@@ -1,0 +1,201 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: First piece of 4D ontology -->
+<!--X-From-R13: "Irfg, [nggurj [D EEW&#45;UDSO&#45;GY" <[nggurj.D.IrfgNvf.furyy.pbz> -->
+<!--X-Date: Thu, 8 Mar 2001 04:36:21 &#45;0500 (EST) -->
+<!--X-Message-Id: DE057CA9F46ED2118C4900805F85E4270757A1F7@LONSC0S0038 -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Derived: bin00006.bin -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01451.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: First piece of 4D ontology</TITLE>
+<LINK REV="made" HREF="mailto:Matthew.R.West@is.shell.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02598.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01426.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd60.html#01451">Thread Index</A></Td>
+<TD><A HREF="msg01452.html">Date Prev</A></TD>
+<TD><A HREF="msg01450.html">Date Next</A>
+</TD>
+<TD><A HREF="mail62.html#01451">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: First piece of 4D ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: First piece of 4D ontology</LI>
+<LI><em>From</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 8 Mar 2001 10:21:50 +0100 </LI>
+<LI><em>Reply-To</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Dear Colleagues,
+
+Please find below a first piece of a 4D ontology.
+
+I'd like to thank Pat Hayes for reviewing some early drafts.
+
+Comment text is of two types:
+1. Translations into English of the KIF below. I assume that
+   eventually  automatic translation from KIF into e.g. ACE
+   will be possible for human interaction.
+2. Structuring information, e.g. Subject Area, Theory, Statement No.
+   These are things that I think we need to support engineering
+   an ontology (vs. saying what we mean) which I hope will be
+   supported by KIF before long.
+
+Comments are welcomed.
+
+; Subject Area: Thing
+;
+; theory: individual and collection
+; uses: 
+;
+; #1: 
+;
+; For all X, X is a thing.
+;
+; i.e. that which everything is a member of.
+;
+; Note 1: In First Order Logic there is no need to make any declaration,
+;         (forall ?x ...) is sufficient.
+; Note 2: This means that all collections will be a subclass of thing.
+;
+; #2: 
+;
+; for all X, if there exists a Y and Y is a member of X, then X is a 
+; member of collection.
+;
+; i.e. any thing that has a member is a collection.
+;
+(forall ?x 
+   (=&gt; (exists ?y 
+          (?x ?y)
+       ) 
+       (collection ?x)
+   )
+)
+; Note: This (?x ?y) is not valid SUO-KIF today, but I understand it 
+;       will be in the near future.
+;
+; #3:
+;
+; For all X, X is an individual, or X is a class.
+;
+; i.e. everything is either an individual or a class
+;
+(forall ?x 
+   (or (individual ?x)
+       (collection ?x)
+   )
+)
+;
+; #4: 
+;
+; For all X, if X is a member of collection then X is not a 
+; member of individual and vice versa.
+;
+; i.e. any thing that is not a collection is an individual, and 
+;      vice-versa.
+;
+(forall ?x
+    (&lt;=&gt; (collection ?x)
+         (not (individual ?x))
+    )
+)
+;
+; end theory
+;
+; end subject area
+
+Regards  
+      Matthew
+============================================================
+Matthew West 
+Operations &amp; Asset Management - Shell Services International
+Shell Visiting Professor, The Keyworth Institute
+
+H3229, Shell Centre, London, SE1 7NA, UK.
+Tel: +44 207 934 4490 Fax: 7929 Mobile: +44 7796 336538
+
+<A  HREF="http://www.shellservices.com/">http://www.shellservices.com/</A>
+<A  HREF="http://www.keyworth.leeds.ac.uk/">http://www.keyworth.leeds.ac.uk/</A>
+<A  HREF="http://www.matthew-west.org.uk/">http://www.matthew-west.org.uk/</A>
+============================================================
+</PRE>
+<P><A HREF="bin00006.bin" >application/ms-tnef</A></P>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01452.html">RE: SUO: RE: Continuants and Occurrents in 4D</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01450.html">SUO: RE: RE: The Story So Far</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02598.html">No Subject</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01426.html">SUO: RE: RE: Continuants and Occurrents in 4D</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail62.html#01451"><strong>Date</strong></a></li>
+<li><a href="thrd60.html#01451"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

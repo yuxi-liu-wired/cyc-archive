@@ -1,0 +1,164 @@
+;;  =================================== 
+;;  Core Plan Representation in SUO KIF
+;;  ===================================
+
+;;  This file contains the results of an attempt to clean up the original
+;;  KIF version of the CPR and to translate it into SUO version of KIF.
+
+;;  ---------------------------
+;;  Plan, Action, and Objective
+;;  ---------------------------
+
+(subclass-of Plan TemporalThing)
+(subclass-of Action TemporalThing)
+(subclass-of Objective IntangibleIndividual)
+
+(subclass-of Plan PlanObject)
+(subclass-of Action PlanObject)
+(subclass-of Actor PlanObject)
+(subclass-of Resource PlanObject)
+(subclass-of Objective PlanObject)
+(subclass-of EvaluationCriterion PlanObject)
+
+(instance-of hasConstraint BinaryRelation)
+(nth-domain hasConstraint 1 PlanObject)
+(nth-domain hasConstraint 2 String)
+
+(instance-of hasAnnotation BinaryRelation)
+(nth-domain hasAnnotation 1 PlanObject)
+(nth-domain hasAnnotation 2 String)
+
+(instance-of implementsPlan BinaryRelation)
+(nth-domain implementsPlan 1 Action)
+(nth-domain implementsPlan 2 Plan)
+
+(instance-of hasObjective BinaryRelation)
+(nth-domain hasObjective 1 Plan)
+(nth-domain hasObjective 2 Objective)
+
+(instance-of relatedInPlan BinaryRelation)
+(nth-domain relatedInPlan 1 Action)
+(nth-domain relatedInPlan 2 Objective)
+
+(instance-of subPlan BinaryRelation)
+(nth-domain subPlan 1 Plan)
+(nth-domain subPlan 2 Plan)
+
+(instance-of subActor BinaryRelation)
+(nth-domain subActor 1 Actor)
+(nth-domain subActor 2 Actor)
+
+(instance-of subObjective BinaryRelation)
+(nth-domain subObjective 1 Objective)
+(nth-domain subObjective 2 Objective) 
+
+(instance-of subAction BinaryRelation)
+(nth-domain subAction 1 Action)
+(nth-domain subAction 2 Action)
+
+(=>
+     (and
+          (subAction ?Act1 ?Act2)
+          (instance-of ?Act1 Action))
+     (temporallySubsumes ?Act1 ?Act2))
+
+;;  -----------
+;;  Time Points
+;;  -----------
+
+(instance-of startingPoint BinaryRelation)
+(nth-domain startingPoint 1 TemporalThing)
+(nth-domain startingPoint 2 TimePoint)
+
+(instance-of endingPoint BinaryRelation)
+(nth-domain endingPoint 1 TemporalThing)
+(nth-domain endingPoint 2 TimePoint)
+
+(instance-of temporallySubsumes BinaryRelation)
+(nth-domain temporallySubsumes 1 Action)
+(nth-domain temporallySubsumes 2 Action)
+
+(=>
+     (and
+          (temporallySubsumes ?Act1 ?Act2)
+	    (starts ?Act1 ?Time2)
+          (starts ?Act2 ?Time2)
+          (ends ?Act1 ?Time3)
+          (ends ?Act2 ?Time4))
+     (and
+          (greaterThan ?Time2 ?Time1)
+          (greaterThan ?Time3 ?Time4)))
+
+;;  -------------------
+;;  Spatial Information
+;;  -------------------
+
+(instance-of eventOccursAt BinaryRelation)
+(nth-domain eventOccursAt 1 Action)
+(nth-domain eventOccursAt 2 SpatialSpec)
+
+(instance-of contains BinaryRelation)
+(instance-of contains Constraint)
+(nth-domain contains 1 SpatialSpec)
+(nth-domain contains 2 SpatialSpec)
+
+(=>
+     (contains ?X ?Y)
+     (not
+          (exists ?Z
+               (and
+                    (contains ?Y ?Z)
+                    (not
+                         (contains ?X ?Z))))))
+
+;;  ----------
+;;  WorldState
+;;  ----------
+
+(subclass-of WorldState TemporalThing)
+
+;;  -------------------
+;;  Evaluation Criteria
+;;  -------------------
+
+(instance-of evaluationCriterionFor BinaryRelation)
+(nth-domain evaluationCriterionFor 1 EvaluationCriterion)
+(nth-domain evaluationCriterionFor 2 Objective)
+
+(instance-of hasMetric BinaryRelation)
+(nth-domain hasMetric 1 EvaluationCriterion)
+(nth-domain hasMetric 2 KIFformula)
+
+(instance-of EvaluationFn IndividualDenotingFunction)
+(instance-of EvaluationFn BinaryFunction)
+(nth-domain EvaluationFn 0 Evaluation)
+(nth-domain EvaluationFn 1 EvaluationCriterion)
+(nth-domain EvaluationFn 2 WorldState)
+
+;;  -----
+;;  Roles
+;;  -----
+
+(subclass-of Role IntangibleIndividual)
+(subclass-of Actor Role)
+(subclass-of Resource Role)
+(subclass-of ProcessProduct Role)
+(subclass-of ConsumableResource Resource)
+
+(instance-of playsRole TernaryRelation)
+(nth-domain playsRole 1 Action)
+(nth-domain playsRole 2 Entity)
+(nth-domain playsRole 3 Role)
+
+(=>
+     (playsRole ?Act ?Ent ?Role)
+     (capableOfDoing ?Ent ?Act ?Role))
+
+(=>
+     (and
+          (playsRole ?Act ?Res Resource)
+          (ends ?Act ?Time)
+          (holdsIn (STIB ?Time) (amountAvailable ?Res ?Amt1))
+          (holdsIn (STIF ?Time) (amountAvailable ?Res ?Amt2)))
+     (greaterThan ?Amt1 ?Amt2)) 
+

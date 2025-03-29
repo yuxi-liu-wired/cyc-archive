@@ -1,0 +1,369 @@
+;;  ======================================================================
+;;  SUO-KIF Formalization of Barry Smith's Formal Theory of Fiat/Bona Fide 
+;;  Boundaries/Objects 
+;;  ======================================================================
+
+;;  This file contains a formalization in KIF of various mereotopological 
+;;  definitions and axioms concerning boundaries and objects.  These axioms 
+;;  were lifted from several papers authored by Barry Smith and other 
+;;  philosophers.  These papers include "Ontological Tools for Geographic 
+;;  Representation" (Roberto Casati, Barry Smith, and Achille C. Varzi), 
+;;  "Fiat Objects" (Barry Smith), "Mereotopology:  A Theory of Parts and 
+;;  Boundaries" (Barry Smith), and "Fiat and Bona Fide Boundaries" (Barry Smith 
+;;  and Achille C. Varzi).  In most cases, the form of the definitions and
+;;  axioms presented here (as well as the order of presentation) follows
+;;  that in the last paper. 
+
+;;  -----------------------------------------
+;;  Basic Mereological Definitions and Axioms
+;;  -----------------------------------------
+
+;;  Definition of 'overlap'
+
+(defrelation overlap (?X ?Y) :=
+     (exists ?Z
+          (and
+               (part-of ?Z ?X)
+               (part-of ?Z ?Y))))
+
+;;  Mereological Axioms
+
+;;  Reflexivity of the relation 'part-of'
+
+(part-of ?X ?X)
+
+;;  Antisymmetry of the relation 'part-of'
+
+(=>
+     (and
+          (part-of ?X ?Y) 
+          (part-of ?Y ?X))
+     (= ?X ?Y))
+
+;;  Transitivity of the relation 'part-of'
+
+(=>
+     (and
+          (part-of ?X ?Y)
+          (part-of ?Y ?Z))
+     (part-of ?X ?Z))
+
+;;  Extensionality of the relation 'part-of'
+
+(=>
+     (forall ?Z
+          (=>
+               (part-of ?Z ?X)
+               (overlap ?Z ?Y))
+     (part-of ?X ?Y))
+
+;;  The following axiom guarantees that for every satisfied condition P there exists an 
+;;  entity, the sum or fusion, consisting precisely of all the P-ers. 
+
+(=>
+     (exists ?X
+          (instance-of ?X ?P)
+     (exists ?Y
+          (forall ?Z
+               (<=>
+                    (overlap ?Y ?Z)
+                    (exists ?X
+                         (and
+                              (instance-of ?X ?P)
+                              (overlap ?X ?Z)))))))
+
+;;  Definition of 'sum'
+
+(deffunction sum (?X ?P) :=
+     (iota ?Y 
+          (forall ?Z
+               (<=>
+                    (overlap ?Y ?Z)
+			  (exists ?X
+                         (and
+                              (instance-of ?X ?P)
+                              (overlap ?X ?Z)))))))
+
+;;  Definition of 'mereological-sum'
+
+(deffunction mereological-sum (?X ?Y) :=
+     (sum ?Z 
+          (or
+               (part-of ?Z ?X)
+               (part-of ?Z ?Y))))
+
+;;  Definition of 'mereological-product'
+
+(deffunction mereological-product (?X ?Y) :=
+     (sum ?Z 
+          (and
+               (part-of ?Z ?X)
+               (part-of ?Z ?Y))))
+
+;;  Definition of 'mereological-complement'
+
+(deffunction mereological-complement (?X) :=
+     (sum ?Z 
+          (and
+               (not
+                    (overlap ?Z ?X)))))
+
+;;  -------------------------------------
+;;  Formal Theory of Bona Fide Boundaries
+;;  -------------------------------------
+
+;;  Definition of 'maximal-boundary'
+
+(deffunction maximal-boundary (?X) :=
+     (sum ?Z (boundary ?Z ?X)))
+
+;;  Definition of 'closure' (of an object)
+
+(deffunction closure (?X) :=
+     (mereological-sum ?X (maximal-boundary ?X)))
+
+;;  Basic axioms for a topology based on bona fide boundaries - these are the result
+;;  of mereologizing the standard Kuratowski axioms for closure operators
+
+(part-of ?X (closure ?X))
+
+(part-of (closure (closure ?X)) (closure ?X))
+
+(= (closure (mereological-sum ?X ?Y)) (mereological-sum (closure ?X) (closure ?Y)))
+
+;;  Definition of the relation of bona fide 'connection'
+
+(defrelation connection (?X ?Y) :=
+     (or
+          (overlap ?X ?Y)
+          (overlap (closure ?X) ?Y)
+	    (overlap ?X (closure ?Y))))
+
+;;  Definition of 'external-connection' (i.e. connection where the objects themselves do
+;;  not overlap with one another).
+
+(defrelation external-connection (?X ?Y) :=
+     (and
+          (connection ?X ?Y)
+          (not
+               (overlap ?X ?Y))))
+
+;;  Definition of 'closed-entity'
+
+(defrelation closed-entity (?X) :=
+     (= ?X (closure ?X)))
+
+;;  Definition of 'interior-part-of'
+
+(defrelation interior-part-of (?X ?Y) :=
+     (=>
+          (part-of ?X ?Y)
+          (forall ?Z
+               (=> 
+                    (boundary ?Z ?Y)
+                    (not
+                         (overlap ?X ?Z))))))
+
+;;  Definition of 'boundary-unary' (the monadic predicate for bona fide boundaries)
+
+(defrelation boundary-unary (?X) :=
+     (exists ?Y
+          (boundary ?X ?Y)))
+
+
+;;  -------------------------------------
+;;  Formal Theory of Fiat Boundaries
+;;  -------------------------------------
+
+;;  Basic Axioms for 'fiat-boundary'
+
+(=>
+     (fiat-boundary ?X ?Y)
+     (part-of ?X ?Y))
+
+(=>
+     (and
+          (part-of ?X ?Y)
+          (fiat-boundary ?Y ?Z))
+     (fiat-boundary ?X ?Z))
+
+(=> 
+     (fiat-boundary ?X ?Y)
+     (not
+          (fiat-internal-part-of ?Z ?X)))
+
+;;  Basic Axioms concerning the relation 'coincide'.  These axioms collectively imply that 
+;;  'coincide' is an equivalence relation.
+
+(coincide ?X ?X)
+
+(=>
+     (coincide ?X ?Y)
+     (coincide ?Y ?X))
+
+(=>
+     (and
+          (coincide ?X ?Y)
+          (coincide ?Y ?Z))
+     (coincide ?X ?Z))
+
+;;  Axioms asserting that coinciding entities have coinciding parts and are closed under
+;;  arbitrary sums
+
+(=>
+     (and
+          (part-of ?X ?Y)
+          (coincide ?Y ?Z))
+     (exists ?W
+          (and
+               (part-of ?W ?Z)
+               (coincide ?X ?W))))
+
+(=>
+     (and
+          (exists ?Y
+               (instance-of ?Y ?P))
+          (forall ?Y
+               (=>
+                    (instance-of ?Y ?P)
+                    (coincide ?X ?Y))))
+     (coincide ?X (sum ?Y (instance-of ?Y ?P))))
+
+;;  Definitions of the fiat analogues of 'internal-part-of' and 'boundary-unary'
+
+(defrelation fiat-internal-part-of (?X ?Y) :=
+     (and
+          (part-of ?X ?Y)
+          (forall ?Z
+               (=>
+                    (fiat-boundary ?Z ?Y)
+                    (not
+                         (overlap ?X ?Z))))))
+
+(defrelation fiat-boundary-unary (?X) :=
+     (exists ?Y
+          (fiat-boundary ?X ?Y)))
+
+;;  Definitions of the fiat analogues of 'connection' and 'external-connection'
+
+(defrelation fiat-connection (?X ?Y) :=
+     (or
+          (overlap ?X ?Y)
+          (exists ?Z
+               (exists ?W
+                    (and
+                         (fiat-boundary ?Z ?X)
+                         (fiat-boundary ?W ?Y)
+                         (coincide ?Z ?W))))))
+
+(defrelation external-connection-fiat (?X ?Y) :=
+     (and
+          (fiat-connection ?X ?Y)
+          (not
+               (overlap ?X ?Y))))
+
+;;  Definition of 'connected-entity' (i.e. an entity all of whose parts are separated
+;;  at most by fiat).
+
+(defrelation connected-entity (?X) :=
+     (forall ?Y
+          (forall ?Z
+               (=>
+                    (= ?X (mereological-sum ?Y ?Z))
+                    (fiat-connection ?Y ?Z)))))
+
+;;  Dependency Axioms - The following axioms (one for bona fide boundaries, one for fiat
+;;  boundaries) assert the existence of connected wholes corresponding to the boundaries
+
+(=>
+     (and
+          (boundary-unary ?X)
+          (connected-entity ?X))
+     (exists ?Y
+          (exists ?Z
+               (and
+                    (connected-entity ?Y)
+                    (boundary ?X ?Y)
+                    (internal-part-of ?Z ?Y)))))
+
+(=>
+     (and
+          (fiat-boundary-unary ?X)
+          (connected-entity ?X))
+     (exists ?Y
+          (exists ?Z
+               (and
+                    (connected-entity ?Y)
+                    (fiat-boundary ?X ?Y)
+                    (internal-part-of ?Z ?Y)))))
+
+;;  --------------------------
+;;  Bona Fide and Fiat Objects
+;;  --------------------------  
+
+;;  Definition of Bona Fide Object
+
+(defrelation bona-fide-entity (?X) :=
+     (exists ?Y
+          (boundary ?Y ?X))
+     (not 
+          (exists ?Y
+               (fiat-boundary ?Y ?X))))
+
+;;  Definition of Fiat Object
+
+(defrelation fiat-object (?X) :=
+     (exists ?Y
+          (fiat-boundary ?Y ?X)))
+
+
+;;  ---------------------------------------
+;;  Theorems derived from the Formal Theory
+;;  ---------------------------------------
+
+
+;;  The following theorems establish that 'boundary' is transitive, dissective
+;;  (i.e. parts of boundaries are themselves boundaries), and symmetric.
+
+(=>
+     (and
+          (boundary ?X ?Y)
+          (boundary ?Y ?Z))
+     (boundary ?X ?Z))
+
+(=>
+     (and
+          (part-of ?X ?Y)
+          (boundary ?Y ?Z))
+     (boundary ?X ?Z))
+
+(=>
+     (boundary ?X ?Y)
+     (boundary ?X (mereological-complement ?Y)))
+  
+ ;;  Theorem concerning 'external-connection'
+
+(=>
+     (external-connection ?X ?Y)
+     (=>
+          (closed-entity ?X)
+          (not 
+               (closed-entity ?Y))))
+
+;;  Theorem establishing that bona fide boundaries have no internal parts
+
+(=>
+     (boundary ?X ?Y)
+     (not
+          (internal-part-of ?Z ?X)))
+
+;;  Theorem establishing the transitivity of 'fiat-boundary'
+
+(=>
+     (and
+          (fiat-boundary ?X ?Y)
+          (fiat-boundary ?Y ?Z))
+     (fiat-boundary ?X ?Z))
+
+ 
+ 

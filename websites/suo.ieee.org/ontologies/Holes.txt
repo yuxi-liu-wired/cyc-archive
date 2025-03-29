@@ -1,0 +1,1461 @@
+;; A KIF encoding of Roberto Casati and Achille Varzi's Theory of
+;; Holes, as found in Appendix A of their book, Holes and Other
+;; Superficialities, MIT Press, 1995.  (See the book's web site:
+;; http://mitpress.mit.edu/book-home.tcl?isbn=026253133X.) Posted with
+;; the permission of MIT Press and the authors, for non-commercial,
+;; content purposes only.  
+;;
+;; Certain details have been altered slightly to smooth exposition.
+;; Other details have been altered slightly (or, in one case, omitted)
+;; as necessitated by the use of KIF.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;			   *** PREFACE ***                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; METALINGUISTIC STUFF
+
+;; Definite descriptions
+
+;; Definite descriptions are not currently part of KIF.  However, they
+;; are used liberally in this ontology, so an axiom schema -- due
+;; largely to Bertrand Russell -- has been introduced to capture its
+;; meanings -- roughly, that an object ?x is the A iff A is in fact
+;; true of ?x, anything that A is true of must be identical to ?x.
+
+;; So, let WFF be a KIF sentence that contains a single free variable
+;; X.  For any term TRM, let WFF[Y] be the result of replacing every
+;; free occurrence of X in WFF with variable Y.  Then the following is
+;; an axiom:
+;;
+;; (<=> (= X (the (X) WFF))
+;;      (and WFF
+;;           (forall (Y)
+;;                   (=> WFF[Y]
+;;                       (= X Y)))))
+                              
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                      An Ontology of Holes                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "This theory is divided into four main sections: \
+\
+(1) a preliminary ontological part, which introduces the basic binary 
+relation is-a-hole-in (or -through), along with some relevant facts;\
+\
+(2) a mereological part, which systematizes some fundamental principles 
+governing the interplay between the host-hole and the part-whole 
+relations;\
+\
+(3) a topological part, which summarizes some basic facts concerning 
+surfaces and the taxonomy of holes; and\
+\
+(4) a morphological part, focusing on the fact that objects with holes 
+constitute - as we have put it - the morphological manifold of 
+fillable things.\
+\
+This organization does not exactly parallel the order we followed in 
+the text, where mereological facts were examined only after -- and 
+somehow on the basis of -- a topo-morphological characterization of 
+holes.  Indeed, the interplay among these different domains (as well 
+as between these and other domains, such as kinematics or causality, 
+considered in the text but not included here) is an interesting issue 
+in itself, but it would take us too far afield to address it here. 
+For the modest purposes of this theory, suffice it to note that the 
+order followed here permits a rather nice and intuitively simple 
+step-by-step construction.\
+\
+The exposition proceeds more geometrico. Each section begins with 
+basic definitions, followed by some basic principles, or axioms, 
+followed by a list of a few noteworthy consequences or theorems. 
+(Numbers in braces indicate the axiom or definition from which a 
+theorem is derived.) It is understood that there is no pretense of 
+completeness or logical elegance. In fact we have been quite 
+relaxed in our choice of axioms and theorems, as our aim is first 
+and foremost perspicuity. An informal spelling of every formula, 
+sometimes with a brief comment, is also provided. The reader may 
+want to skip the formulas and just focus on these informal 
+renderings.")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                         O N T O L O G Y                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Primitive predicates
+;;
+;; 2-place: hole-in
+
+(documentation "The main thesis is that a hole is an immaterial body 
+located at the surface (or at some surface) of a material object. 
+Since the notion of a surface is essentially a topological one, and 
+since the property of being immaterial is reflected in the 
+morphological property of being fillable, the ontological basis is 
+concerned first and foremost with the general dependence of a hole 
+on its host.")
+
+;;;;;;;;;;;;;;;;;;;;;; ONTOLOGICAL DEFINITIONS ;;;;;;;;;;;;;;;;;;;;;;
+
+;; D1.1 (hole)
+
+(documentation hole "X is a hole iff it is a hole in something.  
+Since every hole is ontologically dependent on its host (i.e., the 
+object in which it is a hole), being a hole is defined as being a 
+hole in something.")
+
+(forall (?x)
+	(<=> (hole ?x)
+	     (exists (?y)	   
+		     (hole-in ?x ?y))))
+         
+
+;;;;;;;;;;;;;;;;;;;;;;;;; ONTOLOGICAL AXIOMS ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A1.1
+
+(documentation "AXIOM: The host of a hole is not a hole.")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+            (not (hole ?y))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;; THEOREMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; T1.1
+
+(documentation "THEOREM: The relation of being a hole in is an asymmetric 
+relation; a hole cannot host its own host.")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+            (not (hole-in ?y ?x))))
+
+;; T1.2
+
+(documentation "THEOREM: Being a hole in is an irreflexive relation: a 
+hole cannot host itself.")
+
+(forall (?x)
+        (not (hole-in ?x ?x)))
+
+;; T1.3
+
+(documentation "THEOREM: Holes do not have holes: they cannot host one 
+another (though they can have holes as proper parts).")
+
+(forall (?x)
+        (=> (hole ?x)
+            (not (exists (?y)
+                 (hole-in ?y ?x)))))
+
+;; T1.4
+
+(documentation "THEOREM: Holes cannot be the only things around.")
+
+(=> (exists (?x) (hole ?x))
+    (exists (?x) (not (hole ?x))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                        M E R E O L O G Y                          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "As immaterial bodies, holes have parts and can bear 
+part-whole relations to one another (though not to their hosts). The 
+main principles concerning these relations can be formulated within the 
+framework of classical extensional mereology supplemented with some 
+specific axioms on the behavior of the hole-in relation".)
+
+;; Primitive predicates
+;;
+;; 2-place: part-of
+
+(documentation "This section of the theory introduces the 2-place 
+'part-of' relation.  It is one of many possible mereological primitives: 
+a reflexive, antisymmetric, transitive relation (i.e., a partial 
+ordering), according to classical mereology.")
+
+;;;;;;;;;;;;;;;;;;;;;; MEREOLOGICAL DEFINITIONS ;;;;;;;;;;;;;;;;;;;;;;
+
+;; D2.1 (proper-part-of)
+
+(documentation proper-part-of "?x is a proper part of ?y iff ?x is a 
+part of ?y other than ?y itself. This is a transitive and asymmetric 
+(hence irreflexive) relation.")
+
+(forall (?x ?y)
+	(<=> (proper-part ?x ?y)
+	     (and (part-of ?x ?y)
+		  (/= ?x ?y))))
+
+;; D2.2 (overlaps)
+
+(documentation overlaps "?x overlaps ?y iff ?x and ?y have some parts 
+in common. This is a reflexive and symmetric (but not transitive) 
+relation.")
+
+(forall (?x ?y)
+	(<=> (overlaps ?x ?y)
+	     (exists (?z)
+		     (and (part-of ?z ?x)
+			  (part-of ?z ?y)))))
+
+;; D2.3 (fusion-of)
+
+;; The definition of the notion of the fusion of all the things that
+;; satisfy a certain condition in this ontology requires a
+;; metalinguistic schema, and the expression of metalinguistic
+;; information is not yet settled in KIF.  Informally, the fusion of
+;; the objects that satisfy a given condition A is just the object
+;; such that an object overlaps it if and only if it overlaps
+;; something that satisfies A.  It is the metalinguistic variable `A'
+;; here that makes this an essentially metalinguistic definition.
+;; Fortunately, all definitions and axioms that make use of the fusion
+;; operator can simply be cashed out explicitly case by case in the
+;; manner expressed in the schematic definition.  Thus, instead of
+;; referring to the fusion of all things satisfying a given condition
+;; A, we simply talk directly of the object that is overlapped by all
+;; and only objects that overlap something satisfying condition A.
+;; Hence, while the fusion operator is convenient, is not necessary
+;; for purposes here.
+
+;; D2.4 (sum-of)
+
+(documentation sum-of "The sum of ?x and ?y is the smallest thing 
+whose parts are either parts of ?x or parts of ?y. This is an 
+idempotent, commutative, distributive operation.")
+
+(forall (?x ?y)
+	(= (sum-of ?x ?y) 
+	   (the (?z)
+	     (forall (?w)
+		     (<=> (overlaps ?w ?z)
+			  (exists (?u)
+				  (and (or (part-of ?u ?x)
+					   (part-of ?u ?y))
+				       (overlaps ?w ?u))))))))
+
+;; To illustrate the comments above regarding the schematic definition
+;; D2.3, note that, with the fusion operator the sum-of operator can
+;; be defined simply and elegantly as follows:
+;;
+;; (forall (?x ?y)
+;; 	(= (sum-of ?x ?y)
+;;	   (fusion-of (?z)
+;;		      (or (part-of ?z ?x)
+;;			  (part-of ?z ?y)))))
+
+;; D2.5 (prod-of)
+
+(documentation prod-of "The product of ?x and ?y is the largest thing 
+whose parts are both parts of ?x and parts of ?y. Like `sum-of', this 
+too is an idempotent, commutative, distributive operation, though one 
+that is defined only if ?x overlaps ?y.")
+
+(forall (?x ?y)
+	(= (prod-of ?x ?y)
+	   (the (?z)
+	     (forall (?w)
+		     (<=> (overlaps ?w ?z)
+			  (exists (?u)
+				  (and (part-of ?u ?x)
+				       (part-of ?u ?y)
+				       (overlaps ?w ?u))))))))
+
+;; D2.6 (diff-of)
+
+(documentation diff "The difference of ?x and ?y is the largest thing 
+contained in ?x that has no part in common with ?y.")
+
+(forall (?x ?y)
+	(= (diff-of ?x ?y)
+	   (the (?z)
+	     (forall (?w)
+		     (<=> (overlaps ?w ?z)
+			  (exists (?u)
+				  (and (part-of ?u ?x)
+				       (not (overlaps ?u ?y))
+				       (overlaps ?w ?u))))))))
+
+;; D2.7 (hole-part-of)
+
+(documentation hole-part-of "?x is a hole-part of ?y iff ?x is a hole 
+that is a part of ?y.  This is a partial ordering, like `part-of'; it 
+applies only when ?y is itself a (part of a) hole.")
+
+(forall (?x ?y)
+	(<=> (hole-part-of (?x ?y)
+			   (and (hole ?x)
+				(part-of ?x ?y)))))
+
+;; D2.8 (proper-hole-part-of)
+
+(documentation proper-hole-part-of "?x is a proper hole-part of ?y iff 
+?x is a hole that is a proper part of ?y.  This is transitive, 
+asymmetric, and irreflexive relation.")
+
+(forall (?x ?y)
+	(<=> (proper-hole-part-of (?x ?y)
+				  (and (hole ?x)
+				       (proper-part-of ?x ?y)))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;; MEREOLOGICAL AXIOMS ;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A2.1
+
+(documentation "AXIOM: No hole overlaps its own host (though the sum of
+ a hole and its host may be a legitimate host for different holes: e.g. 
+the sum of a doughnut ?y and its hole ?x -- if such a sum exists -- will 
+not be a host of ?x, but it will be a host of, say, a cavity that may be 
+hidden inside ?y.)")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+            (not (overlaps ?x ?y))))
+
+;; A2.2
+
+(documentation "AXIOM: Any two hosts of a hole have a common proper part 
+that entirely hosts the hole. (Of course, intuitively a hole has one 
+host; but if we allow for mereological sums or splittings, then every 
+hole has a virtually infinite class of hosts, partially ordered by 
+proper-part-of.)")
+
+(forall (?x ?y ?z)
+        (=> (and (hole-in ?x ?y)
+                 (hole-in ?x ?z))
+            (exists (?w)
+                    (and (proper-part-of ?w (prod-of ?x ?y))
+                         (hole-in ?x ?w)))))
+
+;; A2.3
+
+(documentation "AXIOM: A common host of two holes hosts all hole-parts 
+of the sum of those holes.")
+
+(forall (?x ?y ?z)
+        (=> (and (hole-in ?x ?y)
+                 (hole-in ?z ?y)
+            (forall (?w)
+                    (=> (hole-part-of ?w (sum-of ?x ?z))
+                        (hole-in ?w ?y))))))
+
+;; A2.4
+
+(documentation "AXIOM: Any object that includes the host of a hole is 
+a host of that hole, unless its parts also include parts of that very 
+hole.")
+
+(forall (?x ?y ?z)
+        (=> (and (hole-in ?x ?y)
+                 (part-of ?y ?z))
+            (or (overlaps ?x ?z)
+                (hole-in ?x ?z))))
+
+;; A2.5
+
+(documentation "AXIOM: Overlapping holes have overlapping hosts. 
+(However, two holes may occupy the same region, or part of the same 
+region, without sharing any parts.  Holes are immaterial, and can 
+penetrate one another; mereological overlapping is not implied by 
+spatial co-localization.)")
+
+(forall (?x ?y ?z ?w)
+        (=> (and (hole-in ?x ?y)
+                 (hole-in ?z ?w)
+                 (overlaps ?x ?z))
+            (overlaps ?y ?w)))
+
+;; A2.6
+
+(documentation "AXIOM: No hole is atomic (though holes need not have 
+proper hole-parts; otherwise every hole would correspond to a pile of 
+infinitely many, gradually smaller holes).")
+            
+(forall (?x)
+        (=> (hole ?x)
+            (exists (?y)
+                    (proper-part-of ?y ?x))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;; THEOREMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;T2.1 {A2.1}
+
+(documentation "THEOREM: Holes are not parts of their hosts (although 
+the hosts of a hole may have different holes as parts)")
+
+(forall (?x ?y ?z)
+	(=> (hole-in ?x ?y)
+	    (not (part-of ?x ?y))))
+
+;;T2.2 {A2.1}
+;;
+(documentation "THEOREM: Holes are not hole-parts of their hosts 
+(although they can be hole-parts of parts of holes).").
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (not (part-of ?x ?y))))
+
+;;T2.3 {A2.1}
+;;
+(documentation "THEOREM: The host of a hole is not part of it.")
+
+(forall (?x ?y)
+	(hole-in ?x ?y)
+	    (not (part-of ?y ?x)))
+
+;;T2.4 {A1.1 + A2.4-A2.5}
+;;
+(documentation "THEOREM: The host of a hole is not part of any hole. 
+This is a generalization of the ontological axiom and of the thesis 
+that a hole a cannot host anything.")
+
+;;
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (part-of ?y ?z))
+	    (not (hole ?z))))
+
+;;T2.5 {A2.2}
+;;
+(documentation "THEOREM: Any two hosts of the same hole are 
+overlapping; i.e., a hole cannot have two discrete hosts.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (overlaps ?y ?z)))
+		     
+;;T2.6 {A2.2}
+;;
+(documentation "THEOREM: Not every part of a hole?s host is a host 
+of the hole (though it could host a different hole).")
+
+(forall (?x ?y ?z)
+	(=> (hole-in ?x ?y)
+	    (exists (?z)
+		    (and (proper-part-of ?z ?y)
+			 (not (hole-in ?x ?z))))))
+
+;;T2.7 {A2.2}
+;;
+(documentation "THEOREM: Hosting a hole is having some proper part 
+that entirely hosts the hole; i.e., there is no minimal host for a 
+given hole.")
+
+(forall (?x ?y ?z)
+	(=> (hole-in ?x ?y)
+	    (exists (?z)
+		    (and (proper-part-of ?z ?y)
+			 (hole-in ?x ?z)))))
+
+;;T2.8 {A2.3}
+;;
+(documentation "THEOREM: Hosting a hole is hosting any proper parts 
+of the hole that are holes themselves. (Note that the same does not 
+hold relative to proper-part-of.)")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (forall (?z)
+		    (=> (hole-part-of ?z ?x)
+			(hole-in ?z ?y)))))
+		    
+;;T2.9 {A2.1 + A2.4}
+;;
+(documentation "THEOREM: The sum of any two hosts of a hole is itself 
+a host of that hole.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (hole-in ?x (sum-of ?y ?z))))
+
+;;T2.10 {A2.1 + A2.2 + A2.4}
+;;
+(documentation "THEOREM: The product of any two hosts of a hole is 
+itself a host of that hole.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (hole-in ?x (prod-of ?y ?z))))
+
+;;T2.11 {A2.2}
+;;
+(documentation "THEOREM: The difference of two hosts of a hole is 
+not itself a host of that hole.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (not (hole-in ?x (diff-of ?y ?z)))))
+
+;;T2.12 {A2.4}
+;;
+(documentation "THEOREM: A hole in an object is also a hole in any 
+mereological sum including that object, provided the sum does not 
+include any parts of the hole itself.")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (forall (?z)
+		    (=> (not (overlaps ?x ?z))
+			(hole-in (sum-of ?y ?z))))))
+
+;;T2.13 {A2.2}
+;;
+(documentation "THEOREM: A hole in an object is also a hole in some 
+mereological product involving that object, provided the product 
+does not include any parts of the hole itself.")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (forall (?z)
+		    (=> (not (overlaps ?x ?z))
+			(hole-in (prod-of ?y ?z))))))
+
+;;T2.14 {A2.2}
+;;
+(documentation "THEOREM: The difference between an object and the 
+host of a hole is not a host of that hole.")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (forall (?z)
+		    (not (hole-in ?x (diff-of ?z ?y))))))
+
+;;T2.15 {A1.1 + A2.1}
+;;
+(documentation "THEOREM: If the universal individual exists, it 
+surely isn't a hole.")
+
+(not (hole (the (?x)
+	     (forall (?y)
+		     (<=> (overlaps ?y ?x)
+			  (exists (?z)
+				  (and (= ?z ?z)
+				       (overlaps ?z ?y))))))))
+
+;;T2.16 {A2.6}
+;;
+(documentation "THEOREM: The null individual (if it exists) cannot 
+be a hole.")
+
+(not (hole (the (?x)
+	     (forall (?y)
+		     (<=> (overlaps ?y ?x)
+			  (exists (?z)
+				  (and (/= ?z ?z)
+				       (overlaps ?z ?y))))))))
+
+;;T2.17 {A2.2}
+;;
+(documentation "THEOREM: Atoms are holeless.")
+
+(forall (?x)
+	(=> (not (exists (?y)
+			 (part-of ?y ?x)))
+	    (not (exists (?y)
+			 (hole-in ?y ?x)))))
+
+;;T2.18 {A2.1 + A2.4}
+;;
+(documentation "THEOREM: The fusion of all hosts of a hole is a 
+host of that hole.")
+
+(forall (?x
+	(=> (hole ?x)
+	    (hole-in ?x (the (?y)
+			  (forall (?z)
+				  (<=> (overlaps ?z ?y)
+				       (exists (?w)
+					       (and (hole-in ?x ?w)
+						    (overlaps ?w ?z))))))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                         T O P O L O G Y                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "Topology constitutes in many ways a natural next 
+step after mereology, although various mereological notions could 
+formally be defined in terms of topological ones. Particularly in a 
+theory of holes, topological notions are important to account for the 
+fact that every hole is located at some surface of its host as well
+ as for taxonomic purposes.")
+
+;; Primitive predicates
+;;
+;; 2-place: connected-with,
+
+(documentation "This is a reflexive and symmetric relation capturing 
+the intuitive notion of touching or being co-localized at some point. 
+The relation is taken to satisfy the clause that what is connected with 
+a part is also connected with the whole, so that if ?x is a part of ?y, 
+then everything that ?x is connected with ?y is also connected with.  
+(We do not, however, assume the converse, which would have the effect 
+of reducing mereology to topology.)")
+
+;; Primitive function symbols
+;;
+;; 1-place: genus-of
+
+(documentation "Intuitively, the genus of an object is the maximum 
+number of simultaneous cuts that can be made without separating the 
+object into two unconnected pieces (0 if it is a sphere, 1 if it is 
+a torus, etc.). This notion could be defined in terms of connected-with, 
+but that would lead us too far afield.")
+
+;;;;;;;;;;;;;;;;;;;;;; TOPOLOGICAL DEFINITIONS ;;;;;;;;;;;;;;;;;;;;;;
+
+;; D3.1 (self-connected)
+
+(documentation self-connected "?x is self-connected just in case ?x 
+does not consist of two or more disconnected parts.")
+
+(forall (?x)
+(<=> (self-connected ?x)
+     (forall (?y ?z)
+	     (=> (= ?x (sum-of ?y ?z))
+		 (connected-with ?y ?z)))))
+
+;; D3.2 (principle-host-of)
+
+(documentation principle-host-of "The principle host of ?x is ?x's 
+maximally connected host (a notion taken here to be defined only 
+when ?x is a hole).  We may intuitively regard this as the host of 
+the hole, every other host being either a topologically scattered 
+mereological aggregate including the principal host or a potential 
+part of this latter.")
+
+(forall (?x)
+	(= (principle-host-of ?x)
+	   (the (?y)
+	     (forall (?w)
+		     (<=> (overlaps ?w ?y)
+			  (exists (?u)
+				  (and (hole-in ?x ?u)
+				       (self-connected ?u)
+				       (overlaps ?w ?u))))))))
+
+;; D3.3 (ext-connected-with)
+
+(documentation ext-connected-with "?x is externally connected with ?y 
+just in case ?x is connected with ?y but does not overlap it. This is 
+an irreflexive and symmetric relation.")
+
+(forall (?x ?y)
+	(<=> (ext-connected-with ?x ?y)
+	     (and (connected-with ?x ?y)))
+	(not (overlaps ?x ?y)))
+
+;; D3.4 (interior-part-of)
+
+(documentation interior-part-of "?x is an interior part of y just in 
+case x is a part of y that is externally connected only with things 
+that are not so connected with ?y itself. This is a transitive relation 
+included in part-of and closed under both sum-of and prod-of.")
+
+(forall (?x ?y)
+	(<=> (interior-part-of ?x ?y)
+	     (and (part-of ?x ?y)
+		  (forall (?z)
+			  (=> (ext-connected-with ?x ?z)
+			      (not (ext-connected-with ?z ?y)))))))
+
+;; D3.5 (superficial-part-of)
+
+(documentation superficial-part-of "?x is a superficial part of ?y iff 
+?x is a part of ?y that has no interior parts of its own (or, 
+intuitively, that only overlaps those parts of y that are externally 
+connected with the geometric complement of y). This too is a transitive 
+relation closed under sum-of and prod-of.")
+
+(forall (?x ?y)
+	(<=> (superficial-part-of ?x ?y)
+	     (and (part-of ?x ?y)
+		  (not (exists (?z)
+			       (interior-part-of ?z ?x))))))
+
+;; D3.6 (surface-of)
+
+(documentation surface-of "?x is a surface of ?y iff ?x is a maximally 
+connected superficial part of y.")
+
+(forall (?x ?y)
+	(<=> (surface-of ?x ?y)
+			 (and (superficial-part-of ?x ?y)
+			      (self-connected ?x)
+			      (forall (?z)
+				      (=> (and (superficial-part-of ?z ?y)
+					       (self-connected ?z))
+					  (=> (connected-to ?z ?x)
+					      (part-of ?z ?x)))))))
+
+;; D3.7 (cavity-in)
+
+(documentation cavity-in "?x is a cavity in ?y iff ?x is an internal 
+hole enveloped by an entire host surface. A cavity is a topologically 
+nonerasable discontinuity.")
+
+(forall (?x ?y)
+	(<=> (cavity-in ?x ?y)
+	     (and (hole-in ?x ?y)
+		  (exists (?z)
+			  (and (surface-of ?z ?y)
+			       (forall (?w)
+				       (=> (part-of ?w ?z)
+					   (connected-with ?x ?w))))))))
+
+;; D3.8 (tunnel-through)
+
+(documentation tunnel-through "A tunnel (or a perforation) through a 
+host is also a topologically non-erasable hole, characterized by the 
+fact that its host has no connected part of genus 0 entirely hosting 
+the hole. Note that a hole may at once be a tunnel and a cavity: it 
+may be a cavity-tunnel, e.g.,. a 'toroidal' hole.")
+
+(forall (?x ?y)
+	(<=> (tunnel-through ?x ?y)
+	     (and (hole-in ?x ?y)
+		  (forall (?z)
+			  (=> (and (part-of ?z ?y)
+				   (self-connected ?z)
+				   (hole-in ?x ?z))
+			      (/= (genus-of ?x) 0))))))
+
+;; D3.9 (hollow-in)
+
+(documentation hollow-in "?x is a hollow (or a depression) in ?y iff ?x 
+is a hole in ?y which is neither a tunnel through ?y nor a cavity in ?y. 
+This is always an external, topologically erasable disturbance, 
+characterized by the fact that the relevant host must have a part of 
+genus 0 entirely hosting the hole.")
+
+(forall (?x ?y)
+	(<=> (hollow-in ?x ?y)
+	     (and (hole-in ?x ?y)
+		  (not (tunnel-through ?x ?y))
+		  (not (cavity-in ?x ?y)))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;; TOPOLOGICAL AXIOMS ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A3.1
+
+(documentation "AXIOM: Holes are selfconnected; i.e., there is no 
+scattered hole.")
+
+(forall (?x)
+        (=> (hole ?x)
+            (self-connected ?x)))
+
+;; A3.2
+
+(documentation "AXIOM: Holes are connected with their hosts.")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+            (connected-with ?x ?y)))
+
+;; A3.3
+
+(documentation "AXIOM: Every hole has some self-connected host.")
+
+(forall (?x)
+        (=> (hole ?x)
+            (exists (?y)
+                    (and (hole-in ?x ?y)
+                         (self-connected ?y)))))
+
+;; A3.4
+
+(documentation "AXIOM: No hole can have a proper hole-part that is 
+externally connected with exactly the same things as the hole itself.")
+
+(forall (?x ?y)
+        (=> (and (hole ?x)
+                 (proper-hole-part-of ?y ?x)
+            (exists (?z)
+                    (and (ext-connected-with ?x ?z)
+                         (not (ext-connected-with ?y ?z)))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;; THEOREMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;T3.1 {A2.1 + A3.2}
+
+(documentation "THEOREM: Holes are only externally connected with their 
+hosts; i.e., a hole and its host touch each other, but have no parts in 
+common.")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+	    (ext-connected-with ?x ?y)))
+
+;; T3.2 {A2.1 + A3.2}
+
+(documentation "THEOREM: Every hole is connected with some superficial 
+part of its hosts . (Holes are superficial entities; they go hand in 
+hand with surfaces.)")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+	    (exists (?z)
+		    (and (superficial-part-of ?y ?z)
+			 (connected-with ?x ?z)))))
+
+;; T3.3  {A2.1 + A3.2}
+
+(documentation "THEOREM: No hole is connected with any interior parts 
+of its hosts. (Making a hole is transforming interior parts of an 
+object into superficial ones.)")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+	    (forall (?z)
+		    (=> (interior-part-of ?z ?y)
+			(not (connected-with ?x ?z))))))
+
+;; T3.4 {A2.1 + A2.3 + A3.2}
+
+(documentation "THEOREM: The hole-parts of a hole are all externally 
+connected with the host of that hole, i.e., they are all located 
+along the 'walls' of that hole.")
+
+(forall (?x ?y ?z)
+        (=> (and (hole-in ?x ?y)
+		 (hole-part-of ?z ?x))
+	    (ext-connected with ?z ?y)))
+	    
+;; T3.5 {A2.1 + A3.2}
+
+(documentation "THEOREM: A hole is externally connected with every 
+part of its host that is so connected with some hole-part of that 
+hole.")
+
+(forall (?x ?y ?z ?w)
+        (=> (and (hole-in ?x ?y)
+		 (hole-part-of ?z ?x)
+		 (part-of ?w ?y))
+	    (=> (ext-connected-with ?z ?w)
+		(ext-connected-with ?x ?w))))
+		 
+;; T3.6 {A2.1 + A3.2}
+
+(documentation "THEOREM: A hole is sure to be connected (externally 
+or not) with the hosts of its own hole-parts.")
+
+(forall (?x ?y ?w)
+	(=> (and (hole ?x)
+		 (hole-part-of ?z)
+		 (hole-in ?z ?w))
+	    (connected-with ?x ?w)))
+
+;; T3.7 {A3.1}
+
+(documentation "THEOREM: Only holes that are connected with each 
+other can join to form a hole.")
+
+(forall (?x ?y)
+	(=> (and (hole ?x)
+		 (hold ?y))
+	    (=> (hole (sum-of ?x ?y))
+		(connected-with ?x ?y))))
+
+;; T3.8 {A2.2 + A3.3}. 
+
+(documentation "THEOREM: Hosting a hole is having some proper 
+self-connected part that entirely hosts the hole.")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (exists (?z)
+		    (and (proper-part-of ?z ?y)
+			 (self-connected ?z)
+			 (hole-in ?x ?z)))))
+
+;; T3.9 {A2.2 + A3.3}
+
+(documentation "THEOREM: Any two hosts of a hole are connected 
+with each other.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (connected-with ?y ?z)))
+
+;; T3.10 {A2.2 + A3.3}
+
+(documentation "THEOREM: Two hosts of a hole cannot be externally 
+connected.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (not (ext-connected-with ?y ?z))))
+
+;; T3.11 {A2.2 + A3.3}.
+
+(documentation "THEOREM: Any two hosts of a hole have a common 
+self-connected part that entirely hosts the hole.")
+
+(forall (?x ?y ?z)
+	(=> (and (hole-in ?x ?y)
+		 (hole-in ?x ?z))
+	    (exists (?w)
+		    (and (part-of (prod-of ?y ?z))
+			 (self-connected ?z)
+			 (hole-in ?x ?z)))))
+
+;; T3.12 {A2.1 + A2.2 + A2.4 + A3.3}
+
+(documentation "THEOREM: Principal hosts are always sure to be 
+self-connected.")
+
+(forall (?x)
+	(=> (hole ?x)
+	    (self-connected (principle-host-of ?x))))
+
+;; T3.13 {A2.1 + A2.2 + A2.4 + A3.3}
+
+(documentation "THEOREM: Every hole is a hole in its principal 
+host.")
+
+(forall (?x)
+	(=> (hole ?x)
+	    (hole-in (principle-host-of ?x))))
+
+;; T3.14 {A2.3 + A3.3}.
+
+(documentation "THEOREM: The principal host of a hole is also 
+the principal host of any hole-parts of that hole.")
+
+(forall (?x ?z)
+	(=> (and (hole ?x)
+		 (hole-part-of ?z ?x))
+	    (= (principle-host-of ?x) 
+	       (principle-host-of ?z))))
+
+;; T3.15 {A2.1}
+
+(documentation "THEOREM: No hole can be externally connected 
+with an internal cavity (though it may well overlap one).")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (hole-in  ?z ?y))
+	    (not (ext-connected-with ?x ?z))))
+
+;; T3.16 {A2.1 + A3.3 + A3.4}.
+
+(documentation "THEOREM: Cavities are maximal holes; i.e., no 
+hole can include a cavity as a proper part.")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (hole-in  ?z ?y))
+	    (not (proper-part-of ?x ?z))))
+
+;; T3.17 {A2.1 + A3.3 + A3.4}
+
+(documentation "THEOREM: Cavities are maximally connected holes; 
+i.e., a cavity includes every hole with which it is connected.")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (hole-in ?z ?y)
+		 (overlaps ?x ?z))
+	    (part-of ?z ?x)))
+
+;; T3.18 {A2.3}
+
+(documentation "THEOREM: A hole that qualifies as a tunnel with 
+respect to a hollow's host cannot be part of that hollow.")
+
+(forall (?x ?y ?z)
+	(=> (and (tunnel-through ?x ?y)
+		 (hollow-in ?z ?y))
+	    (not (part-of ?x ?z))))
+
+;; T3.19 {A2.3}.
+
+(documentation "THEOREM: A hole cannot qualify as a hollow with 
+respect to any part of a host relative to which it qualifies as 
+a tunnel.")
+
+(forall (?x ?y ?z)
+	(=> (and (tunnel-through ?x ?y)
+		 (hollow-in ?x ?z))
+	    (not (part-of ?z ?y))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                       M O R P H O L O G Y                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "Topological concepts make it possible to distinguish 
+and classify objects with different types of holes, but we need 
+morphology in order to account for the feeling that blind hollows, 
+perforating tunnels, and internal cavities are all part of a single 
+family. The relevant notion operating here is that of filling: objects 
+with holes -- or, better, holes in objects -- constitute the 
+morphological manifold of fillable entities.")
+
+;; Primitive predicates
+;;
+;; 2-place: filled-by
+
+;; Primitive sentential operators
+;;
+;; Nec, Poss
+
+(documentation "Holes can be filled; "filled" here mean PERFECTLY 
+filled. Holes can be filled (without losing their status of holes) 
+insofar as they determine a (partially) concave discontinuity in the 
+surface of their host. In this section, `Poss' and `Nec' are used as 
+modal connectives for possibility and necessity, respectively.")
+
+;;;;;;;;;;;;;;;;;;;;; MORPHOLOGICAL DEFINITIONS ;;;;;;;;;;;;;;;;;;;;;
+
+
+;; D4.1 (fillable)
+
+(documentation fillable "?x is fillable if it can be (perfectly) 
+filled by something.")
+
+(forall (?x)
+	(<=> (fillable ?x)
+	     (Poss (exists (?y) 
+			   (filled-by ?x ?y)))))
+
+;; D4.2 (completely-filled-by)
+
+(documentation completely-filled-by "?x is completely filled by ?y 
+iff there is some part of ?y that perfectly fills ?x. This is a 
+monotonic relation, in the sense that if ?x is completely filled by 
+?y and ?y is a part of ?z, then ?x is completely filled by ?z.")
+
+(forall (?x ?y)
+	(<=> (completely-filled-by ?x ?y)
+				   (exists (?z)
+					   (and (part-of ?z ?y)
+						(filled-by ?x ?z)))))
+
+;; D4.3 (partially-filled-by)
+
+(documentation partially-filled-by "?x is partially filled by ?y iff 
+there is some part of ?x that is completely filled by ?y. This too 
+is a monotonic relation, in the sense that if ?x is partially filled 
+by ?y and ?y is part of ?z, then ?x is partially filled by ?z. Note 
+that a partial filler need not be wholly inside a hole (it may  
+stick out), which means that every complete filler also qualifies as 
+(a limit cases of) a partial one.")
+
+(forall (?x ?y)
+	(<=> (partially-filled-by ?x ?y)
+	     (exists (?z)
+		     (and (part-of ?z ?x)
+			  (completely-filled-by ?z ?y)))))
+
+
+;; D4.4 (properly-filled-by)
+
+(documentation properly-filled-by "?x is properly (though perhaps 
+incompletely) filled by ?y iff some part of ?x is perfectly filled 
+by ?y. properly-filled-by is the dual of completely-filled-by, and 
+is so related to partially-filled-by that ?x is properly filled by 
+?y iff ?x is partially filled by every part of ?y. (Thus, every 
+perfect filler is both complete and proper in this sense.)")
+
+(forall (?x ?y)
+	(<=> (properly-filled-by ?x ?y)
+	     (exists (?z)
+		     (and (part-of ?z ?x)
+			  (filled-by ?z ?y)))))
+
+;; D4.5 (skin-of)
+
+(documentation skin-of "The skin of ?x is the fusion of those 
+superficial parts of ?x's principal host with which ?x is 
+externally connected (a notion that is meant to apply only when 
+?x is a hole).")
+
+(forall (?x)
+	(= (skin-of ?x)
+	   (the (?y)
+	     (forall (?z)
+		     (<=> (overlaps ?z ?y)
+			  (exists (?w)
+				  (and (superficial-part-of ?w (principle-host-of ?x))
+				       (ext-connected-with ?x ?w)
+				       (overlaps ?z ?w))))))))
+
+;; D4.6 (free-superficial-part-of)
+
+(documentation free-superficial-part "?w is a free superficial 
+part of ?z relative to ?x ; i.e., ?w is a superficial part of 
+?z that is not connected with ?x's host(s). (This notion is meant 
+to apply only when ?x is a hole and ?z a corresponding perfect 
+filler.)")
+
+(forall (?x ?y)
+	(<=> free-superficial-part-of ?x ?y ?z)
+	(and (superficial-part-of ?x ?y)
+	     (not (connected-with ?x skin-of ?z))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;; MORPHOLOGICAL AXIOMS ;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A4.1
+
+(documentation "AXIOM: Something is fillable just in case it 
+is part of a hole; i.e., fillability is an exclusive property 
+of holes and their parts.")
+
+(forall (?x)
+        (<=> (fillable ?x)
+             (exists (?y)
+                     (and (hole ?y)
+                          (part-of ?x ?y)))))
+
+;; A4.2
+
+(documentation "Perfect fillers and fillable entities have no 
+parts in common (rather, they may occupy the same spatial region).")
+
+(forall (?x ?y ?z)
+        (=> (and (filled-by ?x ?y))
+            (fillable ?z)
+            (not (overlaps ?y ?z)))))
+
+;; A4.3
+
+;; The informal gloss in the following documentation is different from
+;; the gloss on the web site, as the latter -- "A complete filler of
+;; (a part of) a hole is connected with every part of (that part of)
+;; that hole" -- does not seem to match the formal axiom.  Note in
+;; particular that the part-of relation does not appear in the axiom,
+;; but its (non-parenthetical) occurrence in the informal gloss seems
+;; essential to its meaning.  The gloss also does not mention the
+;; things to which the
+
+(documentation "AXIOM: A complete filler of (a part of) a hole is 
+connected with everything with which (that part of) the hole itself 
+is connected.")
+
+(forall (?x ?y)
+        (=> (completely-filled-by ?x ?y)
+            (forall (?z)
+                    (=> (connected-with ?z ?x)
+                        (connected-with ?z ?y)))))
+
+;; A4.4
+
+;; As with the previous axiom, the informal gloss in the following
+;; documentation is different from the gloss on the web site "Every
+;; part of a proper filler of (a part of) a hole is connected with
+;; (that part of) that hole" -- which also does not seem to match the
+;; axiom (though it appears to be equivalent to the axiom).
+
+(documentation "AXIOM: Every hole is connected with everything with 
+which a proper filler of the hole is connected.") 
+
+(forall (?x ?y ?z)
+        (=> (and (properly-filled-by ?x ?y)
+                 (connected-with ?z ?y))
+            (connected-with ?z ?x)))
+
+;; A4.5
+
+(documentation "AXIOM: A perfect filler of (a part of) a hole 
+completely fills every proper part of (that part of) that hole.")
+
+(forall (?x ?y ?z)
+        (=> (and (filled-by ?x ?y)
+                 (proper-part-of ?z ?x))
+            (completely-filled-by ?z ?y)))
+
+;; A4.6
+
+(documentation "AXIOM: Every proper part of a perfect filler of (a 
+part of) a hole properly fills (that part of) that hole.")
+
+(forall (?x ?y ?z)
+        (=> (and (filled-by ?x ?y)
+                 (proper-part-of ?z ?y))
+            (properly-filled-by ?y ?z)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;; THEOREMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; T4.1 {A4.1}
+
+(documentation "THEOREM: Every hole can be filled (and continue to 
+be a hole).")
+
+(forall (?x) 
+	(=> (hole ?x)
+	    (fillable ?x)))
+
+;; T4.2 {A1.1 + A2.4?A2.5 + A4.1}
+
+(documentation "THEOREM: One cannot fill the host of a hole (except 
+in a loose way of speaking: we can, e.g., say that something material 
+is fillable meaning that it is the host of some fillable entity proper).")
+
+(forall (?x ?y)
+        (=> (hole-in ?x ?y)
+	    (not (fillable ?y))))
+
+;; T4.3 {A4.1 + A4.2}
+
+(documentation "THEOREM: No filler can be a hole (though it can be 
+holed, like the filler of an internal tunnel-cavity).")
+
+(forall (?x ?y)
+	(=> (filled-by ?x ?y)
+	    (not (hole ?y))))
+
+;; T4.4 {A2.1 + A4.3}
+
+(documentation "THEOREM: A filler cannot host the thing it fills.")
+
+(forall (?x ?y)
+	(=> (filled-by ?x ?y)
+	    (not (hole-in ?x ?y))))
+
+;; T4.5 {A4.2}
+
+(documentation "THEOREM: Being filled is an irreflexive relation: 
+holes or parts of holes cannot fill themselves.")
+
+(forall (?x) (not (filled-by ?x ?x)))
+
+;; T4.6 {A4.2}
+
+(documentation "THEOREM: Being filled is an asymmetric relation: 
+holes or parts of holes cannot fill their own fillers.")
+
+(forall (?x ?y)
+	(=> (filled-by ?x ?y)
+	    (not (filled-by ?y ?x))))
+
+;; T4.7 {A4.2}
+
+(documentation "THEOREM: Fillers do not have any parts in common 
+with the holes they fill (though some of their parts are 
+spatio-temporally co-localized with parts of the holes, holes 
+being immaterial).")
+
+(forall (?x ?y)
+	(=> (filled-by ?x ?y)
+	    (not (overlaps ?x ?y))))
+	
+;; T4.8 {A4.2}
+
+(documentation "THEOREM: A filler is not part of any fillable 
+entity (just as a host is not part of any hosted entity).")
+
+(forall (?x ?y ?z)
+	(=> (and (filled-by ?x ?y)
+		 (part-of ?y ?z))
+	    (not (fillable ?z))))
+
+;; T4.9 {A4.2}
+
+(documentation "THEOREM: A perfect filler cannot have any 
+fillable part (though a complete filler, or even a partial 
+filler, can).")
+
+(forall (?x ?y ?z)
+	(=> (and (filled-by ?x ?y)
+		 (part-of ?z ?y))
+	    (not (fillable ?z))))
+
+;; T4.10 {A4.2 + A4.3}
+
+(documentation "THEOREM: A hole's perfect filler is externally 
+connected with every part of the hole's hosts with which the 
+hole itself is connected (i.e., it perfectly 'fits' the hole).")
+
+(forall (?x ?y ?z ?w)
+	(=> (and (hole-in ?x ?y)
+		 (filled-by ?x ?z)
+		 (part-of ?w ?y)
+		 (connected-with ?w ?x))
+	    (ext-connected with ?z ?w)))
+
+;; T4.11 {A4.2 + A4.3}
+
+(documentation "THEOREM: A hole's perfect filler is externally 
+connected with exactly those parts of the principal host with 
+which the hole itself is connected.")
+
+(forall (?x ?y ?z)
+	(=> (and (filled-by ?x ?y)
+		 (part-of ?z (principle-host-of ?x)))
+	    (<=> (ext-connected-with ?y ?z)
+		 (ext-connected-with ?x ?z))))
+
+;; T4.12 {A4.2 + A4.3}
+
+(documentation "THEOREM: A hole's perfect filler is externally 
+connected with every part of the hole's skin.")
+
+(forall (?x ?y ?z)
+	(=> (and (filled-by ?x ?y)
+		 (part-of ?z (skin-of ?x)))
+	    (ext-connected-with ?z ?y)))
+
+;; T4.13 {A3.1 + A4.2 + A4.3}
+
+(documentation "THEOREM: The skin of a hole is a superficial 
+part of each and every host of that hole.")
+
+(forall (?x ?y ?z)
+	(=> (hole-in ?x ?y)
+	    (superficial-part-of (skin-of ?x) ?y)))
+
+;; T4.14 {A2.2 + A3.1 + A4.2 + A4.3}
+
+(documentation "THEOREM: Nothing is a hole in its own skin; 
+i.e., the skin of a hole envelops the hole but does not 
+qualify as a host of it.")
+
+(forall (?x)
+	(not (hole-in ?x (skin-of ?x))))
+
+;; T4.15 {A4.2 + A4.3}
+
+(documentation "THEOREM: A complete filler of a hole is 
+connected with every part of the hole's skin.")
+
+(forall (?x ?y ?z)
+	(=> (and (completely-filled-by ?x ?y)
+		 (part-of ?z (skin-of ?x)))
+	    (connected-with ?y ?z)))
+	    
+;; T4.16 {A4.5}
+
+(documentation "THEOREM: Every proper part of a perfect filler 
+of (a part of) a hole partially fills (that part of) that hole.")
+
+(forall (?x ?y ?z)
+	(=> (and (filled-by ?x ?y)
+		 (proper-part-of ?z ?y))
+	    (partially-filled-by ?x ?z)))
+
+;; T4.17 {A4.5}
+
+(documentation "THEOREM: Any part of a completely filled 
+entity is also completely filled (by the same filler).")
+
+(forall (?x ?y ?z)
+	(=> (and (completely-filled-by ?x ?y)
+		 (part-of ?z ?x))
+	    (completely-filled-by ?z ?y)))
+
+;; T4.18 {A4.6}
+
+(documentation "THEOREM: Any part of a proper filler is also 
+a proper filler (of the same entity).")
+
+(forall (?x ?y ?z)
+	(=> (and (properly-filled-by ?x ?y)
+		 (part-of ?z ?y))
+	    (properly-filled-by ?x ?z)))
+
+;; T4.19 {A4.3}
+
+(documentation "THEOREM: An internal cavity admits of no 
+imperfect complete self-connected fillers: it can only be 
+completely filled in a perfect way.")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (completely-filled-by ?x ?z)
+		 (self-connected ?z))
+	    (filled-by ?x ?z)))
+
+;; T4.20 {A4.3 + A4.4}
+
+(documentation "THEOREM: An internal cavity admits of no 
+improper partial self-connected fillers: it can only be 
+partially filled in a proper way.")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (partially-filled-by ?x ?z)
+		 (self-connected ?z))
+	    (properly-filled-by ?x ?z)))
+
+;; T4.21 {A4.3 + A4.4}
+
+(documentation "THEOREM: An internal cavity admits of no perfect 
+fillers with free superficial parts.")
+
+(forall (?x ?y ?z)
+	(=> (and (cavity-in ?x ?y)
+		 (filled-by ?x ?z))
+	    (not (exists (?w)
+			 (free-superficial-part-of ?w ?z ?x)))))
+		 
+;; T4.22 {A4.3}
+
+(documentation "THEOREM: The filler of a hollow is sure to have 
+exactly one maximal free superficial part.")
+
+(forall (?x ?y ?z)
+	(=> (and (hollow-in ?x ?y)
+		 (filled-by ?x ?z))
+	    (exists (?w)
+		    (and (free-superficial-part-of ?w ?z ?x)
+			 (forall (?v)
+				 (free-superficial-part-of ?v ?z ?x)
+				 (part-of ?v ?w))))))
+
+
+;; T4.23 {A4.3}
+
+(documentation "THEOREM: A cavity is a hole whose fillers cannot 
+have any free superficial parts.")
+
+(forall (?x ?y)
+	(<=> (cavity-in ?x ?y)
+	     (and (hole-in ?x ?y)
+		  (Nec (forall (?z)
+			  (=> (filled-by ?x ?z)
+			      (not (exists (?w)
+					   (free-superficial-part-of ?w ?z ?x)))))))))
+				 
+;; T4.24 {A4.3}
+
+(documentation "THEOREM: A hollow is a hole whose skin has genus 0 
+and cannot be connected with every superficial part of a perfect 
+filler; i.e., the filler of a hollow must have free superficial parts.")
+
+(forall (?x ?y)
+	(<=> (hollow-in ?x ?y)
+	     (and (hole-in ?x ?y)
+		  (= 0 (genus-of (skin-of ?x)))
+		  (Nec (forall (?z)
+			       (=> (filled-by ?x ?z)
+				   (exists (?w)
+					   (free-superficial-part-of ?w ?z ?x))))))))
+		  
+;; T4.25 {A4.1}.
+
+(documentation "THEOREM: Every hole can be filled partially, 
+properly, or completely.")
+
+(forall (?x ?y)
+	(=> (hole-in ?x ?y)
+	    (and (Poss (exists (?z) (partially-filled-by ?x ?y)))
+		 (Poss (exists (?z) (properly-filled-by ?x ?y)))
+		 (Poss (exists (?z) (completely-filled-by ?x ?y))))))

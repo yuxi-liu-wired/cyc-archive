@@ -1,0 +1,304 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Re: Differential Logic -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Tue, 6 May 2003 00:00:41 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3EB73352.259E602@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3E982563.F67459A5@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg04799.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Re: Differential Logic</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg04798.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg04800.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd1.html#04799">Thread Index</A></Td>
+<TD><A HREF="msg04800.html">Date Prev</A></TD>
+<TD><A HREF="msg04798.html">Date Next</A>
+</TD>
+<TD><A HREF="mail2.html#04799">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Re: Differential Logic</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Inquiry &lt;<A HREF="mailto:inquiry@stderr.org">inquiry@stderr.org</A>&gt;, Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;,       SemioCom &lt;<A HREF="mailto:gdsemiocom@univ-perp.fr">gdsemiocom@univ-perp.fr</A>&gt;</li>
+<li><em>Subject</em>: ONT Re: Differential Logic</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</li>
+<li><em>Date</em>: Tue, 06 May 2003 00:00:18 -0400</li>
+<li><em>References</em>: &lt;3E982563.F67459A5@oakland.edu&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+DLOG.  Note D1
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+Differential Logic and Dynamic Systems
+
+Author:   Jon Awbrey
+Created:  16 Dec 1993
+Relayed:  31 Oct 1994
+Revised:  06 May 2003
+
+| Stand and unfold yourself.
+|
+| Hamlet, 1.1.2
+
+Purpose
+
+This series of reports develops a differential extension of
+propositional calculus and applies it to a context of problems
+arising in dynamic systems.  The work pursued here is coordinated
+with a parallel application that focuses on neural network systems,
+but the dependencies are arranged to make the present series the
+main and the more self-contained work, to serve as a conceptual
+frame and a technical background for the network project.
+
+Review and Transition
+
+This note continues a previous discussion on the problem of dealing
+with change and diversity in logic-based intelligent systems.  For
+ease of reference, I begin by summarizing essential material from
+previous reports.
+
+Table 1 outlines the notation that I use for propositional calculus.
+Explained as briefly as possible, I am using only two basic kinds
+of truth-functional connectives, both of variable k-ary scope.
+
+1.  For the first, I use concatenation as a connective
+    to signify the logical conjunctions of k arguments.
+
+2.  For the other, I use a bracket of the form ( , , , )
+    as a connective which says that exactly one of its k
+    arguments is false.
+
+All other truth-functional connectives can be obtained in a very
+efficient style of representation through combinations of these
+two forms.
+
+This treatment of propositional logic is derived from the work of
+C.S. Peirce [P1, P2], who gave this approach an extensive development
+in his graphical systems of predicate, relational, and modal logic [Rob].
+More recently, these ideas were revived and supplemented in an alternative
+interpretation by G. Spencer-Brown [SpB].  Both of these authors used other
+forms of enclosure where I use parentheses, but the structural topologies of
+expression and the functional varieties of interpretation are fundamentally
+the same.
+
+While working with expressions solely in propositional calculus, the use
+of plain parentheses to represent logical connectives is simplest to write
+and easiest to read for both human and machine parsers.  In the present text
+I preserve this form of expression in tables and set-off displays, but in
+contexts where parentheses are needed for functional notation I will use
+a distinctive font for logical operators.  [Not available in Ascii.]
+
+The briefest expression for logical truth is the empty word, usually denoted by
+epsilon or lambda in formal languages, where it forms the identity element for
+concatenation.  To make it visible in this text, I denote it by the equivalent
+expression &quot;(())&quot;, or, especially if operating in an algebraic context, by a
+simple &quot;1&quot;.  Also when working in an algebraic mode, I use the plus sign &quot;+&quot;
+for exclusive disjunction.  Thus, we may express the following paraphrases
+of algebraic forms:
+
+A + B      =  (A, B)
+
+A + B + C  =  ((A, B), C)  =  (A, (B, C))
+
+One should be careful to note that this last pair of
+expressions are not equivalent to the form (A, B, C).
+
+Table 1.  Syntax &amp; Semantics of a Calculus for Propositional Logic
+o-------------------o-------------------o-------------------o
+|    Expression     |  Interpretation   |  Other Notations  |
+o-------------------o-------------------o-------------------o
+|  &quot; &quot;              | True.             |  1                |
+o-------------------o-------------------o-------------------o
+|  ()               | False.            |  0                |
+o-------------------o-------------------o-------------------o
+|  A                | A.                |  A                |
+o-------------------o-------------------o-------------------o
+|  (A)              | Not A.            |  A'               |
+|                   |                   |  ~A               |
+o-------------------o-------------------o-------------------o
+|  A B C            | A and B and C.    |  A &amp; B &amp; C        |
+o-------------------o-------------------o-------------------o
+|  ((A)(B)(C))      | A or B or C.      |  A v B v C        |
+o-------------------o-------------------o-------------------o
+|  (A (B))          | A implies B.      |  A =&gt; B           |
+|                   | If A then B.      |                   |
+o-------------------o-------------------o-------------------o
+|  (A, B)           | A not equal to B. |  A =/= B          |
+|                   | A exclusive-or B. |  A  +  B          |
+o-------------------o-------------------o-------------------o
+|  ((A, B))         | A equals B.       |  A  =  B          |
+|                   | A if &amp; only if B. |  A &lt;=&gt; B          |
+o-------------------o-------------------o-------------------o
+|  (A, B, C)        | Just one of       |  A'B C  v         |
+|                   | A, B, C           |  A B'C  v         |
+|                   | is false.         |  A B C'           |
+o-------------------o-------------------o-------------------o
+|  ((A),(B),(C))    | Just one of       |  A B'C' v         |
+|                   | A, B, C           |  A'B C' v         |
+|                   | is true.          |  A'B'C            |
+|                   |                   |                   |
+|                   | Partition all     |                   |
+|                   | into A, B, C.     |                   |
+o-------------------o-------------------o-------------------o
+|  ((A, B), C)      | Oddly many of     |  A + B + C        |
+|  (A, (B, C))      | A, B, C           |                   |
+|                   | are true.         |  A B C  v         |
+|                   |                   |  A B'C' v         |
+|                   |                   |  A'B C' v         |
+|                   |                   |  A'B'C            |
+o-------------------o-------------------o-------------------o
+|  (Q, (A),(B),(C)) | Partition  Q      |  Q'A'B'C' v       |
+|                   | into A, B, C.     |  Q A B'C' v       |
+|                   |                   |  Q A'B C' v       |
+|                   | Genus Q comprises |  Q A'B'C          |
+|                   | species A, B, C.  |                   |
+o-------------------o-------------------o-------------------o
+
+NB. The usage that one often sees, of a plus sign &quot;+&quot;
+to represent inclusive disjunction, and the reference
+to this operation as &quot;boolean addition&quot;, is a misnomer
+on at least two counts.  Boole used the plus sign to
+represent exclusive disjunction (at any rate, an
+operation of aggregation restricted in its logical
+interpretation to cases where the represented sets
+are disjoint [Boo, 32]), as any mathematician with
+a sensitivity to the ring and field properties of
+algebra would do:
+
+| The expression x + y seems indeed uninterpretable,
+| unless it be assumed that the things represented
+| by x and the things represented by y are entirely
+| separate;  that they embrace no individuals in
+| common.  [Boo, 66].
+
+It was only later that Peirce and Jevons treated inclusive
+disjunction as a fundamental operation, but these authors,
+with a respect for the algebraic properties that were already
+associated with the plus sign, used a variety of other symbols
+for inclusive disjunction [Sty, 177, 189].  It seems to have
+been Schroeder who later reassigned the plus sign to inclusive
+disjunction [Sty, 208].  Additional information, discussion,
+and references can be found in [Boo] and [Sty, 177-263].
+Aside from these historical points, which never really
+count against a current practice that has gained a life
+of its own, this usage does have a further disadvantage
+of cutting or confounding the lines of communication
+between algebra and logic.  For this reason, I am
+forced to avoid it here.
+
+Jon Awbrey
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="04884" href="msg04884.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04872" href="msg04872.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04870" href="msg04870.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04866" href="msg04866.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04861" href="msg04861.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04845" href="msg04845.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04836" href="msg04836.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04833" href="msg04833.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04826" href="msg04826.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04823" href="msg04823.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04816" href="msg04816.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04810" href="msg04810.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="04800" href="msg04800.html">ONT Re: Differential Logic</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg04800.html">ONT Re: Differential Logic</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg04798.html">ONT Re: Differential Logic</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg04798.html">ONT Re: Differential Logic</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04800.html">ONT Re: Differential Logic</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail2.html#04799"><strong>Date</strong></a></li>
+<li><a href="thrd1.html#04799"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

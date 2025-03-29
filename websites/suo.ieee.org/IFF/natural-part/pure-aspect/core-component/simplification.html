@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>A Core Simplification</title>
+<meta name="description" content="Discussion of a core simplification.">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta name="author" content="Robert E. Kent">
+<link rel="icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico"/> 
+<link rel="stylesheet" type="text/css" href="http://suo.ieee.org/IFF/css/normal-page.css"/>
+</head>  
+<body>
+<div id="document">
+<div id="left-column"></div>
+<div id="right-column"></div>
+<div id="header">
+<div id="home">
+<a href="http://suo.ieee.org/IFF/">
+<img width="75" height="75" 
+     src="http://suo.ieee.org/IFF/images/iff-icon-thumbnail.gif" 
+     border="0"
+     alt="[The Information Flow Framework]" 
+     title="The Information Flow Framework"
+     style="width: 75; height: 75; vertical-align: top;" />
+</a>
+</div>
+<div id="top">
+<h1>A Core Simplification</h1>
+</div>
+</div>
+<div id="content">
+<p class="text next-paragraph">As a simplification in coding the axiomatization of the generic core, initially we will not specify the metastack links between the natural part and the metashell. Whether this simplification is permanent can be decided in the future (see the discussion about 
+<a href="http://suo.ieee.org/IFF/notes/ur-simplification.html">an Ur simplification</a>). This does not affect the metastack links within the natural part. An example from generic functions will serve to explain this simplification.</p>
+<p class="text next-paragraph">Each generic function <span style="font-style: italic;">f</span> : <span style="font-style: italic;">X</span> &#8594; <span style="font-style: italic;">Y</span> has a unique generic <span style="font-style: italic;">source</span> set <span style="font-style: italic;">X</span> (and a unique generic <span style="font-style: italic;">target</span> set <span style="font-style: italic;">Y</span>). Here is the unsimplified code for the source function.</p>
+<pre>((#n+1).ftn:function source)<br/>(= ((#n+1).ftn:source source) function)<br/>(= ((#n+1).ftn:target source) #n.set:set)<br/>((#n+2).ftn:restriction source (#n+1).ftn:source)<br/>(type.ftn:restriction source meta.set:source)</pre>
+<p class="text">This contains a metastack link internal to the natural part and a metastack link between the natural part and the metashell. By eliminating the latter, the code is simplified.</p>
+<pre>((#n+1).ftn:function source)<br/>(= ((#n+1).ftn:source source) function)<br/>(= ((#n+1).ftn:target source) #n.set:set)<br/>((#n+2).ftn:restriction source (#n+1).ftn:source)</pre>
+</div> <!-- end of content -->
+<div id="footer">Author: Robert E. Kent</div>
+</div> <!-- end of document -->
+<br/>
+</body>
+<!-- test your browser here [http://plato.stanford.edu/symbols/entities.html] -->
+</html>

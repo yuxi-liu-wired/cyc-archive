@@ -1,0 +1,212 @@
+
+<CENTER>
+<H1>Minutes for KIF Standardization Meeting </H1><B>Texas A &amp; M University 
+</B>
+<P><B>November 30 - December 2, 2000 </B></CENTER>
+<P><B>Participants: </B>
+<P>Bill Andersen, Mike Genesereth, Michael Gruninger, Pat Hayes, Tom Ioerger, 
+Chris Menzel, Adam Pease, John Sowa, Mark Stickel, Mike Uschold, Chris Welty, 
+David Whitten 
+<P>
+<H2>Discussion </H2>The following notes reflect the outcomes of the discussions 
+during the meeting, in roughly chronological order: 
+<P>
+<OL>
+<LI><B>SUO-KIF Document </B>
+<P>It was agreed that the SUO-KIF document will be used as the baseline, so that 
+KIF-Core contains at least all of the features specified in the SUO-KIF 
+document. 
+<P>The following were some problems that were identified with SUO-KIF: 
+<UL>
+<LI>There is no need for an inequality relation 
+<LI>Fix the grammar for <TT>&lt;=&gt;</TT> 
+<LI>Why should we allow functions with no arguments? Should this be <TT>term+ 
+</TT>? 
+<LI>The notion of <TT>bottom </TT>will be eliminated. One of the original 
+motivations for bottom was to handle partial functions. In KIF-Core, functions 
+will be total, but we will simply not care about the values that they take for 
+unrestricted arguments. </LI></UL>
+<P></P>
+<LI><B>Namespaces </B>
+<P>The group discussed the need for a syntactic mechanism for referring to 
+namespaces, although there was concern that this could get bogged down in 
+ontology management issues. 
+<P><I>Consensus: </I>There will be no commitment to namespaces, but that we will 
+extend the BNF so that <TT>wordchar </TT>explicitly contains special alpha 
+characters that can be used to identify namespaces. 
+<P></P>
+<LI><B>Nonmonotonic Reasoning </B>
+<P>Mike Genesereth raised earlier concerns regarding the introduction of 
+features related to nonmonotonic reasoning, which was included in the KIF 3.0 
+document, but removed from subsequent drafts. 
+<P>One proposal was to identify operators (such as <TT>unprovable, bagofall 
+</TT>) that people could use to specify nonmonotonic features. We would also 
+provide syntax to allow people to incorporate new operators; however, within the 
+standard, operators would be uninterpreted constructs. 
+<P><I>Consensus: </I>The group did not arrive at any consensus on this issue, 
+although if they are included, they will belong to a new extension. 
+<P><I>Action Item: </I>Mike Genesereth will flesh out the requirements for 
+nonmonotonic operators. 
+<P></P>
+<LI><B>Sorted KIF </B>
+<P>The introduction of a sorted extension to KIF is motivated by the following 
+concerns: 
+<UL>
+<LI>By enforcing sorts at a syntactic level, we avoid unintentional errors in 
+axiom writing by ensuring that arguments have the right types; 
+<LI>efficiency; 
+<LI>economy of expression; 
+<LI>interface to object-oriented world; 
+<LI>semantics. </LI></UL>
+<P>The group agreed that KIF-Core should be unsorted. 
+<P>After a great deal of discussion, there was still disagreement about the 
+introduction of a Sorted KIF extension. The objections were primarily concerned 
+with the danger of the balkanization of the standard, particularly when merging 
+two ontologies in which one ontology uses only the unsorted Core while the other 
+uses the Sorted extension. Another objection was that the declaration of sort 
+information belongs more properly to an ontology rather than the language of 
+KIF. 
+<P>There was discussion concerning the declaration of sorts. Declaring sorts 
+before using them could result in undesired behaviors. The sort hierarchy has to 
+be set a priori, but you will get errors that you do not want, if the sort 
+hierarchy is not set up correctly. E.g. variable ?x is a human, could be 
+rejected by a parser if not yet delclared to be a subsort of animal. The problem 
+is that in an open world, people will often be adding sorts and changing the 
+hierarchy. 
+<P>Among those who are proposing a Sorted KIF extension, there was agreement on 
+the required features. Given the restricted quantifiers from the KIF-Core BNF, 
+there is no change to the BNF of the Sorted KIF extension. However, the syntax 
+for specifying sort information (i.e. sort signature) must be added. This would 
+include new operators <TT>defsort</TT>, <TT>topsort </TT>, and <TT>subsort,</TT> 
+as well as boolean operators on sorts (union, intersection, complement). 
+<P>There was some disagreement about including the restricted quantification in 
+KIF-Core. However, it was argued that restricted quantification provides a 
+convenient syntax for users, as well as providing a hook to make it easy to link 
+with the Sorted extension. 
+<P><I>Action Items: </I>
+<P>Pat Hayes will sketch out the syntax for sort declarations (as top-level 
+forms that are not embedded in formulae). This will include a treatment of the 
+interaction between sorting and having variables in the predicate position. 
+<P>There is also a need to write a few notes on the semantics for the new 
+grammatical constructs in the proposed Sorted KIF extension. 
+<P><I>Undecided Issues? </I>
+<P>
+<UL>
+<LI>Should signature be given in a single place, or can it be distributed? 
+<LI>If we say S1 and S2 disjoint, is the statement (and (S1 ?x) (S2 ?x)) 
+interpreted as false, or is it syntactically invalid? 
+<LI>Do we want predicates for every sort? 
+<LI>Are the sort names genuine names? Should the same name be used for the sort 
+and ^ the predicate? </LI></UL>
+<P></P>
+<LI><B>Variadic Relations and Sequence Variables </B>
+<P>Although these had earlier been eliminated in the first teleconference, Mike 
+Genesereth urged that they be reintroduced as part of KIF-Core (as they are in 
+the dpANS document). Although variadic relations can be included without 
+sequence variables, Mike argued that they sequence variables provide a simple 
+way of dealing with n-ary arguments and lists. 
+<P>The following objections were raised against the introduction of sequence 
+variables: 
+<UL>
+<LI>complication of the language; 
+<LI>questions about the semantics of sequence variables, particularly if 
+sequences are not elements of the domain; 
+<LI>awkwardness -- there cannot be quantified sequence variables, and the @l 
+variable is forced to be in the last position. </LI></UL>
+<P><I>Consensus: </I>The use of variadic relations was not contentious, but no 
+consensus was reached on the introduction of sequence variables (although there 
+was relatively strong support for their inclusion). 
+<P><I>Action Item: </I>Mike Genesereth will write a clear exposition of the 
+semantics of sequence variables <TT>@l </TT>. 
+<P></P>
+<LI><B>Quantification over Relations </B>
+<P>An example of this is <PRE>(&lt;=&gt;	(symmetric ?R)
+	(&lt;=&gt;	(?R ?x ?y)
+		(?R ?y ?x)))
+</PRE>
+<P>It was agreed that this can be handled by saying that we are quantifying only 
+over all relations in the domain of discourse. 
+<P>An unresolved issue is the interaction between this feature and sorted 
+languages. 
+<P><I>Action Item: </I>Chris Menzel will fully specify the semantics of this 
+quantification. 
+<P></P>
+<LI><B>MetaKIF </B>
+<P>The introduction of the MetaKIF is motivated by the following concerns: 
+<UL>
+<LI>mechanism for extending KIF in the future; 
+<LI>describing the syntax and semantics of KIF and other languages; 
+<LI>defining inference procedures; 
+<LI>implicitly referring to theories and their sentences; 
+<LI>writing axiom schemata. </LI></UL>
+<P>The main discussion revolved around proposals for <TT>quote </TT>and the 
+model theory of MetaKIF. The original treatment of <TT>quote</TT> from KIF 3.0 
+and the dpANS document (which we shall refer to in these notes as structured 
+quote), was based on the use of lists and the restriction to finite lists in 
+particular. 
+<P>There were three proposals for handling <TT>quote</TT>: 
+<OL>
+<LI>Character string quote (see Chris Menzel's document) 
+<LI>Structured quote and string quote (see Mike Genesereth and dpANS) 
+<LI>Implicit quoting (i.e. no <TT>quote</TT> construct) </LI></OL>
+<P>Mike Genesereth described two motivations for his structured quote approach. 
+KIF originally had an abstract syntax (graphs), which was linearized into 
+strings; using Menzel's character string quote would be a bias towards a 
+particular linearization. In addition, structured quote assists in the 
+implementation of reflection principles. 
+<P><I>Action Items: </I>
+<P>Mike Genesereth will tidy up his proposal for quote and bring it line with 
+its stated semantics. Chris Menzel will also flesh out the model theory of his 
+approach. We will then evaluate these two proposals on the basis of their model 
+theories. Also, Mike Genesereth will provide examples illustrating why implicit 
+quoting is insufficient. 
+<P></P>
+<LI><B>Truth Predicates </B>
+<P>The proposal here was to adopt <TT>wtr</TT> within the MetaKIF extension. 
+<P><I>Consensus: </I>We will leave this issue open for now, altough some truth 
+predicate is required, particularly to write axiom schemata. 
+<P></P>
+<LI><B>Relationship to XML </B>
+<P>There were no technical issues here. The group agreed to incorporate a DTD 
+for the KIF BNF as an annex to the standards document. 
+<P></P>
+<LI><B>Definition Constructs </B>
+<P>The original complexity around these constructs arose from the distinctions 
+between conservative and partial definitions in the KIF 3.0 document, which are 
+not present in the dpANS document. 
+<P>The proposal was to introduce a single <TT>def </TT>construct in the MetaKIF 
+extension. We still need a BNF for this construct. 
+<P></P>
+<LI><B>New Operators </B>
+<P>John Sowa had earlier proposed the addition of an assert operator. The group 
+felt that the functionality of such an operator could be captured by 
+<TT>wtr</TT>. 
+<P></P>
+<LI><B>Punning </B>
+<P>This discussion is motivated by the question of whether or not the following 
+expression should be syntactically legal: <PRE>(P (P P) P)
+</PRE>so that the same string is referring to a predicate, function, and 
+constant. 
+<P>The proposal was that there be no punning allowed. To prevent this, functions 
+and predicates must be disjoint in the BNF. We will create non-terminals called 
+<TT>pred</TT> and <TT>func</TT>, with the same definition as definition for 
+<TT>word</TT>. We will state that no pred shall have same characters as a word, 
+and no func shall have same characters as a word. One drawback is that it does 
+not allow a complete BNF. </P></LI></OL>
+<P>
+<H2>Summary of Proposed Features for KIF-Core </H2>The following are features 
+for KIF-Core which are not included in the SUO-KIF document: 
+<UL>
+<LI>KIF-Core is unsorted. 
+<LI>BNF for KIF-Core contains restricted quantification. 
+<LI>KIF-Core has unrestricted syntax -- predicates are allowed in any position 
+and variables are allowed in predicate position. 
+<LI>The syntax allows variadic relations and sequence variables. 
+<LI>KIF-Core does not allow punning of predicates, functions, and constants. 
+</LI></UL>
+<P>
+<H2>Summary of Proposed KIF Extensions </H2>
+<OL>
+<LI>KIF-Core 
+<LI>MetaKIF 
+<LI>Sorted KIF </LI></OL>

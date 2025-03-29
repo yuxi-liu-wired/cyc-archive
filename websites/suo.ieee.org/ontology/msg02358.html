@@ -1,0 +1,323 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: CG's -->
+<!--X-From-R13: "Xbua T. Ebjn" <fbjnNorfgjro.arg> -->
+<!--X-Date: Fri, 4 May 2001 09:27:34 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3AF2A821.DED29DC@bestweb.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 80256A41.002EA0C4.00@d06mta10.portsmouth.uk.ibm.com -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02358.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: CG's</TITLE>
+<LINK REV="made" HREF="mailto:sowa@bestweb.net">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02363.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02355.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd42.html#02358">Thread Index</A></Td>
+<TD><A HREF="msg02359.html">Date Prev</A></TD>
+<TD><A HREF="msg02357.html">Date Next</A>
+</TD>
+<TD><A HREF="mail43.html#02358">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: CG's</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:martin_king@UK.IBM.COM">martin_king@UK.IBM.COM</A></LI>
+<LI><em>Subject</em>: SUO: Re: CG's</LI>
+<LI><em>From</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 04 May 2001 09:01:21 -0400</LI>
+<LI><em>Cc</em>: <A HREF="mailto:cg@cs.uah.edu">cg@cs.uah.edu</A>, <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>References</em>: &lt;80256A41.002EA0C4.00@d06mta10.portsmouth.uk.ibm.com&gt;</LI>
+<LI><em>Reply-To</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Martin,
+
+I agree that more examples would be helpful.  Following are your two
+examples translated to CGs.  I'm sending this note to CG and SUO lists
+because there may be other people who might find it useful.
+
+&gt; In your material on CG's that I have seen, I have not found how to
+&gt; express simple rules of deduction.  If you could provide an example or two,
+&gt; and say something about how a proof engine would use them, I would find
+&gt; this very helpful.
+
+For the theoretical foundations of CGs, I use Peirce's rules of
+inference.  For P's own statement of the rules with my commentary
+and explanation, see the annotated version of his Manuscript 514:
+
+   <A  HREF="http://www.bestweb.net/~sowa/peirce/ms514.htm">http://www.bestweb.net/~sowa/peirce/ms514.htm</A>
+
+These rules are general enough that all other proof procedures
+for FOL can be proved as derived rules of inference, including
+resolution and natural deduction.  For any proof that uses predicate
+calculus notation, there is a formally equivalent proof that uses
+CG notation and vice versa.  Peirce's rules usually give the shortest
+proofs (even when adapted to predicate calculus notation).
+
+Following are your examples translated to CG notation.  For the
+proof procedure, I'll use a version of P's rules adapted to CG
+notation.
+ 
+&gt; Rule:
+&gt; If x is a passenger on bus y
+&gt; And bus y is going to city z
+&gt; then x is going to city z
+
+When CG's are generated from natural language sentences, linguistic
+relations, such as Agnt (for agent) and Dest (for destination) are
+commonly used.  But it is also possible to represent verbs as relations,
+as I illustrate in the CG tutorial:
+
+   <A  HREF="http://www.bestweb.net/~sowa/cg/tut.htm">http://www.bestweb.net/~sowa/cg/tut.htm</A>
+
+To reduce the total number of nodes in the CGs and to simplify
+the discussion, I'll use a dyadic relation named (GoR2):
+
+   [If:   [Passenger: *x]-&gt;(On)-&gt;[Bus: *y]
+          [Bus: *y]-&gt;(GoR2)-&gt;[City: *z]
+   [Then: [?x]-&gt;(GoR2)-&gt;[?z] ] ]
+
+The type labels "If" and "Then" are syntactic sugar for contexts
+with a relation (Neg) or ~ for negation attached to them.  Note that
+the "Then" context is nested inside the "If" context.  That nesting
+is necessary to ensure that any variable (coreference label) in the
+"Then" context is within the scope of its defining node in the "If"
+context.  In the linear notation, contexts are marked with square
+brackets, and in the display form, they are represented by boxes.
+(Peirce used ovals.)
+
+&gt; Facts:
+&gt; John is on bus 19
+&gt; bus 19 is going to Boston
+
+    [Person: "John"]-&gt;(On)-&gt;[Bus: "19"]
+
+    [Bus: "19"]-&gt;(GoR2)-&gt;[City: "Boston"]
+
+&gt; Deduction
+&gt; John is going to city Boston
+
+Peirce's rules of inference can be used in a way that is very similar
+to resolution (in fact, resolution is a derived rule of inference
+that can be proved from P's rules).
+
+ 1. By deiteration, any graph in a nested context that is the same
+    (or can be made the same by graph unification) can be erased after
+    doing the unification (which in CGs corresponds to a copy followed
+    by a maximal join).  First do the unification with the two facts:  
+
+    [If:  [Passenger: "John"]-&gt;(On)-&gt;[Bus: "19"]
+          [Bus: "19"]-&gt;(GoR2)-&gt;[City: "Boston"]
+    [Then:  [Passenger: "John"]-&gt;(GoR2)-&gt;[City: "Boston"] ] ]
+
+Note:  The type labels "Passenger" and "City" can be omitted if
+they are already present on an outer coreferent concept, since they
+state redundant information.  For clarity, they may be copied into
+the inner concept, if desired.  (But there is no requirement to do so.)
+
+Now erase the two graphs in the "If" context:
+
+    [If:  [Then:  [Passenger: "John"]-&gt;(GoR2)-&gt;[City: "Boston"] ] ]
+
+Since "If" and "Then" are synonyms for negations, they can both
+be erased by the rule of double negation:
+
+    [Passenger: "John"]-&gt;(GoR2)-&gt;[City: "Boston"] 
+
+&gt; Next challenge would be to handle negation. e.g.:
+
+&gt; Rule:
+&gt; If x is going to city y
+&gt; And z is not equal to y
+&gt; then x is not going to city z
+
+Handling negation is simple:  You can just put brackets around
+the CG with the relation (Neg) or its abbreviation by ~ in front.
+
+   [If:  [*x]-&gt;(GoR2)-&gt;[City: *y]
+         ~[ [?z]- - -[?y] ]
+   [Then: ~[ [?x]-&gt;(GoR2)-&gt;[City: ?z] ] ] ]
+
+The dotted line is a coreference link.  It expresses equality of
+the referents of the two concept nodes.  The ~ represents negation.
+
+However, there are more serious questions about names and equality.
+In any system of logic, you have to make some kind of assumption.
+For example, is "New York" the same or equal to "New York City" or
+"New York State"?  Is "NYC" the same as "New York City"?  Is "Cicero"
+the same as "Tully"?  Is "Boston" the same as "Washington"?  
+
+To avoid getting into those issues, I will add the following fact:
+
+   ~[ [City: "Boston"]- - -[City: "Washington"] ]
+
+This says it is false that the city named "Boston" is equal to
+(coreferent with) the city named "Washington"
+ 
+&gt; Facts:
+&gt; John is going to city Boston
+
+   [Person: "John"]-&gt;(GoR2)-&gt;[City: "Boston"]
+ 
+&gt; Deduction
+&gt; John is not going to Washington
+
+As before, unify the two facts with the two CGs in the "If" context:
+
+   [If:  [Person: "John"]-&gt;(GoR2)-&gt;[City: "Boston"]
+         ~[ [City: "Washington"]- - -[City: "Boston"] ]
+   [Then: ~[ [Person: "John"]-&gt;(GoR2)-&gt;[City: "Washington"] ] ] ]
+
+As before, the CGs in the "If" context can be erased by the rule
+of deiteration, and the "If" and "Then" brackets can be erased
+by the rule of double negation.  The result is
+
+    ~[ [Person: "John"]-&gt;(GoR2)-&gt;[City: "Washington"] ]
+
+This says it is false that the person named "John" is going
+to the city named "Washington".
+
+The above examples are stated in the informal linear notation for CGs.
+The draft CG standard uses CGIF (CG Interchange Form) as the only
+normative notation.  Following are the above graphs translated to
+CGIF and KIF.
+
+John Sowa
+________________________________________________________________________
+
+CGIF for example 1:
+
+ [If: (On [Passenger: *x] [Bus: *y])
+      (GoR2 [Bus: *y] [City: *z])
+ [Then: (GoR2 ?x ?z) ] ]
+
+ (On [Person: "John"] [Bus: "19"])
+
+ (GoR2 [Bus: "19"] [City: "Boston"])
+
+ (GoR2 [Passenger: "John"] [City: "Boston"])
+
+KIF:
+
+ (=&gt; (and (Passenger ?x) (Bus ?y) (On ?x ?y)
+          (City ?z) (GoR2 ?y ?z) )
+      (GoR2 ?x ?z) )
+
+ (and (Person John) (Bus Bus19) (On John Bus19)
+
+ (and (Bus Bus19) (City Boston) (GoR2 Bus19) (City Boston))
+
+ (and (Passenger John) (City Boston) (GoR2 John Boston))
+
+Note:  Some coventions are needed for translating names in English
+to CGs and KIF.  In CGIF, names are quoted, and they are not considered
+unique identifiers unless some additional assumption is stated.  In KIF,
+constants are represented by identifiers, which are not quoted, and it
+is not clear whether they should be considered identical to the names
+that are used in the English sentence.
+
+In the CG standard, I define [Person: "John"] to be an abbreviation
+for (Name [Person] [Word: "John"]), which says that there exists
+a person whose name is the word "John".  This makes a clear separation
+between the names used in English and the identifiers in the formalism.
+That expanded form would map to the following KIF expression:
+
+  (exists (?x) (and (Person ?x) (Word "John") (Name ?x "John")))
+_______________________________________________________________________
+
+For example 2, the KIF and CGIF statements are similar to the ones above.
+The only new feature is the negation and the equality:
+
+The dotted line is represented by placing a defining coreference
+label on the first concept, such as *x and a bound label ?x on the
+second.  Following is the informal linear notation:
+
+  ~[ [City: "Boston"]- - -[City: "Washington"] ]
+
+which can be translated to the following form in CGIF:
+
+  ~[ [City: "Boston" *x]  [City: "Washington" ?x] ]
+
+In KIF, the coreference label *x or ?x would map to a variable ?x.
+Or you could use Boston and Washington as the names of KIF constants:
+
+  (not (and (City Boston) (City Washington) (= Boston Washington)))
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02359.html">Re: SUO: what the hell was C S P talking about?</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02357.html">Re: SUO: Call for nominations for Chair</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02363.html">SUO: Re: Abstraction, Analogy, Example, Icon, Metaphor, Model, Morphism, Paradigm, Prototype, Simulation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02355.html">SUO: Re: Critique Of Dyadic Reason</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail43.html#02358"><strong>Date</strong></a></li>
+<li><a href="thrd42.html#02358"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

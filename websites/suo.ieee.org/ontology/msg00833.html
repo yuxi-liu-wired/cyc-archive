@@ -1,0 +1,200 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: RE: SUO: CHG -->
+<!--X-From-R13: cng unlrf <cunlrfNnv.hjs.rqh> -->
+<!--X-Date: Mon, 5 Feb 2001 22:25:37 &#45;0500 (EST) -->
+<!--X-Message-Id: v04210117b6a50f682349@[205.160.76.246] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: EE25484266A64A47AE06CFC47C64232B18F9B2@helium.teknowledge.com -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00833.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>RE: SUO: CHG</TITLE>
+<LINK REV="made" HREF="mailto:phayes@ai.uwf.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00822.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00874.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd75.html#00833">Thread Index</A></Td>
+<TD><A HREF="msg00834.html">Date Prev</A></TD>
+<TD><A HREF="msg00832.html">Date Next</A>
+</TD>
+<TD><A HREF="mail74.html#00833">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: SUO: CHG</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Subject</em>: RE: SUO: CHG</LI>
+<LI><em>From</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 5 Feb 2001 21:13:00 -0600</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@majordomo.ieee.org">standard-upper-ontology@majordomo.ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00822.html">EE25484266A64A47AE06CFC47C64232B18F9B2@helium.teknowledge.com</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00822.html">EE25484266A64A47AE06CFC47C64232B18F9B2@helium.teknowledge.com</A>&gt;</LI>
+<LI><em>Reply-To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt; &gt;
+&gt; &gt; A better choice would the 'slices of histories' idea, where 3-d
+&gt; &gt; entities are regarded as timeslices of 4-d histories, and one would
+&gt; &gt; write
+&gt; &gt; (and (married (@Joe 1995) (@ Anne 1995) (not (married (@ Joe 2000)(@
+&gt; &gt; Anne 2000))))
+&gt; &gt; but this is admittedly somewhat cumbersome; so one can abbreviate it
+&gt; &gt; to a situation-calculus style:
+&gt; &gt; (and (married Joe Anne 1995)(not (married Joe Anne 2000)))
+&gt;
+&gt;Is this proposal equivalent to requiring that every predicate have an extra,
+&gt;temporal argument that specifies when the relation holds?
+
+No, its actually slightly worse than that, notationally. It requires, 
+in its most general form, that every *name* has such an extra 
+argument.  Names (of physical things, ie things that have a 
+spatiotemporal location, in contrast to things like integers and 
+shapes) are understood here to refer to the 4-d spatiotemporal "worm" 
+which is simultaneously the thing and its lifetime (there is no 
+occurrent/continuant distinction: it can be introduced, but it has no 
+deep significance, and the same thing can often be thought of in 
+either way.) So the common locution that(R a b) holds at a time t is, 
+in this framework, thought of as the (timeless) assertion that the 
+t-slice of a and the t-slice of b are in the relation R. Whenever (as 
+in this case) the 'slices' being related are contemporary, this can 
+be abbreviated in the way you suggest, but one can also state 
+relationships between slices at different times: for example, to say 
+that I am standing (at time t) where Roosevelt once stood would be 
+something like (to revert to functional language for a moment):
+
+(exists( t') (and (= (Place (Pat t)) (Place (Roosevelt t'))) (before t' t) )
+
+(Ive omitted the "@" and just treated every physical entity name as 
+being a function from times to its 'temporal pieces'.)
+
+There is a uniform translation from the 'holds' notation into (but 
+not from, in general) the 'extra relation argument' notation (which 
+is essentially the situation calculus notation, or equivalently what 
+you would get if you were to axiomatise the Kripke semantics for a 
+temporal modal logic), into (but not from) the temporal-slice (4d) 
+notation, illustrated by:
+
+(holds (and (R a b)(R a c)) t)
+ie a sentence holds at a time
+(and (R a b t)(R a c t))
+ie a time-dependent relation is true (timelessly)
+(and (R (a t)(b t)) (R (a t)(c t)) )
+ie a time-independent relation holds between two temporally located things.
+
+I agree, in case you are thinking this, that the third alternative 
+looks rebarbative, which is why I suggested using the second as a 
+kind of useful shorthand for 'contemporary' relationships, ie those 
+that only hold between things at the same time (what one might call a 
+continuant relationship, in fact) (which, BTW, Cyc has made into a 
+distinct category for just this reason). Still, it is a very powerful 
+basic descriptive framework allowing one to put things like the 
+'shapes' of movements ("a sudden turn to the left") into a common 
+framework with other spatiotemporal entities. These a, b and c's now, 
+you see, can have both spatial and temporal aspects: they can be 
+'static' things like mere endurings, or they can be 'dynamic' things 
+like motions; and they can be taken apart into their spatiotemporal 
+'pieces' in various ways, so that one can easily say things like 
+"this part of the machine follows this other part while the cam is 
+lifted, but remains stationary otherwise", or "the water continues to 
+flow as long as the valve is open."
+
+Pat
+
+PS  If one is really wedded to the occurrent/ continuant distinction, 
+it can be phrased here as a rigid classification into two kinds of 4d 
+entity: those which 'split' only into timelike pieces (perpendicular 
+to the time-axis) and those which split only into spacelike pieces 
+(parallel to the time-axis). But if you make this rigid distinction, 
+there is little point in having the general case: it gets useful just 
+when you want to carve things up a little more carefully than that 
+(which is most of the time, in engineering and physical reasoning.).
+
+---------------------------------------------------------------------
+IHMC					(850)434 8903   home
+40 South Alcaniz St.			(850)202 4416   office
+Pensacola,  FL 32501			(850)202 4440   fax
+phayes@ai.uwf.edu 
+<A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00822" href="msg00822.html">RE: SUO: CHG</a></strong>
+<ul><li><em>From:</em> Ian Niles &lt;iniles@teknowledge.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00834.html">RE: SUO: RE: Re: More KIF-ified Ontology Content</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00832.html">RE: SUO: RE: RE: RE: RE: RE: RE: #3 &quot;Flawed Approach, etc</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00822.html">RE: SUO: CHG</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00874.html">RE: SUO: CHG</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail74.html#00833"><strong>Date</strong></a></li>
+<li><a href="thrd75.html#00833"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

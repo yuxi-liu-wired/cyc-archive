@@ -1,0 +1,199 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: SUO KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: "Irfg, [nggurj [D EEW&#45;UDSO&#45;GY" <[nggurj.D.IrfgNvf.furyy.pbz> -->
+<!--X-Date: Mon, 26 Mar 2001 03:32:03 &#45;0500 (EST) -->
+<!--X-Message-Id: DE057CA9F46ED2118C4900805F85E427077C48C2@LONSC0S0038 -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01857.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: SUO KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:Matthew.R.West@is.shell.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01858.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01869.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd51.html#01857">Thread Index</A></Td>
+<TD><A HREF="msg01858.html">Date Prev</A></TD>
+<TD><A HREF="msg01856.html">Date Next</A>
+</TD>
+<TD><A HREF="mail53.html#01857">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: SUO KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: SUO KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 26 Mar 2001 10:06:42 +0200</LI>
+<LI><em>Reply-To</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Dear Chris,
+
+Some more questions and comments.
+
+1. Under class, relation is defined as a class. Later under relation you
+define class as a unary relation. This seems to be inconsistent.
+
+2. &lt; applies only to integers. Why doesn't it apply to reals or (at least)
+rationals?
+
+3. &lt; is not defined (not that I have any idea how to do it). By which I mean
+what being less than is.
+
+4. I can't get the axiom for addition (or subtraction). Here is my attempt
+at an English translation - where have I gone wrong?
+
+For all integers i and j
+  i+0=0 and  &lt;-- I think this should be i+0=i
+  i+(j+1)= i+j+1 and
+  i+(j-1)= i+j+1
+
+Same applies to subtraction.
+
+phew so all those years using reverse polish notation on HP programmable
+calculators did have a point :-)
+
+6. Sequences
+
+a) Here you find a need to introduce extensionality for some classes like
+sequence. Robert has suggested they should also be necessary for Top, or
+else there is no reason for Top to be unique.
+
+It is starting to look to me as if it would be better to introduce a
+"property" like class that can be non-extensional, and a "set" like class
+that is extensional before we get to this point.
+
+b) on the one hand you say that a sequence holds only for positive integers,
+and on the other hand you say that any object can be an element of a
+sequence. Which is it?
+
+c)
+(forall (?s)
+        (=&gt; (sequence ?s)
+            (and (relation ?s)
+                 (binary ?s)
+                 (functional ?s)
+                 (exists (?n (posint n))  &lt;-- missing ?
+                         (and (not (exists (?x) (?s ?n ?x)))
+                              (forall (?m (posint ?m) (&lt; ?m ?n))
+                                      (exists (?x)
+                                              (?s ?m ?x))))))))
+
+My translation is:
+
+For all s:
+  If s is a sequence then:
+    s is a relation and
+    s is binary and
+    s is functional and
+    for some positive integer n
+      there is no x such that s(n,x) &lt;-- doesn't seem to have
+                                         a defined meaning
+      and
+      for all positive integers m where m&lt;n
+        there is some x such that s(m,x) &lt;-- meaning?
+
+c) you have used the term length to mean just the length of a sequence. This
+means it cannot be used for e.g. length as a basic dimension. Aren't what
+you are defining here as sequences really tuples? If not what is the
+difference?
+
+
+
+Regards  
+      Matthew
+===============================================================
+Matthew West                    <A  HREF="http://www.matthew-west.org.uk/">http://www.matthew-west.org.uk/</A>
+
+Principal Consultant                   Shell Visiting Professor
+Operations &amp; Asset Management            The Keyworth Institute
+Shell Services International            The University of Leeds
+<A  HREF="http://www.shellservices.com/">http://www.shellservices.com/</A>  <A  HREF="http://www.keyworth.leeds.ac.uk/">http://www.keyworth.leeds.ac.uk/</A>
+
+H3229, Shell Centre, London, SE1 7NA, UK.
+Tel: +44 207 934 4490 Fax: 7929 Mobile: +44 7796 336538
+=============================================================== 
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01869" href="msg01869.html">Re: SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@tamu.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01858.html">SUO: Recall: RE: Violation of process</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01856.html">SUO: Violation of process</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01858.html">SUO: Recall: RE: Violation of process</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01869.html">Re: SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail53.html#01857"><strong>Date</strong></a></li>
+<li><a href="thrd51.html#01857"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: RE: suggested draft vertebrate animal Ontology. -->
+<!--X-From-R13: Wna @vyrf <vavyrfNgrxabjyrqtr.pbz> -->
+<!--X-Date: Fri, 5 Jan 2001 13:16:22 &#45;0500 (EST) -->
+<!--X-Message-Id: EE25484266A64A47AE06CFC47C64232B18F918@helium.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00287.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: RE: suggested draft vertebrate animal Ontology.</TITLE>
+<LINK REV="made" HREF="mailto:iniles@teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00288.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00290.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd82.html#00287">Thread Index</A></Td>
+<TD><A HREF="msg00288.html">Date Prev</A></TD>
+<TD><A HREF="msg00286.html">Date Next</A>
+</TD>
+<TD><A HREF="mail85.html#00287">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: RE: suggested draft vertebrate animal Ontology.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;'Horn, Graham'&quot; &lt;<A HREF="mailto:graham.horn@aihw.gov.au">graham.horn@aihw.gov.au</A>&gt;,       &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: RE: suggested draft vertebrate animal Ontology.</LI>
+<LI><em>From</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 5 Jan 2001 09:46:22 -0800 </LI>
+<LI><em>Reply-To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi Graham,
+
+	I've just incorporated into the merged ontology the Natural Kinds
+ontology developed by the ITBM-CNR folks.  I think it does a nice job of
+specifying the essential axioms and taxonomic relations for high-level
+categories of organisms.  Perhaps you could use this ontology as a basis for
+additional biological content.  The merged, SUO-KIF version of the Natural
+Kinds ontology follows.
+
+-Ian
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  BIOLOGICAL HIERARCHY   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following formulas incorporate the content in the Natural-Kinds
+ontology developed by the
+;; CNR-ITBM group.  This content is essentially a set of high-level
+biological categories.
+
+(subclass-of Organism Organic)
+(subclass-of Plant Organism)
+(documentation Plant "An organism having cellulose cell walls, growing by
+synthesis of inorganic 
+substances, generally distinguished by the presence of chlorophyll, and
+lacking the power of  locomotion.  Plant parts are included here as well.")
+
+(=&gt;
+	(instance-of ?X Plant)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y CellWall-Peptidoglycan))))
+
+(=&gt;
+	(instance-of ?X Plant)
+	(exists (?Y ?Z)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Pigment)
+			(result ?Z ?Y)
+			(instance-of ?Z Photosynthesis))))
+
+(subclass-of Animal Organism)
+(documentation Animal "An organism with eukaryotic cells, and lacking stiff
+cell walls, plastids  and photosynthetic pigments. The children of this type
+in the network are 'Invertebrate', and  'Vertebrate'.")
+(disjoint Plant Animal)
+
+(=&gt;
+	(instance-of ?X Animal)
+	(exists (?Y ?Z)
+		(and
+			(component-of ?X ?Y)
+			(instance-of ?Y Cell)
+			(part-of ?Y ?Z)
+			(instance-of ?Z CellWall-NonRigid))))
+
+(subclass-of Microorganism Organism)
+(subclass-of Archaeon Microorganism)
+(documentation Archaeon "A member of one of the three domains of life,
+formerly called  Archaebacteria under the taxon Bacteria, but now considered
+separate and distinct. Archaea are  characterized by:  1) the presence of
+characteristic tRNAs and ribosomal RNAs; 2) the absence of  peptidoglycan
+cell walls; 3) the presence of ether-linked lipids built from branched-chain
+subunits; and 4) their occurrence in unusual habitats. While archaea
+resemble bacteria in  morphology and genomic organization, they resemble
+eukarya in their method of genomic  replication. Thermoproteales;
+Methanospirillum; Haloferax volcanii.")
+
+(subclass-of Bacterium Microorganism)
+(documentation Bacterium "A small, typically one-celled, prokaryotic
+micro-organism."))
+
+(=&gt;
+	(instance-of ?X Bacterium)
+	(cardinality (setof ?Y (and (component-of ?Y ?X) (instance-of ?Y
+Cell))) 1))
+
+(=&gt;
+	(and
+		(instance-of ?X Bacterium)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+
+(subclass-of Virus Microorganism)
+(documentation Virus "An organism consisting of a core of a single nucleic
+acid enclosed in a 
+protective coat of protein. A virus may replicate only inside a host living
+cell. A virus  exhibits some but not all of the usual characteristics of
+living things.")
+
+(=&gt;
+	(instance-of ?X Virus)
+	(cardinality (setof ?Y (and (component-of ?Y ?X) (instance-of ?Y
+Molecule))) 1))
+
+(=&gt;
+	(instance-of ?X Virus)
+	(and
+		(instance-of ?X Nucleic-Acid)
+		(exists (?Y ?Z)
+			(and
+				(external-covering ?Y ?X)
+				(part-of ?Z ?Y)
+				(instance-of ?Z Protein)))))
+
+(=&gt;
+	(and
+		(instance-of ?X Virus)
+		(instance-of ?Y Replication)
+		(effector-of ?Y ?X))
+	(exists (?Z)
+		(and
+			(located-at ?Y ?Z)
+			(instance-of ?Z Cell))))
+
+(=&gt;
+	(and
+		(instance-of ?X Virus)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+	
+				 
+(subclass-of Chlamydia Microorganism)
+(documentation Chlamydia "An organism intermediate in size and complexity
+between a virus and a  bacterium, and which is parasitic within the cells of
+insects and ticks. Included here are all  the chlamydias, also called 'PLT'
+for psittacosis-lymphogranuloma venereum-trachoma.")
+
+(=&gt;
+	(instance-of ?X Chlamydia)
+	(exists (?Y ?Z)
+		(and
+			(lives-in ?X ?Y)
+			(instance-of ?Y Cell)
+			(component-of ?Y ?Z)
+			(or
+				(instance-of ?Z Insect)
+				(instance-of ?Z Tick)))))
+
+(=&gt;
+	(and
+		(instance-of ?X Chlamydia)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+
+
+(subclass-of Vertebrate Animal)
+(documentation Vertebrate "An animal which has a spinal column.")
+
+(=&gt;
+	(instance-of ?X Vertebrate)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Spinal-Column))))
+
+(subclass-of Invertebrate Animal)
+(disjoint Vertebrate Invertebrate)
+(documentation Invertebrate "An animal which has no spinal column. This type
+has no children 
+in the network and is assigned to all invertebrate animals.")
+
+(subclass-of Arthropod Invertebrate)
+(subclass-of Arachnid Arthropod)
+(subclass-of Tick Arachnid)
+(subclass-of Insect Arthropod)
+(subclass-of Vertebrate-ColdBlooded Vertebrate)
+(subclass-of Vertebrate-WarmBlooded Vertebrate)
+(disjoint Vertebrate-WarmBlooded Vertebrate-ColdBlooded)
+(subclass-of Mammal Vertebrate-WarmBlooded)
+
+(subclass-of Alga Plant)
+(documentation Alga "A chiefly aquatic plant that contains chlorophyll, but
+does not form 
+embryos during development and lacks vascular tissue.")
+
+(=&gt;
+	(instance-of ?X Alga)
+	(exists (?Y)
+		(and
+			(lives-in ?X ?Y)
+			(instance-of ?Y Water))))
+
+(=&gt;
+	(instance-of ?X Alga)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Chlorophyll))))
+
+(=&gt;
+	(instance-of ?X Alga)
+	(has-developmental-form ?X Incoherent))
+
+(subclass-of Amphibian Vertebrate-ColdBlooded)
+(disjoint Amphibian Reptile)
+(documentation Amphibian "A cold-blooded, smooth-skinned vertebrate which
+characteristically  hatches as an aquatic larva, breathing by gills. When
+mature, the amphibian breathes with  lungs.")
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Lungs))))
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Smooth-Skin))))
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(has-developmental-form ?X Aquatic-Larva))
+
+(subclass-of Bird Vertebrate-WarmBlooded)
+(disjoint Bird Mammal)
+(documentation Bird "A vertebrate having a constant body temperature and
+characterized by 
+the presence of feathers.")
+
+(=&gt;
+	(instance-of ?X Bird)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Plumage)))) 
+
+(subclass-of Fish Vertebrate-ColdBlooded)
+(disjoint Fish Reptile)
+(documentation Fish "A cold-blooded aquatic vertebrate characterized by fins
+and breathing by  gills. Included here are fishes having either a bony
+skeleton, such as a perch, or a  cartilaginous skeleton, such as a shark, or
+those lacking a jaw, such as a lamprey or hagfish.")
+
+(=&gt;
+	(instance-of ?X Fish)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Gills)))) 
+
+(=&gt;
+	(instance-of ?X Fish)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Fin)))) 
+
+(=&gt;
+	(instance-of ?X Fish
+	(exists (?Y)
+		(and
+			(lives-in ?Y ?X)
+			(instance-of ?Y Water))))
+
+(subclass-of Fungus Plant)
+(documentation Fungus "A eukaryotic organism characterized by the absence of
+chlorophyll and the 
+presence of a rigid cell wall. Included here are both slime molds and true
+fungi such as yeasts,  molds, mildews, and mushrooms.")
+
+(=&gt;
+	(instance-of ?X Fungus)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Cell-Eurkaryotic))))
+
+(=&gt;
+	(instance-of ?X Fungus)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y CellWall-Rigid))))
+
+(=&gt;
+	(and
+		(instance-of ?X Fungus)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+	
+(subclass-of Human Mammal)
+(documentation Human "Modern man, the only remaining species of the Homo
+genus. If a term  describes a human being from the point of view of
+occupational, family, social status, etc., then  a type from the 'Group'
+hierarchy is assigned instead.")
+
+(subclass-of Mammal Vertebrate-WarmBlooded)
+(documentation Mammal "A vertebrate having a constant body temperature and
+characterized by the  presence of hair, mammary glands and sweat glands.")
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Hair))))
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Mammary-Gland))))
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Sweat-Gland))))
+
+(subclass-of Reptile Vertebrate-ColdBlooded)
+(documentation Reptile "A cold-blooded vertebrate having an external
+covering of scales or horny  plates.  Reptiles breathe by means of lungs and
+are generally egg-laying.")
+
+(=&gt;
+	(instance-of ?X Reptile)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Lungs))))
+
+(=&gt;
+	(instance-of ?X Reptile)
+	(exists (?Y)
+		(and
+			(external-covering ?Y ?X)
+			(or
+				(instance-of ?Y Scale)
+				(instance-of ?Y Horny-Plate)))))
+
+&gt; -----Original Message-----
+&gt; From: Horn, Graham [<A  HREF="mailto:graham.horn@aihw.gov.au">mailto:graham.horn@aihw.gov.au</A>]
+&gt; Sent: Thursday, January 04, 2001 6:49 PM
+&gt; To: Schoening CECOM DCSC4I James (E-mail)
+&gt; Cc: 'standard-upper-ontology@majordomo.ieee.org'
+&gt; Subject: SUO: suggested draft vertebrate animal Ontology.
+&gt; 
+&gt; 
+&gt; 
+&gt; Jim et al, 
+&gt; 	.	I gather no-one replied with a medical ontology. 
+&gt; 
+&gt; 	.	I'm not sure that this qualifies as an 
+&gt; ontology, but I have
+&gt; been thinking about having a go at a defining physiology for 
+&gt; vertebrate
+&gt; animals on Planet Earth. I am trying to guess how much complexity is
+&gt; appropriate for the SUO. I suggest this may be appropriate, 
+&gt; since it would
+&gt; cover so much of the life present on this planet. 
+&gt; 
+&gt; 	.	In view of my lack of expertise in the "logical 
+&gt; languages",
+&gt; it would be in plain English "dot point format", but I would 
+&gt; hope it would
+&gt; be reasonably unambiguous. I would be happy to assist anyone 
+&gt; wishing to
+&gt; translate it into SUO-KIF, ACE, etc. 
+&gt; 
+&gt; 	.	Basically, I propose to group structures in 
+&gt; what appears to
+&gt; me to be a logical pattern. 
+&gt; *	Body temperature (significant since this is often used as an
+&gt; indicator for illness), 
+&gt; *	Basic form: 
+&gt; *	Skin - the external covering of the entire being of the animal; 
+&gt; *	Muscles - the tissue able to be contracted along its 
+&gt; length to make
+&gt; movements in the being; 
+&gt; *	the Vascular system; 
+&gt; *	the Nervous system - electrically conductive fibres acting as
+&gt; information carriers; 
+&gt; *	Body (trunk), containing most organs, and comprising: 
+&gt; *	Chest (Thorax), and 
+&gt; *	Belly (Abdomen), 
+&gt; *	Head, location defining the "top front" of the animal; and 
+&gt; *	4 Limbs; 
+&gt; 
+&gt; 	.	The attempt would be to provide a reasonably 
+&gt; comprehensive
+&gt; generic structure. It would involve breaking things up into 
+&gt; logical groups
+&gt; that are independent of each other, and go into multiple 
+&gt; layers of depth. 
+&gt; 
+&gt; 	.	Comments, etc. welcomed. If this is not in the 
+&gt; nature of an
+&gt; ontology, I would appreciate some elaboration of the ways in which it
+&gt; doesn't comply with the definition, so I can get a better 
+&gt; appreciation of
+&gt; what we are hoping to produce. 
+&gt; 
+&gt; 
+&gt; 
+&gt; Cheers   				Graham Horn
+&gt; Australian Institute of Health and Welfare 
+&gt; ================================================
+&gt; Phone:      	02.6244.1094  
+&gt; Fax:          	02.6244.1199  
+&gt; E­mail:    	Graham.Horn@aihw.gov.au &lt;<A  HREF="mailto:graham.horn@aihw.gov.au">mailto:graham.horn@aihw.gov.au</A>&gt;
+&gt; 
+&gt; 
+&gt; 
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00290" href="msg00290.html">Re: SUO: RE: suggested draft vertebrate animal Ontology.</a></strong>
+<ul><li><em>From:</em> Aldo Gangemi &lt;gangemi@saussure.irmkant.rm.cnr.it&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00288.html">SUO: Re: [Fwd: [theory-edge] Speaking to Learn]</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00286.html">SUO: [Fwd: [theory-edge] Speaking to Learn]</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00288.html">SUO: Re: [Fwd: [theory-edge] Speaking to Learn]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00290.html">Re: SUO: RE: suggested draft vertebrate animal Ontology.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail85.html#00287"><strong>Date</strong></a></li>
+<li><a href="thrd82.html#00287"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Sun, 8 Apr 2001 16:20:23 &#45;0400 (EDT) -->
+<!--X-Message-Id: 001401c0c065$69478aa0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038 -->
+<!--X-Reference: v04210116b6f3e08e9365@[205.160.76.201] -->
+<!--X-Reference: 001601c0bfbf$b7717a20$7b76e4ce@Dell -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02099.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02159.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02160.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd53.html#02099">Thread Index</A></Td>
+<TD><A HREF="msg02100.html">Date Prev</A></TD>
+<TD><A HREF="msg02098.html">Date Next</A>
+</TD>
+<TD><A HREF="mail49.html#02099">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: RE: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 8 Apr 2001 12:52:14 -0700</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02054.html">DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038</A>&gt; &lt;<A HREF="msg02081.html">v04210116b6f3e08e9365@[205.160.76.201]</A>&gt; &lt;<A HREF="msg02095.html">001601c0bfbf$b7717a20$7b76e4ce@Dell</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Pat,
+
+One other point.
+
+Considering some of the examples in the ontologies on which I am working, it
+would be quite useful to be able to use a relative namespace prefix with the
+terms in the included subontology.
+
+For example, consider the following situation.
+    * the ontology B is located at B-place
+    * a relation named 'r' is used in the B ontology
+    * the ontology C is a subontology of ontology B with a relative
+namespace prefix 'c1' and relative locator C
+        (ontology B ...(ontology c1 C ...)...)
+    * a second distinct relation named 'r' is used in the C ontology.
+
+In the local context of B
+    * in B the relation named 'r' in B is referred to by the name 'r'
+    * in B the relation named 'r' in C is referred to by the name 'c1#r'
+
+In the local context of C
+    * in C the relation named 'r' in C is referred to by the name 'r'
+    * in C the relation named 'r' in B is either not referencable or is
+referred to by some name such as '#r'
+
+In the global context consider first importing all of B
+    * the ontology A contains an importing expression '(imports b B-place)'
+Then
+    * in A the relation named 'r' in B is referred to by the name 'b#r'
+whereas
+    * in A the relation named 'r' in C is referred to by the name 'b#c1#r'
+
+In the global context next consider importing only the subontology C
+    * the ontology A contains an importing expression '(imports c2
+B-place#C)'
+Then
+    * in A the relation named 'r' in C is referred to by the name 'c2#r'
+
+As an actual example, in my Set Ontology I define a 'product' term for sets
+and I define a 'product' term for functions. Also, in the Set Ontology I
+define a 'vertex' term for limits and a 'vertex' term for colimits. My
+thought was to make subontologies for functions, limits and colimits.
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+----- Original Message -----
+From: "Robert E. Kent" &lt;rekent@ontologos.org&gt;
+To: "Pat Hayes" &lt;phayes@ai.uwf.edu&gt;
+Cc: "SUO" &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Saturday, April 07, 2001 5:06 PM
+Subject: Re: SUO: RE: KIF syntax and semantics and a basic ontology
+
+
+&lt;snip&gt;
+
+&gt; ----- Original Message -----
+&gt; From: "pat hayes" &lt;phayes@ai.uwf.edu&gt;
+&gt; To: "West, Matthew MR SSI-GREA-UK" &lt;Matthew.R.West@is.shell.com&gt;
+&gt; Cc: &lt;standard-upper-ontology@ieee.org&gt;
+&gt; Sent: Friday, April 06, 2001 2:12 PM
+&gt; Subject: RE: SUO: RE: KIF syntax and semantics and a basic ontology
+
+&lt;snip&gt;
+
+&gt; &gt; Ontologies can be combined in two ways.
+&gt; &gt;
+&gt; &gt; An ontology can include another simply by containing an ontology form
+&gt; &gt; for the other ontology. In this way one ontology can simply be
+&gt; &gt; included inside another, and its sentences are considered to be a
+&gt; &gt; subset of those in the including ontology , and the namespace of the
+&gt; &gt; included ontology is part of that of the including ontology. In
+&gt; &gt; effect, the inner ontology form provides a name for a subset of the
+&gt; &gt; sentences of the larger ontology, simply as a book-keeping
+&gt; &gt; convenience.
+
+&lt;snip&gt;
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02160" href="msg02160.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02054" href="msg02054.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+<li><strong><a name="02081" href="msg02081.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+<li><strong><a name="02095" href="msg02095.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02100.html">Re: SUO: Definition Of A Sign</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02098.html">Re: SUO: Definition Of A Sign</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02159.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02160.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail49.html#02099"><strong>Date</strong></a></li>
+<li><a href="thrd53.html#02099"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,2719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>The IFF Namespace for First Order Logic Languages (IFF-FOL)</title>
+  <meta name="author" content="Robert E. Kent">
+  <meta name="description"
+ content="This is an overview of the first order logic language namespace IFF-FOL, which limits FOL languages to variables, function symbols and relation symbols, but no equations.">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h1>The IFF Namespace for FOL Languages</h1>
+<p style="text-align: justify;">This document gives an introductory
+discussion of the IFF Namespace
+for FOL Languages (IFF-FOL). It closely follows the architecture
+illustrated in Figure 1. To specify this namespace, we combine the
+namespaces for terms (IFF-TRM) and
+expressions (IFF-EXPR). Mathematically, the context of FOL languages is
+the product of the context of terms (function symbols and variables)
+and the context of expressions (relation symbols and variables) fibered
+over the context of variables (sets and bijections). As such, FOL
+languages or language morphisms are easy to axiomatize; the main
+technical problem is to use term tuples rather than variations for
+substitution &#8211; variations are term tuples with no function symbols. The
+last section contains a short review of several important notions used
+in the IFF-FOL. The
+<a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/fol-language/version20040404.pdf">axiomatization</a>
+of the IFF-FOL is given separately.<a
+ href="version20040404-intro.html#Basics"><big><br>
+</big></a></p>
+<h2>Table of Contents</h2>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 100%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 500px;" rowspan="3"
+ colspan="1"> <a href="#Basics"><big>Basics</big></a><a href="#Terms"><br>
+      </a> <a href="#Terms"><big>Terms</big><br>
+      </a>
+      <div style="margin-left: 20px;"><a href="#Architecture_">Architecture<br>
+      </a> </div>
+      <div style="margin-left: 40px;"><a
+ href="#TermTuple_Fixpoint_Solution"><small>Term/Tuple
+Fixpoint Solution</small></a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#Lawvere_Construction"><small>Lawvere
+Construction</small></a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#Term_Monad"><small>Term
+Monad</small></a><br>
+      </div>
+      <div style="margin-left: 20px;"><a href="#Abstract_Syntax_">Abstract
+Syntax</a><br>
+      </div>
+      <a href="#Expressions"><big>Expressions</big></a><br>
+      <div style="margin-left: 20px;"><a href="#Architecture__">Architecture</a><br>
+      </div>
+      <div style="margin-left: 40px;"><a
+ href="#ExpressionArity_Fixpoint_Solution"><small>Expression/Arity
+Fixpoint
+Solution</small></a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#Expression_Monad"><small>Expression
+Monad</small></a><br>
+      </div>
+      <div style="margin-left: 20px;"><a href="#Abstract_Syntax__">Abstract
+Syntax</a><br>
+      </div>
+      <a href="#Review"><big>Review</big></a><br>
+      <div style="margin-left: 20px;"><a href="#Abstract_Syntax">Abstract
+Syntax</a><br>
+      </div>
+      <div style="margin-left: 20px;"><a href="#Initial_Fixpoints">Initial
+Fixpoints</a><br>
+      </div>
+      <div style="margin-left: 20px;"><a href="#Monads">Monads</a><br>
+      </div>
+      <a
+ href="file:///C:/My%20Documents/IFF/Work%20in%20Progress/Logic/FOL/FOL%20Languages/version20040404-intro.html#Terms">
+      </a></td>
+      <td
+ style="text-align: center; width: 300px; vertical-align: bottom;"><img
+ src="file:///C:/My%20Documents/IFF/Work%20in%20Progress/Logic/FOL/FOL%20Languages/diagram_files/image001.gif"
+ title="" alt="a" style="width: 201px; height: 184px;"></td>
+    </tr>
+    <tr>
+      <td
+ style="width: 300px; text-align: center; vertical-align: bottom;"><big
+ style="font-weight: bold;">Figure 1: The FOL Architecture</big></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2><a name="Basics">Basics</a></h2>
+<p style="text-align: justify;">In the IFF approach, first
+order logic is factored into two main components, the "term
+component" and the "expression component", plus a third extensional
+component called the "equational component". The term component is
+determined by variables and function symbols,
+whereas the
+expression component is primarily determined by variables and relation
+symbols, and only secondarily determined by function symbls. The FOL
+namespace unites the expression namespace with the
+term namespace by replacing variations with term tuples. The basic
+notion of
+the IFF-FOL is that of a first order logic (FOL) <span
+ style="font-style: italic;">language</span> (signature or lexicon).
+Languages are related through language morphisms. FOL
+languages and FOL language morphisms form the
+category <span style="font-family: Arial;">FOL-Lang</span>. <br>
+</p>
+<h2><a name="Terms">Terms</a></h2>
+<p>This section gives an introductory discussion of the term component
+of the IFF-FOL.</p>
+<h3><a name="Architecture_"></a>Architecture<br>
+</h3>
+<h4><a name="TermTuple_Fixpoint_Solution"></a>Term/Tuple Fixpoint
+Solution<br>
+</h4>
+<div style="text-align: justify;">The
+concepts of <span style="font-style: italic;">variable</span>
+and <span style="font-style: italic;">function</span> (Figure 2) are
+the defining attributes of the term component of the IFF-FOL. The
+central data structure
+in the term component is the concept of <span
+ style="font-style: italic;">term</span>,
+and closely connected, but subordinate, is the concept of term <span
+ style="font-style: italic;">tuple</span>. These co-dependent recursive
+constructions over languages are the solution to a fixpoint equation
+(see the green sub-diagram of Figure 2). In full, the term construction
+gives an
+extended language, with an <span style="font-style: italic;">embedding</span>
+map connecting a language to
+its term
+extension. The concept of <span style="font-style: italic;">arity</span>
+is an attribute defined on functions, terms and tuples, in order of
+increasing generality. The arity of such an object is loosely a
+set-theoretic upper
+bound for the variables occurring freely in that object. In addition,
+tuples have an
+attribute called <span style="font-style: italic;">index</span>. The
+concept of index is self-descriptive. Both arity and index are indicia.
+Concretely, a tuple is a
+function from its index indicia to the set of terms of its arity
+indicia. Terms can be either <span style="font-style: italic;">elementary</span>
+or <span style="font-style: italic;">composite</span>. The concepts of
+<span style="font-style: italic;">element</span> and (function) <span
+ style="font-style: italic;">substitution</span> are the basic
+synthetic
+operators (or constructors) of terms, and the concept of
+(term) <span style="font-style: italic;">substitution</span> is a
+composite constructor of terms. The variable <span
+ style="font-style: italic;">case</span>
+construction represents variables as terms. This case construction, and
+its <span style="font-style: italic;">indication</span> and <span
+ style="font-style: italic;">projection</span> component attributes,
+is
+the coproduct of the identity indicia arity. The set of variables cases
+is the source of the element operator. The concepts <span
+ style="font-style: italic;">counique</span>, <span
+ style="font-style: italic;">singleton</span>
+and <span style="font-style: italic;">pairing</span>
+(Figure 3) are basic constructors of term tuples, with the counique
+operator
+giving the
+term tuple
+of empty index, the singleton operator mapping terms to term tuples,
+and the
+pairing
+operator composing two term tuples in parallel. The concepts of <span
+ style="font-style: italic;">composition</span>
+and <span style="font-style: italic;">identity</span> (Figure 2) are
+composite constructors for term tuples. There are six
+product/pullback
+constructions used for constructors. The first four are visible in
+Figure 2, and the last two are visible in Figure 3. Each of these has
+two projection
+maps.
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">indexed-term</span>
+construction denotes unrestricted (variable,
+term) pairs. It is a Cartesian product
+used by the <span style="font-style: italic;">singleton </span>operator.
+There are two projection maps, <span style="font-style: italic;">&#960;</span><small><sub>1</sub></small>
+and <span style="font-style: italic;">&#960;</span><small><sub>2</sub></small>.
+<br>
+<span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">function-tuple</span>
+construction denotes substitutable (function,
+tuple) pairs
+with matching function arity and tuple index. It is a pullback (fibered
+product) used by the function
+<span style="font-style: italic;">substitution</span>
+operator. There are two projection maps (not visible in Figure 2).
+<br>
+<span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">term-tuple</span>
+construction denotes substitutable (term, tuple)
+pairs with
+matching term arity and tuple index. It is a pullback used by the term <span
+ style="font-style: italic;">substitution</span>
+operator. There are two projection maps (not visible in Figure 2).
+<br>
+<span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">tuple-tuple</span>
+construction denotes composable (tuple, tuple)
+pairs with
+matching tuple arity and tuple index. It is a pullback used by the
+Lawvere <span style="font-style: italic;">composition</span>
+operator. There are two projection maps, <span
+ style="font-style: italic;">first</span> = <span
+ style="font-style: italic;">1</span><small style="font-style: italic;"><sup>st</sup></small>
+and <span style="font-style: italic;">second</span> = <span
+ style="font-style: italic;">2</span><small style="font-style: italic;"><sup>nd</sup></small>.
+<br>
+<span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">indicia-pair</span>
+construction denotes unrestricted (indicia,
+indicia) pairs. It is a Cartesian product used by the <span
+ style="font-style: italic;">binary-coproduct</span> operator.<span
+ style="">&nbsp;
+</span>There are two projection maps, <span style="font-style: italic;">indicia</span><small><sub>1</sub></small>
+and <span style="font-style: italic;">indicia</span><small><sub>2</sub></small>.
+<br>
+<span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The <span style="font-style: italic;">tuple-pair</span>
+construction denotes pairable (tuple, tuple)
+pair of
+matching tuple arity. It is a pullback used by the <span
+ style="font-style: italic;">pairing</span> operator.<span style=""> </span>There
+are two projection maps, <span style="font-style: italic;">opfirst</span>
+= <span style="font-style: italic;">op</span><span
+ style="font-style: italic;">1</span><small style="font-style: italic;"><sup>st</sup></small>and
+<span style="font-style: italic;">op</span><span
+ style="font-style: italic;">second</span> = <span
+ style="font-style: italic;">op</span><span style="font-style: italic;">2</span><small
+ style="font-style: italic;"><sup>nd</sup></small>.<span style=""> </span><br>
+</div>
+<p class="MsoNormal" style="margin: 6pt 0in;"><img
+ src="term-basic-architecture.gif" title="Term Basic Architecture"
+ alt="Term Basic Architecture" style="width: 609px; height: 244px;"
+ vspace="20"><big><br>
+</big></p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 580px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>var<br>
+      </small></td>
+      <td style="vertical-align: top; width: 200px;">variable set<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; width: 50px; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">elem<br>
+      </font> </td>
+      <td style="vertical-align: top; width: 200px;">element &#8211; variable
+as term<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; width: 80px; font-weight: bold; color: rgb(0, 153, 0);"><small>ftn<br>
+      </small></td>
+      <td style="vertical-align: top; width: 220px;">function (symbol)
+set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">&#8712;</font></td>
+      <td style="vertical-align: top; width: 220px;">embedding &#8211;
+function as term </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; width: 80px; font-weight: bold; color: rgb(0, 153, 0);">&#8472;</td>
+      <td style="vertical-align: top; width: 220px;">power set operator<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; width: 50px; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">#</font></td>
+      <td style="vertical-align: top; width: 220px;">function arity<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>case<br>
+      </small></td>
+      <td style="vertical-align: top;">indicia-member pair set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">proj<br>
+      </font></td>
+      <td style="vertical-align: top;">case projection<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(0, 153, 0);"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">indic</font></td>
+      <td style="vertical-align: top;">case indication</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>trm<br>
+      </small></td>
+      <td style="vertical-align: top;">term set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">#</font></td>
+      <td style="vertical-align: top;"> term arity</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">var</span> </small>&times;<small> <span
+ style="font-style: italic;">trm</span><br>
+      </small></td>
+      <td style="vertical-align: top;">variable-term pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; font-family: times new roman,times,serif; color: rgb(0, 153, 0);"><font
+ size="-1"><span style="font-style: italic;">&#960;</span><sub>1</sub></font>,
+      <font size="-1"><span style="font-style: italic;">&#960;</span><sub>2</sub></font></td>
+      <td style="vertical-align: top;">indexed-term projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(0, 153, 0);"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">{-}</font></td>
+      <td style="vertical-align: top;">singleton &#8211; term as tuple</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">ftn</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span><br>
+      </small></td>
+      <td style="vertical-align: top;">function-tuple substitutable
+pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-style: italic; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">subst</font></td>
+      <td style="vertical-align: top;">tuple substitution into
+function</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">trm</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span><br>
+      </small></td>
+      <td style="vertical-align: top;">term-tuple substitutable pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-style: italic; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">subst</font></td>
+      <td style="vertical-align: top;">tuple substitution into term </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(255, 0, 0); font-style: italic;"><small>tpl</small></td>
+      <td style="vertical-align: top;">tuples (of terms) </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(0, 0, 255); font-weight: bold;"><font
+ size="-1"><span style="color: rgb(255, 0, 0);">#</span></font></td>
+      <td style="vertical-align: top;">tuple arity </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><small><span
+ style="font-style: italic;"><br>
+      </span></small></td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1">&sect;</font></td>
+      <td style="vertical-align: top;">tuple index </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);"><small><span
+ style="font-style: italic;">tpl</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span></small></td>
+      <td style="vertical-align: top;">tuple-tuple substitutable pairs</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1"><span style="font-family: arial;">o</span></font></td>
+      <td style="vertical-align: top;">lawvere composition</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><small><span
+ style="font-style: italic;">var</span> &#959;</small><small> </small>&#8472;</td>
+      <td style="vertical-align: top;">indicia (subsets of variables)
+set</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1">1<br>
+      </font> </td>
+      <td style="vertical-align: top;">lawvere identity (indicia as
+tuple)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="MsoNormal" style="margin-bottom: 6pt; margin-left: 40px;"><big><span
+ style="font-weight: bold;">Figure 2: Basic Term Functors and Natural
+Transformations</span></big><br>
+</p>
+<p class="MsoNormal" style="margin-bottom: 6pt; text-align: justify;">The
+architecture of
+the term
+component of FOL languages is illustrated in Figures 2
+and 3. Figure 2 illustrates
+the basic architecture, and Figure 3 represents the term tuple
+coproduct
+architecture. Figure 2
+consists of three sub-diagrams &#8211; the term sub-diagram (upper left), the
+term tuple sub-diagram (lower left) and
+the lawvere sub-diagram (right). The term sub-diagram illustrates the
+fixpoint
+solution for terms,
+the
+term tuple sub-diagram illustrates the embedding structures for term
+tuples,
+and
+the lawvere sub-diagram illustrates the Lawvere construction. The
+fixpoint solution
+for
+terms
+embeds variables (variable cases) as elementary terms and substitutable
+function-tuple pairs
+as composite
+(substitution) terms. Function symbols are embedded as atomic terms and
+indexed-terms are embedded as singleton term tuples. <br>
+</p>
+<h4><a name="Lawvere_Construction"></a>Lawvere Construction</h4>
+<p style="text-align: justify;">The
+central concept in the term component of the IFF-FOL is the <span
+ style="font-style: italic;">Lawvere </span>construction, which serves
+as a framework for FOL logic and its categorical logic
+extension. The Lawvere construction is a collection
+of
+(small) categories and functors indexed by FOL languages and FOL
+language
+morphisms. Abstractly, the Lawvere construction is a (small) category
+object in
+the (large) category of functors and natural transformations between
+the
+categories <span style="font-family: Arial;">FOL-Lang</span> and <span
+ style="font-family: Arial;">Set</span>. The Lawvere category (see the
+red
+sub-diagram in Figure 2) is a
+parametric construction based upon the notion of a FOL <span
+ style="font-style: italic;">language</span>.
+Objects in the
+Lawvere category, called <span style="font-style: italic;">indicia</span>,
+are subsets of variables. Morphisms in the Lawvere category are
+term <span style="font-style: italic;">tuples</span>, which are
+set-theoretic versions of term sequences. At the base level, any
+function between indicia is a term tuple, performing the operations of
+projection and duplication (copy). Composition in the Lawvere category
+is tuple <span style="font-style: italic;">substitution</span>.
+Identity in the Lawvere category is indicia set function <span
+ style="font-style: italic;">identity</span>. </p>
+<div style="text-align: justify;">The
+nodes in Figure 2 represent
+basic functors from <span style="font-family: Arial;">FOL-Lang</span>
+the
+category of FOL languages and FOL language morphisms to <span
+ style="font-family: Arial;">Set</span>
+the category of (small) sets and set functions. The edges in Figure 2
+represent natural transformations between these basic functors. There
+are five
+simple functors <i style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">var</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">ftn</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">case</span></i>,
+<i style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">trm</span></i> and <i
+ style="font-weight: bold; color: rgb(255, 0, 0);"><span
+ style="font-family: Arial;">tpl</span></i>, for variables, function
+symbols,
+variable cases, terms and term tuples, respectively. The first three
+are basic
+and the
+last two are inductively defined. Based on these, there are five
+composite functors: <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">var</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;&times;&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">ftn</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">tpl</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">tpl</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;</span><span
+ style="color: rgb(255, 0, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);"> </span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>,
+for
+indicia (variable subsets),
+indexed terms (variable-term pairs), <span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">substitutable</span>
+function-tuple
+pairs, <span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">substitutable</span>
+term-tuple pairs and composable tuple-tuple pairs,
+respectively. The &#8216;<span style="color: rgb(0, 0, 0);">&#8855;</span>&#8217; symbol
+refers to a matched Cartesian product &#8211;
+the arity of the first (function, term or tuple) matches the index of
+the second (tuple).<br>
+</div>
+<p class="MsoNormal" style="margin: 6pt 0in; text-align: justify;"><img
+ src="tuple-coproduct-architecture.gif"
+ title="Tuple Coproduct Architecture" alt="Tuple Coproduct Architecture"
+ style="width: 650px; height: 340px;" hspace="10" vspace="20"><br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 600px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">&#8709;</font></td>
+      <td style="vertical-align: top; width: 200px;">initial Lawverian
+indicia<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">0<br>
+      </font><font size="-1"> </font></td>
+      <td style="vertical-align: top; width: 200px;">counique term tuple<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><small><span
+ style="font-style: italic;">var </span>&#959;</small><small> </small>&#8472;<small>
+      </small>&times;<small> </small><small><span
+ style="font-style: italic;">var </span>&#959;</small><small> </small>&#8472; </td>
+      <td style="vertical-align: top; width: 170px;">indicia pair </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1"><span style="font-style: italic;">ind</span><sub>1</sub>, </font><font
+ size="-1"><span style="font-style: italic;">ind</span><sub>2</sub><br>
+      </font></td>
+      <td style="vertical-align: top; width: 200px;"> indicia pair
+projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><big><font
+ size="-1"><big>+</big></font></big></td>
+      <td style="vertical-align: top; width: 200px;">binary Lawverian
+coproduct</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><small><span
+ style="font-style: italic;">tpl</span> </small>&#8853;<small> <span
+ style="font-style: italic;">tpl</span></small> </td>
+      <td style="vertical-align: top; width: 170px;">tuple-tuple
+pairable pairs </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1"><span style="font-style: italic;">op1<sup>st</sup></span>, <span
+ style="font-style: italic;">op2<sup>nd</sup></span><br>
+      </font> <font size="-1"> </font></td>
+      <td style="vertical-align: top; width: 200px;"> tuple pair
+projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">[,]</font></td>
+      <td style="vertical-align: top;">tuple (co)pairing</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-weight: bold; margin-left: 40px;"><big>Figure 3:
+Lawvere Coproduct Functors and Natural Transformations</big></p>
+<p style="text-align: justify;">The nodes in Figure 3 represent
+coproduct functors from <span style="font-family: Arial;">FOL-Lang</span>
+to <span style="font-family: Arial;">Set</span>. The edges in Figure 3
+represent natural <span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">transformations</span>
+between these coproduct functors.
+These are the various functors and natural
+transformations associated with the coproduct structure of Lawvere
+categories and
+functors. There is a
+simple functor <i style="font-weight: bold; color: rgb(255, 0, 0);"><span
+ style="font-family: Arial;">tpl</span></i> for
+term tuples. As mentioned before, this is inductively defined. There
+are two
+composite functors:
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>
+and <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(204, 102, 204);">tpl</span><span
+ style="font-weight: bold; color: rgb(204, 102, 204);"> &#8853;
+</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(204, 102, 204);">tpl</span>,
+for
+indicia and pairable tuple pairs, respectively. The &#8216;<span
+ style="font-weight: bold; color: rgb(204, 102, 204);">&#8853;</span>&#8217; symbol
+refers
+to a fibered Cartesian product &#8211; the arity of the two term tuples must
+match.
+Any of the natural transformations in
+Figures 2 and 3 must satisfy naturality conditions. Take for example
+the term arity natural transformation<br>
+</p>
+<div style="margin-left: 40px;">
+<p><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>
+</p>
+</div>
+<p style="text-align: justify;">
+whose source category is the category
+of FOL languages <span style="font-family: arial;">FOL-Lang</span>,
+whose target category is the category of
+sets <span style="font-family: arial;">Set</span>, whose source
+functor is the term functor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, whose target functor is the
+indicia functor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, and whose <span
+ style="font-style: italic; font-weight: bold;">L</span><sup>th</sup>
+component is the term arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) for any FOL
+language <span style="font-style: italic; font-weight: bold;">L</span>.
+Then, for any FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+term arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents two conditions: (1) the naturality
+condition of the term arity natural transformation for the FOL language
+morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+and (2) the
+fact that FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves term
+arity. A similar
+assertion can be made for any of the natural transformations
+in Figures 2 and 3; and this is axiomatized in this namespace. In
+addition, a third condition holds for any of the Lawvere-related
+natural transformation axiomatized in this namespace. Take for example,
+the tuple arity natural transformation <br>
+</p>
+<p style="text-align: justify; margin-left: 40px;"><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>
+<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span><br>
+</p>
+<p style="text-align: justify;">whose <span
+ style="font-style: italic; font-weight: bold;">L</span><sup>th</sup>
+component is the tuple arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) for any FOL
+language <span style="font-style: italic; font-weight: bold;">L</span>.
+Then, for any FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+tuple arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents three conditions: (1) the naturality
+condition of the term arity natural transformation for the FOL language
+morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+(2) the
+fact that FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves term
+arity; and (3) the fact that the Lawvere functor preserves target
+(arity).<br>
+</p>
+<h4><a name="Term_Monad"></a>Term Monad<br>
+</h4>
+<p style="margin-left: 40px;">
+<img src="term-monadic-architecture.gif"
+ title="Term Monadic Architecture" alt="Term Monadic Architecture"
+ style="width: 619px; height: 154px;" vspace="20"><br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 530px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 60px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">endo</span> </td>
+      <td style="vertical-align: top; width: 210px;">term monad
+endofunctor<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 30px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">&#951;</span></td>
+      <td style="vertical-align: top; width: 220px;">term monad unit<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0); width: 140px;"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">&#956;</span><font size="-1">
+      </font></td>
+      <td style="vertical-align: top; width: 200px;">term monad
+multiplication<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-weight: bold; margin-left: 40px;"><big>Figure 4:
+Term Monad Functors and Natural Transformations</big></p>
+<p style="text-align: justify;">A monad construction
+exists for terms in FOL. The abstract algebraic structure of the term
+construction is
+concentrated in the term <span style="font-style: italic;">monad</span>
+(Figure 4)<br>
+</p>
+<div style="margin-left: 40px;">
+&#9001;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>&#9002;,</div>
+which is a triple consisting of the following components:
+<ul>
+  <li style="text-align: justify;">the term monad <span
+ style="font-style: italic;">endofunctor</span> <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>, which maps a FOL language
+    <span style="font-style: italic; font-weight: bold;">L</span>
+to the term extension FOL language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), whose
+variables are the same, but whose functions are <span
+ style="font-style: italic; font-weight: bold;">L</span>-terms,</li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">unit </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial;">id</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>,
+whose source functor is the identity functor on <span
+ style="font-family: arial;">FOL-Lang</span>, whose
+target functor is the term monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the embedding FOL language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;: <span
+ style="font-style: italic; font-weight: bold;">L</span> &#8594; <span
+ style="font-style: italic; font-family: arial;">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the term embedding map on functions, and<br>
+  </li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">multiplication </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span><span
+ style="font-weight: bold; color: rgb(102, 0, 0);">&nbsp;<span
+ style="color: rgb(102, 204, 204);">&#959;</span>&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>,
+whose source functor is the term monad endofunctor composed with
+itself,
+whose target functor is the term monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the collapsing FOL language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>))&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the term collapsing map on functions
+(terms-on-terms).</li>
+</ul>
+<div style="text-align: justify;">In contract to the universal algebra
+situation discussed above, this
+monad is not associated with free algebras, but with "free FOL
+languages" &#8211; for any FOL language <span
+ style="font-style: italic; font-weight: bold;">L</span>, the term
+extension FOL language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) is free over <span
+ style="font-style: italic; font-weight: bold;">L</span>. We use this
+to extend the notion of a FOL language morphism to the freer notion of
+a FOL language <span style="font-style: italic;">interpretation </span>where
+the image of source function symbols is not restricted to target
+function symbols, but can be mapped to target terms. The algebraic
+semantics can likewise be extended.<br>
+</div>
+<h3><a name="Abstract_Syntax_"></a>Abstract Syntax<br>
+</h3>
+<img src="term-tuple-fixpoint-solution.gif"
+ title="Term-Tuple Fixpoint Solution" alt="Term-Tuple Fixpoint Solution"
+ style="width: 441px; height: 115px;"><br>
+<div style="margin-left: 40px;"><big>
+</big>
+<p><big><b>Figure 5: The Term-Tuple Fixpoint
+Solution</b></big></p>
+</div>
+<p>
+Terms and term tuples are corecursively defined. This specification
+replaces the traditional recursive tree-forest set fixpoint equations</p>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold;">tree</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8773; <span
+ style="font-weight: bold;">1</span> + <span
+ style="font-style: italic; font-weight: bold;">A</span>&nbsp;&times;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">forest</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>),<br>
+</div>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold;">forest</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8773; <span
+ style="font-style: italic; font-family: arial; font-weight: bold;">stack</span>(<span
+ style="font-style: italic; font-weight: bold;">tree</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>))<br>
+</div>
+<p style="text-align: justify;">(where &#8216;<span
+ style="font-style: italic; font-weight: bold;">A</span>&#8217;&nbsp;
+is the parameter set, &#8216;&#8773;&#8217; denotes bijection in particular or
+isomorphism in general, &#8216;<span style="font-weight: bold;">1</span>&#8217;
+denotes a generic singleton set, &#8216;+&#8217; denotes disjoint union, and
+&#8216;&times;&#8217; denotes Cartesian product, and &#8216;<span
+ style="font-style: italic; font-family: arial; font-weight: bold;">stack</span>(<span
+ style="font-style: italic; font-weight: bold;">-</span>)&#8217; is the stack
+operator which is itself a fixpoint solution) with the recursive
+term-tuple set fixpoint equation pair<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="color: rgb(0, 0, 255); font-style: italic; font-family: arial; font-weight: bold;">&nbsp;<span
+ style="color: rgb(0, 153, 0);">trm</span></span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8773; <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>),<br>
+</div>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8773; <span
+ style="font-style: italic; font-weight: bold; font-family: arial;">tuple</span>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)),<br>
+</div>
+<p style="text-align: justify;">(where &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; denotes the
+set of cases, variables-with-arity, or indicia-contained-variable
+pairs, &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; denotes the
+set of function symbols, and &#8216;<span style="font-weight: bold;">&#8855;</span>&#8217;
+denotes the combinator for
+function-tuple pairs that
+requires a match between function arity to
+tuple index). Categorically, the term-tuple set pair is the fixpoint
+solution (Figure 5)<br>
+</p>
+<div style="margin-left: 50px;">&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#9002; &#8773; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#9002;),<br>
+</div>
+<p>for the &#969;-continuous endofunctor <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)
+<span style="font-weight: bold;">:</span>
+<span style="font-family: arial; font-weight: bold;">Set</span>&nbsp;<span
+ style="font-weight: bold;">&times;</span>
+<span style="font-weight: bold; font-family: arial;">Set</span> &#8594; <span
+ style="font-weight: bold; font-family: arial;">Set</span> <span
+ style="font-weight: bold;">&times;</span> <span
+ style="font-weight: bold; font-family: arial;">Set</span> on the
+category <span style="font-weight: bold; font-family: arial;">Set</span>
+&times; <span style="font-weight: bold; font-family: arial;">Set</span>
+defined by<br>
+</p>
+<div style="margin-left: 40px;">
+<p><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial;">X</span>,
+<span style="font-style: italic; font-weight: bold; font-family: arial;">Y</span>&#9002;)
+= &#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial;">Y</span>,
+<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial;">X</span>)&#9002;.<br>
+</p>
+</div>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">The abstract syntax of FOL terms, which
+is illustrated in Figure 5, is
+parametric: there is a name for
+the parameter language or lexicon &#8216;<span
+ style="font-style: italic; font-weight: bold;">L</span>&#8217; and also a
+name for FOL terms &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217;. There is a
+collection of synthetic/constructor operators, a collection of
+analytic/selector partial operators and axioms that relate the two
+collections.<br>
+</p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>There is a collection of two synthetic/constructor injective
+operators on FOL
+terms:<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">(where the element operator '<span
+ style="font-style: italic; font-weight: bold;">elem</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)' embeds
+variables as terms, and the substitution operator, aka the application
+operator, &#8216;<span style="font-style: italic; font-weight: bold;">subst</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; substitutes
+term tuples into function symbols; in other words, applies function
+symbols to term tuples). The coproduct copairing of these two functions
+is the resolution bijection<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">res</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>).<br>
+</div>
+<p>The substitution operator is extendible to composition in a
+Kleisli-like term category.</p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: left;">There is a collection of analytic/selector
+operators on FOL terms
+with the two subgroup clusters in one-one correspondence with the two
+synthetic/constructor operators (their inverse):<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">bool</span><br
+ style="font-style: italic; font-weight: bold;">
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594;&nbsp;
+<span style="color: rgb(0, 153, 0);">&#8472;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">where the boolean operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; is for
+the
+elementary term domain, the indicia partial operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+indicia component of an elementary term, and the variable partial
+operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+variable component of an elementary term.&nbsp; </p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial;">bool</span><br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">where the boolean operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; is for
+the
+composite term domain, the function symbol partial operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+function component at the top of a composite term, and the tuple
+partial
+operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+tuple component underneath the top of a composite term.&nbsp; </p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>These operators satisfy the defining FOL term abstract data type
+semantics: there are axioms for the elementary and composite operators.<br>
+</p>
+<h5>Elementary</h5>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">X</span>
+: <span style="color: rgb(0, 153, 0);">&#8472;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic;">x</span> : <span
+ style="font-style: italic;">X</span>)<br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) <br>
+</div>
+<div style="margin-left: 80px;">&amp; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) = <span
+ style="font-style: italic;">X</span> <br>
+</div>
+<div style="margin-left: 80px;">&amp; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) = <span
+ style="font-style: italic;">x</span>)<br>
+</div>
+<p>which states that any FOL term constructed by the element operator
+is elementary and is decomposable into the indicia (subset of
+variables) and variable components
+</p>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">t</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)) <br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)&nbsp;&#8594;&nbsp;(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><span
+ style="font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;"><sub>1</sub></span><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>),&nbsp;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);"><big><span
+ style="font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;">2</sub></span><sub><span
+ style="font-family: times new roman,times,serif;">,</span><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<p>which states that every elementary FOL term is constructible using
+the element operator from its index and variable components.<br>
+</p>
+<h5>Composite</h5>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">f</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic;">t</span> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">compos</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<div style="margin-left: 80px;">&amp; <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">1</span></sub><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">f</span><br>
+</div>
+<div style="margin-left: 80px;">&amp; <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">2</span></sub>,<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>)<br>
+</div>
+<p style="text-align: justify;">which states that any term constructed
+by the substitution
+operator is composite and is decomposable into the original function
+symbol and term tuple.
+</p>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">t</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)) <br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)&nbsp;&#8594;&nbsp;(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">1</span></sub><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>), <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">2</span></sub>,<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<p>which states that every composite FOL term is constructible using
+the substitution operator from the (substitutable) pair of its
+components.
+</p>
+<h2><a name="Expressions"></a>Expressions</h2>
+This section gives an introductory discussion of the expression
+component
+of the IFF-FOL.<br>
+<h3><a name="Architecture__"></a>Architecture<br>
+</h3>
+<h4><a name="ExpressionArity_Fixpoint_Solution"></a>Expression/Arity
+Fixpoint Solution<br>
+</h4>
+<p style="text-align: justify;">The
+concepts of <span style="font-style: italic;">variable</span> and <span
+ style="font-style: italic;">relation</span> (Figure 6) are the
+defining attributes of the expression component of the IFF-FOL. The
+central data structure
+in the expression component is the concept of <span
+ style="font-style: italic;">expression</span>.
+This recursive construction over languages is the solution to a
+fixpoint equation (see the blue sub-diagram of Figure 6). In full, the
+expression construction gives an extended language, with an <span
+ style="font-style: italic;">embedding</span> map connecting a language
+to its expression extension. The concept of <span
+ style="font-style: italic;">arity</span> is an attribute defined on
+relations and expressions, in order of increasing generality. The
+arity of an expression is loosely a set-theoretic upper bound for the
+variables occurring freely in the expression. Arity is an indicia.
+Expressions can be either <span style="font-style: italic;">atomic</span>
+or <span style="font-style: italic;">composite</span>. Atoms are
+relation-tuple pairs that match the relation arity to the tuple
+index. The <span style="font-style: italic;">atom</span>
+construction, and its <span style="font-style: italic;">relation</span>
+and <span style="font-style: italic;">tuple</span> component
+attributes, is based upon the pullback along relation arity and tuple
+index. Composites are defined by logical connectives and
+quantifiers. In the core, following existential graphs, we use only
+negations, conjunctions and existential quantifications. Other
+connectives and quantifiers can be defined in terms of these. The <span
+ style="font-style: italic;">holds</span> construction represents and
+embeds atoms
+as atomic expressions. The <span style="font-style: italic;">negation</span>
+construction represents and embeds expressions as negative expressions.
+The <span style="font-style: italic;">conjunction</span> construction
+represents and embeds
+expression subsets as conjunctive expressions. In the basic IFF
+representation of FOL, the expression subset construction is the power
+of expressions; in an extended IFF representation of FOL that follows
+categorical logic, the expression subset construction requires a common
+arity. The <span style="font-style: italic;">quantification</span>
+construction represents and embeds expression cases as (existentially)
+quantified
+expressions. The case construction is a sum construction used by the
+quantification operator. The <span style="font-style: italic;">case</span>
+construction, and its <span style="font-style: italic;">indication</span>
+and <span style="font-style: italic;">projection</span> component
+attributes, is
+the coproduct of expression arity. The concepts of <span
+ style="font-style: italic;">composition</span> and <span
+ style="font-style: italic;">identity</span> (Figure 6) are composite
+constructors for tuples.
+</p>
+<div style="margin-left: 40px;"><img
+ src="expression-basic-architecture.gif"
+ title="Basic Expression Architecture"
+ alt="Basic Expression Architecture"
+ style="width: 654px; height: 321px;" vspace="20" hspace="10">
+</div>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 700px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; font-weight: bold; color: rgb(0, 0, 255); text-align: center; width: 100px;">var<br>
+      </td>
+      <td style="vertical-align: top; width: 250px;">variables<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; color: rgb(0, 0, 255); font-weight: bold; width: 80px;">
+      <font size="-1">elem<br>
+      </font></td>
+      <td style="vertical-align: top; width: 250px;">element &#8211;
+variable as term<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; font-weight: bold; color: rgb(0, 0, 255); text-align: center; width: 100px;">rel<br>
+      </td>
+      <td style="vertical-align: top; width: 220px;">relation
+symbols<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(0, 0, 255); font-weight: bold;">
+      <font size="-1">@</font></td>
+      <td style="vertical-align: top; width: 220px;">embedding &#8211;
+relation as atom</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; color: rgb(0, 0, 255); text-align: center; width: 100px;">&#8472;</td>
+      <td style="vertical-align: top; width: 220px;">power set
+operator<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; width: 50px; color: rgb(0, 0, 255); font-weight: bold;">
+      <big><font size="-1"><big><span style="color: rgb(0, 0, 255);">#</span></big></font></big></td>
+      <td style="vertical-align: top; width: 220px;">relation/expression
+arity<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; text-align: center; font-style: italic; font-family: arial; font-weight: bold; color: rgb(51, 51, 255); width: 100px;">atm</td>
+      <td style="vertical-align: top;">atoms</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">
+      <big>&#9674;</big></td>
+      <td style="vertical-align: top;">holds operator (injection)</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; font-weight: bold; color: rgb(0, 0, 255); text-align: center; width: 100px;">expr<br>
+      </td>
+      <td style="vertical-align: top;">expressions<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(0, 0, 255);">
+      <big>&not;</big></td>
+      <td style="vertical-align: top;">negation operator
+(injection)<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; text-align: center; color: rgb(51, 51, 255);">
+      <span
+ style="font-style: italic; font-family: arial; font-weight: bold;">expr</span>
+      <small style="font-weight: normal;">&#959;</small> <big
+ style="font-weight: bold;">&#8472;</big></td>
+      <td style="vertical-align: top;">expression-subsets<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; color: rgb(51, 51, 255);">
+      <big><big>&#710;</big></big></td>
+      <td style="vertical-align: top;">conjunction operator
+(injection)</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; font-weight: bold; color: rgb(0, 0, 255); text-align: center; width: 100px;">case<br>
+      </td>
+      <td style="vertical-align: top;">expression-variable
+pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; text-align: center; color: rgb(51, 51, 255);">&#8707;</td>
+      <td style="vertical-align: top;">quantification operator
+(injection)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-style: italic; font-weight: bold; font-family: arial; color: rgb(51, 51, 255);">
+      <big><font size="-1"><big>i<small>ndic,
+proj</small></big></font></big></td>
+      <td style="vertical-align: top;">case indication and
+projection</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; color: rgb(255, 0, 0); font-style: italic; text-align: center; width: 100px;">tpl</td>
+      <td style="vertical-align: top;">tuples</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(0, 0, 255); font-weight: bold;">
+      <big style="color: rgb(51, 51, 255);"><font size="-1"><big><span
+ style="color: rgb(255, 0, 0);">#</span><span
+ style="color: rgb(0, 0, 0);">,</span></big></font></big> <big
+ style="color: rgb(255, 0, 0);"><font size="-1"><big>&sect;</big></font></big></td>
+      <td style="vertical-align: top;">tuple arity and
+index<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-weight: bold; font-family: arial; color: rgb(255, 0, 0); text-align: center; width: 100px;">
+      <span style="font-style: italic;">tpl</span> <span
+ style="font-weight: normal;">&#8855;</span> <span
+ style="font-style: italic;">tpl</span></td>
+      <td style="vertical-align: top;">tuple-tuple composable
+pairs</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; color: rgb(255, 0, 0); font-weight: bold;">
+      <small>&#927;</small></td>
+      <td style="vertical-align: top;">lawvere composition</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; color: rgb(255, 0, 0); font-weight: bold; text-align: center; width: 100px;">
+      <span style="font-style: italic;">var</span> <small
+ style="font-weight: normal;">&#959;</small> <big>&#8472;</big></td>
+      <td style="vertical-align: top;">indicia (subsets of
+variables)<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;">
+      <big><font size="-1"><big><small>1</small><br>
+      </big></font></big></td>
+      <td style="vertical-align: top;">lawvere identity (indicia as
+tuple)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin-left: 40px;"><big><span style="font-weight: bold;">Figure
+6: Basic Expression Functors and Natural Transformations</span></big></p>
+<p style="text-align: justify;">
+The basic architecture of the expression component of FOL languages is
+illustrated in Figure
+6. This consists of three sub-diagrams &#8211; the expression sub-diagram
+(upper left), the arity sub-diagram (lower left) and the lawvere
+sub-diagram (right). The expression sub-diagram and the arity
+sub-diagram illustrate the fixpoint solution for expressions and the
+co-recursive definition of expression arity. The lawvere sub-diagram
+illustrates the Lawvere construction for tuples. The fixpoint
+solution for expressions embeds atoms as atomic expressions via the
+holds operator, embeds expressions as negative expressions via the
+negation operator, embeds expression-subsets as conjunctive expressions
+via the conjunction operator, and embeds expression cases as
+(existentially) quantified expressions via the quantification operator.
+Atoms are projected onto their relation and tuple components, and
+relation symbols are embedded as atoms.
+</p>
+<p style="text-align: justify;">
+The nodes in Figure 6 represent basic functors from <span
+ style="font-family: Arial;">FOL-Lang</span> the category of
+FOL languages and FOL language morphisms to <span
+ style="font-family: Arial;">Set</span> the category of (small) sets
+and set functions. The edges in Figure 6 represent natural
+transformations between these basic functors. There are five simple
+functors <i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">rel</span></i>, <i
+ style="font-weight: bold; color: rgb(255, 0, 0);"><span
+ style="font-family: Arial;">tpl</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">case</span></i> and <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>, for variables, relation
+symbols, tuples, expression cases and expressions, respectively.
+The first three are basic, the fourth is composite and the last is
+inductively defined. Based on these, there are three composite
+functors: <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">expr</span><span
+ style="font-weight: bold; color: rgb(0, 0, 255);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">&#8472;</span>
+and <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>
+<span style="color: rgb(255, 0, 0);">&#8855;</span> <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>,
+for indicia (variable subsets), expression-subsets and composable
+tuple-tuple pairs, respectively. The &#8216;<span
+ style="color: rgb(255, 0, 0);">&#8855;</span>&#8217; symbol refers to a matched
+Cartesian product &#8211; the arity of the first tuple matches the index
+of the second tuple. Any of the natural transformations in Figure 6
+must satisfy naturality conditions. Take for example the expression
+arity natural transformation
+</p>
+<div style="margin-left: 40px;">
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">#</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">expr</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>
+</div>
+<p style="text-align: justify;">
+whose source category is the category
+of FOL languages <span style="font-family: arial;">FOL-Lang</span>,
+whose target category is the category of sets <span
+ style="font-family: arial;">Set</span>, whose source functor is the
+expression functor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">expr</span>
+: <span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, whose target functor is the
+indicia functor <span style="font-style: italic; font-family: arial;">var</span>&nbsp;&#959;&nbsp;<span
+ style="font-family: arial;">&#8472;</span>&nbsp;: <span
+ style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, and whose <span
+ style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component for any FOL language <span
+ style="font-style: italic; font-weight: bold;">L</span> is the
+expression arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>). Then, for
+any FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+expression arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents two conditions: (1) the naturality condition of the
+expression arity natural transformation for the FOL language
+morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+and (2) the fact that the FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves
+expression arity. A similar assertion can be made for any of the
+natural transformations in Figure 6; and this is axiomatized in this
+namespace. In addition, a third condition holds for any of the
+Lawvere-related natural transformation axiomatized in this namespace.
+Take for example, the tuple arity natural transformation
+</p>
+<div style="margin-left: 40px;">
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>&nbsp;:
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>
+<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:
+<span style="font-family: arial;">FOL-Lang</span> &#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>
+</div>
+<p style="text-align: justify;">
+whose <span style="font-style: italic; font-weight: bold;">L</span><sup>th</sup>
+component for any FOL language <span
+ style="font-style: italic; font-weight: bold;">L</span> is the tuple
+arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;: <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-family: arial;">(</span><span
+ style="font-style: italic; font-weight: bold;">L</span>). Then, for
+any FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+tuple arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents three conditions: (1) the naturality condition of the tuple
+arity natural transformation for the FOL language
+morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+(2) the fact that the FOL language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves
+tuple arity; and (3) the fact that the Lawvere functor preserves
+the target (arity) of tuples.<br>
+</p>
+<h4><a name="Expression_Monad"></a>Expression Monad<br>
+</h4>
+<div style="margin-left: 40px;"><img
+ src="expression-monadic-architecture.gif"
+ title="Expression Monadic Architecture"
+ alt="Expression Monadic Architecture"
+ style="width: 619px; height: 154px;" vspace="20"><br>
+</div>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 600px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(102, 0, 0); width: 30px;">
+      <span style="font-style: italic; font-family: arial;">endo</span></td>
+      <td style="vertical-align: top; width: 200px;">expression monad
+endofunctor<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(102, 0, 0); width: 30px;">
+      <span style="font-style: italic; font-family: arial;">&#951;</span></td>
+      <td style="vertical-align: top; width: 220px;">expression monad
+unit<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0); width: 40px;">
+      <br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(102, 0, 0); width: 40px;">
+      <span style="font-style: italic; font-family: arial;">&#956;</span></td>
+      <td style="vertical-align: top; width: 200px;">expression monad
+multiplication<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-weight: bold; margin-left: 40px;"><big>Figure 7:
+Expression Monad Functors and Natural Transformations</big></p>
+<div style="text-align: justify;">
+<p>A monad construction exists for
+expressions in FOL. The abstract algebraic structure of the
+expression construction is concentrated in the expression <span
+ style="font-style: italic;">monad</span> (Figure 7)</p>
+</div>
+<div style="margin-left: 40px;">
+<p>&#9001;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#951;</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#956;</span>&#9002;,
+</p>
+</div>
+which is a triple consisting of the following components:
+<ul>
+  <li style="text-align: justify;">the expression monad <span
+ style="font-style: italic;">endofunctor</span> <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>, which maps an FOL
+language <span style="font-style: italic; font-weight: bold;">L</span>
+to the expression extension FOL language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>),
+whose variables are the same, but whose relations are <span
+ style="font-style: italic; font-weight: bold;">L</span>-expressions,</li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">unit</span>
+natural transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#951;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial;">id</span>&nbsp;<big><big>&#8658;</big></big><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>, whose source functor is
+the identity functor on <span style="font-family: arial;">FOL-Lang</span>,
+whose target functor is the expression monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the embedding FOL language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#951;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the expression embedding map on relations, and</li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">multiplication</span>
+natural transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#956;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>&nbsp;&#959;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>&nbsp;<big><big>&#8658;</big></big><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">FOL-Lang</span> &#8594; <span
+ style="font-family: arial;">FOL-Lang</span>, whose source functor is
+the expression monad endofunctor composed with itself, whose target
+functor is the expression monad endofunctor <span
+ style="font-style: italic; font-family: arial;">endo</span>, and whose
+    <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the collapsing FOL language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">&#956;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;: <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>))&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the expression collapsing map on relations
+(expressions-on-expressions).</li>
+</ul>
+<p style="text-align: justify;">
+In contract to the universal algebra situation discussed above, this
+monad is not associated with free algebras, but with "free FOL
+languages" &#8211; for any FOL language <span
+ style="font-style: italic; font-weight: bold;">L</span>, the extension
+FOL language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) is free over <span
+ style="font-style: italic; font-weight: bold;">L</span>. We use this
+to extend the notion of a FOL language morphism to the freer
+notion of a FOL language <span style="font-style: italic;">interpretation</span>
+where the image of source relation symbols is not restricted to target
+relation symbols, but can be mapped to target expressions. The
+algebraic semantics can likewise be extended.
+</p>
+<h3><a name="Abstract_Syntax__"></a>Abstract Syntax<br>
+</h3>
+<img src="expression-abstract-syntax.gif"
+ title="Expression Abstract Syntax" alt="Expression Abstract Syntax"
+ style="width: 333px; height: 196px;" hspace="40"><br>
+<p style="margin-left: 40px;"><big><b>Figure 8: The Expression Fixpoint
+Solution</b></big></p>
+The abstract syntax for FOL expressions, which is illustrated in Figure
+8, is parametric: there is a name for the parameter FOL language
+or lexicon &#8216;<span style="font-style: italic; font-weight: bold;">L</span>&#8217;
+and also a name for FOL expressions &#8216;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&#8217;. There
+is a collection of synthetic/constructor operators, a collection of
+analytic/selector partial operators and axioms that relate the two
+collections.
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>There is a collection of four
+<i>synthetic</i>/<i>constructor</i> operators on expressions:</p>
+<div style="margin-left: 40px;">
+<p><big style="font-weight: bold; color: rgb(0, 0, 255);">&#9674;</big><b><i><sub>
+L</sub></i></b> = <i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">holds</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">atm</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<div style="margin-left: 40px;">
+<p><big style="font-weight: bold; color: rgb(0, 0, 255);">&not;</big><b><i><sub>L</sub></i></b>
+= <i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">neg</span></i>(<b><i>L</i></b>)&nbsp;:
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<div style="margin-left: 40px;">
+<p><small><span style="font-family: arial; color: rgb(0, 0, 255);">&#923;</span></small><b>
+<i><sub>L</sub></i></b> = <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">conj</span></i>(<b><i>L</i></b>)&nbsp;:
+<span style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<div style="margin-left: 40px;">
+<p><span style="color: rgb(0, 0, 255);">&#8707;</span><b><i><sub>L</sub></i></b>
+=
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">quant</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">case</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<p style="text-align: justify;">where '<big
+ style="font-weight: bold; color: rgb(0, 0, 255);">&#9674;</big><b><i><sub>
+L</sub></i></b>((<i>R</i>,&nbsp;&#945;))&#8217; constructs the
+atomic expression of an arbitrary atom
+(<i>R</i>,&nbsp;&#945;)&nbsp;<small>&#8712;</small> <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">atm</span></i>(<b><i>L</i></b>) =
+<big><big>&#8746;</big></big><sub><i>X</i><small>&#8712;</small><i
+ style="font-family: arial; font-weight: bold; color: rgb(0, 0, 255);">
+var</i>(<b><i>L</i></b>)</sub> <i
+ style="font-weight: bold; color: rgb(0, 0, 255); font-family: arial;">rel</i>(<b>
+<i>L</i></b>)(<i>X</i>)&#8201;&times;<i
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</i>(<b>
+<i>L</i></b>)<small><i><sup>X</sup></i></small> consisting of an
+<i>X</i>-ary relation symbol <i>R</i> <small>&#8712;</small>
+<i style="font-weight: bold; color: rgb(0, 0, 255); font-family: arial;">rel</i>(<b>
+<i>L</i></b>)(<i>X</i>) and a tuple &#945;
+<small>&#8712;</small> <i
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</i>(<b>
+<i>L</i></b>)<small><i><sup>X</sup></i></small> with index
+<i>X</i>, &#8216;<big style="font-weight: bold; color: rgb(0, 0, 255);">&not;</big><b><i><sub>L</sub></i></b>(&#966;)&#8217;
+constructs the negation of an arbitrary <b><i>L</i></b>-expression
+&#966; <small>&#8712;</small> <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>),
+&#8216;<small><span style="font-family: arial; color: rgb(0, 0, 255);">&#923;</span></small><b>
+<i><sub>L</sub></i></b>({&#966;<sub>1</sub>,&nbsp;&#966;<sub>2</sub>,&nbsp;&#8230;,&nbsp;&#966;<i>
+<sub>n</sub></i>})&#8217; constructs the conjunction of an
+arbitrary subset of <b><i>L</i></b>-expressions
+{&#966;<sub>1</sub>,&nbsp;&#966;<sub>2</sub>,&nbsp;&#8230;,&nbsp;&#966;<i>
+<sub>n</sub></i>}&nbsp;<small>&#8712;</small>&nbsp;<span
+ style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>),
+and &#8216;<span style="color: rgb(0, 0, 255);">&#8707;</span><b><i><sub>L</sub></i></b>((&#966;,&nbsp;<i>
+x</i>))&#8217; constructs the existential quantification of an
+arbitrary expression case
+(&#966;,&nbsp;<i>x</i>)&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">case</span></i>(<b><i>L</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&times;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)
+consisting of an arbitrary <b><i>L</i></b>-expression
+&#966;&nbsp;&#8712;&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>) and a
+variable <i>x</i>&nbsp;&#8712;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>) with
+<i>x</i>&nbsp;&#8712;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">arity</span></i>(<b><i>L</i></b>)(&#966;).
+The four synthetic/constructor operators are individually injective
+and jointly surjective.</p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">There is a collection of <i>analytic</i>/<i>selector</i>
+operators on expressions, with the four subgroup clusters in
+one-one correspondence with the four synthetic/constructor
+operators (their inverses):</p>
+<div style="margin-left: 40px;">
+<p><i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-atm</span></i>(<b><i>L</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)<br>
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">atm</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">atm</span></i>(<b><i>L</i></b>)<br>
+[<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">rel</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">rel</span></i>(<b><i>L</i></b>)(<i>X</i>)
+for
+<i>X</i>&nbsp;&#8712; <span
+ style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">var</span></i>(<b><i>L</i></b>), <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">tpl</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(255, 0, 0);"> <span
+ style="font-family: Arial;">tpl</span></i>(<b><i>L</i></b>)<small><i><sup>
+X</sup></i></small> for <i>X</i>&nbsp;&#8712; <span
+ style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)]</p>
+</div>
+<div style="margin-left: 40px;">
+<p><i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-neg</span></i>(<b><i>L</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)<br>
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<div style="margin-left: 40px;">
+<p><i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-conj</span></i>(<b><i>L</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)<br>
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">subset</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;
+<span style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)</p>
+</div>
+<div style="margin-left: 40px;">
+<p><i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-quant</span></i>(<b><i>L</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)<br>
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">case</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">case</span></i>(<b><i>L</i></b>)<br>
+[<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>),
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)]</p>
+</div>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>These operators satisfy the defining FOL expression abstract
+syntax (abstract datatype semantics).</p>
+<h5>Atomic</h5>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">X</span>:&nbsp;<span
+ style="font-weight: bold; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>),
+<i>R</i>&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">rel</span></i>(<b><i>L</i></b>)(<i>X</i>),&nbsp;&#945;&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"> <span
+ style="font-family: Arial;">tpl</span></i>(<b><i>L</i></b>)<i><sup>X</sup></i>)</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-atm</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">holds</span></i>(<b><i>L</i></b>)(<i>R</i>,&nbsp;&#945;))</div>
+<div style="margin-left: 80px;">&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">rel</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">holds</span></i>(<b><i>L</i></b>)(<i>R</i>,&nbsp;&#945;))
+= <span style="font-style: italic;">R</span></div>
+<div style="margin-left: 80px;">&amp; <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">tpl</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">holds</span></i>(<b><i>L</i></b>)(<i>R</i>,&nbsp;&#945;))
+= &#945;)</div>
+<p style="text-align: justify;">which states that any FOL expression
+constructed by the holds
+operator is atomic and is decomposable into the original relation
+symbol and tuple.</p>
+<div style="margin-left: 40px;">&#8704;(&#966;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-atm</span></i>(<b><i>L</i></b>)(&#966;)
+&#8658; (<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">holds</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">rel</span></i>(<b><i>L</i></b>)(&#966;), <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">tpl</span></i>(<b><i>L</i></b>)(&#966;)) =
+&#966;))</div>
+<p>which states that every atomic FOL expression is constructible
+using the holds operator on its component relation and tuple.</p>
+<h5>Negative</h5>
+<div style="margin-left: 40px;">
+&#8704;(&#968;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-neg</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">neg</span></i>(<b><i>L</i></b>)(&#968;))</div>
+<div style="margin-left: 80px;">&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">neg</span></i>(<b><i>L</i></b>)(&#968;) =
+&#968;)</div>
+<p>which states that any FOL expression constructed by the negation
+operator is negative and is decomposable into the original
+<b><i>L</i></b>-expression
+&#968;&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>).</p>
+<div style="margin-left: 40px;">
+&#8704;(&#966;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-neg</span></i>(<b><i>L</i></b>)(&#966;)
+&#8658; (<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">neg</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)(&#966;)) =
+&#966;))</div>
+<p>which states that every negative expression is constructible
+using the negation operator on the underlying expression.</p>
+<h5>Conjunctive</h5>
+<div style="margin-left: 40px;">
+&#8704;(&#934;&nbsp;:&nbsp;<span style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-conj</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">conj</span></i>(<b><i>L</i></b>)(&#934;))</div>
+<div style="margin-left: 80px;">&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">subset</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">conj</span></i>(<b><i>L</i></b>)(&#934;) =
+&#934;)</div>
+<p style="text-align: justify;">which states that any FOL expression
+constructed by the
+conjunction operator is conjunctive and is decomposable into the
+original <b><i>L</i></b>-expression subset &#934;
+<small>&#8712;</small> <span
+ style="font-family: arial; color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>).</p>
+<div style="margin-left: 40px;">
+&#8704;(&#966;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-conj</span></i>(<b><i>L</i></b>)(&#966;)
+&#8658; (<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">conj</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">subset</span></i>(<b><i>L</i></b>)(&#966;)) =
+&#966;))</div>
+<p>which states that every conjunctive expression is constructible
+using the conjunction operator on the underlying expression
+subset.</p>
+<h5>Existential Quantification</h5>
+<div style="margin-left: 40px;">
+&#8704;((&#966;,&nbsp;<i>x</i>)&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">case</span></i>(<b><i>L</i></b>))</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-quant</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">quant</span></i>(<b><i>L</i></b>)((&#966;,&nbsp;<i>
+x</i>))</div>
+<div style="margin-left: 80px;">&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">quant</span></i>(<b><i>L</i></b>)((&#966;,&nbsp;<i>
+x</i>)))&nbsp;=&nbsp;&#966;)</div>
+<div style="margin-left: 80px;">&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">quant</span></i>(<b><i>L</i></b>)((&#966;,&nbsp;<i>
+x</i>)) = <i>x</i>)</div>
+<p style="text-align: justify;">
+which states that any expression constructed by the existential
+uantification operator is existentially quantified and is decomposable
+into the original <b><i>L</i></b>-case (&#966;,&nbsp;<i>x</i>)&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">case</span></i>(<b><i>L</i></b>)
+consisting of an arbitrary <b><i>L</i></b>-expression &#966;&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>) and a
+variable <i>x</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>) with <i>x</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">arity</span></i>(<b><i>L</i></b>)(&#966;).
+</p>
+<div style="margin-left: 40px;">
+&#8704;(&#966;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))<br>
+<div style="margin-left: 40px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-quant</span></i>(<b><i>L</i></b>)(&#966;) &#8658; (<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">quant</span></i>(<b><i>L</i></b>)((<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)(&#966;), <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">var</span></i>(<b><i>L</i></b>)(&#966;))) = &#966;))
+</div>
+</div>
+<p>
+which states that every existential expression is constructible
+using the existential quantification operator on its component
+expression and bound variable.
+</p>
+<h5>Partition</h5>
+<p style="text-align: justify;">
+Finally, following John McCarthy we require that each expression
+satisfy exactly one of these Boolean predicates. That is, that an
+expression is either (1) an atom, (2) a negation, (3) a conjunction
+or (4) an existential quantification,
+</p>
+<div style="margin-left: 40px;">
+&#8704;(&#966;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))<br>
+</div>
+<div style="margin-left: 80px;">(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-atm</span></i>(<b><i>L</i></b>)(&#966;) |
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-neg</span></i>(<b><i>L</i></b>)(&#966;) |
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-conj</span></i>(<b><i>L</i></b>)(&#966;) |
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-quant</span></i>(<b><i>L</i></b>)(&#966;))
+</div>
+<p>
+but not any two such things (there are 6 possibilities).
+</p>
+<div style="margin-left: 40px;">
+&#8704;(&#966;&nbsp;:&nbsp;<i style="font-weight: bold; color: rgb(0, 0, 255);">
+<span style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))<br>
+<div style="margin-left: 40px;">(&#8764;(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-atm</span></i>(<b><i>L</i></b>)(&#966;)
+&amp; <i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-neg</span></i>(<b><i>L</i></b>)(&#966;))<br>
+</div>
+<div style="margin-left: 40px;">&#8230;&nbsp;&amp; &#8764;(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-conj</span></i>(<b><i>L</i></b>)(&#966;)&nbsp;&amp;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">is-quant</span></i>(<b><i>L</i></b>)(&#966;)))
+</div>
+</div>
+<p style="text-align: justify;">That is, that those four domains
+partition the set of expressions.
+Actually, these two axioms are embedded within the fixpoint solution
+and we are just making them explicit here.<br>
+</p>
+<h2><a name="Review"></a>Review<br>
+</h2>
+<h3><a name="Abstract_Syntax"></a>Abstract Syntax</h3>
+<p style="text-align: justify;">
+The notion of <i>abstract syntax</i> is a technical term <a
+ href="http://www-formal.stanford.edu/jmc/towards/node12.html">introduced</a>
+by John McCarthy: &#8220;The predicates and functions whose existence and
+relations define the syntax, are precisely those needed to translate
+from the language, or to define the semantics&#8221;. The abstract syntax of
+FOL languages is the highest meta-level needed in order to
+define the syntax and model theory of FOL languages. The
+orientation in the McCarthy statement is towards the notion of an <i>abstract
+data type</i>, which defines the abstract syntax and formal semantics
+of data types. In general, abstract syntax consists of a collection of <span
+ style="font-style: italic;">synthetic/constructor</span> operators, a
+collection of <span style="font-style: italic;">analytic/selector</span>
+operators, and a collection of <span style="font-style: italic;">axioms</span>
+that relate the two kinds of operators. For recursive data types, the
+synthetic/constructor operators are unpacked from the initial (or
+final) fixpoint solution (bijection) of set equation(s). The
+analytic/selector operators are inverse to the synthetic/constructor
+operators, and this is the content of the axiomatization for the
+abstract data type. In fact, the axioms form subcollections, which are
+in one-one correspondence with the synthetic/constructor operators (and
+their analytic/selector inverses). The analytic/selector functions are
+partial functions, each has an associated Boolean test for its domain,
+and the correct analytic programming style is to test for &#8220;in domain&#8221;
+before applying any of the analytic/selector operators. Finally, to
+quote McCarthy, &#8220;if both the analytic and synthetic functions are
+given, we do not have the difficult and sometimes unsolvable analysis
+problems that arise when languages are described synthetically only".
+</p>
+<h3><a name="Initial_Fixpoints"></a>Initial Fixpoints</h3>
+<div style="text-align: justify;">For any &#969;-continuous <span
+ style="font-family: arial; font-weight: bold;">Set</span> endofunctor <span
+ style="font-family: arial;"><span
+ style="font-style: italic; font-weight: bold;">F</span>&nbsp;:&nbsp;<span
+ style="font-weight: bold;">Set</span>&nbsp;<big>&#8594;</big>&nbsp;<span
+ style="font-weight: bold;">Set</span></span>, there is an initial
+fixpoint solution <span style="font-family: arial; font-style: italic;">X</span><sup><small
+ style="font-family: arial;">@</small></sup> to the equation <span
+ style="font-family: arial; font-weight: bold; font-style: italic;">F</span>(<span
+ style="font-family: arial;"><span style="font-style: italic;">X</span></span>)&nbsp;&#8773;&nbsp;<span
+ style="font-family: arial;"><span style="font-style: italic;">X</span></span>.
+Any such fixpoint solution has an increasing approximation sequence <span
+ style="font-family: arial; font-style: italic;">X</span><sub>0</sub> =
+&Oslash;, <span style="font-family: arial; font-style: italic;">X</span><sub>1</sub>
+= <span style="font-family: arial; font-weight: bold;"><span
+ style="font-style: italic;">F</span></span>(&Oslash;), &#8230;,<span
+ style="font-family: arial; font-style: italic;">X</span><sub><span
+ style="font-style: italic;">n</span>+1</sub> = <span
+ style="font-family: arial; font-weight: bold;"><span
+ style="font-style: italic;">F</span></span>(<span
+ style="font-family: arial; font-style: italic;">X</span><sub><span
+ style="font-style: italic;">n</span></sub>), &#8230; <span
+ style="font-family: arial; font-style: italic;">X</span><small
+ style="font-family: arial;"><sup>@</sup></small> = <span
+ style="font-family: script mt bold;">lim</span><sub><span
+ style="font-style: italic;">n</span></sub>(<span
+ style="font-family: arial; font-style: italic;">X</span><sub><span
+ style="font-style: italic;">n</span></sub>) starting from the empty
+set, constructing each successive step by endofunctor application, and
+"ending" at the fixpoint solution. The data type of FOL expressions is
+a
+recursive data type compactly axiomatized as the fixpoint solution
+</div>
+<p style="margin-left: 40px;">&#945;&nbsp;:&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">fixpt</span></i>(<b><i>L</i></b>)(<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>))&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>)
+</p>
+<p>
+(bijection) of the fixpoint set equation
+</p>
+<div style="margin-left: 40px;">
+<i style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">fixpt</span></i>(<b><i>L</i></b>)(<i><span
+ style="font-family: Arial;">X</span></i>)&nbsp;&#8773;&nbsp;<i><span
+ style="font-family: Arial;">X</span></i></div>
+<p style="text-align: justify;">
+with the fixpoint set operator <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">fixpt</span></i>(<b><i>L</i></b>)(<i><span
+ style="font-family: Arial;">X</span></i>), which is the sum of (1) the
+constant set of atoms <i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">atm</span></i>(<b><i>L</i></b>), (2) the
+variable set <i><span style="font-family: Arial;">X</span></i>, (3)
+the power set <span style="color: rgb(0, 0, 255);">&#8472;</span><i><span
+ style="font-family: Arial;">X</span></i> and (4) the coproduct of the
+arity function #<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&nbsp;:&nbsp;<i><span
+ style="font-family: Arial;">X</span></i>&nbsp;&#8594;&nbsp;<span
+ style="color: rgb(0, 0, 255);">&#8472;</span><i
+ style="font-weight: bold; color: rgb(0, 0, 255);"><span
+ style="font-family: Arial;">expr</span></i>(<b><i>L</i></b>). The
+synthetic/constructor operators are unpacked from the fixpoint solution
+bijection &#945;. For any expression language <span
+ style="font-style: italic; font-weight: bold;">L</span>, the set of
+expressions <span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) and the
+expression arity function #<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="color: rgb(0, 0, 255);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) are
+corecursively defined. The case component of the expression set is the
+coproduct of the arity function <span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) = &#8721;(#<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>), and
+the source of the arity function is the expression set. The
+approximation sequence for the fixpoint solution of expressions starts
+as: <span style="font-family: arial; font-style: italic;">X</span><sub>0</sub>
+= <span style="font-weight: bold; color: rgb(0, 0, 255);">&Oslash;</span>,
+<span style="font-family: arial; font-style: italic;">X</span><sub>1</sub>
+= <span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">atm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <small
+ style="color: rgb(0, 0, 255);"><span
+ style="font-weight: bold; font-family: courier new;">true</span></small>,
+&#8230; , and ends as <span style="">the complete expression set</span> <span
+ style="font-family: arial; font-style: italic;">X</span><small
+ style="font-family: arial;"><sup>@</sup></small> = <span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span style="">in
+the limit (fixpoint)</span>, where <span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">atm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) is a set
+constant and <small style="color: rgb(0, 0, 255);"><span
+ style="font-weight: bold; font-family: courier new;">true</span></small>
+is the conjunction of the empty subset of the empty set. In
+co-recursive parallel, the arity function approximation sequence starts
+as the empty arity function #<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&nbsp;:&nbsp;<span
+ style="font-weight: bold; color: rgb(0, 0, 255);">&Oslash;</span>&nbsp;&#8594;&nbsp;<span
+ style="color: rgb(0, 0, 255);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) at step 0,
+the atomic arity function #<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">atm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;+&nbsp;<small
+ style="color: rgb(0, 0, 255);"><span
+ style="font-weight: bold; font-family: courier new;">true</span></small>&nbsp;&#8594;&nbsp;<span
+ style="color: rgb(0, 0, 255);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) at step 1
+where the arity of <span style=""><small style="color: rgb(0, 0, 255);"><span
+ style="font-weight: bold; font-family: courier new;">true</span></small></span>
+is empty, &#8230; , and ends as the complete expression arity function #<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">expr</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="color: rgb(0, 0, 255);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; color: rgb(0, 0, 255); font-weight: bold;">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) in the limit
+(fixpoint). The coproduct of these approximate arity functions is
+clearly increasing.
+</p>
+<h4>Example</h4>
+<div style="text-align: justify;">The classic case of an abstract
+datatype is the <i>stack</i> datatype.
+This can be used to guide us in specifying the abstract syntax for FOL
+languages. An axiomatization for stack goes as follows:
+</div>
+<ul>
+  <li>
+    <p>Since this is parametric, there is a name for the parameter type
+&#8216;<b><i>P</i></b>&#8217;. There is a name for the stack datatype &#8216;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)&#8217;.
+    </p>
+  </li>
+  <li>
+    <p>There is a collection of <i>synthetic</i>/<i>constructor</i>
+operators on stacks: </p>
+    <p style="margin-left: 40px;"> <i style="font-weight: bold;"><span
+ style="font-family: Arial;">empty</span></i>(<b><i>P</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)
+    </p>
+    <p style="margin-left: 40px;"> <i style="font-weight: bold;"><span
+ style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)<span
+ style="font-family: Symbol;"><span style="">:</span></span>&nbsp;<b><i>P</i></b>&#8201;&times;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)
+    </p>
+    <p style="text-align: justify;">where &#8216;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">empty</span></i>(<b><i>P</i></b>)&#8217;
+denotes the empty stack and &#8216;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)(<i>p</i>,&nbsp;<i>s</i>)&#8217;
+places the item <i>p</i>&nbsp;<small>&#8712;</small>&nbsp;<b><i>P</i></b> of
+type <b><i>P</i></b> onto the top of stack <i>s</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>).
+The stack data type is a recursive data type compactly axiomatized as
+the fixpoint solution</p>
+    <p style="margin-left: 40px;">&#945;&nbsp;:&nbsp;(<b>1</b>&nbsp;+&nbsp;<b><i>P</i></b>&#8201;&times;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>))&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)
+    </p>
+    <p>(bijection) of the simple linear fixpoint set equation </p>
+    <div style="margin-left: 40px;"> <b><span
+ style="font-family: Symbol;"><span style="">1</span></span></b>&nbsp;<span
+ style="font-family: Symbol;"><span style="">+</span></span>&nbsp;(<b><i>P</i></b>&#8201;&times;<i>X</i>)&nbsp;&#8773;&nbsp;<i>X</i></div>
+    <p>where the synthetic/constructor operators are unpacked from the
+fixpoint solution bijection &#945;. </p>
+  </li>
+  <li>
+    <div style="text-align: justify;">There is a collection of <i>analytic</i>/<i>selector</i>
+operators on stacks with the two subgroup clusters in one-one
+correspondence with the two synthetic/constructor operators (their
+inverse): </div>
+    <p style="margin-left: 40px;"> <i style="font-weight: bold;"><span
+ style="font-family: Arial;">is-empty</span></i>(<b><i>P</i></b>)&nbsp;&#8838;&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)</p>
+    <div style="margin-left: 40px;"><i style="font-weight: bold;"><span
+ style="font-family: Arial;">is-nonempty</span></i>(<b><i>P</i></b>)&nbsp;&#8838;&nbsp;<span
+ style="font-family: Arial; font-weight: bold; font-style: italic;">stk</span>(<b><i>P</i></b>)
+    <br>
+    <i style="font-weight: bold;"><span style="font-family: Arial;">top</span></i>(<b><i>P</i></b>)&nbsp;:&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)&nbsp;&#8594;&nbsp;<b><i>P</i></b>
+    <br>
+    <i style="font-weight: bold;"><span style="font-family: Arial;">pop</span></i>(<b><i>P</i></b>)&nbsp;<span
+ style="font-family: Symbol;"> <span style="">:</span></span>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)&nbsp;&#8594;&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)
+    </div>
+    <p style="text-align: justify;">where &#8216;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">is-empty</span></i>(<b><i>P</i></b>)(<i>s</i>)&#8217;
+is the Boolean test that returns true when the stack <i>s</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>)
+is empty and false otherwise, &#8216;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">is-nonempty</span></i>(<b><i>P</i></b>)(<i>s</i>)&#8217;
+is the complementary Boolean test, &#8216;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">top</span></i>(<b><i>P</i></b>)(<i>s</i>)&#8217;
+returns the &#8220;top&#8221; of stack <i>s</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>),
+and
+&#8216;<i style="font-weight: bold;"><span style="font-family: Arial;">pop</span></i>(<b><i>P</i></b>)(<i>s</i>)&#8217;
+returns the &#8220;rest&#8221; of stack <i>s</i>&nbsp;<small>&#8712;</small>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>).
+Since both top and pop are partial functions whose domain is the set of
+nonempty stacks, the correct analytic programming style is to test
+for nonempty stack before applying either of these functions. </p>
+  </li>
+  <li>
+    <p>These operators satisfy the defining stack abstract data
+type
+semantics:</p>
+    <p style="margin-left: 40px;"> <i style="font-weight: bold;"><span
+ style="font-family: Arial;">is-nonempty</span></i>(<b><i>P</i></b>)(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">empty</span></i>(<b><i>P</i></b>))
+    </p>
+    <p>which states that the empty stack is empty. </p>
+    <p style="margin-left: 40px;">&#8704;(<i>p</i>&nbsp;<span
+ style="font-family: Symbol;"><span style="">:</span></span>&nbsp;<b><i>P</i></b>,&nbsp;<i>s</i>&nbsp;:&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>))&nbsp;(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">is-nonempty</span></i>(<b><i>P</i></b>)(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)(<i>p</i>,&nbsp;<i>s</i>))&nbsp;&amp;&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">top</span></i>(<b><i>P</i></b>)(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)(<i>p</i>,&nbsp;<i>s</i>))
+= <i>p</i>&nbsp;&amp;&nbsp;<i style="font-weight: bold;"><span
+ style="font-family: Arial;">pop</span></i>(<b><i>P</i></b>)(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)(<i>p</i>,&nbsp;<i>s</i>))
+= <i>s</i>) </p>
+    <p>which states that the result of a push is a nonempty stack,
+whose top
+is the thing pushed and whose pop is the original stack. </p>
+    <p style="margin-left: 40px;">&#8704;(<i>s</i>&nbsp;<span
+ style="font-family: Symbol;"><span style="">:</span></span>&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">stk</span></i>(<b><i>P</i></b>))&nbsp;(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">is-nonempty</span></i>(<b><i>P</i></b>)(<i>s</i>)&nbsp;&#8658;&nbsp;(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">push</span></i>(<b><i>P</i></b>)(<i
+ style="font-weight: bold;"><span style="font-family: Arial;">top</span></i>(<b><i>P</i></b>)(<i>s</i>),&nbsp;<i
+ style="font-weight: bold;"><span style="font-family: Arial;">pop</span></i>(<b><i>P</i></b>)(<i>s</i>))
+= <i>s</i>)) </p>
+    <p>which states that every nonempty stack is constructible
+using the push
+operator from its top and pop.</p>
+  </li>
+</ul>
+<h3><a name="Monads"></a>Monads</h3>
+<p style="text-align: justify;">
+In universal algebra, the notion of a free algebra is associated with
+an endofunctor that assigns to any set the set of elements of the
+corresponding free algebra. This endofunctor comes equipped with two
+natural transformations that give it a "monoid"-like structure called a
+<span style="font-style: italic;">monad </span>&#8211; one natural
+transformation embeds a set (thought of as variables) as terms and the
+other natural transformation is the free interpretation or action on
+the given set.A free algebra <span style="font-style: italic;">monad</span>
+</p>
+<div style="margin-left: 40px;">
+<p>&#9001;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#951;</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#956;</span>&#9002;,</p>
+</div>
+<p>
+is a triple consisting of the following components:
+</p>
+<ul>
+  <li style="text-align: justify;">the monad <span
+ style="font-style: italic;">endofunctor</span> <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">Set</span> &#8594; <span
+ style="font-family: arial;">Set</span>, which maps a set <span
+ style="font-style: italic; font-weight: bold;">X</span>
+to the free algebra <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">X</span>) over <span
+ style="font-style: italic; font-weight: bold;">X</span>,</li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">unit </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#951;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial;">id</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">Set</span> &#8594; <span
+ style="font-family: arial;">Set</span>,
+whose source functor is the identity functor on <span
+ style="font-family: arial;">Set</span>, whose
+target functor is the monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">X</span><small><sup>th</sup></small>
+component is the embedding function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#951;</span>(<span
+ style="font-style: italic; font-weight: bold;">X</span>)&nbsp;: <span
+ style="font-style: italic; font-weight: bold;">X</span> &#8594; <span
+ style="font-style: italic; font-family: arial; font-weight: bold;">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">X</span>) that regards
+any variable to be an algebraic term, and<br>
+  </li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">multiplication </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#956;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span><span
+ style="font-weight: bold; color: rgb(102, 0, 0);">&nbsp;<span
+ style="color: rgb(0, 0, 0);">&#959;</span>&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>&nbsp;:
+    <span style="font-family: arial;">Set</span> &#8594; <span
+ style="font-family: arial;">Set</span>,
+whose source functor is the monad endofunctor composed with
+itself,
+whose target functor is the monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">X</span><small><sup>th</sup></small>
+component is the collapsing function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">&#956;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>))&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which
+collapses terms-of-terms to terms.</li>
+</ul>
+<p style="text-align: justify;">
+This association between free algebra constructions and monads can be
+abstracted and generalized &#8211; any adjunction gives a monad, which itself
+is an alternate but related adjunction. In fact, in this sense
+adjunctions, monads and their interconnections abstractly algebracize
+Galois connections, closure operators and their interconnections.<br>
+</p>
+<br>
+<hr
+ style="height: 2px; width: 100%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">The SUO-IFF documents contain
+many unicode characters, and so require a recent browser. But even some
+recent browsers fail to render SUO-IFF properly. You can test your
+browser <a href="http://plato.stanford.edu/symbols/entities.html">here</a>.
+</p>
+<p><a href="http://validator.w3.org/check/referer"><img border="0"
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ height="31" width="88"></a>
+</p>
+</body>
+</html>

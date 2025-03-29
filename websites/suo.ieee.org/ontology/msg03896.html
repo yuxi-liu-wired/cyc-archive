@@ -1,0 +1,208 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Re: Program Semantics -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Sun, 24 Mar 2002 15:04:34 &#45;0500 (EST) -->
+<!--X-Message-Id: 3C9E22DA.93C2B2DE@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3C9A1192.22DD8412@oakland.edu -->
+<!--X-Reference: 3C9A2371.D1AA284E@oakland.edu -->
+<!--X-Reference: 3C9A302C.96CB0AF4@oakland.edu -->
+<!--X-Reference: 3C9A42ED.41F9D149@oakland.edu -->
+<!--X-Reference: 3C9B4254.8998999A@oakland.edu -->
+<!--X-Reference: 3C9DFA95.5763A569@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg03896.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Re: Program Semantics</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg03895.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg03898.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd10.html#03896">Thread Index</A></Td>
+<TD><A HREF="msg03897.html">Date Prev</A></TD>
+<TD><A HREF="msg03895.html">Date Next</A>
+</TD>
+<TD><A HREF="mail13.html#03896">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Re: Program Semantics</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Arisbe &lt;<A HREF="mailto:arisbe@stderr.org">arisbe@stderr.org</A>&gt;, Gdsemiocom &lt;<A HREF="mailto:gdsemiocom@univ-perp.fr">gdsemiocom@univ-perp.fr</A>&gt;,       Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Re: Program Semantics</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</li>
+<li><em>Date</em>: Sun, 24 Mar 2002 14:02:50 -0500</li>
+<li><em>References</em>: &lt;<a href="msg03884.html">3C9A1192.22DD8412@oakland.edu</a>&gt; &lt;<a href="msg03885.html">3C9A2371.D1AA284E@oakland.edu</a>&gt; &lt;<a href="msg03886.html">3C9A302C.96CB0AF4@oakland.edu</a>&gt; &lt;<a href="msg03887.html">3C9A42ED.41F9D149@oakland.edu</a>&gt; &lt;<a href="msg03890.html">3C9B4254.8998999A@oakland.edu</a>&gt; &lt;<a href="msg03895.html">3C9DFA95.5763A569@oakland.edu</a>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+| Algebraic Approaches to Program Semantics
+|
+| Part 1.  Denotational Semantics of Control
+|
+| Chapter 1.  An Introduction to Denotational Semantics
+|
+|
+| 1.2.  A Simple Fragment of Pascal (cont.)
+|
+| We now turn to the details of how to associate a definite sequence of
+| states to a statement.  Here the description of Table 1 provides a guide.
+| (We substitute the more mathematical terms &quot;basis step&quot; for &quot;given outright&quot;
+| and &quot;inductive step&quot; for &quot;building rules&quot; from now on.)  We must first assign
+| appropriate values to expressions and tests (a process that depends on the state).
+|
+| 5.  The 'value' [!s!, E] of expression E in normal state !s!
+|     is defined inductively as follows.
+|
+|     Basis step.
+|
+|     If E is a numeral, [!s!, E] is the
+|     usual base-10 natural number value
+|     of E (with leading zeros ignored).
+|
+|     If E is an identifier, [!s!, E] = !s!(E).
+|
+|     Inductive step.
+|
+|     If either [!s!, D] = _|_ or [!s!, E] = _|_ then
+|
+|     [!s!, (D+E)] = [!s!, (D-E)] = [!s!, (D*E)] = [!s!, (D÷E)] = _|_.
+|
+|     Else
+|
+|     [!s!, (D + E)]  =  [!s!, D]  +  [!s!, E]
+|
+|     [!s!, (D - E)]  =  [!s!, D] -°- [!s!, E]
+|
+|     [!s!, (D * E)]  =  [!s!, D]  ·  [!s!, E]
+|
+|     [!s!, (D ÷ E)]  =  [!s!, D] div [!s!, E]
+|
+|     are the expected natural-number arithmetic operations
+|     so that x -°- y means the maximum of 0 and x - y, and
+|     x div y is the largest integer =&lt; y/x, that is, the
+|     unique integer q with y = qx + r, where the remainder
+|     r satisfies 0 =&lt; r &lt; x.
+|
+| (Here we have relied on the earlier-stated fact that there
+|  is only one way to decouple an expression;  if there were
+|  more than one way the above rules might assign values to
+|  expressions ambiguously.)
+|
+| To illustrate how (5) is used, suppose that !s!(a) = 3.  Then:
+|
+| [!s!, ((a + 5) * 2)]
+|
+| =  [!s!, (a + 5)] · [!s!, 2]
+|
+| =  ([!s!, a] + [!s!, 5]) · [!s!, 2]
+|
+| =  (3 + 5)(2)
+|
+| =  16
+|
+| Manes &amp; Arbib, AAPS, pages 7-8.
+|
+| Ernest G. Manes &amp; Michael A. Arbib,
+|'Algebraic Approaches to Program Semantics',
+| Springer-Verlag, New York, NY, 1986.
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="03898" href="msg03898.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="03884" href="msg03884.html">ONT Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03885" href="msg03885.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03886" href="msg03886.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03887" href="msg03887.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03890" href="msg03890.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03895" href="msg03895.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg03897.html">ONT Date: Sun, 24 Mar 2002 22:40:41 -0800</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg03895.html">ONT Re: Program Semantics</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg03895.html">ONT Re: Program Semantics</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03898.html">ONT Re: Program Semantics</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail13.html#03896"><strong>Date</strong></a></li>
+<li><a href="thrd10.html#03896"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,1514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>The IFF-FOL Heavyweight Grammar</title>
+  <meta name="author" content="Robert E. Kent">
+  <link rel="stylesheet" href="http://suo.ieee.org/IFF/Oldstyle"
+ type="text/css">
+</head>
+<body>
+<h2>A Grammar for IFF FOL Languages</h2>
+<p style="text-align: justify;">There are two approaches to the design
+of an IFF-FOL grammar, the categorical logic (CAT) approach and
+the assumed KIF approach (KIF). The CAT approach corresponds to the
+endomorphic or kernel aspect of the IFF-FOL, whereas the KIF approach
+corresponds to the exomorphic or shell aspect of the IFF-FOL. The CAT
+approach is oriented towards
+expression arity, where arity is an indicia (subset of variables);
+particularly substitution
+between expression arity fibers. Hence, it requires that all
+connectives (negations, conjunctions, disjunctions, implications and
+equivalences) operate on a fixed fiber. This means,
+for example, that all conjuncts must have the same arity. Because of
+this inflexibility, when variables are embedded as (elementary) terms,
+they must have an attached indicia that functions as the arity of the
+elementary term. The KIF approach is not so strongly oriented towards
+substitution and expression arity fibers. In fact, arity as indicia is
+not very explicit in traditional KIF (of course arity as natural number
+is explicit, but we use the term "valence" for this notion). Hence, the
+KIF approach
+is more flexible, in the sense that all connectives are unrestricted on
+argument arities. The arity of the result is the union of the set of
+argument arities. Because of this flexibility, variables can be
+embedded as terms using their singleton as an implicit arity.<br>
+</p>
+<p style="text-align: justify;">This document describes an <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/the-fol-distinction.html">extension</a>
+heavyweight CAT-grammar for the IFF-FOL. It is very rigorous and
+oriented towards <a
+ href="http://suo.ieee.org/IFF/references.html#Mathematical_and_Philosophical">categorical
+logic</a>, using lisp-like functions
+for synthetic/constructor operations.An associated <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html">document</a>
+describes a lightweight KIF-oriented grammar for the IFF-FOL. The
+syntax is presented in two parts. The first part called <span
+ style="font-style: italic;">lexical syntax</span> deals with the
+parsing of character streams into lexical items. The second part called
+<span style="font-style: italic;">grammatical syntax</span> is the
+logical syntax of the IFF-FOL kernel, which assumes that lexical items
+have been recognized by a lexical analyzer. The grammatical syntax is
+divided into two parts: a subgrammar for terms and (building upon
+terms) a subgrammar for expressions. The main difference between the
+light and heavy weight grammars appears in the subgrammar for terms.
+The following syntax is written using
+Extended Backus-Naur Form (EBNF), as specified by <a
+ href="http://www.cl.cam.ac.uk/%7Emgk25/iso-14977.pdf">International
+Standard ISO/IEC 14977</a>. Literal characters use quotes <span
+ style="font-family: arial black;">'</span>&#8230;<span
+ style="font-family: arial black;">'</span>, sequences of items are
+separated by commas &#8230;<span style="font-family: arial black;">,</span>&#8230;<span
+ style="font-family: arial black;">,</span>&#8230;, a
+vertical bar <span style="font-family: arial black;">|</span>
+indicates alternatives, braces <span style="font-family: arial black;">{</span>&#8230;<span
+ style="font-family: arial black;">}</span> indicate repetition,
+subtraction <span style="font-family: arial black;">&#8211;</span> indicates
+exceptions, brackets <span style="font-family: arial black;">[</span>&#8230;<span
+ style="font-family: arial black;">]</span> are used for optional
+items, and parentheses <span style="font-family: arial black;">(</span>&#8230;<span
+ style="font-family: arial black;">)</span> group items together.
+Productions are terminated with a semicolon <span
+ style="font-family: arial black;">;</span>.<br>
+</p>
+<h3><a name="Lexical_Syntax">Lexical Syntax</a></h3>
+<p><span style="font-style: italic;">Parentheses </span>are lexical
+tokens that denote pairs, tuples, and
+subsets. They are the only delimiter (grouping device) in the IFF-FOL
+syntax.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 175px; text-align: right;">
+      <a name="open">open</a></td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">(</span><span
+ style="font-family: arial black;">'</span> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="close">close</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; text-align: left;"><span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">)</span><span
+ style="font-family: arial black;">'</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">A <span style="font-style: italic;">character</span>
+is any other
+ASCII non-control character, which
+can all be used to form lexical tokens (with some restrictions based on
+the first character of the lexical token). This includes all the
+alphanumeric characters listed here in keyboard order, where the
+alphabetic characters are indicated by ellipses.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 800px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="nonzero-digit"></a>nonzero-digit<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">1</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">2</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">3</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">4</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">5</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">6</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">7</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">8</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">9</span><span
+ style="font-family: arial black;">'</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="digit">digit</a> </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 600px;"> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">0</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <a href="#nonzero-digit">nonzero-digit</a>
+      <span style="font-family: arial black;">;</span> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="char">char</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 600px;"><a href="#digit">digit</a>
+      <span style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">~</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">!</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">#</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">$</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">%</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">^</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">&amp;</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">*</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">_</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">+</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">{</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">}</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">|</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">:</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">"</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">&lt;</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">&gt;</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">?</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">`</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">-</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">=</span><span
+ style="font-family: arial black;">'</span><span
+ style="font-family: arial black;"> |</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">[</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">]</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">\</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">;</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">,</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">.</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">/</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">A</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> &#8230; <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">Z</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">a</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> &#8230; <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">z</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">The <span style="font-style: italic;">natural
+numbers</span> are the set of
+numbers {<span style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">0</span><span
+ style="font-family: arial black;">'</span>, <span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">1</span><span
+ style="font-family: arial black;">'</span>, &#8230;}.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="natural-number"></a>natural-number </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">0</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">(</span> <a href="#nonzero-digit">nonzero-digit</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">{</span> <a href="#digit">digit</a>
+      <span style="font-family: arial black;">}</span> <span
+ style="font-family: arial black;">)</span></td>
+    </tr>
+  </tbody>
+</table>
+<p>A <span style="font-style: italic;">reserved-word</span> is a
+lexical
+token that represents a logical symbol in the IFF-FOL and is used to
+indicate the syntactic structure of terms or expressions in the IFF-FOL
+languages. These must not be used
+as
+names.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 800px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="variable-word"></a>variable-word<br>
+      </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 600px;"><span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">variable</span></small><span
+ style="font-family: arial black;">'</span> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="term-word"></a>term-word<br>
+      </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 600px;"><span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">element</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">apply</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">singleton</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">identity</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">composite</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">empty</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">pairing</span></small><span
+ style="font-family: arial black;">'</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="expression-word"></a>expression-word<br>
+      </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span><br>
+      </td>
+      <td style="vertical-align: top; width: 600px;"><span
+ style="font-family: arial black;">'</span><span
+ style="font-family: courier new,courier,monospace;">=</span><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">holds</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">and</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">or</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">not</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">implies</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">iff</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">exists</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">forall</span></small><span
+ style="font-family: arial black;">'</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;">
+      <a name="reserved-word">reserved-word</a></td>
+      <td style="vertical-align: top; width: 25px; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td
+ style="vertical-align: top; font-family: times new roman,times,serif; width: 600px;"><a
+ href="#variable-word">variable-word</a> <span
+ style="font-family: arial black;">|</span> <a href="#term-word">term-word</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#expression-word">expression-word</a>
+      <span style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">iff:theory</span></small><span
+ style="font-family: arial black;">'</span> &nbsp;&nbsp; <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>A <span style="font-style: italic;">name </span>is a lexical token
+which is not reserved.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="character-sequence">character-sequence</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><span
+ style="font-family: arial black;">(</span> <a href="#char">char</a> <span
+ style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">{</span> <a href="#char">char</a> <span
+ style="font-family: arial black;">}</span> <span
+ style="font-family: arial black;">)</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="name">name</a></td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#character-sequence">character-sequence</a> <span
+ style="font-family: arial black;">&#8211;</span> <a href="#reserved-word">reserved-word</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">Non-logical symbols in the IFF-FOL
+include constants, variables, function symbols and relation symbols. An
+individual <span style="font-style: italic;">constant</span>
+represents a specific individual and corresponds
+to a proper noun in natural languages. A <span
+ style="font-style: italic;">variable </span>represents a
+specific, but unspecified (or arbitrary) individual and corresponds to
+a pronoun in natural languages. A <span style="font-style: italic;">function</span>
+symbol represents an operation or map, which has an input and an
+output. The input is provided by a list of <span
+ style="font-style: italic;">n</span> arguments, where <span
+ style="font-style: italic;">n</span> is called the <span
+ style="font-style: italic;">valence</span> of the function (the term <span
+ style="font-style: italic;">arity</span> is used for a difference, but
+related, notion in the IFF-FOL). A <span style="font-style: italic;">relation</span>
+or predicate symbol represents a class of individuals or a relationship
+among individuals and corresponds
+to a common noun in natural languages. For each natural number <span
+ style="font-style: italic;">n</span>, we introduce a set of <span
+ style="font-style: italic;">n</span>-place relation symbols (relation
+symbols of valence <span style="font-style: italic;">n</span>).
+Zero-place or nullary relation symbols are called "sentence symbols".
+They correspond to independent sentences whose internal structure does
+not matter. One-place or unary relation symbols correspond to
+linguistic items denoting properties, like "being human", "being loud",
+or "being a prime number". Two-place or binary relation symbols
+correspond to linguistic items denoting binary relations, such as "is a
+child of" or "is less than". Three-place or ternary relation symbols
+are less common directly. Examples include "<span
+ style="font-style: italic;">x</span> lies between <span
+ style="font-style: italic;">y</span> and <span
+ style="font-style: italic;">z</span>", etc. However, the IFF-FOL
+regards expressions as complex relation symbols, and the valence of
+expressions can be arbitrarily large. The two-place or binary equality
+or identity relation "<span
+ style="font-family: courier new,courier,monospace;">=</span>" is
+treated specially in the IFF-FOL &#8211; as a logical symbol. For simplicity,
+in some logical
+languages used for general discourse the only terms are constants and
+variables corresponding to proper nouns and pronouns. However, the
+logic languages used for a more mathematical discourse require the use
+of function symbols. These allow use of complex terms such as the
+constant terms "the wife of John Kerry" and "<small><span
+ style="font-family: courier new,courier,monospace;">8+3</span></small>",
+or terms containing variables, such as "<small><span
+ style="font-family: courier new,courier,monospace;">((x&times;2)&#8722;y)</span></small>"
+or "the brother of <span style="font-style: italic;">x</span>".
+Function symbols in logical languages allow greater expressiveness,
+but increase formal complexity. The IFF-FOL languages include
+function symbols, and constants are regarded in the IFF-FOL as function
+symbols of
+valence <small><span
+ style="font-family: courier new,courier,monospace;">0</span></small>.</p>
+<p>An IFF-FOL language (lexicon, signature or vocabulary) contains
+variables, function<span style="font-style: italic;"> </span>and
+relation<span style="font-style: italic;">
+</span>symbols. All three kinds of linguistic elements are names. We
+assume
+that the set of variables contains a denumerable set of
+<span style="font-style: italic;">canonical variables</span> generated
+from the natural numbers by using the reserved word
+'<small><span style="font-family: courier new,courier,monospace;">variable</span></small>'.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="canonical-variable"></a>canonical-variable<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span><br>
+      </td>
+      <td style="vertical-align: top;"><a href="#open">open</a> <span
+ style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">variable</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#natural-number">natural-number</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 175px; text-align: right;"><a
+ name="variable">variable</a></td>
+      <td style="vertical-align: top; width: 25px; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#canonical-variable">canonical-variable</a> <span
+ style="font-family: arial black;">|</span> <a href="#name">name</a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="function">function</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><a href="#name">name</a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="relation">relation</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><a href="#name">name</a></td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="Core_Grammatical_Syntax"></a>Core Grammatical Syntax</h3>
+<h4>Terms</h4>
+<p style="text-align: justify;">For both indicia and tuples, sets are
+used instead of
+sequences in the IFF-FOL axiomatics. Natural numbers and sequences have
+been carefully eliminated
+from the IFF-FOL for simplicity of the axiomatics. Implicit indicia and
+maps represent natural numbers and sequences used in surface syntax. An
+indicia-variable is a pair
+consisting of an indicia (the arity) and a variable. Indicia-variables
+represent variables as the simplest terms in the IFF-FOL. The indicia
+component is
+used to attach an arity to the variable. The semantics of
+indicia-variables is Cartesian product projection. In an
+indicia-variable, the variable is required to be a member of the
+indicia. Indicia-variables correspond to variable cases in the IFF-FOL
+axiomatics. The arity of an expression can be used to construct the
+arity of its included variables.<br>
+</p>
+<p style="text-align: justify;">An <span style="font-style: italic;">indicia
+</span>is a subset of
+variables. For both indicia and tuples, sets are used instead of
+sequences. Natural numbers and sequences have been carefully eliminated
+from the IFF-FOL kernel in order to recognize and axiomatize the true
+meaning of the logic. An additional module can be added for those who
+have the habit of using natural numbers and sequences. <br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="variable-subset"></a>variable-subset</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><span
+ style="font-family: arial black;">{</span> <a href="#variable">variable</a>
+      <span style="font-family: arial black;">}</span> <span
+ style="font-family: arial black;">;</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="indicia"></a>indicia </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#variable-subset">variable-subset</a> <span
+ style="font-family: arial black;">,</span> <a href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">An <span style="font-style: italic;">elementary
+term</span>
+is a pair consisting of a variable and an indicia (the arity of the
+variable). Elementary terms represent variables as the simplest terms.
+The elementary term is used to attach an arity to the variable. The
+semantics of elementary terms is Cartesian product projection. In an
+elementary term, the variable is required to be a member of the indicia.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="elementary-term"></a>elementary-term </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">element</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#variable">variable</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#indicia">indicia</a> <span style="font-family: arial black;">,</span>
+      <a href="#close">close</a> <span
+ style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p>Function symbols can be "applied" to tuples to form <span
+ style="font-style: italic;">composite terms</span>. This is an
+elementary form of substitution. A function symbol
+can be applied to tuple of terms, and a composite term formed, when the
+arity of the function
+symbol is the same as the index of the tuple. <br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="composite-term"></a>composite-term </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">apply</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#function">function</a>
+      <span style="font-family: arial black;">,</span> <a href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;"><span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">A <i>term</i>
+is either an elementary term or a
+composite term. Nothing else is a term. This qualification is ensured
+practically and theoretically. Practically it is ensured by the
+abstract syntax
+of terms; in particular, the axioms that assert the inverse-ness
+between the
+synthetic/constructor term operations and the analytic/selector term
+operations.
+Theoretically, it is ensured by the term fixpoint semantics.</span></p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="term"></a>term </td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#elementary-term">elementary-term</a> <span
+ style="font-family: arial black;">|</span> <a href="#composite-term">composite-term</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">A tuple is a map from an indicia, its
+index, to the set of terms of a particular arity, its arity. Both terms
+and atomic expressions use the notion of a tuple of terms, which
+represents a vector of arguments to a function or relation,
+respectively. There are operations in the IFF-FOL axiomatics for
+describing several ways to construct tuples: either from single term,
+or as the identity tuple for a particular index and arity, or from a
+composable pair of tuples, or as the empty tuple for a particular
+arity, or from a tuplable pair of tuples.</p>
+<p style="text-align: justify;">Terms are tuples. An indexed-term is a
+pair consisting of a variable and a term. There are no constraints
+between the variable component and the term component. An indexed-term
+becomes a <span style="font-style: italic;">singleton</span>
+tuple, whose index is the singleton of the variable component of the
+indexed-term and whose arity is the arity of the term component of the
+indexed-term.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="singleton-tuple"></a>singleton-tuple</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">singleton</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#variable">variable</a>
+      <span style="font-family: arial black;">,</span> <a href="#term">term</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">For any indicia, there is an <span
+ style="font-style: italic;">identity </span>tuple
+with both index and arity equal to that
+indicia. A pair of
+tuples is composable when the arity of the first is equal to the index
+of the second.
+Any composable pair defines a <span style="font-style: italic;">composite
+</span>tuple, whose index is the index of the first and whose arity is
+the arity of the second.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="identity-tuple"></a>identity-tuple</td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><a href="#open">open</a> <span
+ style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">identity</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#indicia">indicia</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 175px; text-align: right;">
+      <a name="composite-tuple"></a>composite-tuple<br>
+      </td>
+      <td style="vertical-align: top; width: 25px; text-align: center;"><span
+ style="font-family: arial black;">=</span><br>
+      </td>
+      <td style="vertical-align: top; width: 500px;"> <a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">composite</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">For any indicia, there is an <span
+ style="font-style: italic;">empty
+</span>tuple
+with empty index and with arity equal to that
+indicia. A pair of
+tuples is tuplable when they share a common arity.
+Any tuplable pair defines a <span style="font-style: italic;">pairing
+</span>tuple, whose index is (in one-one correspondence with) the
+disjoint
+union of indices and whose arity is the common arity.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><a
+ name="empty-tuple"></a>empty-tuple</td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><a href="#open">open</a> <span
+ style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">empty</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#indicia">indicia</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 175px; text-align: right;"><a
+ name="pairing-tuple"></a>pairing-tuple<br>
+      </td>
+      <td style="vertical-align: top; width: 25px; text-align: center;"><span
+ style="font-family: arial black;">=</span><br>
+      </td>
+      <td style="vertical-align: top; width: 500px;"> <a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">pairing</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a href="#close">close</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>A <span style="font-style: italic;">tuple </span>is either a
+singleton tuple, an identity tuple, a
+composite tuple, an empty tuple, or pairing tuple.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 900px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="tuple"></a>tuple</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 700px;"><a
+ href="#singleton-tuple">singleton-tuple</a> <span
+ style="font-family: arial black;">|</span> <a href="#identity-tuple">identity-tuple</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#composite-tuple">composite-tuple</a> <span
+ style="font-family: arial black;">|</span> <a href="#empty-tuple">empty-tuple</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#pairing-tuple">pairing-tuple</a> <span
+ style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<h4>Expressions</h4>
+<p style="text-align: justify;">An expression or formula is a
+linguistic item that represents a
+logical proposition and corresponds to a declarative sentence in
+natural language. An <span style="font-style: italic;">equation</span>
+or equational expression is used to assert the equality of two terms.
+The two terms involved must have the
+same arity.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="equation">equation</a></td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span>=<span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#term">term</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#term">term</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">An <span style="font-style: italic;">atom</span>
+or atomic-expression asserts that a relation "holds" for a tuple of
+terms. Hence, an atom consists of two components, a relation symbol and
+a tuple, where the arity of the relation symbol is equal to the index
+of the tuple. Relations can be embedded as atoms with the identity
+tuple.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="atom"></a>atom</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">holds</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a
+ href="#relation">relation</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#tuple">tuple</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">A <span style="font-style: italic;">conjunction</span>
+is a subset of expressions labeled by the conjunction symbol. The
+conjunction of any subset of expressions is a conjunctive expression. A
+<span style="font-style: italic;">disjunction</span> is a subset of
+expressions labeled by the disjunction symbol. The disjunction of any
+subset of expressions is a disjunctive expression. In the base IFF-FOL
+axiomatics, conjunctions and disjunction can be applied to subsets of
+expressions with non-matching arities. In an extension IFF-FOL
+axiomatics, conjunctions and disjunction are restricted to subsets of
+expressions with common arity.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="expression-subset">expression-subset</a></td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><span
+ style="font-family: arial black;">{</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression">expression</a>
+      <span style="font-family: arial black;">}</span> <span
+ style="font-family: arial black;">;</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 150px;"><a
+ name="conjunction-disjunction"></a>conjunction-disjunction</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#open">open</a>
+      <span style="font-family: arial black;">, (</span> <span
+ style="font-family: arial black;">'</span><small
+ style="font-family: courier new,courier,monospace;">and</small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">or</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">)</span> <span
+ style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression-subset">expression-subset</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p>A <span style="font-style: italic;">negation</span> is an
+expression labeled by the negation symbol. The negation of any
+expression is a negative expression.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="negation">negation</a></td>
+      <td style="vertical-align: top; text-align: center; width: 25px;">
+      <span style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small
+ style="font-family: courier new,courier,monospace;">not</small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression">expression</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">An <span style="font-style: italic;">implication
+</span>is a pair of expressions labeled by the implication symbol. The
+implication of any pair of expressions is an implicative expression. An
+<span style="font-style: italic;">equivalence</span> is a pair of
+expressions labeled by the equivalence symbol. The equivalence of any
+pair of expressions is an equivalence expression.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="expression-pair"></a>expression-pair</td>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression">expression</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression">expression</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 150px;"><a
+ name="implication-equivalence"></a>implication-equivalence</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#open">open</a>
+      <span style="font-family: arial black;">, (</span> <span
+ style="font-family: arial black;">'</span><small
+ style="font-family: courier new,courier,monospace;">implies</small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">iff</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">)</span> <span
+ style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#expression-pair">expression-pair</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">A (<span style="font-style: italic;">existential</span>)
+<span style="font-style: italic;">quantification </span> or a
+(existentially)
+quantified expression is an
+expression-case labeled
+with the (existential) quantification symbol. A (<span
+ style="font-style: italic;">universal</span>) <span
+ style="font-style: italic;">quantification</span> or an
+(universally) quantified expression is an expression-case
+labeled with the (universal) quantification symbol. An expression-case
+is a
+pair
+consisting of a variable and expression. In an expression-case, the
+variable is required
+to be a member of the arity of the expression. Structurally,
+it would have been better to place the closing parenthesis after the
+expression; but we have switched these two
+items in order to be closer to traditional KIF.<br>
+</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="expression-case"></a>expression-case</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#variable">variable</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#close">close</a>
+      <span style="font-family: arial black;">,</span> <a
+ href="#expression">expression</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="quantification"></a>quantification</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a
+ href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">(</span> <span
+ style="font-family: arial black;">'</span><small
+ style="font-family: courier new,courier,monospace;">exists</small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">|</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">forall</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">)</span> <span
+ style="font-family: arial black;">,</span> <a href="#expression-case">expression-case</a>
+      <span style="font-family: arial black;">, </span><a
+ href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">An <span style="font-style: italic;">expression</span>
+is either an equation, an atom, a conjunction, a disjunction, a
+negation, an
+implication, an equivalence, an (existential) quantification, or a
+(universal) quantification. Nothing else is an expression. This
+qualification is ensured practically and theoretically. Practically it
+is ensured by the abstract syntax of expressions; in particular, the
+axioms that assert the inverse-ness between the synthetic/constructor
+expression operations and the analytic/selector expression operations.
+Theoretically, it is ensured by the expression fixpoint semantics.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 850px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="expression">expression</a></td>
+      <td style="vertical-align: top; text-align: center; width: 25px;"><span
+ style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 650px;"><a
+ href="#equation">equation</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#atom">atom</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#conjunction-disjunction">conjunction-disjunction</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#negation">negation</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#implication-equivalence">implication-equivalence</a>
+      <span style="font-family: arial black;">|</span> <a
+ href="#quantification">quantification</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<p>An <span style="font-style: italic;">IFF theory</span> is a named
+subset of expressions.</p>
+<table cellpadding="3" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: right; width: 175px;"><a
+ name="theory"></a>theory</td>
+      <td style="vertical-align: top; text-align: center; width: 25px;">
+      <span style="font-family: arial black;">=</span></td>
+      <td style="vertical-align: top; width: 500px;"><a href="#open">open</a>
+      <span style="font-family: arial black;">,</span> <span
+ style="font-family: arial black;">'</span><small><span
+ style="font-family: courier new,courier,monospace;">iff:theory</span></small><span
+ style="font-family: arial black;">'</span> <span
+ style="font-family: arial black;">,</span> <a href="#name">name</a> <span
+ style="font-family: arial black;">,</span> <a
+ href="#expression-subset">expression-subset</a> <span
+ style="font-family: arial black;">,</span> <a href="#close">close</a>
+      <span style="font-family: arial black;">;</span></td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="Example">Example</a></h3>
+<p style="text-align: justify;">
+The same logical expression can be rendered in a variety of different
+syntactic external surface forms: connectives can be written as infix,
+postfix or prefix, groupings indicated by brackets, groups of dots or
+graphically by enclosing circles, etc. For example, consider the
+simple logical expression "all boys have been kissed by some girls"
+taken from the SCL standard. This can be written in the following
+surface forms. The IFF-FOL KIF grammar core form is almost identical
+to the SCL core form (they differ in their kernel forms by a quantifier
+exchange, since they use different quantifiers as primitive). The
+IFF-FOL KIF grammar kernel form is close to the
+existential graph form, since they both use the same primitive
+operations: conjunction (implicit in EGs), negation and existential
+quantification. The parentheses in the EG form indicate a contour of
+negation. Conjunctions and existential quantifications are implicit in
+EGs.<br>
+</p>
+<p><span style="font-weight: bold;">[Traditional logical form:]</span></p>
+<pre>(&#8704;x)(Boy(x) &#8594; (&#8707;y)(Girl(y) &amp; Kissed(x, y)))</pre>
+<p><span style="font-weight: bold;">[<a
+ href="http://users.bestweb.net/%7Esowa/cg/cgstandw.htm">Conceptual
+Graph interchange form:</a>]</span></p>
+<pre>[@every *x] <br>    [If: (Boy ?x) <br>         [Then: [*y] <br>             (Girl ?y) (Kissed ?x ?y) ]]</pre>
+<p><span style="font-weight: bold;">[<a href="http://cl.tamu.edu/">SCL
+core form:</a>]</span></p>
+<pre>(forall (x) <br>    (implies (Boy x) <br>             (exists (y) <br>                 (and (Girl y) (Kissed x y)))))</pre>
+<p><span style="font-weight: bold;">[<a href="http://cl.tamu.edu/">SCL
+kernel form:</a>]</span></p>
+<pre>(forall (x) <br>    (not (and (Boy x) <br>              (forall (y) <br>                  (not (and (Girl y) (Kissed x y)))))))</pre>
+<p><span style="font-weight: bold;">[IFF-FOL
+</span><span style="font-weight: bold;">CAT grammar core</span><span
+ style="font-weight: bold;">
+form:]</span></p>
+<pre>(forall (x)<br>    (implies (holds Boy (singleton (variable 0) (element x (x))))<br>             (exists (y) <br>                 (and (holds Girl (singleton (variable 0) (element y (y)))) <br>                      (holds Kissed (pairing (singleton (variable 0) (element x (x y)))<br>                                             (singleton (variable 1) (element y (x y)))))))))<br></pre>
+<p><span style="font-weight: bold;">[IFF-FOL
+CAT</span><span style="font-weight: bold;"> grammar kernel</span><span
+ style="font-weight: bold;">
+form:]</span></p>
+<pre>(not (exists (x)<br>         (and (holds Boy (singleton (variable 0) (element x (x))))<br>&nbsp;             (not (exists (y) <br>                       (and (holds Girl (singleton (variable 0) (element y (y)))) <br>                            (holds Kissed (pairing (singleton (variable 0) (element x (x y)))<br>                                                   (singleton (variable 1) (element y (x y)))))))))))<br></pre>
+<p><span style="font-weight: bold;">[IFF-FOL
+</span><span style="font-weight: bold;">KIF grammar core</span><span
+ style="font-weight: bold;">
+form:]</span></p>
+<pre>(forall (x)<br>    (implies Boy(x)<br>             (exists (y) <br>                 (and Girl(y) Kissed(x y)))))</pre>
+<p><span style="font-weight: bold;">[IFF-FOL
+</span><span style="font-weight: bold;">KIF grammar kernel</span><span
+ style="font-weight: bold;">
+form:]</span></p>
+<pre>(not (exists (x)<br>         (and Boy(x)<br>              (not (exists (y) <br>                       (and Girl(y) Kissed(x y)))))))</pre>
+<p><span style="font-weight: bold;">[<a
+ href="http://www.clas.ufl.edu/users/jzeman/">Existential Graph form:</a>]</span></p>
+<pre>( Boy[x] <br>    ( Girl[y] Kissed[x y] ) )</pre>
+<p style="text-align: justify;">Arity is one of the notions that
+separate the lightweight version of the IFF-FOL grammar from the
+heavyweight version. The arity of any basic linguistic element
+(function symbol, relation symbol, term or tuple) is the indicia
+(variable subset) of <i>n</i> free variables that serve as the
+locations or indices for the arguments of that element, where <i>n</i>
+is its valence. We have demonstrated that arity be defined and
+constructed in the lightweight version of the IFF-FOL grammar. We
+expect it to be constructible in the heavyweight version of the IFF-FOL
+grammar, since that is one of the core concepts of the IFF-FOL, and the
+purpose of the heavyweight version is to make these concepts explicit.
+To demonstrate, let us analyze and construct the arity for the IFF-FOL
+KIF grammar kernel form. A term is either elementary or composite. The
+arity of an elementary term is its indicia component. The arity of a
+composite term is the arity of its tuple component. A tuple is a
+singleton tuple, an identity tuple, a composite tuple, an empty tuple
+or a pairing tuple. The arity of a singleton tuple is the arity of its
+component term. The arity of an identity tuple is its indicia. The
+arity of a composite tuple is the arity of its second tuple component.
+The arity of an empty tuple is its indicia. The arity of a pairing
+tuple is the common arity of its two component tuples. An expression is
+an equation, an atom, a conjunction, a negation or an (existential)
+quantification. The arity of an atom is the arity of its tuple
+component. The arity of a conjunction is the union of the arities of
+the conjunct expressions (this changes to the common arity in the pure
+categorical logic extension of the IFF-FOL). The arity of a negation is
+the arity of the expression being negated. Quantification subtracts the
+quantified variable from the arity of the expression being quantified.
+Here is the arity construction. Let <span
+ style="font-family: courier new,courier,monospace;">v</span><span
+ style="font-style: italic;"><sub>n</sub></span> = <small><span
+ style="font-family: courier new,courier,monospace;">(variable <span
+ style="font-family: times new roman,times,serif; font-style: italic;">n</span>)</span></small>.<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 350px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: center;"
+ rowspan="1" colspan="3"><span
+ style="font-family: arial; font-weight: bold; text-decoration: underline;">Tuple
+or Expression</span> </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; text-align: center; text-decoration: underline; width: 100px;">Arity<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><span
+ style="font-style: italic;">t</span><small><sub>2</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(element
+y (y))</small></td>
+      <td
+ style="vertical-align: top; width: 100px; font-family: courier new,courier,monospace; text-align: center;"><small>{y}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#964;<small><sub>2</sub></small><br>
+      </td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(singleton
+      </small><span style="font-family: courier new,courier,monospace;">v</span><small><sub>0</sub></small><small>
+      </small><span
+ style="font-style: italic; font-family: times new roman,times,serif;">t</span><small><sub>2</sub></small><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{y}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#961;<small><sub>1</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(holds
+Girl </small><span style="font-family: times new roman,times,serif;">&#964;</span><small><sub>2</sub></small><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{y}</small><small>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><span
+ style="font-style: italic;">t</span><small><sub>3</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(element
+x (x y))</small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; text-align: center;"><small>{x,
+y}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;">&#964;<small><sub>3</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(singleton
+      </small><span style="font-family: courier new,courier,monospace;">v</span><small><sub>0</sub></small><small>
+      </small><span
+ style="font-style: italic; font-family: times new roman,times,serif;">t</span><small><sub>3</sub></small><small>)</small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; text-align: center;"><small>{x,
+y}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><span
+ style="font-style: italic;">t</span><small><sub>4</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(element
+y (x y))</small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; text-align: center;"><small>{x,
+y}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;">&#964;<small><sub>4</sub></small><br>
+      </td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(singleton
+      </small><span style="font-family: courier new,courier,monospace;">v</span><small><sub>1</sub></small><small>
+      </small><span
+ style="font-style: italic; font-family: times new roman,times,serif;">t</span><small><sub>4</sub></small><small>)</small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; text-align: center;"><small>{x,
+y}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#964;<small><sub>5</sub></small><br>
+      </td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(pairing
+      </small><span style="font-family: times new roman,times,serif;">&#964;</span><small><sub>3</sub></small><small>
+      </small><span style="font-family: times new roman,times,serif;">&#964;</span><small><sub>4</sub></small><small>)</small><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x,
+y}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#961;<small><sub>2</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(holds
+Kissed </small><span style="font-family: times new roman,times,serif;">&#964;</span><small><sub>5</sub></small><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x,
+y}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#952;</td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(and
+      </small><span style="font-family: times new roman,times,serif;">&#961;</span><small><sub>1</sub></small><small>
+      </small><span style="font-family: times new roman,times,serif;">&#961;</span><small><sub>2</sub></small><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x,
+y}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#968;</td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(exists
+(y) </small><span style="font-family: times new roman,times,serif;">&#952;</span><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#963;<small><sub>2</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(not
+      </small><span style="font-family: times new roman,times,serif;">&#968;</span><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right;"><span
+ style="font-style: italic;">t</span><small><sub>1</sub></small><br>
+      </td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td style="vertical-align: top; width: 170px; text-align: left;"><small><span
+ style="font-family: courier new,courier,monospace;">(element x (x))</span></small></td>
+      <td
+ style="vertical-align: top; width: 100px; font-family: courier new,courier,monospace; text-align: center;"><small>{</small><small>x</small><small>}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#964;<small><sub>1</sub></small><br>
+      </td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small><span
+ style="font-family: courier new,courier,monospace;">(singleton </span></small><span
+ style="font-family: courier new,courier,monospace;">v</span><small><sub>0</sub></small><small><span
+ style="font-family: courier new,courier,monospace;"> </span></small><span
+ style="font-style: italic;">t</span><small><sub>1</sub></small><small><span
+ style="font-family: courier new,courier,monospace;">)</span></small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x</small><small>}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#963;<small><sub>1</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td style="vertical-align: top; width: 170px; text-align: left;"><small><span
+ style="font-family: courier new,courier,monospace;">(holds Boy </span></small>&#964;<small><sub>1</sub></small><small><span
+ style="font-family: courier new,courier,monospace;">)</span></small><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#966;<small><sub>2</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td style="vertical-align: top; width: 170px; text-align: left;"><small><span
+ style="font-family: courier new,courier,monospace;">(and </span></small><span
+ style="font-family: times new roman,times,serif;">&#963;</span><small><sub>1</sub></small><small><span
+ style="font-family: courier new,courier,monospace;"> </span></small><span
+ style="font-family: times new roman,times,serif;">&#963;</span><small><sub>2</sub></small><small><span
+ style="font-family: courier new,courier,monospace;">)</span></small><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{x}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#966;<small><sub>1</sub></small></td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td style="vertical-align: top; width: 170px; text-align: left;"><small><span
+ style="font-family: courier new,courier,monospace;">(exists (x) </span></small><span
+ style="font-family: times new roman,times,serif;">&#966;</span><small><sub>2</sub></small><small><span
+ style="font-family: courier new,courier,monospace;">)</span></small><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{}<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 50px; text-align: right;">&#966;</td>
+      <td style="vertical-align: top; width: 30px; text-align: center;">=</td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 170px; text-align: left;"><small>(not
+      </small><span style="font-family: times new roman,times,serif;">&#966;</span><small><sub>1</sub></small><small>)<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new,courier,monospace; width: 100px; text-align: center;"><small>{}</small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<hr
+ style="height: 2px; width: 100%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">The SUO-IFF documents contain many
+unicode characters, and so require a recent browser. But even some
+recent browsers fail to render SUO-IFF properly. You can test your
+browser <a href="http://plato.stanford.edu/symbols/entities.html">here</a>.</p>
+<p><a href="http://validator.w3.org/check/referer"><img border="0"
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ height="31" width="88"></a></p>
+</body>
+</html>

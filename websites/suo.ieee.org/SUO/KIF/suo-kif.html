@@ -1,0 +1,880 @@
+<HTML>
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Win">
+  <TITLE>Knowledge Interchange Format SUO-KIF</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<HR ALIGN=LEFT>
+
+<P><CENTER>&nbsp;</CENTER></P>
+
+<H1><CENTER>Standard Upper Ontology Knowledge Interchange Format</CENTER></H1>
+
+<P>Note: As with all other versions of KIF as of April 2003, this
+is a work in progress on a proposal with no official standards
+status.<BR>
+<HR ALIGN=LEFT></P>
+
+<H2><A NAME="Scope"></A>1 Scope</H2>
+
+<P>Knowledge Interchange Format (KIF) is a language designed for
+use in the interchange of knowledge among disparate computer systems
+(created by different programmers, at different times, in different
+languages, and so forth).</P>
+
+<P>KIF is not intended as an internal representation for knowledge
+within computer systems or within closely related sets of computer
+systems (though the language can be used for this purpose as well).
+Typically, when a computer system reads a knowledge base in KIF,
+it converts the data into its own internal form (specialized pointer
+structures, arrays, etc.). All computation is done using these
+internal forms. When the computer system needs to communicate
+with another computer system, it maps its internal data structures
+into KIF.</P>
+
+<P>The following categorical features are essential to the design
+of KIF.</P>
+
+<OL>
+  <LI>The language has declarative semantics. It is possible to
+  understand the meaning of expressions in the language without
+  appeal to an interpreter for manipulating those expressions.
+  In this way, KIF differs from other languages that are based
+  on specific interpreters, such as Emycin and Prolog.
+  <LI>The language is logically comprehensive -- at its most general,
+  it provides for the expression of arbitrary logical sentences.
+  In this way, it differs from relational database languages (like
+  SQL) and logic programming languages (like Prolog).
+  <LI>The language provides for the representation of knowledge
+  about knowledge. This allows the user to make knowledge representation
+  decisions explicit and permits the user to introduce new knowledge
+  representation constructs without changing the language.
+  <P>&nbsp;
+</OL>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Normative"></A>2 Normative References</H2>
+
+<P>The following normative documents contain provisions, which,
+through reference in this text, constitute provisions of this
+document. For dated references, subsequent amendments to, or revisions
+of, any of these publications do not apply. However, parties to
+agreements based on this document are encouraged to investigate
+the possibility of applying the most recent editions of the normative
+documents indicated below. Members of ISO and IEC maintain registers
+of currently valid International Standards. ANSI maintains a register
+of currently valid American National Standards.</P>
+
+<P>ISO/IEC 10646-1:1993, <I>Information Technology (IT) - Universal
+Multiple-Octet Coded Character Set (UCS)</I>.</P>
+
+<P>ISO/IEC 14481:1998, <I>Information Technology (IT) - Conceptual
+Schema Modeling Facilities (CSMF)</I>.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Terms"></A>3 Terms and Definitions</H2>
+
+<P>For the purpose of this document, the terms and definitions
+given in ISO/IEC 10646-1:1993 and ISO/IEC 14481:1998 apply.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Syntax"></A>4 Syntax</H2>
+
+<H4><A NAME="4.1"></A>4.1 Introduction</H4>
+
+<P>As with many computer-oriented languages, the syntax of KIF
+is most easily described in three layers. First, there are the
+basic <I>characters</I> of the language. These characters can
+be combined to form <I>lexemes</I>. Finally, the lexemes of the
+language can be combined to form grammatically legal <I>expressions</I>.
+Although this layering is not strictly esential to the specification
+of KIF, it simplifies the description of the syntax by dealing
+with white space at the lexeme level and eliminating that detail
+from the expression level.</P>
+
+<P>The notation <B><TT>nonterminal*</TT></B> means zero or more
+occurrences; <B><TT>nonterminal+</TT></B> means one or more occurrences;
+The nonterminals <B><TT>space</TT></B>, <B><TT>tab</TT></B>, <B><TT>return</TT></B><TT>,</TT>
+<B><TT>linefeed</TT></B>, and <B><TT>page</TT></B> refer to the
+characters corresponding to ascii codes 32, 9, 13, 10, and 12,
+respectively. The nonterminal <B><TT>character</TT></B> denotes
+the set of all 128 ascii characters.</P>
+
+<H4><A NAME="4.2"></A>4.2 Characters</H4>
+
+<P>The alphabet of KIF consists of 7 bit blocks of data. In this
+document, we refer to KIF data blocks via their usual ASCII encodings
+as characters (as given in ISO 646:1983).</P>
+
+<P>KIF characters are classified as upper case letters, lower
+case letters, digits, alpha characters (non-alphabetic characters
+that are used in the same way that letters are used), white space,
+and other characters (every ascii character that is not in one
+of the other categories). Initial characters which are the first
+character of a term, must be alphabetic. Constants and variables
+consist of an initial alphabetic character plus a sequence of
+alphabetic, numeric or dash characters.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    upper ::= A | B | C | D | E | F | G | H | I | J | K | L | M | 
+              N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+
+    lower ::= a | b | c | d | e | f | g | h | i | j | k | l | m | 
+              n | o | p | q | r | s | t | u | v | w | x | y | z
+
+    digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+    special ::= ! | $ | % | & | * | + | - | . | / | &lt; | = | &gt; | ? |
+              @ | _ | ~ |
+
+    white ::= space | tab | return | linefeed | page
+
+    initialchar ::= upper | lower
+
+    wordchar ::= upper | lower | digit | - | _ | special
+
+    character ::= upper | lower | digit | special | white</PRE>
+
+<P>Use of characters in &quot;special&quot; for word characters
+is discouraged as they may be given particular meaning in future
+versions of the standard or its extensions.</P>
+
+<H4><A NAME="4.3"></A>4.3 Lexemes</H4>
+
+<P>The process of converting characters into lexemes in called
+<I>lexical analysis</I>. The input to this process is a stream
+of characters, and the output is a stream of <I>lexemes</I>.</P>
+
+<P>The function of a lexical analyzer is cyclic. It reads characters
+from the input string until it encounters a character that cannot
+be combined with previous characters to form a legal lexeme. When
+this happens, it outputs the lexeme corresponding to the previously
+read characters. It then starts the process over again with the
+new character. Whitespace causes a break in the lexical analysis
+process but otherwise is discarded.</P>
+
+<P>A <I>character string</I> is a series of characters enclosed
+in quotation marks. The escape character <TT>\</TT> is used to
+permit the inclusion of quotation marks and the <TT>\</TT> character
+itself within such strings.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+   string ::= &quot;character*&quot;</PRE>
+
+<P>For the purpose of grammatical analysis, it is useful to subdivide
+the class of words a little further, viz. as variables, operators,
+and constants.</P>
+
+<P>A <I>constant</I> is a letter or digit followed by any number
+of other legal word characters.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    word ::= initialchar wordchar*</PRE>
+
+<P>A <I>variable</I> is a word in which the first character is
+<TT>?</TT> or <TT>@</TT>. A variable with a '@' character is called
+&quot;row variable&quot; or &quot;sequence variable&quot;. It
+holds a variable number of arguments. While the unbounded implementation
+of this makes KIF technically an &quot;infinitary logic&quot;,
+with associated issues in efficient implementation, a bounded
+interpretation does force KIF out of first order. See Appendix
+C for further information.</P>
+
+<PRE>
+    variable ::= ?word | @word</PRE>
+
+<P>Semantically, there are four categories of constants in KIF
+-- object constants, function constants, relation constants, and
+logical constants. <I>Object constants</I> are used to denote
+individual objects. <I>Function constants</I> denote functions
+on those objects. <I>Relation constants</I> denote relations.
+<I>Logical constants</I> express conditions about the world and
+are either true or false. KIF is unusual among logical languages
+in that there is no syntactic distinction among these four types
+of constants; any constant can be used where any other constant
+can be used. The differences between these categories of constants
+is entirely semantic.</P>
+
+<P>&nbsp;</P>
+
+<H4><A NAME="4.4"></A>4.4 Expressions</H4>
+
+<P>The legal expressions of KIF are formed from lexemes according
+to the rules presented in this section. Terms are used to denote
+objects in the world being described; sentences are used to express
+facts about the world. Sentences can be used as terms, allowing
+higher-order expressions to be written. A <I>knowledge base</I>
+is a finite set of sentences.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    number ::= [-] digit+ [. digit+] [exponent]
+    exponent ::= e [-] digit+</PRE>
+
+<P>There are several types of terms in KIF -- variables, constants,
+character strings, and functional terms, as well as sentences
+themselves.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    term ::= variable | word | string | funterm | number | sentence</PRE>
+
+<P>A <I>functional term</I> consists of a constant and an arbitrary
+number of <I>argument</I> terms surrounded by matching parentheses.
+Note that there is no syntactic restriction on the number of argument
+terms; arity restrictions in KIF are treated semantically.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    relword ::= initialchar wordchar*
+    funword ::= initialchar wordchar*</PRE>
+
+<P>No &quot;relword&quot; and &quot;funword&quot; shall have the
+same character sequence in a particular knowledge base.</P>
+
+<PRE>
+    funterm ::= (funword term+)</PRE>
+
+<P>The following BNF defines the set of legal sentences in KIF.
+There are six types of sentences. We have already mentioned logical
+constants.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+     sentence ::= word | equation | relsent | logsent | quantsent</PRE>
+
+<P>An <I>equation</I> consists of the <TT>=</TT> operator and
+two terms.</P>
+
+<PRE>
+    equation ::= (= term term)</PRE>
+
+<P>An <I>implicit relational sentence</I> consists of a constant
+and an arbitrary number of <I>argument</I> terms. As with functional
+terms, there is no syntactic restriction on the number of argument
+terms in a relation sentence.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    relsent ::= (relword term+)</PRE>
+
+<P>The syntax of <I>logical sentences</I> depends on the logical
+operator involved. A sentence involving the <TT>not</TT> operator
+is called a <I>negation</I>. A sentence involving the <TT>and</TT>
+operator is called a <I>conjunction</I>, and the arguments are
+called <I>conjuncts</I>. A sentence involving the <TT>or</TT>
+operator is called a <I>disjunction</I>, and the arguments are
+called <I>disjuncts</I>. A sentence involving the <TT>=&gt;</TT>
+operator is called an <I>implication</I>; all of its arguments
+but the last are called <I>antecedents</I>; and the last argument
+is called the <I>consequent</I>. A sentence involving the <TT>&lt;=&gt;</TT>
+operator is called an <I>equivalence</I>.</P>
+
+<PRE>
+    logsent ::= (not sentence) |
+                (and sentence+) |
+                (or sentence+) |
+                (=&gt; sentence sentence) |
+                (&lt;=&gt; sentence sentence)</PRE>
+
+<P>There are two types of <I>quantified sentences</I> -- a <I>universally
+quantified sentence</I> is signalled by the use of the <TT>forall</TT>
+operator, and an <I>existentially quantified sentence</I> is signalled
+by the use of the <TT>exists</TT> operator. The first argument
+in each case is a list of variable specifications. A variable
+specification is either a variable or a list consisting of a variable
+and a term denoting a relation that restricts the domain of the
+specified variable.</P>
+
+<P>&nbsp;</P>
+
+<PRE>
+    quantsent ::= (forall (variable+) sentence) |
+                  (exists (variable+) sentence)</PRE>
+
+<P>Note that, according to these rules, it is permissible to write
+sentences with <I>free</I> variables, i.e. variables that do not
+occur within the scope of any enclosing quantifiers. The significance
+of the free variables in a sentence depends on the use of the
+sentence. When we assert the truth of a sentence with free variables,
+we are, in effect, saying that the sentence is true for all values
+of the free variables, i.e. the variables are universally quantified.
+When we ask whether a sentence with free variables is true, we
+are, in effect, asking whether there are any values for the free
+variables for which the sentence is true, i.e. the variables are
+existentially quantified.</P>
+
+<P>It is important to keep in mind that a knowledge base is a
+<I>set</I> of sentences, not a <I>sequence</I>; and, therefore,
+the order of forms within a knowledge base is unimportant. Order
+<I>may</I> have heuristic value to deductive programs by suggesting
+an order in which to use those sentences; however, this implicit
+approach to knowledge exchange lies outside of the definition
+of KIF.</P>
+
+<P>&nbsp;</P>
+
+<H4><A NAME="4.4"></A>4.5 Comments</H4>
+
+<P>Comments in SUO-KIF are indicated with a single semi-colon.
+All characters from the semi-colon to the end of the line can
+be ignored.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Basics"></A>5 Basics</H2>
+
+<H4><A NAME="5.1"></A>5.1 Introduction</H4>
+
+<P>The basis for the semantics of KIF is a <EM>conceptualization</EM>
+of the world in terms of objects and relations among those objects.</P>
+
+<P>A <EM>universe of discourse</EM> is the set of all objects
+presumed or hypothesized to exist in the world. The notion of
+<EM>object</EM> used here is quite broad. Objects can be concrete
+(e.g. a specific carbon atom, Confucius, the Sun) or abstract
+(e.g. the number 2, the set of all integers, the concept of justice).
+Objects can be primitive or composite (e.g. a circuit that consists
+of many subcircuits). Objects can even be fictional (e.g. a unicorn,
+Sherlock Holmes).</P>
+
+<P>Different users of a declarative representation language, like
+KIF, are likely to have different universes of discourse. KIF
+is <I>conceptually promiscuous</I> in that it does <I>not</I>
+require every user to share the same universe of discourse. On
+the other hand, KIF is <I>conceptually grounded</I> in that every
+universe of discourse <I>is</I> required to include certain <I>basic</I>
+objects.</P>
+
+<P>The following basic objects must occur in every universe of
+discourse.</P>
+
+<UL>
+  <LI>All numbers, real and complex.
+  <LI>All ASCII characters.
+  <LI>All finite strings of ASCII characters.
+  <LI>Words. Yes, words are themselves objects in the universe
+  of discourse, along with the things they represent.
+  <LI>All finite lists of objects in the universe of discourse.
+  <P>&nbsp;
+</UL>
+
+<P>Remember, that to these basic elements, the user can add whatever
+<I>non-basic</I> objects seem useful.</P>
+
+<P>In KIF, relationships among objects take the form of relations.
+Formally, a <I>relation</I> is defined as an arbitrary set of
+finite lists of objects (of possibly varying lengths). Each list
+is a selection of objects that jointly satisfy the relation. For
+example, the &lt; relation on numbers contains the list &lt;2,3&gt;,
+indicating that 2 is less than 3.</P>
+
+<P>A <I>function</I> is a special kind of relation. For every
+finite sequence of objects (called the <I>arguments</I>), a function
+associates a unique object (called the <I>value</I>). More formally,
+a function is defined as a set of finite lists of objects, one
+for each combination of possible arguments. In each list, the
+initial elements are the arguments, and the final element is the
+value. For example, the 1+ function contains the list &lt;2,3&gt;,
+indicating that integer successor of 2 is 3.</P>
+
+<P>Note that both functions and relations are defined as sets
+of lists. In fact, every function is a relation. However, not
+every relation is a function. In a function, there cannot be two
+lists that disagree on only the last element. This would be tantamount
+to the function having two values for one combination of arguments.
+By contrast, in a relation, there can be any number of lists that
+agree on all but the last element. For example, the list &lt;2,3&gt;
+is a member of the 1+ function, and there is no other list of
+length 2 with 2 as its first argument, i.e. there is only one
+successor for 2. By contrast, the &lt; relation contains the lists
+&lt;2,3&gt;, &lt;2,4&gt;, &lt;2,5&gt;, and so forth, indicating
+that 2 is less than 3, 4, 5, and so forth.</P>
+
+<P>Many mathematicians require that functions and relations have
+fixed arity, i.e they require that all of the lists comprising
+a relation have the same length. The definitions here allow for
+relations with variable arity, i.e. it is perfectly acceptable
+for a function or a relation to contain lists of different lengths.
+For example, the relation &lt; contains the lists &lt;2,3&gt;
+and &lt;2,3,4&gt;, reflecting the fact that 2 is less than 3 and
+the fact that 2 is less than 3 and 3 is less than 4. This flexibility
+is not essential, but it is extremely convenient and poses no
+significant theoretical problems.</P>
+
+<P>&nbsp;</P>
+
+<H4><A NAME="5.3"></A>5.3 Functional Terms</H4>
+
+<P>The value of a functional term is obtained by applying the
+function denoted by the function constant in the term to the objects
+denoted by the arguments.</P>
+
+<P>For example, the value of the term <TT>(+ 2 3)</TT> is obtained
+by applying the addition function (the function denoted by <TT>+</TT>)
+to the numbers <B><TT>2</TT></B> and <B><TT>3</TT></B> (the objects
+denoted by the object constants <TT>2</TT> and <TT>3</TT>) to
+obtain the value <B><TT>5</TT></B>, which is the value of the
+object constant <TT>5</TT>.</P>
+
+<H4><A NAME="5.4"></A>5.4 Relational Sentences</H4>
+
+<P>A simple relational sentence is true if and only if the relation
+denoted by the relation constant in the sentence is true of the
+objects denoted by the arguments. Equivalently, viewing a relation
+as a set of tuples, we say that the relational sentence is true
+if and only if the tuple of objects formed from the values of
+the arguments is a member of the set of tuples denoted by the
+relation constant.</P>
+
+<H4><A NAME="5.5"></A>5.5 Equations and Inequalities</H4>
+
+<P>An equation is true if and only if the terms in the equation
+refer to the same object in the universe of discourse.</P>
+
+<P>An inequality is true if and only if the terms in the equation
+refer to distinct objects in the universe of discourse.</P>
+
+<H4><A NAME="5.6"></A>5.6 True and False</H4>
+
+<P>The truth value of <TT>true</TT> is true, and the truth value
+of <TT>false</TT> is false.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Logic"></A>6 Logic</H2>
+
+<H4><A NAME="6.2"></A>6.2 Logical Sentences</H4>
+
+<P>A negation is true if and only if the negated sentence is false.</P>
+
+<P>A conjunction is true if and only if every conjunct is true.</P>
+
+<P>A disjunction is true if and only if at least one of the disjuncts
+is true.</P>
+
+<P>If every antecedent in an implication is true, then the implication
+as a whole is true if and only if the the consequent is true.
+If any of the antecedents is false, then the implication as a
+whole is true, regardless of the truth value of the consequent.</P>
+
+<P>A reverse implication is just an implication with the consequent
+and antecedents reversed.</P>
+
+<P>An equivalence is equivalent to the conjunction of an implication
+and a reverse implication.</P>
+
+<H4><A NAME="6.3"></A>6.3 Quantified Sentences</H4>
+
+<P>A simple existentially quantified sentence (one in which the
+first argument is a list of variables) is true if and only if
+the embedded sentence is true for <I>some</I> value of the variables
+mentioned in the first argument.</P>
+
+<P>A simple universally quantified sentence (one in which the
+first argument is a list of variables) is true if and only if
+the embedded sentence is true for <I>every</I> value of the variables
+mentioned in the first argument.</P>
+
+<P>Note that the significance of free variables in quantifier-free
+sentences depends on context. Free variables in an assertion are
+assumed to be universally quantified. Free variables in a query
+are assumed to be existentially quantified. In other words, the
+meaning of free variables is determined by the way in which KIF
+is used. It cannot be unambiguously defined within KIF itself.
+To be certain of the usage in all contexts, use explicit quantifiers.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Numbers"></A>7 Numbers</H2>
+
+<H4><A NAME="7.1"></A>7.1 Introduction</H4>
+
+<P>The referent of every numerical constant in KIF is assumed
+to be the number for which that constant is the base <B>10</B>
+representation. Among other things, this means that we can infer
+inequality of all distinct numerical constants, i.e. for every
+<B><TT>t1</TT></B> and distinct <B><TT>t2</TT></B> the following
+sentence is true.</P>
+
+<PRE>
+    (/= <B>t1</B> <B>t2</B>)</PRE>
+
+<P>We use the intended meaning of numerical constants in defining
+the numerical functions and relations in this chapter. In particular,
+we require that these functions and relations behave correctly
+on all numbers represented in this way.</P>
+
+<P>Note that this does mean that it is incorrect to apply these
+functions and relations to terms other than numbers. For example,
+a nonnumerical term may <I>refer</I> to a number, e.g. the term
+<TT>two</TT> may be defined to be the same as the number <TT>2</TT>
+in which case it is perfectly proper to write <TT>(+ two two)</TT>.</P>
+
+<P>The user may also want to extend these functions and relations
+to apply to objects other than numbers, e.g. sets and lists.</P>
+
+<P>&nbsp;</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2><A NAME="Conformance"></A>12 Conformance</H2>
+
+<H4><A NAME="12.1"></A>12.1 Introduction</H4>
+
+<P>KIF is a highly expressive language. For many, this is a desirable
+feature; but there are disadvantages. One disadvantage is that
+it complicates the job of building fully conforming systems. Another
+disdvantage is that the resulting systems tend to be &quot;heavyweight&quot;
+(i.e. they are larger and in some cases less efficient than systems
+that employ more restricted languages).</P>
+
+<P>In order to deal with these problems, the basic language specification
+is augmented with a set of &quot;conformance dimensions&quot;.
+These dimensions are not the same as the &quot;conformance levels&quot;
+of other languages. Rather, each conformance dimension has a variety
+of levels within that dimension.</P>
+
+<P>A &quot;conformance profile&quot; is a selection of alternatives
+from each conformance dimension. System builders are expected
+to make choices for each dimension and and then ensure that their
+systems adhere to the resulting comformance profile. Systems are
+expected to use the terminology defined here to share information
+about their conformance profile with other systems (in a protocol-specific
+manner).</P>
+
+<P>Although this conformance profile scheme is more complex than
+one based on conformance levels, it accommodates varying capabilities
+and/or computational constraints while providing a migration path
+from more restrictive to more expressive.</P>
+
+<H4><A NAME="12.2"></A>12.2 Conformance Dimensions</H4>
+
+<H4>12.2.1 Introduction</H4>
+
+<P>A <B>conformance dimension</B> is a classification of KIF sentences
+into <B>conformance categories</B> on the basis of a single syntactic
+criterion. (For example, the quantification dimension provides
+two categories, quantified KIF and unquantified KIF, based on
+whether or not a conforming knowledge base contans quantifiers.)</P>
+
+<H4>12.2.2 Logical Form</H4>
+
+<P>The first conformance dimension concerns logical form. There
+are five basic categories: atomic, conjunctive, positive, logical,
+and rule-like. Rule-like knowledge bases are further categorized
+as Horn or non-Horn and recursive or non-recursive.</P>
+
+<P>A knowledge base is <B>atomic</B> if and only if it contains
+no logical operators.</P>
+
+<P>A knowledge base is <B>conjunctive</B> if and only if it contains
+no logical operators except for conjunction.</P>
+
+<P>A knowledge base is <B>positive</B> if and only if it contains
+no logical operators except for conjunction and disjunction.</P>
+
+<P>A knowledge base is <B>logical</B> if and only if it contains
+no logical operators except for conjunction, disjunction, and
+negation.</P>
+
+<P>A knowledge base is <B>rule-like</B> if and only if every sentence
+is either atomic or an implication or reverse implication in which
+all subexpressions are atomic sentences or negations of atomic
+sentences. A rule system is a rule-like knowledge base.</P>
+
+<P>A rule system is <B>Horn</B> if and only if every constituent
+of every rule is atomic (i.e. no negations allowed). Otherwise,
+the rule system is said to be <B>non-Horn</B>.</P>
+
+<P>The dependency graph for a rule system is a graph whose nodes
+are the constants in relational position. There is an edge from
+the node for a given relation constant <I>p</I> to the node of
+relation constant <I>q</I> if and only if <I>p</I> appears in
+the body of a rule whose head predicate is <I>p</I>.</P>
+
+<P>A rule system is <B>recursive</B> if there is a cycle in its
+dependency graph. Otherwise, the rule system is said to be <B>non-recursive</B>.</P>
+
+<H4>12.2.3 Term Complexity</H4>
+
+<P>The nature of terms defines a second conformance dimension.
+There are two categories: simple and complex.</P>
+
+<P>A knowledge base is <B>simple</B> if and only if the only terms
+occurring the knowledge base are constants and variables.</P>
+
+<P>A knowledge base is <B>complex</B> if and only if it contains
+terms other than constants or variables, e.g. functional terms
+or logical terms.</P>
+
+<H4>12.2.4 Order</H4>
+
+<P>The third conformance dimension concerns the presence or absence
+of variables.</P>
+
+<P>A knowledge base is <B>ground</B>, or <B>zeroth-order</B>,
+if and only if it contains no variables. Otherwise, a knowledge
+base in <B>nonground</B>.</P>
+
+<P>A knowledge base is <B>first-order</B> if and only if there
+are no variables in the first argument of any explicit functional
+term or explicit relational sentence.</P>
+
+<P>A knowledge base is <B>higher-order</B> otherwise.</P>
+
+<H4>12.2.5 Quantification</H4>
+
+<P>For nonground knowledge bases, there are two alternatives --
+quantified and unquantified.</P>
+
+<P>A nonground knowledge base is <B>quantified</B> if and only
+if it contains at least one explicit quantifier.</P>
+
+<P>A nonground knowledge base is <B>unquantified</B> if and only
+if it contains no explicit quantifiers.</P>
+
+<H4><A NAME="12.3"></A>12.3 Common Conformance Profiles</H4>
+
+<P>A <B>conformance profile</B> is a selection of alternatives
+for each conformance dimension. Given the dimensions and categories
+defined in the preceding section, it is possible to define a large
+number of profiles. A single system may use different profiles
+in different types of communication. In particular, it is common
+to use one profile for assertions and another for queries. The
+following paragraphs define a few common types of systems with
+their corresponding profiles.</P>
+
+<P>A <B>database system</B> is one in which (1) all assertions
+are atomic, simple, ground, and baselevel and (2) all queries
+are positive, simple, unquantified, and baselevel.</P>
+
+<P>A <B>Horn system</B> (e.g. pure Datalog) is one in which (1)
+all assertions are rules that are Horn, unquantified, and baselevel
+and (2) all queries are positive, non-recursive, unquantified,
+and baselevel.</P>
+
+<P>A <B>relational system</B> is one in which (1) all assertions
+are rules that are simple, unquantified (but may be non-Horn and
+non-recursive), and baselevel and (2) all queries are logical,
+non-recursive, unquantified, and baselevel.</P>
+
+<P>A <B>first-order system</B> is one that allows the broadest
+categories within each conformance dimension except that only
+first-order expressions are accommodated.</P>
+
+<P>A <B>full KIF system</B> is one that accepts the broadest categories
+within each conformance dimension, i.e. any KIF knowledge base
+is acceptable in any context.</P>
+
+<H4><A NAME="12.4"></A>12.4 Dealing with Differences in Conformance
+Profiles</H4>
+
+<P>The existence of multiple conformance profiles raises the question
+of what happens when systems with different profles must communicate.</P>
+
+<P>Whenever the conformance profile of a receiver is known, a
+sender should avoid sending expressions that fall outside the
+receiver's conformance profile.</P>
+
+<P>Unfortunately, this rule cannot be enforced in all situations.
+In some cases, conformance information about receivers is unavailable;
+and, even when conformance information is available, it may be
+desirable to send a message that falls outside a receiver's profile,
+e.g. it may be most efficient for a sender to broadcast a single
+knowledge base to a large number of receivers with differing conformance
+profiles rather than sending different knowledge bases to each
+receiver.</P>
+
+<P>Whenever a receiver receives a non-conforming expression, it
+is free to ignore the expression, even though it may be able to
+make sense of portions of that expression. If the receiver ignores
+a non-conforming expression and the sender requests a reply, the
+receiver should report a failure.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2>Appendix A - BNF Syntax</H2>
+
+<PRE>
+    upper ::= A | B | C | D | E | F | G | H | I | J | K | L | M | 
+              N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+
+    lower ::= a | b | c | d | e | f | g | h | i | j | k | l | m | 
+              n | o | p | q | r | s | t | u | v | w | x | y | z
+
+    digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+    special ::= ! | $ | % | & | * | + | - | . | / | &lt; | = | &gt; | ? |
+              @ | _ | ~ |
+
+    white ::= space | tab | return | linefeed | page
+
+    initialchar ::= upper | lower
+
+    wordchar ::= upper | lower | digit | - | _ | special
+
+    character ::= upper | lower | digit | special | white
+
+    word ::= initialchar wordchar*
+
+    string ::= &quot;character*&quot;
+
+    variable ::= ?word | @word
+
+    number ::= [-] digit+ [. digit+] [exponent]
+
+    exponent ::= e [-] digit+
+
+    term ::= variable | word | string | funterm | number | sentence
+
+    relword ::= initialchar wordchar*
+
+    funword ::= initialchar wordchar*
+
+    funterm ::= (funword term+)
+
+    sentence ::= word | equation | inequality | 
+                 relsent | logsent | quantsent
+
+    equation ::= (= term term)
+
+    relsent ::= (relword term+)
+
+    logsent ::= (not sentence) |
+                (and sentence+) |
+                (or sentence+) |
+                (=&gt; sentence sentence) |
+                (&lt;=&gt; sentence sentence)
+
+    quantsent ::= (forall (variable+) sentence) |
+                  (exists (variable+) sentence)</PRE>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2>Appendix B - Structural Ontology</H2>
+
+<P><TT>(<B>instance</B> ?X ?Y)</TT> - ?X is an individual which
+is a member of class ?Y<BR>
+<TT>(<B>subclass</B> ?X ?Y)</TT> - ?X is a class which is a subclass
+of class ?Y.</P>
+
+<P><B>subclass</B> is transitive and <B>instance</B> is transitive
+through <B>subclass</B>.<BR>
+</P>
+
+<PRE>
+  (=&gt;
+    (and
+      (instance ?X ?Y)
+      (subclass ?Y ?Z))
+    (instance ?X ?Z))
+
+  (=&gt;
+    (and
+      (subclass ?X ?Y)
+      (subclass ?Y ?Z))
+    (subclass ?X ?Z))</PRE>
+
+<P><TT>(<B>domain</B> ?X ?N ?Y)</TT> - the argument in position
+?N of relation ?X is a member of class ?Y. Note that ?N=0 could
+be used for the return type of functional relations.</P>
+
+<P>One term is also required which could be called &quot;<B>top</B>&quot;
+(as in Sowa's ontology) or &quot;<B>Entity</B>&quot; (as in <A
+HREF="http://ontology.teknowledge.com/">SUMO</A>)</P>
+
+<P>&nbsp;</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<H2>Appendix C - Truth Tables and Interpretations</H2>
+
+<PRE>
+A  B  (and A B)
+T  T      T
+T  F      F
+F  T      F
+F  F      F
+
+A  B  (or A B)
+T  T      T
+T  F      T
+F  T      T
+F  F      F
+
+A     (not A)
+T         F
+F         T
+
+A  B  (=&gt; A B)
+T  T      T
+T  F      F
+F  T      T
+F  F      T
+
+A  B  (&lt;=&gt; A B)
+T  T      T
+T  F      F
+T  F      F
+F  F      T</PRE>
+
+<P><B>Row Variables</B></P>
+
+<P>One option is to treat row varaibles as &quot;macros&quot;,
+which would get expanded automatically so</P>
+
+<PRE>
+(=&gt;
+   (and
+      (subrelation ?REL1 ?REL2)
+      (holds ?REL1 @ROW))
+   (holds ?REL2 @ROW))</PRE>
+
+<P>would become</P>
+
+<PRE>
+(=&gt;
+   (and
+      (subrelation ?REL1 ?REL2)
+      (holds ?REL1 ?ARG1))
+   (holds ?REL2 ?ARG1))
+
+(=&gt;
+   (and
+      (subrelation ?REL1 ?REL2)
+      (holds ?REL1 ?ARG1 ?ARG2))
+   (holds ?REL2 ?ARG1 ?ARG2))</PRE>
+
+<P>etc.</P>
+
+<P>Note that this &quot;macro&quot; style expansion has the problem
+that unlike the true semantics of row variables, that it is not
+infinite. If the interpretation only expands to five variables,
+that there is a problem if the knowledge engineer uses a relation
+with six.</P>
+
+<P><HR ALIGN=LEFT></P>
+
+<P>Last updated on 2003-12-28 by <I><A HREF="mailto:matthew.west@shell.com">Webmaster</A>
+</I></P>
+
+<P>Copyright IEEE 2003 - All rights reserved.
+
+</BODY>
+</HTML>

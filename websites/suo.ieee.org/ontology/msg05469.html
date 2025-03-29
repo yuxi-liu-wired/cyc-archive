@@ -1,0 +1,213 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Re: Differential Analytic Turing Automata -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNngg.arg> -->
+<!--X-Date: Sun, 7 Mar 2004 18:47:22 &#45;0500 (EST) -->
+<!--X-Message-Id: 404BB2D9.B81EF7A2@att.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 403F546C.D69B6918@att.net -->
+<!--X-Reference: 40476DB3.BC029F0@att.net -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg05469.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Re: Differential Analytic Turing Automata</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@att.net">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg05467.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg05470.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd1.html#05469">Thread Index</A></Td>
+<TD><A HREF="msg05470.html">Date Prev</A></TD>
+<TD><A HREF="msg05468.html">Date Next</A>
+</TD>
+<TD><A HREF="mail1.html#05469">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Re: Differential Analytic Turing Automata</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Re: Differential Analytic Turing Automata</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@att.net">jawbrey@att.net</A>&gt;</li>
+<li><em>Date</em>: Sun, 07 Mar 2004 18:40:09 -0500</li>
+<li><em>References</em>: &lt;<a href="msg05457.html">403F546C.D69B6918@att.net</a>&gt; &lt;<a href="msg05467.html">40476DB3.BC029F0@att.net</a>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+DATA.  Note 12
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+Way back in DATA Note 3, we guessed, or &quot;abduced&quot;,
+as a line of logicians from Aristotle to Peirce
+and beyond would say, the form of a rule that
+adequately accounts for the finite protocol
+of states that we observed the system X
+pass through, as spied in the light of
+its boolean state variable x : X -&gt; B,
+and that rule is well-formulated in
+any of these styles of notation:
+
+1.1.  f : B -&gt; B such that f : x ~&gt; (x)
+
+1.2.  x' = (x)
+
+1.3.  x := (x)
+
+1.4.  dx =  1
+
+In the current example, having read the manual first,
+I guess, we already know in advance the program that
+generates the state transitions, and it is a rule of
+the following equivalent and easily derivable forms:
+
+2.1.  F : B^2 -&gt; B^2 such that F : &lt;u, v&gt; ~&gt; &lt;((u)(v)), ((u, v))&gt;
+
+2.2.  u' = ((u)(v)),  v' = ((u, v))
+
+2.3.  u := ((u)(v)),  v := ((u, v))
+
+2.4.  ???
+
+Well, the last one is not such a fall off the log,
+but that is exactly the purpose for which we have
+been developing all of the foregoing machinations.
+
+Here is what I got when I just went ahead and
+calculated the finite differences willy-nilly:
+
+Incipit 1.  &lt;u, v&gt; = &lt;0, 0&gt; 
+
+d d | d d | d d | d d | d d | ...
+0 0 | 1 1 | 2 2 | 3 3 | 4 4 | ...
+u v | u v | u v | u v | u v | ...
+----+-----+-----+-----+-----+-----
+0 0 | 0 1 | 1 0 | 0 1 | 1 0 | ...
+0 1 | 1 1 | 1 1 | 1 1 | 1 1 | ...
+1 0 | 0 0 | 0 0 | 0 0 | 0 0 | ...
+1 0 | 0 0 | 0 0 | 0 0 | 0 0 | ...
+&quot; &quot; | &quot; &quot; | &quot; &quot; | &quot; &quot; | &quot; &quot; |
+
+Incipit 2.  &lt;u, v&gt; = &lt;1, 1&gt; 
+
+d d | d d | d d | d d |
+0 0 | 1 1 | 2 2 | 3 3 |
+u v | u v | u v | u v |
+----+-----+-----+-----+
+1 1 | 0 0 | 0 0 | = = |
+1 1 | 0 0 | 0 0 | = = |
+&quot; &quot; | &quot; &quot; | &quot; &quot; | &quot; &quot; |
+
+To be honest, I have never thought of trying
+to hack the problem in such a brute-force way
+until just now, and so I know enough to expect
+a not unappreciable probability of error about
+all that I have taken the risk of writing here,
+but let me forge ahead and see what I can see.
+
+What we are looking for is, well, one rule to rule them all,
+that is, a rule that works at every state and at every time.
+
+What we see at first sight in the tables above are patterns
+of differential features that attach to the states in each
+orbit of the dynamics.  Looked at locally to these orbits,
+the isolated fixed point at &lt;1, 1&gt; is no problem, as the
+rule du = dv = 0 describes it pithily enough.  When it
+comes to the other orbit, the first thing that comes
+to mind is to write out the law du = v, dv = (u).
+
+I am going to take a nap to clear my head.
+
+Jon Awbrey
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+inquiry e-lab: <A  HREF="http://stderr.org/pipermail/inquiry/">http://stderr.org/pipermail/inquiry/</A>
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="05470" href="msg05470.html">ONT Re: Differential Analytic Turing Automata</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@att.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="05457" href="msg05457.html">ONT Differential Analytic Turing Automata</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@att.net&gt;</li></ul></li>
+<li><strong><a name="05467" href="msg05467.html">ONT Re: Differential Analytic Turing Automata</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@att.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg05470.html">ONT Re: Differential Analytic Turing Automata</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg05468.html">ONT Re: Information = Comprehension x Extension -- Annotation</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg05467.html">ONT Re: Differential Analytic Turing Automata</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg05470.html">ONT Re: Differential Analytic Turing Automata</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail1.html#05469"><strong>Date</strong></a></li>
+<li><a href="thrd1.html#05469"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

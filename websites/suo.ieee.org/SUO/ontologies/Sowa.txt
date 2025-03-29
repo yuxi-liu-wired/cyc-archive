@@ -1,0 +1,520 @@
+;; A KIF encoding of John Sowa's upper ontology found at
+;; http://www.bestweb.net/~sowa/ontology/toplevel.htm and in Chapter 2
+;; of his book _Knowledge Representation_, Brooks/Cole, 2000.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                          P R E F A C E                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; METALINGUISTIC DEFINITIONS
+;;  
+;; Metalinguistic definitions provide us with theoretical
+;; justifications for the use of certain syntactic abbreviations that
+;; can be both heuristically useful and computationally advantageous.
+;;
+;;;;;;;;;;;;;;;;;;;;
+;;  "nth-domain"  ;;
+;;;;;;;;;;;;;;;;;;;;
+;;
+;; The "nth-domain" provides a computationally and heuristically
+;; convenient mechanism for declaring the intended types of the
+;; argument places of a given relation.  It cannot be considered a
+;; genuine predicate in a standard first-order language as it takes
+;; first-order predicates as arguments.  Furthermore, it also takes
+;; numerals as arguments, which are not part of first-order languages
+;; generally.  However, it can be understood formally as an 
+;; abbreviation as follows.
+;;
+;; Let REL be any n-place predicate, and let M be the numeral for the
+;; positive integer m, where m is less than or equal to n.  Then we
+;; let
+;;
+;;   (nth-domain REL M CLASS)
+;;
+;; serve as an abbreviation for
+;;
+;;   (forall (VAR_1 ... VAR_n)
+;;           (=> (REL VAR_1 ... VAR_n)
+;;               (instance-of VAR_m CLASS)))
+;;
+;; More generally, let M_1, ..., M_i be the numerals for positive
+;; integers m_1, ..., m_i, ordered by size, all less than or equal to
+;; n.  Then, in general, we let
+;;
+;;   (nth-domain REL M_1 CLASS_1 ... M_i CLASS_i) 
+;;
+;; abbreviate 
+;; 
+;;   (forall (VAR_1 ... VAR_n)
+;;           (=> (REL VAR_1 ... VAR_n)
+;;               (and (instance-of VAR_m_1 CLASS_1)
+;;                    ...
+;;                    (instance-of VAR_m_i CLASS_i))))
+;;
+
+;; THE LANGUAGE OF SOWA'S UPPER LEVEL ONTOLOGY
+;;
+;; This ontology uses a first-order modal language, i.e., a
+;; first-order language with the sentence operators "nec" (for
+;; "necessarily") and "poss" (for "possibly").  Primitive constants,
+;; primitive predicates, and defined predicates are listed below.
+;; Note that among the primitive predicates are several (e.g.,
+;; "exists-at") that are borrowed from other ontologies -- moreover,
+;; those predicates may be *defined* in those ontologies.  Eventually,
+;; of course, it will be important to have mechanisms for making such
+;; connections explicitly (via, e.g., something like Ontolingua
+;; packages).
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Primitive constants ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Entity, Absurdity, Independent, Relative, Mediating, Physical,
+;; Abstract, Continuant, Occurrent, Actuality, Form, Prehension,
+;; Proposition, Nexus, Intention, Object, Process, Schema, Script,
+;; Juncture, Participation, Description, History, Structure,
+;; Situation, Reason, Purpose
+;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Primitive predicates ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 1-place: Entity, Class
+;;
+;; 2-place: has, instance-of, subclass-of, temp-part-of, spatial-part-of
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Primitive (non-KIF) operators ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; nec, poss
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Defined predicates ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 2-place: disjoint
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Borrowed predicates ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;; From an ontology of space and time
+;;
+;; 1-place: timepoint
+;;
+;; 2-place: before, beforeEq, exists-at, located-at
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                         O N T O L O G Y                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; DEFINITIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation disjoint "Classes X and Y are disjoint iff they share no instances.")
+
+(forall (?class1 ?class2)
+        (<=> (disjoint ?class1 ?class2)
+             (and (Class ?class1)
+                  (Class ?class2)
+                  (not (exists (?x)
+                               (and (instance-of ?x ?class1)
+                                    (instance-of ?x ?class2)))))))
+
+
+;;;;;;;;;;;;;;; AXIOMS EXPRESSING THE CLASS HIERARCHY ;;;;;;;;;;;;;;;;;
+
+(subclass-of Independent Entity)
+(subclass-of Relative Entity)
+(subclass-of Mediating Entity)
+(subclass-of Physical Entity)
+(subclass-of Abstract Entity)
+(subclass-of Continuant Entity)
+(subclass-of Occurrent Entity)
+
+(subclass-of Actuality Independent)
+(subclass-of Actuality Physical)
+(subclass-of Form Independent)
+(subclass-of Form Abstract)
+(subclass-of Prehension Physical)
+(subclass-of Prehension Relative)
+(subclass-of Proposition Relative)
+(subclass-of Proposition Abstract)
+(subclass-of Nexus Physical)
+(subclass-of Nexus Mediating)
+(subclass-of Intention Abstract)
+(subclass-of Intention Mediating)
+
+(subclass-of Object Actuality)
+(subclass-of Object Continuant)
+(subclass-of Process Actuality)
+(subclass-of Process Occurrent)
+(subclass-of Schema Form)
+(subclass-of Schema Continuant)
+(subclass-of Script Form)
+(subclass-of Script Occurrent)
+(subclass-of Juncture Prehension)
+(subclass-of Juncture Continuant)
+(subclass-of Participation Prehension)
+(subclass-of Participation Occurrent)
+(subclass-of Description Proposition)
+(subclass-of Description Continuant)
+(subclass-of History Proposition)
+(subclass-of History Occurrent)
+(subclass-of Structure Nexus)
+(subclass-of Structure Continuant)
+(subclass-of Situation Nexus)
+(subclass-of Situation Occurrent)
+(subclass-of Reason Intention)
+(subclass-of Reason Continuant)
+(subclass-of Purpose Intention)
+(subclass-of Purpose Occurrent)
+
+;;;;;;;;;;;;;;;;;; DOCUMENTATION FOR THESE CLASSES ;;;;;;;;;;;;;;;;;;;;
+
+(documentation Entity "The universal class of individuals, which has no differentiae.")
+
+(documentation Absurdity "The absurd class, which inherits all differentiae.")
+
+(documentation Abstract "Pure information as distinguished from any particular encoding of the information in a physical medium.")
+
+(documentation Physical "An entity that has a location in space-time.")
+
+(documentation Actuality  "A physical entity (P) whose existence is independent (I) of any other entity. As instances, the category Actuality includes both objects and processes. The term is taken from Whitehead, who used it as a synonym for actual entity, which he considered the equivalent of Aristotle's ousia and Descartes's res vera.")
+
+(documentation Continuant "A continuant is an entity whose identity continues to be recognizable over some extended interval of time.")
+
+(documentation Description  "A proposition (RA) about a continuant (C). A description is a proposition that states how some schema characterizes some aspect or configuration of a continuant.")
+
+(documentation Form  "Abstract information (A) independent (I) of any encoding or embodiment. Forms can be said to exist in the same sense as mathematical objects such as sets and relations, but instances of forms cannot exist at a particular place and time without some physical encoding or embodiment. Whitehead called them "eternal objects" because they are independent of space and time.")
+
+(documentation History "A proposition (RA) about an occurrent (O). A history is a proposition (RA) that relates some script (IAO) to the stages of some occurrent (O). A computer program, for example, is a script (IAO); a computer executing the program is a process (IPO); and the abstract information (A) encoded in a trace of the instructions executed is a history (RAO). Like any proposition, a history need not be true, and it need not be predicated of the past: a myth is a history of an imaginary past; a prediction is a history of an expected future; and a scenario is a history of some hypothetical occurrent.")
+
+(documentation Independent "An entity characterized by some inherent Firstness, independent of any relationships it may have to other entities. Formally, Independent is a primitive for which the has-test (cf. Section 2.4 of _Knowledge Representation_) need not apply.  If x is an independent entity, it is not necessary that there exists an entity y such that x has y or y has x.")
+
+(documentation Intention "Abstraction (A) considered as mediating (M) other entities. Examples of intentions include the hopes, fears, wishes, and purposes that mediate some agent's actions.")
+
+(documentation Juncture "A prehension (RP) considered as a continuant (C) during some time interval. The prehending entity is an object (IPC) in a stable relationship to some prehended entity during that interval. An example of a juncture is the relationship between two adjacent stones in an arch. The arch itself is a nexus that both mediates and consists of the multiple junctures.")
+
+(documentation Mediating "An entity characterized by some Thirdness that brings other entities into a relationship. An independent entity need not have any relationship to anything else, a relative entity must have some relationship to something else, and a mediating entity creates a relationship between two other entities. An example of a mediating entity is a marriage, which creates a relationship between a husband and a wife.  According to Peirce, the defining aspect of Thirdness is 'the conception of mediation, whereby a first and a second are brought into relation.")
+
+(documentation Nexus "A physical entity (P) mediating (M) two or more other entities. Each nexus is a bundle of prehensions, which may be the junctures of an object or the participants of a process. Examples include an arch that consists of junctures of stones or an action that consists of what one participant called an agent is doing to another participant called a patient.")
+
+(documentation Object "Actuality (IP) considered as a continuant (C), which retains its identity over some interval of time. Although no physical entity is ever permanent, an object can be recognized by identity conditions that remain stable during its lifetime. The type Object includes ordinary physical objects as well as the instantiations of classes in object-oriented programming languages.")
+
+(documentation Occurrent "An entity that does not have a stable identity during any interval of time. Formally, Occurrent is a primitive that satisfies the following axioms: \
+   * The temporal parts of an occurrent, which are called stages, exist at different times. \
+   * The spatial parts of an occurrent, which are called participants, may exist at the same time, but an occurrent may have different participants at different stages.\
+   * There are no identity conditions that can be used to identify two occurrents that are observed in nonoverlapping space-time regions. \
+(NOTE: The notions identity conditions and observation are not axiomatized in this ontology, so this is not an actual axiom of the ontology, unlike the two axioms above.  (Though those two required adding some notions that are only implicit in Sowa's ontology, e.g., the relations "exists-at" and "located-at".)  A person's lifetime, for example, is an occurrent. Different stages of a life cannot be reliably identified unless some continuant, such as the person's fingerprints or DNA, is recognized by suitable identity conditions at each stage. Even then, the identification depends on an inference that presupposes the uniqueness of the identity conditions.")
+
+(documentation Participation "A prehension (RP) considered as an occurrent (O) during the interval of interest. The prehending entity is a process (IPO), and the prehended entity is called a participant.")
+
+(documentation Process "Actuality (IP) considered as an occurrent (O) during the interval of interest. Depending on the time scale and level of detail, the same actual entity may be viewed as a stable object or a dynamic process. Even an entity as stable as a diamond could be considered a process when viewed over a long time period or at the atomic level of vibrating particles.")
+
+(documentation Prehension "A physical entity (P) relative (R) to some entity or entities. The has-test is used to check whether an entity x prehends an entity y. If so, the prehension may be expressed has(x,y).")
+
+(documentation Proposition "An abstraction (A) that relates (R) some entity or entities. In logic, the assertion of a proposition is a claim that the abstraction corresponds to some aspect or configuration of the entity or entities involved. As an example, the statement cat(Yojo) expresses a proposition that the form labeled Cat characterizes the entity named Yojo. According to Peirce and Whitehead, more complex propositions are asserted by constructing a compound predicate, such as a mathematical expression or a diagram, and using it to characterize the prehensions that relate multiple entities.")
+
+(documentation Purpose "Intention (MA) that has the form of an occurrent (O). As an example, the words and notes of the song "Happy Birthday" constitute a script (IAO); a description of how people at a party sang the song is history (RAO); and the intention (MA) that explains the situation (MPO) is a purpose (MAO). The basic axioms for Purpose are inherited from its supertypes Mediating, Abstract, and Occurrent.  Some lower level axioms relate purposes to actions and agents:  (1) Time sequence. If an agent x performs an act y whose purpose is a situation z, the start of y occurs before the start of z. (2) Contingency. If an agent x performs an act y whose purpose is a situation z described by a proposition p, then it is possible that z might not occur or that p might not be true of z. (3) Success or failure. If an agent x performs an act y whose purpose is a situation z described by a proposition p, then x is said to be successful if z occurs and p is true of z. otherwise, x!
+ i!
+!
+!
+s said to have failed.  Note that to express these axioms we would need to introduce lower level classes like "agent" and 'action'.")
+
+(documentation Reason "Intention (MA) that has the form of a continuant (C). Unlike a simple description (Secondness), a reason explains an entity in terms of an intention (Thirdness).  For a birthday party, a description might list the presents, but a reason would explain why the presents are relevant to the party.")
+
+(documentation Relative "An entity in a relationship to some other entity.  (See the ISSUE above accompanying the formal axiom for Relative.")
+
+(documentation Schema "A form (IA) that has the structure of a continuant (C). A schema is an abstract form (IA) whose structure does not specify time or timelike relationships. Examples include geometric forms, the syntactic structures of sentences in some language, or the encodings of pictures in a multimedia system.")
+
+(documentation Script "A form (IA) that has the structure of an occurrent (O). A script is an abstract form (IA) that represents time sequences. Examples include computer programs, a recipe for baking a cake, a sheet of music to be played on a piano, or a differential equation that governs the evolution of a physical process. A movie can be described by several different kinds of scripts: the first is a specification of the actions and dialog to be acted out by humans; but the sequence of frames in a reel of film is also a script that determines a process carried out by a projector that generates flickering images on a screen.")
+
+(documentation Situation "A nexus (MP) considered as an occurrent (O). A situation mediates the participants of some process, whose stages may involve different participants at different times.")
+
+(documentation Structure "A nexus (MP) considered as a continuant (C). A structure mediates multiple objects whose junctures constitute the structure.")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;; GENERAL AXIOMS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "AXIOM: X is a subclass of Y only if X and Y are classes, and every instance of X is an instance of Y.")
+
+(forall (?subclass ?class)
+        (=> (subclass-of ?subclass ?class)
+            (and (Class ?subclass)
+                 (Class ?class)
+                 (forall (?x)
+                         (=> (instance-of ?x ?subclass)
+                             (instance-of ?x ?class))))))
+
+;; ISSUE: Given that we are using a modal language, the subclass-of
+;; relation is arguably definable: X is a subclass of Y if and only if
+;; X and Y are classes and, necessarily, every instance of X is an
+;; instance of Y.
+
+(documentation "AXIOM: Every class is a subclass of itself.")
+
+(forall (?class)
+       (=> (Class ?class)
+       (subclass-of ?class ?class)))
+
+;; Axioms for the *predicate* "Entity".  It turns out to be convenient
+;; to introduce "Entity" as both a predicate true of all entities and
+;; as a constant denoting the class of entities.
+
+(documentation "AXIOM: There are entities.")
+
+(exists (?x) (Entity ?x))
+
+(documentation "AXIOM: Everything is either a class or an entity, but not both.")
+
+(forall (?x)
+        (and (or (Class ?x)
+                 (Entity ?x))
+             (<=> (Entity ?x)
+                  (not (Class ?x)))))
+
+(documentation "AXIOM: Only entities are instances of classes, and only classes have instances.")
+
+(forall (?x)
+        (=> (instance-of (?instance ?class))
+            (and (Entity ?instance)
+                 (Class ?class))))
+
+;; Axioms for the *constant* "Entity".  Syntactically, we can treat
+;; the predicate `Entity' and the constant `Entity' as distinct things
+;; that look the same; alternatively, we can simply allow `Entity' to
+;; be both a predicate and a constant.  Semantically, the
+;; interpretations of the predicate "Entity" and the constant "Entity"
+;; may or may not turn out to be the same thing.
+
+(documentation "AXIOM: Entity (the class) consists of exactly the entities (the things to which the `Entity' predicate applies )")
+
+(forall (?x) 
+        (<=> (Entity ?x)
+             (instance-of ?x Entity)))
+
+;; THEOREM: Entity is a class.
+
+(Class Entity)
+
+;; PROOF: By the two preceding axioms, there is at least one entity
+;; ?x, and hence ?x is an instance-of Entity.  Hence, by the axiom
+;; above for instance-of, Entity must be a class (since only classes
+;; have instances).
+
+(documentation "AXIOM:  Every class is a subclass of Entity.")
+
+(forall (?c)
+        (=> (Class ?c)
+            (subclass-of ?c Entity)))
+
+(documentation "AXIOM: The has relation holds between entities.")
+
+(nth-domain has 1 Entity 2 Entity)
+
+(documentation "AXIOM: Absurdity is a class.")
+
+(Class Absurdity)
+
+(documentation "AXIOM: Absurdity has no instances.")
+
+(not (exists (?x) (instance-of ?x Absurdity)))
+
+(documentation "AXIOM: Absurdity is a subclass of every class.")
+
+(forall (?c)
+        (=> (Class ?c)
+            (subclass-of Absurdity ?c)))
+
+(documentation "AXIOM: Abstract is a class.")
+
+(Class Abstract)
+
+(documentation "AXIOM: ?x is abstract iff it has neither a spatial nor temporal location.")
+
+;; NOTE: "located-at" and "exists-at" are spatial and temporal
+;; predicates, respectively, that are not axiomatized here.
+;; "exists-at" is defined in the PSL temporal ontology, which
+;; axiomatizes "timepoint".  This relation holds between an entity and
+;; a timepoint just in case the temporal lifespan of the former
+;; includes the latter.
+
+(forall (?x)
+        (<=> (instance-of ?x Abstract)
+             (and (not (exists (?y) 
+                               (or (located-at ?x ?y)
+                                   (exists-at ?x ?y))))))) 
+                               
+(documentation "AXIOM: ?x is physical if and only if it exists at some location at some time.")
+
+(forall (?x)
+        (<=> (Physical ?x)
+             (exists (?y ?z)
+                     (and (located-at ?x ?y)
+                          (exists-at ?x ?z)))))
+
+(documentation "THEOREM:  Abstract and Physical are disjoint.")
+
+(disjoint Abstract Physical)
+
+;; Proof: Immediate from the axioms for Abstract and Physical.
+
+(documentation "AXIOM: An independent entity need not bear the "has" relation to anything.")
+
+(forall (?x)
+        (=> (Independent ?x)
+            (not (nec (exists (?y)
+                              (or (Has ?x ?y)
+                                  (Has ?y ?x)))))))
+
+(documentation "AXIOM: A continuant is an object that exists (and, hence, retains its identity) over time, i.e., an object that exists at every point over some interval of time.  This axiom is only implicit in Sowa's ontology.  Again, it appeals to an auxiliary ontology of timepoints.")
+
+(forall (?x)
+        (=> (instance-of ?x Continuant)
+            (exists (?t1 ?t2)
+                    (and (timepoint ?t1) 
+                         (timepoint ?t2) 
+                         (before ?t1 ?t2)
+                         (forall (?t)
+                                 (=> (and (beforeEq ?t1 t) 
+                                          (beforeEq (t ?t2)))
+                                     (exists-at ?x ?t)))))))
+                            
+(documentation "AXIOM: If a mediating entity ?m has ?x and ?y, then either ?x has ?y or vice versa.")
+
+(forall (?x ?y ?z)
+        (=> (and (instance-of ?m Mediating) 
+                 (has ?m ?x)  
+                 (has ?m ?y))
+            (nec (or (has ?x ?y) (has ?y ?x)))))
+
+(documentation "AXIOM: Continuant and Occurrent are disjoint.")
+
+(disjoint Continuant Occurrent)
+
+(documentation "AXIOM: The temp-part-of relation holds between entities and occurrents")
+
+(nth-domain temp-part-of 1 Entity 2 Occurrent)
+
+(documentation "AXIOM: Each temporal part of an occurrent exists at some timepoint.")
+
+;; ISSUE: Can stages (i.e., temporal parts of occurrents) exist at
+;; more than one timepoint; in particular, can they they exist across
+;; intervals of time?
+
+(forall (?occ ?x)
+        (=> (and (instance-of ?occ Occurrent) 
+                 (temp-part-of ?x ?occ))
+            (exists (?t)
+                    (exists-at ?x ?t))))
+        
+(documentation "AXIOM: The spatial-part-of relation holds between entities and occurrents")
+
+(nth-domain spatial-part-of 1 Entity 2 Occurrent)
+
+(documentation "AXIOM: Each spatial part of an occurrent exists at some location.")
+
+(forall (?occ ?x)
+        (=> (and (instance-of ?occ Occurrent) 
+                 (spatial-part-of ?x ?occ))
+            (exists (?loc)
+                    (located-at ?x ?loc))))
+        
+(documentation "AXIOM:  Occurrents have temporal parts")
+
+(forall (?occ)
+        (=> (instance-of ?occ Occurrent)
+            (exists (?x)
+                    (temp-part-of ?x ?occ))))
+  
+(documentation "AXIOM:  Occurrents have spatial parts")
+
+(forall (?occ)
+        (=> (instance-of ?occ Occurrent)
+            (exists (?x)
+                    (spatial-part-of ?x ?occ))))
+  
+(documentation "AXIOM: Every relative entity necessarily bears the has relation to some entity, or some entity hears that relation to it.")
+
+;; ISSUE: If "has" is not characterized carefully this axiom could
+;; turn out to be trivial.  For example, most independent physical
+;; objects necessarily have parts.  But I believe physical objects per
+;; se are paradigms of independent (hence non-relative) objects for
+;; Sowa.  So the question is how to avoid the consequence that
+;; intuitively independent entities turn out to be relative.
+;; Qualification of the "has" relation seems to be the best way out
+;; here.  For instance, one could introduce a part-of relation and
+;; then explicitly deny that if x is a part of y, then y has x.  But
+;; this approach is dubious -- how does one distinguish legitimate
+;; cases of having -- e.g., a marriage has a husband, a husband a wife
+;; -- from illegitimate?
+
+(forall (?x)
+        (=> (instance-of ?x Relative)
+            (nec (exists (?y)
+                         (or (has ?x ?y)
+                             (has ?y ?x))))))
+
+(documentation "AXIOM: Independent and Relative are disjoint.")
+
+(disjoint Independent Relative)
+
+(documentation "AXIOM: Relative and Mediating are disjoint.")
+
+(disjoint Relative Mediating)
+
+(documentation "AXIOM: Independent and Relative are disjoint.")
+
+(disjoint Independent Relative)
+
+;;;;;;;;;;;;;;;;;;;;;;; SUPPLEMENTARY ONTOLOGY ;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A minimal ontology of timepoints is included below (from the NIST
+;; Process Specfication Language (PSL) project:
+;; http://www.nist.gov/psl).  An analogous ontology for spatial
+;; locations is needed as well.  Sowa has expressed (controversial)
+;; reservations about the assumption that the before relation is a
+;; total ordering; if necessary, the axiom can always be dropped.
+;; Also, sufficient background for the "exists-at" predicate is also
+;; needed -- but this will require some decisions about where events
+;; fit into Sowa's picture, as well as how to ascribe temporal
+;; properties (like the beginning of a thing's existence) to objects.
+
+(documentation beforeEq "Timepoint ?t1 is beforeEq timepoint ?t2 iff ?t1 is before or equal to ?t1.")
+
+(forall (?t1 ?t2)
+        (<=> (beforeEq (?t1 ?t2)
+                       (and (timepoint ?t1) (timepoint ?t2)
+                            (or (before ?t1 ?t2) (= ?t1 ?t2))))))
+
+(documentation "AXIOM: The exists-at relation holds between physical things and timepoints.")
+
+(nth-domain exists-at 1 Physical 2 timepoint)
+
+(documentation "AXIOM: The before relation only holds between timepoints.")
+
+(nth-domain before 1 timepoint 2 timepoint)
+
+(documentation "AXIOM: The before relation is a total ordering.")
+
+(forall (?t1 ?t2)
+  (and (timepoint ?t1) (timepoint ?t2)
+        (or (= ?t1 ?t2) 
+            (before ?t1 ?t2) 
+            (before ?t2 ?t1))))
+
+(documentation "AXIOM: The before relation is irreflexive.")
+
+(forall (?t1)
+        (not (before ?t1 ?t1)))
+
+(documentation "AXIOM: The before relation is transitive.")
+
+(forall (?t1 ?t2 ?t3)
+        (=> (and (before ?t1 ?t2) (before ?t2 ?t3))
+            (before ?t1 ?t3)))

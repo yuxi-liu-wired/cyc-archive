@@ -1,0 +1,179 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Hypergraphs redux -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Tue, 24 Apr 2001 13:42:15 &#45;0400 (EDT) -->
+<!--X-Message-Id: 002501c0cce4$6a4b3f60$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02269.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Hypergraphs redux</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02275.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02258.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd44.html#02269">Thread Index</A></Td>
+<TD><A HREF="msg02270.html">Date Prev</A></TD>
+<TD><A HREF="msg02268.html">Date Next</A>
+</TD>
+<TD><A HREF="mail45.html#02269">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Hypergraphs redux</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Hypergraphs redux</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 24 Apr 2001 10:31:37 -0700</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+All,
+
+Since hypergraphs seem to be a convenient model for relations in an
+ontology, I give here another version of hypergraph (see
+[<A  HREF="http://suo.ieee.org/ontology/msg02252.html">http://suo.ieee.org/ontology/msg02252.html</A>]). In addition, I define a
+morphism for such hypergraphs, getting a category of hypergraphs. We assume
+an "adequate" (possibly denumerable) collection of indexing "variables".
+Indexing variables are used for naming the participants of relations. Tuples
+are important in what follows.
+
+For any set A, a tuple t of A-elements is a collection of (possibly
+duplicate) A-elements that are indexed by variables. The indexing elements
+of t form a subset of variables. More precisely, a tuple t = [arity(t),
+pr(t)] is a pair consisting of a subset of variables arity(t) called the
+arity or valence of t and a map (function) pr(t) : arity(t) -&gt; A called the
+projector of t. We use the exponential notation t \in A^arity(t) for tuples.
+Although tuples are actually maps, we often use the tuple notation t = [tx |
+x \in arity(t)] for a tuple. In particular, if we are using positive
+integers as indexing variables, then we often use the notation t = [t1 ...
+tn] for a tuple with arity {1 ... n}.
+
+Let tuple(A) denote the collection of all A-tuples. For any function f :
+A -&gt; B, there is a tuple function tuple(f) : tuple(A) -&gt; tuple(B), define by
+composition:
+    arity(f(t)) = arity(t) and pr(f(t)) = pr(t) . f;
+that is, if t = [t1 ... tn] then f(t) = [f(t1) ... f(tn)].
+
+A hypergraph is a graph in which generalized edges (called hyperarcs)
+connect multiple nodes. Formally, a hypergraph A = [node(A), edge(A), dA]
+consists of
+    (1) a set of nodes node(A),
+    (2) a set of hyperarcs edge(A), and
+    (3) a vertex function dA : edge(A) -&gt; tuple(node(A)) that maps a
+hyperarc e \in edge(A) to its associated vertex dA(e) \in tuple(node(A)).
+
+A (strict) hypergraph morphism f = [node(f), edge(f)] : A -&gt; B consists of a
+node function node(f) : node(A) -&gt; node(B) and an edge (hyperarc) function
+edge(f) : edge(A) -&gt; edge(B) that satisfy the hypergraph morphism condition
+expressed in terms of vertex functions as follows:
+    (4) edge(f) . dB = dA . tuple(node(f)).
+Or, using more intuitive notation, if e \in edge(A) is a hyperarc of A with
+vertex [a1 ... an], then edge(f)(e) \in edge(B) is a hyperarc of B with
+vertex tuple(node(f))([a1 ... an]) = [node(f)(a1) ... node(f)(an)]. There
+are more relaxed versions of hypergraph morphism, where (4) is just set
+inclusion.
+
+The category Hypergraph has hypergraphs as objects and (strict) hypergraph
+morphisms as arrows (morphisms). The underlying edge functor edge :
+Hypergraph -&gt; Set maps a hypergraph to its edge set and maps a hypergraph
+morphism to its edge function. Same for nodes.
+
+For any n-ary KIF relation
+    (relation rel)
+    (signature rel cls1 ... clsn)
+a relational expression
+    (rel ent1 ... entn)
+can be modelled as a hyperarc with vertex function mapping this to the
+entity tuple
+    [ent1 ... entn].
+
+So the relevant (instance) hypergraph here would have entities as its nodes
+and relation(ship)s as its edges (hyperarcs) -- all at the level of
+instances. The types 'rel' and 'cls1' ... 'clsn', and the signature
+relation, would be represented in another (type) hypergraph.
+
+By regarding expressions as relations, hypergraph morphisms, in possibly a
+more relaxed version, could serve as a suitable base for the definition of
+the "meaning-preserving translations".
+
+Robert E. Kent
+rekent@ontologos.org
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02270.html">RE: SUO: RE: Re: Expostulation</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02268.html">SUO: Re: Graphs, Hypergraphs, Relations, Spans</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02275.html">SUO: Publish free or perish</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02258.html">SUO: Just Ducky!</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail45.html#02269"><strong>Date</strong></a></li>
+<li><a href="thrd44.html#02269"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: RE: SUO Dictionary &#45;&#45; RE: 3 fundamental kinds of SUO terms -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Mon, 2 Apr 2001 16:29:43 &#45;0400 (EDT) -->
+<!--X-Message-Id: 00b701c0bbb0$8c3fbf00$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02009.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: RE: SUO Dictionary -- RE: 3 fundamental kinds of SUO terms</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02012.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02004.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd48.html#02009">Thread Index</A></Td>
+<TD><A HREF="msg02010.html">Date Prev</A></TD>
+<TD><A HREF="msg02008.html">Date Next</A>
+</TD>
+<TD><A HREF="mail50.html#02009">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: RE: SUO Dictionary -- RE: 3 fundamental kinds of SUO terms</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Philip Jackson&quot; &lt;<A HREF="mailto:phil.jackson@computer.org">phil.jackson@computer.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: RE: SUO Dictionary -- RE: 3 fundamental kinds of SUO terms</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 2 Apr 2001 13:07:30 -0700</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Phil,
+
+First of all, I applaud the idea of an SUO dictionary, and I would like to
+test it out.
+
+That said, let me also remark that I am extremely hard-nosed about the
+separation into the three levels (basic, structural and content), since this
+provides an explicit boundary between metalevel and object level. As I
+mentioned before, the basic level provides an interface between the KIF
+language and ontological terminology, the structural level provides a
+framework for the content level, and each domain of discourse at (and in)
+the content level goes about its own business. So I would prefer that this
+fundamental partition be obviously manifest in the SUO dictionary. This also
+has bearing on the question of namespaces and namespace prefixes.
+
+My view of the central purpose of a namespace mechanism is to disambiguate
+the terminology by obviating term clashes. For example, (one can use any
+separating notation, such as '.' or '$' or ':' or '::' etc.) the namespace
+prefixes 'KIF', 'IFF', 'KR', 'EDU' could be used to distinguish the notion
+of "class" mentioned on the list recently, with the prefixed term
+'KIF$class' referring to the class notion in the Basic Ontology of Chris and
+Pat (which I interpret to mean a general collection), the prefixed term
+'IFF$Class' referring to the class notion in my IFF Foundation Ontology
+(which refers the inclusive set-theoretic notion of class, inclusive in the
+sense that sets are classes), the term 'KR$Class' in some object-level
+ontology for knowledge representation (which may refer to the notion of
+"natural kind"), and the term 'EDU$Class' in some object-level ontology for
+education (which may refer to the notion of the class in which students
+enroll).
+
+Now, this idea of obviating term clashes using prefixes is the old notion of
+disjoint union (note that I am not advocating a namespace hierarchy here,
+which looks suspiciously like a file-system path notation -- I am advocating
+a simple flat separating device). From the category-theory viewpoint,
+disjoint unions are specific, concrete examples of the abstract notion of
+coproducts (aka sums). The structural level uses coproducts as a structuring
+mechanism for the content level. More specifically, coproducts are a special
+case of colimits. And they are also the first step in a two-step process for
+specifying colimits: 1st, specify a coproduct; 2nd, specify a quotient on
+the coproduct (for example, this is the way to specify a pushout, a notion
+mentioned elsewhere on this list). This means that there are terms in the
+structural part that are used to specify coproducts, and these may be
+concrete like a disjoint union or they may be more abstract.
+
+One case where this comes up is in the specification of the "use" relation
+between ontologies at the object (content) level. For example, suppose I am
+axiomatizing an ontology describing how higher education can be represented
+in knowledge representation. Here I may want to use both the Education
+Ontology and the Knowledge Representation Ontology. Then I would normally
+make the two assertions
+    "*use* the Education Ontology with the 'EDU' namespace prefix"
+    "*use* the Knowledge Representation Ontology with the 'KR' namespace
+prefix"
+but I could equivalently make the single assertion
+    "*use* the *sum* ontology [Education Ontology with the 'EDU' tag,
+Knowledge Representation Ontology with the 'KR' tag]"
+where the tags are disjoint union tags (thus, indicating a specific,
+concrete coproduct) and structural level terms *use* and *sum* are
+high-lighted.
+
+In addition, we may need namespaces and namespace prefixes within a single
+object-level domain ontology. But, here I think a simple flat namespace may
+still be appropriate.
+
+Bottom line: the abstract notion of sum or coproduct is involved in
+namespaces and namespace prefixing, in general, and ontology use
+specification, in particular.
+
+BTW, all terms in the structural level are strictly mathematical terms --
+they have very precise definitions.
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+-----Original Message-----
+From: Philip Jackson [<A  HREF="mailto:phil.jackson@computer.org">mailto:phil.jackson@computer.org</A>]
+Sent: Saturday, March 31, 2001 8:15 AM
+To: Robert E. Kent; SUO
+Subject: SUO Dictionary -- RE: 3 fundamental kinds of SUO terms
+
+
+Robert,
+
+After pondering your message, I propose to rename the web-enabled "SUO
+Glossary" database as a "SUO Dictionary".
+
+My hope and intent is that the SUO Dictionary can serve as a framework for
+people working on ontological approaches within SUO to develop and post
+definitions for terms used within their ontologies, as well as to define
+terms that are more general. That is, the web-enabled dictionary could
+provide a framework for collaboration to define terms being developed within
+an "expert contribution" or a "working document", etc.
+
+Thus, in working on a particular ontology, users may use the database as a
+repository for defining terms used within an ontology, e.g. "continuant",
+"occurrent", "class", "relation", "predicate", "physical", "abstract",
+"entity", etc.
+
+In addition, the database could be used to define words used more generally
+in describing ontological approaches, such as "perdurantist", "endurantist",
+etc.
+
+Each entry in the dictionary may be specified as belonging to an "ontology
+namespace". Users may create namespaces as they wish, and they can use "dot
+notation" to indicate that a namespace occurs within a hierarchy of
+namespaces, e.g. "FooOntology.Generic.Physics".
+
+Robert, would the current structure of the SUO Dictionary at
+
+<A  HREF="https://www.quickbase.com/db/6urbwpxk">https://www.quickbase.com/db/6urbwpxk</A>
+
+support defining ontological terminology and namespaces according to the
+approach you describe below? If not, are there ways it could be changed to
+make it more suitable for your approach?
+
+Please advise,
+
+Phil Jackson
+-------------------------------------------------------------------
+"Imagination is more important than knowledge. Knowledge is
+limited. Imagination encircles the world." - Einstein
+-------------------------------------------------------------------
+Standard Disclaimers. www.philjackson.prohosting.com
+
+
+&gt; -----Original Message-----
+&gt; From: owner-standard-upper-ontology@ieee.org
+&gt; [<A  HREF="mailto:owner-standard-upper-ontology@ieee.org]On">mailto:owner-standard-upper-ontology@ieee.org]On</A> Behalf Of Robert E.
+&gt; Kent
+&gt; Sent: Friday, March 30, 2001 2:58 PM
+&gt; To: SUO
+&gt; Subject: SUO: 3 fundamental kinds of SUO terms
+
+&lt;snip&gt;
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02010.html">Re: SUO: 3 fundamental kinds of SUO terms</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02008.html">SUO: Re: Factorization Flip-Flop</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02012.html">SUO: [Fwd: Indispensable!]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02004.html">SUO: Degrees Of Intension</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail50.html#02009"><strong>Date</strong></a></li>
+<li><a href="thrd48.html#02009"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

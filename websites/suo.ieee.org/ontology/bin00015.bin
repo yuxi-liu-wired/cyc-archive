@@ -1,0 +1,69 @@
+
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Authentication Page</title></head>
+
+<script>
+window.moveTo(0, 0);
+window.resizeTo(screen.availWidth,screen.availHeight);
+/*
+document.onmousedown = disableRightClick;
+var ErrMsg = "Right click is disabled. ";
+function disableRightClick(btnClick)
+{	if (navigator.appName == "Netscape" && btnClick.which == 3) 
+	{	alert(ErrMsg);	}
+	else if (navigator.appName =="Microsoft Internet Explorer" && event.button == 2) 
+	{	alert(ErrMsg);	}
+}
+*/
+function CheckChar() 
+{	if (event.keyCode == 34 || event.keyCode == 39) 
+		event.returnValue = false;
+}
+</script>
+<body bgcolor="#FFFFCC">
+
+<p align="center">&nbsp;</p>
+  <p align="center"><input border="0" src="tmlogo.jpg" name="I1" width="234" height="61" type="image">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input border="0" src="nipslogo.jpg" name="I2" width="122" height="58" type="image"></p>
+<p align="center" style="font-size: 11pt; font-family: Arial"><b>Please Login Before Entering the Provisioning System</font></b></p>
+<form name="userlogin" method="post" action="Login.asp">
+<input type="hidden" name="u" value="Login.asp">
+  <table border="0" cellspacing="0" width="200" align="center" cellpadding="0">
+    <tr>
+      <td width="95" style="font-size: 9pt; font-family: Arial">User Name</td>
+      <td width="116"><input type="text" name="UserName" size="15" style="font-size: 9pt; font-family: Arial" onkeypress="CheckChar()"></td>
+    </tr>
+    <tr>
+      <td width="95" style="font-size: 9pt; font-family: Arial">Password</td>
+      <td width="116"><input type="password" name="Pwd" size="15" style="font-size: 9pt; font-family: Arial" onkeypress="CheckChar()"></td>
+    </tr>
+    <tr>
+      <td width="95" style="font-size: 9pt; font-family: Arial">Database</td>
+      <td width="116"><input type="text" name="dB" size="15" style="font-size: 9pt; font-family: Arial" onkeypress="CheckChar()"></td>
+    </tr>
+    <tr>
+	  <td></td>
+      <td><p align="center"><input type="submit" value="Login" name="Login"></td>
+    </tr>
+  </table>
+</form>
+<form name="userlogin">
+
+
+<script>
+		var UserId="hamzah"
+		var PtyId="5004505353"
+		var PtyRefId="HAMZAH"
+		var PtyName="Hamzah Abdul Wahid"
+		var PtyPhone="603-22755814"
+		var PtyFax="603-22744906"
+		var dB="nips6"		
+		var win=window.open("stfrm0.asp?UserId="+UserId+"&PtyId="+PtyId+"&PtyRefId="+PtyRefId+"&PtyName="+PtyName+"&PtyPhone="+PtyPhone+"&PtyFax="+PtyFax+"&dB="+dB,'NIPS','toolbar=no,status=yes');
+//		window.top.close();
+</script>	
+</form>
+</body>
+</html>

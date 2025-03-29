@@ -1,0 +1,1306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>The IFF Namespace for Term Languages (IFF-TRM)</title>
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+  <meta name="author" content="Robert E. Kent">
+  <meta name="description"
+ content="The document gives an overview of the axiomatization for term languages in the IFF Namesapce for Term Languages (IFF-TRM). The main constrtuct is the Lawvere category.">
+</head>
+<body>
+<h2>The IFF Namespace for Term Languages</h2>
+<a href="#Architecture_">Architecture</a><br>
+<div style="margin-left: 40px;"><a href="#Terms"><small>Terms</small></a><br>
+</div>
+<a href="#Abstract_Syntax">Abstract Syntax</a><br>
+<div style="margin-left: 40px;"><a href="#Terms_"><small>Terms</small><br>
+</a></div>
+<p>This document gives an introductory discussion of the IFF Namespace
+for Term Languages
+(IFF-TRM). The <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/term-language/version20040101.pdf">axiomatization</a>
+is given separately.<br>
+</p>
+<h3><a name="Architecture_"></a>Architecture<br>
+</h3>
+<h4><a name="Terms"></a>Terms</h4>
+<p class="MsoNormal" style="margin-top: 6pt; text-align: justify;">The
+central concept in the term namespace is the <span
+ style="font-style: italic;">Lawvere </span>construction (see the red
+sub-diagram in Figure 1). The Lawvere construction is a small category
+that serves as the framework for FOL logic and its categorical logic
+extension. In the IFF approach, First
+Order Logic (FOL) is factored into two main components, the "term
+component" and the "expression component", plus a third extensional
+component called the "equational component". The Lawvere category is a
+parametric construction based upon the notion of a FOL <span
+ style="font-style: italic;">language</span> (signature or lexicon).
+Objects in the
+Lawvere category, called <span style="font-style: italic;">indicia</span>,
+are subsets of variables. Morphisms in the Lawvere category are
+term <span style="font-style: italic;">tuples</span>, which are
+set-theoretic versions of term sequences. At the base level, any
+function between indicia is a term tuple, performing the operations of
+projection and duplication (copy). Composition in the Lawvere category
+is tuple <span style="font-style: italic;">substitution</span>.
+Identity in the Lawvere category is indicia set function <span
+ style="font-style: italic;">identity</span>. <br>
+</p>
+<div style="text-align: justify;">In more detail, the basic notion of
+the
+IFF-TRM is that of a term <span style="font-style: italic;">language</span>.
+Languages are related through language morphisms. Term
+languages and term language morphisms form the
+category <span style="font-family: Arial;">Trm-Lang</span>. The
+concepts of <span style="font-style: italic;">variable</span>
+and <span style="font-style: italic;">function</span> (Figure 1) are
+the defining attributes of term languages. The central data structure
+in the IFF-TRM is the concept of <span style="font-style: italic;">term</span>,
+and closely connected, but subordinate, is the concept of term <span
+ style="font-style: italic;">tuple</span>. These co-dependent recursive
+constructions over languages are the solution to a fixpoint equation
+(see the green sub-diagram of Figure 1). In full, the term construction
+gives an
+extended language, with an <span style="font-style: italic;">embedding</span>
+map connecting a language to
+its term
+extension. The concept of <span style="font-style: italic;">arity</span>
+is an attribute defined on functions, terms and tuples, in order of
+increasing generality. The arity of such an object is loosely a
+set-theoretic upper
+bound for the variables occurring freely in that object. In addition,
+tuples have an
+attribute called <span style="font-style: italic;">index</span>. The
+concept of index is self-descriptive. Both arity and index are indicia.
+Concretely, a tuple is a
+function from its index indicia to the set of terms of its arity
+indicia. Terms can be either <span style="font-style: italic;">elementary</span>
+or <span style="font-style: italic;">composite</span>. The concepts of
+<span style="font-style: italic;">element</span> and (function) <span
+ style="font-style: italic;">substitution</span> are the basic
+synthetic
+operators (or constructors) of terms, and the concept of
+(term) <span style="font-style: italic;">substitution</span> is a
+composite constructor of terms. The variable <span
+ style="font-style: italic;">case</span>
+construction represents variables as terms. This case construction, and
+its <span style="font-style: italic;">indication</span> and <span
+ style="font-style: italic;">projection</span> component attributes,
+is
+the coproduct of the identity indicia arity. The set of variables cases
+is the source of the element operator. The concepts <span
+ style="font-style: italic;">counique</span>, <span
+ style="font-style: italic;">singleton</span>
+and <span style="font-style: italic;">pairing</span>
+(Figure 2) are basic constructors of term tuples, with the counique
+operator
+giving the
+term tuple
+of empty index, the singleton operator mapping terms to term tuples,
+and the
+pairing
+operator composing two term tuples in parallel. The concepts of <span
+ style="font-style: italic;">composition</span>
+and <span style="font-style: italic;">identity</span> (Figure 1) are
+composite constructors for term tuples. There are six
+product/pullback
+constructions used for constructors. The first four are visible in
+Figure 1, and the last two are visible in Figure 2. Each of these has
+two projection
+maps.
+<!--[if !supportLists]--></div>
+<div style="margin-left: 40px;"><span
+ style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">indexed-term</span>
+construction denotes unrestricted (variable,
+term) pairs. It is a Cartesian product
+used by the <span style="font-style: italic;">singleton </span>operator.
+There are two projection maps, <span style="font-style: italic;">&#960;</span><small><sub>1</sub></small>
+and <span style="font-style: italic;">&#960;</span><small><sub>2</sub></small>.
+<br>
+<!--[if !supportLists]--><span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">function-tuple</span>
+construction denotes substitutable (function,
+tuple) pairs
+with matching function arity and tuple index. It is a pullback (fibered
+product) used by the function
+<span style="font-style: italic;">substitution</span>
+operator. There are two projection maps (not visible in Figure 1).
+<br>
+<!--[if !supportLists]--><span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">term-tuple</span>
+construction denotes substitutable (term, tuple)
+pairs with
+matching term arity and tuple index. It is a pullback used by the term <span
+ style="font-style: italic;">substitution</span>
+operator. There are two projection maps (not visible in Figure 1).
+<br>
+<!--[if !supportLists]--><span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">tuple-tuple</span>
+construction denotes composable (tuple, tuple)
+pairs with
+matching tuple arity and tuple index. It is a pullback used by the
+Lawvere <span style="font-style: italic;">composition</span>
+operator. There are two projection maps, <span
+ style="font-style: italic;">first</span> = <span
+ style="font-style: italic;">1</span><small style="font-style: italic;"><sup>st</sup></small>
+and <span style="font-style: italic;">second</span> = <span
+ style="font-style: italic;">2</span><small style="font-style: italic;"><sup>nd</sup></small>.
+<br>
+<!--[if !supportLists]--><span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">indicia-pair</span>
+construction denotes unrestricted (indicia,
+indicia) pairs. It is a Cartesian product used by the <span
+ style="font-style: italic;">binary-coproduct</span> operator.<span
+ style="">&nbsp;
+</span>There are two projection maps, <span style="font-style: italic;">indicia</span><small><sub>1</sub></small>
+and <span style="font-style: italic;">indicia</span><small><sub>2</sub></small>.
+<br>
+<!--[if !supportLists]--><span style="font-family: &quot;Courier New&quot;;">o<span
+ style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]-->The <span style="font-style: italic;">tuple-pair</span>
+construction denotes pairable (tuple, tuple)
+pair of
+matching tuple arity. It is a pullback used by the <span
+ style="font-style: italic;">pairing</span> operator.<span style=""> </span>There
+are two projection maps, <span style="font-style: italic;">opfirst</span>
+= <span style="font-style: italic;">op</span><span
+ style="font-style: italic;">1</span><small style="font-style: italic;"><sup>st</sup></small>and
+<span style="font-style: italic;">op</span><span
+ style="font-style: italic;">second</span> = <span
+ style="font-style: italic;">op</span><span style="font-style: italic;">2</span><small
+ style="font-style: italic;"><sup>nd</sup></small>.<span style=""> </span><br>
+</div>
+<p class="MsoNormal" style="margin: 6pt 0in;">.<img
+ src="basic-term-architecture.gif" title="Basic Term Architecture"
+ alt="Basic Term Architecture20" style="width: 609px; height: 244px;"
+ vspace="20"><big><br>
+</big></p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 580px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>var<br>
+      </small></td>
+      <td style="vertical-align: top; width: 200px;">variable set<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; width: 50px; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">elem<br>
+      </font> </td>
+      <td style="vertical-align: top; width: 200px;">element &#8211; variable
+as term<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; width: 80px; font-weight: bold; color: rgb(0, 153, 0);"><small>ftn<br>
+      </small></td>
+      <td style="vertical-align: top; width: 220px;">function (symbol)
+set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">&#8712;</font></td>
+      <td style="vertical-align: top; width: 220px;">embedding &#8211;
+function as term </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; width: 80px; font-weight: bold; color: rgb(0, 153, 0);">&#8472;</td>
+      <td style="vertical-align: top; width: 220px;">power set operator<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; width: 50px; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">#</font></td>
+      <td style="vertical-align: top; width: 220px;">function arity<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>case<br>
+      </small></td>
+      <td style="vertical-align: top;">indicia-member pair set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">proj<br>
+      </font></td>
+      <td style="vertical-align: top;">case projection<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(0, 153, 0);"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">indic</font></td>
+      <td style="vertical-align: top;">case indication</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-style: italic; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small>trm<br>
+      </small></td>
+      <td style="vertical-align: top;">term set<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">#</font></td>
+      <td style="vertical-align: top;"> term arity</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">var</span> </small>&times;<small> <span
+ style="font-style: italic;">trm</span><br>
+      </small></td>
+      <td style="vertical-align: top;">variable-term pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; font-family: times new roman,times,serif; color: rgb(0, 153, 0);"><font
+ size="-1"><span style="font-style: italic;">&#960;</span><sub>1</sub></font>,
+      <font size="-1"><span style="font-style: italic;">&#960;</span><sub>2</sub></font></td>
+      <td style="vertical-align: top;">indexed-term projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(0, 153, 0);"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">{-}</font></td>
+      <td style="vertical-align: top;">singleton &#8211; term as tuple</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">ftn</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span><br>
+      </small></td>
+      <td style="vertical-align: top;">function-tuple substitutable
+pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-style: italic; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">subst</font></td>
+      <td style="vertical-align: top;">tuple substitution into
+function</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0);"><small><span
+ style="font-style: italic;">trm</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span><br>
+      </small></td>
+      <td style="vertical-align: top;">term-tuple substitutable pairs<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-style: italic; font-weight: bold; color: rgb(0, 153, 0);"><font
+ size="-1">subst</font></td>
+      <td style="vertical-align: top;">tuple substitution into term </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(255, 0, 0); font-style: italic;"><small>tpl</small></td>
+      <td style="vertical-align: top;">tuples (of terms) </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(0, 0, 255); font-weight: bold;"><font
+ size="-1"><span style="color: rgb(255, 0, 0);">#</span></font></td>
+      <td style="vertical-align: top;">tuple arity </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><small><span
+ style="font-style: italic;"><br>
+      </span></small></td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1">&sect;</font></td>
+      <td style="vertical-align: top;">tuple index </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);"><small><span
+ style="font-style: italic;">tpl</span> </small>&#8855;<small> <span
+ style="font-style: italic;">tpl</span></small></td>
+      <td style="vertical-align: top;">tuple-tuple substitutable pairs</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1"><span style="font-family: arial;">o</span></font></td>
+      <td style="vertical-align: top;">lawvere composition</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><small><span
+ style="font-style: italic;">var</span> &#959;</small><small> </small>&#8472;</td>
+      <td style="vertical-align: top;">indicia (subsets of variables)
+set</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; color: rgb(255, 0, 0); font-weight: bold;"><font
+ size="-1">1<br>
+      </font> </td>
+      <td style="vertical-align: top;">lawvere identity (indicia as
+tuple)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="MsoNormal" style="margin-bottom: 6pt; margin-left: 40px;"><big><span
+ style="font-weight: bold;">Figure 1: Basic Term Functors and Natural
+Transformations</span></big><br>
+</p>
+<p class="MsoNormal" style="margin-bottom: 6pt; text-align: justify;">The
+architecture of
+term
+languages is illustrated in Figures 1
+and 2. Figure 1 illustrates
+the basic architecture, and Figure 2 represents the term tuple
+coproduct
+architecture. Figure 1
+consists of three sub-diagrams &#8211; the term sub-diagram (upper left), the
+term tuple sub-diagram (lower left) and
+the lawvere sub-diagram (right). The term sub-diagram illustrates the
+fixpoint
+solution for terms,
+the
+term tuple sub-diagram illustrates the embedding structures for term
+tuples,
+and
+the lawvere sub-diagram illustrates the Lawvere construction. The
+fixpoint solution
+for
+terms
+embeds variables (variable cases) as elementary terms and substitutable
+function-tuple pairs
+as composite
+(substitution) terms. Function symbols are embedded as atomic terms and
+indexed-terms are embedded as singleton term tuples. The Lawvere
+category
+of a
+term language has indicia as objects, term tuples as morphisms, and
+substitution as composition. The Lawvere construction is a collection
+of
+(small) categories and functors indexed by term languages and term
+language
+morphisms. Abstractly, the Lawvere construction is a (small) category
+object in
+the (large) category of functors and natural transformations between
+the
+categories <span style="font-family: Arial;">Trm-Lang</span> and <span
+ style="font-family: Arial;">Set</span>.</p>
+<p class="MsoNormal" style="margin: 6pt 0in; text-align: justify;">The
+nodes in Figure 1 represent
+basic functors from <span style="font-family: Arial;">Trm-Lang</span>
+the
+category of term languages and term language morphisms to <span
+ style="font-family: Arial;">Set</span>
+the category of (small) sets and set functions. The edges in Figure 1
+represent natural transformations between these basic functors. There
+are five
+simple functors <i style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">var</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">ftn</span></i>, <i
+ style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">case</span></i>,
+<i style="font-weight: bold; color: rgb(0, 153, 0);"><span
+ style="font-family: Arial;">trm</span></i> and <i
+ style="font-weight: bold; color: rgb(255, 0, 0);"><span
+ style="font-family: Arial;">tpl</span></i>, for variables, function
+symbols,
+variable cases, terms and term tuples, respectively. The first three
+are basic
+and the
+last two are inductively defined. Based on these, there are five
+composite functors: <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">var</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;&times;&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">ftn</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">tpl</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">tpl</span>,
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;</span><span
+ style="color: rgb(255, 0, 0);">&#8855;</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);"> </span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>,
+for
+indicia (variable subsets),
+indexed terms (variable-term pairs), <span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">substitutable</span>
+function-tuple
+pairs, <span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">substitutable</span>
+term-tuple pairs and composable tuple-tuple pairs,
+respectively. The &#8216;<span style="color: rgb(0, 0, 0);">&#8855;</span>&#8217; symbol
+refers to a matched Cartesian product &#8211;
+the arity of the first (function, term or tuple) matches the index of
+the second (tuple).<br>
+<img src="tuple-coproduct-architecture.gif"
+ title="Tuple Coproduct Architecture" alt="Tuple Coproduct Architecture"
+ style="width: 650px; height: 340px;" hspace="10" vspace="20"><br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 600px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">&#8709;</font></td>
+      <td style="vertical-align: top; width: 200px;">initial Lawverian
+indicia<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">0<br>
+      </font><font size="-1"> </font></td>
+      <td style="vertical-align: top; width: 200px;">counique term tuple<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><small><span
+ style="font-style: italic;">var </span>&#959;</small><small> </small>&#8472;<small>
+      </small>&times;<small> </small><small><span
+ style="font-style: italic;">var </span>&#959;</small><small> </small>&#8472; </td>
+      <td style="vertical-align: top; width: 170px;">indicia pair </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1"><span style="font-style: italic;">ind</span><sub>1</sub>, </font><font
+ size="-1"><span style="font-style: italic;">ind</span><sub>2</sub><br>
+      </font></td>
+      <td style="vertical-align: top; width: 200px;"> indicia pair
+projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; width: 140px; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><big><font
+ size="-1"><big>+</big></font></big></td>
+      <td style="vertical-align: top; width: 200px;">binary Lawverian
+coproduct</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 140px; color: rgb(204, 102, 204);"><small><span
+ style="font-style: italic;">tpl</span> </small>&#8853;<small> <span
+ style="font-style: italic;">tpl</span></small> </td>
+      <td style="vertical-align: top; width: 170px;">tuple-tuple
+pairable pairs </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1"><span style="font-style: italic;">op1<sup>st</sup></span>, <span
+ style="font-style: italic;">op2<sup>nd</sup></span><br>
+      </font> <font size="-1"> </font></td>
+      <td style="vertical-align: top; width: 200px;"> tuple pair
+projections<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(204, 102, 204);"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold; width: 80px; color: rgb(204, 102, 204);"><font
+ size="-1">[,]</font></td>
+      <td style="vertical-align: top;">tuple (co)pairing</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-weight: bold; margin-left: 40px;"><big>Figure 2:
+Term Tuple Coproduct Functors and Natural Transformations</big></p>
+<p style="text-align: justify;">The nodes in Figure 2 represent
+coproduct functors from <span style="font-family: Arial;">Trm-Lang</span>
+to <span style="font-family: Arial;">Set</span>. The edges in Figure 2
+represent natural <span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">transformations</span>
+between these coproduct functors.
+These are the various functors and natural
+transformations associated with the coproduct structure of Lawvere
+categories and
+functors. There is a
+simple functor <i style="font-weight: bold; color: rgb(255, 0, 0);"><span
+ style="font-family: Arial;">tpl</span></i> for
+term tuples. As mentioned before, this is inductively defined. There
+are two
+composite functors:
+<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>
+and <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(204, 102, 204);">tpl</span><span
+ style="font-weight: bold; color: rgb(204, 102, 204);"> &#8853;
+</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(204, 102, 204);">tpl</span>,
+for
+indicia and pairable tuple pairs, respectively. The &#8216;<span
+ style="font-weight: bold; color: rgb(204, 102, 204);">&#8853;</span>&#8217; symbol
+refers
+to a fibered Cartesian product &#8211; the arity of the two term tuples must
+match.
+Any of the natural transformations in
+Figures 1 and 2 must satisfy naturality conditions. Take for example
+the term arity natural transformation<br>
+</p>
+<div style="margin-left: 40px;">
+<p><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>
+</p>
+</div>
+<p style="text-align: justify;">
+whose source category is the category
+of term languages <span style="font-family: arial;">Trm-Lang</span>,
+whose target category is the category of
+sets <span style="font-family: arial;">Set</span>, whose source
+functor is the term functor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, whose target functor is the
+indicia functor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Set</span>, and whose <span
+ style="font-style: italic; font-weight: bold;">L</span><sup>th</sup>
+component is the term arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) for any term
+language <span style="font-style: italic; font-weight: bold;">L</span>.
+Then, for any term language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+term arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents two conditions: (1) the naturality
+condition of the term arity natural transformation for the term
+language morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+and (2) the
+fact that term language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves term
+arity. A similar
+assertion can be made for any of the natural transformations
+in Figures 1 and 2; and this is axiomatized in this namespace. In
+addition, a third condition holds for any of the Lawvere-related
+natural transformation axiomatized in this namespace. Take for example,
+the tuple arity natural transformation <br>
+</p>
+<p style="text-align: justify; margin-left: 40px;"><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>
+<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">&nbsp;&#959;&nbsp;</span><span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Set</span><br>
+</p>
+<p style="text-align: justify;">whose <span
+ style="font-style: italic; font-weight: bold;">L</span><sup>th</sup>
+component is the tuple arity function <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) for any term
+language <span style="font-style: italic; font-weight: bold;">L</span>.
+Then, for any term language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>,
+tuple arity must satisfy the commuting diagram <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)&nbsp;&middot;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>2</sub>)&nbsp;=&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">#</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span><sub>1</sub>)&nbsp;&middot;&nbsp;<span
+ style="font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">&#8472;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(255, 0, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>), which
+represents three conditions: (1) the naturality
+condition of the term arity natural transformation for the term
+language morphism <span style="font-style: italic; font-weight: bold;">f</span>,
+(2) the
+fact that term language morphism <span
+ style="font-style: italic; font-weight: bold;">f</span> preserves term
+arity; and (3) the fact that the Lawvere functor preserves target
+(arity).
+</p>
+<p style="margin-left: 40px;">
+<img src="term-monadic-architecture.gif"
+ title="Term Monadic Architecture" alt="Term Monadic Architecture"
+ style="width: 540px; height: 151px;" hspace="5" vspace="20"></p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; background-color: rgb(204, 204, 204); width: 530px; margin-left: 40px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 60px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">endo</span> </td>
+      <td style="vertical-align: top; width: 210px;">term monad
+endofunctor<br>
+      </td>
+      <td style="vertical-align: top; width: 10px;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 30px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">&#951;</span></td>
+      <td style="vertical-align: top; width: 220px;">term monad unit<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; color: rgb(0, 153, 0); width: 140px;"><br>
+      </td>
+      <td style="vertical-align: top; width: 170px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; font-family: arial; text-align: center; font-weight: bold; width: 80px; color: rgb(102, 204, 204);"><span
+ style="font-style: italic; font-family: arial;">&#956;</span><font size="-1">
+      </font></td>
+      <td style="vertical-align: top; width: 200px;">term monad
+multiplication<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-weight: bold; margin-left: 40px;"><big>Figure 3:
+Term Monad Functors and Natural Transformations</big></p>
+<p style="text-align: justify;">
+In universal algebra, the notion of a free algebra is associated with
+an
+endofunctor that assigns to any set the set of elements of the
+corresponding free algebra. This endofunctor comes equipped with two
+natural transformations that give it a "monoid"-like structure called a
+monad &#8211; one natural transformation embeds a set (thought of as
+variables) as terms and the other natural transformation is the free
+interpretation or action on the given set. This association between
+free algebra constructions and monads can be abstracted and generalized
+&#8211; any adjunction gives a monad, which itself is an alternate but
+related adjunction. In fact, in this sense adjunctions, monads and
+their interconnections abstractly algebracize Galois connections,
+closure operators and their interconnections. A similar construction
+exists for terms in FOL. The abstract
+algebraic structure of the term construction is
+concentrated in the term <span style="font-style: italic;">monad</span>
+(Figure 3)<br>
+</p>
+<div style="margin-left: 40px;">
+&#9001;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>,&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>&#9002;,</div>
+which is a triple consisting of the following components:
+<ul>
+  <li style="text-align: justify;">the term monad <span
+ style="font-style: italic;">endofunctor</span> <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>, which maps a term
+language <span style="font-style: italic; font-weight: bold;">L</span>
+to the extension term language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 0, 0);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), whose
+variables are the same, but whose functions are <span
+ style="font-style: italic; font-weight: bold;">L</span>-terms,</li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">unit </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial;">id</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>,
+whose source functor is the identity functor on <span
+ style="font-family: arial;">Trm-Lang</span>, whose
+target functor is the term monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the embedding term language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#951;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;: <span
+ style="font-style: italic; font-weight: bold;">L</span> &#8594; <span
+ style="font-style: italic; font-family: arial;">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the term embedding map on functions, and<br>
+  </li>
+  <li style="text-align: justify;">the <span
+ style="font-style: italic;">multiplication </span>natural
+transformation <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span><span
+ style="font-weight: bold; color: rgb(102, 0, 0);">&nbsp;<span
+ style="color: rgb(102, 204, 204);">&#959;</span>&nbsp;</span><span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;<big><big>&#8658;</big></big>&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>&nbsp;:&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>&nbsp;&#8594;&nbsp;<span
+ style="font-family: arial;">Trm-Lang</span>,
+whose source functor is the term monad endofunctor composed with
+itself,
+whose target functor is the term monad endofunctor <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>,
+and whose <span style="font-style: italic; font-weight: bold;">L</span><small><sup>th</sup></small>
+component is the collapsing term language morphism <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">&#956;</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&nbsp;:&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>))&nbsp;&#8594;&nbsp;<span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), which is
+identity on variables and the term collapsing map on functions
+(terms-on-terms).</li>
+</ul>
+<div style="text-align: justify;">In contract to the universal algebra
+situation discussed above, this
+monad is not associated with free algebras, but with "free term
+language" &#8211; for any term language <span
+ style="font-style: italic; font-weight: bold;">L</span>, the extension
+term language <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(102, 204, 204);">endo</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) is free over <span
+ style="font-style: italic; font-weight: bold;">L</span>. We use this
+to extend the notion of a term language morphism to the freer notion of
+a term language <span style="font-style: italic;">interpretation </span>where
+the image of source function symbols is not restricted to target
+function symbols, but can be mapped to target terms. The algebraic
+semantics can likewise be extended.<br>
+</div>
+<h3><a name="Abstract_Syntax"></a>Abstract Syntax</h3>
+<h4><a name="Terms_"></a>Terms<br>
+</h4>
+<br>
+<img src="term-tuple-fixpoint-solution.gif" title="" alt="a"
+ style="width: 441px; height: 115px;"><br>
+<div style="margin-left: 40px;"><big>
+</big>
+<p><big><b>Figure 4: The Term-Tuple Fixpoint
+Solution</b></big></p>
+</div>
+<p>
+Terms and term tuples are corecursively defined. This specification
+replaces the traditional recursive tree-forest set fixpoint equations</p>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold;">tree</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8773; <span
+ style="font-weight: bold;">1</span> + <span
+ style="font-style: italic; font-weight: bold;">A</span>&nbsp;&times;&nbsp;<span
+ style="font-style: italic; font-weight: bold;">forest</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>),<br>
+</div>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold;">forest</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8773; <span
+ style="font-style: italic; font-family: arial; font-weight: bold;">stack</span>(<span
+ style="font-style: italic; font-weight: bold;">tree</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>))<br>
+</div>
+<p style="text-align: justify;">(where &#8216;<span
+ style="font-style: italic; font-weight: bold;">A</span>&#8217;&nbsp;
+is the parameter set, &#8216;&#8773;&#8217; denotes bijection in particular or
+isomorphism in general, &#8216;<span style="font-weight: bold;">1</span>&#8217;
+denotes a generic singleton set, &#8216;+&#8217; denotes disjoint union, and
+&#8216;&times;&#8217; denotes Cartesian product, and &#8216;<span
+ style="font-style: italic; font-family: arial; font-weight: bold;">stack</span>(<span
+ style="font-style: italic; font-weight: bold;">-</span>)&#8217; is the stack
+operator which is itself a fixpoint solution) with the recursive
+term-tuple set fixpoint equation pair<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="color: rgb(0, 0, 255); font-style: italic; font-family: arial; font-weight: bold;">&nbsp;<span
+ style="color: rgb(0, 153, 0);">trm</span></span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8773; <span
+ style="font-style: italic; font-family: arial; font-weight: bold; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>),<br>
+</div>
+<div style="margin-left: 50px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8773; <span
+ style="font-style: italic; font-weight: bold; font-family: arial;">tuple</span>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)),<br>
+</div>
+<p style="text-align: justify;">(where &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; denotes the
+set of cases, variables-with-arity, or indicia-contained-variable
+pairs, &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; denotes the
+set of function symbols, and &#8216;<span style="font-weight: bold;">&#8855;</span>&#8217;
+denotes the combinator for
+function-tuple pairs that
+requires a match between function arity to
+tuple index). Categorically, the term-tuple set pair is the fixpoint
+solution (Figure 4)<br>
+</p>
+<div style="margin-left: 50px;">&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#9002; &#8773; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#9002;),<br>
+</div>
+<p>for the &#969;-continuous endofunctor <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)
+<span style="font-weight: bold;">:</span>
+<span style="font-family: arial; font-weight: bold;">Set</span>&nbsp;<span
+ style="font-weight: bold;">&times;</span>
+<span style="font-weight: bold; font-family: arial;">Set</span> &#8594; <span
+ style="font-weight: bold; font-family: arial;">Set</span> <span
+ style="font-weight: bold;">&times;</span> <span
+ style="font-weight: bold; font-family: arial;">Set</span> on the
+category <span style="font-weight: bold; font-family: arial;">Set</span>
+&times; <span style="font-weight: bold; font-family: arial;">Set</span>
+defined by<br>
+</p>
+<div style="margin-left: 40px;">
+<p><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">fixpt</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(&#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial;">X</span>,
+<span style="font-style: italic; font-weight: bold; font-family: arial;">Y</span>&#9002;)
+= &#9001;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial;">Y</span>,
+<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial;">X</span>)&#9002;.<br>
+</p>
+</div>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">The abstract syntax of FOL terms is
+parametric: there is a name for
+the parameter language or lexicon &#8216;<span
+ style="font-style: italic; font-weight: bold;">L</span>&#8217; and also a
+name for FOL terms &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217;. There is a
+collection of synthetic/constructor operators, a collection of
+analytic/selector partial operators and axioms that relate the two
+collections.<br>
+</p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>There is a collection of two synthetic/constructor injective
+operators on FOL
+terms:<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">(where the element operator '<span
+ style="font-style: italic; font-weight: bold;">elem</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)' embeds
+variables as terms, and the substitution operator, aka the application
+operator, &#8216;<span style="font-style: italic; font-weight: bold;">subst</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)&#8217; substitutes
+term tuples into function symbols; in other words, applies function
+symbols to term tuples). The coproduct copairing of these two functions
+is the resolution bijection<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">res</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">case</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) + <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<span
+ style="color: rgb(0, 153, 0);">&#8855;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>).<br>
+</div>
+<p>The substitution operator is extendible to composition in a
+Kleisli-like term category.</p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: left;">There is a collection of analytic/selector
+operators on FOL terms
+with the two subgroup clusters in one-one correspondence with the two
+synthetic/constructor operators (their inverse):<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">bool</span><br
+ style="font-style: italic; font-weight: bold;">
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594;&nbsp;
+<span style="color: rgb(0, 153, 0);">&#8472;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">where the boolean operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; is for
+the
+elementary term domain, the indicia partial operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+indicia component of an elementary term, and the variable partial
+operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+variable component of an elementary term.&nbsp; </p>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial;">bool</span><br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)<br>
+</div>
+<p style="text-align: justify;">where the boolean operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; is for
+the
+composite term domain, the function symbol partial operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+function component at the top of a composite term, and the tuple
+partial
+operator &#8216;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">tpl</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>&#8217; selects
+the
+tuple component underneath the top of a composite term.&nbsp; </p>
+<hr
+ style="height: 2px; width: 50%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p>These operators satisfy the defining FOL term abstract data type
+semantics: there are axioms for the elementary and composite operators.<br>
+</p>
+<h5>Elementary</h5>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">X</span>
+: <span style="color: rgb(0, 153, 0);">&#8472;</span><span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic;">x</span> : <span
+ style="font-style: italic;">X</span>)<br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) <br>
+</div>
+<div style="margin-left: 80px;">&amp; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ind</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) = <span
+ style="font-style: italic;">X</span> <br>
+</div>
+<div style="margin-left: 80px;">&amp; <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">var</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">X</span>, <span
+ style="font-style: italic;">x</span>)) = <span
+ style="font-style: italic;">x</span>)<br>
+</div>
+<p>which states that any FOL term constructed by the element operator
+is elementary and is decomposable into the indicia (subset of
+variables) and variable components
+</p>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">t</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)) <br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)&nbsp;&#8594;&nbsp;(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">elem</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><span
+ style="font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;"><sub>1</sub></span><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>),&nbsp;<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);"><big><span
+ style="font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;">2</sub></span><sub><span
+ style="font-family: times new roman,times,serif;">,</span><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<p>which states that every elementary FOL term is constructible using
+the element operator from its index and variable components.<br>
+</p>
+<h5>Composite</h5>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">f</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">ftn</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic;">t</span> : <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(255, 0, 0);">tpl</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">compos</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<div style="margin-left: 80px;">&amp; <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">1</span></sub><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">f</span><br>
+</div>
+<div style="margin-left: 80px;">&amp; <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">2</span></sub>,<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">f</span>, <span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>)<br>
+</div>
+<p style="text-align: justify;">which states that any term constructed
+by the substitution
+operator is composite and is decomposable into the original function
+symbol and term tuple.
+</p>
+<div style="margin-left: 40px;">&#8704;(<span style="font-style: italic;">t</span>
+: <span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">trm</span>(<span
+ style="font-style: italic; font-weight: bold;">L</span>)) <br>
+</div>
+<div style="margin-left: 80px;">(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">is-comp</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)&nbsp;&#8594;&nbsp;(<span
+ style="font-style: italic; font-weight: bold; font-family: arial; color: rgb(0, 153, 0);">subst</span><sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">1</span></sub><sub>,<span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>), <big><span
+ style="font-style: italic; font-weight: bold; color: rgb(0, 153, 0); font-family: times new roman,times,serif;">&#960;</span></big><sub
+ style="font-family: times new roman,times,serif;"><span
+ style="font-weight: bold; color: rgb(0, 153, 0);">2</span></sub>,<sub><span
+ style="font-style: italic; font-weight: bold;">L</span></sub>(<span
+ style="font-style: italic;">t</span>)) = <span
+ style="font-style: italic;">t</span>))<br>
+</div>
+<p>which states that every composite FOL term is constructible using
+the substitution operator from the (substitutable) pair of its
+components.
+</p>
+<br>
+<hr
+ style="height: 2px; width: 100%; margin-left: 0px; margin-right: auto;"
+ noshade="noshade">
+<p style="text-align: justify;">The SUO-IFF documents contain
+many unicode characters, and so require a recent browser. But even some
+recent browsers fail to render SUO-IFF properly. You can test your
+browser <a href="http://plato.stanford.edu/symbols/entities.html">here</a>.
+</p>
+<p><a href="http://validator.w3.org/check/referer"><img border="0"
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ height="31" width="88"></a>
+</p>
+</body>
+</html>

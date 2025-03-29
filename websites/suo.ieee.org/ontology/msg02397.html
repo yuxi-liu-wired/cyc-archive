@@ -1,0 +1,328 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Tue, 8 May 2001 09:46:37 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3AF7F449.FB6305D8@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E42703AE1812@LONSC0S0038 -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02397.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02396.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02410.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd42.html#02397">Thread Index</A></Td>
+<TD><A HREF="msg02398.html">Date Prev</A></TD>
+<TD><A HREF="msg02396.html">Date Next</A>
+</TD>
+<TD><A HREF="mail43.html#02397">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Standardize Unto Others &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</LI>
+<LI><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 08 May 2001 09:27:37 -0400</LI>
+<LI><em>CC</em>: Matthew West &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02396.html">DE057CA9F46ED2118C4900805F85E42703AE1812@LONSC0S0038</A>&gt;</LI>
+<LI><em>Reply-To</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+Matthew West wrote:
+&gt; 
+&gt; Dear Colleagues,
+&gt; 
+&gt; There seems to be a question of what "reduction of a triadic relation
+&gt; to dyadic relations" means to different people.  So using Jon's example
+&gt; of an AND truth table, here is what I mean.  I mean that for any n-ary
+&gt; relation I can create a set of at most n binary relations from which
+&gt; the original n-ary relation can be created as a view.
+&gt; 
+&gt; I don't have skills in SQL but using Microsoft Access I was able
+&gt; to construct the following tables and a view definition based on
+&gt; them using the graphical tools of Access. The SQL presented below
+&gt; is an output from this.
+&gt; 
+&gt; Here are the results:
+&gt; 
+&gt; Truth_Value_Table
+&gt; o------------o
+&gt; |Truth_Value |
+&gt; o------------o
+&gt; |False       |
+&gt; |True        |
+&gt; o------------o
+&gt; 
+&gt; AND_Truth_Table
+&gt; o---------o
+&gt; |Row      |
+&gt; o---------o
+&gt; |AND-Row-1|
+&gt; |AND-Row-2|
+&gt; |AND-Row-3|
+&gt; |AND-Row-4|
+&gt; o---------o
+&gt; 
+&gt; AND_Argument1
+&gt; o-----------o----------------o
+&gt; |Row        |    Arg1-Value  |
+&gt; |AND-Row-1  |    True        |
+&gt; |AND-Row-2  |    True        |
+&gt; |AND-Row-3  |    False       |
+&gt; |AND-Row-4  |    False       |
+&gt; o-----------o----------------o
+&gt; 
+&gt; AND_Argument2
+&gt; o-----------o----------------o
+&gt; |Row        |    Arg2-Value  |
+&gt; |AND-Row-1  |    True        |
+&gt; |AND-Row-2  |    False       |
+&gt; |AND-Row-3  |    True        |
+&gt; |AND-Row-4  |    False       |
+&gt; o-----------o----------------o
+&gt; 
+&gt; AND_Result
+&gt; o-----------o----------------o
+&gt; |Row        |    Result-Value|
+&gt; |AND-Row-1  |    True        |
+&gt; |AND-Row-2  |    False       |
+&gt; |AND-Row-3  |    False       |
+&gt; |AND-Row-4  |    False       |
+&gt; o-----------o----------------o
+&gt; 
+&gt; AND_Truth_Table_Query (Query Definition)
+&gt; 
+&gt; SELECT AND_Argument1.[Arg1-Value],
+&gt;        AND_Argument2.[Arg2-Value],
+&gt;        AND_Result.[Result-Value]
+&gt; FROM
+&gt;   (AND_Argument1
+&gt;      INNER JOIN AND_Argument2
+&gt;        ON AND_Argument1.Row = AND_Argument2.Row)
+&gt;      INNER JOIN AND_Result
+&gt;        ON AND_Argument1.Row = AND_Result.Row;
+&gt; 
+&gt; (Result of executing the query)
+&gt; o-----------o------------o-------------o
+&gt; |Arg1-Value | Arg2-Value | Result-Value|
+&gt; o-----------o------------o-------------o
+&gt; |True       | True       | True        |
+&gt; |True       | False      | False       |
+&gt; |False      | True       | False       |
+&gt; |False      | False      | False       |
+&gt; o-----------o------------o-------------o
+&gt; 
+&gt; From where I sit doing this is trivial technically.
+&gt; And when I say that a triadic relation can be "reduced" to
+&gt; a dyadic form, this (and not something else) is what I mean.
+&gt; 
+&gt; The question is, why and when might this be useful?
+&gt; The answer is that many n-ary relations are overconstrained.
+&gt; I.e. they are not a good model because there are many cases
+&gt; they do not support.
+&gt; 
+&gt; This is particularly so when activities are represented by relations.
+&gt; Take giving as an example.  Using a relation to represent this does
+&gt; not only require that there is a giver, a receiver, and a gift, but
+&gt; it requires that there is not more than one giver, receiver, and gift.
+&gt; Whilst it is true that there are some giving acts for which this
+&gt; constraint holds, it is not true for all giving activities.
+&gt; And whilst you could define relations for all the possible
+&gt; combinations of different numbers of givers, receivers,
+&gt; and gifts, this is not particularly practical.
+&gt; 
+&gt; So how does changing the representation of an activity from
+&gt; a relation to a set and some binary relations help?
+&gt; 
+&gt; The answer is that it removes the constraints.
+&gt; Actually it removes both the minimum constraints
+&gt; and the maximum constraints.
+&gt; 
+&gt; Even removing the minimum constraint can be useful
+&gt; from an epistemological viewpoint.  So whilst in
+&gt; an act of giving ontologically we know that there
+&gt; must be at least one giver, one given and one gift,
+&gt; do we necessarily have knowledge of each of these
+&gt; for any giving activity?  More particularly do we
+&gt; always have to care?
+&gt; 
+&gt; Example:  Steve Redgrave was given his 5th gold medal in
+&gt; rowing at the Sydney Olympics.  Do we care who gave it to him?
+&gt; Would we wish to be prevented from recording anything about this
+&gt; giving act if we could not identify the person who gave it to him?
+&gt; I think not.
+&gt; 
+&gt; Of course there are times when you do want to require some information.
+&gt; Explicit axioms can be used to support this.  For example, if you do not
+&gt; have a product ordered and a customer at least, then there is no purpose
+&gt; to accepting only partial information as an order.
+&gt; 
+&gt; Regards
+&gt;       Matthew
+&gt; ===============================================================
+&gt; Matthew West                    <A  HREF="http://www.matthew-west.org.uk/">http://www.matthew-west.org.uk/</A>
+&gt; 
+&gt; Principal Consultant                   Shell Visiting Professor
+&gt; Operations &amp; Asset Management            The Keyworth Institute
+&gt; Shell Services International            The University of Leeds
+&gt; <A  HREF="http://www.shellservices.com/">http://www.shellservices.com/</A>  <A  HREF="http://www.keyworth.leeds.ac.uk/">http://www.keyworth.leeds.ac.uk/</A>
+&gt; 
+&gt; H3229, Shell Centre, London, SE1 7NA, UK.
+&gt; Tel: +44 207 934 4490 Fax: 7929 Mobile: +44 7796 336538
+&gt; ===============================================================
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+By Way Of "Expostulation", Jon Awbrey To Matthew West Wrote:
+
+| My comment was directed to the question of what you "syntacticians"
+| intend by the various symbols that you introduce on the right side
+| of this purported definition, equivalence, or whatchamacallit this
+| very hour or minute.  You are a sensible person.  If you ask me to
+| define or to explain some problematic concept or term that I foist
+| on the discussion, and if my response is stated in terms of eleven
+| or twelve rather more problematic concepts or terms, then you will
+| immediately "smell a rat", as they say, and demand that I try once
+| again to reduce the total complicity of what I tender as definiens.
+| Thus, a person does not escape the charge of a circular definition
+| simply by placing primes on the recursèd subsequent appearances of
+| the symbol or term to be defined, by conferring a diversionary new
+| alias upon it, or by changing its name to protect his innocence of
+| knowledge about the subject.  No, sensible people are not deceived
+| by callous gambits and shallow tricks such as these, now are they?
+
+Matthew,
+
+Virtual Reality (VR) is a lot of fun, can be very educational,
+and is well-known to have a panoply of practical applications,
+among which number a wealth of deadly serious industrial uses --
+I have seen instructional software for the domain of physics
+where one can play with frictionless pucks, bounce a six-ton
+superball off an ideally inelastic concrete wall on a planet
+with the gravity of Jupiter, all while keeping my own bipeds
+solidly planted on "Terra Firma" (TF), where I can entertain
+myself with life in a universe where entropy is conservative
+and energy is liberal, been there, done that, and I can tell
+you that it was a truly miraculous existence, a virtual trip,
+if not quite literally a Veri-Table Experience -- but a line
+divides a "Virtual Imaginary Experiential World" (VIEW) from
+a "Virtually InExistent World" (VIEW), a line evidently cast
+too finely in this thin air to be dreamt of in the images of
+my acronymic philosophy.  But if the lesson that a person is
+thereby instructed to draw from this bit of virtual exercise
+is that the laws of physics and the laws of information are
+somehow optional for the likes of me and thee, or that they
+could indeed be disrespected by the very designatories who
+designed these virtual environments, then that person has
+another lesson coming.
+
+But I am a sensible person, too -- no, really! -- at any rate,
+when the currents of my rarefied air have a functional moment
+of coordinate projection in exactly the right eigen-direction,
+and so I must tell you that I smell something just a bit ripe,
+indeed, more over-ripe, here, in this, your reputed reduction.
+
+So I will ask you to climb down off your end-user's high-chair,
+and to think for a while about what is really going on beneath
+the glib and glossy surface of your Microsoft XS, and then, if
+you honestly believe, and mean to claim, that no ANDimals were
+used in the making of this filmy production, well, then we may
+indeed be forced to proceed a bit further with the analysis of
+your analysis, and all the categoriness of this meta-reduction.
+
+Jon Awbrey
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02410" href="msg02410.html">SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02396" href="msg02396.html">SUO: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02398.html">SUO: Re: Powers That B</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02396.html">SUO: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02396.html">SUO: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02410.html">SUO: Re: RDBMS Example of Construction of a Triadic Relation from Dyadic Relations</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail43.html#02397"><strong>Date</strong></a></li>
+<li><a href="thrd42.html#02397"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

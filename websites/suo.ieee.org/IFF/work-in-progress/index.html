@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Work in Progress</title>
+  <meta name="author" content="Marco Schorlemmer">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h2>Work in Progress</h2>
+<div style="text-align: justify;">
+<p> The work in progress efforts below are strongly connected. They
+support the IFF representation of the structural aspect of the SUO.
+There is consensus that the SUO should be represented by logic,
+specifically by first order logic. The IFF Ontology (meta) Ontology
+represents a general form of first order logic, namely a form of
+order-sorted first order logic where the sort order has been
+generalized
+to a sort IF theory and the model-theoretic structures allow the
+contextual notion of relational classification. There is also consensus
+that the SUO should represent a modular framework for ontologies. The
+IFF represents and situates the modular framework of a library of
+modules within the homogeneous context of a lattice of theories or the
+heterogeneous context of the category of theories. The essence of the
+logic that represents the SUO is an abstract logical system; that is,
+an
+institution. The notion of an institution is equivalent to the notion
+of
+a truth structure. In addition to ontological systems, institutions
+have
+been applied to the management of database systems. The IFF develops
+the lattice of theories within the general theory of institutions or
+truth. The channel theory of Information Flow (IF) reveals how
+participating ontologies in a modular framework carry information about
+each other.&nbsp; Other topics of interest for work in progress in the
+IFF are the Formal Concept Analysis (FCA) notion of <span
+ style="font-weight: bold;">conceptual scaling</span>,<span
+ style="font-weight: bold;"> algebraic semiotic systems</span>, and the
+development of a module representing <span style="font-weight: bold;">common
+logic</span> (CL). The overall structure of truth and the lattice of
+theories can be partitioned into conceptual scales according to topic,
+where one topic could be the metadata about the theories in the
+lattice.
+The IFF takes the high road to implementation. There is work in
+progress
+on an IFF representation of the Meta Object Facility (MOF) and the
+Model
+Driven Architecture (MDA) of the Object Management Group (OMG). In the
+other direction, there are on-going explorations to demonstrate how the
+MOF can be used for a high level specification of the IFF.<br>
+</p>
+</div>
+<h4><a name="IFF-OO"></a>IFF-OO: The Ontology (meta) Ontology (new
+version)<br>
+</h4>
+<p> Currently, the first revision of the IFF Ontology (meta) Ontology
+is
+under construction. This is a reasonably major revision. The purpose of
+this revision is to formulate the notion of a first order language,
+such
+that the categories of models and logics are cocomplete. The problem
+with the first version is briefly explained here.<br>
+</p>
+<p>The IFF Ontology (meta) Ontology (IFF-OO) in the lower metalevel
+contains axiomatizations for the notions of <span
+ style="font-style: italic;">first order language</span>, <span
+ style="font-style: italic;">first order model-theoretic structure</span>,<span
+ style="font-style: italic;">first order theory</span> and <span
+ style="font-style: italic;">first order logic</span>. Obviously, these
+notions and the IFF-OO itself are first order representations for the
+theory of Information Flow, a theory that is implicit in the book by
+Barwise and Seligman and explicit in the paper "The Information Flow
+Foundation for Conceptual Knowledge Organization" by Kent (see the <a
+ href="http://suo.ieee.org/IFF/references.html">references</a> for
+links
+to both of these). The goal is to provide a categorical representation
+for all four concepts (language, model, theory and logic) that
+faithfully represents the fundamentals of these notions, where
+appropriate categories are both cocomplete and/or complete, and where
+suitable free notions, hence adjunctions, exist. To follow the IFF
+approach to semantic integration, we need all of these properties. The
+first version of the IFF-OO got the free notions, but did not get all
+cocompleteness. In particular, the category Logic of first order logics
+and their infomorphisms was not cocomplete, since coproducts could not
+be computed. In hindsight, the problem with the first version of the
+IFF-OO was a too faithful representation of the sort function (see
+Enderton in the <a href="http://suo.ieee.org/IFF/references.html">references</a>
+or Chris Menzel's <a
+ href="http://grouper.ieee.org/groups/suo/email/msg01792.html">recapitulation</a>,
+which in the first version of the IFF-OO is called the <span
+ style="font-style: italic;">reference function</span> of a first order
+language. We get cocompleteness in the new version of the IFF-OO, and
+still retain a sort-like function, by defining a notion of spangraphs
+as
+a categorical equivalent to hypergraphs. It was a little delicate to
+come up with this idea, but once you have the axiomatization down it is
+fairly simple.</p>
+<ul style="text-align: justify;">
+  <li>The (meta) ontology <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/ontology/work-in-progress.html">IFF-OO</a>&nbsp;&#8211;&nbsp;
+this document briefly explains the new architecture of the IFF-OO.</li>
+  <li>The namespace of <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/set/work-in-progress.pdf">sets</a>&nbsp;&#8211;&nbsp;
+this document axiomatizes and represents the category Set of sets and
+set functions. It contains a very elaborate formalization for limits
+and
+colimits, since these are used to represent the limits and colimits in
+other categories axiomatized in the IFF lower metalevel.</li>
+  <li>The namespace of <a
+ href="../metalevel/lower/namespace/hypergraph/work-in-progress.pdf">hypergraphs</a>&nbsp;&#8211;
+this document axiomatizes and represents the category Hypergraph of
+hypergraphs and hypergraph morphisms.
+Although many notions of hypergraph are possible and have been defined
+in the literature, this document defines a notion that is most suitable
+for the IFF. </li>
+  <li>The namespace of <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/spangraph/version20030508.pdf">spangraphs</a>&nbsp;&#8211;&nbsp;
+this document axiomatizes and represents the category Spangraph of
+spangraphs and spangraph morphisms. Spangraphs are equivalent to
+hypergraphs, but can be more flexible in modeling relational arity.
+Spangraphs nicely model the SCL "role-set syntax", where arguments form
+a set of role-value pairs.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Example: '<small><span
+ style="font-family: courier new;">(Married (roleset: (wife Jill)
+(husband Jack)))</span></small>'<br>
+This notion has been advocated in SCL development by Pat Hayes.
+Position and argument order are not needed.&nbsp; According to Hayes,
+this provides some insurance against communication errors. </li>
+  <li>The namespace of <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/set-semipair/version20030508.pdf">set
+semipairs</a>&nbsp;&#8211; this document axiomatizes and represents the
+category Set<sup><small><small>&aelig;</small></small></sup> of set
+pairs
+and set semiquartets (parallel and covariant bijection-function pairs).
+This category serves as a locale for the appropriate construction of
+tuples for set pairs and tuple morphisms for set semiquartets.</li>
+  <li>The namespace of <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/classification/version20020515.pdf">classifications</a>&nbsp;&#8211;
+this document axiomatizes and represents the category Classification of
+classifications and infomorphisms. These are two of the central
+concepts
+used in the theory of Information Flow (see the references for Barwise
+and Seligman).</li>
+</ul>
+<h4><a name="IF"></a>IF: Channel Theory</h4>
+<ul style="text-align: justify;">
+  <li>Barwise &amp; Seligman's <a href="IF/if.html">approach to
+information
+flow</a>. </li>
+  <li><a href="IF/example.pdf">An example</a>
+illustrating the alignment and merging of ontologies via information
+channels.<br>
+  </li>
+  <li><a href="IF/chth.pdf">An introduction</a>
+to the main concepts and definitions of channel theory.<br>
+  </li>
+  <li><a href="http://suo.ieee.org/IFF/references.html#channel-theory">Papers</a>
+on channel theory and semantic integration.</li>
+</ul>
+<h4><a name="MOFMDA"></a>MOF/MDA: Meta Object Facility and Model Driven
+Architecture</h4>
+<p> </p>
+<ul>
+  <li><a href="MOF-MDA/IFF-of-MOF-MDA.pdf">The
+IFF Representation of the MOF and the MDA</a>: This is work in progress
+on the IFF representation of the <a
+ href="http://www.dstc.edu.au/Research/Projects/MOF/">Meta Object
+Facility (MOF)</a> and the <a href="http://www.omg.org/mda/">Model
+Driven</a><a href="http://www.omg.org/mda/"> Architecture (MDA)</a> of
+the OMG.</li>
+  <li><a href="MOF-MDA/MOF-of-IFF.pdf">The
+MOF Representation of the IFF</a>: Here we use the <a
+ href="http://www.dstc.edu.au/Research/Projects/MOF/">Meta Object
+Facility (MOF)</a> to represent portions of the IFF lower metalevel. We
+start small with just the notions of language and theory.</li>
+</ul>
+<p> </p>
+<h4><a name="LOT"></a>LOT: The Lattice of Theories</h4>
+<p> </p>
+<ul>
+  <li><a href="LOT/language-module-processing.html">Language
+and Module Processing</a>: Here is a scenario for the stepwise
+processing of the languages and modules of ontologies.</li>
+  <li><a href="LOT/colimits.pdf">Colimits
+in a Nutshell</a>: Here is a page that concisely defines the elements
+needed to axiomatize colimits.</li>
+  <li><a href="LOT/glossary.pdf">Glossary
+for the Lattice of Theories</a>: Here is the core functionality for the
+"lattice of theories" as represented and axiomatized in the IFF.</li>
+  <li><a href="LOT/lattice-of-theories.pdf">The
+IFF Approach to the Lattice of Theories</a>: This is a discussion of
+the IFF approach, representation and axiomatization for the "lattice of
+theories".</li>
+  <li><a href="LOT/semantics.pdf">Formal
+or Axiomatic Semantics in the IFF</a>: This gives a very rigorous
+axiomatics for the semantics architecture concentrated in IFF theories.
+It consists of three categories of theories (open theories, closed
+theories and entailment-oriented morphisms), connecting adjunctions,
+and
+the fibrational structure of the IFF theory context &#8211; the so-called
+"lattice of theories".</li>
+</ul>
+<h4><a name="INS"></a>INS: The Institutions (meta) Ontology</h4>
+<ul>
+  <li><a href="INS/IFF-INS.pdf">The
+Truthful Connection between the IFF and Institutions</a>: This is work
+in progress with the goal to explain the connection via truth
+equivalence between the IFF, in particular John Sowa's lattice of
+theories construction, and the Joseph Goguen's (and Rod Burstall&#8217;s)
+theory of institutions. Institutions formalize the intuitive notion of
+a logical system. There is a <a
+ href="http://www.cs.ucsd.edu/users/goguen/projs/inst.html">vast
+literature</a> on the theory of institutions.</li>
+  <li><span style="font-weight: bold; text-decoration: underline;">The
+IFF Namespace of Institutions</span>: <br>
+  </li>
+  <ul>
+    <li>[<a
+ href="http://suo.ieee.org/IFF/work-in-progress/INS/version20031002.pdf">version20031002</a>]
+This is our first cut at the IFF
+axiomatization of institutions.</li>
+    <li>[<a
+ href="http://suo.ieee.org/IFF/work-in-progress/INS/version20041014.pdf">version20041014</a>]
+This is our second cut at the IFF
+axiomatization of institutions.</li>
+  </ul>
+  <li>A <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/metatheory/synthesis/version20040909.html">synthesis</a>
+of Information Flow with Institutions lifts the channel theory of
+Information Flow to the abstraction of Institutions. </li>
+</ul>
+<h4><a name="LOG"></a>LOG: Logic</h4>
+<p>In this work area, we are interested in axiomatizing the abstract
+syntax and model-theoretic semantics of several logical languages:
+traditional first order logic (FOL),
+simple common logic (SCL), and the
+logical language (IFF-KIF) used for the axiomatization of the
+various meta-ontologies in the IFF.
+</p>
+<h5><a name="FOL"></a>FOL: First Order Logic</h5>
+<ul>
+  <li> <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/version20040101.html">The
+IFF First Order Logic (meta) Ontology (IFF-FOL)</a>: This project is
+our first cut at the IFF axiomatization
+of first order logic (FOL). First order logic is simple &#8211; in contrast
+to the Simple Common Logic (SCL), traditional FOL does not have
+variably
+polyadic relations (predicates), quantification over the predicate or
+function position,
+or sequence variables. In fact, the core difference between the SCL
+approach to
+the formulation of logic and the IFF approach is concentrated in the
+distinction between relations and functions. The central motif and data
+structure for the SCL is the relation concept (here we mean the concept
+of a multivalent or n-ary relation), whereas the central motif and data
+structure
+for the IFF is the function concept (and here we mean the concept of a
+unary
+function, which is a central example of the concept of a morphism from
+category
+theory). As usually, understood, the multivalent relation is the more
+complex
+and more expressive of the two, and in spirit the SCL regards a
+function as just
+a functional relation. However, from the IFF perspective, the function
+concept
+is simpler than the relation concept, it is more closely related to
+programming
+languages in general, and it is just as expressive as the relation
+concept. In
+fact, any typed multivalent relation can be represented by functions in
+several
+ways: the most obvious representation is as a collection of attribute
+functions
+from the relation extent to the argument extents; but the IFF actually
+uses a
+different representation for multivalent relations, as seen in the FOL
+language
+namespace of the IFF Ontology (meta) Ontology. This design decision, of
+whether
+to place the relation concept or the function concept at the core, is
+of the
+highest importance. Many other design decisions fall out from this. </li>
+</ul>
+<h5><a name="SCL"></a>SCL: Simple Common Logic</h5>
+<ul>
+  <li><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/scl/version20040505-obj.pdf">The
+IFF Namespace of Simple Common Logic (IFF-SCL)</a>. This project is our
+first cut at the IFF axiomatization of simple common logic (SCL). SCL
+has three advances over traditional first order logic (FOL): variably
+polyadic relations
+(predicates), quantification over the predicate position, and sequence
+variables. The <a
+ href="http://www.ontologos.org/SCL%20Abstract%20Syntax.pdf">abstract
+syntax</a> of SCL (terms and formulas), consisting of
+synthetic/constructor operators, analytic/selector operators and axioms
+asserting an invertible relationship between pairings of
+synthetic/constructor and analytic/selector operators, is the highest
+meta-level needed in order to define the syntax and model theory for
+SCL. Abstract syntax is related to the programming style of processing,
+with synthetic/constructor operators compatible with declarative
+programming style and analytic/selector operators compatible with
+imperative programming style. Axiomatization of the SCL in the
+terminology of the Information Flow Framework (IFF) has the following
+advantages. </li>
+  <ul>
+    <li><span style="font-weight: bold;">Integration</span>: By being
+expressed in a common framework, the SCL constructs have immediate
+connections to other modules of the IFF.</li>
+    <li><span style="font-weight: bold;">Viewpoint</span>: The
+category-theoretic formulation of the IFF provides not only object
+representation but also morphic connection.</li>
+    <li><span style="font-weight: bold;">Full Abstraction:</span> The
+category-theoretic formulation of the IFF provides full abstraction for
+SCL.</li>
+    <li><span style="font-weight: bold;">Reuse</span>: We can easily
+adapt any concrete syntax of SCL into an IFF representation.</li>
+  </ul>
+</ul>
+<h5><a name="IFF-KIF"></a>IFF-KIF: The Shell Metalanguage</h5>
+<ul>
+  <li><u style="font-weight: bold;">The Syntax and Semantics of
+IFF-KIF</u>:
+This project is our first cut
+at the IFF axiomatization of IFF-KIF. Clearly, this effort has a
+certain
+reflexive quality to it. The IFF-KIF has a simple lisp-like format,
+which additionally uses the two abbreviations of restricted
+quantification and definite descriptions. Just like SCL, which has a
+similar abstract syntax and semantics, the IFF-KIF has one advance over
+FOL it uses quantification over the relation position. However, in
+contrast to SCL, the IFF does not use sequence variables, it does not
+need (at least so far) variably polyadic relations (predicates), but
+instead it only needs binary relations (predicates) in the body of its
+expression and unary relations for its restricted quantification.
+Furthermore, it regards functions as things that return a value but are
+not implicitly functional relations (functions and relations are
+disjoint), it needs only 1-place functions, and it regards constants as
+individual constants.<br>
+  </li>
+</ul>
+<h4><a name="META"></a>META: The Meta Hierarchy</h4>
+<ul>
+  <li><a href="http://suo.ieee.org/IFF/metastack/version20040707.html">The
+IFF Metastack</a>: This project describes the IFF core hierarchy (aka
+IFF metastack) and links to its four components: the meta-ontologies
+IFF-UR, IFF-TCO, IFF-UCO and IFF LCO. It is mainly oriented towards the
+meta-hierarchy and metalanguage aspect of the IFF.</li>
+  <li><a href="http://suo.ieee.org/IFF/Namespace%20Proposal.pdf">Namespace
+Proposal</a>: This is a new proposal for rationalizing the namespace
+prefix notation.<br>
+  </li>
+</ul>
+<br>
+<small><small><span style="font-style: italic;">Technical Editor</span>:
+<a href="mailto:marco@cir.unica.edu">Marco Schorlemmer</a></small><br>
+<small><span style="font-style: italic;">Assistant Technical Editor</span>:
+<a href="mailto:lobrst@mitre.org">Leo Obrst</a></small></small> <br>
+<p> <a href="http://validator.w3.org/check/referer"><img
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ border="0" height="31" width="88"></a> </p>
+</body>
+</html>

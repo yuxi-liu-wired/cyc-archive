@@ -1,0 +1,239 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: Propositions -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Sun, 25 Mar 2001 19:36:03 &#45;0500 (EST) -->
+<!--X-Message-Id: 3ABE8976.59FEB7D8@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3abc2da7.f017.0@bestweb.net -->
+<!--X-Reference: 3ABD0E91.BD27294B@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01850.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: Propositions</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01836.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01851.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd53.html#01850">Thread Index</A></Td>
+<TD><A HREF="msg01851.html">Date Prev</A></TD>
+<TD><A HREF="msg01849.html">Date Next</A>
+</TD>
+<TD><A HREF="mail54.html#01850">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: Propositions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;, <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>Subject</em>: SUO: Re: Propositions</LI>
+<LI><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 25 Mar 2001 19:12:38 -0500</LI>
+<LI><em>References</em>: &lt;<A HREF="msg01822.html">3abc2da7.f017.0@bestweb.net</A>&gt; &lt;<A HREF="msg01836.html">3ABD0E91.BD27294B@oakland.edu</A>&gt;</LI>
+<LI><em>Reply-To</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+John,
+
+A mite too scattered and tunnel-visioned this weekend to think about
+the larger issues here in any sort of systematic way, so I will just
+focus on your splendid propositional example and play around with it
+a bit in the hopes of developing some material for future discussion.
+
+John Sowa wrote:
+&gt;
+&gt; This series of functions shows how large numbers of closely
+&gt; related sentences can be reduced to a single canonical form.
+&gt; If two sentences express the same proposition, their canonical
+&gt; forms, which can usually be calculated efficiently, would be the
+&gt; same.  The function f2 has the effect of reducing sentences to
+&gt; Peirce Normal Form (PNF) -- the result of translating a sentence
+&gt; from predicate calculus to an existential graph and back again.
+&gt; As an example, consider the following sentence, which Leibniz
+&gt; called the Praeclarum Theorema (splendid theorem):
+&gt;
+&gt; * ((p -&gt; r) &amp; (q -&gt; s)) -&gt; ((p &amp; q) -&gt; (r &amp; s)).
+&gt;
+&gt; This formula may be read
+&gt;
+&gt; "If p implies r and q implies s, then p and q imply r and s."
+&gt;
+&gt; When translated to L2 by f3 and back to L1 by g,
+&gt; it has the following Peirce Normal Form:
+&gt;
+&gt; * ~((~(p &amp; ~r) &amp; ~(q &amp; ~s)) &amp; ~(~(p &amp; q) &amp; ~(r &amp; s)) ).
+&gt;
+&gt; This form is not as readable as the original,
+&gt; but it serves as the canonical representative
+&gt; of an equivalence class that contains 864 different,
+&gt; but highly similar sentences.  The function f3, which
+&gt; deletes duplicates, can reduce an infinite number of
+&gt; sentences to the same form.  Such transformations
+&gt; can factor out the differences caused by the
+&gt; choice of symbols or syntax.
+
+------------------------------------------
+
+Here is how I write this theorem,
+followed by an equational proof:
+
+------------------------------------------
+
+    r o   o s     o rs
+      |   |       |
+    p o   o q     o pq
+       \ /        |
+        o---------o
+        |
+        |
+        @
+   
+=========================[Double Negation]
+
+    r o   o s
+      |   |
+    p o   o q
+       \ /
+     pq o---------o rs
+        |
+        |
+        @
+
+=========================[Weed &amp; Seed]
+
+    r o   o s
+      |   |
+      o   o
+       \ /
+     pq o---------o rs
+        |
+        |
+        @
+
+=========================[Double Negation]
+
+   pqrs o---------o rs
+        |
+        |
+        @
+
+=========================[Weed &amp; Seed]
+
+   pqrs o---------o
+        |
+        |
+        @
+
+=========================[Axiom]
+
+        o---------o
+        |
+        |
+        @
+
+=========================[Axiom]
+
+        @
+
+------------------------------------------
+
+The blank node = true,
+in existential interp.
+
+------------------------------------------
+
+More, later, if I get a chance,
+
+Jon Awbrey
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01851" href="msg01851.html">SUO: Re: Propositions</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01822" href="msg01822.html">SUO: Propositions (was Peirce's MS 514)</a></strong>
+<ul><li><em>From:</em> &quot;John F. Sowa&quot; &lt;sowa@bestweb.net&gt;</li></ul></li>
+<li><strong><a name="01836" href="msg01836.html">SUO: Re: Propositions</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01851.html">SUO: Re: Propositions</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01849.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01836.html">SUO: Re: Propositions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01851.html">SUO: Re: Propositions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail54.html#01850"><strong>Date</strong></a></li>
+<li><a href="thrd53.html#01850"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

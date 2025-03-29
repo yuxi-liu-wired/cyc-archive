@@ -1,0 +1,192 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Notes On Categories -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNngg.arg> -->
+<!--X-Date: Mon, 14 Jul 2003 12:07:16 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3F12D061.35E82758@att.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg04908.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Notes On Categories</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@att.net">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg05007.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg04902.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd2.html#04908">Thread Index</A></Td>
+<TD><A HREF="msg04909.html">Date Prev</A></TD>
+<TD><A HREF="msg04907.html">Date Next</A>
+</TD>
+<TD><A HREF="mail2.html#04908">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Notes On Categories</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Inquiry &lt;<A HREF="mailto:inquiry@stderr.org">inquiry@stderr.org</A>&gt;, Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Notes On Categories</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@att.net">jawbrey@att.net</A>&gt;</li>
+<li><em>Date</em>: Mon, 14 Jul 2003 11:46:41 -0400</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+NOC.  Note 1
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+Here I will document some of the computational approaches to
+category theory that I starting working on back in the 1980's,
+all of which work as yet remains in the &quot;Schubert Category&quot; of
+unfinished symphonies.
+
+It helps me a little bit to write the names of categories in the plural,
+so as not to confuse them with individuals.  It also helps if I treat the
+arrows of Arr(C) as the primary entities in the category C, recovering the
+objects of Obj(C) as secondary entities by collecting all the entities that
+appear in s(f) = Source(f) and t(f) = Target(f) as one ranges over all of the
+arrows f in Arr(C).
+
+The last time that I tried to do &quot;categories by computer&quot;,
+I was using data structures that had the following shapes:
+
+   Category C o
+             /|\
+            / | \
+          ... | ...
+              |
+      Arrow f o
+             / \
+            s   t
+           /     \
+     s(f) o       o t(f)
+
+A functor, then, is something that I picture like this:
+
+              Functor F o
+                      . | .
+                    .   |   .
+                  .     |     .
+                .       |       .
+   Category C o         o         o Category D = CF
+              |       ./ \.       |
+              |     . /   \ .     |
+              |   .  /     \  .   |
+              | .   /       \   . |
+      Arrow f o    o         o    o Arrow fF
+             / \ .   .     .   . / \
+            /  .\      . .      /.  \
+           s .   t     . .     s   . t
+          /.      \  .     .  /      .\
+         o         o         o         o
+         x         y         xF        yF
+
+This is a rough sketch of the actual data structures that I used to represent
+a functor F as a &quot;matching&quot; between the parallel items of categories C and D.
+
+NB.  I will have to revert to the convention that I was accustomed to using
+     then, where all operators are applied on the right of their arguments.
+
+What the picture says is that the functor F : C -&gt; CF takes each arrow f in C
+to an arrow fF in CF, and each object x in C to an object xF in CF, in such a
+manner that (fs)F = (fF)s and (ft)F = (fF)t.  To be a functor, F must satisfy
+the following two systems of equations:
+
+   (1_x)F     =   1_(xF), for all x in Obj(C).
+
+   (f o g)F   =   fF o gF, for all composable f, g in Arr(C).
+
+That was just how I kept track of things on the computer.
+
+It is, of course, more usual to draw a &quot;functor square&quot; like this,
+where we get one such picture for each object x and arrow f in C.
+
+          F
+   x o--------&gt;o xF
+     |         | 
+     |         |
+   f |         | fF
+     |         |
+     v         v
+   y o--------&gt;o yF
+          F
+
+Jon Awbrey
+
+o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o~~~~~~~~~o
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg04909.html">ONT Re: Quine -- Two Dogmas Of Empiricism</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg04907.html">ONT Re: Category Theory</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg05007.html">ONT Re: Russell -- Philosophy Of Logical Atomism</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04902.html">ONT Quine -- Two Dogmas Of Empiricism</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail2.html#04908"><strong>Date</strong></a></li>
+<li><a href="thrd2.html#04908"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

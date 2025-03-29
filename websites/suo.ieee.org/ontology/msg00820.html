@@ -1,0 +1,207 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: RE: SUO: RE: Re: More KIF&#45;ified Ontology Content -->
+<!--X-From-R13: cng unlrf <cunlrfNnv.hjs.rqh> -->
+<!--X-Date: Mon, 5 Feb 2001 15:55:10 &#45;0500 (EST) -->
+<!--X-Message-Id: v0421010eb6a4ba7e2ff7@[205.160.76.246] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E427070BD250@LONSC0S0038 -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00820.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>RE: SUO: RE: Re: More KIF-ified Ontology Content</TITLE>
+<LINK REV="made" HREF="mailto:phayes@ai.uwf.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00793.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00796.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd87.html#00820">Thread Index</A></Td>
+<TD><A HREF="msg00821.html">Date Prev</A></TD>
+<TD><A HREF="msg00819.html">Date Next</A>
+</TD>
+<TD><A HREF="mail74.html#00820">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: SUO: RE: Re: More KIF-ified Ontology Content</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Subject</em>: RE: SUO: RE: Re: More KIF-ified Ontology Content</LI>
+<LI><em>From</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 5 Feb 2001 14:41:32 -0600</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@majordomo.ieee.org">standard-upper-ontology@majordomo.ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00793.html">DE057CA9F46ED2118C4900805F85E427070BD250@LONSC0S0038</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00793.html">DE057CA9F46ED2118C4900805F85E427070BD250@LONSC0S0038</A>&gt;</LI>
+<LI><em>Reply-To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt;Dear Pat,
+&gt;
+&gt; &gt;
+&gt; &gt; &gt;One advantage of the logic view is that relations can be treated like
+&gt; &gt; &gt;properties - and there can be a simple taxonomy of
+&gt; &gt; relations. This is more
+&gt; &gt; &gt;difficult to achieve under the relational view. However, the
+&gt; &gt; logic view does
+&gt; &gt; &gt;lead to the seemingly odd conclusion that for every relation
+&gt; &gt; class and
+&gt; &gt; &gt;particular relation there also exists its inverse.
+&gt;
+&gt;MW: Lots of things I don't quite follow here:
+&gt;
+&gt; &gt;
+&gt; &gt; No, it doesn't. This is a delicate point but an important one (since
+&gt; &gt; it will be central in SUO-KIF, which can quantify over relations).
+&gt;
+&gt;MW: Does this mean I can say something like:
+&gt;
+&gt;(forall ?x, forsome ?y, forsome ?z)
+&gt;(=&gt; binaryrelation ?x (?x ?y ?z))
+&gt;
+&gt;? (sorry, that is probably dreadful bit of KIF - I hope you can see what I
+&gt;mean, which is that for each binaryrelation, there is some two objects that
+&gt;take places in that relation).
+
+I think I can see what you mean, and yes you should be able to say 
+that. I think it would look like this:
+
+(forall (?x: binaryrelation) (exist (?y ?z) (?x ?y ?z)))
+
+This ought to be a logical truth, by the way, so there wouldnt be 
+much point in saying it.
+
+&gt;Please provide a good example.
+
+My favorite example is defining a relation on relations, such as transitive:
+
+(forall (?r) (&lt;=&gt; (transitivebinaryrelation ?r)
+                          (forall (?x ?y ?z) (implies (and (?r ?x 
+?y)(?r ?y ?z)) (?r ?x ?z)))))
+
+&gt; &gt; Saying what a relation is does not automatically say that all things
+&gt; &gt; like that must be relations.  If every set of tuples was a relation,
+&gt; &gt; then we would have a genuine higher-order logic;
+&gt;
+&gt;MW: Excuse my ignorance, but why does this make for a higher order logic?
+
+Because it would imply (if taken seriously as a semantic constraint) 
+that the universe of quantification for relation variables must be 
+the actual power set of *all* sets of  n-tuples of elements in the 
+base universe, and with that semantics we would have genuine 
+(non-semi-decideable) higher-order logic. See 
+<A  HREF="http://suo.ieee.org/email/msg00345.html">http://suo.ieee.org/email/msg00345.html</A> for an intuitive discussion.
+
+&gt; &gt; but we do not make
+&gt; &gt; this assumption (though it is, I concede, often made by
+&gt; &gt; mathematicians.) So it is quite possible for a relation to exist but
+&gt; &gt; its inverse not to, or at any rate not to be considered a relation in
+&gt; &gt; the universe of all relations.
+&gt;
+&gt;MW: And presumably this is sufficient to make the logic first order. Could
+&gt;you explain this in terms I might understand?
+
+What makes it first order is that it makes no particular assumptions 
+one way or the other about the set of 'all relations'. The universe 
+of relations might be every set of n-tuples, or it might be so small 
+that it only contains a referent for the particular relation symbols 
+in the language. Unlike higher-order logic - which assumes that 
+*every* set of n-tuples is a genuine relation, so when you write 
+(forall (?r).... ) you are making a very large claim indeed - the 
+first-order version uses the same syntax, but understands it much 
+more modestly. It only requires that the universe of relations 
+contains at least enough things to be the referents of the names in 
+the language.
+
+Note however that all through this discussion, 'relation' means set 
+of n-tuples. This discussion is only about how many of those sets we 
+want to count as 'genuine' relations, ie how many of them our logic 
+claims to range over when it says 'forall ?r...'.
+
+Pat
+
+---------------------------------------------------------------------
+IHMC					(850)434 8903   home
+40 South Alcaniz St.			(850)202 4416   office
+Pensacola,  FL 32501			(850)202 4440   fax
+phayes@ai.uwf.edu 
+<A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00793" href="msg00793.html">RE: SUO: RE: Re: More KIF-ified Ontology Content</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00821.html">Re: SUO: RE: RE: RE: RE: RE: RE: #3 &quot;Flawed Approach, etc</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00819.html">RE: SUO: RE: Re: Signation</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00793.html">RE: SUO: RE: Re: More KIF-ified Ontology Content</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00796.html">RE: SUO: RE: Re: More KIF-ified Ontology Content</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail74.html#00820"><strong>Date</strong></a></li>
+<li><a href="thrd87.html#00820"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

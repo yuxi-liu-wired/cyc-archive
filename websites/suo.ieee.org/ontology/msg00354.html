@@ -1,0 +1,2998 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Latest Version of Merged Ontology -->
+<!--X-From-R13: Wna @vyrf <vavyrfNgrxabjyrqtr.pbz> -->
+<!--X-Date: Fri, 12 Jan 2001 14:27:03 &#45;0500 (EST) -->
+<!--X-Message-Id: EE25484266A64A47AE06CFC47C64232B18F933@helium.teknowledge.com -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00354.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Latest Version of Merged Ontology</TITLE>
+<LINK REV="made" HREF="mailto:iniles@teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01701.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00418.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd81.html#00354">Thread Index</A></Td>
+<TD><A HREF="msg00355.html">Date Prev</A></TD>
+<TD><A HREF="msg00353.html">Date Next</A>
+</TD>
+<TD><A HREF="mail84.html#00354">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Latest Version of Merged Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Latest Version of Merged Ontology</LI>
+<LI><em>From</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 12 Jan 2001 10:38:45 -0800</LI>
+<LI><em>Reply-To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi All,
+
+	It's attached.  This version incorporates innumerable minor
+corrections, but the biggest differences between it and the version I sent
+out three weeks ago are as follows:
+
+1.  Incorporates six new ontologies, viz. Simple-Time, Standard-Units,
+Agents, and Numbers (from the Ontolingua server), and Natural-Kinds and
+Positions (authored by the Ontology Group at ITBM-CRN).  The original forms
+of all of these ontologies can be accessed from the SUO Candidate Content
+page (<A  HREF="http://ltsc.ieee.org/suo/refs.html">http://ltsc.ieee.org/suo/refs.html</A>).
+
+2.  The temporal axioms have been heavily revised on the basis of Pat Hayes'
+comments.
+
+3.  The subhierarchy of high-level concepts (borrowed from John Sowa) has
+been simplified in an attempt to eliminate concepts that are of purely
+philosophical interest.  This is a work in progress, and it was prompted by
+both Pat Hayes and Chris Menzel.
+
+4.  The case role portion of the ontology (also borrowed from John Sowa) has
+also been simplified.
+
+	I'd like to extend a special thanks to Pat Hayes and Chris Menzel
+for their detailed, helpful, and challenging remarks on the previous version
+of the merged ontology, and I'd like to encourage everyone to comment on the
+new version.  Let me know if anyone has any difficulty viewing the attached
+file.
+
+-Ian
+
+   
+
+</PRE>
+<PRE>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                               ;;
+;;                PREFACE                        ;;
+;;                                               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This file is a perliminary merge of the SUO ontology sources.  The basis for 
+;; the merge is John Sowa's upper ontology (as described at 
+;; <A  HREF="http://www.bestweb.net/~sowa/ontology/toplevel.htm">http://www.bestweb.net/~sowa/ontology/toplevel.htm</A> and in Chapter 2 of his book 
+;; _Knowledge Representation_, Brooks/Cole, 2000).  The definitions and axioms of 
+;; the other SUO sources have been aligned with this ontology.  In addition to Sowa's ontology, 
+;; the merge incorporates Russell and Norvig's ontology, Casati and Varzi's theory of 
+;; holes, Allen's temporal axioms, the relatively noncontroversial elements of 
+;; Smith's and Guarino's respective mereotopologies, and the KIF formalization of the CPR 
+;; (Core Plan Representation). 
+
+;; This ontology uses a first-order modal language, i.e., a first-order language 
+;; with the sentence operators "nec" (for "necessarily") and "poss" (for "possibly").  
+;; The ontology contains both primitive and defined constants.  Among the primitive 
+;; predicates are several (e.g., "exists-at") that are borrowed from other ontologies 
+;; -- moreover, those predicates may be *defined* in those ontologies.  Eventually,
+;; of course, it will be important to have mechanisms for making such connections 
+;; explicitly (via, e.g., something like Ontolingua packages).
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                                            ;;
+;;                STRUCTURAL ONTOLOGY                         ;;
+;;                                                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; The Structural Ontology consists of definitions (both in the object
+;; language and in the metalanguage) of certain syntactic abbreviations that
+;; can be both heuristically useful and computationally advantageous.
+
+;;;;;;;;;;;;;;;;;;;;
+;;  "nth-domain"  ;;
+;;;;;;;;;;;;;;;;;;;;
+
+;; The "nth-domain" provides a computationally and heuristically
+;; convenient mechanism for declaring the intended types of the
+;; argument places of a given relation.  It cannot be considered a
+;; genuine predicate in a standard first-order language as it takes
+;; first-order predicates as arguments.  Furthermore, it also takes
+;; numerals as arguments, which are not part of first-order languages
+;; generally.  However, it can be understood formally as an 
+;; abbreviation as follows.
+;;
+;; Let REL be any n-place predicate, and let M be the numeral for the
+;; positive integer m, where m is less than or equal to n.  Then we
+;; let
+;;
+;;   (nth-domain REL M CLASS)
+;;
+;; serve as an abbreviation for
+;;
+;;   (forall (VAR_1 ... VAR_n)
+;;           (=&gt; (REL VAR_1 ... VAR_n)
+;;               (instance-of VAR_m CLASS)))
+;;
+;; More generally, let M_1, ..., M_i be the numerals for positive
+;; integers m_1, ..., m_i, ordered by size, all less than or equal to
+;; n.  Then, in general, we let
+;;
+;;   (nth-domain REL M_1 CLASS_1 ... M_i CLASS_i) 
+;;
+;; abbreviate 
+;; 
+;;   (forall (VAR_1 ... VAR_n)
+;;           (=&gt; (REL VAR_1 ... VAR_n)
+;;               (and (instance-of VAR_m_1 CLASS_1)
+;;                    ...
+;;                    (instance-of VAR_m_i CLASS_i))))
+;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Definite descriptions ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Definite descriptions are not currently part of KIF.  However, they
+;; are used liberally in this ontology, so an axiom schema -- due
+;; largely to Bertrand Russell -- has been introduced to capture its
+;; meanings -- roughly, that an object ?x is the A iff A is in fact
+;; true of ?x, anything that A is true of must be identical to ?x.
+
+;; So, let WFF be a KIF sentence that contains a single free variable
+;; X, and let WFF[Y] be the result of replacing every free occurrence
+;; of X in WFF with the variable Y.  Then the following is an axiom:
+
+;;
+;; (&lt;=&gt; (= X (the (X) WFF))
+;;      (and WFF
+;;           (forall (Y)
+;;                   (=&gt; WFF[Y]
+;;                       (= X Y)))))
+
+;;;;;;;;;;;;;;;;
+;; "disjoint" ;;
+;;;;;;;;;;;;;;;;
+
+(documentation disjoint "Classes X and Y are disjoint iff they share no instances.")
+
+(&lt;=&gt; 
+	(disjoint ?class1 ?class2)
+      	(forall (?X)
+		(not
+			(and 
+				(instance-of ?X ?class1)
+                              	(instance-of ?X ?class2)))))
+
+;;;;;;;;;;;;;;;;;;;
+;; "subclass-of" ;;
+;;;;;;;;;;;;;;;;;;;
+
+(documentation subclass-of "X is a subclass of Y only if X and Y are classes, and every instance of X is an instance of Y.")
+
+(forall (?subclass ?class)
+        (&lt;=&gt; (subclass-of ?subclass ?class)
+            (and (Class ?subclass)
+                 (Class ?class)
+                 (forall (?x)
+                         (=&gt; (instance-of ?x ?subclass)
+                             (instance-of ?x ?class))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                                                   ;;
+;;                         ONTOLOGY PROPER                           ;;
+;;                                                                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   GENERAL CLASSES   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following axioms (down to the next comment) represent a simplified version of the tip of 
+;; Sowa's upper ontology.  Concepts in the ontology that were deemed to be of purely 
+;; philosophical interest are not included here. 
+
+(subclass-of Independent Entity)
+(subclass-of Relative Entity)
+(subclass-of Physical Entity)
+(subclass-of Abstract Entity)
+(subclass-of Continuant Entity)
+(subclass-of Occurrent Entity)
+
+(subclass-of Actuality Independent)
+(subclass-of Actuality Physical)
+(subclass-of Form Independent)
+(subclass-of Form Abstract)
+(subclass-of Role Physical)
+(subclass-of Role Relative)
+(subclass-of IntentionalEntity Abstract)
+(subclass-of IntentionalEntity Relative)
+
+(subclass-of Object Actuality)
+(subclass-of Object Continuant)
+(subclass-of Process Actuality)
+(subclass-of Process Occurrent)
+(subclass-of Schema Form)
+(subclass-of Schema Continuant)
+(subclass-of Script Form)
+(subclass-of Script Occurrent)
+(subclass-of Structure Relative)
+(subclass-of Structure Continuant)
+(subclass-of Situation Relative)
+(subclass-of Situation Occurrent)
+(subclass-of Reason Intention)
+(subclass-of Reason Continuant)
+(subclass-of Purpose Intention)
+(subclass-of Purpose Occurrent)
+
+;; The following axioms from Sowa were added to facilitate the merging of the SUO ontology 
+;; sources.
+
+(subclass-of ContinuousProcess Process)
+(subclass-of Initiation ContinuousProcess)
+(subclass-of Continuation ContinuousProcess)
+(subclass-of Cessation ContinuousProcess)
+(subclass-of DiscreteProcess Process)
+(subclass-of Act DiscreteProcess)
+(subclass-of Sign Role)
+(subclass-of SpatialForm Schema)
+(subclass-of Arrangement Schema)
+(subclass-of KineticForm Script)
+(subclass-of Procedure Script)
+(subclass-of Continuous SpatialForm)
+(subclass-of Corpuscular SpatialForm)
+(subclass-of Homogeneous Continuous)
+(subclass-of Variable Continuous)
+(subclass-of Organic Corpuscular)
+(subclass-of Assembly Corpuscular)
+
+;; The following formulas place 'ChemicalElement', 'Quantity', 'Number', and 'Set' 
+;; in the class hierarchy.  These concepts are needed to hook several of the 
+;; Ontolingua ontologies into the upper ontology.
+
+(subclass-of ChemicalElement Homogeneous)
+(subclass-of Quantity SpatialForm)
+(subclass-of Unit-Of-Measure Quantity)
+(subclass-of Unit-Of-Measure UnaryFunction)
+(subclass-of Number Arrangement)
+(subclass-of Set Arrangement)
+(subclass-of Proposition Arrangement)
+
+;; The following is a reworking of the constants under 'Role' in Sowa's ontology.
+
+(subclass-of Predicate Role)
+(subclass-of Function Role)
+(subclass-of UnaryFunction Function)
+(subclass-of BinaryFunction Function)
+(subclass-of TernaryFunction Function)
+(subclass-of VariableArityFunction Function)
+(subclass-of ComponentRelation Predicate)
+(instance-of part-of ComponentRelation)
+(subclass-of component-of part-of)
+(subclass-of external-covering component-of)
+(subclass-of internal-component-of component-of)
+(instance-of property-of ComponentRelation)
+(subclass-of BinaryRelation Predicate)
+(subclass-of TernaryRelation Predicate)
+(subclass-of VariableArityRelation Predicate)
+(subclass-of CaseRole BinaryRelation)
+(subclass-of IntentionalRelation BinaryRelation)
+(subclass-of IntentionalRelation IntentionalEntity)
+(subclass-of PropositionalAttitude IntentionalRelation)
+(subclass-of ObjectAttitude IntentionalRelation) 
+(instance-of stage-of ComponentRelation)
+(subclass-of attribute-of property-of)
+(subclass-of manner-of property-of)
+(instance-of source-of CaseRole)
+(instance-of agent CaseRole)
+(instance-of recipient CaseRole)
+(instance-of beneficiary CaseRole)
+(instance-of completion CaseRole)
+(instance-of destination CaseRole)
+(instance-of duration CaseRole)
+(instance-of effector-of CaseRole)
+(instance-of experiencer CaseRole)
+(instance-of instrument CaseRole)
+(instance-of located-at CaseRole)
+(instance-of matter CaseRole)
+(instance-of medium CaseRole)
+(instance-of origin CaseRole)
+(instance-of path CaseRole)
+(instance-of patient CaseRole)
+(instance-of exists-at CaseRole)
+(instance-of result CaseRole)
+(instance-of theme CaseRole)
+
+;; The following axioms and definitions are taken from Russell &amp; Norvig and from CPR.
+;; They have been reformulated in such a way that their content is aligned with Sowa's
+;; upper ontology.
+
+(subclass-of Sentence Sign)
+(subclass-of Sentence Structure)
+(subclass-of Solid Structure)
+(subclass-of Liquid Structure)
+(subclass-of Gas Structure)
+(subclass-of TextObject Sign)
+(subclass-of TextObject Structure)
+
+(instance-of containsInformation BinaryRelation)
+(nth-domain containsInformation 1 TextObject)
+(nth-domain containsInformation 2 Proposition)
+
+(instance-of constraintOfProcedure BinaryRelation)
+(nth-domain constraintOfProcedure 1 Procedure)
+(nth-domain constraintOfProcedure 2 Requirement)
+
+(instance-of hasAnnotation BinaryRelation)
+(nth-domain hasAnnotation 1 Object)
+(nth-domain hasAnnotation 2 TextObject)
+
+(instance-of implementsProcedure BinaryRelation)
+(nth-domain implementsProcedure 1 Process)
+(nth-domain implementsProcedure 2 Procedure)
+
+(instance-of hasPurpose BinaryRelation)
+(nth-domain hasPurpose 1 Script)
+(nth-domain hasPurpose 2 Purpose)
+
+(instance-of subProcedure BinaryRelation)
+(nth-domain subProcedure 1 Procedure)
+(nth-domain subProcedure 2 Procedure)
+
+(instance-of subPurpose BinaryRelation)
+(nth-domain subPurpose 1 Purpose)
+(nth-domain subPurpose 2 Purpose)
+
+(instance-of subProcess BinaryRelation)
+(nth-domain subProcess 1 Process)
+(nth-domain subProcess 2 Process)
+
+(instance-of standardFor BinaryRelation)
+(nth-domain standardFor 1 Standard)
+(nth-domain standardFor 2 Actuality)
+
+(subclass-of Standard Schema)
+(subclass-of Requirement Standard)
+(subclass-of ConsumableResource Resource)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   DOCUMENTATION OF GENERAL CLASSES   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation Absurdity "The absurd class, which inherits all differentiae.")
+
+(documentation Abstract "Pure information as distinguished from any particular encoding of the information in a physical medium.")
+
+(documentation Physical "An entity that has a location in space-time.")
+
+(documentation Actuality  "A physical entity (P) whose existence is independent (I) of any other entity. As instances, the category Actuality includes both objects and processes. The term is taken from Whitehead, who used it as a synonym for actual entity, which he considered the equivalent of Aristotle's ousia and Descartes's res vera.")
+
+(documentation Arrangement "Mathematical structures that do not have spatial dimensions: numbers, sets, lists, algebras, grammars, and the data structure of computer science. Arrangement includes the subclasses whose names are derived from _taxis_, the Greek word for "arrangement", including taxonomies and syntax.  All the syntactic forms in natural languages, programming languages, and versions of symbolic logic are included under Arrangement.")
+
+(documentation Assembly "A corpuscular entity whose discrete parts are completely separable. Whether something is considered an unstructured collection or a structured assembly depends on some agent's intention.  A car in working order is a highly structured assembly.  But if the parts were disassembled and spread out on some surface, it would be called a collection.  Yet if the parts were arranged to spell the word 'CAR', they would again form an assembly, although not one that could be used for transportation. Conversely, if a car were towed to the junk yard, the junk dealer might consider it a collection, even though the parts were in the same order they had been in while it was running.")
+
+(documentation CaseRole "The class of predicates relating the spatially distinguished parts of an occurrent. Case roles include the agent, patient or recipient of an action, the flammable substance in a burning, or the water that falls in rain.")
+
+(documentation Cessation "A ContinuousProcess with an explicit ending point.")
+
+(documentation ComponentRelation "An intrinsic prehended entity, called a component, bears a relationship to the composite in which it inheres. Its subtypes include parts, whose existence is independent of the whole.")
+
+(documentation Composite "An intrinsic prehending entity that bears a relationship to each component within itself.  Its subtypes are distinguished by the kind of prehension: a whole is made up of its parts; and a substrate is the underlying material that supports the dependent properties of size, weight, shape or color.")
+
+(documentation Continuant "A continuant is an entity whose identity continues to be recognizable over some extended interval of time.")
+
+(documentation Continuation "A ContinuousProcess whose endpoints are not being considered.")
+
+(documentation Continuous "An entity that is indefinitely divisible to the limits of perception by the available sense organs or measuring instruments.")
+
+(documentation ContinuousProcess "A process in which incremental changes take place continuously.  This is the normal kind of physical process.")
+
+(documentation Corpuscular "An entity that has separable parts.")
+
+(documentation Correlative "An extrinsic prehending or prehended entity, called a correlative, bears a relationship to something outside itself. Examples include mother and child, lawyer and client, or employer and employee. A correlative could be considered the prehending entity of one prehension or the prehended entity of the converse prehension.")
+
+(documentation DiscreteProcess "In a discrete process, which is typical of computer programs or idealized approximations to physical processes, changes occur in discrete steps called events, which are interleaved with periods of inactivity called states.")
+
+(documentation Entity "The universal class of individuals, which has no differentiae.")
+
+(documentation Form  "Abstract information (A) independent (I) of any encoding or embodiment. Forms can be said to exist in the same sense as mathematical objects such as sets and relations, but instances of forms cannot exist at a particular place and time without some physical encoding or embodiment. Whitehead called them "eternal objects" because they are independent of space and time.")
+
+(documentation Homogeneous "A continuous entity in which every part is similar to every other in every relevant respect, e.g., temperature, chemical constitution, density, etc., An example would be a beaker of pure distilled water in a controlled environment.")
+
+(documentation Independent "An entity characterized by some inherent Firstness, independent of any relationships it may have to other entities. Formally, Independent is a primitive for which the has-test (cf. Section 2.4 of _Knowledge Representation_) need not apply.  If x is an independent entity, it is not necessary that there exists an entity y such that x has y or y has x.")
+
+(documentation Initiation "A ContinuousProcess with an explicit starting point.")
+
+(documentation IntentionalEntity "Examples of intentions include the hopes, fears, wishes, and purposes that mediate some agent's actions.")
+
+(documentation KineticForm "Includes the information in a reel of motion picture film or the patterns and equations for generating motion in virtual reality.")
+
+(documentation Object "Actuality (IP) considered as a continuant (C), which retains its identity over some interval of time. Although no physical entity is ever permanent, an object can be recognized by identity conditions that remain stable during its lifetime. The type Object includes ordinary physical objects as well as the instantiations of classes in object-oriented programming languages.")
+
+(documentation Occurrent "An entity that does not have a stable identity during any interval of time. Formally, Occurrent is a primitive that satisfies the following axioms: \
+   * The temporal parts of an occurrent, which are called stages, exist at different times. \
+   * The spatial parts of an occurrent, which are called participants, may exist at the same time, but an occurrent may have different participants at different stages.\
+   * There are no identity conditions that can be used to identify two occurrents that are observed in nonoverlapping space-time regions. \
+(NOTE: The notions identity conditions and observation are not axiomatized in this ontology, so this is not an actual axiom of the ontology, unlike the two axioms above.  (Though those two required adding some notions that are only implicit in Sowa's ontology, e.g., the relations "exists-at" and "located-at".)  A person's lifetime, for example, is an occurrent. Different stages of a life cannot be reliably identified unless some continuant, such as the person's fingerprints or DNA, is recognized by suitable identity conditions at each stage. Even then, the identification depends on an inference that presupposes the uniqueness of the identity conditions.")
+
+(documentation Organic "A corpuscular entity such as a tree or flower that has parts that are not completely separable, even though there are discontinuities.")
+
+(documentation Procedure "Any time- or sequence-dependent specification of actions and events: including: computer programs, finite-state machines, Petri nets, robot commands, cooking recipes, musical scores, conference schedules, driving directions, and the scripts of actions and dialog in plays and movies. Although a script is intended to represent a dynamic process, it may have static parts.  In a movie film, for example, the sequence of images is a script that determines the motion, but each frame is a schema of a static image.")
+
+(documentation Process "Actuality (IP) considered as an occurrent (O) during the interval of interest. Depending on the time scale and level of detail, the same actual entity may be viewed as a stable object or a dynamic process. Even an entity as stable as a diamond could be considered a process when viewed over a long time period or at the atomic level of vibrating particles.")
+
+(documentation Proposition "A subclass of Assembly. In logic, the assertion of a proposition is a claim that the abstraction corresponds to some aspect or configuration of the entity or entities involved. As an example, the statement cat(Yojo) expresses a proposition that the form labeled Cat characterizes the entity named Yojo. According to Peirce and Whitehead, more complex propositions are asserted by constructing a compound predicate, such as a mathematical expression or a diagram, and using it to characterize the prehensions that relate multiple entities.")
+
+(documentation Purpose "Intention (MA) that has the form of an occurrent (O). As an example, the words and notes of the song "Happy Birthday" constitute a script (IAO); a description of how people at a party sang the song is history (RAO); and the intention (MA) that explains the situation (MPO) is a purpose (MAO). The basic axioms for Purpose are inherited from its supertypes Mediating, Abstract, and Occurrent.  Some lower level axioms relate purposes to actions and agents:  (1) Time sequence. If an agent x performs an act y whose purpose is a situation z, the start of y occurs before the start of z. (2) Contingency. If an agent x performs an act y whose purpose is a situation z described by a proposition p, then it is possible that z might not occur or that p might not be true of z. (3) Success or failure. If an agent x performs an act y whose purpose is a situation z described by a proposition p, then x is said to be successful if z occurs and p is true of z. otherwise, x i!
+s said to have failed.  Note that to express these axioms we would need to introduce lower level classes like "agent" and 'action'.")
+
+(documentation Reason "Intention (MA) that has the form of a continuant (C). Unlike a simple description (Secondness), a reason explains an entity in terms of an intention (Thirdness).  For a birthday party, a description might list the presents, but a reason would explain why the presents are relevant to the party.")
+
+(documentation Relative "An entity in a relationship to some other entity.  (See the ISSUE above accompanying the formal axiom for Relative.")
+
+(documentation Role "A Role is considered in relation to something else.")
+
+(documentation Schema "A form (IA) that has the structure of a continuant (C). A schema is an abstract form (IA) whose structure does not specify time or timelike relationships. Examples include geometric forms, the syntactic structures of sentences in some language, or the encodings of pictures in a multimedia system.")
+
+(documentation Script "A form (IA) that has the structure of an occurrent (O). A script is an abstract form (IA) that represents time sequences. Examples include computer programs, a recipe for baking a cake, a sheet of music to be played on a piano, or a differential equation that governs the evolution of a physical process. A movie can be described by several different kinds of scripts: the first is a specification of the actions and dialog to be acted out by humans; but the sequence of frames in a reel of film is also a script that determines a process carried out by a projector that generates flickering images on a screen.")
+
+(documentation Sign "A Sign is considered as representing something to some agent.")
+
+(documentation Situation "A nexus (MP) considered as an occurrent (O). A situation mediates the participants of some process, whose stages may involve different participants at different times.")
+
+(documentation SpatialForm "The class of schemata that depend on geometrical relations: Plato's forms, the natural shapes of cats, dogs, and people, and the irregular but systematic fractals that are used to simulate trees, grass, ocean waves, and mountain ranges.")
+
+(documentation Structure "A nexus (MP) considered as a continuant (C). A structure mediates multiple objects whose junctures constitute the structure.")
+
+(documentation Substrate "a substrate (translated from Aristotle's word hypokeimenon) is the underlying material that supports dependent properties, such as size, weight, shape, or color.")
+
+(documentation Variable "A continuous entity that nonetheless varies in, e.g., temperature, chemical constitution, density, etc.  An example would be a large body of water such as the ocean.")
+
+(documentation Whole "A Whole is made up of its parts.")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   DOCUMENTATION OF PREDICATES   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation agent "(agent ?ACTION ?AGENT) means that the active animate entity ?AGENT voluntarily initiates ?ACTION.  Example: Eve bit an apple.")
+
+(documentation attribute-of "(attribute-of ?ENTITY ?PROPERTY) means that ?PROPERTY is a property of ?ENTITY. Properties include things like colors, shapes, sizes, and weights.")
+
+(documentation beneficiary "(beneficiary ?EVENT ?RECIPIENT) means that ?RECIPIENT derives a benefit from the successful completion of ?EVENT.  Example: Diamonds were given to Ruby.")
+
+(documentation completion "(completion ?EVENT ?GOAL) means that ?GOAL is the goal of the temporal process ?EVENT.  Example: Mary waited until noon. ")
+
+(documentation component-of "(component-of ?COMPONENT ?WHOLE) means that ?COMPONENT is a piece of ?WHOLE. Examples of pieces include the doors and walls of a house, the states or provinces of a country, or the limbs and organs of an animal.")
+
+(documentation destination "(destination ?EVENT ?GOAL) means that ?GOAL is the goal of the spatial process ?EVENT.  Example: Bob went to Danbury.")
+
+(documentation duration "(duration ?EVENT ?TIME) means that the TimeMeasure ?Time is a resource of the temporal process ?EVENT.  Example: The truck was serviced for 5 hours.")
+
+(documentation effector-of "(effector-of ?ACTION ?ENTITY) means that ?ENTITY is an active determinant source, either animate or inanimate, that initiates ?ACTION, but without voluntary intention.  Example: The tree produced new leaves. ")
+
+(documentation exists-at "exists-at is defined in the PSL temporal ontology, which axiomatizes 'timepoint'.  This relation holds between an entity and a timepoint just in case the temporal lifespan of the former includes the latter.  The constants located-at and exists-at are spatial and temporal predicates, respectively.")
+
+(documentation experiencer "(experiencer ?EVENT ?ENTITY) means that ?ENTITY is an active animate goal of the experience ?EVENT.  Example: Yojo sees the fish.")
+
+(documentation instrument "(instrument ?EVENT ?RESOURCE) means that ?RESOURCE is a resource that is not changed by ?EVENT.  Example: The key opened the door.")
+
+(documentation located-at "A very general predicate.  (located-at ?X ?Y) means that ?X is situated at ?Y, in some sense.  Example: Vehicles arrive at a station.  The constants located-at and exists-at are spatial and temporal predicates, respectively.")
+
+(documentation manner-of "(manner-of ?ENTITY ?MANNER) means that the occurent ?ENTITY is qualified by the manner ?MANNER.  Manners are usually described by adverbs and include things like the speed of the wind, the style of a dance, or the intensity of a sports competition.")
+
+(documentation matter "(matter ?EVENT ?RESOURCE) means that the resource ?RESOURCE is changed by the event ?EVENT.  Example: The gun was carved out of soap.")
+
+(documentation medium "(medium ?EVENT ?RESOURCE) means that ?RESOURCE is a physical resource for the information transfer event ?EVENT.  Two examples of such resources are the sound of speech and the electromagnetic signals that transmit data.  Example: Bill told Boris by phone.")
+
+(documentation origin "(origin ?EVENT ?SOURCE) means that ?SOURCE is a passive determinant source of the spatial or ambient nexus represented by ?EVENT.  Example: The chapter begins on page 20.")
+
+(documentation part-of "(part-of ?PART ?WHOLE) implies that the existence of ?PART is independent of the existence of ?WHOLE.")
+
+(documentation path "(path ?EVENT ?RESOURCE) means that ?RESOURCE is a resource of the spatial nexus ?EVENT.  Example: The pizza was shipped via Albany and Buffalo.")
+
+(documentation patient "(patient ?EVENT ?ENTITY) means that ?ENTITY is an essential participant that undergoes some structural change as a result of ?EVENT.  Example: The cat swallowed the canary.")
+
+(documentation property-of "The class ComponentRelation has two elements, viz. part-of and property-of.  The latter relation holds between an object and something which cannot exist without some substrate.  Two subpredicates of property-of are attribute-of and manner-of.")
+
+(documentation recipient "(recipient ?ACTION ?ENTITY) means that ?ENTITY is an animate goal of ?ACTION.  Example: Sue sent the gift to Bob.")
+
+(documentation result "(result ?ACTION ?GOAL) means that ?GOAL is an inanimate goal of ?ACTION.  Example: Eric built a house.")
+
+(documentation source-of "(source-of ?EVENT ?ENTITY) implies that ?ENTITY is present at the beginning of the process, but need not participate throughout the process.")
+
+(documentation stage-of "The temporally distinguished parts of an occurrent are called stages. In the life of a human being, for example, the stages would include infancy, childhood, adolescence, and adulthood. Other possibly overlapping stages would include education, motherhood, business career, and retirement.")
+
+(documentation theme "(theme ?EVENT ?ENTITY) means that ?ENTITY is an essential participant that may be moved, said, or experienced, but is not structurally changed.  Example: Billy likes the Beer.")
+
+
+;;;;;;;;;;;;;;;;;;;;
+;; GENERAL AXIOMS ;;
+;;;;;;;;;;;;;;;;;;;;
+
+
+;; Most of these axioms relate to constants comprising the tip of Sowa's upper ontology.
+
+;; There are entities.
+
+(exists (?x) (instance-of ?x Entity))
+
+;; Everything is either a class or an entity, but not both.
+
+(or 
+	(instance-of ?x Class) 
+	(instance-of ?x Entity))
+
+(&lt;=&gt; 
+	(instance-of ?x Entity)
+      	(not 
+		(instance-of ?x Class)))
+
+;; Only entities are instances of classes, and only classes have instances.
+
+(=&gt; 
+	(instance-of (?instance ?class))
+      	(and 
+		(instance-of ?instance Entity)
+              	(instance-of ?class Class)))
+
+;; Every class is a subclass of Entity.
+
+(=&gt; 
+	(instance-of ?c Class)
+       	(subclass-of ?c Entity))
+
+;; The 'has' relation holds between entities.
+
+(nth-domain has 1 Entity)
+(nth-domain has 2 Entity)
+
+;; Absurdity is a class.
+
+(instance-of Absurdity Class)
+
+;; Absurdity has no instances.
+
+(not
+	(instance-of ?x Absurdity))
+
+;; Absurdity is a subclass of every class.
+
+(=&gt; 
+	(instance-of ?c Class)
+       	(subclass-of Absurdity ?c))
+
+;; Abstract is a class.
+
+(instance-of Abstract Class)
+
+;; Something is Abstract just in case it has neither a spatial nor temporal location.
+
+(&lt;=&gt; 
+	(instance-of ?x Abstract)
+       	(and 
+		(not 
+			(exists (?y) 
+                               (or 
+					(located-at ?x ?y)
+                                   	(exists-at ?x ?y)))))) 
+                               
+;; Something is Physical just in case it exists at some location at some time.
+
+(&lt;=&gt; 
+	(instance-of ?x Physical)
+	(exists (?y)
+     		(and 
+			(located-at ?x ?y)
+                       	(exists-at ?x ?z))))
+
+;; Note that the axioms for Abstract and Physical imply that Abstract and Physical 
+;; are disjoint, i.e. (disjoint Abstract Physical).
+
+;; An independent entity need not bear the "has" relation to anything.
+
+(=&gt; 
+	(instance-of ?x Independent)
+       	(not 
+		(nec 
+			(exists (?y)
+                      		(or 
+					(has ?x ?y)
+                                  	(has ?y ?x))))))
+
+;; A continuant is an object that exists (and, hence, retains its identity) over time, 
+;; i.e., an object that exists at every point over some interval of time.  This axiom 
+;; is only implicit in Sowa's ontology.
+
+(=&gt; 
+	(instance-of ?x Continuant)
+      	(exists (?t1 ?t2)
+        	(and 
+			(instance-of ?t1 TimePoint) 
+                	(instance-of ?t2 TimePoint) 
+                      	(before ?t1 ?t2)
+                       	(forall (?t)
+                      		(=&gt; 
+					(and 
+						(beforeEq ?t1 t) 
+                                          	(beforeEq t ?t2))
+                                  	(exists-at ?x ?t))))))
+                            
+;; If a mediating entity ?m has ?x and ?y, then either ?x has ?y or vice versa.
+
+(=&gt; 
+	(and 
+		(instance-of ?m Mediating) 
+               	(has ?m ?x)  
+              	(has ?m ?y))
+     	(nec 
+		(or 
+			(has ?x ?y) 
+			(has ?y ?x))))
+
+;; Continuant and Occurrent are disjoint.
+
+(disjoint Continuant Occurrent)
+
+;; Each temporal part of an occurrent exists at some timepoint.
+
+;; ISSUE: Can stages (i.e., temporal parts of occurrents) exist at
+;; more than one timepoint; in particular, can they they exist across
+;; intervals of time?
+
+(=&gt; 
+	(and 
+		(instance-of ?occ Occurrent) 
+               	(stage-of ?x ?occ))
+     	(exists (?t)
+      		(exists-at ?x ?t)))
+        
+;; Occurrents have temporal parts.
+
+(=&gt; 
+	(instance-of ?occ Occurrent)
+       	(exists (?x)
+        	(stage-of ?x ?occ)))
+  
+;; Occurrents have spatial parts.
+
+(=&gt; 
+	(instance-of ?occ Occurrent)
+       	(exists (?x)
+        	(spatial-part-of ?x ?occ)))
+  
+;; Every relative entity necessarily bears the has relation to some entity 
+;; or some entity hears that relation to it.
+
+;; ISSUE: If "has" is not characterized carefully this axiom could
+;; turn out to be trivial.  For example, most independent physical
+;; objects necessarily have parts.  But I believe physical objects per
+;; se are paradigms of independent (hence non-relative) objects for
+;; Sowa.  So the question is how to avoid the consequence that
+;; intuitively independent entities turn out to be relative.
+;; Qualification of the "has" relation seems to be the best way out
+;; here.  For instance, one could introduce a part-of relation and
+;; then explicitly deny that if x is a part of y, then y has x.  But
+;; this approach is dubious -- how does one distinguish legitimate
+;; cases of having -- e.g., a marriage has a husband, a husband a wife
+;; -- from illegitimate?
+
+(=&gt; 
+	(instance-of ?x Relative)
+       	(nec 
+		(exists (?y)
+               		(or 
+				(has ?x ?y)
+                             	(has ?y ?x)))))
+
+;; Independent and Relative are disjoint.
+
+(disjoint Independent Relative)
+
+;; Relative and Mediating are disjoint.
+
+(disjoint Relative Mediating)
+
+;; part-of and stage-of cannot be satisfied by the same ordered pair.
+
+(&lt;=&gt;
+	(part-of ?X ?Y)
+	(not
+		(stage-of ?X ?Y)))
+
+;; attribute-of and manner-of cannot be satisfied by the same ordered pair.
+
+(&lt;=&gt;
+	(attribute-of ?X ?Y)
+	(not
+		(manner-of ?X ?Y)))
+
+(disjoint Attribute Manner)
+
+;; SpatialForm and Arrangement are disjoint.
+
+(disjoint SpatialForm Arrangement)
+
+;; The following axiom is from CPR.
+
+(=&gt;
+     (and
+          (subAction ?Act1 ?Act2)
+          (instance-of ?Act1 Action))
+     (during ?Act1 ?Act2))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   AGENT HIERARCHY   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following ground facts incorporate the 'Agent' hierarchy from the 
+;; corresponding ontology on the Ontolingua server.
+
+(subclass-of Agent Object)
+(subclass-of Person Agent)
+(subclass-of Organization Agent)
+(subclass-of Publisher Organization)
+(subclass-of University Organization)
+(disjoint Person Organization)
+
+(documentation Agent "An agent is something or someone that can act on its
+own and produce changes in the world.")
+
+(documentation Organization "An organization is a corporate or similar 
+institution, distinguished from persons and other agents.")
+
+(documentation University "A university is an institute of higher learning that offers a
+graduate research program.  Of importance here is the fact that
+universities sponsor the publication of dissertations.  Any organization
+that has been accredited to grant graduate degrees and is recognized
+in libraries to be a publisher of dissertations can be called a
+university.  Some places that call themselves colleges fall under this
+category.")
+
+(documentation Publisher "A publisher is an organization that publishes.  
+The owner of a publishing company may be a person, 
+and the name of the publisher may be the name of a person.")
+
+;; Axiom defining the class 'Agent' in terms of the case role 'agent'
+
+(&lt;=&gt;
+	(instance-of ?X Agent)
+	(exists (?Y)
+		(agent ?Y ?X)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  NUMBER HIERARCHY   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following ground facts incorporate the Number hierarchy from the ontology 
+;; 'kif-numbers' on the Ontolingua server.
+
+(subclass-of RealNumber Number)
+(subclass-of RationalNumber RealNumber)
+(subclass-of PositiveRealNumber RealNumber)
+(subclass-of NegativeRealNumber RealNumber)
+(subclass-of Integer RationalNumber)
+(subclass-of EvenInteger Integer)
+(subclass-of OddInteger Integer)
+(subclass-of NaturalNumber Integer)
+(subclass-of NonnegativeInteger Integer)
+(subclass-of NegativeInteger Integer)
+(subclass-of PositiveInteger Integer)
+(subclass-of PositiveNumber Number)
+(subclass-of NegativeNumber Number)
+(subclass-of ComplexNumber Number)
+
+(valence logBit 2)
+(documentation logBit "The formula (logbit ?X ?Y) is true if bit ?Y of ?X is 1.")
+
+(valence logTest 2)
+(documentation logTest "The formula (logtest ?X ?Y) is true if the logical and of the two's-complement representation of the integers ?X and ?Y is not zero.")
+
+(instance-of MultiplicationFn VariableArityFunction)
+(documentation MultiplicationFn "If ?X, ?Y, ..., ?N denote numbers, then the term 
+(MultiplicationFn ?X ?Y ... ?N) denotes the product of those numbers.")
+
+(instance-of AdditionFn VariableArityFunction)
+(documentation AdditionFn "If ?X, ?Y, ..., ?N are numerical constants, then the term  
+(AdditionFn ?X ?Y ... ?N) denotes the sum of the numbers corresponding to those 
+constants.")
+ 
+(instance-of SubtractionFn VariableArityFunction)
+(documentation SubtractionFn "If ?X, ?Y, ..., ?N denote numbers, then the term 
+(SubtractionFn ?X ?Y ... ?N) denotes the difference between the number denoted 
+by ?X and the numbers denoted by ?Y through ?N.  An exception occurs when ?Y ... ?N = 0, 
+in which case the term denotes the negation of the number denoted by ?X.")
+
+(instance-of DivisionFn VariableArityFunction)
+(documentation DivisionFn "If ?X, ?Y, ..., ?N are numbers, then the term
+(DivisionFn ?X ?Y ... ?N) denotes the result ?N obtained by dividing the 
+number denoted by ?X by the numbers denoted by ?Y through ?N.  An exception 
+occurs when ?Y ... ?N = 1, in which case the term denotes the reciprocal 
+?X of the number denoted by ?Y ... ?N.")
+
+(instance-of AbsoluteValueFn UnaryFunction)
+(documentation AbsoluteValueFn "The term (AbsoluteValueFn ?X) denotes the 
+absolute value of the object denoted by ?X.")
+
+(instance-of ArcCosineFn UnaryFunction)
+(documentation ArcCosineFn "If ?X denotes a number, then the term (ArcCosineFn ?X) 
+denotes the arc cosine of that number (in radians).")
+
+(instance-of ArithmeticalShiftFn BinaryFunction)
+(documentation ArithmeticalShiftFn "The term (ArithmeticalShiftFn ?X ?Y) denotes 
+the result of arithmetically shifting the object denoted by ?X by the number of 
+bits denoted by ?Y (left or right shifting depending on the sign of ?Y).")
+
+(instance-of ArcSineFn UnaryFunction)
+(documentation ArcSineFn "The term (ArcSineFn ?X) denotes the arc sine of the object
+denoted by ?X (in radians).")
+
+(instance-of HyperbolicArcSineFn UnaryFunction)
+(documentation HyperbolicArcSine "The term (HyperbolicArcSine ?X) denotes the 
+hyperbolic arc sine of the object denoted by ?X (in radians).")
+
+(instance-of ArcTangentFn UnaryFunction)
+(documentation ArcTangentFn "The term (ArcTangentFn ?X) denotes the arc tangent 
+of the object denoted by ?X (in radians).")
+
+(instance-of HyperbolicArcTangentFn UnaryFunction)
+(documentation HyperbolicArcTangentFn "The term (HyperbolicArcTangent ?X) denotes 
+the hyperbolic arc tangent of the object denoted by ?X (in radians).")
+
+(instance-of BooleanFn TernaryFunction)
+(documentation BooleanFn ""The term (BooleanFn ?OPERATOR ?X ?Y) denotes the
+result of applying the operation denoted by ?OPERATOR to the objects
+denoted by ?X and ?Y.")
+
+(instance-of CeilingFn UnaryFunction)
+(documentation CeilingFn "If ?X denotes a real number, then the term (CeilingFn ?X) 
+denotes the smallest integer greater than or equal to the anumber denoted by ?X.")
+
+(instance-of ConjugateFn UnaryFunction)
+(documentation ConjugateFn "If ?X denotes a complex number, then the term 
+(ConjugateFn ?X) denotes the complex conjugate of the number denoted by ?X.")
+
+(instance-of CosineFn UnaryFunction)
+(documentation CosineFn "The term (CosineFn ?X) denotes the cosine of the object
+denoted by ?X (in radians).")
+
+(instance-of HyperbolicCosineFn UnaryFunction)
+(documentation HyperbolicCosineFn "The term (HyperbolicCosineFn ?X) denotes the 
+hyperbolic cosine of the object denoted by ?X (in radians).
+
+(instance-of DecodeFloatFn UnaryFunction)
+(documentation DecodeFloatFn "The term (DecodeFloatFn ?X) denotes the mantissa of the
+object denoted by ?X.")
+
+(instance-of DenominatorFn UnaryFunction)
+(documentation DenominatorFn "The term (DenominatorFn ?X) denotes the denominator 
+of the canonical reduced form of the object denoted by ?X.")
+
+(instance-of ExponentiationFn BinaryFunction)
+(documentation ExponentiationFn "The term (Exponentiation ?X ?Y) denotes ?X raised 
+to the power of the object denoted by ?Y.")
+
+(instance-of FloatingCeilingFn UnaryFunction)
+(documentation FloatingCeilingFn "The term (FloatingCeilingFn ?X) denotes the 
+smallest integer (as a floating point number) greater than the object denoted by ?X.")
+
+(instance-of FloatingFloorFn UnaryFunction)
+(documentation FloatingFloorFn "The term (FloatingFloorFn ?X) denotes the largest 
+integer (as a floating point number) less than the object denoted by ?X.")
+
+(instance-of FloatingPointNumberFn UnaryFunction)
+(documentation FloatingPointNumberFn "The term (FloatingPointNumberFn ?X) denotes 
+the floating point number equal to the object denoted by ?X.")
+
+(instance-of FloatingDigitFn UnaryFunction)
+(range FloatingDigitFn NonnegativeInteger) 
+(documentation FloatingDigitFn "The term (FloatingDigitFn ?X) denotes the number 
+of digits used in the representation of a floating point number denoted by ?X.")
+
+(instance-of FloatingPrecisionFn UnaryFunction)
+(range FloatingPrecisionFn NonnegativeInteger) 
+(documentation FloatingPrecisionFn "The term (FloatingPrecisionFn ?X) denotes the 
+number of significant digits in the floating point number denoted by ?X.")
+
+(instance-of FloatingRadixFn UnaryFunction)
+(range FloatingRadixFn NaturalNumber)
+(documentation FloatingRadixFn "The term (FloatingRadixFn ?X) denotes the radix 
+of the floating point number denoted by ?X. The most common values are 2
+and 16.")
+
+(instance-of FloatingSignFn BinaryFunction)
+(documentation FloatingSignFn "The term (FloatingSignFn ?X ?Y) denotes a 
+floating-point number with the same sign as the object denoted by ?X and
+the same absolute value as the object denoted by ?Y.")
+
+(instance-of FloorFn UnaryFunction)
+(range FloorFn Integer)
+(documentation FloorFn "The term (FloorFn ?X) denotes the largest integer less
+than the object denoted by ?X.")
+
+(instance-of FloatingTruncateFn UnaryFunction)
+(documentation FloatingTruncateFn "The term (FloatingTruncateFn ?X)} denotes 
+the largest integer (as a floating point number) less than the object 
+denoted by ?X.")
+
+(instance-of GreatestCommonDivisorFn VariableArityFunction)
+(documentation GreatestCommonDivisorFn "The term (GreatestCommonDivisorFn ?X ?Y ... ?N) 
+denotes the greatest common divisor of the objects denoted by ?X through ?N.")
+
+(instance-of ImaginaryPartFn UnaryFunction)
+(documentation ImaginaryPartFn "The term (ImaginaryPartFn ?X) denotes the imaginary 
+part of the object denoted by ?X.")
+
+(instance-of IntegerDecodeFloatFn UnaryFunction)
+(range IntegerDecodeFloatFn Integer)
+(documentation IntegerDecodeFloatFn "The term (IntegerDecodeFloatFn ?X) denotes 
+the significand of the object denoted by ?X.")
+
+(instance-of IntegerLengthFn UnaryFunction)
+(range IntegerLengthFn NonnegativeInteger)
+(documentation IntegerLengthFn "The term (IntegerLengthFn ?X) denotes the 
+number of bits required to store the absolute magnitude of the object denoted 
+by ?X.")
+
+(instance-of IntegerSquareRootFn UnaryFunction)
+(range IntegerSquareRootFn NonnegativeInteger)
+(documentation IntegerSquareRootFn "The term (IntegerSquareRootFn ?X) denotes 
+the integer square root of the object denoted by ?X.")
+     
+(instance-of LeastCommonMultipleFn VariableArityFunction)
+(documentation LeastCommonMultipleFn "The term (LeastCommonMultipleFn ?X ?Y ... ?N) 
+denotes the least common multiple of the objects denoted by ?X, ?Y, ... ?N.")
+
+(instance-of LogFn BinaryFunction)
+(documentation LogFn "The term (LogFn ?X ?Y) denotes the logarithm of the
+object denoted by ?X in the base denoted by ?Y.")
+
+(instance-of LogicalAndFn VariableArityFunction)
+(documentation LogicalAndFn "The term (LogicalAndFn ?X ?Y ... ?N) denotes the 
+bit-wise logical and of the objects denoted by ?X, ?Y, ... , ?N.")
+
+(instance-of LogicalCountFn UnaryFunction)
+(documentation LogicalCountFn "The term (LogicalCountFn ?X) denotes the number 
+of bits in the object denoted by ?X.  If the denotation of ?X is positive, then 
+the one bits are counted; otherwise, the zero bits in the twos-complement 
+representation are counted.")
+
+(instance-of LogicalExclusiveOrFn VariableArityFunction)
+(documentation LogicalExclusiveOrFn "The term (LogicalExclusiveOrFn ?X ?Y ... ?N) 
+denotes the logical-exclusive-or of the objects denoted by ?X, ?Y, ..., ?N.")
+
+(instance-of LogicalInclusiveOrBitwiseFn VariableArityFunction)
+(documentation LogicalInclusiveOrFn "The term (LogicalInclusiveOrFn ?X ?Y ... ?N) 
+denotes the bit-wise logical inclusive or of the objects denoted by ?X, ?Y, ... , ?N.  
+It denotes 0 if there are no arguments.")
+
+(instance-of LogicalNotFn UnaryFunction)
+(documentation LogicalNotFn "The term (LogicalNotFn ?X) denotes the bit-wise 
+logical not of the object denoted by ?X.")
+
+(instance-of LogicalExclusiveOrBitwiseFn VariableArityFunction)
+(documentation LogicalExclusiveOrBitwiseFn "The term (LogicalExclusiveOrBitwiseFn ?X ?Y ... ?N) denotes the bit-wise logical exclusive or of the objects denoted by ?X, ?Y, ..., ?N.  
+It denotes 0 if there are no arguments.")
+
+(instance-of MaxFn VariableArityFunction)
+(documentation MaxFn "The term (MaxFn ?X ?Y ... ?N) denotes the largest object
+denoted by ?X, ?Y, ... , ?N.")
+
+(instance-of MinFn VariableArityFunction)
+(documentation MinFn "The term (MinFn ?X ?Y ... ?N) denotes the smallest object
+denoted by ?X, ?Y, ... , ?N.")
+
+(instance-of ModuloFn BinaryFunction)
+(documentation ModuloFn "The term (ModuloFn ?X ?Y) denotes the root of the object
+denoted by ?X modulo the object denoted by ?Y.  The result will have the same sign 
+as denoted by ?X.")
+
+(instance-of NumeratorFn UnaryFunction)
+(documentation NumeratorFn "The term (NumeratorFn ?X) denotes the numerator of the
+canonical reduced form of the object denoted by ?X.")
+
+(instance-of PhaseFn UnaryFunction)
+(documentation PhaseFn "The term (PhaseFn ?X) denotes the angle part of the polar
+representation of the object denoted by ?X (in radians).")
+
+(instance-of Pi-TheNumber RealNumber)
+(documentation Pi-TheNumber "Pi-TheNumber is the real number that is the ratio of the perimeter of a circle to its diameter.  It is approximately equal to 3.141592653589793.")
+
+(instance-of RationalNumberFn UnaryFunction)
+(documentation RationalNumberFn "The term (RationalNumberFn ?X) denotes the rational
+representation of the object denoted by ?X.")
+
+(instance-of RealNumberFn UnaryFunction)
+(documentation RealNumberFn "The term (RealNumberFn ?X) denotes the real part of the
+object denoted by ?X.")
+
+(instance-of RemainderFn BinaryFunction)
+(documentation RemainderFn "The term (RemainderFn ?NUMBER ?DIVISOR) denotes the 
+remainder of the object denoted by ?NUMBER divided by the object denoted by 
+?DIVISOR.  The result has the same sign as the object denoted by ?DIVISOR.")
+
+(instance-of RoundFn UnaryFunction)
+(range RoundFn Integer)
+(documentation RoundFn "The term (RoundFn ?X) denotes the integer nearest to 
+the object denoted by ?X.  If the object denoted by ?X is halfway between two 
+integers (for example 3.5), it denotes the nearest integer divisible by 2.")
+
+(instance-of ScaleFloatFn BinaryFunction)
+(documentation ScaleFloatFn "The term (ScaleFloatFn ?X ?Y) denotes a floating-point
+number that is the representational radix of the object denoted by ?X raised to the 
+integer denoted by ?Y.")
+
+(instance-of SignumFn UnaryFunction)
+(documentation SignumFn "The term (SignumFn ?X) denotes the sign of the object
+denoted by ?X.  This is one of -1, 1, or 0 for rational numbers and one of 
+-1.0, 1.0, or 0.0 for floating point numbers.")
+
+(instance-of SineFn UnaryFunction)
+(documentation SineFn "The term (SineFn ?X) denotes the sine of the object denoted
+by ?X (in radians).")
+
+(instance-of HyperbolicSineFn UnaryFunction)
+(documentation HyperbolicSineFn "The term (HyperbolicSineFn ?X) denotes the hyperbolic 
+sine of the object denoted by ?X (in radians).")
+
+(instance-of SquareRootFn UnaryFunction)
+(documentation SquareRootFn "The term (SquareRootFn ?X) denotes the principal 
+square root of the object denoted by ?X.")
+
+(instance-of TangentFn UnaryFunction)
+(documentation TangentFn "The term (TangentFn ?X) denotes the tangent of the 
+object denoted by ?X (in radians).")
+
+(instance-of HyperbolicTangentFn UnaryFunction)
+(documentation HyperbolicTangentFn "The term (HyperbolicTangentFn ?X) denotes 
+the hyperbolic tangent of the object denoted by ?X (in radians).")
+
+(instance-of TruncateFn UnaryFunction)
+(documentation TruncateFn "The term (TruncateFn ?X) denotes the largest integer less
+than the object denoted by ?X.")
+
+(instance-of lessThan BinaryRelation)
+(documentation lessThan "The formula (lessThan ?X ?Y) is true if and only if
+the number denoted by ?X is less than the number denoted by ?Y.")
+
+(instance-of greaterThan BinaryRelation)
+(documentation greaterThan "The formula (greaterThan ?X ?Y) is true if and only if
+the number denoted by ?X is greater than the number denoted by ?Y.")
+
+(=&gt;
+	(instance-of ?X EvenInteger)
+	(= (DivisionFn ?X 2) 0)
+
+(=&gt;
+	(instance-of ?X OddInteger)
+	(= (DivisionFn ?X 2) 1)
+
+(&lt;=&gt;
+	(instance-of ?X NaturalNumber)
+	(and
+		(greaterThan ?X 0)
+		(instance-of ?X Integer)))
+
+(=&gt;
+	(instance-of ?X NonnegativeInteger)
+	(or
+		(greaterThan ?X 0)
+		(= ?X 0)))
+
+(=&gt;
+	(instance-of ?X PositiveNumber)
+	(greaterThan ?X 0))
+
+(=&gt;
+	(instance-of ?X NegativeNumber)
+	(greaterThan 0 ?X))
+
+(&lt;=&gt;  
+	(lessThan ?X ?Y)
+	(greaterThan ?Y ?X))
+
+(&lt;=&gt;
+	(lessThanOrEqualTo ?X ?Y)
+	(or
+		(equal ?X ?Y)
+		(lessThan ?X ?Y)))
+
+(&lt;=&gt;
+	(greaterThanOrEqualTo ?X ?Y)
+	(or
+		(equal ?X ?Y)
+		(greaterThan ?X ?Y)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  UNITS OF MEASURE   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following formulas incorporate the units of measure in the "Standard Units" ontology on
+;; the Ontolingua server.
+
+(subclass-of SystemeInternationalUnit Unit-Of-Measure)
+(documentation SystemeInternationalUnit "The class of Systeme International units.")
+
+(subclass-of ElectricalCurrentMeasure Unit-Of-Measure)
+(subclass-of MassMeasure Unit-Of-Measure)
+(subclass-of LengthMeasure Unit-Of-Measure)
+(subclass-of IdentityMeasure Unit-Of-Measure)
+(subclass-of InformationMeasure Unit-Of-Measure)
+(subclass-of EnergyMeasure Unit-Of-Measure)
+(subclass-of LuminosityMeasure Unit-Of-Measure)
+(subclass-of TimeMeasure-Duration Unit-Of-Measure)
+(subclass-of TemperatureMeasure Unit-Of-Measure)
+(subclass-of FrequencyMeasure Unit-Of-Measure)
+(subclass-of PowerMeasure Unit-Of-Measure)
+(subclass-of ResistanceMeasure Unit-Of-Measure)
+(subclass-of PressureMeasure Unit-Of-Measure)
+(subclass-of ElectricalPotentialMeasure Unit-Of-Measure)
+(subclass-of SubstanceMeasure Unit-Of-Measure)
+(subclass-of ForceMeasure Unit-Of-Measure)
+(subclass-of CurrencyMeasure Unit-Of-Measure)
+
+(instance-of MeasureFn BinaryFunction)
+(nth-domain MeasureFn 1 RealNumber)
+(nth-domain MeasureFn 2 Unit-Of-Measure)
+(documentation MeasureFn "This function maps a real number and a unit of measure to that number of units.") 
+
+(instance-of Ampere ElectricalCurrentMeasure)
+(instance-of Ampere SystemeInternationalUnit)
+(documentation Ampere "SI electrical current unit.  It is one of the base units.") 
+
+(instance-of Amu MassMeasure)
+(documentation Amu "Atomic mass unit, which is the mass of the twelfth part of a the Carbon 12 isotope. ")
+
+(equal
+	(MeasureFn ?X Amu)
+	(MeasureFn (MultiplicationFn ?X 1.660434E-24) Gram)) 
+
+(instance-of Angstrom LengthMeasure)
+
+(equal
+	(MeasureFn ?X Angstrom)
+	(MeasureFn (MultiplicationFn ?X 1.0E-10) Meter))
+
+(instance-of AngularDegree IdentityMeasure)
+(documentation AngularDegree "Angular measurement unit.")
+
+(equal
+	(MeasureFn ?X AngularDegree)
+	(MeasureFn (MultiplicationFn ?X (DivisionFn Pi-TheNumber 180)) Radian))
+
+(instance-of AtomGram MassMeasure)
+(Documentation AtomGram
+  "AKA gram-atom.  Defined as the mass in grams of a 1 mole of pure substance.  For example, 1 atom-gram of Carbon 12 will be 12 grams of pure Carbon 12. 2 atom-grams of the same substance will be 24 grams of it.  This is an unusual unit that it is essentially 1 mole of 'stuff' but measured in grams so that the actual value (i.e. mass) depends on the type of substance.")
+
+(instance-of Bit InformationMeasure)
+(documentation Bit "One bit of information.  A one or a zero.")
+
+(instance-of BritishThermalUnit EnergyMeasure)
+(documentation BritishThermalUnit "British thermal unit, a unit of energy.")
+
+(equal
+	(MeasureFn ?X BritishThermalUnit)
+	(MeasureFn (MultiplicationFn ?X 1055.0) Joule))
+
+(instance-of Byte InformationMeasure)
+(documentation Byte "One byte of information.  A byte is eight bits.")
+
+(equal
+	(MeasureFn ?X Byte)
+	(MeasureFn (MultiplicationFn ?X 8) Bit))
+
+(instance-of Calorie EnergyMeasure)
+(documentation Calorie "A calorie is 4.186 joule.")
+
+(equal
+	(MeasureFn ?X Calorie)
+	(MeasureFn (MultiplicationFn ?X 4.186) Joule))
+
+(instance-of Candela LuminosityMeasure)
+(instance-of Candela SystemeInternationalUnit)
+(documentation Candela "The CANDELA is the SI unit for luminous intensity.")
+
+(instance-of Centimeter LengthMeasure)
+(documentation Centimeter "It is the 100th part of a METER")
+
+(equal
+	(MeasureFn ?X Centimeter)
+	(MeasureFn (MultiplicationFn ?X 0.01) Meter))
+
+(instance-of Coulomb ElectricalCurrentMeasure)
+(instance-of Coulomb SystemeInternationalUnit)
+(documentation Coulomb "SI charge unit.")
+
+(equal
+	(MeasureFn ?X Coulomb)
+	(PerFn (MeasureFn ?X Ampere) (MeasureFn 1 Second-Duration)))
+
+(instance-of Day-Duration TimeMeasure)
+(documentation Day-Duration "one day, ie 24 hours")
+
+(equal
+	(MeasureFn ?X Day-Duration)
+	(MeasureFn (MultiplicationFn ?X 24) Hour-Duration))
+
+(instance-of Degree-Celcius TemperatureMeasure)
+(documentation Degree-Celcius "A unit for measuring temperature.
+The degree-Kelvin differs from the Celcius scale that the triple point of water is defined to be 273.16 degrees Kelvin while it is 0 degrees Celcius.  The magnitudes of intervals in two scales are the same.")
+
+(equal
+	(MeasureFn ?X Degree-Celcius)
+	(MeasureFn (SubtractionFn ?X 273.16) Degree-Kelvin))
+
+(instance-of Degree-Kelvin TemperatureMeasure)
+(instance-of Degree-Kelvin SystemeInternationalUnit)
+(documentation Degree-Kelvin
+  "A unit of thermodynamic temperature.  The degree-Kelvin 
+differs from the Celcius scale that the triple point of water is defined to be 273.16 degrees Kelvin while it is 0 degrees Celcius.  The magnitudes of intervals in two scales are the same.")
+
+(instance-of Degree-Rankine TemperatureMeasure)
+(documentation Degree-Rankine
+ "0 degree Rankine is the same as the absolute zero (i.e. 0 degree Kelvin).  The magnitues of a degree Rankine is the same as that of a degree Fahrenheit.")
+
+(equal
+	(MeasureFn ?X Degree-Rankine)
+	(MeasureFn (MultiplicationFn ?X 1.8) Degree-Rankine))
+
+(instance-of ElectronVolt EnergyMeasure)
+(documentation Electronvolt "The elecronvolt is an energy measure")
+
+(equal
+	(MeasureFn ?X ElectronVolt)
+	(MeasureFn (MultiplicationFn ?X 1.6E-19) Joule))
+
+(instance-of Foot LengthMeasure)
+(documentation Foot "English length unit of feet.")
+
+(equal
+	(MeasureFn ?X Foot)
+	(MeasureFn (MultiplicationFn ?X 0.3048) Meter))
+
+(instance-of Giga-Hertz FrequencyMeasure)
+(documentation Giga-Hertz "A unit of measure equal to one billion times per second.")
+
+(equal 
+	(MeasureFn ?X Giga-Hertz)
+	(MeasureFn (MultiplicationFn ?X 1.0E9) Hertz))
+
+(instance-of Gram MassMeasure)
+(documentation Gram "1 kilogram = 1000 Grams")
+
+(equal
+	(MeasureFn ?X Gram)
+	(MeasureFn (MultiplicationFn ?X 0.001) Kilogram))
+
+(instance-of Hertz FrequencyMeasure)
+(documentation Hertz "A unit of measure equal to a frequency of once per second.")
+
+(equal
+	(MeasureFn ?X Hertz)
+	(PerFn (MeasureFn ?X Cycle) (MeasureFn 1 Second)))
+
+(instance-of Hour-Duration TimeMeasure)
+(documentation Hour-Duration "Time unit.")
+
+(equal
+	(MeasureFn ?X Hour-Duration)
+	(MeasureFn (MultiplicationFn ?X 60) Minute-Duration))
+
+(instance-of Inch LengthMeasure)
+(documentation Inch "English length unit.")
+
+(equal
+	(MeasureFn ?X Inch)
+	(MeasureFn (MultiplicationFn ?X 0.0254) Meter))
+
+(instance-of Joule EnergyMeasure)
+(instance-of Joule SystemeInternationalUnit)
+(documentation Joule "SI energy unit.")
+
+(instance-of Kilo-Byte InformationMeasure)
+(documentation Kilo-Byte "One kilo byte (K) of information.  One K is 1024 bytes.")
+
+(equal
+	(MeasureFn ?X Kilo-Byte)
+	(MeasureFn (MultiplicationFn ?X 1024) Byte))
+
+(instance-of Kilo-Hertz FrequencyMeasure)
+(documentation Kilo-Hertz "A unit of measure equal to a frequency of one thousand times per second.")
+
+(equal
+	(MeasureFn ?X Kilo-Hertz)
+	(MeasureFn (MultiplicationFn ?X 1000) Hertz))
+
+(instance-of Kilo-Watt PowerMeasure)
+(documentation Kilo-Watt "A unit that measures power, ie energy produced or expended per unit of time.")
+
+(equal
+	(MeasureFn ?X Kilo-Watt)
+	(MeasureFn (MultiplicationFn ?X 1000) Watt))
+
+(instance-of Kilogram MassMeasure)
+(instance-of Kilogram SystemeInternationalUnit)
+(documentation Kilogram "The basic unit of mass in the MKS system.")
+
+(equal
+	(MeasureFn ?X Kilogram)
+	(MeasureFn (MultiplicationFn ?X 1000) Gram))
+
+(instance-of Kilometer LengthMeasure)
+(documentation Kilometer "1 kilometer = 1000 meters")
+
+(equal
+	(MeasureFn ?X Kilometer)
+	(MeasureFn (MultiplicationFn ?X 1000) Meter))
+
+(instance-of Mega-Byte InformationMeasure)
+(documentation Mega-Byte "One mega byte (MB) of information.  One MB is 1024 K.")
+
+(equal
+	(MeasureFn ?X Mega-Byte)
+	(MeasureFn (MultiplicationFn ?X 1024) Kilo-Byte))
+
+(instance-of Mega-Hertz FrequencyMeasure)
+(documentation Mega-Hertz "A unit of measure equal to one million times per second.")
+
+(equal
+	(MeasureFn ?X Mega-Hertz)
+	(MeasureFn (MultiplicationFn ?X 1000) Kilo-Hertz))
+
+(instance-of Mega-Ohm ResistanceMeasure)
+(documentation Mega-Ohm "One million ohms.")
+
+(equal
+	(MeasureFn ?X Mega-Ohm)
+	(MeasureFn (MultiplicationFn ?X 1.0E6) Ohm))
+
+(instance-of Mega-Pascal PressureMeasure) 
+(documentation Mega-Pascal " 1 megapascal = 10^6 pascal ")
+
+(equal
+	(MeasureFn ?X Mega-Pascal)
+	(MeasureFn (MultiplicationFn ?X 1.0E6) Pascal))
+
+(instance-of Meter LengthMeasure)
+(instance-of Meter SystemeInternationalUnit)
+(documentation Meter "SI length unit.  No conversion function is given because this is a standard.")
+
+(instance-of Micro-Ohm ResistanceMeasure)
+(documentation Micro-Ohm "10^(-6) Ohms")
+
+(equal
+	(MeasureFn ?X Micro-Ohm)
+	(MeasureFn (MultiplicationFn ?X 0.000001) Ohm))
+
+(instance-of Micro-Volt ElectricalPotentialMeasure)
+(documentation Micro-Volt "A unit for measuring electrical potential.")
+
+(equal
+	(MeasureFn ?X Micro-VoltFn)
+	(MeasureFn (MultiplicationFn ?X 0.000001) Volt))
+
+(instance-of Mile LengthMeasure)
+(documentation Mile "English length unit.")
+
+(equal
+	(MeasureFn ?X Mile)
+	(MeasureFn (MultiplicationFn ?X 1609) Meter))
+
+(instance-of Milli-Ampere ElectricalCurrentMeasure)
+(documentation Milli-Ampere "A unit of electrical current equal to one thousandth of an ampere.")
+
+(equal
+	(MeasureFn ?X Milli-Ampere)
+	(MeasureFn (MultiplicationFn ?X .001) Ampere))
+
+(instance-of Milli-Volt ElectricalPotentialMeasure)
+(documentation Milli-Volt "A unit of electrical potential equal to one thousandth of a volt.")
+
+(equal
+	(MeasureFn ?X Milli-Volt)
+	(MeasureFn (MultiplicationFn ?X .001) Volt))
+
+(instance-of Minute-Duration TimeMeasure)
+(documentation Minute-Duration "Time unit.")
+
+(instance-of Mole SubstanceMeasure)
+(instance-of Mole SystemeInternationalUnit)
+(documentation Mole
+  "SI unit for amount of substance.  A mole of a substance is the
+amount of that substance that contains 6.02252 x 10^23 elementary
+entities.  Those entities may be atoms, molecules, ions, electrons,
+other particles, or specified groups of such particles.  One mole
+of carbon atoms (the C^12 isotope) is exactly 12 grams [Halliday
+and Resnick].  In this ontology we say that the specified unit
+is the molecule, so that the MOLE stands by itself as a unit.")
+
+(instance-of Nano-Ampere ElectricalCurrentMeasure)
+(documentation Nano-Ampere "A unit of electrical current equal to one billionth of an ampere.")
+
+(equal
+	(MeasureFn ?X Nano-Ampere)
+	(MeasureFn (MultiplicationFn ?X 1.0E-9) Ampere))
+
+(instance-of Nano-Second TimeMeasure)
+(documentation Nano-Second "A unit of measure equal to one trillionth of a second.")
+
+(equal
+	(MeasureFn ?X Nano-Second)
+	(MeasureFn (MultiplicationFn ?X 1.0E-9) Second))
+
+(instance-of Newton ForceMeasure)
+(instance-of Newton SystemeInternationalUnit)
+(documentation Newton "SI force unit.")
+
+(instance-of Ohm ResistanceMeasure)
+(documentation Ohm "A unit for measuring electrical resistance.")
+
+(instance-of Pascal PressureMeasure)
+(instance-of Pascal SystemeInternationalUnit)
+(documentation Pascal "SI pressure unit.  Newton/meter^2.")
+
+(instance-of Pico-Ampere ElectricalCurrentMeasure)
+(documentation Pico-Ampere "A unit of electrical current equal to one trillionth of an ampere.")
+
+(equal
+	(MeasureFn ?X Pico-AmpereFn)
+	(MeasureFn (MultiplicationFn ?X 1.0E-12) Ampere))
+
+(instance-of Pico-Second TimeMeasure)
+
+(equal
+	(MeasureFn ?X Pico-Second)
+	(MeasureFn (Multiplication ?X 1.0E-12) Second-Duration))
+
+(instance-of Pound-Force ForceMeasure)
+(documentation Pound-Force "English pound of force.")
+
+(instance-of Pound-Mass MassMeasure)
+(documentation Pound-Mass "English pound of mass.")
+
+(equal
+	(MeasureFn ?X Pound-Mass)
+	(MeasureFn (MultiplicationFn ?X 0.4536) Kilogram))
+
+(instance-of Radian IdentityMeasure)
+(documentation Radian "Angular measurement unit.")
+
+(instance-of Second-Duration TimeMeasure)
+(instance-of Second-Duration SystemeInternationalUnit)
+(documentation Second-Duration "The SI standard unit of time.")
+
+(instance-of Slug MassMeasure)
+(documentation Slug "English mass unit.")
+
+(equal
+	(MeasureFn ?X Slug)
+	(MeasureFn (MultiplicationFn ?X 14.59) Kilogram))
+
+(instance-of Dollar-UnitedStates CurrencyMeasure)
+(documentation Dollar-UnitedStates "An example currency unit.")
+
+(instance-of Cent-UnitedStates CurrencyMeasure)
+(documentation Cent-UnitedStates "Currency measurement unit.")
+
+(equal
+	(MeasureFn ?X Cent-UnitedStates)
+	(MeasureFn (MultiplicationFn ?X .01) Dollar-UnitedStates))
+
+(instance-of Volt ElectricalPotentialMeasure)
+(documentation Volt "A unit for measuring electrical potential.")
+
+(instance-of Watt PowerMeasure)
+(documentation Watt "A unit that measures power, ie energy produced or expended per unit of time.")
+
+(instance-of Year-Duration TimeMeasure)
+(documentation Year-Duration "one calendar year")
+
+(equal
+	(MeasureFn ?X Year-Duration)
+	(MeasureFn (MultiplicationFn ?X 365) Day-Duration))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  ORGANISM HIERARCHY   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following formulas incorporate the content in the Natural-Kinds ontology developed by the
+;; CNR-ITBM group.  This content is essentially a set of high-level biological categories.
+
+(subclass-of Organism Organic)
+(subclass-of Plant Organism)
+(documentation Plant "An organism having cellulose cell walls, growing by synthesis of inorganic 
+substances, generally distinguished by the presence of chlorophyll, and lacking the power of locomotion.  Plant parts are included here as well.")
+
+(=&gt;
+	(instance-of ?X Plant)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y CellWall-Peptidoglycan))))
+
+(=&gt;
+	(instance-of ?X Plant)
+	(exists (?Y ?Z)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Pigment)
+			(result ?Z ?Y)
+			(instance-of ?Z Photosynthesis))))
+
+(subclass-of Animal Organism)
+(documentation Animal "An organism with eukaryotic cells, and lacking stiff cell walls, plastids and photosynthetic pigments. The children of this type in the network are 'Invertebrate', and 'Vertebrate'.")
+(disjoint Plant Animal)
+
+(=&gt;
+	(instance-of ?X Animal)
+	(exists (?Y ?Z)
+		(and
+			(component-of ?X ?Y)
+			(instance-of ?Y Cell)
+			(part-of ?Y ?Z)
+			(instance-of ?Z CellWall-NonRigid))))
+
+(subclass-of Microorganism Organism)
+(subclass-of Archaeon Microorganism)
+(documentation Archaeon "A member of one of the three domains of life, formerly called Archaebacteria under the taxon Bacteria, but now considered separate and distinct. Archaea are characterized by:  1) the presence of characteristic tRNAs and ribosomal RNAs; 2) the absence of peptidoglycan cell walls; 3) the presence of ether-linked lipids built from branched-chain subunits; and 4) their occurrence in unusual habitats. While archaea resemble bacteria in morphology and genomic organization, they resemble eukarya in their method of genomic replication. Thermoproteales; Methanospirillum; Haloferax volcanii.")
+
+(subclass-of Bacterium Microorganism)
+(documentation Bacterium "A small, typically one-celled, prokaryotic micro-organism."))
+
+(=&gt;
+	(instance-of ?X Bacterium)
+	(cardinality (setof ?Y (and (component-of ?Y ?X) (instance-of ?Y Cell))) 1))
+
+(=&gt;
+	(and
+		(instance-of ?X Bacterium)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+
+(subclass-of Virus Microorganism)
+(documentation Virus "An organism consisting of a core of a single nucleic acid enclosed in a 
+protective coat of protein. A virus may replicate only inside a host living cell. A virus exhibits some but not all of the usual characteristics of living things.")
+
+(=&gt;
+	(instance-of ?X Virus)
+	(cardinality (setof ?Y (and (component-of ?Y ?X) (instance-of ?Y Molecule))) 1))
+
+(=&gt;
+	(instance-of ?X Virus)
+	(and
+		(instance-of ?X Nucleic-Acid)
+		(exists (?Y ?Z)
+			(and
+				(external-covering ?Y ?X)
+				(part-of ?Z ?Y)
+				(instance-of ?Z Protein)))))
+
+(=&gt;
+	(and
+		(instance-of ?X Virus)
+		(instance-of ?Y Replication)
+		(effector-of ?Y ?X))
+	(exists (?Z)
+		(and
+			(located-at ?Y ?Z)
+			(instance-of ?Z Cell))))
+
+(=&gt;
+	(and
+		(instance-of ?X Virus)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+	
+				 
+(subclass-of Chlamydia Microorganism)
+(documentation Chlamydia "An organism intermediate in size and complexity between a virus and a bacterium, and which is parasitic within the cells of insects and ticks. Included here are all the chlamydias, also called 'PLT' for psittacosis-lymphogranuloma venereum-trachoma.")
+
+(=&gt;
+	(instance-of ?X Chlamydia)
+	(exists (?Y ?Z)
+		(and
+			(lives-in ?X ?Y)
+			(instance-of ?Y Cell)
+			(component-of ?Y ?Z)
+			(or
+				(instance-of ?Z Insect)
+				(instance-of ?Z Tick)))))
+
+(=&gt;
+	(and
+		(instance-of ?X Chlamydia)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+
+
+(subclass-of Vertebrate Animal)
+(documentation Vertebrate "An animal which has a spinal column.")
+
+(=&gt;
+	(instance-of ?X Vertebrate)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Spinal-Column))))
+
+(subclass-of Invertebrate Animal)
+(disjoint Vertebrate Invertebrate)
+(documentation Invertebrate "An animal which has no spinal column. This type has no children 
+in the network and is assigned to all invertebrate animals.")
+
+(subclass-of Arthropod Invertebrate)
+(subclass-of Arachnid Arthropod)
+(subclass-of Tick Arachnid)
+(subclass-of Insect Arthropod)
+(subclass-of Vertebrate-ColdBlooded Vertebrate)
+(subclass-of Vertebrate-WarmBlooded Vertebrate)
+(disjoint Vertebrate-WarmBlooded Vertebrate-ColdBlooded)
+(subclass-of Mammal Vertebrate-WarmBlooded)
+
+(subclass-of Alga Plant)
+(documentation Alga "A chiefly aquatic plant that contains chlorophyll, but does not form 
+embryos during development and lacks vascular tissue.")
+
+(=&gt;
+	(instance-of ?X Alga)
+	(exists (?Y)
+		(and
+			(lives-in ?X ?Y)
+			(instance-of ?Y Water))))
+
+(=&gt;
+	(instance-of ?X Alga)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Chlorophyll))))
+
+(=&gt;
+	(instance-of ?X Alga)
+	(has-developmental-form ?X Incoherent))
+
+(subclass-of Amphibian Vertebrate-ColdBlooded)
+(disjoint Amphibian Reptile)
+(documentation Amphibian "A cold-blooded, smooth-skinned vertebrate which characteristically hatches as an aquatic larva, breathing by gills. When mature, the amphibian breathes with lungs.")
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Lungs))))
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Smooth-Skin))))
+
+(=&gt;
+	(instance-of ?X Amphibian)
+	(has-developmental-form ?X Aquatic-Larva))
+
+(subclass-of Bird Vertebrate-WarmBlooded)
+(disjoint Bird Mammal)
+(documentation Bird "A vertebrate having a constant body temperature and characterized by 
+the presence of feathers.")
+
+(=&gt;
+	(instance-of ?X Bird)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Plumage)))) 
+
+(subclass-of Fish Vertebrate-ColdBlooded)
+(disjoint Fish Reptile)
+(documentation Fish "A cold-blooded aquatic vertebrate characterized by fins and breathing by gills. Included here are fishes having either a bony skeleton, such as a perch, or a cartilaginous skeleton, such as a shark, or those lacking a jaw, such as a lamprey or hagfish.")
+
+(=&gt;
+	(instance-of ?X Fish)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Gills)))) 
+
+(=&gt;
+	(instance-of ?X Fish)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Fin)))) 
+
+(=&gt;
+	(instance-of ?X Fish
+	(exists (?Y)
+		(and
+			(lives-in ?Y ?X)
+			(instance-of ?Y Water))))
+
+(subclass-of Fungus Plant)
+(documentation Fungus "A eukaryotic organism characterized by the absence of chlorophyll and the 
+presence of a rigid cell wall. Included here are both slime molds and true fungi such as yeasts, molds, mildews, and mushrooms.")
+
+(=&gt;
+	(instance-of ?X Fungus)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Cell-Eurkaryotic))))
+
+(=&gt;
+	(instance-of ?X Fungus)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y CellWall-Rigid))))
+
+(=&gt;
+	(and
+		(instance-of ?X Fungus)
+		(located-at ?X ?Y))
+	(instance-of ?Y Organic))
+	
+(subclass-of Human Mammal)
+(documentation Human "Modern man, the only remaining species of the Homo genus. If a term describes a human being from the point of view of occupational, family, social status, etc., then a type from the 'Group' hierarchy is assigned instead.")
+
+(subclass-of Mammal Vertebrate-WarmBlooded)
+(documentation Mammal "A vertebrate having a constant body temperature and characterized by the presence of hair, mammary glands and sweat glands.")
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Hair))))
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Mammary-Gland))))
+
+(=&gt;
+	(instance-of ?X Mammal)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Sweat-Gland))))
+
+(subclass-of Reptile Vertebrate-ColdBlooded)
+(documentation Reptile "A cold-blooded vertebrate having an external covering of scales or horny plates.  Reptiles breathe by means of lungs and are generally egg-laying.")
+
+(=&gt;
+	(instance-of ?X Reptile)
+	(exists (?Y)
+		(and
+			(component-of ?Y ?X)
+			(instance-of ?Y Lungs))))
+
+(=&gt;
+	(instance-of ?X Reptile)
+	(exists (?Y)
+		(and
+			(external-covering ?Y ?X)
+			(or
+				(instance-of ?Y Scale)
+				(instance-of ?Y Horny-Plate)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BIOLOGICAL SUBSTANCES HIERARCHY ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following formulas incorporate the content in the Biologic-Substances ontology 
+;; developed by the CNR-ITBM group.  This broadens the taxonomy of organisms by incorporating
+;; components of organisms, as well as agents that induce biological changes.
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TEMPORAL DEFINITIONS/AXIOMS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The first part of this section contains definitions and axioms for 'point in time', 
+;; 'time interval', and relations between these temporal notions.  Most of these definitions
+;; and axioms were derived from Allen.  The second part of this section is an attempt to 
+;; incorporate the Simple-Time ontology on the Ontolingua server into the merged ontology.
+
+;; Necessary intermediate constants
+
+   (nth-domain exists-at 1 Actuality)
+   (nth-domain exists-at 2 TimePoint)
+   (documentation exists-at "Means that the Process/Object exists at the given point in time")
+
+  (subclass-of TimeInterval TemporalEntity)
+  (documentation TimeInterval "An interval of time.")
+
+  (subclass-of TimePoint TemporalEntity)
+  (documentation TimePoint "A TimePoint is not a measurement of time, nor is it a specification of time.  It is the point in time. The TimePoints at which events occur can be known with various degrees of precision and approximation, but conceptually TimePoints are point-like and not interval-like.  That is, it doesn't make sense to talk about what happens during a TimePoint, or how long the TimePoint lasts.")
+
+  (subclass-of TimeMeasure TemporalEntity)
+  (subclass-of TimeMeasure-Duration TimeMeasure)
+  (subclass-of TimeMeasure-Position TimeMeasure)
+
+;; Definitions of basic temporal relations
+
+  (instance-of BeginFn UnaryFunction)
+  (nth-domain BeginFn 1 TimeInterval)
+  (range BeginFn TimePoint)
+  (documentation BeginFn "A function that maps a time interval to the point of time at which the interval begins")
+
+  (instance-of EndFn UnaryFunction)
+  (nth-domain EndFn 1 TimeInterval)
+  (range EndFn TimePoint)
+  (documentation EndFn "A function that maps a time interval to the point of time at which the interval ends")
+
+  (nth-domain starts 1 TimeInterval)
+  (nth-domain starts 2 TimeInterval)
+  (documentation starts "Relates one time interval to another time interval with which the first shares the same initial time point and of which the first is a proper part")
+
+;; Axiom specifying the meaning of 'starts'
+
+    (&lt;=&gt; 
+      (starts ?t1 ?t2)
+      (and 
+	(equal
+	  (BeginFn ?t1)
+	  (BeginFn ?t2))
+	(before
+	  (EndFn ?t1)
+  	  (EndFn ?t2))))
+
+;; Definition of 'finishes'
+
+  (nth-domain finishes 1 TimeInterval)
+  (nth-domain finishes 2 TimeInterval)
+  (documentation finishes "Relates one time interval to another time interval with which the first shares the same terminal time point and of which the first is a proper part")
+
+;; Axiom specifying the meaning of 'finishes'
+
+    (&lt;=&gt;
+      (finishes ?t1 ?t2)
+      (and
+        (before
+          (BeginFn ?t2)
+          (BeginFn ?t1))
+        (equal
+          (EndFn ?t2)
+          (EndFn ?t1))))
+
+;; Note that the definition of 'before' below has been broadened from its statement in Allen.
+;; The selectional restrictions for both arguments are now 'TemporalEntity' instead of
+;; 'TimeInterval'.
+
+  (nth-domain before 1 TemporalEntity)
+  (nth-domain before 2 TemporalEntity)
+  (documentation before "Means that the first temporal quantity precedes the second, and there is no overlap between the two quantities")
+
+(not
+   (before ?t1 ?t1))
+
+(=&gt; 
+   (and 
+      (before ?t1 ?t2) 
+      (before ?t2 ?t3))
+   (before ?t1 ?t3))
+
+;;  Definition of 'beforeEq', from Chris Menzel.  
+
+   (nth-domain beforeEq 1 TimePoint)
+   (nth-domain beforeEq 2 TimePoint)
+   (documentation beforeEq "Means that the first timepoint either is identical with the second or occurs before it in time")
+
+;;  Axiom specifying the full meaning of 'beforeEq'.
+
+(&lt;=&gt; 
+   (beforeEq (?t1 ?t2)
+   (and 
+      (instance-of ?t1 TimePoint) 
+      (instance-of ?t2 TimePoint)
+      (or 
+         (before ?t1 ?t2) 
+         (= ?t1 ?t2))))
+
+;; Definition of the relation 'overlaps-TimeInterval-proper'
+
+  (nth-domain overlaps-TimeInterval-proper 1 TimeInterval)
+  (nth-domain overlaps-TimeInterval-proper 2 TimeInterval)
+  (documentation overlaps "Means that the first time interval ends after the beginning and before the ending of the second interval") 
+
+;; Axiom specifying the meaning of 'overlaps-TimeInterval-proper'
+   
+   (&lt;=&gt; 
+      (overlaps-TimeInterval-proper ?t1 ?t2)
+      (and 
+	(before
+	  (BeginFn ?t2)
+          (BeginFn ?t1)
+        (before
+          (BeginFn ?t2)
+          (EndFn ?t1))
+        (before
+          (EndFn ?t1)
+          (EndFn ?t2))))
+
+;; Definition and axiom for 'overlaps-TimeInterval-general'.  Note that this relation was
+;; extracted from Russell-Norvig's ontology.
+
+(nth-domain overlaps-TimeInterval-general 1 TimeInterval)
+(nth-domain overlaps-TimeInterval-general 2 TimeInterval)
+(documentation overlaps-TimeInterval-general "Means that the two time intervals have some time interval in common")
+
+(&lt;=&gt;
+   (overlaps-TimeInterval-general ?t1 ?t2)
+   (and
+      (exists ?t3
+        (and
+          (during ?t3 ?t1)
+          (during ?t3 ?t2)))))
+
+;; Definition of the relation 'meets'
+
+  (nth-domain meets 1 TimeInterval)
+  (nth-domain meets 2 TimeInterval)
+  (documentation meets "Means that the terminal point of the first interval is the initial point of the second interval")
+
+;; Axiom specifying the meaning of 'meets'
+
+   (&lt;=&gt; 
+      (meets ?t1 ?t2)
+      (equal 
+        (EndFn ?t1)
+        (BeginFn ?t2)))
+
+;; Extensionality Axiom for 'equal'
+
+(=&gt;
+  (and
+    (equal
+      (BeginFn ?t1)
+      (BeginFn ?t2))
+    (equal
+      (EndFn ?t1)
+      (EndFn ?t2)))
+    (equal ?t1 ?t2))
+
+;; Definition of 'during'
+
+   (nth-domain during 1 TimeInterval)
+   (nth-domain during 2 TimeInterval)
+   (documentation during "Means that the first time interval starts after and ends before the second time interval")
+
+;; Axiom specifying the meaning of 'during'
+   
+   (=&gt; 
+      (during ?t1 ?t2)
+      (and 
+        (endof ?t1 ?e1)
+        (endof ?t2 ?e2)
+        (&lt; ?e1 ?e2)
+        (startof ?t1 ?s1)
+        (startof ?t2 ?s2)
+        (&gt; ?s1 ?s2)))))
+
+;; Definition of 'in-TimeInterval'
+
+  (nth-domain in-TimeInterval 1 TimeInterval)
+  (nth-domain in-TimeInterval 2 TimeInterval)
+  (documentation in-TimeInterval "Means that the first time interval is a proper part of the second time interval")
+
+   (&lt;=&gt;
+      (in ?t1 ?t2)
+      (or
+        (during ?t1 ?t2)
+        (starts ?t1 ?t2)
+        (finishes ?t1 ?t2)))
+
+
+;; Axiom concerning 'meets', 'during', and 'overlaps'
+
+(=&gt; 
+  (and
+    (meets ?t1 ?t2)
+    (during ?t2 ?t3))
+  (or
+    (overlaps ?t1 ?t3)
+    (during ?t1 ?t3)
+    (meets ?t1 ?t3)))
+
+;; The following definitions and axioms (down to the next section break) cover the content in 
+;; the Simple-Time ontology on the Ontolingua server.
+
+(nth-domain time 1 DiscreteProcess)
+(nth-domain time 2 TimeMeasure-Position)
+(valence time 2)
+(documentation time "A general relation that specifies, at any level of resolution, the time at which a particular event occurs.")
+
+(nth-domain date 1 DiscreteProcess)
+(nth-domain date 2 Day)
+(subclass-of date time)
+(valence date 2)
+(documentation date "A binary relation that specifies a point in absolute calendar time, at the 
+resolution of one day, for a particular event.")
+
+(instance-of YearFn UnaryFunction)
+(nth-domain YearFn 1 NaturalNumber)
+(range YearFn Year)
+(documentation YearFn "A unary function that maps a number to the corresponding calendar year.")
+
+(instance-of MonthFn BinaryFunction)
+(nth-domain MonthFn 1 NaturalNumber)
+(nth-domain MonthFn 2 Year)
+(range MonthFn Month)
+(documentation MonthFn "A binary function that maps a number and a year to the corresponding month of the year.")
+
+(instance-of DayFn BinaryFunction)
+(nth-domain DayFn 1 NaturalNumber)
+(nth-domain DayFn 2 Month)
+(range DayFn Day)
+(documentation DayFn "A binary function that maps a number and a month to the corresponding day of the month.")
+
+(instance-of HourFn BinaryFunction)
+(nth-domain HourFn 1 PositiveRealNumber)
+(nth-domain HourFn 2 Day)
+(range HourFn "A binary function that maps a number and a day to the corresponding hour of the day.")
+
+(instance-of MinuteFn BinaryFunction)
+(nth-domain MinuteFn 1 PositiveRealNumber)
+(nth-domain MinuteFn 2 Hour)
+(range MinuteFn Minute)
+(documentation MinuteFn "A binary function that maps a number and a hour to the corresponding minute of the hour.")
+
+(instance-of SecondFn BinaryFunction)
+(nth-domain SecondFn 1 PositiveRealNumber)
+(nth-domain SecondFn 2 Minute)
+(range SecondFn Second)
+(documentation SecondFn "A binary function that maps a number and a minute to the corresponding second of the minute.")
+
+(subclass-of Year TimeMeasure-Position)
+(subclass-of Month TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (MonthFn ?X ?Y) Month)
+	(lessThanOrEqualTo ?X 12))
+
+(subclass-of Day TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (DayFn ?X ?Y) Day)
+	(lessThanOrEqualTo ?X 31))
+
+(subclass-of Hour TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (HourFn ?X ?Y) Hour)
+	(lessThanOrEqualTo ?X 24))
+
+(subclass-of Minute TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (MinuteFn ?X ?Y) Minute)
+	(lessThanOrEqualTo ?X 60))
+
+(subclass-of Second TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (SecondFn ?X ?Y) Second)
+	(lessThanOrEqualTo ?X 60))
+
+(&lt;=&gt;
+	(instance-of ?X BinaryRelation)
+	(valance ?X 2))
+
+(&lt;=&gt;
+	(instance-of ?X TernaryRelation)
+	(valance ?X 3))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MEREOTOPOLOGICAL DEFINITIONS/AXIOMS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Most of this content is taken from Barry Smith's and Nicola Guarino's papers.
+
+;;  Definition of 'overlaps' from Guarino
+
+(&lt;=&gt;
+	(overlaps ?X ?Y)
+     	(exists (?Z)
+          	(and
+               	(part-of ?Z ?X)
+               	(part-of ?Z ?Y))))
+
+(documentation overlaps "?x overlaps ?y iff ?x and ?y have some parts in common. This is a reflexive and symmetric (but not transitive) relation.")
+
+;;  Definition of 'proper-part-of' from Smith
+
+(&lt;=&gt; 
+	(proper-part-of ?X ?Y)
+     	(and
+		(part-of ?X ?Y)
+		(not
+			(= ?X ?Y))))
+
+(documentation proper-part-of "?x is a proper part of ?y iff ?x is a part of ?y other than ?y itself. This is a transitive and asymmetric (hence irreflexive) relation.")
+
+;;  Definition of 'proper-overlaps' from Guarino
+
+(&lt;=&gt;
+	(proper-overlaps ?X ?Y)
+	(and
+		(overlaps ?X ?Y)
+		(not
+			(part-of ?X ?Y))
+		(not
+			(part-of ?Y ?X))))
+
+;;  Definition of 'interior-part-of' from Smith
+
+(&lt;=&gt;
+	(interior-part-of ?X ?Y)
+     	(=&gt;
+          	(part-of ?X ?Y)
+          	(forall (?Z)
+               	(=&gt; 
+                    	(boundary ?Z ?Y)
+                    	(not
+                         	(overlaps ?X ?Z))))))
+
+;;  Definition of 'superficial-part-of' from Casati and Varzi
+
+(&lt;=&gt; 
+	(superficial-part-of ?x ?y)
+	(and 
+		(part-of ?x ?y)
+		(not
+			(exists (?z)
+				(interior-part-of ?z ?x)))))
+
+(documentation superficial-part-of "?x is a superficial part of ?y iff ?x is a part of ?y that has no interior parts of its own (or, intuitively, that only overlaps those parts of y that are externally connected with the geometric complement of y). This too is a transitive relation closed under sum-of and prod-of.")
+
+;;  Definition of 'surface-of' from Casati and Varzi
+
+(&lt;=&gt; 
+	(surface-of ?x ?y)
+	(and 
+		(superficial-part-of ?x ?y)
+		(self-connected ?x)
+		(forall (?z)
+			(=&gt; 
+				(and 
+					(superficial-part-of ?z ?y)
+					(self-connected ?z))
+					(=&gt;
+						(connected-to ?z ?x)
+						(part-of ?z ?x)))))))
+
+(documentation surface-of "?x is a surface of ?y iff ?x is a maximally connected superficial part of y.")
+
+;;  Axiom about 'proper-part-of' from Sowa
+
+(=&gt;
+	(proper-part-of ?X ?Y)
+	(exists (?Z)
+		(and
+			(part-of ?Z ?X)
+			(not
+				(overlaps ?Z ?Y)))))
+
+;;  Axiom about the extensionality of 'part-of' from Smith and Sowa
+
+(=&gt;
+     (forall (?Z)
+          (=&gt;
+               (part-of ?Z ?X)
+               (overlaps ?Z ?Y))
+     (part-of ?X ?Y))
+
+;;  Reflexivity, Antisymmetry, and Transitivity of 'part-of' from Smith
+
+(part-of ?X ?X)
+
+(=&gt;
+     (and
+          (part-of ?X ?Y) 
+          (part-of ?Y ?X))
+     (= ?X ?Y))
+
+(=&gt;
+     (and
+          (part-of ?X ?Y)
+          (part-of ?Y ?Z))
+     (part-of ?X ?Z))
+
+(=
+	(mereological-sum ?X ?Y)
+	(the (?Z)
+		(forall (?W)
+			(&lt;=&gt;
+				(overlaps ?W ?Z)
+					(or
+						(overlaps ?W ?X)
+						(overlaps ?W ?Y))))))
+
+(=
+	(mereological-product ?X ?Y)
+	(the (?Z)
+		(forall (?W)
+			(&lt;=&gt;
+				(part-of ?W ?Z)
+				(and
+					(part-of ?W ?X)
+					(part-of ?W ?Y))))))
+
+(=
+	(mereological-difference ?X ?Y)
+	(the (?Z)
+		(forall (?W)
+			(&lt;=&gt;
+				(part-of ?W ?Z)
+				(and
+					(part-of ?W ?X)
+					(not
+						(overlaps ?W ?Y)))))))
+
+
+;;  Definition of 'Maximal-Boundary'
+
+(=
+	(maximal-boundary (?X)
+     	(mereological-sum ?Z (boundary ?Z ?X)))
+
+;;  Definition of 'Closure' (of an object)
+
+(=
+	(closure ?X)
+     	(mereological-sum ?X (maximal-boundary ?X)))
+
+;;  Basic axioms for a topology based on bona fide boundaries - these are the result
+;;  of mereologizing the standard Kuratowski axioms for closure operators
+
+(part-of ?X (closure ?X))
+
+(part-of (closure (closure ?X)) (closure ?X))
+
+(= 
+	(closure (mereological-sum ?X ?Y)) 
+	(mereological-sum (closure ?X) (closure ?Y)))
+
+;;  Definition of the relation of 'connected' from Smith
+
+(&lt;=&gt;
+	(connected ?X ?Y)
+     	(overlaps (closure ?X) (closure ?Y)))
+
+;;  Definition of 'externally-connected' (i.e. connection where the objects themselves do
+;;  not overlap with one another).
+
+(&lt;=&gt;
+	(externally-connected ?X ?Y)
+     	(and
+          	(connected ?X ?Y)
+          	(not
+               		(overlaps ?X ?Y))))
+
+;;  Definition of 'self-connected' (from Casati and Varzi):  ?x is self-connected 
+;;  just in case ?x does not consist of two or more disconnected parts.
+
+(&lt;=&gt; 
+	(self-connected ?x)
+	(=&gt; 
+		(= ?x (sum-of ?y ?z))
+		(connected ?y ?z)))
+
+;;  Definition of 'Closed-Entity'
+
+(&lt;=&gt;
+	(instance-of ?X Closed-Entity)
+     	(= ?X (closure ?X)))
+
+;;  Definition of 'Boundary-Unary' (the monadic predicate for boundaries)
+
+(&lt;=&gt;
+	(boundary-unary ?X)
+     	(exists (?Y)
+          	(boundary ?X ?Y)))
+
+;;;;;;;;;;;;;;;;;;;;;
+;;    POSITIONS    ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+;; This section aligns the content in the Positions ontology of the ITBM-CRN group.  This content 
+;; is a set of predicates for describing spatial relations.  At this point (01/12/01), very
+;; few axioms are given.  Eventually, the meaning of all of these predicates should be cashed 
+;; out with the relations defined in the earlier section "Mereotopological Definitions/Axioms".
+
+(valence position 2)
+(nth-domain position 1 Physical)
+(nth-domain position 2 Physical)
+(documentation position "(position ?X ?Y) means that ?X is positioned with respect to ?Y in some way.  This is a very general predicate whose main utility is to function as an umbrella for the more specific positional predicates.")
+
+(subclass-of above position)
+(documentation above "This is a cognitive primitive, derived from the up/down schema and not involving contact.  A possible formalization of the medical meaning must take into account the conventional body directions; though, there is no unique direction hierarchy guiding the application of this relation to anatomical spaces.")
+
+(=&gt;
+  (above ?X ?Y)
+  (not
+    (connected ?X ?Y)))
+
+(subclass-of adjacent position)
+(documentation adjacent "Close to, near or abutting another physical unit with no other 
+structure of the same kind intervening. This includes adjoins, abuts, is contiguous to, is 
+juxtaposed, and is close to.") 
+
+(=&gt;
+  (adjacent ?X ?Y)
+  (or
+    (near ?X ?Y)
+    (connected ?X ?Y)))
+
+(subclass-of along position)
+(documentation along "(along ?X ?Y) means that an object ?X shares the region of ?Y at least as far the extension of one dimension is concerned.")
+
+(subclass-of behind position)
+(documentation behind "This is a cognitive primitive, derived from the front/back schema; a possible formalization of the medical meaning must take into account the conventional body directions; though, there is no unique direction hierarchy guiding the application of this relation to anatomical spaces.")
+
+(subclass-of below position)
+
+(&lt;=&gt;
+  (below ?X ?Y)
+  (above ?Y ?X))
+
+(valence between 3)
+(nth-domain between 1 Physical)
+(nth-domain between 2 Physical)
+(nth-domain between 3 Physical)
+
+(=&gt;
+  (between ?X ?Y ?Z)
+  (and
+    (left-of ?Y ?X)
+    (left-of ?X ?Z)))
+
+(subclass-of contains position)
+(documentation contains "The surrounding relation for masses.")
+
+(=&gt;
+  (contains ?X ?Y)
+  (forall (?Z)
+    (=&gt;
+      (part-of ?Z ?Y)
+      (exists ?U
+        (interior-part-of ?U ?X)
+        (located-at ?Z ?U)))))
+
+(subclass-of crosses-over position)
+(documentation crosses-over "(crosses-over ?X ?Y) means that X crosses-through the region of 
+y, without overlapping y.")
+
+(=&gt;
+  (crosses-over ?X ?Y) 
+  (not
+    (connected ?X ?Y)))
+
+(subclass-of crosses-through position)
+(documentation crosses-through "Here: x crosses-through y equals to x overlaps y along at least one whole dimension (length, width or depth), say the interiors of x and y overlap.") 
+
+(subclass-of left-of position)
+(documentation left-of "This is a cognitive primitive, derived from the left/right schema; a possible formalization of the medical meaning must take into account the conventional body directions; though, there is no unique direction hierarchy guiding the application of this relation to anatomical spaces.")
+
+(subclass-of near position)
+(documentation near "Specialized common sense adjacency without contact; 
+based on implicit scale and distance less than the diameter of the smaller object; 
+alternatively, based on the smallest distance among the higher granularity objects. 
+Eg, in cell C near object P, P is the less distant object of a higher granularity 
+than C.")
+
+(=&gt;
+  (near ?A ?B) 
+  (or (exists (?C ?D ?E)
+           (and (the-smaller ?A ?B ?E)
+                (diameter ?E ?D)
+                (distance ?A ?B ?C)
+                (lessThan ?C ?D)))
+          (not (exists (?Z)
+                (or (and (exists (?F)
+                          (and (the-finer-granularity ?A ?Z ?F)
+                               (equal ?F ?A)))
+                         (same-granularity ?B ?Z)
+                         (exists (?G ?H)
+                          (and (distance ?B ?A ?H)
+                               (distance ?Z ?A ?G)
+                               (lessThan ?G ?H)))
+                         (different ?B ?Z))
+                    (and (exists (?I)
+                          (and (the-finer-granularity ?B ?Z ?I)
+                               (equal ?I ?B)))
+                         (same-granularity ?A ?Z)
+                         (exists (?J ?K)
+                          (aND (distance ?A ?B ?K)
+                               (distance ?Z ?B ?J)
+                               (lessThan ?J ?K)))
+                         (different ?A ?Z)))))))
+
+(subclass-of on position)
+(documentation on "This is a cognitive primitive, derived from the up/down schema and involving contact.  A possible formalization of the medical meaning must take into account the conventional body directions; though, there is no unique direction hierarchy guiding the application of this relation to anatomical spaces.")
+
+(=&gt;
+  (on ?X ?Y)
+  (connected ?X ?Y))
+
+(subclass-of right-of position)
+
+(&lt;=&gt;
+  (right-of ?X ?Y)
+  (left-of ?Y ?X))
+
+(subclass-of surrounds position)
+(documentation surrounds "limits, bounds, confines, encloses or circumscribes, but excluding the containment of substances. Here it is defined by stating that x surrounds y iff the interior of x wholly contains y.")
+
+(subclass-of traverses position)
+(documentation traverses "Crosses or extends across another physical structure or 
+area. This includes crosses over and crosses through.")
+
+(subclass-of under position)
+(=&gt;
+  (under ?X ?Y)
+  (or
+    (on ?Y ?X)
+    (above ?Y ?X)))
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; THEORY OF HOLES ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+
+;; What follows is essentially a SUO-KIF translation of Casati and Varzi's formal 
+;; theory of holes that has been aligned with Sowa's upper ontology.
+
+;;Definition of binary relation 'hole-in'
+
+(instance-of hole-in BinaryRelation)
+(instance-of hole-in Juncture)
+(nth-domain hole-in 1 Object)
+(nth-domain hole-in 2 Hole)
+(documentation hole-in "The main thesis is that a hole is an immaterial body located at the surface (or at some surface) of a material object. Since the notion of a surface is essentially a topological one, and since the property of being immaterial is reflected in the morphological property of being fillable, the ontological basis is concerned first and foremost with the general dependence of a hole on its host.")
+
+
+;; Definition of class 'Hole'
+
+(subclass-of Hole Property)
+(documentation Hole "X is a hole iff it is a hole in something.  Since every hole is ontologically dependent on its host (i.e., the object in which it is a hole), being a hole is defined as being a hole in something.")
+
+;; Axioms relating 'hole-in' to 'Hole'
+
+(&lt;=&gt; 
+	(instance-of ?x Hole)
+	(exists (?Y)
+		(hole-in ?x ?y)))
+
+(=&gt; 
+	(hole-in ?x ?y)
+        (not 
+		(instance-of ?y Hole)))
+
+;; Definitions of 'hole-part-of' and 'proper-hole-part-of'
+
+(documentation hole-part-of "?x is a hole-part of ?y iff ?x is a hole that is a part of ?y.  This is a partial ordering, like `part-of'; it applies only when ?y is itself a (part of a) hole.")
+
+(&lt;=&gt; 
+	(hole-part-of (?x ?y)
+	(and 
+		(instance-of ?x Hole)
+		(part-of ?x ?y)))
+
+(documentation proper-hole-part-of "?x is a proper hole-part of ?y iff ?x is a hole that is a proper part of ?y.  This is transitive, asymmetric, and irreflexive relation.")
+
+(&lt;=&gt; 
+	(proper-hole-part-of (?x ?y)
+	(and 
+		(instance-of ?x Hole)
+		(proper-part-of ?x ?y)))
+
+;; Mereological Axioms
+
+;; No hole overlaps its own host (though the sum of a hole and its host may be a legitimate 
+;; host for different holes: e.g. the sum of a doughnut ?y and its hole ?x -- if such a sum 
+;; exists -- will not be a host of ?x, but it will be a host of, say, a cavity that may be 
+;; hidden inside ?y.
+
+(=&gt; 
+	(hole-in ?x ?y)
+        (not 
+		(overlaps ?x ?y)))
+
+;; Any two hosts of a hole have a common proper part that entirely hosts the hole. 
+;; (Of course, intuitively a hole has one host; but if we allow for mereological sums or 
+;; splittings, then every hole has a virtually infinite class of hosts, partially ordered by 
+;; proper-part-of.
+
+(=&gt; 
+	(and 
+		(hole-in ?x ?y)
+              	(hole-in ?x ?z))
+      	(exists (?w)
+               	(and 
+			(proper-part-of ?w (mereological-product ?x ?y))
+                        (hole-in ?x ?w))))
+
+;; A common host of two holes hosts all hole-parts of the sum of those holes.
+
+(=&gt; 
+	(and 
+		(hole-in ?x ?y)
+      		(hole-in ?z ?y)
+     	(forall (?w)
+        	(=&gt; 
+			(hole-part-of ?w (mereological-sum ?x ?z))
+                        (hole-in ?w ?y))))
+
+;; Any object that includes the host of a hole is a host of that hole, 
+;; unless its parts also include parts of that very hole.
+
+(=&gt; 
+	(and 
+		(hole-in ?x ?y)
+             	(part-of ?y ?z))
+      	(or
+		(overlaps ?x ?z)
+                (hole-in ?x ?z)))
+
+;; Overlapping holes have overlapping hosts. (However, two holes may occupy 
+;; the same region, or part of the same region, without sharing any parts.  
+;; Holes are immaterial, and can penetrate one another; mereological overlapping 
+;; is not implied by spatial co-localization.)")
+
+(=&gt; 
+	(and 
+		(hole-in ?x ?y)
+             	(hole-in ?z ?w)
+             	(overlaps ?x ?z))
+      	(overlaps ?y ?w))
+
+;; No hole is atomic (though holes need not have proper hole-parts; 
+;; otherwise every hole would correspond to a pile of infinitely many, 
+;; gradually smaller holes).
+            
+(=&gt; 
+	(instance-of ?x Hole)
+       	(exists (?y)
+       		(proper-part-of ?y ?x)))
+
+
+;; Topological Definitions
+
+;; Definition of 'principal-host-of'
+
+(= (principle-host-of ?x)
+   (the (?y)
+   	(forall (?w)
+		(&lt;=&gt; 
+			(overlaps ?w ?y)
+			(exists (?u)
+				(and 
+					(hole-in ?x ?u)
+				       	(self-connected ?u)
+				       	(overlaps ?w ?u)))))))
+
+(documentation principal-host-of "The principle host of ?x is ?x's maximally connected host (a notion taken here to be defined only when ?x is a hole).  We may intuitively regard this as the host of the hole, every other host being either a topologically scattered mereological aggregate including the principal host or a potential part of this latter.")
+
+;; Definition of 'cavity-in'
+
+(&lt;=&gt; 
+	(cavity-in ?x ?y)
+	(and 
+		(hole-in ?x ?y)
+		(exists (?z)
+			(and 
+				(surface-of ?z ?y)
+			      	(forall (?w)
+					(=&gt; 
+						(part-of ?w ?z)
+					   	(connected ?x ?w)))))))
+
+(documentation cavity-in "?x is a cavity in ?y iff ?x is an internal hole enveloped by an entire host surface. A cavity is a topologically nonerasable discontinuity.")
+
+;; Definition of 'tunnel-through'
+
+(&lt;=&gt; 
+	(tunnel-through ?x ?y)
+	(and 
+		(hole-in ?x ?y)
+		(forall (?z)
+			(=&gt; 
+				(and 
+					(part-of ?z ?y)
+				   	(self-connected ?z)
+				   	(hole-in ?x ?z))
+			      (/= (genus-of ?x) 0)))))
+
+(documentation tunnel-through "A tunnel (or a perforation) through a host is also a topologically non-erasable hole, characterized by the fact that its host has no connected part of genus 0 entirely hosting the hole. Note that a hole may at once be a tunnel and a cavity: it may be a cavity-tunnel, e.g.,. a 'toroidal' hole.")
+
+(documentation genus-of "Intuitively, the genus of an object is the maximum number of simultaneous cuts that can be made without separating the object into two unconnected pieces (0 if it is a sphere, 1 if it is a torus, etc.). This notion could be defined in terms of connected-with, but that would lead us too far afield.")
+
+;; Definition of 'hollow-in'
+
+(&lt;=&gt; 
+	(hollow-in ?x ?y)
+	(and 
+		(hole-in ?x ?y)
+		(not 
+			(tunnel-through ?x ?y))
+		(not 
+			(cavity-in ?x ?y))))
+
+(documentation hollow-in "?x is a hollow (or a depression) in ?y iff ?x is a hole in ?y which is neither a tunnel through ?y nor a cavity in ?y. This is always an external, topologically erasable disturbance, characterized by the fact that the relevant host must have a part of genus 0 entirely hosting the hole.")
+
+;; Topological Axioms
+
+;; Holes are self-connected; i.e., there are no scattered holes.
+
+(=&gt; 
+	(instance-of ?x Hole)
+       	(self-connected ?x))
+
+;; Holes are connected with their hosts.
+
+(=&gt; 
+	(hole-in ?x ?y)
+       	(connected ?x ?y))
+
+;; Every hole has some self-connected host.
+
+(=&gt; 
+	(instance-of ?x Hole)
+       	(exists (?y)
+       		(and 
+			(hole-in ?x ?y)
+                      	(self-connected ?y))))
+
+;; No hole can have a proper hole-part that is externally connected with exactly the same
+;; things as the hole itself.
+
+(=&gt; 
+	(and 
+		(instance-of ?x Hole)
+               	(proper-hole-part-of ?y ?x))
+      	(exists (?z)
+            	(and 
+			(externally-connected ?x ?z)
+                      	(not 
+				(externally-connected ?y ?z)))))
+
+
+;; Morphological Definitions
+
+;; Definition of 'filled-by'
+
+(instance-of filled-by BinaryRelation)
+(nth-domain filled-by 1 Object)
+(nth-domain filled-by 2 Object)
+(documentation filled-by "Holes can be filled; 'filled' here mean PERFECTLY filled. Holes can be filled (without losing their status of holes) insofar as they determine a (partially) concave discontinuity in the surface of their host."
+ 
+;; Definition of 'fillable'
+
+(&lt;=&gt; 
+	(fillable ?x)
+	(Poss 
+		(exists (?y) 
+			(filled-by ?x ?y))))
+
+(documentation fillable "?x is fillable if it can be (perfectly) filled by something.")
+
+;; Definition of 'completely-filled-by'
+
+(&lt;=&gt; 
+	(completely-filled-by ?x ?y)
+	(exists (?z)
+		(and 
+			(part-of ?z ?y)
+			(filled-by ?x ?z))))
+
+(documentation completely-filled-by "?x is completely filled by ?y iff there is some part of ?y that perfectly fills ?x. This is a monotonic relation, in the sense that if ?x is completely filled by ?y and ?y is a part of ?z, then ?x is completely filled by ?z.")
+
+;; Definition of 'partially-filled-by'
+
+(&lt;=&gt; 
+	(partially-filled-by ?x ?y)
+	(exists (?z)
+		(and 
+			(part-of ?z ?x)
+			(completely-filled-by ?z ?y))))
+
+(documentation partially-filled-by "?x is partially filled by ?y iff there is some part of ?x that is completely filled by ?y. This too is a monotonic relation, in the sense that if ?x is partially filled by ?y and ?y is part of ?z, then ?x is partially filled by ?z. Note that a partial filler need not be wholly inside a hole (it may  stick out), which means that every complete filler also qualifies as (a limit cases of) a partial one.")
+
+
+;; Definition of 'properly-filled-by'
+
+(&lt;=&gt; 
+	(properly-filled-by ?x ?y)
+	(exists (?z)
+		(and 
+			(part-of ?z ?x)
+			(filled-by ?z ?y))))
+
+(documentation properly-filled-by "?x is properly (though perhaps incompletely) filled by ?y iff some part of ?x is perfectly filled by ?y. properly-filled-by is the dual of completely-filled-by, and is so related to partially-filled-by that ?x is properly filled by ?y iff ?x is partially filled by every part of ?y. (Thus, every perfect filler is both complete and proper in this sense.)")
+
+;; Definition of 'skin-of'
+
+(= (skin-of ?x)
+   (the (?y)
+	(forall (?z)
+		(&lt;=&gt; 
+			(overlaps ?z ?y)
+			(exists (?w)
+				(and 
+					(superficial-part-of ?w (principle-host-of ?x))
+				        (externally-connected ?x ?w)
+				        (overlaps ?z ?w)))))))
+
+(documentation skin-of "The skin of ?x is the fusion of those superficial parts of ?x's principal host with which ?x is externally connected (a notion that is meant to apply only when ?x is a hole).")
+
+;; Definition of 'free-superficial-part-of'
+
+(&lt;=&gt; 
+	(free-superficial-part-of ?x ?y ?z)
+	(and 
+		(superficial-part-of ?x ?y)
+	     	(not 
+			(connected ?x (skin-of ?z)))))
+
+(documentation free-superficial-part-of "?w is a free superficial part of ?z relative to ?x ; i.e., ?w is a superficial part of ?z that is not connected with ?x's host(s). (This notion is meant to apply only when ?x is a hole and ?z a corresponding perfect filler.)")
+
+
+;; Morphological Axioms
+
+;; Something is fillable just in case it is part of a hole; i.e., fillability is an exclusive
+;; property of holes and their parts.
+
+(&lt;=&gt; 
+	(instance-of ?x Fillable)
+       	(exists (?y)
+        	(and 
+			(instance-of ?y Hole)
+                       	(part-of ?x ?y))))
+
+;; Perfect fillers and fillable entities have no parts in common (rather, they may 
+;; occupy the same spatial region).
+
+(=&gt; 
+	(and 
+		(filled-by ?x ?y)
+            	(instance-of ?z fillable))
+            (not (overlaps ?y ?z)))))
+
+;; A complete filler of (a part of) a hole is connected with everything 
+;; with which (that part of) the hole itself is connected.
+
+(=&gt; 
+	(completely-filled-by ?x ?y)
+       	(forall (?z)
+   		(=&gt; 
+			(connected ?z ?x)
+                        (connected ?z ?y))))
+
+;; Every hole is connected with everything with which a proper filler of 
+;; the hole is connected. 
+
+(=&gt; 
+	(and 
+		(properly-filled-by ?x ?y)
+          	(connected-with ?z ?y))
+     	(connected ?z ?x))
+
+;; A perfect filler of (a part of) a hole completely fills every proper ;; part of (that part of) that hole.
+
+(=&gt; 
+	(and 
+		(filled-by ?x ?y)
+              	(proper-part-of ?z ?x))
+     	(completely-filled-by ?z ?y))
+
+;; Every proper part of a perfect filler of (a part of) a hole properly 
+;; fills (that part of) that hole.
+
+(=&gt; 
+	(and 
+		(filled-by ?x ?y)
+              	(proper-part-of ?z ?y))
+     	(properly-filled-by ?y ?z))
+
+
+;;;;;;;;;;;
+;; NOTES ;;
+;;;;;;;;;;;
+
+;; We need to be able to distinguish instances of Continuant which are stuffs 
+;; (e.g. water, oxygen, sand) from instances of Continuant which are objects 
+;; (e.g. table, jacket, notebook).  From what I can see, there is no provision 
+;; for this distinction in Sowa's ontology.  Perhaps we could divide 'Continuant' 
+;; into two disjoint classes, viz. Continuant-Stuff and Continuant-Object.
+
+;; We may want to include something like the following axioms at some point.
+
+;;(=&gt;
+;;     (playsRole ?Act ?Ent ?Role)
+;;     (capableOfDoing ?Ent ?Act ?Role))
+
+;;(=&gt;
+;;     (and
+;;          (playsRole ?Act ?Res Resource)
+;;          (ends ?Act ?Time)
+;;          (holdsIn (STIB ?Time) (amountAvailable ?Res ?Amt1))
+;;          (holdsIn (STIF ?Time) (amountAvailable ?Res ?Amt2)))
+;;     (greaterThan ?Amt1 ?Amt2)) 
+
+;; Formulate an axiom to the effect that a DiscreteProcess consists of interleaved 
+;; events and states
+
+;; The following is a provisional addition to the top level of the ontology.  The purpose
+;; of this addition is to accommodate normative notions.  If this addition is embraced by
+;; the other SUO participants and if it is deemed acceptable in other respects it will be ;; commented out.
+
+;; (subclass-of Normative Entity)
+;; (subclass-of NormativeProposition Normative)
+;; (subclass-of NormativeProposition Proposition)
+;; (subclass-of Obligation NormativeProposition)
+;; (subclass-of Agreement NormativeProposition)
+;; (subclass-of JudgementOfEtiquette NormativeProposition)
+;; (subclass-of AestheticJudgement NormativeProposition)
+;; (subclass-of InstitutionalObligation Obligation)
+;; (subclass-of PersonalObligation Obligation)
+;; (subclass-of ReligiousObligation InstitutionalObligation)
+;; (subclass-of LegalObligation InstitutionalObligation)
+
+;; The following is another provisional addition to the top level of the ontology.  This 
+;; addition locates the crucial notions of 'WavePropagation', 'ElectronicWave', and
+;; 'ElectronicSignal' within the existing framework of concepts.
+
+;; (subclass-of WavePropagation KineticForm)
+;; (subclass-of ElectronicWave WavePropagation)
+;; (subclass-of ElectronicSignal ElectronicWave)
+;; (subclass-of ElectronicSignal Sign)
+
+;; The following is the original hierarchy of constants under 'Role' in Sowa's ontology.  Since
+;; this part of the ontology has been superceded, it has been commented out.
+
+;;(subclass-of PrehendingEntity Role)
+;;(subclass-of PrehendedEntity Role)
+;;(subclass-of Composite PrehendingEntity)
+;;(subclass-of Correlative PrehendingEntity)
+;;(subclass-of Correlative PrehendedEntity)
+;;(subclass-of Component PrehendedEntity)
+;;(subclass-of Whole Composite)
+;;(subclass-of Substrate Composite)
+;;(subclass-of Part Component)
+;;(subclass-of Property Component)
+;;(subclass-of Piece Part)
+;;(subclass-of Participant Part)
+;;(subclass-of Stage Part)
+;;(subclass-of Attribute Property)
+;;(subclass-of Manner Property)
+;;(subclass-of Determinant Participant)
+;;(subclass-of Source Participant)
+;;(subclass-of Product Participant)
+;;(subclass-of Immanent Participant)
+;;(subclass-of Initiator Determinant)
+;;(subclass-of Initiator Source)
+;;(subclass-of Resource Source)
+;;(subclass-of Resource Immanent)
+;;(subclass-of Goal Determinant)
+;;(subclass-of Goal Product)
+;;(subclass-of Essence Product)
+;;(subclass-of Essence Immanent)
+;;(subclass-of Agent Initiator)
+;;(subclass-of Recipient Goal)
+;;(subclass-of Beneficiary Recipient)
+;;(subclass-of Completion Goal)
+;;(subclass-of Destination Goal)
+;;(subclass-of Duration Resource)
+;;(subclass-of Effector Initiator)
+;;(subclass-of Experiencer Goal)
+;;(subclass-of Instrument Resource)
+;;(subclass-of Location Essence)
+;;(subclass-of Matter Resource)
+;;(subclass-of Medium Resource)
+;;(subclass-of Origin Initiator)
+;;(subclass-of Path Resource)
+;;(subclass-of Patient Essence)
+;;(subclass-of PointInTime Essence)
+;;(subclass-of Result Goal)
+;;(subclass-of Start Initiator)
+;;(subclass-of Theme Essence)
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00418" href="msg00418.html">SUO: Re: Latest Version of Merged Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00355.html">Re: SUO: Re: some questions about semantics</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00353.html">SUO: Ontology of systems</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01701.html">SUO: Site Of Uberty (SOU)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00418.html">SUO: Re: Latest Version of Merged Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail84.html#00354"><strong>Date</strong></a></li>
+<li><a href="thrd81.html#00354"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

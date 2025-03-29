@@ -1,0 +1,198 @@
+<!-- MHonArc v2.4.6 -->
+<!--X-Subject: Re: KIF: SUO&#45;KIF -->
+<!--X-From-R13: Oqnz Brnfr <ncrnfrNgrxabjyrqtr.pbz> -->
+<!--X-Date: Mon, 4 Dec 2000 23:54:59 &#45;0500 (EST) -->
+<!--X-Message-Id: 4.2.0.58.20001204205844.01f21658@helium.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200012050323.TAA07948@puffin.rt.cs.boeing.com -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: KIF: SUO-KIF</TITLE>
+<LINK REV="made" HREF="mailto:apease@teknowledge.com">
+</HEAD>
+<BODY>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00011.html">Date Prev</A>][<A HREF="msg00013.html">Date Next</A>][<A HREF="msg00011.html">Thread Prev</A>][<A HREF="msg00015.html">Thread Next</A>][<A HREF="index.html#00012">Date Index</A>][<A HREF="threads.html#00012">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: KIF: SUO-KIF</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:kif@philebus.tamu.edu">kif@philebus.tamu.edu</A>, <A HREF="mailto:suo-kif@ieee.org">suo-kif@ieee.org</A></LI>
+<LI><em>Subject</em>: Re: KIF: SUO-KIF</LI>
+<LI><em>From</em>: Adam Pease &lt;<A HREF="mailto:apease@teknowledge.com">apease@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 04 Dec 2000 20:59:39 -0800</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00011.html">200012050323.TAA07948@puffin.rt.cs.boeing.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-suo-kif@ieee.org">owner-suo-kif@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Mike,
+   I agree that "punctuation" would be a better name.  I'll make the change 
+shortly unless anyone objects.
+
+Adam
+
+At 07:23 PM 12/4/2000 -0800, Michael Uschold wrote:
+&gt;Good thorough job, Adam. One minor thing:
+&gt;
+&gt;I thought that 'alpha' was going to be named 'special_alpha', although I would
+&gt;recommend 'pseudo_alpha' as a more accurate name, since they are in fact *not*
+&gt;alpha characters, as normally conceived, but they are being treated as if they
+&gt;were.
+&gt;
+&gt;The existing 'special' can either remain the same, or be changed to something
+&gt;more accurate, such as 'punctuation', which I believe Mike Genesereth favored.
+&gt;I alwasy favor names that are as accurate as possible, making it easy to guess
+&gt;what they mean.
+&gt;
+&gt;Mike
+&gt; &gt;From kif-owner@philebus.tamu.edu Sun Dec  3 20:18:34 2000
+&gt;X-Authentication-Warning: philebus.tamu.edu: majordomo set sender to 
+&gt;owner-kif@kif.tamu.edu using -f
+&gt;X-Sender: apease@helium.teknowledge.com
+&gt;Date: Sun, 03 Dec 2000 20:10:44 -0800
+&gt;To: kif@philebus.tamu.edu, suo-kif@ieee.org
+&gt;From: Adam Pease &lt;apease@teknowledge.com&gt;
+&gt;Subject: KIF: SUO-KIF
+&gt;Mime-Version: 1.0
+&gt;
+&gt;Folks,
+&gt;    Here's a list of basic changes to the SUO-KIF document that came out of
+&gt;our meeting this week.  The revised document is posted at
+&gt;<A  HREF="http://ltsc.ieee.org/suo/suo-kif.html">http://ltsc.ieee.org/suo/suo-kif.html</A>
+&gt;
+&gt;
+&gt;*** section 4.2 ***
+&gt;
+&gt;1.  Rename "alpha" as "special"
+&gt;
+&gt;2.  Add the underscore and "special" to the definition for "wordchar"
+&gt;
+&gt;3.  Add the sentence "Use of characters in "special" for word characters is
+&gt;discouraged as they may be given particular meaning in future versions of
+&gt;the standard or its extensions."
+&gt;
+&gt;
+&gt;*** section 4.3 ***
+&gt;
+&gt;4.  Rename "constant" to "word"
+&gt;
+&gt;
+&gt;*** section 4.4 ***
+&gt;
+&gt;5.  In our meeting I believe it was felt that just allowing special
+&gt;characters in words was enough to support inclusion of numbers.  The
+&gt;justification for this was in part that the BNF for numbers might be
+&gt;extensive and that therefore we could avoid a full definition but just
+&gt;including special characters.  However, I found a BNF definition for
+&gt;numbers in Java which is quite simple.  I hope this will be considered
+&gt;reasonable.  Add definition for "number" and "exponent" as follows:
+&gt;
+&gt;number ::= [-] digit+ [. digit+] [exponent]
+&gt;exponent ::= e [-] digit+
+&gt;
+&gt;6.  replace "constant" with "word" as indicated above.
+&gt;
+&gt;7.  eliminate "sentence" in the definition for "term"
+&gt;
+&gt;8.  add "number" to the definition for "term"
+&gt;
+&gt;9.  add definitions for "relword" and "funword" as follows
+&gt;
+&gt;relword ::= initialchar wordchar*
+&gt;funword ::= initialchar wordchar*
+&gt;
+&gt;replace "constant" with relword and fundword in the definitions for relsent
+&gt;and funterm respectively.
+&gt;
+&gt;10.  Add the sentence "No "relword" and "funword" shall have the same
+&gt;characters in a particular knowledge base."
+&gt;
+&gt;11.  Rename "constant" to "word" in the definition for "sentence" as above.
+&gt;
+&gt;12.  Delete the definition for "inequality" and references to it.
+&gt;
+&gt;13.  Replace "*" with "+" in the definitions for "funterm", "relsent" and
+&gt;"logsent".
+&gt;
+&gt;14.  Delete the clause containing "&lt;=" from the definition of "logsent".
+&gt;
+&gt;15.  Remove the "*" in the clause for "=&gt;" in the definition of "logsent".
+&gt;
+&gt;*** section 5.1 ***
+&gt;
+&gt;16.  Remove the reference to "bottom".
+&gt;
+&gt;*** section 5.2 ***
+&gt;
+&gt;17.  Remove the reference to "bottom".
+&gt;
+&gt;
+&gt;Adam
+&gt;-----------------
+&gt;Adam Pease
+&gt;Teknowledge
+&gt;(650) 424-0500 x571
+&gt;
+
+-----------------
+Adam Pease
+Teknowledge
+(650) 424-0500 x571
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00011" HREF="msg00011.html">Re: KIF: SUO-KIF</A></STRONG>
+<UL><LI><EM>From:</EM> mfu@redwood.rt.cs.boeing.com (Michael Uschold)</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00011.html">Re: KIF: SUO-KIF</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00013.html">RE: SUO-KIF</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00011.html">Re: KIF: SUO-KIF</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00015.html">Re: KIF: SUO-KIF</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="index.html#00012"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00012"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

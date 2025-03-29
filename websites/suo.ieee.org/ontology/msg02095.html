@@ -1,0 +1,300 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Sat, 7 Apr 2001 20:19:26 &#45;0400 (EDT) -->
+<!--X-Message-Id: 001601c0bfbf$b7717a20$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038 -->
+<!--X-Reference: v04210116b6f3e08e9365@[205.160.76.201] -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02095.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02081.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02096.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd53.html#02095">Thread Index</A></Td>
+<TD><A HREF="msg02096.html">Date Prev</A></TD>
+<TD><A HREF="msg02094.html">Date Next</A>
+</TD>
+<TD><A HREF="mail49.html#02095">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Pat Hayes&quot; &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: RE: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 7 Apr 2001 17:06:09 -0700</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02054.html">DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038</A>&gt; &lt;<A HREF="msg02081.html">v04210116b6f3e08e9365@[205.160.76.201]</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Pat,
+
+Two points.
+
+1. There seem to be two uses of the '#' notation.
+    (i) Use of the '#' notation for "namespace prefixing", for example
+'arithmetic#plus', is like tagging in the disjoint union operation.
+    (ii) Use of the '#' notation for "referencing a part" of another
+ontology, for example '(imports seq
+<A  HREF="http://www.frob.org/2000/iterations#sequences">http://www.frob.org/2000/iterations#sequences</A>)', is like a restriction
+operation.
+Should we use different notations for these two different uses? I believe
+the XML namespace mechanism uses ':' for namespace prefixing and '#' for
+referencing parts.
+
+2. Is importation transitive or absorbtive or something else? For example,
+consider the following situation.
+    * the ontology B is located at B-place
+    * the ontology C is located at C-place
+    * the ontology A contains an importing expression '(imports b B-place)'
+    * the ontology B contains an importing expression '(imports c C-place)'
+    * the ontology A also contains an importing expression '(imports c2
+C-place)'
+    * the relation named 'r' is used in the C ontology
+Now
+    * in B this relation is referred to by the name 'c#r'
+But
+    * in A is this relation referred to by the name 'b#c#r' or by the name
+'c2#r'?
+Often (always?), A will want these two names to refer to the same relation.
+Should there be either automatic or manual means for making these two names
+synonymous (equivalent)?
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+----- Original Message -----
+From: "pat hayes" &lt;phayes@ai.uwf.edu&gt;
+To: "West, Matthew MR SSI-GREA-UK" &lt;Matthew.R.West@is.shell.com&gt;
+Cc: &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Friday, April 06, 2001 2:12 PM
+Subject: RE: SUO: RE: KIF syntax and semantics and a basic ontology
+
+
+&gt; &gt; &gt;
+&gt; &gt; &gt; One thing we do have is the ability to give a bunch of axioms a name,
+&gt; &gt; &gt; and then include them in another module by using the name.
+&gt; &gt; &gt;
+&gt; &gt;MW: As long as that was recurcsive, i.e. the module referred to would
+&gt; &gt;pull in the modules it in turn referred to, then this would I believe
+&gt; &gt;meet the requirement. How does the syntax look?
+&gt; &gt;
+&gt;
+&gt; The following is a DRAFT of a PROPOSAL to an UNOFFICIAL AD_HOC
+&gt; WORKING GROUP which has not even been ACCEPTED by them, so it is
+&gt; about as far from being approved as anything can get. That said, I
+&gt; would welcome any feedback.:
+&gt;
+&gt; ------
+&gt; Namespaces and inclusion
+&gt;
+&gt; An ontology (traditionally called a 'theory' in logic) is a set of
+&gt; assertional expressions. Each ontology has an associated vocabulary
+&gt; or namespace, defined to be all the identifiers used in its
+&gt; expressions, other than those with a predefined logical meaning.  A
+&gt; KIF ontology can be given a name, which can be indicated in KIF  by
+&gt; enclosing all the expressions of the ontology, preceded by the word
+&gt; "ontology" and the name itself, within parentheses. Such an
+&gt; expression is called an ontology form. (We use this label, rather
+&gt; than "expression",  since the form does not denote anything, but
+&gt; indicates a set of axioms by ostention.) Such a name of the ontology
+&gt; is considered to be part of the ontology namespace, so must be
+&gt; distinct from other symbols in that namespace; it is called a local
+&gt; name.
+&gt;
+&gt; Other methods for giving names to ontologies are acceptable. In
+&gt; particular, the ontology may reside on a web page, or in a computer
+&gt; file, in which case the URI of the page, or the name of the file, may
+&gt; be used as names for the ontology (provided they are KIF lexical
+&gt; items. They can usually be made acceptable by inserting backslashes
+&gt; in front of any interlexical characters.) These are intended to have
+&gt; a scope which extends beyond the ontology itself, so are called
+&gt; global names.  KIF assumes that some external process is capable of
+&gt; accessing the ontology named by a global name, so the exact form of
+&gt; global names is not mandated by the KIF standard.  Some convention
+&gt; should be establsihed which guarantees the uniqueness of global
+&gt; ontology names within any proposed community of usage. Following
+&gt; current practice, URI's used as global ontology names are taken to
+&gt; refer to a KIF ontology at the location indicated by the URI. [ref:
+&gt; <A  HREF="http://www.w3.org/Addressing/">http://www.w3.org/Addressing/</A> ]
+&gt;
+&gt; Ontologies can be combined in two ways.
+&gt;
+&gt; An ontology can include another simply by containing an ontology form
+&gt; for the other ontology. In this way one ontology can simply be
+&gt; included inside another, and its sentences are considered to be a
+&gt; subset of those in the including ontology , and the namespace of the
+&gt; included ontology is part of that of the including ontology. In
+&gt; effect, the inner ontology form provides a name for a subset of the
+&gt; sentences of the larger ontology, simply as a book-keeping
+&gt; convenience.
+&gt;
+&gt; An ontology can also be imported  by including an expression
+&gt; consisting of the word "imports" and the name of the ontology,
+&gt; enclosed in parentheses. (The notion of importing is intended to be
+&gt; the same as that used in  DAML+OIL [ref:
+&gt; <A  HREF="http://www.daml.org/2000/12/daml+oil-index">http://www.daml.org/2000/12/daml+oil-index</A> ] .) This allows an
+&gt; ontology to include content from ontologies accessed remotely, for
+&gt; example from another website, or from elsewhere in an intranet filing
+&gt; system. Importation differs from inclusion in that the namespace of
+&gt; the importing ontology is disjoint from that of the imported
+&gt; ontology. To refer to something with name &lt;name&gt; in &lt;namespace&gt; from
+&gt; outside that namespace, one writes &lt;namespace&gt;#&lt;name&gt;. For example,
+&gt; if an ontology called 'arithmetic' uses the function name 'plus',
+&gt; then the name of this function will be 'arithmetic#plus' elsewhere in
+&gt; any ontology which contains the expression '(imports arithmetic)'. In
+&gt; this way ontologies may include axioms which use vocabulary
+&gt; introduced in other ontologies. (Note. There is one exception to this
+&gt; rule, where one ontology consists entirely of declarations and no
+&gt; #-prefixing is required. This is used only in sorted KIF.)
+&gt;
+&gt; As a convenience, an ontology can be given a local name in the
+&gt; importing expression, eg
+&gt; (imports ar <A  HREF="http://www.frob.org/2000/arithmetic">http://www.frob.org/2000/arithmetic</A>)
+&gt; indicates that the ontology at that URL is imported, but that the
+&gt; prefix 'ar#' is sufficient to identify words from its namespace.
+&gt; Such a local name is considered to be part of the namespace of the
+&gt; ontology containing the importing expression. The effect of such an
+&gt; importing expression is the same as including the imported ontology
+&gt; with every nonlogical symbol #-prefixed by the local name.
+&gt;
+&gt; Importation is considered to be transitive, and the #-namespace
+&gt; convention can be iterated; so for example if the ontology called
+&gt; arithmetic at <A  HREF="http://www.frob.org/2000/arithmetic">http://www.frob.org/2000/arithmetic</A> contains an
+&gt; importing expression  '(imports it
+&gt; <A  HREF="http://www.frob.org/2000/iterations">http://www.frob.org/2000/iterations</A>)'
+&gt; and the relation name 'succ' is used in the 'iterations'ontology,
+&gt; then this relation may be referred to by the name 'it#succ' in
+&gt; arithmetic, and by the name 'ar#it#succ' in any ontology which
+&gt; imports it with the local name 'ar', ie which contains the expression
+&gt; (imports ar <A  HREF="http://www.frob.org/2000/arithmetic">http://www.frob.org/2000/arithmetic</A>).
+&gt;
+&gt; If an ontology at a URL includes another ontology , the included
+&gt; ontology can be imported by using the #-prefix to refer to the
+&gt; included ontology. For example, if the ontology at
+&gt; <A  HREF="http://www.frob.org/2000/iterations">http://www.frob.org/2000/iterations</A> includes an ontology form
+&gt; (ontology sequences ...)
+&gt; then  the expression
+&gt; (imports seq <A  HREF="http://www.frob.org/2000/iterations#sequences">http://www.frob.org/2000/iterations#sequences</A>)
+&gt; will import just the sentences from the sequences ontology form, with
+&gt; the prefix seq# added to all the words in that namespace.
+&gt;
+&gt; The KIF expression
+&gt; (imports foo &lt;URI&gt;) ....
+&gt; corresponds to the following fragment of DAML+OIL:
+&gt;
+&gt; &lt;rdf:RDF  xmlns:foo="&lt;URI&gt;#" &gt;
+&gt; &lt;daml:Ontology rdf:about=""&gt;
+&gt; &lt;daml:imports resource="&lt;URI&gt;" /&gt;
+&gt; &lt;/daml:Ontology&gt;
+&gt; ....
+&gt; &lt;/rdf:RDF&gt;
+&gt; -------------
+&gt;
+&gt; ---------------------------------------------------------------------
+&gt; IHMC (850)434 8903   home
+&gt; 40 South Alcaniz St. (850)202 4416   office
+&gt; Pensacola,  FL 32501 (850)202 4440   fax
+&gt; phayes@ai.uwf.edu
+&gt; <A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+&gt;
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02158" href="msg02158.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+<li><strong><a name="02099" href="msg02099.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="02096" href="msg02096.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02054" href="msg02054.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+<li><strong><a name="02081" href="msg02081.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02096.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02094.html">Re: SUO: Definition Of A Sign</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02081.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02096.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail49.html#02095"><strong>Date</strong></a></li>
+<li><a href="thrd53.html#02095"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

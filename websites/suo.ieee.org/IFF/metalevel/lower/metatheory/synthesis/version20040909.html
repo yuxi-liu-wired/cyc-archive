@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>A Synthesis of Information Flow with Institutions</title>
+  <meta content="Robert E. Kent" name="author">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h1>Lifting Information Flow to Institutions<br>
+</h1>
+A central goal of
+the Information
+Flow Framework (IFF) project is to
+specify a theoretical framework for representing and managing
+ontologies. This theoretical framework is concentrated around the
+concept of an <span style="font-style: italic;">institution</span>. As
+stated on the <a
+ href="http://www.cs.ucsd.edu/users/goguen/projs/inst.html">institutions
+homepage</a>, the concept of an institution formalizes, represents,
+implements and translates the notion of "a logic". The literature on
+institutions now comprises hundreds of papers.
+<h2>Institutions</h2>
+<div style="text-align: justify;">In this document institutions are
+viewed abstractly. Associated with an institution
+I is a category <b>Sign</b><sub>I</sub>
+of signatures and singature morphisms, a model
+functor <span style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;
+<b>Cat</b>, and a sentence functor <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub>
+&#8594;&nbsp;<b>Set</b>.
+Recall the underlying
+object functor |-| : <b>Cat</b> &#8594;&nbsp;<b>Set</b> that maps a category
+to its set of objects and maps a
+functor to its object function. Define the underlying model functor
+|<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>
+&middot; |-| :&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;
+<b>Set</b>.
+Also associated with an institution I is a collection of binary
+incidence relations indexed by signatures. For any signature S, there
+is a <b>satisfaction</b> relation |=<sub>I</sub>(S) between |<span
+ style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(S)
+and <span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S).
+For any signature morphism f: S &#8594;
+S' the following
+<b>satisfaction condition</b> holds: for any S'-model M' and any
+S-sentence e: <br>
+</div>
+M' |=<sub>I</sub>(S') <span
+ style="font-style: italic; font-weight: bold;">Sen</span><sub>I</sub>(f)(e)
+<span style="text-decoration: underline;">iff</span> |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)(M')
+|=<sub>I</sub>(S) e. This satisfaction condition expresses the
+invariance of truth
+under change of notation.<br>
+<p style="text-align: justify;">Truth is objectively represented. For
+any signature S, the
+triple <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(S)
+=
+(|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(S),&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S),&nbsp;|=<sub>I</sub>(S))
+is called the <strong>truth classification</strong>
+of S. From the basic theorem of FCA, this is equivalent to a concept
+lattice <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(S)
+called the
+<strong>truth concept lattice</strong> of S, which consists of a
+complete
+lattice <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S)
+= (<span style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(S),
+&#8804;<sub>I</sub>(S), <span style="font-family: arial;">V</span><sub>I</sub>(S),
+<span style="font-family: arial;">&#923;</span><sub>I</sub>(S)),
+a model embedding map <span style="font-weight: bold;">&#953;</span><sub>I</sub>(S)
+: |<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(S)
+&#8594; <span style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(S)
+that maps a model to its maximal theory consisting of the set of all
+sentences that it satisfies, and a sentence embedding map <span
+ style="font-weight: bold;">&#964;</span><sub>I</sub>(S)
+: <span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)
+&#8594; <span style="font-style: italic; font-weight: bold;">Cloth</span><sub>I</sub>(S)
+that maps a sentence to its
+entailment theory consising of the set of all sentences that it
+entails. In general, the elements of any concept lattice can be
+represented by their intents. That is the case here. The truth concept
+lattice elements are represented by their intents <span
+ style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(S),
+the closed theories
+of S, and the
+lattice
+order &#8804;<sub>I</sub>(S) is reverse subset inclusion: T&nbsp;&#8804;&nbsp;T' <span
+ style="text-decoration: underline;">iff</span> T&nbsp;&#8839;&nbsp;T'. The
+join <span style="font-family: arial;">V</span><sub>I</sub>(S) and
+meet <span style="font-family: arial;">&#923;</span><sub>I</sub>(S)
+operators are described as follows: the join of a collection of closed
+theories <span style="font-family: script mt bold;">T</span> is their
+intersection <span style="font-family: arial;">V</span><span
+ style="font-family: script mt bold;">T</span> = &#8745;<span
+ style="font-family: script mt bold;">T</span>, and the meet is the
+closure of their union <span style="font-family: arial;">&#923;</span><span
+ style="font-family: script mt bold;">T</span> = (&#8746;<span
+ style="font-family: script mt bold;">T</span>)<small><sup>&#8226;</sup></small>.
+Any
+concept (closed theory) is the join of a subset of instance
+concepts (model theories) and the meet of a subset of type concepts
+(sentence theories).</p>
+<p style="text-align: justify;">A (not necessarily
+closed) theory is just a set of
+sentences. For any signature S, the free theory order <span
+ style="font-weight: bold; font-style: italic;">Th</span>&deg;<sub>I</sub>(S)
+= (<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S),
+&#8839;) is
+just the powerset construction on sentences of S with the reverse
+subset inclusion order. This is a complete lattice. For any signature
+S,
+the free classification <span
+ style="font-weight: bold; font-style: italic;">Free</span><sub>I</sub>(S)
+= (<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S),
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S),
+&#8715;) has theories as instances, sentences as types and
+reverse membership as incidence relation. There is a canonical
+intent infomorphism <span
+ style="font-weight: bold; font-style: italic;">Intent</span><sub>I</sub>(S)
+: <span style="font-weight: bold; font-style: italic;">Free</span><sub>I</sub>(S)
+&#8594;
+<span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(S),
+whose instance function <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(S)
+:
+|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(S)
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)
+maps a model to its maximal theory and whose type function is the
+identity on sentences. The free concept lattice is the concept lattice
+associated with the free classification; it has the free theory order
+as its complete lattice, identity instance embedding, and
+singleton type embedding functions. The concept morphism associated
+with the intent infomorphism has maximal theory as its instance
+function, inclusion of
+closed theories as theories as its left adjoint, theory closure as its
+right
+adjoint,
+and singleton closure as its type function.
+</p>
+<p style="text-align: justify;">For any signature
+morphism f : S &#8594; S', there are (at least) two maps between theory
+orders; the direct image function <span
+ style="font-weight: bold; font-style: italic;">dir</span><sub>I</sub>(f)
+: <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S')
+is the direct power operator applied to the
+sentence function, and the inverse image function <span
+ style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f)
+:
+<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S')
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)
+is the inverse image
+operator applied to the sentence function. For free theories these form
+a Galois connection &#8211; the inverse image function is left adjoint to the
+direct image function. Hence, associated with an
+institution I is a free theory functor for either adjoint; let <span
+ style="font-weight: bold; font-style: italic;">Th</span>&deg;<sub>I</sub>
+:
+<span style="font-weight: bold; font-style: italic;">Sign</span><sub>I</sub><small><sup>op</sup></small>
+&#8594; <span style="font-weight: bold;">Cat</span> represent the free
+theory functor associated with the inverse image operator. Using the
+Grothendieck construction to generate a category, the adjointness
+properties mean that the associated signature projection is a
+bifibration.
+</p>
+<p style="text-align: justify;">Truth extends to morphisms. Based upon
+the satisfaction condition for institutions,
+associated with any signature morphism
+f&nbsp;:&nbsp;S&nbsp;&#8594;&nbsp;S' is a <span
+ style="font-weight: bold; font-style: italic;">truth infomorphism Clsn</span><sub>I</sub>(f)
+=
+(|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f),&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f))
+: <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(S)&nbsp;&#8594;
+<span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(S'),
+whose
+instance function is the model function |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)
+: |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(S')
+&#8594; |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(S)
+and
+whose type function is the sentence function <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)&nbsp;:&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S').
+From the basic
+theorem of FCA, this is equivalent to a concept morphism <span
+ style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(f)
+= (|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f))
+: <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(S)
+&#8594; <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(S')
+called the <span style="font-style: italic; font-weight: bold;">truth
+concept morphism</span> of f, which consists of the two component maps
+of <span style="font-style: italic; font-weight: bold;">Clsn</span><sub>I</sub>(f),
+plus a Galois connection consisting of a
+left adjoint monotonic function <span
+ style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f)
+: <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S')
+&#8594; <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S),
+and a right adjoint monotonic function <span
+ style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f)
+: <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S)
+&#8594; <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S').
+Adjointness means
+that <span style="font-style: italic; font-weight: bold;">Left</span><sub>I</sub>(f)(T')
+&#8804;<sub>I</sub>(S) T <span style="text-decoration: underline;">iff</span>
+T' &#8804;<sub>I</sub>(S')
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f)(T)
+for every closed source theory T &#8712; <span
+ style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S)
+and every closed target theory T' &#8712; <span
+ style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(S').
+The left
+adjoint is compatible with the model function <span
+ style="font-weight: bold;">&#953;</span><sub>I</sub>(S')
+&middot;
+<span style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f)
+= |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)
+&middot; <span style="font-weight: bold;">&#953;</span><sub>I</sub>(S),
+and the right adjoint is compatible with the sentence function <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)
+&middot; <span style="font-weight: bold;">&#964;</span><sub>I</sub>(S') = <span
+ style="font-weight: bold;">&#964;</span><sub>I</sub>(S) &middot;
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f).
+Pointwise on theories, the left adjoint is the
+inverse image function <span
+ style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f)
+restricted to closed theories, and the right adjoint is the
+composition of the restriction of the direct image function <span
+ style="font-weight: bold; font-style: italic;">dir</span><sub>I</sub>(f)
+and the theory closure function. Hence, associated with an
+institution I is a theory functor for either adjoint; let <span
+ style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>
+:
+<span style="font-weight: bold; font-style: italic;">Sign</span><sub>I</sub><small><sup>op</sup></small>
+&#8594; <span style="font-weight: bold;">Cat</span>
+represent the theory functor associated with the the left adjoint
+operator <span style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f).
+Using the Grothendieck construction to generate a category,
+the adjointness properties mean that the associated signature
+projection is a bifibration.
+</p>
+<p style="text-align: justify;">These truth constructions are
+functorial. Associated with an
+institution
+I is the truth
+classification functor <span
+ style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub>
+&#8594;&nbsp;<b>Clsn</b>
+from the category of signatures and signature morphisms to the category
+of
+classifications and infomorphisms. By the categorical version of the
+FCA basic theorem (<a href="#Kent_2002">Kent, 2002</a>), there is an
+equivalence <b>Clsn</b>&nbsp;&#8801;&nbsp;<b>CnLat</b>,
+where <b>CnLat</b> is the category of concept lattices and
+their morphisms. Hence, also associated with an institution I is the
+concept lattice
+functor <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub> &#8594;&nbsp;<b>CnLat</b>.
+The category <span style="font-weight: bold;">Clsn</span> has two
+projection functors (fibrations), the instance functor <span
+ style="font-weight: bold; font-style: italic;">inst</span> : <b>Clsn</b><sup>op</sup>&nbsp;&#8594;&nbsp;<b>Set</b>
+and the type functor <span
+ style="font-weight: bold; font-style: italic;">typ</span> : <b>Clsn</b>&nbsp;&#8594;&nbsp;<b>Set</b>.
+By composing the truth classification functor with these two
+projections, we can
+unpack it into the underlying model functor |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub><sup>op</sup>&nbsp;&middot;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">inst</span>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;&nbsp;<b>Set</b>
+and
+the sentence functor
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>
+&middot;&nbsp;<span style="font-weight: bold; font-style: italic;">typ</span>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub>
+&#8594;&nbsp;<b>Set</b>.
+</p>
+<h2>Local Logics</h2>
+<p>We adapt the notion of a local logic to the theory of institutions.</p>
+<span style="font-weight: bold;">Definition 1.</span> Let I be an
+institution. Let S be an I-signature. A local S-logic <span
+ style="font-family: script mt bold;">L</span> = (<span
+ style="font-style: italic; font-weight: bold;">tok</span>(<span
+ style="font-family: script mt bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-family: script mt bold;">L</span>),
+&nbsp;<span style="font-style: italic;">N</span><sub><span
+ style="font-family: script mt bold;">L</span></sub>) consists of
+<br>
+<ol>
+  <li>a subset of S-models <span
+ style="font-style: italic; font-weight: bold;">tok</span>(<span
+ style="font-family: script mt bold;">L</span>) &#8838; |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(S)
+called the tokens or models of <span
+ style="font-family: script mt bold;">L</span>,</li>
+  <li>a subset of S-sentences (that is, an S-theory) <span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-family: script mt bold;">L</span>) &#8838; <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(S)
+called the types or constraints of <span
+ style="font-family: script mt bold;">L</span>, and<br>
+  </li>
+  <li>a subset of <span style="font-style: italic; font-weight: bold;">normal
+models</span> (tokens) <span style="font-style: italic;">N</span><sub><span
+ style="font-family: script mt bold;">L</span></sub> &#8838; <span
+ style="font-weight: bold; font-style: italic;">tok</span><sub>I</sub>(S),
+which satisfy all the constraints of <span
+ style="font-family: script mt bold;">L</span>.</li>
+</ol>
+The underlying classification <span
+ style="font-weight: bold; font-style: italic;">Clsn</span>(<span
+ style="font-family: script mt bold;">L</span>)
+=
+(<span style="font-style: italic; font-weight: bold;">tok</span>(<span
+ style="font-family: script mt bold;">L</span>), <span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-family: script mt bold;">L</span>),&nbsp;|=<sub>I</sub>(S))
+is the restriction of the truth classification of S to the tokens and
+types of <span style="font-family: script mt bold;">L</span>. A model
+(token) that fails to satisfy some constraint &#963; &#8712; <span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-family: script mt bold;">L</span>) is said to be an <span
+ style="font-style: italic; font-weight: bold;">exception</span> to
+this constraint. Normal models are not exceptions to any constraints of
+<span style="font-family: script mt bold;">L</span>.&nbsp;
+<h2><b>Bibliography</b></h2>
+<dl>
+  <dt>[<a name="Barwise_and_Seligman_1997"></a>Barwise and Seligman,
+1997]<br>
+  </dt>
+Jon Barwise and Jerry Seligman. <em>Information Flow: The Logic
+of Distributed Systems</em>, Cambridge Tracts in Theoretical Computer
+Science, vol. 44 (Cambridge, 1997).<br>
+  <dt>[<a name="Ganter_and_Wille_1999"></a>Ganter and Wille, 1999]</dt>
+Bernhard Ganter and Rudolf Wille. <em>Formal Concept Analysis:
+Mathematical Foundations</em>,
+(Springer, 1999). <br>
+  <dt>[<a name="Goguen_1991"></a>Goguen, 1991]</dt>
+Joseph Goguen. "A Categorical Manifesto," <em>Mathematical
+Structures in Computer Science, 1</em>, 1991,
+pages 49-67. <br>
+  <dt>[<a name="Goguen_and_Burstall_1992"></a>Goguen and Burstall, 1992]</dt>
+Joseph Goguen and Rod Burstall.
+"Institutions: Abstract Model Theory for Specification and
+Programming." <em>Journal of the Association for Computing Machinery,
+39</em>, no. 1, 1992, pages 95-146.
+Preprint, Report CSLI-85-30, Center for the Study of Language and
+Information, Stanford University, 1985. <br>
+  <dt>[<a name="Goguen_and_Rosu_2002"></a>Goguen and Rosu, 2002]</dt>
+Joseph Goguen and Grigore Rosu.
+"Institution Morphisms." <em>Formal Aspects of Computing, 13</em>,
+2002, pages 274-307. <br>
+  <dt>[<a name="Kent_2000"></a>Kent, 2000]</dt>
+Robert Kent.
+"<a href="http://www.ontologos.org/Papers/ISKO6/ISKO6.pdf">The
+Information Flow Foundation for Conceptual Knowledge Organization</a>."
+In: Dynamism and Stability in Knowledge Organization. Proceedings of
+the Sixth International ISKO Conference. Advances in Knowledge
+Organization 7 (2000), pp. 111-117. Ergon Verlag, W&uuml;rzburg. <br>
+  <dt>[<a name="Kent_2002"></a>Kent, 2002]</dt>
+Robert Kent. "Distributed Conceptual Structures." In: <em>Proceedings,
+Sixth International Workshop on Relational Methods in Computer Science</em>,
+Harre de Swart, editor. Lecture Notes in Computer Science, vol. 2561
+(Springer, 2002), pages 104-123. <br>
+  <dt>[<a name="Kent_2003a"></a>Kent, 2003a]</dt>
+Robert Kent. "The IFF Foundation for Ontological Knowledge
+Organization." In: <em>Knowledge Organization and Classification in
+International Information Retrieval</em> (Haworth, 2003). <br>
+  <dt>[<a name="Kent_2003b"></a>Kent, 2003b]</dt>
+Robert Kent. "<a
+ href="http://sunsite.informatik.rwth-aachen.de/Publications/CEUR-WS/Vol-82/SI_paper_09.pdf">Semantic
+Integration in the IFF</a>."
+ISWC'03 Semantic Integration Workshop. Sanibel Island, Florida, USA,
+2003. <br>
+  <dt>[<a name="Sowa_2000"></a>Sowa, 2000]</dt>
+John Sowa. <em>Knowledge Representation: Logical, Philosophical,
+and Computational Foundations</em> (Brookes/Coles, 2000). <br>
+  <dt>[<a name="Tarski_1944"></a>Tarski, 1944]</dt>
+Alfred Tarski. "The Semantic Conception of Truth," <em>Philos.
+Phenomenological Research, 4</em>, 1944, pages 13-47.
+</dl>
+<br>
+<br>
+</body>
+</html>

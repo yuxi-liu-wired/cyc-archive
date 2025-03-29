@@ -1,0 +1,117 @@
+
+<CENTER>
+<H1>Minutes for KIF Standardization Meeting </H1><B>November 17, 2000 
+</B></CENTER><B>Participants: </B>
+<P>Pat Hayes, Chris Menzel, Adam Pease, John Sowa, Mark Stickel, Mike Uschold, 
+Chris Welty, Michael Gruninger 
+<P>
+<H2>Discussion </H2>
+<H3>Modular Organization of KIF </H3>The current proposal is that all extensions 
+are one of the following: 
+<UL>
+<LI>new nonlogical lexicon with the same grammar with the same grammar or they 
+specify new 
+<LI>different grammars. Along these lines, Pat viewed extensions as extending 
+the grammatical categories of KIF-Core. For example, with quotation, character 
+strings would be a subcategory of some grammatical category in the Core. 
+</LI></UL>One question is how new nonlogical symbols are introduced. 
+<P>John Sowa proposed there should be a simple, limited core plus metalevel 
+operators such as assert and retract. These operators can talk about what goes 
+into another KIF module, and say things such as ``we are using theory X and 
+theory Y in our ontology.'' 
+<P>This idea raised the question of how assert is different from simply writing 
+an axiom. 
+<P>The discussion centred on the role that the metatheory will play. For John 
+and Pat, there is a stronger need to explicitly refer to other ontologies. In 
+particular, Pat sees to ways of referring to another ontology: 
+<UL>
+<LI>use the ontology's vocabulary 
+<LI>import the the ontology. In this case, we need to refer to other theories 
+explicitly as objects. </LI></UL>
+<P>The consensus was that KIF must have a metatheory extension. An action item 
+was to elaborate the requirements for such a metatheory. Two were discussed in 
+the meeting: 
+<OL>
+<LI>quotation 
+<LI>capability for specifying new grammars </LI></OL>
+<H3>Sorted languages and KIF </H3>People in the meeting had the following 
+positions: 
+<P>Pat: KIF-Core is unsorted. 
+<P>John: KIF-Core contains no sorts but has the capability of writing sorts. The 
+semantics is unsorted but the grammar allows polymorphism. 
+<P>Mark: Need to be aware of grammatical restrictions on sorts, which can impose 
+heavy burdens on implementations. 
+<P>
+<P>The point was raised that there are several different approaches to sorted 
+languages. KIF98 allows restricted quantification. Chris Menzel said that this 
+is only syntactic sugar; it is not really sorted, since there is no change in 
+the semantics. Another approach to sorting is to tie the sorts to variables so 
+that predicates are sorted. There was general agreement that we need to go one 
+step further and support order sorting together with inheritance. However, there 
+was some discussion over exactly what features are included here -- should some 
+predicates (e.g. subtype, instance, restriction-to) have special status which 
+get handled in special way? One new issue that arose was the treatment of the 
+sort predicates in this approach. For the definition of sorts, predicates need 
+to be arguments to predicates. Mark Stickel proposed the notion of ``punning'' 
+-- a given theory may use the same symbol for a constant, function, and 
+predicate. In the Core, there are no semantic constraints among these, but sort 
+constraints among these would be introduced in the sorted extension. This is one 
+possible way of preserving a first-order semantics for predicates that allow 
+predicates as arguments. 
+<H3>The ability to describe the syntax of languages within KIF </H3>The basic 
+issue here is a specification of the requirements that must be supported by KIF. 
+Pat feels that a substantial functionality for KIF-Meta can be handled by 
+quotation. John Sowa felt that if we have good operators for KIF(meta), can 
+probably do what we need for any other syntax. 
+<P>There was a lot of discussion related to the intended application of the 
+ability to describe the syntax of languages within KIF. This part of the meeting 
+was difficult to summarize, so I am including Mike Uschold's rough notes 
+verbatim: 
+<P><I>Adam: not want meta-level stuff in KIF core, not sure why. Just want plain 
+First-Order Logic, not the extra gunk. Want simple language, with simple 
+extensions. No confusion, as there were in early versions of KIF with all the 
+ontological stuff there and other facilities too. 
+<P>John: wants meta-level assertions, To explicitly say "I am asserting X". 
+<P>Editing is a meta-level assertion. Need to be able to say we are using theory 
+X and theory Y, this is meta-level. 
+<P>CM/PH: not need to explicitly say I am asserting, just hand off the ontology 
+and that means these are asserted. 
+<P>General agreement to be clear about what is meta-level vs what is object 
+level. 
+<P>John: First log in: no assertion, but do have metalevel tools, e.g editor 
+tool, which does asserting. Need to be able to say want to use this editor or 
+that, also translate character string into kif expression, copy this module into 
+that module - primitive meta-level operations. 
+<P>MU: why need to formalize what editor does? 
+<P>JS: META level KIF defines API for kif. 
+<P>JS: Ability to HAVE meta-level needs to be in core. But the metalevel stuff 
+can be in an extension. 
+<P>PH: current KIF-meta stuff may be adequate insome sense, but 
+probably/possibly not the best way to do it. 
+<P>TODO: make a list of the kinds of meta-level operations that we want. (JS?) * 
+translate 
+<P>* assert/retract
+<P>* rename
+<P>* procedural attachments...
+<P>* <FOR inter-operability for things stating>
+<P>- here is stuff in XML, want to say XML tags have formal definition.
+<P>JS nearly comes for free, with quasi-quote 
+<P>CW: this may best be thought of as 'Ontology Management Software'. 
+<P>Punch line: General agreement about need for meta-stuff, substantially in an 
+extension. Not total agreement on how central the meta stuff is? 
+<P>JS: Python has XML parser defined in Python, but terribly inefficient. It 
+serves role of saying what actually happens, but need to go to, say C 
+implementation to actually do the work. 
+<P>PH: but, is this visible to the logic? 
+<P>Much of this is orthogonal to the logic, so let's move on! </I>
+<P>
+<H3>Standardization Issues </H3>Michael G. restated the proposal that SUO-KIF be 
+the baseline, with the remaining features of KIF98 being extensions. The 
+discussion centred on the degree of coupling between the Core and extensions. 
+Mike Uschold and Adam raised the point that anytime you have options to use some 
+modules and not other ones, inter-operability suffers to the extent that people 
+use different sets of modules. 
+<P>
+<H3>Action Items </H3>Chris Menzel will elaborate the implications of the 
+different proposals for sorted languages. 
+<P>John Sowa will write a specific proposal for metalevel operators. </P>

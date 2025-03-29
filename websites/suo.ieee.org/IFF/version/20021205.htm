@@ -1,0 +1,1030 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>The Information Flow Framework (IFF)</title>
+  <meta name="author" content="Robert E. Kent">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h2>The Information Flow Framework (IFF)</h2>
+<h3><a name="Motivation_and_Overview"></a>Motivation and Overview</h3>
+<blockquote>
+&#8220;<span style="font-style: italic;">She
+acknowledged it to be very fitting, that every little social
+commonwealth should dictate its own matters of discourse; and hoped,
+ere long, to become a not unworthy member of the one she was now
+transplanted into. With the prospect of spending at least two months at
+  </span>&#8211;<span style="font-style: italic;">, it was highly incumbent
+on her to clothe her imagination, her
+memory, and all her ideas in as much of </span>&#8211;<span
+ style="font-style: italic;"> as possible</span>.&#8221;
+</blockquote>
+<blockquote><a
+ href="http://ofcn.org/cyber.serv/resource/bookshelf/persu11/chapter06.html">Persuasion,
+Chapter 6</a>, (1818). Jane Austen
+</blockquote>
+<p style="text-align: justify;">According to the <a
+ href="http://suo.ieee.org/scopeAndPurpose.html">Scope &amp; Purpose</a>
+of the IEEE SUO project, &#8220;This standard will specify an upper ontology
+that will enable computers to utilize it for applications such as data
+interoperability, information search and retrieval, automated
+inferencing, and natural language processing.&#8221;<span style="">&nbsp; </span>Further,
+one of the three purposes of the project is &#8220;INTER-OPERABILITY: The
+standard will provide a basis for achieving Inter-Operability among
+various software and database applications.&#8221; The work presented here
+proposes a framework, the <i><a
+ href="http://www.ontologos.org/IFF/IFF.html">Information Flow Framework</a>
+</i>(IFF) to accomplish this goal of interoperability, as well as the
+goals related to automated reasoning and application areas. The IFF is
+designed to allow not only the interoperability among software and
+database applications, but also the semantic interoperability among
+various object-level ontologies themselves (Figure 1). As such, this
+work can be seen as complementary to the work being done in the IEEE
+SUO Working group on the <a href="http://ontology.teknowledge.com/">SUMO</a>.
+At this stage in the development of both the IFF and the SUMO, the
+major difference between the two works is that the SUMO effort is
+geared toward providing a single upper ontology, whereas the IFF is
+designed to support the semantic interoperability among various
+object-level ontologies. The IFF supports this interoperability by its
+architecture (Figure 1 and Section 2) and its use of a particular
+branch of mathematics known as category theory. A major reason that the
+IFF uses the architecture and formalisms that it does is to support
+modular ontology development.</p>
+<p style="text-align: justify;">Modularity (constructing with
+standardized units
+or dimensions for flexibility and variety in use &#8211; <a
+ href="http://www.m-w.com/home.htm">Merriam-Webster</a>) is essential (<a
+ href="http://grouper.ieee.org/groups/suo/email/msg06590.html">John Sowa</a>)
+to good design decisions in every area of engineering, and most of all
+knowledge engineering and software engineering. In particular,
+modularity is important in the development, testing, maintenance, and
+use of ontologies. Development time will be shortened because separate
+groups would work on each module with little need for communication.
+When an ontology is maintained in modular fashion, errors and
+deficiencies can be traced to specific modules, thus limiting the scope
+of detailed error searching. With a modular design, it will be possible
+to make drastic changes to one module without the need to change other
+modules. Also with a modular design, by considering one module at a
+time the ontology as a whole will more easily be understood. With this
+understanding, the whole system can be better utilized. A monolithic
+ontology, on the other hand, would be very inefficient. In use, some
+parts would be very stable, well justified and shared across very broad
+communities, while other parts would not be adopted widely and would be
+quickly replaced (<a
+ href="http://grouper.ieee.org/groups/suo/email/msg06593.html">Austin
+Tate</a>). A modular design will facilitate these consensual and
+evolutionary processes of renewal. The categorical approach of the
+Information Flow Framework provides a framework for modular design via
+a structural metatheory of ontologies. Such a metatheory is a method
+for representing the structural relationships between ontologies. As
+will be quite evident in the Model Theory Ontology, this structural
+metatheory is compatible with the representation of object-level
+ontologies in any suitable and appropriate ontology language.<br>
+</p>
+<p style="text-align: justify;">From the point of view (<a
+ href="http://grouper.ieee.org/groups/suo/email/msg02629.html">Robert
+Kent</a>) that &#8220;every little social commonwealth should dictate its own
+matters of discourse,&#8221; would it not seem that the SUO should be
+structured in a modular fashion, as a loose confederation of
+participating ontologies, or perhaps better a league or commonwealth of
+ontologies?<br>
+</p>
+<p>We now turn to the modular architecture of the
+Information Flow Framework.<br>
+</p>
+<table border="1" cellspacing="0" cellpadding="0"
+ style="border: medium none ; border-collapse: collapse; margin-left: 13.08pt;">
+  <tbody>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: solid none solid solid; border-width: 1.5pt medium 1.5pt 1.5pt; border-top: 1.5pt solid black; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 6pt 0in;"><b><span
+ style="font-size: 14pt; font-family: Arial;">Metalevel<o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: solid none solid solid; border-width: 1.5pt medium 1.5pt 1.5pt; border-top: 1.5pt solid black; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 6pt 0in;"><b><span
+ style="font-size: 14pt; font-family: Arial;">Ontology<o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: solid solid solid none; border-width: 1.5pt 1.5pt 1.5pt medium; border-top: 1.5pt solid black; border-right: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 6pt 0in;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><b><span
+ style="font-family: Arial; text-transform: uppercase;"><o:p></o:p></span></b></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;">Top<o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/top/ontology/core/version20020102.pdf">Top
+Core Ontology</a></span></b><b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid solid none; border-width: medium 1.5pt 1.5pt medium; border-right: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(17 pages)<b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;">Upper<o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/upper/ontology/core/version20020102.pdf">Upper
+Core Ontology</a></span></b><b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid none none; border-color: -moz-use-text-color black -moz-use-text-color -moz-use-text-color; border-width: medium 1.5pt medium medium; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(97 pages)<b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><b><span
+ style="font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/upper/ontology/category-theory/version20020102.pdf">Category
+Theory Ontology</a></span></b><b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid none none; border-color: -moz-use-text-color black -moz-use-text-color -moz-use-text-color; border-width: medium 1.5pt medium medium; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(53 pages)<b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><b><span
+ style="font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/upper/ontology/classification/version20020102.pdf">Upper
+Classification Ontology</a></span></b><b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid solid none; border-width: medium 1.5pt 1.5pt medium; border-right: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(78 pages)<b><span
+ style="font-size: 10pt; font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;">Lower<o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color black; border-width: medium medium medium 1.5pt; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/model-theory/version20020515.htm">Model
+Theory Ontology</a><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid none none; border-color: -moz-use-text-color black -moz-use-text-color -moz-use-text-color; border-width: medium 1.5pt medium medium; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(15 pages)</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="145" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 108.9pt;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><b><span
+ style="font-family: Arial;"><o:p></o:p></span></b></p>
+      </td>
+      <td width="288" valign="top"
+ style="border-style: none none solid solid; border-width: medium medium 1.5pt 1.5pt; border-left: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 3in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;"><b><span
+ style="font-family: Arial;"><a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/ontology/version20021205.htm">Ontology
+Ontology</a><o:p></o:p></span></b></p>
+      </td>
+      <td width="96" valign="top"
+ style="border-style: none solid solid none; border-width: medium 1.5pt 1.5pt medium; border-right: 1.5pt solid black; border-bottom: 1.5pt solid black; padding: 0in 5.4pt; width: 1in;">
+      <p class="MsoNormal" style="margin: 3pt 0in;">(15 pages)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-weight: bold;"><br>
+<br>
+<img src="image001.gif" title="IFF Architecture" alt="IFF Architecture"
+ style="width: 725px; height: 868px;"><br>
+</span><br>
+<h3><a name="Architecture"></a>Architecture</h3>
+<p style="text-align: justify;">The <a
+ href="http://www.ontologos.org/IFF/IFF.html">Information
+Flow Framework</a> seeks to apply Information Flow to distributed
+logic, ontologies, and knowledge representation. The IFF takes a
+building-blocks approach towards the development of object-level
+ontological structure, This is a rather elaborate categorical approach
+that uses insights from the theory of distributed logic known as
+Information Flow (Barwise and Seligman 1997), and also uses ideas from
+the theory of <a
+ href="http://www.math.tu-dresden.de/%7Eganter/fba.html">Formal Concept
+Analysis</a> initiated by Rudolf Wille (Ganter &amp; Wille 1999). The
+IFF provides mechanisms for a principled foundation for a metalevel
+ontological framework &#8211; a framework for sharing ontologies,
+manipulating ontologies as objects, relating ontologies through
+morphisms, partitioning ontologies, composing ontologies via colimits,
+discussing ontological structure, noting dependencies between
+ontologies, declaring the use of other ontologies, etc. The IFF is <i>primarily</i>
+based upon the theory of Information Flow,
+which is centered on the notion of a <i>classification</i>.
+Information Flow is itself based upon the theory of the Chu
+construction of <span style="font-family: Symbol;"><span style="">*</span></span>-autonomous
+categories (Barr 1996), thus giving it a connection to concurrency and
+Linear Logic. The IFF is <i>secondarily</i> based upon the theory of
+Formal Concept Analysis, which is centered on the notion of a <i>concept
+lattice</i>. The IFF represents metalogic, and as such operates at the
+structural level of ontologies. In the IFF, there is a precise boundary
+between the metalevel and the object level. The architectural structure
+of the Information Flow Framework is illustrated in Figure 1.<br>
+</p>
+<p style="text-align: justify;">Although the Information Flow Framework
+is rather large, it is
+highly structured, representing the <i>structural aspect</i> of the
+SUO, its metalevel, in terms of meta-ontologies. The Information Flow
+Framework is partitioned into three metalevels: top, upper and lower.
+These metalevels correspond to the set-theoretic distinction in
+foundations between (1) the generic, (2) the large and (3) the small
+(Mac Lane, 1971/1998).<br>
+</p>
+<p style="text-align: justify;"><img src="image002.gif" title="" alt=""
+ style="width: 272px; height: 216px;" align="left" hspace="10">The
+Information Flow Framework consists
+of an adequate amount of set
+theory which, on the one hand, is sufficiently flexible for the
+categorical inquiry involved in the Information Flow Framework (IFF)
+but, on the other hand, is sufficiently restrictive that IFF be
+consistent (does not produce contradictions). The terminology of the
+Information Flow Framework is mathematical. As a result, mathematical
+aesthetics plays a large role in development of the Information Flow
+Framework, both as a stimulus for change and as a guiding criterion in
+how to make those changes. Mathematical aesthetics includes such things
+as simplicity, elegance and power of expression, etc.<br>
+</p>
+<div style="text-align: justify;">The Information Flow Framework
+consists of an adequate amount of set
+theory which, on the one hand, is sufficiently flexible for the
+categorical inquiry involved in the Information Flow Framework (IFF)
+but, on the other hand, is sufficiently restrictive that IFF be
+consistent (does not produce contradictions). The terminology of the
+Information Flow Framework is mathematical. As a result, mathematical
+aesthetics plays a large role in development of the Information Flow
+Framework, both as a stimulus for change and as a guiding criterion in
+how to make those changes. Mathematical aesthetics includes such things
+as simplicity, elegance and power of expression, etc.<br>
+</div>
+<p class="MsoBodyText" style="text-indent: 0in; text-align: justify;">From
+the set-theoretic
+perspective, the metalevel hierarchy of the Information Flow Framework
+(Figure 2) corresponds to the hierarchy of (1) collections, (2)
+classes, and (3) sets. Table 1 locates particular kinds of collections
+and functions in the three-tiered framework of the IFF. In the IFF, all
+relations are strictly binary and all functions are strictly unary.
+Functions that are conceptually binary need to use pair notation for
+arguments. <br>
+</p>
+<div style="margin-left: 5px;">
+<p><big><span style="font-weight: bold;">Kinds of Specific Collections</span></big></p>
+</div>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 700px;">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; background-color: rgb(204, 204, 204);">Collections<br>
+      </td>
+      <td style="vertical-align: top;">
+      <ul>
+        <li>the collections of classes, functions, opspans and binary
+cones</li>
+        <li>the collections of large graphs and large graph morphisms</li>
+        <li>the collections of large categories and functors between
+large categories</li>
+        <li>the collection of natural transformations, and the
+collection of adjunctions</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; background-color: rgb(204, 204, 204);">Classes<br>
+      </td>
+      <td style="vertical-align: top; width: 600px;">
+      <ul>
+        <li>the object and morphism collections in any large category</li>
+        <li>the source and target of the component map of a natural
+transformation</li>
+        <li>the collections of algebras and homomorphisms of a monad</li>
+        <li>the collection of diagrams and cocones for each type of
+finite colimit in a category</li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 100px; background-color: rgb(204, 204, 204);">Sets<br>
+      </td>
+      <td style="vertical-align: top; width: 500px;">
+      <ul>
+        <li>sets as collections and the extent of their functions</li>
+        <li>the instance/type sets of classifications and the
+instance/type functions of infomorphisms</li>
+        <li>any small relation regarded as a collection</li>
+      </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;">Note however, that the Information Flow
+Framework is being developed from the perspective of category theory.
+From this perspective, the three IFF metalevels are distinguished by <i>use</i>.
+Each metalevel
+provides a language for the representation of the level below it &#8211; this
+is its raison d&#8217;etre. The top metalevel provides a language for
+representing the upper metalevel. The upper metalevel provides a
+language for representing and reasoning about the lower metalevel. The
+lower metalevel provides a language for representing and reasoning
+about the object level. Now, although one could apply the upper
+metalevel axiomatizations to object level information, a goal of the
+IFF is to apply these only to upper and lower metalevel information. If
+a similar axiomatization is needed for the object level, then such an
+axiomatization can be put in place at the metalevel.<br>
+</p>
+<ul>
+  <li>
+    <p style="text-align: justify;">The top metalevel of the
+Information Flow Framework is used to
+represent and axiomatize the
+upper metalevel. The top metalevel does this by providing an interface
+between the KIF logical language and the upper metalevel of the
+Information Flow Framework. The ability to express all of the
+mechanisms in the upper metalevel needs a limited set of basic notions
+from mathematics: general terminology for collections, relations,
+functions, limits, colimits, and specific cases of these &#8211; restriction,
+abridgment, etc. <br>
+    </p>
+  </li>
+  <ul>
+    <li>
+      <p style="text-align: justify;">This ability is axiomatized in
+the <i>Top Core (Basic KIF)
+Ontology</i>, which contains rudimentary (fundamental) namespaces for
+collections, functions, relations, limits
+and colimits. The Top Core Ontology provides an adequate foundation for
+representing ontologies in general and for defining the other metalevel
+ontologies (Figure 1) in particular. All upper metalevel ontologies
+import and use, either directly or indirectly, the Top Core Ontology.
+The Top Core Ontology operates at the set-theoretic level of generic
+collections, whereas Chris Menzel&#8217;s <a
+ href="http://grouper.ieee.org/groups/suo/email/msg04183.html">Basic
+Ontology</a>
+operates at the level of small sets (much of this will be
+subsumed by the Model Theory Ontology). <br>
+      </p>
+    </li>
+  </ul>
+  <li>
+    <p style="text-align: justify;">The upper metalevel of the
+Information Flow Framework is
+used to represent and axiomatize the
+lower metalevel. The upper metalevel does this by representing
+category theory, information flow and formal concept analysis. The
+upper metalevel is partitioned into three sub-ontologies: the Upper
+Core Ontology, the Category Theory Ontology, and the Upper
+Classification Ontology. The upper metalevel is organized in order to
+be able to realize the categorical principle (see below). In
+particular, the mechanism for expressing composition and limits are
+axiomatized in the Upper Core ontology, the mechanisms for expressing
+categories, functors, natural transformations, adjunctions are
+axiomatized in the Category Theory ontology, and the mechanisms for
+combining ontologies in a lattice of theories is axiomatized in the
+Upper Classification ontology. <br>
+    </p>
+    <ul>
+      <li>
+        <p style="text-align: justify;">The <i>Upper Core Ontology</i>
+provides an anchor for the
+other two ontologies at this level. It has a
+distinguished namespace for set-theoretic classes and their functions.
+It also contains basic terminology and axiomatics for large relations
+and endorelations.<br>
+        </p>
+      </li>
+      <li>
+        <p style="text-align: justify;">The <i>Category Theory
+Ontology</i> represents in various
+namespaces a baseline for the standard ideas of
+category theory. Much of the content comes from well-known
+category-theoretic intuitions and some of the semi-standard notation
+used in papers and textbooks. The Category Theory Ontology provides a
+framework for reasoning about metalogic, as represented in the lower
+metalevel ontologies. Examples of provable statements are: &#8220;the
+Classification namespace represents a category,&#8221; or &#8220;the IF
+classification functor is left adjoint to the IF theory functor&#8221; (Kent
+2000). The Category Theory Ontology encodes a KIF formalism for <i>category
+theory</i> in one of its normal presentations. Other presentations,
+such as home-set or arrows-only, may also have merit. The Category
+Theory Ontology is based upon the namespace for large graphs and graph
+morphisms that includes horizontal multiplication of graphs and a
+theory of coherence &#8211; a category is a monoid in the monoidal category
+of large graphs. <br>
+        </p>
+      </li>
+      <li>
+        <p style="text-align: justify;">The <i>Upper Classification
+Ontology</i> represents the
+theory of distributed conceptual structures. This theory is concerned
+with the distribution
+and conception of knowledge. It rests upon two related theories,
+Information Flow and Formal Concept Analysis, which it seeks to unify.
+The Upper Classification Ontology connects these two studies by
+representing the basic theorem of Formal Concept Analysis as a
+categorical equivalence between classifications and concept lattices at
+the level of functions, and the categorical equivalence between bonds
+and complete adjoints at the level of relations. With this, the Upper
+Classification Ontology accomplishes a rapprochement between
+Information Flow and Formal Concept Analysis. <br>
+        </p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p style="text-align: justify;">The lower metalevel of the
+Information Flow Framework is used
+to represent and axiomatize the
+object metalevel. The lower metalevel is the location for various
+modules that help represent the structural aspect of the SUO using a
+categorical expression. That is to say, the lower metalevel should
+follow as closely as possible the categorical principle: it should be
+expressed at the level of classes and their functions, but using no
+quantification, no logical connectives, and only the specific
+terminology organized using composition, limits, and other categorical
+notions. This should make inferencing highly efficient. The lower
+metalevel is used to the build the objects and morphisms of ordinary
+categories such as <span style="font-family: Arial;">Set</span>, <span
+ style="font-family: Arial;">Classification</span>, <span
+ style="font-family: Arial;">Hypergraph</span>, &#8230; . It thus represents
+these categories along with their associated functors, natural
+transformations, and adjunctions.<br>
+    </p>
+  </li>
+  <ul>
+    <li>
+      <p style="text-align: justify;">The lower metalevel contains at
+present one module called the <i>Model Theory Ontology</i> consisting
+of about ten namespaces. This expression of model theory, somewhat
+novel since it is based upon the theory of Information Flow, is used to
+represent and axiomatize the object level. Use of this ontology could
+be direct, but more likely will involve a parse/translation from some
+&#8220;external&#8221; (to the IFF) ontological description into the &#8220;internal&#8221; IFF
+semantic representation (see the <a
+ href="http://grouper.ieee.org/groups/suo/email/msg05990.html">expansion</a>
+of one of Adam Pease&#8217;s examples.<br>
+      </p>
+    </li>
+    <li>
+      <p style="text-align: justify;">Other modules (namespaces or
+subontologies), in addition to
+the Model Theory Ontology, are perhaps
+possible at the lower metalevel. These might include modules for
+categorical model theory, modules for modal, tense and linear logic,
+modules for rough and fuzzy sets, modules for semiotics, etc.<br>
+      </p>
+    </li>
+  </ul>
+  <li>
+    <p style="text-align: justify;">The object level is where the
+content ontologies reside. These could be very generic, such as a 4D
+ontology, or specific, such as ontologies for government or higher
+education. It should be noted that the object level satisfies a
+representation property similar to the categorical property satisfied
+by the lower metalevel &#8211; the ontological language used is not KIF;
+instead it is the terminology defined and axiomatized in the lower
+structural level (terms such as &#8216;subtype&#8217;, &#8216;instance&#8217;, &#8216;expression&#8217;,
+&#8216;model&#8217;, &#8216;ontology&#8217;, &#8216;relation&#8217;, &#8216;entity&#8217;, &#8216;role&#8217;, etc.).<br>
+    </p>
+  </li>
+</ul>
+<p>The following principle is critically important in meta-ontology
+design.<br>
+</p>
+<h4><b><a name="Categorical_Design_Principle:"></a>Categorical Design
+Principle</b>:</h4>
+<i>The design of any module situated in the lower metalevel of the
+Information Flow Framework should adhere to the categorical property
+that its axiomatic representation is strictly category-theoretic:</i>
+<ul>
+  <li> <small><i>All axioms are
+expressed in terms of either terms from another
+lower metalevel module or category-theoretic notions (upper metalevel
+notions), such as classes, binary relations, order, the composition and
+identity class functions, the pullback of diagrams of class functions,
+etc.</i></small> </li>
+  <li> <small><i>No axioms use explicit logical notation: No
+variables,
+quantification (&#8216;forall&#8217;, &#8216;exists&#8217;) or logical connectives (&#8216;and&#8217;,
+&#8216;or&#8217;, &#8216;not&#8217;, &#8216;=&gt;&#8217;,&#8216;&lt;=&gt;&#8217;) are used.</i></small> </li>
+  <li> <small><i>No axioms use terms from the Top Core ontology,
+other
+than
+pair bracketing &#8216;[-]&#8217; or pair projection &#8216;(- 1)&#8217;, &#8216;(- 2)&#8217;.</i></small> </li>
+</ul>
+<p style="text-align: justify;">Here is some representative code in
+the
+function sub-namespace of
+the <span style="font-style: italic;">IFF Ontology of Small Sets</span>
+(a part of the Model Theory Ontology, which is under development).
+Notice how this code adheres to the Categorical Property. The lower
+metalevel terms being introduced in this fragment are: &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">function</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">source</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">target</span></small>&#8217;
+and &#8216;<small><span style="font-family: courier new,courier,monospace;">fn2rel</span></small>&#8217;.
+The axiomatization uses both previously introduced lower-metalevel
+terms, and upper metalevel terms imported from the Upper Core Ontology.<br>
+</p>
+<ul>
+  <li>The term &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">set</span></small>&#8217;
+comes from the set namespace.</li>
+  <li>The terms &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">rel$relation</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">rel$set1</span></small>&#8217;
+and &#8216;<small><span style="font-family: courier new,courier,monospace;">rel$set2</span></small>&#8217;
+come from
+the rel namespace.</li>
+  <li>The terms &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">class</span></small>&#8217;
+and &#8216;<small><span style="font-family: courier new,courier,monospace;">subclass</span></small>&#8217;
+come from the SET namespace.</li>
+  <li>The terms &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">function</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">source</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">target</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">restriction</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">composition</span></small>&#8217;,
+&#8216;<small><span style="font-family: courier new,courier,monospace;">fn2rel</span></small>&#8217;
+and &#8216;<small><span style="font-family: courier new,courier,monospace;">injection</span></small>&#8217;
+come from the SET.FTN namespace.</li>
+  <li>The term &#8216;<small><span
+ style="font-family: courier new,courier,monospace;">tripling</span></small>&#8217;
+comes from the SET.LIM.PRD namespace.</li>
+</ul>
+<p>It uses no top metalevel terms, and it uses no logical variables,
+quantifiers or logical connectives.</p>
+<ul>
+  <table cellpadding="5" cellspacing="5" border="10"
+ style="text-align: left; width: 600px; background-color: rgb(238, 238, 238);">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;">
+        <pre style="background-color: rgb(238, 238, 238);">(SET$class function)<br>(SET$subclass function SET.FTN$function)<br><br>(SET.FTN$function source)<br>(= (SET.FTN$source source) function)<br>(= (SET.FTN$target source) set$set)<br>(SET.FTN$restriction source SET.FTN$source)<br><br>(SET.FTN$function target)<br>(= (SET.FTN$source target) function)<br>(= (SET.FTN$target target) set$set)<br>(SET.FTN$restriction target SET.FTN$target)<br><br>(SET.FTN$function fn2rel)<br>(= (SET.FTN$source fn2rel) function)<br>(= (SET.FTN$target fn2rel) rel$relation)<br>(= (SET.FTN$composition [fn2rel rel$set1]) source)<br>(= (SET.FTN$composition [fn2rel rel$set2]) target)<br>(SET.FTN$restriction fn2rel SET.FTN$fn2rel)<br><br>(SET.FTN$injection (SET.LIM.PRD$tripling [source target fn2rel]))</pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ul>
+<h3><a name="Language_Levels_Role_Types_and"></a>Language Levels, Role
+Types and Ontological Visibility </h3>
+<p style="text-align: justify;">At its core, the Information Flow
+Framework is coded in the KIF logical
+language. As an ontological machine language, the Lisp-y style of
+logical expression of the KIF logical language is very useful,
+adequately expressive and conveniently terse. However, in the proposed
+IFF structure for the SUO the KIF logical language will not be used as
+the sine qua non for ontological expression. Instead, the IFF
+Foundation terminology is partitioned into language levels according to
+the following programming language analogy.<br>
+</p>
+<ol start="0">
+  <li>
+    <p>The KIF logical language is like an <span
+ style="font-style: italic;">ontological machine language</span>. </p>
+  </li>
+  <li>
+    <p>The Top Core Ontology is like an <span
+ style="font-style: italic;">ontological assembly language</span>. It
+provides a basic ontological apparatus for the SUO. The purpose of this
+kind of terminology is to be an interface between the KIF language and
+other ontological terminology, in general. Because of this purpose, the
+Top Core Ontology might also be called a bootstrap ontology. </p>
+  </li>
+  <li>
+    <p>The bulk of the Information Flow Framework, as encoded in the
+of
+the upper/lower metalevel namespaces, </p>
+  </li>
+  <li>
+    <p>is like a <span style="font-style: italic;">high level
+programming language</span> such as Lisp, Java, ML, etc. The lower
+metalevel provides direct representation capabilities, and the upper
+metalevel provides indirect structuring capabilities. <br>
+    </p>
+  </li>
+  <li>
+    <p>The object level of the SUO is like various <span
+ style="font-style: italic;">software applications</span>, such as word
+processors, browsers, spreadsheet software, databases, etc. The object
+level provides the content of the SUO coming from the various domain
+ontologies and philosophies with their own namespaces. The object-level
+ontologies can be specified using the terminology axiomatized in the
+lower structural level. </p>
+  </li>
+</ol>
+<p style="text-align: justify;">A central goal of the Information
+Flow
+Framework is to provide a
+principled mechanism for interoperability between the various modules
+at the object level. To support this goal, it is important that a
+complete distinction and an explicit boundary are kept between the
+object level and the metalevel. This fundamental partition must be
+obviously manifest in the SUO. Some ontologies at the object level may
+choose to represent and discuss metalevel concepts, but they would
+still be doing so at the object level.</p>
+<div style="text-align: justify;">On the <a
+ href="http://suo.ieee.org/email/threads.html">SUO email list</a> and
+at the <a href="http://projects.teknowledge.com/IJCAI01">IJCAI-01 SUO
+Workshop</a>, various comments and concerns have been expressed about
+intimidating users with category theory terminology. As John Sowa has
+remarked &#8220;the appropriate place for category theory is under the rug
+where no one will ever see it.&#8221; Since the IFF uses the categorical
+perspective, it makes heavy use of the various ideas and terminology of
+category theory. However, in the Information Flow Framework this
+category theory terminology is invisible to the ordinary user &#8211; the
+user of object level ontologies. In the IFF approach the terminology
+that is visible to the ordinary <i>user</i> is that introduced in the
+object level ontologies, and the part of the IFF terminology visible to
+the object level content ontology <i>developer</i> is the terminology
+introduced in the lower metalevel. The latter is normal semantic
+terminology, but not category theory terminology. The IFF category
+theory terminology is introduced in the upper metalevel, and this is
+seen and used only at the lower metalevel, but not at the object level.
+This fact is represented by the dependencies in the IFF Architecture
+Diagram (Figure 1). In the above programming language analogy, the
+users of software applications should not see source code, but the
+programmers of those applications need to have it visible in front of
+them. By analogy, in the IFF approach, certain people working in
+certain roles will need to see and use category theory terminology,
+whereas others will want it to be invisible. This remains true, even
+when the lattice of theories is visible.
+These issues center on role types and ontological visibility of the IFF
+terminology and axiomatizations. As has been repeatedly stated, the
+Information Flow Framework is partitioned into four levels: the object
+level, and the lower, upper and top metalevels. The visibility of these
+levels depends upon the role that people play with respect to the IFF.
+Two distinctions are important in a discussion of role types and
+visibility:<br>
+</div>
+<ul>
+  <li>The contrast or distinction between the designers of an
+ontology
+versus the users of that ontology. Note that a designer must do some
+reasoning about the module being developed.</li>
+  <li>The four levels of terminology mentioned above.</li>
+</ul>
+These two distinctions are combined into six possible role types, of
+which we identify two pairs, ending up with four possible distinct role
+types. The first two role types do not want to see category theory
+terminology &#8211; they want it swept under the rug. However, the second two
+role types need to use category theory terminology.<br>
+<p><big><span style="font-weight: bold;">Role Types and
+Ontological Visibility</span></big><br>
+</p>
+<table cellpadding="5" cellspacing="5" border="5"
+ style="text-align: left; width: 100%; background-color: rgb(238, 238, 238);">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 204, 0);">
+      <p><big><span style="font-weight: bold;">4. The object level
+user</span></big></p>
+      <p>A person in this role (with respect to the IFF) sees only
+(4) object level terminology, that is, they see only
+domain/middle/upper ontology
+terminology.<br>
+      </p>
+      <p style="font-weight: bold;">Example terminology:</p>
+      <ol style="list-style-type: lower-alpha;">
+        <li>From a Movie domain ontology: &#8216;movie&#8217;, &#8216;actor&#8217;, &#8216;rating&#8217;,
+&#8230;</li>
+        <li>From an upper object level ontology: &#8216;3D&#8217;, &#8216;4D&#8217;,
+&#8216;object&#8217;,
+&#8216;event&#8217;, &#8216;continuant&#8217;, &#8216;occurrent&#8217;, &#8230;</li>
+      </ol>
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;">
+      <p>&#9660;</p>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 204, 255);">
+      <p><big><span style="font-weight: bold;">3. The object level
+module designer = the lower metalevel user</span></big></p>
+      <p>A person in this role (with respect to the IFF) sees both
+(4)
+object level and (3) lower metalevel (for example, model theory,
+fuzzy/rough set, semiotic) terminology. </p>
+      <p style="font-weight: bold;">Example terminology:</p>
+      <ol style="list-style-type: lower-alpha;">
+        <li>From the Model Theory Ontology: &#8216;instance&#8217;, &#8216;type&#8217;,
+&#8216;classification&#8217;, &#8216;subtype&#8217;, &#8216;disjoint&#8217;, &#8216;expression&#8217;, &#8216;arity&#8217;,
+&#8216;sentence&#8217;, &#8216;language&#8217;, &#8216;model&#8217;, &#8216;satisfies&#8217;, &#8216;interpretation&#8217;,&nbsp;
+...</li>
+        <li>From a fuzzy/rough set module: &#8216;fuzzy-subset&#8217;,
+&#8216;upper-approximation&#8217;, &#8216;rough-set&#8217;, &#8230;</li>
+      </ol>
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;">&#9632;</td>
+    </tr>
+    <tr align="center">
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">
+      <p class="MsoNormal" align="center"
+ style="margin: 3pt 0in; text-align: center;"><span
+ style="font-size: 10pt;"><big>Here is the visibility boundary for
+category theory terminology (John Sowa&#8217;s &#8220;rug&#8221;).</big><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;">&#9660;</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(102, 255, 255);">
+      <p><big><span style="font-weight: bold;">2. The lower metalevel
+module designer = the upper metalevel user</span></big></p>
+      <p>A person in this role (with respect to the IFF) sees both
+(3)
+lower metalevel (model theory and other modules) and (2) upper
+metalevel (core, classification and category theory) terminology. </p>
+      <p style="font-weight: bold;">Example terminology:</p>
+      <ol style="list-style-type: lower-alpha;">
+        <li>From the Model Theory Ontology: &#8216;instance&#8217;, &#8216;type&#8217;,
+&#8216;classification&#8217;, &#8216;expression&#8217;, &#8216;arity&#8217;, &#8216;sentence&#8217;, &#8216;language&#8217;,
+&#8216;model&#8217;, &#8216;satisfies&#8217;, &#8216;interpretation&#8217;,&nbsp; &#8230;</li>
+        <li>From the Upper Core Ontology: &#8216;class&#8217;, &#8216;function&#8217;,
+&#8216;source&#8217;, &#8216;target&#8217;, &#8216;relation&#8217;, &#8216;limit&#8217;, &#8216;colimit&#8217;, &#8230;</li>
+        <li>From the Upper Classification Ontology: &#8216;classification&#8217;,
+&#8216;concept-lattice&#8217;, &#8216;concept-morphism&#8217;, &#8230;</li>
+        <li>From the Category Theory Ontology: &#8216;category&#8217;, &#8216;functor&#8217;,
+&#8216;pullback&#8217;, &#8216;colimit&#8217;, &#8216;monad&#8217;, &#8230;</li>
+      </ol>
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;">&#9660;</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);">
+      <p style="font-weight: bold;"><big>1. The upper metalevel
+module
+designer</big></p>
+      <p>A person in this role (with respect to the IFF) sees both
+(2)
+the upper metalevel (core, classification and category theory) and (1)
+the top metalevel (KIF interface) terminology. This would include
+Robert Kent, as the preliminary designer of the IFF upper metalevel and
+other category-theorists that might help in the future. </p>
+      <p style="font-weight: bold;">Example terminology:</p>
+      <ol style="list-style-type: lower-alpha;">
+        <li>From the Upper Core Ontology: &#8216;class&#8217;, &#8216;function&#8217;,
+&#8216;source&#8217;, &#8216;target&#8217;, &#8216;relation&#8217;, &#8216;limit&#8217;, &#8216;colimit&#8217;, &#8230;</li>
+        <li>From the Upper Classification Ontology: &#8216;classification&#8217;,
+&#8216;concept-lattice&#8217;, &#8216;concept-morphism&#8217;, &#8230;</li>
+        <li>From the Category Theory Ontology: &#8216;category&#8217;, &#8216;functor&#8217;,
+&#8216;pullback&#8217;, &#8216;colimit&#8217;, &#8216;monad&#8217;, &#8230;</li>
+      </ol>
+      <p>From the Top Core Ontology: &#8216;collection&#8217;, &#8216;function&#8217;,
+&#8216;relation&#8217;, &#8216;binary-product&#8217;, &#8216;tuple&#8217;, &#8230;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="Truth_and_Modularity"></a>Truth and Modularity</h3>
+<p style="text-align: justify;">The categorical approach of the
+Information Flow Framework
+provides
+a framework for modular design via a structural metatheory of
+ontologies. Such a metatheory is a method for representing the
+structural relationships between ontologies. As will be quite evident
+in the Model Theory Ontology, this structural metatheory is compatible
+with the representation of object-level ontologies in any suitable and
+appropriate ontology language. A categorical approach for modular
+design has previously been used in the Kestrel Institute&#8217;s <a
+ href="http://www.kestrel.edu/HTML/prototypes/specware.html">SpecWare</a>
+system. Specware uses the categorical notions of <i>sheaves</i><span
+ style="font-style: italic;">colimits</span> for realizing a modular
+approach to software specification. Colimits, which are mechanisms for
+the fusion (amalgamation) of diagrams within categories, can be
+constructed from primitives (indexed objects and morphisms in the
+diagram) using sums (coproducts) and/or quotients (coequalizers,
+pushouts). Colimits are already represented in the Information Flow
+Framework: the Core Ontology has a representation for colimits in the
+quasicategory of set-theoretic classes and class functions; the
+Classification Ontology has a representation for colimits in the
+quasicategory of large classifications and infomorphisms, based upon
+the Core colimits; and the Category Theory Ontology has a
+representation for colimits in any large category. Extensions to the
+Category Theory Ontology will be able represent systems such as
+Specware by adding a namespace for sheaves. A <a
+ href="http://grouper.ieee.org/groups/suo/email/msg02781.html">study</a>
+by Michael Uschold has demonstrated the power of colimits as a
+composition mechanism, not only for software specifications but also
+for ontologies. The Information Flow Framework advocates the use
+colimits for realizing a modular approach to ontology specification,
+not in terms of specifications and sheaves, but in terms of concept
+lattices and concept morphisms.<br>
+</p>
+<p style="text-align: justify;">John Sowa has <a
+ href="http://grouper.ieee.org/groups/suo/email/msg03804.html">proposed</a>
+the use of &#8220;an infinite lattice of all possible theories as the
+theoretical foundation of the SUO.&#8221; He advocates that the SUO have as
+its goal &#8220;a framework that can support an open-ended collection of
+ontological theories (potentially infinite) organized in a lattice
+together with systematic metalevel techniques for moving from one to
+another, for testing their adequacy for any given problem, and for
+mixing, matching, combining, and transforming them to whatever form is
+appropriate for whatever problem anyone is trying to solve.&#8221; The IFF
+approach advocates that the Information Flow Framework be used as this
+framework, and proposes that <span style="font-family: arial;">Concept
+Lattice</span>, the category of concept lattices, be used
+in the SUO as a representation for John Sowa&#8217;s &#8220;lattice of all
+theories.&#8221; A very detailed formalism for the category of concept
+lattices is incorporated in the Upper Classification Ontology. The
+objects in this category are large concept lattices, and each concept
+lattice has an underlying large classification as its base and on which
+it is built. Large means that the collections of instances, types and
+formal concepts are set-theoretic classes, and not just small sets.
+Thus, this category can accommodate the truth concept lattice for a FOL
+language, whose instance collection is the class of all
+(model-theoretic) structures for that language, and whose formal
+concepts have as their intents the (closed) ontologies for that
+language. Amongst other things, the axiomatization of large concept
+lattices in the Upper Classification Ontology answers Chris Menzel&#8217;s <a
+ href="http://grouper.ieee.org/groups/suo/email/msg01759.html">foundational
+concerns</a> about a &#8220;reasonable class theory.&#8221; The morphisms in this
+category are called concept morphisms. Each concept morphism has an
+underlying infomorphism as its base and on which it is built. In
+addition, each concept morphism has a pair of adjoint monotonic
+functions mapping between the source and target concept lattices. Being
+adjoint, one function preserves the joins and the other function
+preserves the meets of formal concepts. In terms of the truth concept
+lattices, they preserve the joins and meets of ontologies. The
+essential property of the category of concept lattices (Kent, 2001) is
+that it is categorically equivalent to <span
+ style="font-family: arial;">Classification</span>, the underlying
+category of classifications
+and infomorphisms, which is complete/cocomplete. Therefore, by a basic
+result from category theory, the category of concept lattices is also
+complete/cocomplete. This means that we can construct both limits and
+colimits. However, the colimits are of most interest. A build process
+that constructs colimits in the <span style="font-family: arial;">Concept
+Lattice</span> quasicategory can be described as follows.<br>
+</p>
+<ul>
+  <li><span style="font-weight: bold;">[Base (start) step]</span>
+Such
+a build process starts with the truth classifications (or their
+categorical equivalent, the truth concept lattices) and the
+interpretation infomorphisms between truth classifications associated
+with FOL interpretations (or their categorical equivalent, the
+interpretation concept morphisms). Other interesting infomorphisms
+between truth classifications may come from formalizing and
+axiomatizing the methodology that is used in various ontological merge
+operations.</li>
+  <li><span style="font-weight: bold;">[Recursion (iteration,
+induction) step]</span> More interesting concept lattices are
+iteratively built by taking colimits (sums and/or quotients) of
+previously built large classifications (or their categorical
+equivalent, large concept lattices) and previously built large
+infomorphisms (or their categorical equivalent, large concept
+morphisms). Sums may involve taking the disjoint union of theories,
+whereas quotients may involve identifying certain pairs of sentences of
+theories and restricting the models accordingly.</li>
+</ul>
+<p style="text-align: justify;">The notion of the <i>truth
+classification</i> of a FOL
+language is discussed as example 4.6 on page 71 of (Barwise and
+Seligman, 1997). Both this and the associated <i>truth concept lattice</i>,
+which is illustrated on slides 5 and 6 of the <a
+ href="http://reliant.teknowledge.com/IJCAI01/Kent.ppt">presentation</a>,
+use the terminology of the Model Theory Ontology and occur as examples
+within the Upper Classification Ontology. The truth classification of a
+FOL language <b><i>L</i></b> is the
+meta-classification, whose instances are <b><i>L</i></b>-structures
+(models), whose types are <b><i>L</i></b>-sentences, and whose
+classification relation is satisfaction. In the IFF approach, the
+concept lattice of the truth meta-classification functions is an
+appropriate base &#8220;lattice of ontological theories.&#8221; A formal concept in
+this lattice has an intent that is a closed theory (set of sentences)
+and an extent that is the collection of all models for that theory. The
+theory (intent) of the join or supremum of two concepts is the
+intersection of the theories (conceptual intents), and the theory
+(intent) of the meet or infimum of two concepts is the theory of the
+common models or the closure of the union of the theories (conceptual
+intents). It is important to note that this truth framework is a
+fibered structure. Which means that this is not a single lattice of
+theories but an infinite collection of such lattices, where each truth
+classification <i><span style="font-family: Arial;">truth-classification</span></i>(<b><i>L</i></b>)
+and each truth concept lattice <i><span style="font-family: Arial;">truth-concept-lattice</span></i>(<b><i>L</i></b>)
+is based upon (indexed by, parameterized by) a particular FOL
+language <b><i>L</i></b>. So a particular object level ontology &#8211; be
+it a domain ontology, a middle level ontology, or an upper level
+ontology &#8211; will be an element of a lattice based on its FOL
+language. Internally, the various ontologies (theories) are connected
+by generalization-specialization and sideways jumping. Externally, the
+lattices in the IFF framework can be connected by concept morphisms in
+numerous ways: by FOL interpretations, by colimit
+injections (for example, the FCA notions of apposition and
+subposition), or by concept morphisms defined by ontology merging, etc.
+The colimit operation can be viewed as an internalization operator,
+taking an (external) indexed collection of concept lattices and concept
+morphisms, and producing a single (internal) fused concept lattice.<br>
+</p>
+<p style="text-align: justify;">The notion of a FOL <i>interpretation</i>
+is discussed as example 4.11
+on page 74 of (Barwise and Seligman [op. cit.]). FOL interpretations
+are axiomatized in the Model Theory Ontology. A FOL
+interpretation <b><i>I</i></b> from one FOL language <b><i>L</i></b><sub><span
+ style="font-size: 10pt; font-family: Symbol;">1</span></sub>
+to a second FOL language <b><i>L</i></b><sub><span
+ style="font-size: 10pt; font-family: Symbol;">2</span></sub>
+maps the relations of <b><i>L</i></b><sub><span
+ style="font-size: 10pt; font-family: Symbol;">1</span></sub>
+to the formulas of <b><i>L</i></b><sub><span
+ style="font-size: 10pt; font-family: Symbol;">2</span></sub>
+preserving sorts. There are two relevant functorial passages: </p>
+<p style="margin-left: 40px;">FOL interpretation between two FOL
+languages</p>
+<p style="margin-left: 80px;">&#8658; infomorphism between the truth
+classifications of the languages</p>
+<p style="margin-left: 120px;">&#8658; concept morphism between the truth
+concept lattices of the languages</p>
+<p style="text-align: justify;">Each FOL interpretation <b><i>I</i></b>
+defines a truth
+infomorphism <i><span style="font-family: Arial;">truth-infomorphism</span></i><span
+ style="font-family: Symbol;">(</span><b><i>I</i></b><span
+ style="font-family: Symbol;"><span style="">)</span></span> from the
+associated truth classification&nbsp;<i><span
+ style="font-family: Arial;">truth-classification</span></i><span
+ style="font-family: Symbol;">(</span><b><i>L</i></b><sub><span
+ style="font-family: Symbol;"><span style="">1</span></span></sub><span
+ style="font-family: Symbol;"><span style="">)</span></span> to the
+associated truth classification <i><span style="font-family: Arial;">truth-classification</span></i><span
+ style="font-family: Symbol;">(</span><b><i>L</i></b><sub><span
+ style="font-family: Symbol;"><span style="">2</span></span></sub><span
+ style="font-family: Symbol;"><span style="">)</span></span> (Barwise
+and Seligman, 1997). This truth infomorphism defines a truth concept
+morphism<i><span style="font-family: Arial;"> truth-concept-morphism</span></i><span
+ style="font-family: Symbol;">(</span><b><i>I</i></b><span
+ style="font-family: Symbol;"><span style="">)</span></span> from the
+associated truth concept lattice&nbsp;<i><span
+ style="font-family: Arial;">truth-concept-lattice</span></i><span
+ style="font-family: Symbol;">(</span><b><i>L</i></b><sub><span
+ style="font-family: Symbol;"><span style="">1</span></span></sub><span
+ style="font-family: Symbol;"><span style="">)</span></span> to the
+associated truth concept lattice <i><span style="font-family: Arial;">truth-concept-lattice</span></i><span
+ style="font-family: Symbol;">(</span><b><i>L</i></b><sub><span
+ style="font-family: Symbol;"><span style="">2</span></span></sub><span
+ style="font-family: Symbol;"><span style="">)</span></span> (<a
+ href="http://suo.ieee.org/IFF/references.html">Kent 2001</a>). This
+functorial passage is axiomatized in the Upper Classification Ontology.</p>
+<br>
+</body>
+</html>

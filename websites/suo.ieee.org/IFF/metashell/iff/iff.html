@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>The IFF Namespace</title>
+<meta name="description" content="Description and axiomatization of the IFF namespace in the metashell." />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="author" content="Robert E. Kent" />
+<link rel="icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico" /> 
+<link rel="stylesheet" type="text/css" href="http://suo.ieee.org/IFF/css/normal-page.css" />
+</head>
+<body>
+<div id="document">
+<div id="left-column"></div>
+<div id="right-column">
+<div id="architecture">
+<img width="160" height="110" 
+     src="http://suo.ieee.org/IFF/images/metashell-iff-icon.gif" 
+     border="0"
+     alt="[The IFF Metashell IFF Namespace]" 
+     title="The IFF Metashell IFF Namespace"
+     style="width: 160; height: 110; vertical-align: bottom;" />
+</div>
+</div>
+<div id="header">
+<div id="home">
+<a href="http://suo.ieee.org/IFF/">
+<img width="75" height="75" 
+     src="http://suo.ieee.org/IFF/images/iff-icon-thumbnail.gif" 
+     border="0"
+     alt="[The Information Flow Framework]" 
+     title="The Information Flow Framework" />
+</a>
+</div>
+<div id="top">
+<h1>The IFF Namespace</h1>
+</div>
+<div id="navigation">
+<ul>
+<li><a href="#section1">Things</a></li>
+<li><a href="#section2">Sets</a></li>
+<li><a href="#section3">Functions</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<table class="namespace">
+<caption>Table 1: Terminology</caption>
+<tr><th class="topic"></th><th class="set">Set</th><th class="ftn">Function</th><th class="topic"></th></tr>
+<tr><td class="topic last"></td><td class="set last">thing</td><td class="function last"></td><td class="topic last"></td></tr>
+<tr><td class="topic"></td><td class="set">set</td><td class="function"></td><td class="topic"></td></tr>
+<tr><td class="topic"></td><td class="set">function</td><td class="function">source  target</td><td class="topic"></td></tr>
+<tr><td class="topic"></td><td class="namespace-prefix" colspan="2"><span style="font-family: Arial, Helvetica, Verdana, Geneva, sans-serif;">Technical and</span><br/><span style="font-family: Arial, Helvetica, Verdana, Geneva, sans-serif;">Recommended Prefix:</span>iff</td><td class="topic"></td></tr>
+</table>
+<dl class="outer-prefix">
+<dt>Namespace Prefix</dt> 
+<dd><span style="font-family: Arial, Helvetica, Verdana, Geneva, sans-serif;">Technical:&nbsp;</span>iff</dd>
+<dd><span style="font-family: Arial, Helvetica, Verdana, Geneva, sans-serif;">Recommended:&nbsp;</span>iff</dd>
+</dl>
+<p class="text next-paragraph">The IFF namespace is a tiny namespace at the very top of the IFF architecture. The terminology of the IFF namespace, which is used to specify the concepts in the IFF type namespace and hence the entire IFF, is listed in Table 1. There are only five primitive terms and two primitive syntactic constructs. There is a collection of all IFF <em>thing</em>s. Conceptually, all IFF things are morphisms; morphisms combine via an associative composition operation, and objects are special identity morphisms satisfying two unit laws. Since we are within a universe of Cantorian featureless sets (a graph at the <span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">iff</span> level, a finitely-complete category with subobjects at the <span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">type</span> level, and a well-pointed topos from the <span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">meta</span> level down), we use the terminology &lsquo;set&rsquo; and &lsquo;function&rsquo; for objects and morphisms, respectively. Practically, we take several shortcuts: (1) at this level we ignore composition and identity; (2) for our primitive syntactic constructs of set membership (declaration) and function application, we use ordinary set-theoretic elements rather than generalized category-theoretic elements, and (3) in order to distinguish the two syntactic constructs during parsing, we separate IFF things into the two disjoint collections of IFF <em>set</em>s and IFF <em>function</em>s, with <em>source</em> and <em>target</em> maps from functions to sets.</p>
+<p class="text next-paragraph">Like other parts of the IFF metashell, the IFF namespace is closely related to <a href="http://suo.ieee.org/IFF/grammar.html">the IFF grammar</a>, which specifies the correct form for IFF expressions. The IFF grammar can be used for type correctness in set membership and function application: an error should be signaled, (1) if a set symbol is being used as a function (in a term), or (2) if a function symbol is being used as a set (in a declaration) or a set component for functions. As is explained below, the IFF grammar can and should be used to check for well-formedness of set membership and function application.</p>
+<a name="section1"><h3>IFF Things</h3></a>
+<p class="text first-paragraph">Things exist. There is a collection of all IFF <em>thing</em>s. The symbol &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">thing</span>&rsquo; is used to declare an IFF thing. Any IFF thing is an IFF set or an IFF function. But no thing can be both set and function.</p>
+<!-- Discuss IFF objects, such as numbers, that are nor sets or functions. -->
+<pre>
+(forall ((thing ?x))
+    (and (or (set ?x) (function ?x))
+         (not (and (set ?x) (function ?x)))))
+</pre>
+<a name="section2"><h3>IFF Sets</h3></a>
+<p class="text first-paragraph">Sets exist. There is a collection <span style="font-weight: bold">set</span> of all IFF <em>set</em>s. The symbol &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">set</span>&rsquo; is used to declare an IFF set. Any IFF set is an IFF thing. Any element of an IFF set is an IFF thing.</p>
+<pre>
+(forall ((set ?X)) (thing ?X))
+(forall ((set ?X) (?X ?x)) (thing ?x))
+</pre>
+<p class="text">If the symbols &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">X</span>&rsquo; and &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">x</span>&rsquo; represent the two IFF things <span style="font-style: italic;">X</span> and <span style="font-style: italic;">x</span>, then the code</p>
+<pre>
+(set X)
+</pre>
+<p class="text">declares <span style="font-style: italic;">X</span> to be an IFF set, <span style="font-style: italic;">X</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">set</span>, and the code</p>
+<pre>
+(X x)
+</pre>
+<p class="text">which expresses the primitive syntactic construct of set membership (declaration) that &ldquo;<span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X</span>&rdquo;, is a well-formed statement of IFF. However, the following nullary, binary, ternary and higher arity expressions are ill-formed:</p>
+<pre>
+(X)
+(X x0 x1)
+(X x0 x1 x2)
+...
+</pre>
+<p class="text">Two sets are equal precisely when they have the same elements: for any two sets <span style="font-style: italic;">X</span>,&nbsp;<span style="font-style: italic;">Y</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">set</span>, <span style="font-style: italic;">X</span> = <span style="font-style: italic;">Y</span> iff &forall;<sub><span style="font-size: xx-small;"><span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X</span></span></sub>&nbsp;&nbsp;<span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;<span style="font-style: italic;">Y</span> and vice-versa.</p>
+<pre>
+(forall ((set ?X) (set ?Y))
+    (<=> (= ?X ?Y)
+         (and (forall ({?X ?x)) (?Y ?x))
+              (forall ({?Y ?y)) (?X ?y)))))
+</pre>
+<a name="section3"><h3>IFF Functions</h3></a>
+<p class="text first-paragraph">Functions exist. There is a collection <span style="font-weight: bold">ftn</span> of all IFF <em>function</em>s. The symbol &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">function</span>&rsquo; is used to declare an IFF function. Any IFF function is an IFF thing.</p>
+<pre>
+(forall ((function ?f)) (thing ?f))
+</pre>
+<p class="text">Each IFF function has a unique <em>source</em> IFF set and a unique <em>target</em> IFF set. The function notation <span style="font-style: italic;">f</span>&nbsp;:&nbsp;<span style="font-style: italic;">X</span>&nbsp;&rarr;&nbsp;<span style="font-style: italic;">Y</span> shows an IFF function <span style="font-style: italic;">f</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">ftn</span> with source IFF set <span style="font-style: italic;">X</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">set</span> and target IFF set <span style="font-style: italic;">Y</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">set</span>. The notation &part;<sub>0</sub>(<span style="font-style: italic;">f</span>) = <span style="font-style: italic;">X</span> and &part;<sub>1</sub>(<span style="font-style: italic;">f</span>) = <span style="font-style: italic;">Y</span> is also used to assert the source and target. Hence, the IFF namespace represents a graph of abstract sets and functions (Figure&nbsp;1)
+<div class="figure">
+<div id="image">
+<img width="109" height="79" 
+     src="http://suo.ieee.org/IFF/images/graph.gif" 
+     alt="[Graph]" 
+     title="Graph" 
+     style="width: 109px; height: 79px;"
+/>
+</div>
+<div id="caption">
+Figure 1: Graph
+</div>
+</div>
+with the collection <span style="font-weight: bold">ftn</span> of IFF functions as the edges of the graph, the collection <span style="font-weight: bold">set</span> of IFF sets as the nodes of the graph, and the source and target operations &part;<sub>0</sub>,&nbsp;&part;<sub>1</sub>&nbsp;:&nbsp;<span style="font-weight: bold">ftn</span>&nbsp;&rarr;&nbsp;<span style="font-weight: bold">set</span> mapping functions to sets. The symbols &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">source</span>&rsquo; and &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">target</span>&rsquo; are used to express application of the source and target (total, functional) operations.</p>
+<pre>
+(forall ((thing ?f) (thing ?X) (= ?X (source ?f)))
+    (and (function ?f) (set ?X)))
+
+(forall ((function ?f))
+    (and (exists ((set ?X))
+             (= (source ?f) ?X))
+         (forall ((set ?X0) (set ?X1) (= (source ?f) ?X0) (= (source ?f) ?X1))
+             (= ?X0 ?X1))))
+
+(forall ((thing ?f) (thing ?Y) (= ?Y (target ?f)))
+    (and (function ?f) (set ?Y)))
+
+(forall ((function ?f))
+    (and (exists ((set ?Y))
+             (= (target ?f) ?Y))
+         (forall ((set ?Y0) (set ?Y1) (= (target ?f) ?Y0) (= (target ?f) ?Y1))
+             (= ?Y0 ?Y1))))
+</pre>
+<p class="text">Any IFF function is required to be total (defined on all source elements) and functional (have only one value).</p>
+<dl class="theorem">
+<dt>Note</dt>
+<dd>This axiom uses quantification over variables in function position.</dd>
+</dl>
+<pre>
+(forall ((function ?f) ((source ?f) ?x))
+    (and (exists (((target ?f) ?y))
+             (= (?f ?x) ?y))
+         (forall (((target ?f) ?y0) ((target ?f) ?y1) (= (?f ?x) ?y0) (= (?f ?x) ?y1))
+             (= ?y0 ?y1))))
+</pre>
+<p class="text">If the symbols &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">f</span>&rsquo;, &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">X</span>&rsquo; and &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">Y</span>&rsquo; represent the three IFF things <em>f</em>, <em>X</em> and <em>Y</em>, then</p>
+<pre>
+(function f)
+(set X) (= (source f) X) 
+(set Y) (= (target f) Y)
+</pre>
+<p class="text">makes the declaration &ldquo;<span style="font-style: italic;">f</span>&nbsp;&isin;&nbsp; <span style="font-weight: bold">ftn</span> &rdquo; and &ldquo;<span style="font-style: italic;">f</span>&nbsp;:&nbsp;<span style="font-style: italic;">X</span>&nbsp;&rarr;&nbsp;<span style="font-style: italic;">Y</span>&rdquo; (or &ldquo;&part;<sub>0</sub>(<span style="font-style: italic;">f</span>)&nbsp;=&nbsp;<span style="font-style: italic;">X</span>&rdquo; and &ldquo;&part;<sub>1</sub>(<span style="font-style: italic;">f</span>)&nbsp;=&nbsp;<span style="font-style: italic;">Y</span>&rdquo;), and</p>
+<pre>
+(X x) (X y) 
+(= y (f x))
+</pre>
+<p class="text">expresses the equality statement that &ldquo;&nbsp;<span style="font-style: italic;">y</span> = <span style="font-style: italic;">f</span>(<span style="font-style: italic;">x</span>)&rdquo;. Hence, the primitive syntactic construct &lsquo;<span style="font-family: 'Courier New', Courier, 'Andale Mono', Terminal, monospace;">(f x)</span>&rsquo; of function application is a well-formed term, which follows the prescription: <em>all IFF functions are unary</em>. Hence, the following nullary, binary, ternary and higher arity expressions are iff-formed</p>
+<pre>
+(= y (f))
+(= y (f x0 x1))
+(= y (f x0 x1 x2))
+...
+</pre>
+<p class="text">The IFF tuple notation can be used to express <em>n</em>-ary functions</p>
+<pre>
+(= y (f [x0 x1 ...]))
+</pre>
+<p class="text">Two functions are equal precisely when they have the same source and target sets and the same image on all source elements: for any two functions <span style="font-style: italic;">f</span>,&nbsp;<span style="font-style: italic;">g</span>&nbsp;&isin;&nbsp;<span style="font-weight: bold">ftn</span>, <span style="font-style: italic;">f</span> = <span style="font-style: italic;">g</span> iff &part;<sub>0</sub>(<span style="font-style: italic;">f</span>) = &part;<sub>0</sub>(<span style="font-style: italic;">g</span>), &part;<sub>1</sub>(<span style="font-style: italic;">f</span>) = &part;<sub>1</sub>(<span style="font-style: italic;">g</span>), and &forall;<sub><span style="font-size: x-small;"><span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;&part;<sub>0</sub>(<span style="font-style: italic;">f</span>)</span></sub> &nbsp;<span style="font-style: italic;">f</span>(<span style="font-style: italic;">x</span>) = <span style="font-style: italic;">g</span>(<span style="font-style: italic;">x</span>).</p>
+<pre>
+(forall ((function ?f) (function ?g))
+    (<=> (= ?f ?g)
+         (and (= (source ?f) (source ?g)) 
+              (= (target ?f) (target ?g))
+              (forall ({(source ?f) x)) 
+                  (= (?f ?x) (?g ?x))))))
+</pre>
+<p class="text">&nbsp;</p>
+<p class="text unicode">Some IFF documents such as this one contain a lot of <a href="http://www.alanwood.net/unicode/mathematical_operators.html">unicode characters</a>, and so require a recent browser. But even some recent browsers fail to render it properly. Two browsers that do render these documents correctly are <a href="http://www.mozilla.com/firefox/">Firefox</a> and <a href="http://www.opera.com/">Opera</a>.</p>
+</div> <!-- end of content -->
+<div id="footer">Author: Robert E. Kent</div>
+</div> <!-- end of document -->
+<br/>
+</body>
+</html>
+

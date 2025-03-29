@@ -1,0 +1,400 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: Xbua.HryznaNVEQ.pbz -->
+<!--X-Date: Fri, 6 Apr 2001 20:57:55 &#45;0400 (EDT) -->
+<!--X-Message-Id: OF0E6B2697.D6C5A8C1&#45;ON88256A27.0003655B@hughes.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02086.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:John.Velman@HSC.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02142.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02105.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd53.html#02086">Thread Index</A></Td>
+<TD><A HREF="msg02087.html">Date Prev</A></TD>
+<TD><A HREF="msg02085.html">Date Next</A>
+</TD>
+<TD><A HREF="mail49.html#02086">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@tamu.edu">cmenzel@tamu.edu</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: RE: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: <A HREF="mailto:John.Velman@HSC.com">John.Velman@HSC.com</A></LI>
+<LI><em>Date</em>: Fri, 6 Apr 2001 17:41:27 -0700</LI>
+<LI><em>Cc</em>: IEEE Standard Upper Ontology List &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:John.Velman@HSC.com">John.Velman@HSC.com</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+
+Chris,
+
+I'm somewhat embarrassed at not replying sooner, but I seem to have a lot
+of distractions and couldn't get to this sooner.  Since part of the reply
+is something of an apology, I decided to reply even though a lot of time
+has passed.
+
+On about Mar 26 you wrote:
+&gt;
+&gt;Hi John, thanks for your comments and suggestions.
+&gt;
+&gt;John Velman wrote:
+&gt;&gt; 1. Reference numbers, and KIF global syntax.
+&gt;&gt;
+&gt;&gt; It appears that there is a global syntax convention that (discussion
+&gt;&gt; "xxx") preceeds the actual axiom, theorem, or definition that is being
+&gt;&gt; discussed.  Can we count on this?  (If this is docmumented, I missed
+&gt;&gt; it.)
+&gt;
+&gt;It isn't documented.
+&gt;
+&gt;&gt; If so, this might be a good place to start putting in reference
+&gt;&gt; identifiers of some kind.  Of course, putting reference identifiers on
+&gt;&gt; material that is in an early stage of development has a lot of
+&gt;&gt; problems, but it certainly would facilitate discussion.
+&gt;
+&gt;I completely agree.  In fact, some sort of reference scheme is essential
+&gt;if documentation statements are to be included as object language
+&gt;statements in KIF, because it is currently just an artifact of the
+&gt;"source code" that documentation statements are placed immediately prior
+&gt;to the axioms they document.  Logically, there is no order to things in
+&gt;an ontology -- it's just a set of sentences, so there needs to be a more
+&gt;robust mechanism for attaching documentation to axioms, theorems, and
+&gt;definitions.  Moreover, a reference scheme shouldn't imply any
+&gt;particular sequential order for the axioms, as we would have to
+&gt;renumber every time we inserted an axiom somewhere.  Hence, I'm inclined
+&gt;(following Pat Hayes) toward developing some sort of "wrapper" for
+&gt;ontology axioms (definitions, theorems) that encloses both the axiom and
+&gt;its documentation and which avoids numerical references (or at least,
+&gt;avoids using them in any way that implies any sequential ordering of the
+&gt;elements of the ontology), e.g.:
+&gt;
+&gt;{
+&gt;REFNAME: sequence-extensionality
+&gt;STATEMENT-TYPE: axiom
+&gt;DOCUMENTATION: "Sequences are extensional, i.e., sequences with the same
+&gt;elements in the same order are identical."
+&gt;CONTENT:
+&gt;
+&gt;(forall (?seq1 ?seq2 (sequence ?seq1) (sequence ?seq2))
+&gt;        (=&gt; (forall (?n ?x)
+&gt;                    (&lt;=&gt; (?seq1 ?n ?x) (?seq2 ?n ?x)))
+&gt;            (= ?seq1 ?seq2)))
+&gt;}
+&gt;
+&gt;Or something like that.
+&gt;
+
+I like this.  It should be easy to parse, and put's all the information in
+a nice package.  I agree with John Sowa that adding a list of the terms
+used in the KIF statement is neither necessary or desirable.  On the other
+hand, the suggestion that a reference to modules used or terms imported
+from other modules (in a modular ontology, of course) would be useful (as I
+think Mathew West advised).
+
+
+&gt;&gt; 3. Some confusion results from the order in which things are
+&gt;&gt; presented, and lack of clear statements as to what is primative.
+&gt;&gt; Some things that are stated as axioms or theorems seem to either be or
+&gt;&gt; need definitions.
+&gt;
+&gt;I used "definition" when a term was axiomatized with a biconditional,
+&gt;and hence theoretically dispensable, but was not consistent on this
+&gt;point, as I was more concerned with the content than the documentation.
+&gt;(As you note, I didn't call the axiom for "unary" a definition, for
+&gt;instance.)  However, theoretically, definitions are just a type of
+&gt;axiom, so marking something as a definition rather than an axiom is
+&gt;mostly just for heuristic value.  Again, the "documentation" mechanism
+&gt;needs to be pretty thoroughly revamped in any case.
+&gt;
+
+For my taste, the heuristic is of great value.  I also think it would be of
+great value to document, somehow, the terms that don't ever appear alone
+"on one side" of a biconditional (primatives).
+
+As with the "definitions" this information could be extracted by an ontology
+analyser.  Nevertheless, I think this documentation, together with a brief
+informal text explaining the intended meaning of the term would be valuable in
+identifying the intentions of the ontology writer, and in understanding how
+to build mappings between the ontology and a domain of application.
+
+&gt;&gt; The theorem on unions of classes struck me as lacking a definition of
+&gt;&gt; union -- but I found it later on.   I'm still looking for the
+&gt;&gt; definition of 'empty.'
+&gt;
+&gt;I called it an axiom, but, to be consistent, should have called it a
+&gt;definition.  I also realize that I've been using "null" to mean both the
+&gt;null class and to mean "empty" in a couple of emails with Robert
+&gt;Meersman, which has no doubt left him and others confused.  Here's the
+&gt;axiom ("definition") for "empty":
+&gt;
+&gt;(forall (?rel (relation ?rel))
+&gt;        (&lt;=&gt; (empty ?rel)
+&gt;             (not (exists (@args) (?rel @args)))))
+&gt;
+
+OK at first glance, but I'm not sure I really understand this.  @args
+represents any arbitrary (possibly empty) list (row?) of variables or constants,
+as I understand (or misunderstand) it.  Now suppose I introduce a term
+"foo"   and the axioms
+(foo),
+(relation foo), and
+(forall (?x @args) (not (foo ?x @args))).
+
+then the empty list @args satisfies
+(foo @args).  So foo is not empty.  I'm not saying this is wrong, by the
+way, I'm just looking at bounding cases to see what happens.
+On the other hand, this seems strange, so maybe I haven't got it right yet.
+
+
+&gt;&gt;
+&gt;&gt; 4. There is a level of abstraction (or something!) here that I had
+&gt;&gt; trouble with---not wrong, just confusing to the unwary.  Like Matthew,
+&gt;&gt; I was stopped for a good long time over (class relation).
+&gt;
+&gt;It is not really a matter of abstraction.  I think that what is probably
+&gt;unfamiliar to some folks here is that you can talk about anything,
+&gt;including classes, in KIF.  In particular:  relations are classes, hence
+&gt;(instance-of relation class), which, given than classes are properties,
+&gt;is equivalent to (class relation).
+&gt;
+
+I hope I'm starting to catch on.
+
+&gt;&gt; 5. Well, to help sort out whether or not I'm on the right track, here
+&gt;&gt; is a paraphrase of some of the content.  Any corrections or objections
+&gt;&gt; will be appreciated.
+&gt;&gt;
+&gt;&gt; I'll try to do some KIF, but ...
+&gt;&gt;
+&gt;&gt; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+&gt;&gt; ;;  Primatives
+&gt;&gt; ;;
+&gt;&gt; ;;  The language includes (in addition to the bare KIF syntax)
+&gt;&gt; ;;  logical connectives, and the following primatives:
+&gt;&gt; ;;
+&gt;&gt; ;;  relation
+&gt;&gt; ;;
+&gt;&gt; ;;  instance-of
+&gt;&gt; ;;
+&gt;&gt; ;;  particular
+&gt;&gt; ;;
+&gt;&gt; ;;  -- I've thrown in the term 'particular' since particulars seem to be
+&gt;&gt; ;;  lurking
+&gt;&gt; ;;  in the background.  I'm not sure this is essential at this stage, but
+&gt;&gt; ;;  I'm more comfortable including them.
+&gt;&gt; ;;
+&gt;&gt; ;;  Well formed expressions --
+&gt;
+&gt;This is made explicit in a BNF.  Since the current KIF BNF is in flux at
+&gt;the moment as it is being worked on, I didn't include one.
+&gt;
+
+I'm looking forward to it.
+
+&gt;&gt; ;; We need to know that if (relation ?rel) then (?rel @args) is well
+&gt;&gt; ;; formed if and only if @args has one or more entries.
+&gt;
+&gt;"@args" is just a variable.  It doesn't have "entries".  (TERM @FOO) is
+&gt;always well formed, for any term TERM and any row variable @FOO.
+&gt;
+&gt;&gt; (documentation "Axiom: only relations can be truly predicated of other
+&gt;&gt; things")
+&gt;&gt; (forall (?r @args)
+&gt;&gt;      (=&gt; (?r @args)
+&gt;&gt;          (relation ?r)))
+&gt;
+&gt;You saw this in the ontology, right?
+&gt;
+
+Yes, and this is where the apology comes in.  I meant to say I'd take it
+from the ontology, and was simply showing how I it would follow (in my
+supposedly preferred order) the insertions I had made.
+
+&gt;&gt; (documentation "AXIOM:  instance-of is an instance of relation")
+&gt;&gt; (instance-of instance-of relation)
+&gt;
+&gt;This is already theorem of the ontology.  We can prove, e.g.,
+&gt;(instance-of null top).  Hence, by the preceding axiom, we have
+&gt;(relation instance-of), and by the axiom for instance-of we have
+&gt;(instance-of instance-of relation).
+&gt;
+
+OK.
+&gt;&gt; (documentation "AXIOM:  particular is an instance of relation")
+&gt;&gt; (instance-of particular relation)
+&gt;
+&gt;Will be a theorem if you can derive an instance of (particular FOO).
+&gt;
+
+I agree.
+&gt;&gt; (documentation "AXIOM:  relation is an instance of  relation")
+&gt;&gt; (instance-of relation relation)
+&gt;
+&gt;This is a theorem.
+
+I agree.  (I think!)
+&gt;
+&gt;&gt; (documentation "AXIOM:  Everything is either a relation or a particular")
+&gt;&gt;
+&gt;&gt; (forall (?x) (or ((relation ?x) (particular ?x))
+&gt;&gt;
+&gt;&gt; (documentation "AXIOM:  Nothing is both a relation and a particular")
+&gt;&gt;
+&gt;&gt; (forall (?x) (not
+&gt;&gt;                (and (relation ?x)  (particular ?x))))
+&gt;
+&gt;Sounds reasonable.
+&gt;
+&gt;&gt; ;;;;;;;;;;;;;;;;;;;
+&gt;&gt; ;;  It is unclear to me why unary and binary were given as AXIOMS rather
+&gt;&gt; ;;  than as DEFINITIONS.   It seems to me they should be defined.
+&gt;&gt; ;;  Alternatively, one makes these primative terms, and then gives
+&gt;AXIOMS.
+&gt;&gt; ;;  BUt why not just define them?
+&gt;
+&gt;Again, a definition is an axiom of a certain sort.  But you are right
+&gt;that, had I been consistent, I would have marked these as definitions.
+&gt;
+&gt;&gt; ;;  In either case, at this point in the development we can
+&gt;&gt; ;;  go from here to a definiton (or axiomatization?) of arity of
+&gt;relations,
+&gt;
+&gt;That's already been done; not sure what you are suggesting.
+&gt;
+
+More apology.  I thought I was using a collective "we", (and thus taking
+partial credit for work already done :-)  )  Again, I only meant to suggest a
+different order of presentation.
+
+&gt;&gt; ;;  and the other definitions and theorems in the section on BASIC
+&gt;RELATION
+&gt;&gt; ;;  THEORY  (except, of course, those that refer to classes).
+&gt;&gt; ;;
+&gt;&gt; ;;   I think the following are axioms:
+&gt;
+&gt;&gt; (documentation "AXIOM  relation is a unary relation")
+&gt;&gt; (unary relation)
+&gt;
+&gt;This already follows from (class relation) and the axiom that sez that
+&gt;classes are unary.
+&gt;
+&gt;&gt; (documentation "AXIOM  particular is a unary relation")
+&gt;&gt; (unary particular)
+&gt;
+&gt;Will also follow from (class particular).
+&gt;
+
+yep.
+&gt;&gt; (documentation "AXIOM instance-of is a binary relation")
+&gt;
+&gt;This already follows from the axiom (signature instance-of top class).
+&gt;
+&gt;&gt; Now the material on classes is largely covered by the material on
+&gt;&gt; relations.
+&gt;
+&gt;I believe it already was.
+
+Blush.  See above apology.
+&gt;
+&gt;&gt; I hope I'm on more or less the right track.
+&gt;
+&gt;Looks good to me.
+&gt;
+&gt;&gt; I heartily recommend trying to write some KIF as an aid to
+&gt;&gt; learning the language.
+&gt;
+&gt;Good advice!
+&gt;
+&gt;-chris
+&gt;
+&gt;--
+&gt;
+&gt;Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+&gt;Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu
+&gt;College Station, TX  77843-4237  # vox:             (979) 845-8764
+&gt;
+
+John Velman
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02087.html">RE: SUO: Excessive volume of effort for far too few results</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02085.html">RE: SUO: SGML + RE: Excessive volume of effort for far too few results</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02142.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02105.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail49.html#02086"><strong>Date</strong></a></li>
+<li><a href="thrd53.html#02086"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

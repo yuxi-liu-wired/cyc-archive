@@ -1,0 +1,303 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: SUO KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: Quevf [ramry <pzramryNgnzh.rqh> -->
+<!--X-Date: Mon, 26 Mar 2001 11:02:14 &#45;0500 (EST) -->
+<!--X-Message-Id: Pine.LNX.4.33.0103260719500.27510&#45;100000@philebus.tamu.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E427077C48C2@LONSC0S0038 -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01869.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: SUO KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:cmenzel@tamu.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01857.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01872.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd51.html#01869">Thread Index</A></Td>
+<TD><A HREF="msg01870.html">Date Prev</A></TD>
+<TD><A HREF="msg01868.html">Date Next</A>
+</TD>
+<TD><A HREF="mail53.html#01869">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: SUO KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;<A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: SUO KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@tamu.edu">cmenzel@tamu.edu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 26 Mar 2001 09:35:05 -0600 (CST)</LI>
+<LI><em>cc</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg01857.html">DE057CA9F46ED2118C4900805F85E427077C48C2@LONSC0S0038</A>&gt;</LI>
+<LI><em>Reply-To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@tamu.edu">cmenzel@tamu.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt; Some more questions and comments.
+
+Appreciated, as always.  Thanks for the careful look.
+
+&gt; 1. Under class, relation is defined as a class.
+
+Yes, it is the class of relations.
+
+&gt; Later under relation you define class as a unary relation.
+
+Right, unlike, say, the OWNERSHIP relation, CLASS is not a relation that
+holds among several things, but is true only of single things (namely,
+classes).
+
+&gt; This seems to be inconsistent.
+
+It is quite consistent.  You seem to be confusing the claim that
+RELATION itself is a class with the (false) claim that relations (i.e.,
+the instances of the class RELATION) are classes.
+
+&gt; 2. &lt; applies only to integers. Why doesn't it apply to reals or (at least)
+&gt; rationals?
+
+Reals and rationals are not axiomatized in the ontology, so, as in the
+ontology as it stands, &lt; only holds between integers.  The axiom for &lt;
+would have to be modified if you introduced further number systems and
+you wanted &lt; to be polymorphic.
+
+&gt; 3. &lt; is not defined (not that I have any idea how to do it). By which
+&gt; I mean what being less than is.
+
+What being less than *is* is exactly what the axioms tell us it is.
+For primitive terms like "&lt;", this is what you get instead of a
+definition.  (In a true definition, the defined term is eliminable;
+anything expressed in terms of the defined term can be expressed without
+it, albeit more verbosely, in terms of the primitives of the language.)
+
+&gt; 4. I can't get the axiom for addition (or subtraction). Here is my attempt
+&gt; at an English translation - where have I gone wrong?
+&gt;
+&gt; For all integers i and j
+&gt;   i+0=0 and  &lt;-- I think this should be i+0=i
+
+Whoops, yes, serious typo; thanks for catching that.
+
+&gt;   i+(j+1)= i+j+1 and
+&gt;   i+(j-1)= i+j+1
+
+Don't confuse the sum of some number i and the number 1 with the
+application of the (primitive) successor operator "+1".  The idea here
+is to axiomatize addition and subtraction in terms of addition in terms
+of the two successor "+1" and predecessor "-1".  (Maybe it would be
+better to use, e.g., the terms "scssr" and "prdssr" or the like here for
+these operators to avoid confusion.)  There are only three cases to
+consider:
+
+1. The case where we add 0 to a number i;
+2. The case where we add the successor (+1 j) of a number j to i; and
+3. The case where we add the predecesor (-1 j) of a number j to i.
+
+The base clause (= (+ i 0) i) gives us the first case.  The clause
+
+                (= (+ ?i (+1 ?j)) (+1 (+ ?i ?j)))
+
+gives us case 2; it says that the sum of i and the successor of a number
+j is the successor of the sum and i and j.  So if we know the sum of i
+and j, we can calculate the sum of i and the successor of j.  Similarly,
+case 3 is given by the last clause:
+
+                 (= (+ ?i (-1 ?j)) (-1 (+ ?i ?j))))))
+
+which says that the sum of i and the predecessor of a number j is the
+predecessor of the sum of i and j.  Eventually, due to the recursive
+nature of the axioms, you will be able to unpack any sum in terms of
+a finite number of successive operations of successor and predecessor
+(and hence,, in virtue of the Cancellation Axiom, successive operations
+of *either* successor or predecessor only).  Try, for example, to show
+that (= (+ 2 3) 5) (using the definitions of "2", "3", and "5" given).
+
+&gt; phew so all those years using reverse polish notation on HP programmable
+&gt; calculators did have a point :-)
+
+And you thought that was wasted effort!
+
+&gt; 6. Sequences
+&gt;
+&gt; a) Here you find a need to introduce extensionality for some classes like
+&gt; sequence.
+
+Sequences aren't classes, but yes, they are axiomatized to be extensional.
+(They didn't *have* to be, but it is definitely simpler to make this
+assumption.)
+
+&gt; Robert has suggested they should also be necessary for Top, or else
+&gt; there is no reason for Top to be unique.
+
+I think we've cleared that one up.
+
+&gt; It is starting to look to me as if it would be better to introduce a
+&gt; "property" like class that can be non-extensional, and a "set" like class
+&gt; that is extensional before we get to this point.
+
+Quite possibly.
+
+&gt; b) on the one hand you say that a sequence holds only for positive
+&gt; integers, and on the other hand you say that any object can be an
+&gt; element of a sequence. Which is it?
+
+You are not understanding.  A sequence is a (partial) *function* (i.e.,
+a binary relation that is functional) that *applies* to positive
+integers and which can have *any object* as value.  The elements of a
+sequence are its values on the integers on which it is defined.  We say
+that a sequence s is defined on n iff, for some object x, (s n x), i.e.,
+n bears s to x.
+
+&gt; c)
+&gt; (forall (?s)
+&gt;         (=&gt; (sequence ?s)
+&gt;             (and (relation ?s)
+&gt;                  (binary ?s)
+&gt;                  (functional ?s)
+&gt;                  (exists (?n (posint n))  &lt;-- missing ?
+
+Yes, thanks.
+
+&gt;                          (and (not (exists (?x) (?s ?n ?x)))
+&gt;                               (forall (?m (posint ?m) (&lt; ?m ?n))
+&gt;                                       (exists (?x)
+&gt;                                               (?s ?m ?x))))))))
+&gt;
+&gt; My translation is:
+&gt;
+&gt; For all s:
+&gt;   If s is a sequence then:
+&gt;     s is a relation and
+&gt;     s is binary and
+&gt;     s is functional and
+&gt;     for some positive integer n
+&gt;       there is no x such that s(n,x) &lt;-- doesn't seem to have
+&gt;                                          a defined meaning
+
+It most certainly does.  As discussed at some length, you can use a term
+both as a predicate and as a function symbol; the context serves to
+disambiguate what is meant.  Sequences are introduced as (functional)
+binary relations.  Hence, s(n,x) means that the sequence s holds between
+the number n and the object x.  Alternatively, one can write s(n)=x,
+though, for reasons explained in the introductory material, one should
+do so only when one knows that s is defined on n.
+
+&gt;       and
+&gt;       for all positive integers m where m&lt;n
+&gt;         there is some x such that s(m,x) &lt;-- meaning?
+
+As above.  Here's a terse English translation of the axiom:  if s is a
+sequence, then it is a binary, functional relation that is defined on
+some initial segment of the positive integers.  Here's a more verbose
+version:  if s is a sequence, then it is a binary, functional relation
+such that, for some positive integer n, s is defined on exactly the
+positive integers less than n (i.e., for each such integer m, there is
+an x such that s(m,x)).
+
+&gt; c) you have used the term length to mean just the length of a
+&gt; sequence. This means it cannot be used for e.g. length as a basic
+&gt; dimension.
+
+So let's use "seqlength" instead.  Let us not quibble.
+
+&gt; Aren't what you are defining here as sequences really tuples?
+
+Yes, it is a precise rendering of the notion of an n-tuple.  It is not
+the only possible rendering, it is simply a good -- and common -- one.
+
+Regards,
+
+-chris
+
+--
+
+Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu
+College Station, TX  77843-4237  # vox:             (979) 845-8764
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01872" href="msg01872.html">Re: SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@tamu.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01857" href="msg01857.html">SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01870.html">SUO: RE: Re: Violation of Process</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01868.html">SUO: 'n'</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01857.html">SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01872.html">Re: SUO: SUO KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail53.html#01869"><strong>Date</strong></a></li>
+<li><a href="thrd51.html#01869"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

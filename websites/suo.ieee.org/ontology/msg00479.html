@@ -1,0 +1,218 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: Classification Ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Mon, 22 Jan 2001 18:22:59 &#45;0500 (EST) -->
+<!--X-Message-Id: 004801c084c8$4659f4c0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200101190124.RAA09990@puffin.rt.cs.boeing.com -->
+<!--X-Reference: 000e01c08275$4b4e96c0$7b76e4ce@Dell -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00479.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: Classification Ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00476.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00517.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd80.html#00479">Thread Index</A></Td>
+<TD><A HREF="msg00480.html">Date Prev</A></TD>
+<TD><A HREF="msg00478.html">Date Next</A>
+</TD>
+<TD><A HREF="mail81.html#00479">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: Classification Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: Classification Ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 22 Jan 2001 15:08:47 -0800</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00448.html">200101190124.RAA09990@puffin.rt.cs.boeing.com</A>&gt; &lt;<A HREF="msg00469.html">000e01c08275$4b4e96c0$7b76e4ce@Dell</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+All,
+
+A KIF infomorphism also has an alternate functional representation that is
+often more useful. Here the instance function and the type function are
+written as KIF functions.
+
+(UnaryRelation Infomorphism)
+
+The 'src' and 'tgt' functions are typed as before.
+
+The instance function is typed as follows.
+
+(forall (?f ?g)
+    (=&gt; (= (instFn ?f) ?g)
+        (and (Infomorphism ?f) (UnaryFunction ?g))))
+
+(forall (?f ?i2 ?i1)
+    (=&gt; (= ((instFn ?f) ?i2) ?i1)
+        (and ((inst (tgt ?f)) ?i2) ((inst (src ?f)) ?i1))))
+
+The type function is typed as follows.
+
+(forall (?f ?g)
+    (=&gt; (= (typFn ?f) ?g)
+        (and (Infomorphism ?f) (UnaryFunction ?g))))
+
+(forall (?f ?i2 ?i1)
+    (=&gt; (= ((typFn ?f) ?t1) ?t2)
+        (and ((typ (src ?f)) ?t1) ((typ (tgt ?f)) ?t2))))
+__________
+
+KIF definitions and declarations are changed accordingly.
+
+For example, the canonical extent infomorphism '(eta ?c)' is defined as
+follows.
+
+(UnaryFunction eta)
+
+(forall (?c ?f)
+    (=&gt; (= (eta ?c) ?f)
+        (and (Classification ?c) (Infomorphism ?f))))
+
+The source and target classifications are specified as before.
+
+The instance function is the identity function on instances.
+
+(forall (?c ?i)
+    (= ((instFn (eta ?c)) ?i)
+       ?i))
+
+The type function is the extent function on types.
+
+(forall (?c ?t)
+    (= ((typFn (eta ?c)) ?t)
+       (ext ?c ?t)))
+
+Robert E. Kent
+rekent@ontologos.org
+
+----- Original Message -----
+From: "Robert E. Kent" &lt;rekent@ontologos.org&gt;
+To: "Michael Uschold" &lt;mfu@redwood.rt.cs.boeing.com&gt;
+Cc: "SUO" &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Friday, January 19, 2001 4:09 PM
+Subject: Re: SUO: Classification Ontology
+
+
+&gt; Hi Mike,
+&gt;
+&gt; I agree. I have ongoing work on the Information Flow Framework (IFF). What
+I
+&gt; sent was an extraction from the appendix of an unpublished paper of mine
+on
+&gt; a "Classification Metatheory." I will try to send a more completely
+&gt; annotated document later. As a stopgap let me send the basic part of this
+&gt; appendix -- the part without the colimit representation. Although this
+also
+&gt; is a bit terse, perhaps it will suffice in the meantime.
+&gt;
+&gt; Robert E. Kent
+&gt; rekent@ontologos.org
+&gt;
+&gt;
+&gt; ----- Original Message -----
+&gt; From: "Michael Uschold" &lt;mfu@redwood.rt.cs.boeing.com&gt;
+&gt; To: &lt;rekent@ontologos.org&gt;; &lt;standard-upper-ontology@ieee.org&gt;
+&gt; Sent: Thursday, January 18, 2001 5:24 PM
+&gt; Subject: Re: SUO: Classification Ontology
+&gt;
+&gt;
+&gt; &gt;
+&gt; &gt; Robert,
+&gt; &gt;
+&gt; &gt; It would be helpful to augment Kif-ese with English documentation
+&gt; &gt; indicating what is going on. In my opinion, this is more important
+&gt; &gt; than the KIF - in communicating.
+&gt; &gt;
+&gt; &gt; Mike
+&gt;
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00448" href="msg00448.html">Re: SUO: Classification Ontology</a></strong>
+<ul><li><em>From:</em> mfu@redwood.rt.cs.boeing.com (Michael Uschold)</li></ul></li>
+<li><strong><a name="00469" href="msg00469.html">Re: SUO: Classification Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00480.html">SUO: Re: Bootstrap Ontology</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00478.html">Re: SUO: Establishing voting rights</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00476.html">Re: SUO: Classification Ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00517.html">Re: SUO: Classification Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail81.html#00479"><strong>Date</strong></a></li>
+<li><a href="thrd80.html#00479"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

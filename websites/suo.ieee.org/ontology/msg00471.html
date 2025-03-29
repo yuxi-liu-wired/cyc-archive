@@ -1,0 +1,215 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Bootstrap Ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Sat, 20 Jan 2001 14:01:35 &#45;0500 (EST) -->
+<!--X-Message-Id: 001b01c08310$8753b7e0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00471.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Bootstrap Ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00472.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00474.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd79.html#00471">Thread Index</A></Td>
+<TD><A HREF="msg00472.html">Date Prev</A></TD>
+<TD><A HREF="msg00470.html">Date Next</A>
+</TD>
+<TD><A HREF="mail81.html#00471">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Bootstrap Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Bootstrap Ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 20 Jan 2001 10:40:57 -0800</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+All,
+
+In the document [Appendix to Classification Metatheory] attached to the
+message [<A  HREF="http://grouper.ieee.org/groups/ltsc/logs/ontology/msg00469.html">http://grouper.ieee.org/groups/ltsc/logs/ontology/msg00469.html</A>]
+there is an type error in the socalled core axiom, which asserts "Relative
+instantiation-predication represented by '|=' is compatible with the
+absolute KIF instantiation-predication.", and is formalized by the KIF
+sentence
+
+(forall (?c ?i ?t)
+    (and (=&gt; (|= ?c ?i ?t) (?t ?i))
+         (=&gt; (not (|= ?c ?i ?t)) (not (?t ?i)))))
+
+In the relative instantiation-predication notation
+
+(|= ?c ?i ?t)
+
+the variables '?c', '?i' and '?t' have the types 'Classification',
+'Instance' and 'Type', respectively.
+
+However, in the universal (absolute), and basic KIF,
+instantiation-predication notation
+
+(?t ?i)
+
+the variables '?t' and '?i' should have the types 'UnaryRelation' and
+'Object', respectively, where the latter denotes the universal type of all
+KIF objects.
+__________
+
+So two things need to be done here.
+
+First, we need to define a *Bootstrap Ontology*, which will mesh the needs
+of the Classification Ontology (and other Information Flow metatheories in
+the future) with KIF. Note that this Bootstrap Ontology is NOT the
+Structural Ontology, which is being replaced and augmented by a collection
+of metatheories that allow one to build ontologies in a principled fashion
+from basic ontologies with constructor operations.
+
+Second, we need to correct the core axiom error mentioned above.
+__________
+
+The Bootstrap Ontology needs (at least for now) the following categories of
+things:
+
+Object -- the universal type
+Relation -- the sum of all relation types
+UnaryRelation
+BinaryRelation
+TernaryRelation
+Function -- the sum of all function types
+UnaryFunction
+BinaryFunction
+
+I will assume the following partitions:
+
+Object = Relation + Function + ...
+Relation = UnaryRelation + BinaryRelation + TernaryRelation + ...
+Function = UnaryFunction + BinaryFunction + ...
+__________
+
+The core axiom error is fixed as follows.
+
+Define a binary KIF function 'int' that denotes the intent of an instance
+'i' in a classification 'c' defined by
+    int(i) = {t in typ(c) | i |= t}.
+
+(BinaryFunction int)
+(forall (?c ?i ?p)
+    (=&gt; (= (int ?c ?i) ?p)
+        (and (Classification ?c) (inst ?c ?i) (UnaryRelation ?p))))
+(forall (?c ?i ?t)
+    (=&gt; (and (Classification ?c) (Instance ?i) (Type ?t))
+        (&lt;=&gt; (int(?c ?i) ?t) (|= ?c ?i ?t))))
+
+Dually, define a binary KIF function 'ext' that denotes the extent of a type
+'t' in a classification 'c' defined by
+    ext(t) = {i in inst(c) | i |= t}.
+
+(BinaryFunction ext) ;; we need to change to name of the extensibility
+predicate
+(forall (?c ?i ?p)
+    (=&gt; (= (ext ?c ?t) ?p)
+        (and (Classification ?c) (typ ?c ?t) (UnaryRelation ?p))))
+(forall (?c ?i ?t)
+    (=&gt; (and (Classification ?c) (Instance ?i) (Type ?t))
+        (&lt;=&gt; (ext(?c ?t) ?i) (|= ?c ?i ?t))))
+
+Finally, using the KIF predicate 'ext', the core axiom now becomes the KIF
+sentence
+
+(forall (?c ?i ?t)
+    (and (=&gt; (|= ?c ?i ?t) (ext(?c ?t) ?i))
+         (=&gt; (not (|= ?c ?i ?t)) (not (ext(?c ?t) ?i)))))
+
+But this is redundant by the third axiom above for the KIF predicate 'ext'.
+So toss it out.
+
+Robert E. Kent
+rekent@ontologos.org
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00480" href="msg00480.html">SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="00474" href="msg00474.html">SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00472.html">ONT SUBSCRIBER: Change of address</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00470.html">Re: SUO: More details on stds development (base documents, working drafts, etc.)</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00472.html">ONT SUBSCRIBER: Change of address</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00474.html">SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail81.html#00471"><strong>Date</strong></a></li>
+<li><a href="thrd79.html#00471"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

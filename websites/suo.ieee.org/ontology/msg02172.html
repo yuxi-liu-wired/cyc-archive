@@ -1,0 +1,166 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: Tenapvf [pQnor <stzNsyn.shwvgfh.pbz> -->
+<!--X-Date: Mon, 16 Apr 2001 13:00:54 &#45;0400 (EDT) -->
+<!--X-Message-Id: 200104161644.JAA16939@ns.net.fla.fujitsu.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3ad7bce0.5e7.0@bestweb.net -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02172.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:fgm@fla.fujitsu.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02162.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02181.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd54.html#02172">Thread Index</A></Td>
+<TD><A HREF="msg02173.html">Date Prev</A></TD>
+<TD><A HREF="msg02171.html">Date Next</A>
+</TD>
+<TD><A HREF="mail47.html#02172">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: Francis McCabe &lt;<A HREF="mailto:fgm@fla.fujitsu.com">fgm@fla.fujitsu.com</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 16 Apr 2001 09:42:24 -0700</LI>
+<LI><em>Cc</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;, &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;,       <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg02162.html">3ad7bce0.5e7.0@bestweb.net</A>&gt;</LI>
+<LI><em>Reply-To</em>: Francis McCabe &lt;<A HREF="mailto:fgm@fla.fujitsu.com">fgm@fla.fujitsu.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+I got onto this particular thread a little late. So please forgive me if 
+I am stating the obvious.
+
+1. My understanding is that the proposal is to have an import `statement'
+(import url formula)
+
+2. To allow references within the formula to other ontologies O#ref
+
+Some comments:
+
+1. Programming languages have dealt with this problem with varying 
+degrees of success. There is actually not much that is specific to 
+ontologies per se here
+
+2. An expression such as O#ref is quite hard to give a semantics for. 
+Consider the reasonable version: fun(Arg)#ref. Yes, this will come up in 
+practice. Does the O part have an independent interpretation? (op.ed. It 
+should if you want to make life easier for yourself)
+
+3. A simple story looks like this:
+
+A micro theory (sic Cyc) is a tuple of predicates and other items.
+An item may be named: foo:item
+
+(Yes, this does smack of higher order; but at least its explicit)
+
+Exp#foo refers to the item named foo in the tuple of named items in Exp. 
+More generally, you could allow foo to be an expression: foo is 
+evaluated in the context of Exp (much like a letrec)
+
+import(url) refers to the contents of the expression located in the url.
+
+So, a full import of an ontology looks like:
+
+import("htttp:.....")#formula
+
+where the interpretation of this is analogous to the LET
+
+LET x1:pred1
+        x2:pred2
+       ...
+      IN formula
+
+which should be familiar.
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02181" href="msg02181.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02162" href="msg02162.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;John F. Sowa&quot; &lt;sowa@bestweb.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02173.html">Re: SUO: Excessive volume of effort for far too few results</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02171.html">SUO: Computation And Logic As Semiosis (CALAS)</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02162.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02181.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail47.html#02172"><strong>Date</strong></a></li>
+<li><a href="thrd54.html#02172"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: Re: Bootstrap Ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Sun, 28 Jan 2001 15:55:21 &#45;0500 (EST) -->
+<!--X-Message-Id: 005001c08969$d198d740$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 001b01c08310$8753b7e0$7b76e4ce@Dell -->
+<!--X-Reference: 001401c084d8$3b6a52c0$7b76e4ce@Dell -->
+<!--X-Reference: v04210103b694e9008c8c@[204.214.21.210] -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00522.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: Re: Bootstrap Ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00480.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00542.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd79.html#00522">Thread Index</A></Td>
+<TD><A HREF="msg00523.html">Date Prev</A></TD>
+<TD><A HREF="msg00521.html">Date Next</A>
+</TD>
+<TD><A HREF="mail80.html#00522">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: Re: Bootstrap Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Pat Hayes&quot; &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: Re: Bootstrap Ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 28 Jan 2001 12:35:14 -0800</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00471.html">001b01c08310$8753b7e0$7b76e4ce@Dell</A>&gt; &lt;<A HREF="msg00480.html">001401c084d8$3b6a52c0$7b76e4ce@Dell</A>&gt; &lt;v04210103b694e9008c8c@[204.214.21.210]&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+----- Original Message -----
+From: "pat hayes" &lt;phayes@ai.uwf.edu&gt;
+To: "Robert E. Kent" &lt;rekent@ontologos.org&gt;
+Sent: Saturday, January 27, 2001 6:21 PM
+Subject: Re: SUO: Re: Bootstrap Ontology
+
+
+&gt; &gt;All, especially KIF experts,
+&gt; &gt;
+&gt; &gt;The Boot Ontology needs a Cartesian product unary predicate
+&gt; &gt;'(productRelation ?p1 ?p2)' for any two given unary predicates '?p1' and
+&gt; &gt;'?p2'. What follows is a candidate definition of this. Please check to
+see
+&gt; &gt;if this is correct.
+&gt;
+&gt; It is impossible to tell, since it uses undefined terminology
+&gt; ('double', notably. I assume that this is a predicate which
+&gt; characterises the set (?) of pairs, with 'first' and 'second' as the
+&gt; selector functions?)
+
+Yes. This is some of the list terminology defined on the following page:
+
+    Knowledge Interchange Format
+    draft proposed American National Standard (dpANS)
+    NCITS.T2/98-004
+
+[<A  HREF="http://meta2.stanford.edu/kif/dpans.html#Lists">http://meta2.stanford.edu/kif/dpans.html#Lists</A>]
+
+Here is the definition.
+
+    (defrelation double (?l) :=
+        (exists (?x ?y) (= ?l (listof ?x ?y))))
+
+    (deffunction first (?l) :=
+        (if (= (listof ?x @items) ?l) ?x)
+
+    (deffunction last (?l) :=
+        (cond ((null ?l) bottom)
+            ((null (rest ?l)) (first ?l))
+            (true (last (rest ?l)))))
+
+&gt; &gt;__________
+&gt; &gt;
+&gt; &gt;The Cartesian product unary predicate is define as follows.
+&gt; &gt;
+&gt; &gt;(BinaryFunction productRelation)
+&gt; &gt;
+&gt; &gt;(forall (?p1 ?p2 ?p)
+&gt; &gt; (=&gt; (= (productRelation ?p1 ?p2) ?p)
+&gt; &gt;     (and (UnaryRelation ?p1) (UnaryRelation ?p2) (UnaryRelation ?p))))
+&gt;
+&gt; I presume this is intended to be something like a sort restriction?
+
+Yes.
+
+&gt; If so, it doesnt really work in KIF.
+
+Can you go into any more detail? I am very much interested in this kind of
+restriction of KIF.
+
+&gt;SUO-KIF will have an explicit
+&gt; sorting extension; details available shortly, but you can get the
+&gt; flavor from the way your example would look:
+&gt;
+&gt; (SortOf productRelation ((UnaryRelation UnaryRelation) UnaryRelation) )
+&gt;
+&gt; ie the sort of 'productRelation' is a binary function from
+&gt; UnaryRelation x UnaryRelation to UnaryRelation. (The language will
+&gt; also permit more complex Boolean combinations to allow things like
+&gt; sort overloading and multiple inheritance.)
+
+OK. Seems rather elaborate. Would this stuff be better placed in some
+"mathematically-oriented" ontologies? I would prefer that an absolute
+minimum be placed in core KIF and a core KIF ontology. What that minimum is,
+is another question.
+
+Again, can we not have some very basic sort-like ontologies where semantical
+typing is defined? I will soon offer a KIF "ontology" for basic
+category-theoretic notions where a kind of semantical typing is defined.
+
+&gt; SUO-KIF will also, by the way, allow terms (including variables) to
+&gt; occur in function and relation position, which means that your other
+&gt; axioms can be written more compactly without the explicit equalities
+&gt; in the antecedents:
+&gt;
+&gt; &gt;(forall (?p1 ?p2 ?i ?i1)
+&gt; &gt; (=&gt; (= ((projectionFunction1 ?p1 ?p2) ?i) ?i1)
+&gt; &gt;     (and ((productRelation ?p1 ?p2) ?i) (?p1 ?i1))))
+
+OK, but I think that I am already using this idea here. For example,
+'((projectionFunction1 ?p1 ?p2) ?i)' uses the term '(projectionFunction1 ?p1
+?p2)' in a unary relation position. And '(?p1 ?i1)' uses the variable '?p1'
+in a unary relation position.
+
+&gt; (forall (?p1 ?p2 ?i)
+&gt; (?p1 ((projectionFunction1 ?p1 ?p2) ?i) )
+
+This gets half of the typing, but the other half asserts that '?i' is of the
+product type '(productRelation ?p1 ?p2)'.
+
+In summary, I believe that a core (or bootstrap) KIF ontology is necessary.
+But, there is still some question about what to put in this ontology. Right
+now I am oriented towards placing in this the foundation assumptions
+(restricted comprehension principle) made by Saunders Mac Lane on pages
+21--24 in the text "Categories for the Working Mathematician": existience of
+a universe (the set of all KIF objects), and formation of doubletons, pairs,
+Cartesian product, power set, union, etc.
+
+&gt; ---------------------------------------------------------------------
+&gt; IHMC (850)434 8903   home
+&gt; 40 South Alcaniz St. (850)202 4416   office
+&gt; Pensacola,  FL 32501 (850)202 4440   fax
+&gt; phayes@ai.uwf.edu
+&gt; <A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+&gt;
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00725" href="msg00725.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+<li><strong><a name="00542" href="msg00542.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00471" href="msg00471.html">SUO: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="00480" href="msg00480.html">SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00523.html">SUO: Re: Nunciation</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00521.html">Re: SUO: Vote on Merged Ontology as a 'Base Document' (fwd)</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00480.html">SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00542.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail80.html#00522"><strong>Date</strong></a></li>
+<li><a href="thrd79.html#00522"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

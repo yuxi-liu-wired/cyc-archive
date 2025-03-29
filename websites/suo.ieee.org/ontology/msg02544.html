@@ -1,0 +1,250 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: intention vs. extension again -->
+<!--X-From-R13: "Xbua T. Ebjn" <fbjnNorfgjro.arg> -->
+<!--X-Date: Wed, 16 May 2001 10:07:20 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3B028752.7EADAA38@bestweb.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com -->
+<!--X-Reference: v04210124b7279fd83e17@[205.160.76.173] -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02544.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: intention vs. extension again</TITLE>
+<LINK REV="made" HREF="mailto:sowa@bestweb.net">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02518.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02560.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd38.html#02544">Thread Index</A></Td>
+<TD><A HREF="msg02545.html">Date Prev</A></TD>
+<TD><A HREF="msg02543.html">Date Next</A>
+</TD>
+<TD><A HREF="mail40.html#02544">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: intention vs. extension again</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>Subject</em>: Re: SUO: intention vs. extension again</LI>
+<LI><em>From</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 16 May 2001 09:57:38 -0400</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>References</em>: &lt;<A HREF="msg02509.html">5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com</A>&gt; &lt;<A HREF="msg02518.html">v04210124b7279fd83e17@[205.160.76.173]</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Pat,
+
+I would like to address the concluding paragraph of one of your
+recent messages:
+
+pat hayes wrote:
+
+&gt; If you want to be able to talk about what might be true, then use a
+&gt; modal logic explicitly, and keep that part of the ontology sharply
+&gt; distinct from the parts that do not involve modal notions.
+&gt; Incorporating modality into the structural ontology would make the
+&gt; SUO worthless for all industrial and engineering applications.
+
+I agree that for most practical applications, a modal theorem prover
+is highly undesirable.  However, modality does enter into commercial
+database systems at the metalevel (although that point is seldom
+recognized by the people who routinely use those features).
+
+That point, however, is a major topic of the research literature
+about databases.  It is common practice to apply Kripke's semantics to
+the problem of determining which DB updates are permissible according
+to a given set of constraints (which are, in effect, first-order axioms).
+They treat each state of the DB as a "possible world" and consider
+the DB constraints as the criteria that determine whether one DB (world)
+is accessible from another by a permissible update.
+
+I enjoy pointing out to those people that what they are doing is
+converting Kripke's semantics to Dunn's semantics by the method
+that Dunn recommended in 1978:  treat the constraints as the laws
+that determine the accessibility relation.  The usual reaction is
+quite positive; they say "Yes! that's exactly what we've been doing,
+where's the reference."
+
+Below is an excerpt from my context paper:
+
+   <A  HREF="http://www.bestweb.net/~sowa/ontology/contexts.htm">http://www.bestweb.net/~sowa/ontology/contexts.htm</A>
+
+Summary:  The difference between a simple assertion and an axiom
+or definition is its effect on DB (or KB) updates.  You can formalize
+that point with a version of modal logic, or you can apply Dunn's
+semantics.  The advantage of Dunn's semantics is that it lets you
+use FOL at the metalevel to get the effect of modal logic at the
+object level.  This approach is routinely used for "industrial and
+engineering" applications.
+
+John Sowa
+________________________________________________________________________
+
+Databases and Knowledge bases.  For computational purposes, Kripke's
+possible worlds must be converted to symbolic representations that can
+be stored and manipulated in a database or knowledge-based system.  The
+mapping from Kripke's models to Dunn's models is essential for replacing
+the physical world or some imaginary world with a computable symbolic
+representation.  Following are the correspondences between Dunn's
+semantics and the common terminology of databases and knowledge bases:
+
+ * Laws.  An ontology in AI terminology or a conceptual schema in
+   database terminology is a collection of axioms and definitions that
+   determine the laws for any of Kripke's real or imaginary worlds. Those
+   laws, which have also been called database constraints or business
+   rules, must be true of every database that correctly represents
+   something in the real world or a possible world.
+
+   As an examples, a law or DB constraint might state that every person
+   has two parents, one male and one female; and each person's age must
+   be less than the age of either parent. Even if the facts stored in the
+   database are incomplete, there must be room for adding the names and
+   birthdates of the parents when they become known.
+
+ * Facts.  The tables in a relational database correspond to ground level
+   facts in a theory. All the laws (axioms and definitions or constraints
+   and business rules) must be true of the database at all times.
+   Therefore, anything deducible from the laws and the database must also
+   be a fact. In Dunn's models, the set of all facts is the deductive
+   closure of the laws and the ground-level facts.
+
+   The ground-level facts, for example, might state the names and
+   birthdates for everyone known to the system. The laws could be used
+   to verify that nobody has more than two parents and to deduce family
+   relationships such as siblings, grandparents, and cousins. During
+   normal operations, the laws would not change, but the ground-level
+   facts could be updated to record births, deaths, and marriages.
+
+ * Accessibility relation.  Kripke's accessibility relation R(u,v) from
+   a world u to a world v corresponds to a permissible update from
+   a database that represents u to a database that represents v.  In
+   database terms, accessibility corresponds to a update that observes
+   the constraints: every law of u must remain true in the updated
+   database that represents v.
+
+   If some person already has two parents named in the database, no
+   update that named a third parent for that person would be permitted.
+
+After the possible worlds have been mapped to collections of laws
+and facts in a database or knowledge base, the possible worlds become
+unnecessary and ontologically dubious baggage.  All further theories
+and computation can be stated in terms of the laws and facts.
+
+The various axioms for modality correspond to different options for
+permissible changes to a database or knowledge base.  In effect, they
+specify policies for how a knowledge engineer or database administrator
+could modify the laws to accommodate changes in the known scientific
+principles or changes in the business or social structures.  Following
+are the policies that correspond to the modal systems T, S4, and S5:
+
+ * System T.  The basic modal logic, System T, would allow the DB
+   administrator to promote any fact in the current database to the
+   privileged status of a law or to demote any law to the status of a
+   fact. However, no such change would modify the truth value of any
+   law or fact, since both facts and laws are assumed to be true.
+
+ * System S4.  The axiom S4, when added to System T, would allow the DB
+   administrator to promote facts to laws, but not demote any laws to the
+   status of mere facts. S4 would allow new laws to be made, but no laws
+   could be repealed.
+
+ * System S5.  The addition of axiom S5 to System S4 would require all
+   accessible databases to have exactly the same laws. Therefore, the DB
+   administrator would not be allowed make any changes to the collection
+   of laws.
+
+As an example, the constraint that every person must have two parents
+of opposite sexes might be modified to accommodate sex-change operations.
+The possibility of cloning might mean that some people might have only
+one parent.  The axioms of System T would permit such modifications to
+the laws, but System S4 would prohibit them because earlier laws could
+not be deleted.  S5 would prohibit any changes to the laws.
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02560" href="msg02560.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02509" href="msg02509.html">SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> Adam Pease &lt;apease@ks.teknowledge.com&gt;</li></ul></li>
+<li><strong><a name="02518" href="msg02518.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02545.html">SUO: Re: Focus, Magnification, Resolution</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02543.html">Re: SUO: intention vs. extension again</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02518.html">Re: SUO: intention vs. extension again</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02560.html">Re: SUO: intention vs. extension again</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail40.html#02544"><strong>Date</strong></a></li>
+<li><a href="thrd38.html#02544"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

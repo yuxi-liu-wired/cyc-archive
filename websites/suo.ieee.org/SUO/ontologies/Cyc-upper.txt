@@ -1,0 +1,2255 @@
+;;; Translation of Cyc-Upper-Level
+;;; into target language Kif
+
+;;;Cycorp License Agreement 
+
+;;;Cycorp is providing this material from the Cyc(tm) Upper
+;;;Ontology at no charge, for everyone to use, including 
+;;;commercial service use and incorporation into products. 
+;;;However, it is not 'Public Domain.'  Please acknowledge 
+;;;Cycorp, 3721 Executive Center Dr., Austin, TX 78731 in 
+;;;any use or citation of this material, and request that each
+;;;further user include a full copy of this notice as well,
+;;;in any use or citation they make of the material.  All
+;;;these terms equally apply to renamings and other 
+;;;logically equivalent reformulations of the material in 
+;;;any natural or formal language.  Cycorp intends to 
+;;;amend and expand the material from time to time; the 
+;;;latest version is available at  http://www.cyc.com
+
+
+(in-package "ONTOLINGUA-USER")
+
+(defrelation Cyc-Compound-Term
+             (Class Cyc-Compound-Term)
+             (Arity Cyc-Compound-Term 1))
+
+(defrelation  (GASEOUS-FN WATER) 
+             (Subclass-Of  (GASEOUS-FN WATER)  Gaseous-Tangible-Thing)
+             (Subclass-Of  (GASEOUS-FN WATER)  Water)
+             (Tangible-Stuff-State-Type  (GASEOUS-FN WATER) )
+             (Cyc-Compound-Term  (GASEOUS-FN WATER) )
+             (Class  (GASEOUS-FN WATER) )
+             (Arity  (GASEOUS-FN WATER)  1))
+
+(defobject  (GOVERNMENT-FN COUNTRY) 
+ (Regional-Government  (GOVERNMENT-FN COUNTRY) )
+ ( (GROUP-FN INTELLIGENT-AGENT)   (GOVERNMENT-FN COUNTRY) )
+ (Cyc-Compound-Term  (GOVERNMENT-FN COUNTRY) ))
+
+(defobject  (GOVERNMENT-FN INDONESIA-THE-NATION) 
+ (Regional-Government  (GOVERNMENT-FN INDONESIA-THE-NATION) )
+ (Cyc-Compound-Term  (GOVERNMENT-FN INDONESIA-THE-NATION) )
+ (Documentation  (GOVERNMENT-FN INDONESIA-THE-NATION) 
+  "GOVERNMENT OF INDONESIA"))
+
+(defrelation  (GROUP-FN CURRENCY) 
+             (Subclass-Of  (GROUP-FN CURRENCY)  Group)
+             (Subclass-Of  (GROUP-FN CURRENCY)  Spatial-Thing)
+             (Object-Type  (GROUP-FN CURRENCY) )
+             (Cyc-Compound-Term  (GROUP-FN CURRENCY) )
+             (Class  (GROUP-FN CURRENCY) )
+             (Arity  (GROUP-FN CURRENCY)  1))
+
+(defrelation  (GROUP-FN EVENT) 
+             (Subclass-Of  (GROUP-FN EVENT)  Group)
+             (Subclass-Of  (GROUP-FN EVENT)  Event)
+             (Object-Type  (GROUP-FN EVENT) )
+             (Cyc-Compound-Term  (GROUP-FN EVENT) )
+             (Class  (GROUP-FN EVENT) )
+             (Arity  (GROUP-FN EVENT)  1))
+
+(defrelation  (GROUP-FN INTELLIGENT-AGENT) 
+             (Subclass-Of  (GROUP-FN INTELLIGENT-AGENT)  Spatial-Thing)
+             (Subclass-Of  (GROUP-FN INTELLIGENT-AGENT)  Group)
+             (Object-Type  (GROUP-FN INTELLIGENT-AGENT) )
+             (Cyc-Compound-Term  (GROUP-FN INTELLIGENT-AGENT) )
+             (Class  (GROUP-FN INTELLIGENT-AGENT) )
+             (Arity  (GROUP-FN INTELLIGENT-AGENT)  1))
+
+(defrelation  (GROUP-FN SPATIAL-THING) 
+             (Subclass-Of  (GROUP-FN SPATIAL-THING)  Group)
+             (Subclass-Of  (GROUP-FN SPATIAL-THING)  Spatial-Thing)
+             (Object-Type  (GROUP-FN SPATIAL-THING) )
+             (Cyc-Compound-Term  (GROUP-FN SPATIAL-THING) )
+             (Class  (GROUP-FN SPATIAL-THING) )
+             (Arity  (GROUP-FN SPATIAL-THING)  1))
+
+(defobject  (HIGH-AMOUNT-FN COMPRESSIBILITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN COMPRESSIBILITY) )
+ (Compressibility  (HIGH-AMOUNT-FN COMPRESSIBILITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN COMPRESSIBILITY) )
+ (Documentation  (HIGH-AMOUNT-FN COMPRESSIBILITY) 
+  "Can be compressed almost any amount"))
+
+(defobject  (HIGH-AMOUNT-FN CORROSION-RESISTANCE) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Corrosion-Resistance  (HIGH-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN CORROSION-RESISTANCE) ))
+
+(defobject  (HIGH-AMOUNT-FN ELASTICITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN ELASTICITY) )
+ (Elasticity  (HIGH-AMOUNT-FN ELASTICITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN ELASTICITY) )
+ (Documentation  (HIGH-AMOUNT-FN ELASTICITY) 
+  "completely re-expands almost instantly after compression"))
+
+(defobject  (HIGH-AMOUNT-FN FLAMMABILITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN FLAMMABILITY) )
+ (Flammability  (HIGH-AMOUNT-FN FLAMMABILITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN FLAMMABILITY) ))
+
+(defobject  (HIGH-AMOUNT-FN MALLEABILITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN MALLEABILITY) )
+ (Malleability  (HIGH-AMOUNT-FN MALLEABILITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN MALLEABILITY) ))
+
+(defobject  (HIGH-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN POROSITY) )
+ (Porosity  (HIGH-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN POROSITY) ))
+
+(defobject  (HIGH-AMOUNT-FN RAININESS) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN RAININESS) )
+ (Raininess  (HIGH-AMOUNT-FN RAININESS) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN RAININESS) )
+ (Genl-Attributes  (HIGH-AMOUNT-FN RAININESS)  Rainy))
+
+(defobject  (HIGH-AMOUNT-FN RIGIDITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN RIGIDITY) )
+ (Rigidity  (HIGH-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (HIGH-AMOUNT-FN SHEAR-STRENGTH) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN SHEAR-STRENGTH) )
+ (Shear-Strength  (HIGH-AMOUNT-FN SHEAR-STRENGTH) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN SHEAR-STRENGTH) ))
+
+(defobject  (HIGH-AMOUNT-FN TENSILE-STRENGTH) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN TENSILE-STRENGTH) )
+ (Tensile-Strength  (HIGH-AMOUNT-FN TENSILE-STRENGTH) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN TENSILE-STRENGTH) ))
+
+(defobject  (HIGH-AMOUNT-FN VISIBILITY) 
+ (Scalar-Interval  (HIGH-AMOUNT-FN VISIBILITY) )
+ (Visibility  (HIGH-AMOUNT-FN VISIBILITY) )
+ (Cyc-Compound-Term  (HIGH-AMOUNT-FN VISIBILITY) ))
+
+(defrelation  (JUVENILE-FN PERSON) 
+             (Subclass-Of  (JUVENILE-FN PERSON)  Juvenile-Animal)
+             (Subclass-Of  (JUVENILE-FN PERSON)  Person)
+             (Existing-Object-Type  (JUVENILE-FN PERSON) )
+             (Cyc-Compound-Term  (JUVENILE-FN PERSON) )
+             (Class  (JUVENILE-FN PERSON) )
+             (Arity  (JUVENILE-FN PERSON)  1))
+
+(defrelation  (LIQUID-FN WATER) 
+             (Subclass-Of  (LIQUID-FN WATER)  Liquid-Tangible-Thing)
+             (Subclass-Of  (LIQUID-FN WATER)  Water)
+             (Tangible-Stuff-State-Type  (LIQUID-FN WATER) )
+             (Cyc-Compound-Term  (LIQUID-FN WATER) )
+             (Class  (LIQUID-FN WATER) )
+             (Arity  (LIQUID-FN WATER)  1))
+
+(defrelation  (LIQUID-FN WATER-SALINE) 
+             (Subclass-Of  (LIQUID-FN WATER-SALINE)  Liquid-Tangible-Thing)
+             (Subclass-Of  (LIQUID-FN WATER-SALINE)  Water-Saline)
+             (Tangible-Stuff-State-Type  (LIQUID-FN WATER-SALINE) )
+             (Cyc-Compound-Term  (LIQUID-FN WATER-SALINE) )
+             (Class  (LIQUID-FN WATER-SALINE) )
+             (Arity  (LIQUID-FN WATER-SALINE)  1))
+
+(defobject  (LOW-AMOUNT-FN COMPRESSIBILITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN COMPRESSIBILITY) )
+ (Compressibility  (LOW-AMOUNT-FN COMPRESSIBILITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN COMPRESSIBILITY) )
+ (Documentation  (LOW-AMOUNT-FN COMPRESSIBILITY)  "can be compressed somewhat"))
+
+(defobject  (LOW-AMOUNT-FN DUCTILITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN DUCTILITY) )
+ (Ductility  (LOW-AMOUNT-FN DUCTILITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN DUCTILITY) ))
+
+(defobject  (LOW-AMOUNT-FN ELASTICITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN ELASTICITY) )
+ (Elasticity  (LOW-AMOUNT-FN ELASTICITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN ELASTICITY) )
+ (Documentation  (LOW-AMOUNT-FN ELASTICITY) 
+  "re-expands somewhat after compression, but not all the way back"))
+
+(defobject  (LOW-AMOUNT-FN FRAGILITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN FRAGILITY) )
+ (Fragility  (LOW-AMOUNT-FN FRAGILITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN FRAGILITY) ))
+
+(defobject  (LOW-AMOUNT-FN HARDNESS) 
+ (Scalar-Interval  (LOW-AMOUNT-FN HARDNESS) )
+ (Hardness  (LOW-AMOUNT-FN HARDNESS) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN HARDNESS) ))
+
+(defobject  (LOW-AMOUNT-FN MALLEABILITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN MALLEABILITY) )
+ (Malleability  (LOW-AMOUNT-FN MALLEABILITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN MALLEABILITY) ))
+
+(defobject  (LOW-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN POROSITY) )
+ (Porosity  (LOW-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN POROSITY) ))
+
+(defobject  (LOW-AMOUNT-FN RAININESS) 
+ (Scalar-Interval  (LOW-AMOUNT-FN RAININESS) )
+ (Raininess  (LOW-AMOUNT-FN RAININESS) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN RAININESS) )
+ (Genl-Attributes  (LOW-AMOUNT-FN RAININESS)  Rainy))
+
+(defobject  (LOW-AMOUNT-FN RELATIVE-HUMIDITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Relative-Humidity  (LOW-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN RELATIVE-HUMIDITY) ))
+
+(defobject  (LOW-AMOUNT-FN RIGIDITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN RIGIDITY) )
+ (Rigidity  (LOW-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (LOW-AMOUNT-FN SHEAR-STRENGTH) 
+ (Scalar-Interval  (LOW-AMOUNT-FN SHEAR-STRENGTH) )
+ (Shear-Strength  (LOW-AMOUNT-FN SHEAR-STRENGTH) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN SHEAR-STRENGTH) ))
+
+(defobject  (LOW-AMOUNT-FN TENSILE-STRENGTH) 
+ (Scalar-Interval  (LOW-AMOUNT-FN TENSILE-STRENGTH) )
+ (Tensile-Strength  (LOW-AMOUNT-FN TENSILE-STRENGTH) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN TENSILE-STRENGTH) ))
+
+(defobject  (LOW-AMOUNT-FN VISIBILITY) 
+ (Scalar-Interval  (LOW-AMOUNT-FN VISIBILITY) )
+ (Visibility  (LOW-AMOUNT-FN VISIBILITY) )
+ (Cyc-Compound-Term  (LOW-AMOUNT-FN VISIBILITY) ))
+
+(defrelation  (MAKING-FN VISUAL-IMAGE) 
+             (Subclass-Of  (MAKING-FN VISUAL-IMAGE)  Making-Something)
+             (Script-Type  (MAKING-FN VISUAL-IMAGE) )
+             (Temporal-Object-Type  (MAKING-FN VISUAL-IMAGE) )
+             (Cyc-Compound-Term  (MAKING-FN VISUAL-IMAGE) )
+             (Class  (MAKING-FN VISUAL-IMAGE) )
+             (Arity  (MAKING-FN VISUAL-IMAGE)  1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") 
+              Individual)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ABSTRACT-OBJECT") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+              Communicating)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Temporal-Stuff-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Script-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") 
+              Physical-Event)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") )
+             (Script-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AMBIENT-PROCESS") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AREA") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AREA") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AREA") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "AREA") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CARDINALITY") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CARDINALITY") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CARDINALITY") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CARDINALITY") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSAL-RELATION") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSAL-RELATION") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSAL-RELATION") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSAL-RELATION") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSE-EFFECT") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSE-EFFECT") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSE-EFFECT") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CAUSE-EFFECT") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CONTAINED") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CONTAINED") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CONTAINED") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "CONTAINED") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") 
+              Thing)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DECOMPOSABLE-OBJECT") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") 
+              Physical-Event)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DIRECTED-ACTION") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DISTANCE") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DISTANCE") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DISTANCE") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "DISTANCE") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT-OF") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT-OF") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT-OF") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ELEMENT-OF") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GAS-MATERIAL") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GAS-MATERIAL") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GAS-MATERIAL") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GAS-MATERIAL") ))
+
+(defobject
+  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GENERALIZED-POSSESSION") 
+ (Thing
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GENERALIZED-POSSESSION") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GENERALIZED-POSSESSION") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "GENERALIZED-POSSESSION") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTENSIVE") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTENSIVE") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTENSIVE") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTENSIVE") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") 
+              Intangible-Individual)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "INTERPERSONAL-THING") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") 
+              Communication-Convention)
+             (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") )
+             (Class  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") )
+             (Arity  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") 
+              Communication-Convention)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LANGUAGE-RELATED-OBJECT") 
+              1))
+
+(defobject
+  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LESS-THAN-COMPARISON") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LESS-THAN-COMPARISON") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LESS-THAN-COMPARISON") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LESS-THAN-COMPARISON") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LINEAR-SIZE") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LINEAR-SIZE") )
+ (Physical-Amount-Slot
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LINEAR-SIZE") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LINEAR-SIZE") )
+ (Arg2-Isa  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LINEAR-SIZE") 
+  Distance))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LIQUID-MATERIAL") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LIQUID-MATERIAL") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LIQUID-MATERIAL") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LIQUID-MATERIAL") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LOCATING") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LOCATING") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LOCATING") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "LOCATING") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") 
+              Thing)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "MISC-STUFF")  1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") 
+              Something-Existing)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NAMED-OBJECT")  1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+              Communicating)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Temporal-Stuff-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Script-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-ADDRESSEE-ORIENTED-VERBAL-PROCESS") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") 
+              Partially-Tangible)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") )
+             (Existing-Object-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-CONSCIOUS-BEING") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") 
+              Physical-Event)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NON-DIRECTED-ACTION") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") 
+              Individual)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NONDECOMPOSABLE-OBJECT") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NOTCONTAINED") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NOTCONTAINED") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NOTCONTAINED") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "NOTCONTAINED") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") 
+              Geometric-Thing)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") )
+             (Shape-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ONE-OR-TWO-D-LOCATION") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERED-SET") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERED-SET") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERED-SET") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERED-SET") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") 
+              Binary-Predicate)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "ORDERING-RELATION") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "OWNED-BY") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "OWNED-BY") )
+ (Binary-Predicate  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "OWNED-BY") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "OWNED-BY") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "PHYSICAL-MATERIAL") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "PHYSICAL-MATERIAL") )
+ (Collection
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "PHYSICAL-MATERIAL") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "PHYSICAL-MATERIAL") ))
+
+(defobject
+  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "REPRESENTATIONAL-OBJECT") 
+ (Thing
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "REPRESENTATIONAL-OBJECT") )
+ (Collection
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "REPRESENTATIONAL-OBJECT") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "REPRESENTATIONAL-OBJECT") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") 
+              Attribute-Value)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") )
+             (Attribute-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SENSE-AND-MEASURE-QUALITY") 
+              1))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") 
+              Something-Existing)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SEPARABLE-ENTITY") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SET") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SET") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SET") )
+ (Cyc-Compound-Term  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SET") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") 
+              Physical-Attribute)
+             (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") )
+             (Measurable-Attribute-Type
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") )
+             (Class  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE") )
+             (Arity  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE")  1))
+
+(defobject
+  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE-PROPERTY-ASCRIPTION") 
+ (Thing
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE-PROPERTY-ASCRIPTION") )
+ (Physical-Amount-Slot
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE-PROPERTY-ASCRIPTION") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SIZE-PROPERTY-ASCRIPTION") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOLID-MATERIAL") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOLID-MATERIAL") )
+ (Collection  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOLID-MATERIAL") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOLID-MATERIAL") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOURCE-DESTINATION") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOURCE-DESTINATION") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOURCE-DESTINATION") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SOURCE-DESTINATION") ))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SPATIAL-LOCATING") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SPATIAL-LOCATING") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SPATIAL-LOCATING") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SPATIAL-LOCATING") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") 
+              Intangible-Individual)
+             (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") )
+             (Class  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") )
+             (Arity  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "STRIVING") 
+              1))
+
+(defobject  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SUBJECT-MATTER") 
+ (Thing  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SUBJECT-MATTER") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SUBJECT-MATTER") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "SUBJECT-MATTER") ))
+
+(defobject
+  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TEMPORAL-NONINCLUSIVE") 
+ (Thing
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TEMPORAL-NONINCLUSIVE") )
+ (Binary-Predicate
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TEMPORAL-NONINCLUSIVE") )
+ (Cyc-Compound-Term
+   (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TEMPORAL-NONINCLUSIVE") ))
+
+(defrelation  (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") 
+             (Subclass-Of
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") 
+              Time-Interval)
+             (Thing
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") )
+             (Collection
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") )
+             (Cyc-Compound-Term
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") )
+             (Class
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") )
+             (Arity
+               (MEANING-IN-SYSTEM-FN SENSUS-INFORMATION1997 "TIME-INTERVAL") 
+              1))
+
+(defobject  (MEDIUM-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) )
+ (Bio-Deterioration-Resistance
+   (MEDIUM-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) ))
+
+(defobject  (MEDIUM-AMOUNT-FN COMPRESSIBILITY) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN COMPRESSIBILITY) )
+ (Compressibility  (MEDIUM-AMOUNT-FN COMPRESSIBILITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN COMPRESSIBILITY) )
+ (Documentation  (MEDIUM-AMOUNT-FN COMPRESSIBILITY) 
+  "Can be compressed to less than half its volume"))
+
+(defobject  (MEDIUM-AMOUNT-FN CORROSION-RESISTANCE) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Corrosion-Resistance  (MEDIUM-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN CORROSION-RESISTANCE) ))
+
+(defobject  (MEDIUM-AMOUNT-FN ELASTICITY) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN ELASTICITY) )
+ (Elasticity  (MEDIUM-AMOUNT-FN ELASTICITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN ELASTICITY) )
+ (Documentation  (MEDIUM-AMOUNT-FN ELASTICITY) 
+  "will eventually re-expand after compression"))
+
+(defobject  (MEDIUM-AMOUNT-FN FLAMMABILITY) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN FLAMMABILITY) )
+ (Flammability  (MEDIUM-AMOUNT-FN FLAMMABILITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN FLAMMABILITY) ))
+
+(defobject  (MEDIUM-AMOUNT-FN FRAGILITY) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN FRAGILITY) )
+ (Fragility  (MEDIUM-AMOUNT-FN FRAGILITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN FRAGILITY) ))
+
+(defobject  (MEDIUM-AMOUNT-FN HARDNESS) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN HARDNESS) )
+ (Hardness  (MEDIUM-AMOUNT-FN HARDNESS) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN HARDNESS) ))
+
+(defobject  (MEDIUM-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN POROSITY) )
+ (Porosity  (MEDIUM-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN POROSITY) ))
+
+(defobject  (MEDIUM-AMOUNT-FN RAININESS) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN RAININESS) )
+ (Raininess  (MEDIUM-AMOUNT-FN RAININESS) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN RAININESS) )
+ (Genl-Attributes  (MEDIUM-AMOUNT-FN RAININESS)  Rainy))
+
+(defobject  (MEDIUM-AMOUNT-FN RIGIDITY) 
+ (Rigidity  (MEDIUM-AMOUNT-FN RIGIDITY) )
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (MEDIUM-AMOUNT-FN SHEAR-STRENGTH) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN SHEAR-STRENGTH) )
+ (Shear-Strength  (MEDIUM-AMOUNT-FN SHEAR-STRENGTH) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN SHEAR-STRENGTH) ))
+
+(defobject  (MEDIUM-AMOUNT-FN TENSILE-STRENGTH) 
+ (Scalar-Interval  (MEDIUM-AMOUNT-FN TENSILE-STRENGTH) )
+ (Tensile-Strength  (MEDIUM-AMOUNT-FN TENSILE-STRENGTH) )
+ (Cyc-Compound-Term  (MEDIUM-AMOUNT-FN TENSILE-STRENGTH) ))
+
+(defrelation  (MOB-FN MOUNTAIN) 
+             (Subclass-Of  (MOB-FN MOUNTAIN)  Mob)
+             (Existing-Stuff-Type  (MOB-FN MOUNTAIN) )
+             (Collection  (MOB-FN MOUNTAIN) )
+             (Cyc-Compound-Term  (MOB-FN MOUNTAIN) )
+             (Class  (MOB-FN MOUNTAIN) )
+             (Arity  (MOB-FN MOUNTAIN)  1))
+
+(defrelation  (MOB-FN PARTICLE) 
+             (Subclass-Of  (MOB-FN PARTICLE)  Mob)
+             (Existing-Stuff-Type  (MOB-FN PARTICLE) )
+             (Collection  (MOB-FN PARTICLE) )
+             (Cyc-Compound-Term  (MOB-FN PARTICLE) )
+             (Class  (MOB-FN PARTICLE) )
+             (Arity  (MOB-FN PARTICLE)  1))
+
+(defrelation  (MOB-FN PRECIPITATION-PARTICLE) 
+             (Subclass-Of  (MOB-FN PRECIPITATION-PARTICLE)  Mob)
+             (Existing-Stuff-Type  (MOB-FN PRECIPITATION-PARTICLE) )
+             (Collection  (MOB-FN PRECIPITATION-PARTICLE) )
+             (Cyc-Compound-Term  (MOB-FN PRECIPITATION-PARTICLE) )
+             (Class  (MOB-FN PRECIPITATION-PARTICLE) )
+             (Arity  (MOB-FN PRECIPITATION-PARTICLE)  1))
+
+(defobject  (NO-AMOUNT-FN COMPRESSIBILITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN COMPRESSIBILITY) )
+ (Compressibility  (NO-AMOUNT-FN COMPRESSIBILITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN COMPRESSIBILITY) )
+ (Documentation  (NO-AMOUNT-FN COMPRESSIBILITY) 
+  "essentially cannot be compressed"))
+
+(defobject  (NO-AMOUNT-FN DUCTILITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN DUCTILITY) )
+ (Ductility  (NO-AMOUNT-FN DUCTILITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN DUCTILITY) ))
+
+(defobject  (NO-AMOUNT-FN ELASTICITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN ELASTICITY) )
+ (Elasticity  (NO-AMOUNT-FN ELASTICITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN ELASTICITY) )
+ (Documentation  (NO-AMOUNT-FN ELASTICITY) 
+  "does not re-expand at all after compression"))
+
+(defobject  (NO-AMOUNT-FN FLAMMABILITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN FLAMMABILITY) )
+ (Flammability  (NO-AMOUNT-FN FLAMMABILITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN FLAMMABILITY) ))
+
+(defobject  (NO-AMOUNT-FN MALLEABILITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN MALLEABILITY) )
+ (Malleability  (NO-AMOUNT-FN MALLEABILITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN MALLEABILITY) ))
+
+(defobject  (NO-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN POROSITY) )
+ (Porosity  (NO-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN POROSITY) ))
+
+(defobject  (NO-AMOUNT-FN RIGIDITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN RIGIDITY) )
+ (Rigidity  (NO-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (NO-AMOUNT-FN VOLATILITY) 
+ (Scalar-Interval  (NO-AMOUNT-FN VOLATILITY) )
+ (Volatility  (NO-AMOUNT-FN VOLATILITY) )
+ (Cyc-Compound-Term  (NO-AMOUNT-FN VOLATILITY) ))
+
+(defrelation  (SOLID-FN CONCRETE) 
+             (Subclass-Of  (SOLID-FN CONCRETE)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN CONCRETE)  Concrete)
+             (Tangible-Stuff-State-Type  (SOLID-FN CONCRETE) )
+             (Cyc-Compound-Term  (SOLID-FN CONCRETE) )
+             (Class  (SOLID-FN CONCRETE) )
+             (Arity  (SOLID-FN CONCRETE)  1))
+
+(defrelation  (SOLID-FN EARTH-STUFF) 
+             (Subclass-Of  (SOLID-FN EARTH-STUFF)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN EARTH-STUFF)  Earth-Stuff)
+             (Tangible-Stuff-State-Type  (SOLID-FN EARTH-STUFF) )
+             (Cyc-Compound-Term  (SOLID-FN EARTH-STUFF) )
+             (Class  (SOLID-FN EARTH-STUFF) )
+             (Arity  (SOLID-FN EARTH-STUFF)  1))
+
+(defrelation  (SOLID-FN GLASS) 
+             (Subclass-Of  (SOLID-FN GLASS)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN GLASS)  Glass)
+             (Tangible-Stuff-State-Type  (SOLID-FN GLASS) )
+             (Cyc-Compound-Term  (SOLID-FN GLASS) )
+             (Class  (SOLID-FN GLASS) )
+             (Arity  (SOLID-FN GLASS)  1))
+
+(defrelation  (SOLID-FN METAL) 
+             (Subclass-Of  (SOLID-FN METAL)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN METAL)  Metal)
+             (Tangible-Stuff-State-Type  (SOLID-FN METAL) )
+             (Cyc-Compound-Term  (SOLID-FN METAL) )
+             (Class  (SOLID-FN METAL) )
+             (Arity  (SOLID-FN METAL)  1))
+
+(defrelation  (SOLID-FN PLASTIC) 
+             (Subclass-Of  (SOLID-FN PLASTIC)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN PLASTIC)  Plastic)
+             (Tangible-Stuff-State-Type  (SOLID-FN PLASTIC) )
+             (Cyc-Compound-Term  (SOLID-FN PLASTIC) )
+             (Class  (SOLID-FN PLASTIC) )
+             (Arity  (SOLID-FN PLASTIC)  1))
+
+(defrelation  (SOLID-FN WATER) 
+             (Subclass-Of  (SOLID-FN WATER)  Solid-Tangible-Thing)
+             (Subclass-Of  (SOLID-FN WATER)  Water)
+             (Tangible-Stuff-State-Type  (SOLID-FN WATER) )
+             (Cyc-Compound-Term  (SOLID-FN WATER) )
+             (Class  (SOLID-FN WATER) )
+             (Arity  (SOLID-FN WATER)  1))
+
+(defobject  (STIB (YEAR-FN -902))  (Time-Interval  (STIB (YEAR-FN -902)) )
+ (Cyc-Compound-Term  (STIB (YEAR-FN -902)) ))
+
+(defobject  (THE-COVERING CREATION-EVENT DESTRUCTION-EVENT) 
+ (Set-Mathematical  (THE-COVERING CREATION-EVENT DESTRUCTION-EVENT) )
+ (Cyc-Compound-Term  (THE-COVERING CREATION-EVENT DESTRUCTION-EVENT) ))
+
+(defobject  (THE-COVERING GAINING-USER-RIGHTS LOSING-USER-RIGHTS) 
+ (Set-Mathematical  (THE-COVERING GAINING-USER-RIGHTS LOSING-USER-RIGHTS) )
+ (Cyc-Compound-Term  (THE-COVERING GAINING-USER-RIGHTS LOSING-USER-RIGHTS) ))
+
+(defobject  (THE-COVERING MOVEMENT-TRANSLATION-EVENT MOVEMENT-ROTATION) 
+ (Set-Mathematical
+   (THE-COVERING MOVEMENT-TRANSLATION-EVENT MOVEMENT-ROTATION) )
+ (Cyc-Compound-Term
+   (THE-COVERING MOVEMENT-TRANSLATION-EVENT MOVEMENT-ROTATION) ))
+
+(defobject
+  (THE-COVERING ORGANIZATIONAL-TRANSFER-IN ORGANIZATIONAL-TRANSFER-OUT) 
+ (Set-Mathematical
+   (THE-COVERING ORGANIZATIONAL-TRANSFER-IN ORGANIZATIONAL-TRANSFER-OUT) )
+ (Cyc-Compound-Term
+   (THE-COVERING ORGANIZATIONAL-TRANSFER-IN ORGANIZATIONAL-TRANSFER-OUT) ))
+
+(defobject  (THE-COVERING TRANSFER-IN TRANSFER-OUT) 
+ (Set-Mathematical  (THE-COVERING TRANSFER-IN TRANSFER-OUT) )
+ (Cyc-Compound-Term  (THE-COVERING TRANSFER-IN TRANSFER-OUT) ))
+
+(defobject  (THE-PARTITION ADULT-ANIMAL JUVENILE-ANIMAL) 
+ (Set-Mathematical  (THE-PARTITION ADULT-ANIMAL JUVENILE-ANIMAL) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION ADULT-ANIMAL JUVENILE-ANIMAL) )
+ (Cyc-Compound-Term  (THE-PARTITION ADULT-ANIMAL JUVENILE-ANIMAL) ))
+
+(defobject  (THE-PARTITION ARTIFACT INANIMATE-THING-NATURAL) 
+ (Set-Mathematical  (THE-PARTITION ARTIFACT INANIMATE-THING-NATURAL) )
+ (Disjoint-Set-Or-Collection
+   (THE-PARTITION ARTIFACT INANIMATE-THING-NATURAL) )
+ (Cyc-Compound-Term  (THE-PARTITION ARTIFACT INANIMATE-THING-NATURAL) ))
+
+(defobject  (THE-PARTITION CORNER-2D CORNER-3D) 
+ (Set-Mathematical  (THE-PARTITION CORNER-2D CORNER-3D) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION CORNER-2D CORNER-3D) )
+ (Cyc-Compound-Term  (THE-PARTITION CORNER-2D CORNER-3D) ))
+
+(defobject  (THE-PARTITION DUSK DAWN) 
+ (Set-Mathematical  (THE-PARTITION DUSK DAWN) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION DUSK DAWN) )
+ (Cyc-Compound-Term  (THE-PARTITION DUSK DAWN) ))
+
+(defobject  (THE-PARTITION FEMALE-PERSON MALE-PERSON) 
+ (Set-Mathematical  (THE-PARTITION FEMALE-PERSON MALE-PERSON) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION FEMALE-PERSON MALE-PERSON) )
+ (Cyc-Compound-Term  (THE-PARTITION FEMALE-PERSON MALE-PERSON) ))
+
+(defobject  (THE-PARTITION INTANGIBLE PARTIALLY-TANGIBLE) 
+ (Set-Mathematical  (THE-PARTITION INTANGIBLE PARTIALLY-TANGIBLE) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION INTANGIBLE PARTIALLY-TANGIBLE) )
+ (Cyc-Compound-Term  (THE-PARTITION INTANGIBLE PARTIALLY-TANGIBLE) ))
+
+(defobject  (THE-PARTITION INVERTEBRATE VERTEBRATE) 
+ (Set-Mathematical  (THE-PARTITION INVERTEBRATE VERTEBRATE) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION INVERTEBRATE VERTEBRATE) )
+ (Cyc-Compound-Term  (THE-PARTITION INVERTEBRATE VERTEBRATE) ))
+
+(defobject  (THE-PARTITION NON-LEAP-YEAR LEAP-YEAR) 
+ (Set-Mathematical  (THE-PARTITION NON-LEAP-YEAR LEAP-YEAR) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION NON-LEAP-YEAR LEAP-YEAR) )
+ (Cyc-Compound-Term  (THE-PARTITION NON-LEAP-YEAR LEAP-YEAR) ))
+
+(defobject  (THE-PARTITION NON-PERSON-ANIMAL PERSON) 
+ (Set-Mathematical  (THE-PARTITION NON-PERSON-ANIMAL PERSON) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION NON-PERSON-ANIMAL PERSON) )
+ (Cyc-Compound-Term  (THE-PARTITION NON-PERSON-ANIMAL PERSON) ))
+
+(defobject  (THE-PARTITION NON-POWERED-DEVICE POWERED-DEVICE) 
+ (Set-Mathematical  (THE-PARTITION NON-POWERED-DEVICE POWERED-DEVICE) )
+ (Disjoint-Set-Or-Collection
+   (THE-PARTITION NON-POWERED-DEVICE POWERED-DEVICE) )
+ (Cyc-Compound-Term  (THE-PARTITION NON-POWERED-DEVICE POWERED-DEVICE) ))
+
+(defobject  (THE-PARTITION SET-MATHEMATICAL COLLECTION) 
+ (Set-Mathematical  (THE-PARTITION SET-MATHEMATICAL COLLECTION) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION SET-MATHEMATICAL COLLECTION) )
+ (Cyc-Compound-Term  (THE-PARTITION SET-MATHEMATICAL COLLECTION) ))
+
+(defobject  (THE-PARTITION SET-OR-COLLECTION INDIVIDUAL) 
+ (Set-Mathematical  (THE-PARTITION SET-OR-COLLECTION INDIVIDUAL) )
+ (Disjoint-Set-Or-Collection  (THE-PARTITION SET-OR-COLLECTION INDIVIDUAL) )
+ (Cyc-Compound-Term  (THE-PARTITION SET-OR-COLLECTION INDIVIDUAL) ))
+
+(defobject  (THE-PARTITION TRANSLATION-FLOW TRANSLATION-COMPLETE) 
+ (Set-Mathematical  (THE-PARTITION TRANSLATION-FLOW TRANSLATION-COMPLETE) )
+ (Disjoint-Set-Or-Collection
+   (THE-PARTITION TRANSLATION-FLOW TRANSLATION-COMPLETE) )
+ (Cyc-Compound-Term  (THE-PARTITION TRANSLATION-FLOW TRANSLATION-COMPLETE) ))
+
+(defrelation  (TRANSPORT-FN GASEOUS-TANGIBLE-THING) 
+             (Subclass-Of  (TRANSPORT-FN GASEOUS-TANGIBLE-THING) 
+              Transporting-Goods)
+             (Script-Type  (TRANSPORT-FN GASEOUS-TANGIBLE-THING) )
+             (Cyc-Compound-Term  (TRANSPORT-FN GASEOUS-TANGIBLE-THING) )
+             (Class  (TRANSPORT-FN GASEOUS-TANGIBLE-THING) )
+             (Arity  (TRANSPORT-FN GASEOUS-TANGIBLE-THING)  1))
+
+(defrelation  (TRANSPORT-FN LIQUID-TANGIBLE-THING) 
+             (Subclass-Of  (TRANSPORT-FN LIQUID-TANGIBLE-THING) 
+              Transporting-Goods)
+             (Script-Type  (TRANSPORT-FN LIQUID-TANGIBLE-THING) )
+             (Cyc-Compound-Term  (TRANSPORT-FN LIQUID-TANGIBLE-THING) )
+             (Class  (TRANSPORT-FN LIQUID-TANGIBLE-THING) )
+             (Arity  (TRANSPORT-FN LIQUID-TANGIBLE-THING)  1))
+
+(defrelation  (TRANSPORT-FN PERSON) 
+             (Subclass-Of  (TRANSPORT-FN PERSON)  Transporting-Goods)
+             (Script-Type  (TRANSPORT-FN PERSON) )
+             (Cyc-Compound-Term  (TRANSPORT-FN PERSON) )
+             (Class  (TRANSPORT-FN PERSON) )
+             (Arity  (TRANSPORT-FN PERSON)  1))
+
+(defrelation  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING) 
+             (Subclass-Of  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING) 
+              Transporting-Goods)
+             (Script-Type  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING) )
+             (Cyc-Compound-Term  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING) )
+             (Class  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING) )
+             (Arity  (TRANSPORT-FN SEMI-SOLID-TANGIBLE-THING)  1))
+
+(defrelation  (TRANSPORT-FN SOLID-TANGIBLE-THING) 
+             (Subclass-Of  (TRANSPORT-FN SOLID-TANGIBLE-THING) 
+              Transporting-Goods)
+             (Script-Type  (TRANSPORT-FN SOLID-TANGIBLE-THING) )
+             (Cyc-Compound-Term  (TRANSPORT-FN SOLID-TANGIBLE-THING) )
+             (Class  (TRANSPORT-FN SOLID-TANGIBLE-THING) )
+             (Arity  (TRANSPORT-FN SOLID-TANGIBLE-THING)  1))
+
+(defrelation  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) 
+              Transportation-Event)
+             (Default-Disjoint-Script-Type
+               (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Script-Type  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Temporal-Stuff-Type
+               (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Class  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Arity  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE)  1)
+             (Documentation  (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) 
+              "A collection of events.  An instance of (Transport-Via-Fn Air-Transportation-Device) is a transportation event in which a Vehicle designed to travel through the atmosphere or outer space is used.  Examples include instances of the would-be collections hang gliding, airplane tranportation, flying the space shuttle, hot air ballon transport.  Note: This collection does not include Flying-Flapping-Wings, which is what birds do."))
+
+(defrelation  (TRANSPORT-VIA-FN AIRPLANE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN AIRPLANE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AIRPLANE) 
+               (TRANSPORT-VIA-FN AIR-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AIRPLANE)  Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN AIRPLANE) )
+             (Default-Disjoint-Script-Type  (TRANSPORT-VIA-FN AIRPLANE) )
+             (Script-Type  (TRANSPORT-VIA-FN AIRPLANE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN AIRPLANE) )
+             (Class  (TRANSPORT-VIA-FN AIRPLANE) )
+             (Arity  (TRANSPORT-VIA-FN AIRPLANE)  1)
+             (Documentation  (TRANSPORT-VIA-FN AIRPLANE) 
+              "Transportation in an Airplane. This includes not only flying (moving through the air, with the plane supoorted by the air), but also such events as taxiing, takeoff and landing."))
+
+(defrelation  (TRANSPORT-VIA-FN AMBULANCE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE)  Service-Event)
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE) 
+               (TRANSPORT-VIA-FN AMBULANCE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE) 
+               (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AMBULANCE)  Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN AMBULANCE) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN AMBULANCE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN AMBULANCE) )
+             (Class  (TRANSPORT-VIA-FN AMBULANCE) )
+             (Arity  (TRANSPORT-VIA-FN AMBULANCE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN ANIMAL) 
+             (Subclass-Of  (TRANSPORT-VIA-FN ANIMAL)  Purposeful-Action)
+             (Subclass-Of  (TRANSPORT-VIA-FN ANIMAL)  Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN ANIMAL) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN ANIMAL) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN ANIMAL) )
+             (Class  (TRANSPORT-VIA-FN ANIMAL) )
+             (Arity  (TRANSPORT-VIA-FN ANIMAL)  1)
+             (Documentation  (TRANSPORT-VIA-FN ANIMAL) 
+              "Transportation in which an animal provides the force for movement.  Includes horses and other animals carrying people and objects, people carrying objects and other people, etc."))
+
+(defrelation  (TRANSPORT-VIA-FN AUTOMOBILE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE) 
+               (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE) 
+               (TRANSPORT-VIA-FN AUTOMOBILE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN AUTOMOBILE)  Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN AUTOMOBILE) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN AUTOMOBILE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN AUTOMOBILE) )
+             (Class  (TRANSPORT-VIA-FN AUTOMOBILE) )
+             (Arity  (TRANSPORT-VIA-FN AUTOMOBILE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN BICYCLE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN BICYCLE)  Exercising)
+             (Subclass-Of  (TRANSPORT-VIA-FN BICYCLE)  Locomotion-Process)
+             (Subclass-Of  (TRANSPORT-VIA-FN BICYCLE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BICYCLE)  Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN BICYCLE) )
+             (Default-Disjoint-Script-Type  (TRANSPORT-VIA-FN BICYCLE) )
+             (Script-Type  (TRANSPORT-VIA-FN BICYCLE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN BICYCLE) )
+             (Class  (TRANSPORT-VIA-FN BICYCLE) )
+             (Arity  (TRANSPORT-VIA-FN BICYCLE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) 
+              Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) )
+             (Class  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE) )
+             (Arity  (TRANSPORT-VIA-FN BUS-ROAD-VEHICLE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) 
+             (Subclass-Of  (TRANSPORT-VIA-FN DEVICE-USER-POWERED)  Exercising)
+             (Subclass-Of  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) 
+              Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) )
+             (Class  (TRANSPORT-VIA-FN DEVICE-USER-POWERED) )
+             (Arity  (TRANSPORT-VIA-FN DEVICE-USER-POWERED)  1))
+
+(defrelation  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) 
+              Transportation-Event)
+             (Subclass-Of  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Default-Disjoint-Script-Type
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Script-Type  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Temporal-Stuff-Type
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Cyc-Compound-Term
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Class  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Arity  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE)  1)
+             (Documentation  (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) 
+              "A collection of events.  An instance of (Transport-Via-Fn Land-Transportation-Device) is a transportation event in which a Vehicle designed to travel over land is used.  Examples include instances of the collections (Transport-Via-Fn Road-Vehicle), Skate-Boarding, and Snow-Skiing.  Note: This collection does not include instances of Animal-Walking-Process, which is a Locomotion-Process (q.v.), not a form of transportation as defined in Cyc.  A marginal example of this would be a (fictional) event in which someone burrowed through the earth in a Jules-Vernesque real-time tunnel-digging machine."))
+
+(defrelation  (TRANSPORT-VIA-FN MOTORCYCLE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE) 
+               (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE) 
+               (TRANSPORT-VIA-FN MOTORCYCLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN MOTORCYCLE)  Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN MOTORCYCLE) )
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN MOTORCYCLE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN MOTORCYCLE) )
+             (Class  (TRANSPORT-VIA-FN MOTORCYCLE) )
+             (Arity  (TRANSPORT-VIA-FN MOTORCYCLE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN ROAD-VEHICLE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN ROAD-VEHICLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN ROAD-VEHICLE) 
+              Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Script-Type  (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Default-Disjoint-Script-Type  (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Class  (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Arity  (TRANSPORT-VIA-FN ROAD-VEHICLE)  1)
+             (Documentation  (TRANSPORT-VIA-FN ROAD-VEHICLE) 
+              "The collection of transportion events in which a (more or less conventional) road vehicle (see Road-Vehicle) is the transportation device (see Transporter and Vehicle)."))
+
+(defrelation  (TRANSPORT-VIA-FN SPACECRAFT) 
+             (Subclass-Of  (TRANSPORT-VIA-FN SPACECRAFT) 
+               (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Subclass-Of  (TRANSPORT-VIA-FN SPACECRAFT) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN SPACECRAFT)  Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Default-Disjoint-Script-Type  (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Script-Type  (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Class  (TRANSPORT-VIA-FN SPACECRAFT) )
+             (Arity  (TRANSPORT-VIA-FN SPACECRAFT)  1)
+             (Documentation  (TRANSPORT-VIA-FN SPACECRAFT) 
+              "The collection of all events in which vehicles, manned or unmanned, leave the atmosphere of earth to orbit around it or travel to other regions of the universe."))
+
+(defrelation  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) 
+              Transportation-Event)
+             (Temporal-Stuff-Type
+               (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) )
+             (Script-Type  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) )
+             (Cyc-Compound-Term
+               (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) )
+             (Class  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE) )
+             (Arity  (TRANSPORT-VIA-FN TRAIN-TRANSPORTATION-DEVICE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+              Translation-Single-Path)
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+              Human-Activity)
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+              Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Script-Type  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Class  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Arity  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE)  1)
+             (Documentation  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) 
+              "A collection of events.  An instance of (Transport-Via-Fn Transportation-Device) is a Transportation-Event in which the Transporter is a TransportationDevice@cyc; e.g., driving a car, riding a train, sending scientific instruments to Mars on an unmanned space probe."))
+
+(defrelation  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) 
+              Transportation-Event)
+             (Script-Type  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Temporal-Stuff-Type
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Cyc-Compound-Term
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Class  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Arity  (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE)  1))
+
+(defrelation  (TRANSPORT-VIA-FN TRUCK) 
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK) 
+               (TRANSPORT-VIA-FN ROAD-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK) 
+               (TRANSPORT-VIA-FN LAND-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE-VEHICLE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK) 
+               (TRANSPORT-VIA-FN TRUCK) )
+             (Subclass-Of  (TRANSPORT-VIA-FN TRUCK)  Transportation-Event)
+             (Temporal-Stuff-Type  (TRANSPORT-VIA-FN TRUCK) )
+             (Script-Type  (TRANSPORT-VIA-FN TRUCK) )
+             (Cyc-Compound-Term  (TRANSPORT-VIA-FN TRUCK) )
+             (Class  (TRANSPORT-VIA-FN TRUCK) )
+             (Arity  (TRANSPORT-VIA-FN TRUCK)  1))
+
+(defrelation  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) 
+             (Subclass-Of  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) 
+               (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Subclass-Of  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) 
+              Transportation-Event)
+             (Default-Disjoint-Script-Type
+               (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Script-Type  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Temporal-Stuff-Type
+               (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Cyc-Compound-Term
+               (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Class  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) )
+             (Arity  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE)  1)
+             (Documentation  (TRANSPORT-VIA-FN WATER-TRANSPORTATION-DEVICE) 
+              "A collection of events.  An instance of (Transport-Via-Fn Water-Transportation-Device) is a transportation event in which a Vehicle designed to float on or travel through water is used.  Examples include instances of Sailing in boats, Water-Skiing, and Windsurfing.  Note: This collection does not include swimming, which is a Locomotion-Process (q.v.), not a form of transportation as defined (intended and axiomatized) in Cyc."))
+
+(defobject  (VERY-HIGH-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) )
+ (Bio-Deterioration-Resistance
+   (VERY-HIGH-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN BIO-DETERIORATION-RESISTANCE) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN CORROSION-RESISTANCE) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Corrosion-Resistance  (VERY-HIGH-AMOUNT-FN CORROSION-RESISTANCE) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN CORROSION-RESISTANCE) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN FLAMMABILITY) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN FLAMMABILITY) )
+ (Flammability  (VERY-HIGH-AMOUNT-FN FLAMMABILITY) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN FLAMMABILITY) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN FRAGILITY) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN FRAGILITY) )
+ (Fragility  (VERY-HIGH-AMOUNT-FN FRAGILITY) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN FRAGILITY) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN HARDNESS) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN HARDNESS) )
+ (Hardness  (VERY-HIGH-AMOUNT-FN HARDNESS) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN HARDNESS) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN POROSITY) )
+ (Porosity  (VERY-HIGH-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN POROSITY) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN RELATIVE-HUMIDITY) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Relative-Humidity  (VERY-HIGH-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN RELATIVE-HUMIDITY) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN RIGIDITY) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN RIGIDITY) )
+ (Rigidity  (VERY-HIGH-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN SHEAR-STRENGTH) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN SHEAR-STRENGTH) )
+ (Shear-Strength  (VERY-HIGH-AMOUNT-FN SHEAR-STRENGTH) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN SHEAR-STRENGTH) ))
+
+(defobject  (VERY-HIGH-AMOUNT-FN TENSILE-STRENGTH) 
+ (Scalar-Interval  (VERY-HIGH-AMOUNT-FN TENSILE-STRENGTH) )
+ (Tensile-Strength  (VERY-HIGH-AMOUNT-FN TENSILE-STRENGTH) )
+ (Cyc-Compound-Term  (VERY-HIGH-AMOUNT-FN TENSILE-STRENGTH) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN DUCTILITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN DUCTILITY) )
+ (Ductility  (VERY-LOW-AMOUNT-FN DUCTILITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN DUCTILITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN FLAMMABILITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN FLAMMABILITY) )
+ (Flammability  (VERY-LOW-AMOUNT-FN FLAMMABILITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN FLAMMABILITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN FRAGILITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN FRAGILITY) )
+ (Fragility  (VERY-LOW-AMOUNT-FN FRAGILITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN FRAGILITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN HARDNESS) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN HARDNESS) )
+ (Hardness  (VERY-LOW-AMOUNT-FN HARDNESS) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN HARDNESS) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN MALLEABILITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN MALLEABILITY) )
+ (Malleability  (VERY-LOW-AMOUNT-FN MALLEABILITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN MALLEABILITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN POROSITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN POROSITY) )
+ (Porosity  (VERY-LOW-AMOUNT-FN POROSITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN POROSITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN RELATIVE-HUMIDITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Relative-Humidity  (VERY-LOW-AMOUNT-FN RELATIVE-HUMIDITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN RELATIVE-HUMIDITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN RIGIDITY) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN RIGIDITY) )
+ (Rigidity  (VERY-LOW-AMOUNT-FN RIGIDITY) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN RIGIDITY) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN SHEAR-STRENGTH) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN SHEAR-STRENGTH) )
+ (Shear-Strength  (VERY-LOW-AMOUNT-FN SHEAR-STRENGTH) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN SHEAR-STRENGTH) ))
+
+(defobject  (VERY-LOW-AMOUNT-FN TENSILE-STRENGTH) 
+ (Scalar-Interval  (VERY-LOW-AMOUNT-FN TENSILE-STRENGTH) )
+ (Tensile-Strength  (VERY-LOW-AMOUNT-FN TENSILE-STRENGTH) )
+ (Cyc-Compound-Term  (VERY-LOW-AMOUNT-FN TENSILE-STRENGTH) ))
+
+(defrelation  (WAVE-EMISSION-FN AUDIBLE-SOUND) 
+             (Subclass-Of  (WAVE-EMISSION-FN AUDIBLE-SOUND)  Emitting-A-Wave)
+             (Temporal-Stuff-Type  (WAVE-EMISSION-FN AUDIBLE-SOUND) )
+             (Script-Type  (WAVE-EMISSION-FN AUDIBLE-SOUND) )
+             (Cyc-Compound-Term  (WAVE-EMISSION-FN AUDIBLE-SOUND) )
+             (Class  (WAVE-EMISSION-FN AUDIBLE-SOUND) )
+             (Arity  (WAVE-EMISSION-FN AUDIBLE-SOUND)  1))
+
+(defrelation  (WAVE-EMISSION-FN VISIBLE-LIGHT) 
+             (Subclass-Of  (WAVE-EMISSION-FN VISIBLE-LIGHT)  Emitting-A-Wave)
+             (Temporal-Stuff-Type  (WAVE-EMISSION-FN VISIBLE-LIGHT) )
+             (Script-Type  (WAVE-EMISSION-FN VISIBLE-LIGHT) )
+             (Cyc-Compound-Term  (WAVE-EMISSION-FN VISIBLE-LIGHT) )
+             (Class  (WAVE-EMISSION-FN VISIBLE-LIGHT) )
+             (Arity  (WAVE-EMISSION-FN VISIBLE-LIGHT)  1)
+             (Documentation  (WAVE-EMISSION-FN VISIBLE-LIGHT) 
+              "A collection of events; a subset of Emitting-A-Wave. Each element of (Wave-Emission-Fn Visible-Light) is an event in which an instance of Visible-Light is emitted from some Wave-Source. Examples: the burning of a candle; the shining of a light bulb; a firefly's glowing. Almost every instance of (Wave-Emission-Fn Visible-Light) will also emit instances of other types of Electromagnetic-Radiation other than Visible-Light."))
+
+(defobject  (YEAR-FN -902)  (Cyc-Compound-Term  (YEAR-FN -902) )
+ (Stib  (YEAR-FN -902)   (STIB (YEAR-FN -902)) ))
+
+(defobject A-Few-Days-Duration (Time-Quantity A-Few-Days-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Days-Duration)
+ (Documentation A-Few-Days-Duration "Duration of 2 to 10 days"))
+
+(defobject A-Few-Decades-Duration (Time-Quantity A-Few-Decades-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Decades-Duration)
+ (Documentation A-Few-Decades-Duration "Duration of 2 to 10 decades"))
+
+(defobject A-Few-Hours-Duration (Time-Quantity A-Few-Hours-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Hours-Duration)
+ (Documentation A-Few-Hours-Duration "Duration of 2 to 10 hours"))
+
+(defobject A-Few-Minutes-Duration (Time-Quantity A-Few-Minutes-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Minutes-Duration)
+ (Documentation A-Few-Minutes-Duration "Duration of 2 to 10 minutes"))
+
+(defobject A-Few-Months-Duration (Time-Quantity A-Few-Months-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Months-Duration)
+ (Documentation A-Few-Months-Duration "A few months 2-10"))
+
+(defobject A-Few-Seconds-Duration
+ (Order-Of-Magnitude-Interval A-Few-Seconds-Duration)
+ (Time-Quantity A-Few-Seconds-Duration)
+ (Documentation A-Few-Seconds-Duration "Duration of 2 to 30 seconds"))
+
+(defobject A-Few-Weeks-Duration (Time-Quantity A-Few-Weeks-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Weeks-Duration)
+ (Documentation A-Few-Weeks-Duration "Duration of 2 to 10 weeks"))
+
+(defobject A-Few-Years-Duration (Time-Quantity A-Few-Years-Duration)
+ (Order-Of-Magnitude-Interval A-Few-Years-Duration)
+ (Documentation A-Few-Years-Duration "Duration of 2 to 10 years"))
+
+(defrelation Abandoning-Something
+             (Subclass-Of Abandoning-Something Losing-User-Rights)
+             (Subclass-Of Abandoning-Something Purposeful-Action)
+             (Temporal-Object-Type Abandoning-Something)
+             (Script-Type Abandoning-Something)
+             (Class Abandoning-Something)
+             (Arity Abandoning-Something 1)
+             (Documentation Abandoning-Something
+              "The collection of events in which some Agent deliberately gives up possession of something, without giving it to another."))
+
+(defrelation Ablation
+             (Subclass-Of Ablation Separation-Complete)
+             (Subclass-Of Ablation Intrinsic-State-Change-Event)
+             (Subclass-Of Ablation Removing-Something)
+             (Default-Disjoint-Script-Type Ablation)
+             (Temporal-Stuff-Type Ablation)
+             (Class Ablation)
+             (Arity Ablation 1)
+             (Documentation Ablation
+              "A collection of events.  In an Ablation, a (usually relatively thin) layer of material is removed from the surface of an object."))
+
+(defrelation Abnormal
+             (Slot Abnormal)
+             (Binary-Predicate Abnormal)
+             (Default-Monotonic-Predicate Abnormal)
+             (Range Abnormal Assertion)
+             (Domain Abnormal Cyc-System-List)
+             (Relation Abnormal)
+             (Arity Abnormal 2)
+             (Binary-Relation Abnormal)
+             (Documentation Abnormal "Every default rule in our system
+
+  P(x1,...,xn) => Q(x1,...,xn)
+
+is implicitly treated as
+
+  (not(abnormal(x1,...,xn)) and P(x1,...,xn) => Q(x1,...,xn)
+
+This allows rules without exceptions to never have to incur the
+overhead of default reasoning.
+
+Exceptions to rules are written like so:
+
+  (Except-When R(x1,...,xn) Rule001)
+
+and get canonicalized into rules concluding abnormal like so:
+
+  R(x1,...,xn) => (Abnormal(x1,....,xn) Rule001)
+
+Since a different 'abnormality' predicte is needed for every default
+rule in the system, we instead handle this uniqueness requirement by
+having a single Abnormal predicate which takes the rule in question
+as an argument.
+
+Also, the variables over which abnormality is computed is given as a
+single list.  This allows Abnormal to be binary rather than
+arbitrary arity. "))
+
+(defrelation Above-Directly
+             (Slot Above-Directly)
+             (Asymmetric-Binary-Predicate Above-Directly)
+             (Physical-Feature-Describing-Predicate Above-Directly)
+             (Subrelation-Of Above-Directly Above-Generally)
+             (Range Above-Directly Partially-Tangible)
+             (Domain Above-Directly Partially-Tangible)
+             (not (Transitive-Binary-Predicate Above-Directly))
+             (Relation Above-Directly)
+             (Arity Above-Directly 2)
+             (Binary-Relation Above-Directly)
+             (Documentation Above-Directly
+              "(Above-Directly ABOVE BELOW) means either (1) the volumetric center of ABOVE is directly above some point of BELOW, if ABOVE is smaller than BELOW; or (2) otherwise, it means that some point of ABOVE is directly above the volumetric center of BELOW."))
+
+(defrelation Above-Generally
+             (Slot Above-Generally)
+             (Asymmetric-Binary-Predicate Above-Generally)
+             (Physical-Feature-Describing-Predicate Above-Generally)
+             (Subrelation-Of Above-Generally Above-Higher)
+             (Range Above-Generally Partially-Tangible)
+             (Domain Above-Generally Partially-Tangible)
+             (Synonymous-External-Concept Above-Generally
+              Sensus-Information1997 "ABOVE")
+             (not (Transitive-Binary-Predicate Above-Generally))
+             (Relation Above-Generally)
+             (Arity Above-Generally 2)
+             (Binary-Relation Above-Generally)
+             (Documentation Above-Generally "(Above-Higher OBJ1 OBJ2)
+means that OBJ1 is more or less above OBJ2. To be more 
+precise: if OBJ1 would be within a cone-shaped set of 
+vectors within about 45 degrees of Up-Directly 
+pointing up from OBJ2 (see Up-Generally), then 
+(Above-Higher OBJ1 OBJ2). This
+is a wider predicate than Above-Directly, but narrower
+than Above-Higher. It probably most closely conforms to
+the English word 'above.'"))
+
+(defrelation Above-Ground-Level-In-A-Construction
+             (Subclass-Of Above-Ground-Level-In-A-Construction
+              Container-Product)
+             (Subclass-Of Above-Ground-Level-In-A-Construction
+              Level-Of-A-Construction)
+             (Existing-Object-Type Above-Ground-Level-In-A-Construction)
+             (Class Above-Ground-Level-In-A-Construction)
+             (Arity Above-Ground-Level-In-A-Construction 1)
+             (Documentation Above-Ground-Level-In-A-Construction
+              "This refers to first floor and up. We created this to make the distinction between basements and non-basements.  We'd like to be able to talk about, count, etc. the levels above ground."))
+
+(defrelation Above-Higher
+             (Slot Above-Higher)
+             (Spatial-Predicate Above-Higher)
+             (Transitive-Binary-Predicate Above-Higher)
+             (Asymmetric-Binary-Predicate Above-Higher)
+             (Cotemporal-Objects-Slot Above-Higher)
+             (Subrelation-Of Above-Higher Cotemporal)
+             (Range Above-Higher Partially-Tangible)
+             (Domain Above-Higher Partially-Tangible)
+             (Relation Above-Higher)
+             (Arity Above-Higher 2)
+             (Binary-Relation Above-Higher)
+             (Documentation Above-Higher
+              "(Above-Higher ?OBJ-A ?OBJ-B) means that ?OBJ-A is ``higher up'' than ?OBJ-B.  Since most contexts are terrestrial (see Terrestrial-Frame-Of-Reference-Mt) ``higher up'' typically means that the Altitude-Above-Ground of ?OBJ-A is greater than that of ?OBJ-B."))
+
+(defrelation Above-Overhead
+             (Slot Above-Overhead)
+             (Spatial-Predicate Above-Overhead)
+             (Asymmetric-Binary-Predicate Above-Overhead)
+             (Irreflexive-Binary-Predicate Above-Overhead)
+             (Subrelation-Of Above-Overhead Above-Directly)
+             (Subrelation-Of Above-Overhead Above-Generally)
+             (Range Above-Overhead Partially-Tangible)
+             (Domain Above-Overhead Partially-Tangible)
+             (not (Transitive-Binary-Predicate Above-Overhead))
+             (Relation Above-Overhead)
+             (Arity Above-Overhead 2)
+             (Binary-Relation Above-Overhead)
+             (Documentation Above-Overhead
+              "(Above-Overhead ABOVE BELOW) means that ABOVE is directly above BELOW, all points of ABOVE are higher than all points of BELOW, and they do NOT touch.  Examples: a bomb falling directly above a bunker; a street lamp shining directly above a person standing below."))
+
+(defrelation Above-Touching
+             (Slot Above-Touching)
+             (Irreflexive-Binary-Predicate Above-Touching)
+             (Asymmetric-Binary-Predicate Above-Touching)
+             (Spatial-Predicate Above-Touching)
+             (Subrelation-Of Above-Touching Touches)
+             (Subrelation-Of Above-Touching Above-Generally)
+             (Subrelation-Of Above-Touching Above-Directly)
+             (Range Above-Touching Partially-Tangible)
+             (Domain Above-Touching Partially-Tangible)
+             (not (Transitive-Binary-Predicate Above-Touching))
+             (Relation Above-Touching)
+             (Arity Above-Touching 2)
+             (Binary-Relation Above-Touching)
+             (Documentation Above-Touching
+              "(Above-Touching ABOVE BELOW) means that ABOVE is located over BELOW and they are touching.  More precisely, it implies both (Above-Directly ABOVE BELOW) and that ABOVE Touches BELOW.  Examples: a person sitting on a chair; coffee in a cup; a boat on water; a hat on a head. (Note that not every point of ABOVE must be higher than every point of BELOW.)"))
+
+(defrelation Abrading-Something
+             (Subclass-Of Abrading-Something Voluntary-Body-Movement)
+             (Subclass-Of Abrading-Something Physical-Contact-Situation)
+             (Subclass-Of Abrading-Something Ablation)
+             (Default-Disjoint-Script-Type Abrading-Something)
+             (Class Abrading-Something)
+             (Arity Abrading-Something 1)
+             (Documentation Abrading-Something
+              "A collection of events.  In an Abrading-Something event, the surface of some object is gradually worn away by scraping or similar physical contact involving friction.  Devices used in elements of Abrading-Something include files and sand paper; elements of Abrading-Something would include the event in which Howard Hughes sanded down the Spruce Goose for the last time, the event in which Lucy Ricardo filed her fingernails just before her singing debut at Rickie's club, etc."))
+
+(defrelation Absolute-Value-Fn
+             (Slot Absolute-Value-Fn)
+             (Function-From-Quantities-To-Quantities Absolute-Value-Fn)
+             (Domain Absolute-Value-Fn Scalar-Interval)
+             (Range Absolute-Value-Fn Scalar-Interval)
+             (Relation Absolute-Value-Fn)
+             (Arity Absolute-Value-Fn 2)
+             (Binary-Relation Absolute-Value-Fn)
+             (Documentation Absolute-Value-Fn
+              "Absolute-Value-Fn is the unary mathematical function that returns the absolute value of its argument; e.g., (Absolute-Value-Fn -2) returns 2, and (Absolute-Value-Fn 2) returns 2."))
+
+(defrelation Abstract-Information
+             (Subclass-Of Abstract-Information Intangible)
+             (Object-Type Abstract-Information)
+             (Stuff-Type Abstract-Information)
+             (Class Abstract-Information)
+             (Arity Abstract-Information 1)
+             (Documentation Abstract-Information
+              "The collection of all instances of abstract information stored or transmitted in some manner, and representing (to someone potentially at least) something.  Abstract information need not have any propositional content (see Propositional-Information-Thing); a score for music, or a bit-map, are examples.  Note that Abstract-Information is the abstract, intangible information, not any particular physical embodiment.  The same abstract information is often stored in many different physical Information-Bearing-Objects.  Abstract-Information may or may not be digital; it need not be representable in a particular number of bits.  Abstract-Information does not include every abstract Intangible or 'Platonic' concept, only that information that represents something and is (at least potentially) stored or transmitted for that purpose; thus, the ideal regular icosahedron is not in itself an instance of Abstract-Information.  Note also that although most instances of Abstract-Information are Intangible-Individuals, some are Set-Or-Collections such as Biological-Taxons and other Conventional-Classification-Types."))
+
+(defrelation Abstract-Programming-Language
+             (Subclass-Of Abstract-Programming-Language
+              Mathematical-Or-Computational-Thing)
+             (Subclass-Of Abstract-Programming-Language Language)
+             (Object-Type Abstract-Programming-Language)
+             (Class Abstract-Programming-Language)
+             (Arity Abstract-Programming-Language 1)
+             (Documentation Abstract-Programming-Language
+              "The collection of languages invented for use by computers. This includes both command languages and others which one doesn't really `program' in."))
+
+(defrelation Abstract-Shape
+             (Subclass-Of Abstract-Shape Geometric-Thing)
+             (Object-Type Abstract-Shape)
+             (Overlapping-External-Concept Abstract-Shape
+              Sensus-Information1997 "SHAPE-QUALITY")
+             (Class Abstract-Shape)
+             (Arity Abstract-Shape 1)
+             (Documentation Abstract-Shape
+              "A collection of objects; a subset of Geometric-Thing.  Abstract-Shape is the collection of all abstract physical shapes.  Each element of Abstract-Shape is an abstract region of physical space, having two or more dimensions.  This includes all circles, spheres, triangles, wedges, spirals, cylinders, toruses, etc."))
+
+(defrelation Abstract-Shape-Type
+             (Subclass-Of Abstract-Shape-Type Shape-Type)
+             (Collection Abstract-Shape-Type)
+             (Class Abstract-Shape-Type)
+             (Arity Abstract-Shape-Type 1)
+             (Documentation Abstract-Shape-Type
+              "A collection of collections.  Each element of Abstract-Shape-Type is a collection of things which are subsets of Abstract-Shape.  The elements of Abstract-Shape-Type comprise the basic physical shapes.  Examples include: Cylinder-Shape, Pyramid-Shape, Cone-Shape, Tube-Shape, Rectangular3D-Shape, Polygon, Spiral, etc."))
+
+(defrelation Academic-Professional
+             (Subclass-Of Academic-Professional Professional)
+             (Occupation-Type Academic-Professional)
+             (Class Academic-Professional)
+             (Arity Academic-Professional 1)
+             (Documentation Academic-Professional
+              "A collection of persons; a subset of Professional.  Each element of Academic-Professional is a person whose job is to educate and/or to perform research as an affiliate of an academic institution.  This includes members of the teaching and/or research staff of schools, colleges, universities, and research institutes."))
+
+(defrelation Academic-Quarter
+             (Subclass-Of Academic-Quarter Time-Interval)
+             (Temporal-Object-Type Academic-Quarter)
+             (Class Academic-Quarter)
+             (Arity Academic-Quarter 1)
+             (Documentation Academic-Quarter
+              "Each instance of this collection is a Time-Interval defined by some educational institution: one quarter of their Academic-Year.  Since the start dates, end dates, and duration may all vary depending on the institution, the year, etc., instances of this collection must unfortunately be time intervals like StanfordSpringQuarter1991."))
+
+(defrelation Academic-Semester
+             (Subclass-Of Academic-Semester Time-Interval)
+             (Temporal-Object-Type Academic-Semester)
+             (Class Academic-Semester)
+             (Arity Academic-Semester 1)
+             (Documentation Academic-Semester
+              "Each instance of this collection is a Time-Interval defined by some educational institution: one half of their Academic-Year. Since the start dates, end dates and duration may vary depending on the institution and year, instances will be time intervals such as ``StanfordSpringSemester1990-91''."))
+
+(defrelation Academic-Trimester
+             (Subclass-Of Academic-Trimester Time-Interval)
+             (Temporal-Object-Type Academic-Trimester)
+             (Class Academic-Trimester)
+             (Arity Academic-Trimester 1)
+             (Documentation Academic-Trimester
+              "Each instance of this collection is a Time-Interval defined by some educational institution: one third of their Academic-Year. Since the start dates, end dates, and duration may all vary depending on the institution and year, instances of this collection must unfortunately be time intervals like UCLASpringTrimester1990-91."))
+
+(defrelation Academic-Year
+             (Subclass-Of Academic-Year Time-Interval)
+             (Temporal-Object-Type Academic-Year)
+             (Class Academic-Year)
+             (Arity Academic-Year 1)
+             (Documentation Academic-Year
+              "Each instance of this collection is an annually recurring Time-Interval defined by an educational institution.  Since the start dates, end dates, and duration may all vary depending on the institution, the year, etc., instances of this collection must unfortunately be time intervals like Stanford1989-90AcademicYear."))
+
+(defrelation Acceleration
+             (Subclass-Of Acceleration Scalar-Interval)
+             (Subclass-Of Acceleration Physical-Attribute)
+             (Derived-Numeric-Attribute-Type Acceleration)
+             (Class Acceleration)
+             (Arity Acceleration 1)
+             (Documentation Acceleration
+              "Acceleration is the change in speed of an object per unit time.  It is a measurable physical quantity, measured in units such as MilesPerHourPerSecond."))
+
+(defrelation Accessing-Anibt
+             (Subclass-Of Accessing-Anibt Mental-Activity)
+             (Subclass-Of Accessing-Anibt Purposeful-Action)
+             (Subclass-Of Accessing-Anibt Transfer-In)
+             (Subclass-Of Accessing-Anibt Information-Transfer-Event)
+             (Temporal-Object-Type Accessing-Anibt)
+             (Default-Disjoint-Script-Type Accessing-Anibt)
+             (Class Accessing-Anibt)
+             (Arity Accessing-Anibt 1)
+             (Documentation Accessing-Anibt
+              "A collection of information transfer events.  Each element of Accessing-AnIBT is an action by which an agent accesses the content of some IBT (i.e., an element of Information-Bearing-Thing).  Examples include (getting information from) reading a newspaper, watching a film, listening to a musical performance, decoding an encrypted message, seeing a traffic police officer wave you on, or hearing your roommate ask you to take out the trash.  Of course, communication conventions play a role here.  In the Naive-Information-Mt, Cyc simply assumes that an agent who accesses an IBT understands its content afterwards.  In the InformationG-Mt, Cyc makes the more complicated inference that an agent who accesses an IBT understands its content afterwards only if the agent is able to get the encoded information using a convention familiar to that agent.  See also Communication-Convention, Has-Comm-Convention, Uses-Comm-Convention-For-Info."))
+
+(defrelation Account
+             (Subclass-Of Account Legal-Agreement)
+             (Subclass-Of Account Authorized-Agreement)
+             (Account-Type Account)
+             (Class Account)
+             (Arity Account 1)
+             (Documentation Account
+              "A collection of objects; a subset of Legal-Agreement.  Each element of Account is a recorded obligation (of some particular type) between specified parties, consisting of `funds' which typically can be added to and drawn upon.  Examples include the instances of Retirement-Account, Travel-Expense-Account, and of the many types of Financial-Account.  Note that the contents of an account need not be monetary; for example, the contents may be amounts of time, as in the subsets Vacation-Account or a Sick-Leave-Account.  Account does NOT include debt obligations of fixed face value that cannot be increased or reduced (such as a bond)."))
+
+(defrelation Account-Administrator
+             (Slot Account-Administrator)
+             (Binary-Predicate Account-Administrator)
+             (Range Account-Administrator Agent)
+             (Domain Account-Administrator Account)
+             (Relation Account-Administrator)
+             (Arity Account-Administrator 2)
+             (Binary-Relation Account-Administrator)
+             (Documentation Account-Administrator
+              "The predicate Account-Administrator identifies the agent who administers a particular account.  (Account-Administrator ACCT AGENT) means that the Account ACCT is administered by the individual or organization AGENT."))
+
+(defrelation Account-Balance
+             (Slot Account-Balance)
+             (Interval-Based-Quantity-Slot Account-Balance)
+             (Range Account-Balance Money)
+             (Domain Account-Balance Financial-Account)
+             (Relation Account-Balance)
+             (Arity Account-Balance 2)
+             (Binary-Relation Account-Balance)
+             (Documentation Account-Balance
+              "The predicate Account-Balance is used to indicate the balance of a particular account.  (Account-Balance ACCT BAL) means that the Financial-Account ACCT has the balance BAL; BAL is the amount of Money either owed by, or available to, the Account-Holder (depending upon the type of account)."))
+
+(defrelation Account-Holder
+             (Slot Account-Holder)
+             (Binary-Predicate Account-Holder)
+             (Range Account-Holder Agent)
+             (Domain Account-Holder Account)
+             (Relation Account-Holder)
+             (Arity Account-Holder 2)
+             (Binary-Relation Account-Holder)
+             (Documentation Account-Holder
+              "The predicate Account-Holder identifies the holder of a particular account.  (Account-Holder ACCT AGENT) means that the Account ACCT is held by the individual or organization AGENT; thus, money (or some other valuable) is owed to or from AGENT, in the amount shown in the account (see Account-Balance)."))
+
+(defrelation Account-Status
+             (Slot Account-Status)
+             (Binary-Predicate Account-Status)
+             (Range Account-Status Account-Status-Attribute)
+             (Domain Account-Status Account)
+             (Relation Account-Status)
+             (Arity Account-Status 2)
+             (Binary-Relation Account-Status)
+             (Documentation Account-Status
+              "The predicate Account-Status indicates whether a particular account is paid up, overdue, delinquent, etc.  (Account-Status ACCT STATUS) means that the Account ACCT has the attribute STATUS (see also Account-Status-Attribute)."))
+
+(defrelation Account-Status-Attribute
+             (Subclass-Of Account-Status-Attribute Attribute-Value)
+             (Sibling-Disjoint-Attribute-Type Account-Status-Attribute)
+             (Class Account-Status-Attribute)
+             (Arity Account-Status-Attribute 1)
+             (Documentation Account-Status-Attribute
+              "A collection of attributes.  Each element of Account-Status-Attribute is an attribute that describes the obligational status of an Account@cyc; e.g.,Paid-In-Full, In-Compliance-With-Payment-Schedule, Payment-Overdue, Account-Inactive."))
+
+(defrelation Account-Type
+             (Subclass-Of Account-Type Existing-Object-Type)
+             (Sibling-Disjoint-Collection Account-Type)
+             (Temporal-Stuff-Type Account-Type)
+             (Class Account-Type)
+             (Arity Account-Type 1)
+             (Documentation Account-Type
+              "A collection of collections.  Each element of Account-Type is a collection of financial accounts of some type.  Examples: Savings-Account, Credit-Card-Account, Retirement-Account, Social-Security-Account, Travel-Expense-Account.  Typically, accounts are denominated in units of Money."))
+
+(defrelation Acknowledged-Act
+             (Slot Acknowledged-Act)
+             (Anti-Transitive-Binary-Predicate Acknowledged-Act)
+             (Irreflexive-Binary-Predicate Acknowledged-Act)
+             (Asymmetric-Binary-Predicate Acknowledged-Act)
+             (Subrelation-Of Acknowledged-Act Starts-After-Ending-Of)
+             (Range Acknowledged-Act Communication-Act-Single)
+             (Domain Acknowledged-Act Acknowledging-Communication-Act)
+             (Relation Acknowledged-Act)
+             (Arity Acknowledged-Act 2)
+             (Binary-Relation Acknowledged-Act)
+             (Documentation Acknowledged-Act
+              "(Acknowledged-Act ?ACKACT ?COMACT) means that the Communication-Act-Single ?COMACT is acknowledged and replied-to by the responsive Acknowledging-Communication-Act ?ACKACT.   Particular acceptances or rejections of a particular project proposal would involve examples of this predicate, as would a person responding to a wedding invitation, or a court responding to a motion.  See also Response-To which refers to the abstarct content of the communication."))
+
+(defrelation Acknowledging-Communication-Act
+             (Subclass-Of Acknowledging-Communication-Act
+              Communication-Act-Single)
+             (Default-Disjoint-Script-Type Acknowledging-Communication-Act)
+             (Temporal-Object-Type Acknowledging-Communication-Act)
+             (Class Acknowledging-Communication-Act)
+             (Arity Acknowledging-Communication-Act 1)
+             (Documentation Acknowledging-Communication-Act
+              "The collection of actions which are Performed-By one Agent to convey information about the receipt of a prior Communication-Act-Single which was Performed-By another Agent.  An example: Judy saying `No' in response to Jane's prior act of saying `Will you clean the toaster.'"))
+
+(defrelation Acquaintance-Attribute
+             (Subclass-Of Acquaintance-Attribute Attribute-Value)
+             (Social-Attribute-Type Acquaintance-Attribute)
+             (Class Acquaintance-Attribute)
+             (Arity Acquaintance-Attribute 1)
+             (Documentation Acquaintance-Attribute
+              "The collection of attributes that specify ways in which (and/or degrees to which) one person is acquainted with another  E.g., some instances of this collection are:  Famous-Person-Acquaintance, True-Fan-Acquaintance, Intimate-Acquaintance, Frequent-Contact-Acquaintance, etc."))
+
+(defrelation Acquaintances
+             (Ternary-Predicate Acquaintances)
+             (Nth-Domain Acquaintances 3 Acquaintance-Attribute)
+             (Nth-Domain Acquaintances 2 Agent)
+             (Nth-Domain Acquaintances 1 Person)
+             (Relation Acquaintances)
+             (Documentation Acquaintances
+              "(Acquaintances X Y HOW) means that X is acquainted with Y,  at least in the way (and/or to the degree) specified by HOW.  Note that Y must be an Agent, so this is not the predicate to use to express the fact that Fred `is acquainted with' drag racing.  Note that, depending on the value for HOW, there may or may not be some way in which Y is acquainted with X.  E.g., (Acquaintances Lenat Madonna True-Fan-Acquaintance) but there is no Z such that (Acquaintances Madonna Lenat Z).
+Note that X and Y should rarely be instances of Entity.  In fact, Doug has only been acqainted with Madonna since 1983, so we should write (Holds-In (Time-Interval-From-Fn (Year-Fn 1983) Now) (Acquaintances Lenat Madonna True-Fan-Acquaintance))."))
+
+(defrelation Acquainted-With
+             (Slot Acquainted-With)
+             (Symmetric-Binary-Predicate Acquainted-With)
+             (Reflexive-Binary-Predicate Acquainted-With)
+             (Cotemporal-Objects-Slot Acquainted-With)
+             (Subrelation-Of Acquainted-With Cotemporal)
+             (Range Acquainted-With Individual-Agent)
+             (Domain Acquainted-With Individual-Agent)
+             (Genl-Inverse Acquainted-With Acquainted-With)
+             (not (Asymmetric-Binary-Predicate Acquainted-With))
+             (not (Anti-Symmetric-Binary-Predicate Acquainted-With))
+             (not (Transitive-Binary-Predicate Acquainted-With))
+             (Relation Acquainted-With)
+             (Arity Acquainted-With 2)
+             (Binary-Relation Acquainted-With)
+             (Documentation Acquainted-With
+              "(Acquainted-With AGENT1 AGENT2) means the Individual-Agent AGENT1 is acquainted with the Individual-Agent AGENT2 (in the minimal sense that AGENT1 has come into physical or conversational contact with AGENT2, or that they have somehow knowingly communicated with each other).  This typically means that each Individual-Agent is aware of some facts about the other.  In cases where one of the Individual-Agents is sentient, this typically includes the ability of this agent to recognize the other by appearance, voice, scent, or some other physical attribute."))
+
+(defrelation Action
+             (Subclass-Of Action Event)
+             (Script-Type Action)
+             (Temporal-Object-Type Action)
+             (Class Action)
+             (Arity Action 1)
+             (Documentation Action
+              "A collection of events.  Each instance of Action is an event in which something is done by some agent.  (See Done-By.)  Actions may include any event in which one or more actor(s) effect some change(s) in the tangible or intangible state of the world, typically by some expenditure of effort or energy.  But note that it is not required that any tangible object be moved, changed, produced, or destroyed for an action to occur; the effects of actions may be intangible (such as the change in a bank balance, or the intimidation of a subordinate).  Depending upon the context, actors may be animate or inanimate, conscious or nonconscious.  For actions that are intentional, see also Purposeful-Action, Performed-By."))
+
+(defrelation Action-Expresses-Feeling
+             (Slot Action-Expresses-Feeling)
+             (Binary-Predicate Action-Expresses-Feeling)
+             (Range Action-Expresses-Feeling Feeling-Attribute-Type)
+             (Domain Action-Expresses-Feeling Action)
+             (Arg2-Genl Action-Expresses-Feeling Feeling-Attribute)
+             (Relation Action-Expresses-Feeling)
+             (Arity Action-Expresses-Feeling 2)
+             (Binary-Relation Action-Expresses-Feeling)
+             (Documentation Action-Expresses-Feeling
+              "(Action-Expresses-Feeling ACT EMOTYPE) means that the particular action ACT expresses the doer's feeling of EMOTYPE.
+Note: additional complications arise in using this in inference, as people can `fake' actions such as laughing, crying, etc., to mislead other people."))
+
+(defrelation Action-On-Object
+             (Subclass-Of Action-On-Object Action)
+             (Temporal-Object-Type Action-On-Object)
+             (Script-Type Action-On-Object)
+             (Class Action-On-Object)
+             (Arity Action-On-Object 1)
+             (Documentation Action-On-Object
+              "The collection of events in which some doer acts on an object. Each element of Action-On-Object is an action in which both the roles of Done-By and Object-Acted-On (qq.v.) are filled.  Positive examples: someone typing on a keyboard; a tornado destroying a building.  Negative examples: a person dancing; wind blowing."))
+
+(defrelation Actor-Capacity
+             (Ternary-Predicate Actor-Capacity)
+             (Nth-Domain Actor-Capacity 3 Capacity-Attribute)
+             (Nth-Domain Actor-Capacity 2 Situation)
+             (Nth-Domain Actor-Capacity 1 Something-Existing)
+             (Relation Actor-Capacity)
+             (Documentation Actor-Capacity
+              "The predicate Actor-Capacity is used to indicate the capacity in which some entity participates in a particular event or situation.  (Actor-Capacity ENTITY SIT CAP) means that ENTITY has an (unspecified) role in SIT with the Capacity-Attribute CAP.  An important use of Actor-Capacity is with the capacity attributes Main-Function or Intended-Function to state that a device is serving its Primary-Function or intended function (i.e., Intended-Behavior-Capable) in a certain situation."))
+
+(defrelation Actor-Parts-Affected
+             (Slot Actor-Parts-Affected)
+             (Actor-Slot Actor-Parts-Affected)
+             (Subrelation-Of Actor-Parts-Affected Object-Acted-On)
+             (Subrelation-Of Actor-Parts-Affected Non-Deliberate-Actors)
+             (Range Actor-Parts-Affected Animal-Body-Part)
+             (Range Actor-Parts-Affected Organism-Part)
+             (Domain Actor-Parts-Affected Event)
+             (Relation Actor-Parts-Affected)
+             (Arity Actor-Parts-Affected 2)
+             (Binary-Relation Actor-Parts-Affected)
+             (Documentation Actor-Parts-Affected
+              "(Actor-Parts-Affected ACT PART) means that PART is an Object-Acted-On in ACT, and it is one of the Anatomical-Parts of the organism which is Bodily-Acted-On in ACT.  For example, during a man's morning shave, his Beard is an Actor-Parts-Affected, but the hand with which he shaves is not, because his beard is changed, but his hand is not changed (`acted on') in any significant way."))
+
+(defrelation Actor-Parts-Involved
+             (Slot Actor-Parts-Involved)
+             (Actor-Slot Actor-Parts-Involved)
+             (Subrelation-Of Actor-Parts-Involved Pre-Actors)
+             (Subrelation-Of Actor-Parts-Involved Non-Deliberate-Actors)
+             (Range Actor-Parts-Involved Organism-Part)
+             (Domain Actor-Parts-Involved Event)
+             (Relation Actor-Parts-Involved)
+             (Arity Actor-Parts-Involved 2)
+             (Binary-Relation Actor-Parts-Involved)
+             (Documentation Actor-Parts-Involved
+              "(Actor-Parts-Involved ACT PART) means that PART is one of the Anatomical-Parts of an organism who has an active role in the event ACT, and, moreover, that PART is somehow involved in the action.  Note that the organism to which PART belongs either performs or does ACT; it is not merely an Object-Acted-On.  Some examples of Actor-Parts-Involved  include: the eyes of someone who is sneezing (or crying); the left foot of someone playing in a football game; the right hand of someone who is shaking hands; the claws of a cat who is scratching someone.  As a negative example, consider your hair while you are getting a haircut.  It is not an Actor-Parts-Involved, because you are passive in that event; it is, though, an Actor-Parts-Affected in that event."))
+
+(defrelation Actor-Slot
+             (Subclass-Of Actor-Slot Role)
+             (Subclass-Of Actor-Slot Binary-Predicate)
+             (Subclass-Of Actor-Slot Extensional-Representation-Predicate)
+             (Predicate-Category Actor-Slot)
+             (Class Actor-Slot)
+             (Arity Actor-Slot 1)
+             (Documentation Actor-Slot
+              "A collection of binary predicates.  Each element of Actor-Slot relates some instance of Event to a thing involved in that event (here called a `participant').  The first argument of every Actor-Slot is an instance of Event, and the second argument is an instance of Something-Existing, denoting a participant in that event.  Each specialized actor slot indicates HOW its participant participates in the event, i.e., in what role (e.g., Inputs, Outputs, Done-By).  `Participant' does NOT include the time of the event's occurrence, external representations of the event, and other more remotely related things that are not directly or indirectly `involved' in the occurrence of the event."))
+
+(defrelation Actors
+             (Slot Actors)
+             (Actor-Slot Actors)
+             (Subrelation-Of Actors Temporally-Intersects)
+             (Range Actors Something-Existing)
+             (Domain Actors Event)
+             (Synonymous-External-Concept Actors Sensus-Information1997
+              "PARTICIPANT")
+             (Relation Actors)
+             (Arity Actors 2)
+             (Binary-Relation Actors)
+             (Documentation Actors
+              "The predicate Actors is the most general instance of Actor-Slot.  All other actor slots are specializations of this predicate.  Thus, Actors is a broad concept which includes any entity which is involved in an action.  (Actors EVENT ACTOR) means that ACTOR is somehow meaningfully (directly or indirectly) involved in EVENT during EVENT.  Mere cotemporality of objects (somewhere in the universe) with a particular event is not enough `involvement' to make those objects Actors of that event.  Nor is a representation of an event among the Actors of that event, unless the representation affects the event."))
+
+(defrelation Acts-In-Capacity
+             (Quaternary-Predicate Acts-In-Capacity)
+             (Arg4-Isa Acts-In-Capacity Capacity-Attribute)
+             (Nth-Domain Acts-In-Capacity 4 Capacity-Attribute)
+             (Nth-Domain Acts-In-Capacity 3 Script-Type)
+             (Nth-Domain Acts-In-Capacity 2 Actor-Slot)
+             (Nth-Domain Acts-In-Capacity 1 Agent)
+             (Relation Acts-In-Capacity)
+             (Documentation Acts-In-Capacity
+              "The predicate Acts-In-Capacity indicates the capacity in which an agent participates in certain kinds of actions.  (Acts-In-Capacity AGENT ROLE SCRIPT-TYPE CAP) means that the agent AGENT plays the role ROLE in instances of SCRIPT-TYPE, and s/he does that role in the capacity CAP.  CAP is a Capacity-Attribute (q.v.) which describes the AGENT's mode of participation--e.g., as a job, hobby, main function, support function, etc.  Contrast three cases of acts of Greeting-Someone, when Performed-By: (1) instances of Receptionist, in their Job-Capacity and as their MainFunction@cyc; (2) instances of Flight-Attendant, in their Job-Capacity but as a SupportFunction@cyc; and (3) instances of Train-Engineer, in a Hobby-Capacity (though they do it while working, it's not part of their job)."))
+
+(defrelation Address-Location-Designator
+             (Subclass-Of Address-Location-Designator Attribute-Value)
+             (Subclass-Of Address-Location-Designator Character-String)
+             (Object-Type Address-Location-Designator)
+             (Class Address-Location-Designator)
+             (Arity Address-Location-Designator 1)
+             (Documentation Address-Location-Designator
+              "A collection of strings.  Each element of Address-Location-Designator is a string that denotes an address.  Each string indicates one entire address.  For example: `President Bill Clinton, White House,, 1600 Pennsylvania Avenue, Washington, DC."))
+
+(defrelation Address-Text
+             (Slot Address-Text)
+             (Functional-Slot Address-Text)
+             (Range Address-Text Address-Location-Designator)
+             (Domain Address-Text Contact-Location)
+             (Relation Address-Text)
+             (Arity Address-Text 2)
+             (Binary-Relation Address-Text)
+             (Documentation Address-Text
+              "The predicate Address-Text maps a particular element of Contact-Location to its Address-Location-Designator, ADDRESS.  (Address-Text LOC ADDRESS) means that the Contact-Location LOC has the address ADDRESS.  For example, the Address-Text of the Cycorp Mailing-Location is `Cycorp, 3721 Executive Center Dr., Ste. 100, Austin, TX 78731-1615.'  See also Contact-Location."))
+
+(defrelation Adjacent-Paths-At-Junction
+             (Slot Adjacent-Paths-At-Junction)
+             (Spatial-Predicate Adjacent-Paths-At-Junction)
+             (Connection-Predicate Adjacent-Paths-At-Junction)
+             (Cotemporal-Objects-Slot Adjacent-Paths-At-Junction)
+             (Subrelation-Of Adjacent-Paths-At-Junction Connected-To)
+             (Subrelation-Of Adjacent-Paths-At-Junction
+              Physical-Decompositions)
+             (Subrelation-Of Adjacent-Paths-At-Junction Cotemporal)
+             (Subrelation-Of Adjacent-Paths-At-Junction On-Path-Generic)
+             (Range Adjacent-Paths-At-Junction Path-Generic)
+             (Domain Adjacent-Paths-At-Junction Junction-Of-Paths)
+             (Relation Adjacent-Paths-At-Junction)
+             (Arity Adjacent-Paths-At-Junction 2)
+             (Binary-Relation Adjacent-Paths-At-Junction)
+             (Documentation Adjacent-Paths-At-Junction
+              "(adjacentPathsAtJunction JUNCT PATH) means that the Junction-Of-Paths JUNCT has PATH as one of the paths joining it. A junction may connect many paths (it must connect more than one), and a path may pass through many junctions, and may end at a junction.  Examples: all the streets meeting at a certain intersection, or the particular trachea and both primary bronchi meeting at  the Tracheobronchial-Junction between a certain person's lungs.  Within a specified Path-System, a node is the end of all the links to that node; this is established with Link-Between-In-System or Path-Between-In-System."))
+
+(defrelation Adjacent-To
+             (Slot Adjacent-To)
+             (Inter-Existing-Object-Slot Adjacent-To)
+             (Symmetric-Binary-Predicate Adjacent-To)
+             (Physical-Feature-Describing-Predicate Adjacent-To)
+             (Spatial-Predicate Adjacent-To)
+             (Subrelation-Of Adjacent-To Touches)
+             (Range Adjacent-To Spatial-Thing)
+             (Domain Adjacent-To Spatial-Thing)
+             (Genl-Inverse Adjacent-To Adjacent-To)
+             (not (Transitive-Binary-Predicate Adjacent-To))
+             (Relation Adjacent-To)
+             (Arity Adjacent-To 2)
+             (Binary-Relation Adjacent-To)
+             (Documentation Adjacent-To
+              "arg1 and arg2 are touching such that their region of contact is a line (i.e. not a point).  Also arg1 is neither above nor below arg2."))
+
+(defrelation Adjective
+             (Subclass-Of Adjective Speech-Part)
+             (Linguistic-Object-Type Adjective)
+             (Class Adjective)
+             (Arity Adjective 1)
+             (Documentation Adjective
+              "The collecton of all adjectives. Adjectives are words which can modify nouns. Many adjectives have comparative and superlative forms. Example: `red'."))
+
+(defrelation Administrator
+             (Subclass-Of Administrator Desk-Worker)
+             (Occupation-Type Administrator)
+             (Class Administrator)
+             (Arity Administrator 1)
+             (Documentation Administrator
+              "A collection of persons; a subset of Professional.  Each element of Administrator is an employee of an organization who is responsible for managing its organizational affairs.  Elements of Administrator may or may not also be required to manage people.  If so, then they are also Managers (q.v.)."))
+
+(defrelation Admiration
+             (Subclass-Of Admiration Respect)
+             (Feeling-Attribute-Type Admiration)
+             (Class Admiration)
+             (Arity Admiration 1)
+             (Documentation Admiration
+              "A feeling of strong approval.  An intense positive attitude towards another person(s) or group.  May be accompanied by emulation.  Admiration is different than Respect (qv).  This is a collection --- see Happiness for an explanation.  Some more specialized Feeling-Attribute-Types than Admiration are Wonder-Admiration, Adulation, Awe, etc. "))
+
+(defrelation Adult-Animal
+             (Subclass-Of Adult-Animal Animal)
+             (Subclass-Of Adult-Animal Biological-Stage-Of-Development)
+             (Existing-Object-Type Adult-Animal)
+             (The-Partition Adult-Animal Juvenile-Animal
+               (THE-PARTITION ADULT-ANIMAL JUVENILE-ANIMAL) )
+             (Class Adult-Animal)
+             (Arity Adult-Animal 1)
+             (Documentation Adult-Animal
+              "The collection of all adult animals (including adult people), meaning all elements of Animal that are mature enough to bear offspring, or older."))
+
+(defrelation Adult-Female-Person
+             (Subclass-Of Adult-Female-Person Human-Adult)
+             (Subclass-Of Adult-Female-Person Female-Person)
+             (Existing-Object-Type Adult-Female-Person)
+             (Class Adult-Female-Person)
+             (Arity Adult-Female-Person 1)
+             (Documentation Adult-Female-Person
+              "The collection of all women; i.e., Persons who are adult and female"))
+
+(defrelation Adverb
+             (Subclass-Of Adverb Speech-Part)
+             (Linguistic-Object-Type Adverb)
+             (Class Adverb)
+             (Arity Adverb 1)
+             (Documentation Adverb
+              "The collection of all adverbs. Adverbs are words which can modify adverbs, verbs, or adjectives. Many adverbs are morphologically derived from adjectives. Example: `slowly'."))
+
+(defrelation Advertising
+             (Subclass-Of Advertising Communication-Act-Single)
+             (Temporal-Object-Type Advertising)
+             (Script-Type Advertising)
+             (Class Advertising)
+             (Arity Advertising 1)
+             (Documentation Advertising
+              "A collection of Communication-Act-Singles.  In an Advertising event, someone is communicating, to potential customers of an Agent, the desire of that agent to do business with those customers (either to `do business' in general or to sell them something specific."))
+
+(defrelation Affection
+             (Subclass-Of Affection Feeling-Attribute)
+             (Feeling-Attribute-Type Affection)
+             (Class Affection)
+             (Arity Affection 1)
+             (Documentation Affection
+              "A feeling of fondness for someone or something.  Sympathy, liking, warmth, tenderness.  This is a Collection --- for an explanation of that, see Happiness.  Some more specialized Feeling-Attribute-Types than Affection are Love, Passion, etc."))
+
+(defrelation Affiliated-With
+             (Slot Affiliated-With)
+             (Cotemporal-Objects-Slot Affiliated-With)
+             (Symmetric-Binary-Predicate Affiliated-With)
+             (Irreflexive-Binary-Predicate Affiliated-With)
+             (Subrelation-Of Affiliated-With Cotemporal)
+             (Range Affiliated-With Agent)
+             (Domain Affiliated-With Agent)
+             (Genl-Inverse Affiliated-With Affiliated-With)
+             (not (Transitive-Binary-Predicate Affiliated-With))
+             (Relation Affiliated-With)
+             (Arity Affiliated-With 2)
+             (Binary-Relation Affiliated-With)
+             (Documentation Affiliated-With
+              "(Affiliated-With AGENT1 AGENT2) means Agents AGENT1 and AGENT2 are somehow affiliated.  This is a broad relation, but it involves at least the voluntary entry into an understood relationship, with rights and obligations, by at least one of the affiliated Agents@cyc; i.e., they may be business partners, kin, employer/employee, one (say a person) may be a member of the other (say an organization), parent-company/subsidiary, etc."))
+
+(defrelation After
+             (Slot After)
+             (Transitive-Binary-Predicate After)
+             (Asymmetric-Binary-Predicate After)
+             (Primitive-Temporal-Relation After)
+             (Irreflexive-Binary-Predicate After)
+             (Range After Time-Point)
+             (Domain After Time-Point)
+             (Overlapping-External-Concept After Sensus-Information1997
+              "AFTER")
+             (Relation After)
+             (Arity After 2)
+             (Binary-Relation After)
+             (Documentation After
+              "(After ?X ?Y) means Time-Point ?X is after (occurs later in time than) Time-Point ?Y.   
+Note:  Individual Time-Points are seldom mentioned in axioms; rather, the axiom is likely to use some Complex-Temporal-Relation, such as Starts-After-Ending-Of, which holds between two Temporal-Thing.   These Complex-Temporal-Relations are themselves usually defined in terms of Primitive-Temporal-Relations, such as After and Simultaneous-With, which relate one Time-Point to another."))
+
+(defrelation After-Adding
+             (Slot After-Adding)
+             (Binary-Predicate After-Adding)
+             (Inference-Related-Bookkeeping-Predicate After-Adding)
+             (Range After-Adding Cyc-System-Symbol)
+             (Domain After-Adding Predicate)
+             (Relation After-Adding)
+             (Arity After-Adding 2)
+             (Binary-Relation After-Adding)
+             (Documentation After-Adding
+              "Whenever a source is added to a gaf use of a predicate, each of that predicate's After-Adding functions is called on that source."))
+
+(defrelation After-Removing
+             (Slot After-Removing)
+             (Binary-Predicate After-Removing)
+             (Inference-Related-Bookkeeping-Predicate After-Removing)
+             (Range After-Removing Cyc-System-Symbol)
+             (Domain After-Removing Predicate)
+             (Relation After-Removing)
+             (Arity After-Removing 2)
+             (Binary-Relation After-Removing)
+             (Documentation After-Removing
+              "Whenever a source is removed from a gaf use of a predicate, each of that predicate's After-Removing functions is called on that source."))
+
+(defrelation Afternoon
+             (Subclass-Of Afternoon Qualitative-Time-Of-Day)
+             (Temporal-Object-Type Afternoon)
+             (Class Afternoon)
+             (Arity Afternoon 1)
+             (Documentation Afternoon
+              "An Afternoon is the daily Event where the Sun moves from its `highest' position in the daily cycle and `sets', i.e from noon till Sunset.  A Midday overlaps the start of an Afternoon, and an Evening is Contiguous-After an Afternoon.  Each Afternoon is Temporally-Finished-By a Sunset."))
+
+(defrelation Age
+             (Slot Age)
+             (Interval-Based-Quantity-Slot Age)
+             (Range Age Time-Quantity)
+             (Domain Age Something-Existing)
+             (Synonymous-External-Concept Age Sensus-Information1997
+              "AGE-PROPERTY-ASCRIPTION")
+             (Relation Age)
+             (Arity Age 2)
+             (Binary-Relation Age)
+             (Documentation Age "(age THING TIME) means that the thing THING
+has the age TIME, where thing can be a person, a galaxy, or
+anything else with temporal extent, e.g., (age MaryShepherd 
+       (YearsDuration 40)). The previous assertion is not quite right, however:
+notice that one can talk about the Birth-Date of a person quite safely, but whenever one makes a statement about the AGE of a person that statement will only be true `for a while' -- i.e., in some temporal context.  Therefore it would be a mistake to simply assert to Cyc that (Age Lenat (Years-Duration 45)), because that would be true in some contexts and false in others.  So what one does is to assert an expression of the form  (Holds-In ?X (Age ?Y ?Z)) to indicate that during time interval ?X, the thing ?Y has age ?Z.  For example, (Holds-In (Quarter-Fn 2 (Year-Fn 1996)) (Age Lenat (Years-Duration 45)), which means that Doug is a 45-year-old during the entire second quarter of 1996.  It is seldom correct to use Age outside of some temporal qualification."))
+
+(defrelation Agent
+             (Subclass-Of Agent Composite-Tangible-And-Intangible-Object)
+             (Existing-Object-Type Agent)
+             (Class Agent)
+             (Arity Agent 1)
+             (Documentation Agent
+              "An agent is something which can show independent action, whether conscious or not.  Agent represents the collection of all agents.  Most animals are considered agents, in most contexts; so are most organizations.   Most plants are not agents, in most contexts.  Inanimate devices are sometimes considered agents, in certain contexts.  This is one of those concepts which is important yet very hard to define precisely.  Here is some elaboration, to help convey the intended meaning of the basic criterion for agenthood:  It must seem that a kind of decision-making is going on, even if it's down at the `mindless' level of the reflex reaction of a spider leg to heat, or the reflex reaction of a Human Resources Department rejecting an applicant with no formal degree.  It generally `sounds right' or `feels  natural' to assign causality to agents, rather than some larger or smaller entity.  E.g., it is more natural to say `Fred wrote an essay' than to say `Fred's left hand wrote an essay' or, at the other extreme, to say `The Solar System wrote an essay'.  Similarly, we might very well talk about `Microsoft' buying IBM, but it would be unnatural and even incorrect to talk about a much larger entity (`corporate America') or smaller entity (`the Microsoft lawyers') as the performer of that buying action."))
+
+(defrelation Agentive-Noun
+             (Subclass-Of Agentive-Noun Speech-Part)
+             (Linguistic-Object-Type Agentive-Noun)
+             (Class Agentive-Noun)
+             (Arity Agentive-Noun 1)
+             (Documentation Agentive-Noun
+              "The collection of all nouns in the agentive form.  Agentive nouns usually denote the `doer' or `performer' of some action, and often end in `-er' or `-or'. Example: `runner'."))
+
+(defrelation Agility
+             (Subclass-Of Agility Script-Performance-Attribute)
+             (Script-Performance-Attribute-Type Agility)
+             (Class Agility)
+             (Arity Agility 1)
+             (Documentation Agility
+              "Agility is the Script-Performance-Attribute-Type for describing actions in which the performer's whole body moves precisely and in a well-coordinated fashion."))
+
+(defrelation Agreeing-Agents
+             (Slot Agreeing-Agents)
+             (Inter-Actor-Slot Agreeing-Agents)
+             (Range Agreeing-Agents Agent)
+             (Domain Agreeing-Agents Agreement)
+             (Relation Agreeing-Agents)
+             (Arity Agreeing-Agents 2)
+             (Binary-Relation Agreeing-Agents)
+             (Documentation Agreeing-Agents
+              "The predicate Agreeing-Agents relates a particular agreement to the agents who are making the agreement.  (Agreeing-Agents AGR PARTY) means that the Agreement AGR has the Agent PARTY among its agreeing parties.  Agreeing-Agents may have specialized roles, such as Agreeing-Buyer or Agreeing-Seller, Insuring-Agent or Policy-Holder, Employed-Agent or Employing-Agent.  The Agreeing-Agents will be mentioned in their agreement."))
+
+(defrelation Agreement
+             (Subclass-Of Agreement Intangible-Existing-Thing)
+             (Subclass-Of Agreement Supposed-To-Be-Microtheory)
+             (Existing-Object-Type Agreement)
+             (Class Agreement)
+             (Arity Agreement 1)
+             (Documentation Agreement
+              "A collection of `objects' with temporal extent.  Each element of Agreement involves two or more parties, who agree that certain propositions should be true.  Making the propositions true may require some action or commitment of wealth on the part of one or more of the Agreeing-Agents.  Thus, elements of Agreement will usually involve some instances of Obligation.
+Note:  Elements of Agreement and Obligation differ, however, in that an Obligated-Agent is responsible for the truth of all of the propositions in an obligation.  In an agreement, some agents may not be re

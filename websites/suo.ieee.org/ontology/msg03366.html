@@ -1,0 +1,193 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Formal Languages -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Wed, 3 Oct 2001 15:05:45 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3BBB63B5.5163479E@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg03366.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Formal Languages</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg03369.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg03360.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd22.html#03366">Thread Index</A></Td>
+<TD><A HREF="msg03367.html">Date Prev</A></TD>
+<TD><A HREF="msg03365.html">Date Next</A>
+</TD>
+<TD><A HREF="mail23.html#03366">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Formal Languages</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Arisbe &lt;<A HREF="mailto:arisbe@stderr.org">arisbe@stderr.org</A>&gt;, Generic Ontology Group &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Formal Languages</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</li>
+<li><em>Date</em>: Wed, 03 Oct 2001 15:15:01 -0400</li>
+<li><em>CC</em>: Organization Complexity Autonomy &lt;<A HREF="mailto:oca@cc.newcastle.edu.au">oca@cc.newcastle.edu.au</A>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+It is time to introduce a few elements of formal language theory
+that will be found to have a general utility.  The initial parts
+of this presentation are fairly standard material, though I will
+be trying out several innovations later on, as we get under way.
+
+| Note On Notation.  In transcribing this text from my archives,
+| I will be using a few antic devices and display conventions
+| from the Asciimolean Museum of semi-antique languages.
+|
+| @A@  =  attic A = greek alpha,
+| #A#  =  bold  A,
+| $A$  =  curly A = script A,
+| !A!  =  singly underscored A,
+| %A%  =  doubly underscored A,
+| x^j  =  x superscript j,
+| x_j  =  x subscript j.
+
+¤~~~~~~~~~¤~~~~~~~~~¤~DISSERTATION~¤~~~~~~~~~¤~~~~~~~~~¤
+
+| Document History:
+|
+| Subject:  Inquiry Driven Systems:  An Inquiry Into Inquiry
+| Contact:  Jon Awbrey &lt;jawbrey@oakland.edu&gt;
+| Version:  Draft 8.62
+| Created:  23-Jun-1996
+| Revised:  02-Oct-2001
+| Advisor:  M.A. Zohdy
+| Setting:  Oakland University, Rochester, Michigan, USA
+| Excerpt:  Subsection 1.3.10.9 (The Cactus Language: Syntax)
+
+A few definitions from formal language theory are required at this point.
+
+An &quot;alphabet&quot; is a finite set of signs, typically, !A! = {a_1, ..., a_n}.
+
+A &quot;string&quot; over an alphabet !A! is a finite sequence of signs from !A!.
+
+The &quot;length&quot; of a string is just its length as a sequence of signs.
+A sequence of length 0 yields the &quot;empty string&quot;, here presented as &quot;&quot;.
+A sequence of length k &gt; 0 is typically presented in the concatenated forms:
+
+s_1 s_2 ... s_(k-1) s_k,
+
+or
+
+s_1 . s_2 . ... . s_(k-1) . s_k,
+
+with s_j in !A!, for all j = 1 to k.
+
+Two alternative notations are often useful:
+
+1.  !e!  =   @e@   =   &quot;&quot;   =  the empty string.
+
+2.  %e%  =  {!e!}  =  {&quot;&quot;}  =  the language consisting of a single empty string.
+
+The &quot;kleene star&quot; !A!* of alphabet !A! is the set of all strings over !A!.
+In particular, !A!* includes among its elements the empty string !e!.
+
+The &quot;surplus&quot; !A!^+ of an alphabet !A! is the set of all positive length
+strings over !A!, in other words, everything in !A!* but the empty string.
+
+A &quot;formal language&quot; !L! over an alphabet !A! is a subset !L! c !A!*.
+If S is a string over !A! and if S is an element of !L!, then it is
+customary to call S a &quot;sentence&quot; of !L!.  Thus, a formal language !L!
+is defined by specifying its elements, which amounts to saying what it
+means to be a sentence of !L!.
+
+One last device turns out to be useful in this connection.
+If S is a string that ends with a sign t, then S . t^-1 is
+the string that results by deleting the terminal t from S.
+
+In this context, I make the following distinction:
+
+1.  By &quot;deleting&quot; an appearance of a sign,
+    I mean replacing it with an appearance
+    of the empty string &quot;&quot;.
+
+2.  By &quot;erasing&quot; an appearance of a sign, 
+    I mean replacing it with an appearance
+    of the blank symbol &quot; &quot;.
+
+A &quot;token&quot; is a particular appearance of a sign.
+
+¤~~~~~~~~~¤~~~~~~~~~¤~NOITATRESSID~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg03367.html">ONT Re: Apposite Purposes Of Logical Languages Objectified (APOLLO)</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg03365.html">ONT Re: Apposite Purposes Of Logical Languages Objectified (APOLLO)</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg03369.html">ONT levance</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03360.html">ONT Lattices, Partial Orders, Pre-Orders</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail23.html#03366"><strong>Date</strong></a></li>
+<li><a href="thrd22.html#03366"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: Powers That B -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Mon, 7 May 2001 13:22:08 &#45;0400 (EDT) -->
+<!--X-Message-Id: 002e01c0d716$f91f3c00$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 000901c0d5c8$65858ac0$7b76e4ce@Dell -->
+<!--X-Reference: 3AF57519.9ECAD47D@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02393.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: Powers That B</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02386.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02394.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd42.html#02393">Thread Index</A></Td>
+<TD><A HREF="msg02394.html">Date Prev</A></TD>
+<TD><A HREF="msg02392.html">Date Next</A>
+</TD>
+<TD><A HREF="mail43.html#02393">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: Powers That B</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Jon Awbrey&quot; &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Re: Powers That B</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 7 May 2001 09:58:43 -0700</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02381.html">000901c0d5c8$65858ac0$7b76e4ce@Dell</A>&gt; &lt;<A HREF="msg02386.html">3AF57519.9ECAD47D@oakland.edu</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi Jon,
+
+I am developing a representation called the Information Flow Framework (IFF)
+for ontologies and their models using the new-KIF. More specifically, my
+chief goal is to formalize the *truth classification* and the *truth concept
+lattice*.
+
+The truth concept lattice is generated from the truth classification of a
+first-order language L -- whose instances are L-structures, whose types are
+L-sentences, and whose classification relation is satisfaction. I would
+guess that the truth concept lattice is a precise mathematical version of
+John Sowa's lattice of theories [<A  HREF="http://suo.ieee.org/email/msg03804.html">http://suo.ieee.org/email/msg03804.html</A>].
+In place of John's theories are the formal concepts of this lattice. A
+formal concept in this lattice has an intent which is a closed theory (set
+of sentences) and an extent which is the collection of all models for that
+theory. The theory (intent) of the join (sup) of two concepts is the closure
+of the intersection of the theories (conceptual intents), and the theory
+(intent) of the meet (inf) of two concepts is the theory of the common
+models. See the following links: [<A  HREF="http://suo.ieee.org/email/msg01758.html">http://suo.ieee.org/email/msg01758.html</A>],
+[<A  HREF="http://suo.ieee.org/email/msg02950.html">http://suo.ieee.org/email/msg02950.html</A>], and
+[<A  HREF="http://suo.ieee.org/email/msg03839.html">http://suo.ieee.org/email/msg03839.html</A>].
+
+To represent this truth classification I must represent the truth formal
+objects (L-structures or models), the truth formal attributes (L-sentences
+or expressions) and the truth incidence relation (satisfaction). I have done
+this theoretically, but have only partially completed the encoding into the
+new KIF. Take for example, the representation of a first order structure or
+model. Conceptuall, this is a 2-dimensional mathematical structure that uses
+the hypergraph notion along one dimension and the classification notion
+along the other dimension. I have written new-KIF ontologies for hypergraphs
+and classifications, and it should be easy to put these together for the
+new-KIF ontology for models.
+
+Now all of this representation is at the metalevel (or structural level) of
+the SUO. And in particular, this metalevel factors very nicely into two
+levels with distinct objectives, which correspond to the set-theoretic
+notions of sets and classes, respectively. The object level ontologies would
+not be directly coded in the new KIF, but would use the language specified
+in the lower metalevel consisting of the notions and terminology of models,
+typed expressions, classifications, hypergraphs, etc. However, in my
+metalevel encoding efforts I have noticed the following property that speaks
+to the foundations of all this.
+
+PROPERTY: The new-KIF axiomatization for spans (and hypergraphs) is strictly
+category-theoretic -- in the axiomatization of spans all axioms are
+expressed in terms of category-theoretic (in my approach, foundational)
+notions, such as the composition and identity of large (class to class)
+functions or the pullback of small sets, and no axioms use explicit logical
+KIF connectives or quantification! This seems to be a hallmark of the
+ontologies in the lower-level structure (the lower metalevel) -- the
+ontologies for true categories (not quasi-categories), whose object and
+morphism collections are classes (not conglomerates). In addition, no axioms
+in the Span Ontology use explicit KIF terms from the basic KIF ontology.
+
+This property, and my attempt to realize it for the lower metalevel
+Classification Ontology, prompts the following question: should this
+metalevel representation have a set-theoretic foundation or a
+category-theoretic foundation? As you would expect, these are contentious
+issues. For instance, look at the following exchanges on the category list
+[<A  HREF="http://www.risc.uni-linz.ac.at/research/category/risc/catlist/goedel-cat">http://www.risc.uni-linz.ac.at/research/category/risc/catlist/goedel-cat</A>].
+In particular, my problem with the universal set and functions is probably
+the same mentioned by Colin McLarty in that exchange: "Anyway, the problem
+here is that functions are hard to work with in set theory with a universal
+set." So perhaps I should heed his advice and consider following the
+foundational approach described in Benabou's theory of fibrations and
+definability [Benabou J. (1985). "Fibered categories and the foundations].
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+----- Original Message -----
+From: "Jon Awbrey" &lt;jawbrey@oakland.edu&gt;
+To: "Robert E. Kent" &lt;rekent@ontologos.org&gt;
+Cc: "SUO" &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Sunday, May 06, 2001 9:00 AM
+Subject: SUO: Powers That B
+
+
+&gt; ¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+&gt;
+&gt; Robert,
+&gt;
+&gt; I am not sure if it is what you are after,
+&gt; but you may want to look at the subobject
+&gt; and power object material in Barr &amp; Wells,
+&gt; 'Category Theory for Computing Science',
+&gt; Prentice Hall, London, UK, 1990.  This is
+&gt; a rather older text from the last time that
+&gt; I was hot on the trail of the toposaurus,
+&gt; and there was a lot of ferment at the time
+&gt; about "partial equivalence relations" (PER's)
+&gt; and their use as models for lambda calculus,
+&gt; so perhaps some of the dust has settled by now.
+&gt;
+&gt; Happy Hunting!
+&gt;
+&gt; Jon Awbrey
+&gt;
+&gt; ¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02398" href="msg02398.html">SUO: Re: Powers That B</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="02394" href="msg02394.html">SUO: Re: Re: Powers That B</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02381" href="msg02381.html">SUO: power classes</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="02386" href="msg02386.html">SUO: Powers That B</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02394.html">SUO: Re: Re: Powers That B</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02392.html">SUO: Last Call for Nominations</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02386.html">SUO: Powers That B</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02394.html">SUO: Re: Re: Powers That B</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail43.html#02393"><strong>Date</strong></a></li>
+<li><a href="thrd42.html#02393"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

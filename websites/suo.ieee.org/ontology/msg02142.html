@@ -1,0 +1,180 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Thu, 12 Apr 2001 15:07:33 &#45;0400 (EDT) -->
+<!--X-Message-Id: 001601c0c37b$dddb3ba0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038 -->
+<!--X-Reference: v04210116b6f3e08e9365@[205.160.76.201] -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02142.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02123.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02086.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd53.html#02142">Thread Index</A></Td>
+<TD><A HREF="msg02143.html">Date Prev</A></TD>
+<TD><A HREF="msg02141.html">Date Next</A>
+</TD>
+<TD><A HREF="mail48.html#02142">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: RE: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 12 Apr 2001 11:10:33 -0700</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02054.html">DE057CA9F46ED2118C4900805F85E42707A64D29@LONSC0S0038</A>&gt; &lt;<A HREF="msg02081.html">v04210116b6f3e08e9365@[205.160.76.201]</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi Pat,
+
+Here is some more feedback on ontological namespaces.
+
+As I mentioned before, the Set Ontology that I am working on is part of the
+metalevel. It functions as part of the foundations and as a base category
+for other categories such as Classification and Hypergraph. In tandem, I am
+developing the Classification Ontology and the Category Theory Ontology. I
+am using these three ontologies synergistically to figure out how to
+represent the basic categorical and information flow intuitions with KIF
+terminology. The Set Ontology (and the Classification Ontology) feels like
+its getting fairly mature. So I thought I would mention how I am thinking
+about namespaces vis-a-vis the Set Ontology.
+
+It seems to break up into about 5 sub-namespaces: sets, functions, limits,
+colimits, and topos terminology. So I am thinking about partitioning the Set
+terminology into these 5 parts, with the following namespace prefixes for an
+arbitrary term t (the separating symbol could be any one of '#' or '$' or
+':' etc.):
+    set$t or set.set$t
+    set.ftn$t
+    set.lim$t
+    set.col$t
+    set.top$t
+consisting of a namespace prefix 'set' for the entire ontology and namespace
+prefixes '' or 'set', 'ftn', 'lim', 'col' and 'top' for the sub-namespaces.
+I am allowing two prefixes for the sets sub-namespace, since the ontology is
+named after this. This seems to look good in external references, such as in
+the Classification Ontology. Internally, the 'set' prefix is not needed, and
+within any sub-namespace its own prefix is not needed. Although, I so far
+have not formalized how to specify the structure, it could look something
+like this:
+    (ontology set
+    ...
+        (part ftn ...)
+        (part lim ...)
+        (part col ...)
+        (part top ...)
+    ...)
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+----- Original Message -----
+From: "pat hayes" &lt;phayes@ai.uwf.edu&gt;
+To: "West, Matthew MR SSI-GREA-UK" &lt;Matthew.R.West@is.shell.com&gt;
+Cc: &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Friday, April 06, 2001 2:12 PM
+Subject: RE: SUO: RE: KIF syntax and semantics and a basic ontology
+
+
+&lt;snip&gt;
+
+&gt; The following is a DRAFT of a PROPOSAL to an UNOFFICIAL AD_HOC
+&gt; WORKING GROUP which has not even been ACCEPTED by them, so it is
+&gt; about as far from being approved as anything can get. That said, I
+&gt; would welcome any feedback.:
+
+&lt;snip&gt;
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02054" href="msg02054.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew MR SSI-GREA-UK&quot; &lt;Matthew.R.West@is.shell.com&gt;</li></ul></li>
+<li><strong><a name="02081" href="msg02081.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02143.html">SUO: Re: Why Triadicity Matters</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02141.html">Re: SUO: Why Triadicity Matters</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02123.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02086.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail48.html#02142"><strong>Date</strong></a></li>
+<li><a href="thrd53.html#02142"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

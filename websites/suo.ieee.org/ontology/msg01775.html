@@ -1,0 +1,1155 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: Quevf [ramry <pzramryNcuvyrohf.gnzh.rqh> -->
+<!--X-Date: Wed, 21 Mar 2001 23:37:50 &#45;0500 (EST) -->
+<!--X-Message-Id: 200103220415.f2M4FTd15481@philebus.tamu.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01775.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:cmenzel@philebus.tamu.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01810.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01776.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd54.html#01775">Thread Index</A></Td>
+<TD><A HREF="msg01776.html">Date Prev</A></TD>
+<TD><A HREF="msg01774.html">Date Next</A>
+</TD>
+<TD><A HREF="mail55.html#01775">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A> (IEEE Standard Upper Ontology List)</LI>
+<LI><em>Subject</em>: SUO: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 21 Mar 2001 22:15:29 -0600</LI>
+<LI><em>Reply-To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Good SUOers,
+
+Attached below please find an informal account of the KIF syntax and
+semantics that is currently under development by the KIF working group,
+as well as an ontology of the basic apparatus of classes, relations,
+integers, and sequences.  Pat Hayes and I are chiefly to blame for the
+semantics.  A technical document describing the semantics in detail is
+in preparation.  I wrote most of the axioms.  Obviously, many of the
+axioms for classes and relations have been seen before, albeit perhaps
+not organized in just this way.  The presence of row variables (a.k.a.
+sequence variables; see below) provided the expressive power for some
+new "structural" axioms for relations and a nice theory of sequences.
+
+The ontology does not purport to be complete or comprehensive.  It is a
+proposal, a starting point.  Everything here is tentative and revisable.
+No axes are being ground.  All is offered in a spirit of cooperation
+with the hope that it helps to move the project along in some useful
+way.  Comments, corrections, suggestions, and criticisms in the same
+spirit are warmly welcomed.
+
+-chris
+
+ps: If you read your mail with a proportional font (e.g., Times) it
+would be well to save this document to a separate file and view it using
+a nonproportional font like Courier (and in an editor or viewer that
+will wrap long lines).
+
+--
+
+Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu 
+College Station, TX  77843-4237  # vox:             (979) 845-8764 
+
+*****
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;; I. (SUO-)KIF SYNTAX AND SEMANTICS ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; A revision of the current KIF syntax is currently underway by the
+;; KIF working group, and will be published (as a working document) as
+;; soon as a stable version emerges.  However, SUO-KIF will remain
+;; largely as it was, with the possible exception of a broader class
+;; of strings to enable the embedding of URI's and Unicode characters.
+;;
+;; There are two particularly important features of KIF's syntax that
+;; require special semantic attention: (i) KIF's free syntax, and (ii)
+;; row variables @&lt;word&gt;.  (Row variables were known as "sequence
+;; variables" in earlier versions of KIF (see
+;; <A  HREF="http://logic.stanford.edu/kif/dpans.html">http://logic.stanford.edu/kif/dpans.html</A>).  Row variables are used
+;; fairly liberally in this document, as they increase the expressive
+;; power of SUO-KIF rather dramatically, while still remaining rather
+;; well-behaved from a metatheoretic point of view.
+;; 
+;; THE SEMANTICS OF KIF'S FREE SYNTAX
+;;
+;; In KIF, any term can occur in predicate position or subject
+;; position in an atomic sentence.  What this means, semantically
+;; speaking, is that everything is an object.  This does NOT mean that
+;; there is no distinction between KINDS of things.  Notably, KIF's
+;; basic ontology includes classes, relations, and individuals.
+;; Rather, it simply means that all of these things are in the
+;; universe of discourse, i.e., the range of the object quantifiers
+;; (i.e., those, like `(forall (?x) ...)' that only bind object
+;; variables).  Interestingly, this fact requires no change to the
+;; basic semantic apparatus of first-order logic.  Notably, let W, W1,
+;; ..., Wn be n+1 terms, and let E, E1, ..., En be their semantic
+;; values in some model of KIF.  Then an atomic sentence (W W1 ... Wn)
+;; formed from these terms is true if and only the sequence &lt;E1,...En&gt;
+;; is an element of (the extension of) E.  If E happens not to be a
+;; relation, and has no associated extension, then the formula in
+;; question simply evaluates to FALSE, as it should.
+;;
+;; There is really only one complication that needs attention, namely,
+;; that an expression of the form (P T1 ... Tn) can occur both as
+;; atomic sentences and as a term in an atomic sentence.  Semantically
+;; speaking, when occurring as an atomic sentence, such an expression
+;; has a truth value.  When occurring as a term, the expression refers
+;; to an object.
+;;
+;; It is useful to allow such expressions to play this dual role.  For
+;; instance, if we want to attribute some property to Cain's father,
+;; it is convenient to use functional notation:
+;; 
+;;                 (gardener (father-of cain)).  
+;; 
+;; But simply to indicate that Cain's father is Adam, an atomic
+;; sentence is preferable:
+;;
+;;                    (father-of cain adam).
+;;
+;; This leaves two semantic questions.  First, what happens when we
+;; use an expression intended as a function term instead as an atomic
+;; sentence?  For instance, what if we assert
+;;
+;;                  (exists (?x) (father-of ?x))
+;;
+;; The answer here is simple.  Viewed as a sentence, since father-of
+;; is a 2-place (functional) relation `(father-of ?x)' is simply false
+;; for all values of `?x', and hence the quantified sentence above
+;; evaluates to false as well.
+;;
+;; The second question is a bit more problematic.  Typically,
+;; functions are not *total* on the universe of discourse.  Hence, for
+;; example, `(father-of ?x)' (where this expression is now viewed as a
+;; term) might be undefined for some values of `?x', and the semantics
+;; of classical logic does not permit undefined terms.  To deal with
+;; this problem we employ a simple trick.  Let FN be a function symbol
+;; interpreted as the functional relation f, and let the semantic
+;; values of the terms W1, ..., Wn be e1, ..., en, respectively.
+;; Suppose then that there is no unique object e such that
+;; [e1,...,en,e] is in the extension of f.  Then, when the expression
+;; `(FN W1 ... Wn)' *occurs as a term* in an atomic sentence, we let
+;; the semantic value of `(FN W1 ... Wn)' be some arbitrary object;
+;; for example, the function f itself.  This trick, of course, could
+;; lead to trouble if axioms are not written carefully, but that is
+;; nothing new to formal ontology.  Quantifiers in axioms about
+;; (partial) functions simply need to be restricted so that the axioms
+;; only have any purchase when the quantifers take objects in the
+;; domain of the function as values.  (See, for example, some the
+;; axioms for sequences below.)
+;;
+;; THE SEMANTICS OF ROW VARIABLES
+;;
+;; The semantics of row variables (i.e., variables of the form
+;; `@&lt;word&gt;') is quite straightforward.  Informally, a row variable
+;; should be thought of as a general way of referring jointly to a
+;; series of objects referred to by a row of terms in an expression,
+;; for example, the row `george martha' in the expression `(married-to
+;; george martha)' can be thought of as referring to the series of
+;; objects [George,Martha].  For many purposes, it is very useful to
+;; be able to talk about arbitrary rows of terms.  However, to do so,
+;; we usually have to use *schematic* sentences in our metalanguage
+;; that refer to infinitely of our actual language. For example, one
+;; might define a unary relation, denoted by the constant R, to be a
+;; relation such that there is no row of terms V1, ..., Vn, for n&gt;1,
+;; such that, under any interpretation of those variables `(R T1
+;; ... Tn)' is true.  Row variables provide a mechanism for talking
+;; about the series of objects indicated by arbitrary rows of terms,
+;; without actually putting those series of objects themselves in the
+;; universe of discourse.
+;;
+;; More formally, then, row variables can be modeled as ranging over
+;; all the finite sequences that can be formed from the objects in the
+;; universe of discourse.  To illustrate, suppose that, in a given
+;; interpretation I, the semantic value of the variable `@args' is the
+;; series [a,b].  And suppose the term t denotes c, and that F denotes
+;; the relation R.  Then we take atomic formula `(F @args t)' to be an
+;; assertion to the effect, *not* that the sequence [a,b] bears the
+;; relation R to c, but rather that a, b, and c, respectively stand in
+;; the relation R.
+;;
+;; In more detail.  Let I be an interpretation of the KIF language,
+;; and for a term t of KIF, let I(t) be its semantic value under I.
+;; Then, for a term t, we define the I-evaluation sequence for t,
+;; I-EvalSeq(t), to be the singleton sequence [I(t)] if t is a &lt;word&gt;
+;; or &lt;var&gt;, and if t is a row variable @s, then I-EvalSeq(t) = I(t).
+;; Then we define an atomic formula (P t1 ... tn) to be true under I
+;; just in case the sequence obtained by concatenating the evaluation
+;; sequences of t1,...,tn is in the interpretation of P.  Thus, for
+;; example, the sentence `(exists (@args) (between 1 @args))' will be
+;; true just in case there is some sequence of objects (numbers, in
+;; this case) [m,n] such that the concatenation of [1] with [m,n],
+;; i.e., the sequence [1,m,n], is in the extension of the between
+;; relation.  This provides KIF with a very natural generalization of
+;; ordinary quantification.
+;;
+;; It is important to note that, for many purposes -- notably,
+;; metatheoretic ones -- it is critical to be able to quantify over
+;; sequences explicitly by means of object variables.  For this
+;; reason, a theory of sequences is included below.  Note, however,
+;; that the semantics remains the same; row variables will still
+;; range over "series" of objects, where those "series" are themselves
+;; outside of the domain of quantification, but there will be a
+;; one-to-one correspondence between those series and the sequences in
+;; the domain; see the theory of sequences below for details.
+
+
+;;;;;;;;;;;;;;;;;;;; SOME METALINGUISTIC MATTERS ;;;;;;;;;;;;;;;;;;;
+
+;; DEFINITION DESCRIPTIONS
+
+;; Definite descriptions are also useful.  However, they are not 
+;; an official part of the KIF language, as adding them requires
+;; modifying KIF's semantics to allow for nondenoting terms (as many
+;; descriptions do not denote anything).  Hence, they are better regarded
+;; as convenient abbreviations that can be unpacked a la Russell's theory
+;; of descriptions.  Specifically, let S1, ..., Sn, and S' be sentences
+;; (typically containing free occurrences of V).  Then
+;; 
+;; (P T1 ... (the (V S1 ... Sn) S') ... Tn)
+;;
+;; shall be regarded as an abbreviation for
+;;
+;; (exists (V')
+;;         (and (forall (V)
+;;               (&lt;=&gt; (and S1 ... Sn S')
+;;                         (= V V')))
+;;                         (P T1 ... V' ... Tn)))
+
+;; NUMERICAL QUANTIFIERS
+
+;; Let S, S1, ..., Sn be any &lt;sentence&gt;s, and let S[V1/V2] be the
+;; result of replacing all free occurrences of the variable V1 with
+;; the variable V2.  Assume that V2 does not occur in S, S1, ..., or
+;; Sn.  Then:
+;; 
+;; (&lt;=&gt; (exists-1 (V S1 ... Sn) S)
+;;      (exists (V1)
+;;              (forall (V2 S1[V/V2] ... Sn[V/V2])
+;;                      (&lt;=&gt; S[V/V2]
+;;                           (= V1 V2)))))
+;; 
+;; Similarly (with similar assumptions about the non-occurrence of
+;; relevant variables in S, S1, ..., Sn):
+;;
+;; (&lt;=&gt; (exists-2 (V S1 ... Sn) S)
+;;      (exists (V1 V2)
+;;              (forall (V3 S1[V/V3] ... Sn[V/V3])
+;;                      (&lt;=&gt; S[V/V3]
+;;                           (or (= V1 V3)
+;;                               (= V2 V3))))))
+;; 
+;; (&lt;=&gt; (exists-3 (V S1 ... Sn) S)
+;;      (exists (V1 V2 V3)
+;;              (forall (V4 S1[V/V4] ... Sn[V/V4])
+;;                      (&lt;=&gt; S[V/V4]
+;;                           (or (= V1 V4)
+;;                               (= V2 V4)
+;;                               (= V3 V4))))))
+;; 
+;; And so on.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;; II. BASIC ONTOLOGY ;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; In the remainder of this document we offer a formal account of some
+;; of the basic ontological apparatus of the SUO.  It consists in a
+;; simple theory of classes and relations, a simple theory of the
+;; integers with addition and subtraction, and a theory of sequences.
+;; It also makes regular use of row variables, though many axioms
+;; don't require them.
+;;
+;; It is hoped that the account of classes and relations is simple
+;; enough not to be terribly controversial, and that it accurately
+;; reflects the informal notions of class and relation at work in the
+;; bulk of the SUO discussions.  Some of the noteworthy features
+;; (or, more tendentiously, virtues ;-) of the account are the
+;; following:
+;;
+;; * Classes and relations are objects that can be referred to and
+;;   quantified over like any other objects.
+;;
+;; * Classes are unary relations.
+;;
+;; * Relations (classes included) are not assumed to be extensional,
+;;   i.e., relations with the same instances are not assumed to be
+;;   identical.
+
+;; * There is a universal class "top" and a null class "null".
+;;
+;; * The class of relations is closed under the operations of
+;;   union, intersection, and complementation.  (An axiom of
+;;   extensionality is needed to infer that this class constitutes a
+;;   boolean algebra under those operations.)
+;;
+;; * Classes can be self-membered.  Notably, it is a consequence of 
+;;   the theory that the "top" class is an instance of itself.  Note
+;;   that there is nothing inherently paradoxical in this.  The top
+;;   class itself, being a universal class, is potentially more
+;;   problematic, but only if one assumes in addition the set
+;;   theoretic axiom of separation which states that, for any class C
+;;   and any specifiable condition, there is a class whose instances
+;;   are exactly those members of C satisfying the condition.  Under
+;;   the assumption of a universal class, this axiom is equivalent to
+;;   the naive comprehension principle and leads to Russell's paradox
+;;   via the condition "(not (instance-of ?x ?x))".  Needless to say,
+;;   we do not adopt the separation axiom in our theory of classes.
+;;
+;; * The instance-of predicate, while perhaps heuristically desirable,
+;;   is dispensable in favor of standard predicate/argument notation:
+;;   "(instance-of P t)" is equivalent simply to "(P t)".
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                      CLASSES AND RELATIONS                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;; BASIC CLASSES ;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(class class)
+
+(class relation)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;; BASIC CLASS THEORY ;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "AXIOM: Classes are unary.")
+
+(forall (?cls (class ?cls))
+        (unary ?cls))
+
+
+(documentation "AXIOM: There are two basic classes: top and null.")
+
+(class top)
+
+(class null)
+
+
+(documentation "AXIOM: Everything is an instance of top.")
+
+(forall (?x)
+        (instance-of ?x top))
+
+
+(documentation "AXIOM: Nothing is an instance of null.")
+
+(forall (?x)
+        (not (instance-of ?x null)))
+
+
+(documentation "THEOREM: top is an instance of itself.")
+
+(instance-of top top).  
+
+
+(documentation "THEOREM: An objects is an instance of the union of two classes iff it is an instance of either class.  This and the following theorems follow as particular instances of their more general counteparts in the theory of relations below.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (forall (?x)
+                (&lt;=&gt; (instance-of ?x (union ?c1 ?c2))
+                     (or (instance-of ?x ?c1)
+                         (instance-of ?x ?c2)))))
+
+(documentation "THEOREM:  The union of two classes is a class.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (class (union (?c1 ?c2))))
+
+
+(documentation "THEOREM: An object is an instance of the intersection of two classes iff it is an instance of both of those class.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (forall (?x)
+                (&lt;=&gt; (instance-of ?x (intersect ?c1 ?c2))
+                     (and (instance-of ?x ?c1)
+                          (instance-of ?x ?c2)))))
+
+
+(documentation "THEOREM: The intersection of two classes is a class.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (class (intersection (?c1 ?c2))))
+
+
+(documentation "THEOREM: An object is an instance of the complement of a class iff it is not an instance of that class.")
+
+(forall (?cls (class ?cls))
+        (forall (?x)
+                (&lt;=&gt; (instance-of ?x (complement ?cls))
+                     (not (instance-of ?x ?cls)))))
+
+
+(documentation "THEOREM: The complement of a class is a class.")
+
+(forall (?cls (class ?cls))
+        (class (complement ?cls)))
+
+
+(documentation difference: "THEOREM: An object is in the difference of two classes C1 and C2 if it is in C1 but not in C2.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (forall (?x)
+                (&lt;=&gt; (instance-of ?x (difference ?c1 ?c2))
+                     (and (instance-of ?c1 ?x)
+                          (not (instance-of ?x ?c2))))))
+
+
+(documentation "THEOREM:  The difference of two classes is a class.")
+
+(forall (?c1 ?c2(class ?r1) (class ?r2))
+        (relation (difference ?c1 ?c2)))
+
+
+(documentation empty "THEOREM: A class is empty if and only if has no instances.  Classes are not assumed to be extensional, that is, they are not assumed to be identical if they have the same instances.  Hence, we cannot define emptiness as identity with null (as there may be many distinct empty classes).  Hence, we define emptiness in terms of instance-of directly.  Note that the axioms on which this theorem depends are found in the simple theory of relations below.")
+
+(forall (?cls (class ?cls))
+        (&lt;=&gt; (empty ?cls)
+             (not (exists (?x)
+                          (instance-of ?x ?cls)))))
+
+
+(documentation subclass "THEOREM: If C1 is a subclass of C2, then every instance of C1 is an instance of C2.  If classes are not assumed to be extensional, the subclass relation is sometimes taken to indicate more than that the members of one class are included in another.  Hence, we introduce the subclass relation as a primitive and axiomatize it so that inclusion is merely a necessary condition of the relation holding.")
+
+(forall (?c1 ?c2 (class ?c1) (class ?c2))
+        (=&gt; (subclass ?c1 ?c2)
+            (forall (?x)
+                    (=&gt; (instance-of ?x ?c1)
+                        (instance-of ?x ?c2)))))
+
+
+(documentation "THEOREM: The subclass relation only holds between classes.")
+
+(signature subclass class class)
+
+
+(documentation "THEOREM: The arity of the subclass relation is 2.")
+
+(arity subclass 2)
+
+
+(documentation "THEOREM: The subclass-of relation is transitive.")
+
+(transitive subclass)
+
+
+(documentation "THEOREM: Every class is a subclass of top.")
+
+(forall (?cls (class ?cls))
+        (subclass ?cls top))
+
+
+;; THE INSTANCE-OF RELATION
+
+(documentation "AXIOM: The instance-of relation always takes two arguments.")
+
+(arity instance-of 2)
+
+
+(documentation "AXIOM: The first argument of an instance of the instance-of relation can be anything; the second argument is always a class.")
+
+(signature instance-of top class)
+
+
+(documentation "AXIOM (roughly put): The `instance-of' predicate is dispensable in favor of standard function/argument notation.")
+
+(forall (?cls ?x (class ?cls))
+        (&lt;=&gt; (instance-of ?x ?cls)
+             (?cls ?x)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;; BASIC RELATION THEORY ;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "REMARK: Most all the principles of class theory can be seen as theorems of a general theory of relations given the following axiom that only relations can be predicated of other things and the preceding axiom that the instance-of relation is dispensable in favor of predication.")
+
+
+(documentation "AXIOM: Only relations can be truly predicated of other things.")
+
+(forall (?r @args)
+        (=&gt; (?r @args)
+            (relation ?r)))
+
+
+(documentation "AXIOM: Classes are relations.  For nonempty classes, this follows from the previous axiom.")
+
+(subclass class relation)
+
+
+(documentation union "DEFINITION: Objects bear the union of two relations to each other iff they stand in either of those relations.")
+
+(forall (?r1 ?r2 (relation ?c1) (relations ?c2))
+        (forall (@args)
+                (&lt;=&gt; ((union ?r1 ?r2) @args)
+                     (or (?r1 @args)
+                         (?r2 @args)))))
+
+
+(documentation "AXIOM:  The union of two relations is a relation.")
+
+(forall (?r1 ?r2(relation ?r1) (relation ?r2))
+        (relation (union ?r1 ?r2)))
+
+
+(documentation intersection "DEFINITION: Objects bear the intersection of two relations to each other iff they stand in both of those relations.")
+
+(forall (?r1 ?r2 (relation ?r1) (relations ?r2))
+        (forall (@args)
+                (&lt;=&gt; ((intersect ?r1 ?r2) @args)
+                     (and (?r1 @args)
+                          (?r2 @args)))))
+
+
+(documentation "AXIOM:  The intersection of two relations is a relation.")
+
+(forall (?r1 ?r2(relation ?r1) (relation ?r2))
+        (relation (intersection ?r1 ?r2)))
+
+
+(documentation complement "DEFINITION: Objects bear the complement of a relation to each other iff they fail to stand in that relation.")
+
+(forall (?r (relation ?r))
+        (forall (@args)
+                (&lt;=&gt; ((complement ?r) @args)
+                     (not (?r1 @args)))))
+
+
+(documentation "AXIOM: The complement of a relation is a relation.")
+
+(forall (?r (relation ?r))
+        (relation (complement ?r)))
+
+
+(documentation difference: "DEFINITION: Objects bear the difference of two relations R1 and R2 to one another if they bear R1 to one another but not R2.")
+
+(forall (?r1 ?r2 (relation ?r1) (relations ?r2))
+        (forall (@args)
+                (&lt;=&gt; ((difference ?r1 ?r2) @args)
+                     (and (?r1 @args)
+                          (not (?r2 @args))))))
+
+
+(documentation "AXIOM:  The difference of two relations is a relation.")
+
+(forall (?r1 ?r2(relation ?r1) (relation ?r2))
+        (relation (difference ?r1 ?r2)))
+
+
+(documentation empty "AXIOM: A relation is empty iff it has no instances.")
+
+(forall (?rel (relation ?rel))
+        (&lt;=&gt; (empty ?rel)
+             (not (exists (@args) (?rel @args)))))
+
+
+(documentation "AXIOM: The subrelation relation holds between two relations R1 and R2 only if, whenever objects bear R1 to each other, they also bear R2 to each other.")
+
+(forall (?r1 ?r2 (relation ?r1) (relation ?r2))
+        (=&gt; (subrelation-of ?r1 ?r2)
+            (forall (@args)
+                    (=&gt; (?r1 @args)
+                        (?r2 @args)))))
+
+
+;;;;;;;;;;;;;;;;; STRUCTURAL AXIOMS FOR RELATIONS  ;;;;;;;;;;;;;;;;;
+
+(documentation transitive "DEFINITION: A relation R is transitive iff, whenever X bears R to Y and Y to Z, then X bears R to Z as well.")
+
+(forall (?r (relation ?r))
+        (&lt;=&gt; (transitive ?r)
+             (forall (?x ?y ?z)
+                     (=&gt; (and (?r ?x ?y)
+                              (?r ?y ?z))
+                         (?r ?x ?z)))))
+
+
+(documentation symmetric "DEFINITION: A relation R is symmetric iff, whenever X bears R to Y, then Y bears R to X.")
+
+(forall (?r (relation ?r))
+        (&lt;=&gt; (symmetric ?r)
+             (forall (?x ?y)
+                     (=&gt; (?r ?x ?y)
+                         (?r ?y ?x)))))
+
+
+(documentation reflexive "DEFINITION: A relation R is reflexive on a class C iff every instance of C bears R to itself.")
+
+(forall (?r ?cls (relation ?r) (class ?cls))
+        (&lt;=&gt; (reflexive-on ?r ?cls)
+             (forall (?x)
+                     (=&gt; (instance-of ?x ?cls)
+                         (?r ?x ?x)))))
+
+
+(documentation functional "DEFINITION: A relation is functional iff, whenever it is true of n+1 tuples S1 and S2 with the same first n elements, the n+1th elements must be identical as well, i.e., S1 and S2 must be the same n+1 tuples.  It is useful to identify functional relations, as it is often convenient to use functional notation for these relations; in this regard, see the next axiom.")
+
+(forall (?r (relation ?r))
+        (&lt;=&gt; (functional ?r)
+             (forall (@args ?y ?z)
+                     (=&gt; (and (?r @args ?y) 
+                              (?r @args ?z))
+                         (= ?y ?z)))))
+
+
+(documentation "AXIOM: Functional notation can be used for functional relations.  This depends on the semantic trick noted above for interpreting functional relations when applied to values on which, qua relations, they are not defined.")
+
+(forall (?r (relation ?r) (functional ?r))
+        (forall (@args)
+                (=&gt; (exists (?x) (?r @args ?x))
+                    (?r @args (?r @args)))))
+
+
+(documentation disjoint "DEFINITION: Relations are disjoint if they share no instances.")
+
+(forall (?r1 ?r2 (relation ?r1) (relation ?r2))
+        (&lt;=&gt; (disjoint ?r1 ?r2)
+             (not (exists (@args)
+                          (and (?r1 @args)
+                               (?r1 @args))))))
+
+
+(documentation unary "AXIOM: A relation is unary if it is never true of multiple things; only objects, rather than n-tuples, for n&gt;2, are in its extension.  Note how the axiom relies on the semantics of row variables in order to achieve this effect. The row variable `@args' can take any sequence [including the null sequence] as a value.  Hence, if the relation R assigned to `?rel' fails to be unary, it will hold of at least two things, A and B, respectively, which can be assigned to `?x' and `?y', respectively (the null sequence being assigned to `@args'), thus constituting a counterexample to R's being unary.  If R holds of more than two things, A1, ..., An, respectively, then A1 can be assigned to `?x' and A2' to `?y', and the remainder of the sequence, i.e., [A3,...,An], can be assigned to `@args', thus again constituting a counterexample.")
+
+(forall (?rel (relation ?rel))
+        (&lt;=&gt; (unary ?rel)
+             (not (exists (?x ?y @args)
+                          (?rel ?x ?y @args)))))
+
+
+(documentation binary "AXIOM: A relation is binary iff it is true only of pairs of things.  Once again the semantics of row variables gives us the necessary expressive power.")
+
+(forall (?rel (relation ?rel))
+        (&lt;=&gt; (binary ?rel)
+             (and (not (unary ?rel))
+                  (not (exists (?x ?y ?z @args)
+                               (?rel ?x ?y ?z @args))))))
+
+
+(documentation binary "AXIOM: A relation is ternary iff it is true only of triples of things.")
+
+(forall (?rel (relation ?rel))
+        (&lt;=&gt; (ternary ?rel)
+             (and (not (unary ?rel))
+                  (not (binary ?rel))
+                  (not (exists (?x ?y ?z ?w @args)
+                               (?rel ?x ?y ?z ?w @args))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                             INTEGERS                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The following is a simple theory of the integers with addition and
+;; subtraction
+
+;; Definitional Axioms
+
+(documentation posint "A positive integer is an integer that is greater than 0.") 
+
+(forall (?i)
+        (&lt;=&gt; (posint ?i)
+             ((&lt; 0 ?i))))
+
+(documentation negint "A negative integer is an integer that is less than 0.") 
+
+(forall (?i)
+        (&lt;=&gt; (negint ?i)
+             (&lt; ?i 0)))
+
+(documentation nonnegint "A non-negative integer is an integer that either 0 or positive.") 
+
+(forall (?i)
+        (&lt;=&gt; (nonnegint ?i)
+             (or (= ?i 0)
+                 (posint ?i))))
+
+(documentation &gt; "The greater-than relation.")
+
+(forall (?i ?j)
+        (&lt;=&gt; (&gt; ?i ?j)
+             (&lt; ?j ?i)))
+
+(documentation =&lt; "The less-than or equal-to relation.")
+
+(forall (?i ?j)
+        (&lt;=&gt; (=&lt; ?i ?j)
+             (and (integer ?i)
+                  (integer ?j)
+                  (or (&lt; ?i ?j)
+                      (= ?i ?j)))))
+
+(documentation &gt;= "The greater-than or equal-to relation.")
+
+(forall (?i ?j)
+        (&lt;=&gt; (&gt;= ?i ?j)
+             (and (integer ?i)
+                  (integer ?j)
+                  (or (&gt; ?i ?j)
+                      (= ?i ?j)))))
+
+
+;; Basic Axioms for the integer class
+
+(documentation "AXIOM:  integer is a class.")
+
+(class integer)
+
+
+(documentation "AXIOM: 0 is an integer.")
+
+(integer 0)
+
+
+(documentation "AXIOM: The successor and predecessor of any integer is an integer.")
+
+(forall (?i (integer ?i))
+        (and (integer (+1 ?i))
+             (integer (-1 ?i))))
+
+
+;; Axioms for the Less-than Relation
+
+(documentation "AXIOM: The less-than relation only applies to integers.")
+
+(signature &lt; integer integer)
+
+
+(documentation "AXIOM: The less-than relation has arity 2.")
+
+(= (arity &lt;) 2)
+
+
+(documentation "AXIOM: The less-than relation is transitive on the integers.")
+
+(forall (?i ?j ?k)
+        (=&gt; (and (&lt; ?i ?j) (&lt; ?j ?k))
+            (&lt; ?i ?k)))
+
+
+(documentation "AXIOM: The less-than relation is irreflexive on the integers.")
+
+(forall (?i)
+        (not (&lt; ?i ?i)))
+
+
+(documentation "AXIOM: The less-than relation is a total ordering on the integers.")
+
+(forall (?i ?j (integer ?i) (integer ?j))
+        (or (&lt; ?i ?j) (&lt; ?j ?i) (= ?i ?j)))
+
+
+;; Axioms for the Successor and Predecessor Functions
+
+(documentation "AXIOM: The successor and predecessor functions are one-to-one on the integers.")
+
+(forall (?i ?j (integer ?i) (integer ?j))
+        (and (=&gt; (= (+1 ?i) (+1 ?j)) 
+                 (= ?i ?j)) 
+             (=&gt; (= (-1 ?i) (-1 ?j)) 
+                 (= ?i ?j))))
+
+
+(documentation "AXIOM: An integer is less than its successor and greater than its predecessor.")
+
+(forall (?i integer ?i)
+        (and (&lt; ?i (+1 ?i)) 
+             (&lt; (-1 ?i) ?i))))
+
+
+(documentation "AXIOM: No integer is between a given integer and its successor or predecessor.")
+
+(forall (?i ?j (integer ?i) (integer ?j))
+        (not (or (and (&lt; ?i ?j) (&lt; ?j (+1 ?i)))
+                 (and (&lt; ?j ?i) (&lt; (-1 ?i) ?j))))))
+
+
+(documentation "REMARK: This axiom -- the `Cancellation Axiom' -- entails that every numeric term containing both +1 and -1 can be replaced by a numeric term containing only +1 or -1.")
+
+(forall (?i (integer ?i))
+        (and (= (+1 (-1 ?i)) ?i) 
+             (= (-1 (+1 ?i)) ?i)))
+
+
+;; Axioms for Addition and Subtraction
+
+(documentation "AXIOM: Recursive definition of +.")
+
+(forall (?i ?j (integer ?i) (integer ?j))
+        (and (= (+ ?i 0) 0) 
+             (= (+ ?i (+1 ?j)) (+1 (+ ?i ?j))) 
+             (= (+ ?i (-1 ?j)) (-1 (+ ?i ?j))))))
+
+
+(documentation "AXIOM: Recursive definition of -.")
+
+(forall (?i ?j (integer ?i) (integer ?j))
+        (and (= (- ?i 0) 0) 
+             (= (- ?i (+1 ?j)) (-1 (- ?i ?j))) 
+             (= (- ?i (-1 ?j)) (+1 (- ?i ?j)))))
+
+;; Basic numerals
+
+(documentation "It is convenient to introduce definitions for some of the traditional numerals.")
+
+(= 1 (+1 0)) 
+
+(= 2 (+1 1))
+
+(= 3 (+1 2))
+
+(= 4 (+1 3))
+
+(= 5 (+1 4))
+
+(= 6 (+1 5))
+
+(= 7 (+1 6))
+
+(= 8 (+1 7))
+
+(= 9 (+1 8))
+
+(= 10 (+1 9))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                          SEQUENCES                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(documentation "AXIOM: sequence is a class.")
+
+(class sequence)
+
+
+(documentation sequence "A sequence is an ordered n-tuple of objects, for some non-negative integer n.  Formally, a sequence is defined to be a 2-place functional relation that that holds between each positive integer [and only the positive integers] less than some positive integer and a unique object in the domain.  Intuitively, then, `(S N X)' indicates that X is the Nth element of the sequence S.  Any objects in the universe of discourse -- including other sequences -- may be elements of a sequence.  Note that we do not use a biconditional here, as we want sequences, qua sequences, to be extensional, but we also want them to be functions, and hence a type of relation.  But we do not wish to build the extensionality of relations into our logical foundations, and so we have to treat sequences as a special *type* of relation where extensionality holds.")
+
+(forall (?s)
+        (=&gt; (sequence ?s)
+            (and (relation ?s)
+                 (binary ?s)
+                 (functional ?s)
+                 (exists (?n (posint n))
+                         (and (not (exists (?x) (?s ?n ?x)))
+                              (forall (?m (posint ?m) (&lt; ?m ?n))
+                                      (exists (?x)
+                                              (?s ?m ?x))))))))
+
+
+(documentation "AXIOM: Sequences are extensional, i.e., sequences with the same elements in the same order are identical.")
+
+(forall (?seq1 ?seq2 (sequence ?seq1) (sequence ?seq2))
+        (=&gt; (forall (?n ?x)
+                    (&lt;=&gt; (?seq1 ?n ?x) (?seq2 ?n ?x)))
+            (= ?seq1 ?seq2)))
+
+
+(documentation "AXIOM: There is a null sequence.")
+
+(exists (?seq (sequence ?seq))
+        (not (exists (?n ?x)
+                     (?seq ?n ?x))))
+
+
+(documentation nil "nil is the null sequence.  The uniqueness of the null sequence follows from extensionality.")
+
+(= nil
+   (the (?seq (sequence ?seq))
+     (not (exists (?n ?x)
+                  (?seq ?n ?x)))))
+
+
+(documentation length "The length of a sequence SEQ is the largest nonnegative integer n such that SEQ is `defined' on every positive integer less or equal to n, that is, the largest nonnegative integer n such that, for every positive m =&lt; n, there is an object X such that (SEQ m X).")
+
+(forall (?seq ?n (sequence ?seq) (nonnegint ?n))
+        (&lt;=&gt; (length ?seq ?n)
+             (and (forall (?m (posint ?m) (=&lt; ?m ?n))
+                          (exists (?x)
+                                  (?seq ?m ?x)))
+                  (not (exists (?y)
+                               (?seq (+1 ?n) ?y))))))
+
+
+(documentation "AXIOM: length is functional.")
+
+(functional length)
+
+
+(documentation "THEOREM: The length of nil is 0.  This follows chiefly from the fact that nil is defined [vacuously] on every positive integer less than 1.")
+
+(= (length nil) 0)
+
+
+(documentation initseg "DEFINITION:  One sequence S1 is an initial segment of another S2 if they agree on every number on which S1 is defined.")
+
+(forall (?s1 ?s2 (sequence ?s1) (sequence ?s2))
+        (&lt;=&gt; (initseg ?s1 ?s2)
+             (and (=&lt; (length ?s1) (length ?s2))
+                  (forall (?i (posint ?i))
+                          (=&gt; (=&lt; ?i (length ?s1))
+                              (= (?s1 ?i) (?s2 ?i)))))))
+
+
+(documentation "AXIOM: Any sequence can be extended by any object.")
+
+(forall (?s1 ?x ?n (sequence ?s1) (= (length ?s1) ?n))
+        (exists (?s2 (sequence ?s2))
+                (and (initseg ?s1 ?s2)
+                     (= (length ?s2) (+1 ?n))
+                     (= (?s2 (+1 ?n)) ?x))))
+
+
+(documentation element-of "The element-of relation holds between an object in a sequence and the seqence.  It is the analog of the membership relation for sets.")
+
+(forall (?x ?seq (sequence ?seq))
+        (&lt;=&gt; (element-of ?x ?seq)
+             (exists (?n)
+                     (?seq ?n ?x))))
+
+
+(documentation max "The max of a non-null sequence of integers is the largest integer in the sequence.  max is an auxiliary notion used to axiomatize nth-domain.")
+
+(forall (?seq (sequence ?seq)
+              (=&gt; (and (forall (?x (element-of ?x ?seq))
+                               (integer ?x))
+                       (/= ?seq nil)
+                       (= (max ?seq)
+                          (the (?n (element-of ?n ?seq))
+                            (forall (?m (element-of ?m ?seq))
+                                    (&gt;= ?n ?m))))))))
+
+
+(documentation weave "The weave of two sequences of the same length is simply the result of interleaving them.  Thus, the weave of [a,b,c] and [d,e,f] is [a,d,b,e,c,f].  The weave function is used below in the axiom for the nth-domain relation.")
+
+(forall (?s1 ?s2 (sequence ?s1) (sequence ?s2) (= (length ?s1) (length ?s2)))
+        (= (weave ?s1 ?s2)
+           (the (?seq (sequence ?seq) (= (length ?seq) (+ (length ?s1) (length ?s2)))) 
+             (forall (?i (posint ?i) (=&lt; ?i (length ?s1)))
+                     (and (= (?seq (+ ?i (-1 ?i))) (?s1 ?i))
+                          (= (?seq (+ ?i ?i)) (?s2 ?i)))))))
+
+
+(documentation one-one "A sequence SEQ is one-one if the same object does not occur twice as an element, i.e., if there are no distinct numbers m and n such that, for some object X, we have both (SEQ m X) and (SEQ n X).")
+
+(forall (?seq (sequence ?seq))
+        (&lt;=&gt; (one-one ?seq)
+             (not (exists (?m ?n (/= ?m ?n))
+                          (= (?seq ?m) (?seq ?n))))))
+
+
+(documentation cc "The concatenation of two sequences S1 and S2, `(cc S1 S2)', is the unique sequence SEQ consisting of the elements of S1 followed by the elements of S2.  More formally, (SEQ m) is (S1 m), for positive integers less than or equal to the length i of S1, and (SEQ (+ i n)) is (S1 n) for positive integers n less than or equal to the length of S2.")
+
+(forall (?s1 ?s2 (sequence ?s1) (sequence ?s2))
+        (= (cc ?s1 ?s2)
+           (the (?seq (sequence ?seq))
+             (and (= (length ?seq) (+ (length ?s1) (length ?s2)))
+                  (forall (?m (posint ?m) (=&lt; ?m (length ?s1)))
+                          (= (?seq ?m) (?s1 ?m)))
+                  (forall (?n (posint ?n) (=&lt; ?m (length ?s2)))
+                          (= (?seq (+ (length s1) ?n) (?s2 ?n))))))))
+
+
+;; AXIOMS FOR THE SEQ FUNCTION
+
+(documentation "REMARK: The seq function enables us to form names of sequences by listing their elements.  Thus, for example, where `a' refers to A, `b' to B, and `c' to C, (seq a b c)' denotes the sequence [A,B,C].  The seq function also enables us to move seamlessly between the values of row variables [which lie outside the domain of the object quantifiers] and the sequences within the domain of the object quantifiers given by a theory of sequences.")
+
+
+(documentation seq "AXIOM: The seq function applied to some objects returns a sequence.")
+
+(forall (@args)
+        (sequence (seq @args)))
+
+
+(documentation "AXIOM: seq with no arguments yields nil.")
+
+(= nil (seq))
+
+
+(documentation "THEOREM: The length of (seq) is 0.  This follows from the previous axiom and the theorem that the length of nil is 0.")
+
+(= (length (seq)) 0)
+
+
+(documentation "AXIOM: The length of the seq of some arguments together with a further argument is one greater than the length of the seq of those arguments alone.  From this and the previous theorem [together with our simple theory of the integers] it follows that, e.g., the length of (seq a) is 1, that of (seq a b) is 2, and so on.")
+
+(forall (?x @args)
+        (= (length (seq @args ?x))
+           (+1 (seq @args))))
+
+
+(documentation "AXIOM: The seq of some arguments is an initial segment of the seq of those same arguments together with an additional argument, and, moreover, the value of the latter sequence applied its length is that additional argument.  This axiom enables us to prove such facts as: (= ((seq a b c) 2) b), i.e., the second element of the sequence [a,b,c] is b.")
+
+(forall (?x @args)
+        (and (initseg (seq @args) (seq @args ?x))
+             (= ((seq @args ?x) (length (seq @args ?x))) ?x)))
+
+
+(documentation "NOTATION: The `seq' operator is a bit awkward.  We therefore introduce a simpler bracket notation to indicate the seq of some arguments.  COMMENT: The BNF needs to be revised a bit for this notation to be kosher.")
+
+(forall (@args)
+        (= [@args] (seq @args)))
+
+
+;; STRUCTURAL NOTIONS THAT REQUIRE SEQUENCES
+
+(documentation "REMARK: The trick seen above for defining unary, binary, etc. could of course be repeated indefinitely.  However, given the additional expressive power of a little arithmetic and a theory of sequences, we can capture all of these properties in the single notion of arity.")
+
+
+(documentation arity "DEFINITION: A nonempty relation has a definite arity only if it is always true of the same number of arguments.  Hence, that number is defined to be the arity of the relation.")
+
+(forall (?r ?n (relation ?r) (not (empty ?r)) (posint ?n))
+        (=&gt; (arity ?r ?n)
+            (forall (@seq)
+                    (=&gt; (R @seq)
+                        (= (length [@seq]) ?n)))))
+
+
+(documentation "AXIOM: The arity of an empty relation is 0.  This is just a stipulation that enables arity to be functional on all relations.")
+
+(forall (?r (empty ?r))
+        (arity ?r 0))
+
+
+(documentation "AXIOM: Arity is a functional relation.")
+
+(functional arity)
+
+
+(documentation "AXIOM: Arity applies only to classes and relations in its first argument place and positive integers in its second.")
+
+(signature arity relation posint)
+
+
+(documentation signature "The signature of a relation gives the classes, in order,of which objects standing in the relation, respectively, must be instances.  Thus, for example, the signature square-root-of relation -- viewed as a relation that holds between a perfect square and either of its integer square roots -- would be expressed as `(signature square-root-of posint integer)'.")
+
+(forall (?r @cls (relation ?r))
+        (=&gt; (signature ?r @cls)
+            (forall (@args)
+                    (=&gt; (?r @args)
+                        (and (= (length [@args]) (length [@cls]))
+                             (forall (?n (posint ?n) (=&lt; ?n (length [@args])))
+                                     (instance-of ([@args] ?n) ([@cls] ?n))))))))
+
+
+(documentation nth-domain "The nth-domain relation holds between a relation REL and n posint/class pairs INT1, CLS1..., INTn, CLSn, for n&gt;0, only if, for all i&lt;n, the INTi'th argument of any sequence of which REL is true is an instance of the CLSi.  So, for example, we have `(nth-domain subclass-of 1 CLASS 2 CLASS)'. NOTE, however, that most, perhaps all, of the functions of the nth-domain relation are subsumed rather more elegantly by the signature relation.")
+
+(forall (?rel ?numseq ?clsseq ?wvseq (relation ?rel) (sequence ?numseq) (sequence ?clsseq) (one-one ?numseq))
+        (=&gt; (and (forall (?n ?x)
+                         (=&gt; (?numseq ?n ?x) (posint ?x)))
+                 (forall (?n ?cls)
+                         (=&gt; (?clsseq ?n ?cls) (class ?cls)))
+                 (= ?wvseq (weave ?numseq ?clsseq)))
+            (=&gt; (nth-domain ?rel @wvseq)
+                (forall (?seq (sequence ?seq) (&gt;= (length ?seq) (max ?numseq)))
+                        (=&gt; (?rel @args)
+                            (forall (?i (posint ?i) (=&lt; ?i length ?numseq))
+                                    (instance-of (?seq (?numseq ?i)) (?clsseq ?i))))))))
+    
+
+(documentation "THEOREM: As a special case of the above, the nth-domain relation holds between a relation REL, positive integer INT, and class CLS then the INT'th argument of any sequence of which REL is true must be an instance of CLS.  For example, `(nth-domain instance-of 2 CLASS)'.")
+
+(forall (?rel ?int ?cls (relation ?rel) (posint ?int) (class ?cls))
+        (=&gt; (nth-domain ?rel ?int ?cls)
+            (forall (?seq (sequence ?seq) (&gt;= (length ?seq) ?int))
+                    (=&gt; (?rel @args)
+                        (instance-of (?seq ?int) ?cls)))))
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01939" href="msg01939.html">SUO: Re: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="01792" href="msg01792.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@philebus.tamu.edu&gt;</li></ul></li>
+<li><strong><a name="01776" href="msg01776.html">SUO: Re: KIF Syntax &amp; Semantics &amp; A Basic Ontology</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01776.html">SUO: Re: KIF Syntax &amp; Semantics &amp; A Basic Ontology</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01774.html">Re: SUO: RE: Re: Peirce's MS 514</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01810.html">RE: SUO: English language (fwd) OUCH!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01776.html">SUO: Re: KIF Syntax &amp; Semantics &amp; A Basic Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail55.html#01775"><strong>Date</strong></a></li>
+<li><a href="thrd54.html#01775"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

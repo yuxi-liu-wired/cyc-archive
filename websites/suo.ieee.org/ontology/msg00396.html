@@ -1,0 +1,232 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG -->
+<!--X-From-R13: Wna @vyrf <vavyrfNgrxabjyrqtr.pbz> -->
+<!--X-Date: Tue, 16 Jan 2001 16:40:49 &#45;0500 (EST) -->
+<!--X-Message-Id: EE25484266A64A47AE06CFC47C64232B18F94C@helium.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00396.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</TITLE>
+<LINK REV="made" HREF="mailto:iniles@teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00393.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00397.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd81.html#00396">Thread Index</A></Td>
+<TD><A HREF="msg00397.html">Date Prev</A></TD>
+<TD><A HREF="msg00395.html">Date Next</A>
+</TD>
+<TD><A HREF="mail83.html#00396">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;'John F. Sowa'&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;, Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;,       pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;,       &quot;Schoening, James R CECOM DCSC4I&quot; &lt;<A HREF="mailto:James.Schoening@mail1.monmouth.army.mil">James.Schoening@mail1.monmouth.army.mil</A>&gt;,       <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>Subject</em>: RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</LI>
+<LI><em>From</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 16 Jan 2001 13:12:00 -0800</LI>
+<LI><em>Reply-To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+John,
+
+	Here is some information about points relating to the "trouble
+spots".
+
+-Ian
+
+&gt; -----Original Message-----
+&gt; From: John F. Sowa [<A  HREF="mailto:sowa@bestweb.net">mailto:sowa@bestweb.net</A>]
+&gt; Sent: Tuesday, January 16, 2001 10:23 AM
+&gt; To: Ian Niles; 'John F. Sowa'; pat hayes; Schoening, James R CECOM
+&gt; DCSC4I; standard-upper-ontology@ieee.org
+&gt; Subject: RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO
+&gt; WG
+&gt; 
+&gt; 
+&gt; 
+&gt; Ian,
+&gt; 
+&gt; I agree that the work you have done is a useful beginning.
+&gt; In fact, it might be a very good way to focus our attention
+&gt; on something concrete, instead of the aimless commentary
+&gt; that we have been engaged in for the past several months.
+&gt; 
+&gt; Request:  In order to help us address the "trouble spots"
+&gt; that require further work, could you please send us some
+&gt; information about the following points:
+&gt; 
+&gt;  1. What additions have you made (other than translations
+&gt;     to KIF) beyond the original source files you started with?
+
+OK, here's a list of the main links I added to the ontology to incorporate
+merging.  I'll follow up this email with another, if I find important, added
+links that aren't addressed here.
+
+;; Taxonomy of roles/predicates/functions
+
+(subclass-of Predicate Role)
+(subclass-of Function Role)
+(subclass-of UnaryFunction Function)
+(subclass-of BinaryFunction Function)
+(subclass-of TernaryFunction Function)
+(subclass-of VariableArityFunction Function)
+(subclass-of BinaryRelation Predicate)
+(subclass-of TernaryRelation Predicate)
+(subclass-of VariableArityRelation Predicate)
+(subclass-of CaseRole BinaryRelation)
+
+;; Locating the concepts of 'Number' and 'Set' in your upper-level ontology.
+I know you describe a 
+;; a different way of doing this in your book, but I wanted something that
+was less philosophical.
+
+(subclass-of Number Arrangement)
+(subclass-of Set Arrangement)
+
+;; Locating the concept of 'Organism' in the ontology
+
+(subclass-of Organism Organic)
+
+;; Constants needed for framing the temporal axioms
+
+   (nth-domain exists-at 1 Actuality)
+   (nth-domain exists-at 2 TimePoint)
+   (documentation exists-at "Means that the Process/Object exists at the
+given point in time")
+
+  (subclass-of TimeInterval TemporalEntity)
+  (documentation TimeInterval "An interval of time.")
+
+  (subclass-of TimePoint TemporalEntity)
+  (documentation TimePoint "A TimePoint is not a measurement of time, nor is
+it a specification of time.  It is the point in time. The TimePoints at
+which events occur can be known with various degrees of precision and
+approximation, but conceptually TimePoints are point-like and not
+interval-like.  That is, it doesn't make sense to talk about what happens
+during a TimePoint, or how long the TimePoint lasts.")
+
+  (subclass-of TimeMeasure TemporalEntity)
+  (subclass-of TimeMeasure-Duration TimeMeasure)
+  (subclass-of TimeMeasure-Position TimeMeasure)
+
+;; Locating 'hole-in' and 'Hole' in the taxonomy 
+
+(instance-of hole-in BinaryRelation)
+(nth-domain hole-in 1 Object)
+(nth-domain hole-in 2 Hole)
+
+(subclass-of Hole Property)
+
+&gt; 
+&gt;  2. What assumptions did you find it necessary to make in
+&gt;     order to fill in the gaps between the various sources?
+
+The assumptions that I made in constructing the merged ontology are
+contained in the extra subsumption links addressed above. 
+
+&gt; 
+&gt;  3. Which areas seemed to raise the largest number of questions?
+&gt;     And where did you need to make modifications in order to
+&gt;     make the source ontologies fit together?
+
+The parts of the merged ontology that I'm least comfortable with are the
+sections entitled "Mereotopological Definitions/Axioms", "Theory of Holes",
+and "Temporal Definitions/Axioms".  I think a more substantive alignment of
+the first two sections should be possible.  In particular, it would be
+optimal if the theory of holes could be derived from the basic
+mereotopology.  I'm not sure about how to do this, so the more substantive
+alignment has not been attempted yet.  Again, I welcome any comments about
+how to do this.  As for "Temporal Definitions/Axioms", I overhauled the
+formulation of many of the axioms in this section on the basis of Pat Hayes'
+suggestions, and I think there's probably still room for improvement here.  
+
+&gt; 
+&gt; I still agree with Pat that the current version of the merged
+&gt; ontology is not yet suitable as a "base document".  But perhaps
+&gt; we might come closer to something concrete if we jointly
+&gt; addressed the "trouble spots" that you have uncovered in your
+&gt; work.  It might help us to make some progress toward a truly
+&gt; collaborative ontology effort.
+&gt; 
+&gt; John Sowa
+&gt; 
+&gt; 
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00397.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00395.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO  WG</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00393.html">Re: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00397.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO WG</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail83.html#00396"><strong>Date</strong></a></li>
+<li><a href="thrd81.html#00396"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

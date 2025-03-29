@@ -1,0 +1,1122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Logical Environments</title>
+  <meta content="Robert E. Kent" name="author">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h1>Logical Environments</h1>
+<h2>Table of Contents<br>
+</h2>
+<table style="width: 500px; text-align: left;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><big><a href="#Institutions">Institutions</a><br>
+      </big></td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><big><a
+ href="#The_Grothendieck_Construction">The Grothendieck Construction</a><br>
+      </big></td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><big><a
+ href="#The_Information_Flow_IF_Institution">The Information Flow (IF)
+Institution</a><br>
+      </big></td>
+    </tr>
+  </tbody>
+</table>
+<p>This paper owes a special debt of thanks to Joseph Goguen. The idea
+of applying Institutions and the Grothendieck construction to
+Formal Concept Analysis and Information Flow was pioneered in his
+online paper <a
+ href="http://www.cs.ucsd.edu/users/goguen/papers/IF.html">Information
+Flow in Institutions</a> currently under development.<br>
+</p>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="2"
+ style="vertical-align: top; text-align: justify;">A central goal of
+the Information
+Flow Framework (IFF) project is to
+specify a theoretical framework for representing and managing
+ontologies. This theoretical framework is concentrated around the
+concept of a <span style="font-style: italic;">logical environment</span>.
+The concept of a logical
+environment is the concept of a "structured institution".
+As stated on the <a
+ href="http://www.cs.ucsd.edu/users/goguen/projs/inst.html">Institutions
+homepage</a>, the concept of an institution formalizes, represents,
+implements and translates the notion of "a logic". The literature on
+institutions now comprises hundreds of papers. The concept
+of a logical environment has been discussed within the SUO IFF project
+during the past several
+years. The "structured" aspect of a logical environment is iconically
+illustrated in Figure 1.
+This architecture consists of the four representative
+concepts of language, model, theory and logic, and the five natural
+connections between these concepts. There is a formal-actual
+distinction present within this architecture. The type pole of
+formality consists
+of languages and theories. Languages, known as signatures in
+the institutions literature, represent the basic formalism; theories
+add constraints. The instance pole of actuality consists of
+models and logics. Models contain instance data and classifications;
+logics add constraints. Theories represent formal semantics,
+models represent actual/interpretive semantics, and logics represent
+combined
+semantics. Unpopulated ontologies manifesting formal semantics
+are represented in the IFF by theories,
+whereas populated ontologies incorporating actual semantics (aspects of
+the natural world) are represented in the IFF by logics.</td>
+      <td style="vertical-align: top; text-align: center;"><img alt="t"
+ title="t" src="thumbnail-diagram.gif"
+ style="width: 195px; height: 195px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><big><big><span
+ style="font-weight: bold;">Figure 1</span></big></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>
+    <p style="text-align: justify;">As discussed in the paper (<a
+ href="#Kent_2000">Kent, 2000</a>),
+a simple notion of a logical environment appears as the background
+architecture for Information Flow. Call this the <span
+ style="text-decoration: underline;">IF logical environment</span>.
+This was the original logical environment. Figure 2 of <a
+ href="version20041010.html#Kent_2000">Kent, 2000</a>
+illustrates the categories and adjunctions that form the IF logical
+environment. Models are IF classifications, sentences are IF sequents,
+and logics are IF normal logics. The lower part of Figure 2, regarded
+as an environment architectural diagram, is absent due to simplicity &#8211;
+languages are just sets regarded as sets of type symbols,
+and the free model adjunction is just the free classification
+adjunction over type symbol sets. </p>
+  </li>
+  <li>
+    <p style="text-align: justify;">The concept of a logical
+environment is pictured in the <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/ontology/version20021205.htm#The_Architecture">architecture
+diagram</a> (Figure 1) on the introduction webpage for the IFF Ontology
+(meta) Ontology
+(<a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/ontology/version20021205.htm">IFF-ONT</a>),
+and is theoretically discussed in the associated document "<a
+ href="http://suo.ieee.org/IFF/metalevel/lower/metatheory/ontology/version20021205.pdf">Category
+Theory of Ontologies</a>".
+Call this the <span style="text-decoration: underline;">IFF logical
+environment</span>.
+This environment, which is illustrated in Figure 1 of the document
+IFF-ONT <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/ontology/work-in-progress.html">work-in-progress</a>,
+was briefly discussed in a <a
+ href="http://suo.ieee.org/IFF/metastack/CT04%20Presentation.pdf">presentation</a>
+on the <a href="http://suo.ieee.org/IFF/metastack/version20040707.html">the
+IFF metastack</a> at the category theory conference <a
+ href="http://www.pims.math.ca/science/2004/CT04/">CT04</a>. </p>
+  </li>
+</ul>
+<p style="text-align: justify;">A goal of this paper is to make the
+presentation of logical
+environments a little more precise and understandable.
+</p>
+<h2><a name="Institutions"></a>Institutions</h2>
+<div style="text-align: justify;">
+<p>In this document, institutions are
+viewed abstractly. Associated with an institution
+I is a category <b>Sign</b><sub>I</sub>
+of signatures and signature morphisms, a model
+functor <span style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;
+<b>Cat</b>, and a sentence functor <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub>
+&#8594;&nbsp;<b>Set</b>.
+Recall the underlying
+object functor |-| : <b>Cat</b> &#8594;&nbsp;<b>Set</b> that maps a category
+to its set of objects and maps a
+functor to its object function. Define the underlying model functor
+|<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>
+&middot; |-| :&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;
+<b>Set</b>.
+Also associated with an institution I is a collection of binary
+incidence relations indexed by signatures. For any signature &#931;, there
+is a <b>satisfaction</b> relation |=<sub>I</sub>(&#931;) between |<span
+ style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(&#931;)
+and <span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;).
+This following condition expresses the
+invariance of truth
+under change of notation. Note that for signatures &#931; the morphisms in
+the fiber categories <span
+ style="font-style: italic; font-weight: bold;">Mod</span>(&#931;) are not
+used in this satisfaction condition.</p>
+<span style="font-weight: bold;">Satisfaction Condition.</span> For any
+signature morphism f : &#931; &#8594; &#931;&#8242;, any &#931;&#8242;-model M&#8242; and any &#931;-sentence e, M&#8242;
+|=<sub>I</sub>(&#931;&#8242;) <span style="font-style: italic; font-weight: bold;">Sen</span><sub>I</sub>(f)(e)
+<span style="text-decoration: underline;">iff</span> |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)(M&#8242;)
+|=<sub>I</sub>(&#931;) e. <br>
+</div>
+<p style="text-align: justify;">Truth is objectively represented. For
+any signature &#931;, the
+triple <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(&#931;)
+= (|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(&#931;),&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;),&nbsp;|=<sub>I</sub>(&#931;))
+is called the <strong>truth classification</strong>
+of &#931;. From the basic theorem of FCA, this is equivalent to a concept
+lattice <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(&#931;)
+called the
+<strong>truth concept lattice</strong> of &#931;, which consists of a
+complete
+lattice <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;)
+= (<span style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(&#931;),
+&#8804;<sub>I</sub>(&#931;), <span style="font-family: arial;">V</span><sub>I</sub>(&#931;),
+<span style="font-family: arial;">&#923;</span><sub>I</sub>(&#931;)),
+a model embedding map <span style="font-weight: bold;">&#953;</span><sub>I</sub>(&#931;)
+: |<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(&#931;)
+&#8594; <span style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(&#931;)
+that maps a model to its maximal theory consisting of the set of all
+sentences that it satisfies, and a sentence embedding map <span
+ style="font-weight: bold;">&#964;</span><sub>I</sub>(&#931;)
+: <span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)
+&#8594; <span style="font-style: italic; font-weight: bold;">Cloth</span><sub>I</sub>(&#931;)
+that maps a sentence to its
+entailment theory consisting of the set of all sentences that it
+entails. In general, the elements of any concept lattice can be
+represented by their intents. That is the case here. The truth concept
+lattice elements are represented by their intents <span
+ style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(&#931;),
+the closed theories
+of &#931;, and the
+lattice
+order &#8804;<sub>I</sub>(&#931;) is reverse subset inclusion: T&nbsp;&#8804;&nbsp;T&#8242; <span
+ style="text-decoration: underline;">iff</span> T&nbsp;&#8839;&nbsp;T&#8242;. The
+join <span style="font-family: arial;">V</span><sub>I</sub>(&#931;) and
+meet <span style="font-family: arial;">&#923;</span><sub>I</sub>(&#931;)
+operators are described as follows: the join of a collection of closed
+theories <span style="font-family: script mt bold;">T</span> is their
+intersection <span style="font-family: arial;">V</span><span
+ style="font-family: script mt bold;">T</span> = &#8745;<span
+ style="font-family: script mt bold;">T</span>, and the meet is the
+closure of their union <span style="font-family: arial;">&#923;</span><span
+ style="font-family: script mt bold;">T</span> = (&#8746;<span
+ style="font-family: script mt bold;">T</span>)<small><sup>&#8226;</sup></small>.
+Any
+concept (closed theory) is the join of a subset of instance
+concepts (model theories) and the meet of a subset of type concepts
+(sentence theories).</p>
+<p style="text-align: justify;">A (not necessarily
+closed) theory is just a set of
+sentences. For any signature &#931;, the free theory order <span
+ style="font-weight: bold; font-style: italic;">Th</span>&deg;<sub>I</sub>(&#931;)
+= (<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;),
+&#8839;) is
+just the powerset construction on sentences of &#931; with the reverse
+subset inclusion order. This is a complete lattice. For any signature
+&#931;,
+the free classification <span
+ style="font-weight: bold; font-style: italic;">Free</span><sub>I</sub>(&#931;)
+= (<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;),
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;),
+&#8715;) has theories as instances, sentences as types and
+reverse membership as incidence relation. There is a canonical
+intent infomorphism <span
+ style="font-weight: bold; font-style: italic;">Intent</span><sub>I</sub>(&#931;)
+: <span style="font-weight: bold; font-style: italic;">Free</span><sub>I</sub>(&#931;)
+&#8594;
+<span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(&#931;),
+whose instance function <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(&#931;)
+:
+|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(&#931;)
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)
+maps a model to its maximal theory and whose type function is the
+identity on sentences. The free concept lattice is the concept lattice
+associated with the free classification; it has the free theory order
+as its complete lattice, identity instance embedding, and
+singleton type embedding functions. The concept morphism associated
+with the intent infomorphism has maximal theory as its instance
+function, inclusion of
+closed theories as theories as its left adjoint, theory closure as its
+right
+adjoint,
+and singleton closure as its type function.
+</p>
+<p style="text-align: justify;">For any signature
+morphism f : &#931; &#8594; &#931;&#8242;, there are (at least) two maps between theory
+orders; the direct image function <span
+ style="font-weight: bold; font-style: italic;">dir</span><sub>I</sub>(f)
+: <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;&#8242;)
+is the direct power operator applied to the
+sentence function, and the inverse image function <span
+ style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f)
+:
+<span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;&#8242;)
+&#8594; <span style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)
+is the inverse image
+operator applied to the sentence function. For free theories these form
+a Galois connection &#8211; the inverse image function is left adjoint to the
+direct image function. Hence, associated with an
+institution I is a free theory functor for either adjoint; let <span
+ style="font-weight: bold; font-style: italic;">Th</span>&deg;<sub>I</sub>
+:
+<span style="font-weight: bold; font-style: italic;">Sign</span><sub>I</sub><small><sup>op</sup></small>
+&#8594; <span style="font-weight: bold;">Cat</span> represent the free
+theory functor associated with the inverse image operator. Using the
+Grothendieck construction to generate a category, the adjointness
+properties mean that the associated signature projection is a
+bifibration.
+</p>
+<p style="text-align: justify;">Truth extends to morphisms. Based upon
+the satisfaction condition for institutions,
+associated with any signature morphism
+f&nbsp;: &#931; &#8594; &#931;&#8242; is a <span
+ style="font-weight: bold; font-style: italic;">truth infomorphism Clsn</span><sub>I</sub>(f)
+=
+(|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f),&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f))
+: <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(&#931;)&nbsp;&#8594;
+<span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>(&#931;&#8242;),
+whose
+instance function is the model function |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)
+: |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(&#931;&#8242;)
+&#8594; |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(&#931;)
+and
+whose type function is the sentence function <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)&nbsp;:&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;&#8242;).
+From the basic
+theorem of FCA, this is equivalent to a concept morphism <span
+ style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(f)
+= (|<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f),
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f))
+: <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(&#931;)
+&#8594; <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>(&#931;&#8242;)
+called the <span style="font-style: italic; font-weight: bold;">truth
+concept morphism</span> of f, which consists of the two component maps
+of <span style="font-style: italic; font-weight: bold;">Clsn</span><sub>I</sub>(f),
+plus a Galois connection consisting of a
+left adjoint monotonic function <span
+ style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f)
+: <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;&#8242;)
+&#8594; <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;),
+and a right adjoint monotonic function <span
+ style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f)
+: <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;)
+&#8594; <span style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;&#8242;).
+Adjointness means
+that <span style="font-style: italic; font-weight: bold;">Left</span><sub>I</sub>(f)(T&#8242;)
+&#8804;<sub>I</sub>(&#931;) T <span style="text-decoration: underline;">iff</span>
+T&#8242; &#8804;<sub>I</sub>(&#931;&#8242;)
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f)(T)
+for every closed source theory T &#8712; <span
+ style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;)
+and every closed target theory T&#8242; &#8712; <span
+ style="font-weight: bold; font-style: italic;">Lat</span><sub>I</sub>(&#931;&#8242;).
+The left
+adjoint is compatible with the model function <span
+ style="font-weight: bold;">&#953;</span><sub>I</sub>(&#931;&#8242;)
+&middot;
+<span style="font-weight: bold; font-style: italic;">Left</span><sub>I</sub>(f)
+= |<span style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>(f)
+&middot; <span style="font-weight: bold;">&#953;</span><sub>I</sub>(&#931;),
+and the right adjoint is compatible with the sentence function <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)
+&middot; <span style="font-weight: bold;">&#964;</span><sub>I</sub>(&#931;&#8242;) = <span
+ style="font-weight: bold;">&#964;</span><sub>I</sub>(&#931;) &middot;
+<span style="font-weight: bold; font-style: italic;">Right</span><sub>I</sub>(f).
+Pointwise on theories, the left adjoint is the
+inverse image function <span
+ style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f)
+restricted to closed theories, and the right adjoint is the
+composition of the restriction of the direct image function <span
+ style="font-weight: bold; font-style: italic;">dir</span><sub>I</sub>(f)
+and the theory closure function. Hence, associated with an
+institution I is a theory functor for either adjoint.
+When using the Grothendieck construction to generate a category of
+theories,
+the adjointness properties mean that the associated signature
+projection is a bifibration. Let <span
+ style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>
+:
+<span style="font-weight: bold; font-style: italic;">Sign</span><sub>I</sub><small><sup>op</sup></small>
+&#8594; <span style="font-weight: bold;">Cat</span>
+represent the theory functor associated with the inverse image function
+<span style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f).
+</p>
+<p style="text-align: justify;">
+These truth constructions are functorial. Associated with an
+institution I is the truth classification functor <span
+ style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub>&nbsp;&#8594;&nbsp;<b>Clsn</b>
+from the category of signatures and signature morphisms to the category
+of
+classifications and infomorphisms. By the categorical version of the
+FCA basic theorem (<a href="#Kent_2002">Kent, 2002</a>), there is an
+equivalence <b>Clsn</b>&nbsp;&#8801;&nbsp;<b>CnLat</b>,
+where <b>CnLat</b> is the category of concept lattices and
+their morphisms. Hence, also associated with an institution I is the
+concept lattice
+functor <span style="font-weight: bold; font-style: italic;">CnLat</span><sub>I</sub>
+:&nbsp;<b>Sign</b><sub>I</sub> &#8594;&nbsp;<b>CnLat</b>.
+The category <span style="font-weight: bold;">Clsn</span> has two
+projection functors (fibrations), the instance functor <span
+ style="font-weight: bold; font-style: italic;">inst</span> : <b>Clsn</b><sup>op</sup>&nbsp;&#8594;&nbsp;<b>Set</b>
+and the type functor <span
+ style="font-weight: bold; font-style: italic;">typ</span> : <b>Clsn</b>&nbsp;&#8594;&nbsp;<b>Set</b>.
+By composing the truth classification functor with these two
+projections, we can
+unpack it into the underlying model functor |<span
+ style="font-weight: bold; font-style: italic;">Mod</span>|<sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub><sup>op</sup>&nbsp;&middot;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">inst</span>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub><sup>op</sup>&nbsp;&#8594;&nbsp;<b>Set</b>
+and
+the sentence functor
+<span style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>
+= <span style="font-weight: bold; font-style: italic;">Clsn</span><sub>I</sub>&nbsp;&middot;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">typ</span>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub>&nbsp;&#8594;&nbsp;<b>Set</b>.
+</p>
+<h2><a name="The_Grothendieck_Construction"></a>The Grothendieck
+Construction</h2>
+<p style="text-align: justify;">The Grothendieck construction is
+discussed in <a
+ href="http://www.cs.ucsd.edu/users/goguen/papers/IF.html#secA">Appendix
+A</a> of the draft paper "Information Flow in Institutions". Let I be
+any institution. It <span
+ style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;">is understood
+</span> that satisfaction is at the
+heart of institutions, and the satisfaction condition expresses the
+invariance of truth under change of notation. However, more is desired.
+We also want satisfaction to vary appropriately along model morphisms
+as expressed by the following.
+</p>
+<p style="text-align: justify;">
+<span style="font-weight: bold;">Model Variance Condition:</span>
+For any signature &#931;,
+satisfaction varies along model morphisms in the category <span
+ style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>(&#931;)
+in the following sense: for any model morphism h : M<small><sub>1</sub></small>&nbsp;&#8594;&nbsp;M<small><sub>2</sub></small>
+in <span style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>(&#931;)
+and for any sentence e &#8712; <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;),
+if M<small><sub>2</sub></small>&nbsp;|=<sub>I</sub>(&#931;) e then M<small><sub>1</sub></small>&nbsp;|=<sub>I</sub>(&#931;)
+e.
+</p>
+<p style="text-align: justify;">An institution I that satisfies the
+model variance condition is called an <span
+ style="font-style: italic; font-weight: bold;">orthovariant institution</span>.
+Assume that I is orthovariant. Define the Grothendieck model category <span
+ style="font-weight: bold;">Model</span><sub>I</sub>
+= <span style="font-weight: bold;">Gr</span>(<span
+ style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>)
+and the Grothendieck theory category <span style="font-weight: bold;">Theory</span><sub>I</sub>
+= <span style="font-weight: bold;">Gr</span>(<span
+ style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>).
+Define the projection functors (fibrations) <span
+ style="font-style: italic; font-weight: bold;">typ</span><sub>I</sub>&nbsp;:&nbsp;<span
+ style="font-weight: bold; font-family: times new roman;">Model</span><sub>I</sub>&nbsp;&#8594;&nbsp;<b
+ style="font-family: times new roman;">Sign</b><sub>I</sub>
+and <span style="font-style: italic; font-weight: bold;">base</span><sub>I</sub>&nbsp;:
+<span style="font-weight: bold; font-family: times new roman;">Theory</span><sub>I</sub>&nbsp;&#8594;&nbsp;<b
+ style="font-family: times new roman;">Sign</b><sub>I</sub>.
+These two categories are the vertices
+in the horizontal axis of the diagrams in Figure 2 (below), and these
+two projection functors form the opspan below this horizontal axis.
+The model variance condition implies that the
+maximal theory operator has the following property: <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>1</sub></small>)
+&#8839; <span style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>2</sub></small>),
+which is expressible as <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>1</sub></small>)
+&#8804; <span style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>2</sub></small>)
+in the truth concept lattice order.
+Hence, for any
+signature &#931;, the maximal theory operator is a functor <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(&#931;)
+: <span style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>(&#931;)
+&#8594; <span style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>(&#931;).
+The satisfaction condition implies that maximal theory is
+a natural transformation <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>&nbsp;:&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>&nbsp;&#8658;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>
+from the model functor to the theory functor. <span
+ style="font-weight: bold;">Proof:</span>
+Let f : &#931; &#8594; &#931;&#8242;
+be any signature morphism, and let M&#8242; &#8712; <span
+ style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>(&#931;&#8242;)
+be any model of the target signature. For any sentence e &#8712; <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;)
+of the source signature, e &#8712; <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(&#931;)(<span
+ style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>(f)(M&#8242;))
+<span style="text-decoration: underline;">iff</span> <span
+ style="font-weight: bold; font-style: italic;">Mod</span><sub>I</sub>(f)(M&#8242;)
+|=<sub>I</sub>(&#931;) e <span style="text-decoration: underline;">iff</span>
+M&#8242; |=<sub>I</sub>(&#931;&#8242;) <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)(e)
+<span style="text-decoration: underline;">iff</span> <span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(f)(e)
+&#8712; <span style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M&#8242;)
+<span style="text-decoration: underline;">iff</span> e &#8712; <span
+ style="font-weight: bold; font-style: italic;">inv</span><sub>I</sub>(f)(<span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(&#931;&#8242;)(M&#8242;))
+<span style="text-decoration: underline;">iff</span> e &#8712; <span
+ style="font-weight: bold; font-style: italic;">Th</span><sub>I</sub>(f)(<span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M&#8242;))
+&#9830;. Applying the
+Grothendieck construction to this maximal
+theory natural transformation results in a functor <span
+ style="font-style: italic; font-weight: bold; font-family: times new roman;">max-th</span><sub>I</sub>
+: <span style="font-weight: bold; font-family: times new roman;">Model</span><sub>I</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold; font-family: times new roman;">Theory</span><sub>I</sub>
+that commutes with the signature projections (fibrations).
+This is the horizontal axis in the diagrams in Figure 2. Functoriality
+of the maximal theory operator is dependent upon the model variance
+condition.
+</p>
+<div style="text-align: justify;">Unfortunately, many
+institutions
+are
+not orthovariant. Fortunately, associated with any institution I is an
+orthovariant institution |I|. The orthovariant associate |I| is defined
+as follows. Ignore the model morphisms in
+<span style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>(&#931;).
+Induce a preorder <span style="font-weight: bold;">Model</span><sub>|I|</sub>(&#931;)
+on the class of models
+|<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(&#931;)
+via the model embedding map <span style="font-weight: bold;">&#953;</span><sub>I</sub>(&#931;)&nbsp;:&nbsp;|<span
+ style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>(&#931;)&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Cloth</span><sub>I</sub>(&#931;):
+M<sub>1</sub>&nbsp;&#8804;&nbsp;M<sub>2</sub> when <span
+ style="font-weight: bold;">&#953;</span><sub>I</sub>(&#931;)(M<sub>1</sub>)&nbsp;&#8839;&nbsp;<span
+ style="font-weight: bold;">&#953;</span><sub>I</sub>(S)(M<sub>2</sub>);
+that is, M<sub>1</sub>&nbsp;&#8804;&nbsp;M<sub>2</sub> when <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>1</sub></small>)
+&#8839; <span style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M<small><sub>2</sub></small>);
+or equivalently, M<sub>1</sub>&nbsp;&#8804;&nbsp;M<sub>2</sub> when M<small><sub>2</sub></small>&nbsp;|=<sub>I</sub>(&#931;)
+e implies M<small><sub>1</sub></small>&nbsp;|=<sub>I</sub>(&#931;) e
+for any sentence e&nbsp;&#8712;&nbsp;<span
+ style="font-weight: bold; font-style: italic;">Sen</span><sub>I</sub>(&#931;).
+For any signature morphism
+f&nbsp;: &#931; &#8594; &#931;&#8242;, by using the fact (stated above) that
+the left adjoint is compatible with the model function, it is easy to
+see that the underlying model function is a monotonic function
+(functor) between
+preorders (categories) <span style="font-weight: bold;">Model</span><sub>|I|</sub>(f)
+: <span style="font-weight: bold;">Model</span><sub>|I|</sub>(&#931;&#8242;)&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">Model</span><sub>|I|</sub>(&#931;).
+However, we offer an elementary proof. <span style="font-weight: bold;">Proof:</span>
+Assume that M<sub>1</sub>&#8242; and M<sub>2</sub>&#8242; are models in <span
+ style="font-style: italic; font-weight: bold;">Mod</span>(&#931;&#8242;) and that
+M<sub>1</sub>&#8242; &#8804; M<sub>2</sub>&#8242;. Also assume that e is a sentence in <span
+ style="font-style: italic; font-weight: bold;">Sen</span>(&#931;) and that <span
+ style="font-style: italic; font-weight: bold;">Mod</span>(f)(M<sub>2</sub>&#8242;)
+|=<sub>I</sub>(&#931;) e. By the satisfaction condition, M<sub>2</sub>&#8242;
+|=(&#931;&#8242;) <span style="font-style: italic; font-weight: bold;">Sen</span>(f)(e).
+By the induced order definition, M<sub>1</sub>&#8242; |=(&#931;&#8242;) <span
+ style="font-style: italic; font-weight: bold;">Sen</span>(f)(e). By
+the satisfaction condition, <span
+ style="font-style: italic; font-weight: bold;">Mod</span>(f)(M<sub>1</sub>&#8242;)
+|=(&#931;) e &#9830;. This preorder construction enriches the
+underlying model functor
+|<span style="font-style: italic; font-weight: bold;">Mod</span>|<sub>I</sub>&nbsp;:&nbsp;<b>Sign</b><sub>I</sub><small><sup>op</sup></small>&nbsp;&#8594;
+<b>Set</b>
+from sets to (preorders as) categories, resulting in the associate
+model functor <span style="font-style: italic; font-weight: bold;">Mod</span><sub>|I|</sub>
+: <span style="font-weight: bold;">Sign</span><sup>op</sup> &#8594; <span
+ style="font-weight: bold;">Cat</span>. Define the associate insitution
+|I| to have the same signature category, sentence functor, and
+satisfaction relations as I. Let |I| have the associate model functor,
+so that |I| and I are also the same on the object parts of their model
+fiber functors |Mod|(f) for signature morphisms f. Define the associate
+Grothendieck
+category <span style="font-weight: bold;">Model</span><sub>|I|</sub>
+= <span style="font-weight: bold;">Gr</span>(<span
+ style="font-style: italic; font-weight: bold;">Mod</span><sub>|I|</sub>).
+We can use the orthovariant associate
+|I| when the
+institution I is not orthovariant. For orthovariant institutions I, we
+can use either I or |I|. Also for orthovariant institutions, there is a
+forgetful functor
+<span style="font-style: italic; font-weight: bold;">Mod</span><sub>I</sub>(&#931;)&nbsp;&#8594;
+<span style="font-style: italic; font-weight: bold;">Mod</span><sub>|I|</sub>(&#931;)
+that is natural in &#931;; hence, using the Grothendieck construction, there
+is a quotient functor
+<span style="font-weight: bold;">Model</span><sub>I</sub>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">Model</span><sub>|I|</sub>.
+</div>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1"
+ style="vertical-align: top; text-align: center;"> <img
+ alt="Skeletal Diagram" title="Skeletal Diagram"
+ src="skeletal-diagram.gif" style="width: 270px; height: 318px;"> </td>
+    </tr>
+    <tr align="center">
+      <td colspan="1" rowspan="1"
+ style="height: 50px; vertical-align: middle;"> <big><big><span
+ style="font-family: arial; font-weight: bold;">Logical Environment</span></big></big>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><big><big><span
+ style="font-weight: bold;">Figure 2</span></big></big></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3>Extent and Intent Concept Morphisms</h3>
+<p style="text-align: justify;">
+Explain the details of a concept morphism, especially one arising from
+an infomorphism.
+Explain the initial (intent) and final (extent) infomorphisms in a
+fiber. Define their associated concept morphisms. This gives a nice
+representation of the connections between the instance/type power sets
+and the concept lattice of a classification.<br>
+</p>
+<h3>Architectural Diagram for an Institution</h3>
+<p style="text-align: justify;">
+Illustrate and explain the functors in the architectural diagram that
+arise from any institution I. Add the restriction functor forming part
+of a reflection with inclusion of logics into prologics.
+</p>
+<p style="text-align: justify;">A prologic L = (T, M) is a
+theory-model&nbsp; pair that share the same signature &#931;. The category
+of prologics <span style="font-weight: bold;">Prologic</span><sub>I</sub>
+is the pullback (fibered product) in <span style="font-weight: bold;">CAT</span>
+over the projection opspan under the categories <span
+ style="font-weight: bold;">Theory</span><sub>I</sub> and <span
+ style="font-weight: bold;">Model</span><sub>I</sub>. Note that the
+model component of a prologic may satisfy only part of the theory
+component of the prologic; that is, only part of the model M is
+"normal" with respect to the theory T. A logic is a prologic that is
+normal; that is, a logic L = (T, M) is a prologic, where M |=<sub>I</sub>(&#931;)
+e for all e &#8712;&nbsp;<span style="font-weight: bold; font-style: italic;">thm</span><sub>I</sub>(T);
+that is, where <span style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M)
+&#8839; <span style="font-weight: bold; font-style: italic;">axm</span><sub>I</sub>(T);
+or equivalently, where <span
+ style="font-weight: bold; font-style: italic;">max-th</span><sub>I</sub>(M)
+&#8804; T. Let <span style="font-weight: bold;">Logic</span><sub>I</sub>
+denote the full subcategory of logics in <span
+ style="font-weight: bold;">Prologic</span><sub>I</sub> with logic
+inclusion functor <span style="font-weight: bold; font-style: italic;">incl</span><sub><span
+ style="font-weight: bold;"></span>I</sub><span
+ style="font-weight: bold; font-style: italic;"> </span>: <span
+ style="font-weight: bold;">Logic</span><sub>I</sub><span
+ style="font-weight: bold;"> </span>&#8594; <span style="font-weight: bold;">Prologic</span><sub>I</sub>.<br>
+</p>
+<h2><a name="The_Information_Flow_IF_Institution"></a>The Information
+Flow (IF) Institution</h2>
+<p style="text-align: justify;">As shown above, in a general sense
+institutions are closely related to Information Flow. However, there is
+also a special sense in which these two theories are related. This
+is represented by a naturally defined institution for Information
+Flow. Here, we discuss this institution in some detail. First we do
+some review.</p>
+<div style="text-align: justify;">A <span
+ style="font-weight: bold; font-style: italic;">classification
+A </span>=
+(<span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>), <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>),&nbsp;|=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>)
+consists of a set of instances or tokens <span
+ style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>), a set of
+types <span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) and a binary
+incidence relation |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#8838; <span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) &times; <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) between
+instances and types. We can consider the type symbols <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) to be a
+collection of unary predicate symbols. When a |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#945; for some instance a &#8712; <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) and some type
+&#945; &#8712; <span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>), then we say
+"a is of type &#945;". The power set construction <span
+ style="font-family: script mt bold;">P</span> allows us to define two
+special classifications: for each set A (of elements considered
+as instances), the instance power set classification is <span
+ style="font-family: script mt bold;">P</span>A = (A, <span
+ style="font-family: script mt bold;">P</span><span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>), &#8712;<small><sub>A</sub></small>);
+and for any set &#931; (of elements considered as types), the type power
+classification <span style="font-family: script mt bold;">P</span>&#931; = (<span
+ style="font-family: script mt bold;">P</span>&#931;, &#931;, &#8715;<small><sub>&#931;</sub></small>).
+Every classification <span
+ style="font-style: italic; font-weight: bold;">A</span> determines an
+intent function <span style="font-weight: bold; font-style: italic;">int</span><small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>
+: <span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8594; <span
+ style="font-family: script mt bold;">P</span><span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) where <span
+ style="font-weight: bold; font-style: italic;">int</span><small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>(a)
+= {&#945; &#8712; <span style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) | a |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#945;}, and an
+extent function <span style="font-weight: bold; font-style: italic;">ext</span><small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>
+: <span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8594; <span
+ style="font-family: script mt bold;">P</span><span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) where <span
+ style="font-style: italic; font-weight: bold;">ext</span><small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>(&#945;)
+= {a &#8712; <span style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) | a |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#945;}. An <span style="font-weight: bold; font-style: italic;">infomorphism
+f </span>=
+(<span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">f</span>), <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)) : <span
+ style="font-weight: bold; font-style: italic;">A</span> &#8594; <span
+ style="font-weight: bold; font-style: italic;">B</span> from
+classification <span style="font-style: italic; font-weight: bold;">A</span>
+to classification <span style="font-weight: bold; font-style: italic;">B</span>
+consists of an instance function <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">f</span>) : <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">B</span>) &#8594; <span
+ style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) in the
+reverse sense and a type function <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>) : <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8594; <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">B</span>) in the direct
+sense, which satisfy the fundamental condition: for any
+source type &#945; &#8712; <span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) and any
+target instance b &#8712; <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">B</span>), <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">f</span>)(b) |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#945; <span style="text-decoration: underline;">iff</span> b |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">B</span></sub></small> <span
+ style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)(&#945;).
+Every classification <span
+ style="font-weight: bold; font-style: italic;">A</span> determines an
+intent infomorphism &#949;<small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>
+= (<span style="font-weight: bold; font-style: italic;">int</span><small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>,
+1<sub><span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>)</sub>) :
+<span style="font-family: script mt bold;">P</span><span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) &#8594; <span
+ style="font-style: italic; font-weight: bold;">A</span> and an extent
+infomorphism &#951;<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+= (1<sub><span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>)</sub>, <span
+ style="font-weight: bold; font-style: italic;">ext</span><small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>)
+: <span style="font-weight: bold; font-style: italic;">A</span> &#8594; <span
+ style="font-family: script mt bold;">P</span><span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>). Compositions
+and identities are defined in terms of the component instance and type
+functions. Therefore, there is a category <span
+ style="font-weight: bold;">Clsn</span> of
+classifications and infomorphisms and two projection functors
+<span style="font-style: italic; font-weight: bold;">inst</span> : <span
+ style="font-weight: bold;">Clsn</span> &#8594; <span
+ style="font-weight: bold;">Se</span><span style="font-weight: bold;">t</span><small><sup>op</sup></small>
+and <span style="font-weight: bold; font-style: italic;">typ</span> : <span
+ style="font-weight: bold;">Clsn</span> &#8594; <span
+ style="font-weight: bold;">Set</span>.<br>
+</div>
+<p style="text-align: justify;">For
+any set A (of elements considered
+as instances), let <span style="font-style: italic; font-weight: bold;">Inst</span>(A)
+= <span style="font-style: italic; font-weight: bold;">inst</span><small><sup>&#8722;1</sup></small>(A)
+&#8838; <span style="font-weight: bold;">Clsn</span> denote the subcategory
+of all classifications whose instance set is A and all infomorphisms
+whose instance function is 1<small><sub>A</sub></small>. For any
+function f : A&#8242; &#8594; A (regarded as an instance map), let <span
+ style="font-weight: bold; font-style: italic;">Inst</span>(f)
+: <span style="font-weight: bold; font-style: italic;">Inst</span>(A)
+&#8594; <span style="font-weight: bold; font-style: italic;">Inst</span>(A&#8242;)
+denote the functor whose object function maps a classification <span
+ style="font-style: italic; font-weight: bold;">A</span> &#8712; <span
+ style="font-weight: bold; font-style: italic;">Inst</span>(A) to the
+classification <span style="font-weight: bold; font-style: italic;">Inst</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">A</span>) = (A&#8242;, <span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>), |=) &#8712; <span
+ style="font-weight: bold; font-style: italic;">Inst</span>(B),
+where b |= &#945; when f(b) |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>
+&#945; in classification <span
+ style="font-weight: bold; font-style: italic;">A</span>, and whose
+morphism function maps an infomorphism <span
+ style="font-weight: bold; font-style: italic;"> f </span>=
+(1<small><sub>A</sub></small>,
+<span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)) : <span
+ style="font-weight: bold; font-style: italic;">A</span><small><sub>1</sub></small>
+&#8594; <span style="font-weight: bold; font-style: italic;">A</span><small><sub>2</sub></small>
+in <span style="font-style: italic; font-weight: bold;">Inst</span>(A)
+to the
+infomorphism <span style="font-weight: bold; font-style: italic;">Inst</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">f</span>) =
+(1<sub><small>A</small>&#8242;</sub>,
+<span style="font-weight: bold; font-style: italic;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">f</span>)) : <span
+ style="font-weight: bold; font-style: italic;">Inst</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">A</span><small><sub>1</sub></small>)
+&#8594; <span style="font-weight: bold; font-style: italic;">Inst</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">A</span><small><sub>2</sub></small>)
+in <span style="font-weight: bold; font-style: italic;">Inst</span>(A&#8242;).
+This instance construction forms an indexed category <span
+ style="font-style: italic; font-weight: bold;">Inst</span>&nbsp;:&nbsp;<span
+ style="font-weight: bold;">Set</span><small><sup>op</sup></small>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">CAT</span>. [NEEDS WORK].</p>
+<p style="text-align: justify;">Dually, for
+any set &#931; (of elements considered
+as types), let <span style="font-style: italic; font-weight: bold;">Typ</span>(&#931;)
+= <span style="font-style: italic; font-weight: bold;">typ</span><small><sup>&#8722;1</sup></small>(&#931;)
+&#8838; <span style="font-weight: bold;">Clsn</span> denote the subcategory
+of all classifications whose type set is &#931; and all infomorphisms whose
+type function is 1<small><sub>&#931;</sub></small>. Considering the type
+symbols &#931; to be unary predicate symbols, a classification <span
+ style="font-weight: bold; font-style: italic;">A</span> in the fiber <span
+ style="font-style: italic; font-weight: bold;">Typ</span>(&#931;) can be
+regarded as a model for &#931; consisting of a set of instances <span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) called the
+(relative) universe of <span
+ style="font-weight: bold; font-style: italic;">A</span> and a map <span
+ style="font-style: italic; font-weight: bold;">ext</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) : &#931; &#8594; <span
+ style="font-family: script mt bold;">P</span>(<span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>)) called the
+extension function of <span
+ style="font-style: italic; font-weight: bold;">A</span>, which that
+maps predicate symbols to subsets of the universe where those symbols
+are "true", and an infomorphism f : <span
+ style="font-weight: bold; font-style: italic;">A</span> &#8594; <span
+ style="font-weight: bold; font-style: italic;">B</span> in <span
+ style="font-weight: bold; font-style: italic;">Typ</span>(&#931;) can be
+regarded as a model morphism consisting of a universe map <span
+ style="font-weight: bold; font-style: italic;">inst</span>(f) : <span
+ style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">B</span>) &#8594; <span
+ style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) that
+preserves extensions in the sense that <span
+ style="font-style: italic; font-weight: bold;">ext</span><small><sub><span
+ style="font-weight: bold; font-style: italic;">B</span></sub></small>(&#945;)
+= f<small><sup>&#8722;1</sup></small>(<span
+ style="font-style: italic; font-weight: bold;">ext</span><small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>(&#945;))
+for all unary predicate symbols &#945; &#8712; &#931;. For any function f : &#931; &#8594; &#931;&#8242;
+(regarded as a type map), let <span
+ style="font-weight: bold; font-style: italic;">Typ</span>(f)
+: <span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;&#8242;)
+&#8594;
+<span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;)
+denote the functor whose object function maps a classification <span
+ style="font-style: italic; font-weight: bold;">B</span> &#8712;
+<span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;&#8242;) to
+the classification <span style="font-weight: bold; font-style: italic;">Typ</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">B</span>) = (<span
+ style="font-style: italic; font-weight: bold;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">B</span>), &#931;, |=) &#8712;
+<span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;),
+where b |= a when b |=<small><sub><span
+ style="font-weight: bold; font-style: italic;">B</span></sub></small>
+f(a) in classification <span
+ style="font-weight: bold; font-style: italic;">B</span>, and whose
+morphism function maps an infomorphism <span
+ style="font-weight: bold; font-style: italic;"> f </span>=
+(<span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">f</span>), 1<small><sub><span
+ style="font-weight: bold; font-style: italic;">B</span></sub></small>)
+: <span style="font-weight: bold; font-style: italic;">B</span><small><sub>1</sub></small>
+&#8594; <span style="font-weight: bold; font-style: italic;">B</span><small><sub>2</sub></small>
+in <span style="font-style: italic; font-weight: bold;">Typ</span>(&#931;&#8242;)
+to the
+infomorphism <span style="font-weight: bold; font-style: italic;">Typ</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">f</span>) = (<span
+ style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">f</span>), 1<small><sub>A</sub></small>)
+: <span style="font-weight: bold; font-style: italic;">Typ</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">B</span><small><sub>1</sub></small>)
+&#8594; <span style="font-weight: bold; font-style: italic;">Typ</span>(f)(<span
+ style="font-weight: bold; font-style: italic;">B</span><small><sub>2</sub></small>)
+in <span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;).
+The type construction forms an indexed category
+<span style="font-weight: bold; font-style: italic;">Typ</span>&nbsp;:&nbsp;<span
+ style="font-weight: bold;">Set</span><small><sup>op</sup></small>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">CAT</span>. The Grothendieck category <span
+ style="font-style: italic; font-weight: bold;">Gr</span>(<span
+ style="font-weight: bold; font-style: italic;">Typ</span>) is
+isomorphic to <span style="font-weight: bold;">Clsn</span> and the
+Grothendieck projection functor is isomorphic to <span
+ style="font-weight: bold; font-style: italic;">typ</span>&nbsp;:&nbsp;<span
+ style="font-weight: bold;">Clsn</span>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">Set</span>.
+</p>
+<p style="text-align: justify;">For any set &#931; (of elements considered
+as types), a <span style="font-weight: bold; font-style: italic;">sequent
+</span>of &#931; is a pair &#963; = (&#915;, &#916;) of subsets of &#931;. The
+subset &#915; &#8838; &#931; is called the antecedent of &#963; and the subset &#916; &#8838; &#931; is
+called the consequent of &#963;. The meaning of a sequent is that the
+antecedent is regarded in a conjunctive sense, the consequent is
+regarded in a disjunctive sense, and the relation between them is
+regarded in an implicative sense. The binary power <span
+ style="font-style: italic; font-weight: bold;">Seq</span>(&#931;) = <span
+ style="font-family: script mt bold;">P</span>&#931;&times;<span
+ style="font-family: script mt bold;">P</span>&#931; is the set of all
+sequents of &#931; (&#931;-sequents). For any function f : &#931; &#8594; &#931;&#8242; (regarded as a
+type map), The binary power <span
+ style="font-style: italic; font-weight: bold;">Seq</span>(f) = <span
+ style="font-family: script mt bold;">P</span>f&times;<span
+ style="font-family: script mt bold;">P</span>f : <span
+ style="font-style: italic; font-weight: bold;">Seq</span>(&#931;) &#8594; <span
+ style="font-weight: bold; font-style: italic;">Seq</span>(&#931;&#8242;) denotes
+the function that maps a sequent &#963; = (&#915;, &#916;) in <span
+ style="font-weight: bold; font-style: italic;">Seq</span>(&#931;) to the
+sequent <span style="font-style: italic; font-weight: bold;">Seq</span>(f)(&#963;)
+= (<span style="font-family: script mt bold;">P</span>f(&#915;), <span
+ style="font-family: script mt bold;">P</span>f(&#916;)) in <span
+ style="font-style: italic; font-weight: bold;">Seq</span>(&#931;&#8242;). The
+sequent construction forms an indexed (discrete) category <span
+ style="font-weight: bold; font-style: italic;">Seq</span> : <span
+ style="font-weight: bold;">Set</span> &#8594; <span
+ style="font-weight: bold;">Set</span>.<br>
+</p>
+<p style="text-align: justify;">Let &#931; be any set (of elements
+considered
+as types), let <span style="font-weight: bold; font-style: italic;">A </span>=
+(<span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>), &#931;,&nbsp;|=<small><sub><span
+ style="font-weight: bold; font-style: italic;">A</span></sub></small>)
+be any classification in <span
+ style="font-style: italic; font-weight: bold;">Typ</span>(&#931;) and let &#963;
+= (&#915;, &#916;) be any
+sequent in <span style="font-weight: bold; font-style: italic;">Seq</span>(&#931;).
+An instance
+a &#8712; <span style="font-weight: bold; font-style: italic;">inst</span>(<span
+ style="font-weight: bold; font-style: italic;">A</span>) satisfies &#963;
+when the following holds: if a is
+of every antecedent type then it is of some consequent type; or in
+symbols, (&#8704;<sub>&#945;&#8712;&#915;</sub> a |=<small><sub>A</sub></small> &#945;) implies (&#8707;<sub>&#946;&#8712;&#916;</sub>
+a |=<small><sub>A</sub></small> &#946;). An
+instance not satisfying a sequent is called a counterexample
+to the sequent. The classification <span
+ style="font-style: italic; font-weight: bold;">A</span> satisfies the
+sequent &#963;, denoted by <span
+ style="font-style: italic; font-weight: bold;">A</span> |= &#963;, when all
+instances of <span style="font-weight: bold; font-style: italic;">A</span>
+satisfy &#963; (that is, there are no counterexamples to &#963; in <span
+ style="font-weight: bold; font-style: italic;">A</span>. Hence, there
+is a binary <span style="font-weight: bold; font-style: italic;">satisfaction
+</span>relation |=<small><sub>&#931;</sub></small> &#8838; <span
+ style="font-weight: bold; font-style: italic;">Typ</span>(&#931;)&times;<span
+ style="font-weight: bold; font-style: italic;">Seq</span>(&#931;).
+Satisfaction satisfies the following condition: for any function f : &#931;
+&#8594; &#931;&#8242; (regarded as a type map), <span
+ style="font-weight: bold; font-style: italic;">Typ</span>(f)(<span
+ style="font-style: italic; font-weight: bold;">A</span>&#8242;) |= &#963; <span
+ style="text-decoration: underline;">iff</span> <span
+ style="font-style: italic; font-weight: bold;">A</span>&#8242; |= <span
+ style="font-weight: bold; font-style: italic;">Seq</span>(f)(&#963;) for
+any source sequent &#963; in <span
+ style="font-style: italic; font-weight: bold;">Seq</span>(&#931;) and any
+target classification <span
+ style="font-weight: bold; font-style: italic;">A</span>&#8242; in <span
+ style="font-style: italic; font-weight: bold;">Typ</span>(&#931;&#8242;).</p>
+<p style="text-align: justify;"><span style="font-weight: bold;">Definition:</span>
+The <span style="font-style: italic; font-weight: bold;">Information
+Flow (IF) institution</span> is the quadruple (<span
+ style="font-weight: bold;">Set</span>, <span
+ style="font-weight: bold; font-style: italic;">Typ</span>, <span
+ style="font-weight: bold; font-style: italic;">Seq</span>, |=), whose
+category of abstract signatures is the category <span
+ style="font-weight: bold;">Set</span> of sets and functions, whose
+model functor is the type functor <span
+ style="font-weight: bold; font-style: italic;">Typ</span>&nbsp;:&nbsp;<span
+ style="font-weight: bold;">Set</span><small><sup>op</sup></small>&nbsp;&#8594;&nbsp;<span
+ style="font-weight: bold;">CAT</span>, whose sentence functor is the
+sequent functor <span style="font-weight: bold; font-style: italic;">Seq</span>
+: <span style="font-weight: bold;">Set</span> &#8594; <span
+ style="font-weight: bold;">Set</span>, and whose parameterize
+satisfaction relation is the binary satisfaction relation |=<small><sub>&#931;</sub></small>
+&#8838; <span style="font-weight: bold; font-style: italic;">Typ</span>(&#931;)&times;<span
+ style="font-weight: bold; font-style: italic;">Seq</span>(&#931;).<br>
+</p>
+<h3>IF Theories<br>
+</h3>
+<p style="text-align: justify;">
+A <span style="font-weight: bold; font-style: italic;">theory
+T </span>= (<span style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">T</span>), |&#8211;<small><sub><span
+ style="font-style: italic; font-weight: bold;">T</span></sub></small>)
+is a set (of types) and a binary consequence relation |&#8211;<small><sub><span
+ style="font-style: italic; font-weight: bold;">T</span></sub></small> &#8838;<span
+ style="font-family: script mt bold;"> </span><span
+ style="font-style: italic; font-weight: bold;">Seq</span>(<span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">T</span>)) on subsets
+of types. An axiom or constraint of a theory <span
+ style="font-style: italic; font-weight: bold;">T</span> is a sequent &#963;
+= (&#915;, &#916;) of <span style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">T</span>) for which &#915; |&#8211;<small><sub><span
+ style="font-style: italic; font-weight: bold;">T</span></sub></small> &#916;<small><sub><span
+ style="font-style: italic; font-weight: bold;"></span></sub></small>.
+The theory <span style="font-weight: bold; font-style: italic;">Th</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>) = (<span
+ style="font-style: italic; font-weight: bold;">typ</span>(<span
+ style="font-style: italic; font-weight: bold;">A</span>), |&#8211;<small><sub><span
+ style="font-style: italic; font-weight: bold;">A</span></sub></small>)
+generated by a classification <span
+ style="font-style: italic; font-weight: bold;">A</span> is the theory
+whose types are the types of <span
+ style="font-weight: bold; font-style: italic;">A</span> and whose
+constraints are the set of sequents satisfied by every instance of <span
+ style="font-style: italic; font-weight: bold;">A</span>. [MUCH MORE].
+</p>
+<h2><b>Bibliography</b></h2>
+<ul>
+  <li>
+    <p><a name="Barwise_and_Seligman_1997"></a>Jon Barwise and Jerry
+Seligman. <em>Information Flow: The Logic of Distributed Systems</em>,
+Cambridge Tracts in Theoretical Computer Science, vol. 44 (Cambridge,
+1997). </p>
+  </li>
+  <li>
+    <p><a name="Ganter_and_Wille_1999"></a>Bernhard Ganter and Rudolf
+Wille. <em>Formal Concept Analysis: Mathematical Foundations</em>,
+(Springer, 1999). </p>
+  </li>
+  <li>
+    <p><a name="Goguen_1991"></a>Joseph Goguen.
+"A Categorical Manifesto," <em>Mathematical Structures in Computer
+Science, 1</em>, 1991, pages 49-67. </p>
+  </li>
+  <li>
+    <p><a name="Goguen_and_Burstall_1992"></a>Joseph Goguen and Rod
+Burstall.
+"Institutions: Abstract Model Theory for Specification and
+Programming." <em>Journal of the Association for Computing Machinery,
+39</em>,
+no. 1, 1992, pages 95-146.
+Preprint, Report CSLI-85-30, Center for the Study of Language and
+Information, Stanford University, 1985. </p>
+  </li>
+  <li>
+    <p><a name="Goguen_and_Rosu_2002"></a>Joseph Goguen and Grigore
+Rosu.
+"Institution Morphisms." <em>Formal Aspects of Computing, 13</em>,
+2002, pages 274-307. </p>
+  </li>
+  <li>
+    <p><a name="Kent_2000"></a>Robert Kent.
+"<a href="http://www.ontologos.org/Papers/ISKO6/ISKO6.pdf">The
+Information Flow Foundation for Conceptual Knowledge Organization</a>."
+In: Dynamism and Stability in Knowledge Organization. Proceedings of
+the Sixth International ISKO Conference. Advances in Knowledge
+Organization 7 (2000), pp. 111-117. Ergon Verlag, W&uuml;rzburg. </p>
+  </li>
+  <li>
+    <p><a name="Kent_2002"></a>Robert Kent. "Distributed Conceptual
+Structures." In: <em>Proceedings,
+Sixth International Workshop on Relational Methods in Computer Science</em>,
+Harre de Swart, editor. Lecture Notes in Computer Science, vol. 2561
+(Springer, 2002), pages 104-123. </p>
+  </li>
+  <li>
+    <p><a name="Kent_2003a"></a>Robert Kent. "The IFF Foundation for
+Ontological Knowledge
+Organization." In: <em>Knowledge Organization and Classification in
+International Information Retrieval</em> (Haworth, 2003). </p>
+  </li>
+  <li>
+    <p><a name="Kent_2003b"></a>Robert Kent. "<a
+ href="http://sunsite.informatik.rwth-aachen.de/Publications/CEUR-WS/Vol-82/SI_paper_09.pdf">Semantic
+Integration in the IFF</a>."
+ISWC'03 Semantic Integration Workshop. Sanibel Island, Florida, USA,
+2003. </p>
+  </li>
+  <li>
+    <p><a name="Sowa_2000"></a>John Sowa. <em>Knowledge
+Representation:
+Logical, Philosophical, and Computational Foundations</em>
+(Brookes/Coles, 2000). </p>
+  </li>
+  <li>
+    <p><a name="Tarski_1944"></a>Alfred Tarski. "The Semantic
+Conception
+of Truth," <em>Philos. Phenomenological Research, 4</em>, 1944, pages
+13-47.<br>
+    </p>
+  </li>
+</ul>
+<p><a href="http://validator.w3.org/check?uri=referer"><img
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ border="0" height="31" width="88"></a>
+</p>
+</body>
+</html>

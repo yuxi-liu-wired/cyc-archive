@@ -1,0 +1,172 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Wed, 28 Mar 2001 16:00:34 &#45;0500 (EST) -->
+<!--X-Message-Id: 000c01c0b7c1$489d1880$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200103220415.f2M4FTd15481@philebus.tamu.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01939.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01792.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01887.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd54.html#01939">Thread Index</A></Td>
+<TD><A HREF="msg01940.html">Date Prev</A></TD>
+<TD><A HREF="msg01938.html">Date Next</A>
+</TD>
+<TD><A HREF="mail52.html#01939">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Chris Menzel&quot; &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Re: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 28 Mar 2001 11:57:12 -0800</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg01775.html">200103220415.f2M4FTd15481@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Chris, Pat, and others,
+
+In my categorical approach to ontological structuring I want to use a core,
+bootstrap, or basic KIF ontology -- a single namespace, say with namespace
+prefix 'KIF', that provides me with the following terminology: 'KIF$Class',
+'KIF$subclass', 'KIF$BinaryRelation', 'KIF$UnaryFunction',
+'KIF$BinaryFunction', 'KIF$TernaryFunction', KIF$Pair (a predicate), the
+pair constructor 'KIF$pair', the pair selectors 'KIF$first' and KIF$second',
+and the same for triples. As you see, my needs are very simple ;^). I like
+your basic ontology, and I want to use it for this core ontology. However,
+there are some small inconveniences in doing this.
+
+First, the pair-triple terms are not there. I realize that these can be
+defined in terms of sequences, and I could define my own, but I prefer that
+there be only one basic, core namespace. Could we include such convenience
+and derivative terminology for pairs and triples in the basic ontology?
+
+Second, I seem to be using function terminology much more than relation
+terminology, probably because my stuff is rather mathematical. However, the
+basic ontology seems to be oriented more towards relations than functions.
+For example, suppose I want to define a "binary" function 'func' whose
+argument types are 'X' and 'Y' and whose return type is 'Z'. Previously, I
+was using the code:
+
+(KIF$UnaryFunction func)
+
+(forall (?x ?y ?z)
+    (=&gt; (= (func ?x ?y) ?z)
+        (and (X ?x) (Y ?y) (Z ?z))))
+
+Now it seems that I should use the following code:
+
+(KIF$relation func)
+(KIF$functional func)
+(KIF$arity func 3)   or   (= (KIF$arity func) 3)
+(KIF$signature func X Y Z)
+
+Is this correct? Now, the arity statement is not needed because of the
+signature. In addition, the arity statement is a little odd, since this is
+normally considered to be a binary function. Perhaps we just shouldn't use
+arity with functions. Plus, I would prefer to use just the statement
+
+(KIF$function func)
+
+instead of the first two, thus, ending up with just the following simple
+code for this declaration:
+
+(KIF$function func)
+(KIF$signature func X Y Z)
+
+Could we include the term 'function' in the basic ontology, again as a
+convenience in wanting only one basic, core namespace?
+
+Robert E. Kent
+rekent@ontologos.org
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01775" href="msg01775.html">SUO: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@philebus.tamu.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01940.html">SUO: Re: Semes To Be The Truth</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01938.html">SUO: Semes To Be The Truth</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01792.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01887.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail52.html#01939"><strong>Date</strong></a></li>
+<li><a href="thrd54.html#01939"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Graphs, Relations, Spans and Hypergraphs -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Sat, 21 Apr 2001 15:26:44 &#45;0400 (EDT) -->
+<!--X-Message-Id: 002901c0ca96$fde321c0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02252.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Graphs, Relations, Spans and Hypergraphs</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02259.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02254.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd44.html#02252">Thread Index</A></Td>
+<TD><A HREF="msg02253.html">Date Prev</A></TD>
+<TD><A HREF="msg02251.html">Date Next</A>
+</TD>
+<TD><A HREF="mail46.html#02252">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Graphs, Relations, Spans and Hypergraphs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Graphs, Relations, Spans and Hypergraphs</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 21 Apr 2001 12:12:21 -0700</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Here are some mathematical definitions for some algebraic structures that
+might be helpful in some of the current SUO discussion threads. What I
+present below is well-known and reasonably standard in category-theoretic
+circles, and corresponds somewhat to the discussion
+[<A  HREF="http://www.bestweb.net/~sowa/misc/mathw.htm#Representing">http://www.bestweb.net/~sowa/misc/mathw.htm#Representing</A>] of John Sowa on
+"representing relations by graphs". However, here I give the precise
+definitions from a category-theoretic standpoint. There are several
+definitions for the hypergraph concept, but here we start with the
+definition of an unlabelled hypergraph used by John Sowa in the document
+mentioned above, which we then generalize. I have already defined ontologies
+for (the categories of) spans (hypergraphs) and binary relations using the
+new KIF (SUO-KIF).
+____________________
+
+A *graph* G = [E, N, s, t] consists of a sets of nodes N and set of edges E
+and two (total) functions, a source function s: E -&gt; N and a target function
+t : E -&gt; N. We often picture the graph G as the following diagram in the
+category Set, of sets and functions.
+
+    s
+    -&gt;
+ E    N
+    -&gt;
+    t
+
+This picture is a little hard to make using just ascii text.
+
+If e is an edge in E with source node a = s(e) and target node b = t(e), we
+often picture this as
+
+    e
+ a -&gt; b
+
+Some things to note:
+
+1. The two diagram above are on two different levels -- the first in the
+category Set, the second in the graph G.
+
+2. There are no constraints between the edge set E and the node set N; they
+could either overlap or be disjoint; they could even be identical.
+
+3. There may be any number of edges between any two nodes; although two
+edges e1 and e2 share the same source and target nodes, they are abstract
+things, not necessarily distinct labels for two different relations between
+the nodes.
+____________________
+
+A binary (dyadic) *relation* R between two sets A and B is a subset of the
+Cartesian product set AxB; that is, R \subset AxB. We can refer to the set A
+as the domain of R and the set B as the codomain of R; then we say that
+relation R is from domain A to domain B. The terminology source and target
+can be also used for domain and codomain, respectively. However, these may
+be on a different (category-theoretic and foundational) level than the
+source and target of graph edges. Initially, it may be a little unclear how
+to relate relations and graphs. The appropriate way is through the concept
+of a span.
+____________________
+
+A *span* S from domain set A to codomain set B is a set of edges E and two
+(total) functions, a source function s: E -&gt; A and a target function t :
+E -&gt; B. Speaking in terms of graphs, we can regard the sets A and B as two
+sets of nodes.
+
+Some things to note:
+
+1. There are no constraints between the edge set E and the node sets A and
+B; they could either overlap, be disjoint, or even be identical.
+
+2. Any graph G is a span, where the two node sets are identical A = B = N.
+
+3. Any binary relation R can be embedded as a span S(R) -- the edge set is
+R, the node sets are A and B, and the source and target functions are the
+projection functions: when edge (a, b) is a member of R, then s(a, b) = a
+and t(a, b) = b.
+____________________
+
+A *hypergraph* H (preliminary version) consists of a set N of nodes and a
+set A of (hyper)arcs. Here, as distinct from graphs, each arc in E may have
+an arbitrary number of endpoint nodes. Represent the fact that arc e has
+endpoint node n by saying that the pair (e, n) is a member of H. This means
+that H is just a binary relation from domain set A to codomain set N, and
+hence is a special case of a span. Let us generalize by equating hypergraphs
+with spans (perhaps this corresponds to John Sowa's labelled hypergraphs??);
+that is, a (generalized) *hypergraph* H consists of a set of connectors or
+indices E, a set of domain nodes or hyperarcs A, a set of codomain nodes or
+ordinary nodes N, and two functions, a source function s : E - &gt; A from
+connectors to hyperarcs and a target function from connectors to (ordinary)
+nodes.
+
+Some things to note:
+
+1. Hypergraphs can represent multivalent relations, where each hyperarc of a
+hypergraph represents one n-tuple or relationship among n entities in the
+set of nodes N, and the connectors between hyperarcs and nodes represent the
+roles.
+
+2. So for the case
+
+(gives John Mary book)
+
+with correponding expression
+
+(exists (?e)
+    (and (giving ?e)
+         (giver ?e John)
+         (receiver ?e Mary)
+         (given ?e book)))
+
+one interpretation might be as follows:
+
+at the level of instances
+
+'(gives John Mary book)' and '?e' are hyperarcs,
+'John', 'Mary' and 'book' are ordinary nodes,
+'giver', 'receiver' and 'given' (or 'agent', 'patient' and 'thematic
+object') are connector (types);
+
+whereas 'gives' and 'giving' occur at the level of hyperarc types.
+
+
+Robert E. Kent
+rekent@ontologos.org
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02254" href="msg02254.html">SUO: Graphs, Relations, Spans, Hypergraphs</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02253.html">Re: SUO: Excessive volume of effort for far too few results</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02251.html">Re: SUO: Excessive volume of effort for far too few results</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02259.html">SUO: Re: Just Ducky!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02254.html">SUO: Graphs, Relations, Spans, Hypergraphs</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail46.html#02252"><strong>Date</strong></a></li>
+<li><a href="thrd44.html#02252"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

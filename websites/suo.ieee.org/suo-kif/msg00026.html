@@ -1,0 +1,145 @@
+<!-- MHonArc v2.4.6 -->
+<!--X-Subject: KIF Re: CG: KINDS OF CONTEXTS -->
+<!--X-From-R13: "Xbua T. Ebjn" <fbjnNorfgjro.arg> -->
+<!--X-Date: Sat, 16 Dec 2000 11:52:40 &#45;0500 (EST) -->
+<!--X-Message-Id: 3a3b9dc8.12ec4.0@bestweb.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>KIF Re: CG: KINDS OF CONTEXTS</TITLE>
+<LINK REV="made" HREF="mailto:sowa@bestweb.net">
+</HEAD>
+<BODY>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00025.html">Date Prev</A>][<A HREF="msg00027.html">Date Next</A>][<A HREF="msg00025.html">Thread Prev</A>][<A HREF="msg00027.html">Thread Next</A>][<A HREF="index.html#00026">Date Index</A>][<A HREF="threads.html#00026">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>KIF Re: CG: KINDS OF CONTEXTS</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Marta Giorgetti &lt;<A HREF="mailto:marta@IASI.RM.CNR.IT">marta@IASI.RM.CNR.IT</A>&gt;, <A HREF="mailto:cg@cs.uah.edu">cg@cs.uah.edu</A></LI>
+<LI><em>Subject</em>: KIF Re: CG: KINDS OF CONTEXTS</LI>
+<LI><em>From</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 16 Dec 2000 11:52:24 EDT</LI>
+<LI><em>Cc</em>: <A HREF="mailto:suo-kif@ieee.org">suo-kif@ieee.org</A></LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-suo-kif@ieee.org">owner-suo-kif@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Marta Giorgetti's point is important:
+
+&gt;I think that a CG considered as a literal is equivalent in KIF language
+&gt;to a proposition preceded by the quote operator, while  a CG considered
+&gt;as a descriptor is equivalent in McCarthy context language to a
+&gt;proposition that is true in some context.
+
+That is exactly what I intended to say in Ch 5 of the KR book.
+
+&gt;I want to stress, as I showed above, that there is a difference in
+&gt;meaning between a literal CG and a descriptor CG.  So I wonder if the
+&gt;two kinds of CG's should be syntactically distinguished.
+
+Yes, some kind of syntactic distinction is essential.  In a
+programming language, there are several ways of making such
+distinctions.  One way is to use an explicit operator, such
+as a quote.
+
+But in a language with strict typing, it is possible to take
+advantage of the types to determine how a particular piece of
+data should be interpreted.  If the data is not in the format
+expected for the type, the system can automatically convert
+it to the proper form.  Such a conversion is usually called
+"coercion" in programming languages.
+
+In conceptual graphs, several kinds of coercions have been
+used since the very beginning.  A name, for example, is not
+a unique identifier (as people named John are well aware).
+Therefore, the concept [Person: John] is an abbreviation
+for a graph of the following form:
+
+   [Person]-&gt;(Name)-&gt;[Word: "John"],
+
+which may be read:  There exists a person whose name is the
+word "John".
+
+When a CG occurs in the referent field of a concept, it can
+only be interpreted as a CG if the type label is CG or some
+supertype, such as Graph.  In all other cases, it must be
+coerced to some other type.  As an example, the following
+concept states that there is a situation of a cat on a mat:
+
+   [Situation: [Cat]-&gt;(On)-&gt;[Mat]].
+
+Since a graph is not a situation, this concept can be expanded
+(i.e., coerced) into the following form:
+
+   [Situation]-&gt;(Dscr)-&gt;[Proposition: [Cat]-&gt;(On)-&gt;[Mat]].
+
+This says that there exists a situation described by (Dscr)
+a proposition that a cat is on a mat.  But as Marta observed,
+a graph is not a proposition.  Therefore, another coercion
+is necessary:
+
+   [Situation]-&gt;(Dscr)-&gt;[Proposition]-&gt;(Stmt)-&gt;[CG:
+      [Cat]-&gt;(On)-&gt;[Mat] ].
+
+This says that there exists a situation described by a
+proposition, which has a statement (Stmt) by the CG
+for a cat on a mat.
+
+In the next version of the CG standard (which I am now writing),
+I plan to explain these coercions more clearly.
+
+John Sowa
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00025.html">RE: ANSI and ISO standards for CGs and KIF</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00027.html">KIF Subscriber: Change of address</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00025.html">RE: ANSI and ISO standards for CGs and KIF</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00027.html">KIF Subscriber: Change of address</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="index.html#00026"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00026"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

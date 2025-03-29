@@ -1,0 +1,178 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: RE: ONT RE: Ontology case study -->
+<!--X-From-R13: Oqnz Brnfr <ncrnfrNxf.grxabjyrqtr.pbz> -->
+<!--X-Date: Fri, 31 May 2002 16:24:04 &#45;0400 (EDT) -->
+<!--X-Message-Id: 5.1.0.14.2.20020531130610.01ed1768@ks.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DE057CA9F46ED2118C4900805F85E4270859B686@lonsc0s0038.sipc.shell.co.uk -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg04195.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>RE: ONT RE: Ontology case study</TITLE>
+<LINK REV="made" HREF="mailto:apease@ks.teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg04184.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg04185.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd7.html#04195">Thread Index</A></Td>
+<TD><A HREF="msg04196.html">Date Prev</A></TD>
+<TD><A HREF="msg04194.html">Date Next</A>
+</TD>
+<TD><A HREF="mail7.html#04195">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: ONT RE: Ontology case study</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;West, Matthew R SITI-ITPSIE&quot; &lt;<A HREF="mailto:Matthew.R.West@IS.shell.com">Matthew.R.West@IS.shell.com</A>&gt;,       <A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A></li>
+<li><em>Subject</em>: RE: ONT RE: Ontology case study</li>
+<li><em>From</em>: Adam Pease &lt;<A HREF="mailto:apease@ks.teknowledge.com">apease@ks.teknowledge.com</A>&gt;</li>
+<li><em>Date</em>: Fri, 31 May 2002 13:24:43 -0700</li>
+<li><em>In-Reply-To</em>: &lt;<a href="msg04184.html">DE057CA9F46ED2118C4900805F85E4270859B686@lonsc0s0038.sipc.shell.co.uk</a>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Matthew,
+   Many thanks for working this through.  I feel like we're getting 
+somewhere.  Although I'd be happy to continue point by point, I think maybe 
+we can get to the heart of the matter in summary.
+   I take your points below to be, broadly, that you have a sense that 
+database normalization and cardinality constraints cover the most common 
+cases of database error, and that in the rare cases that more checking is 
+needed that stored procedures are sufficient.  It's always a challenge to 
+restate someone else's views fairly, so let me know if that's right.
+   If that is a fair restatement, my rejoinder would be that if one is 
+making an efficiency argument, that it has to be made relative to the size 
+of the database, and the time constraints of the situation.  If one is 
+running a theorem prover on the client machine of say a medical records 
+technician, and the tests involved are run only over a single record at 
+time of entry, the efficiency argument is far less compelling, it seems to 
+me.  One could argue that the dramatic hardware speed increases that 
+continue mean that even if theorem proving is too slow now, that in a few 
+years, it will be enough, and that it makes sense to begin define precise 
+semantics and expressive constraints now.  One could argue, as I think Bill 
+Andersen has recently, that techniques are being developed (at 
+OntologyWorks at least) to implement expressive constraints in databases 
+that do function very efficiently today.
+   I'll address the specific request for &quot;how would I do this&quot; below, since 
+after pleading with others to be concrete and specific, I'd better practice 
+what I preach.
+
+
+At 10:48 AM 5/31/2002 +0200, West, Matthew R SITI-ITPSIE wrote:
+
+[snip]
+
+
+&gt; &gt; &gt;MW: I don't think there is anything that can merge two databases
+&gt; &gt; &gt;automatically without humans looking at it as part of the process.
+&gt; &gt;
+&gt; &gt; Nor do I.  What an ontology can do is provide a set of integrity
+&gt; &gt; constraints that can be automatically processed to determine
+&gt; &gt; in part if
+&gt; &gt; that merger was specified correctly.
+&gt;
+&gt;MW: Please explain how you think that might work.
+
+Imagine that a database technician reverses the fields that should be 
+mapped from a client database into a common DB.  He flips birth date and 
+hire date (for an employee database for a multinational corporation for 
+example).  As each record is pulled into the common DB it's checked against 
+the constraint
+
+(=&gt;
+   (and
+     (instance ?X Employee)
+     (birthTime ?X ?BTIME)
+     (deathTime ?X ?DTIME))
+   (greaterThan ?DTIME ?BTIME))
+
+
+
+
+[snip]
+
+
+Adam Pease
+Teknowledge
+(650) 424-0500 x571
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="04184" href="msg04184.html">RE: ONT RE: Ontology case study</a></strong>
+<ul><li><em>From:</em> &quot;West, Matthew R SITI-ITPSIE&quot; &lt;Matthew.R.West@IS.shell.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg04196.html">ONT Re: Extension x Comprehension = Information</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg04194.html">ONT Re: Data Models, Ontologies, Logic</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg04184.html">RE: ONT RE: Ontology case study</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04185.html">RE: ONT RE: Ontology case study</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail7.html#04195"><strong>Date</strong></a></li>
+<li><a href="thrd7.html#04195"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

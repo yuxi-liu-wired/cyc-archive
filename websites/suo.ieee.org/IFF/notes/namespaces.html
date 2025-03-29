@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>Namespaces</title>
+<meta name="description" content="A discussion of the IFF namespaces." />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="author" content="Robert E. Kent" />
+<link rel="icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico" /> 
+<link rel="stylesheet" type="text/css" href="http://suo.ieee.org/IFF/css/normal-page.css" />
+</head>
+<body>
+<div id="document"> 
+<div id="left-column"></div>
+<div id="right-column"></div>
+<div id="header">
+<div id="home">
+<a href="http://suo.ieee.org/IFF/">
+<img width="75" height="75" 
+     src="http://suo.ieee.org/IFF/images/iff-icon-thumbnail.gif" 
+     border="0"
+     alt="[The Information Flow Framework]" 
+     title="The Information Flow Framework" />
+</a>
+</div>
+<div id="top">
+<h1>Namespaces</h1>
+</div>
+<div id="navigation">
+<ul>
+<li><a href="http://suo.ieee.org/IFF/grammar.html">Grammar</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<p class="text next-paragraph">The IFF terminology is managed in terms of namespace prefixes &#8212; each namespace is given a unique prefix (with perhaps a few synonyms) in order to avoid clash of terminology. For example, the term &#8216;<span style="font-family: courier new,courier,monospace;">morphism</span>&#8217; is introduced in the contexts of the models and theories of first order logic to represent two distinct, but analogous, concepts. When these concepts need to be used in other contexts, the namespace prefixes &#8216;<span style="font-family: courier new;">fol.mod.mor</span>&#8217; and &#8216;<span style="font-family: courier new;">fol.th.mor</span>&#8217; can be used to distinguish them, thus resulting in the distinct representations &#8216;<span style="font-family: courier new,courier,monospace;">fol.mod.mor:morphism</span>&#8217; and &#8216;<span style="font-family: courier new;">fol.th.mor:morphism</span>&#8217;. Namespaces can be nested. This nesting does not refer to either the vertical or horizontal dimensions of the metalevel structure in <a href="http://suo.ieee.org/IFF/architecture.html#modular-structure">Figure&nbsp;1</a>, but instead to an implicit third dimension of the architecture. This means that the axiomatization of one namespace may be included within the axiomatization of another namespace, when these are closely connected. By definition, an outermost namespace is not included in any other, but an inner namespace is so included, it is not outermost. By definition, an atomic namespace is innermost, no other namespace is included in it. In contrast, a molecular namespace has others included; that is, it is not atomic.</p>
+<p class="text next-paragraph">Each namespace incorporates a nexus of satellite concepts centered on a single idea. The granularity of the namespace corresponds to the degree of focus of the idea, with outermost namespaces being the least focused ideas (called basic concepts) covering a broad scope, and the atomic namespaces being the most focused ideas covering a narrow scope. The architecture of the IFF namespace mechanism is flat &#8212; namespace prefixes are like tags: by using namespace prefixes the complete IFF terminology is the disjoint union of the terminology in the atomic IFF namespaces. To recapitulate, the IFF architecture can be thought of as a two dimensional structure (<a href="http://suo.ieee.org/IFF/architecture.html#modular-structure">Figure&nbsp;1</a>) consisting of metalevels, which are partitioned into outermost namespaces representing basic concepts such as diagram (&#8216;<span style="font-family: courier new,courier,monospace;">dgm</span>&#8217;), graph (&#8216;<span style="font-family: courier new;">gph</span>&#8217;), category (&#8216;<span style="font-family: courier new;">cat</span>&#8217;) or institution (&#8216;<span style="font-family: courier new;">ins</span>&#8217;). The various levels are indexed by the natural numbers {0, 2, 3, &#8230; n, &#8230;} plus (for the <a href="http://suo.ieee.org/IFF/architecture.html#metashell">metashell</a> levels) three additional symbols &#8216;<span style="font-family: courier new;">meta</span>&#8217;, &#8216;<span style="font-family: courier new;">type</span>&#8217; and &#8216;<span style="font-family: courier new;">iff</span>&#8217;. Natural language correlates can also be used for the first four levels: &#8216;<span style="font-family: courier new;">obj</span>&#8217; for 0, &#8216;<span style="font-family: courier new;">sml</span>&#8217; for 1, &#8216;<span style="font-family: courier new;">lrg</span>&#8217; for 2 and &#8216;<span style="font-family: courier new;">vlrg</span>&#8217; for 3.</p>
+<p class="text next-paragraph">To locate any namespace one can use its (level, concept) pair, a concatenation called the full prefix of the name of the namespace. The full namespace prefix acts as a unique identifier of that namespace. For example, the namespace axiomatizing very large categories would be denoted by &#8216;<span style="font-family: courier new,courier,monospace;">vlrg.cat</span>&#8217; or &#8216;<span style="font-family: courier new,courier,monospace;">3.cat</span>&#8217;. Inner namespaces need further qualification. For example, the inner namespace of small graph morphisms would be denoted by &#8216;<span style="font-family: courier new,courier,monospace;">sml.gph.mor</span>&#8217;. It is assumed that each basic concept has a particular metalevel that is in common use. These are indicated by the filled squares for the particular concepts in <a href="http://suo.ieee.org/IFF/architecture.html#transition">Figure&nbsp;2</a>. For such commonly used namespaces, the level notation may be omitted. For example, the namespace that axiomatizes large categories could be denoted by &#8216;<span style="font-family: courier new,courier,monospace;">lrg.cat</span>&#8217; or &#8216;<span style="font-family: courier new,courier,monospace;">2.cat</span>&#8217;, but a simpler notation is &#8216;<span style="font-family: courier new,courier,monospace;">cat</span>&#8217;.</p>
+<p class="text next-paragraph">The namespace mechanism has been made backward compatible, by allowing a special namespace prefix notation that is synonymous with the general format just described. For example, the namespace axiomatizing large categories would be denoted by the general prefixes &#8216;<span style="font-family: courier new,courier,monospace;">cat</span>&#8217;, &#8216;<span style="font-family: courier new,courier,monospace;">lrg.cat</span>&#8217; or &#8216;<span style="font-family: courier new,courier,monospace;">2.cat</span>&#8217; or by the special prefix &#8216;<span style="font-family: courier new,courier,monospace;">CAT</span>&#8217; that was used in earlier versions of the <span style="font-family: courier new,courier,monospace;">IFF-CAT</span> axiomatization. Hence, for any basic concept (outermost namespace), both the general prefix and the common level need to be declared, and for any namespace axiomatization, the special prefixes also need to be declared. The prefixes denoting inner namespaces should be compatible with outermost prefixes; for example, at level 2 the general prefix for the outermost namespace for limits would be &#8216;<span style="font-family: courier new,courier,monospace;">lrg.lim</span>&#8217; or &#8216;<span style="font-family: courier new,courier,monospace;">2.lim</span>&#8217; with the special prefix &#8216;<span style="font-family: courier new,courier,monospace;">LIM</span>&#8217;, whereas the general prefix for the inner (non-atomic) namespace of pullbacks would be &#8216;<span style="font-family: courier new,courier,monospace;">lrg.lim.pbk</span>&#8217; with the special prefix &#8216;<span style="font-family: courier new,courier,monospace;">LIM.PBK</span>&#8217;. As these examples illustrate, only the lower case is needed for the general namespace prefix notation.</p>
+</div> <!-- end of content -->
+<div id="footer">Author: Robert E. Kent</div>
+</div> <!-- end of document -->
+<br/>
+</body>
+<!-- test your browser here [http://plato.stanford.edu/symbols/entities.html] -->
+</html>

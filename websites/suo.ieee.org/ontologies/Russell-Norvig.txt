@@ -1,0 +1,87 @@
+;; KIF version of the ontology from
+;; Russell and Norvig, (1995), "Artificial Intelligence: A Modern Approach"
+
+(subclass-of AbstractObjects Anything)
+(subclass-of Events Anything)
+(subclass-of Sets AbstractObjects)
+(subclass-of Numbers AbstractObjects)
+(subclass-of RepresentationalObjects AbstractObjects)
+(subclass-of Sets Categories)
+(subclass-of Sentences RepresentationalObjects)
+(subclass-of Measurements RepresentationalObjects)
+(subclass-of Times Measurements)
+(subclass-of Weights Measurements)
+(subclass-of Intervals Events)
+(subclass-of Places Events)
+(subclass-of PhysicalObjects Events)
+(subclass-of Processes Events)
+(subclass-of Movements Intervals)
+(subclass-of Things PhysicalObjects)
+(subclass-of Stuff PhysicalObjects)
+(subclass-of Animals Things)
+(subclass-of Agents Things)
+(subclass-of Solid Stuff)
+(subclass-of Liquid Stuff)
+(subclass-of Gas Stuff)
+(subclass-of Humans Animals)
+(subclass-of Humans Agents)
+
+(deffunction Start (?ev) :=
+  (Event ?ev))
+
+(deffunction End (?ev) :=
+  (Event ?ev))
+
+(defrelation Meet (?i ?j) :=
+  (forall (?i ?j)
+    (and
+      (Event ?i)
+      (Event ?j)
+      (<=>
+        (Meet ?i ?j)
+        (= (Start ?i) (End ?j))))))
+
+(defrelation Before (?i ?j) :=
+  (forall (?i ?j)
+    (and
+      (Event ?i)
+      (Event ?j)
+      (<=>
+        (Before ?i ?j)
+        (< (End ?i) (Start ?j))))))
+
+(defrelation After (?i ?j) :=
+  (forall (?i ?j)
+    (and
+      (Event ?i)
+      (Event ?j)
+      (<=>
+        (After ?i ?j)
+        (Before ?j ?i)))))
+
+(defrelation During (?i ?j) :=
+  (forall (?i ?j)
+    (and
+      (Event ?i)
+      (Event ?j)
+      (<=>
+        (During ?i ?j)
+        (and
+          (<= (Start ?j) (Start ?i))
+          (<= (End ?i) (End ?j)))))))
+
+(defrelation Overlap (?i ?j) :=
+  (forall (?i ?j)
+    (and
+      (Event ?i)
+      (Event ?j)
+      (<=>
+        (Overlap ?i ?j)
+        (exists (?k)
+          (and
+            (During ?k ?i)
+            (During ?k ?j)))))))
+
+
+
+

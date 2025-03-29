@@ -1,0 +1,215 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: cng unlrf <cunlrfNnv.hjs.rqh> -->
+<!--X-Date: Tue, 17 Apr 2001 13:40:41 &#45;0400 (EDT) -->
+<!--X-Message-Id: v04210105b700d6eae718@[204.214.21.206] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200104161644.JAA16939@ns.net.fla.fujitsu.com -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02181.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:phayes@ai.uwf.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02172.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01763.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd54.html#02181">Thread Index</A></Td>
+<TD><A HREF="msg02182.html">Date Prev</A></TD>
+<TD><A HREF="msg02180.html">Date Next</A>
+</TD>
+<TD><A HREF="mail47.html#02181">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Francis McCabe &lt;<A HREF="mailto:fgm@fla.fujitsu.com">fgm@fla.fujitsu.com</A>&gt;,       &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;,       &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 17 Apr 2001 10:26:58 -0500</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg02172.html">200104161644.JAA16939@ns.net.fla.fujitsu.com</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02172.html">200104161644.JAA16939@ns.net.fla.fujitsu.com</A>&gt;</LI>
+<LI><em>Reply-To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+
+&gt;1. My understanding is that the proposal is to have an import `statement'
+&gt;(import url formula)
+&gt;
+&gt;2. To allow references within the formula to other ontologies O#ref
+
+The # notation is not used to refer to other ontologies. It is purely 
+a lexical device to avoid accidental clashes of namespaces, where the 
+same symbol is acccidentally used in two different ontologies to 
+refer to the different entities.
+(Since posting the original suggestion, I have been persuaded that 
+this #-prefixing device should be optional rather than compulsory. 
+However I havent worked out a detailed proposal for a syntax which 
+allows it to be optional yet.)
+
+&gt;Some comments:
+&gt;
+&gt;1. Programming languages have dealt with this problem with varying 
+&gt;degrees of success. There is actually not much that is specific to 
+&gt;ontologies per se here
+
+There are some issues special to ontologies, since the logical 
+semantics treats identifiers somewhat differently. But I agree with 
+your overall point.
+
+&gt;2. An expression such as O#ref is quite hard to give a semantics for.
+
+No, it is easy. As far as the logical language is concerened, # has 
+no semantics. A string containing # is just another identifier and it 
+denotes in the usual way. The 'semantics' is all at the purely 
+lexical level.
+
+&gt;Consider the reasonable version: fun(Arg)#ref. Yes, this will come 
+&gt;up in practice.
+
+If it does, it will be rejected as ill-formed by a KIF parser. It 
+consists of five lexical items (in order: fun, (, Arg, ), #ref) and 
+does not parse to a well-formed KIF expression. What is it supposed 
+to mean?
+
+&gt;Does the O part have an independent interpretation? (op.ed. It 
+&gt;should if you want to make life easier for yourself)
+
+No, it does not. The string preceding the #  is simply used as a 
+prefixing device to ensure lexical separation of two vocabularies. 
+(See earlier comment on making this nonobligatory.)
+
+&gt;3. A simple story looks like this:
+&gt;
+&gt;A micro theory (sic Cyc) is a tuple of predicates and other items.
+&gt;An item may be named: foo:item
+&gt;
+&gt;(Yes, this does smack of higher order; but at least its explicit)
+&gt;
+&gt;Exp#foo refers to the item named foo in the tuple of named items in 
+&gt;Exp. More generally, you could allow foo to be an expression: foo is 
+&gt;evaluated in the context of Exp (much like a letrec)
+
+You could, but that would be a major extension and would take us into 
+much deeper waters, involving 'contexts'.
+
+&gt;import(url) refers to the contents of the expression located in the url.
+
+My 'imports' doesnt refer to anything. It is a form, not an 
+expression. It simply stands for a set of sentences.
+
+&gt;So, a full import of an ontology looks like:
+&gt;
+&gt;import("htttp:.....")#formula
+&gt;
+&gt;where the interpretation of this is analogous to the LET
+&gt;
+&gt;LET x1:pred1
+&gt;       x2:pred2
+&gt;      ...
+&gt;     IN formula
+&gt;
+&gt;which should be familiar.
+
+Actually it is not (and I don't quite see the analogy). Is this a 
+function call? If so, I think this is not at all similar to what I 
+was proposing. That would require the 'imported' ontology to retain 
+its identity as a subtheory, so that 'evaluation' could be performed 
+relative to that subtheory. That is not what I had in mind: I meant 
+'import' to be simply a notationally handy way of, in effect, copying 
+a bunch of sentences into ones ontology without actually writing 
+them. Once included, their status as a member of the imported set 
+plays no further role in the inference processes of the importing 
+ontology.
+
+Pat Hayes
+
+---------------------------------------------------------------------
+IHMC					(850)434 8903   home
+40 South Alcaniz St.			(850)202 4416   office
+Pensacola,  FL 32501			(850)202 4440   fax
+phayes@ai.uwf.edu 
+<A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02172" href="msg02172.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Francis McCabe &lt;fgm@fla.fujitsu.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02182.html">SUO: Re: Expostulation</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02180.html">RE: SUO: Exposition</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02172.html">Re: SUO: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01763.html">SUO: RE: Re: Peirce's MS 514</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail47.html#02181"><strong>Date</strong></a></li>
+<li><a href="thrd54.html#02181"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,1122 @@
+(In-Package "ONTOLINGUA-USER")
+
+;;; Written by user Paj from session "download docs" owned by group HPKB
+;;; Date: Feb 4, 1998  01:58
+;;; Definitions: 177
+
+(Define-Ontology
+     Enterprise-Ontology
+     (Frame-Ontology Simple-Time)
+   "This is the Enterprise Ontology v1.1, a collection of terms and definitions relevant to business enterprises. The ontology was developed in the Enterprise Project by the Artificial Intelligence Applications Institute at the University of Edinburgh with its partners: IBM, Lloyd's Register, Logica UK Limited, and Unilever. The project was support by the UK's Department of Trade and Industry under the Intelligent Systems Integration Programme(project no IED4/1/8032)<p>
+
+For further information about the Enterprise Ontology please see the publication:<p>
+<blockquote>
+Mike Uschold, Martin King, Stuart Moralee and Yannis Zorgios, The Enterprise Ontology, <I>The Knowledge Engineering Review</I>, Vol. 13, Special Issue on Putting Ontologies to Use (eds. Uschold. M. and  Tate. A.), 1998
+</blockquote><p>
+(c) AIAI, The University of Edinburgh,1998.
+Permission to use the Enterprise Ontology for any non-commercial purpose or purposes is granted as long as credit is given to AIAI, The University of Edinburgh, as the authors of this work, and as long as this notice remains intact on any derivative work.<p>
+
+The Enterprise Ontology is maintained on KSL by Peter.Jarvis@ed.ac.uk<p>
+Conceptually, the Enterprise Ontology it is divided
+into a number of main sections -- these are summarised below.
+<p>
+ACTIVITIES and PROCESSES:
+<p>
+The central term is Activity. This is intended to capture the notion of
+anything that involves doing, in particular including action.  The concept of
+Activity is closely linked with the idea of the Doer, which may be a Person,
+Organisational-Unit or Machine.  These terms are defined in the Organisation
+section and are collectively referred to as Potential-Actor s.
+Have-Capability denotes the ability of a Potential-Actor
+ to be the
+Doer of an Activity (or Skill if the Doer is a
+Person).  Actors may have other Roles in respect of an Activity such as
+Activity-Owner.
+<p>
+Also closely related to Activity is Resource, which is something used or
+consumed in an Activity. An Activity can also have outputs or Effects. An
+Activity is linked to a Time-Range (i.e. an interval),
+which is defined in the Time section.
+An Activity may be large and complex and take a long
+time. This may be represented as composition of many Sub-Activity s.
+<p>
+An Activity can obviously have happened in the past and may be happening in the
+present. The term can also be used to refer to a hypothetical future
+Activity. However, there is a need to refer explicitly to specifications or
+plans for Activities. This is provided by the term Activity-Spec. An
+Activity-Spec specifies at some level of detail one or more possible
+Activities.  If the Activity-Spec has an Intended-Purpose, it is called a Plan.
+The concept of repeatability of an Activity or Plan is captured in the term
+Process-Specification.
+<p>
+Control of doing of Activities is important to enterprises. This is provided by
+the Relationship Hold-Authority denoting that an Actor has the right to
+perform the Activities as specified in an Activity-Spec.
+<p>
+ORGANISATION:
+<p>
+Central to the Organisation section are concepts of Legal-Entity and
+ORGANISATIONAL UNIT (abbreviated as OU).  Both of these refer to things which
+have a `gestalt' whether they are individual or composite. They differ in that
+a Legal-Entity is recognised as having rights and responsibilities in the world
+at large and by legal jurisdictions in particular, whereas Organisational-Unit
+need only have full recognition within an organisation.
+<p>
+Legal-Entity includes Person and Corporation. Larger Legal-Entities may wholly
+own other smaller Legal-Entities.  An Organisational-Unit may be large and
+complex, even transcending Legal-Entities. Large OUs will normally be seen as
+being made up from smaller ones. The smallest may correspond to a single
+Person, in fact a particular Person could be seen as corresponding with more
+than one small OU.
+<p>
+A Machine is a non-human, non- Legal-Entity that may play certain Roles
+otherwise played by a Person or Ou (e.g. perform an Activity).
+<p>
+The Ownership of rights and responsibilities may only, from the legal point of
+view, lie with a Legal-Entity.  Within an organisation, rights and
+responsibilities for Resources may be allocated to OUs. Therefore Ownership is
+defined to include this, with Legal-Ownership and Non-Legal-Ownership defined
+to enable the distinction where needed. OUs may be responsible for Activities.
+<p>
+Within an organisation the management structure is represented by Management
+Links. The term Manage represents assigning Purposes to OUs.  An Organisational
+Structure will be defined as a pattern of Management Links between OUs. This
+can include multiple Management Links into any one OU with constraints on the
+different type of Purposes assigned through each link.
+<p>
+STRATEGY:
+<p>
+The central concept of the Strategy section is Purpose.  Purpose captures the
+idea either of something which a PLAN can HELP ACHIEVE or that an ORGANISATION
+UNIT can be responsible for.  In fact it includes any kind of PURPOSE, whether
+on a level of organisation and time scale which will normally be called
+strategic, or detailed and short term.
+<p>
+Like an OU, a Purpose can be composed or decomposed. That is, one statement of
+Purpose may relate to something which can also be seen to Help-Achieve some
+grander Purpose. By this means, a spectrum of widely used terms like Vision,
+Mission, Goal, and Objective can be represented without there being shared
+agreement on precisely how these terms are used.
+<p>
+Strategy is defined as a Plan to Achieve a high-level Purpose.
+Based on the concept of PLAN from the Activity section, the concepts key
+to Strategic Planning can be represented with the
+terms Decision, Assumption, Risk, and various types of Factor.
+<p>
+MARKETING:
+<p>
+The central concept of the Marketing section is Sale. A Sale is an agreement
+between two Legal-Entities for the exchange of a Product for a Sale-Price.
+Normally the Product is a good or service and the Sale-Price is monetary,
+however other possibilities are included.  The Legal-Entities play the (usually
+distinct) Roles of Vendor and Customer.  A Sale can have been agreed in the
+past, and a future Potential-Sale can be envisaged, whether or not
+the actual Product can be identified, or even exists.
+<p>
+The Market is all Sales and Potential Sales within a scope of interest.  The
+Market may include Sales by Competitors.  The Market may be decomposed into
+Market Segments in many ways in many levels of detail.  This can be done by any
+properties of the Product, Vendor, Customer, Sale-Price or of anything else
+associated with a Sale. These properties are Segmentation-Variables.
+<p>
+Analysis of a Market may involve understanding of Features of Products,
+Needs of Customers, and Images of Brands, Products, or Vendors.
+Promotions are Activities whose Purposes relate to the Image in a
+Market."
+   :Io-Package
+   "ONTOLINGUA-USER"
+   :Generality
+   :Moderate
+   :Maturity
+   :Moderate)
+
+(In-Ontology (Quote Enterprise-Ontology))
+
+;;; Restricted-List-Of-Relsents
+
+(Define-Relation Restricted-List-Of-Relsents (?List ?Rs) "A Relationship between two lists ?List and ?Rs whereby: <br>
+1 - the List ?List is either <br>
+a. a Relational Sentence [Relsent@KIf-Meta] or <br>
+b. a List of Relational Sentences
+<br> --and--
+<br>
+2 - in either case, for every Relsent comprising ?List, the corresponding R
+is an item in ?Rs, a List of Relation and/or Function constants, " :Iff-Def (And (List ?List) (Or (And (Relsent ?List) (Restricted-Relsent ?List ?Rs)) (And (Forall (?Relsent) (=> (Item ?Relsent ?List) (Restricted-Relsent ?Relsent ?Rs))) (>= (Length ?List) 1)))))
+
+;;; Influence-Factor
+
+(Define-Class Influence-Factor (?Influence-Factor) "a State-Of-Affairs Known-True by an Actor which is In-Scope-Of-Interest
+of that Actor" :Iff-Def (And (State-Of-Affairs ?Influence-Factor) (Exists (?Actor) (And (Known-True ?Actor ?Influence-Factor) (In-Scope-Of-Interest ?Actor ?Influence-Factor)))))
+
+;;; Share-Type-Of
+
+(Define-Relation Share-Type-Of (?Shareholding ?Type) "The Share-Type in a Shareholding situation." :Def (And (Shareholding ?Shareholding) (Share-Type ?Type)))
+
+;;; Process-Spec
+
+(Define-Class Process-Spec (?X) "a Plan that is intended to be or is capable of being
+               Executed more than once" :Def (And (Plan ?X)))
+
+;;; Sale
+
+(Define-Frame Sale :Own-Slots ((Documentation "An agreement between two
+Legal-Entity s to exchange one Good-Service-or-Money for
+another Good-Service-or-Money.") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Actual-Customer (Cardinality 1) (Value-Type Legal-Entity)) (Product-Sold (Minimum-Cardinality 0) (Value-Type Good-Service-Or-Money)) (Sale-Price (Minimum-Cardinality 0) (Value-Type Good-Service-Or-Money)) (Sale-Vendor (Cardinality 1) (Value-Type Legal-Entity))))
+
+;;; During-Whole-Interval
+
+(Define-Individual During-Whole-Interval (Effect-When-Hold Pre-Condition-When-Hold) "Specifies that a pre-condition or effect is to hold during
+the whole interval over which an activity is performed.")
+
+;;; Strategic-Purpose
+
+(Define-Class Strategic-Purpose (?Strategic-Purpose) "A purpose held by an Actor that is declared to be of 'Strategic'
+importance.
+
+A Strategic-Purpose may Help-Achieve another Purpose, and thus be
+lower-level with respect to that Purpose.  However, any such Purpose that
+is higher-level than at least one Strategic-Purpose must itself be a
+Strategic-Purpose." :Def (And (Purpose ?Strategic-Purpose) (Exists (?Actor) (Hold-Purpose ?Actor ?Strategic-Purpose))) :Axiom-Constraints (Forall (?Purpose ?Sgc-Purpose) (=> (And (Strategic-Purpose ?Sgc-Purpose) (Help-Achieve ?Sgc-Purpose ?Purpose)) (Strategic-Purpose ?Purpose))))
+
+;;; Specified-Activity-Interval
+
+(Define-Relation Specified-Activity-Interval (?Activity-Spec ?Time-Range) "An attribute of an Activity-Spec constraining the time range
+during which the execution of the Activity-Spec can take place." :Def (And (Activity-Spec ?Activity-Spec) (Time-Range ?Time-Range)))
+
+;;; Market-Segment
+
+(Define-Frame Market-Segment :Documentation "A portion of a Market including all
+Sales and Potential-Sales limited to specified ranges of Products,
+Vendors and Customers.  Normally the ranges will be specified with defined
+values of Segmentation-Variables, however the more general case of
+defining the ranges as sets with explicit members is also allowed." :Own-Slots ((Instance-Of Class) (Subclass-Of Market)) :Template-Slots ((Product-Range (Minimum-Cardinality 0) (Value-Type Set-Of-Products)) (Customer-Range (Minimum-Cardinality 0) (Value-Type Set-Of-Customers)) (Vendor-Range (Minimum-Cardinality 0) (Value-Type Set-Of-Vendors))))
+
+;;; Strategic-Planning
+
+(Define-Class Strategic-Planning (?Sgc-Planning) "a Planning Activity whose Intended-Purpose is to produce [an
+Actual-Output which is] a Strategy" :Def (And (Planning ?Sgc-Planning) (Exists (?Strategy ?Aspec) (And (Strategy ?Strategy) (Activity-Spec ?Aspec) (Execution-Of-Activity-Spec ?Aspec ?Sgc-Planning) (Intended-Purpose ?Aspec (Quote (Actual-Output ?Sgc-Planning ?Strategy)))))))
+
+;;; Has-Need
+
+(Define-Relation Has-Need (?Customer ?Need) "a Relationship between a Customer and an Need whereby
+the Customer possesses a Need which potentially could be satisfied by
+some Product which has the appropriate Feature (Has-Feature)" :Def (And (Customer ?Customer) (Need ?Need)))
+
+;;; Actually-Execute
+
+(Define-Relation Actually-Execute (?Actor ?Activity) "A relationship between an Actor and an Activity
+whereby the Actor has performed the Activity." :Def (And (Potential-Actor ?Actor) (Activity ?Activity)))
+
+;;; Eo-Entity
+
+(Define-Class Eo-Entity (?X) "A fundamental thing in the domain being modelled." :Def (And (Individual-Thing ?X)))
+
+;;; Number-Held
+
+(Define-Relation Number-Held (?Shareholding ?Number) "The Number of Shares owned in a Shareholding situation." :Def (And (Shareholding ?Shareholding) (Positive ?Number)))
+
+;;; Potential-Customer
+
+(Define-Frame Potential-Customer :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Potential-Sale) (Range Legal-Entity)) :Documentation "The Legal-Entity in a Potential-Sale that may become the
+               Actual-Customer in a possible future Sale.")
+
+;;; Asking-Price
+
+(Define-Frame Asking-Price :Own-Slots ((Arity 2) (Documentation "the Good-Service-or-Money being asked for by a
+Legal-Entity in exchange for a Product For-Sale.") (Domain For-Sale) (Instance-Of Binary-Relation Function) (Range Good-Service-Or-Money)))
+
+;;; Misc-Spec-Detail
+
+(Define-Class Misc-Spec-Detail (?X) "Miscellaneous specification detail, usually for text strings to
+specify some detail.  " :Def (And (Eo-Entity ?X)))
+
+;;; State-Of-Affairs
+
+(Define-Class State-Of-Affairs (?Soa) "A situation. It is described by or consists of one or
+more statements asserting that a RELATIONSHIP holds
+between particular ENTITIES.
+
+Syntactically, a State-Of-Affairs is either <br>
+1. a Relational Sentence [Relsent@KIf-Meta] --or-- <br>
+2. a non-empty list of Relational Sentences.
+<p>
+A Relsent is a list of the form: [R ?x1 ?x2 ... xn] where R is a relation [or
+function] constant; each xi is a term; and n>0" :Iff-Def (Restricted-List-Of-Relsents ?Soa (Setofall ?R (Relation ?R))))
+
+;;; Specified-Doer
+
+(Define-Frame Specified-Doer :Own-Slots ((Documentation "The Actor in the Specified-To-Execute relationship.") (Instance-Of Class) (Subclass-Of Actor)) :Axioms (<=> (Specified-Doer ?Actor) (And (Actor ?Actor) (Exists (?Activity-Spec) (Specified-To-Execute ?Actor ?Activity-Spec)))))
+
+;;; Resource-Allocation
+
+(Define-Class Resource-Allocation (?X) "the allocation of Resources to Activities" :Def (And (Activity ?X)))
+
+;;; Resource
+
+(Define-Frame Resource :Own-Slots ((Documentation "The Entity that is used or consumed in the Can-Use-Resource
+relationship") (Instance-Of Class) (Subclass-Of Qua-Entity)) :Axioms ((<=> (Resource ?Resource) (Exists (?Activity-Or-Spec) (Can-Use-Resource ?Activity-Or-Spec ?Resource)))))
+
+;;; Segmentation-Variable
+
+(Define-Frame Segmentation-Variable :Documentation "Any attribute determinable from a Sale, Sale-Offer or Potential-Sale
+in a Market." :Own-Slots ((Instance-Of Class Relation) (Subclass-Of Relation)))
+
+;;; Event
+
+(Define-Frame Event :Own-Slots ((Documentation "A kind of Activity. ") (Instance-Of Class) (Subclass-Of Activity)))
+
+;;; Specified-Effect
+
+(Define-Frame Specified-Effect :Own-Slots ((Arity 2) (Domain Activity-Spec) (Instance-Of Binary-Relation Relation) (Range Effect)) :Documentation "A relationship between an Activity-Spec and an Effect
+whereby the Effect (Planning-Constraint) must  be satisfied in order
+for the Activity-Spec to be Executed.")
+
+;;; Need
+
+(Define-Class Need (?Need) "A physical, psychological or sociological requirement of a Customer" :Def (And (Eo-Entity ?Need)))
+
+;;; Market
+
+(Define-Frame Market :Documentation "All Sale s and Potential-Sale s within a scope of interest." :Own-Slots ((Instance-Of Class) (Subclass-Of Eo-Entity)))
+
+;;; Hold-Authority
+
+(Define-Relation Hold-Authority (?Actor ?Activity-Spec) "A Relationship between an Actor and an Activity-Spec whereby
+the Actor has the right to perform the Activities as specified,
+i.e. to Execute the Activity-Spec." :Def (And (Potential-Actor ?Actor) (Activity-Spec ?Activity-Spec)))
+
+;;; Brand
+
+(Define-Class Brand (?Brand) "The Name in the Brand-Of Relationship" :Iff-Def (And (String ?Brand) (Qua-Entity ?Brand) (Exists (?Vendor) (Brand-Of ?Brand ?Vendor))))
+
+;;; Partner
+
+(Define-Class Partner (?Partner) "The Person in the Partner-Of Relationship; i.e.
+a Person who forms part of a Partnership" :Iff-Def (And (Person ?Partner) (Actor ?Partner) (Exists (?Partnership) (Partner-Of ?Partner ?Partnership))))
+
+;;; Critical-Assumption
+
+(Define-Class Critical-Assumption (?Critical-Assumption) "an Assumption that is associated with or used in Strategic-Planning." :Def (And (Assumption ?Critical-Assumption) (Exists (?Strategic-Planning) (And (Strategic-Planning ?Strategic-Planning) (Planning-Assumption ?Strategic-Planning ?Critical-Assumption)))))
+
+;;; Strategy
+
+(Define-Class Strategy (?Strategy) "a Plan whose Intended-Purpose is a Strategic-Purpose; i.e.
+a Plan to Achieve a Strategic-Purpose" :Def (And (Plan ?Strategy) (Exists (?Purpose) (And (Strategic-Purpose ?Purpose) (Intended-Purpose ?Strategy ?Purpose)))))
+
+;;; Responsibilities-Of-Owner
+
+(Define-Relation Responsibilities-Of-Owner (?Ownership ?Responsibilities) "The Responsibilities in an Ownership situation that
+are placed on the Actor." :Def (And (Ownership ?Ownership) (Eo-Entity ?Responsibilities)))
+
+;;; Corporation-Of
+
+(Define-Relation Corporation-Of (?Shareholding ?Corporation) "The Corporation in a Shareholding situation whose shares are owned." :Def (And (Shareholding ?Shareholding) (Corporation ?Corporation)))
+
+;;; Sub-Plan
+
+(Define-Class Sub-Plan (?Sub-Plan) "The supporting Plan in the Sub-Plan-Of Relationship" :Iff-Def (And (Plan ?Sub-Plan) (Qua-Entity ?Sub-Plan) (Exists (?Plan) (Sub-Plan-Of ?Sub-Plan ?Plan))))
+
+;;; Vendor-Image
+
+(Define-Relation Vendor-Image (?Vendor ?Soa) "a Relationship between a Vendor and a State-of-Affairs whereby there
+are one more Customers that believe the State-of-Affairs to be true about the
+Vendor." :Def (And (Vendor ?Vendor) (State-Of-Affairs ?Soa)))
+
+;;; Before-T-End
+
+(Define-Individual Before-T-End (Pre-Condition-When-Hold) :Documentation "Specifies that a pre-condition must hold before
+the performance of an activity is completed.")
+
+;;; Potential-Vendor
+
+(Define-Frame Potential-Vendor :Documentation "The Legal-Entity in a Potential-Sale that may become the
+   Sale-Vendor in a possible future Sale" :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Potential-Sale) (Range Legal-Entity)))
+
+;;; Product
+
+(Define-Frame Product :Own-Slots ((Documentation "A Good-Service-or-Money that is or has the potential to be either
+<UL>
+<LI> offered For-Sale by a Vendor
+<li> agreed to be exchanged by the Vendor with the Actual-Customer
+in a Sale.
+</UL>") (Instance-Of Class) (Subclass-Of Qua-Entity)) :Axioms (<=> (Product ?Product) (Or (Exists (?Sale) (Product-Sold ?Sale ?Product)) (Exists (?For-Sale) (Product-For-Sale ?For-Sale ?Product)) (Exists (?Potential-Sale) (Potential-Product ?Potential-Sale ?Product)))))
+
+;;; Effect
+
+(Define-Frame Effect :Own-Slots ((Documentation "A Planning-Constraint associated with a particular Activity or
+Activity-Spec that is required to be true in order for the successful
+performance or execution of the Activity or Activity-Spec.
+
+It contains two main things: 1) a  State-Of-Affairs that is brought about,
+or made true by the execution of the Activity or Activity-Spec;
+2) A specification of when that State-Of-Affairs must be true; this may be
+one of: to hold immediately after T-Begin, immediately after T-End, or
+throughout the whole Actual- or Specified-Activity-Interval") (Instance-Of Class) (Subclass-Of Planning-Constraint)) :Template-Slots ((State-Description (Cardinality 1) (Value-Type State-Of-Affairs)) (When-Hold (Cardinality 1) (Value-Type Effect-When-Hold))))
+
+;;; In-Scope-Of-Interest
+
+(Define-Relation In-Scope-Of-Interest (?Actor ?Eo-Entity) "A Relationship between an Actor and something whereby the thing is within
+the scope of interest of the Actor." :Def (And (Potential-Actor ?Actor) (Eo-Entity ?Eo-Entity)))
+
+;;; Corporation
+
+(Define-Class Corporation (?X) "a group of Person s recognised in law as having existence,
+rights, and duties distinct from those of the individual
+Person s who from time to time comprise the group. " :Def (And (Legal-Entity ?X)))
+
+;;; Good-Service-Or-Money
+
+(Define-Class Good-Service-Or-Money (?X) "A good, a service, or a quantity of money." :Def (And (Eo-Entity ?X)))
+
+;;; Activity-Status
+
+(Define-Relation Activity-Status (?Activity ?Activity-State) "A Relationship between an Activity and an Activity-State denoting the
+State of the activity (e.g. past, present, or future)" :Def (And (Activity ?Activity) (Activity-State ?Activity-State)))
+
+;;; Role-Class
+
+(Define-Frame Role-Class :Own-Slots ((Documentation "Role-Class is a meta-class.  Its instances are classes
+defined to be the set of all Entities playing a particular Role in some
+Relation.
+
+<p> To the extent that updates may occur which change the particular set of
+tuples comprising a relation, being an instance of such a class is dynamically
+determined.") (Subclass-Of Class)) :Axioms (<=> (Role-Class ?Rc) (Exists (?R ?N) (And (Relation ?R) (Natural ?N) (Forall (?Z) (<=> (Instance-Of ?Z ?Rc) (Exists (?Args) (And (List ?Args) (Holds ?R ?Args) (= (Nth ?Args ?N) ?Z)))))))))
+
+;;; Asset
+
+(Define-Class Asset (?Asset) "A Legally Owned-Entity that Has-Monetary-Value" :Iff-Def (And (Has-Monetary-Value ?Asset) (Exists (?L-O) (And (Legal-Ownership ?L-O) (Owned-Entity ?L-O ?Asset)))))
+
+;;; After-T-End
+
+(Define-Individual After-T-End (Effect-When-Hold) :Documentation "Specifies that an effect must hold immediately after the
+performance of an activity is completed.")
+
+;;; Product-For-Sale
+
+(Define-Frame Product-For-Sale :Own-Slots ((Arity 2) (Documentation "the Good-Service-or-Money that is offered For-Sale by
+a Legal-Entity.") (Domain For-Sale) (Instance-Of Binary-Relation Function) (Range Good-Service-Or-Money)))
+
+;;; Ordinary
+
+(Define-Individual Ordinary (Share-Type) "A type of share ...")
+
+;;; Pre-Condition-When-Hold
+
+(Define-Class Pre-Condition-When-Hold (?X) "A specification of when a pre-condition of an activity must
+hold.  Currently, there are 4 instances." :Def (And (When-Hold-Spec ?X)))
+
+;;; Non-Critical-Assumption
+
+(Define-Class Non-Critical-Assumption (?Non-Critical-Assumption) "an Assumption that is not associated with or used in Strategic-Planning." :Def (And (Assumption ?Non-Critical-Assumption) (Not (Exists (?Strategic-Planning) (And (Strategic-Planning ?Strategic-Planning) (Planning-Assumption ?Strategic-Planning ?Non-Critical-Assumption))))))
+
+;;; Used-Or-Associated-With
+
+(Define-Relation Used-Or-Associated-With (?State-Of-Affairs ?Strategic-Planning) "A Relationship between a State-Of-Affairs and a Strategic-Planning Activity
+whereby the former is used or associated with the latter.
+
+A Planning-Assumption of a Strategic-Planning Activity is always
+Used-Or-Associated-With the Strategic-Planning Activity" :Def (And (State-Of-Affairs ?State-Of-Affairs) (Strategic-Planning ?Strategic-Planning)) :Axiom-Constraints (Forall (?Sgc-Planning ?Assumption) (=> (And (Strategic-Planning ?Sgc-Planning) (Assumption ?Assumption) (Planning-Assumption ?Sgc-Planning ?Assumption)) (Used-Or-Associated-With ?Assumption ?Sgc-Planning))))
+
+;;; Have-Skill
+
+(Define-Relation Have-Skill (?Person ?Activity-Spec) "the same as the Have-Capability relationship
+with the additional restriction that 1) the Actor is a Person and
+2) the ability must be practised/demonstrated to some measurable degree." :Def (And (Person ?Person) (Activity-Spec ?Activity-Spec) (Have-Capability ?Person ?Activity-Spec)))
+
+;;; Plan
+
+(Define-Frame Plan :Own-Slots ((Documentation "The Activity-Spec in the Intended-Purpose Relationship") (Instance-Of Class) (Subclass-Of Activity-Spec) (Subclass-Of Qua-Entity)) :Template-Slots ((Intended-Purpose (Minimum-Cardinality 0) (Cardinality 1) (Value-Type State-Of-Affairs))) :Axioms (<=> (Plan ?Plan) (Exists (?Soa) (Intended-Purpose ?Plan ?Soa))))
+
+;;; Owner
+
+(Define-Class Owner (?Owner) "the Actor in an Owning-Actor Relationship." :Iff-Def (And (Actor ?Owner) (Exists (?Ownership) (Owning-Actor ?Ownership ?Owner))))
+
+;;; Image
+
+(Define-Class Image (?Image) "The State-of-Affairs in one of the following Relationships:
+<UL>
+<LI> Product-Image
+<li> Vendor-Image
+<li> Brand-Image
+</UL>" :Iff-Def (And (String ?Image) (Qua-Entity ?Image) (Or (Exists (?Product) (Product-Image ?Image ?Product)) (Exists (?Vendor) (Vendor-Image ?Image ?Vendor)) (Exists (?Brand) (Brand-Image ?Image ?Brand)))))
+
+;;; Chosen-Activity
+
+(Define-Relation Chosen-Activity (?Decision ?Activity) "A Relationship between an Activity and a Decision whereby
+the Activity in a Decision is committed to by some Actor" :Def (And (Decision ?Decision) (Activity ?Activity)))
+
+;;; Goal
+
+(Define-Class Goal (?Goal) "A kind of Purpose" :Def (And (Purpose ?Goal)))
+
+;;; Restricted-Relsent
+
+(Define-Relation Restricted-Relsent (?Relsent ?Rs) "A Relationship between a Relational Sentence ?Relsent and a list ?Rs
+whereby <br>
+1. - ?Rs is a list of relation or function constants.
+<br> --and--
+<br>
+2. the R in ?Relsent is an item in the list ?Rs" :Iff-Def (And (Relsent ?Relsent) (Forall (?R) (=> (Item ?R ?Rs) (Or (Relconst ?R) (Funconst ?R)))) (Exists (?R ?Args) (And (Item ?R ?Rs) (= ?Relsent (Cons ?R ?Args))))))
+
+;;; Assumed
+
+(Define-Relation Assumed (?Actor ?Soa) "A Relationship between an  Actor and a State-of-Affairs whereby the Actor
+takes the State Of Affairs to be true without knowing whether it is
+true or not." :Def (And (Potential-Actor ?Actor) (State-Of-Affairs ?Soa) (Not (Known-True ?Actor ?Soa))))
+
+;;; Specified-Output
+
+(Define-Relation Specified-Output (?Activity-Spec ?Output) "A Relationship between an Activity-Spec and an Entity whereby the
+Entity will be an Output produced by execution of the Activity-Spec." :Def (And (Activity-Spec ?Activity-Spec) (Eo-Entity ?Output)))
+
+;;; Market-Need
+
+(Define-Class Market-Need (?Need) "An identifiable Need of a Customer which
+is not fully satisfied by Product s currently For-Sale" :Def (And (Need ?Need) (Exists (?Customer) (And (Customer ?Customer) (Has-Need ?Customer ?Need) (Not (Exists (?For-Sale ?Product ?Feature) (And (Product-For-Sale ?For-Sale ?Product) (Has-Feature ?Product ?Feature) (Satisfies-Need ?Feature ?Need))))))))
+
+;;; Owning-Actor
+
+(Define-Relation Owning-Actor (?Ownership ?Actor) "The Actor in an Ownership situation that owns something." :Def (And (Ownership ?Ownership) (Potential-Actor ?Actor)))
+
+;;; Partnership
+
+(Define-Class Partnership (?X) "A group of PERSONS carrying on business in common." :Def (And (Legal-Entity ?X)))
+
+;;; Critical-Influence-Factor
+
+(Define-Class Critical-Influence-Factor (?Critical-Influence-Factor) "an Influence-Factor that is used in or associated with Strategic-Planning" :Iff-Def (And (Influence-Factor ?Critical-Influence-Factor) (Exists (?Strategic-Planning) (And (Strategic-Planning ?Strategic-Planning) (Used-Or-Associated-With ?Critical-Influence-Factor ?Strategic-Planning)))))
+
+;;; Execution-Of-Activity-Spec
+
+(Define-Relation Execution-Of-Activity-Spec (?Activity-Spec ?Activity) "A Relationship between an Activity-Spec and an Activity whereby the
+Activity is the result of [one] execution of the Activity-Spec." :Def (And (Activity ?Activity) (Activity-Spec ?Activity-Spec)))
+
+;;; Customer-Range
+
+(Define-Frame Customer-Range :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Market-Segment) (Range Set-Of-Customers)) :Documentation "the Set-of-Customers that a Market-Segment is limited to.")
+
+;;; Potential-Product
+
+(Define-Frame Potential-Product :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Potential-Sale) (Range Good-Service-Or-Money)) :Documentation "the Good-Service-or-Money in a Potential-Sale that may become
+               the Product-Sold in a possible future Sale.")
+
+;;; Activity-State
+
+(Define-Class Activity-State (?X) "A specification of the state that an Activity is in." :Def (And (Misc-Spec-Detail ?X)))
+
+;;; Managed-By
+
+(Define-Relation Managed-By (?Managed ?Managing) "The inverse of Manages." :Iff-Def (Manages ?Managing ?Managed) :Axiom-Def (Inverse Managed-By Manages))
+
+;;; Plan-Assumption
+
+(Define-Relation Plan-Assumption (?Plan ?Assumption) "A Relationship between an Plan and a Assumption whereby the Plan is
+based on the Assumption (i.e. used during Planning) and may be invalid if
+the Assumption fails to hold
+
+An Assumption in a Plan-Assumption relationship is also the Assumption in a
+Planning-Assumption Relationship for the Planning Activity that produced the
+Plan" :Def (And (Plan ?Plan) (Assumption ?Assumption) (Exists (?Planning) (And (Planning ?Planning) (Actual-Output ?Planning ?Plan) (Planning-Assumption ?Planning ?Assumption)))))
+
+;;; Actual-Effect
+
+(Define-Frame Actual-Effect :Own-Slots ((Arity 2) (Domain Activity) (Instance-Of Binary-Relation Relation) (Range Effect)) :Documentation "A relationship between an Activity and an Effect
+whereby the State-of-Affairs is brought about by the
+performance of the Activity." :Axioms (Forall (?Activity ?Output) (=> (Actual-Output ?Activity ?Output) (Actual-Effect ?Activity (Quote (Actual-Output ?Activity ?Output))))))
+
+;;; Legal-Entity
+
+(Define-Class Legal-Entity (?X) "That which can enter into a legal contract.  For the
+purposes of the Enterprise Ontology, this is equivalent to
+the union of Person, Corporation, and Partnership." :Iff-Def (And (Eo-Entity ?X) (Or (Person ?X) (Corporation ?X) (Partnership ?X))) :Axiom-Def (Partition Legal-Entity (Setof Person Corporation Partnership)))
+
+;;; Sale-Price
+
+(Define-Frame Sale-Price :Own-Slots ((Arity 2) (Domain Sale) (Instance-Of Binary-Relation Function) (Range Good-Service-Or-Money)) :Documentation "the Good-Service-or-Money that is agreed to be exchanged by
+the ACTUAL-CUSTOMER  with the SALE-VENDOR in a SALE.")
+
+;;; Works-For-Ou
+
+(Define-Relation Works-For-Ou (?Person ?Organisational-Unit) "A Relationship between an Person and a Organisational-Unit whereby the
+   Person works for the Organisational-Unit" :Def (And (Person ?Person) (Organisational-Unit ?Organisational-Unit)))
+
+;;; Organisational-Unit
+
+(Define-Class Organisational-Unit (?X) "An Entity for Managing the performance
+of Activities to Achieve one or more Purposes. An OU may be characterised by:
+
+* the nature of its Purpose(s);
+* one or more Person(s) working for the OU;
+* Resource(s) allocated to the OU;
+* other OUs that Manage or are Managed-By the OU;
+* its Assets;
+* its Stakeholders;
+* being Legally Owned;
+* its Market (if it is a Vendor)." :Def (And (Potential-Actor ?X)))
+
+;;; For-Sale
+
+(Define-Frame For-Sale :Own-Slots ((Documentation "A situation whereby one Legal-Entity offers to enter into a
+Sale.  This necessarily entails a Product-For-Sale and an
+Asking-Price.") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Asking-Price (Cardinality 1) (Value-Type Good-Service-Or-Money)) (For-Sale-Vendor (Cardinality 1) (Value-Type Legal-Entity)) (Product-For-Sale (Cardinality 1) (Value-Type Good-Service-Or-Money)) (Specified-Potential-Customer (Minimum-Cardinality 0) (Value-Type Legal-Entity))))
+
+;;; Potential-Actor
+
+(Define-Class Potential-Actor (?X) "An Entity that *can* play an Actor Role." :Def (And (Eo-Entity ?X)))
+
+;;; Set-Of-Customers
+
+(Define-Class Set-Of-Customers (?Customers) "A Set-Class all of whose instances are sets whose members are all of
+Class Customer." :Iff-Def (And (Eo-Set ?Customers) (And (Set ?Customers) (Forall (?X) (=> (Member ?X ?Customers) (Instance-Of ?X Customer))))))
+
+;;; Activity-Ownership
+
+(Define-Frame Activity-Ownership :Own-Slots ((Documentation "a Non-Legal-Ownership between an Actor
+and an Activity whereby the Actor is responsible for the Activity.") (Instance-Of Class) (Subclass-Of Non-Legal-Ownership)) :Template-Slots ((Owning-Actor (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Potential-Actor)) (Owned-Entity (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Activity)) (Parent-Legal-Entity (Minimum-Cardinality 0) (Value-Type Legal-Entity)) (Owned-Rights (Minimum-Cardinality 0)) (Responsibilities-Of-Owner (Minimum-Cardinality 0))))
+
+;;; Objective
+
+(Define-Class Objective (?Objective) "A Purpose with a defined measure" :Def (And (Purpose ?Objective)))
+
+;;; Partner-Of
+
+(Define-Relation Partner-Of (?Person ?Partnership) "A Relationship between a Person and a Partnership denoting
+that the Person is a member of the Partnership" :Def (And (Person ?Person) (Partnership ?Partnership)))
+
+;;; Actual-Pre-Condition
+
+(Define-Frame Actual-Pre-Condition :Own-Slots ((Arity 2) (Documentation "A relationship between an Activity and a State-Of-Affairs
+whereby the State-Of-Affairs is required to be true in
+order to perform the Activity.") (Domain Activity) (Instance-Of Binary-Relation Relation) (Range Pre-Condition)))
+
+;;; Product-Image
+
+(Define-Relation Product-Image (?Product ?Soa) "a Relationship between a Product and a State-of-Affairs whereby there
+are one more Customers that believe the State-of-Affairs to be true about the
+Product." :Def (And (Product ?Product) (State-Of-Affairs ?Soa)))
+
+;;; Hold-Purpose
+
+(Define-Relation Hold-Purpose (?Actor ?Soa) "a Relationship between an Actor and a State-Of-Affairs
+Affairs whereby the Actor wants, intends, or is responsible for the full or
+partial achievement of the State-Of-Affairs;" :Def (And (Potential-Actor ?Actor) (State-Of-Affairs ?Soa)))
+
+;;; Sale-Offer
+
+(Define-Class Sale-Offer (?X) "A For-Sale situation with a Specified-Potential-Customer" :Iff-Def (And (For-Sale ?X) (Exists (?Le) (Specified-Potential-Customer ?X ?Le))))
+
+;;; Potential-Price
+
+(Define-Frame Potential-Price :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Potential-Sale) (Range Good-Service-Or-Money)) :Documentation "the Good-Service-or-Money in a Potential-Sale that may become
+               the Sale-Price in a possible future Sale.")
+
+;;; Intended-Purpose
+
+(Define-Relation Intended-Purpose (?Activity-Spec ?Soa) "A Relationship between an Activity-Spec and a
+State-Of-Affairs whereby:
+1. Execution of the Activity-Spec will result in fully or partially
+Achieving the State Of Affairs *and* <br>
+2. The State-Of-Affairs comprises one more of the Specified-Effects of the
+Activity-Spec whose achievement is declared to be the primary reason(s)
+for Executing the Activity-Spec.
+
+An Activity-Spec with an Intended-Purpose is defined to be a Plan" :Def (And (Activity-Spec ?Activity-Spec) (State-Of-Affairs ?Soa) (Specified-Effect ?Activity-Spec ?Soa)))
+
+;;; Potential-Sale
+
+(Define-Frame Potential-Sale :Own-Slots ((Documentation "A possible future Sale") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Potential-Product (Minimum-Cardinality 0) (Value-Type Good-Service-Or-Money)) (Potential-Price (Minimum-Cardinality 0) (Value-Type Good-Service-Or-Money)) (Potential-Customer (Minimum-Cardinality 0) (Value-Type Legal-Entity)) (Potential-Vendor (Minimum-Cardinality 0) (Value-Type Legal-Entity))))
+
+;;; Sale-Vendor
+
+(Define-Frame Sale-Vendor :Own-Slots ((Arity 2) (Documentation "The Legal-Entity in a Sale that agrees to exchange a
+Product for a Sale Price.
+") (Domain Sale) (Instance-Of Binary-Relation Function) (Range Legal-Entity)))
+
+;;; Help-Achieve
+
+(Define-Relation Help-Achieve (?Soa ?Soa) "a Relationship between two States Of
+Affairs whereby one State Of Affairs contributes to or facilitates the
+achievement of the other State Of Affairs." :Def (And (State-Of-Affairs ?Soa)))
+
+;;; Have-Capability
+
+(Define-Relation Have-Capability (?Actor ?Activity-Spec) "A Relationship between an Actor and an Activity-Spec
+denoting the ability of the Actor to perform the Activities as specified." :Def (And (Potential-Actor ?Actor) (Activity-Spec ?Activity-Spec)))
+
+;;; Competitor
+
+(Define-Class Competitor (?Competitor) "Either Vendor in the Competitor-Of Relationship" :Iff-Def (And (Vendor ?Competitor) (Qua-Entity ?Competitor) (Or (Exists (?Vendor2) (Competitor-Of ?Competitor ?Vendor2)) (Exists (?Vendor1) (Competitor-Of ?Vendor1 ?Competitor)))))
+
+;;; Shareholder
+
+(Define-Class Shareholder (?Legal-Entity) "A Legal-Entity owning one or more Shares in some Corporation" :Iff-Def (And (Legal-Entity ?Legal-Entity) (Actor ?Legal-Entity) (Exists (?Shareholding) (Shareholder-Of ?Shareholding ?Legal-Entity))))
+
+;;; When-Hold-Spec
+
+(Define-Class When-Hold-Spec (?X) "A specification of when a State-Of-Affairs must hold in regards of
+a Planning-Constraint" :Def (And (Misc-Spec-Detail ?X)))
+
+;;; When-Hold
+
+(Define-Frame When-Hold :Own-Slots ((Arity 2) (Domain Planning-Constraint) (Instance-Of Binary-Relation) (Range When-Hold-Spec)) :Documentation "The specification of when a State-Of-Affairs must be true in a
+Planning-Constraint")
+
+;;; Vision
+
+(Define-Class Vision (?Vision) "A kind of Purpose" :Def (And (Purpose ?Vision)))
+
+;;; Promotion
+
+(Define-Class Promotion (?Promotion) "an Activity whose primary Purpose is to
+improve the Image [of a Product, Brand and/or Vendor]" :Def (And (Activity ?Promotion)))
+
+;;; Activity-Or-Spec
+
+(Define-Class Activity-Or-Spec (?X) "The union of Activity and Activity-Spec" :Iff-Def (And (Eo-Entity ?X) (Or (Activity ?X) (Activity-Spec ?X))) :Axiom-Def (Partition Activity-Or-Spec (Setof Activity Activity-Spec)))
+
+;;; Purpose
+
+(Define-Class Purpose (?Purpose) "a State-Of-Affairs that is either 1) the Intended-Purpose
+of some Plan, or 2) in a Hold-Purpose relationship with some Actor" :Iff-Def (And (State-Of-Affairs ?Purpose) (Qua-Entity ?Purpose) (Or (Exists (?Plan) (Intended-Purpose ?Plan ?Purpose)) (Exists (?Actor) (Hold-Purpose ?Actor ?Purpose)))))
+
+;;; Customer
+
+(Define-Class Customer (?X) "Any Legal-Entity that participates in at least one of:
+<UL>
+<li> the Actual-Customer relationship with respect to some Sale,
+<LI> the Potential-Customer relationship with respect to some Potential-Sale,
+<li> the Specified-Potential-Customer Relationship with some Sale-Offer
+</UL>" :Iff-Def (And (Legal-Entity ?X) (Actor ?X) (Or (Exists (?Sale) (Actual-Customer ?Sale ?X)) (Exists (?Potential-Sale) (Potential-Customer ?Potential-Sale ?X)) (Exists (?Sale-Offer) (Specified-Potential-Customer ?Sale-Offer ?X)))))
+
+;;; Actual-Customer
+
+(Define-Frame Actual-Customer :Own-Slots ((Arity 2) (Domain Sale) (Instance-Of Binary-Relation Function) (Range Legal-Entity)) :Documentation "The Legal-Entity in a Sale that agrees to exchange a
+Sale Price for a Product.
+")
+
+;;; Share-Type
+
+(Define-Class Share-Type (?Share-Type) "A type of Share" :Def (And (Eo-Entity ?Share-Type)))
+
+;;; Decision-Taker
+
+(Define-Relation Decision-Taker (?Decision ?Actor) "A Relationship between an Actor and a Decision whereby
+the Actor is committed to an Activity in a Decision" :Def (And (Decision ?Decision) (Potential-Actor ?Actor)))
+
+;;; Sub-Activity
+
+(Define-Relation Sub-Activity (?Activity ?Activity-2) "A relationship between two activities whereby performance of
+one activity is considered to be part of the performance of
+the other activity." :Def (And (Activity ?Activity) (Activity ?Activity-2)))
+
+;;; Perceived-Risk
+
+(Define-Relation Perceived-Risk (?Actor ?Risk) "a Relationship between an Actor and a State-Of-Affairs whereby
+the Actor regards the State Of Affairs as a potential
+hindrance to the achievement of one or more of Purposes of the Actor." :Def (And (Potential-Actor ?Actor) (State-Of-Affairs ?Risk)))
+
+;;; Assumption
+
+(Define-Class Assumption (?Assumption) "The State-Of-Affairs in an Assumed Relationship with some Actor" :Iff-Def (And (State-Of-Affairs ?Assumption) (Qua-Entity ?Assumption) (Exists (?Actor) (Assumed ?Actor ?Assumption))) :Axioms (Partition Assumption (Setof Critical-Assumption Non-Critical-Assumption)))
+
+;;; Actor
+
+(Define-Frame Actor :Own-Slots ((Documentation "An EO-Entity that *does* play an Actor Role") (Subclass-Of Qua-Entity) (Subclass-Of Potential-Actor)))
+
+;;; Planning-Constraint
+
+(Define-Frame Planning-Constraint :Own-Slots ((Documentation "A constraint used during planning.  It contains two main things: 1) a
+State-Of-Affairs that is required to be true for successful execution of some
+activity or is made true by some activity; and 2) A specification of when
+that State-Of-Affairs must be true.") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((State-Description (Cardinality 1) (Value-Type State-Of-Affairs)) (When-Hold (Cardinality 1) (Value-Type When-Hold-Spec))))
+
+;;; Ownership
+
+(Define-Frame Ownership :Own-Slots ((Documentation "The union of Legal-Ownership and Non-Legal-Ownership") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Owning-Actor (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Potential-Actor)) (Owned-Entity (Minimum-Cardinality 0) (Cardinality 1)) (Owned-Rights (Minimum-Cardinality 0)) (Responsibilities-Of-Owner (Minimum-Cardinality 0))) :Axioms (Partition Ownership (Setof Legal-Ownership Non-Legal-Ownership)))
+
+;;; Has-Monetary-Value
+
+(Define-Relation Has-Monetary-Value (?X) "The property of an Entity whereby it has monetary value." :Def (And (Eo-Entity ?X)))
+
+;;; Activity-Spec
+
+(Define-Frame Activity-Spec :Own-Slots ((Documentation "a characterisation of something to do; a specification of activity.
+
+By its
+very nature, this characterisation restricts the possible things to do
+and thus corresponds to a subset of the Activities in the universe.
+
+*  an Activity Specification can be thought of as a constraint functioning
+   as a selector identifying a restricted range of Activities in the universe;
+
+*  insofar as an Activity Specification will be built up from various
+   components (statements in some language), each constraining the
+   specification in different ways, an
+   Activity Specification can be thought of a collection of constraints.
+
+*  The language for expressing Activity Specifications
+   will include statements about
+   ordering (sub)-Activities; Resource usage, Activity
+   Decomposition, and much more") (Instance-Of Class) (Subclass-Of Activity-Or-Spec)) :Template-Slots ((Specified-Activity-Interval (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Time-Range)) (Specified-Pre-Condition (Minimum-Cardinality 1) (Value-Type Pre-Condition)) (Specified-Effect (Minimum-Cardinality 1) (Value-Type Effect))))
+
+;;; Shareholder-Of
+
+(Define-Relation Shareholder-Of (?Shareholding ?Legal-Entity) "The Legal-Entity in a Shareholding situation that owns the shares." :Def (And (Shareholding ?Shareholding) (Legal-Entity ?Legal-Entity)))
+
+;;; Planning
+
+(Define-Class Planning (?Planning) "An Activity whose Intended-Purpose is to produce a Plan.
+
+Specifically, if an Activity is a Planning Activity, this implies that
+a. there is some Activity-Spec which when Executed, gave rise to the Activity;
+b. the Intended-Purpose of the Activity-Spec is to produce a Plan" :Def (And (Activity ?Planning) (Exists (?Plan ?Aspec) (And (Plan ?Plan) (Activity-Spec ?Aspec) (Execution-Of-Activity-Spec ?Aspec ?Planning) (Intended-Purpose ?Aspec (Quote (Actual-Output ?Planning ?Plan)))))))
+
+;;; Activity
+
+(Define-Frame Activity :Own-Slots ((Documentation "Something done over a particular Time-Range.
+The following may pertain to an Activity:
+* is performed by one or more Actual-Doer s;
+* is decomposed into more detailed Sub-Activity s;
+* Can-Use-Resource s;
+* An Actor may Hold-Authority to perform it;
+* there may be an Activity-Owner;
+* has a measured efficiency.
+") (Instance-Of Class) (Subclass-Of Activity-Or-Spec)) :Template-Slots ((Actual-Activity-Interval (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Time-Range)) (Actual-Pre-Condition (Minimum-Cardinality 1) (Value-Type Pre-Condition)) (Actual-Effect (Minimum-Cardinality 1) (Value-Type Effect)) (Activity-Status (Minimum-Cardinality 1) (Value-Type Activity-State))))
+
+;;; Holds-Stake-In
+
+(Define-Relation Holds-Stake-In (?Stakeholder ?Organisational-Unit) "A Relationship between an Actor and a Organisational-Unit whereby one or
+more Purpose s of the Organisational-Unit are included In-Scope-Of-Interest
+of the Actor.  The Actor must be either a Legal-Entity or an
+Organisational-Unit." :Def (And (Or (Legal-Entity ?Stakeholder) (Organisational-Unit ?Stakeholder)) (Organisational-Unit ?Organisational-Unit) (Exists (?Purpose) (And (Hold-Purpose ?Organisational-Unit ?Purpose) (In-Scope-Of-Interest ?Stakeholder ?Purpose)))))
+
+;;; Actual-Activity-Interval
+
+(Define-Relation Actual-Activity-Interval (?Activity ?Time-Range) "An attribute of an Activity denoting the time-range over
+which an Activity actually is performed." :Def (And (Activity ?Activity) (Time-Range ?Time-Range)))
+
+;;; Has-Feature
+
+(Define-Relation Has-Feature (?Product ?Feature) "a Relationship between a Product and an Feature whereby
+the Product possesses a Feature which potentially
+Satisfies-Need of a Customer" :Def (And (Product ?Product) (Feature ?Feature)))
+
+;;; Activity-Owner
+
+(Define-Class Activity-Owner (?Actor) "The Owner in an instance of the Activity-Ownership class." :Iff-Def (And (Actor ?Actor) (Exists (?Activity-Ownership) (And (Activity-Ownership ?Activity-Ownership) (Owning-Actor ?Activity-Ownership ?Actor)))))
+
+;;; Past
+
+(Define-Individual Past (Activity-State) :Documentation "Specifies that an Activity has happened already.")
+
+;;; Eo-Set
+
+(Define-Frame Eo-Set :Own-Slots ((Documentation "The most general Set-Class in the Enterprise Ontology.
+Every instance of Set-Class is a subclass of EO-Set.") (Instance-Of Set-Class) (Subclass-Of Eo-Entity Set)) :Axioms (<=> (Eo-Set ?X) (Exists (?Sc) (And (Instance-Of ?Sc Set-Class) (Instance-Of ?X ?Sc)))))
+
+;;; Employee
+
+(Define-Relation Employee (?Employment-Contract ?Person) "A Relationship between an Person and a Employment-Contract
+whereby the Person is employed by some Legal-Entity" :Def (And (Employment-Contract ?Employment-Contract) (Person ?Person)))
+
+;;; Employer
+
+(Define-Relation Employer (?Employment-Contract ?Legal-Entity) "A Relationship between a Legal-Entity and an Employment-Contract
+whereby the Legal-Entity employs some Person." :Def (And (Employment-Contract ?Employment-Contract) (Legal-Entity ?Legal-Entity)))
+
+;;; After-T-Begin
+
+(Define-Individual After-T-Begin (Effect-When-Hold) "Specifies that an effect must hold immediately after the
+performance of an activity commences.")
+
+;;; Actual-Doer
+
+(Define-Frame Actual-Doer :Own-Slots ((Documentation "The Actor in the Actually-Execute relationship.") (Instance-Of Class) (Subclass-Of Actor)) :Axioms (<=> (Actual-Doer ?Actor) (And (Actor ?Actor) (Exists (?Activity) (Actually-Execute ?Actor ?Activity)))))
+
+;;; Present
+
+(Define-Individual Present (Activity-State) :Documentation "Specifies that an Activity is happening in the present.")
+
+;;; Set-Of-Vendors
+
+(Define-Class Set-Of-Vendors (?Vendors) "A Set-Class all of whose instances are sets whose members are all of
+Class Vendor." :Iff-Def (And (Eo-Set ?Vendors) (And (Set ?Vendors) (Forall (?X) (=> (Member ?X ?Vendors) (Instance-Of ?X Vendor))))))
+
+;;; Known-True
+
+(Define-Relation Known-True (?Actor ?State-Of-Affairs) "A Relationship between an Actor and a State-Of-Affairs whereby the Actor
+knows the State-Of-Affairs to be true." :Def (And (Potential-Actor ?Actor) (State-Of-Affairs ?State-Of-Affairs) (Not (Assumed ?Actor ?State-Of-Affairs))))
+
+;;; Purpose-Holder
+
+(Define-Class Purpose-Holder (?Purpose-Holder) "The Actor in the Hold-Purpose Relationship" :Iff-Def (And (Actor ?Purpose-Holder) (Exists (?Purpose) (Hold-Purpose ?Purpose-Holder ?Purpose))))
+
+;;; Owned-Rights
+
+(Define-Relation Owned-Rights (?Ownership ?Rights) "The Rights in an Ownership situation that is owned." :Def (And (Ownership ?Ownership) (Eo-Entity ?Rights)))
+
+;;; Delegate
+
+(Define-Class Delegate (?X) "a kind of Manage  Activity whereby there is
+a transfer of something to a (normally lower-level) Actor" :Def (And (Manage ?X)))
+
+;;; Brand-Image
+
+(Define-Relation Brand-Image (?Brand ?Soa) "a Relationship between a Brand and a State-of-Affairs whereby there
+are one more Customers that believe the State-of-Affairs to be true about the
+Brand." :Def (And (Brand ?Brand) (State-Of-Affairs ?Soa)))
+
+;;; Employment-Contract
+
+(Define-Frame Employment-Contract :Own-Slots ((Documentation "an agreement between a Legal-Entity and a Person whereby
+the Legal-Entity employs the Person") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Employer (Cardinality 1) (Value-Type Legal-Entity)) (Employee (Cardinality 1) (Value-Type Person))))
+
+;;; Product-Sold
+
+(Define-Frame Product-Sold :Own-Slots ((Arity 2) (Documentation "the Good-Service-or-Money that is agreed to be exchanged by
+the Sale-Vendor with the
+Actual-Customer in a Sale.") (Domain Sale) (Instance-Of Binary-Relation Function) (Range Good-Service-Or-Money)))
+
+;;; Manage
+
+(Define-Class Manage (?X) "the Activity of assigning Purpose s and monitoring their
+achievement." :Def (And (Activity ?X)))
+
+;;; Share
+
+(Define-Class Share (?Share) " A subdivision of the rights of Ownership of a
+Corporation recognised by law and the Corporation" :Def (And (Eo-Entity ?Share)))
+
+;;; State-Description
+
+(Define-Frame State-Description :Own-Slots ((Arity 2) (Domain Planning-Constraint) (Instance-Of Binary-Relation) (Range State-Of-Affairs)) :Documentation "The State-Of-Affairs in a Planning-Constraint")
+
+;;; Shareholding
+
+(Define-Frame Shareholding :Own-Slots ((Documentation "A Relationship between a Legal-Entity and a Corporation whereby the former
+owns a number of Shares of the Corporation") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Shareholder-Of (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Legal-Entity)) (Corporation-Of (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Corporation)) (Share-Type-Of (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Share-Type)) (Number-Held (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Positive))))
+
+;;; Stakeholder
+
+(Define-Class Stakeholder (?Stakeholder) "An Actor that Holds-Stake-In some Organisational-Unit" :Iff-Def (And (Actor ?Stakeholder) (Or (Legal-Entity ?Stakeholder) (Organisational-Unit ?Stakeholder)) (Exists (?Organisational-Unit) (Holds-Stake-In ?Stakeholder ?Organisational-Unit))))
+
+;;; Manages
+
+(Define-Relation Manages (?Managing ?Managed) "A Relationship between two Actor s whereby one
+Actor directly performs the Manage Activity with respect to the
+the other." :Def (And (Organisational-Unit ?Managing) (Organisational-Unit ?Managed)))
+
+;;; Competitor-Of
+
+(Define-Relation Competitor-Of (?Vendor1 ?Vendor2) "a Relationship between two Vendors whereby one offers one or more Product s
+For-Sale that could limit the Sale s of one or more Product s of the other
+Vendor." :Def (And (Vendor ?Vendor1) (Vendor ?Vendor2)))
+
+;;; Decision
+
+(Define-Frame Decision :Own-Slots ((Documentation "a commitment by an Actor to perform an Activity") (Instance-Of Class) (Subclass-Of Eo-Entity)) :Template-Slots ((Decision-Taker (Cardinality 1) (Value-Type Potential-Actor)) (Chosen-Activity (Cardinality 1) (Value-Type Activity))))
+
+;;; Brand-Of
+
+(Define-Relation Brand-Of (?Brand ?Vendor) "a Relationship between a Vendor and a Name (i.e. a text string) whereby<br>
+the Name is identifiable by Customer s <br>
+the Name is associated with one or more Product s of the Vendor." :Def (And (Vendor ?Vendor) (String ?Brand)))
+
+;;; Non-Critical-Influence-Factor
+
+(Define-Class Non-Critical-Influence-Factor (?Non-Critical-Influence-Factor) "an Influence-Factor that is *not* associated with or used in
+Strategic-Planning" :Iff-Def (And (Influence-Factor ?Non-Critical-Influence-Factor) (Not (Exists (?Strategic-Planning) (And (Strategic-Planning ?Strategic-Planning) (Used-Or-Associated-With ?Non-Critical-Influence-Factor ?Strategic-Planning))))))
+
+;;; Qua-Entity
+
+(Define-Frame Qua-Entity :Own-Slots ((Documentation "An EO-Entity that is defined in terms of the role it plays in one or
+more Relationships.
+<UL>
+<li> Qua-Entity is the most general Role-Class
+<LI> Every instance of Role-Class is a subclass of Qua-Entity.
+;;; <li> every Qua-Entity is an instance of at least one Role-Class
+
+</UL>") (Instance-Of Role-Class) (Subclass-Of Eo-Entity)) :Axioms (<=> (Qua-Entity ?X) (Exists (?Rc) (And (Instance-Of ?Rc Role-Class) (Instance-Of ?X ?Rc)))))
+
+;;; Set-Class
+
+(Define-Frame Set-Class :Own-Slots ((Documentation "Set-Class is a meta-Class.  Its instances are special
+kinds of classes,  all of whose instances
+are themselves sets (not Classes) such that every member of such a set
+is specified to be a member of a certain Class.") (Subclass-Of Class)) :Axioms (<=> (Set-Class ?Set-Of-Things) (Exists (?Thing) (And (Class ?Thing) (Forall (?Things) (<=> (Instance-Of ?Things ?Set-Of-Things) (And (Set ?Things) (Forall (?X) (=> (Member ?X ?Things) (Instance-Of ?X ?Thing))))))))))
+
+;;; Before-T-Begin
+
+(Define-Individual Before-T-Begin (Pre-Condition-When-Hold) :Documentation "Specifies that a pre-condition must hold before
+the performance of an activity commences.
+")
+
+;;; Vendor-Range
+
+(Define-Frame Vendor-Range :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Market-Segment) (Range Set-Of-Vendors)) :Documentation "the Set-of-Vendors that a Market-Segment is limited to.")
+
+;;; Mission
+
+(Define-Class Mission (?Mission) "A kind of Purpose" :Def (And (Purpose ?Mission)))
+
+;;; Actual-Output
+
+(Define-Relation Actual-Output (?Activity ?Output) "A Relationship between an Activity and an Entity whereby the
+Entity is an Output produced by the Activity." :Def (And (Activity ?Activity) (Eo-Entity ?Output)))
+
+;;; Legal-Ownership
+
+(Define-Frame Legal-Ownership :Own-Slots ((Documentation "a Relationship between a Legal-Entity and
+some Entity whereby the Legal-Entity has certain *legal* rights
+with respect to the Entity.") (Instance-Of Class) (Subclass-Of Ownership)) :Template-Slots ((Owning-Actor (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Legal-Entity)) (Owned-Entity (Minimum-Cardinality 0) (Cardinality 1)) (Owned-Rights (Minimum-Cardinality 0)) (Responsibilities-Of-Owner (Minimum-Cardinality 0))))
+
+;;; Pre-Condition
+
+(Define-Frame Pre-Condition :Own-Slots ((Documentation "A Planning-Constraint associated with a particular Activity or
+Activity-Spec that is required to be true in order for the successful
+performance or execution of the Activity or Activity-Spec.
+
+It contains two main things: 1) a  State-Of-Affairs; and
+2) A specification of when that State-Of-Affairs must be true; this may be
+one of: to hold immediately before  T-Begin, immediately before T-End, or
+throughout the whole Actual- or Specified-Activity-Interval") (Instance-Of Class) (Subclass-Of Planning-Constraint)) :Template-Slots ((State-Description (Cardinality 1) (Value-Type State-Of-Affairs)) (When-Hold (Cardinality 1) (Value-Type Pre-Condition-When-Hold))))
+
+;;; Can-Use-Resource
+
+(Define-Relation Can-Use-Resource (?Activity-Or-Spec ?Resource) "a Relationship between an Activity or Activity-Spec and an
+Entity whereby the Entity is or can be used or consumed during the performance
+of the Activity or the Activities as specified in the Activity-Spec" :Def (And (Eo-Entity ?Resource) (Activity-Or-Spec ?Activity-Or-Spec)))
+
+;;; Market-Research
+
+(Define-Class Market-Research (?Market-Research) "an Activity whose
+<li> Purpose is to better understand a Market;
+<li> Effect s include the existence of information about the Market." :Def (And (Activity ?Market-Research)))
+
+;;; Always
+
+(Define-Individual Always (Pre-Condition-When-Hold) "Specifies that an pre-condition must always hold, before,
+during, and after an activity is performed.
+")
+
+;;; Effect-When-Hold
+
+(Define-Class Effect-When-Hold (?X) "A specification of when an effect of an activity must
+hold. There are exactly 3 special instances." :Def (And (When-Hold-Spec ?X)))
+
+;;; Reseller
+
+(Define-Class Reseller (?X) "A Customer who enters into a Sale for the Purpose of making further Sale s
+   of the Product, or derivatives of it. " :Def (Customer ?X))
+
+;;; Planning-Assumption
+
+(Define-Relation Planning-Assumption (?Planning ?Assumption) "A Relationship between an Planning Activity and a Assumption whereby the
+Actor doing the Planning makes the Assumption whilst producing a Plan.
+
+A Planning-Assumption used always gives rise to a Plan-Assumption
+associated with the plan produced." :Def (And (Planning ?Planning) (Assumption ?Assumption) (Exists (?Doer) (And (Actor ?Doer) (Actually-Execute ?Doer ?Planning) (Assumed ?Doer ?Assumption)))) :Axiom-Constraints (Forall (?Plng ?Assump) (=> (Planning-Assumption ?Plng ?Assump) (Exists (?Pln) (And (Actual-Output ?Plng ?Pln) (Plan-Assumption ?Pln ?Assump))))))
+
+;;; For-Sale-Vendor
+
+(Define-Frame For-Sale-Vendor :Own-Slots ((Arity 2) (Documentation "The Legal-Entity offering a Good-Service-or-Money For-Sale
+in exchange for an Asking-Price.
+") (Domain For-Sale) (Instance-Of Binary-Relation Function) (Range Legal-Entity)))
+
+;;; Specified-To-Execute
+
+(Define-Relation Specified-To-Execute (?Actor ?Activity-Spec) "A relationship between an Actor and an Activity-Spec
+whereby the Actor is specified to perform all or part of the Activities
+as specified in the Activity-Spec" :Def (And (Potential-Actor ?Actor) (Activity-Spec ?Activity-Spec)))
+
+;;; Specified-Pre-Condition
+
+(Define-Frame Specified-Pre-Condition :Own-Slots ((Arity 2) (Documentation "A relationship between an Activity-Spec and a Pre-Condition
+whereby the Pre-Condition (Planning-Constraint) must  be satisfied in order
+for the Activity-Spec to be Executed.") (Domain Activity-Spec) (Instance-Of Binary-Relation Relation) (Range Pre-Condition)))
+
+;;; Future
+
+(Define-Individual Future (Activity-State) :Documentation "Specifies that an Activity has not yet commenced.")
+
+;;; Feature
+
+(Define-Class Feature (?Feature) "An Attribute of a Product which may satisfy the Need of a
+               Customer" :Def (And (Eo-Entity ?Feature)))
+
+;;; Person
+
+(Define-Class Person (?X) "A human being" :Def (And (Potential-Actor ?X) (Legal-Entity ?X)))
+
+;;; Sub-Plan-Of
+
+(Define-Relation Sub-Plan-Of (?Sub-Plan ?Plan) "a Relationship between two Plans whereby the Intended-Purpose
+of one Plan does Help-Achieve the Intended-Purpose of the other Plan." :Iff-Def (And (Plan ?Plan) (Plan ?Sub-Plan) (Exists (?Purpose ?Sub-Purpose) (And (Intended-Purpose ?Plan ?Purpose) (Intended-Purpose ?Sub-Plan ?Sub-Purpose) (Help-Achieve ?Sub-Purpose ?Purpose)))))
+
+;;; Parent-Legal-Entity
+
+(Define-Relation Parent-Legal-Entity (?Nl-Ownership ?Le) "The Legal Entity in a Non-Legal-Ownership situation
+that recognises the Owning-Actor's Owned-Rights." :Def (And (Non-Legal-Ownership ?Nl-Ownership) (Legal-Entity ?Le)))
+
+;;; Vendor
+
+(Define-Frame Vendor :Own-Slots ((Documentation "A Legal-Entity who either 1) offers a Product
+For-Sale for an Asking-Price or 2) agrees to exchange a
+Product for a Sale-Price in a Sale.") (Instance-Of Class) (Subclass-Of Legal-Entity) (Subclass-Of Actor)) :Axioms (<=> (Vendor ?Vendor) (Or (Exists (?Sale) (Sale-Vendor ?Sale ?Vendor)) (Exists (?For-Sale) (For-Sale-Vendor ?For-Sale ?Vendor)) (Exists (?Potential-Sale) (Potential-Vendor ?Potential-Sale ?Vendor)))))
+
+;;; Satisfies-Need
+
+(Define-Relation Satisfies-Need (?Feature ?Need) "a Relationship between a Feature and a Need whereby
+if a Customer Has-Need Need and possesses a Product that Has-Feature Feature,
+the Product can fulfill the Customer's need." :Def (And (Feature ?Feature) (Need ?Need)))
+
+;;; Non-Legal-Ownership
+
+(Define-Frame Non-Legal-Ownership :Own-Slots ((Documentation "a Relationship between
+an Actor and an Entity whereby the Actor is recognised within a Legal-Entity as
+having certain (non-legal) rights with respect to the Entity.") (Instance-Of Class) (Subclass-Of Ownership)) :Template-Slots ((Owning-Actor (Minimum-Cardinality 0) (Cardinality 1) (Value-Type Potential-Actor)) (Owned-Entity (Minimum-Cardinality 0) (Cardinality 1)) (Parent-Legal-Entity (Minimum-Cardinality 0) (Value-Type Legal-Entity)) (Owned-Rights (Minimum-Cardinality 0)) (Responsibilities-Of-Owner (Minimum-Cardinality 0))))
+
+;;; Machine
+
+(Define-Class Machine (?X) "A non-human Entity which has the capacity to carry out
+functions and/or play various roles in an enterprise" :Def (And (Potential-Actor ?X)))
+
+;;; Sub-Activity-Spec
+
+(Define-Relation Sub-Activity-Spec (?Activity-Spec ?Activity-Spec-2) "A relationship between two Activity specifications whereby
+execution of one Activity-Spec is considered to be part of the execution of
+the other Activity-Spec." :Def (And (Activity-Spec ?Activity-Spec) (Activity-Spec ?Activity-Spec-2)))
+
+;;; Critical-Success-Factor
+
+(Define-Class Critical-Success-Factor (?Csf) "A Purpose declared by an Actor to be critical to the success of one or more
+Strategic-Purposes" :Def (And (Purpose ?Csf) (Exists (?Actor) (Intended-Purpose ?Actor ?Csf)) (Exists (?Strategic-Purpose) (And (Strategic-Purpose ?Strategic-Purpose) (Help-Achieve ?Csf ?Strategic-Purpose)))))
+
+;;; Specified-Potential-Customer
+
+(Define-Frame Specified-Potential-Customer :Own-Slots ((Arity 2) (Documentation "A Relationship between a For-Sale and a Legal-Entity where by the
+Legal-Entity is specifically being offered the Product-For-Sale") (Domain For-Sale) (Instance-Of Binary-Relation) (Range Legal-Entity)))
+
+;;; Resource-Substitute
+
+(Define-Relation Resource-Substitute (?Resource ?Resource-Sub ?A-Or-Spec) "A Relationship between two Resources and an Activity
+or Activity-Spec whereby the one Resource may be used or consumed in the
+Activity or Activity-Spec instead of the other." :Def (And (Activity-Or-Spec ?A-Or-Spec) (=> (Can-Use-Resource ?A-Or-Spec ?Resource) (Can-Use-Resource ?A-Or-Spec ?Resource-Sub))))
+
+;;; Strategic-Action
+
+(Define-Class Strategic-Action (?Strategic-Action) "a Sub-Plan of a Strategy" :Iff-Def (And (Sub-Plan ?Strategic-Action) (Exists (?Strategy) (And (Strategy ?Strategy) (Sub-Plan-Of ?Strategic-Action ?Strategy)))))
+
+;;; Owned-Entity
+
+(Define-Relation Owned-Entity (?Ownership ?Owned) "The Entity in an Ownership situation that is owned." :Def (And (Ownership ?Ownership) (Eo-Entity ?Owned)))
+
+;;; Set-Of-Products
+
+(Define-Class Set-Of-Products (?Products) "A Set-Class all of whose instances are sets whose members are all of
+Class Product." :Iff-Def (And (Eo-Set ?Products) (And (Set ?Products) (Forall (?X) (=> (Member ?X ?Products) (Instance-Of ?X Product))))))
+
+;;; Product-Range
+
+(Define-Frame Product-Range :Own-Slots ((Arity 2) (Instance-Of Binary-Relation) (Domain Market-Segment) (Range Set-Of-Products)) :Documentation "the Set-of-Products that a Market-Segment is limited to.")

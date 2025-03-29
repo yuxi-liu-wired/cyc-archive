@@ -1,0 +1,186 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: Re: Bootstrap Ontology -->
+<!--X-From-R13: cng unlrf <cunlrfNnv.hjs.rqh> -->
+<!--X-Date: Sat, 3 Feb 2001 02:36:42 &#45;0500 (EST) -->
+<!--X-Message-Id: v04210135b6a169b67afb@[205.160.76.250] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 001b01c08310$8753b7e0$7b76e4ce@Dell -->
+<!--X-Reference: 001401c084d8$3b6a52c0$7b76e4ce@Dell -->
+<!--X-Reference: v04210103b694e9008c8c@[204.214.21.210] -->
+<!--X-Reference: 005001c08969$d198d740$7b76e4ce@Dell -->
+<!--X-Reference: v04210117b6a0baee6a5e@[205.160.76.250] -->
+<!--X-Reference: 008901c08d56$81aa4f20$7b76e4ce@Dell -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00757.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: Re: Bootstrap Ontology</TITLE>
+<LINK REV="made" HREF="mailto:phayes@ai.uwf.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00730.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00470.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd79.html#00757">Thread Index</A></Td>
+<TD><A HREF="msg00758.html">Date Prev</A></TD>
+<TD><A HREF="msg00756.html">Date Next</A>
+</TD>
+<TD><A HREF="mail75.html#00757">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: Re: Bootstrap Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: Re: Bootstrap Ontology</LI>
+<LI><em>From</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 3 Feb 2001 02:03:50 -0600</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00730.html">008901c08d56$81aa4f20$7b76e4ce@Dell</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00471.html">001b01c08310$8753b7e0$7b76e4ce@Dell</A>&gt;&lt;<A HREF="msg00480.html">001401c084d8$3b6a52c0$7b76e4ce@Dell</A>&gt;&lt;v04210103b694e9008c8c@[204.214.21.210]&gt;&lt;<A HREF="msg00522.html">005001c08969$d198d740$7b76e4ce@Dell</A>&gt;&lt;<A HREF="msg00725.html">v04210117b6a0baee6a5e@[205.160.76.250]</A>&gt;&lt;<A HREF="msg00730.html">008901c08d56$81aa4f20$7b76e4ce@Dell</A>&gt;</LI>
+<LI><em>Reply-To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt;
+&gt;OK, good. Here is a slightly more complex example taken from an ontology for
+&gt;category theory.
+&gt;
+&gt;(KIF$Class Category)
+&gt;(KIF$UnaryFunction source)
+&gt;
+&gt;(forall (?c ?s)
+&gt;    (=&gt; (= (source ?c) ?s)
+&gt;        (and (Category ?c) (KIF$UnaryFunction ?s))))
+&gt;
+&gt;(forall (?c ?m ?o)
+&gt;    (=&gt; (= ((source ?c) ?m) ?o)
+&gt;        (and ((morphism ?c) ?m) ((object ?c) ?o))))
+&gt;
+&gt;Here is a version using the sorting predicate that you mentioned.
+&gt;
+&gt;(SortOf source ((Category) KIF$UnaryFunction))
+&gt;(forall (?c)
+&gt;    (SortOf (source ?c)(((morphism ?c)) (object ?c)))
+&gt;
+&gt;Here 'object and 'morphism' are some other KIF$Classes.
+&gt;Does this look OK?
+
+Hmmm. No, in fact, as in the current draft there is no way to 
+quantify into a (SortOf) assertion. But I see what you want to be 
+able to say. Thanks for the example, and I will try to see if we 
+could extend the language to accomodate this kind of assertion. Let 
+me get back to you on this in a few days.
+
+&gt;I am using the namespace notation 'namespace$name', since namespaces seem to
+&gt;be very natural in this situation. The KIF namespace is for a core (or
+&gt;bootstrap) KIF ontology. I have other namespaces for Categories, Functors,
+&gt;etc. And for particular categories, such as Set and Classification. Are
+&gt;namespaces to be included in SUO-KIF? I hope so!
+
+We havn't discussed any explicit syntax for namespaces, but the KIF 
+syntax for identifiers is very liberal, so you are free to use syntax 
+like 'namespace$name' if you want. Would you expect a KIF reasoner to 
+treat your namespace syntax in a special way? If so, what would you 
+expect it to be able to do?
+
+(One suggestion, used by Mark Stickel in his SNARK reasoning engine, 
+is to allow a class or sort name to be used as a kind of namespace 
+identifier in variable names, so that '?person-1' automatically 
+expresses a quantification restricted to the class Person. Would you 
+find that useful?)
+
+Pat Hayes
+
+---------------------------------------------------------------------
+IHMC					(850)434 8903   home
+40 South Alcaniz St.			(850)202 4416   office
+Pensacola,  FL 32501			(850)202 4440   fax
+phayes@ai.uwf.edu 
+<A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00471" href="msg00471.html">SUO: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="00480" href="msg00480.html">SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="00522" href="msg00522.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+<li><strong><a name="00725" href="msg00725.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+<li><strong><a name="00730" href="msg00730.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00758.html">RE: SUO: CHG</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00756.html">Re: SUO: RE: RE: RE: Comment#1  'Foundations'</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00730.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00470.html">Re: SUO: More details on stds development (base documents, working drafts, etc.)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail75.html#00757"><strong>Date</strong></a></li>
+<li><a href="thrd79.html#00757"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

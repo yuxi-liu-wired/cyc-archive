@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>An IFF Simplification</title>
+  <meta content="Robert E. Kent" name="author">
+  <meta
+ content="A discussion of a simplification of the IFF architecture."
+ name="description">
+</head>
+<body>
+<br>
+<div style="text-align: center;">
+<table
+ style="margin-left: auto; margin-right: auto; width: 100%; text-align: left;"
+ border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+      <td colspan="1" rowspan="1"
+ style="vertical-align: top; width: 60%;"><br>
+      </td>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+      <td colspan="1" rowspan="1"
+ style="vertical-align: top; width: 60%;">
+      <h1>An IFF Simplification</h1>
+      </td>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+      <td style="vertical-align: top; width: 60%;"><br>
+      </td>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+      <td colspan="1" rowspan="1"
+ style="vertical-align: top; width: 60%;">
+      <p style="text-align: justify;">There is a significant
+simplification in the IFF architecture and code. The assertion that the
+categories,
+functors and natural transformations (at the metalevel of the
+metashell) form a 2-category needs suitable terminology
+axiomatized in the structural
+component of the type namespace (<small><span
+ style="font-family: courier new,courier,monospace;">IFF-TYPE</span></small>)
+of the metashell (level <small><span
+ style="font-family: courier new,courier,monospace;">type</span></small>
+=&nbsp;&#8734;<span style="font-family: courier new,courier,monospace;">+<small>2</small></span>).
+Similarly, the assertion that categories,
+functors and natural-transformations (at level n) form a 2-category
+needs suitable
+terminology axiomatized in the structural
+component of level <span
+ style="font-family: courier new,courier,monospace;">n+<small>1</small></span>.
+However, level <span
+ style="font-family: courier new,courier,monospace;">n</span> and level
+      <span style="font-family: courier new,courier,monospace;">n+1</span>
+are represented by the same axiomatization. This is the meaning when we
+say that the pure aspect of the natural part is generic. These
+observations suggest that making structural
+assertions (such as category-ness,
+2-category-ness, double-category-ness, bicategory-ness, &#8230;) at
+finite metalevels allows significant simplification, since then such
+structural axiomatizations would need to be created just once
+(generically). Currently, the basic structural
+axiomatization for
+category-ness (containing the basic concepts for categories, graphs,
+functors, natrual transformations, adjunctions, monads, <big>&#8230;</big>)
+is nearly
+compliant with categorical design, and it is assumed that the other
+structural axiomatizations mentioned above would also be so compliant.</p>
+      <p style="text-align: justify;">Hence, the question presents
+itself: <span style="font-style: italic;">Do we really need the Ur
+meta-level?</span> </p>
+      <ul>
+        <li style="text-align: justify;">
+          <p><span style="font-weight: bold;">Point 1:</span> In the
+kernel namespace at level <span
+ style="font-family: courier new,courier,monospace;">n</span>, the
+collection <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+is specified to be a subset of both the level <span
+ style="font-family: courier new,courier,monospace;">n+<small>1</small></span>
+collection of
+sets <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n+1</sub>
+and the Ur level collection of sets <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub><span
+ style="font-family: times new roman,times,serif;">&#8734;</span></sub>. The
+first constraint is required, since it is a basic constraint for the <a
+ href="metastack.html">metastack</a>. However, the second
+constraint is more problematic &#8212; its
+purpose is part of the specification that the Ur level is the
+cumulative
+generic level for the natural part. </p>
+        </li>
+        <li style="text-align: justify;">
+          <p><span style="font-weight: bold;">Point 2:</span>
+Similarly, in the
+kernel namespace at level <span
+ style="font-family: courier new,courier,monospace;">n</span>, the
+two metastack constraints <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub><span
+ style="font-family: times new roman,times,serif;">&#8734;</span></sub> and <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub><span
+ style="font-family: times new roman,times,serif;">&#8734;</span></sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><small><sub><span
+ style="font-family: courier new,courier,monospace;">meta</span></sub></small>
+are equivalent to the metastack constraint <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><small><sub><span
+ style="font-family: courier new,courier,monospace;">meta</span></sub></small>.
+          </p>
+        </li>
+        <li style="text-align: justify;">
+          <p><span style="font-weight: bold;">Point 3:</span> In one
+sense, the Ur
+level axiomatization is somewhat redundant, since it is just the
+specialization of the meta level axiomatization, using the metastack
+constraints of subset, predicate delimitation, function
+(optimal-)restriction and relation abridgment.</p>
+        </li>
+      </ul>
+      <p style="text-align: justify;">Eliminating the Ur level
+axiomatization would clearly make the
+axiomatization much simpler. But, elimination of the Ur level
+axiomatization requires that we also eliminate the metastack
+constraints such as <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub><span
+ style="font-family: times new roman,times,serif;">&#8734;</span></sub>.
+Following this, there is one further design decision. Should we add the
+metastack constraints of the form <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><small><sub><span
+ style="font-family: courier new,courier,monospace;">meta</span></sub></small>
+or not? If metastack
+constraints of the form <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub><span
+ style="font-family: times new roman,times,serif;">&#8734;</span></sub> (and
+similar constraints for predicates, functions and relations) are
+elminated without adding metastack constraints of the form <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><sub>n</sub>
+&#8838; <span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">set</span><small><sub><span
+ style="font-family: courier new,courier,monospace;">meta</span></sub></small>,
+the natural part of the IFF would become
+disconnected from the metashell. In this case, following the principle
+of conceptual
+warrant, the metashell would lose its raison
+d'&ecirc;tre. This would argue for elimination of the entire metashell.
+By eliminating the metashell, the natural part would become the full
+IFF
+axiomatization. But note that the pointwise set-theoretical foundation
+of the IFF
+exists only in
+the metashell. Hence, assuming complete
+compliance of the natural part with the principle of categorical
+design, the natural part, and hence the full IFF axiomatization,
+would have only a pointless set-theoretic axiomatization (in the
+generic core) and a category-theoretic foundation (in the generic
+structure), <span style="text-decoration: underline;">and</span> these
+would be expressed
+atomically by means of some declarations, some relational expressions,
+but mainly commutative diagrams.<br>
+      </p>
+      </td>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+      <td style="vertical-align: top; width: 60%;"><br>
+      </td>
+      <td style="vertical-align: top; width: 20%;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</body>
+</html>

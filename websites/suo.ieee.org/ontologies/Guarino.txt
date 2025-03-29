@@ -1,0 +1,675 @@
+;;  =======================================================================================
+;;  SUO-KIF Formalization of Borgo, Guarino, and Masolo's Formal Theory of Physical Objects 
+;;  =======================================================================================
+
+;;  This file contains a formalization in KIF of the definitions and axioms
+;;  regarding mereology, topology, morphology, and physical objects presented
+;;  by Stefano Borgo, Nicola Guarino, and Claudio Masolo in their papers
+;;  "Towards an Ontological Theory of Physical Objects" and "A Pointless Theory
+;;  of Space Based on Strong Connection and Congruence".  The formalization
+;;  presented here follows the form and order of presentation adopted in 
+;;  the former paper.
+
+;;  ---------------------------------------
+;;  Mereotopological Definitions and Axioms
+;;  ---------------------------------------
+
+;;  Definitions
+
+(defrelation proper-part (?X ?Y) :=
+	(and
+		(part-of ?X ?Y)
+		(= ?X ?Y)))
+
+(defrelation overlap (?X ?Y) :=
+	(exists ?Z
+		(and
+			(part-of ?Z ?X)
+			(part-of ?Z ?Y))))
+
+(defrelation proper-overlap (?X ?Y) :=
+	(and
+		(overlap ?X ?Y)
+		(not
+			(part-of ?X ?Y))
+		(not
+			(part-of ?Y ?X))))
+
+(deffunction mereological-sum (?X ?Y) :=
+	(iota ?Z
+		(forall ?W
+			(<=>
+				(overlap ?W ?Z)
+					(or
+						(overlap ?W ?X)
+						(overlap ?W ?Y))))))
+
+(deffunction mereological-product (?X ?Y) :=
+	(iota ?Z
+		(forall ?W
+			(<=>
+				(part-of ?W ?Z)
+					(and
+						(part-of ?W ?X)
+						(part-of ?W ?Y)))))
+
+(deffunction mereological-difference (?X ?Y) :=
+	(iota ?Z
+		(forall ?W
+			(<=>
+				(part-of ?W ?Z)
+					(and
+						(part-of ?W ?X)
+						(not
+							(overlap ?W ?Y)))))))
+
+(defrelation interior-part (?X ?Y) :=
+	(and
+		(instance-of ?X region)
+		(proper-part ?X ?Y)
+		(forall ?Z
+			(=>
+				(and
+					(instance-of ?Z simple-region)
+					(proper-overlap ?Z ?X))
+				(overlap ?Z (mereological-difference ?Y ?X))))))
+
+(defrelation maximally-connected-part (?X ?Y) :=
+	(and
+		(part-of ?X ?Y)
+		(instance-of ?X simple-region)
+		(not
+			(exists ?Z
+				(instance-of ?Z simple-region)
+				(proper-part ?X ?Z)
+				(part-of ?Z ?Y)))))
+
+(defrelation strong-connection (?X ?Y) :=
+	(exists ?U
+		(exists ?V
+			(and
+				(part-of ?U ?X)
+				(part-of ?V ?Y)
+				(instance-of (mereological-sum ?U ?V) simple-region)))))
+
+;; Axioms
+
+(or
+	(instance-of ?X region)
+	(instance-of ?X matter)
+	(instance-of ?X object)
+	(instance-of ?X state))
+
+(=>
+	(part-of ?X ?Y)
+	(or
+		(and
+			(instance-of ?X matter)
+			(instance-of ?Y matter))
+		(and
+			(instance-of ?X region)
+			(instance-of ?Y region))))
+
+(part-of ?X ?X)
+
+(=>
+	(and
+		(part-of ?X ?Y)
+		(part-of ?Y ?X))
+	(= ?X ?Y))
+
+(=>
+	(and
+		(part-of ?X ?Y)
+		(part-of ?Y ?Z))
+	(part-of ?X ?Z))
+
+(exists ?Z
+	(= ?Z (mereological-sum ?X ?Y)))
+
+(=>
+	(not
+		(part-of ?X ?Y))
+	(exists ?Z
+		(= ?Z (mereological-difference ?X ?Y))))
+
+(=>
+	(not
+		(part-of ?X ?Y))
+	(exists ?Z
+		(and
+			(part-of ?Z ?X)
+			(not
+				(overlap ?Z ?Y)))))
+
+(<=>
+	(instance-of (iota ?X ?P) ?Q)
+	(exists ?Y
+		(and
+			(forall ?X
+				(<=>
+					(instance-of ?X ?P)
+					(= ?X ?Y)))
+			(instance-of ?Y ?Q))))
+
+(=>
+	(instance-of ?X simple-region)
+	(instance-of ?X region))
+
+(=>
+	(and
+		(instance-of ?X simple-region)
+		(= ?X (mereological-sum ?Y ?Z)))
+	(exists ?U
+		(and
+			(instance-of ?X simple-region)
+			(overlap ?U ?Y)
+			(overlap ?U ?Z)
+			(interior-part ?U ?X))))
+
+(=>
+	(instance-of ?X region)
+	(exists ?Y
+		(maximally-connected-part ?Y ?X)))
+
+(=>
+	(instance-of ?X region)
+	(exists ?Y
+		(instance-of ?Y simple-region)
+		(interior-part ?X ?Y)))
+	
+
+;;  ------------------------------------
+;;  Morphological Definitions and Axioms
+;;  ------------------------------------
+
+(defrelation sphere (?X) :=
+	(and
+		(instance-of ?X simple-region)
+		(forall ?Y
+			(=>
+				(and
+					(congruent ?X ?Y)
+					(proper-overlap ?X ?Y))
+				(instance-of (mereological-difference ?X ?Y) simple-region)))))
+
+(defrelation externally-tangent (?X ?Y) :=
+	(and
+		(not
+			(overlap ?X ?Y)
+		(forall ?U
+			(=>
+				(and
+					(not
+						(overlap ?U ?Y))
+					(not
+						(overlap ?V ?Y))
+					(part-of ?X ?U)
+					(part-of ?X ?V))
+				(or
+					(part-of ?U ?V)
+					(part-of ?V ?U))))))
+
+(documentation externally-tangent "A sphere x is externally tangent to a sphere y") 
+
+(defrelation internally-tangent (?X ?Y) :=
+	(and
+		(proper-part ?X ?Y)
+		(forall ?U
+			(forall ?V
+				(=>
+					(and
+						(part-of ?U ?Y)
+						(part-of ?V ?Y)
+						(part-of ?X ?U)
+						(part-of ?X ?V))
+					(or
+						(part-of ?U ?V)
+						(part-of ?V ?U)))))))
+
+(documentation internally-tangent "A sphere x is internally tangent to a sphere y")
+
+(defrelation externally-diametrical (?X ?Y ?Z) :=
+	(and
+		(externally-tangent ?X ?Z)
+		(externally-tangent ?Y ?Z)
+		(forall ?U
+			(forall ?V
+				(=>
+					(and
+						(not
+							(overlap ?U ?Z))
+						(not
+							(overlap ?V ?Z))
+						(part-of ?X ?U)
+						(part-of ?Y ?V))
+					(not
+						(overlap ?U ?V))))))))
+
+(documentation externally-diametrical "Two spheres x and y are externally diametrical with regard to z")  
+
+(defrelation internally-diametrical (?X ?Y ?Z) :=
+	(and
+		(internally-tangent ?X ?Z)
+		(internally-tangent ?Y ?Z)
+		(forall ?U
+			(forall ?V
+				(=>
+					(and
+						(not
+							(overlap ?U ?Z))
+						(not
+							(overlap ?V ?Z))
+						(externally-tangent ?X ?U)
+						(part-of ?Y ?V))
+					(not
+						(overlap ?U ?V))))))))
+
+(documentation internally-diametrical "Two spheres x and y are internally diametrical with regard to z")
+
+(defrelation concentric (?X ?Y) :=
+	(or
+		(= ?X ?Y)
+		(and
+			(proper-part ?X ?Y)
+			(forall ?U
+				(forall ?V
+					(=>
+						(and
+							(externally-diametrical ?U ?V ?X)
+							(internally-tangent ?U ?Y)
+							(internally-tangent ?V ?Y))
+						(internally-diametrical ?U ?V ?Y)))))
+		(and
+			(proper-part ?Y ?X)
+			(forall ?U
+				(forall ?V
+					(=>
+						(and
+							(externally-diametrical ?U ?V ?Y)
+							(internally-tangent ?U ?X)
+							(internally-tangent ?V ?X))
+						(internally-diametrical ?U ?V ?X)))))
+
+(documentation concentric "A sphere x is concentric with the sphere y")
+
+(defrelation between (?X ?Y ?Z) :=
+	(exists ?X1
+		(exists ?X2
+			(exists ?X3
+				(and
+					(concentric ?X ?X1)
+					(concentric ?Y ?Y1)
+					(concentric ?Z ?Z1)
+					(externally-diametrical ?Y1 ?Z1 ?X1))))))
+
+(documentation between "A sphere x is between the spheres y and z")
+
+(defrelation aligned (?X ?Y ?Z) :=
+	(or
+		(between ?X ?Y ?Z)
+		(between ?Y ?X ?Z)
+		(between ?Z ?X ?Y)))
+
+(documentation aligned "A sphere x is aligned with regard to the spheres y and z")
+
+(defrelation same-side (?X ?Y ?Z) :=
+	(or
+		(between ?X ?Y ?Z)
+		(between ?Y ?X ?Z)
+		(concentric ?X ?Y)))
+
+(documentation same-side "Two spheres x and y are on the same side with regard to z")
+
+(defrelation sphere-segment (?X ?Y) :=
+	(not
+		(concentric ?X ?Y)))
+
+(documentation sphere-segment "Two spheres x and y form an s-segment")
+
+(defrelation sphere-triangle (?X ?Y ?Z) :=
+	(and
+		(not 
+			(concentric ?X ?Y))
+		(not
+			(concentric ?Y ?Z))
+		(not
+			(concentric ?X ?Z))
+		(not
+			(aligned ?X ?Y ?Z))))
+
+(documentation sphere-triangle "Three spheres x, y, and z form an s-triangle")
+
+(=>
+	(congruent ?X ?Y)
+	(and
+		(instance-of ?X region)
+		(instance-of ?Y region)))
+
+(=>
+	(congruent ?X ?Y)
+	(not
+		(proper-part ?X ?Y)))
+
+(=>
+	(and
+		(congruent ?X ?Y)
+		(congruent ?Z ?Y))
+	(congruent ?X ?Z))
+
+(=>
+	(and
+		(externally-connected ?X ?Y)
+		(externally-connected ?X ?Z))
+	(exists ?W
+		(and
+			(congruent ?X ?W)
+			(overlap ?W ?Y)
+			(overlap ?W ?Z))))
+
+(exists ?Y
+	(and
+		(instance-of ?Y sphere)
+		(interior-part ?Y ?X)))
+
+;;  Transportability of Segments		
+						
+(=>
+	(and
+		(sphere-segment ?X ?Y)
+		(congruent ?X ?X1)
+		(sphere-segment ?X1 ?W))
+	(exists ?Y1
+		(and
+			(congruent (mereological-sum ?X ?Y) (mereological-sum ?X1 ?Y1))
+			(same-side ?W ?Y1 ?X1))))
+
+;; Congruence of Segments
+
+(=>
+	(and
+		(aligned ?X ?Y ?Z)
+		(aligned ?X1 ?Y1 ?Z1)
+		(congruent (mereological-sum ?X ?Y) (mereological-sum ?X1 ?Y1))
+		(same-side ?W ?Y1 ?X1))
+	(congruent (mereological-sum ?X ?Z) (mereological-sum ?X1 ?Z1)))
+
+;; Congruence of Triangles
+
+(=>
+	(and
+		(sphere-triangle ?X ?Y ?Z)
+		(sphere-triangle ?X1 ?Y1 ?Z1)
+		(congruent ?X ?X1)
+		(congruent ?Y ?Y1)
+		(congruent ?Z ?Z1)
+		(congruent ?V ?V1)
+		(congruent (mereological-sum ?X ?Y) (mereological-sum ?X1 ?Y1))
+		(congruent (mereological-sum ?X ?Z) (mereological-sum ?X1 ?Z1))
+		(congruent (mereological-sum ?Y ?Z) (mereological-sum ?Y1 ?Z1))
+		(between ?Z ?Y ?V)
+		(between ?Z1 ?Y1 ?V1)
+		(congruent (mereological-sum ?Y ?V) (mereological-sum ?Y1 ?V1)))
+	(congruent (mereological-sum ?X ?V) (mereological-sum ?X1 ?V1)))
+
+;; Definition of l-connection
+
+(defrelation l-connection (?X ?Y) :=
+	(and
+		(not 
+			(strong-connection ?X ?Y))
+		(exists ?Z
+			(and
+				(instance-of ?Z sphere)
+				(instance-of (mereological-difference ?Z ?X) simple-region)
+				(instance-of (mereological-difference ?Z ?Y) simple-region)
+				(not
+					(instance-of (mereological-difference ?Z (mereological-sum ?X ?Y)))))))
+	
+
+;; Definition of p-connection
+
+(defrelation p-connection (?X ?Y) :=
+	(and
+		(not
+			(strong-connection ?X ?Y))
+		(not
+			(l-connection ?X ?Y))
+		(exists ?Z
+			(forall ?U
+				(=>
+					(concentric ?U ?Z)
+					(and
+						(overlap ?U ?X)
+						(overlap ?U ?Y))))))
+
+;; Definition of connection
+
+(defrelation connection (?X ?Y) :=
+	(or
+		(strong-connection ?X ?Y)
+		(l-connection ?X ?Y)
+		(p-connection ?X ?Y)))
+
+;; Definition of a convex region
+
+(defrelation convex (?X) :=
+	(=>
+		(and
+			(part-of (mereological-sum ?U ?V) ?X)
+			(congruent ?X ?U))
+		(=>
+			(and
+				(congruent ?W ?U)
+				(between ?W ?U ?V))
+			(part-of ?W ?X))))
+
+;;  ---------------------------
+;;  Matter and Physical Objects
+;;  ---------------------------
+
+(=>
+	(location ?R ?X ?S)
+	(and
+		(instance-of ?R region)
+		(or
+			(instance-of ?X object)
+			(instance-of ?X matter)
+			(instance-of ?X region))
+		(instance-of ?S state)))
+
+(documentation location "location gives the spatial extension (location) of an individual x at state s")
+
+(=>
+	(material ?M ?X ?S)
+	(and
+		(instance-of ?M matter)
+		(or
+			(instance-of ?X object)
+			(instance-of ?X matter))
+		(instance-of ?S state)))
+
+(documentation material "material gives the material extension of an individual x at state s")
+
+(=>
+	(instance-of ?X region)
+	(location ?X ?X ?S))
+
+(=>
+	(instance-of ?X matter)
+	(material ?X ?X ?S))
+
+(=>
+	(existence ?X ?S)
+	(exists ?R
+		(location ?R ?X ?S)))
+
+(=>
+	(instance-of ?X matter)
+	(forall ?S (existence ?X ?S)))
+
+(=>
+	(instance-of ?X object)
+	(exists ?S (existence ?X ?S)))
+
+(=>
+	(and
+		(location ?R1 ?X ?S)
+		(location ?R2 ?X ?S))
+	(= ?R1 ?R2))
+
+(=>
+	(and
+		(instance-of ?X1 matter)
+		(instance-of ?X2 matter)
+		(location ?R ?X1 ?S)
+		(location ?R ?X2 ?S))
+	(= ?X1 ?X2))
+
+(=>
+	(and
+		(instance-of ?X1 matter)
+		(instance-of ?X2 matter)
+		(location ?R1 ?X1 ?S)
+		(location ?R2 ?X2 ?S)
+	(<=> 
+		(part-of ?X1 ?X2)
+		(part-of ?R1 ?R2)))
+
+(=>
+	(and
+		(location ?R ?M ?S1)
+		(location ?R ?M ?S2))
+	(= ?S1 ?S2))
+
+(=>
+	(and
+		(material ?M1 ?X ?S)
+		(material ?M2 ?X ?S))
+	(= ?M1 ?M2))
+
+(=>
+	(and
+		(location ?R ?X ?S)
+		(material ?M ?X ?S))
+	(location ?R ?M ?S))
+
+(defrelation material-object (?X) :=
+	(and
+		(instance-of ?X object)
+		(forall ?S
+			(=>
+				(existence ?X ?S)
+				(exists ?M
+					(material ?M ?X ?S))))))
+
+(documentation material-object "Material and immaterial objects are distinguished on the basis of the presence or absence of a material substrate in any state where the object exists.")
+
+(defrelation immaterial-object (?X) :=
+	(and
+		(instance-of ?X object)
+		(forall ?S
+			(=>
+				(existence ?X ?S)
+				(not 
+					(exists ?M
+						(material ?M ?X ?S)))))))
+
+(documentation immaterial-object "Material and immaterial objects are distinguished on the basis of the presence or absence of a material substrate in any state where the object exists.")
+
+(defrelation contingent-part (?X ?Y ?S) :=
+	(and
+		(or
+			(and
+				(instance-of ?X immaterial-object)
+				(instance-of ?Y immaterial-object))
+			(and
+				(instance-of ?X material-object)
+				(instance-of ?Y material-object)))
+		(location ?U ?X ?S)
+		(location ?V ?Y ?S)
+		(part-of ?U ?V)))
+
+(documentation contingent-part "This is the notion of a contingent part for an object in a particular state.  Note that the case of an immaterial object being part of a material object, and vice versa, is excluded.")
+
+(defrelation essential-part (?X ?Y) :=
+	(=>
+		(existence ?Y ?S)
+		(contingent-part ?X ?Y ?S)))
+
+(documentation essential-part "Objects being contingent parts of another object in any state are called essential parts of that object.")
+
+(defrelation coincide (?X ?Y ?S) :=
+	(forall ?Z
+		(<=>
+			(contingent-part ?Z ?X ?S)
+			(contingent-part ?Z ?Y ?S))))
+
+(documentation coincide "Two objects coincide in a state if they have the same contingent parts in that state.")
+
+(defrelation rigid-object (?X) :=
+	(and
+		(instance-of ?X object)
+		(forall ?U
+			(forall ?V
+				(forall ?S1
+					(forall ?S2
+						(=>
+							(and
+								(location ?U ?X ?S1)
+								(location ?V ?X ?S2))
+							(congruent ?U ?V))))))))
+
+(defrelation granularity (?X ?G) :=
+	(and
+		(instance-of ?G sphere)
+		(congruent ?X ?G)))
+
+(defrelation spatial-boundary (?X ?Y ?G) :=
+	(and
+		(instance-of ?X region)
+		(instance-of ?Y region)
+		(forall ?Z
+			(<=>
+				(part-of ?Z ?X)
+				(forall ?W
+					(=>
+						(part-of ?W ?Z)
+						(exists ?U
+							(and
+								(granularity ?U ?G)
+								(overlap ?U ?W)
+								(proper-overlap ?U ?Y)))))))))
+
+(documentation spatial-boundary "x is the spatial boundary of y at granularity g")
+
+(defrelation physical-boundary (?X ?Y ?G) :=
+	(and
+		(instance-of ?X immaterial-object)
+		(instance-of ?Y object)
+		(forall ?U
+			(forall ?V
+				(forall ?S
+					(=>
+						(and
+							(location ?U ?X ?S)
+							(location ?V ?Y ?S))
+						(spatial-boundary ?U ?V ?G)))))))
+
+(documentation physical-boundary "x is the physical boundary of y at granularity g.  In the case of physical objects, boundaries are not intended as regions, but as immaterial objects always overlapping the "real boundary" as the state changes.")
+
+(defrelation surface (?X ?Y ?G) :=
+	(forall ?S
+		(and
+			(contingent-part ?X ?Y ?S)
+			(forall ?U
+				(forall ?V
+					(forall ?W
+						(=>
+							(and
+								(location ?U ?X ?S)
+								(location ?V ?Y ?S)
+								(spatial-boundary ?W ?V ?G))
+							(= ?U (mereological-product ?V ?W)))))
+
+(documentation surface "The notion of the surface (or 'skin') of a physical object")

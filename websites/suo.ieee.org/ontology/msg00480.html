@@ -1,0 +1,279 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: Bootstrap Ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Mon, 22 Jan 2001 20:19:32 &#45;0500 (EST) -->
+<!--X-Message-Id: 001401c084d8$3b6a52c0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 001b01c08310$8753b7e0$7b76e4ce@Dell -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00480.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: Bootstrap Ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00474.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00522.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd79.html#00480">Thread Index</A></Td>
+<TD><A HREF="msg00481.html">Date Prev</A></TD>
+<TD><A HREF="msg00479.html">Date Next</A>
+</TD>
+<TD><A HREF="mail81.html#00480">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: Bootstrap Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Re: Bootstrap Ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 22 Jan 2001 17:03:00 -0800</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00471.html">001b01c08310$8753b7e0$7b76e4ce@Dell</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+All, especially KIF experts,
+
+The Boot Ontology needs a Cartesian product unary predicate
+'(productRelation ?p1 ?p2)' for any two given unary predicates '?p1' and
+'?p2'. What follows is a candidate definition of this. Please check to see
+if this is correct.
+__________
+
+The Cartesian product unary predicate is define as follows.
+
+(BinaryFunction productRelation)
+
+(forall (?p1 ?p2 ?p)
+ (=&gt; (= (productRelation ?p1 ?p2) ?p)
+     (and (UnaryRelation ?p1) (UnaryRelation ?p2) (UnaryRelation ?p))))
+
+(forall (?p1 ?p2 ?i)
+ (&lt;=&gt; ((productRelation ?p1 ?p2) ?i)
+      (and (double ?i) (?p1 (first ?i)) (?p2 (last ?i)))))
+
+The product projection functions are defined as follows.
+
+(BinaryFunction projectionFunction1)
+
+(forall (?p1 ?p2 ?f)
+ (=&gt; (= (projectionFunction1 ?p1 ?p2) ?f)
+     (and (UnaryRelation ?p1) (UnaryRelation ?p2) (UnaryFunction ?f))))
+
+(forall (?p1 ?p2 ?i ?i1)
+ (=&gt; (= ((projectionFunction1 ?p1 ?p2) ?i) ?i1)
+     (and ((productRelation ?p1 ?p2) ?i) (?p1 ?i1))))
+
+(forall (?p1 ?p2 ?i)
+ (= ((projectionFunction1 ?p1 ?p2) ?i) (first ?i)))
+
+(BinaryFunction projectionFunction2)
+
+(forall (?p1 ?p2 ?f)
+ (=&gt; (= (projectionFunction2 ?p1 ?p2) ?f)
+     (and (UnaryRelation ?p1) (UnaryRelation ?p2) (UnaryFunction ?f))))
+
+(forall (?p1 ?p2 ?i ?i2)
+ (=&gt; (= ((projectionFunction2 ?p1 ?p2) ?i) ?i2)
+     (and ((productRelation ?p1 ?p2) ?i) (?p2 ?i2))))
+
+(forall (?p1 ?p2 ?i)
+ (= ((projectionFunction2 ?p1 ?p2) ?i) (last ?i)))
+
+Robert E. Kent
+rekent@ontologos.org
+
+----- Original Message -----
+From: "Robert E. Kent" &lt;rekent@ontologos.org&gt;
+To: "SUO" &lt;standard-upper-ontology@ieee.org&gt;
+Sent: Saturday, January 20, 2001 10:40 AM
+Subject: SUO: Bootstrap Ontology
+
+
+&gt;
+&gt; All,
+&gt;
+&gt; In the document [Appendix to Classification Metatheory] attached to the
+&gt; message [<A  HREF="http://grouper.ieee.org/groups/ltsc/logs/ontology/msg00469.html">http://grouper.ieee.org/groups/ltsc/logs/ontology/msg00469.html</A>]
+&gt; there is an type error in the socalled core axiom, which asserts "Relative
+&gt; instantiation-predication represented by '|=' is compatible with the
+&gt; absolute KIF instantiation-predication.", and is formalized by the KIF
+&gt; sentence
+&gt;
+&gt; (forall (?c ?i ?t)
+&gt;     (and (=&gt; (|= ?c ?i ?t) (?t ?i))
+&gt;          (=&gt; (not (|= ?c ?i ?t)) (not (?t ?i)))))
+&gt;
+&gt; In the relative instantiation-predication notation
+&gt;
+&gt; (|= ?c ?i ?t)
+&gt;
+&gt; the variables '?c', '?i' and '?t' have the types 'Classification',
+&gt; 'Instance' and 'Type', respectively.
+&gt;
+&gt; However, in the universal (absolute), and basic KIF,
+&gt; instantiation-predication notation
+&gt;
+&gt; (?t ?i)
+&gt;
+&gt; the variables '?t' and '?i' should have the types 'UnaryRelation' and
+&gt; 'Object', respectively, where the latter denotes the universal type of all
+&gt; KIF objects.
+&gt; __________
+&gt;
+&gt; So two things need to be done here.
+&gt;
+&gt; First, we need to define a *Bootstrap Ontology*, which will mesh the needs
+&gt; of the Classification Ontology (and other Information Flow metatheories in
+&gt; the future) with KIF. Note that this Bootstrap Ontology is NOT the
+&gt; Structural Ontology, which is being replaced and augmented by a collection
+&gt; of metatheories that allow one to build ontologies in a principled fashion
+&gt; from basic ontologies with constructor operations.
+&gt;
+&gt; Second, we need to correct the core axiom error mentioned above.
+&gt; __________
+&gt;
+&gt; The Bootstrap Ontology needs (at least for now) the following categories
+of
+&gt; things:
+&gt;
+&gt; Object -- the universal type
+&gt; Relation -- the sum of all relation types
+&gt; UnaryRelation
+&gt; BinaryRelation
+&gt; TernaryRelation
+&gt; Function -- the sum of all function types
+&gt; UnaryFunction
+&gt; BinaryFunction
+&gt;
+&gt; I will assume the following partitions:
+&gt;
+&gt; Object = Relation + Function + ...
+&gt; Relation = UnaryRelation + BinaryRelation + TernaryRelation + ...
+&gt; Function = UnaryFunction + BinaryFunction + ...
+&gt; __________
+&gt;
+&gt; The core axiom error is fixed as follows.
+&gt;
+&gt; Define a binary KIF function 'int' that denotes the intent of an instance
+&gt; 'i' in a classification 'c' defined by
+&gt;     int(i) = {t in typ(c) | i |= t}.
+&gt;
+&gt; (BinaryFunction int)
+&gt; (forall (?c ?i ?p)
+&gt;     (=&gt; (= (int ?c ?i) ?p)
+&gt;         (and (Classification ?c) (inst ?c ?i) (UnaryRelation ?p))))
+&gt; (forall (?c ?i ?t)
+&gt;     (=&gt; (and (Classification ?c) (Instance ?i) (Type ?t))
+&gt;         (&lt;=&gt; (int(?c ?i) ?t) (|= ?c ?i ?t))))
+&gt;
+&gt; Dually, define a binary KIF function 'ext' that denotes the extent of a
+type
+&gt; 't' in a classification 'c' defined by
+&gt;     ext(t) = {i in inst(c) | i |= t}.
+&gt;
+&gt; (BinaryFunction ext) ;; we need to change to name of the extensibility
+&gt; predicate
+&gt; (forall (?c ?i ?p)
+&gt;     (=&gt; (= (ext ?c ?t) ?p)
+&gt;         (and (Classification ?c) (typ ?c ?t) (UnaryRelation ?p))))
+&gt; (forall (?c ?i ?t)
+&gt;     (=&gt; (and (Classification ?c) (Instance ?i) (Type ?t))
+&gt;         (&lt;=&gt; (ext(?c ?t) ?i) (|= ?c ?i ?t))))
+&gt;
+&gt; Finally, using the KIF predicate 'ext', the core axiom now becomes the KIF
+&gt; sentence
+&gt;
+&gt; (forall (?c ?i ?t)
+&gt;     (and (=&gt; (|= ?c ?i ?t) (ext(?c ?t) ?i))
+&gt;          (=&gt; (not (|= ?c ?i ?t)) (not (ext(?c ?t) ?i)))))
+&gt;
+&gt; But this is redundant by the third axiom above for the KIF predicate
+'ext'.
+&gt; So toss it out.
+&gt;
+&gt; Robert E. Kent
+&gt; rekent@ontologos.org
+&gt;
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00471" href="msg00471.html">SUO: Bootstrap Ontology</a></strong>
+<ul><li><em>From:</em> &quot;Robert E. Kent&quot; &lt;rekent@ontologos.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00481.html">RE: SUO: RE: Re: More KIF-ified Ontology Content</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00479.html">Re: SUO: Classification Ontology</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00474.html">SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00522.html">Re: SUO: Re: Bootstrap Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail81.html#00480"><strong>Date</strong></a></li>
+<li><a href="thrd79.html#00480"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

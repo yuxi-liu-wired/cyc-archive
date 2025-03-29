@@ -1,0 +1,254 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Re: Intension Versus Extension Again -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Wed, 16 May 2001 00:01:23 &#45;0400 (EDT) -->
+<!--X-Message-Id: 3B01F78D.CCD3FF16@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com -->
+<!--X-Reference: 3B01BD03.4F558C0D@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02524.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Re: Intension Versus Extension Again</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02510.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02511.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd37.html#02524">Thread Index</A></Td>
+<TD><A HREF="msg02525.html">Date Prev</A></TD>
+<TD><A HREF="msg02523.html">Date Next</A>
+</TD>
+<TD><A HREF="mail40.html#02524">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Re: Intension Versus Extension Again</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>Subject</em>: SUO: Re: Intension Versus Extension Again</LI>
+<LI><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 15 May 2001 23:44:13 -0400</LI>
+<LI><em>CC</em>: Adam Pease &lt;<A HREF="mailto:apease@ks.teknowledge.com">apease@ks.teknowledge.com</A>&gt;, Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg02509.html">5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com</A>&gt; &lt;<A HREF="msg02510.html">3B01BD03.4F558C0D@oakland.edu</A>&gt;</LI>
+<LI><em>Reply-To</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+AP:  Here's a practical question on the merged ontology.
+     We currently have the axiom
+
+     (&lt;=&gt;
+       (disjoint ?C1 ?C2)
+       (not
+         (thereExists (?I)
+           (and
+             (instance-of ?I ?C1)
+             (instance-of ?I ?C2)))))
+     
+     two classes are disjoint if no individual exists
+     which is a instance of both classes and vice versa
+
+     (see
+
+     <A  HREF="http://ontology.teknowledge.com:8080/rsigma/SKB.jsp?req=SC&amp;name=disjoint&amp;caseSensitive=on&amp;skb=Merge">http://ontology.teknowledge.com:8080/rsigma/SKB.jsp?req=SC&amp;name=disjoint&amp;caseSensitive=on&amp;skb=Merge</A>&gt;)
+
+AP:  This looks problematic to me and Ian and I have discussed changing it from
+     bi-implication to simple implication.  One could make a case for the above
+     version if classes are extension.  The counter argument (which could be
+     labelled an argument for intentional classes) would say that Equine and
+     SinglyHornedAnimal are not disjoint just because no one has reified Unicorn
+     in the knowledge base.
+
+AP:  What do folks think?
+
+JA:  Could not both C1 and C2 be empty?
+
+IN:  That's just the case the raises the problem.
+     If C1 and C2 have contradictory meanings associated with them and
+     both of them have no extension (i.e. both of them are associated
+     with the empty set), then there is no actual object which is an
+     instance of C1 and is not an instance of C2.  Hence, the two
+     classes would not be disjoint, according to the standard
+     extensional criterion of disjointness.  However, since
+     it is impossible for any instance to be a member of
+     both classes, the classes are disjoint according
+     to an intensional criterion.  The question, then,
+     is whether we want to go with an extensional or
+     an intensional criterion of disjointness.
+
+Ian,
+
+I think that we are not talking the same set of dialects yet.
+I will explain the three most common ways that I would read
+an expression like the one that you folks were asking about,
+taking them in order of increasing frequency in my own usage
+but also in order of increasing conceptual overhead in the
+interpretive environment that is required to support them:
+
+1.  The minimum overhead choice is the "plural reference" option,
+    one that I would normally entertain only under the most severe
+    constraints of nominal thinking.  In this case, the variable names
+    "C1" and "C2" would be taken as signs in a "sign relation complex",
+    each sign of which could have no objects, one object, or many objects
+    as their denotations.  As a relational table, the set-up might look so:
+
+    ¤---------¤---------¤---------¤
+    | Object  |  Sign   | Interp  |
+    ¤---------¤---------¤---------¤
+    |   e11   |  "C1"   |   ...   |
+    |   ...   |  "C1"   |   ...   |
+    |   e1j   |  "C1"   |   ...   |
+    ¤---------¤---------¤---------¤
+    |   e21   |  "C2"   |   ...   |
+    |   ...   |  "C2"   |   ...   |
+    |   e2k   |  "C2"   |   ...   |
+    ¤---------¤---------¤---------¤
+
+    Whether one takes these signs as terms in a public language medium
+    or as concepts, that is, mental symbols in a private frame of mind,
+    one says that the objects e11, ..., e1j fall under the sign "C1",
+    and says that the objects e21, ..., e2k fall under the sign "C2".
+
+2.  The next choice is the "intensional" option.  This time, the objects
+    being denoted are "intensions", in other words, "properties", say,
+    with "C1" denoting property f1 and with "C2" denoting property f2. 
+
+    ¤---------¤---------¤---------¤
+    | Object  |  Sign   | Interp  |
+    ¤---------¤---------¤---------¤
+    |   f1    |  "C1"   |   ...   |
+    ¤---------¤---------¤---------¤
+    |   f2    |  "C2"   |   ...   |
+    ¤---------¤---------¤---------¤
+
+    Typically, this order of sign-relational development arises
+    from the previous type of plural reference situation, where
+    f1 is a property that entities e11, ..., e1j have in common,
+    f2 is a property that entities e21, ..., e2k have in common,
+    and so on.
+
+3.  Last but not least, one has the "extensional" option.  Here,
+    the objects being denoted are constituted as sets of elements,
+    where "C1" denotes the set g1 and where "C2" denotes the set g2.
+
+    ¤---------¤---------¤---------¤
+    | Object  |  Sign   | Interp  |
+    ¤---------¤---------¤---------¤
+    |   g1    |  "C1"   |   ...   |
+    ¤---------¤---------¤---------¤
+    |   g2    |  "C2"   |   ...   |
+    ¤---------¤---------¤---------¤
+
+    This is an alternative species of sign-relational development
+    that frequently arises from either of the previous situations:
+    g1 is a set or class that contains the elements e11, ..., e1j,
+    g2 is a set or class that contains the elements e21, ..., e2k,
+    and so on.
+
+This is how I understand the various pictures.
+The question, I think, is not so much how to
+choose among them as how to integrate their
+sundry different advantages and utilities.
+
+Right at the moment, though, I am mostly working on
+sign relations as cast in the extensional framework,
+and so let me say how I read your example from that
+point of view.
+
+The first thing that I notice is the variables "C1" and "C2",
+which are read in extension to range over a set of sets, TBA,
+but there is no condition that makes them refer to different
+sets, and thus it is perfectly possible that C1 = C2.  If so,
+then it is not the usual thing to say that a set is disjoint
+from itself, even if that set is empty, so there seems to be
+a difficulty with the formulation here, at this boundary case,
+one that I imagine requires some sort of explicit stipulation.
+
+Jon Awbrey
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02509" href="msg02509.html">SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> Adam Pease &lt;apease@ks.teknowledge.com&gt;</li></ul></li>
+<li><strong><a name="02510" href="msg02510.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02525.html">Re: SUO: intention vs. extension again</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02523.html">Re: SUO: intention vs. extension again</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02510.html">Re: SUO: intention vs. extension again</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02511.html">Re: SUO: intention vs. extension again</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail40.html#02524"><strong>Date</strong></a></li>
+<li><a href="thrd37.html#02524"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

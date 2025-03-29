@@ -1,0 +1,1269 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Non&#45;gibberish Version of Ontological Additions -->
+<!--X-From-R13: Wna @vyrf <vavyrfNgrxabjyrqtr.pbz> -->
+<!--X-Date: Fri, 9 Mar 2001 16:22:53 &#45;0500 (EST) -->
+<!--X-Message-Id: EE25484266A64A47AE06CFC47C64232B18FA27@helium.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01493.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Non-gibberish Version of Ontological Additions</TITLE>
+<LINK REV="made" HREF="mailto:iniles@teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01495.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01530.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd59.html#01493">Thread Index</A></Td>
+<TD><A HREF="msg01494.html">Date Prev</A></TD>
+<TD><A HREF="msg01492.html">Date Next</A>
+</TD>
+<TD><A HREF="mail61.html#01493">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Non-gibberish Version of Ontological Additions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Non-gibberish Version of Ontological Additions</LI>
+<LI><em>From</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 9 Mar 2001 12:37:05 -0800 </LI>
+<LI><em>Reply-To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi All,
+
+	Here are the additions again (this time as enclosed text), in case
+you had trouble reading the attachment I sent out earlier today.
+
+-Ian
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;     SET THEORY      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; The following part of the ontology covers set-theoretic predicates and 
+;; functions.  Most of the content here is taken from the kif-sets ontology 
+;; (available on the Ontolingua server).
+
+(instance-of subset BinaryRelation)
+(nth-domain subset 1 Set)
+(nth-domain subset 2 Set)
+(documentation subset "The formula (subset ?SET1 ?SET2) is true if
+and only if ?SET1 and ?SET2 are sets and the objects in the set
+denoted by ?SET1 are contained in the set denoted by ?SET2.")
+
+(instance-of member BinaryRelation)
+(nth-domain member 1 Entity)
+(nth-domain member 2 Set)
+(documentation member "The formula (member ?ENTITY ?SET) is true if and only
+if 
+the object denoted by ?ENTITY is contained in the set denoted by ?SET.  An 
+object can be a member of another object only if the latter is a set.")
+
+(=&gt;
+   (forall (?X)
+         (&lt;=&gt;
+            (member ?X ?S1)
+            (member ?Y ?S2)))
+   (equal ?S1 ?S2))
+
+(instance-of UnionFn BinaryFunction)
+(nth-domain UnionFn 1 Set)
+(nth-domain UnionFn 2 Set)
+(range UnionFn Set)
+(documentation UnionFn "A function whose arguments are two sets and whose
+result 
+is the set-theoretic union of these sets, i.e. the set of all elements which
+are 
+members of either the first or second set.")
+
+(equal
+   (UnionFn ?S1 ?S2)
+   (SetFn ?X
+      (or
+         (member ?X ?S1)
+         (member ?X ?S2))))
+
+(instance-of IntersectionFn BinaryFunction)
+(nth-domain IntersectionFn 1 Set)
+(nth-domain IntersectionFn 2 Set)
+(range IntersectionFn Set)
+(documentation IntersectionFn "A function whose arguments are two sets and
+whose 
+result is the set-theoretic intersection of these sets, i.e. the set of all 
+elements which are members of both the first and the second sets.")
+
+(equal
+   (IntersectionFn ?S1 ?S2)
+   (SetFn ?X
+      (and
+         (member ?X ?S1)
+         (member ?X ?S2))))
+
+(instance-of DifferenceFn BinaryFunction)
+(nth-domain DifferenceFn 1 Set)
+(nth-domain DifferenceFn 2 Set)
+(range DifferenceFn Set)
+(documentation DifferenceFn "A function whose arguments are two sets and
+whose 
+result is the set-theoretic difference of these sets, i.e. the set of all 
+elements which are members the first set and not of the second set.")
+
+(equal
+   (DifferenceFn ?S1 ?S2)
+   (SetFn ?X
+      (and
+         (member ?X ?S1)
+         (not
+	      (member ?X ?S2)))))
+
+(instance-of ComplementFn UnaryFunction)
+(nth-domain ComplementFn 1 Set)
+(range ComplementFn Set)
+(documentation ComplementFn "The complement of a given set S is the set of
+all 
+elements that are not members of S.")
+
+(equal
+   (ComplementFn ?S)
+   (SetFn ?X
+      (not (member ?X ?S))))
+
+(instance-of GeneralizedUnionFn UnaryFunction)
+(nth-domain-subclass GeneralizedUnionFn 1 Set)
+(range GeneralizedUnionFn Set)
+(documentation GeneralizedUnionFn "This function takes a set of sets as its
+single 
+argument and returns a set which is the merge of all of the sets in the
+original 
+set, i.e. the set containing just those elements which are members of an
+element 
+of the original set.")
+
+(equal 
+   (GeneralizedUnionFn ?S)
+   (SetFn ?X
+      (exists (?Y)
+         (and
+            (member ?Y ?S)
+            (member ?X ?Y)))))
+
+(instance-of GeneralizedIntersectionFn UnaryFunction)
+(nth-domain-subclass GeneralizedIntersectionFn 1 Set)
+(range GeneralizedIntersectionFn Set)
+(documentation GeneralizedIntersectionFn "This function takes a set of sets
+as 
+its single argument and returns a set which contains just those elements
+which 
+are members of all of the elements of the original set.")
+
+(equal 
+   (GeneralizedIntersectionFn ?S)
+   (SetFn ?X
+      (forall (?Y)
+         (=&gt;
+            (member ?Y ?S)
+            (member ?X ?Y)))))
+
+(instance-of EmptySet Set)
+(documentation EmptySet "The set that contains no members.")
+
+
+(&lt;=&gt;
+   (equal ?X EmptySet)
+   (not
+      (exists (?Y)
+         (member ?Y ?X))))
+
+(subclass-of PairwiseDisjointSet Set)
+(documentation PairwiseDisjointSet "A set of sets is PairwiseDisjoint just
+in case 
+every element of the set is either equal to or disjoint from every other
+element 
+of the set.")
+
+(=&gt;
+   (instance-of ?X PairwiseDisjointSet)
+   (forall (?Y ?Z)
+      (=&gt;
+         (and
+            (member ?Y ?X)
+            (member ?Z ?X))
+         (or
+            (equal ?Y ?Z)
+            (disjoint ?Y ?Z)))))
+
+(subclass-of MutuallyDisjointSet Set)
+(documentation MutuallyDisjointSet "A set of sets is a MutuallyDisjointSet 
+just in case there exists no element of an element of the original set which
+
+is an element of all of the elements of the original set.")
+
+(=&gt;
+   (instance-of ?S MutuallyDisjoint)
+   (equal (GeneralizedIntersectionFn ?S) EmptySet))
+
+(instance-of holds VariableArityRelation)
+(nth-domain holds 1 Predicate)
+(documentation holds "(holds P N1 ... NK) is true if and only if 
+the ordered set of objects denoted by N1,..., NK is a member of 
+the predicate P.")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;     RELATION TYPES      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; The following part of the ontology covers the various classes under 
+;; 'Relation'.  Most of the content here is taken from frame-ontology, 
+;; abstract-algebra, kif-relations, and kif-extensions (ontologies available
+
+;; on the Ontolingua server).
+
+(subclass-of Predicate Relation)
+(documentation Predicate "A predicate is a set of tuples that represents 
+a relationship among objects in the universe of discourse.  Each tuple 
+is a finite, ordered sequence (i.e., list) of objects.  A relation is 
+also an object itself, namely, the set of tuples.  
+   Predicates are denoted by relation constants in KIF.  A fact that a 
+particular tuple is a member of a predicate is denoted
+by (&lt;relation-name&gt; arg_1 arg_2 .. arg_n), where the arg_i are the 
+objects in the tuple.  In the case of binary relations, the fact can
+be read as `arg_1 is &lt;relation-name&gt; arg_2' or `a &lt;relation-name&gt; of
+arg_1 is arg_2.'  The relation constant is a term as well, which
+denotes the set of tuples.")
+
+(subclass-of Function Relation)
+(documentation Function "A function is a mapping from a domain to a range 
+that associates a domain element with exactly one range element.  The 
+elements of the domain are tuples, as in relations.  The range is a class 
+-- a set of singleton tuples -- and each element of the range is an 
+instance of the class.  Functions are also first-class objects in the same 
+sense that relations are objects: namely, functions can be viewed as sets of
+tuples.")
+
+(subclass-of UnaryFunction Function)
+(subclass-of BinaryFunction Function)
+(subclass-of TernaryFunction Function)
+(subclass-of VariableArityFunction Function)
+(subclass-of ContinuousFunction Function)
+(documentation ContinuousFunction "Functions which are continuous.  This
+concept 
+is taken as primitive until representations for limits are generated.")
+
+(subclass-of BinaryRelation Predicate)
+(documentation BinaryRelation "A binary relation is a non-empty relation 
+in which all lists have exactly two items.  A binary relation maps 
+instances of a class to instances of another class.  Its valence is 2.  
+Binary relations are often shown as slots in frame systems.")
+
+(subclass-of TernaryRelation Predicate)
+(subclass-of VariableArityRelation Predicate)
+(subclass-of CaseRole BinaryRelation)
+(subclass-of IntentionalRelation BinaryRelation)
+(subclass-of PropositionalAttitude IntentionalRelation)
+(subclass-of ObjectAttitude IntentionalRelation)
+
+(instance-of AssignmentFn VariableArityFunction)
+(nth-domain AssignmentFn 1 Function)
+(range AssignmentFn Entity)
+(documentation AssignmentFn "If F denotes a function with a value 
+for the objects denoted by N1,..., NK, then the term 
+(AssignmentFn F N1 ... NK) denotes the value of applying that function 
+to the objects denoted by N1,..., NK.  Otherwise, the value is undefined.")
+
+(subclass-of RelationExtendedToQuantities Relation)
+(documentation RelationExtendedToQuantities "A RelationExtendedToQuantities 
+is a relation that, when it is true on a sequence of arguments that are real
+
+numbers, then it is also true on a sequence of constant quantites with those
+magnitudes in some units.  For example, the lessThan relation is extended to
+
+quantities.  That means that for all pairs of quantities q1 and q2, 
+(lessThan q1 q2) if and only  if, for some ?n and ?m, q1 = (MeasureFn ?n
+?u), 
+q2 = (MeasureFn ?m ?u), and (lessThan ?n ?m), for all units ?u on which q1 
+and q2 can be measured.  There may be relations that are not instances of 
+this class that nonetheless hold for quantity arguments.  To be a 
+RelationExtendedToQuantities means that the relation holds when all the 
+arguments are of the same physical dimension.")
+
+(=&gt;
+   (and
+      (instance-of ?R RelationExtendedToQuantities)
+      (instance-of ?R BinaryFunction)
+      (instance-of ?N RealNumber)
+      (instance-of ?M RealNumber)
+      (equal (AssignmentFn ?R ?N ?M) ?P))
+   (forall (?U)
+      (=&gt;
+         (instance-of ?U Unit-Of-Measure)
+         (equal (AssignmentFn ?R 
+                (MeasureFn ?N ?U) (MeasureFn ?M ?U)) (MeasureFn ?P ?U)))))
+
+(=&gt;
+   (and
+      (instance-of ?R RelationExtendedToQuantities)
+      (instance-of ?R BinaryRelation)
+      (instance-of ?N RealNumber)
+      (instance-of ?M RealNumber)
+      (holds ?R ?N ?M))
+   (forall (?U)
+      (=&gt;
+         (instance-of ?U Unit-Of-Measure)
+         (holds ?R (MeasureFn ?N ?U) (MeasureFn ?M ?U)))))
+
+(instance-of binary-operator-on BinaryRelation)
+(nth-domain binary-operator-on 1 BinaryFunction)
+(range binary-operator-on Class)
+(documentation Binary-Operator-On "A function is a binary operator 
+on a domain if it is closed on the domain, that is, it is defined 
+for all pairs of objects that are instances of the domain and its 
+value on all such pairs is an instance of the domain.")
+
+(=&gt;
+   (binary-operator-on ?function ?domain)
+   (forall (?x ?y)
+      (=&gt; 
+         (and 
+            (instance-of ?x ?domain) 
+            (instance-of ?y ?domain))
+         (instance-of (AssignmentFn ?function ?x ?y) ?domain))))
+
+(subclass-of AssociativeFunction BinaryFunction)
+
+(=&gt;
+   (instance-of ?OP AssociativeFunction)
+   (forall (?X ?Y ?Z)
+      (equal (AssignmentFn ?OP ?X (AssignmentFn ?OP ?Y ?Z))
+             (AssignmentFn ?OP (AssignmentFn ?OP ?X ?Y) ?Z))))
+
+(subclass-of CommutativeFunction BinaryFunction)
+
+(=&gt;
+   (instance-of ?OP CommutativeFunction)
+   (forall (?X ?Y)
+      (equal (AssignmentFn ?OP ?X ?Y) 
+             (AssignmentFn ?OP ?Y ?X))))
+
+(instance-of distributes BinaryRelation)
+(nth-domain distributes 1 BinaryFunction)
+(nth-domain distributes 2 BinaryFunction)
+
+(=&gt;
+   (distributes ?OP ?G)
+   (forall (?X ?Y ?Z)
+      (equal (AssignmentFn ?OP (AssignmentFn ?G ?X ?Y) ?Z)
+             (AssignmentFn ?G (AssignmentFn ?OP ?X ?Z) (AssignmentFn ?OP ?Y
+?Z)))))
+
+(instance-of identity-element BinaryRelation)
+(nth-domain identity-element 1 BinaryFunction)
+(nth-domain identity-element 2 Entity)
+(documentation identity-element "An object ?id is the identity element 
+for binary operator ?o iff for every instance ?x of ?d, applying ?o
+to ?x and ?id results in ?x.")
+
+(=&gt;
+   (identity-element ?OP ?ID)
+   (forall (?X)
+      (equal (AssignmentFn ?OP ?ID ?X) ?X)))
+
+(subclass-of ReflexiveRelation BinaryRelation)
+(documentation ReflexiveRelation "Relation R is reflexive if R(x,x) 
+for all x in the domain of R.")
+
+(=&gt;
+   (instance-of ?R ReflexiveRelation)
+   (forall (?X)
+      (holds ?R ?X ?X)))
+
+(subclass-of IrreflexiveRelation BinaryRelation)
+(documentation Irreflexive-Relation "Relation R is irreflexive if 
+R(a,a) never holds.")
+
+(=&gt;
+   (instance-of ?R IrreflexiveRelation)
+   (forall (?X)
+      (not 
+         (holds ?R ?X ?X))))
+
+(subclass-of SymmetricRelation BinaryRelation)
+(documentation SymmetricRelation "Relation R is symmetric if R(x,y) 
+implies R(y,x).")
+
+(=&gt;
+   (instance-of ?R SymmetricRelation)
+   (forall (?X ?Y)
+      (=&gt;
+         (holds ?R ?X ?Y)
+         (holds ?R ?Y ?X))))
+
+(subclass-of AsymmetricRelation IrreflexiveRelation)
+(subclass-of AsymmetricRelation AntisymmetricRelation)
+(documentation AsymmetricRelation "A binary relation is asymmetric if it 
+is antisymmetric and irreflexive over its exact-domain.")
+
+(=&gt;
+   (instance-of ?R AsymmetricRelation)
+   (forall (?X ?Y)
+      (=&gt;
+         (holds ?R ?X ?Y)
+         (not
+            (holds ?R ?Y ?X)))))
+
+(subclass-of AntisymmetricRelation BinaryRelation)
+(documentation AntisymmetricRelation "Relation R is an 
+AntisymmetricRelation if for distinct x and y, R(x,y) implies 
+not R(y,x).  In other words, for all x,y, R(x,y) and R(y,x) =&gt; x=y.  
+R(x,x) is still possible.")
+
+(=&gt;
+   (instance-of ?R AntisymmetricRelation)
+   (forall (?X ?Y)
+      (=&gt;
+         (and
+            (holds ?R ?X ?Y)
+            (holds ?R ?Y ?X))
+         (equal ?X ?Y))))
+
+(subclass-of TrichotomizingRelation BinaryRelation)
+
+(=&gt;
+   (instance-of ?R TrichotomizingRelation)
+   (forall (?X ?Y)
+      (or
+         (holds ?R ?X ?Y) 
+         (equal ?X ?Y) 
+         (holds ?R ?Y ?X))))
+
+(subclass-of TransitiveRelation BinaryRelation)
+(documentation TransitiveRelation "Relation R is transitive 
+if R(x,y) and R(y,z) implies R(x,z).")
+
+(=&gt;
+   (instance-of ?R TransitiveRelation)
+   (forall (?X ?Y ?Z)
+      (=&gt;
+         (and
+            (holds ?R ?X ?Y)
+            (holds ?R ?Y ?Z))
+         (holds ?R ?X ?Z))))
+
+(subclass-of PartialOrderingRelation TransitiveRelation)
+(subclass-of PartialOrderingRelation AsymmetricRelation)
+(subclass-of PartialOrderingRelation ReflexiveRelation)
+(documentation PartialOrderingRelation "A relation is a partial ordering 
+if it is reflexive, asymmetric, and transitive.")
+
+(subclass-of TotalOrderingRelation PartialOrderingRelation)
+(documentation TotalOrderingRelation  "A relation R is a 
+TotalOrderingRelation if it is a PartialOrderingRelation 
+for which either R(x,y) or R(y,x) for every x or y in its 
+exact-domain.")
+
+(=&gt;
+   (instance-of ?R TotalOrderingRelation)
+   (forall (?X ?Y)
+      (or
+         (holds ?R ?X ?Y)
+         (holds ?R ?Y ?X))))
+
+(subclass-of LinearOrderingRelation PartialOrderingRelation)
+(subclass-of LinearOrderingRelation TrichotomizingRelation)
+
+(subclass-of EquivalenceRelation TransitiveRelation)
+(subclass-of EquivalenceRelation SymmetricRelation)
+(subclass-of EquivalenceRelation ReflexiveRelation)
+(documentation EquivalenceRelation "A relation is an equivalence 
+relation if it is reflexive, symmetric, and transitive.")
+
+(instance-of inverse SymmetricRelation)
+(nth-domain inverse 1 
+(SetFn ?X (or (instance-of ?X BinaryRelation) (instance-of ?X
+UnaryFunction))))
+(nth-domain inverse 2 
+(SetFn ?X (or (instance-of ?X BinaryRelation) (instance-of ?X
+UnaryFunction))))
+(documentation inverse "The inverse of a binary relation is a binary 
+relation with all tuples reversed.  In other words, one binary relation 
+is the inverse of another if they are equivalent when their arguments 
+are swapped.")
+
+
+(=&gt;
+   (inverse ?R ?P)
+   (forall (?X ?Y)
+      (&lt;=&gt;
+         (holds ?P ?X ?Y)
+         (holds ?R ?Y ?X))))
+
+(instance-of cardinality BinaryRelation)
+(nth-domain cardinality 1 Set)
+(nth-domain cardinality 2 NonnegativeInteger)
+(documentation cardinality "(cardinality ?SET ?NUMBER) means that 
+there are ?NUMBER elements of ?SET.")  
+
+(instance-of IdentityFn UnaryFunction)
+(nth-domain IdentityFn 1 Entity)
+(range IdentityFn Entity)
+(documentation IdentityFn "The value of the identity function is 
+just its argument.")
+
+(equal (IdentityFn ?X) ?X)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  ARTIFACT HIERARCHY  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This section of the ontology will eventually encompass all artifacts.
+For the 
+;; time being, it is mostly restricted to the content of the Ontolingua
+ontology 
+;; component-assemblies, which covers the types of engineering elements used
+to 
+;; construct systems.
+
+(subclass-of Device Artifact)
+(subclass-of Machine Device)
+
+(=&gt;
+   (instance-of ?X Device)
+   (exists (?Y)
+      (and
+         (instance-of ?Y Activity)
+         (instrument ?Y ?X))))
+
+(subclass-of EngineeringElement Artifact)
+(documentation EngineeringElement "An EngineeringElement is any element that
+is 
+used to build up a system with structure.")
+
+(=&gt;
+   (instance-of ?X EngineeringElement)
+   (exists (?Y)
+      (and
+         (instance-of ?Y Artifact)
+         (part-of ?X ?Y))))
+
+(subclass-of EngineeringComponent EngineeringElement)
+(documentation EngineeringComponent "An EngineeringComponent is a structure
+that 
+can have parts and connections.  An EngineeringComponent as a defined in
+this 
+ontology is a fundamental abstraction that applies in many engineering
+domains.  
+Component structures need not correspond to physically whole objects such as
+
+standard parts from a catalog.  The class of component, as defined here, may
+also 
+be used to represent nonphysical objects such as modules in a software
+program, 
+functions in a functional description, and model fragments in a model
+library.
+This is a primitive concept; what makes an object a component is how it is 
+connected and a part of other objects.")
+
+(=&gt;
+   (instance-of ?X EngineeringComponent)
+   (exists (?Y)
+      (and
+         (instance-of ?Y Artifact)
+         (component-of ?X ?Y))))
+
+(subclass-of Junction EngineeringElement)
+(subclass-of Terminal EngineeringElement)
+
+(instance-of engineeringSubcomponent AntisymmetricRelation)
+(instance-of engineeringSubcomponent IrreflexiveRelation)
+(nth-domain engineeringSubcomponent 2 EngineeringComponent)
+(nth-domain engineeringSubcomponent 1 EngineeringComponent)
+(documentation engineeringSubcomponent "(engineeringSubcomponent ?sub
+?super)
+means that the component ?sub is structurally a part of component ?super.  A
+
+component cannot be a subcomponent of itself (irrreflexivity) and two
+components
+cannot be subcomponents of each other (antisymmetrity).  Note that 
+engineeringSubcomponent is not a transitive relation.  A main difference
+betweeen 
+engineering components and arbitrary globs of matter is that engineering 
+components are object-like in a modeling sense; thus, an engineering
+subcomponent 
+is not an arbtrary subregion, but a part of a system with a stable identity
+as 
+its part.  If engineeringSubcomponent were transitive, then there would be
+no 
+level boundaries between a component and its subcomponents and their 
+subcomponents; for modularity reasons, the system modeler describes the 
+subcomponents of a component as black boxes, rather than as arbitrary
+regions.")
+
+(instance-of connectedEngineeringComponents SymmetricRelation)
+(instance-of connectedEngineeringComponents IrreflexiveRelation)
+(nth-domain connectedEngineeringComponents 2 Component)
+(nth-domain connectedEngineeringComponents 1 Component)
+(documentation ConnectedEngineeringComponents "This is the most general
+binary 
+connection relation between components.  If (connectedEngineeringComponents
+?X ?Y), 
+then ?X and ?Y must be engineering components and neither can be a
+engineering 
+subcomponent of the other.  The relation connectedEngineeringComponents is 
+symmetric; there is no information in the direction of connection between
+two 
+components.  It is also irreflexive; a component cannot be connected to
+itself.
+This is an abstract relationship.  There is no commitment that the two
+components much touch physically.  Even in the case of a connection between
+physical components, the connection can represent abstract properties of the
+interaction of the two components.  Note this relation does not associate a 
+name or type with the connection.  One may specify that with other binary 
+relations (e.g., thermally-connected).")
+
+(=&gt;
+   (connectedEngineeringComponents ?X ?Y)
+   (and
+      (not
+         (engineeringSubcomponent ?X ?Y))
+      (not
+         (engineeringSubcomponent ?Y ?X))))
+
+(=&gt; 
+   (connectedEngineeringComponents ?X ?Y)
+   (and 
+      (not 
+         (instance-of ?X EngineeringConnection)) 
+      (not 
+         (instance-of ?Y EngineeringConnection))))
+
+(&lt;=&gt;
+   (connectedEngineeringComponents ?X ?Y)
+   (exists (?Z)
+      (connectsEngineeringComponents ?Z ?X ?Y))) 
+         
+(instance-of EngineeringComponentFn UnaryFunction)
+(inverse EngineeringComponentFn TerminalFn)
+(nth-domain EngineeringComponentFn 1 Terminal)
+(range EngineeringComponentFn EngineeringComponent)
+
+(instance-of TerminalFn UnaryFunction)
+(inverse TerminalFn EngineeringComponentFn)
+(nth-domain TerminalFn 1 EngineeringComponent)
+(range TerminalFn Terminal)
+
+(instance-of JunctionFn UnaryFunction)
+(nth-domain JunctionFn 1 Terminal)
+(range JunctionFn Junction)
+
+(subclass-of EngineeringConnection EngineeringComponent)
+
+(=&gt;
+   (instance-of ?X EngineeringConnection)
+   (exists (?Y ?Z)
+      (connectsEngineeringComponents ?X ?Y ?Z)))
+
+(documentation EngineeringConnection "An EngineeringConnection is an 
+EngineeringComponent that represents a connection relationship between two 
+other components.  It is a reification of the predicate 
+connectedEngineeringComponents.  That means that whenever this relation 
+holds between two components, there exists a connection component.
+This is logical existence; this connection object may not be
+present in the memory of a representation system.  Conversely,
+if a representation system has allocated a data structure for
+a connection object, it doesn't mean that it must explicitly
+represent the implied connectedEngineeringComponents relationship.
+The practical reason for reifying a relationship is to be
+able to attached other information about it. For example, one
+might want to say that a particular connection is associated with
+some shared parameters, or that it is of a particular type.  Connection 
+objects are components and can therefore be subcomponents of other
+components.  However, to provide for modular regularity in component
+systems, 
+connection components cannot be connected.  For each pair of components 
+related by connectedEngineeringComponents, there exists at least one
+connection 
+object.  However, that object may not be unique, and the same connection
+object 
+may be associated with several pairs of connected components.")
+
+(instance-of connectsEngineeringComponents TernaryRelation)
+(nth-domain connectsEngineeringComponents 1 EngineeringConnection)
+(nth-domain connectsEngineeringComponents 2 EngineeringComponent)
+(nth-domain connectsEngineeringComponents 3 EngineeringComponent)
+(documentation connectsEngineeringComponents "connectsEngineeringComponents
+is a 
+predicate that maps from a connection object to the engineering components
+it 
+connects.  Since components cannot be connected to themselves, and there
+cannot 
+be a connection object without a connectedEngineeringComponents
+relationship, 
+the second and third arguments of any connectsEngineeringComponents
+relationship 
+will always be distinct for any given first argument.")
+
+
+;;;;;;;;;;;;;;;;;;
+;;  QUANTITIES  ;;
+;;;;;;;;;;;;;;;;;;
+
+
+;; The following formulas incorporate the relations in the Quantities
+ontology 
+;; (developed by ITBM-CNR) and the units of measure in the "Standard 
+;; Units" and "Standard Dimensions" ontologies on the Ontolingua server.
+
+(subclass-of Quantity Abstract)
+(subclass-of PhysicalQuantity Quantity)
+(partition PhysicalQuantity 
+(SetFn ?X (or (member ?X ConstantQuantity) (member ?X FunctionQuantity))))
+(documentation PhysicalQuantity "A physical quantity is a measure of some 
+quantifiable aspect of the modeled world, such as 'the earth's diameter' 
+(a constant length) and 'the stress in a loaded deformable solid' (a 
+measure of stress, which is a function of three spatial coordinates).  The 
+first type is called constant quantity and the second type is called
+function 
+quantity.  All physical quantities are either constant quantities or
+function quantities.  Although the name and definition of this concept
+is inspired from physics, physical quantities need not be material.
+For example, amounts of money are physical quantities.  In fact,
+all real numbers and numeric-valued tensors are special cases of physical 
+quantities.  In engineering textbooks, quantities are often called
+variables.
+   Physical quantities are distinguished from purely numeric entities
+like a real numbers by their physical dimensions.  A
+physical dimension is a property that distinguishes types of
+quantities.  Every physical quantity has exactly one associated
+physical dimension.  In physics, we talk about dimensions such as
+length, time, and velocity; again, nonphysical dimensions such as
+currency are also possible.
+   The 'value' of a physical quantity depends on its type.  The value of
+a constant quantity is dependent on a unit-of-measure.  Physical quantities 
+of the type FunctionQuantity are functions that map quantities to other
+quantities (e.g., time-dependent quantities are function quantities).")
+
+(subclass-of ConstantQuantity PhysicalQuantity)
+(documentation ConstantQuantity "A ConstantQuantity is a constant value of 
+some PhysicalQuantity, like 3 meters or 55 miles per hour. Constant
+quantities 
+are distinguished from function quantities, which map some quantities to
+other 
+quantities.  For example, the velocity of a particle over some range of time
+
+would be represented by a function quantity mapping values of time (which
+are
+constant quantities) to velocity vectors (also constant quantities).  All 
+constant quantites can be expressed as the product of some number and a unit
+
+of measure.  This is what it means to say a quantity `has a magnitude'.  For
+
+example, 3 meters can be expressed as (MeasureFn 3 Meter), where meter is 
+defined as a unit of measure for length.")
+
+(subclass-of FunctionQuantity PhysicalQuantity)
+(subclass-of FunctionQuantity Function)
+(documentation FunctionQuantity "A FunctionQuantity is a function that maps 
+from one or more constant-quantities to a constant-quantity.  The function 
+must have a fixed arity of at least 1.  All elements of the range (ie,
+values 
+of the function) have the same physical-dimension, which is the dimension of
+the function-quantity itself.")
+
+(subclass-of ScalarQuantity ConstantQuantity)
+(documentation Scalar-Quantity "A ScalarQuantity is a ConstantQuantity whose
+
+magnitude is a real number.  An important property of scalar quantities is
+that 
+they form a field with respect to addition and multiplication (with proper
+subclass restrictions).  The class of scalar quantities forms a partial
+order 
+with the lessThan relation, since lessThan is a RelationExtendedToQuantities
+
+and lessThan is defined over the real numbers.  The lessThan relation is not
+a 
+total order over the class of scalar quantity since elements from some
+subclasses 
+such as length quantities are incomparable to elements from other subclasses
+such 
+as mass quantities.")
+
+(subclass-of UnaryScalarFunctionQuantity FunctionQuantity)
+(subclass-of UnaryScalarFunctionQuantity UnaryFunction)
+(documentation UnaryScalarFunctionQuantity "A unary function that maps from 
+a scalar quantity to a scalar quantity.")
+
+
+(=&gt;
+   (instance-of ?X UnaryScalarFunctionQuantity)
+   (and
+      (nth-domain ?X 1 ScalarQuantity)
+      (range ?X ScalarQuantity)))
+
+(subclass-of TimeDependentQuantity UnaryScalarFunctionQuantity)
+(subclass-of TimeDependentQuantity ContinuousFunction)
+(documentation TimeDependentQuantity "A unary scalar function of continuous
+time.  
+Maps a time quantity into another scalar quantity such as a temperature.
+For 
+example, a quantity that denotes 'the temperature of the top of the Empire
+State 
+Building' is a time dependent quantity since its value depends on the
+time.")
+
+(=&gt;
+   (instance-of ?X TimeDependentQuantity)
+   (nth-domain ?X 1 TimeMeasure))
+
+(subclass-of Unit-Of-Measure PhysicalQuantity)
+(documentation Unit-Of-Measure "A unit-of-measure serves as
+a standard of measurement for some dimension. For example, the meter is 
+a unit-of-measure for the length-dimension, as is the inch.  There is no 
+intrisic property of a unit that makes it primitive or fundamental; rather, 
+a system-of-units defines a set of orthogonal dimensions and assigns units 
+for each.  Therefore, there is no distinguished class for fundamental unit 
+of measure.  The magnitude of a unit-of-measure is always a positive real 
+number, using any comparable unit.  Units are not scales, which have 
+reference origins and can have negative values. Units are like distances 
+between points on scales.  Any composition of units and reals using the 
+MeasureFn functions is also a unit-of-measure.") 
+(subclass-of Number Quantity)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    SOCIAL HIERARCHY    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This section contains definitions and axioms relating to social groups
+and 
+;; the relations between them.
+
+(subclass-of Group Collection)
+
+(=&gt;
+   (instance-of ?X Group)
+   (exists (?Y)
+      (mereologicalMember ?Y ?X)))
+
+(subclass-of GroupOfPeople Group)
+
+(=&gt;
+   (and
+      (instance-of ?X GroupOfPeople)
+      (mereologicalMember ?Y ?X))
+   (instance-of ?Y Person))
+
+(subclass-of Community GroupOfPeople)
+
+(subclass-of AgeGroup GroupOfPeople)
+(documentation AgeGroup "An individual or individuals classified according
+to 
+their age.")
+
+(=&gt;
+   (instance-of ?X AgeGroup)
+   (forall (?Y ?Z ?P ?Q)
+      (=&gt;
+         (and
+            (mereologicalMember ?Y ?X)
+            (mereologicalMember ?Z ?X)
+            (age ?Y ?P)
+            (age ?Z ?Q))
+         (equal ?P ?Q))))
+
+(subclass-of FamilyGroup GroupOfPeople)
+(documentation FamilyGroup "An individual or individuals classified
+according to their 
+family relationships or relative position in the family unit.")
+
+(=&gt;
+   (instance-of ?X FamilyGroup)
+   (forall (?Y ?Z)
+      (=&gt;
+         (and
+            (mereologicalMember ?Y ?X)
+            (mereologicalMember ?Z ?X))
+         (familyRelation ?Y ?Z))))
+
+(instance-of familyRelation EquivalenceRelation)
+(nth-domain familyRelation 1 Animal)
+(nth-domain familyRelation 2 Animal)
+(documentation familyRelation "This a very general predicate which simply
+states 
+that there is some sort of blood tie between the two arguments.")
+
+(instance-of citizen-of BinaryRelation)
+(nth-domain citizen-of 1 Person)
+(nth-domain citizen-of 2 Nation)
+(documentation citizen-of "(citizen-of ?X ?Y) means that ?X is a citizen of 
+the country ?Y.")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    CALENDAR TIME       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; The following definitions and axioms cover the content in the Simple-Time
+ontology 
+;; on the Ontolingua server.
+
+(instance-of time BinaryRelation)
+(nth-domain time 1 Physical)
+(nth-domain time 2 TimeMeasure-Position)
+(documentation time "A general relation that specifies, at any level of 
+resolution, the time at which a particular thing occurs.")
+
+(instance-of date BinaryRelation)
+(nth-domain date 1 Physical)
+(nth-domain date 2 Day)
+(subrelation-of date time)
+(documentation date "A binary relation that specifies a point in absolute 
+calendar time, at the resolution of one day, for a particular thing.")
+
+(instance-of birthTime BinaryRelation)
+(nth-domain birthTime Organism)
+(nth-domain birthTime TimeMeasure-Position)
+(subrelation-of birthTime time)
+(documentation birthTime "A binary relation that specifies the time at which
+
+a particular organism was born.")
+
+(instance-of deathTime BinaryRelation)
+(nth-domain deathTime Organism)
+(nth-domain deathTime TimeMeasure-Position)
+(subrelation-of deathTime time)
+(documentation deathTime "A binary relation that specifies the time at which
+
+a particular organism died.")
+
+(instance-of YearFn UnaryFunction)
+(nth-domain YearFn 1 NaturalNumber)
+(range YearFn Year)
+(documentation YearFn "A unary function that maps a number to the
+corresponding 
+calendar year.")
+
+(instance-of MonthFn BinaryFunction)
+(nth-domain MonthFn 1 NaturalNumber)
+(nth-domain MonthFn 2 Year)
+(range MonthFn Month)
+(documentation MonthFn "A binary function that maps a number and a year to
+the 
+corresponding month of the year.")
+
+(instance-of DayFn BinaryFunction)
+(nth-domain DayFn 1 NaturalNumber)
+(nth-domain DayFn 2 Month)
+(range DayFn Day)
+(documentation DayFn "A binary function that maps a number and a month to
+the 
+corresponding day of the month.")
+
+(instance-of HourFn BinaryFunction)
+(nth-domain HourFn 1 PositiveRealNumber)
+(nth-domain HourFn 2 Day)
+(range HourFn "A binary function that maps a number and a day to the 
+corresponding hour of the day.")
+
+(instance-of MinuteFn BinaryFunction)
+(nth-domain MinuteFn 1 PositiveRealNumber)
+(nth-domain MinuteFn 2 Hour)
+(range MinuteFn Minute)
+(documentation MinuteFn "A binary function that maps a number and a hour to
+the 
+corresponding minute of the hour.")
+
+(instance-of SecondFn BinaryFunction)
+(nth-domain SecondFn 1 PositiveRealNumber)
+(nth-domain SecondFn 2 Minute)
+(range SecondFn Second)
+(documentation SecondFn "A binary function that maps a number and a minute
+to 
+the corresponding second of the minute.")
+
+(subclass-of Year TimeMeasure-Position)
+(subclass-of Month TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (MonthFn ?X ?Y) Month)
+	(lessThanOrEqualTo ?X 12))
+
+(subclass-of Day TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (DayFn ?X ?Y) Day)
+	(lessThanOrEqualTo ?X 31))
+
+(subclass-of Hour TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (HourFn ?X ?Y) Hour)
+	(lessThanOrEqualTo ?X 24))
+
+(subclass-of Minute TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (MinuteFn ?X ?Y) Minute)
+	(lessThanOrEqualTo ?X 60))
+
+(subclass-of Second TimeMeasure-Position)
+
+(=&gt;
+	(instance-of (SecondFn ?X ?Y) Second)
+	(lessThanOrEqualTo ?X 60))
+
+(&lt;=&gt;
+	(instance-of ?X BinaryRelation)
+	(valence ?X 2))
+
+(&lt;=&gt;
+	(instance-of ?X TernaryRelation)
+	(valence ?X 3))
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;;    POSITIONS    ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This section aligns the content in the Positions ontology of the ITBM-CRN
+
+;; group.  This content is, for the most part, a set of predicates for 
+;; describing spatial relations.  Very few axioms are given.  Eventually,
+the 
+;; meaning of all of these predicates should be cashed out with the
+relations 
+;; defined in the earlier section "Mereotopological Definitions/Axioms".
+
+(instance-of position BinaryRelation)
+(nth-domain position 1 Object)
+(nth-domain position 2 Object)
+(documentation position "(position ?X ?Y) means that ?X is positioned with 
+respect to ?Y in some way.  This is a very general predicate whose main
+utility 
+is to function as an umbrella for the more specific positional predicates.")
+
+(subrelation-of above position)
+(documentation above "This is a cognitive primitive, derived from the
+up/down 
+schema and not involving contact.  A possible formalization of the medical 
+meaning must take into account the conventional body directions; though,
+there 
+is no unique direction hierarchy guiding the application of this relation to
+
+anatomical spaces.")
+
+(=&gt;
+  (above ?X ?Y)
+  (not
+    (connected ?X ?Y)))
+
+(subrelation-of adjacent position)
+(documentation adjacent "Close to, near or abutting another physical unit
+with 
+no other structure of the same kind intervening. This includes adjoins,
+abuts, 
+is contiguous to, is juxtaposed, and is close to.") 
+
+(=&gt;
+  (adjacent ?X ?Y)
+  (or
+    (near ?X ?Y)
+    (connected ?X ?Y)))
+
+(subrelation-of along position)
+(documentation along "(along ?X ?Y) means that an object ?X shares the
+region of 
+?Y at least as far the extension of one dimension is concerned.")
+
+(subrelation-of behind position)
+(documentation behind "This is a cognitive primitive, derived from the 
+front/back schema; a possible formalization of the medical meaning must take
+
+into account the conventional body directions; though, there is no unique 
+direction hierarchy guiding the application of this relation to anatomical 
+spaces.")
+
+(subrelation-of below position)
+
+(&lt;=&gt;
+  (below ?X ?Y)
+  (above ?Y ?X))
+
+(instance-of between TernaryRelation)
+(nth-domain between 1 Object)
+(nth-domain between 2 Object)
+(nth-domain between 3 Object)
+
+(=&gt;
+  (between ?X ?Y ?Z)
+  (and
+    (left-of ?Y ?X)
+    (left-of ?X ?Z)))
+
+(subrelation-of contains position)
+(documentation contains "The surrounding relation for masses.")
+
+(=&gt;
+  (contains ?X ?Y)
+  (forall (?Z)
+    (=&gt;
+      (part-of ?Z ?Y)
+      (exists ?U
+        (interior-part-of ?U ?X)
+        (located-at ?Z ?U)))))
+
+(subrelation-of crosses-over position)
+(documentation crosses-over "(crosses-over ?X ?Y) means that X
+crosses-through 
+the region of y, without overlapping y.")
+
+(=&gt;
+  (crosses-over ?X ?Y) 
+  (not
+    (connected ?X ?Y)))
+
+(subrelation-of crosses-through position)
+(documentation crosses-through "Here: x crosses-through y equals to x
+overlaps y 
+along at least one whole dimension (length, width or depth), say the
+interiors 
+of x and y overlap.") 
+
+(subrelation-of left-of position)
+(documentation left-of "This is a cognitive primitive, derived from the 
+left/right schema; a possible formalization of the medical meaning must take
+
+into account the conventional body directions; though, there is no unique 
+direction hierarchy guiding the application of this relation to anatomical 
+spaces.")
+
+(subrelation-of near position)
+(documentation near "Specialized common sense adjacency without contact; 
+based on implicit scale and distance less than the diameter of the smaller 
+object; alternatively, based on the smallest distance among the higher 
+granularity objects.  Eg, in cell C near object P, P is the less distant
+object 
+of a higher granularity than C.")
+
+(subrelation-of on position)
+(documentation on "This is a cognitive primitive, derived from the up/down 
+schema and involving contact.  A possible formalization of the medical
+meaning 
+must take into account the conventional body directions; though, there is no
+
+unique direction hierarchy guiding the application of this relation to 
+anatomical spaces.")
+
+(=&gt;
+  (on ?X ?Y)
+  (connected ?X ?Y))
+
+(subrelation-of right-of position)
+
+(&lt;=&gt;
+  (right-of ?X ?Y)
+  (left-of ?Y ?X))
+
+(subrelation-of surrounds position)
+(documentation surrounds "limits, bounds, confines, encloses or
+circumscribes, 
+but excluding the containment of substances. Here it is defined by stating
+that 
+x surrounds y iff the interior of x wholly contains y.")
+
+(subrelation-of traverses position)
+(documentation traverses "Crosses or extends across another physical
+structure 
+or area. This includes crosses over and crosses through.")
+
+(subrelation-of under position)
+
+(=&gt;
+  (under ?X ?Y)
+  (or
+    (on ?Y ?X)
+    (above ?Y ?X)))
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01494.html">RE: SUO: RE: A proposed SUO content outline</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01492.html">Re: SUO: RE: Criteria that an ontology must satisfy</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01495.html">RE: SUO: RE: A proposed SUO content outline - location</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01530.html">Re: SUO: Non-gibberish Version of Ontological Additions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail61.html#01493"><strong>Date</strong></a></li>
+<li><a href="thrd59.html#01493"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

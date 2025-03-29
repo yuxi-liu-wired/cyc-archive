@@ -1,0 +1,136 @@
+;; axioms taken from Allen, J., (1984) Toward a General Theory of Action 
+;; and Time, Artificial Intelligence 23 pp 123-154.
+
+(defobject TimeInterval)
+  (documentation "An interval of time.")
+
+(defobject TimePoint
+  documentation "[taken from Ontolingua user Rse] TimePoint is independent of observer and context.  A TimePoint is not a measurement of time, nor is it a specification of time.  It is the point in time. The TimePoints at which events occur can be known with various degrees of precision and approximation, but conceptually TimePoints are point-like and not interval-like.  That is, it doesn't make sense to talk about what happens during a TimePoint, or how long the TimePoint lasts.")
+
+(defrelation startof (?t1 ?p1)
+  (nth-domain startof 1 TimeInterval)
+  (nth-domain startof 2 TimePoint))
+
+(defrelation endof (?t1 ?p1)
+  (nth-domain endof 1 TimeInterval)
+  (nth-domain endof 2 TimePoint)) 
+
+(defrelation starts (?t1 ?t2)
+  (nth-domain starts 1 TimeInterval)
+  (nth-domain starts 2 TimeInterval)
+  (axiom
+    (=> 
+      (starts ?t1 ?t2)
+      (and 
+        (startof ?t1 ?s1)
+        (startof ?t2 ?s2)
+        (= ?s1 ?s2)
+        (endof ?t1 ?e1)
+        (endof ?t2 ?e2)
+        (< ?e1 ?e2)))))
+
+(defrelation finishes (?t1 ?t2)
+  (nth-domain finishes 1 TimeInterval)
+  (nth-domain finishes 2 TimeInterval)
+  (axiom
+    (=> 
+      (finishes ?t1 ?t2)
+      (and 
+        (endof ?t1 ?e1)
+        (endof ?t2 ?e2)
+        (= ?e1 ?e2)
+        (startof ?t1 ?s1)
+        (startof ?t2 ?s2)
+        (> ?s1 ?s2)))))
+
+(defrelation before (?t1 ?t2)
+  (nth-domain before 1 TimeInterval)
+  (nth-domain before 2 TimeInterval)
+  (axiom
+    (=> 
+      (finishes ?t1 ?t2)
+      (and 
+        (endof ?t1 ?p1)
+        (startof ?t2 ?p2)
+        (< ?p1 ?p2)))))
+
+(defrelation overlaps (?t1 ?t2)
+  (nth-domain overlaps 1 TimeInterval)
+  (nth-domain overlaps 2 TimeInterval)
+  (axiom
+    (=> 
+      (finishes ?t1 ?t2)
+      (and 
+        (endof ?t1 ?p1)
+        (startof ?t2 ?p2)
+        (> ?p1 ?p2)
+        (endof ?t1 ?p1)
+        (endof ?t2 ?p2)
+        (< ?p1 ?p2)))))
+
+(defrelation meets (?t1 ?t2)
+  (nth-domain meets 1 TimeInterval)
+  (nth-domain meets 2 TimeInterval)
+  (axiom
+    (=> 
+      (finishes ?t1 ?t2)
+      (and 
+        (endof ?t1 ?p1)
+        (startof ?t2 ?p2)
+        (= ?p1 ?p2)))))
+
+(defrelation equal (?t1 ?t2)
+  (nth-domain equal 1 TimeInterval)
+  (nth-domain equal 2 TimeInterval)
+  (axiom
+    (=> 
+      (during ?t1 ?t2)
+      (and 
+        (endof ?t1 ?e1)
+        (endof ?t2 ?e2)
+        (= ?e1 ?e2)
+        (startof ?t1 ?s1)
+        (startof ?t2 ?s2)
+        (= ?s1 ?s2)))))
+
+(defrelation during (?t1 ?t2)
+  (nth-domain during 1 TimeInterval)
+  (nth-domain during 2 TimeInterval)
+  (axiom
+    (=> 
+      (during ?t1 ?t2)
+      (and 
+        (endof ?t1 ?e1)
+        (endof ?t2 ?e2)
+        (< ?e1 ?e2)
+        (startof ?t1 ?s1)
+        (startof ?t2 ?s2)
+        (> ?s1 ?s2)))))
+
+(=> 
+  (and 
+    (before ?t1 ?t2) 
+    (before ?t2 ?t3))
+  (before ?t1 ?t3))
+
+(=> 
+  (and
+    (meets ?t1 ?t2)
+    (during ?t2 ?t3))
+  (or
+    (overlaps ?t1 ?t3)
+    (during ?t1 ?t3)
+    (meets ?t1 ?t3)))
+
+(defrelation in (?t1 ?t2)
+  (nth-domain in 1 TimeInterval)
+  (nth-domain in 2 TimeInterval)
+  (axiom
+    (<=>
+      (in ?t1 ?t2)
+      (or
+        (during ?t1 ?t2)
+        (starts ?t1 ?t2)
+        (finishes ?t1 ?t2)))))
+
+        

@@ -1,0 +1,288 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: Classification Ontology -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Wed, 17 Jan 2001 22:58:38 &#45;0500 (EST) -->
+<!--X-Message-Id: 002101c080f8$9b58b2a0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00430.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: Classification Ontology</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00434.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00448.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd79.html#00430">Thread Index</A></Td>
+<TD><A HREF="msg00431.html">Date Prev</A></TD>
+<TD><A HREF="msg00429.html">Date Next</A>
+</TD>
+<TD><A HREF="mail82.html#00430">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: Classification Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: Classification Ontology</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 17 Jan 2001 18:44:40 -0800</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+All,
+
+In each ontology example submitted so far there has been only one universal
+classification with incidence relation symbolized by the KIF
+instantiation-predication notation
+     '(type instance)'.
+In a building blocks approach to ontology development there is a need for
+multiple classifications. One straight-forward way for enabling this
+relative specification is (1) to use a generic incidence predicate '|=' and
+(2) to use a parameter that indicates the specific classification. So the
+incidence relation of these relative classifications is symbolized by the
+KIF-like instantiation-predication notation
+     '(|= classification type instance)'.
+____________________
+
+An ontology for classifications needs to be able to specify multiple
+classifications. What follows is a possible first cut at a *Classification
+Ontology* in a KIF-like notation.
+
+(Class Instance)
+(Class Type)
+
+CLASSIFICATIONS
+
+A *classification* is a triple
+    [Inst, Typ, inc]
+consisting of a set of instances 'Inst', a set of types 'Typ', and a binary
+incidence (aka classification) relation 'inc' between instances and types.
+
+(Class Classification)
+(BinaryRelation Inst)
+(forall (?c ?i) (=&gt; (Inst ?c ?i) (and (Classification ?c) (Instance ?i))))
+(BinaryRelation Typ)
+(forall (?c ?t) (=&gt; (Typ ?c ?t) (and (Classification ?c) (Type ?t))))
+(TernaryRelation |=)
+(forall (?c ?i ?t) (=&gt; (|= ?c ?i ?t) (and (Classification ?c) (Instance ?i)
+(Type ?t))))
+
+INFOMORPHISMS
+
+Classifications are related through infomorphisms. An *infomorphism* from
+classification 'Class1 = [Inst1, Typ1, inc1]' to classification 'Class2 =
+[Inst2, Typ2, inc2]' is a pair
+    [instFn, typFn]
+consisting of an instance function 'instFn : Inst2 -&gt; Inst1' and  a type
+function 'typFn : Typ1 -&gt; Typ2' that satisfy the following "fundamental
+condition":
+    inc1(instFn(i2), t1) iff inc2(i2, typFn(t1))
+for all instances i2 in Inst2 and all types t1 in Typ1.
+
+(Class Infomorphism)
+(UnaryFunction source.classification)
+(forall (?f ?c) (=&gt; (= (source.classification ?f) ?c) (and (Infomorphism ?f)
+(Classification ?c))))
+(UnaryFunction target.classification)
+(forall (?f ?c) (=&gt; (= (target.classification ?f) ?c) (and (Infomorphism ?f)
+(Classification ?c))))
+(BinaryFunction InstFn)
+(forall (?f ?i2 ?i1)
+    (=&gt;
+        (= (InstFn ?f ?i2) ?i1)
+        (and (Infomorphism ?f) (Inst (target.classification ?f) ?i2) (Inst
+(source.classification ?f) ?i1))
+    )
+)
+(BinaryFunction TypFn)
+(forall (?f ?t1 ?t2)
+    (=&gt;
+        (= (TypFn ?f ?t1) ?t2)
+        (and (Infomorphism ?f) (Typ (source.classification ?f) ?t1) (Typ
+(target.classification ?f) ?t2))
+    )
+)
+
+;; the fundamental condition for an infomorphism
+
+(forall (?f ?i2 ?t1)
+    (=&gt;
+        (and (Infomorphism ?f) (Inst (target.classification ?f) ?i2) (Typ
+(source.classification ?f) ?t1))
+        (&lt;=&gt; (|= (source.classification ?f) (InstFn ?f ?i2) ?t1) (|=
+(target.classification ?f) ?i2 (TypFn ?f ?t1)))
+    )
+)
+____________________
+
+Here are examples of classifications and infomorphisms taken from the text
+"Information Flow: The Logic of Distributed Systems" by Barwise and
+Seligman.
+
+EXAMPLE: CLASSIFICATION (page 70)
+
+(Classification Webster)
+(Typ Webster Noun)
+(Typ Webster Intransitive-Verb)
+(Typ Webster Transitive-Verb)
+(Typ Webster Adjective)
+(Inst Webster bet)
+(Inst Webster eat)
+(Inst Webster fit)
+(Inst Webster friend)
+(Inst Webster square)
+...
+(|= Webster bet Noun)
+(|= Webster bet Intransitive-Verb)
+(|= Webster bet Transitive-Verb)
+(not (|= Webster bet Adjective))
+(not (|= Webster eat Noun))
+(|= Webster eat Intransitive-Verb)
+(|= Webster eat Transitive-Verb)
+(not (|= Webster fit Adjective))
+(|= Webster fit Noun)
+(|= Webster fit Intransitive-Verb)
+(|= Webster fit Transitive-Verb)
+(|= Webster fit Adjective)
+(|= Webster friend Noun)
+(not (|= Webster friend Intransitive-Verb))
+(|= Webster friend Transitive-Verb)
+(not (|= Webster friend Adjective))
+(|= Webster square Noun)
+(not (|= Webster square Intransitive-Verb))
+(|= Webster square Transitive-Verb)
+(|= Webster square Adjective)
+...
+
+EXAMPLE: INFOMORPHISM (page 73)
+
+Let "yakity-yak" denote the command "Take out the papers and the trash!"
+with its punction symbol "yy-punc" being the exclamation symbol at the end
+of the sentence. Let "gettysburg1" denote the statement that "Fourscore and
+seven years ago our fathers brought forth on this continent a new nation,
+conceived in liberty and dedicated to the proposition that all men are
+created equal." with its punction symbol "g1-punc" being the period at the
+end of the sentence. Let "angels" denote the question "How many angels can
+fit on the head of a pin?" with its punction symbol "ag-punc" being the
+question mark at the end of the sentence.
+
+(Classification Punctuation)
+(Typ Punctuation Period)
+(Typ Punctuation Exclamation-Mark)
+(Typ Punctuation Question-Mark)
+(Typ Punctuation Comma)
+(Inst Punctuation yy-punc)
+(Inst Punctuation g1-punc)
+(Inst Punctuation ag-punc)
+...
+(not (|= Punctuation yy-punc Period))
+(|= Punctuation yy-punc Exclamation-Mark)
+(not (|= Punctuation yy-punc Exclamation-Mark))
+...
+
+(Classification Sentence)
+(Typ Sentence Declarative)
+(Typ Sentence Question)
+(Typ Sentence Other)
+(Inst Sentence yakity-yak)
+(Inst Sentence gettysburg1)
+(Inst Sentence angels)
+...
+(|= Sentence yakity-yak Declarative)
+(not (|= Sentence yakity-yak Question))
+(not (|= Sentence yakity-yak Other))
+...
+
+(Infomorphism punct-type)
+(= (source.classification punct-type) Punctuation)
+(= (target.classification punct-type) Sentence)
+
+(= (InstFn punct-type yakity-yak) yy-punc)
+(= (InstFn punct-type gettysburg1) g1-punc)
+...
+(= (TypFn punct-type Period) Declarative)
+(= (TypFn punct-type Exclamation-Mark) Declarative)
+(= (TypFn punct-type Question-Mark) Question)
+(= (TypFn punct-type Comma) Other)
+...
+
+
+Robert E. Kent
+rekent@ontologos.org
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00431.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO   WG</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00429.html">Re: SUO: Composing Ontologies using morphisms and colimits</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00434.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO   WG</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00448.html">Re: SUO: Classification Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail82.html#00430"><strong>Date</strong></a></li>
+<li><a href="thrd79.html#00430"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

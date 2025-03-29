@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>The IFF Grammar</title>
+<meta name="description" content="A description of the IFF Grammar.">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="author" content="Robert E. Kent">
+<link rel="icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="http://suo.ieee.org/IFF/favicon.ico"/> 
+<link rel="stylesheet" type="text/css" href="http://suo.ieee.org/IFF/css/normal-page.css"/>
+</head>
+<body>
+<div id="document">
+<div id="left-column"></div>
+<div id="right-column"></div>
+<div id="header">
+<div id="home">
+<a href="http://suo.ieee.org/IFF/">
+<img width="75" height="75" 
+     src="http://suo.ieee.org/IFF/images/iff-icon-thumbnail.gif" 
+     border="0"
+     alt="[The Information Flow Framework]" 
+     title="The Information Flow Framework" />
+</a>
+</div>
+<div id="top">
+<h1>The IFF Grammar</h1>
+</div>
+<div id="navigation">
+<ul>
+<li><a href="http://suo.ieee.org/IFF/grammar.pdf">Grammar</a></li>
+</div>
+</div>
+<div id="content">
+
+<p class="text next-paragraph">The LISt Processing (<a href="http://en.wikipedia.org/wiki/Lisp_programming_language">LISP</a>) programming language, which is based on the lambda calculus, is the second oldest (1958) programming language &mdash; only the <a href="http://en.wikipedia.org/wiki/Fortran">FORTRAN</a> language is older. LISP became the favored programming language for artificial intelligence research. All program code is written as parenthesized lists. The Knowledge Interchange Format (<a href="http://logic.stanford.edu/kif/dpans.html">KIF</a>), which has a LISP-like format, was created to serve as a syntax for first-order logic. The IFF language (or logical notation) (Table&nbsp;1), which is a vastly simplified and modified version of KIF, also has a LISP-like format. The IFF language contains both logical code and comments. Both nested namespaces and metalevels are specified by prefixes. The IFF <a href="http://suo.ieee.org/IFF/grammar.pdf">grammar</a> which specifies the syntax of the IFF language, is written in <a href="http://en.wikipedia.org/wiki/Extended_Backus_Naur_Form">Extended Backus Naur Form (EBNF)</a>.</p>
+
+<table class="math">
+<tr"><th>&nbsp;&nbsp;&nbsp;</th><th>&nbsp;</th><th align="right"><span style="font-family: helvetica,arial,sans-serif; font-weight: lighter; font-size: large;">Math</span></th><th>&nbsp;&nbsp;&nbsp;</th><th align="left"><span style="font-family: helvetica,arial,sans-serif; font-weight: lighter; font-size: large;">IFF</span></th></tr>
+<tr class="first"><td>&nbsp;<span style="font-family: helvetica,arial,sans-serif; font-weight: bolder; font-size: small;">names</span></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right"><span style="font-style: italic;">a</span></td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">o.i.a</span>,&nbsp;inner&nbsp;context&nbsp;<span style="font-family: courier new,courier,monospace;">i</span>,&nbsp;&nbsp;outer&nbsp;context&nbsp;<span style="font-family: courier new,courier,monospace;">o</span>&nbsp;</td></tr>
+<tr class="first"><td><span style="font-family: helvetica,arial,sans-serif; font-weight: bolder; font-size: small;">atoms and terms</span></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td align="right">&nbsp;set&nbsp;element</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right"><span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X</span> or <span style="font-style: italic;">X</span>(<span style="font-style: italic;">x</span>)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(X&nbsp;x)</span></td></tr>
+<tr class="middle"><td align="right">&nbsp;predicate&nbsp;member</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right"><span style="font-style: italic;">x</span>&nbsp;&isin;&nbsp;<span style="font-style: italic;">p</span> or <span style="font-style: italic;">p</span>(<span style="font-style: italic;">x</span>)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(p&nbsp;x)</span></td></tr>
+<tr class="middle"><td align="right">&nbsp;relation&nbsp;member</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">(<span style="font-style: italic;">x</span>,&nbsp;<span style="font-style: italic;">y</span>)&nbsp;&isin;&nbsp;<span style="font-style: italic;">r</span> or <span style="font-style: italic;">r</span>(<span style="font-style: italic;">x</span>,&nbsp;<span style="font-style: italic;">y</span>)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(r&nbsp;x&nbsp;y)</span></td></tr>
+<tr class="middle"><td align="right">&nbsp;function&nbsp;application</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right"><span style="font-style: italic;">f</span>(<span style="font-style: italic;">x</span>)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(f&nbsp;x)</span></td></tr>
+<tr class="first"><td><span style="font-family: helvetica,arial,sans-serif; font-weight: bolder; font-size: small;">&nbsp;equations</span></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td align="right">&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&sigma;&nbsp;=&nbsp;&tau; or =(&sigma;&nbsp;&tau;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(=&nbsp;&sigma;&nbsp;&tau;)</span></td></tr>
+<tr class="first"><td><span style="font-family: helvetica,arial,sans-serif; font-weight: bolder; font-size: small;">&nbsp;connectives</span></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td align="right">conjunction</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&phi;&nbsp;&#8896;&nbsp;&psi; or &#8896;(&phi;&nbsp;&psi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(and&nbsp;P&nbsp;Q)</span></td></tr>
+<tr class="middle"><td align="right">disjunction</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&phi;&nbsp;&#8897;&nbsp;&psi; or &#8897;(&phi;&nbsp;&psi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(or&nbsp;P&nbsp;Q)</span></td></tr>
+<tr class="middle"><td align="right">implication</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&phi;&nbsp;&rArr;&nbsp;&psi; or &rArr;(&phi;&nbsp;&psi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(implies&nbsp;P&nbsp;Q)</span>&nbsp;or&nbsp;<span style="font-family: courier new,courier,monospace;">(=>&nbsp;P&nbsp;Q)</span></td></tr>
+<tr class="middle"><td align="right">equivalence</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&phi;&nbsp;&hArr;&nbsp;&psi; or &hArr;(&phi;&nbsp;&psi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(iff&nbsp;P&nbsp;Q)</span>&nbsp;or&nbsp;<span style="font-family: courier new,courier,monospace;">(<=>&nbsp;P&nbsp;Q)</span></td></tr>
+<tr class="middle"><td align="right">negation</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&not;&nbsp;&phi; or &not;(&phi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(not&nbsp;P)</span></td></tr>
+<tr class="first"><td><span style="font-family: helvetica,arial,sans-serif; font-weight: bolder; font-size: small;">&nbsp;quantifiers</span></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td align="right">universal</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&forall;<sub><span style="font-size: x-small;"><span style="font-style: italic;">x</span><sub>0</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>0</sub></span>,&nbsp;<span style="font-style: italic;">x</span><sub>1</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>1</sub></span></span></sub>&nbsp;&phi;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="middle"><td align="right">&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">or&nbsp;&forall;<sub><span style="font-size: x-small;">(<span style="font-style: italic;">x</span><sub>0</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>0</sub></span>,&nbsp;<span style="font-style: italic;">x</span><sub>1</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>1</sub></span>)</span></sub>&nbsp;(&phi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(forall&nbsp;((X0&nbsp;x0)&nbsp;(X1&nbsp;x1))&nbsp;P)</span></td></tr>
+<tr class="middle"><td align="right">existential</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">&exist;<sub><span style="font-size: x-small;"><span style="font-style: italic;">x</span><sub>0</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>0</sub></span>,&nbsp;<span style="font-style: italic;">x</span><sub>1</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>1</sub></span></span></sub>&nbsp;&phi;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+<tr class="last"><td align="right">&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td align="right">or&nbsp;&exist;<sub><span style="font-size: x-small;">(<span style="font-style: italic;">x</span><sub>0</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>0</sub></span>,&nbsp;<span style="font-style: italic;">x</span><sub>1</sub>&nbsp;&isin;&nbsp;<span style="font-style: italic;">X<sub>1</sub></span>)</span></sub>&nbsp;(&phi;)</td><td>&nbsp;&nbsp;&nbsp;</td><td><span style="font-family: courier new,courier,monospace;">(exists&nbsp;((X0&nbsp;x0)&nbsp;(X1&nbsp;x1))&nbsp;P)</span></td></tr>
+<caption>Table&nbsp;1:&nbsp;<span style="font-weight: bold;">Syntax&nbsp;Tutorial</span></caption>
+</table>
+
+<p class="text">&nbsp;</p>
+
+<p class="text unicode">Some IFF documents such as this one contain a lot of <a href="http://www.alanwood.net/unicode/mathematical_operators.html">unicode characters</a>, and so require a recent browser. But even some recent browsers fail to render it properly. Two browsers that do render these documents correctly are <a href="http://www.mozilla.com/firefox/">Firefox</a> and <a href="http://www.opera.com/">Opera</a>.</p>
+</div> <!-- end of content -->
+<div id="footer">Author: Robert E. Kent</div>
+</div> <!-- end of document -->
+<br/>
+</body>
+</html>

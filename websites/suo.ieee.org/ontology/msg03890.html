@@ -1,0 +1,273 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Re: Program Semantics -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Fri, 22 Mar 2002 09:39:31 &#45;0500 (EST) -->
+<!--X-Message-Id: 3C9B4254.8998999A@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3C9A1192.22DD8412@oakland.edu -->
+<!--X-Reference: 3C9A2371.D1AA284E@oakland.edu -->
+<!--X-Reference: 3C9A302C.96CB0AF4@oakland.edu -->
+<!--X-Reference: 3C9A42ED.41F9D149@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg03890.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Re: Program Semantics</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg03887.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg03895.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd10.html#03890">Thread Index</A></Td>
+<TD><A HREF="msg03891.html">Date Prev</A></TD>
+<TD><A HREF="msg03889.html">Date Next</A>
+</TD>
+<TD><A HREF="mail13.html#03890">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Re: Program Semantics</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Arisbe &lt;<A HREF="mailto:arisbe@stderr.org">arisbe@stderr.org</A>&gt;, Gdsemiocom &lt;<A HREF="mailto:gdsemiocom@univ-perp.fr">gdsemiocom@univ-perp.fr</A>&gt;,       Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Re: Program Semantics</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</li>
+<li><em>Date</em>: Fri, 22 Mar 2002 09:40:20 -0500</li>
+<li><em>References</em>: &lt;<a href="msg03884.html">3C9A1192.22DD8412@oakland.edu</a>&gt; &lt;<a href="msg03885.html">3C9A2371.D1AA284E@oakland.edu</a>&gt; &lt;<a href="msg03886.html">3C9A302C.96CB0AF4@oakland.edu</a>&gt; &lt;<a href="msg03887.html">3C9A42ED.41F9D149@oakland.edu</a>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+| Algebraic Approaches to Program Semantics
+|
+| Part 1.  Denotational Semantics of Control
+|
+| Chapter 1.  An Introduction to Denotational Semantics
+|
+|
+| 1.2.  A Simple Fragment of Pascal
+|
+| In this section we describe an abbreviated version of Pascal.
+| Although this limited version has full computing power with
+| regard to functions whose inputs and outputs are natural
+| numbers, this is a tangential point -- the main objective
+| of this section is to illustrate how to present a formal
+| syntax as well as an operational semantics for a simple
+| programming language.  The reader should observe that
+| the level of precision of the operational semantics
+| is such that it becomes fairly clear how to write
+| a compiler or interpreter for the Pascal fragment,
+| so that we accomplish more than an exercise in
+| formalizing what we already knew.
+|
+| The complete syntax of our Pascal fragment is given in Table 1.
+|
+| Table 1.  The Syntax of a Pascal Fragment
+| ---------------------------------------------------
+|
+| 'Alphabet of Symbols'
+|
+|    Digits:  0, 1, ..., 9
+|
+|    Letters:  a, b, ..., z
+|
+|    Parentheses:  ( , )
+|
+|    Boolean Truth Values:  T, F
+|
+|    Boolean Connectives:  ~, v, &amp;
+|
+|    Comparisons:  =, =/=, &lt;, =&lt;, &gt;, &gt;=
+|
+|    Arithmetic Functions:  +, -, *, ÷
+|
+|    Statement Constructors:
+|
+|       :=, ;, begin, end, if, then, else, while, do, repeat, until
+|
+| The set of 'expressions' is defined by:
+|
+|    Given Outright:
+|
+|       Any nonempty string of digits (called a 'numeral'),
+|       a letter followed by a (possibly empty) string of
+|       digits and letters (called an 'identifier').
+|
+|    Building Rules:
+|
+|       If D, E are expressions
+|       so are (D + E), (D - E), (D * E), (D ÷ E).
+|
+| The set of 'tests' is defined by:
+|
+|    Given Outright:
+|
+|       T, F,
+|
+|       D = E, D =/= E, D &lt; E, D =&lt; E, D &gt; E, D &gt;= E,
+|       for any two expressions D, E.
+|
+|    Building Rules:
+|
+|       If B, C are tests so are (~B), (B v C), (B &amp; C).
+|
+| The set of 'statements' is defined by:
+|
+|    Given Outright:
+|
+|       I := E, if I is an identifier and E is an expression.
+|
+|    Building Rules:
+|
+|       If S_1, ..., S_n are statements (n &gt;= 0), so is:
+|
+|          begin S_1; ...; S_n end.
+|
+|       If B is a test and R, S are statements, so are:
+|
+|          (if B then R else S),
+|
+|          (while B do S),
+|
+|          (repeat S until B).
+|
+| ---------------------------------------------------
+|
+| Here, the colons, commas, and periods are 'not' among the 64 symbols
+| in the alphabet.  Parentheses are used liberally to ensure that there
+| is exactly one way to derive an expression, test, or statement using
+| the building rules and beginning with those which are given outright.
+| We do not give a formal proof of this here, but encourage the reader
+| to explore this (see Exercise 1).  Three examples of expressions are:
+|
+|    ((a + 5) * 2),
+|
+|    572,
+|
+|    (cat + (dog + mouse)),
+|
+| whereas, according to our rules,
+|
+|    a + 5
+|
+| is not an expression.  An example of a statement is shown in (2).
+|
+| 2.  begin a := 5; (while (a &gt; 0 &amp; a =/= 6) do a := a - 1) end
+|
+| Note that begin, while, do, and end are single symbols
+| in the chosen alphabet and that there is no space symbol
+| in the alphabet.  Normally, one displays a statement so as
+| to be more readable by humans, for example, as in (3).
+|
+| 3.  begin
+|       a := 5;
+|       (while (a &gt; 0 &amp; a =/= 6) do a := a - 1)
+|     end
+|
+| This is harmless since we obtain (2) from (3) by ignoring the
+| aspects (in this case the vertical arrangement and the spaces)
+| which are not expressible in the formal syntax.
+|
+| Manes &amp; Arbib, AAPS, pages 5-6.
+|
+| Ernest G. Manes &amp; Michael A. Arbib,
+|'Algebraic Approaches to Program Semantics',
+| Springer-Verlag, New York, NY, 1986.
+
+Nota Bene.  In this transcription, I found it too distracting
+to mark the syntactic keywords in bold -- as #begin# or #end# --
+by way of attempting to emulate the authors' practice in mine,
+so I must ask for my reader's indulgence in the way of making
+intelligent adjustments, 'mutatis mutandis', in the reception.
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="03895" href="msg03895.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="03884" href="msg03884.html">ONT Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03885" href="msg03885.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03886" href="msg03886.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03887" href="msg03887.html">ONT Re: Program Semantics</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg03891.html">ONT Re: Topology &amp; Religion</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg03889.html">ONT Re: Topology</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg03887.html">ONT Re: Program Semantics</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03895.html">ONT Re: Program Semantics</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail13.html#03890"><strong>Date</strong></a></li>
+<li><a href="thrd10.html#03890"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

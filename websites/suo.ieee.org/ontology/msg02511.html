@@ -1,0 +1,172 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: intention vs. extension again -->
+<!--X-From-R13: Quevf [ramry <pzramryNcuvyrohf.gnzh.rqh> -->
+<!--X-Date: Tue, 15 May 2001 19:59:51 &#45;0400 (EDT) -->
+<!--X-Message-Id: 200105152348.f4FNmsd23079@philebus.tamu.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02511.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: intention vs. extension again</TITLE>
+<LINK REV="made" HREF="mailto:cmenzel@philebus.tamu.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02524.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02513.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd37.html#02511">Thread Index</A></Td>
+<TD><A HREF="msg02512.html">Date Prev</A></TD>
+<TD><A HREF="msg02510.html">Date Next</A>
+</TD>
+<TD><A HREF="mail40.html#02511">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: intention vs. extension again</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Adam Pease &lt;<A HREF="mailto:apease@ks.teknowledge.com">apease@ks.teknowledge.com</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: intention vs. extension again </LI>
+<LI><em>From</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 15 May 2001 18:48:54 -0500</LI>
+<LI><em>cc</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: Message from Adam Pease &lt;apease@ks.teknowledge.com&gt;   of &quot;Tue, 15 May 2001 16:01:01 PDT.&quot; &lt;<A HREF="msg02509.html">5.1.0.14.2.20010515154632.03318680@ks.teknowledge.com</A>&gt; </LI>
+<LI><em>Reply-To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt; Here's a practical question on the merged ontology.  We currently have 
+&gt; the axiom
+&gt; 
+&gt; (&lt;=&gt;
+&gt;    (disjoint ?C1 ?C2)
+&gt;    (not
+&gt;      (thereExists (?I)
+&gt;        (and
+&gt;          (instance-of ?I ?C1)
+&gt;          (instance-of ?I ?C2)))))
+&gt; 
+&gt; ; two classes are disjoint if no individual exists which is a instance of 
+&gt; ; both classes and vice versa
+
+The meaning of "vice versa" here is unclear to me.  I guess it is a way of
+expressing the biconditional, but if so, I'd suggest just changing "if" to
+"if and only if" and deleting "and vice versa".
+
+&gt; This looks problematic to me and Ian and I have discussed changing it from 
+&gt; bi-implication to simple implication.  One could make a case for the above 
+&gt; version if classes are extension.  The counter argument (which could be 
+&gt; labelled an argument for intentional classes) would say that Equine and 
+&gt; SinglyHornedAnimal are not disjoint just because no one has reified Unicorn 
+&gt; in the knowledge base.
+
+The issue is whether you want disjointness to have an implicit modal
+connotation.  If all you ever mean by saying C and C' are disjoint is
+that, right now, as things stand, they have no common instances, then the
+above axiom is fine.  You just have to bear in mind that classes that are
+in fact disjoint can suddenly cease to be disjoint.  On the other hand,
+if, by saying C and C' are disjoint, you mean something stronger -- namely
+that C and C' *can't* have common instances -- then you need to use
+implication rather than bi-implication, since, obviously, from the fact
+that C and C' happen to have no instances in common it doesn't follow that
+they couldn't possibly have instances in common.
+
+Note that this issue arises for most common properties of, and relations
+among, classes; e.g., transitivity, reflexivity, subclass, etc.
+
+-chris
+
+--
+
+Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu 
+College Station, TX  77843-4237  # vox:             (979) 845-8764 
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02519" href="msg02519.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+<li><strong><a name="02514" href="msg02514.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> Adam Pease &lt;apease@ks.teknowledge.com&gt;</li></ul></li>
+<li><strong><a name="02513" href="msg02513.html">Re: SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> &quot;John F. Sowa&quot; &lt;sowa@bestweb.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02509" href="msg02509.html">SUO: intention vs. extension again</a></strong>
+<ul><li><em>From:</em> Adam Pease &lt;apease@ks.teknowledge.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02512.html">RE: SUO: intention vs. extension again</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02510.html">Re: SUO: intention vs. extension again</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02524.html">SUO: Re: Intension Versus Extension Again</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02513.html">Re: SUO: intention vs. extension again</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail40.html#02511"><strong>Date</strong></a></li>
+<li><a href="thrd37.html#02511"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

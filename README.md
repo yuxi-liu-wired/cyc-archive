@@ -25,6 +25,15 @@ Because the Internet Archive has been very fiddly, several other tools I tried h
 ### Contents of the folder
 
 * `websites`: The scraped websites.
+	* `opencyc.org` and `www.opencyc.org`: From the `OpenCyc.org` website, which went offline around 2016. Particularly interesting is the tutorial at `www.opencyc.org\doc\doc`.
+	* Particularly interesting are:
+		* `www.cyc.com\doc\handbook\oe`: The Ontology Engineer's Handbook, version 0.7, last updated on `2002-06-05`.
+		* `\www.cyc.com\cycdoc`: Documentation.
+			* `walkthroughs\oeintro_cats_frames_long.html`: A long introduction tutorial.
+			* `vocab`: A list of vocabularies (that is, entities in the top-level and mid-level ontology and microtheories).
+			* `ref`: The reference documentation for the CycL language as it was in 2002.
+	* `tunes.org`: Some IRC chat records about Cyc back in 2002--2003.
+	* `suo.ieee.org`: The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it.
 * `other_files`:
   * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
   * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
@@ -39,7 +48,6 @@ Other than what's in the archive, there's also
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
 * [`www.saildart.org/DBL`](https://www.saildart.org/DBL): Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`. I made a [mirror on GitHub](https://github.com/yuxi-liu-wired/Large-Knowledge-Collider-archive).
-* The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it. I haven't bothered to archive it since even my patience has limits, and having to scrape through another 6000 files of Standard Upper Ontology would possibly `kill -9` my brain. But I think running `.\wbm-dl.exe http://suo.ieee.org/ -t 2008 -X "^.*/email/.*$"` should do the trick.
 
 ### Lost files
 

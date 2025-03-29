@@ -1,0 +1,251 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: Criteria that an ontology must satisfy -->
+<!--X-From-R13: "Dboreg S. Yrag" <erxragNbagbybtbf.bet> -->
+<!--X-Date: Fri, 9 Mar 2001 18:40:50 &#45;0500 (EST) -->
+<!--X-Message-Id: 000e01c0a8ed$62d33be0$7b76e4ce@Dell -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3aa941c4.155a2.0@bestweb.net -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01498.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: Criteria that an ontology must satisfy</TITLE>
+<LINK REV="made" HREF="mailto:rekent@ontologos.org">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01492.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01548.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd59.html#01498">Thread Index</A></Td>
+<TD><A HREF="msg01499.html">Date Prev</A></TD>
+<TD><A HREF="msg01497.html">Date Next</A>
+</TD>
+<TD><A HREF="mail61.html#01498">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: Criteria that an ontology must satisfy</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;John F. Sowa&quot; &lt;<A HREF="mailto:sowa@bestweb.net">sowa@bestweb.net</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: RE: Criteria that an ontology must satisfy</LI>
+<LI><em>From</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 9 Mar 2001 15:05:07 -0800</LI>
+<LI><em>Cc</em>: &quot;SUO&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg01492.html">3aa941c4.155a2.0@bestweb.net</A>&gt;</LI>
+<LI><em>Reply-To</em>: &quot;Robert E. Kent&quot; &lt;<A HREF="mailto:rekent@ontologos.org">rekent@ontologos.org</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+John, Chris M, Pat, et al,
+
+----- Original Message -----
+From: "John F. Sowa" &lt;sowa@bestweb.net&gt;
+To: "Jay Halcomb" &lt;jhalcomb@teknowledge.com&gt;;
+&lt;standard-upper-ontology@IEEE.ORG&gt;
+Sent: Friday, March 09, 2001 11:49 AM
+Subject: Re: SUO: RE: Criteria that an ontology must satisfy
+
+
+&gt; The language of core KIF is pure first-order.  But we have been
+&gt; talking about extending KIF to a sorted language, which can be
+&gt; used as a metalanguage for arbitrary many metalevels.  A sorted
+&gt; first-order language can indeed support true HOL, if you allow
+&gt; sorts that have uncountably many members.
+
+I have been meaning to comment about the sorted extension to KIF for some
+time. John's comment gives me a little push to do so.
+
+I had thought previously (see message
+[<A  HREF="http://suo.ieee.org/ontology/msg00983.html">http://suo.ieee.org/ontology/msg00983.html</A>]) that I needed a sorted
+extension of KIF for the Information Flow Framework (IFF) metalevel. But
+now, with the IFF Foundation Ontology, it seems that I do not need this.
+What I really need is semantic type restrictions, and these have been
+provided in the IFF Foundation Ontology
+[<A  HREF="http://www.ontologos.org/IFF/Metalevel/Metalevel.html">http://www.ontologos.org/IFF/Metalevel/Metalevel.html</A>].
+
+To show a picture of both before and after, consider the KIF example for the
+"source" operator for category theory that was used in the message
+[<A  HREF="http://suo.ieee.org/ontology/msg00983.html">http://suo.ieee.org/ontology/msg00983.html</A>]. The goal is to define the
+"source" or "domain" of a morphism in a category.
+__________
+
+Previously I had defined 'source' to be a unary KIF function
+
+1.    (KIF$UnaryFunction source)
+
+that maps a category '?c' to a unary KIF function '(source ?c)'.
+
+2.    (forall (?c ?s)
+          (=&gt; (= (source ?c) ?s)
+              (and (Category ?c) (KIF$UnaryFunction ?s))))
+
+Here 'Category' was a previously defined KIF class (I was using 'Class' as a
+synonym for 'UnaryRelation').
+
+The KIF function '(source ?c)' should only be applied to morphisms of the
+category '?c' and should only return objects of the category '?c'.
+
+3.    (forall (?c ?m ?o)
+          (=&gt; (= ((source ?c) ?m) ?o)
+              (and ((morphism ?c) ?m) ((object ?c) ?o))))
+
+Here '(morphism ?c)' and '(object ?c)' were a previously defined KIF
+classes.
+__________
+
+Now I still define 'source' to be a unary KIF function
+
+1*.     (KIF$UnaryFunction source)
+
+but this maps a category '?c' to an IFF function '(source ?c)'.
+
+This 'source' is a unary KIF function, since it takes a category as a
+parameter -- the term '(source ?r)' is the actual IFF function that
+represents the "source" operator inside of a category. This parametric
+technique is used throughout the KIF formulation of IFF. An IFF function is
+the notion of function defined in the IFF Foundation Ontology
+[<A  HREF="http://www.ontologos.org/IFF/Metalevel/Metalevel.html">http://www.ontologos.org/IFF/Metalevel/Metalevel.html</A>]. The string 'IFF' is
+the namespace prefix for this foundation ontology.
+
+2*.    (forall (?c ?f)
+            (=&gt; (= (source ?c) ?f)
+                (and (Category ?c) (IFF$Function ?f))))
+
+Here 'Category' is the IFF conglomerate previously defined as
+
+        (IFF$Conglomerate Category)
+
+An IFF class is the set-theoretic notion of class defined in the IFF
+Foundation Ontology. This is not the same as a KIF 'UnaryRelation'. However,
+in the IFF Foundation Ontology there are mechanisms for mapping from the
+foundation ontology to KIF. An IFF conglomerate is larger set-theoretically.
+The IFF Foundation Ontology uses the three-level set-theoretic hierarchy of
+sets - classes - conglomerates, from smallest to largest -- but only needs
+to axiomatize the first two.  For example, the collection of all sets is a
+class, and the collection of all classes and the collection of all
+categories are conglomerates. At the conglomerate level, I use KIF functions
+and relations. However, the levels of classes and sets are axiomatized and
+more abstract. For more on this, see the first footnote in the PDF document
+for the IFF Foundation Ontology
+[<A  HREF="http://www.ontologos.org/IFF/Metalevel/Metalevel.html">http://www.ontologos.org/IFF/Metalevel/Metalevel.html</A>].
+
+Now the IFF function '(source ?c)' should only be applied to morphisms of
+the category '?c' and should only return objects of the category '?c'. These
+type constraints are declared by using the IFF 'source' and IFF 'target' KIF
+functions in the IFF Foundation Ontology.
+
+3*.    (forall (?c)
+            (=&gt; (Category ?c)
+                (and (= (IFF$source (source ?c)) (Morphism ?c))
+                        (= (IFF$target (source ?c)) (Object ?c)))))
+
+Here '(Morphism ?c)' and '(Object ?c)' are IFF classes previously defined as
+
+4*. (KIF$UnaryFunction Object)
+
+      (forall (?c ?p)
+        (=&gt; (= (Object ?c) ?p)
+            (and (Category ?c) (IFF$Class ?p))))
+
+     (KIF$UnaryFunction Morphism)
+
+     (forall (?c ?p)
+         (=&gt; (= (Morphism ?c) ?p)
+            (and (Category ?c) (IFF$Class ?p))))
+
+Bottom line: in IFF I do not need a sorted extension of KIF for this kind of
+type restriction.
+
+BTW, the IFF Foundation Ontology now goes beyond the approach to foundations
+outlined in chapter 2 of the book "Abstract and Concrete Categories (1990)"
+by Jirí Adámek, Horst Herrlich and George E. Strecker. It seems natural that
+this ontology should contain axioms for an topos. However, the architecture
+for this is somewhat split -- at the level of classes I have only
+Cartesian-closure; however, at the level of sets I have the remaining topos
+axioms.
+
+Robert E. Kent
+rekent@ontologos.org
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01548" href="msg01548.html">Re: SUO: RE: Criteria that an ontology must satisfy</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01492" href="msg01492.html">Re: SUO: RE: Criteria that an ontology must satisfy</a></strong>
+<ul><li><em>From:</em> &quot;John F. Sowa&quot; &lt;sowa@bestweb.net&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01499.html">re:SUO: RE: First piece of 4D ontology</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01497.html">RE: SUO: On Clay and Vase</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01492.html">Re: SUO: RE: Criteria that an ontology must satisfy</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01548.html">Re: SUO: RE: Criteria that an ontology must satisfy</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail61.html#01498"><strong>Date</strong></a></li>
+<li><a href="thrd59.html#01498"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

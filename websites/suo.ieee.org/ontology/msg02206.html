@@ -1,0 +1,188 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: RE: Re: Expostulation -->
+<!--X-From-R13: Quevf [ramry <pzramryNcuvyrohf.gnzh.rqh> -->
+<!--X-Date: Wed, 18 Apr 2001 14:40:57 &#45;0400 (EDT) -->
+<!--X-Message-Id: 200104181832.f3IIW5h13300@philebus.tamu.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3ADDA317.3A8F1EFF@mitre.org -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg02206.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: RE: Re: Expostulation</TITLE>
+<LINK REV="made" HREF="mailto:cmenzel@philebus.tamu.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg02201.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg02210.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd45.html#02206">Thread Index</A></Td>
+<TD><A HREF="msg02207.html">Date Prev</A></TD>
+<TD><A HREF="msg02205.html">Date Next</A>
+</TD>
+<TD><A HREF="mail47.html#02206">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: RE: Re: Expostulation</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A> (IEEE Standard Upper Ontology List)</LI>
+<LI><em>Subject</em>: Re: SUO: RE: Re: Expostulation </LI>
+<LI><em>From</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 18 Apr 2001 13:32:05 -0500</LI>
+<LI><em>In-Reply-To</em>: Message from &quot;Frederick N. Chase&quot; &lt;fnc@mitre.org&gt;   of &quot;Wed, 18 Apr 2001 10:22:15 EDT.&quot; &lt;<A HREF="msg02201.html">3ADDA317.3A8F1EFF@mitre.org</A>&gt; </LI>
+<LI><em>Reply-To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Matthew wrote:
+
+&gt;  (&lt;=&gt; (gives John Mary Book1)
+&gt;       (and (gives x)
+&gt;            (giver x John)
+&gt;            (receiver x Mary)
+&gt;            (given x book1)
+&gt;       )
+&gt;  )
+
+This can't be right, as the free variable "x" occurs on the right side of
+the &lt;=&gt; but not on the left; it just sits there like a pronoun with no
+associated context to give it meaning.   Also, you are using "gives"
+ambiguously here. If I recall another of your recent posts correctly, you
+are using "(gives x)" to mean something like "x is a giving", i.e., an act
+or event of giving.  If so, I think what you're after is the following (I
+change to the more mnemonic (and KIF'ish) variable "?e"):
+
+(&lt;=&gt; (gives John Mary book1)
+     (exists (?e) 
+             (and (giving ?e)
+                  (giver ?e John)
+                  (receiver ?e Mary)
+                  (given ?e book1))))
+
+I.e., John gives book1 to Mary iff there is a giving ?e in which John is
+the giver, Mary the receiver, and book1 the thing given.
+
+Fred wrote:
+&gt; Dear Matthew, 
+&gt; I wonder if the following isn't yet closer to what you have in mind.
+&gt; 
+&gt;    (&lt;=&gt; (gives3 ?d ?r &amp;g)
+&gt;         (and (gives2 ?x)
+&gt;              (giver ?x ?d)
+&gt;              (receiver ?x ?r)
+&gt;              (given ?x ?g)
+&gt;          )
+&gt;     )     
+
+Same problem with the free "?x" here.  Also, why would gives3 take three
+arguments while gives2 takes only one?  And where is gives2 axiomatized?
+As for this being closer to what Matthew had in mind, I believe h was just
+giving an instance of what you intend with your more general axiom, 
+though I'd express it as follows:
+
+(forall (?x ?y ?z)
+        (&lt;=&gt; (gives ?x ?y ?z)
+             (exists (?e)
+                     (and (giving ?e)
+                          (giver ?e ?x)
+                          (receiver ?e ?y)
+                          (given ?e ?z)))))
+
+What all this means for the triadicity debate I have no idea, as I have no
+idea what triadicity in the Mystical Peircean Sense is all about.  I would
+understand the above axiom as nothing more than a way of providing a
+(perhaps) more robust analysis of the giving relation by enlarging one's
+ontology to include events.
+
+-chris
+
+--
+
+Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu 
+College Station, TX  77843-4237  # vox:             (979) 845-8764 
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="02210" href="msg02210.html">Re: SUO: RE: Re: Expostulation</a></strong>
+<ul><li><em>From:</em> &quot;Mark Pierre Richards&quot; &lt;mprichards@email.msn.com&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="02201" href="msg02201.html">Re: SUO: RE: Re: Expostulation</a></strong>
+<ul><li><em>From:</em> &quot;Frederick N. Chase&quot; &lt;fnc@mitre.org&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg02207.html">SUO: My First Definition Of A Cartesian Product</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg02205.html">SUO: Exposé</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg02201.html">Re: SUO: RE: Re: Expostulation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02210.html">Re: SUO: RE: Re: Expostulation</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail47.html#02206"><strong>Date</strong></a></li>
+<li><a href="thrd45.html#02206"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: ONT Re: Zeroth Order Theories (ZOT's) -->
+<!--X-From-R13: Xba Ojoerl <wnjoerlNbnxynaq.rqh> -->
+<!--X-Date: Tue, 29 Jan 2002 16:09:04 &#45;0500 (EST) -->
+<!--X-Message-Id: 3C570E73.46EBF84C@oakland.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3C4EBB61.FF30D914@oakland.edu -->
+<!--X-Reference: 3C5437D3.748B2B4@oakland.edu -->
+<!--X-Reference: 3C5452F9.EAF1DBEF@oakland.edu -->
+<!--X-Reference: 3C547012.6B0C4BC@oakland.edu -->
+<!--X-Reference: 3C54B1A9.E34B4086@oakland.edu -->
+<!--X-Reference: 3C54DAD8.552EAD14@oakland.edu -->
+<!--X-Reference: 3C55BBD1.E386C834@oakland.edu -->
+<!--X-Reference: 3C56CE09.771D7B1A@oakland.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg03715.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>ONT Re: Zeroth Order Theories (ZOT's)</TITLE>
+<LINK REV="made" HREF="mailto:jawbrey@oakland.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg03712.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg03716.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd15.html#03715">Thread Index</A></Td>
+<TD><A HREF="msg03716.html">Date Prev</A></TD>
+<TD><A HREF="msg03714.html">Date Next</A>
+</TD>
+<TD><A HREF="mail16.html#03715">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ONT Re: Zeroth Order Theories (ZOT's)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Arisbe &lt;<A HREF="mailto:arisbe@stderr.org">arisbe@stderr.org</A>&gt;, Gdsemiocom &lt;<A HREF="mailto:gdsemiocom@univ-perp.fr">gdsemiocom@univ-perp.fr</A>&gt;,       Ontology &lt;<A HREF="mailto:ontology@ieee.org">ontology@ieee.org</A>&gt;</li>
+<li><em>Subject</em>: ONT Re: Zeroth Order Theories (ZOT's)</li>
+<li><em>From</em>: Jon Awbrey &lt;<A HREF="mailto:jawbrey@oakland.edu">jawbrey@oakland.edu</A>&gt;</li>
+<li><em>Date</em>: Tue, 29 Jan 2002 16:04:51 -0500</li>
+<li><em>References</em>: &lt;<a href="msg03680.html">3C4EBB61.FF30D914@oakland.edu</a>&gt; &lt;<a href="msg03701.html">3C5437D3.748B2B4@oakland.edu</a>&gt; &lt;<a href="msg03702.html">3C5452F9.EAF1DBEF@oakland.edu</a>&gt; &lt;<a href="msg03703.html">3C547012.6B0C4BC@oakland.edu</a>&gt; &lt;<a href="msg03706.html">3C54B1A9.E34B4086@oakland.edu</a>&gt; &lt;<a href="msg03707.html">3C54DAD8.552EAD14@oakland.edu</a>&gt; &lt;<a href="msg03708.html">3C55BBD1.E386C834@oakland.edu</a>&gt; &lt;<a href="msg03712.html">3C56CE09.771D7B1A@oakland.edu</a>&gt;</li>
+<li><em>Sender</em>: <A HREF="mailto:owner-ontology@majordomo.ieee.org">owner-ontology@majordomo.ieee.org</A></li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+I think that it might be a good idea to go back to a simpler example
+of a constraint satisfaction problem, and to discuss the elements of
+its expression as a ZOT in a less cluttered setting before advancing
+onward once again to problems on the order of the Four Houses Puzzle.
+
+| Applications of a Propositional Calculator:
+| Constraint Satisfaction Problems.
+| Jon Awbrey, April 24, 1995.
+
+Graph Coloring
+
+Based on the discussion in [Wil, page 196].
+
+One is given three colors, say, orange, silver, indigo,
+and a graph on four nodes that has the following shape:
+
+|          1
+|          o
+|         / \
+|        /   \
+|     4 o-----o 2
+|        \   /
+|         \ /
+|          o
+|          3
+
+The problem is to color the nodes of the graph
+in such a way that no pair of nodes that are
+adjacent in the graph, that is, linked by
+an edge, get the same color.
+
+The objective situation that is to be achieved can be represented
+in a so-called &quot;declarative&quot; fashion, in effect, by employing the
+cactus language as a very simple sort of declarative programming
+language, and depicting the prospective solution to the problem
+as a ZOT.
+
+To do this, begin by declaring the following set of
+twelve boolean variables or &quot;zeroth order features&quot;:
+
+{1_orange, 1_silver, 1_indigo,
+ 2_orange, 2_silver, 2_indigo,
+ 3_orange, 3_silver, 3_indigo,
+ 4_orange, 4_silver, 4_indigo}
+
+The interpretation to keep in mind will be such that
+the feature name of the form &quot;&lt;node i&gt;_&lt;color j&gt;&quot;
+says that the node i is assigned the color j.
+
+Logical Input File:  Color.Log
+o----------------------------------------------------------------------o
+|                                                                      |
+|  (( 1_orange ),( 1_silver ),( 1_indigo ))                            |
+|  (( 2_orange ),( 2_silver ),( 2_indigo ))                            |
+|  (( 3_orange ),( 3_silver ),( 3_indigo ))                            |
+|  (( 4_orange ),( 4_silver ),( 4_indigo ))                            |
+|                                                                      |
+|  ( 1_orange  2_orange )( 1_silver  2_silver )( 1_indigo  2_indigo )  |
+|  ( 1_orange  4_orange )( 1_silver  4_silver )( 1_indigo  4_indigo )  |
+|  ( 2_orange  3_orange )( 2_silver  3_silver )( 2_indigo  3_indigo )  |
+|  ( 2_orange  4_orange )( 2_silver  4_silver )( 2_indigo  4_indigo )  |
+|  ( 3_orange  4_orange )( 3_silver  4_silver )( 3_indigo  4_indigo )  |
+|                                                                      |
+o----------------------------------------------------------------------o
+
+The first stanza of verses declares that
+every node is assigned exactly one color.
+
+The second stanza of verses declares that
+no adjacent nodes get the very same color.
+
+Each satisfying interpretation of this ZOT
+that is also a program corresponds to what
+graffitists call a &quot;coloring&quot; of the graph.
+
+Theme One's Model interpreter, when we set
+it to work on this ZOT, will array  before
+our eyes all of the colorings of the graph.
+
+Sense Outline:  Color.Sen
+o-----------------------------o
+| 1_orange                    |
+|  2_silver                   |
+|   3_orange                  |
+|    4_indigo                 |
+|  2_indigo                   |
+|   3_orange                  |
+|    4_silver                 |
+| 1_silver                    |
+|  2_orange                   |
+|   3_silver                  |
+|    4_indigo                 |
+|  2_indigo                   |
+|   3_silver                  |
+|    4_orange                 |
+| 1_indigo                    |
+|  2_orange                   |
+|   3_indigo                  |
+|    4_silver                 |
+|  2_silver                   |
+|   3_indigo                  |
+|    4_orange                 |
+o-----------------------------o
+
+| Reference [Wil]
+|
+| Wilf, Herbert S.,
+|'Algorithms and Complexity,
+| Prentice-Hall, Englewood Cliffs, NJ, 1986.
+|
+| Nota Bene.  There is a wrong Figure in some
+| printings of the book, that does not match
+| the description of the Example that is
+| given in the text.
+
+¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤~~~~~~~~~¤
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="03716" href="msg03716.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="03680" href="msg03680.html">ONT Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03701" href="msg03701.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03702" href="msg03702.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03703" href="msg03703.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03706" href="msg03706.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03707" href="msg03707.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03708" href="msg03708.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+<li><strong><a name="03712" href="msg03712.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg03716.html">ONT Re: Zeroth Order Theories (ZOT's)</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg03714.html">Re: ONT Re: Zeroth Order Theories (ZOT's)</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg03712.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03716.html">ONT Re: Zeroth Order Theories (ZOT's)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail16.html#03715"><strong>Date</strong></a></li>
+<li><a href="thrd15.html#03715"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

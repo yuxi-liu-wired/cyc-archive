@@ -1,0 +1,397 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: SUO: RE: Latest Version of Merged Ontology -->
+<!--X-From-R13: Wna @vyrf <vavyrfNgrxabjyrqtr.pbz> -->
+<!--X-Date: Wed, 17 Jan 2001 23:43:28 &#45;0500 (EST) -->
+<!--X-Message-Id: EE25484266A64A47AE06CFC47C64232B18F958@helium.teknowledge.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00435.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>SUO: RE: Latest Version of Merged Ontology</TITLE>
+<LINK REV="made" HREF="mailto:iniles@teknowledge.com">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00432.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00419.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd80.html#00435">Thread Index</A></Td>
+<TD><A HREF="msg00436.html">Date Prev</A></TD>
+<TD><A HREF="msg00434.html">Date Next</A>
+</TD>
+<TD><A HREF="mail82.html#00435">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUO: RE: Latest Version of Merged Ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: &quot;Standard-Upper-Ontology (E-mail)&quot; &lt;<A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A>&gt;</LI>
+<LI><em>Subject</em>: SUO: RE: Latest Version of Merged Ontology</LI>
+<LI><em>From</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 17 Jan 2001 10:43:50 -0800</LI>
+<LI><em>Reply-To</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi Robert,
+
+	Here's an attempt to spell out the procedure I used in
+merging/aligning the ontologies that make up the "Merged Ontology".  The
+first step was to convert all of the ontologies listed on the SUO Candidate
+Content web page (<A  HREF="http://ltsc.ieee.org/suo/refs.html">http://ltsc.ieee.org/suo/refs.html</A>) into SUO-KIF.  Once
+this was accomplished, I selected the most general ontology (John Sowa's
+upper level ontology) as the base ontology.  I then mapped concepts/axioms
+from the remaining ontologies into the base ontology.  In this mapping
+process, there were two possible cases, each in turn with two subcases.
+
+1.  New content (Nothing in the merged ontology corresponds with the
+concept/axiom to be mapped)
+
+  	a. Useful/Relatively Noncontroversial content.  In this subcase, the
+new concept/axiom is deemed to 	be useful and not to violate any cherished
+philosophical principles.  Once I decided that the new 	concept/axiom should
+be included, it was simply a matter of finding a place for it in the
+ontology.  	In some cases, this required creating some intermediate
+levels of concepts between existing 	concepts and new content.  These
+intermediate levels were identified in an earlier email directed 	at
+John Sowa on "trouble spots" in the merged ontology.  An example of this
+subcase is the 	subhierarchy of numbers that was taken from the KIF-Numbers
+ontology on the Ontolingua server. 
+
+	(subclass-of RealNumber Number)
+	(subclass-of RationalNumber RealNumber)
+	(subclass-of PositiveRealNumber RealNumber)
+	(subclass-of NegativeRealNumber RealNumber)
+	(subclass-of Integer RationalNumber)
+	(subclass-of EvenInteger Integer)
+	(subclass-of OddInteger Integer)
+	(subclass-of NaturalNumber Integer)
+	(subclass-of NonnegativeInteger Integer)
+	(subclass-of NegativeInteger Integer)
+	(subclass-of PositiveInteger Integer)
+	(subclass-of PositiveNumber Number)
+	(subclass-of NegativeNumber Number)
+	(subclass-of ComplexNumber Number) 
+
+	b. Useless/Controversial content.  In this subcase, the new
+concept/axiom is judged (by me) to be 	either not useful or too
+controversial for incorporation into a schema that we hope will have both
+broad application and wide acceptance.  This is of course a very subjective
+judgement, but ontology 	merging/alignment is probably much more of
+an art than a science.  An example of content that was 	thought to be too
+controversial for inclusion is the following hierarchy of normative notions
+developed by myself.  It is too controversial, because there are many ways
+of categorizing such 	notions, and some have suggested that a version of
+Deontic Logic would be more appropriate for 	capturing the required
+connections.
+
+	;; (subclass-of Normative Entity)
+	;; (subclass-of NormativeProposition Normative)
+	;; (subclass-of NormativeProposition Proposition)
+	;; (subclass-of Obligation NormativeProposition)
+	;; (subclass-of Agreement NormativeProposition)
+	;; (subclass-of JudgementOfEtiquette NormativeProposition)
+	;; (subclass-of AestheticJudgement NormativeProposition)
+	;; (subclass-of InstitutionalObligation Obligation)
+	;; (subclass-of PersonalObligation Obligation)
+	;; (subclass-of ReligiousObligation InstitutionalObligation)
+	;; (subclass-of LegalObligation InstitutionalObligation)
+
+2.  Old Content (There is some degree of overlap between the merged ontology
+and the concept/axiom to be     mapped)
+
+	a.  Perfect Overlap.  In this case, the terms may differ but the new
+concept has the same semantic 	content as a concept already in the merged
+ontology or, with respect to axioms, there is a logical 	equivalence
+between the new axiom and an existing axiom.  An example of this sort of
+case occurs in 	the various mereotopological theories.  Some philosophers
+use 'part-of' as the primitive notion to 	frame their axioms, some use
+'overlaps', and still others use some notion of 'connection'.  	However, in
+many cases, axioms across these different systems are logically equivalent.
+
+	b.  Partial Overlap.  In this case, there is some overlap in meaning
+between the new content and 	existing concepts or axioms in the merged
+ontology.  An example of this is the case role hierarchy.  	Although
+John Sowa's system of case roles was part of the base ontology (and, hence,
+the original 	merged ontology), I tried to simplify it somewhat to make it
+more like other systems of case roles.  	Both systems follow:
+
+	John Sowa's Subhierarchy under 'Role':
+
+	;;(subclass-of PrehendingEntity Role)
+	;;(subclass-of PrehendedEntity Role)
+	;;(subclass-of Composite PrehendingEntity)
+	;;(subclass-of Correlative PrehendingEntity)
+	;;(subclass-of Correlative PrehendedEntity)
+	;;(subclass-of Component PrehendedEntity)
+	;;(subclass-of Whole Composite)
+	;;(subclass-of Substrate Composite)
+	;;(subclass-of Part Component)
+	;;(subclass-of Property Component)
+	;;(subclass-of Piece Part)
+	;;(subclass-of Participant Part)
+	;;(subclass-of Stage Part)
+	;;(subclass-of Attribute Property)
+	;;(subclass-of Manner Property)
+	;;(subclass-of Determinant Participant)
+	;;(subclass-of Source Participant)
+	;;(subclass-of Product Participant)
+	;;(subclass-of Immanent Participant)
+	;;(subclass-of Initiator Determinant)
+	;;(subclass-of Initiator Source)
+	;;(subclass-of Resource Source)
+	;;(subclass-of Resource Immanent)
+	;;(subclass-of Goal Determinant)
+	;;(subclass-of Goal Product)
+	;;(subclass-of Essence Product)
+	;;(subclass-of Essence Immanent)
+	;;(subclass-of Agent Initiator)
+	;;(subclass-of Recipient Goal)
+	;;(subclass-of Beneficiary Recipient)
+	;;(subclass-of Completion Goal)
+	;;(subclass-of Destination Goal)
+	;;(subclass-of Duration Resource)
+	;;(subclass-of Effector Initiator)
+	;;(subclass-of Experiencer Goal)
+	;;(subclass-of Instrument Resource)
+	;;(subclass-of Location Essence)
+	;;(subclass-of Matter Resource)
+	;;(subclass-of Medium Resource)
+	;;(subclass-of Origin Initiator)
+	;;(subclass-of Path Resource)
+	;;(subclass-of Patient Essence)
+	;;(subclass-of PointInTime Essence)
+	;;(subclass-of Result Goal)
+	;;(subclass-of Start Initiator)
+	;;(subclass-of Theme Essence)
+
+	The Revised Case Roles (the version that appears in the latest
+release of the merged ontology):
+
+	(subclass-of Predicate Role)
+	(subclass-of ComponentRelation Predicate)
+	(instance-of part-of ComponentRelation)
+	(subclass-of component-of part-of)
+	(subclass-of external-covering component-of)
+	(subclass-of internal-component-of component-of)
+	(instance-of property-of ComponentRelation)
+	(subclass-of BinaryRelation Predicate)
+	(subclass-of TernaryRelation Predicate)
+	(subclass-of VariableArityRelation Predicate)
+	(subclass-of CaseRole BinaryRelation)
+	(subclass-of IntentionalRelation BinaryRelation)
+	(subclass-of IntentionalRelation IntentionalEntity)
+	(subclass-of PropositionalAttitude IntentionalRelation)
+	(subclass-of ObjectAttitude IntentionalRelation) 
+	(instance-of stage-of ComponentRelation)
+	(subclass-of attribute-of property-of)
+	(subclass-of manner-of property-of)
+	(instance-of source-of CaseRole)
+	(instance-of agent CaseRole)
+	(instance-of recipient CaseRole)
+	(instance-of beneficiary CaseRole)
+	(instance-of completion CaseRole)
+	(instance-of destination CaseRole)
+	(instance-of duration CaseRole)
+	(instance-of effector-of CaseRole)
+	(instance-of experiencer CaseRole)
+	(instance-of instrument CaseRole)
+	(instance-of located-at CaseRole)
+	(instance-of matter CaseRole)
+	(instance-of medium CaseRole)
+	(instance-of origin CaseRole)
+	(instance-of path CaseRole)
+	(instance-of patient CaseRole)
+	(instance-of exists-at CaseRole)
+	(instance-of result CaseRole)
+	(instance-of theme CaseRole)
+
+I hope this note helps to clarify the process I used in merging/aligning
+ontologies.  Let me know if you want additional details.
+
+-Ian
+
+
+  
+
+
+&gt; -----Original Message-----
+&gt; From: Robert E. Kent [<A  HREF="mailto:rekent@ontologos.org">mailto:rekent@ontologos.org</A>]
+&gt; Sent: Wednesday, January 17, 2001 9:15 AM
+&gt; To: Ian Niles
+&gt; Cc: SUO
+&gt; Subject: Re: Latest Version of Merged Ontology
+&gt; 
+&gt; 
+&gt; Ian,
+&gt; 
+&gt; Since I am an advocate for a building blocks approach to ontology
+&gt; construction, and understand that the mortar between the 
+&gt; blocks must be
+&gt; strong and resilient in order to adequately support the 
+&gt; building, I would
+&gt; like to request that we spell out very clearly how the 
+&gt; component ontologies
+&gt; 
+&gt; -- in this case Sowa's upper ontology, Russell and Norvig's 
+&gt; ontology, Casati
+&gt; and Varzi's theory of holes, Allen's temporal axioms, the relatively
+&gt; noncontroversial elements of  Smith's and Guarino's respective
+&gt; mereotopologies, the KIF formalization of the Core Plan 
+&gt; Representation, a
+&gt; Simple-Time ontology, a Standard-Units ontology, an Agents 
+&gt; ontology, the
+&gt; Numbers ontology (from the Ontolingua server), and the 
+&gt; Natural-Kinds and
+&gt; Positions ontology (authored by the Ontology Group at 
+&gt; ITBM-CRN), but in
+&gt; general any ontologies --
+&gt; 
+&gt; are put together. You mention the two operations or steps of 
+&gt; (1) merging and
+&gt; (2) alignment. In order that everyone comprehends what is 
+&gt; involved here, can
+&gt; we give these an explicit and detailed explanation with illustrious
+&gt; examples? And are there other hidden and/or useful operations 
+&gt; for building a
+&gt; composite ontology?
+&gt; 
+&gt; Robert E. Kent
+&gt; rekent@ontologos.org
+&gt; 
+&gt; 
+&gt; ----- Original Message -----
+&gt; From: "Ian Niles" &lt;iniles@teknowledge.com&gt;
+&gt; To: "Standard-Upper-Ontology (E-mail)" 
+&gt; &lt;standard-upper-ontology@ieee.org&gt;
+&gt; Sent: Friday, January 12, 2001 10:38 AM
+&gt; Subject: SUO: Latest Version of Merged Ontology
+&gt; 
+&gt; 
+&gt; &gt; Hi All,
+&gt; &gt;
+&gt; &gt; It's attached.  This version incorporates innumerable minor
+&gt; &gt; corrections, but the biggest differences between it and the 
+&gt; version I sent
+&gt; &gt; out three weeks ago are as follows:
+&gt; &gt;
+&gt; &gt; 1.  Incorporates six new ontologies, viz. Simple-Time, 
+&gt; Standard-Units,
+&gt; &gt; Agents, and Numbers (from the Ontolingua server), and 
+&gt; Natural-Kinds and
+&gt; &gt; Positions (authored by the Ontology Group at ITBM-CRN).  
+&gt; The original
+&gt; forms
+&gt; &gt; of all of these ontologies can be accessed from the SUO 
+&gt; Candidate Content
+&gt; &gt; page (<A  HREF="http://ltsc.ieee.org/suo/refs.html">http://ltsc.ieee.org/suo/refs.html</A>).
+&gt; &gt;
+&gt; &gt; 2.  The temporal axioms have been heavily revised on the 
+&gt; basis of Pat
+&gt; Hayes'
+&gt; &gt; comments.
+&gt; &gt;
+&gt; &gt; 3.  The subhierarchy of high-level concepts (borrowed from 
+&gt; John Sowa) has
+&gt; &gt; been simplified in an attempt to eliminate concepts that 
+&gt; are of purely
+&gt; &gt; philosophical interest.  This is a work in progress, and it 
+&gt; was prompted
+&gt; by
+&gt; &gt; both Pat Hayes and Chris Menzel.
+&gt; &gt;
+&gt; &gt; 4.  The case role portion of the ontology (also borrowed 
+&gt; from John Sowa)
+&gt; has
+&gt; &gt; also been simplified.
+&gt; &gt;
+&gt; &gt; I'd like to extend a special thanks to Pat Hayes and Chris Menzel
+&gt; &gt; for their detailed, helpful, and challenging remarks on the previous
+&gt; version
+&gt; &gt; of the merged ontology, and I'd like to encourage everyone 
+&gt; to comment on
+&gt; the
+&gt; &gt; new version.  Let me know if anyone has any difficulty viewing the
+&gt; attached
+&gt; &gt; file.
+&gt; &gt;
+&gt; &gt; -Ian
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; 
+&gt; 
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00436.html">SUO: Obtain Biotech IPOs!    88</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00434.html">RE: SUO: Vote on Merged Ontology as a 'Base Document' for SUO   WG</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00432.html">SUO: RE: Latest Version of Merged Ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00419.html">SUO: Sowa's Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail82.html#00435"><strong>Date</strong></a></li>
+<li><a href="thrd80.html#00435"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

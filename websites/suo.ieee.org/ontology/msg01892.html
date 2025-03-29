@@ -1,0 +1,272 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: RE: SUO: RE: KIF syntax and semantics and a basic ontology -->
+<!--X-From-R13: cng unlrf <cunlrfNnv.hjs.rqh> -->
+<!--X-Date: Tue, 27 Mar 2001 03:00:49 &#45;0500 (EST) -->
+<!--X-Message-Id: v04210103b6e5e863eef0@[204.214.21.234] -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: Pine.LNX.4.33.0103251607180.27510&#45;100000@philebus.tamu.edu -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg01892.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>RE: SUO: RE: KIF syntax and semantics and a basic ontology</TITLE>
+<LINK REV="made" HREF="mailto:phayes@ai.uwf.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg01863.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg01903.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd52.html#01892">Thread Index</A></Td>
+<TD><A HREF="msg01893.html">Date Prev</A></TD>
+<TD><A HREF="msg01891.html">Date Next</A>
+</TD>
+<TD><A HREF="mail53.html#01892">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: SUO: RE: KIF syntax and semantics and a basic ontology</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@tamu.edu">cmenzel@tamu.edu</A>&gt;, <A HREF="mailto:Matthew.R.West@is.shell.com">Matthew.R.West@is.shell.com</A></LI>
+<LI><em>Subject</em>: RE: SUO: RE: KIF syntax and semantics and a basic ontology</LI>
+<LI><em>From</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 26 Mar 2001 23:37:26 -0800</LI>
+<LI><em>Cc</em>: <A HREF="mailto:standard-upper-ontology@ieee.org">standard-upper-ontology@ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg01849.html">Pine.LNX.4.33.0103251607180.27510-100000@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg01849.html">Pine.LNX.4.33.0103251607180.27510-100000@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Reply-To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt; &gt;  - A little something about rationale, approach and choices, e.g. why
+&gt; &gt;  did you introduce @arg,
+&gt;
+&gt;You mean, why did I introduce row variables?  Well, there's four
+&gt;paragraphs on row variables there, including an explicit semantics for
+&gt;them, but the simple answer is that they give KIF a great deal of
+&gt;additional expressive power (noted at various points in the
+&gt;documentation statements).
+
+Also, to be fair, Chris didnt *introduce* row variables: they are in 
+the original KIF spec, and all we have done is to provide them with a 
+decent semantics.
+
+&gt; &gt; Why did you stop short of extensional classes?
+&gt;
+&gt;Because people often talk about classes in a way that does not
+&gt;presuppose extensionality.  Seems to me to be a good methodological
+&gt;principle not to force a relatively simple issue when you don't have to.
+
+Chris is being slightly disingenuous here. There are actually two 
+distinct issues. First, Chris has a philosophical taste for a 
+non-extensional view of classes and relations. I disagree with him 
+about that. But there is another, technical, reason for keeping the 
+relation/extension distinction in the KIF semantics, which is that it 
+provides an elegant semantic mechanism for interpreting a logic with 
+a 'free syntax', in which for example expressions like
+(R R) can be written and are meaningful. This is a compelling reason 
+for maintaining the distinction in the logic; particularly as anyone 
+who wishes to assert that relations are to be understood 
+extensionally can say that with a single simple axiom, eg by 
+asserting:
+(=&gt; (forall (@x) (&lt;=&gt; (?rel1 @x)(?rel2 @x)))
+      (= ?rel1 ?rel2))
+......
+
+&gt; &gt; &gt; &gt; I'm afraid this does not compute with me. I was also not aware of a
+&gt; &gt; &gt; &gt; demand for this (whose requirement is this? what are the benefits?)
+&gt; &gt; &gt;
+&gt; &gt; &gt; Suppose one wants to develop an ontology that embodies a conception
+&gt; &gt; &gt; of time on which the future is not determinate, and hence on which
+&gt; &gt; &gt; there are past and present objects, but no determinate future
+&gt; &gt; &gt; objects.  (Such a conception might be useful, say, in a
+&gt; &gt; &gt; manufacturing system that has to calculate on the fly the number of
+&gt; &gt; &gt; kind of objects it is going to produce during any given run
+&gt; &gt; &gt; depending on demand.)  On such a conception, the class of humans
+&gt; &gt; &gt; grows moment by moment with each birth (or conception, or whatever
+&gt; &gt; &gt; your criterion is for being human).  But if classes are extensional,
+&gt; &gt; &gt; they don't "grow"; `human' picks out a different class with each
+&gt; &gt; &gt; birth.  Now, maybe that's ok with you; maybe it's the way it should
+&gt; &gt; &gt; be.  But there are, it seems to me, intuitions that warrant saying
+&gt; &gt; &gt; that membership in the class of humans can change over time.
+&gt; &gt; &gt; Extensionality is omitted simply to for allow such a conception of
+&gt; &gt; &gt; class.  Add extensionality if you don't like it.
+
+Chris' view of 'existence', class-membership and time is 
+idiosyncratic and I think woefully confused, and it is not forced on 
+one by non-extensionality or by assuming that the future is 
+indeterminate. And as I said, this isn't the only, or in my view the 
+main, reason why the KIF model theory is the way it is:certainly one 
+should not think of KIF as endorsing these positions.  But his final 
+point is the main one: the logic makes no committment to 
+extensionality one way or the other. It does not assume it, but it 
+also doesn't deny it. The fewer philosophical assumptions imposed by 
+the underlying language, the better.
+
+&gt; &gt;
+&gt; &gt; MW: OK - of course one of the benefits of a 4D approach is that all this
+&gt; &gt; comes out in the wash, so extensional classes don't have a problem.
+&gt;
+&gt;At the cost of loss of generality.  Your 4D approach forces a conception
+&gt;of time on which one has to view the future as determinate.
+
+No, Chris, it doesn't force that conception. The following might be 
+the same misunderstanding, in a different form:
+
+&gt; That's
+&gt;exactly the kind of decision I don't think should be forced on users in
+&gt;an ontology meant for general use, and I suspect that is likely to be
+&gt;problematic in certain contexts.  Furthermore, your 4D approach doesn't
+&gt;allow for the possibility that there could have been other things --
+&gt;other humans, say -- than the ones that actually exist at some time or
+&gt;other, since, by definition, the class HUMAN comprises just the actual
+&gt;humans.
+
+It doesn't restrict one to considering only the actual humans. In 
+fact, by providing a uniform notion of 'enclosing' spatiotemporal 
+plenum, it actually elegantly supports an ontology of alternative 
+world-lines. The issues of 4d/3d, and of representing nondeterminate 
+futures or alternative possible worlds, are almost completely 
+orthogonal.
+
+&gt; So if you ever need to add modality, your 4D extensional
+&gt;classes are once again likely to be problematic.
+
+Maybe if you wanted to add modality, but that is another issue. Modal 
+languages are not the only way to talk about nondeterminate futures 
+or alternative possiblities.
+
+&gt; &gt; &gt; &gt; If classes are non-extensional then I presume membership can also
+&gt; &gt; &gt; &gt; change over time.  There needs to be something that explains how you
+&gt; &gt; &gt; &gt; get to the membership at some point in time.
+&gt; &gt; &gt;
+
+The presumption is unwarranted. There may be many reasons for wishing 
+to have non-extensional classes other than temporal considerations. 
+For one example: it can be argued that since not all sets are 
+classes, there must be something more to a class other than simply 
+the set comprising its extension. (I don't think much of this 
+argument, but I've heard it made.)
+
+&gt; &gt; &gt; I'm not sure I understand the question, but it's irrelevant until
+&gt; &gt; &gt; you add a temporality to the axioms somehow, either by introducing
+&gt; &gt; &gt; temporal operators and an appropriate extension to the semantics or
+&gt; &gt; &gt; an explicit theory of time.  If you do, then presumably you'd have
+&gt; &gt; &gt; to add something like a temporal parameter to all predicates,
+&gt; &gt; &gt; including instance-of, so that talks instead of being an instance-of
+&gt; &gt; &gt; class C *at some time* t.
+
+You wouldnt HAVE to add such a temporal parameter to relations. That 
+is one way to proceeed, but there are others.
+
+&gt; &gt;
+&gt; &gt; MW: I keep struggling with it, but I know from experience with data
+&gt; &gt; models that languages like this are often missread by non-experts such
+&gt; &gt; as myself.  Also the introducion of (to me) new elements like @args
+&gt; &gt; means I have a new struggle to come to terms with what they mean and
+&gt; &gt; how they can be used.
+&gt;
+&gt;I devote a fair amount of informal discussion to the semantics of row
+&gt;variables, and state their formal semantics explicitly.  How they are
+&gt;used is illustrated throughout the document.
+
+We do plan to provide more 'tutorial' material on row variables, 
+however, in future documents. The idea is not actually very hard, but 
+it is sometimes hard to *believe* until one gets used to it. Think 
+about a normal variable ?x as standing for a single term, and a row 
+variable @x as standing for any row of terms, ie something like t1 
+.... tn, except that n might be zero. (Including the zero row is a 
+technical device that makes things work better.)
+
+Pat Hayes
+
+---------------------------------------------------------------------
+IHMC					(850)434 8903   home
+40 South Alcaniz St.			(850)202 4416   office
+Pensacola,  FL 32501			(850)202 4440   fax
+phayes@ai.uwf.edu 
+<A  HREF="http://www.coginst.uwf.edu/~phayes">http://www.coginst.uwf.edu/~phayes</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="01919" href="msg01919.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@tamu.edu&gt;</li></ul></li>
+<li><strong><a name="01903" href="msg01903.html">SUO: Re: KIF Syntax &amp; Semantics &amp; A Basic Ontology</a></strong>
+<ul><li><em>From:</em> Jon Awbrey &lt;jawbrey@oakland.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="01849" href="msg01849.html">RE: SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+<ul><li><em>From:</em> Chris Menzel &lt;cmenzel@tamu.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg01893.html">Re: SUO: RE: KIF syntax and semantics and a basic ontology</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg01891.html">SUO: RE: Violation of process</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg01863.html">SUO: RE: KIF syntax and semantics and a basic ontology</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01903.html">SUO: Re: KIF Syntax &amp; Semantics &amp; A Basic Ontology</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail53.html#01892"><strong>Date</strong></a></li>
+<li><a href="thrd52.html#01892"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

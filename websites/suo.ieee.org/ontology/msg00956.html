@@ -1,0 +1,226 @@
+<!-- MHonArc v2.4.8 -->
+<!--X-Subject: Re: SUO: NTH -->
+<!--X-From-R13: Quevf [ramry <pzramryNcuvyrohf.gnzh.rqh> -->
+<!--X-Date: Fri, 9 Feb 2001 18:42:04 &#45;0500 (EST) -->
+<!--X-Message-Id: 200102092327.f19NR3A20256@philebus.tamu.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: v04210139b6a176627538@[205.160.76.250] -->
+<!--X-Head-End-->
+
+<!-- /groups/802/3/efm/public/email/msg00956.html -->
+<!-- /groups/???? ?SUO?                              -->
+
+<HTML>
+
+<HEAD>
+<TITLE>Re: SUO: NTH</TITLE>
+<LINK REV="made" HREF="mailto:cmenzel@philebus.tamu.edu">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+
+<CENTER>
+
+<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=1 WIDTH="100%">
+<TBODY>
+<TR ALIGN="CENTER">
+<TH COLSPAN=3><STRONG>Thread Links</STRONG></TH>
+<TH COLSPAN=3><STRONG>Date Links</STRONG></TH>
+</TR>
+<TR ALIGN="CENTER">
+<TD><A HREF="msg00760.html">Thread Prev</A>
+</TD>
+<TD><A HREF="msg00980.html">Thread Next</A>
+</TD>
+<TD><A HREF="thrd75.html#00956">Thread Index</A></Td>
+<TD><A HREF="msg00957.html">Date Prev</A></TD>
+<TD><A HREF="msg00955.html">Date Next</A>
+</TD>
+<TD><A HREF="mail72.html#00956">Date Index</A></TD>
+</TR>
+</TBODY>
+</TABLE>
+</CENTER>
+
+
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SUO: NTH</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: pat hayes &lt;<A HREF="mailto:phayes@ai.uwf.edu">phayes@ai.uwf.edu</A>&gt;</LI>
+<LI><em>Subject</em>: Re: SUO: NTH </LI>
+<LI><em>From</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 09 Feb 2001 17:27:03 -0600</LI>
+<LI><em>cc</em>: Ian Niles &lt;<A HREF="mailto:iniles@teknowledge.com">iniles@teknowledge.com</A>&gt;,       <A HREF="mailto:standard-upper-ontology@majordomo.ieee.org">standard-upper-ontology@majordomo.ieee.org</A></LI>
+<LI><em>In-Reply-To</em>: Your message of &quot;Sat, 03 Feb 2001 02:54:51 CST.&quot;            &lt;<A HREF="msg00760.html">v04210139b6a176627538@[205.160.76.250]</A>&gt; </LI>
+<LI><em>Reply-To</em>: Chris Menzel &lt;<A HREF="mailto:cmenzel@philebus.tamu.edu">cmenzel@philebus.tamu.edu</A>&gt;</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-standard-upper-ontology@ieee.org">owner-standard-upper-ontology@ieee.org</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Greetings, Pat.  Way back when, you wrote:
+&gt; &gt;;; Let REL be any n-place predicate, and let M be the numeral for the
+&gt; &gt;;; positive integer m, where m is less than or equal to n.  Then we
+&gt; &gt;;; let
+&gt; &gt;;;
+&gt; &gt;;;   (nth-domain REL M CLASS)
+&gt; &gt;;;
+&gt; &gt;;; serve as an abbreviation for
+&gt; &gt;;;
+&gt; &gt;;;   (forall (VAR_1 ... VAR_n)
+&gt; &gt;;;           (=&gt; (REL VAR_1 ... VAR_n)
+&gt; &gt;;;               (instance-of VAR_m CLASS)))
+&gt; &gt;
+&gt; 
+&gt; I should have noticed this sooner, but this doesnt really capture the 
+&gt; intended meaning of 'nth-domain', at least I don't think it does. 
+
+It does.
+
+&gt; I assume that (nth-domain REL M CLASS) is supposed to mean that the
+&gt; Mth argument position of REL is restricted to be in CLASS, right?  
+
+No.  What you've expressed is a metalinguistic syntactic restriction,
+viz., that any *term* that occupies the nth argument position of the
+*predicate* REL must be of the *syntactic* sort associated with the
+class term CLASS.  If you want an nth-domain sentence '(nth-domain REL
+M CLASS)' to say *that*, then the 'nth-domain' predicate should take,
+not a predicate and a class term for its first and third argument
+places, respectively, but a *name* for a predicate and a *name* for a
+class term, respectively (e.g., quotation names formed in the usual
+way).  
+
+The language for which the above was designed is syntactically
+unsorted, so such a restriction would be out of place.  To the
+contrary, an nth-domain sentence says something about the *relation* R
+that the predicate REL expresses, namely, that, in any instance
+&lt;a_1,...,a_n&gt; of R, a_m must be a member of the class denoted by
+CLASS.  It is thus an object language assertion.  To express it
+directly one would have to allow predicates to serve as arguments to
+other predicates, and that was not the case in the language in
+question -- although it appears it will be allowed in SUO-KIF.  Hence,
+nth-domain sentences are, strictly speaking, syntactically ill-formed
+in that language, but the above gives us a way of using them all the
+same -- understood, however, as abbrevations.  But if predicates *are*
+allowed to be arguments to other predicates, then 'nth-domain' could
+be considered just another predicate, and the abbrevational schema
+above can be replaced by an *axiom* schema, viz.:
+
+  For all predicates REL, numerals M, class terms CLASS, and variables
+  VAR_1, ..., VAR_n,
+
+  (=&gt; (nth-domain REL M CLASS)
+      (forall (VAR_1 ... VAR_n)
+              (=&gt; (REL VAR_1 ... VAR_n)
+                  (instance-of VAR_m CLASS))))
+
+&gt; A kind of sort restriction? 
+
+In the semantic sense above, yes; in a syntactic sense, no.
+
+&gt; If so, ...
+
+I.e., if taken (incorrectly) in a syntactic sense, ...
+
+&gt; this doesnt do that job, since if one violates the sort restriction
+&gt; one simply generates a contradiction, 
+
+As one should, if understood in a semantic sense.
+
+&gt; rather than a syntax error.
+
+Correct.  The language in question, again, is not syntactically
+sorted (better, I think, "typed").
+
+&gt; There is also a more subtle point, by the way, that this 'definition' 
+&gt; isn't a definition, 
+
+It doesn't purport to be; as it says, it is a metalinguistic schema
+that expresses in one fell swoop what an infinite number of
+abbreviations.
+
+&gt; ...since it uses a metasyntactic convention (the 'triple dots')
+&gt; which isn't part of the language. 
+
+Of course -- the same goes for the metalinguistic variables 'REL',
+'M', 'CLASS', etc.
+
+&gt; One could define it in KIF 3.0 (but not in ANSI-KIF) by using
+&gt; sequence variables and recursion, but it still wouldn't be
+&gt; first-order definable.
+
+Well, I'm not sure that's true, given a weak enough underlying
+arithmetic (indeed, you could generate a weak theory in terms of
+sequences, as we discussed at the TAMU KIF workshop); but that's
+really a moot point.
+
+Cheers!
+
+-chris
+
+--
+
+Christopher Menzel               # web: philebus.tamu.edu/~cmenzel
+Philosophy, Texas A&amp;M University # net:      chris.menzel@tamu.edu 
+College Station, TX  77843-4237  # vox:             (979) 845-8764
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00980" href="msg00980.html">Re: SUO: NTH</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00760" href="msg00760.html">RE: SUO: NTH</a></strong>
+<ul><li><em>From:</em> pat hayes &lt;phayes@ai.uwf.edu&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00957.html">RE: SUO: Internal Links in Archives</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00955.html">Re: SUO: Internal Links in Archives</A></STRONG>
+</LI>
+<li>Prev by thread:
+<strong><a href="msg00760.html">RE: SUO: NTH</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00980.html">Re: SUO: NTH</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="mail72.html#00956"><strong>Date</strong></a></li>
+<li><a href="thrd75.html#00956"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>The First Order Logic (meta) Ontology (IFF-FOL)</title>
+  <meta name="author" content="Robert E. Kent">
+  <meta name="description"
+ content="This is the main web page for the IFF-FOL. It briefly describes the IFF-FOL, and contains links to the various IFF-FOL namespaces.">
+  <link rel="stylesheet"
+ href="http://www.w3.org/StyleSheets/Core/Oldstyle" type="text/css">
+</head>
+<body>
+<h2>The IFF First Order Logic (meta) Ontology (IFF-FOL)</h2>
+<p style="text-align: justify;">
+This page briefly describes the IFF First Order Logic (meta) Ontology
+(IFF-FOL),
+which resides in the lower metalevel of the IFF. As such, it
+falls within the scope of the <a
+ href="http://suo.ieee.org/IFF/version/20021205.htm#Categorical_Design_Principle:">Categorical
+Design Principle</a>, an
+important goal in the design of the IFF lower metalevel. To achieve
+this goal, several changes to the IFF are described as <a
+ href="http://suo.ieee.org/IFF/core-considerations.pdf">core
+considerations</a>. The interior or kernel
+aspect of the IFF-FOL, which is one pole of <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/the-fol-distinction.html">the
+FOL distinction</a>, is fully represented by categorical logic.
+<a
+ href="http://suo.ieee.org/IFF/metalevel/lower/ontology/fol/KIF-grammar.html">Grammars</a>
+are being develop for the external surface syntax of the IFF-FOL.<br>
+</p>
+<h3>Modular Design</h3>
+<p style="text-align: justify;">
+This document discusses and axiomatizes the IFF First Order Logic
+(meta) Ontology (IFF-FOL). The language aspect of the IFF-FOL
+architecture is layered in a modular fashion (Figure 1). The central
+bifurcation is between terms and expressions. The context of FOL
+languages is the fibered product of the context of
+expression languages and the context of term languages over the context
+of sets and bijections (variables), whereas the context of FOL
+languages with equality is the fibered product of the context of
+FOL languages and the context of universal algebra over the context
+of term languages. Loosely, to get FOL languages with equality,
+pullback relations along functions and then along equations. Within the
+modules of
+Figure 1, are six important submodules: term/tuple fixpoint,
+expression/arity fixpoint, Lawvere construction, term-tuple coproducts,
+term monad and expression monad. The terms attached to these submodules
+are
+color-coded according to Table 1. <br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 800px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center; width: 400px;">
+      <div style="text-align: left;"><br>
+      </div>
+      <br>
+      <table style="text-align: left; width: 200px;" border="1"
+ cellspacing="5" cellpadding="3">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>term/tuple
+fixpoint<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(0, 153, 0); width: 20px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>expression/arity
+fixpoint<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(51, 51, 255); width: 20px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>Lawvere
+construction<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 0, 0); width: 20px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>tuple
+coproducts<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(102, 204, 204); width: 20px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>term
+monad<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 153, 255); width: 20px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; font-family: arial; font-weight: bold; width: 250px; text-align: right;"><small>expression
+monad<br>
+            </small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(153, 0, 0); width: 20px;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td style="vertical-align: top; text-align: center; width: 400px;">
+      <p><img src="The%20IFF-FOL%20Language%20Architecture.gif"
+ title="The IFF-FOL Language Architecture"
+ alt="The IFF-FOL Language Architecture"
+ style="width: 349px; height: 226px;" vspace="10"><br>
+      </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 400px;"><big><span
+ style="font-weight: bold;">Table
+1: Term Color-Coding</span></big></td>
+      <td style="vertical-align: top; width: 400px; text-align: center;"><big><span
+ style="font-weight: bold;">Figure
+1: The IFF-FOL Language
+Architecture</span></big></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h4>Term Languages</h4>
+<p style="text-align: justify;">
+There is an <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/term-language/version20040101-intro.html">IFF-FOL
+Term Language Namespace (IFF-TRM)</a>. At the base, a term language
+contains only functions symbols and
+variables. Terms and term tuples are inductively generated and have
+an abstract syntax. The Lawvere construction is defined here.
+Equations can be added giving an equational language. Equational
+languages or equational presentations are an extension of term
+languages. They define a quotient of their Lawvere category.
+</p>
+<h4>Expression Languages</h4>
+<p style="text-align: justify;">
+There is an <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/expression-language/version20040303-intro.html">IFF-FOL
+Expression Language Namespace (IFF-EXPR)</a>. At the base, an
+expression language contains only relation symbols and
+variables. Expressions (formulas) are inductively generated using
+connectives and quantifiers,
+and have an abstract syntax. Peircian existential graphs can be
+included here.
+</p>
+<h4>FOL Languages</h4>
+<p style="text-align: justify;">
+There is an <a
+ href="http://suo.ieee.org/IFF/metalevel/lower/namespace/fol-language/version20040404-intro.html">IFF
+FOL Language Namespace (IFF-FOL)</a>. Expression and term
+languages can be composed into FOL languages.
+At the base, these contain function symbols, relation symbols and
+variables. An FOL language is a term language and an expression
+language that share a common set of variables. In other words, FOL
+languages are the product of expression languages and term languages
+fibered at variables.
+</p>
+<h3>Common Logic Comparison</h3>
+<p style="text-align: justify;">
+The <a href="http://cl.tamu.edu/">Simple Common Logic (SCL) Standard</a>
+provides
+an abstract syntax that can be realized in various concrete
+syntaxes. Each syntax consists of a grammar that specifies the sets of
+terms and formulas built upon the basic linguistic elements of
+variables, functions and relation symbols. Languages will be identified
+with the formulas generated by a given grammar from a given lexicon.
+SCL provides the structural constraints that must be met by any
+language so generated to be considered conformant. Table 2 compares the
+terminology used for specifying the abstract syntax of the SCL standard
+and the IFF-FOL.
+</p>
+<p><big><span style="font-weight: bold;">Table 2: Comparisons between
+SCL and IFF-FOL</span></big></p>
+<table
+ style="width: 50%; text-align: left; background-color: rgb(51, 51, 151);"
+ border="3" cellspacing="3" cellpadding="3">
+  <tbody>
+    <tr>
+      <th
+ style="vertical-align: top; background-color: rgb(204, 236, 255);">
+      <p>&nbsp;</p>
+      </th>
+      <th
+ style="vertical-align: top; font-family: arial; font-weight: bold; background-color: rgb(204, 236, 255);">
+      <p><big>SCL</big></p>
+      </th>
+      <th
+ style="vertical-align: top; background-color: rgb(204, 236, 255);">
+      <p><big><span style="font-family: arial; font-weight: bold;">IFF-FOL</span></big></p>
+      </th>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: script mt bold; background-color: rgb(204, 236, 255);"
+ rowspan="6" colspan="1"><big>basic<br>
+      </big></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>GenVar<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>variable<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>FnSym<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>function<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>IndCon<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>constant<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Id<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>equation<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>PredCon<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>relation<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>arity<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>valence<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: script mt bold; background-color: rgb(204, 236, 255);"
+ rowspan="3" colspan="1"><big>terms<br>
+      </big></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>App<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>application<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>PrimTrm<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>constant
++ variable<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Trm<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>term<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: script mt bold; background-color: rgb(204, 236, 255);"
+ rowspan="10" colspan="1"><big>formulas<br>
+      </big></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Holds<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>holds<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>AtFla<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>atomic-expression<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Neg<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>negation<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Conj<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>conjunction<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Disj<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>disjunction<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Cond<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>implication<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>BiCond<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>equivalence<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>ExQuant<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>existential-quantification<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>UnivQuant<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>universal-quantification<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>Fla<br>
+      </small></td>
+      <td
+ style="vertical-align: top; font-family: courier new; font-weight: bold; background-color: rgb(204, 236, 255);"><small>expression<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p> <a href="http://validator.w3.org/check/referer"><img border="0"
+ src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+ height="31" width="88"></a> </p>
+</body>
+</html>
