@@ -1,35 +1,64 @@
 # Cyc Archive
 
-## Contents
+## How to scrape these
 
-## The website
+The tools used:
 
-We archived several parts of the websites. The tools used are [`hartator/wayback-machine-downloader`](https://github.com/hartator/wayback-machine-downloader) and [`erlange/wbm-dl`](https://github.com/erlange/wbm-dl/tree/master), though I'm pretty sure just `wbm-dl` would have been enough, and `wayback-machine-downloader` isn't actually necessary, but I can't be bothered to rewrite the part of the script that calls `wayback-machine-downloader`.
+* [`erlange/wbm-dl`](https://github.com/erlange/wbm-dl/tree/master).
+* `python`
 
-[x] For some urls, a very specific version is needed. Those are in `exact.txt` and downloaded by `exact.sh`.
+For some urls, a very specific version is needed. Those are in `exact.txt` and downloaded by `python exact.py`.
 
-[x] For some urls, the latest version is needed. Those are
-
-```
-http://cyc.com:80/cycdoc/img/cb/*
-http://tunes.org/~nef/logs/opencyc/[0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]
-https://cyc.com/publications/
-```
-
-and downloaded by
+There is a rather special case: some IRC records from 2002 and 2003. They are downloaded by the following command:
 
 ```sh
-.\wbm-dl.exe http://cyc.com:80/cycdoc/img/cb/
 .\wbm-dl.exe -e http://tunes.org/~nef/logs/opencyc/
 .\wbm-dl.exe http://tunes.org/~nef/logs/opencyc/ -O "^.*[0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]$"
-.\wbm-dl.exe -e https://cyc.com/publications/
 ```
 
-For some others, we need the latest version in a specific year. Those are placed into the `url_year.txt`, and to download them using `wbm-dl.exe`, run `python url_year.py`.
+For the rest, we need the latest version before a specific year (later years throw something like a 404 or other bad results). Those are placed into the `url_year.txt`, and to download them using `wbm-dl.exe`, run `python url_year.py`.
 
-Also, note that because Internet Archive is being quite moody and interrupt-y, you should watch the progress and rerun the downloads if necessary. For each successful scrap, move the corresponding line from `url_year.txt` to `url_year_done.txt`.
+Because the Internet Archive has been very fiddly, several other tools I tried have failed, and even this one doesn't work all the time. Sometimes the download would fail, so you should watch the terminal carefully for "Unable to connect to the remote server" error message. Interrupt if it starts throwing errors. Move the successful scraps from `url_year.txt` to `url_year_done.txt` so that you don't restart from the beginning.
 
-The `http://cyc.com/cyc/` domain is particularly difficult, so we do it as follows.
+## Contents
 
-## Other contents
+### Contents of the folder
 
+* `websites`: The scraped websites.
+* `other_files`:
+  * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
+  * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from 
+* `scraping_utils`: Scripts used for scraping, described above.
+
+### Other files
+
+Other than what's in the archive, there's also
+
+* [`asanchez75/opencyc`](https://github.com/asanchez75/opencyc): The published versions of OpenCyc and its knowledge graphs. The last update was in 2012.
+* [`white-flame/am`](https://github.com/white-flame/am): Automated Mathematician from SAIL archives circa 1977.
+* [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
+* [`www.saildart.org/DBL`](https://www.saildart.org/DBL): Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
+* [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`.
+
+### Lost files
+
+There was apparently a `TPTP Challenge Problem Set`, described in [The Cyc TPTP Challenge Problem Set | Cycorp: Home of Smarter Solutions](https://web.archive.org/web/20160811204509/http://www.cyc.com/resource/tptp-challenge-set/), but I cannot find any download page for it. It used to be hosted on [SourceForge](https://web.archive.org/web/20120216055329/http://sourceforge.net/projects/opencyc/files/TPTP%20Challenge%20Problem%20Set/) during 2007--2012, but it has since then completely disappeared from the Internet.
+
+| filename | size | last updated |
+|----|----|----|
+| tptp_scaling_challenge_problem_set.tgz | 109.8 MB | 2007-09-07 03:29 |
+| tptp_elaboration_challenge_problem_set.tgz | 99.1 MB | 2007-09-07 03:10 |
+
+I am fairly certain that `tptp_scaling_challenge_problem_set.tgz` still exists, since it is described as
+
+> The Scaling Challenge Problem Set was first released as part of TPTP v3.4.0 in the CSR (Common Sense Reasoning) domain. The problem numbers are CSR025+S through CSR074+S, where S is the segment number.
+
+However, `tptp_elaboration_challenge_problem_set.tgz` seems to have completely vanished. It is described as
+
+> The Elaboration Challenge Problem Set consists of 300 problems with about 3,280,000 axioms each. The Elaboration Challenge Problem Set is designed to be more challenging than the Scaling Challenge Problem Set and to be even more representative of the problems Cyc’s inference engine typically faces. Developers are advised to tackle the Scaling Challenge Problem Set before the Elaboration Challenge Problem Set. The Elaboration Challenge Problem Set tests everything in the Scaling Challenge Problem Set, and also tests a system’s elaboration tolerance.
+>
+> > A formalism is elaboration tolerant to the extent that it is convenient to modify a set of facts expressed in the formalism to take into account new phenomena or changed circumstances. -John McCarthy[1]
+>
+> The Elaboration Challenge Problem Set has not yet been released as part of the TPTP, but is available for download.
+
+Sadly, they never released it as part of the TPTP.

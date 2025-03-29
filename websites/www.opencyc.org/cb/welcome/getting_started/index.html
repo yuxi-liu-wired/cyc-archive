@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <style type='text/css'>
+    p {font-family: Arial, sans-serif }
+    a {font-family: Arial, sans-serif }
+    li {font-family: Arial, sans-serif }
+    h1 {font-family: Arial, sans-serif }
+    h2 {font-family: Arial, sans-serif }
+    h3 {font-family: Arial, sans-serif }
+     p {font-size: 100%}
+  </style>
+    <title>
+
+Getting Started with OpenCyc
+
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'></td>
+        <td align='center'>
+          <p>
+            <b><font size='+2'>Getting Started with OpenCyc</font>
+            </b>
+          </p>
+          <p>Version 1.0</p>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <hr>
+    <b><p>
+        <font size='+1'>Contents</font>
+      </p><p></p><p>
+        <a HREF='#intro'>
+Introduction
+</a>
+      </p><p></p><p>
+        <a HREF='#step1'>Starting and Stopping the Cyc Server
+</a>
+      </p><p></p><p>
+        <a HREF='#step2'>
+Starting the KB Browser</a>
+      </p><p></p><p>
+        <a HREF='#step3'>
+Logging In</a>
+      </p><p></b>
+    <hr>
+    <a NAME='intro'></a>
+    <h3>
+Introduction
+</h3>
+    <p>
+Below is a brief description of the administrative steps involved in using OpenCyc, including starting 
+and stopping a Cyc process, logging in and out, and saving your work.
+</p>
+
+    <a NAME='step1'></a>
+    <h3>
+
+<p></p>
+Starting and Stopping the Cyc Server
+</h3>
+    <p>
+The Readme document that accompanies the release includes information about starting 
+a Cyc server. The process is slightly different on Windows than on Linux.</p>
+<p>At a Windows command-line prompt:</p>
+<ul>
+<li>cd cyc/run</li>
+<li>run-cyc.bat (<i>to launch the Cyc server</i>)</li>
+</ul></p>
+
+<p>On Linux:</p>
+<ul>
+<li>cd to cyc/run</li>
+<li>./run-cyc.sh (to launch the Cyc server)</li>
+</ul></p>
+
+<p>After some time loading the world into memory you will see:</p>
+
+  <table align="center" border="0" width="100%">
+    <tr>
+      <td bgcolor="#d3d3d3"><font color="black"><tt><pre>
+Loading statics.
+Mapping in the memory image.
+Running initializers ... PROCESS (1031), PROCESS (1053), done.
+Copyright (C) 1995 - 2002 Cycorp, Inc.  All rights reserved.
+RTL initialized.
+CycL Initialized.
+Enabling base TCP services to port 3600.
+
+Ready for services.
+System 1.2594 KB 567.
+CYC(1):
+      </pre></tt></font></td>
+    </tr>   
+  </table>
+<p>
+<b>CYC(<i>n</i>):</b> is the SubL command prompt.</p>
+<p>You can exit Cyc by typing <b>(exit)</b> at the command prompt.</p>
+<p></p>
+    <a NAME='step2'></a>
+    <h3>
+Starting the KB Browser
+</h3>
+    <p>
+To start the KB Browser, just open your Internet browser and enter the URL below replacing <i>HOSTNAME</i> 
+with the machine name (or IP number) of the Cyc Server you are running. If you are using a browser 
+on the same machine that is running the Cyc server, then you should be able to use "localhost" as 
+the host name.
+</p>
+<p>
+http://<i>HOSTNAME</i>:3602/cgi-bin/cyccgi/cg?cb-start
+</p>
+<p>
+After connecting to this link, you should see the login screen.
+</p>
+<p>
+<a href="http://www.cyc.com/doc/tut/ppoint/InterfaceOverview_files/frame3.htm" target="reading_window">
+ <img src="http://www.cyc.com/cycdoc/img/cb/book_icon.gif" border="0" width="30" alt="Click here for suggested reading on this topic" /></a>
+&#160;&#160;<a href="http://www.cyc.com/doc/tut/ppoint/InterfaceOverview_files/v3_document.htm" target="reading_window">Tutorial on the KB Browser Interface</a>
+</p>
+<p></p>
+    <a NAME='step3'></a>
+    <h3>
+Logging In
+</h3>
+    <p>
+When you first connect to the Cyc Server using the KB Browser (see the previous step), you are 
+already logged in, as Guest. The Guest account has permission to browse through the terms in 
+the KB and to use certain tools, such as ASK. In order to use tools that affect a change on the 
+knowledge base (such as ASSERT), you need to change identities to something other than 'Guest'. 
+If you have not yet created any new identities, log in as CycAdministrator.</p>
+
+<p>
+  <img src="http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif" border="0" width="30" alt="Try it yourself! Enter this into your copy of OpenCyc." /> &#160;&#160;
+  <font color="#660033">
+Type CycAdministrator in the text field within the 'Login Area' and click on the [Submit] button.</font>
+</p>
+<p>
+Once you are logged in as CycAdministrator, you can create a new identity by 
+returning to the login screen (click the 'Login' link in the top frame), typing the new 
+name into the same text field and clicking [Submit]. You will be asked to confirm that you 
+want to create a new Cyclist.</p>
+
+  <table align="center" border="0" width="100%">
+    <tr>
+      <td bgcolor="#d3d3d3"><font color="black"><tt><pre>
+Unknown Cyclist
+
+The name JohnDoe is not the name of a known HumanCyclist.
+
+Do you want to create a new Cyc constant with this name? You will be 
+able to use this constant as you would any other in the Knowledge Base 
+as well as login with this new name.
+      </pre></tt></font></td>
+    </tr>   
+  </table>
+<p>Click the button that says, 'Yes, Create Cyclist'. The constant #$JohnDoe will now be added to the Knowledge Base.</p>
+<p>
+  <img src="http://www.cyc.com/cycdoc/img/cb/exclamation_yellow_tri.gif" border="0" width="30" alt="Try it yourself! Enter this into your copy of OpenCyc." /> &#160;&#160;
+  <font color="#660033">
+  <em>
+Note: You may have noticed that you do not need to use passwords when logging into 
+the server from the KB Browser. There is currently no security model implemented 
+in OpenCyc. The KB Browser is meant to be accessed by fully trusted users. The 
+Cyc API can be used to develop secure interfaces for other users.
+  </em></font>
+</p>
+<p>
+To change identities (including from or to #$Guest):</p>
+
+<p>
+  <img src="http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif" border="0" width="30" alt="Try it yourself! Enter this into your copy of OpenCyc." /> &#160;&#160;
+  <font color="#660033">
+Enter the name of your Cyc constant in the type-in pane provided (minus the "#$"), then press the 
+[Submit] button. For example, the user Fred Smith might be represented in the KB as #$FredSmith. 
+To log in, Fred would type "FredSmith" in the input window.
+  </font>
+</p>
+</body>
+</html>
