@@ -38,8 +38,8 @@ Other than what's in the archive, there's also
 * [`white-flame/am`](https://github.com/white-flame/am): Automated Mathematician from SAIL archives circa 1977.
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
 * [`www.saildart.org/DBL`](https://www.saildart.org/DBL): Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
-* [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`.
-* The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. I haven't bothered to archive it since even my patience has limits. But I think running `.\wbm-dl.exe http://suo.ieee.org/ -t 2008 -X "^.*/email/.*$"` should do the trick.
+* [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`. I made a [mirror on GitHub](https://github.com/yuxi-liu-wired/Large-Knowledge-Collider-archive).
+* The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it. I haven't bothered to archive it since even my patience has limits, and having to scrape through another 6000 files of Standard Upper Ontology would possibly `kill -9` my brain. But I think running `.\wbm-dl.exe http://suo.ieee.org/ -t 2008 -X "^.*/email/.*$"` should do the trick.
 
 ### Lost files
 
