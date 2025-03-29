@@ -1,0 +1,98 @@
+00:00:00 --- log: started opencyc/02.12.11
+00:04:03 <dmiles> COERCE
+00:04:16 <dmiles> do i need to escape it?>
+00:04:24 <dmiles> err make it call to RTL ?
+01:58:46 <yepster> hmm
+02:32:14 <yepster> working on importing new java classes in oracle.. again fipaos doesn't work :(
+06:21:31 <yepster> in opencyc-0.7.0/lib/classpath.txt jug.jar is missing
+06:43:50 --- join: mea_cu|pa (~mea_culpa@12-213-238-134.client.attbi.com) joined #opencyc
+06:51:31 --- quit: mea_cu|pa (Read error: 60 (Operation timed out))
+06:54:00 --- join: mea_cu|pa (~mea_culpa@12-213-238-134.client.attbi.com) joined #opencyc
+06:59:46 --- quit: mea_culpa (Connection timed out)
+06:59:58 --- nick: mea_cu|pa -> mea_culpa
+07:55:11 <yepster> Redo thread mounted by this instance: 1
+07:55:11 <yepster> Oracle process number: 17
+07:55:11 <yepster> Unix process pid: 17570, image: oracle@web.tower.dev.evsh.nl (TNS V1-V3)
+07:55:11 <yepster> *** SESSION ID:(18.8105) 2002-12-11 16:53:39.426
+07:55:11 <yepster> Security policy does not permit a log file.
+07:55:12 <yepster> (CAND (BOOLEAN (FIND-CONSTANT "Dog")) (VALID-CONSTANT (FIND-CONSTANT "Dog"))) --> cyc
+07:58:22 <yepster> It cannot create the org.opencyc.util.log logfile output.
+07:58:47 <yepster> I tried        System.setProperty("org.opencyc.util.log", "display");
+07:59:03 <yepster> to log only to stdout, but it doesn't seem to work..
+08:10:34 <yepster> ok, i changed Log.makeLog to getproperty with 'display' instead of default
+08:10:47 <yepster> (only for log class in oracle)
+08:10:48 <yepster> CYC.ISQUERYTRUE('(#$ISA#$DOG#$COLLECTION)','INFERENCEPSC')
+08:10:48 <yepster> ----------------------------------------------------------
+08:10:48 <yepster> 							
+08:14:29 --- quit: mea_culpa (Connection timed out)
+08:29:41 <dmiles> is it that the fipos.jar is missing? or is it that fipos contains things Oracle will not accept?
+08:34:39 <yepster> not missing, oracle does not accept it
+08:36:10 <yepster> but I already have it working in oracle with use of the 0.7 distributed jars
+08:36:16 <yepster> and the newest cvs stuff
+08:37:00 <yepster> I am working on an 'packaged' install for oracle 9ir2 on linux now
+08:37:35 <yepster> and will upload that as a tarball into cvs, so ant won't compile it from 'org'
+08:38:29 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+08:50:15 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+10:02:21 <dmiles> looks like i have everything in API  need ;P
+10:30:32 <fleeky> what stuff do you need in the api ? 
+10:31:15 <dmiles> ability to make remote socket connctiions and define subl calls to be tested by preduicates
+10:31:59 <fleeky> ahh
+10:32:02 <dmiles> so if a query reqired checking if a user was part of a mail,ing list 
+10:32:11 <dmiles> then there ould be recorse to doing so
+10:32:47 <dmiles> aslo if i have program that was say sending out email.. the toploop of the program could be a process
+10:33:00 <dmiles> not requred to by an outside app quering cyc
+10:33:22 <dmiles> if i wanted to make a horn cluase loader i could
+10:33:48 <dmiles> also i am interested in douing a text matching subl thing to define text to *-Theword
+10:34:26 <dmiles> i want to make a telnet command prompt that deals more with english commonds
+10:34:46 <dmiles> that the transformation could be maintained from cyc (even deduced)
+10:35:10 <dmiles> that doesnt require me a 2nd app running pulling out query 
+10:35:30 <dmiles> since cyc is the best place to store arrays and strctures that programs need
+10:35:39 <dmiles> cyc is the best placeto have those programs run
+10:36:13 <dmiles> otherwise 60% of your developmwent time is defineing some contract between cyc and your app
+10:37:36 <dmiles> not a bad thing.. but so many bottlenecks have to occure.. and many things that you know you should do.. you dont because it's "too much work" adding in somer cache in your program from an ever expiring cycl query
+10:38:14 <dmiles> for example in the telnet logicmoo mud.. i had to query out . all PartialTangible objects
+10:38:28 <dmiles> themn do a gen-paraphrase on all 10000s of them
+10:38:37 <dmiles> let this sit in a hashmap in java
+10:38:54 <dmiles> then when the user said look at X .. i had to loop thru each
+10:40:04 <dmiles> one would think it would be better to define subl to be (get-Constant-from-english-paraphrase-version text)
+10:40:15 <dmiles> and put X into that
+10:40:48 <dmiles> then i dont have to have weird 1 second from out of datecaches 
+10:41:14 <dmiles> but really the besty thing is to get everything into the SuBL
+10:42:09 <dmiles> like http://12.211.44.132/cvs/openmodality/subl/atlas.lisp
+10:42:32 <dmiles> http://12.211.44.132/cvs/openmodality/subl/client.lisp
+10:43:00 <dmiles> now an ircbot http://12.211.44.132/cvs/openmodality/subl/lispbot.lsp
+10:45:31 <dmiles> the example of the telent paraphrase made the app take 5 minutes to load
+10:45:39 <dmiles> to build that cache
+10:46:04 <dmiles> so definately many reasons to keep things in or out of subl
+10:47:43 <dmiles> i have to go here in a few..
+10:48:07 <dmiles> but while i am gone.. if someone can explain ADD1 method
+10:48:09 <dmiles> (what it does)
+10:48:52 <dmiles> (from SubL)
+11:42:15 <yepster> so, the new oracle opencyc interface is ready
+11:42:42 <yepster> but i'm still the only person on the earth that has it running
+11:44:17 <yepster> because there was a typo in cyc.pkb on cvs for a few months
+11:44:55 <yepster> (shame on me)
+11:46:04 <yepster> pff the sourceforge searches are down again.. :-(
+11:47:30 <yepster> blaatFUNCTION converseVoid( command_in IN VARCHAR2 )
+11:47:44 <yepster> in the old cyc.pkb
+11:56:36 <yepster> I wonder though what would happen if somebody were to setup a publically
+11:57:04 <yepster> available 'Cyc Transcript Server'.
+12:14:21 <Graham> Collaboration, I'd imagine.
+12:14:51 <Graham> Thos the current version of the trsncript server is unsuitable for release
+14:32:55 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:44:26 <dmiles> is there a way to define a special #$and then is orddinal?
+16:44:35 <dmiles> like #$and-then
+16:44:52 <dmiles> sorta pre-empting rule jusgemetns?
+16:44:58 <dmiles> actually a bigger question..
+16:45:13 <dmiles> can i assert somthing that _wont_ be canoniucalized
+16:45:50 <dmiles> but still use like some form of #$implies that cyc will modus ponens off
+18:34:45 --- quit: Cobwa ("[x]chat")
+20:35:23 --- join: broked`pr0nsurf (guest@slip-32-100-70-31.ca.us.prserv.net) joined #opencyc
+20:36:18 --- part: broked`pr0nsurf left #opencyc
+22:39:47 --- join: mdupont (mdupont@p5080E5C2.dip0.t-ipconnect.de) joined #opencyc
+22:39:49 <mdupont> hey
+22:40:07 <mdupont> any Cyc people awake?
+23:03:50 --- join: mea_cu|pa (~mea_culpa@12-213-238-134.client.attbi.com) joined #opencyc
+23:04:29 --- nick: mea_cu|pa -> mea_culpa
+23:34:23 --- nick: mdupont -> mdupont-off-to-w
+23:59:59 --- log: ended opencyc/02.12.11

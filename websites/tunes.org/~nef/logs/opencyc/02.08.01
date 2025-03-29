@@ -1,0 +1,469 @@
+00:00:00 --- log: started opencyc/02.08.01
+00:16:45 --- join: huthut (~trumpet@194.149.224.3) joined #opencyc
+00:29:54 --- quit: huthut ("Leaving")
+00:45:45 --- quit: futhin_ ("sleep!")
+00:50:00 --- quit: siege ("Client Exiting")
+00:53:54 --- join: siege (~siege@216.254.102.94) joined #opencyc
+03:45:26 --- join: huthut (~trumpet@194.149.224.3) joined #opencyc
+03:47:14 --- quit: huthut (Client Quit)
+03:54:11 --- join: huthut (~trumpet@194.149.224.3) joined #opencyc
+03:54:31 --- part: huthut left #opencyc
+05:10:17 --- quit: dmiles_afkish (bear.openprojects.net irc.openprojects.net)
+05:10:17 --- quit: bruce (bear.openprojects.net irc.openprojects.net)
+05:10:17 --- quit: sandos (bear.openprojects.net irc.openprojects.net)
+05:14:33 --- join: dmiles_afkish (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:14:33 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+05:14:33 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+05:24:23 --- quit: sandos (bear.openprojects.net irc.openprojects.net)
+05:24:23 --- quit: bruce (bear.openprojects.net irc.openprojects.net)
+05:24:23 --- quit: dmiles_afkish (bear.openprojects.net irc.openprojects.net)
+05:24:38 --- join: dmiles_afkish (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:24:38 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+05:24:38 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+05:39:22 --- quit: sandos (bear.openprojects.net irc.openprojects.net)
+05:39:22 --- quit: bruce (bear.openprojects.net irc.openprojects.net)
+05:39:22 --- quit: dmiles_afkish (bear.openprojects.net irc.openprojects.net)
+05:39:33 --- join: dmiles_afkish (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:39:33 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+05:39:33 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+05:43:19 --- quit: sandos (bear.openprojects.net irc.openprojects.net)
+05:43:19 --- quit: bruce (bear.openprojects.net irc.openprojects.net)
+05:43:19 --- quit: dmiles_afkish (bear.openprojects.net irc.openprojects.net)
+05:43:47 --- join: dmiles_afkish (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:43:47 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+05:43:47 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+09:03:18 --- nick: mea_working -> mea_sleep
+09:07:47 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+09:15:08 --- quit: huthut (Read error: 104 (Connection reset by peer))
+09:20:17 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+10:21:48 --- quit: devEiant ("switching servers.")
+10:33:42 --- join: futhin (~thin@24.64.175.61) joined #opencyc
+10:36:56 --- quit: futhin (Client Quit)
+10:37:44 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+10:42:18 --- quit: futhin ("bye")
+12:25:21 --- quit: huthut (Read error: 104 (Connection reset by peer))
+12:25:27 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+13:18:44 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:54:43 --- join: Taral (~taral@66.25.132.47) joined #opencyc
+15:09:08 <siege> quick question: how do you determine when a predicate is testing an association as opposed to then it's setting an association
+15:09:50 <siege> for example:  is_person(joe)
+15:10:07 <siege> it seems that you use the same syntax to set that as to check it
+15:11:12 <huthut_> in prolog?
+15:11:34 <siege> yeah
+15:11:45 <huthut_> different syntax
+15:12:10 <siege> could you give me an example to set/get a relation?
+15:12:23 <huthut_> if you are testing, you either use the lefthandside, or the righthandside of production LHS:- RHS.
+15:12:32 <dmiles_afkish> by whether or not is_person/1 has a side affect like is_person(X):-assert(remembed_is_person(X)).
+15:12:39 <huthut_> or just LHS.
+15:12:58 <siege> ahhh
+15:13:09 <siege> now I understand
+15:13:27 <huthut_> yes, if you use assert(X) or assertz(X) in the RHS, you add the predicate X into the database of assertions.
+15:13:30 * dmiles_afkish lets huthut explain further
+15:14:35 <huthut_> or you can add the predicate X into the db using forms X:- anything. or X.
+15:14:57 <huthut_> assert/assertz are for programmatic access
+15:15:07 <dmiles_afkish> ah yeah and one trick could use clause/2 on is_person/1 like "clasue(is_person(X),RHS)"
+15:15:15 <huthut_> X:- anything. or X. is for static access.
+15:15:19 <huthut_> (almost so).
+15:16:01 <huthut_> you can also programmatically consult(file_with_new_predicates_to_be_asserted).
+15:16:20 <huthut_> this file can have the above X:- anything. and/or X.
+15:16:35 <siege> whoosh.
+15:17:00 <siege> so let me ensure I have this one basic thing straight
+15:17:31 <siege> person(joe).  sets that joe is person
+15:17:43 <siege> is_person(X) :- person(X).
+15:17:44 <huthut_> yes
+15:18:06 <siege> is_person(joe).  will show yes if person(joe). has been called
+15:18:16 <dmiles_afkish> set_person(X):-assert(person(X)).
+15:18:24 <dmiles_afkish> get_person(X):-person(X).
+15:18:40 <dmiles_afkish> unset_person(X):-retractall(person(X)).
+15:18:46 <siege> excellent
+15:19:02 <siege> what's clause/2 do ?
+15:19:17 <dmiles_afkish> it introspects into the prolog rule and fact base
+15:20:33 <dmiles_afkish> so LHS:-RSH was in a file you loaded will be visable with clause(LHS,RHS)
+15:20:35 <siege> mind giving a related simple example?
+15:20:37 <huthut_> is it a synonym:  clause(X, Y) === assert(X:-Y)  ?
+15:20:46 <siege> ah hah
+15:21:02 <huthut_> dmiles, is it a synonym?
+15:21:17 <dmiles_afkish> well kinda
+15:21:32 <huthut_> does clause/2 change the db? 
+15:21:33 <dmiles_afkish> but they are differnt temporally ;P
+15:21:45 <siege> oh god, lost me again
+15:21:46 <dmiles_afkish> clause/2 wont change the db
+15:21:49 <huthut_> ok
+15:22:00 <huthut_> clause tests only.
+15:22:04 <dmiles_afkish> but assert(X:-Y),clause(X,Y) is true ;P
+15:22:05 <huthut_> right?
+15:22:12 <dmiles_afkish> yes.. only a test
+15:22:19 <siege> can assert change the db?
+15:22:23 <siege> apparently
+15:22:26 <siege> sorry, silly question
+15:22:38 <dmiles_afkish> yes.. and the DB and the program are the same thing.. so you can change the program as it's running
+15:22:48 <siege> wild
+15:23:21 <siege> (I'm trying to get the knowledge appropriate to adapt an alpha6 MudObject to a cyc object)
+15:23:29 <huthut_> heheh
+15:23:40 <huthut_> good.
+15:24:07 <dmiles_afkish> yeah a prolog anonlogy is definately to way to go.
+15:24:14 <siege> that nani page was excellent, btw dmiles
+15:24:40 <siege> though I'm going to read it again now that I understand a little more
+15:24:52 <dmiles_afkish> yeah .. it's insane how quickly it goes.. and your straight into prduction
+15:25:09 <dmiles_afkish> but yet the production was so small amount of code
+15:26:10 <dmiles_afkish> its the kind of tutorial that rewards you 1-for-1 as you learn
+15:26:47 <siege> the apparently arbitrary object space is what I liked
+15:27:01 <siege> name an object, start throwing associations at it
+15:27:04 <siege> so cool
+15:27:21 <siege> though I have to start thinking about it under the correct terminology
+15:27:27 <siege> don't think that's "objecT", heh
+15:27:37 <siege> what type of language is prolog labelled as, incedentally?
+15:27:45 <siege> not OO, not procedural
+15:27:49 <dmiles_afkish> some people treat them as objects.. and in a way room/1 is used as an object.. so it is
+15:28:23 <dmiles_afkish> (i pretend prolog terms are objects all the time)
+15:28:44 <dmiles_afkish> its Fucntional language.. huthut?
+15:29:00 <dmiles_afkish> well its called a declarative language as well
+15:29:21 <dmiles_afkish> but its als a structured query language
+15:29:29 <dmiles_afkish> you could say the same with CycL
+15:30:18 <dmiles_afkish> the interesting thing though is prolog can be used as a procededural language just as easily
+15:30:52 <dmiles_afkish> go:-a,b,c,d,e,f,g(X),h(X),x,y,z,r(X).
+15:30:54 <huthut_> sometimes prolog paradigm is called `logical programming', but some math logicists criticize this callsign much
+15:31:15 <huthut_> i.e. it is not logic, but a very restricted dialect of logic
+15:31:27 <huthut_> i.e. restricted almost to absurd
+15:31:33 <siege> does it save to state very well?
+15:32:07 <siege> a running database/program I mean
+15:32:26 <dmiles_afkish> very well
+15:32:32 <siege> excellent
+15:32:56 <dmiles_afkish> saveme(File):-tell(File),listing,told(File).
+15:33:00 <dmiles_afkish> oops
+15:33:03 <dmiles_afkish> saveme(File):-tell(File),listing,told.
+15:33:12 <huthut_> `functional languages', as far as i know, are languages without any side effects, e.g. scheme.  So prolog doesnt qualify.  But I dont actually know this issue.
+15:33:15 <dmiles_afkish> to reload [File].
+15:33:22 <huthut_> (so i cant speak)
+15:34:03 <dmiles_afkish> yeah i dont know eaigther some would say that assert/retract are not really side effects but just a uses of a stack
+15:34:55 <dmiles_afkish> yeahy the Logioc of prolog and a logic language is a very contentous subject
+15:35:52 <dmiles_afkish> to me its not a logic language.. but can be used to write logic language programs
+15:36:10 <dmiles_afkish> (makes them easier to write)
+15:36:33 <huthut_> the notion of stack is irrelevant to the notion of side effects, in this case...  assert/retract are side effects, since they change the global state before and after the function call.
+15:36:51 <dmiles_afkish> yes.. true.. hrrm.. i see
+15:37:27 <huthut_> main point of these logicists is that there are many kinds of logic and logical systems, and that prolog is too limited to cover them all.
+15:37:56 <huthut_> e.g. setq is a side effect function in lisp
+15:38:02 <dmiles_afkish> it reminds me once when i write a program that for speed instead of asserting and retracting clauses.. i included an extra varible to carry the state change so it would only live as long as a call
+15:38:53 <dmiles_afkish> the movement of the varible between clauses was more effecient then assert/retract 
+15:40:07 <dmiles_afkish> yes prolog is very limited logically for perfomrance reasons mainly (thats at least what the authors claimed) 
+15:40:23 <dmiles_afkish> it only deals in logical horn clauses
+15:40:42 <dmiles_afkish> (and thats all) no quantification.. except for universal
+15:41:17 <dmiles_afkish> CycL is kinda where prolog could have gone
+15:42:06 <siege> what does CycL bring that other prologs didn't?
+15:42:06 <dmiles_afkish> but since not all appications needed FOL.. they gave the simplist needed that full FOL could be broken down to
+15:43:03 <dmiles_afkish> Tabling/Transitive closure (cycle checking) .. and sound unificatiion
+15:43:11 <dmiles_afkish> and a wiki like gui
+15:44:01 <dmiles_afkish> sound unification == varaibles that dont explode becasue they wont ever contain sub refernces
+15:44:25 <siege> uhm.
+15:44:38 <siege> why do variables explode, and what's a sub reference ?
+15:44:50 <dmiles_afkish> all these things could still be done in prolog.. just have to specifiy you want it explicitly
+15:44:59 <dmiles_afkish> A = p(A)
+15:45:24 <dmiles_afkish> means that A=p(p(p(p(...))))
+15:45:35 <siege> yikes
+15:46:01 <dmiles_afkish> this can easily be avoided and doesnt happen in real cases
+15:46:31 <dmiles_afkish> but there are times in decaritive unchecked logic (likethe ones that come from the web) that contain problems like this
+15:46:53 <dmiles_afkish> r /declaritive
+15:47:36 <dmiles_afkish> so in some prolog before you try to unify you might need to do a safe_unification_chack
+15:48:29 <dmiles_afkish> the transive closure in cycl is for problems like:
+15:48:42 <dmiles_afkish> if X is a peron then X has 2 legs
+15:48:56 <dmiles_afkish> err..
+15:49:14 <dmiles_afkish> if X is a person and has a social security number then X has 2 legs
+15:49:38 <dmiles_afkish> if X has a socila security number then X is a person
+15:50:09 <dmiles_afkish> whne you are looking for two legged critters.. you are looking for persons
+15:50:34 <dmiles_afkish> oh and then a rule like if X is a person then X has a social security namuber
+15:50:47 <dmiles_afkish> creates like a loop
+15:51:01 <dmiles_afkish> in vanilla prolog it would loop
+15:51:02 <siege> where the two checks keep checking each other
+15:51:06 <dmiles_afkish> yes
+15:51:08 <siege> yikes
+15:51:25 <dmiles_afkish> i am working with SWI prolog right now on implimentaing a fix for this
+15:51:37 <dmiles_afkish> (at least specific to SWI-Prolog) ..
+15:51:50 <dmiles_afkish> XSBProlog and BinProlog.. have fixes
+15:52:10 <dmiles_afkish> but their fixes are imho not that great
+15:52:39 <dmiles_afkish> i came up with something that allows max backcahins per unbound variable
+15:53:02 <dmiles_afkish> XSBProlog and BinProlog use memoization
+15:53:22 <dmiles_afkish> which means they store the facts and create a runtime cache before rules get used.. 
+15:53:34 <dmiles_afkish> which on a large KB blows up memory
+15:53:48 <siege> yikes
+15:53:54 <dmiles_afkish> well for example..
+15:54:03 <dmiles_afkish> person(X):-ssn(X).
+15:54:13 <dmiles_afkish> ssn(X):-person(X).
+15:54:18 <dmiles_afkish> ssn(joe)
+15:54:26 <dmiles_afkish> person(phil)
+15:54:49 <dmiles_afkish> what they do is cache ssn(joe),person(phil) first
+15:55:26 <dmiles_afkish> and then rember the call to ssn(X) used person(X) therefore only look at facts containing no varibles first
+15:55:34 <dmiles_afkish> they build a finite model
+15:55:44 <dmiles_afkish> then exiceute the rules
+15:56:13 <dmiles_afkish> which is great idea.. bu tthe finite models such of the kind that the cyc kb holds are very large
+15:56:58 <dmiles_afkish> Cyc actualyl doesnt really fix this problem eigther.. it just uses a call_with_depth_limit
+15:57:25 <siege> and if it recurses over n times, what happens?
+15:57:26 <dmiles_afkish> and then also makes sure the same literals do not get called below themselves
+15:57:36 <dmiles_afkish> N times is fine
+15:57:47 <dmiles_afkish> but the real trouble is it comes up with duplicate answers
+15:58:05 <dmiles_afkish> so here is a case:
+15:58:10 <dmiles_afkish> ssn(joe)
+15:58:14 <dmiles_afkish> person(joe)
+15:58:28 <dmiles_afkish> now we call.. 
+15:58:43 <dmiles_afkish> ssn(X) - we get joe twice
+15:59:01 <siege> weird.
+15:59:19 <dmiles_afkish> if some rule used the ssn(X),something_else(X)
+15:59:47 <dmiles_afkish> something_else(X) gets joe twice .. and if joe did not fit the slot.. we have twice as many CPU cycles
+16:00:00 <dmiles_afkish> (that are unproducive)
+16:00:26 <siege> broken
+16:00:30 <dmiles_afkish> so if a rule was like person_something_else(X):-ssn(X),something_else(X)
+16:00:58 <dmiles_afkish> something_else might mean peopklethat wear tall hats
+16:01:17 <dmiles_afkish> if joe wears tall hats...
+16:01:30 <dmiles_afkish> person_something_else(X) will additionaly return joe twice
+16:01:58 <dmiles_afkish> so this means its a performance hit
+16:02:50 <dmiles_afkish> cyc (and some prologs) remove duplicates while returning bindings.. to help with this.. but that duplicate removal is furture overhead that may be more expensive
+16:04:14 <dmiles_afkish> sometimes just using joe twice is cheaper then removing the 2nd joe in the result
+16:05:00 <dmiles_afkish> so cyc tries to keep problems like this to a minumum by creation large forward chaining caches
+16:05:24 <dmiles_afkish> so it will precache something_else(X) and never call its rules afterwards
+16:06:10 <dmiles_afkish> most cases this is all good .. but not in cases high up on ontology
+16:06:28 <dmiles_afkish> thats why building cyc was such a menacing project
+16:07:09 <dmiles_afkish> its a delecate balance of premature optimization (evil) and doing what it should really do (not really possible)
+16:07:47 * siege head spins
+16:07:57 <dmiles_afkish> ok .. i'll give you a break ;P
+16:08:39 <dmiles_afkish> but mainly the thing about cyc vs prolog.. is cyc and prolog have the same same capabilies at some point but have the identical problems
+16:09:15 <dmiles_afkish> its just Cycs UI straps onto a prolog type system to make this problems kless visable to user
+16:09:58 <dmiles_afkish> prolog users already know the problems when they create them.. cyc users tend to just create problems
+16:10:30 <siege> can I quote you on that? ;)
+16:10:36 <dmiles_afkish> becasue they cant forsee the consquences performance wise on the rest of the cyc system
+16:10:56 <dmiles_afkish> with that last line yes ;P
+16:12:01 * siege is away: to make some coffee
+16:12:06 <dmiles_afkish> well becasue ones a programming language and the other is a knowledge wiki
+16:12:33 <dmiles_afkish> not every page of a wiki will make sense to another page
+16:15:10 <dmiles_afkish> i wrote a Cyc KB opimizer last night in prolog .. it takes the total model of the KB and removes redundant cycles .. and calls to unsatisfiable antedicants.. it creates a infernce path map (VERY Large) and sees what routes will always fail
+16:15:48 <dmiles_afkish> the resulting accessable model is much smaller then what lives in the KB by Many persenct
+16:16:59 <dmiles_afkish> it also looks at genlMts and sees if a parent Mt will duplicate a childs deduction
+16:18:09 <dmiles_afkish> (it retracts it from the child) if it was a gaf
+16:18:46 <dmiles_afkish> (i cant be that destructive when it comes to rules though)
+16:19:27 <dmiles_afkish> however i can tell what rules will never fire until more assertions come in
+16:20:22 <dmiles_afkish> i am sure cyccorp did something simular as part of a maintenace system
+16:20:59 <kinoc> ping
+16:21:00 <CycLBot> hello kinoc
+16:21:25 <dmiles_afkish> hi there
+16:21:33 <kinoc> hi
+16:22:05 <kinoc> so you've compiled the universe. I await universal leasure shortly :)
+16:22:22 <dmiles_afkish> yeah.. soon enough ;P
+16:22:50 <dmiles_afkish> oh but yes.. the universe does complie in less then 62Megs
+16:22:58 <kinoc> in the next universe, #1 requested mod should be an "undo" button
+16:23:24 <kinoc> you read "A new kind of science" by Wolfram ?
+16:23:34 <dmiles_afkish> well thats an issue that assertions (of rules)are marked (ignore me until i get more facts)
+16:23:48 <dmiles_afkish> and the unmarking them is expensive
+16:24:11 <dmiles_afkish> so they create afterAdding-like things
+16:24:50 <dmiles_afkish> which is just as large as the KB!
+16:25:09 <dmiles_afkish> havent yet
+16:25:16 <kinoc> some kinda conservation principle 
+16:26:03 <kinoc> wolfram thinks the cellular automata description of the universe code will be small
+16:26:13 <kinoc> way less than 62 Meg.
+16:27:40 <dmiles_afkish> well that is the textual save.. the memory footpint is much smaller
+16:27:45 <kinoc> he expects if we find it the big response will be "that it!?!?! we kinda expected something....well... bigger."
+16:28:07 <dmiles_afkish> hehe yes the unvere is just a unbound single variable
+16:28:30 <dmiles_afkish> ?- X.
+16:28:30 <dmiles_afkish> % ... 1,000,000 ............ 10,000,000 years later
+16:28:30 <dmiles_afkish> %
+16:28:30 <dmiles_afkish> %       >> 42 << (last release gives the question)
+16:28:54 <kinoc> yep
+16:29:12 <kinoc> an interesting way of putting it
+16:29:33 <dmiles_afkish> well the worl is only as detailed as the question asked.
+16:29:36 <dmiles_afkish> err world
+16:29:53 <dmiles_afkish> but the answer would need to contain all questions
+16:30:42 <kinoc> hmmm, maybe someone is looking for a solution and we're the processor
+16:31:23 <kinoc> we are working on the answer to gods question and not the other way around
+16:31:44 <kinoc> "why ask me. that's what you're for."
+16:33:27 <kinoc> a few more hints in the old KB would really help out you know, might help direct the search a little better
+16:42:11 <dmiles_afkish> yes.. when a assertion was put in by a user it tells me they are more intersted then if it was something deduced
+16:42:44 <dmiles_afkish> so offer a KE will try to ask loaded questions (find things they specificly asserted)
+16:43:14 <dmiles_afkish> KE in this case would mean the Child MT containing an assertion could be said to me more 'realvat' to the search
+17:03:36 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:47:44 --- quit: Cobra_ ("[x]chat")
+20:01:50 <bruce> I have a CycL question perhaps if someone is around.
+20:02:13 --- join: dash (washort@adsl-64-123-27-105.dsl.austtx.swbell.net) joined #opencyc
+20:05:51 <dmiles_afkish> maybe i can help
+20:05:59 <bruce> sure :)
+20:06:25 <bruce> this is probably a poorly thought out abuse, but you've done this sort of thing in Prolog before ..
+20:07:15 <bruce> given a rule 'pickup', which validates a set of constraints, and if they are true, carries out a change of state as a side effect (picking upt he object, thereby altering its location)
+20:07:43 <bruce> but, should it fail, if you wanted to get back the particular constraints which failed ..
+20:07:52 <bruce> is that something that could be done in Cyc? :)
+20:07:57 <dmiles_afkish> as in a logical rollback of sideeffect?
+20:08:16 <dmiles_afkish> well you would want to break it into two steps
+20:08:19 <bruce> well, I can pick up X if 1) it isn't too heavy and 2) it is in the same location as I am.
+20:08:34 <dmiles_afkish> first you should query on if it was possible
+20:08:42 <bruce> but, should it be too heavy, I want 'pickup' to indicate that that was the constraint which failed.
+20:08:45 <dmiles_afkish> so 1 and 2 should be stepo 1
+20:09:10 <dmiles_afkish> then if it passes as behavourCapable...
+20:09:17 <dmiles_afkish> and all the contraints..
+20:09:19 --- part: dash left #opencyc
+20:09:28 <dmiles_afkish> then you should do the side effect
+20:10:06 <dmiles_afkish> to make a predicate do a sideeffect as well.. then need to rollback because of some problem further down the line does meet the ideas of logic
+20:10:32 <bruce> well, you don't need to rollback if you just don't do it until the constraints are validated, no ?
+20:10:52 <dmiles_afkish> i can see the usecase problem.. though.. you cant do check number 2 until somethiong like 1 was dowen first with sideeeffect
+20:11:31 <dmiles_afkish> so you are looking for more then contraints.. you are looking for a viaabble plan
+20:11:49 <bruce> hmmm, i think i might have mis-stated.
+20:11:52 <bruce> 1) is it too heavy?
+20:11:57 <bruce> 2) is it in my location
+20:12:11 <bruce> if (!1 && 2) then alter location
+20:12:36 <dmiles_afkish> ok then  if (!1 && 2) then possible to alter location
+20:13:21 <dmiles_afkish> if possible to alter location & inokeAlterLocation then doit forreal
+20:13:45 <dmiles_afkish> the only reason for breking it into two is so you never have to revse the saide effect
+20:14:09 <dmiles_afkish> err never have to try to reverse it.. since it happend over infernce
+20:14:26 <dmiles_afkish> becasue you cant predicte something in cyc wont walk your path when your not looking
+20:14:29 <bruce> right, but what i want is to be able to know which of 1 or 2 failed.
+20:14:55 <dmiles_afkish> you may do that yes
+20:15:30 <dmiles_afkish> you can create a predicate called (#$whyCantIDo ?CMD ?Why)
+20:15:54 <dmiles_afkish> and instanciate ?CMD and look back at ?Why
+20:16:35 <bruce> hmmm. i may just be too braindead tonight.
+20:18:10 <dmiles_afkish> ($imples (and (objectWeight ?Obj ?W) (humanStr ?A ?S)) (greaterThan ?W ?S)) (whyCantIDo (invoke ?A (take ?Obj))
+20:18:18 <dmiles_afkish> oops
+20:18:48 <dmiles_afkish> ($imples (and (objectWeight ?Obj ?W) (humanStr ?A ?S)) (greaterThan ?W ?S)) (whyCantIDo (invoke ?A (take ?Obj) (objectToHeavyFor ?Obj ?A)))
+20:19:21 <dmiles_afkish> does that make sense?
+20:19:35 <bruce> one moment .. reformatting that to pick apart the parens :)
+20:19:44 <huthut_> straightforward logic :)
+20:19:46 <huthut_> kool
+20:19:53 <dmiles_afkish> i misbalenced them slightly as well
+20:20:14 <dmiles_afkish> (implies (and (objectWeight ?Obj ?W) (humanStr ?A ?S) (greaterThan ?W ?S)) (whyCantIDo (invoke ?A (take ?Obj)) (objectToHeavyFor ?Obj ?A))
+20:20:24 <huthut_> i want math-like language for expressing these silly parentheses
+20:20:25 <dmiles_afkish> still need one more ) on the end
+20:20:39 <huthut_> so that there will be much less of em
+20:20:42 --- quit: Taral ("ircII EPIC4-1.1.5 -- Are we there yet?")
+20:20:55 <kinoc> and of course another rule for objectNotInSamePlace
+20:21:25 <dmiles_afkish> yeah and that way you can do a whyCantIDo check before each invoke
+20:21:42 <dmiles_afkish> whyCantIDo  will respond to eighter rule
+20:21:46 <dmiles_afkish> or all if you wanted
+20:22:05 <bruce> okay, so the implies part gets called objectTooHeavyFor ?
+20:22:18 --- join: Freekaz (Panteon@dl-dtg-cvl-C89AA811.p001.terra.com.br) joined #opencyc
+20:22:27 <dmiles_afkish> the test  (and (objectWeight ?Obj ?W) (humanStr ?A ?S) (greaterThan ?W ?S))
+20:22:37 <dmiles_afkish> reults in (whyCantIDo (invoke ?A (take ?Obj)) (objectToHeavyFor ?Obj ?A))
+20:23:05 <dmiles_afkish> so you call  (whyCantIDo (invoke Joe (take cookie666)) ?WhyNot)
+20:23:41 <dmiles_afkish> you would get back a (objectToHeavyFor cooklie Joe)
+20:24:06 <dmiles_afkish> err  (objectToHeavyFor cooklie666 Joe)
+20:24:50 <bruce> hmmm. okay.
+20:25:11 <huthut_> e.g. ``objectWeight(?Obj, ?W) & humanStrength(?A, ?S) & greaterThan(?W, ?S) => objectToHeavyFor(?Obj, ?A) & whyCantIDo( invoke(?A, take(?Obj)), objectToHeavyFor(?Obj, ?A)).''
+20:25:50 <dmiles_afkish> yeah it prology is done best the way huthut described.. you get more leverage out of objecttooHeavy
+20:26:07 <dmiles_afkish> err s/prology/probibly
+20:26:33 <dmiles_afkish> one rule objectWeight(?Obj, ?W) & humanStrength(?A, ?S) & greaterThan(?W, ?S) => objectToHeavyFor(?Obj, ?A)
+20:26:35 <huthut_> objectToHeavyFor(?Obj, ?A) is actually redundant
+20:26:51 <huthut_> whyCantIDo can replace it
+20:26:56 <dmiles_afkish> oh i see.. you poly cononicalized!
+20:27:10 <huthut_> or objectToHeavyFor can replace whyCantIDo
+20:27:18 <huthut_> partially
+20:27:36 <dmiles_afkish> yeah.. logically you looked ant the etantialments and gave cyc a clearer pricture
+20:27:38 <huthut_> whycantido carries more info
+20:28:20 <bruce> okay, so part of where i am missing things is ...
+20:28:36 <bruce> in the dmiles example, how did anything know what was bound to objectTooHeavyFor ?
+20:30:08 <dmiles_afkish>  objectWeight(?Obj, ?W) & humanStrength(?A, ?S) & greaterThan(?W, ?S) => objectTooHeavyFor(?Obj, ?A) woukld make sense
+20:31:20 <dmiles_afkish> then alsoe  objectTooHeavyFor(?Obj, ?A) => (whyCantIDO (inkove ?A (take ?Obj)) objectTooHeavyFor(?Obj, ?A))
+20:32:10 <dmiles_afkish> but huthuts would work as well with the dual consequents
+20:32:25 <bruce> i have much ignorance to overcome.
+20:32:37 <bruce> 'dual consequents' and so on are all foreign to me.
+20:32:51 <dmiles_afkish> two results of an if/tehn
+20:32:59 <bruce> okay
+20:33:05 <kinoc> are you trying to find out why the last action failed in general what ever that action may be ?
+20:33:21 <bruce> huthut's way made more sense to me .. I didn't understand your original since i didn't see where it defined the meaning of objectToHeavy
+20:33:48 <bruce> kinoc: I'd like to know what constraint for an action failed, to be able to print a diagnostic message
+20:34:04 <dmiles_afkish>  objectTooHeavyis more of a term that your program would reconise.. not in cyc Kb
+20:34:11 <bruce> dmiles_afkish: okay
+20:36:05 <kinoc> but do you want the reason back with the action invokation or is seperate queries (do -> fail - > why?)  ok ?
+20:37:03 <bruce> kinoc: well, if you want it to come back with it, then that could just be a wrapper .. so the separate queries is fine, I think.
+20:38:44 <dmiles_afkish> part of the reason why separating it into two things is if a rule had a phycial change it made in the KB.. infernce used elsewhere my consider your rule and trip it off accidently
+20:39:19 <dmiles_afkish> part of the reason why separating it into two things is if a rule had a physcial change to the KB.. inferrnce used elsewhere may consider your rule and trip it off accidently changing the state
+20:39:28 * bruce nods.
+20:41:48 <bruce> dmiles_afkish: do you do anything like that in logicmoo? :)
+20:42:18 <dmiles_afkish> well kinda the whole logicmoo project is pretty wierd.. so much done. but not actualyl used
+20:42:19 --- quit: Freekaz (Read error: 110 (Connection timed out))
+20:42:34 <dmiles_afkish> originally it started before cyc and jamud
+20:42:52 <bruce> right. how do you handle contraint failure diagnostics?
+20:42:56 <dmiles_afkish> so there is a ton of prolog code that actually plans the NPC's next move
+20:42:57 <bruce> or doyou not? :)
+20:42:57 --- join: Freekaz (Panteon@200.154.168.169) joined #opencyc
+20:43:15 <dmiles_afkish> that search for next best move uses rules and contrains
+20:43:18 <dmiles_afkish> yes i do
+20:44:03 <dmiles_afkish> http://12.225.207.235/~logicmoo/src/logicserver/moo_dspg.pl  <-thats the implentation of it
+20:45:03 <dmiles_afkish> but thats for NPCs not humans bieng verified.. NPCs only see legal movesto start
+20:45:45 <dmiles_afkish> so they never get troubled with "you cant do that" but would be more fun if they had to try things before they knew they couldnt
+20:46:25 <bruce> dmiles_afkish: yeah, but there are problems with letting them try things before they know they can't (or at least in our NPC AI @ work)
+20:46:41 <dmiles_afkish> here is some unused code from a program called NaniSearch that verifies and gives users a message if they cant do somnething http://12.225.207.235/~logicmoo/src/logicserver/mod/mod_nani.pl
+20:47:02 <bruce> players abused the hell out of it, since the AI didn't have a memory and the players do, so they didn't try things like that and manipulated the NPCs into states where they'd basically stall out temporarily.
+20:47:15 <bruce> but I fixed all that and turned the NPCs back into Player Killing Machines.
+20:47:24 <dmiles_afkish> hhehe yeah
+20:48:26 <bruce> okay, so I think i understand now ...
+20:48:34 <bruce> (about my original question)
+20:48:40 <bruce> i had an even more complex question
+20:48:56 <bruce> but i am obviously too ignorant to ask it yet, much less understand enough to ask it properly :)
+20:51:32 <Freekaz> hey, some help with opencyc: i want to know if have any meaning to chat with opencyc in meaning you can chat with eliza or other chatterbots?
+20:52:51 <dmiles_afkish> i think cyccorp may be working on a chatterbot for cyc
+20:52:56 <kinoc> is cyclbot up ?
+20:53:15 <dmiles_afkish> not really at the moment ;(
+20:54:15 <kinoc> poor thing. must be recovering (or undergoing) all that brain surgery.
+20:54:27 <dmiles_afkish> yeah.. tons going on right now
+20:54:55 <Freekaz> how opencyc say somethink to someone?
+20:54:56 <kinoc> raising the roof so you can pack more in
+20:57:12 <huthut_> bsh "is cyclbot up?"
+20:57:13 <CycLBot> In file: <Inline eval of: bsh "is cyclbot up?"; > Encountered "\"is cyclbot up?\"" at line 1, column 5.
+20:57:16 <huthut_> bsh "is cyclbot up?";
+20:57:17 <CycLBot> In file: <Inline eval of: bsh "is cyclbot up?"; > Encountered "\"is cyclbot up?\"" at line 1, column 5.
+20:57:24 <huthut_> bsh: "is cyclbot up?"
+20:57:25 <CycLBot> is cyclbot up?
+20:57:39 <dmiles_afkish> the java parts are going but the conversatinal parts that run on a socet server are npot
+20:59:15 <huthut_> bsh: "redirect your System.out to microsoft.com:80"
+20:59:15 <CycLBot> redirect your System.out to microsoft.com:80
+20:59:36 <huthut_> ehh
+20:59:59 <kinoc> Freekaz: opencyc uses a language 'cycL' which is similar to logic. translators can go from english (and others) to and from cycL
+21:00:58 <Freekaz> tks
+21:01:02 <kinoc> 'cycL' is about meaning between symbols. translator/parsers connect human language to opencyc language
+21:02:19 <kinoc> cyccorp has not released their translators just yet. but opencyc can respond in english, but you still have to speak cycL for it to understand
+21:02:43 <kinoc> for now
+21:05:11 <Freekaz> good
+21:08:27 <Freekaz> someone speak that opencyc ask if it was a human. its real? how it tell this?
+21:10:33 <kinoc> need some one to verify that rumour. I also hear it.
+21:10:44 <kinoc> opencyc is smaller than full cyc 
+21:11:18 <kinoc> cyccorp cyc runs a knowledge check to find errors and maybe useful patterns
+21:12:15 <kinoc> cyc notice that the knowledge base said most of the things about humans (process information, knows stuff....) were said about it
+21:12:21 <kinoc> so it was checking
+21:13:09 <kinoc> but it may not know that 'cyc' means it.  it noticed that the word 'cyc' was used like the word 'human' a lot.
+21:13:30 <kinoc> at least that is what i understood.
+21:13:47 <kinoc> can anyone verify this legend ?
+21:14:51 <Freekaz> panteon
+21:14:56 <Freekaz> bye
+21:15:06 --- quit: Freekaz ("2002 Isn't Just a Palindrome. It's Also the Year of the Panteon!")
+21:15:22 <huthut_> ask (#$isa #$CycLBot ?Who)
+21:15:24 <CycLBot> java.lang.NullPointerException
+21:15:29 <huthut_> :)
+21:15:56 <kinoc> teasing the dead twitching body...tsk, tsk.
+21:16:14 <huthut_> ask: (#$isa #$CycLBot ?Who)
+21:16:22 <huthut_> ping
+21:16:22 <CycLBot> hello huthut_
+21:16:36 <huthut_> query (#$isa #$CycLBot ?Who)
+21:16:38 <CycLBot> java.lang.NullPointerException
+21:17:24 <kinoc> 'es dead jim.
+21:17:52 <dmiles_afkish> ah cyc was restarted since java.. will restart java
+21:17:56 <kinoc> ah, i meant " 'es dead huthut" :)
+21:18:13 --- quit: CycLBot (Remote closed the connection)
+21:18:24 <huthut_> bad, bad cycjavaapi
+21:18:31 --- join: CycLBot ([7DjtXXLqX@12-225-207-235.client.attbi.com) joined #opencyc
+21:18:39 <huthut_> ask (#$isa #$CycLBot ?Who)
+21:18:41 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+21:19:13 * bruce wonders to what extent he should provide that high level stuff in the C/Python API.
+21:21:36 <kinoc> good luck on making cycLBot self aware
+21:22:20 <dmiles_afkish> bruce: always a big question..  the implimentation of a th Fasl to call SUBL which makes everything availble is a good start
+21:22:46 * kinoc defrag mode initiated. min defrag time 8 hr 35 min 53sec
+21:24:54 <bruce> dmiles_afkish: yeah. how hard is that once i have teh basic encoding/decoding done?
+21:25:35 <dmiles_afkish> pretty easy.. you would probly just map the cycapi from the coducmentation after htat
+21:29:59 --- quit: CycLBot (bear.openprojects.net irc.openprojects.net)
+21:29:59 --- quit: huthut_ (bear.openprojects.net irc.openprojects.net)
+21:30:00 --- quit: sandos (bear.openprojects.net irc.openprojects.net)
+21:30:00 --- quit: bruce (bear.openprojects.net irc.openprojects.net)
+21:30:00 --- quit: dmiles_afkish (bear.openprojects.net irc.openprojects.net)
+21:30:00 --- quit: siege (bear.openprojects.net irc.openprojects.net)
+21:30:00 --- quit: mea_sleep (bear.openprojects.net irc.openprojects.net)
+21:31:02 --- join: CycLBot ([7DjtXXLqX@12-225-207-235.client.attbi.com) joined #opencyc
+21:31:02 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+21:31:02 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+21:31:02 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+21:31:02 --- join: dmiles_afkish (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+21:31:02 --- join: siege (~siege@216.254.102.94) joined #opencyc
+21:31:02 --- join: mea_sleep (mea_culpa@12-225-234-29.client.attbi.com) joined #opencyc
+21:35:00 --- join: futhin (~thin@24.64.175.61) joined #opencyc
+23:38:41 --- nick: mea_sleep -> mea_oly
+23:59:59 --- log: ended opencyc/02.08.01

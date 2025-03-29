@@ -1,0 +1,194 @@
+00:00:00 --- log: started opencyc/03.02.24
+00:10:30 --- quit: dmiles (leguin.freenode.net irc.freenode.net)
+00:10:35 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+00:31:07 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+02:43:11 --- log: started opencyc/03.02.24
+02:43:11 --- join: clog (nef@bespin.org) joined #opencyc
+02:43:11 --- topic: 'Welcome to #opencyc, The IRC channel for the OpenCyc project. ***Release 0.7.0 is now available from http://sourceforge.net/projects/opencyc/'
+02:43:11 --- topic: set by Graham on [Wed Dec 18 08:44:34 2002]
+02:43:11 --- names: list (clog fleeky dmiles Cobra @ChanServ deltab stevereed @Graham)
+03:25:34 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+07:32:41 --- join: CyHawk (cyhawk@kradlewrath.sch.bme.hu) joined #opencyc
+07:52:56 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:01:06 <kinoc> yepster: some more link grammar to CD parsing
+08:01:09 <kinoc> http://4.33.94.173:2002/cdml?pos="John%20gave%20%20an%20big%20red%20apple%20to%20Bill."
+08:01:52 <kinoc> http://4.33.94.173:2002/cdml?pos="Bill%20ate%20the%20apple."
+08:02:19 <kinoc> <cyc-hypolinks>
+08:02:20 <kinoc> (#$thereExists ?SENT 
+08:02:20 <kinoc>   (#$isa ?SENT #$LGP-SENT)
+08:02:20 <kinoc>     (and 
+08:02:20 <kinoc>      (#$isa ?SENT #$CD-ATRANS)
+08:02:20 <kinoc>      (#$CD-ACTOR ?SENT #$John-TheWord )
+08:02:22 <kinoc>      (#$CD-TO ?SENT #$Bill-TheWord )
+08:02:24 <kinoc>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+08:02:26 <kinoc>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+08:02:28 <kinoc>      (#$LGP-RIN ?SENT #$Bill-TheWord #$Apple-n-TheWord )
+08:02:30 <kinoc>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Big-a-TheWord )
+08:02:32 <kinoc>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Red-a-TheWord )
+08:02:34 <kinoc>   ))
+08:02:36 <kinoc> </cyc-hypolinks>
+08:02:38 <kinoc> <cyc-hypolinks>
+08:02:40 <kinoc> (#$thereExists ?SENT 
+08:02:42 <kinoc>   (#$isa ?SENT #$LGP-SENT)
+08:02:44 <kinoc>     (and 
+08:02:46 <kinoc>      (#$isa ?SENT #$CD-INGEST)
+08:02:48 <kinoc>      (#$CD-ACTOR ?SENT #$Bill-TheWord )
+08:02:50 <kinoc>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+08:02:52 <kinoc>   ))
+08:02:54 <kinoc> </cyc-hypolinks>
+08:03:33 <kinoc> Not quite cannon but you can get the drift
+08:04:44 <kinoc> thanks to dmiles who kept pushing for CD triples over the weekend
+08:05:55 <kinoc> oh yeah. given the sentence "Bill ate the orange apple." the system generates two interpertations....
+08:06:07 <kinoc> <cyc-hypolinks>
+08:06:08 <kinoc> (#$thereExists ?SENT 
+08:06:08 <kinoc>   (#$isa ?SENT #$LGP-SENT)
+08:06:08 <kinoc>     (and 
+08:06:08 <kinoc>      (#$isa ?SENT #$CD-INGEST)
+08:06:08 <kinoc>      (#$CD-ACTOR ?SENT #$Bill-TheWord )
+08:06:10 <kinoc>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+08:06:12 <kinoc>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Orange-a-TheWord )
+08:06:14 <kinoc>   ))
+08:06:16 <kinoc> </cyc-hypolinks>
+08:06:22 <kinoc> and
+08:06:24 <kinoc> <cyc-hypolinks>
+08:06:24 <kinoc> (#$thereExists ?SENT 
+08:06:24 <kinoc>   (#$isa ?SENT #$LGP-SENT)
+08:06:26 <kinoc>     (and 
+08:06:28 <kinoc>      (#$isa ?SENT #$CD-INGEST)
+08:06:30 <kinoc>      (#$CD-ACTOR ?SENT #$Bill-TheWord )
+08:06:32 <kinoc>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+08:06:34 <kinoc>      (#$LGP-ATTRIB-CLASS ?SENT #$Apple-n-TheWord #$Orange-n-TheWord )
+08:06:36 <kinoc>   ))
+08:06:38 <kinoc> </cyc-hypolinks>
+08:07:11 <kinoc> where LGP-ATTRIB indicates that orange is an attribute of the apple (i.e. orange color or orange taste)
+08:09:39 <kinoc> while LGP-ATTRIB-CLASS indicates that the apple was somehow a member of the orange group (like a lemon-lime?). The apple was in someway an orange! since orange could be a noun.
+08:10:16 <kinoc> so how does the real cyc parser handle something like that?
+08:11:34 <kinoc> what is how does it handle multiple interpertations of a given sentence. Seperate MT's ???
+08:11:48 <kinoc> err Data MT's
+09:10:53 --- join: mcburton (~mcburton@mcburton.stu.wesleyan.edu) joined #opencyc
+09:19:26 --- quit: kinoc (Read error: 60 (Operation timed out))
+09:41:05 <yepster> cool stuff kinoc
+09:44:05 <yepster> where is the source?
+10:19:36 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:20:20 <kinoc> on my laptop :-)
+10:20:59 <kinoc> sorry, I need to tidy it up (or give up) and post it to my site
+10:22:04 <kinoc> its a msvc++ project but I don't think there is anything msvc specific, especially wrt the parsing
+10:22:45 <kinoc> maybe with the net connect. It could stand some improvement with some extra eyes
+10:45:07 <yepster> hmm..
+10:53:39 --- quit: kinoc (Read error: 60 (Operation timed out))
+11:51:42 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+11:52:43 <kinoc> Yepster: ok, got a minimum zip package together (you too dmiles)
+11:52:54 <kinoc> http://www.daxtron.com/pub/rosetta.zip
+11:53:49 <kinoc> if you unzip it and run link42.exe it should work. Includes the source code I have here.
+11:54:40 <kinoc> so you can see that its not an OZ project :-)    [ignore the man behind the computer rackk....]
+11:55:33 <kinoc> you can run http://localhost:2002/cdml?pos="John ate a big red apple." to see if it is working.
+12:30:48 <yepster> cool!
+12:34:44 <yepster> <cyc-hypolinks>
+12:34:45 <yepster> (#$thereExists ?SENT 
+12:34:45 <yepster>   (#$isa ?SENT #$LGP-SENT)
+12:34:45 <yepster>     (and 
+12:34:45 <yepster>      (#$isa ?SENT #$CD-INGEST)
+12:34:45 <yepster>      (#$CD-ACTOR ?SENT #$John-TheWord )
+12:34:47 <yepster>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+12:34:49 <yepster>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Big-a-TheWord )
+12:34:51 <yepster>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Red-a-TheWord )
+12:34:53 <yepster>   ))
+12:34:55 <yepster> </cyc-hypolinks>
+12:35:12 <kinoc> good
+12:35:44 <yepster> (sorry for slow response, was a bit occupied with a counterstrike game with collegue ;-)
+12:35:54 <kinoc> so no problem running ?
+12:36:00 <yepster> not at all
+12:36:13 <kinoc> well there are priorities ;-)
+12:36:17 <yepster> are there definitions for #$LGP-SENT etc?
+12:36:29 <kinoc> in inferlinks.c
+12:36:42 <kinoc> need to make a better readme
+12:37:27 <kinoc> void singlestepCD(SOCKET sock,char *vec,char *lnode,char *rnode)
+12:37:37 <yepster> cannot find inferlings.c
+12:37:42 <kinoc> and void twostepCD(SOCKET sock,char *vec,char *lnode,char *rnode)
+12:37:52 <yepster> yhavinga@app2:~/rosetta$ fgrep -r '#$LGP-SENT' *
+12:37:52 <yepster> Binary file link42.exe matches
+12:37:52 <yepster> src/parse.c:					sock_print(sock,"  (#$isa ?SENT #$LGP-SENT)\r\n");
+12:38:11 <kinoc> hmmmm
+12:39:56 <yepster> hmm what even weirder, grep on CD-ACTOR gives no results at all..
+12:40:57 <mcburton> Hey I'm new to this whole cyc/opencyc thing and am curious where a good place to start is
+12:41:09 <yepster> www.opencyc.org/doc
+12:41:12 <yepster> :-)
+12:41:23 <kinoc> oh try src/linkinfer.c
+12:41:38 <yepster> looking at that right now, see some references to #$LGP
+12:41:45 <mcburton> are than any other websites?
+12:41:53 <kinoc> try looking for CD
+12:42:02 <kinoc> the original link grammar site
+12:42:23 <kinoc> http://www.link.cs.cmu.edu/link
+12:43:19 <kinoc> in the readme I pointed to jimmy lin who had a system that does what <semparse> does
+12:43:42 <kinoc> i.e. <semparse> is sorta my interpertation of part of his system
+12:44:21 <kinoc> oops, mental cross talk
+12:45:08 * yepster looking at the link
+12:45:56 <yepster> long list
+12:45:59 <kinoc> mcburton under www.opencyc.org/doc there should be links to the IRC logs (everything ever said here) and to the forum which is the Q&A
+12:47:11 <kinoc> and http://www.opencyc.org/OpenCyc_org/faq/opencyc_faq
+12:48:35 <mcburton> cool
+12:48:51 <mcburton> I'm curious as to what its possible to do with cyc
+12:49:09 <kinoc> ever work with locgic programming
+12:50:04 <mcburton> not really
+12:51:42 <mcburton> I read about that cycsecure thing, is it even possible to recreate that with opencyc?
+12:55:36 <yepster> yesterday i was browsing a bit and found this
+12:55:37 <yepster> http://www.cs.utexas.edu/users/nn/pages/software/software.html
+12:57:57 <yepster> gotta go, tty la8r
+12:58:10 --- nick: yepster -> yepsterzzz
+13:07:16 <kinoc> ok, got side tracked by rl
+13:07:36 <kinoc> mcburton... maybe
+14:30:10 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:38:46 --- quit: kinoc (Read error: 60 (Operation timed out))
+14:44:25 <KinoC2> yepster: the src/parse.c:	sock_print(sock,"  (#$isa ?SENT #$LGP-SENT)\r\n");
+14:45:27 <KinoC2> is part of the wrapper for the cyc-hypolink. so it can be changed to anything that would make more sense
+14:46:42 <KinoC2> addnote in inferlink.c gets a triple defining a link
+14:47:37 <KinoC2> and if "CD-*" is in the first position it generates sprintf(message,"     (#$CD-%s ?SENT #$%s-TheWord )\r\n",label,rlink);
+14:48:14 <KinoC2> which is why do don't find a CD-ACTOR
+14:48:57 <KinoC2> the code that generates it is
+14:48:58 <KinoC2> 	if (matchlike(vec,"*ate.v*")==1)
+14:48:58 <KinoC2> 	{
+14:48:58 <KinoC2> 		if (matchlike(vec,"* ate.v")==1) addnote(sock,"sent","isa","CD-INGEST");
+14:48:58 <KinoC2> 		if (matchlike(vec,"* ss ate.v")==1) addnote(sock,"CD-INGEST","ACTOR",lnode);
+14:48:58 <KinoC2> 		if (matchlike(vec,"ate.v os *.n")==1) addnote(sock,"CD-INGEST","OBJECT",rnode);
+14:49:00 <KinoC2> 	}
+14:49:25 <KinoC2> to generate
+14:49:50 <KinoC2> <cyc-hypolinks>
+14:49:50 <KinoC2> (#$thereExists ?SENT 
+14:49:50 <KinoC2>   (#$isa ?SENT #$LGP-SENT)
+14:49:50 <KinoC2>     (and 
+14:49:50 <KinoC2>      (#$isa ?SENT #$CD-INGEST)
+14:49:51 <KinoC2>      (#$CD-ACTOR ?SENT #$Bill-TheWord )
+14:49:53 <KinoC2>      (#$CD-OBJECT ?SENT #$Apple-n-TheWord )
+14:49:55 <KinoC2>      (#$LGP-ATTRIB ?SENT #$Apple-n-TheWord #$Orange-a-TheWord )
+14:49:57 <KinoC2>   ))
+14:49:59 <KinoC2> </cyc-hypolinks>
+14:50:01 <KinoC2> from
+14:50:17 <KinoC2> <link><llink>LEFT-WALL</llink><label>Xp</label><rlink>.</rlink></link>
+14:50:17 <KinoC2> <link><llink>LEFT-WALL</llink><label>Wd</label><rlink>Bill</rlink></link>
+14:50:17 <KinoC2> <link><llink>Bill</llink><label>Ss</label><rlink>ate.v</rlink></link>
+14:50:17 <KinoC2> <link><llink>ate.v</llink><label>Os</label><rlink>apple.n</rlink></link>
+14:50:17 <KinoC2> <link><llink>the</llink><label>Ds</label><rlink>apple.n</rlink></link>
+14:50:18 <KinoC2> <link><llink>orange.a</llink><label>A</label><rlink>apple.n</rlink></link>
+14:50:20 <KinoC2> <link><llink>.</llink><label>RW</label><rlink>RIGHT-WALL</rlink></link>
+14:51:47 <KinoC2> which is the parser native output (sorta)
+14:52:17 <KinoC2> llink and rlink are the nodes and label is the label of the link between the nodes
+14:54:50 <KinoC2> http://www.link.cs.cmu.edu/link/dict/summarize-links.html
+14:56:01 <KinoC2> has the key of labels indexed by the first capatilized characters.
+14:56:28 <KinoC2> So to find Ds you look up D.
+14:58:34 <KinoC2> vec is just the link written out and matched in lowercase form. so the vec "bill ss ate.v" will match the 3 if, and generate the ingest actor slot filler
+14:59:22 <KinoC2> while "ate.v os apple.n" will match the last if, and generate the OBJECT filler
+15:00:38 <KinoC2> The same with the twostepCD pattern rules only they connect through the middle nodes.
+15:01:26 <KinoC2> So it will consider but do nothing with "bill ss ate.v os apple.n"
+15:03:42 <KinoC2> it would trigger on "went.v mvp to jp Dallas" for an Ptrans though, since it has to go through at least one preposition to find the final head word of the target phrase
+15:38:17 --- join: queg (queg@dialup-192.174.220.203.acc01-geor-mor.comindico.com.au) joined #opencyc
+15:45:41 --- part: queg left #opencyc
+15:46:49 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+17:19:31 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:27:46 --- quit: Cobra ("[x]chat")
+17:27:58 --- quit: mcburton ("Client exiting")
+17:33:57 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+17:37:11 --- quit: CyHawk (Read error: 110 (Connection timed out))
+18:59:33 --- quit: kinoc (Read error: 60 (Operation timed out))
+19:53:02 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+22:01:45 --- quit: kinoc (Read error: 60 (Operation timed out))
+23:59:59 --- log: ended opencyc/03.02.24

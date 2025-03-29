@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/WD-html-in-xml/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Wave Phenomena</title></head>
+    <body>
+        <h2>
+            <a href="http://www.opencyc.org"><img alt="OpenCyc Homepage"
+                    border="0"
+            src="/cycdoc/img/opencyc-logo.gif" /></a>Wave
+        Phenomena</h2>E-Mail Comments to: <a
+        href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a><br />Last
+        Update: 12/13/02<br />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a><br />
+        <hr />
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+        <br />
+        <hr />
+        <p />  The following representation scheme is a starting point
+        for modeling  phenomena such as electromagnetic radiation,
+        sound, or surface waves in  a fluid.  These events are
+        classified as elements of <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a>,  a
+        special subset of <a
+        href=./top-vocab.html#Translocation>#$Translocation</a>. This
+        scheme captures some common  features of these phenomena, while
+        remaining noncommittal as to their  underlying physical
+        mechanisms.  There is currently no "physics" theory  in Cyc of
+        the behavior of any wave phenomena, not even at a naive level.
+        The intent of the following vocabulary is to establish a basic
+        level of  representation which will not unduly constrain future
+        work.<p>    Since <a
+        href=/cycdoc/vocab/wave-vocab.html#WavePropagation>#$WavePropagation</a>
+        is a subset of <a
+        href=./top-vocab.html#Translocation>#$Translocation</a>, each
+        element of  <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a> has
+        an origin (<a
+        href=./transportation-vocab.html#fromLocation>#$fromLocation</a>)
+        and an endpoint  (<a
+        href=./transportation-vocab.html#toLocation>#$toLocation</a>).
+        Translational movements (<a
+        href=./movement-vocab.html#Movement-TranslationEvent>#$Movement-TranslationEvent</a>)
+        also have a <a
+        href=./transportation-vocab.html#toLocation>#$toLocation</a> and
+        <a
+        href=./transportation-vocab.html#fromLocation>#$fromLocation</a>,
+        but elements of  <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a>
+        differ in that they have no <a
+        href=./actor-vocab-complete.html#objectMoving>#$objectMoving</a>.
+        Instead,  there is some physical change which first occurs at
+        the <a
+        href=./transportation-vocab.html#fromLocation>#$fromLocation</a>
+        and then `moves' away -- i.e., the location of occurrence
+        changes  location in a continuous fashion away from the origin.
+        Although there is  something `moving', wave phenomena are more
+        eventlike than objectlike.  For example, a sound is something
+        that happens to the medium in which it  propagates; for a given
+        location, its structure is defined by a temporal  sequence of
+        certain <a href=./top-vocab.html#subEvents>#$subEvents</a>
+        (changes in pressure). <p>    Elements of <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a>,
+        though they are <a href=./time-vocab.html#Event>#$Event</a>s,
+        are  distinguishable from the events that produce them.
+        Consider an  <a href=./info-vocab.html#Utterance>#$Utterance</a>
+        event: one can reasonably discuss the sound itself without
+        referring to the mechanism that produced it, whether that be a
+        person, a  recording, or a voice synthesizer.  Therefore, Cyc
+        distinguishes between  a <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a> and
+        its generation (<a
+        href=./wave-vocab.html#EmittingAWave>#$EmittingAWave</a>).<p>
+        Some important subsets of <a
+        href=./wave-vocab.html#WavePropagation>#$WavePropagation</a> are
+        also subsets of  #$InformationBearingEvents.<p><br />
+        <hr />
+        <h3>Top Level Collections</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="WavePropagationType">#$WavePropagationType<i>&nbsp;&nbsp;&nbsp;types
+                    of wave propogation</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of collections. Each instance of <a
+            href="./wave-vocab.html#WavePropagationType">#$WavePropagationType</a>
+            is a specialization of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            (q.v). Instances of <a
+            href="./wave-vocab.html#WavePropagationType">#$WavePropagationType</a>
+            include the collections <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation,</a>
+                <a href="./wave-vocab.html#Sound">#$Sound,</a> <a
+            href="./wave-vocab.html#VisibleLight">#$VisibleLight,</a>
+            and <a href="./wave-vocab.html#XRay">#$XRay.</a><br />
+            <b>guid: </b>bf331d6f-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SiblingDisjointCollectionType
+            #$SecondOrderCollection  <br />
+            <b>direct specialization of: </b>
+            <a href="./time-vocab.html#TemporalStuffType">#$TemporalStuffType</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>#$SoundWavePropagationType
+            #$ElectromagneticRadiationType  </blockquote>
+        <font size="+1">
+            <a
+                    name="WavePropagation">#$WavePropagation<i>&nbsp;&nbsp;&nbsp;wave propagations</i></a></font>
+        <blockquote> A specialization of <a
+            href="./top-vocab.html#Translocation">#$Translocation</a>
+            (q.v.). Each instance of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            is an event in which a wavelike disturbance propagates
+            through space, with or without a medium. A wave propagation
+            is like a translational movement (see <a
+            href="./movement-vocab.html#Movement-TranslationEvent">#$Movement-TranslationEvent)</a>
+            in that it can have both a starting and an ending point (see
+                <a
+            href="./actor-vocab.html#fromLocation">#$fromLocation</a>
+            and <a
+            href="./actor-vocab.html#toLocation">#$toLocation),</a> but
+            differs from a translational motion in that there is no
+            object moving (see <a
+            href="./actor-vocab.html#objectMoving">#$objectMoving).</a>
+            Notable specializations of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            include <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>
+            and <a href="./wave-vocab.html#Sound">#$Sound.</a><br />
+            <b>guid: </b>c10080f5-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#DefaultDisjointScriptType">#$DefaultDisjointScriptType</a>
+                <a
+            href="./time-vocab.html#TemporalStuffType">#$TemporalStuffType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./top-vocab.html#Translocation">#$Translocation</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>
+                <a
+            href="./info-vocab.html#InformationBearingWavePropagation">#$InformationBearingWavePropagation</a>
+                <a href="./wave-vocab.html#Sound">#$Sound</a>  <a
+            href="./wave-vocab.html#AudibleSound">#$AudibleSound</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="EmittingAWave">#$EmittingAWave<i>&nbsp;&nbsp;&nbsp;wave emissions</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of events; a subcollection of <a
+            href="./top-vocab.html#Emission">#$Emission.</a> Each
+            instance is an event in which a wave is emitted at a <a
+            href="./actor-vocab.html#fromLocation">#$fromLocation.</a>
+            For example, Themistocles ordering his fleet to withdraw;
+            Miles Davis playing the trumpet; an emergency flare burning
+            by the side of the road. See also <a href="./wave-vocab.html#WavePropagation">#$WavePropagation.</a><br />
+            <b>guid: </b>bebe7cda-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#TemporalStuffType">#$TemporalStuffType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./top-vocab.html#Emission">#$Emission</a>&nbsp;&nbsp;#$GenerationOrConversionEvent&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./info-vocab.html#EmittingSound">#$EmittingSound</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="ReceivingAWave">#$ReceivingAWave<i>&nbsp;&nbsp;&nbsp;receiving
+                    a wave</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./top-vocab.html#Receiving">#$Receiving.</a> Each
+            instance of <a
+            href="./wave-vocab.html#ReceivingAWave">#$ReceivingAWave</a>
+            is an event in which an instance of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            (q.v.) is received at some location (the location is related
+            to the instance of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            by the predicate <a
+            href="./actor-vocab.html#toLocation">#$toLocation).</a>
+            Instances of <a
+            href="./wave-vocab.html#ReceivingAWave">#$ReceivingAWave</a>
+            include a CD player receiving an infrared signal from a
+            remote control, a person hearing a sound of distant thunder,
+            and a radio telescope receiving signals from a celestial body.<br />
+            <b>guid: </b>bfccc722-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#TemporalStuffType">#$TemporalStuffType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./top-vocab.html#Receiving">#$Receiving</a>&nbsp;&nbsp;</blockquote>
+        <hr />
+        <h3>Types Of Wave Phenomena</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="ElectromagneticRadiation">#$ElectromagneticRadiation<i>&nbsp;&nbsp;&nbsp;electromagnetic radiation</i></a></font>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            (q.v.). Each instance of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>
+            is an event that arises from the interaction of an
+            electrical field and a magnetic field. Specializations of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>
+            include <a
+            href="./wave-vocab.html#VisibleLight">#$VisibleLight,</a> <a
+            href="./wave-vocab.html#RadioWave">#$RadioWaves,</a> and <a href="./wave-vocab.html#XRay">#$XRays.</a><br />
+            <b>guid: </b>c1009603-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./wave-vocab.html#WavePropagationType">#$WavePropagationType</a>
+                <a
+            href="./top-vocab.html#DefaultDisjointScriptType">#$DefaultDisjointScriptType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>#$Light  <a
+            href="./wave-vocab.html#RadioWave">#$RadioWave</a>  <a
+            href="./wave-vocab.html#GammaRay">#$GammaRay</a>  <a
+            href="./wave-vocab.html#XRay">#$XRay</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="VisibleLight">#$VisibleLight<i>&nbsp;&nbsp;&nbsp;light waves</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of events; a subcollection of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation.</a>
+            Every instance of <a
+            href="./wave-vocab.html#VisibleLight">#$VisibleLight</a> is
+            an instance of electromagnetic radiation having a wavelength
+            approximately between 3800 and 7750 <a
+            href="./quantity-vocab.html#Angstrom">#$Angstroms,</a> i.e.,
+            light visible to human eyes.<br />
+            <b>guid: </b>bd58f608-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ElectromagneticRadiationType  <br />
+            <b>direct specialization of: </b>#$Light&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./info-vocab.html#VisualImage">#$VisualImage</a>  </blockquote>
+        <font size="+1">
+            <a name="RadioWave">#$RadioWave<i>&nbsp;&nbsp;&nbsp;radio waves</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation.</a>
+            Each instance of <a
+            href="./wave-vocab.html#RadioWave">#$RadioWave</a> is an
+            instance of electromagnetic radiation having a wavelength in
+            the range from approximately 1 centimeter (1x10^8 <a
+            href="./quantity-vocab.html#Angstrom">#$Angstrom)</a> to
+            3,000,000 meters (3x10^18 <a
+            href="./quantity-vocab.html#Angstrom">#$Angstrom),</a> and a
+            frequency of approximately 10^8 <a
+            href="./wave-vocab.html#Hertz">#$Hertz</a> to 10^2 <a href="./wave-vocab.html#Hertz">#$Hertz.</a><br />
+            <b>guid: </b>c100962b-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ElectromagneticRadiationType  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="XRay">#$XRay<i>&nbsp;&nbsp;&nbsp;x rays (wave
+                    propagations) (moves) (transfers)</i></a></font>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation.</a>
+            Each instance of <a href="./wave-vocab.html#XRay">#$XRay</a>
+            is some electromagnetic radiation with a wavelength (see the
+            predicate <a
+            href="./wave-vocab.html#wavelength">#$wavelength)</a>
+            ranging from about 1 <a
+            href="./quantity-vocab.html#Angstrom">#$Angstrom</a> to
+            1x10^-3 <a href="./quantity-vocab.html#Angstrom">#$Angstroms.</a><br />
+            <b>guid: </b>bf85c802-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ElectromagneticRadiationType  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="GammaRay">#$GammaRay<i>&nbsp;&nbsp;&nbsp;gamma rays</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation.</a>
+            Each instance of <a
+            href="./wave-vocab.html#GammaRay">#$GammaRay</a> is an
+            instance of electromagnetic radiation that has a wavelength
+            (see the predicate <a
+            href="./wave-vocab.html#wavelength">#$wavelength)</a> of
+            less than 1x10^-2 angstroms (see the constant <a
+            href="./quantity-vocab.html#Angstrom">#$Angstrom).</a> Low
+            power instances of <a
+            href="./wave-vocab.html#GammaRay">#$GammaRay</a> overlap
+            with high power instances of <a
+            href="./wave-vocab.html#XRay">#$XRay</a> (q.v.).<br />
+            <b>guid: </b>c05ce4b7-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ElectromagneticRadiationType  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#ElectromagneticRadiation">#$ElectromagneticRadiation</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="Sound">#$Sound<i>&nbsp;&nbsp;&nbsp;sounds (wave propagations)</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation.</a>
+            Each instance of <a
+            href="./wave-vocab.html#Sound">#$Sound</a> is an instance of
+            wave propagation in which longitudinal pressure waves travel
+            through matter. Notable specializations of <a
+            href="./wave-vocab.html#Sound">#$Sound</a> include <a
+            href="./wave-vocab.html#AudibleSound">#$AudibleSound,</a> <a
+            href="./wave-vocab.html#UltraSound">#$UltraSound,</a> and <a href="./info-vocab.html#Music">#$Music.</a><br />
+            <b>guid: </b>be99a967-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./wave-vocab.html#WavePropagationType">#$WavePropagationType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./wave-vocab.html#AudibleSound">#$AudibleSound</a>
+                <a href="./wave-vocab.html#UltraSound">#$UltraSound</a>
+            #$Utterance-IBT  </blockquote>
+        <font size="+1">
+            <a
+                    name="AudibleSound">#$AudibleSound<i>&nbsp;&nbsp;&nbsp;audible sounds</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote>
+            <b>guid: </b>bd5906fc-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SoundWavePropagationType  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#Sound">#$Sound</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./info-vocab.html#SoundInformationBearingThing">#$SoundInformationBearingThing</a>
+                <a href="./info-vocab.html#Music">#$Music</a>  <a
+            href="./info-vocab.html#AnimalUtterance-IBT">#$AnimalUtterance-IBT</a>
+                <a
+            href="./info-vocab.html#AnimalSound">#$AnimalSound</a>  </blockquote>
+        <font size="+1">
+            <a name="UltraSound">#$UltraSound<i>&nbsp;&nbsp;&nbsp;ultrasound</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./wave-vocab.html#Sound">#$Sound.</a> Each instance of
+                <a href="./wave-vocab.html#UltraSound">#$UltraSound</a>
+            is a sound wave having a <a
+            href="./quantity-vocab.html#Frequency">#$Frequency</a>
+            (q.v.) greater than 20,000 cycles per second, a frequency
+            which is above the range of human hearing.<br />
+            <b>guid: </b>c02c1799-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SoundWavePropagationType  <br />
+            <b>direct specialization of: </b>
+            <a href="./wave-vocab.html#Sound">#$Sound</a>&nbsp;&nbsp;</blockquote>
+        <hr />
+        <h3>Measurement Of Wave Phenomena</h3>
+        <br />
+        <font size="+1">
+            <a name="wavelength">#$wavelength<i>&nbsp;&nbsp;&nbsp;wavelength</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./wave-vocab.html#wavelength">(#$wavelength</a> WAVE
+            LENGTH) means that the <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            WAVE consists of waves having the length LENGTH. LENGTH is a
+                <a href="./quantity-vocab.html#Distance">#$Distance</a>
+            measuring one complete wave in a <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a> event.<br />
+            <b>guid: </b>c10096d6-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="amplitudeOfSignal">#$amplitudeOfSignal<i>&nbsp;&nbsp;&nbsp;amplitude
+                    of signal</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./wave-vocab.html#amplitudeOfSignal">(#$amplitudeOfSignal</a>
+            WAVE AMP) means the distance from the average to the
+            extremes of the signal WAVE is AMP.<br />
+            <b>guid: </b>be5d5b47-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./quantity-vocab.html#IntervalBasedQuantitySlot">#$IntervalBasedQuantitySlot</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="frequencyOfSignal">#$frequencyOfSignal<i>&nbsp;&nbsp;&nbsp;frequency
+                    (binary predicate) (CycL predicate) (relationship)</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./wave-vocab.html#frequencyOfSignal">(#$frequencyOfSignal</a>
+            WAVE FREQ) means that the <a
+            href="./wave-vocab.html#WavePropagation">#$WavePropagation</a>
+            event WAVE consists of waves that occur at intervals of
+            FREQ. FREQ is a measure of <a
+            href="./quantity-vocab.html#Frequency">#$Frequency</a>
+            generally expressed as cycles per unit of time; frequency of
+            electromagnetic radiation is standardly measured in <a href="./wave-vocab.html#Hertz">#$Hertz.</a><br />
+            <b>guid: </b>c10096a8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="Frequency">#$Frequency<i>&nbsp;&nbsp;&nbsp;frequencies
+                    (quantities) (structured information sources)</i></a></font>
+        <blockquote> A specialization of <a
+            href="./quantity-vocab.html#Rate">#$Rate.</a> Each instance
+            of <a href="./quantity-vocab.html#Frequency">#$Frequency</a>
+            is the number of times something happens during some time
+            interval. Instances of <a
+            href="./quantity-vocab.html#Frequency">#$Frequency</a> may
+            be either single values (see the collection <a
+            href="./quantity-vocab.html#ScalarPointValue">#$ScalarPointValue),</a>
+            such as 103 kiloHertz, or a range of values, such as
+            #$Rarely. Note that instances of <a
+            href="./quantity-vocab.html#Frequency">#$Frequency</a> are
+            important in the characterization of types of <a href="./wave-vocab.html#WavePropagation">#$WavePropagation.</a><br />
+            <b>guid: </b>bd58fad4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#DerivedNumericScalarIntervalType">#$DerivedNumericScalarIntervalType</a>
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of: </b>
+            <a href="./quantity-vocab.html#Rate">#$Rate</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="Hertz">#$Hertz<i>&nbsp;&nbsp;&nbsp;hertz (unit of
+                    measure) (relationship) (mathematical concept)</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> An instance of <a
+            href="./fundamental-vocab.html#IndividualDenotingFunction">#$IndividualDenotingFunction</a>
+            and <a
+            href="./quantity-vocab.html#UnitOfFrequency">#$UnitOfFrequency.</a>
+                <a href="./wave-vocab.html#Hertz">#$Hertz</a> returns a
+            unit of frequency in hertz when applied to a real number
+            (see the collection <a
+            href="./fundamental-vocab.html#SubLRealNumber">#$SubLRealNumber)</a>
+            or a sequence of two real numbers. Hertz is the basic unit
+            of measure for elements of <a
+            href="./quantity-vocab.html#Frequency">#$Frequency</a> (1
+            Hz=1 cycle per second). <a
+            href="./wave-vocab.html#Hertz">(#$Hertz</a> NUM) denotes the
+            frequency NUM cycles per second.<br />
+            <b>guid: </b>bd588e07-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./quantity-vocab.html#UnitOfFrequency">#$UnitOfFrequency</a>
+                <a
+            href="./quantity-vocab.html#StandardUnitOfMeasure">#$StandardUnitOfMeasure</a>
+                <a
+            href="./quantity-vocab.html#UnitOfMeasureNoPrefix">#$UnitOfMeasureNoPrefix</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <p />
+        <hr />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a></body></html>

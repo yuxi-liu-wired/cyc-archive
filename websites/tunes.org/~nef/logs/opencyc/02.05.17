@@ -1,0 +1,100 @@
+00:00:00 --- log: started opencyc/02.05.17
+03:48:25 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+06:53:59 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+06:54:39 <theos_wrk> lo all
+07:00:45 --- quit: theos_wrk (Read error: 104 (Connection reset by peer))
+07:13:49 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+07:13:55 <theos_wrk> back from the crash
+08:32:30 * theos_wrk is away: F L U P P ing
+08:35:39 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+08:49:27 * theos_wrk is back (gone 00:16:57)
+09:54:50 --- part: theos_wrk left #opencyc
+11:01:44 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+11:17:02 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+13:57:51 <dmiles> question:
+13:57:56 <dmiles> (implies 
+13:57:56 <dmiles>    (isa ?City MudAreaCity)
+13:57:56 <dmiles>    (and 
+13:57:56 <dmiles> 	(thereExists ?Area  
+13:57:56 <dmiles> 		(and
+13:57:57 <dmiles> 			(isa ?Area MudAreaOutdoor)
+13:57:59 <dmiles> 			(nameString ?Area "Center of town")
+13:58:01 <dmiles> 			(subRegions ?Area ?City)))
+13:58:03 <dmiles> 	(thereExists ?Gate  
+13:58:05 <dmiles> 		(and
+13:58:07 <dmiles> 			(isa ?Gate MudAreaOutdoor)
+13:58:09 <dmiles> 			(nameString ?Gate "Gate into town")
+13:58:10 <dmiles> 			(subRegions ?Gate ?City)))
+13:58:13 <dmiles> 	(mudPathwayToArea ?Area ?Gate "enter")
+13:58:15 <dmiles> 	(mudPathwayToArea ?Gate ?Area "leave")))
+13:58:16 <dmiles> eww
+13:58:19 <dmiles> hrrm
+13:58:45 <dmiles> actually this is a good uestion to ask on List
+14:04:59 --- join: Don (Don@ip-216-23-48-58.adsl.one.net) joined #opencyc
+14:14:01 <dmiles> ah it was my quantifiers scopes
+14:14:27 <dmiles> the bottem two assertions are outside the scopes
+14:14:31 <dmiles> err senetnces
+14:20:12 <Don> hey dmiles, what are you working on today
+14:20:38 <dmiles> knowledge that createsd places in a mud
+14:21:11 <Don> are you creating new assertions?
+14:21:13 <dmiles> like having trouble making the skolems become actuall objects
+14:21:23 <dmiles> thats the goal to create GAF like things
+14:21:46 <dmiles> that have the thereExists varaibles filled in
+14:21:54 <dmiles> example:
+14:22:16 <dmiles> (forAll (?City )
+14:22:16 <dmiles>    (thereExists (?Area  ?Gate)
+14:22:16 <dmiles>    (implies 
+14:22:16 <dmiles>    (isa ?City MudAreaCity)
+14:22:16 <dmiles>                 (and
+14:22:16 <dmiles>                         (isa ?Area MudAreaOutdoor)
+14:22:18 <dmiles>                         (nameString ?Area "Center of town")
+14:22:20 <dmiles>                         (subRegions ?Area ?City)
+14:22:22 <dmiles>                         (isa ?Gate MudAreaOutdoor)
+14:22:24 <dmiles>                         (nameString ?Gate "Gate into town")
+14:22:26 <dmiles>                         (subRegions ?Gate ?City)
+14:22:28 <dmiles>                         (mudPathwayToArea ?Area ?Gate "enter")
+14:22:30 <dmiles>                         (mudPathwayToArea ?Gate ?Area "leave")))))
+14:23:05 <dmiles> for each city in the KB there should be at least 8 gafs asserted
+14:23:53 <dmiles>  MudAreaOutdoor is a FirstOrderCOllection
+14:24:17 <dmiles> and genled to SpatialThingLocalized
+14:24:27 <Don> that encompasses all Cities?
+14:24:40 <dmiles> it would yes.. but there can be exceptions in Cyc
+14:24:56 <dmiles> but currely that is assertted MONTONIC
+14:25:33 <dmiles> but as a forward rule that should create two extra areas
+14:25:54 <dmiles> that are instances of MudAreaOutdoor
+14:26:03 <dmiles> right now in Cyc its creating..
+14:26:17 <dmiles> a 'thereExists' rule for each City
+14:26:32 <dmiles> which is infact the safest thing for it to do
+14:27:14 <dmiles> it doesnt enforce any 'particular'  MudAreaOutdoor skolems into each city
+14:27:59 <dmiles> which is a timid behauvour
+14:28:10 <dmiles> i am tryiong now to find out how to make it do sop
+14:28:53 <dmiles> also any skolems it creates needs to be arity 1
+14:29:02 <dmiles> with on ?City variable
+14:29:35 <dmiles> brb
+14:32:34 <Don> Oops gotta go   good luck
+14:32:54 --- part: Don left #opencyc
+15:10:10 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+15:10:14 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+17:14:38 --- quit: Seth (Ping timeout: 14400 seconds)
+17:33:45 --- join: markwattier (~mark@apx1-04-26.pdx.du.teleport.com) joined #opencyc
+17:34:05 <markwattier> I am getting an exception from running the following:
+17:34:11 <markwattier> cycaccess.converseList("(CYC-ASSERT '(#$isTicklish #$MarkWCustomer1) #$MarkWExpe
+17:34:11 <markwattier> rimentalMt)");
+17:34:18 <markwattier> The message from the exception is:
+17:34:23 <markwattier> org.opencyc.cycobject.CycSymbol
+17:34:29 <markwattier> Even though I get the exception, the assertion works, and I can see the
+17:34:36 <markwattier> result in the browser when I look at "All KB Assertions" for my microtheory.
+17:34:42 <markwattier> Is this an API bug, or might I be doing something wrong?
+17:38:05 <markwattier> It looks like I have a knack for finding the quiet times on this channel
+17:38:12 <markwattier> I have another nit-pick with the java api. When I use CycList.isValid(), the
+17:38:20 <markwattier> result appears to be negative - that is, it only returns true when the list
+17:38:28 <markwattier> is empty. This is easy to work-around, but is this a known api bug, or am
+17:38:33 <markwattier> I misunderstanding something?
+17:38:58 <markwattier> And I will look at the logs later, of course,
+17:39:07 <markwattier> and thanks in advance.
+18:18:11 --- part: markwattier left #opencyc
+22:16:37 --- quit: dmiles-- (carter.openprojects.net irc.openprojects.net)
+22:16:38 --- quit: DemiGod (carter.openprojects.net irc.openprojects.net)
+22:19:13 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+22:19:13 --- join: DemiGod (ggelling@207.207.8.145) joined #opencyc
+23:59:59 --- log: ended opencyc/02.05.17

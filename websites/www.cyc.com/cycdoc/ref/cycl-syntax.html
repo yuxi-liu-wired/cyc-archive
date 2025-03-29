@@ -1,0 +1,1179 @@
+<html>
+
+<title>The Syntax of CycL</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>The Syntax of CycL</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  See <a href=/cycdoc/legal-terms.html>Terms of Usage.</a><br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+CycL is a formal language whose syntax derives from 
+<A HREF="glossary.html#FOPC">first-order predicate calculus</A> 
+(the language of formal logic) and from Lisp. In order to express
+common sense knowledge, however, it goes far beyond first order logic. 
+The vocabulary of CycL consists of <A HREF="glossary.html#term">terms</A>.  
+The set of terms can be divided into 
+<A HREF="glossary.html#constant">constants</A>, 
+<A HREF="glossary.html#NAT">non-atomic terms</A> (NATs), 
+<A HREF="glossary.html#variable">variables</A>, and a few other types 
+of objects.  Terms are combined into meaningful CycL 
+<A HREF="glossary.html#expression">expressions</A>, 
+which are used to make <A HREF="glossary.html#assertion">assertions</A> 
+in the CYC&reg; <A HREF="glossary.html#KB">knowledge base</A>.
+
+<hr>
+<h2>Contents:</h2> 
+
+<ul>
+
+<li><A HREF="#constants">Constants</A>
+<ul>
+  <li><A HREF="#constant names">Constant Names</A>
+  <li><A HREF="#naming conventions">Naming Conventions</A>
+  <li><A HREF="#naming strategies">Naming Strategies</A>
+  <li><A HREF="#significance of names">Significance of Names</A>
+</ul>
+
+<li><A HREF="#variables">Variables</A>
+<ul>
+  <li><A HREF="#variable names">Variable Names</A>
+  <li><A HREF="#variable naming conventions">Naming Conventions</A>
+</ul>
+
+<li><A HREF="#formulas">Formulas</A>
+<ul>
+  <li><A href="#CycFormula">#$CycFormula</A> 
+  <li><A HREF="#atomic formulas">Atomic Formulas</A>
+</ul>
+
+<li><A HREF="#predicates">Predicates</A>
+<ul>
+  <li><A HREF="#predicate arity">Predicate Arity</A>
+  <li><A HREF="#predicate argument types">Predicate Argument Types</A>
+</ul>
+
+
+<li><A HREF="#logical connectives">Logical Connectives</A>
+<ul>
+  <li><A HREF="#not">#$not</A>
+  <li><A HREF="#and">#$and</A>
+  <li><A HREF="#or">#$or</A>
+  <li><A HREF="#implies">#$implies</A>
+  <li><A HREF="#well-formedness">Well-Formedness of Complex Formulas</A>
+</ul>
+
+<li><A HREF="#quantification">Quantification</A>
+<ul>
+  <li><A HREF="#forAll">#$forAll</A>
+  <li><A HREF="#multiple quantification">Multiple Quantification</A>
+  <li><A HREF="#unbound variables">Unbound Variables</A>
+  <li><A HREF="#thereExists">#$thereExists</A>
+  <li><A HREF="#thereExistExactly">#$thereExistExactly, #$thereExistAtLeast,
+#$thereExistAtMost</A> 
+  <li><A href="#well-formedness-2">Well-Formedness of Quantified Formulas</A>
+  <li><A HREF="#skolemization">Skolemization</A>
+</ul>
+
+<li><A HREF="#NATs">Non-Atomic Terms</A>
+<ul>
+  <li><A HREF="#functions">Functions</A>
+  <li><A HREF="#function arity">Function Arity</A>
+  <li><A HREF="#function argument types">Function Argument Types and
+Result Types</A>
+  <li><A HREF="#IDFs vs. CDFs">IndividualDenotingFunctions vs.
+CollectionDenotingFunctions</A>
+  <li><A HREF="#reifiable-functions">Reifiable Functions vs.
+Non-Reifiable Functions</A> 
+  <li><A HREF="#quantifying into nats">Quantifying into NATs</A>
+</ul>
+
+<li><A HREF="#assertions">Assertions</A>
+<ul>
+  <li><A HREF="#assertion formulas">Formulas</A>
+  <li><A HREF="#truth values">Truth Values</A>
+  <li><A HREF="#microtheories">Microtheories</A>
+  <li><A HREF="#directions">Directions</A>
+  <li><A HREF="#support">Supports</A>
+</ul>
+
+</ul>
+
+<hr>
+
+<H2><A NAME="constants">Constants</A></H2> 
+<dl> 
+
+Constants are the "vocabulary words" of the CYC&reg; knowledge base.  The CYC&reg
+KB is an attempt to model the world as most sane, adult humans perceive
+it, so each constant stands for some thing or concept in the world that
+we think many people know about and/or that most could understand.<p>
+
+The KB contains constants that denote collections of other concepts,
+such as <a href=/cycdoc/vocab/physiology-vocab.html#AnimalWalkingProcess>#$AnimalWalkingProcess</a> (the set of all actions in which some animal
+walks) or #$Typewriter (the set of all typewriters).  It can
+have constants that denote individual things, some of which are
+more-or-less permanently in the KB, like
+#$InternalRevenueService, and some of which might get created
+only when reasoning about some state of affairs, like
+#$Walking00036 (a particular case of walking).  Some of the
+individuals represented in the KB are predicates, such as
+<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> or <a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a>, that allow one to express
+relationships among constants.  Others are functions, such as
+<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a>, which can take constants or other things as
+arguments, and generate new concepts (i.e., (#$GovernmentOf
+#$Canada)).<p>
+
+Each constant has its own data structure in the KB, consisting of the constant and the assertions which describe it.  
+   
+<dt><H3><A NAME="constant names">Constant Names</A></H3>
+<dd>
+
+Most CYC&reg; constants have a unique name, such as #$BillJ,
+<a href=/cycdoc/vocab/material-vocab.html#massOfObject>#$massOfObject</a>, or #$MapleTree.  (For information on
+those that don't, see <A HREF="#reifiable-functions">Reifiable
+Functions</A> below.)<p>
+
+CYC&reg; constants are referred to with the prefix "#$&quot; (read
+"hash-dollar").  These characters are sometimes omitted in documents
+describing CycL, and they may be omitted by certain interface tools.
+But in these CYC&reg; Documentation pages, the policy will be to use the "#$&quot;
+prefix when referring to CYC&reg; constants.<p>
+
+<dt><H3><A NAME="naming conventions">Naming Conventions</A></H3>
+<dd>
+
+The name of a CYC&reg;
+ constant -- the part after the "#$&quot; prefix -- must
+follow these rules:
+
+All CYC&reg; constant names must be at least 2 characters long
+(not including the #$ prefix).<p>
+
+Constant names can include any uppercase or lowercase letter, any digit,
+and the symbols "-" (dash), "_" (underscore), and "?" (question mark).
+No other characters, such as "!", "&amp", or "@" are allowed.
+This policy is enforced in the CYC&reg; Functional Interface and in the CYC&reg
+Web Interface.<p>
+
+CYC&reg; constant names are case-sensitive: #$foo is not the same as #$Foo.
+However, distinguishing two constant names solely on the basis of
+capitalization is prohibited by the system.<p>
+
+All CYC&reg; predicate names must begin with a lowercase
+character.  (This does not include all the things that are presently
+instances of <a href=/cycdoc/vocab/fundamental-vocab.html#Predicate>#$Predicate</a> in CYC&reg;.  Some of these
+latter things are more like functions, and their names begin
+with uppercase letters).<p>
+
+All non-predicate constant names must begin with an
+uppercase character.  Non-predicate constant names may also
+begin with a numeric character (e.g., #$3MCorporation).  We
+may also allow predicates to begin with numeric characters,
+if someone makes a compelling argument for why this should
+be allowed.<p>
+
+All CYC&reg; constant names should be composed of one or more
+meaningful "words" in sequence, with no breaks except for
+dashes or underlines (e.g. <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> and
+#$SportsCar).  A sequence of numeric characters may
+count as a "word" (e.g., #$FrontOfficeOf123Corp).  With the
+exception noted above for predicate names, each
+(non-numeric) "word" in a sequence must begin with a capital
+letter.  An acronym may count as a "word", but all its
+characters will be the same case (e.g., lower case if the
+acronym begins the name of a predicate constant;
+otherwise uppercase).<p>
+
+Hyphens are used to set off parts of names which restrict or refine the
+meaning of the name, as in #$Fruit-TheWord or #$Horse-Domesticated.<p>
+
+<dt><H3><A NAME="naming strategies">Naming Strategies</A></H3>
+<dd>
+
+In general, it's best to give related constants names which are
+alphabetically proximal.  Some of our interface tools make it easy to
+search for all constants whose name begins with a certain string of
+characters, and it's easier to find all constants having to do with
+horses if they have been given names like #$Horse-Domesticated and
+#$Horse-Wild than if they have been given names like "DomesticatedHorse"
+and "WildHorse".<p>
+
+When naming a constant, it's important to assign a name that
+distinguishes the denoted concept from other concepts it might get
+confused with.  So "Bow" would be a terrible name for a constant.
+Instead, names like "Bow-BoatPart", "BowTheWeapon",
+"Bowing-BodyMovement" should be used, depending on the underlying
+concept denoted.<p>
+
+Sometimes it is possible to take this principle of specificity in names
+to an extreme, and attempt to embody the whole meaning of the constant
+in its name.  This is discouraged.  For example, one might be tempted to
+give the constant <a href=/cycdoc/vocab/part-vocab.html#physicalParts>#$physicalParts</a> the name
+"distinctIdentifiablePhysicalParts", but it is better to leave the name
+a bit terser since it isn't easily confused with some other concept, and
+put the additional information in the <A
+HREF="glossary.html#constant-docs">constant documentation</A>.
+    
+<dt><H3><A NAME="significance of names">Significance of Names</A></H3>
+<dd>
+
+It's important to remember that the names we assign to constants mean
+nothing to CYC&reg;.  It doesn't matter whether the concept <I>green </I> is
+represented by #$Green, #$GreenColor, #$Verde, #$Gruen, or #$EMRG.<p>
+
+It's also very important never to assume that you, the observer of the
+CYC&reg; KB, can know with certainty what a constant denotes to the system,
+just from seeing its name and nothing else.<p>
+
+The meaning of a constant in CycL is determined by the assertions in the
+KB that use that constant.  For example, from the following assertions,
+it is easy to tell what the hypothetical constant #$EMRG means:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$EMRG <a href=/cycdoc/vocab/material-vocab.html#Color>#$Color</a>)
+(<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$Grass37 #$EMRG)
+(<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> ?O (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?O #$Okra) (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> ?O #$EMRG)))
+</pre>
+
+For convenience, we choose names for CYC&reg; constants that will indicate to
+human users what the constant is intended to mean.  (For example, #$Red
+or #$RedColor.)  But remember, CYC&reg; doesn't understand those strings.
+Don't be misled by evocative names like
+#$LittleRedHairedGirlLikedByCharlieBrown.  Unless that constant is
+appropriately related to other CYC&reg; constants such as #$FemaleChild,
+<a href=/cycdoc/vocab/physiology-vocab.html#hairColor>#$hairColor</a>, #$RedHairColor, #$CharlieBrown, and <a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a>, it is
+meaningless to CYC&reg;.<p>
+
+</dl>
+
+<H2><A NAME="variables">Variables</A></H2>
+
+<A HREF="glossary.html#quantification">Quantified</A> CycL expressions
+(discussed below) contain one or more variables which stand for <A
+HREF="glossary.html#constant">constants</A> whose identities are not
+specified.  A variable may appear (nearly) anywhere a constant can
+appear.
+
+<dl>
+
+<dt><H3><A NAME="variable names">Variable Names</A></H3>  
+<dd>
+
+Variable names must begin with a question mark and are
+ordinarily written in capital letters ("?FOO").  Variable names are
+subject to the same restrictions on usable characters as <a
+href="#naming conventions">constant names</a>.
+
+<dt><H3><A NAME="variable naming conventions">Naming
+Conventions</A></H3>
+<dd>
+
+In formulas in which only one variable is used, it is common to use a
+single-letter variable, such as "?X".  However, when a formula
+contains more than one variable, it will be much more readable if you
+give the variables mnemonic names.  Here's an example:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?TRANSFER <a href=/cycdoc/vocab/social-vocab.html#TransferringPossession>#$TransferringPossession</a>)
+         (<a href=/cycdoc/vocab/actor-vocab-complete.html#fromPossessor>#$fromPossessor</a> ?TRANSFER ?FROM))
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?FROM <a href=/cycdoc/vocab/social-vocab.html#SocialBeing>#$SocialBeing</a>))
+</pre>
+
+"The initial possessor in a possession transfer is a social being."
+</dl>
+
+<H2><A NAME="formulas">Formulas</A></H2>
+
+CycL <A HREF="glossary.html#CycLForm">formulas</A> combine <A
+HREF="glossary.html#term">terms</A> into meaningful expressions.<p>
+
+Every formula has the structure of a Lisp list.  It is enclosed in
+parentheses, and consists of a list of objects which are commonly
+designated ARG0, ARG1, ARG2, etc.  The object in the ARG0 position may
+be a <A HREF="glossary.html#predicate">predicate</A>, a <A
+HREF="glossary.html#logical connective">logical connective</A>, or a <A
+HREF="glossary.html#quantifier">quantifier</A>.  The remaining arguments
+may be <A HREF="glossary.html#constant-atomic">atomic constants</A>, <A
+HREF="glossary.html#NAT">non-atomic terms</A>, <A
+HREF="glossary.html#variable">variables</A>, numbers, English strings
+delimited by double quotes ("), or other formulas.
+
+<dl>
+
+<dt><H3><A NAME="CycFormula">#$CycFormula</A></H3>
+<dd>
+This is the class of <A HREF="glossary.html#well-formed">well-formed</A>
+formulas in CycL.  If a CycL formula satisfies all the constraints on the
+number and types of arguments to the <A
+HREF="glossary.html#relation">relations</A> that appear in it, 
+the system will recognize it as an instance of the
+collection <a href=/cycdoc/vocab/fundamental-vocab.html#CycFormula>#$CycFormula</a>.
+
+<dt><H3><A NAME="atomic formulas">Atomic Formulas</A></H3>
+<dd>
+
+The simplest kind of formula is an atomic formula: a formula in which
+the ARG0 position is occupied by a predicate, and all the other argument
+positions are filled with terms:
+
+<pre>
+   (<a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a> #$DougLenat #$KeithGoolsbey)
+   (<a href=/cycdoc/vocab/role-vocab.html#skillCapableOf>#$skillCapableOf</a> #$LinusVanPelt #$PlayingAMusicalInstrument <a href=/cycdoc/vocab/actor-vocab-complete.html#performedBy>#$performedBy</a>)
+   (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> ?CAR ?COLOR)
+</pre>
+
+The first two of the atomic formulas above are <A
+HREF="glossary.html#GAF">ground atomic formulas</A> (GAFs), since none
+of the terms filling the argument positions ARG1, ARG2, etc. are
+variables.
+</dl>
+
+<H2><A NAME="predicates">Predicates</A></H2>
+
+Every CycL atomic formula must begin with a predicate in order to be <A
+HREF="glossary.html#well-formed">well-formed</A>.
+
+<dl>
+
+<dt><h3><A NAME="predicate arity">Predicate Arity</A></H3>
+<dd>
+
+Most predicates are defined to take a fixed number of arguments.
+There are no optional predicate arguments in CycL.  However, a few
+predicates, such as <a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a>, can take a variable number of
+arguments.  Such predicates are elements of the collection
+<a href=/cycdoc/vocab/math-vocab.html#VariableArityRelation>#$VariableArityRelation</a>. In most cases, arity is automatically inferred by CYC&reg;
+when a relation or predicate is made an instance of a certain type of
+collection (e.g. <a href=/cycdoc/vocab/fundamental-vocab.html#BinaryPredicate>#$BinaryPredicate</a>).  However, arity can also be
+asserted directly, via the binary predicate <a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a>.<p>
+
+The number of arguments a predicate takes is determined by its <A
+HREF="glossary.html#arity">arity</A>.  A predicate is described as
+unary, binary, ternary, quaternary, or quintary, according to whether it
+takes 1, 2, 3, 4, or 5 arguments.  Currently, no CycL predicate takes
+more than 5 arguments; however, if some representation required a
+predicate to take more arguments, CycL would be changed to allow
+this.<p>
+
+To be well-formed, an atomic formula must have the right number of
+arguments for the predicate filling the ARG0 position.  So,
+
+<pre>
+   (<a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a> #$DougLenat #$KeithGoolsbey #$Fido)
+</pre>
+
+is not well-formed, since the arity of <a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a> is 2, but this formula gives 3 arguments to <a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a>.
+
+<dt><h3><A NAME="predicate argument types">Predicate Argument Types</A></H3>
+<dd>
+
+The type of each argument must be specified in the definition of the
+predicate, using the predicates <a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#arg2Isa>#$arg2Isa</a>,
+etc.  For example, suppose the predicate <a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> is defined
+by the following:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> <a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> <a href=/cycdoc/vocab/fundamental-vocab.html#BinaryPredicate>#$BinaryPredicate</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a> <a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arg2Isa>#$arg2Isa</a> <a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> <a href=/cycdoc/vocab/construction-vocab.html#ShelterConstruction>#$ShelterConstruction</a>)
+</pre>
+
+To be well-formed, every formula which has <a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> in the
+ARGO position must have a term which is an instance of <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a> in the
+ARG1 position, and term which is an instance of <a href=/cycdoc/vocab/construction-vocab.html#ShelterConstruction>#$ShelterConstruction</a> in
+the ARG2 position.  So,
+
+<pre>
+   (<a href=/cycdoc/vocab/social-vocab.html#residesInDwelling>#$residesInDwelling</a> #$PottedPlant37 #$KarensHouse)
+</pre>
+
+is probably not well-formed.  Though we can never be absolutely certain
+just from the names, #$KarensHouse could be an instance of
+<a href=/cycdoc/vocab/construction-vocab.html#ShelterConstruction>#$ShelterConstruction</a>, but #$PottedPlant37 is probably not an instance
+of <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>.
+
+</dl>
+
+<H2><A NAME="logical connectives">Logical Connectives</A></H2>
+
+Complex formulas can be built up out of 
+<A HREF="glossary.html#atomic formula">atomic formulas</A> 
+or other complex formulas by using <A
+HREF="glossary.html#logical connective">logical connectives</A>, which
+are special constants analogous to the logical operators of formal
+logic.  The most important logical connectives in CycL are <a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a>,
+<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a>, and <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>.
+
+<dl>
+
+<dt><H3><A NAME="not">#$not</A></H3>
+<dd>
+
+The connective <a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> takes a single <A
+HREF="glossary.html#formula">formula</A> as an argument.  Like the "not"
+of formal logic, it reverses the <A HREF="glossary.html#tv">truth
+value</A> of its argument.  Thus,
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor))
+</pre>
+
+will be true if and only if (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor) is
+false.  Likewise,
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor))) 
+</pre>
+
+will have the same truth value as (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor).<p>
+
+<dt><H3><A NAME="and">#$and</A></H3>
+<dd>
+
+The connective <a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> takes one or more formulas as arguments.  Like
+the "and" of formal logic, it returns true if and only if each of its
+arguments evaluates to true.  Here's an example:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+   (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor)
+   (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> #$FredsBike #$FredsGarage))
+</pre>
+
+This formula states that Fred's bike is red and that it is located in
+Fred's garage.  If both of those things are true then the whole formula
+is true, but if one or both are false, then the whole formula is false.
+
+<dt><H3><A NAME="or">#$or</A></H3>
+<dd>
+
+The connective <a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> takes one or more formulas as arguments.  Like
+the "or" of formal logic, it returns true if and only if at least one of
+its arguments evaluates to true.  Here's an example:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a>
+   (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$FredsBike #$RedColor)
+   (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> #$FredsBike #$FredsGarage)
+   (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred #$FredsBike))
+</pre>
+
+This assertion states that either Fred's bike is red, or it is located
+in Fred's garage, or Fred owns it, <I>or all three</I>.  (The word "or"
+in English is sometimes taken to imply that one alternative or the other
+is true, but not both.  That is not the case with <a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a>.)  If any or
+all of these three statements is true, then the whole formula is true.
+All would have to be false for the formula as a whole to be false.
+
+<dt><H3><A NAME="implies">#$implies</A></H3>	
+<dd>
+
+The connective <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> takes exactly two formulas as arguments.
+Like the "if-then" statement of formal logic, it returns true if and
+only if it is not the case that its first argument is true and its
+second argument is false.  Here's an example:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+   (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred #$Bike001)
+   (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$Bike001 #$RedColor))
+</pre>
+
+This assertion states that if #$Bike001 is owned by #$Fred, then it is red.
+Newcomers to formal logic may misinterpret <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> as implying
+a causal relationship.  But, strictly speaking, a <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+assertion says only that either the first argument is false, or the
+second argument is true.  So, for example, the assertion
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$RichardNixon <a href=/cycdoc/vocab/biology-vocab.html#Fruit>#$Fruit</a>)
+   (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> #$BillJ #$PastelMintGreen))
+</pre>
+
+is true, because the first argument is false.<p>
+
+Assertions involving <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> are very common in the CYC&reg; KB.  We
+also call them <A HREF="glossary.html#conditional">conditionals</A> or
+<A HREF="glossary.html#rule">rules</A>, and we often refer to the first
+argument as the <A HREF="glossary.html#antecedent">antecedent</A> and
+the second argument as the <A
+HREF="glossary.html#consequent">consequent</A>.  Note, however, that the
+particular formula above is <i>not</i> representative of assertions
+likely to be found in the CYC&reg; KB.  We will come to some more
+representative examples in a moment.
+
+<dt><H3><A NAME="well-formedness">Well-Formedness of Complex Formulas</A></H3>
+<dd>
+
+Any complex formula formed by using the logical connectives will be <A
+HREF="glossary.html#well-formed">well-formed</A> if the formulas given
+as arguments to the connectives are also well-formed and if the right
+number of arguments are given.  (The formulas given as arguments to
+the logical connectives need not be atomic formulas, like most of the
+examples above, but can be any well-formed formula.)  Another way of
+saying this is that <a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> and <a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> produce
+<A HREF="glossary.html#CycLForm">CycFormulas</A> when they are given
+arguments which are also
+<A HREF="glossary.html#CycLForm">CycFormulas</A>.<p> Suppose A and B
+are syntactically legal, and C is not.  Then,
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> A)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> A)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> A B)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> A)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> A B)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> A B)
+</pre>
+
+would all be CycFormulas.  But
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> A B)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> A C)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> A)
+</pre>
+
+would NOT be CycFormulas.  Why?  (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> A B) violates the requirement
+that <a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> take only one formula as an argument.
+(<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>) and (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> A) also violate
+restrictions on the number of formulas these connectives take as
+arguments.  (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> A C) is not well-formed because C
+is not; any complex formula that contained C would be
+syntactically bad for the same reason.<p>
+  
+It should also be noted that <a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> and <a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> are elements of
+<a href=/cycdoc/vocab/math-vocab.html#VariableArityRelation>#$VariableArityRelation</a>: hence, if A, B, C, and D are well-formed CycL
+expressions,
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> A B C D)
+</pre> 
+
+would be well-formed and also
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> A B C D)
+</pre>
+
+would be well-formed.
+
+</dl>
+
+<H2><A NAME="quantification">Quantification</A></H2>	
+
+So far, we have only looked at ways to make statements about specific
+objects, like #$FredsBike.  But CycL, like <A
+HREF="glossary.html#FOPC">first-order predicate calculus</A>, also gives
+us two ways to talk about objects without being specific about the
+identity of the objects involved: <A HREF="glossary.html#universal-quantification">universal quantification</A> and <A
+HREF="glossary.html#existential quantification">existential
+quantification</A>.  Universal quantification corresponds to English
+expressions like <i>every</i>, <i>all</i>, <i>always</i>,
+<i>everyone</i>, and <i>anything</i>, while existential quantification
+corresponds to English expressions like <i>someone</i>,
+<i>something</i>, and <i>somewhere</i>.  CycL contains one universal <A
+HREF="glossary.html#quantifier">quantifier</A>, <a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a>, and four
+existential <A HREF="glossary.html#quantifier">quantifiers</A>,
+<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#thereExistAtLeast>#$thereExistAtLeast</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#thereExistAtMost>#$thereExistAtMost</a>, and
+<a href=/cycdoc/vocab/fundamental-vocab.html#thereExistExactly>#$thereExistExactly</a>.
+
+<dl> 
+
+<dt><H3><A NAME="forAll">forAll</A></H3>
+<dd>
+
+The quantifier <a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> takes two arguments, a <A
+HREF="glossary.html#variable">variable</A> and a <A
+HREF="glossary.html#formula">formula</A> in which the variable appears.
+In practice, the formula is almost always a <A
+HREF="glossary.html#conditional">conditional</A> in which the <A
+HREF="glossary.html#antecedent">antecedent</A> is used to restrict the
+scope of the variable.  Here's an example:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> ?X
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?X)
+      (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> ?X #$FredsHouse)))
+</pre>
+
+This formula states that it is true, concerning every object in the CYC&reg;
+<A HREF="glossary.html#ontology">ontology</A>, that if #$Fred owns that
+object, then that object is located in #$FredsHouse.  In other words,
+all Fred's stuff is in his house.
+
+<dt><H3><A NAME="multiple quantification">Multiple Quantification</A></H3>
+<dd>
+
+Formulas may contain more than one quantifier, as in the following:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> ?X
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> ?Y
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+            (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?X)
+            (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?Y))
+         (<a href=/cycdoc/vocab/spatial-vocab.html#near>#$near</a> ?X ?Y))))
+</pre>
+
+which says that any two things owned by Fred are near each other.  Note
+that each quantifier introduces a new variable, and that each variable
+must have a different name.
+  
+<dt><H3><A NAME="unbound variables">Unbound Variables</A></H3>
+<dd>
+
+Normally, variables need to be introduced ("bound") by a quantifier
+before they are used.  Each quantifier binds exactly one variable, and
+every variable used should be bound by exactly one quantifier.
+Furthermore, a variable has no meaning outside the <A
+HREF="glossary.html#scope">scope</A> of the quantifier which binds
+it.<p>
+
+However, if a unbound variable appears in a CycL formula, it is always
+assumed to be universally quantified, with the result that
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+   (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?X)
+   (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> ?X #$FredsHouse))
+</pre>
+
+is exactly equivalent to
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> ?X
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?X)
+      (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> ?X #$FredsHouse)))
+</pre>
+
+Since the former is easier to write and read, it is almost always
+preferred in practice, and you will rarely see a <a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> while browsing
+the CYC&reg; KB.  Note, however, that unbound variables which appear only in
+the consequent of a conditional, and not in the antecedent, may have
+drastic and undesired consequences.  Take, for example, the following:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+   (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> #$Fred ?WHATEBER)
+   (<a href=/cycdoc/vocab/spatial-vocab.html#objectFoundInLocation>#$objectFoundInLocation</a> ?WHATEVER #$FredsHouse))
+</pre>
+
+Because of the typo, the variable ?WHATEVER will range over the
+entire CYC&reg; <A HREF="glossary.html#ontology">ontology</A>.  In other
+words, the assertion above states that as long as Fred owns one thing,
+<i>everything</i> is located in #$FredsHouse--probably not what we
+wanted.
+
+<dt><H3><A NAME="thereExists">#$thereExists</A></H3>
+<dd>
+
+The quantifier <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> takes two arguments, a <A
+HREF="glossary.html#variable">variable</A> and a <A
+HREF="glossary.html#formula">formula</A> in which the variable appears.
+In practice one uses <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> only in certain ways, of which the
+following is a good example:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?A <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> ?M
+         (<a href=/cycdoc/vocab/biology-vocab.html#mother>#$mother</a> ?A ?M)))
+</pre>
+
+This assertion states that, for every animal, there exists at least one
+object which is that animal's mother.  The object which is the animal's
+mother may be an object which is already represented by a CYC&reg; <A
+HREF="glossary.html#constant">constant</A>, or it may be a new object of
+which CYC&reg; has no knowledge.  But unless and until it is told otherwise,
+CYC&reg; will assume that the object is a new one not identical with any
+"known" object.
+ 
+<dt><H3><A NAME="thereExistExactly">#$thereExistExactly, #$thereExistAtLeast, #$thereExistAtMost</A></H3>
+<dd>
+
+These three quantifiers are similar to <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a>, but provide
+greater quantitative expressiveness.  Each of them takes three
+arguments: a positive integer, a variable, and a formula in which the
+variable appears.  Their meaning should be fairly self-explanatory.
+Look at the following examples:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?P <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>)
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExistExactly>#$thereExistExactly</a> 2 ?LEG
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+            (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?LEG <a href=/cycdoc/vocab/physiology-vocab.html#Leg>#$Leg</a>)
+            (<a href=/cycdoc/vocab/physiology-vocab.html#anatomicalParts>#$anatomicalParts</a> ?P ?LEG))))
+</pre>
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?T #$Table)
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExistAtLeast>#$thereExistAtLeast</a> 3 ?LEG
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+            (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?LEG <a href=/cycdoc/vocab/physiology-vocab.html#Leg>#$Leg</a>)
+            (<a href=/cycdoc/vocab/physiology-vocab.html#anatomicalParts>#$anatomicalParts</a> ?T ?LEG))))
+</pre>
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?P <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>)
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExistAtMost>#$thereExistAtMost</a> 1 ?SPOUSE
+            (<a href=/cycdoc/vocab/social-vocab.html#spouse>#$spouse</a> ?P ?SPOUSE)))
+</pre>
+
+<dt><H3><A NAME="well-formedness-2">Well-Formedness of Quantified Formulas</A></H3>
+<dd>
+
+As you probably by now expect, any formula beginning with a quantifier
+is <A HREF="glossary.html#well-formed">well-formed</A> if and only if
+its arguments are of the right number, of the right types, in the right
+order, and its formula argument is well-formed.
+
+<dt><H3><A NAME="skolemization">Skolemization</A></H3>
+<dd>
+
+People writing assertions for entry into the CYC&reg; <A
+HREF="glossary.html#KB">KB</A> use <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> quite frequently.  But
+when you browse the KB, you rarely see <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> in an assertion.
+That's because once assertions are entered into the KB, occurences of
+<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> are automatically converted into <A
+HREF="glossary.html#Skolem function">Skolem functions</A>.  The only
+exceptions are certain cases where <a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> is used within an
+expression that is an argument to a predicate.  Thus, an assertion which
+was entered as:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?A <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> ?M
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/biology-vocab.html#mother>#$mother</a> ?A ?M)
+		 (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?M <a href=/cycdoc/vocab/biology-vocab.html#FemaleAnimal>#$FemaleAnimal</a>))))
+</pre>
+
+will appear in the KB as 4 different assertions: 
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$SKF-8675309 <a href=/cycdoc/vocab/fundamental-vocab.html#SkolemFunction>#$SkolemFunction</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a> #$SKF-8675309 1)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+     (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?A <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+     (<a href=/cycdoc/vocab/biology-vocab.html#mother>#$mother</a> ?A (#$SKF-8675309 ?A)))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> 
+     (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?A <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+     (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> (#$SKF-8675309 ?A) <a href=/cycdoc/vocab/biology-vocab.html#FemaleAnimal>#$FemaleAnimal</a>))
+</pre>
+
+For more details, look at <A HREF="http://www.cyc.com/cycdoc/ref/inferencing.html">"An Introduction to
+CYC&reg; Inferencing"</A>.
+
+</dl>
+
+<H2><A NAME="NATs">Non-Atomic Terms</A></H2>
+
+A <A HREF="glossary.html#NAT">non-atomic term</A> (NAT) is a way of
+specifying a <A HREF="glossary.html#term">term</A> as a function of some
+other term(s).  Every NAT is composed of a function and one or more
+arguments to that function.<p>
+
+Consider, for example, the function <a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a>, which takes as an
+argument a type of plant and returns the collection of the fruits of
+that type of plant.  This function can be used to build the following
+NATs:
+
+<pre>
+    (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$AppleTree)
+    (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$PearTree)
+    (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$WatermelonPlant)
+    . . . .
+</pre>
+
+Note that there may or may not be a named CYC&reg; <A
+HREF="glossary.html#constant">constant</A> corresponding to the
+collection of apples (that is, a constant called #$Apple).  The NAT
+(<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$AppleTree) provides a way of talking about this
+collection even if the corresponding constant does not exist.<p>
+
+NATs can be used anywhere a constant can be used.  One could write, for
+example:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+       (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?APPLE (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$AppleTree))
+       (<a href=/cycdoc/vocab/material-vocab.html#colorOfObject>#$colorOfObject</a> ?APPLE #$RedColor))
+</pre>
+
+<dl> 
+
+<dt><H3><A NAME="functions">Functions</A></H3>
+<dd>
+
+Since all NATs are built around functions, it's important to understand
+more about them.
+  
+<dt><H3><A NAME="function arity">Function Arity</A></H3> 
+<dd>
+
+Like predicates, most functions have a fixed <A
+HREF="glossary.html#arity">arity</A>.  A function is described as unary,
+binary, ternary, quaternary, or quintary, according to whether it takes
+1, 2, 3, 4, or 5 arguments.  No CycL function currently takes more than
+5 arguments.<p>
+
+A few functions do not have a fixed arity, but can take a variable
+number of arguments.  Mathematical functions like <a href=/cycdoc/vocab/math-vocab.html#PlusFn>#$PlusFn</a> are one
+example.  And in Cyc-10, <A HREF="glossary.html#IBQE">IBQEs</A> are now
+treated as NATs in which the units of measure are functions which
+can take either one or two arguments, according to whether they are
+intended to denote a single value or a range.
+
+<dt><H3><A NAME="function argument types">Function Argument Types and Result Types</A></H3>
+<dd>
+
+Functions with fixed arity are similar to predicates in that the
+definition of the function must specify the type of each argument, using
+the predicates <a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#arg2Isa>#$arg2Isa</a>, etc.<p>
+
+Functions with no fixed arity are defined using the predicate
+<a href=/cycdoc/vocab/fundamental-vocab.html#argsIsa>#$argsIsa</a>, which specifies a single type of which every argument
+must be an instance.<p>
+
+Functions differ from predicates in that they return a CYC&reg; term as a
+result.  Accordingly, function definitions must also describe the type
+of the result to be returned, using the predicate <a href=/cycdoc/vocab/fundamental-vocab.html#resultIsa>#$resultIsa</a>.
+Consider, for example, the function <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a>:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a> <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> 1)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a> <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> <a href=/cycdoc/vocab/geography-vocab.html#GeopoliticalEntity>#$GeopoliticalEntity</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#resultIsa>#$resultIsa</a> <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> <a href=/cycdoc/vocab/organization-vocab.html#RegionalGovernment>#$RegionalGovernment</a>)
+</pre>   
+  
+The argument to <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> must always be an instance of
+<a href=/cycdoc/vocab/geography-vocab.html#GeopoliticalEntity>#$GeopoliticalEntity</a>, and a NAT created using <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> will always
+be an instance of <a href=/cycdoc/vocab/organization-vocab.html#RegionalGovernment>#$RegionalGovernment</a>.  So, for instance,
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> (<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> <a href=/cycdoc/vocab/geography-vocab.html#UnitedStatesOfAmerica>#$UnitedStatesOfAmerica</a>) <a href=/cycdoc/vocab/organization-vocab.html#RegionalGovernment>#$RegionalGovernment</a>)
+</pre>
+
+<dt><H3><A NAME="IDFs vs. CDFs">#$IndividualDenotingFunction vs. #$CollectionDenotingFunction</A></H3>
+<dd>
+
+Most functions are instances of either <a href=/cycdoc/vocab/fundamental-vocab.html#IndividualDenotingFunction>#$IndividualDenotingFunction</a> or
+<a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a>.  <a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> is an example of the
+former, since a NAT like (<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> <a href=/cycdoc/vocab/geography-vocab.html#UnitedStatesOfAmerica>#$UnitedStatesOfAmerica</a>)
+denotes an <A HREF="glossary.html#individual">individual</A> government.
+On the other hand, <a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> is an example of the latter, since a NAT
+like (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$AppleTree) denotes the <A
+HREF="glossary.html#collection">collection</A> of all apples, not an
+individual apple.<p> 
+
+The distinction between individuals and collections is an important one
+in CycL.  For more on this topic, look at the constants <a href=/cycdoc/vocab/fundamental-vocab.html#Individual>#$Individual</a> and <a href=/cycdoc/vocab/fundamental-vocab.html#Collection>#$Collection</a>.<p> 
+
+The definition of an instance of <a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a> should
+specify, not only its argument types and result type, but also the
+collection that the result will have as genls.  This is done using the
+predicate <a href=/cycdoc/vocab/fundamental-vocab.html#resultGenl>#$resultGenl</a>.  For example, if the function
+#$LeftPairMemberFn is defined by:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$LeftPairMemberFn <a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a> #$LeftPairMemberFn 1)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a> #$LeftPairMemberFn #$SymmetricalPartType)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#resultIsa>#$resultIsa</a> #$LeftPairMemberFn <a href=/cycdoc/vocab/top-vocab.html#ExistingObjectType>#$ExistingObjectType</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#resultGenl>#$resultGenl</a> #$LeftPairMemberFn <a href=/cycdoc/vocab/spatial-vocab.html#LeftObject>#$LeftObject</a>)
+</pre>   
+
+then the following must be true concerning a NAT constructed from
+#$LeftPairMemberFn and <a href=/cycdoc/vocab/clothing-vocab.html#Shoe>#$Shoe</a>:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> (#$LeftPairMemberFn <a href=/cycdoc/vocab/clothing-vocab.html#Shoe>#$Shoe</a>) <a href=/cycdoc/vocab/top-vocab.html#ExistingObjectType>#$ExistingObjectType</a>)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> (#$LeftPairMemberFn <a href=/cycdoc/vocab/clothing-vocab.html#Shoe>#$Shoe</a>) <a href=/cycdoc/vocab/spatial-vocab.html#LeftObject>#$LeftObject</a>)
+</pre>
+
+In other words, the set of left shoes is an instance of
+<a href=/cycdoc/vocab/top-vocab.html#ExistingObjectType>#$ExistingObjectType</a> and a subset of <a href=/cycdoc/vocab/spatial-vocab.html#LeftObject>#$LeftObject</a>.
+
+<dt><H3><A NAME="reifiable-functions">Reifiable Functions vs.
+Non-Reifiable Functions</A></H3> 
+<dd>
+
+Many CycL functions are instances of <a href=/cycdoc/vocab/fundamental-vocab.html#ReifiableFunction>#$ReifiableFunction</a>.  Each time an
+instance of <a href=/cycdoc/vocab/fundamental-vocab.html#ReifiableFunction>#$ReifiableFunction</a> is used with a new set of arguments to
+build a NAT, that NAT is <A
+HREF="glossary.html#reification">reified</A>, that is, preserved in the
+CYC&reg; <A HREF="glossary.html#ontology">ontology</A> as a <A
+HREF="glossary.html#constant">constant</A>.  Constants which are reified
+NATs don't start out with proper constant names, but can always be
+referred to by their NAT expression.  They can later be assigned
+constant names if desired.<p>
+
+When a new reified NAT-constant is first created, CYC&reg; automatically sets
+up the correspondence
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> NAT-CONSTANT NAT-EXPRESSION)
+</pre>
+
+where NAT-CONSTANT is the automatically created constant and
+NAT-EXPRESSION is the non-atomic term that can be used to refer to it.
+In the CYC&reg; web interface, such an assertion might look like this:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> (<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> #$Canada) (<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> #$Canada))
+</pre>
+
+It looks like the first and second arguments are the same, but that's
+because, in lieu of a proper constant name for the reified NAT-constant,
+the system uses the NAT expression as a print name.  If you look very
+carefully at any <a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> assertion in the web interface, you will
+see that the opening parenthesis of ARG1 is a followable link (depending
+on the web-browser you use, it may be underlined, or a different color),
+but the opening parenthesis of ARG2 is just opaque text.  Clicking on
+the opening paren of a NAT expression will display the page for the
+reified NAT-constant the expression denotes.<p>
+
+Moreover, a reified NAT can be explicitly identified with an existing
+constant using the predicate <a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a>:
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> #$TheYear1996 (<a href=/cycdoc/vocab/time-vocab.html#YearFn>#$YearFn</a> 1996))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> #$Apple (<a href=/cycdoc/vocab/biology-vocab.html#FruitFn>#$FruitFn</a> #$AppleTree))
+</pre>
+
+When a NAT is identified with a constant using <a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a>, the two are
+asserted to be <A HREF="glossary.html#de dicto">de dicto</A>
+equivalent.<p>
+
+<A HREF="glossary.html#Skolem function">Skolem functions</A> are reifiable.<p>
+
+Non-reifiable functions include mathematical functions like <a href=/cycdoc/vocab/math-vocab.html#PlusFn>#$PlusFn</a>.
+Just because we use a NAT like (<a href=/cycdoc/vocab/math-vocab.html#PlusFn>#$PlusFn</a> 59 64) doesn't mean we want
+to add to the KB a unit denoting the number 123.  If we want to talk
+about the number 123, we'll just refer to it directly.<p>
+
+Also, <a href=/cycdoc/vocab/quantity-vocab.html#UnitOfMeasure>#$UnitOfMeasure</a> is not a subset of <a href=/cycdoc/vocab/fundamental-vocab.html#ReifiableFunction>#$ReifiableFunction</a>, so <A
+HREF="glossary.html#IBQE">IBQEs</A> such as (<a href=/cycdoc/vocab/quantity-vocab.html#Inch>#$Inch</a> 37) and (<a href=/cycdoc/vocab/quantity-vocab.html#Meter>#$Meter</a>
+500) are not reified when they are referred to.
+
+<dt><H3><A NAME="quantifying into nats">Quantifying into NATs</A></H3>
+<dd>
+
+You may find, on occasion, that you want to write a rule which involves
+quantifying into a NAT, that is, using a NAT which has a variable as one
+of its arguments.  You can do so by following these guidelines:<p>
+
+<ul>
+<li>Use the variables ?ARG1, ?ARG2, ?ARG3, etc., to stand for any arguments over which you want to quantify.<p>
+<li>Introduce a free variable which represents the result of the NAT.<p>
+<li>Add a clause to the antecedent which identifies this variable with
+the NAT.  To do this, use the predicate <a href=/cycdoc/vocab/fundamental-vocab.html#equals>#$equals</a>.
+</ul><p>
+
+For example: 
+
+<pre>
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#equals>#$equals</a> ?U (#$PreviouslyOwnedFn ?ARG1))
+         (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?X ?U))
+      (<a href=/cycdoc/vocab/fundamental-vocab.html#hasAttributes>#$hasAttributes</a> ?X #$Used))
+</pre>
+
+For quantifying into NATs you should always use <a href=/cycdoc/vocab/fundamental-vocab.html#equals>#$equals</a>, never
+<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a>. The predicate <a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> is used in the automatic mapping
+between the system generated data structure and the original
+non-atomic-term and should figure in the hand-entered assertions of
+human Cyclists very rarely, if at all. <p>
+
+Note that you cannot quantify into a NAT unless it is built on an
+instance of <a href=/cycdoc/vocab/fundamental-vocab.html#ReifiableFunction>#$ReifiableFunction</a>.
+
+
+
+<dt><H2><A NAME="assertions">Assertions</A></H2>
+<dd>
+
+So far this document has dealt mostly with the syntax of formulas in
+CycL.  This is the syntax used by people or external programs when
+they assert things into a version of the CYC&reg; KB or query the KB.  Now we will shift
+our focus to what formulas look like once they have been asserted into
+the KB.<p>
+
+The CYC&reg; <A HREF="glossary.html#KB">KB</A> consists of a large number of
+<A HREF="glossary.html#assertion">assertions</A>.  When a formula is
+successfully asserted into the KB, it is stored as one of these.
+Each assertion is composed of a number of elements:
+
+<UL>
+<LI>a <A HREF="glossary.html#formula">formula</A>
+<LI>a <A HREF="glossary.html#mt">microtheory</A>   
+<LI>a <A HREF="glossary.html#tv">truth value</A> 
+<LI>a <A HREF="glossary.html#direction">direction</A> (or <A HREF="glossary.html#access level">access level</A>)
+<LI>a <A HREF="glossary.html#support">support</A>
+</UL>
+
+We'll discuss each of these and point out where they come from.  It's
+important that you be familiar with all of them:
+
+<dl>
+
+<dt><H3><A NAME="assertion formulas">Formulas</A></H3>
+<dd>
+
+You are already familiar with formulas--they are the
+<A HREF="glossary.html#CycLForm">CycFormulas</A>
+we use to state things in the CYC&reg; KB.
+
+<dt><H3><A NAME="microtheories">Microtheories</A></H3>
+<dd>
+
+Every assertion is contained in some <A
+HREF="glossary.html#mt">microtheory</A>.  A particular formula may be
+asserted into (or concluded in) more than one microtheory; when this is
+the case, there will be an assertion which has that formula in each of
+those microtheories.  The largest number of assertions are currently in
+the <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>.<p>
+
+Microtheories are covered in more detail <A HREF="../course/contexts-basic-module.html">here</A>, as well as in the constant vocabulary, under <a href=/cycdoc/vocab/mt-vocab.html#Microtheory>#$Microtheory</a>.
+
+Where does the microtheory information on assertions come from?  That
+depends on the origin of the assertion.  If an assertion is added to
+the KB by the inference engine as the result of firing a rule, the
+inference engine code decides what microtheory the conclusion should be
+added in and records it at add time.  If an assertion is the result of a
+person or external program asserting a formula into the KB, at that time
+the asserter must specify which microtheory the formula is to go in.
+Some interfaces for knowledge entry may not require the user to specify
+a microtheory for new assertions, and will then either try to choose the
+right one or will use <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a> as a default.  If you use such an
+interface make sure you know what the default behavior is.
+
+<dt><H3><A NAME="truth values">Truth Values</A></H3>
+<dd>
+
+Attached to every assertion is a truth value that indicates its degree
+of truth.  CycL contains five possible truth values, of which the most
+common are <A HREF="glossary.html#default true">default true</A> and <A
+HREF="glossary.html#monotonically true">monotonically true</A>.<p>
+
+Assertions that are monotonically true are held to be true in every
+case, that is, for every possible set of bindings to the universally
+quantified variables (if any) in the assertion, and cannot be
+overridden.  In the case of a monotonically true assertion with
+universally quantified variables in its formula, if an object is found
+for which the assertion is not true, an error is signalled.  In the case
+of a ground assertion that is monotonically true, if the negation of
+that formula is ever asserted or arrived at during inference (in the
+same microtheory), an error is signalled.<p>
+
+Assertions that are default true, in contrast, are held to be true in
+most cases, and can be overridden.  If the negation of an existing
+ground, default assertion is asserted in the same microtheory, or is
+arrived at through inference, no error is signalled.  Instead, the
+<A HREF="glossary.html#argumentation">argumentation</A> mechanism is
+invoked to decide what the final truth value of the assertion will
+be.<p>
+  
+By default, <A HREF="glossary.html#GAF">GAFs</A> which begin with the
+predicates <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> and <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> are monotonically true, while all
+other assertions (including <A HREF="glossary.html#rule">rules</A>) are
+default true.
+
+<dt><H3><A NAME="directions">Directions</A></H3>
+<dd>
+
+<A HREF="glossary.html#direction">Direction</A> is a value associated
+with every assertion that determines when inferencing involving that
+assertion should be performed.  There are three possible values for
+direction: <A HREF="glossary.html#forward">forward</A>, <A
+HREF="glossary.html#backward">backward</A>, and <A HREF="glossary.html#code">code</A>.  Inferencing involving assertions with direction forward is performed at <A
+HREF="glossary.html#ASSERT">assert</A> time (that is, when a new assertion
+is added to the KB), while inferencing involving assertions with
+direction backward is postponed until a query occurs and that query allows
+backward inference.  By default, <A
+HREF="glossary.html#GAF">GAFs</A> have direction forward, while <A
+HREF="glossary.html#rule">rules</A> have direction backward.  Only in
+very special cases should rules have direction forward.
+<p>
+Assertions with direction code are not used in normal inference at all; instead, special HL
+modules have been written to supplant the need for inference using the
+assertion itself.  Code assertions cannot be edited via the HTML interface.
+<p>
+One way of viewing directions is as a hierarchy of "when it gets used" :
+<ul>
+<li> :code <br>
+Assertions declared :code are exhaustively supported directly by HL modules.
+<li> :forward <br>
+Assertions declared forward are used exhaustively in forward inference.
+All :code assertions are also used implicitly at this level since the
+HL modules supplanting them are used here.
+<li> :backward <br>
+Assertions declared backward are only used in backward inference.
+All :forward assertions are also used at this level, and the HL modules
+supplanting :code assertions are again used at this level.
+</ul>
+<p>
+Older CYC&reg; documentation refers to "access levels" rather than to
+direction.  Access level 0 is equivalent to direction forward, while
+access level 4 or higher is equivalent to direction backward.
+
+<dt><H3><A NAME="support">Supports</A></H3>
+<dd>
+
+Attached to every assertion is a <A HREF="#support">support</A>, which consists
+of one or more <A
+HREF="glossary.html#justification">justifications</A> which form the
+support for the presence of the assertion in the KB.  In many cases, at
+least one of the supporting justifications is <A
+HREF="glossary.html#local">local</A>, indicating that the assertion was
+added to the <A HREF="glossary.html#KB">KB</A> from an outside source
+(most commonly, a human <A HREF="glossary.html#KEer">KEer</A>).  In
+other cases, a supporting justification is a <A
+HREF="glossary.html#source">source</A> which indicates the assertion was
+inferred and which outlines the final step of some <A
+HREF="glossary.html#argument">argument</A>, or chain of reasoning,
+which supports the assertion.<p>
+
+The support is the one element of an assertion which need not be
+specified by the KEer when performing knowledge entry.  It is created
+and updated automatically.  However, supports can be displayed by
+KB browsing tools.<p>
+
+</dl>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

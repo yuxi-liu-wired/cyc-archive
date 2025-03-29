@@ -1,0 +1,2133 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 11. 
+Implicit Cyc Functionality
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 11. 
+Implicit Cyc Functionality
+</h2>
+    <p></p>
+    <b>11.1.  <a HREF='#137147048'>
+TMS: Truth Maintenance System</a></b>
+    <br>
+    <font size='-1'>11.1.1.  <a HREF='#137149032'>
+What is TMS?
+</a>
+      <br>
+    </font>
+    <font size='-1'>11.1.2.  <a HREF='#137153216'>
+How TMS is stored internally
+</a>
+      <br>
+    </font>
+    <font size='-1'>11.1.3.  <a HREF='#137185640'>
+Argumentation</a>
+      <br>
+    </font>
+    <font size='-1'>11.1.4.  <a HREF='#137219032'>
+Immediate TMS (the "ripple effect")</a>
+      <br>
+    </font>
+    <font size='-1'>11.1.5.  <a HREF='#137228856'>
+Deep TMS</a>
+      <br>
+    </font>
+    <p></p>
+    <b>11.2.  <a HREF='#137276672'>
+SubL Interactor</a></b>
+    <br>
+    <p></p>
+    <b>11.3.  <a HREF='#137310696'>
+Current HL Modules</a></b>
+    <br>
+    <font size='-1'>11.3.1.  <a HREF='#137322408'>
+Generic Removal Modules</a>
+      <br>
+    </font>
+    <font size='-1'>11.3.2.  <a HREF='#137474992'>
+Predicate-specific removal modules:</a>
+      <br>
+    </font>
+    <font size='-1'>11.3.3.  <a HREF='#137801496'>
+Evaluatable Predicates
+</a>
+      <br>
+    </font>
+    <font size='-1'>11.3.4.  <a HREF='#137887472'>
+Evaluatable Functions
+</a>
+      <br>
+    </font>
+    <font size='-1'>11.3.5.  <a HREF='#138160232'>
+Transformation Modules</a>
+      <br>
+    </font>
+    <font size='-1'>11.3.6.  <a HREF='#138229296'>
+Forward modules
+</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 11. 
+    
+Implicit Cyc Functionality
+</h1>
+    <h2>11.1.  <a NAME='137147048'>
+TMS: Truth Maintenance System</a>
+    </h2>
+    <h3>11.1.1.  <a NAME='137149032'>
+What is TMS?
+</a>
+    </h3>
+    <p>
+Any time Cyc learns a piece of new information, it could potentially
+contradict any other fact that Cyc already knows. Conversely, any time
+Cyc learns that a piece of information it once held to be true is in
+fact not the case, this could potentially undermine any of Cyc's
+knowledge. It is infeasible for Cyc to reconsider every assertion in
+its knowledge base every time it learns or unlearns a new piece of
+information; also it is infeasible for all of the dependencies between
+assertions to be declaratively stored. The compromise is Cyc's Truth
+Maintenance System (TMS).</p>
+    <h3>11.1.2.  <a NAME='137153216'>
+How TMS is stored internally
+</a>
+    </h3>
+    <p>
+The KB datastructures relevant to TMS are arguments, deductions,
+beliefs, supports, and assertions.  Here are a couple of graphs
+explaining their relationships to each other.  The diagonal lines
+are genls links and the dashed arrow is a "contains many" link.</p>
+    <pre>
+            argument         
+           /        \      
+     belief         deduction  - - - - - ->  support
+      /                                     /       \
+asserted argument                   assertion       hl-support
+</pre>
+
+<p>
+Every assertion in the KB is justified by at least one argument.  A
+belief is an unjustified argument.  Currently the most common belief
+is an asserted argument, which says, effectively, "because somebody
+told me so."  A deduction is basically a set of supports which
+constitute a deductive proof for the assertion they justify.</p>
+    <p>
+For example, if we had an argument justifying the assertion</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa Lassie Dog)</pre></tt>
+    </font> <p>
+in the BiologyMt,</p>
+    <p>
+a reasonable set of supports for this argument might be the assertion</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa Lassie Collie)</pre></tt>
+    </font> <p>
+in the BiologyMt,
+</p>
+    <p>
+and the rule</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (isa ?X Collie)
+    (isa ?X Dog))  </pre></tt>
+    </font>
+    <p>
+ in the BaseKB.</p>
+    <p>
+However, reasoning of this sort is actually done via SBHL, not by
+explicit rules. So a more realistic support for this argument would be</p>
+    <font color='#339900'>
+      <tt><pre>
+  :ISA (isa Lassie Collie) </pre></tt>
+    </font>
+    <p>
+in BiologyMt</p>
+    <p>
+which is an HL support, telling us that the :ISA HL TMS module
+supports the assertion.  HL supports will be discussed in more
+detail later.</p>
+    <h3>11.1.3.  <a NAME='137185640'>
+Argumentation</a>
+    </h3>
+    <p>
+Argumentation is how Cyc deals with possibly contradictory information
+when it is added to its knowledge base.  It looks at the set of
+arguments which are supporting an assertion or its negation, and
+attempts to adjudicate which should win out.  Here is the algorithm it
+uses to adjudicate.</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+If there's only one argument, it wins.</em>
+        </dt>
+        <dd>
+Otherwise, we know we have more than one argument.</dd>
+        <dt>
+          <em>
+If all the arguments have the same truth and strength (strength
+    being either default or monotonic), then the assertion's truth and
+    strength are determined by that of the arguments.</em>
+        </dt>
+        <dd>
+Otherwise, we know we have differing arguments.</dd>
+        <dt>
+          <em>
+If Cyc has both a monotonically true and a monotonically false
+    argument for an assertion, this currently produces an error.</em>
+        </dt>
+        <dd>
+Otherwise, we know that we don't have a hard contradiction.</dd>
+        <dt>
+          <em>
+If there is a monotonic argument for an assertion, the monotonic
+    argument wins.</em>
+        </dt>
+        <dd>
+Otherwise, we know that we don't have any monotonic arguments, only
+default arguments.</dd>
+        <dt>
+          <em>
+If there is a belief argument (and there can be at most one), it
+    takes precedence over a deduced argument.</em>
+        </dt>
+        <dd>
+Otherwise, we know that we have only default deduced arguments -- no
+monotonic arguments and no belief arguments.</dd>
+        <dt>
+          <em>
+If we have a true argument but lack a false argument, deem the
+    assertion true.</em>
+        </dt>
+        <dt>
+          <em>
+If we have a false argument but lack a true argument, deem the
+    assertion false.</em>
+        </dt>
+        <dd>
+Otherwise, one of two cases obtains: (1) we have at least one default
+deduced true argument and one default deduced false argument, or (2)
+all arguments have a truth value of "unknown".</dd>
+        <dt>
+          <em>
+At this point, Cyc gives up and deems the assertion unknown. </em>
+        </dt>
+      </dl>
+    </blockquote>
+    <h3>11.1.4.  <a NAME='137219032'>
+Immediate TMS (the "ripple effect")</a>
+    </h3>
+    <p>
+We assume that the KB begins in a consistent TMS state.  When an
+argument is added or removed from an assertion, it is a belief
+revision step for the KB.  First the arguments for that assertion are
+reconsidered, and the assertion may or may not change truth value or
+strength.  If it changes, then Cyc looks at all the assertions
+supported by the newly changed assertion, and continues to ripple
+outward until quiescence.  It's guaranteed to terminate, because TMS
+does not add new deductions or assertions, it only changes them or
+removes them, and the changing is done in such a way that infinite
+oscillation is impossible.</p>
+    <p>
+When an argument is added or removed from an assertion, argumentation
+is triggered on that assertion, as explained above.  If argumentation
+changes the truth value of the assertion, then all the arguments which
+were previously justified by this assertion are invalidated (removed),
+which may trigger more argumentation and TMS.  If argumentation
+changes the strength of the assertion but leaves its truth value
+intact, then TMS is triggered to reexamine the strengths of the
+deductions in which it is a support.</p>
+    <p>
+If the last argument is removed from an assertion, this means that the
+assertion now has a truth value of "unknown".  At this point there
+is no longer any advantage to explicitly representing the assertion
+in the KB, so it is removed.</p>
+    <h3>11.1.5.  <a NAME='137228856'>
+Deep TMS</a>
+    </h3>
+    <p>
+Argumentation is triggered each time an argument is added or removed
+from an assertion, and if if this changes the truth value or strength
+of the assertion, Immediate TMS (discussed above) is triggered.
+However, the "ripple effect" of Immediate TMS only ripples outward
+through assertions and deductions; it does not reexamine HL supports.
+Hence, HL supports can be made false without triggering Immediate TMS.
+This, in addition to its rippling nature (the fact that it acts
+locally, not globally) is why Immediate TMS is incomplete.  To find
+and re-examine assertions with HL supports that are no longer valid,
+Immediate TMS is not enough; we need Deep TMS.</p>
+    <p>
+For example, if we had the following HL support in a deduction
+supporting some assertion,</p>
+    <font color='#339900'>
+      <tt><pre>
+  :GENLS (genls Collie Animal)</pre></tt>
+    </font> <p>
+in BiologyMt</p>
+    <p>
+there are a vast number of #$genls assertions which, if removed, could
+make this HL support false.  For example:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (genls Collie Dog)
+  (genls Dog CanineAnimal)
+  (genls CanineAnimal NonPersonAnimal)
+  (genls NonPersonAnimal Animal)</pre></tt>
+    </font>
+
+<p>
+If any of the above assertions were removed, the aforementioned HL
+support would no longer be valid.  However, this TMS information is
+not stored, because representing it all explicitly would take an
+explosive amount of storage space. Furthermore, if any of these
+#$genls assertions were removed in the chain between #$Poodle and
+#$Animal, Immediate TMS would not be triggered; Deep TMS is needed to
+detect the staleness.  This is one of the tradeoffs of Cyc's TMS
+implementation.  You can trigger Deep TMS by the [Force TMS] or [Redo
+TMS] buttons in the Cyc Browser.</p>
+    <p>
+Here's a more concrete example of how TMS could go stale and the
+[Force TMS] button would have an effect.</p>
+    <p>
+In the NaivePhysicsMt, create two collections RedThing and
+CrimsonThing, and make CrimsonThing a spec of RedThing.  Assert the
+forward rule</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (isa ?OBJ RedThing)
+    (objectHasColor ?OBJ RedColor))</pre></tt>
+    </font>
+
+<p>
+Then create a new constant CrimsonThing212, and make it an instance of
+CrimsonThing.  The forward rule will be triggered, and this assertion</p>
+    <font color='#339900'>
+      <tt><pre>
+  (objectHasColor CrimsonThing212 RedColor)</pre></tt>
+    </font>
+
+<p>
+will be deduced.  Its supports will be:</p>
+    <blockquote>
+      <ol>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+ (implies
+       (isa ?OBJ RedThing)
+       (objectHasColor ?OBJ RedColor)) in NaivePhysicsMt</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+ (isa CrimsonThing212 CrimsonThing) in NaivePhysicsMt</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+ :GENLS (genls CrimsonThing RedThing) in NaivePhysicsMt</pre></tt>
+          </font>
+        </li>
+      </ol>
+    </blockquote>
+
+<p>
+Now if we unassert</p>
+    <font color='#339900'>
+      <tt><pre>
+  (genls CrimsonThing RedThing)
+</pre></tt>
+    </font>
+<p>
+the deduced assertion
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (objectHasColor CrimsonThing212 RedColor)
+</pre></tt>
+    </font>
+
+<p>
+remains in the KB, because TMS revalidation of HL supports is not
+automatically triggered.  If you [Redo TMS] on the assertion, or
+[Force TMS] on CrimsonThing212, the stale assertion will be reexamined
+by TMS, the SBHL will find that the genls link no longer holds, and
+since that was the only argument for that assertion, the assertion's
+truth value will become "unknown", and it will be removed.</p>
+    <h2>11.2.  <a NAME='137276672'>
+SubL Interactor</a>
+    </h2>
+    <p>
+SubL is the underlying implementation language of Cyc.  The SubL
+Interactor is an interface into the guts of the Cyc system.  It is a
+read-eval-print window, which means that it will read in whatever SubL
+expression you type in, evaluate it (which may perform some side
+effects), and print out the results of the evaluation.</p>
+    <p>
+The SubL interactor prints the same results as one would get upon 
+evaluating a SubL function at the read loop in the Cyc buffer, with 
+one exception, namely, in the SubL interactor, HTML tags are 
+interpreted by the browser in accord with the constant browser ("cb")
+interface functions, but are simply printed at the read loop.</p>
+    <p>For example, at the read loop, (find-assertion-by-id 772452) returns:</p>
+    <font color='#339900'>
+      <tt><pre>
+   #&lt;AS:(#$superTaxons #$Dog #$CanineAnimal):#$BiologyVocabularyMt></pre></tt>
+    </font>
+
+<p>
+In the SubL interactor, (find-assertion-by-id 825989) returns:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (superTaxons Dog Canine Animal)</pre></tt>
+    </font>
+
+<p>
+The intent of the SubL Interactor is to allow OEers who have an
+understanding of Cyc's code base to execute scripts or commands via
+the Cyc Browser. </p>
+    <p>
+A good source for useful SubL functions can be found at:
+http://www.cyc.com/cyc-api.html</p>
+    <p>
+No more documentation on it is provided because familiarity with the
+Cyc code base is assumed.</p>
+    <p>
+Example:</p>
+    <p>
+Type in</p>
+    <font color='#339900'>
+      <tt><pre>
+  (constant-name #$Dog)</pre></tt>
+    </font>
+
+<p>
+click on Eval</p>
+    <p>
+yields</p>
+    <font color='#339900'>
+      <tt><pre>
+  "Dog"</pre></tt>
+    </font>
+
+
+
+
+<h2>11.3.  <a NAME='137310696'>
+Current HL Modules</a>
+    </h2>
+    <p>
+Currently (August 2001) there are 495 HL modules in the Cyc Inference
+Engine.  This section will describe some of the most commonly used HL
+modules, and give a listing of the rest.  A more complete, up-to-date,
+and hypertext-indexed description of each HL module is available in
+the Cyc Browser, from the Nav page, via the link "HL Module Summary".
+This document provides a better overview, and the browser provides
+better details.  A few examples of the cases covered by the classes of
+HL modules are given here; a more complete listing of cases and
+examples can be found on the HL Module Summary page.</p>
+    <p>
+The most important distinction is between removal modules,
+transformation modules, and forward modules.  These three types of HL
+modules partition the HL module space.  Furthermore, an important
+partition of the removal module space is between removal modules which
+are predicate-specific and those which are generic.  Evaluatable
+predicates and functions are like predicate-specific removal modules
+with a very stylized form.</p>
+    <p>
+The genls graph under #$CycHLModule in the KB yields a much prettier
+version of the following hierarchy:</p>
+    <pre>
+                     ________HL module________
+                    /            |            \
+Transformation module      Removal module     Forward module
+                          /              \
+       Generic Removal module        Predicate-specific removal module
+</pre>
+
+<p>
+First, we will cover the generic removal modules, which could apply
+to any predicate in the KB.</p>
+    <h3>11.3.1.  <a NAME='137322408'>
+Generic Removal Modules</a>
+    </h3>
+    <h4>11.3.1.a.  
+Basic Lookup</h4>
+    <p>
+These are the removal modules that support the basic low-level
+lookup methods.</p>
+    <p>
+Examples:</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(#$bordersOn #$UnitedStatesOfAmerica ?COUNTRY)</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$bordersOn #$UnitedStatesOfAmerica #$Canada)</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(?PREDICATE #$UnitedStatesOfAmerica #$Canada)</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+
+
+<h4>11.3.1.b.  
+SBHL modules</h4>
+    <p>
+These are the SBHL modules, which support reasoning using #$genlPreds,
+#$genlInverse, and #$negationPreds.</p>
+    <p>
+Examples:</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(#$spatiallyIntersects #$ContinentOfEurope #$CityOfParisFrance)</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$not (#$spatiallyIntersects ?WHAT ?WHAT-ELSE))</pre></tt>
+          </font>
+        </li>
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$spatiallyIntersects ?WHAT ?WHAT-ELSE)</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+
+
+<h4>11.3.1.c.  
+Reflexivity and Irreflexivity
+</h4>
+    <font color='#339900'>
+      <tt><pre>
+(#$notFarFrom #$Italy #$Italy)</pre></tt>
+    </font>
+<p>
+in</p>
+    <font color='#339900'>
+      <tt><pre>
+#$WorldGeographyMt</pre></tt>
+    </font>
+<p>
+via </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa #$notFarFrom #$ReflexiveBinaryPredicate)
+</pre></tt>
+    </font>
+
+<font color='#339900'>
+      <tt><pre>
+(#$not (#$farFrom #$Italy #$Italy))</pre></tt>
+    </font>
+<p>
+in </p>
+    <font color='#339900'>
+      <tt><pre>
+#$WorldGeographyMt
+</pre></tt>
+    </font>
+    <p>
+via </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa #$farFrom #$IrreflexiveBinaryPredicate)</pre></tt>
+    </font>
+
+<h4>11.3.1.d.  
+Symmetry and Asymmetry
+</h4>
+    <font color='#339900'>
+      <tt><pre>
+(#$not (#$northOf #$UnitedStatesOfAmerica #$Canada))"
+(#$bordersOn #$Canada #$UnitedStatesOfAmerica)"</pre></tt>
+    </font>
+
+
+<h4>11.3.1.e.  
+Transitivity</h4>
+    <font color='#339900'>
+      <tt><pre>
+(#$geographicalSubRegions ?SUPER #$CityOfParisFrance)
+(#$geographicalSubRegions #$ContinentOfEurope ?SUB)
+(#$geographicalSubRegions #$ContinentOfEurope #$CityOfParisFrance)</pre></tt>
+    </font>
+
+
+<h4>11.3.1.f.  
+#$transitiveViaArg(Inverse)</h4>
+    <p>
+The system will attempt to use #$transitiveViaArg(Inverse) assertions
+to prove or provide bindings for your query.  This applies any time
+the predicate in question has any #$transitiveViaArg(Inverse)
+assertions on it, or if some spec-pred of the predicate has some
+#$transitiveViaArg(Inverse) assertions on it.</p>
+    <p>
+Example:</p>
+    <font color='#339900'>
+      <tt><pre>
+ (#$relationAllExists #$physicalParts #$Dog #$Head)</pre></tt>
+    </font>
+<p>
+via</p>
+    <font color='#339900'>
+      <tt><pre>
+ (#$relationAllExists #$anatomicalParts #$Vertebrate #$Head-Vertebrate)</pre></tt>
+    </font>
+<p>
+and</p>
+    <font color='#339900'>
+      <tt><pre>
+ (#$transitiveViaArg #$relationAllExists #$genlPreds 1)
+ (#$transitiveViaArgInverse #$relationAllExists #$genls 2)
+ (#$transitiveViaArg #$relationAllExists #$genls 3)
+ (#$genlPreds #$anatomicalParts #$physicalParts)
+ (#$genls #$Dog #$Vertebrate)
+ (#$genls #$Head-Vertebrate #$Head)</pre></tt>
+    </font>
+
+<h4>11.3.1.g.  
+#$relationAllExists, #$relationExistsAll
+</h4>
+    <p>
+Examples:
+</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(#$citizens ?WHERE #$AbrahamLincoln)</pre></tt>
+          </font>
+<p>
+from </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$relationExistsAll #$citizens #$Country #$Person)</pre></tt>
+          </font>
+<p>
+and </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$isa #$AbrahamLincoln #$Person)</pre></tt>
+          </font>
+</li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$grandfathers #$AbrahamLincoln ?RELATIVE)</pre></tt>
+          </font>
+<p>
+from </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$relationAllExists #$grandfathers #$Animal #$MaleAnimal)
+</pre></tt>
+          </font>
+          <p>
+and </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$isa #$AbrahamLincoln #$Animal)</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+
+<h4>11.3.1.h.  
+#$relationAll, #$relationAllInstance, #$relationInstanceAll</h4>
+    <p>
+Examples:</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(#$hasGender #$AbrahamLincoln #$Masculine)</pre></tt>
+          </font>
+<p>
+from</p>
+          <font color='#339900'>
+            <tt><pre>
+(#$relationInstanceAll #$hasGender #$MalePerson #$Masculine)</pre></tt>
+          </font>
+<p>
+and</p>
+          <font color='#339900'>
+            <tt><pre>
+(#$isa #$AbrahamLincoln #$MalePerson)</pre></tt>
+          </font>
+        </li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$temporallyContinuous #$AbrahamLincoln)</pre></tt>
+          </font>
+<p>
+from </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$relationAll #$temporallyContinuous #$Entity)</pre></tt>
+          </font>
+<p>
+and </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$isa #$AbrahamLincoln #$Entity)</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+
+
+<h4>11.3.1.i.  
+#$completeExtentKnown, #$minimizeExtent</h4>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(#$not (#$bordersOn #$Canada #$France))</pre></tt>
+          </font>
+<p>
+from</p>
+          <font color='#339900'>
+            <tt><pre>
+ (#$completeExtentKnown #$bordersOn)</pre></tt>
+          </font>
+        </li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(#$not (#$citizens #$AbrahamLincoln #$France))</pre></tt>
+          </font>
+<p>
+from</p>
+          <font color='#339900'>
+            <tt><pre>
+ (#$minimizeExtent #$citizens)</pre></tt>
+          </font>
+        </li>
+</ul>
+    </blockquote>
+<p>
+See the section on Negation By Failure Reasoning for more information
+on these.</p>
+    <h4>11.3.1.j.  
+Evaluatable predicates
+</h4>
+    <p>
+There is one generic removal module for all evaluatable predicates
+(see #$evaluationDefn).  The evaluatable predicates themselves
+are covered in their own section, below.</p>
+    <h3>11.3.2.  <a NAME='137474992'>
+Predicate-specific removal modules:</a>
+    </h3>
+    <p>
+The following predicates have one or more removal modules defined
+to handle inference with that specific predicate.</p>
+    <h4>11.3.2.a.  
+SBHL Predicates</h4>
+    <blockquote>
+      <ul>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$isa</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$genls</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$genlPreds</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$genlInverse</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$genlMt</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$genlAttributes</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$disjointWith</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$negationPreds
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$negationInverse</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$negationAttribute</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$nearestIsa</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestGenls</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestGenlPreds</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestGenlMt</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestGenlAttributes</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$nearestCommonIsa</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestCommonGenls</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestCommonSpecs</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestCommonGenlMt</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$nearestDifferentIsa</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nearestDifferentGenls</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+    <h4>11.3.2.b.  
+SBHL-Time Predicates</h4>
+    <blockquote>
+      <ul>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$contiguousAfter</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$cotemporal</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$endsAfterEndingOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$endsAfterStartingOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$endsDuring</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$endingDate</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$overlapsStart</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$startingDate</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$startsAfterEndingOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$startsAfterStartingOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$startsDuring</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporalBoundsContain</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporalBoundsIdentical</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporalBoundsIntersect</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyCooriginating</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyCoterminal</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyDisjoint</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyFinishedBy</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyIntersects</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallyStartedBy</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$temporallySubsumes</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$birthDate</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$dateOfDeath</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$dateOfEvent</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+    <h4>11.3.2.c.  
+Other HL-supported predicates
+</h4>
+    <blockquote>
+      <ul>
+        <li>
+Equality-related predicates
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$different
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$differentSymbols</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$equalStrings-CaseInsensitive</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$equalSymbols</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$equals</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$indexicalReferent</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Set-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$elementOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nthLargestElement</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$nthSmallestElement</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$subsetOf</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$extentCardinality</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Context lifting predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$ist</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Important Cyc-internal predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$evaluate</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$termChosen</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$performSubL</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Well-formedness predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$admittedArgument</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$admittedSentence</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Inheritance-blocking predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$assertedPredicateArg</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$assertedSentence</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$ist-Asserted</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$assertedTermSentences</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Predicates relating CycL terms to their properties
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$constantName</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$constantID</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$assertionID</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$assertionJustificationAttribute</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$assertionMt</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$assertionSentence</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$natFunction</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$natArgument</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$natArgumentsEqual</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$termOfUnit</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$termFormulas</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Truth-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$knownSentence
+</tt></em>
+              </li>  #$unknownSentence
+<li>
+                <em><tt>
+  #$trueSentence
+</tt></em>
+              </li>  #$sentenceEquiv
+<li>
+                <em><tt>
+  #$sentenceImplies
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$consistent</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+NL-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$termPhrases
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$termStrings</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$wordForms</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$wordStrings</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Application-motivated predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$programFoundOnComputer
+</tt></em>
+              </li>
+              <li>
+[and others for CycSecure]</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Miscellaneous predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$conceptuallyRelated</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$integerBetween</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+    <h3>11.3.3.  <a NAME='137801496'>
+Evaluatable Predicates
+</a>
+    </h3>
+    <p>
+Here is the list of evaluatable predicates currently in the system.
+See the HL Module Summary page for more information.</p>
+    <blockquote>
+      <ul>
+        <li>
+Equality-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$different
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$differentSymbols</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Date-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+ #$dateSubsumes</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$laterThan</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Quantity-related predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+ #$greaterThan</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$greaterThanOrEqualTo</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$lessThan</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$lessThanOrEqualTo</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$numericallyEqual</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$quantityIntersects</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$quantitySubsumes</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+List predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$initialSublists</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$listSetMembers</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$sublists</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+String predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+ #$stringSubword</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$substring</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$substring-CaseInsensitive</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+SubL predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$trueSubL</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Application-specific predicates
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$programInVersionSeries</tt></em>
+              </li>
+              <li>
+                <em><tt>
+ #$versionOfProgram</tt></em>
+              </li>
+              <li>
+[and more for CycSecure]</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+    <h3>11.3.4.  <a NAME='137887472'>
+Evaluatable Functions
+</a>
+    </h3>
+    <blockquote>
+      <ul>
+        <li>Arithmetic functions
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+		#$PlusFn
+	</tt></em>
+              </li>
+              <li>
+                <em><tt>
+		#$DifferenceFn
+	</tt></em>
+              </li>
+              <li>
+                <em><tt>
+		#$MinusFn
+	</tt></em>
+              </li>
+              <li>
+                <em><tt>
+		#$AbsoluteValueFn
+	</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$TimesFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$QuotientFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$Percent</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$InverseOfIntervalFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$SquaredFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$SqrtFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$LogFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ExpFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ExponentFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Rounding functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$RoundDownFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$RoundUpFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$RoundClosestFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Summation and related functions
+
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$PlusAll 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$TimesAll</tt></em>
+              </li> 
+  #$Minimum<li>
+                <em><tt></tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$Maximum </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$Average</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Trigonometric functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$SineFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$CosineFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$TangentFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+ #$CosecantFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$SecantFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$CotangentFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+          <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$ArcSineFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ArcCosineFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ArcTangentFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ArcCosecantFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ArcSecantFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$ArcCotangentFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Date functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$DateBeforeFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$DateAfterFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$DateFromIntegerFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+CycL manipulation functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$FormulaArityFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$FormulaArgFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$FormulaArgSetFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$FormulaArgListFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$SubstituteFormulaFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$SubstituteFormulaArgFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$AssertionAssertTimeFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$RelationTuplesFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Set and List functions
+
+  <blockquote>
+            <ul>
+              <li>
+                <em><tt>
+#$SetIntersection 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$SetExtentFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$SetOfListMembersFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$JoinSimpleListsFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$LengthOfListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$NthInListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$JoinListsFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$FirstInListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$RestOfListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$LastInListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$SublistFromToFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$PositionsInListFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$ReverseListFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+String functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$LengthOfStringFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$SubstringFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringToIntegerFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$IntegerToStringFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringConcatFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringTokenizeFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringPostremoveFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringPreremoveFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$StringReplaceSubstringFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+ScalarInterval functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$QuantityConversionFn</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$MinRangeFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$MaxRangeFn </tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$ToleranceFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$MinQuantValueFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$MaxQuantValueFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+NL functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$UniqueWordSenseFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$StringsToPhraseFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$SubstituteNLTEFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$DavidsonianFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+#$EnglishSuffixFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+Miscellaneous functions
+
+<blockquote>
+            <ul>
+              <li>
+                <em><tt>
+  #$IdentityFn 
+</tt></em>
+              </li>
+              <li>
+                <em><tt>
+  #$EvaluateSubLFn</tt></em>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+    <h3>11.3.5.  <a NAME='138160232'>
+Transformation Modules</a>
+    </h3>
+    <p>
+There are currently (August 2001) 10 transformation modules in the Cyc
+Inference Engine.  These are used to transform a literal P into
+another set of literals (possibly a singleton, possibly more), such
+that if we can prove this set of literals, we can therefore prove P.</p>
+    <h4>11.3.5.a.  
+Backchaining</h4>
+    <p>
+The most commonly used transformation module is backchaining, which
+uses, to state a simple case, the literal P and the rule Q -> P to
+transform P to Q.  Recall that instead of a single literal Q, P
+may be transformed into a set of literals.</p>
+    <p>
+Example:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$likesAsFriend #$AbrahamLincoln ?WHO)</pre></tt>
+    </font>
+<p>
+from a rule concluding to #$likesAsFriend</p>
+    <p>
+Another case of backchaining is backchaining on an unbound predicate.
+For pedagogical purposes, say we implemented the HL support for
+#$SymmetricBinaryPredicate via a rule instead of an HL module.  The
+rule would be this:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$and
+      (#$isa ?PRED #$SymmetricBinaryPredicate)
+      (?PRED ?ARG1 ?ARG2))
+    (?PRED ?ARG2 ?ARG1))</pre></tt>
+    </font>
+
+<p>
+which has a consequent with a variable in the arg0 position.  Hence,
+this rule can be backchained on any time the literal matches the
+consequent.  In this case, all that is necessary is for the literal to
+be binary.  For example, if we were trying to prove</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$bordersOn #$Canada #$France)</pre></tt>
+    </font>
+
+<p>
+we might have to backchain on the above rule, and instead try to
+prove</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$and
+    (#$isa #$bordersOn #$SymmetricBinaryPredicate)
+    (#$bordersOn #$France #$Canada))</pre></tt>
+    </font>
+ 
+<p>
+Unbound predicate backchaining can be computationally explosive
+because it has enormous syntactic applicability, and the syntactic
+information is all the transformation module uses to determine when to
+backchain.  Due to this explosiveness, its use is gated by an
+inference parameter which is default off.</p>
+    <h4>11.3.5.b.  
+Symmetry and Asymmetry</h4>
+    <font color='#339900'>
+      <tt><pre>
+(#$bordersOn #$Canada ?WHAT)</pre></tt>
+    </font>
+<p>
+from</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa #$bordersOn #$SymmetricBinaryPredicate)</pre></tt>
+    </font>
+<p>
+and a rule concluding to #$bordersOn</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$not (#$northOf ?WHAT #$Canada))</pre></tt>
+    </font>
+<p>
+from </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa #$northOf #$AsymmetricBinaryPredicate)</pre></tt>
+    </font>
+<p>
+and a rule concluding to #$northOf</p>
+    <h4>11.3.5.c.  
+SBHL overrides</h4>
+    <p>
+By tweaking the advanced inference settings, you can choose to enable
+these transformation modules instead of using the SBHL predicates, so
+that, for instance, you can prove #$isa statements via rules.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa #$AbrahamLincoln #$FamousPerson)</pre></tt>
+    </font>
+<p>
+from </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$genls #$UnitedStatesPresident #$FamousPerson)</pre></tt>
+    </font>
+<p>
+and a rule concluding to #$isa #$UnitedStatesPresident</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$not (#$isa #$AbrahamLincoln #$FrenchPerson))</pre></tt>
+    </font>
+<p>
+from</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$genls #$FrenchPerson #$EuropeanPerson)</pre></tt>
+    </font>
+<p>
+and a rule concluding from #$isa #$EuropeanPerson</p>
+    <h4>11.3.5.d.  
+Exception handling
+</h4>
+    <p>
+There is a special transformation module for #$abnormal, to handle
+exceptions in inference.</p>
+    <h3>11.3.6.  <a NAME='138229296'>
+Forward modules
+</a>
+    </h3>
+    <p>
+Forward modules are used to trigger forward inference.  Take for
+example the forward rule</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$isa ?PRED #$BinaryPredicate)
+    (#$arity ?PRED 2))</pre></tt>
+    </font>
+
+<p>
+If someone creates a new predicate #$foo and asserts</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$isa #$foo #$BinaryPredicate)</pre></tt>
+    </font>
+
+<p>
+then forward inference can be triggered by indexing alone.  But
+what if instead you assert</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$isa #$foo #$TransitiveBinaryPredicate)</pre></tt>
+    </font>
+    <p>
+?</p>
+    <p>
+Then some genls reasoning is needed to trigger the relevant forward
+rule.  Forward modules take care of this kind of inference
+when determining which forward rules to trigger.</p>
+    <p>
+The different types of forward modules are:</p>
+    <h4>11.3.6.a.  
+
+transitiveViaArg forward modules</h4>
+    <p>
+Forward modules to perform the above kinds of triggering for #$isa,
+#$genls, #$genlMt, #$genlPreds, #$genlInverse, #$genlAttributes, and
+the negations of each.</p>
+    <h4>11.3.6.b.  
+Symmetry and Asymmetry</h4>
+    <p>
+There are forward modules for symmetry and asymmetry; given (p X Y),
+these conclude, respectively, (p Y X) and (not (p Y X)).</p>
+    <h4>11.3.6.c.  
+#$genlPreds and relata</h4>
+    <p>
+There is another forward module for #$genlPreds:
+</p>
+    <p>
+If you asserted
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (p X Y)</pre></tt>
+    </font>
+
+<p>
+and it is true that
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (genlPreds p q)</pre></tt>
+    </font>
+
+<p>
+then one of the #$genlPreds forward modules would trigger a forward
+rule with an antecedent literal of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+  (q X Y)</pre></tt>
+    </font>
+
+<p>
+There are analogous forward modules for #$genlInverse,
+#$negationPreds, and #$negationInverse.</p>
+    <h4>11.3.6.d.  
+Evaluatable Functions
+</h4>
+    <p>
+There is a forward module to inhibit forward inference on evaluatable
+functions.</p>
+    <h4>11.3.6.e.  
+termOfUnit</h4>
+
+There is a forward module to handle forward inference for
+#$termOfUnit.
+
+<hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

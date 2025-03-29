@@ -1,0 +1,624 @@
+00:00:00 --- log: started opencyc/02.05.23
+00:00:24 <dmiles> i am doing the .mod .wld .obj loader into cyc
+00:00:37 <yottzumm> okay
+00:00:40 <dmiles> i would like to do lamba moo stuff as well
+00:01:00 <dmiles> LPMUD probly uses a compat format or can export to one
+00:02:04 <dmiles> so the deal is this is a bootstrap that pussing circlemud datat into a .load file
+00:02:09 <yottzumm> I programmed in BSXMUD/LPMUD for a while.  It was like programming in C almost
+00:02:13 <dmiles> it also saves it out in cyc kif
+00:02:43 <yottzumm> I think the language was called LPC
+00:03:35 <dmiles> maybe java could run a shell of it?
+00:03:52 <yottzumm> write a bean shell for LPC?
+00:03:57 <dmiles> or its script could be tranliterated to javaish code rto run wiith bsh ?
+00:04:07 <yottzumm> yeah, probably
+00:04:59 <dmiles> part of something i am hoping to discover is where does script play in.. it can be persisted in Cyc.. but will a subL module invoke a Java script from a foreine lang interface
+00:05:30 <dmiles> or will the script exists to be queries out and rann in a java ticker
+00:05:33 <yottzumm> I think scripts should be like stylesheets
+00:05:49 <yottzumm> just give a URL to the script
+00:05:54 <dmiles> right now i am queriing cyc in a thread tyhat works like a ticker
+00:06:08 <dmiles> then that ticker erunsd arbitrary code
+00:06:49 <dmiles> but yeah the source of code should be abkle to be gotten from a genral api
+00:07:10 <yottzumm> I think I'll try an easy game like crazy eights before tackling pinocle
+00:08:44 <dmiles> makes sense
+00:09:33 <dmiles> so where you are working.. are you using opencyc?
+00:10:34 <yottzumm> Yeah, I'm about to write a program to assert the cards into opencyc.  I already have a prototype user interface written in java.  The user interface contains no rules, just decks of cards.
+00:11:11 <yottzumm> (the cards are just text items in a Swing JList for now)
+00:15:59 <dmiles> neat
+00:16:07 <dmiles> btw: do you have a person homepage?
+00:16:17 <yottzumm> http://www.geocities.com/yottzumm
+00:16:29 <yottzumm> how about you?
+00:17:01 <dmiles> actually wired right now i dont ;P
+00:17:09 <dmiles> er wierd 
+00:17:49 <dmiles> neat:  (Internet Chat by MUD)
+00:20:52 <dmiles> cool: Designing Multi-player Games: Player Progression and Interface
+00:20:57 <dmiles> you have been at this a while
+00:21:25 <yottzumm> yeah, but I don't get to do it at work, so I am very slow
+00:21:47 <yottzumm> I wrote a multiperson chat server in 1985 or so
+00:22:36 <yottzumm> using C an berkeley sockets. on a VAX 11/750
+00:23:55 <dmiles> ah, thats seasoned
+00:25:31 <dmiles> in 85 i was typing in scott adams text adventure games on my trs-80 color computer 
+00:26:58 <dmiles> but not realy understanding them yet ;P
+00:29:04 <dmiles> really good things on your website
+00:30:58 <dmiles> i bet when i get this apla/beta version of logicmoo out you will be able to really work with being able top imporve it or suggest imporvemnts
+00:32:02 <dmiles> i am thinking the logimoo.MudClient will be something that sockets in to a remote Cyc server
+00:32:07 <dmiles> or locally of course
+00:32:54 <dmiles> and almost all the code will happen from the client.. but then for room.prints() really needs a chat server as well
+00:33:03 <yottzumm> thanks
+00:33:17 <dmiles> so i am still working from a mudServer point of view
+00:34:18 <dmiles> but developing the MudClient to look for the registry collection of other MudClients for event sending
+00:34:51 <dmiles> each NPC is also like a MudClient 
+00:34:59 <dmiles> same as the 'ticker'
+00:35:46 <dmiles> the irc bot is currenly part of the same collection of runables
+00:36:06 <yottzumm> You should try to make your mudserver as generic as possible, so you can do things like plug in a client which converts the whole mud to a different natural language
+00:36:34 <yottzumm> Or reuse your mud server for different multiuser systems
+00:36:58 <yottzumm> like the Window manager for X11 window system
+00:37:01 <dmiles> right now the mudserver is a thing that starts up this concept of plugins which are runabbles.. one runnable is the telnet deamon that creates sibling runnables but bound to the socket it created
+00:37:21 <yottzumm> okay
+00:37:47 <dmiles> so at this moment the cyc webserver, the irc bot and the telnet deamon are running 
+00:38:14 <yottzumm> either creating plugins, or isolating mud logic from communication is a good idea, I think
+00:38:19 <dmiles> oh and the ticker()
+00:39:06 <dmiles> they all have this mudEvent(recived) interface
+00:40:05 <dmiles> if comunication takes place to a players client it is becasue an event was recived the client decided to parse into the players telnet console
+00:40:45 <yottzumm> I am just suggesting that you put the mudserver logic in another client
+00:41:12 <dmiles> explain
+00:41:31 <yottzumm> I've never done this, but I've though about it a lot.
+00:42:17 <yottzumm> in typical client server, you have clients connecting to servers.  The business logic is kept on the server.
+00:43:31 <yottzumm> I am suggesting that you put the business logic on a client, and then create a special interface or protocol for the business logic client.  Client requests
+00:43:49 <yottzumm> would be tagged with a client id  and forwarded to the business logic client
+00:44:28 <yottzumm> the business logic client would address messages to one or more clients, and the server would be responsible for sending it to the client
+00:44:49 <yottzumm> the server only knows about communication and putting on and removing tags
+00:45:29 <yottzumm> is that clear enough
+00:45:43 <dmiles> ah so the server would have methods like sendMessasge(destination,event)
+00:45:50 <yottzumm> there are probably other architecture that work as well
+00:45:57 <dmiles> the destination is suject to 'all'
+00:46:12 <dmiles> or all of this Class
+00:46:24 <yottzumm> For my card player, I have a general game server, and plug in decks of cards
+00:46:33 <yottzumm> I could plug in the rules too
+00:47:00 <yottzumm> card server I mean
+00:47:14 <yottzumm> I think you get the idea
+00:47:22 <dmiles> ah yes so in this sense i guess i am doing simular the server is there to provide game static methods.. like get item vmun based on string
+00:47:42 <dmiles> but the look cvode is one the clinets class
+00:47:54 <dmiles> err is ion the client.
+00:47:57 <dmiles> for example..
+00:48:15 <dmiles> the player types 'look Fido'
+00:48:43 <dmiles> the look command coded on client asks the server to find "Fido" somehpow to CycFort
+00:49:16 <dmiles> then the client uses the CycFort to query cyc to get the mudDescription
+00:49:50 <yottzumm> do you want to use cycfort for your communications server?
+00:49:55 <yottzumm> do you want to use cyc for your communications server?
+00:49:56 <dmiles> then the client tells the server that he invoked a 'look'+cycfort.. so it can tell other concered tiems
+00:50:19 <yottzumm> okay
+00:50:32 <dmiles> sdo maybe 'Fido' as a npc agent gets the 'dmiles looked at Fido' and can tell the NPC to do something
+00:51:02 <dmiles> so the server just sends each event into the plugins generic mudEvent() interface
+00:51:17 <dmiles> all pligins
+00:51:41 <yottzumm> yeah, my idea probably predates java.  You can probably do the same with a good interface
+00:51:48 <dmiles> the look command code on the clinet chooses to enact the event to the server
+00:52:42 <dmiles> the irc bot plugin can tell us on irc if it wanted to that dmiles looks at fido
+00:53:17 <yottzumm> yeah, irc bot is what I'm talking about.  Most people on IRC are humans, IRC contains the business logic
+00:53:25 <dmiles> the commonications server blindly give any Object
+00:53:26 <yottzumm> yeah, irc bot is what I'm talking about.  Most people on IRC are humans, IRCbot contains the business logic
+00:54:07 <yottzumm> IRC is the communication server.
+00:54:22 <yottzumm> The mud is just another bot
+00:55:18 <dmiles> yes.. there is no interpretation the mud is a game .. the closest thing to the mud is the ticker
+00:55:39 <yottzumm> I don't know what the ticker is
+00:55:50 <dmiles> which runs indepdantly to the clinet telnet dispatcher
+00:56:01 <yottzumm> How come I can create constants more than once and no exceptions are thrown?
+00:56:25 <yottzumm> does it throw away GAFs if you recreate a constant?
+00:56:34 <dmiles> the ticker job is to every minute tell everyone a minute has passed or if someone wants a tick every 5 seconds they can get one
+00:56:45 <yottzumm> okay
+00:56:56 <dmiles> so a NPC says tick me every 5 seconds.. 
+00:57:03 <yottzumm> like heartbeat
+00:57:13 <dmiles> then on a tick they do a cyc query that is supposed to result in some action they can do
+00:57:15 <yottzumm> an event to keep things running
+00:57:22 <yottzumm> okay
+00:57:58 <dmiles> the irc bot gets a tick to.. but priobly has no response
+00:59:03 <dmiles> if you creatwe a constant from your client....
+00:59:22 <yottzumm> seems like moving cards between stacks is a lot like moving people between rooms
+00:59:23 <dmiles> it goes into cyc dirrectly from your client
+00:59:49 <dmiles> meaning each client is very cycapi aware
+01:00:31 <yottzumm> so if cyc changes, you have to upgrade every client
+01:00:35 <dmiles> yes a room never has a code instanciation anywhere
+01:01:02 <dmiles> i room only exists becasue a client believes its there as a reult of a look 
+01:01:24 <yottzumm> well, we can't have people looking through a deck of cards
+01:01:39 <dmiles> so a player has a private varible that says he's somewhere that his look command uses
+01:01:59 <yottzumm> or a CycList?
+01:02:02 <dmiles> when he goes north he updates his variable and unasserts /reasserts his new loaction
+01:02:15 <yottzumm> cool
+01:02:20 <dmiles> then broadcast he moved
+01:03:07 <yottzumm> so if he gets into someone else's hand, a rule will catch that?
+01:03:38 <dmiles> alot iof the current fun is aloowing such a thing
+01:03:46 <yottzumm> haha
+01:03:50 <dmiles> but cyc should TMS it away
+01:04:13 <dmiles> meaning it could veto the inContainer-Generic assertion
+01:04:33 <dmiles> so the players client has to give a reason why
+01:04:48 <yottzumm> well, I've got work tomorrow.  It's been good talking to you.
+01:04:52 <dmiles> but if he is now in the hand of another player legally.. then he broadcasts his move
+01:05:15 <dmiles> the player could yturn the recived message into something
+01:05:34 <yottzumm> cd
+01:05:37 <yottzumm> oops
+01:05:47 <dmiles> ah take care.. glad your arround
+01:07:01 <yottzumm> q/uit
+01:07:03 --- quit: yottzumm ("Client Exiting")
+02:06:41 --- quit: CycLBot (Remote closed the connection)
+02:06:41 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+02:06:41 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+02:07:32 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+02:25:52 --- quit: CycLBot (Remote closed the connection)
+02:26:02 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+02:26:03 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+02:26:24 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+02:42:45 --- quit: CycLBot (Remote closed the connection)
+02:43:02 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+02:43:24 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+05:35:00 --- join: Psyicide (dragon@sdn-ap-027dcwashP1107.dialsprint.net) joined #opencyc
+05:45:56 --- part: Psyicide left #opencyc
+07:09:00 --- join: bruce_ (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+07:25:54 --- quit: bruce (Read error: 110 (Connection timed out))
+07:31:33 --- nick: bruce_ -> bruce
+07:42:52 <dmiles> want to see something cool :) ? http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&12033
+08:39:35 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+11:22:33 * jlatour listens to a needle drop.
+14:12:53 <dmiles> hi all
+14:13:00 <jlatour> Hello.
+14:14:02 <dmiles> hrrm what to work on todfay...
+14:14:25 <jlatour> Choices, choices :)
+14:14:46 <dmiles> what are you up to?
+14:15:22 <jlatour> Hrm. Finishing some university work, doing some work I'd promised to do, and figuring out a design for my project.
+14:15:41 <dmiles> what is your project about?
+14:15:49 <jlatour> http://www.sanddunes.org/ :)
+14:17:24 <dmiles> ah very cool, portalizing knowlegde 
+14:17:49 * jlatour nods.
+14:18:43 <dmiles> what computer languages are you familiar with?
+14:19:05 <jlatour> How familiar? :)
+14:19:40 <dmiles> just wondering what approaches your at
+14:19:54 <jlatour> I'm still wondering about what language to do it in
+14:20:21 <jlatour> I'm thinking about doing the website/portal in Perl, with a Java server running maintaining the data
+14:20:50 <dmiles> ah java is pretty good.. makes your code most sharable/usable
+14:21:06 <jlatour> I don't think I want to use servlets though
+14:22:06 <dmiles> any approach that makes you comfortable
+14:22:36 <jlatour> Doesn't using servlet requires installing an additional webserver?
+14:22:39 <jlatour> -s
+14:22:48 <dmiles> soap/rpc things tend to be good.. it sounds like you can make the perl pages talk to the rcp/soap of java
+14:23:07 <jlatour> I was thinking about that, yes. I'm trying to work with XML signatures, but that's hardly implemented.
+14:23:21 <jlatour> I believe XML-RPC is widely implemented.
+14:23:49 <dmiles> well i have used tomcat as a webserver.. it requires a big web dirrectory structure but when it comes down to it its just a single java app
+14:24:22 <dmiles> so supporting it in something i would distribute is actually more doable then i knew 2 months ago
+14:24:44 <dmiles> since i can start the jsp sever from an arbitray java vm
+14:24:56 <jlatour> You'll find a lot of activity on sanddunes-dev - not :(
+14:25:27 <dmiles> still subscribed, i am on numeraous uinactive lists
+14:25:42 <dmiles> sometimes just having a place to send notes to for feedback is good
+14:25:53 <jlatour> The problem is, you're the second member :)
+14:26:00 <dmiles> hehe
+14:27:26 <dmiles> so today i am working on finallizing the circlemud impiort tools.. i made to vital mistakes to fix
+14:27:34 <dmiles> err two
+14:27:58 <dmiles> object artifacts loaded from files are classes and not instances
+14:28:11 <dmiles> oops
+14:28:33 <dmiles> i am interested in making cyc kb a gaming server
+14:28:42 <jlatour> I heard.
+14:29:00 <jlatour> <dmiles> the idea is that knowledge can help dictate howe the mud works and hopw NPC interact
+14:29:21 <dmiles> heh, i made sense ;)
+14:29:56 <dmiles> i just loaded a starktrek game this morning
+14:30:34 <dmiles> now that i have the what is system done, have to develope that what can be done system
+14:30:49 <dmiles> err 'what is' vs 'what can be mnaniputed'
+14:30:58 <jlatour> Right :)
+14:31:01 <jlatour> That cleared up the sentence
+14:32:54 <dmiles> i wonder if my use a Narts is correct, Graham or Steve?
+14:34:24 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&-7222
+14:38:51 <dmiles> i am hoping to use the nart like an existing thing
+14:39:21 <dmiles> but it translates into a seach in a frame of refernce
+14:39:27 <dmiles> err to a search
+14:39:43 <dmiles> (ObjectDenotedFn Area1008 "holodeck")
+14:40:16 <dmiles> means the thing in Area1008 that is refered to as holideck
+14:41:58 <dmiles> i am also doing the same with (PortalFromToFn Area1005 North-Generally Area1008)
+14:43:53 <dmiles> i thnk my question is if i should be using just a Function-Denotational and not CycLNonAtomicReifiedTerm 
+14:46:08 <dmiles> well the two functions are a little differnt ObjectDenotedFn vs PortalFromToFn
+14:46:30 <jlatour> Do you enjoy talking to walls? :)
+14:46:32 <dmiles> PortalFromToFn result isa is something that really exists in the room always
+14:47:20 <dmiles> ObjectDenotedFn is only to exist in the room if there was no object that already was specified to match up
+14:48:00 <dmiles> well i see some web activity on cyc ;) 
+14:48:16 <jlatour> True
+14:48:19 <dmiles> i am hoping to successfully ask my question in a way that makes most sense to deserve an answer
+14:48:47 <dmiles> even though they could answer each.. i dont want to force anyone into a long explaination
+14:49:27 <dmiles> trying to find the question that gets the exlaination the fastest 
+14:50:17 <dmiles> i am loojking to find preds in cyc that already do something simular
+14:50:47 <dmiles> GovernmentFn does what PortalFromToFn is supposed to do
+14:51:27 <dmiles> but ObjectDenotedFn is wierd since it is only supposed to sometimes make something exist
+14:51:43 <Graham> Alas, I'm ill-equipped to answer your question, OE is not my strong point
+14:51:54 <jlatour> Hello Graham.
+14:52:01 <Graham> but I did send it on to someone else, hopefully we can get an swer for you
+14:52:04 <dmiles> so when i write rules.. i am hoping that the nart doesnt hoze the way i can talk about it
+14:52:42 <dmiles> for example
+14:52:44 <dmiles> (implies 
+14:52:44 <dmiles> 	(containsPortals ?Loc (PortalFromToFn ?Loc ?Dest ?Dir))
+14:52:44 <dmiles> 	(hasPortalToRegion ?Loc ?Dest))
+14:53:41 <dmiles> oops ?Dest ?Dir switched.
+14:54:26 <dmiles> Graham, did i describe it in a way that formulates to a question ?
+14:55:14 <Graham> I think so
+14:55:30 <Graham> I think the clear question is "Did I use Narts correctly"
+14:56:04 <Graham> folowed by" Is the manner I use them in going to screw me down the line."
+14:56:14 <dmiles> exacly :)
+14:56:26 <Graham> kay..
+14:56:46 <Graham> well I have to be gone, hopefully either I'll get a response and send it on to you, or someone will drop in and mention it.
+14:57:12 <dmiles> i am basingh it on the belive that Narting it makes it avable for further engininging in gafs
+14:57:58 <dmiles> cool
+14:58:42 <dmiles> thank you
+15:04:10 <dmiles> oh, here's a wierd question i can probly just try it.. but can i later rename a nart to a constant? 
+15:04:10 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+15:04:20 <dmiles> hi johnd :)
+15:04:26 <johnd> hi doug
+15:04:53 <johnd> Graham emailed me and said you were asking about NARTs, I think.
+15:04:56 <dmiles> i have been being successfull at making the mud client and server.. now cleaning it up
+15:05:01 <dmiles> yeah
+15:05:29 <dmiles> i am creating GeographicalRegions with protals between them
+15:05:46 <dmiles> i am making the Portals Narts built from regions they connect
+15:06:16 * dmiles turns on his special grammer and spelling checker
+15:06:58 <dmiles> so i interpreted Narts to be used becvasue they act like constants
+15:07:03 <johnd> (grammer -> grammar)
+15:07:19 <dmiles> oh my , its very broken
+15:07:37 <johnd> that would be my first guess
+15:07:48 <johnd> NARTs, I mean
+15:08:28 <dmiles> so that first use seems correct.. my second use is..
+15:08:59 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&-7222
+15:09:21 <dmiles> (ObjectDenotedFn Area1008 "holodeck")
+15:10:01 <dmiles> means plase reify to an object that is found in Area1008 that can be refernced by "holodeck"
+15:11:15 <dmiles> when you can reifiy to that also me to maKE sentences like : mudDescription :  "It looks like this: <br> 
+15:11:43 <johnd> "also me to make" ? huh?
+15:11:48 <dmiles> (comment (ObjectDenotedFn Area1008 "holodeck") "Looks like an instance of Holodeck)
+15:12:01 <dmiles> oh also/allows
+15:13:20 <dmiles> meaning i am not sure i need the assertion that it is a NART 
+15:13:59 <johnd> I can see making it a NART if you're going to have a bunch of these and you don't want to think up names.
+15:14:05 <johnd> Is there another reason?
+15:14:35 <dmiles> well ObjectDenotedFn will have two bavours
+15:14:43 <dmiles> err behavours
+15:14:52 <johnd> you're overloading the term?
+15:15:18 <dmiles> one is that it will try to find a holodeck in the room.. two it will be the holodeck in the room
+15:16:04 <johnd> You mean, call it this, and if it's already there use it, else create it?
+15:16:11 <dmiles> exactly
+15:16:29 <johnd> I think that sounds fine.
+15:17:00 <johnd> I'm not crazy about the name. It sounds too general.
+15:17:16 <dmiles> so i wonder if by making it a Nart loses the abilties to pull out parts as a varible in a query
+15:17:29 <johnd> Maybe ObjectLocatedInWithName
+15:17:42 <johnd> What do you mean pull out parts
+15:17:46 <dmiles> yes much better
+15:18:01 <dmiles> well in the first case PortalToFromFn..
+15:18:31 <dmiles> (implies 
+15:18:32 <dmiles>         (containsPortals ?Loc (PortalFromToFn ?Loc ?Dest ?Dir  ))
+15:18:32 <dmiles>         (hasPortalToRegion ?Loc ?Dest))
+15:19:34 <dmiles> ?Loc and ?Dest are picked out of it
+15:19:42 <johnd> So, you're concerned about the NART behaving properly as bindings?
+15:19:55 <johnd> OH
+15:20:06 <johnd> Loc is pulled out of arg1 of the NART
+15:20:13 <dmiles> yes becasue i was wonder if NonAtomicReifiedTerm was a constant in practicce
+15:20:33 <dmiles> + if a NArt
+15:20:48 <johnd> Do you see the termOfUnit assertion that automatically gets asserted in BaseKB?
+15:21:02 <dmiles> yes.. and neither side was quoted
+15:21:11 <dmiles> (which seems good?)
+15:21:16 <johnd> you can reach into it
+15:21:39 <johnd> If you look closely at the regular KB browser screen...
+15:22:12 <johnd> ... and you list all assertions involving Area1008, for example...
+15:22:57 <johnd> You'll see that it says (termOfUnit (ObjectDenotedFn Area1008 "holodeck") (ObjectDenotedFn Area1008 "holodeck"))
+15:23:13 <johnd> it looks like its stating the same NART twice.
+15:23:33 <johnd> Actually, the first one is the NART and the second one isn't.
+15:23:48 <johnd> You can "reach inside" the termOfUnit.
+15:23:53 <dmiles> ah i see a hyperlink above the first paren
+15:24:23 <johnd> The left parens on the first one is clickable, gets you to the term content frame for the NART.
+15:24:34 <johnd> The left parens on the second one isn't.
+15:24:37 <dmiles> rr at the first parent and not the other now.. i was expection to see a 'quote instead
+15:25:00 <dmiles> ah.. so they arent identical is a see now :)
+15:25:09 <dmiles> as i see now
+15:25:34 <johnd> (implies
+15:26:40 <johnd>    (and  (termOfUnit ?MYNART (?FUNC ?FUNCARG1 ?FUNCARG2))
+15:27:31 <johnd>          (containsPortals ?FUNCARG1 ....)
+15:27:39 <johnd> or something like that
+15:27:52 <johnd> I need to track down a rule to see how this is really done
+15:27:57 <dmiles> i see.. so i can make sure i pull it out manually
+15:28:08 <johnd> right. In the rule
+15:28:59 <dmiles> that makes sense.
+15:29:49 <dmiles> now with ObjectLocatedInWithName...
+15:30:16 <johnd> I've got to find out it I'm right about the usage on this. Back in a minute...
+15:30:23 <dmiles> thank you
+15:30:55 <jlatour> Hrm. Dilemma.
+15:31:59 <jlatour> I can either keep reading here, know when you're done asking questions, and talk to johnd, or finish my work, and risk missing johnd :)
+15:32:40 <dmiles> well johnd can probly interleave our questions
+15:33:06 <jlatour> You don't mind?
+15:33:15 <dmiles> not at all
+15:34:02 <jlatour> OK. In that case: johnd, I mailed you about the conversation Steve Reed and I had. Did you read that?
+15:34:46 <johnd> interleaving engine engaged!
+15:34:58 * jlatour grins.
+15:35:28 <johnd> Jeroen, I've still got your email sitting open in my mail app.
+15:36:28 <johnd> Doug, look at #$natArgument. You may be able to use it instead of messing with termOfUnit.
+15:36:49 <jlatour> Hrm. I'd like to know as soon as possible if Cycorp wants to participate in this project, so that I know if I have to find something else or start learning CycML.
+15:36:52 <johnd> Jeroen, while he's researching that...
+15:37:27 <johnd> I think what you're up goes with what we are doing.
+15:37:42 <johnd> I'd like to identify synergies, ways to work together.
+15:38:09 * jlatour nods. "What do you propose?"
+15:38:13 <johnd> It is not the case that we're restricting ourselves to the "tools" side, although that is where most of the work has been so far.
+15:38:48 <johnd> I have heard from several people who are very interested, some who have taken initial steps, all to do with massive KE.
+15:39:03 <jlatour> It's an interesting subject :)
+15:39:19 <johnd> Yes, I find it fascinating! We should start talking as a group.
+15:39:34 <johnd> I don't want to hold up creative progress.
+15:39:39 <jlatour> And I know you're not restricting yourself to tools, that's partly why I contacted you
+15:39:44 <johnd> I don't want to create a beauracracy.
+15:40:09 <jlatour> Group sounds good. If two projects are created, one or both is probably doomed to fail.
+15:40:13 <johnd> But I would like each of us to have a sense of what others are up to.
+15:40:56 <johnd> I think a centralized vision with decentralized but well communicated execution would be good.
+15:41:03 <johnd> We need more people involved.
+15:41:07 * jlatour nods.
+15:41:25 <jlatour> Getting more people involved seems to require getting something done first.
+15:41:28 <johnd> We need to start with some vision document, like what you started writing.
+15:41:52 <johnd> That could perhaps attract a few folks.
+15:42:11 <jlatour> It's going to be pretty difficult to both a) merge all those contributions and b) make the interface accessible
+15:42:16 <johnd> When we come out with some tools for non-ontologists, that will be another driver.
+15:43:04 <johnd> If by merging contributions, you're talking about bring the knowledge together, I don't think that happens in a big way until phase two.
+15:43:38 <johnd> But if we are in agreement that knowledge gets represented in CycL and passed aruond in CycML...
+15:43:48 <johnd> ...then we're a good part of the way there.
+15:44:12 <johnd> We're working out answers to global namespace issues and other issues.
+15:44:33 <jlatour> Adding XML signatures to CycML would be nice.
+15:44:47 <johnd> For example, two people could use the constant #$Rover to mean totally different things.
+15:44:55 <johnd> CycML is an XML schema.
+15:45:21 <jlatour> You can just add signatures to any XML schema?
+15:45:54 <johnd> As for #$Rover, namespace collisions could be resolved in a late-binding way.
+15:46:18 <johnd> Yes, I believe you can, but I'm not sure about the need for signatures. You may be right.
+15:46:34 <johnd> Every constant is assigned its own GUID.
+15:46:42 <jlatour> Depends on how much of my document is implemented :)
+15:47:22 <johnd> The bookkeeping on every assertion includes info on where it came from, and the "where" is itself a "centrally" (on the grid) registered GUID
+15:47:40 <johnd> Depends on what solves the problem
+15:47:50 <jlatour> Right.
+15:47:52 <johnd> If it's needed it gets included
+15:48:04 <dmiles> today i was interviewed for a job by Dr. Charles Cleveland to help him come up with a NL parser front end converting to CycL for www.questerresearch.com  ..  i told him its an intersting subject that definately involves working closely with cyccorp .. its one of those things that requires Group in your context above ;) in the context that no one wants to redo anyone elses work
+15:48:36 <johnd> right. thanks.
+15:48:54 <jlatour> It'd be nice to be able to detach organising the community from cycorp/some other group, and still keep quality.
+15:48:55 <dmiles> especially if he is staffing hours towards the same goals
+15:49:59 <jlatour> Anyway, to business. How do you propose we open a dialogue with everyone? A mailinglist of some sort?
+15:50:07 <johnd> OpenCyc.org is supposed to break off from Cycorp, once it can afford to.
+15:50:53 <johnd> We could make a new forum on the opencyc sourceforge site
+15:51:01 * jlatour nods.
+15:51:03 <dmiles> opencyc.org seems to provide infrastruture for even ambitious projects
+15:51:15 <jlatour> Of course :)
+15:51:22 <johnd> what to you mean, doug
+15:52:06 <dmiles> i meant that it might be usefull to put subprojects on opencyc.org
+15:52:16 <johnd> oh yeah, agreed
+15:52:45 <dmiles> but the text above about questerresearch leveraging cyc in a semi-commercial envirnoment?
+15:53:24 <johnd> however, I was thinking, in terms of communcations among members of a group (like the one we're discussing), it might be better to keep the conversation in the general forum at first, where more people could see it
+15:53:39 <dmiles> they have been looking at cyc for a while and deciding it helps them scale up the maintainace of NL data
+15:54:20 <dmiles> i would agree to keep in general i would not want to see atrophy in any particualar list
+15:54:38 <johnd> I think we could probably help, even just to help them get better use of the NL stuff, since its not that well documented
+15:54:56 <dmiles> everytime i see a mail in opendiscussion i get a sense of happiness
+15:55:03 <johnd> :)
+15:55:42 <johnd> jeroen?
+15:55:47 <jlatour> Yes?
+15:55:50 <dmiles> yes .. i imagine that corcorp actually has people dedicated currently to beefing up NL
+15:56:04 <johnd> I've gotta go.
+15:56:13 <jlatour> Ok. Will you start the discussion?
+15:56:17 <johnd> Yes we do. Almost 10, I guess.
+15:56:32 <johnd> Either way, J.
+15:56:51 <johnd> If I do it, it might be either tomorrow or Tuesday.
+15:57:08 <dmiles> i dont think i stand any better chance at reimplementing what experts are already doing.. but i dont know if Cleveland wants to wait
+15:57:24 <jlatour> I think it's best you do it. And invite the people who contacted you to it?
+15:57:25 <dmiles> thats the snafu 
+15:57:34 <johnd> error. non-sequitur
+15:57:59 <johnd> What's in Cleveland?
+15:58:09 <johnd> OH!!
+15:58:24 <johnd> Dr. Cleveland. He popped off my stack.
+15:58:32 <dmiles> you know him? :)
+15:59:07 <johnd> No, you mentioned him above.
+15:59:09 <dmiles> he employs about 40 people.. and is working on a dialog system
+15:59:21 <dmiles> and wants help leveraging opencyc
+15:59:33 <johnd> Right. I wonder how we can help?
+15:59:53 <dmiles> i think by having the NL dept work more vissible
+15:59:57 <johnd> At a minimum I could run down answers to certain questions.
+16:00:11 <jlatour> Bah. I keep mis-expanding the abbreviation 'NL'.
+16:00:12 <johnd> You know you can email Steve or me.
+16:00:31 <dmiles> definately this is a good offline topic
+16:01:10 <johnd> Really gotta go. Nice talking to both of you on the holodeck (in Area 1008).
+16:01:17 * johnd is away: I'm busy
+16:01:20 <dmiles> take care.. talk to you soon
+16:01:29 <jlatour> OK, bye.
+16:14:35 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+16:34:03 <jlatour> Well, time for sleep. Goodnight.
+16:37:12 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+17:23:32 --- quit: reed_ (Read error: 110 (Connection timed out))
+17:32:13 <dmiles> is this good?
+17:32:14 <dmiles> (implies 
+17:32:14 <dmiles>    (and 
+17:32:14 <dmiles>      (mudPossiblyAlreadyInRoom (ObjectLocatedInWithName ?Area ?Text) ?Area)
+17:32:14 <dmiles>      (not 
+17:32:14 <dmiles>       (thereExists ?FO 
+17:32:16 <dmiles>         (and 
+17:32:18 <dmiles>         (inContainer-Generic ?FO ?Area)
+17:32:20 <dmiles>         (mudKeyword ?FO ?Text)))))
+17:32:22 <dmiles>    (inContainer-Generic (ObjectLocatedInWithName ?Area ?Text) ?Area))
+17:33:50 --- quit: Graham (Read error: 104 (Connection reset by peer))
+17:35:32 --- quit: johnd (Read error: 104 (Connection reset by peer))
+17:51:29 --- join: reed_ (reed@207.207.8.185) joined #opencyc
+18:58:19 <dmiles> hey bruce
+18:59:21 <dmiles> i am reworking it becasue i made a mistake that .obj create Exemplars and not instances
+19:03:03 <bruce> did I do something to indicate that I was home? :)
+19:03:13 <bruce> oh, I loaded a page from your server
+19:03:19 <dmiles> ah
+19:03:24 <dmiles> oh yes
+19:32:28 <bruce> i'm having my brain stretched by some math stuff
+21:33:48 --- join: yottzumm ([hef5mPExW@12-232-76-192.client.attbi.com) joined #opencyc
+21:39:27 --- join: banram (~Iggeres@OL248-229.fibertel.com.ar) joined #opencyc
+21:44:11 <yottzumm> I'm confused, if i had seven cards to put in a hand, would I use #$isa to put them in the deck?
+21:44:16 <yottzumm> I'm confused, if i had seven cards to put in a hand, would I use #$isa to put them in the hand?
+21:44:35 <yottzumm> I'm trying to do it with the java API
+21:45:13 <dmiles> isa the Cards
+21:45:31 <dmiles> in-ContGenric to place them
+21:45:45 <dmiles> or objectFoundInLocation
+21:46:10 <dmiles> isa type assertions are usefull for classification
+21:46:26 <dmiles> so you could have a Collection for each suit
+21:46:40 <dmiles> Collection for Royality
+21:47:17 <dmiles> a card can be an instance of multiple Collections
+21:48:00 <dmiles> actually.. a Card.. hrrm.. let me rethink that again
+21:48:07 <dmiles> a single card is a Collection
+21:48:09 <yottzumm> so just assert a GAF with the appropriate predicate?
+21:48:24 <dmiles> that collection can be Genl'd to Royality ansd Suit
+21:49:02 <dmiles> the AceOFClubsCard is an instance of the AceOFClubsCardCloolection
+21:49:22 <dmiles> its located in the PlayerHand1
+21:49:31 <yottzumm> because you can have more than one AceOfClubs in a deck (like pinocle)?
+21:49:41 <dmiles> exactly
+21:50:32 <dmiles> so you could create one collection for each card type
+21:50:43 <yottzumm> I think I'll write java to generate SubL
+21:50:45 <dmiles> then genls it to appropriate super collections
+21:51:35 <dmiles> yes its a pain to try top hand assert things like that :)
+21:53:08 <dmiles> i should put together the KifFileLoader to have amin that takes files that connects to the local cyc server
+21:53:16 <dmiles> err have a main()
+21:56:41 --- part: banram left #opencyc
+22:06:48 --- quit: Seth (Read error: 104 (Connection reset by peer))
+22:11:28 <yottzumm> shouldn't there be a function in SubL that will take  a file and read it in?
+22:14:58 <yottzumm> okay, I have SpadesCollection isa SuitCollection
+22:15:30 <yottzumm> AceOfSpades isa AceCollection
+22:15:55 <yottzumm> AceOfSpades isa AceOfSpadesCollection
+22:16:15 <yottzumm> AceOfSpades isa SpadesCollection
+22:16:50 <yottzumm> I think I'll change AceOfSpades to AceOfSpadesCard
+22:17:44 <yottzumm> maybe I should add Card to a lot of it
+22:18:12 <dmiles> you ccan strten your definations
+22:18:17 <dmiles> err shorten
+22:18:40 <dmiles> oh not isa.. you want to use Genls
+22:19:06 <yottzumm> so only when I get an actual card, I use isa?
+22:19:08 <dmiles> (#$genls  AceOfSpadesCollection SpadesCollection)
+22:19:37 <dmiles> correct
+22:20:22 <dmiles> (#$isa #$AceOfSpades43  #$AceOfSpadesCollection)
+22:20:32 <yottzumm> okay
+22:20:57 <dmiles> or even.. you can do a (#$isa #$Card43  #$AceOfSpadesCollection)
+22:21:25 <yottzumm> okay
+22:22:21 <dmiles> me cant stop help thinking of the impliemtnion in java of the loops to make it.. and how cool it can look
+22:22:49 <yottzumm> that's what I'm doing, writing it in java
+22:23:36 <dmiles> bruce if you get a chance: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&-632
+22:23:56 <dmiles> Existentional creation of things!
+22:24:16 <yottzumm> I think I'll only instantiate 52 cards for now.  Should be easy to change later
+22:26:07 <dmiles> yes
+22:33:54 <yottzumm> arg! none of my Gaf worked! It looks like all most of my constants are there though.  Probably I have a problem with Microtheory again
+22:36:01 <yottzumm> CycConstant genls = cycAccessGetKnownConstantByName("genls");
+22:36:27 <dmiles> or you can use cycAccess.genl
+22:36:30 <dmiles> err
+22:36:33 <dmiles> or you can use cycAccess.genls
+22:36:37 <yottzumm> CycConstant anycardcoll = cycAccess.createNewPermanent("CardCollection")
+22:36:42 <yottzumm> okay, I'll look at that
+22:36:44 <dmiles> there are some cached constants in it
+22:37:41 <dmiles> i prefer to use CycConstant anycardcoll = cycAccess.makeCycConstant("CardCollection")
+22:38:04 <dmiles> make reuses it if its already in there
+22:38:17 <dmiles> first it tryies to 'find'
+22:38:42 <dmiles> createNewPermanent can create duplicates with differnt GUIDs i think
+22:39:03 <yottzumm> thanks
+22:40:17 <yottzumm> its taking a while.  It must be doing something
+22:40:52 <dmiles> asserts can be slow :)
+22:41:16 <dmiles> it takes me ovver 30 minutes to load circle mud actually .. a few days ago i was guessing 15 but timed it
+22:45:15 <yottzumm> can I DCC my code to you and have you look it over?  I can't get copy and paste working with xchat
+22:45:36 <dmiles> how many lines is it?
+22:45:42 <yottzumm> 66
+22:46:22 <dmiles> there is #flood
+22:46:50 <dmiles> oh i see
+22:46:55 <dmiles> yeah lets try DCC
+22:47:28 <dmiles> oh i probly haver it on ignore ;(
+22:47:57 <yottzumm> says waiting
+22:48:11 <dmiles> email to dmiles@isotheos.com
+22:48:23 <dmiles> my firewqall is a pain
+22:49:37 <yottzumm> it's off
+22:50:44 <dmiles> so what is happening with it (have it)
+22:51:23 <dmiles> 				mt = cycAccess.getKnownConstantByName("SBJMt");
+22:51:30 <dmiles> not yet created?
+22:51:50 <yottzumm> throws an exception?
+22:51:52 <yottzumm> maybe not
+22:52:02 <dmiles> its just null
+22:52:08 <dmiles> 				mt = cycAccess.makeCycConstant("SBJMt");
+22:52:09 <yottzumm> I'm trying to recreate the MT too
+22:52:30 <dmiles> oh i see
+22:52:50 <dmiles> so your sure it will throw?
+22:52:56 <yottzumm> no, I'm not
+22:53:02 <dmiles> i whoulsd do a null test
+22:53:06 <yottzumm> let's recreate the Mt each time
+22:53:17 <dmiles> yep.. good idea
+22:53:20 <yottzumm> wouldn't it throw NPE below
+22:53:36 <yottzumm> so I'll move the stuff in the catch out
+22:53:43 <yottzumm> up
+22:54:42 <yottzumm> am I adding to genlmt properly
+22:56:02 <dmiles> perfect
+22:56:10 <dmiles> well oopops
+22:56:17 <dmiles> use CycList()
+22:56:46 <dmiles> http://12.225.207.235/offt/Cyrd.java
+22:58:14 <dmiles> cool i leanred a new java styntax
+22:58:16 <dmiles>             CycConstant [] suits = new CycConstant[suit.length]; 
+22:59:36 <dmiles> oh refresh the page.. i am not using ide editor ;P
+23:00:53 <dmiles> the reason behind CycList.. is its submitted as Object later.. and that object may need a .stringApiValuie
+23:01:24 <dmiles> or a .cyclify
+23:01:39 <yottzumm> looks like it didn't add anything to my Mt
+23:01:49 <dmiles> but it did create it?
+23:02:05 <yottzumm> yes, the microtheory is there
+23:02:12 <yottzumm> maybe I should restart cyc
+23:02:23 <dmiles> hrrm i am wondering if you have differnt Guids for the same text Mt
+23:02:29 <dmiles> yep
+23:02:45 <dmiles> the prowser makes Guid based links
+23:08:50 <yottzumm> get rid of the first SBJMt line.
+23:09:29 <dmiles> it is redundant
+23:09:37 <dmiles> but also confuses cyc
+23:10:09 <dmiles> becasue the kill() system would get invoked.. yeah for a constant that has no index
+23:12:03 <yottzumm> maybe I don't know how to get at the isa from the browser?
+23:12:25 <yottzumm> everythings returning as a constant, with no additional detail
+23:12:42 <dmiles> with creation times?
+23:13:13 <dmiles> oh you need to assert that those collections are really collections
+23:14:00 <yottzumm> assertIsa(collection, ..., mt)?
+23:14:06 <yottzumm> no
+23:14:18 <yottzumm> assertIsa(..., collection, mt)?
+23:14:45 <dmiles> cycAccess.assertIsa(anycardcoll,cycAssess.collection,mt();
+23:14:49 <dmiles> yep
+23:15:37 <dmiles> assertIsa maybe is falling from TMS
+23:15:51 <dmiles> your 3 in a row bellow
+23:16:50 <dmiles> you should only need of thsoe three.. 
+23:16:50 <dmiles> 					cycAccess.assertIsa(card, valcoll, mt);
+23:16:51 <dmiles> 					cycAccess.assertIsa(card, cardcoll, mt);
+23:16:51 <dmiles> 					cycAccess.assertIsa(card, suits[s], mt);
+23:17:14 <dmiles> err one of those three
+23:18:01 <yottzumm> just use cardcoll, I guess
+23:18:18 <dmiles> yes .. thats all thats required
+23:20:40 <yottzumm> so I need one Isa for the CardCollection, and one for each of 52 cards?  The rest are genls?
+23:22:02 <dmiles> need one CardCollection collection to genls SuitNameCOllection 
+23:22:23 <dmiles> and the CardValueCollections
+23:22:49 <dmiles> is to the card value Collction
+23:22:56 <dmiles> so here is ana example...
+23:23:31 <dmiles> Card43 isa AceOfSpaceds genls (Aces, Spades)
+23:23:53 <dmiles> Aces genls AllCardsColl
+23:24:01 <dmiles> Spades genls AllCardsColl
+23:24:43 <dmiles> just as an example
+23:24:50 <yottzumm> okay, I'll try that
+23:27:12 <yottzumm> aha
+23:27:41 <yottzumm> I have an isa (cardcollection, collection)
+23:28:15 <yottzumm> maybe you told me this.  do I have to do an isa for every collection?
+23:28:33 <dmiles> since yes
+23:28:36 --- quit: bruce (Read error: 110 (Connection timed out))
+23:30:20 <dmiles> as in that it is cycAccess.collection.. and also all collections should genls to something higher
+23:30:20 <yottzumm> cool 125 assertions
+23:31:30 <dmiles> excellent.. brb
+23:38:49 <dmiles> how ios it going?
+23:39:23 <yottzumm> I'm not getting any of the assertGenls to show up in the browser.  All the isa look like they're there
+23:39:57 <dmiles> before assert genls can happen.. both fiirst arguments must be instances opf Collection
+23:40:43 <yottzumm> do the isas first, I take it
+23:41:06 <dmiles> yes fior the Collections.. thne genls them together.. then the cards
+23:41:55 <dmiles> your uppmost collection could be genls to Thing 
+23:42:48 <yottzumm> okay, the genls are showing up now.
+23:44:42 <yottzumm> individual cards don't have genls, right?
+23:45:22 <dmiles> instances of cards no
+23:45:59 <dmiles> but the AceOfSpades could have a couple.. to Aces.. to Spades.. even to SpecialCards
+23:46:59 <dmiles> the goal for making collections heirarchial is so you can write your rules easier
+23:47:45 <yottzumm> my AceOfSpadesCardCollection genls to SpadesCardCollection and AceCardCollection
+23:47:45 <dmiles> spades could genls to BlackCards.. if you where writting a KingsCorner game
+23:47:55 <yottzumm> cool.
+23:48:49 <dmiles> you have it yes
+23:49:08 <yottzumm> thanks tons.  Do you want my code as it stands now?
+23:49:22 <dmiles> yes
+23:52:37 <dmiles> looks good
+23:53:46 <yottzumm> did you dig through all the docs to figure this out?
+23:54:27 <dmiles> i spent some time with cyc at a previous job.. and was tasked at cloning a simular api
+23:54:51 <dmiles> that was borrowd from cyc's model i am guessing
+23:55:04 <dmiles> i leanred java in the context of this ;)
+23:55:25 <dmiles> well in the context of expert systems
+23:55:33 <yottzumm> cool
+23:56:22 <dmiles> i do know that someone is rearranging some java api for cyc to be released soon
+23:56:54 <dmiles> based on SubLTerm to lower datatypes
+23:57:17 <dmiles> right now things spluit between CycFort and CycList
+23:57:44 <dmiles> but they are working on a more upper type
+23:57:58 <dmiles> i think it will follow the SubL typeas
+23:59:05 <dmiles> with a leafmost thing of SubLConstant
+23:59:29 <dmiles> which will make things easier in java 
+23:59:35 <yottzumm> so they're using the composite/component design pattern?
+23:59:59 --- log: ended opencyc/02.05.23

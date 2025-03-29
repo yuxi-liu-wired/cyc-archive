@@ -1,0 +1,153 @@
+00:00:00 --- log: started opencyc/02.07.28
+03:58:13 --- join: Vutral (~ss@brln-d9b80cf2.pool.mediaWays.net) joined #opencyc
+04:28:25 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+07:14:33 <huthut_> cycapi is hanging during a long time, in org.opencyc.api.CycAccess. instance init
+07:14:43 <huthut_> org.opencyc.api.CycAccess.<init>
+07:14:54 <huthut_> is this normal?
+07:19:16 <dmiles> it hould be less then a second.. sound like the Cyc daemon on the other end is not responding
+07:28:10 <huthut_> cyc console responds, CycAccess.<init> is still hanging
+07:28:42 <dmiles> it sounds like maybe its not going over local loopback
+07:29:11 <dmiles> if its not over 127.0.0.1 it will answer and then not go on anymore
+07:29:56 <dmiles> which constuctor did you use?
+07:31:23 <huthut_> nondefault one.  i will now try default, but i think that results will be the same.
+07:33:14 <huthut_> both the java api & cyc are on localhost.
+07:34:00 <dmiles> as long as the tcp routes over 127.0.0.1 thats the key.. if you use your hostname you often get the public ip
+07:34:37 <dmiles> that will make CycAccees.<init> block
+07:36:09 <dmiles> so if you netstat ed in another console your can confirm its over 127.0.0.1
+07:42:06 --- quit: huthut_ (Read error: 104 (Connection reset by peer))
+07:42:14 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+07:43:05 <huthut> now, default constructor, all the same.
+07:43:25 <dmiles> hrrm.. what kind of ehternet adapter are you using?
+07:43:38 <dmiles> their is an issue with the guid generator
+07:43:49 <dmiles> (it need a MAC address)
+07:45:00 <huthut> i dunno
+07:45:06 <dmiles> if ifconfig shows one maybe even ppp0 you might be ok
+07:45:35 <dmiles>  run /sbin/ifconfig
+07:46:00 <dmiles> you should see an eth0
+07:46:24 <dmiles> (and an 'lo')
+07:47:19 <dmiles> most likely you will need both.. 'eth0' for SubL GUIDGen and 'lo' for CycAccess to talk over
+07:47:59 <huthut> $ /sbin/ifconfig 
+07:47:59 <huthut> eth0      Link encap:Ethernet  HWaddr 00:95:86:82:17:ac  
+07:47:59 <huthut>           inet addr: [censored] Bcast:[censored] Mask:255.255.255.0
+07:47:59 <huthut>           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+07:47:59 <huthut>           RX packets:7785325 errors:1 dropped:0 overruns:1 frame:0
+07:48:00 <huthut>           TX packets:2529807 errors:0 dropped:0 overruns:0 carrier:0
+07:48:02 <huthut>           collisions:0 txqueuelen:100 
+07:48:04 <huthut>           Interrupt:11 
+07:48:06 <huthut> lo        Link encap:Local Loopback  
+07:48:08 <huthut>           inet addr:127.0.0.1  Mask:255.0.0.0
+07:48:08 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+07:48:10 <huthut>           UP LOOPBACK RUNNING  MTU:16436  Metric:1
+07:48:12 <huthut>           RX packets:609 errors:0 dropped:0 overru
+07:48:14 <huthut>           TX packets:609 errors:0 dropped:0 overruns:0 carrier:0
+07:48:16 <huthut>           collisions:0 txqueuelen:0 
+07:48:45 <huthut> numbers are changed in hwaddr
+07:48:50 <dmiles> the 00:95:86:82:17:ac doesnt look right.. but probly ok
+07:49:05 <huthut> numbers are censored/changed in hwaddr
+07:49:26 <dmiles> hrrm yeah.. that may be blocking the sessionizer
+07:49:42 <huthut> what may be blocking?
+07:50:01 <dmiles> it vreates a transaction space for you.. like a key
+07:50:24 <dmiles> this is so it can create a user variable space durring API
+07:50:36 <huthut> ic
+07:50:47 <dmiles> it uses a call the your mac address to seed the generator
+07:51:03 <dmiles> (HWaddr)
+07:53:06 <dmiles> there was a report on this.. getting a link
+07:54:19 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+07:56:14 <dmiles> In release 0.6.0 you will receive an ioctl error when creating a new constant, if you do not have an ethernet adapter. We use the ethernet MAC address as a piece of the GUID assigned to each new constant. When this bug is fixed, a random 128-bit GUID will be assigned if you do not have an ethernet adapter on your computer. 
+07:56:45 <dmiles> even though you ar enot creating a constant you still need a tracking number
+07:57:19 <dmiles> huthut: for sanity though..
+07:57:47 <dmiles> try telneting to localhost 3601
+07:58:02 <huthut> did
+07:58:10 <dmiles> type: (api-quit)<enter>
+07:58:42 <dmiles> the java i think goes over a differn port.. but should be close enoough
+07:59:12 <dmiles> also the run of cyc cannot be nohuped 
+07:59:26 <dmiles> it needs an active stdin/out
+07:59:38 <dmiles> so i usually run under a screen
+07:59:45 <huthut> `java goes port' -- netstat was showing 3614 for it
+08:00:16 <huthut> `type: (api-quit)<enter>'  did this.  no response.
+08:00:32 <dmiles> cyc does a round robin for the verious streams polling.. iif it gets to stdin and it cant get a possitive response it will hang
+08:01:09 <dmiles> (so a daemonized opencyc wont work)
+08:01:19 <huthut> its console responds quickly.
+08:02:06 <dmiles> something going on that your loopback maybe is firewalled?
+08:02:44 <dmiles> (i.g. prevents users from hacking samba from localhost)
+08:03:58 <dmiles> so then since its responing on console i assume then you making sure it has a sense of a valid tty at all times
+08:05:23 <dmiles> if 3601 hangs then i am sure 3614 hangs as well
+08:06:46 <huthut> `(i.g. prevents users from hacking samba from localhost)
+08:06:48 <huthut> no
+08:07:29 <dmiles> the only 3 things it could be is it cant resolve you back to "localhost" for a name, cant get access to HWAddr or does not have a ttyto poll for inactivity
+08:07:39 <huthut> its a testing/developer host, so it doesnt have anything like this... e.g. any user is provided with root password.
+08:09:01 <dmiles> good!.. i pretty much refuse to use linux machines i dont have root on.. not worth the hassles ;).. people have no fear of letting you on a windows machine
+08:09:32 <dmiles> so you definately have a valid tty or ptty right?
+08:09:45 <huthut> yes
+08:09:56 <huthut> also, the httpd 3602 doesnt respond
+08:10:01 <huthut> ill now restart cyc.
+08:10:08 <dmiles> try a nslookup 127.0.0.1
+08:11:13 <dmiles> you may need to set your bind order to hosts,dns
+08:11:18 <huthut> nslookup reports:   1.0.0.127.in-addr.arpa  name = localhost.
+08:11:31 <dmiles> ok then it does resolve
+08:11:44 <dmiles> and nslookup localhost ?
+08:12:19 <huthut>  Address: 127.0.0.1
+08:13:08 <dmiles> [root@titan quester]# cat /etc/host.conf
+08:13:08 <dmiles> order hosts,bind
+08:14:36 <dmiles> so ok.. when you PS on cyc can you see it uses latest.bin world/opencyc.load ?
+08:15:31 <dmiles> oh.. also it may be trying to get to a transcript server it sould be set to :DEAF
+08:15:48 <dmiles> in parameters.lisp
+08:16:06 <huthut> i didnt change parameters.lisp or any other configs
+08:16:06 <dmiles> or dpoesnt have write permissions to log its stuff
+08:16:32 <huthut> where does it place its logs?
+08:16:50 <dmiles> in run/transcripts or something
+08:16:54 <huthut> if in its local dirs, then it should have rights
+08:17:13 <dmiles> it is local yes
+08:17:25 <dmiles> well somehwere in opencyc-6-*
+08:18:16 <dmiles> and you are not trying to background it right?
+08:18:43 <huthut> bin/latest.bin -w world/latest.load
+08:18:59 <huthut> no, its foreground
+08:19:14 <huthut> and has an active tty
+08:19:49 <dmiles> so then now that yuve restarted fbofore trying to connect with java. how does 3601 work?
+08:20:14 <dmiles> (you wont get anyfeedback just a connect)
+08:20:25 <dmiles> then you can (api-quit)
+08:20:31 <huthut> hmm
+08:20:39 <dmiles> it should volentarily close on you
+08:20:42 <huthut> after cyc restart, java api worked
+08:21:12 <dmiles> sometimes if it is sitting at press 1-x it will hang as well
+08:21:50 <dmiles> well good
+08:21:56 <huthut> when i first started cyc, i tried to connect from non-localhost machine, it was hanging.  so i ran javaapi from localhost. javaapi was still hanging.  i restarted cyc, and ran the javaapi which worked.
+08:22:19 <huthut> so, probably, first call from non-localhost made the cyc hang.
+08:22:24 <dmiles> ah.. so maybe it only takes one non localhost connect to get it into a nasty state
+08:22:29 <dmiles> yep
+08:23:38 <huthut> (api-quit) worked as well.
+08:24:11 <huthut> so, opencyc bug.
+08:24:38 <dmiles> well i hear they will let you open or close up non localhost calls 
+08:24:50 <dmiles> like sometime in the next reelase
+08:25:33 <dmiles> grsh graylensman?
+08:26:02 <dmiles> is #<sdf:<()>> normally readable by Scheme?
+08:27:19 <huthut> i am filing a bug on opencyc.sf.net
+08:27:42 <dmiles> good deal
+08:37:15 <dmiles> hrrm is '() not equal to () ?
+08:37:30 <dmiles> are they both NIL ?
+08:50:48 --- nick: Vutral -> Vutral_
+08:51:03 --- join: fmike (~fmike@fw224.novosoft.ru) joined #opencyc
+08:58:58 --- quit: fmike ()
+09:15:05 --- nick: huthut -> hobot
+09:15:40 --- nick: hobot -> huthut
+09:21:52 <graylensman> dmiles: #< is not normally.  But neither was #$.  The reader would have to be modified.
+09:30:13 --- nick: huthut -> hobot
+09:36:09 --- nick: hobot -> huthut
+11:11:27 --- quit: graylensman ("Client Exiting")
+11:14:37 --- quit: Cobra_ ("[x]chat")
+12:04:56 --- part: futhin left #opencyc
+13:00:27 --- join: yottzumm ([VNZHYmYpP@12-232-124-73.client.attbi.com) joined #opencyc
+13:00:52 --- quit: yottzumm (Client Quit)
+13:14:52 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+13:32:49 --- join: futhin_ (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+13:33:17 --- part: futhin_ left #opencyc
+14:30:48 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:15:30 --- quit: Vutral_ (Read error: 113 (No route to host))
+16:43:19 --- quit: devEiant ("Err... Quitting.")
+18:30:29 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:38:42 --- quit: Cobra_ ("[x]chat")
+22:10:56 --- quit: graylensman ("Client Exiting")
+22:29:49 --- quit: huthut (Read error: 113 (No route to host))
+22:30:46 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:26:14 --- quit: huthut (Read error: 104 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/02.07.28

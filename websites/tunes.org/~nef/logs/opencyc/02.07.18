@@ -1,0 +1,228 @@
+00:00:00 --- log: started opencyc/02.07.18
+00:00:56 <huthut_> most (80% or so) sentences are parsed into a purely linear tree.  nonlinear trees are only produced when ",", ";" or ":" are encountered in the sentence.
+00:01:14 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:02:22 <dmiles> hrrm yeah
+00:04:21 <huthut_> logs show some nontrivial analysis activities, but the result trees are fairly non-informative.
+00:05:26 <dmiles> i see that.. well we didnt give it agood sentence with a subject verb object
+00:05:34 <dmiles> the kinds it's supposed to do well with
+00:06:04 <dmiles> like "The dog barked at the moving car"
+00:06:16 <dmiles> kind of thing
+00:06:47 <whagga> yes I just read a little bit about wordStringd, and I have saw that it s the right function, if only it wanted to work :(
+00:10:59 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:12:35 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:13:10 <dmiles> whagga: definately is the right thing, yes
+00:13:28 <dmiles> are you a SF member?
+00:13:44 <whagga> no
+00:14:23 <dmiles> well there is a mauiling list and "open Discussion" on http://sourceforge.net/projects/opencyc/
+00:14:23 <whagga> in fact it seems that it is all the genls link that doesn t work in inference
+00:14:43 <dmiles> well i think its a code implemented fucntion
+00:14:59 <huthut_> well it does the same on s v o.  I used russian equivalent of `the dog barked....'
+00:15:06 <dmiles> the code for uit needs to grab an all genlPreds childiern
+00:15:08 <huthut_> updated logs-desem.zip and added desem3.gif
+00:16:23 <dmiles> yeah still linear
+00:16:23 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:20:47 <dmiles> hehe lots to do about nothing huthut_ :)
+00:21:34 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:21:54 <whagga> my connection is not working very well
+00:22:00 <sandos> we know =)
+00:22:33 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:22:41 <huthut_> "<dmiles> hehe lots to do"  it may have some c++ calls disabled in my version
+00:23:09 <huthut_> but i don't think so
+00:23:13 <huthut_> godknows
+00:24:45 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:28:04 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:28:09 <huthut_> 1st translation variant: 
+00:28:09 <huthut_> The dog woofed at a moving automobile. 
+00:28:09 <huthut_> 2nd translation variant: 
+00:28:09 <huthut_> The dog was woofing at a moving automobile. 
+00:28:09 <huthut_> 3rd translation variant: 
+00:28:10 <huthut_> The dog woofed at a moving car. 
+00:28:12 <huthut_> 4th translation variant: 
+00:28:14 <huthut_> The dog was woofing at a moving car. 
+00:28:16 <huthut_> 5th translation variant: 
+00:28:18 <huthut_> The dog woofed on a moving automobile. 
+00:28:20 <huthut_> 6th translation variant: 
+00:28:22 <huthut_> The dog was woofing on a moving automobile. 
+00:28:24 <huthut_> 7th translation variant: 
+00:28:26 <huthut_> The dog woofed on a moving car. 
+00:28:28 <huthut_> 8th translation variant: 
+00:28:30 <huthut_> The dog was woofing on a moving car. 
+00:28:32 <huthut_> Total of 12 variants generated, yielding 8 different translati
+00:29:03 <dmiles> thats pretty good
+00:29:08 <huthut_> is that `on' right?
+00:29:13 <huthut_> instead of `at' ?
+00:29:23 <dmiles> at is better
+00:29:30 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:30:14 <huthut_> `on' is literal translation of a corresponding russian word
+00:30:33 <huthut_> `at' is more correct semantically
+00:30:34 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:30:54 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+00:32:06 --- quit: whagga (Read error: 104 (Connection reset by peer))
+00:36:33 <huthut_> hehe i asked it for all veriants of `на', it gave a single variant of `on'.
+00:37:55 <huthut_> the same with e2r.
+00:38:19 <huthut_> i asked it for all veriants of `at', it gave a single variant of `при'.
+00:38:59 <huthut_> i asked it for all veriants of `при', it gave a single variant of `at'.
+00:39:12 <huthut_> smart beast
+00:39:47 <huthut_> i asked it for all veriants of `on', it gave a single variant of `на'.
+00:47:53 <huthut_> haha
+00:51:08 <huthut_> also, i made one icq2000 protocol connector library in Java, which is used in an industrial heavy load servers.  The old but perfectly working unlimited version of it is available LGPL.  It would be very easy for me to do an ICQ chatbot connector for your system... I don't have any server to run it though.
+00:52:03 <huthut_> I don't think it is wanted by anyone though.
+00:52:19 <dmiles> the abilty to get things to ICQ is nice
+00:55:25 <huthut_> Also, there is a current version of that plugin (not opensource), which is much more feature-rich (e.g. search users, send/recv contacts etc etc etc), stable and resource-wise, could be made available LGPL... I am almost certain that my managers would allow me to publish it with some required changes (that wouldn't limit its abilities).
+00:55:31 <dmiles> in a few days definatley will have time to hook up what you have
+00:55:54 <huthut_> well i don't have time nearest days
+00:56:21 <dmiles> yeah
+00:56:31 <huthut_> but in the future, i could.
+00:57:03 <dmiles> very good
+01:01:41 * dmiles must nap for a bit
+01:01:45 <huthut_> cya
+01:12:47 --- nick: YtKracker -> dmiles-laptop
+01:15:13 --- nick: dmiles-laptop -> DMiles-TheLaptop
+01:47:23 --- nick: DMiles-TheLaptop -> mea_culpa_away
+03:12:45 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+07:10:11 --- join: whagga (whagga@islab25h.fri.utc.sk) joined #opencyc
+07:47:41 --- join: stubby (~schemer@folsom.officedepot.com) joined #opencyc
+08:29:23 --- nick: mea_culpa_away -> mea_culpa
+11:20:47 --- join: Otteri (~otter@stekt53.oulu.fi) joined #opencyc
+11:21:40 --- nick: Otteri -> Otter
+11:37:08 --- part: Otter left #opencyc
+12:03:35 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+12:58:01 --- join: Vutral_ (~ss@217.4.50.102) joined #opencyc
+14:44:35 <Vutral_> dmiles
+14:47:11 --- quit: Taral ("going home")
+15:12:08 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+15:13:27 --- quit: stubby ("Client Exiting")
+16:25:49 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:17:38 --- quit: graylensman (Remote closed the connection)
+18:19:42 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:52:04 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+20:53:39 <dmiles> whagga: your connection seems better now ;P
+21:46:59 --- quit: sayke (Read error: 104 (Connection reset by peer))
+21:47:09 --- join: yottzumm ([0kjefaVJD@12-232-124-73.client.attbi.com) joined #opencyc
+21:50:47 <dmiles>  channels grown a buit yottzumm :P
+21:52:29 <yottzumm> yeah, quite a few people.  I've lately been thinking about evolving visual languages and securing a language server with "capabilities"
+21:54:18 <yottzumm> see http://www.nersc.gov/~jed/papers/Managing-Domains
+21:54:57 <yottzumm> so I can imagine something like Oracle and PL/SQL.   A parser server, and a visual language
+21:56:08 <yottzumm> probably something like the X window system, except with security about what buttons you can press on a GUI...how the buttons reorganize themselves following a grammar
+21:56:39 <yottzumm> and then how to maintain existing applications as you change the grammar the programs are written in
+21:57:42 <yottzumm> I'd like to see something like GME 2000 built on top of OpenCyc.... maybe I should do it myself.
+21:58:30 <dmiles> ah .. a comnplete messdage driven programming
+21:58:33 <yottzumm> a modelling tool that can work at both the metamodel and modelling levels
+21:59:30 <dmiles> yeah cyc could help with that
+21:59:38 <dmiles> orginaization and reuse
+21:59:48 <yottzumm> I'd like to strike a happy medium between the applications where you can do anything, and the restrictions of a typical programming language (syntax)
+22:00:29 <yottzumm> anyway, I'm kind of doing several things at once
+22:01:16 <yottzumm> I'm trying to bring back modal applications I think
+22:01:31 <yottzumm> like MUDs and MOOs
+22:02:25 <dmiles> that ExistingObject pragma (Modality) certainly makes sense for many things
+22:02:52 <dmiles> that an object that exists in the realworld should or could have a first class existance in cyc
+22:07:57 <yottzumm> do you know of any good graphical clients for mudding?
+22:09:37 <dmiles> siege may know more then me about that
+22:09:53 <siege> never been a graphical person, sorry
+22:10:06 <siege> I'm all about plain-text :)
+22:10:09 <yottzumm> well, I wrote one for my chat room, but it was all HTML
+22:10:16 <yottzumm> siege: no HTML?
+22:10:18 <siege> that's not a bad thing
+22:10:29 <siege> not for mudding, anway
+22:10:46 <siege> no color, most of the time, too
+22:11:00 <siege> too distracting
+22:11:23 <yottzumm> yeah, I'm kind of a hypocrit, I talk big, but when it comes down to it, give me a terminal window and vi
+22:11:31 <yottzumm> :)
+22:11:50 <dmiles> i am wondering this about jamud.. it doenst concern me yet of migh tn ot ever.. but people could build a graphic client
+22:11:52 <yottzumm> solitare and mille bornes are cool though
+22:12:01 <siege> dmiles: absolutely
+22:12:13 <siege> dmiles: especially if it centered around html ;)
+22:12:15 <siege> or vrml
+22:12:33 <dmiles> yeah .. what jamuid is to me is a instance broker
+22:12:37 <yottzumm> I don't think you want to generate vrml by hand
+22:12:55 <siege> jamud is turning into a damn application framework rather than a mud, but I can't say I don't like it
+22:13:12 <siege> by hand? what's this "by hand" stuff? :)
+22:13:29 <siege> oh, for the initial creation, yeah
+22:13:31 --- join: dmiles2 (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+22:13:41 <dmiles2> ussing bsh.. or whatever
+22:13:57 <dmiles2> ussing bsh.. or whatever
+22:14:01 <dmiles2> 22:19] <dmiles> a place to put java objects into and find later;P .. operate on them over telnet
+22:14:03 <dmiles2> [22:19] <dmiles> ussing bsh.. or whatever
+22:14:04 <yottzumm> maybe you could figure out hallways and autogenerate vrml or something
+22:14:05 <dmiles2> [22:19] *** Disconnected
+22:14:06 <siege> in stereo, where available
+22:14:25 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+22:14:33 --- nick: dmiles2 -> dmiles
+22:14:37 <siege> dmiles is having some problems, so it seems :)
+22:15:01 <dmiles> odd i never get connection problems now i dont use a firewal
+22:15:34 <yottzumm> someone took my IP address for a while, that caused all kinds of problems
+22:15:35 <dmiles> its a pain though each one of my machines get DHCP and spred all over ATTs subnets
+22:15:53 <dmiles> so getting arround my own LAN can be impo0ssible
+22:16:13 <dmiles> attt filters por 139 
+22:16:13 <siege> build a 10/8 net
+22:16:22 <yottzumm> dmiles: can you put in some direct routes
+22:16:24 <siege> for safety, probably
+22:16:27 <siege> hah, funny story
+22:16:38 <dmiles> well i had that before.. but in win2k you cant DHCP and Static on the same card
+22:16:46 <siege> I saw someone probing my webserv for some common cmd.exe stuff
+22:16:51 <siege> probably a trojan on their machine
+22:17:03 <siege> but I noticed it in realtime 'cause I was tailing the logs
+22:17:04 <siege> hah
+22:17:07 <dmiles> yeah thats that last bigone
+22:17:15 <siege> anyway, I thought "that must be a windows box"
+22:17:30 <siege> so I used smbclient -L on the IP, and sure enough, it was
+22:17:32 <dmiles> well i hear it did linux things as well.. i forget whart
+22:17:45 <siege> an win2000 machine. I sent it a winpop :)
+22:18:09 <siege> heehee! it dropped off the net in less than a minute after that
+22:18:20 <dmiles> yeah.. smbclient works nice.. too bad att filters 139 :(
+22:18:25 <siege> yeah :(
+22:19:00 <yottzumm> had no problem with someone using VNC over at&t
+22:19:00 <siege> it's funny you should say that dmiles
+22:19:07 <siege> the name of the machine was "BIGONE"
+22:19:10 <dmiles> i need to learn how to do a 10/78 on top of dhcp with only one Nic card still
+22:19:13 <siege> or so smb reported.
+22:19:26 <dmiles> err 10/8.. i can do that on linux
+22:19:31 <siege> dmiles: it's easy in linux
+22:19:39 <siege> to set up an eth0 and an eth0:0
+22:19:58 <yottzumm> why do you get all these machines when you can run vmware?
+22:19:59 <dmiles> yeah.. 
+22:20:21 <dmiles> hrmrm maybe I could static ARP my win2k machine
+22:20:25 <siege> yottzumm: because I like to have machines running independant tasks of another machines fuckup
+22:20:32 <dmiles> err i have 4 of them
+22:20:57 <yottzumm> oh, you must run too many windows programs
+22:21:13 <siege> ? I don't run any :)
+22:21:14 <dmiles> my mother sister and GF all have win2k machines hear
+22:21:23 <dmiles> (not the same person!)
+22:21:39 <siege> my fiancee has a win box
+22:21:59 <siege> in it's own little subset, of which I don't route 137 in/out
+22:22:09 <dmiles> i keep up 3 linux boxes.. my GF roots one
+22:22:17 <siege> s/bset/bnet/
+22:23:04 <siege> I've got the router/NAT thing (with NOTHING ELSE on it but ssh) and then papasmurf
+22:23:19 <dmiles> its a pain static arpping everything ... ui may need to go back to firewall so thay can all be on the same net
+22:24:19 <dmiles> so you mean i cant hack in to get current jamud code?
+22:25:03 <siege> hah! you'd have to get not only into one of the public IPs, but from there you'd have to find your way to my workstation and then into THAT :)
+22:25:57 <siege> I'm thinking of setting up a machine for nothing but NFS/smb file space
+22:27:04 <siege> I like keeping things cleanly separated.
+22:27:28 <dmiles> that would be the good one to httpd 
+22:27:41 <siege> yeah, but papasmurf doesn't have the chasis for it
+22:27:44 <siege> not a bad idea, though
+22:27:49 <dmiles> i pretty much do that.. i have one box i do all my developemnt one.. over SMB
+22:27:59 <siege> I could move papa into another case maybe
+22:28:09 <siege> but then, I've only got these two little drives for space
+22:28:23 <siege> my roommate (ex roommate) just setup this raid5 monstrosity
+22:28:39 <siege> ~360Gig of Redundancy, mm
+22:28:53 <siege> home directories, music/movie collection
+22:29:05 <dmiles> raid5 set up for speed as much as reducndcy?
+22:29:32 <siege> I don't know the full specifics of his setup, sorry. I only know I am envious ;)
+22:30:18 <siege> he started ripping DVDs like I rip CDs, heh
+22:30:32 <siege> problem is he's not compressing them
+22:30:43 <siege> .8 to 1.4Gig a movie
+22:30:54 <siege> or something close to that
+22:33:32 <yottzumm> how long would it take to compress/decompress that?
+22:33:48 <yottzumm> or you mean something like MPEG which drops out a lot
+22:35:03 <yottzumm> how far can you compress MPEG?
+22:35:45 <yottzumm> maybe I'll just shut my mouth
+22:36:28 <siege> you're asking the wrong guy :)
+22:36:38 <siege> it takes eight hours to rip
+22:36:51 <siege> that's the only length of time I have that's related.
+22:46:38 --- quit: yottzumm ("Client Exiting")
+23:30:59 * siege is away: think, read, write. what?
+23:41:24 --- quit: graylensman ("Client Exiting")
+23:49:00 --- quit: CycLBot (Remote closed the connection)
+23:53:50 --- join: CycLBot ([7rgEcgRed@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.07.18

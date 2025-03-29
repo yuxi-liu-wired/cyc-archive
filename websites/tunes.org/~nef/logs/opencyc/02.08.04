@@ -1,0 +1,665 @@
+00:00:00 --- log: started opencyc/02.08.04
+01:32:49 --- join: huthut (~trumpet@194.149.224.3) joined #opencyc
+02:03:41 --- quit: futhin ("good night :)")
+04:51:04 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+06:20:51 --- join: yottzumm ([xg8J7SznG@12-232-124-73.client.attbi.com) joined #opencyc
+06:20:56 <yottzumm> can't get to the web site
+06:22:27 <yottzumm> www.opencyc.org isn't responding
+06:22:30 --- quit: yottzumm (Client Quit)
+07:45:39 --- join: yottzumm ([2siiUI2sJ@12-232-124-73.client.attbi.com) joined #opencyc
+07:46:12 <yottzumm> Is there another way to get to the chat logs than go through opencyc.org?
+07:46:31 <bruce> how do you mean?
+07:46:41 <bruce> you cna just /whois clog and get the URL that way.
+07:47:23 <yottzumm> thanks
+07:47:32 <bruce> ahh, opencyc.org is missing from the net.
+07:50:04 --- quit: yottzumm ("Client Exiting")
+07:50:53 <bruce> time for some Jazzanova and then to start the C impl of CFASL
+08:38:04 --- join: Kahless (qa_pla@host217-32-117-32.in-addr.btopenworld.com) joined #opencyc
+08:38:08 <Kahless> hi
+08:38:23 <Kahless> anyone know of an opencyc irc bot?
+08:38:43 <bruce> dmiles has one ..
+08:38:54 <Kahless> cool
+08:38:54 <bruce> but i don't know what you want it to do, or entirely what his does.
+08:39:08 <Kahless> to be an IRC ai bot that can answer question
+08:39:22 <bruce> it doesn't have language understanding
+08:39:33 <bruce> but if you ask in CycL, it can answer like that.
+08:39:41 <Kahless> ok
+08:39:45 <Kahless> what is CycL?
+08:39:50 <Kahless> is it like alicebot?
+08:40:16 <bruce> no ... CycL is the (#$isa ?X #$OtherTerm) stuff
+08:40:37 <Cobra_> help
+08:40:43 <Cobra_> hello CycLBot
+08:40:53 <bruce> CycLBot: help
+08:40:53 <Cobra_> :) hmm
+08:41:00 <bruce> CycLBot: subl
+08:41:03 <bruce> subl
+08:41:04 <CycLBot> java.lang.RuntimeException: End of stream
+08:41:12 <bruce> subl (+ 2 2)
+08:41:13 <CycLBot> java.lang.ClassCastException: org.opencyc.cycobject.CycSymbol
+08:41:19 <Cobra_> Seems to be no responsive...
+08:41:38 <Cobra_> CycLBot: ping
+08:41:42 <Cobra_> ping
+08:41:44 <CycLBot> hello Cobra_
+08:41:49 <Cobra_> ah ha
+08:42:05 <Cobra_> help
+08:42:14 <Cobra_> grrr.
+08:42:38 <Cobra_> There some bot code in the cvs repository, but it's nothing like alicebot yet.
+08:42:57 <bruce> subl: (#$isa ?X #$Person)
+08:43:04 <Kahless> ok
+08:43:14 <Kahless> opencyc is fairly new?
+08:43:22 <Cobra_> The CycLBot version is dmiles version, he was adding the alicebot db, and he had some eliza rules for it.
+08:43:49 <Cobra_> I think he has his version on logicmoo.sf.net
+08:43:51 <bruce> Kahless: the underlying Cyc stuff is all old (but still evolving...) .. OpenCyc as a concept and the public release is fairly new.
+08:44:01 <Kahless> ok
+08:44:14 <Kahless> cyclbot hi
+08:44:20 <Kahless> cyclbot: hi
+08:44:32 <Kahless> CycLBot: hi
+08:44:54 <bruce> subl (#$isa ?X #$Person)
+08:44:55 <CycLBot> java.lang.ClassCastException: org.opencyc.cycobject.CycSymbol
+08:45:03 <Cobra_> bummer...
+08:45:17 <bruce> subl (fi-hypothesize '(#$isa ?X #$Person) #$BaseKB)
+08:45:18 <CycLBot> java.lang.ClassCastException: org.opencyc.cycobject.CycSymbol
+08:45:28 <bruce> oh well. I give up for now.
+08:47:31 * bruce is pondering a good design for the infrastructure of a C lib to decode CFASL to make it easy to write efficient language wrappers.
+08:47:34 <Kahless> the opencyc.org page is down
+08:47:43 <Kahless> what would you use cyclbot for then?
+08:48:20 <bruce> i don't use cyclbot .. and i don't really do anything with natural language understanding myself. :)
+08:48:27 <Kahless> ok
+08:48:35 <bruce> my interest in Cyc is different from all of that, for better or worse.
+08:49:09 * Kahless is 30 minutes new to it
+08:49:44 <bruce> Cobra_: what do you do with Cyc?
+08:50:07 <Cobra_> If you want to try a bot, I just started one in #cobra
+08:50:22 <Kahless> ok
+08:50:28 <Kahless> what else can cyc do then ?
+08:51:36 <bruce> i'm interested in it for simplifying creation of online gaming worlds.
+08:51:57 <bruce> but it is a long way from here to there.
+08:52:23 <Cobra_> Hmm, I've broken that bot... It should still handle basic queries, but it's very limited.
+08:52:34 <Kahless> so you it is an engine to take down paremeters of the gaming world and make it easier to creat them?
+08:52:50 <Cobra_> I was trying to get the NL stuff working, but have been away from it for a couple weeks.
+08:54:05 <bruce> Kahless: usually, you have a messy class hierarchy and some code scattered through out that hierarchy to create and management various behaviors in objects.. and that'd be nice to centralize around Cyc .. but also, if you can use the inference engine, then some interesting things might be possible to add greater depth to the world ...
+08:54:06 <Cobra_> No, it's a engine based around a common sense knowledge base.
+08:54:34 <Kahless> interesting
+08:54:44 <Cobra_> cyc has several levels of knowledge base they release, with the opencyc version being about 2 years behind the research version
+08:55:08 <bruce> Kahless: like if you know and can teach the system that "Danger that is near a dog and that the dog can sense will cause the dog to bark" .. then you'll end up with the cliched behavior of "Dogs bark when danger is nearby" that you have in literature, movies, etc. (for a random example)
+08:55:27 <Cobra_> they claim to have interaction with cyc at the point of it reading text and picking up knowledge from it (I assume with some human guidance.)
+08:55:53 <Kahless> hmm sounds very amitious, but i see the idea of it all now
+08:56:03 <Kahless> basically a learning AI engine?
+08:56:25 <bruce> Kahless: but what I said is something that I still don't really know how to do yet .. but is where I'd like to be going.
+08:56:25 <Kahless> brb tea time
+08:56:47 <Kahless> what are they doing in the research version then
+08:56:48 <Kahless> ?
+08:56:48 <Cobra_> Seems like that could be possible.  They seem focused on teaching it a lot of facts so it can handle 'common sense'
+08:57:25 <Kahless> so it is more about learning general rules rather than any specific activity?
+08:57:57 <Cobra_> for profit work, seems like some government funding, some DARPA ties, there was a contract with one of the major web search engines to improve the intelligence of searching
+08:58:32 <Cobra_> When the site is up there are some articles
+09:00:36 --- join: fretyh (~ddd@port569.ds1-oebr.adsl.cybercity.dk) joined #opencyc
+09:00:39 <Kahless> yes i have a clear idea now, so many sites are using cyc then?
+09:02:24 <Cobra_> Don't think so... but couldn't really say.  I think the research side is used by a few, but the web contract was over and I don't think they are using it presenlty (i forget, but it wasn't google as I recall.)
+09:03:02 <bruce> i think it was infoseek
+09:03:02 <Cobra_> The opencyc stuff is early and not useful except for some learning
+09:08:06 <Cobra_> could be, I forget where I read that
+09:10:20 <bruce> cool .. i think i got a design for the C stuff.
+09:11:28 <bruce> i'll just have a per-language consumer that receives events from the CFASL stream decoder telling it to create the datastructures for the data .. that way, a Python wrapper will just plugin in a version of that code that creates the PyObjects and so on.
+09:12:01 <Cobra_> http://sourceforge.net/projects/opencyc/
+09:12:11 <Cobra_> is still up, just not the main opencyc page...
+11:34:46 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+11:40:36 --- quit: futhin ("gtgfortheday")
+11:40:49 --- quit: Kahless ("We are always brighter than we feel, even when we feel good, with a little effort, even the hardest things become easy.")
+11:42:05 --- quit: Cobra_ ("[x]chat")
+12:08:51 --- quit: clog (^C)
+12:08:51 --- log: stopped opencyc/02.08.04
+12:10:22 --- log: started opencyc/02.08.04
+12:10:22 --- join: clog (~nef@bespin.org) joined #opencyc
+12:10:22 --- topic: 'Welcome to #opencyc, The IRC channel for the OpenCyc project. ***Release 0.6 is now available from http://sourceforge.net/projects/opencyc/'
+12:10:22 --- topic: set by people on [Tue Jul 16 08:22:30 2002]
+12:10:22 --- names: list (clog fretyh huthut bruce dmiles reed_ Cobra kinoc CycLBot sandos siege mea_oly)
+13:43:42 * dmiles returns
+14:37:18 --- quit: dmiles (Excess Flood)
+14:37:29 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+14:51:14 <bruce> hey dmiles
+14:55:49 --- quit: fretyh (Read error: 110 (Connection timed out))
+15:01:13 * dmiles returns
+15:01:15 <dmiles> hi
+16:44:03 --- join: fleeky (~flooki@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+16:45:58 <fleeky> hi
+16:46:08 <bruce> howdy
+16:49:41 <fleeky> so whats opencyc about ? 
+16:50:04 <fleeky> do you guys just do developing for it ? or do you use it ? 
+16:50:20 <dmiles> opencyc is a relation deductive database
+16:50:25 <bruce> i'm working on learning to use it.
+16:50:27 <dmiles> err relational
+16:51:01 <fleeky> once you learn to use it what do you plan on doing with it ? 
+16:51:07 <fleeky> what about you dmiles ? what do you do with it ?
+16:51:07 <dmiles> some in here are cyccorp employees , others not
+16:51:12 <fleeky> ahh 
+16:51:35 <bruce> fleeky: i'm interesting in using it to add depth to virtual worlds for gaming applications.
+16:51:36 <dmiles> i am not an employee like many in here.. we are developing apis to make it more usefull
+16:51:45 <dmiles> fleeky: i the same
+16:52:00 <dmiles> (virtualworld gaming applications)
+16:52:37 <dmiles> and eventually ussing this asa proof of concept to use it to participate in real world
+16:52:43 <fleeky> so giving npc's a little more brain?
+16:52:43 <bruce> fleeky: what about you? what type of usae are you interested in?
+16:53:28 <bruce> fleeky: more than just NPC AI ... something like Cyc could enable greater detail in the world itself, not just making it more accessible to AI.  And then using that greater detail in conjunction with inference to alter how it is presented to the user.
+16:53:41 <fleeky> maybe it would be neat if opencyc could search the web and find things im interested in , that would be neat.. but i think opencyc would take to long to learn . i have other things to learn atm
+16:54:06 <fleeky> what do you mean by greater detail ? 
+16:54:10 <fleeky> visual detail / 
+16:54:11 <bruce> fleeky: like in fiction and movies, dogs bark when there is danger near by .. and that's symbolism that adds contextual meanings to hint at conditions in the world ...
+16:54:21 <fleeky> ohh
+16:54:43 <dmiles> the web is great for cyc to learn background info and mine data.. more work needs to be done.. DAML is a start
+16:54:45 <fleeky> so you would use opencyc to basically make the world you create more dynamic .. true to life
+16:54:52 <fleeky> daml ? 
+16:54:55 <bruce> fleeky: ideally ..
+16:55:01 <fleeky> does it have a cute little gui :)
+16:55:07 <dmiles> fleeky: yes creating world and understanding it
+16:55:20 <fleeky> do you guys have a virtualworld webpage ? 
+16:55:34 <dmiles> it can be used to color the world in a physical sense with deduction and in a sense with information for NPCs
+16:56:02 <bruce> fleeky: dmiles does .. i have a generic vworlds Wiki (http://agora.cubik.org/), but I haven't publicly written much about the use of semitoics and ontologies yet wrt vworlds.
+16:56:04 <fleeky> so basically using opencyc to create its own internal model of a world and allowing people to play inside its model of whatever world that is
+16:56:11 <bruce> err, semiotics.
+16:56:19 <dmiles> fleeky: thats the goal
+16:56:23 <fleeky> cool 
+16:56:27 <bruce> dmiles: btw, it is evil that your employer trademarked 'semiotics'
+16:56:47 <dmiles> hehe QuesterResearch did ?
+16:56:56 <dmiles> i wouldnt be suprised
+16:57:00 <fleeky> if you guys ever need a 3d modeler im here for ya :) 
+16:57:00 <bruce> according to the website, yeah.
+16:57:05 <dmiles> lol
+16:57:12 <dmiles> then thats kinda cool for me
+16:57:53 <dmiles> fleeky: daml os amarkup of sematics for webcontent
+16:58:08 <dmiles> veiwable at www.daml.org
+16:58:24 <fleeky> yes i see (quick google search) 
+16:58:31 <dmiles> opencyc expects to leverage this content
+17:00:11 <dmiles> my webpage is a staemtent of work..but the the CVS is a tangled mess
+17:00:19 <dmiles> http://logicmoo.sourceforge.net
+17:00:44 <dmiles> the project hasbeen taken in many dirrections.. and has alot to do
+17:01:25 <dmiles> we have an engine picked out called jamud to run the world
+17:01:47 <dmiles> and opencyc as the NPC controller rules
+17:02:04 <fleeky> its going to be textbased ?
+17:02:04 <dmiles> but a tigther coupling between cyc and jamud will have to happen .. thats shortly
+17:02:16 <dmiles> initally just so we dont scare the pants off people
+17:02:28 <dmiles> but the mud itself does not assume text
+17:02:35 <dmiles> but is sort of where it starts
+17:02:58 <fleeky> ahh thats true you can make any interface you want into a moo
+17:03:04 <dmiles> yep
+17:03:41 <fleeky> you guys are busy little bees ! 
+17:03:42 <dmiles> i am wormndering if we'll do an Atlas server protocol
+17:04:02 <dmiles> if we do.. then we can use worldforge clients
+17:04:14 <dmiles> they have neat graphical clients
+17:04:40 <dmiles> siege, when aplha6 releases one of my goaols is to export atlas server protocol to cleants ;P
+17:04:48 <dmiles> err to clients
+17:04:53 <dmiles> realitively simple
+17:05:01 <fleeky> it would be funny if someone figured out how to make a quake1/2/or3 moo interface :) 
+17:05:27 <bruce> dmiles: atlas server protocol ?
+17:05:49 <dmiles> itsa generic system used by worldforge folks...
+17:05:55 <bruce> oh dear.
+17:06:04 <bruce> i was afraid of that.
+17:06:10 <dmiles> hey its not that.. bad cuz it asumes very little about client
+17:06:20 <dmiles> nor about content
+17:06:35 <bruce> it is also pretty much useless.
+17:06:45 <dmiles> yeah.. but the clients are not.. 
+17:07:12 <dmiles> some of the guys spoend many hours a week trying to make a client that will deal with their useless servers;P
+17:07:38 <bruce> and it isn't like their clients are that great.
+17:07:58 <dmiles> well better then nil
+17:07:59 <bruce> use use Nebula Device if you want 3D. it's much nicer than what they've got so far.
+17:08:30 <dmiles> yes.. you aremoe in the know about this..
+17:08:50 <dmiles> what proptocal would be most usefull to clients?
+17:09:19 <dmiles> ( i mean what is a Nebula Device ?)
+17:09:35 <bruce> dmiles: a 3D rendering engine, fully scirptable in Python, Lua or TCL.
+17:09:44 <bruce> dmiles: http://nebuladevice.sf.net/
+17:09:55 <bruce> and under the MIT/TCL/X11 license so no fascism.
+17:10:12 <bruce> and it is being used for http://www.asbahr.com/beyond.html
+17:10:32 <dmiles> how much server assumption does it make?
+17:10:41 <bruce> and beyond is using Nebula, Twisted (http://www.twistedmatrix.com) and OpenCyc for vworlds.
+17:10:43 <bruce> dmiles: none.
+17:10:58 <dmiles> ah so all we have to do is excport content correctly for it?
+17:11:30 <bruce> if you use Maya, yeah .. and write your client side code and the networking.
+17:11:42 <bruce> but Twisted is being integrated with it for networking and seems a pretty easy go so far.
+17:11:55 <dmiles> well i am hoping we can just write serverside code
+17:12:10 <bruce> you really ought to talk with Asbahr.
+17:12:16 <dmiles> and make thier existing clients happy
+17:12:44 <bruce> he's on IRC occasionally as DeepTape and has met the Cycorp people (he's in Austin, used to work on UO2)
+17:13:15 <dmiles> ah i wonder if he wants to head a project
+17:13:30 <bruce> he is .. Beyond2.
+17:13:33 <bruce> read that URL.
+17:14:22 <dmiles> so he is specifically ussing opencyc?
+17:14:33 * dmiles is clicking aror8ind
+17:14:59 <bruce> he was how i originally heard of Cyc .. I'd been looking at FramerD some prior to that.
+17:17:29 <dmiles> you think he will let cyc reify into the world?
+17:17:47 <bruce> dunno. i've been talking to him about how it will tie in.
+17:18:31 <dmiles> sometimes these python developers (and java devlopers) lover the O of their language so much they cercumvent external ontologies
+17:18:39 <dmiles> err love the OO
+17:19:05 <dmiles> like the original jamud was like that ;P
+17:19:27 <bruce> well, i would dearly love to see Beyond get things right.
+17:19:32 <dmiles> WF is way too far into that to ever make their servers usefull
+17:19:42 <bruce> drop him an email. tell him about logicmoo. tell him about whta you've done and are doing with opencyc.
+17:19:55 <bruce> and i started the Python API to OpenCyc today.
+17:20:05 <dmiles> well my problem is .. i still dont have a good valid proof of concept yet ;(
+17:20:08 <bruce> the C module will just do the decoding of the binary protocol.
+17:20:24 <bruce> dmiles: DROP HIM AN EMAIL. WRITE ABOUT WHAT YOU _HAVE_ DONE.
+17:20:29 <bruce> You've done good and interesting things.
+17:20:34 <dmiles> i almost feel ashamed logicmoo has been arround so long with reams of code.. till doent do anyhting yet
+17:20:44 <dmiles> yes it *has* ;P
+17:20:56 <dmiles> but withing it would do some hnow
+17:21:00 <dmiles> err wishing
+17:21:21 <dmiles> yeah i should ;P
+17:21:24 <dmiles> ok
+17:21:31 <bruce> so you'll drop him an email tonight?
+17:21:43 <dmiles> cool you starting in the C stuff
+17:22:04 <dmiles> hrrm .. maybe i'll drop him a mail telling him to come onto irc ;P
+17:22:10 <dmiles> ok will do right now
+17:22:17 <bruce> i'm going to fly to Portland and kick your ass.
+17:22:24 <bruce> and then go eat at Typhoon on Broadway.
+17:22:42 <dmiles> :)
+17:22:44 <bruce> and lunch the following day at La Buca on 24th and Kearney.
+17:23:00 <bruce> and I forgot the name of my other favorite place :/
+17:23:03 <dmiles> have to go to seattle with me
+17:23:23 <bruce> it was up past the theaters (a bit south), but not all the way to PSU.
+17:23:29 <bruce> oh, you moved ?
+17:23:46 <dmiles> no i still live just north of protland
+17:23:56 <dmiles> like a 10 minute drive
+17:24:03 <bruce> that's almost to Washington.
+17:24:12 <bruce> since you can get from Portland to Vancouver in 12 minutes.
+17:24:24 <dmiles> i am in washington east of vancouver but still right abouve protalnd
+17:24:32 * bruce nods.
+17:24:54 <dmiles> yeah i can get to 205 biridge in about 10 mintess
+17:27:51 * bruce nods.
+17:27:53 <bruce> oops
+17:28:25 <dmiles> damn his email is hard to find on the site
+17:28:28 <bruce> jason@asbahr.com
+17:29:51 <dmiles> ok sent
+17:30:18 <bruce> that was fast to write about what you've done.
+17:30:29 <bruce> unless you have a prepared spiel that you copy/paste. :)
+17:30:29 <dmiles> i didnt.. uinvited him to chat
+17:30:37 * bruce flogs dmiles.
+17:31:20 <dmiles> but still .. thinking about it.. so far wrote a sync between jamud and opencyc.. ome creation webpages for opencyc.. 
+17:31:54 <dmiles> and.. now i await to fix up the sync between jamud and opencyc
+17:32:29 <dmiles> looks like siege is sorta seeing the needs
+18:14:30 --- join: DeepTape (~jasbahr@cs242732-194.austin.rr.com) joined #opencyc
+18:14:45 <dmiles> Hi Jason ;P
+18:14:55 <DeepTape> Greetings : ) 
+18:14:59 <dmiles> bruce told me about you
+18:15:20 <dmiles> thank you for comming on
+18:15:22 <bruce> DeepTape: i started the C and Python APIs today.
+18:15:34 <DeepTape> bruce: Awesome! 
+18:15:40 <DeepTape> dmiles: You betcha  : ) 
+18:16:08 <DeepTape> Did y'all hear that we (Glyph, Dash, and I) met with the OpenCyc folks in Ausitn on Tuesday? 
+18:16:20 <dmiles> ah cool
+18:16:24 <dmiles> awesome
+18:16:27 <bruce> only briefly
+18:16:33 <dmiles> so you see some potential
+18:16:36 <bruce> when i tried to get dash to volunteer to write a new browser.
+18:16:48 * DeepTape smiles 
+18:17:22 <DeepTape> I'm good friends with Karen Pittman, who has worked at Cycorp since back when they were at MCC 
+18:17:35 <dmiles> you see how opencyc could help the cause of keeping track of objects?
+18:17:58 <dmiles> or at least some potentual arorund world understanding
+18:18:36 <DeepTape> dmiles: Yes, I see opencyc fitting in as a tool for world rule description 
+18:18:42 * dmiles doesnt work for cyccorp but interested in seeing it participate in a virtual worlds project
+18:18:44 <DeepTape> Not tracking instances per se, though 
+18:18:58 <DeepTape> Me too, d  : ) 
+18:19:09 <DeepTape> I met with Doug Lenat several months ago, and he *gets* why Cyc and VR go together 
+18:19:35 <dmiles> yes.. in cyc docs out there one of the target apps Doug says is a RPG system
+18:19:47 <DeepTape> *nods* 
+18:20:19 <dmiles> hrrm so what do you think are some steps in the process?
+18:20:27 <DeepTape> In a previous project (UO2) we used a relational database to associate bits of code ("Properties") with classes and instances, changing their execution behavior 
+18:20:40 <DeepTape> I'd like to see opencyc do that task in the future 
+18:21:17 <DeepTape> As I outlined to the Cyc folks, I see at least three phases for applying Cyc to virtual worlds 
+18:21:32 <dmiles> you think its a one time shot or could it run in a ongoing context?
+18:21:44 <DeepTape> Hang on a sec : ) 
+18:21:47 <dmiles> ok :)
+18:21:47 <DeepTape> 1) Customer support, Cyc-backed Q&A databases, probably fronted via the web 
+18:22:24 <DeepTape> 2) Customer support, Cyc-backed simple natural language Q&A, probably frontend via in-game NPCs 
+18:22:56 <DeepTape> 3) World-rule description and code assembly driven by game-oriented microtheories 
+18:23:32 * dmiles nods
+18:24:01 <bruce> there's a 4th then past that I think.
+18:24:11 <DeepTape> Please elaborate, Bruce  : ) 
+18:24:23 <bruce> it's what my email was to be about :)
+18:24:30 * DeepTape grins 
+18:24:31 <bruce> not just world rule description in the current sense of things ...
+18:24:43 <bruce> but to add greater depth to the world, the gameplay and the presentation of both
+18:25:05 <bruce> the example that i keep using is that in a book or movie, dogs bark when there is danger nearby, esp.hidden danger ..
+18:25:31 <dmiles> i think for NPCs to fully leverage yc they need to see the world represented partially in Cyc
+18:25:58 <DeepTape> Those are both very interesting viewpoints 
+18:26:07 <DeepTape> Bruce: it sounds like you are talking about emergent world rules 
+18:26:20 <bruce> and having the system be able to recognize uses of symbolism in some sense and use those to creat that greater context (esp. if you start looking into things like jewish mysticism, secret societies, etc and employing those)
+18:27:15 <dmiles> yes so it sounds like Bruces concept is relate to #3 but with runtime vs complietime?
+18:27:16 <bruce> dmiles: isn't that what Heuristic level modules are for? to query external datasources?
+18:27:34 <bruce> dmiles: well, just that it more than just some simple rules like exist in systems today.
+18:27:47 <dmiles> yes definately can access them.. but at some point the data has to be cached in the tightest loop of infernce
+18:28:19 <dmiles> meaning some external database could be employed.. 
+18:28:48 <dmiles> definately.. but i am not sure what would be the benifit keeping it outside of cyc
+18:29:00 <bruce> that a text game like TEC has 3G of data. :)
+18:29:03 <dmiles> or at least an infernce engine
+18:29:14 <bruce> and surely, UO has far far far far more than that.
+18:29:20 <DeepTape> My bias is not to use a knowledge rep system for most of what NPCs would do, rather more 'situated' approaches, like subsumption architectures, re: Rodney Brooks, hierarchical finite state machines, insect robots 
+18:29:21 <dmiles> i guess i dont own anyu pcs with less then a gig of ram ;P
+18:30:07 <DeepTape> A hybrid approach could layer a KB onto that 
+18:30:13 <dmiles> but i see we could write a Mt to access quickly the remote DB
+18:30:32 * DeepTape nods at dmiles 
+18:30:55 <dmiles> so i agree with you Bruce.. i just talked into saying what you mean
+18:31:03 <DeepTape> hehe 
+18:31:21 <dmiles> so given that it makes NPCs run well in Cyc
+18:31:24 <bruce> i tend to be right on issues like that. agree sooner :)
+18:31:38 <dmiles> heh was i not right as well?!?! :0
+18:31:49 <dmiles> hehe
+18:32:10 <dmiles> ok so now that we agree the runtime is virtually in Cyc as well
+18:32:33 <dmiles> would the game system expect to run NPCs in a cyc?
+18:32:56 <DeepTape> Just so I'm clear, how do you mean 'virtually in cyc' ?  : ) 
+18:33:18 <dmiles> well that the game state is visible to a cyc infernce
+18:33:26 <DeepTape> Ah, okay 
+18:33:48 <dmiles> so we are talking about three disticnt things here
+18:33:57 <dmiles> !) code gens from cyc
+18:34:18 <dmiles> 2) world eleaberation from cyc
+18:34:46 <dmiles> 3) the abilty to use cyc infernce to help make NPCsmore interesting
+18:35:15 <dmiles> DeepTape, bruce, dmiles in that order
+18:35:36 <dmiles> 2 and 1 are closly related
+18:36:15 <DeepTape> Fair enough 
+18:36:36 <dmiles> i am worndering is 2 and 3 are really possible
+18:36:56 <DeepTape> I believe so 
+18:37:04 <dmiles> we know that 1 could be based on the dirrection of the next releases of opencyc
+18:37:50 <dmiles> there has been some recent research on code gereration by cyccorp\
+18:38:26 <DeepTape> Yes, though we could get away with a lot less than what they are doing right now  
+18:38:49 <DeepTape> We could assemble hand-coded Properties based on Cyc rules 
+18:38:54 <dmiles> as in writting a specific generator that uses cyc as a broker ?
+18:39:03 <dmiles> yeah
+18:39:44 <dmiles> are properties/attributes something that you have found are nessiarly should be static?
+18:40:25 <DeepTape> Well, we were attaching properties at runtime as well, so static is a relative concept : ) 
+18:40:42 <dmiles> i see.. so cyc could bootstrap the nessisary properties
+18:40:51 <DeepTape> Yes 
+18:41:13 <DeepTape> That's just to get us started, though.  It sounds like Bruce is talking much more fine grained control than that 
+18:41:23 <bruce> i want much finer control :)
+18:41:34 <dmiles> well something that is possible is this could be runtime 
+18:42:07 <dmiles> as in cyc maybe could attach properties?
+18:42:20 <DeepTape> I don't see why not... 
+18:42:57 <DeepTape> One example would be, NPC receives updates from the simulation, cranks a bit in Cyc, makes a decision, which gets reflected back to the NPC who does that actual attachment 
+18:43:01 <DeepTape> Lots of ways to slice this 
+18:43:33 <DeepTape> The Cyc guys have an even more extreme example.  They were talking Cyc learning at runtime to change reactivity of the world under simulation. 
+18:43:51 <dmiles> yes that is very doable
+18:44:03 <DeepTape> Like the user says "That vase I threw against the wall should break", and via a question and answer session, Cyc figures out how to apply breakable to it 
+18:44:12 <DeepTape> From then on, vases break 
+18:44:17 <dmiles> yes
+18:44:38 <DeepTape> Okay, this is a bit of a tangent, but... 
+18:45:14 <DeepTape> That sort of interactive "teaching" of cyc smacks of computer aided software engineering, which is something I think is an obvious application of Cyc 
+18:45:32 <DeepTape> The first thing to teach a knowledge base is all about knowledge bases, for one   : ) 
+18:46:19 <DeepTape> Why not Cyc as an 'programmer's helper', tracking requirements, user stories, code, unit tests, and dependencies between each ? 
+18:46:37 <bruce> because that distracts from vworlds.
+18:47:15 <dmiles> yes cyc definately could be used to help track and help changes to code
+18:47:37 <DeepTape> bruce: a man not to be deterred, eh?  : ) 
+18:48:06 <bruce> yeah. distractions lead to things never happening.
+18:48:16 <bruce> and this is too important to have it get distracted. :)
+18:48:26 <DeepTape> I can agree with that attitude 
+18:48:27 <dmiles> ah .. i would hope that code time i spent would be improving qualiuty of a game
+18:49:03 <dmiles> even though humanitarily i would like to create good usecase tools for opencyc to be a programmers helper
+18:50:01 <DeepTape> Perhaps they will emerge from this effort 
+18:50:31 <dmiles> yes cyc needs to have more KB introspective data so NPCs could undertand that part of their world is known and unkown that requires thoughts and knowledge of KBs in gernal
+18:50:49 <DeepTape> *nods* 
+18:51:10 <dmiles> this is called Modality i think
+18:51:19 <DeepTape> Another potential use for Cyc in games is internationalization 
+18:51:51 <DeepTape> We spent a lot of effort designing something like a very lame cyc to handle NPC dialog 
+18:51:54 <dmiles> as in a translator between languages?
+18:52:04 <DeepTape> Yes 
+18:52:19 <dmiles> hrrm anything is better then nothing
+18:52:40 <DeepTape> Even microtheories that consisted of sets of statements which could be said to be equivalent to other sorts of statements in another language mt would be handy 
+18:52:55 <dmiles> yes.. just a somewhat smart mapper
+18:53:13 <dmiles> Thought treasure is helpfull getting to french
+18:53:20 <DeepTape> Yes? 
+18:53:22 <dmiles> and can be loaded into cyc
+18:53:27 <DeepTape> We ran into issues with nouns having different genders in different languages 
+18:53:47 <dmiles> forms can be deduced in cycc
+18:54:10 <dmiles> so thats a problem that could b handled.. hrrm who is responsible for that code?
+18:54:34 <DeepTape> ? 
+18:54:54 <dmiles> i mean if we did put that information into cyc .. whould would write the SubL to do it?
+18:55:16 <dmiles> i guess Cyccorp will creation something like that 
+18:55:41 <DeepTape> Hmm 
+18:55:50 * dmiles in brainstorming ideas how cyc can help is also thinking in a task list
+18:56:03 <DeepTape> : ) 
+18:56:21 <DeepTape> dmiles, I'm not very familiar with your current project.  Can you tell me a bit about it? 
+18:56:50 <dmiles> well it is about 3 yrears old.. and started by ussing a Microsft gaming engine
+18:57:11 <dmiles> the Microsoft virtual worlds moo
+18:57:32 <dmiles> i wrote AI scripting tools for it
+18:57:41 <dmiles> (all in Prolog)
+18:57:49 <DeepTape> Wow 
+18:58:11 <dmiles> then it came to pass that lead into getting hired by a Cyccorp partner
+18:58:26 <dmiles> since they needed a prolog developer
+18:58:38 <DeepTape> Handy  : ) 
+18:58:48 <dmiles> so for about a year it just sat there while i leanred alot about how the cyc stem works
+18:59:06 <dmiles> and realized that it may be easier to manage things in cycs context
+18:59:16 * DeepTape nods 
+18:59:46 <dmiles> MS had scraped their engine and client after a bit
+19:00:16 <dmiles> and even when it was active it still frightened developers away
+19:00:27 <DeepTape> I can imagine 
+19:00:39 <dmiles> well it was one of theri first opensouce projects
+19:00:55 <dmiles> very complex based on Asherons call
+19:01:20 <dmiles> which was not really MS .. but possiesed all the good qualities 
+19:01:45 <dmiles> so then i spent some time looking for  anew engine to hook to
+19:01:55 <dmiles> and siege and i met over jamud
+19:02:07 <dmiles> (here in channel)
+19:02:35 <dmiles> and i saw it to be a potentual for hooking live agents and a mirror world for cyc
+19:02:48 <dmiles> since many people know java.. and it documents well
+19:03:02 <dmiles> it has a greater developer comunity potentual
+19:03:30 <dmiles> so i wrote some syncing and creation tools for opencyc and jamud
+19:03:59 <DeepTape> *nods* 
+19:04:06 <dmiles> and saw that things where definately doable. but lead into some code blokers that will be fixed in upcomming opencyc releases
+19:04:41 <dmiles> so i am hoping an NPC scripting language system can come out of opencyc
+19:05:03 <dmiles> then i thought.. wow woouldnt it be neat to have some deductive world growing
+19:05:14 <dmiles> and found that 10 times easier the nhe NPC part
+19:05:37 <DeepTape> Really? 
+19:05:39 <dmiles> since it was just a push through normal creation from opencyc queries
+19:05:52 <dmiles> so jamud has ways of building objects
+19:06:04 <dmiles> i just made a query and then created the pobjects
+19:06:28 <dmiles> then every few seconds repeated the process
+19:06:30 <DeepTape> Interesting... 
+19:06:54 <dmiles> and of course the load id and DB id are kept in sync
+19:07:07 <dmiles> so i knew a dif at any point between toe two world
+19:07:51 <dmiles> but of courxse i had to have bits of background on the java objects shape and do some handcoded translation
+19:08:30 <dmiles> some parts of jamud code though when making changes could do it secretly behind the eye of the system
+19:08:40 <dmiles> which was harder to catch
+19:09:00 <dmiles> so every so often i had to bring that back into sync
+19:09:18 <DeepTape> What did you do with the knowledge of the differences? 
+19:09:24 <dmiles> blow away the games Mt and puch jamud into it
+19:09:40 <dmiles> oh i fixed the differnces
+19:09:53 <dmiles> if it was minor.. retract/assert into opencyc
+19:10:10 <dmiles> like if the discription of an objects (the commant) changed
+19:10:29 <dmiles> if an object stoped existing in jamudthen  had to kill the contant in cyc
+19:10:29 <DeepTape> Hmmm 
+19:10:55 <dmiles> but that was just code time.. i can say this was a very fast process.
+19:11:02 <dmiles> i needed probly better subl 
+19:11:10 <dmiles> but right now subl is not working in cyc \
+19:11:16 <DeepTape> So you reflected the entire state of the world in Cyc? 
+19:11:21 <dmiles> well i did yes
+19:11:32 <dmiles> actually one sec while i load cyc with a world
+19:11:42 <dmiles> so you can see it in action
+19:12:36 --- quit: CycLBot (Remote closed the connection)
+19:13:17 <DeepTape> bruce: you're awful quiet 
+19:13:20 <DeepTape> : ) 
+19:13:28 --- join: CycLBot ([g627bBrRl@12-225-207-235.client.attbi.com) joined #opencyc
+19:13:30 <dmiles> oik its reloadinhg
+19:14:30 <bruce> DeepTape: yeah ... dmiles was busy talking :)
+19:14:58 * dmiles is in athoer window for a sec
+19:18:09 <bruce> DeepTape: how much would Beyond change for a more invasive use of Cyc or other rule-based systems like I was thinking?
+19:18:59 <DeepTape> bruce:  Good question.  On the one hand, this would be the best time to do it, because it's in the way early spike stages : ) 
+19:19:13 <DeepTape> bruce: On the other hand, I don't know that it would have to change that much anyway 
+19:19:32 <dmiles> ok here is some links http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8413
+19:21:27 <dmiles> i wrote a NPC creator http://12.225.207.235:8080/logicmoo/createnpc.jsp
+19:21:47 <DeepTape> Wow, this is cool 
+19:22:07 <dmiles> also has a telet server
+19:22:21 <dmiles> o it serves a texct mud.. but i dont want to be the only coder
+19:22:34 <dmiles> thats why i am woanted to rest on a jamud 
+19:23:05 <dmiles> so that it can be imporved and written on by others
+19:23:24 <dmiles> i also have NPCs making queries for their next action in the mud
+19:23:33 <dmiles> they take the resultsand execture them
+19:24:03 <dmiles>  however certain parts of cyc are incomplete so they dont do anything ;lP
+19:24:25 <dmiles> they get a NIL back from there query
+19:24:43 <dmiles> this working system is going to be integrated into jamud
+19:25:02 <dmiles> as a pligin.. that does sync and NPC
+19:25:37 <dmiles> in the next release of cyc they have a planner and the abilioty to make a remote call
+19:25:55 <DeepTape> *nods* 
+19:25:56 <dmiles> the planner assumes certain data will be availbe.. like game data
+19:26:22 <dmiles> the remote api calls can allow game data to be stored outside
+19:26:41 <dmiles> (by a process pretending to be a peer buddy server)(
+19:27:12 <dmiles> so that python API bruce is working on maybe could be turned arround to allow itself to be queried
+19:27:21 <DeepTape> *nods* 
+19:28:10 <dmiles> i just wanted a quick dirty game server from cyc.. and wrapped all player commands to cyc queries and side effects
+19:28:39 <dmiles> (from the telnet server)
+19:28:50 <DeepTape> *nods* 
+19:28:52 <DeepTape> In the case of Beyond, the project I'm working on, we could drive property assembly that way, or could in advanced stages of code generation, construct subclasses of hand coded simulation classes 
+19:28:52 <dmiles> i dont want of course to go this route
+19:29:15 <dmiles> explain
+19:29:38 <DeepTape> By "that way", I meant, "via remote api calls" 
+19:29:53 <dmiles> yes.. you could go both ways
+19:30:16 <dmiles> you mean you calling cyc durring game execution?
+19:30:37 <dmiles> or just durring code gen?
+19:30:38 <DeepTape> I was thinking during startup there, but yes, ti could be done at other times during game execution 
+19:32:18 <dmiles> by the way i am working on a restricted domain cyc peer
+19:32:37 <DeepTape> For untrusted knowledge?  : ) 
+19:32:40 <dmiles> it is alot like cyc by itself but a little faster 
+19:32:57 <DeepTape> Ah, for optimization 
+19:32:57 <dmiles> it uses cyc for longterm persistance and validation
+19:33:07 <DeepTape> Wow 
+19:33:09 <dmiles> but it has its own persistance as well
+19:33:17 <dmiles> its nearly completed
+19:33:34 <dmiles> i had to make it for my employer to do the things we needed that opencyc doesnt do yet
+19:33:46 <DeepTape> Who do you work for, btw? 
+19:33:52 <dmiles> but evently it could be moved iinto subl implemetation
+19:33:59 <dmiles> QuesterReseach
+19:34:08 <DeepTape> *nods* 
+19:34:09 <dmiles> www.questerresearch.com
+19:34:34 <dmiles> we needed NL abilities
+19:34:46 <dmiles> so it translates english to CycL
+19:34:59 <dmiles> IBM is funding the project
+19:35:06 <DeepTape> *nods* 
+19:35:16 <DeepTape> So I guess you'll be working on the NPC NL code then?  : ) 
+19:35:19 <dmiles> they wanted a DB that they could talk with in engish.. an expert system
+19:35:38 <dmiles> oh i hate NL actually ;P its a low hanging fruit in my opinion
+19:35:53 <dmiles> i'd rather have had cyccorp do it ;P
+19:35:53 <DeepTape> hehehe 
+19:36:09 <dmiles> i mean its not low hangiung but its easy in templated situations
+19:36:22 <huthut> heh
+19:36:24 <DeepTape> Ah 
+19:36:26 <dmiles> and in prolog so much exists.. we just needed cyc's KB
+19:37:03 <dmiles> so we could at least have our finite coverage
+19:37:13 <DeepTape> *nods* 
+19:37:14 <dmiles> to know why things failed or worked
+19:37:57 <dmiles> so in doing that i created a tiny specialized kinda infernce but it scales to large problems in a tight need cercumstance
+19:38:20 <dmiles> so in a modality of a game for instance
+19:38:28 <DeepTape> *nods* 
+19:38:29 <dmiles> it *might* be usefull
+19:38:53 <dmiles> but the best way to think is always in cyc context of how things work
+19:39:04 <DeepTape> So what is next for you?  (Leading up to the question, how can we work together?) 
+19:39:06 --- quit: fleeky (Read error: 113 (No route to host))
+19:39:26 <dmiles> thats what i am hoping to achive some kind of code situation
+19:39:33 <dmiles> i do not know python very well
+19:39:46 <dmiles> but i do know how to make cyc work in some curcumstances
+19:40:14 <dmiles> and know enough lisp to put together SubL modules
+19:40:47 <dmiles> and where subl is not there know how to implemtn things in a systemX cyc peer
+19:41:16 <DeepTape> *nods* 
+19:41:29 <DeepTape> Bruce sounds well on his way to nailing the Python-Cyc problem 
+19:41:33 <dmiles> so there presently is some code blockers in Cyc .. like the SubL API missing
+19:41:43 <bruce> DeepTape: it'll be a week or so of spare time hacking.
+19:41:51 <bruce> maybe a bit more if I odn't have as much time as I like.
+19:42:03 <dmiles> but maybe Cyccorp will fix this issue
+19:42:13 <DeepTape> bruce: You amazing me with how much you get done in "spare time hacking"  : ) 
+19:43:07 <bruce> there are bugs in the Java Cyc API though.
+19:43:16 <dmiles> yes.. bruce also seems to have good ideas how a game ontology for NPCs could look
+19:43:19 <bruce> involving packet/read() boundaries.
+19:43:25 <bruce> whichsucks for Java people.
+19:43:38 <DeepTape> Dash is interested in working on the Twisted-Cyc integration, which would be the next step with your code, bruce 
+19:43:43 <dmiles> in the FASL parts?
+19:43:46 <DeepTape> dmiles, Python is easy, btw  : ) 
+19:44:01 <bruce> dmiles: yeah, the CFASL reader isn't safe.
+19:44:06 <dmiles> i maintained some python code a while back for a libraries webserver.. was pretty easy
+19:45:21 <dmiles> the CFASL reader is it consitent whne talking dirrectly to cyc?
+19:45:34 <dmiles> is there a problem with things needing escaped ?
+19:46:02 <bruce> no .. the problem is that if there is a large string, it may not all get read in a single read()
+19:46:11 <bruce> unless i missed something cuz my java is weak.
+19:46:11 <dmiles> ah i see
+19:46:18 <dmiles> no it makes sense
+19:46:29 <dmiles> reads have finite boundries
+19:46:44 <dmiles> and java assumes whatever it wants
+19:47:08 <dmiles> i could see how to workarround it in java though
+19:47:36 <dmiles> do strings come with a lenght?
+19:47:53 <dmiles> (in the discription token?)
+19:47:57 <bruce> yeah
+19:48:27 <dmiles> i eneded up using port 3601 for the Prolog-Cyc api ;P
+19:48:38 <bruce> ohhhh, the way the read() happens avoids that.
+19:48:40 <bruce> nevermind :
+19:48:40 <bruce> :)
+19:49:11 <dmiles> well i havent ran into a string too long in java yet
+19:49:18 <dmiles> ah.. so i might never?
+19:49:30 <bruce> nah, problem shouldn't happen, I was wrong.
+19:50:28 <DeepTape> I'm my end, I'm pushing for a 0.1 release of Beyond by the end of August, which is basic client-server with Nebula and Twisted, basic character creation capability, basic geometry description capability, user input.  I'd anticipate starting to integrate Cyc into Beyond in the 0.2 phase 
+19:59:03 <bruce> looking forward to that then... :)
+19:59:07 <bruce> how public iwll the 0.1 be?
+19:59:49 <DeepTape> bruce: How public should it be?  I was figuring everyone who I have personally sent of copy of the technical paper to 
+20:00:13 <DeepTape> You, Ling, Glyph, Radix, Dash, a few others 
+20:00:26 <bruce> Tess?
+20:00:57 <DeepTape> The one working on Machinima?  I can't remember if I sent it to her yet 
+20:01:05 * bruce nods.
+20:01:07 <siege> dmiles, is your logicmoo CVS updated?
+20:01:26 <siege> I want to see what I can adapt, if that's allright.
+20:02:00 <dmiles> you bet.. you may need to look in the attic
+20:02:51 <siege> ok
+20:03:14 <dmiles> i'll peek and see if i can find the version that did two way creation
+20:09:06 <siege> is the connectors and wrappers used at all?
+20:09:37 <dmiles> will CycMoo.java
+20:10:05 <siege> ok, so I'll grab that chunk from CVS, to
+20:10:07 <siege> "too
+20:10:08 <siege> "
+20:10:21 <siege> (note the inability to type tonight)
+20:11:41 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/Attic/CycMoo.java?rev=1.8&hideattic=0&content-type=text/vnd.viewcvs-markup
+20:11:47 <huthut> hehe, cyc could also give birth to objects in the moo
+20:12:14 <huthut> trivial tho
+20:12:33 <huthut> ugh
+20:12:37 <dmiles> "Reify Cyc To Jamud
+20:12:38 <dmiles> "
+20:13:00 <dmiles> syncAllMudArtifacts(HashMap allMudArtifacts)
+20:17:03 --- quit: huthut ("Leaving")
+20:20:11 <dmiles>  what is the life like in Twisted?
+20:20:28 <dmiles> what are players generaly doing with their time?
+20:20:40 <bruce> Twisted isn't a mud .. it is infrastructre.
+20:20:44 <dmiles> ah i see
+20:21:21 <siege> that sounds familiar
+20:21:30 <siege> bruce: got a link to a page on Twisted?
+20:21:38 <bruce> www.twistedmatrix.com
+20:23:37 <bruce> DeepTape: mischannel :)
+20:24:00 <bruce> oops, i misread.
+20:24:26 <siege> interesting. bruce: would you be interested in testing out some channel/presence sharing plugins?
+20:24:41 <bruce> siege: what do you mean ?
+20:25:46 <siege> I noticed it's plugin-based, similar to what I'm driving jamud towards. I also noticed that you mentioned an IRC server as one of the simple implementations
+20:26:10 <bruce> siege: i didn't write twisted .. i just hack on it. but that's all in CVS.
+20:26:17 <siege> ah, ok
+20:26:46 <siege> what sort of stuff do you work on?
+20:27:19 <bruce> i work at worlds-apart.com .. we have 2 text-based commercial muds running and we're working on other stuff.
+20:27:34 <bruce> with twisted, i've been hacking some c extensions to make core parts faster
+20:27:46 <siege> are they using any sort of intra-mud connectors?
+20:29:09 <bruce> check out /products/spread on their site
+20:33:00 <dmiles> siege, where you able to see the syncing process in there?"
+20:34:34 <siege> saw where it got called, but that was in another class
+20:34:41 <siege> I'm still pulling down from CVs
+20:34:42 <dmiles> it woalks donw the parent child and saves to opencyc the properties
+20:34:46 <bruce> siege: did you find the page I meant ?
+20:34:48 <siege> there's A LOT in there
+20:35:04 <dmiles> oh well it contains the source to the MS Vwrolds erver
+20:35:07 <siege> bruce: sorry, didn't look yet
+20:35:16 <dmiles> it acedciently put in everything in F
+20:35:32 <dmiles> in SF cvs.. i thought it would ue .cvignore
+20:35:51 <dmiles> but man poluted the entire cvs
+20:42:18 <dmiles> wow cyc has 77693 deducatble genls relatuionships
+20:44:05 <dmiles> iam exploring cahcing them all
+20:53:33 <DeepTape> Time to crash 
+20:53:40 <DeepTape> I enjoyed the conversation, very enlightening 
+20:54:05 <bruce> me too .. thanks for coming by
+20:54:09 <bruce> and good night
+20:54:17 <dmiles> good night all
+20:54:26 <DeepTape> /waves 
+20:54:34 --- part: DeepTape left #opencyc
+21:15:38 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+21:23:50 --- join: Edison (~tweber@pD9EB48C9.dip.t-dialin.net) joined #opencyc
+21:24:45 --- quit: Edison (Client Quit)
+22:07:47 --- join: Vutral (~ss@pD9042E42.dip.t-dialin.net) joined #opencyc
+22:08:01 <Vutral> hey
+22:08:13 <Vutral> someone knows about "Lithium-Argon" Batteries ?
+22:51:43 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+23:43:21 --- quit: huthut (Read error: 104 (Connection reset by peer))
+23:43:50 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:51:54 * siege is away: work needs sleep.
+23:59:59 --- log: ended opencyc/02.08.04

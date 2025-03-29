@@ -1,0 +1,937 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 6. EL, HL, and the Canonicalizer</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 6. EL, HL, and the Canonicalizer</h2>
+    <p></p>
+    <b>6.1.  <a HREF='#137143680'>The EL/HL Distinction</a></b>
+    <br>
+    <font size='-1'>6.1.1.  <a HREF='#137150064'>
+What is the motivation for the EL/HL distinction? Why isn't one knowledge representation language good enough?
+</a>
+      <br>
+    </font>
+    <font size='-1'>6.1.2.  <a HREF='#137171856'>
+What are the EL and the HL, and how do they differ?</a>
+      <br>
+    </font>
+    <p></p>
+    <b>6.2.  <a HREF='#137196928'>
+The Canonicalizer</a></b>
+    <br>
+    <font size='-1'>6.2.1.  <a HREF='#137198696'>
+What is the Canonicalizer and why is it important?
+</a>
+      <br>
+    </font>
+    <font size='-1'>6.2.2.  <a HREF='#137208536'>
+What are the objectives of the Canonicalizer?</a>
+      <br>
+    </font>
+    <font size='-1'>6.2.3.  <a HREF='#137238264'>
+How does the Canonicalizer affect the OE process?</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 6. 
+    EL, HL, and the Canonicalizer</h1>
+    <h2>6.1.  <a NAME='137143680'>The EL/HL Distinction</a>
+    </h2>
+    <p>
+CycL is Cyc's knowledge representation language.  However, CycL is
+really two separate sublanguages, the EL (Epistemological Level) and
+the HL (Heuristic Level).  This section will explain the motivation
+for this distinction and how it affects ontological engineering.
+</p>
+    <h3>6.1.1.  <a NAME='137150064'>
+What is the motivation for the EL/HL distinction? Why isn't one knowledge representation language good enough?
+</a>
+    </h3>
+    <p>
+The two most important criteria for a knowledge representation
+language are <em>expressiveness</em> and <em>efficiency</em>.  Expressiveness is the
+most important criterion for entering knowledge.  Efficiency is the
+most important criterion for making inferences over that knowledge.
+Expressiveness in a representation language is the ability to express 
+facts, rules, and relationships quickly, easily, and in a principled and
+factored way.  Efficiency in a representation language is the ability
+to conclude new facts from existing facts as quickly and easily as
+possible, with as much coverage as possible.
+</p>
+    <p>
+Most programming languages, for example C++, would have a high
+efficiency but a low expressiveness if used as a knowledge
+representation language.  The efficiency would be high because there
+would be a tight coupling between the knowledge and the program
+inferencing over that knowledge, and the knowledge would be in an
+easily machine-readable form.  The expressiveness would be low because
+all ontological engineers or knowledge enterers would have to be C++
+programmers, and they would all be constrained to express only those
+assertions which can be programmed in C++.</p>
+    <p>
+Most natural languages, for example English, would have a high
+expressiveness but a low efficiency if used as a knowledge
+representation language.  The expressiveness would be high because it
+is quick and easy to express facts, rules, and relationships in
+English.  The efficiency would be low because it would be almost
+impossible to reason about English sentences to conclude new English
+sentences, since natural language is so complex, ambiguous, and
+computationally inefficient.</p>
+    <p>
+The following is a graphical representation of the tradeoff between
+expressiveness and efficiency.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/elhl.gif'></center>
+    <p>
+If we chose any one language as Cyc's representation language, we
+would be committing to a particular tradeoff between expressiveness
+and efficiency.  However, if we choose <em>two</em> knowledge representation
+languages, one with a high expressiveness (the EL) and the other with
+a high efficiency (the HL), we can have both expressiveness and
+efficiency, and we don't have to trade one for the other.  Separating
+the EL from the HL benefits both the knowledge engineers, who need
+only learn a stable representation language, and the system designers,
+who are free to modify the internal data structures as needed without
+changing the EL and thus without disrupting the efforts of the
+knowledge engineers.</p>
+    <h3>6.1.2.  <a NAME='137171856'>
+What are the EL and the HL, and how do they differ?</a>
+    </h3>
+    <p>
+The EL, or Epistemological Level, is the knowledge representation
+language optimized for entering knowledge into Cyc and presenting it
+to users.  It is what you see when you are using the Cyc Browser or
+most other modes of interaction with Cyc.  It is the "face" of CycL
+that you are already familiar with from earlier sections of this
+document.</p>
+    <p>
+The HL, or Heuristic Level, differs from the EL in the following ways:</p>
+    <blockquote>
+      <ul>
+        <li>Reifiable NAUTs (non-atomic reified terms) are converted to NARTs (non-atomic reified terms).</li>
+        <li>HL assertions are efficiently indexed.</li>
+        <li>Non-embedded quantifiers and logical operators are eliminated, and replaced with a (possibly skolemized) list of CNF (conjuctive normal form) clauses.</li>
+        <li>Arguments to commutative relations are sorted into a canonical order.</li>
+        <li>...and various other differences, many of which are idiosyncratic to Cyc.</li>
+      </ul>
+    </blockquote>
+    <p>
+The goal of the HL is maximum efficiency without losing important
+information.  Unimportant information, like the order of arguments to
+commutative relations, is lost with the conversion from EL to HL.  See
+the section on the Canonicalizer for more information on the
+difference between EL and HL.</p>
+    <font color='red' size='-1'>
+      <em>
+note: This should eventually replace all but the two introductory
+paragraphs of http://localhost/cycdoc/ref/canon.html</em>
+    </font>
+    <h2>6.2.  <a NAME='137196928'>
+The Canonicalizer</a>
+    </h2>
+    <h3>6.2.1.  <a NAME='137198696'>
+What is the Canonicalizer and why is it important?
+</a>
+    </h3>
+    <p>
+The Canonicalizer is the module in Cyc which converts from EL to HL.
+Having two separate representation languages means that we have to
+have a way to convert between the two. The Canonicalizer converts
+from EL to HL, and the Uncanonicalizer converts back from HL to EL.
+The Canonicalizer is important because it makes the EL/HL distinction
+possible. Without the Canonicalizer, we would be stuck with choosing
+a particular tradeoff between expressiveness and efficiency. With the
+Canonicalizer, we can have both. See the section on the EL/HL
+Distinction for more information on EL and HL, and the motivation for
+making the separation.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/czer-architecture.gif'></center>
+    <p>
+The diagram above shows how all access to the KB, input and output,
+is mitigated by the Inference Engine, specifically the Canonicalizer.</p>
+    <h3>6.2.2.  <a NAME='137208536'>
+What are the objectives of the Canonicalizer?</a>
+    </h3>
+    <p>
+Canonicalization Objectives: </p>
+    <blockquote>
+      <dl>
+        <blockquote>
+          <ol>
+            <li>
+              <dt>
+                <em>
+compression:</em>
+              </dt>
+              <dd>
+mapping logically equivalent EL expressions into a common HL construct </dd>
+            </li>
+            <li>
+              <dt>
+                <em>
+correctness:</em>
+              </dt>
+              <dd>
+only equivalent EL expressions are mapped into a common HL construct</dd>
+            </li>
+            <li>
+              <dt>
+                <em>
+speed</em>
+              </dt>
+            </li>
+          </ol>
+        </blockquote>
+      </dl>
+    </blockquote>
+    <p>
+The raison d'etre for the Canonicalizer is to translate soundly
+equivalent EL expressions into a single HL construct. This avoids
+redundantly adding one expression that is simply a rephrasing of another
+expression. For example, imagine CycL contains the predicate #$sociallyDominates.
+The following are all equivalent EL sentences that map into a single HL sentence:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies 
+      (and (isa ?X Dog) (isa ?Y Dog) (different ?X ?Y))
+      (or (sociallyDominates ?X ?Y) (sociallyDominates ?Y ?X)))
+
+   (implies 
+      (and (isa ?X Dog) (isa ?Y Dog) (different ?Y ?X))
+      (or (sociallyDominates ?X ?Y) (sociallyDominates ?Y ?X))) 
+
+   (implies 
+      (and (isa ?Y Dog) (isa ?X Dog) (different ?X ?Y))
+      (or (sociallyDominates ?X ?Y) (sociallyDominates ?Y ?X)))
+
+   (implies 
+      (and (isa ?Y Dog) (isa ?X Dog) (different ?Y ?X))
+      (or (sociallyDominates ?Y ?X) (sociallyDominates ?X ?Y)))
+
+    (or
+     (sociallyDominates ?X ?Y) 
+     (sociallyDominates ?Y ?X)
+     (not (isa ?X Dog))
+     (not (isa ?Y Dog))
+     (not (different ?X ?Y)))</pre></tt>
+    </font>
+
+
+<p>
+The second differs from the first only in the order of the arguments
+to the symmetric predicate #$different. The third differs from the
+first only in the order of the antecedent literals. This also involves
+canonicalizing the order of arguments to a commutative relation, in
+this case #$and. The fourth differs from the first only by variable
+naming. The fifth differs from the first by a few applications of
+standard logical transformations (e.g., DeMorgan's Law). Attempting to
+add all five EL sentences to the Cyc KB results in only one HL
+construct.</p>
+    <p>
+An important secondary objective of the Canonicalizer is speed; it is
+not uncommon for users to load transcripts containing thousands of EL
+sentences, each of which must be canonicalized. Therefore,
+canonicalization must be as fast as possible. However, the goal of
+efficient translation is directly at odds with the goal of detecting
+and removing duplication (which can involve arbitrary theorem
+proving). To balance this trade-off, the Canonicalizer uses a limited
+set of rules for simplifying and transforming sentences that has been
+tuned with hundreds of thousands of examples; not all equivalent EL
+expressions simplify to the same HL expression. These rules reflect a
+pragmatic compromise between efficiently translating EL expressions
+into HL constructs and detecting and eliminating duplication, and they
+are truth-preserving. Thus the Canonicalizer does not (cannot)
+guarantee to map all equivalent EL sentences into a single HL
+construct; however, it can guarantee soundness (only truly equivalent 
+sentences are mapped into a common HL construct), and it can guarantee 
+a relatively fast response.</p>
+    <h3>6.2.3.  <a NAME='137238264'>
+How does the Canonicalizer affect the OE process?</a>
+    </h3>
+    <p>
+Most of the time, it doesn't affect it at all, because no information
+is lost or altered in the conversion from EL to HL and back to EL.
+However, sometimes a knowledge enterer will assert something which canonicalizes 
+in an unexpected way, and it's good to know a little bit about the workings
+of the Canonicalizer so as to understand why and how it's doing what
+it's doing.
+</p>
+    <p>
+Another important thing to remember about the Canonicalizer is that
+its behavior is KB-dependent, as well as microtheory-dependent. The
+Canonicalizer uses existing assertions in the KB to determine how to
+canonicalize new inputs. For example, if you created a predicate
+#$foo, and you asserted the following two EL sentences in order:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (isa foo CommutativeRelation)
+ 
+   (foo 3 2 1)</pre></tt>
+    </font>
+
+<p>
+then the second one would canonicalize as
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (foo 1 2 3)
+</pre></tt>
+    </font>
+
+<p>
+If you did not assert the commutativity sentence, or asserted it in a
+microtheory inaccessible to the second assertion, then the
+Canonicalizer would not reorder the arguments of #$foo.</p>
+    <p>
+Here is an overview of what the canonicalizer does:
+</p>
+    <li>Well-formedness checking (wff-checking)</li>
+    <li>Precanonicalizations</li>
+    <li>Expands EL relations</li>
+    <li>Evaluates EL-evaluatable relations (see #$evaluateAtEL)</li>
+    <li>Converts #$exceptFor and #$exceptWhen into #$abnormal</li>
+    <li>Clausification</li>
+    <li>Expands implications</li>
+    <li>Pushes negations inwards</li>
+    <li>Standardizes variables</li>
+    <li>Converts existentials to Skolem functions</li>
+    <li>Removes leading universals</li>
+    <li>Pushes disjunctions inwards (or conjunctions, if a query)</li>
+    <li>Clause Canonicalization </li>
+    <li>Polycanonicalizes if necessary</li>
+    <li>Sorts arguments of commutative relations, including #$and and #$or</li>
+    <li>Converts some EL objects to HL objects, e.g. reifiable nauts and EL variables</li>
+    <li>Adds #$termOfUnit and #$evaluate literals when necessary</li>
+    <li>Simplification is performed at various points during canonicalization</li>
+    <p>
+Clausification is a standard logical algorithm implemented by the
+Canonicalizer. However, special support for particular syntactic
+constructs require special processing. The precanonicalizer handles
+those special transformations that are easiest to accomplish prior to
+conversion to clausal normal form; the clause canonicalizer handles
+those special transformations easiest to accomplish after conversion
+to clausal normal form.</p>
+    <p>
+Many of these operations have perfect inverses performed by the
+Uncanonicalizer, so they are invisible at the EL, assuming that both
+the Canonicalizer and Uncanonicalizer are in working order. But some
+of the transformations do have a projection onto the EL, so those will
+be covered in the following sections.</p>
+    <h4>6.2.3.a.  
+Wff-checking
+</h4>
+    <p>
+The wff-checker imposes user-defined constraints on all input to Cyc,
+including assertions and queries. Tighter constraints are imposed on
+assertions than queries. This is important from the OE perspective
+because the canonicalizer will not allow you to assert ill-formed CycL.</p>
+    <p>
+The input in question must be syntactically well-formed, i.e. it
+must be a CycL sentence. What it means to be a CycL sentence has
+already been covered in the CycL section.</p>
+    <p>
+The CycL sentence and all of its subexpressions must meet all
+applicable arity constraints. Relations in CycL are declared to be
+of either fixed or variable arity. The arity of fixed arity relations
+is declared and constant (but may be microtheory specific). Variable
+arity relations (e.g., #$and, #$different) accept zero or more
+arguments, but may be constrained by the predicates #$arityMin and
+#$arityMax.</p>
+    <p>
+The wff-checker ensures the semantic constraint that each
+relation referenced in a formula has a declared arity (variable or a
+non-negative integer) and that the number of arguments satisfies the
+arity.</p>
+    <p>
+If the sentence is being asked as a query, then these constraints are
+all that are imposed. If the sentence is being asserted, then the
+following constraints are also imposed:</p>
+    <p>
+The CycL sentence and all of its subexpressions must meet all
+applicable argument constraints. All predicates used to state
+argument constraints are instances of #$ArgConstraintPredicate. Two
+important things to remember are that argument constraints <em>conjoin</em>,
+and that they are inherited from genlPreds. However, it is good OE
+practice to state the exact argument constraints for every predicate,
+and not to depend on this inheritance. This is for modularity's sake
+in case the genlPreds hierarchy changes. Also, it has the effect that
+you only have to look in one place to see the constraints; you don't
+also have to look at all the genlPreds.</p>
+    <p>
+An important distinction in wff-checking is whether the term in
+question must provably satisfy the constraint, or whether it must
+merely be consistent with the constraint (e.g. not disjoint). Generally
+the decision of which criteria to apply depends on the type of term being
+checked; whether it is a fort or a naut. Quoted from 
+#$ArgumentTypeChecking-FORTSvsNonReifiedNATS:</p>
+    <font color='#339900'>
+      <tt><pre>
+  "Arg-type checking imposes somewhat weaker constraints on non-reified
+  function terms than it does for forts (first order reified
+  terms). Specifically, non-reified terms are required only to be
+  consistent with arg-isa and arg-genls constraints using disjointness
+  reasoning constraint is satisfied when no disjointness violation can
+  be found. This is significantly weaker than the constraints imposed on
+  forts: forts must provably satisfy applicable arg-isa and arg-genl
+  constraints using isa and genls reasoning."</pre></tt>
+    </font>
+
+<p>
+The predicates that are currently (August 2001) supported in code are:
+</p>
+    <li>
+#$arg?Isa, #$arg?Genl, #$arg?GenlAttribute</li>
+    <li>
+#$arg?Format</li>
+    <li>
+#$argAndRestIsa, #$argAndRestGenl, #$argsIsa, #$argsGenl
+</li>
+    <li>
+#$interArgIsa*</li>
+    <li>
+#$interArgDifferent</li>
+    <p>
+These are discussed in more detail in their comments in the KB.
+</p>
+Predicates currently (August 2001) unenforced by code include:
+
+<li>
+#$argGenlPreds</li>
+    <li>
+#$argNotIsa, #$argNotGenl</li>
+    <li>
+#$interArgFormat*</li>
+    <li>
+#$interArgGenl*</li>
+    <li>
+#$interArgNotIsa*, #$interArgNotGenl*</li>
+    <li>
+#$interArgReln*</li>
+    <li>
+#$interArgDisjoint</li>
+    <li>
+#$interArg?ResultIsa, #$interArg?ResultGenls</li>
+    <p>
+You can use these as statements of intent, but they will not be enforced
+by the wff-checker.</p>
+    <p>
+Another topic relevant to arg-type constraints is defns. The
+predicates #$defnIff, #$defnNecessary, and #$defnSufficient,
+collectively known as "defns", can be used to determine collection
+membership via a piece of code rather than explicit assertions in the
+KB. A good example of a collection defined this way is
+#$PositiveInteger. For example, if you try to assert</p>
+    <font color='#339900'>
+      <tt><pre>
+   (fanOutArg covers-Dustlike "Brazil")</pre></tt>
+    </font>
+
+<p>
+in the BaseKB, the wff-checker will respond:</p>
+    <font color='#339900'>
+      <tt><pre>
+   Term "Brazil" violates defns of arg-isa #$PositiveInteger
+   applicable to argument 2 of relation #$fanOutArg
+   in mt #$BaseKB.</pre></tt>
+    </font>
+
+
+<p>
+because it can determine at runtime that the string "Brazil" is not a
+positive integer. This gives us the power to algorithmically define
+certain collections instead of reifying their extent, which would be
+especially problematic in the case of collections of infinite
+cardinality.</p>
+    <p>
+For more detailed information on arg-type constraints, see the comments on
+#$NoteAboutELVersusHLVersusCycL, #$NoteOnArgumentTypingAndPropertiesOfRelations, 
+and #$NoteAboutArgIsaCycIndexedTerm.</p>
+    <p>
+For information on special arg-type constraints that affect the
+behavior of the canonicalizer, see #$SharedNoteAboutCanonicalizerDirectiveArgConstraints.</p>
+    <p>
+The CycL sentence must not violate monotonically true SBHL
+knowledge in the KB. (SBHL assertions are assertions using predicates
+like #$isa, #$genls, and $#genlAttributes.) For example, if you
+attempt to assert the CycL sentence
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (genls Collection Individual)
+</pre></tt>
+    </font>
+<p>
+in the BaseKB, the wff-checker will give you an error something like:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   Formula 
+
+   (genls Collection Individual) 
+   was not well formed because: 
+
+   Collection is known not to be a spec of Individual in mt BaseKB.</pre></tt>
+    </font>
+
+<p>
+If you try to assert this assertion, your agenda would halt and you would
+get the following message:</p>
+    <font color='#339900'>
+      <tt><pre>
+   Last Agenda operation:
+   (FI-ASSERT 
+   '(genls Collection Individual) 'BaseKB ':DEFAULT)
+
+   Agenda halted due to:
+  
+   sbhl conflict: (genls Collection Individual) :TRUE BaseKB
+        because: (genls Collection SetOrCollection) :TRUE
+                 (disjointWith SetOrCollection Individual) :TRUE</pre></tt>
+    </font>
+
+
+<p>
+The CycL sentence must be assertible. For example, making
+assertions which directly reference a Skolem function
+(e.g. #$SKF-8675309) is prohibited. See #$notAssertible and
+#$notAssertibleCollection for more details.</p>
+    <p>
+There are various other idiosyncrasies of certain predicates
+which are enforced by the wff-checker. A detailed explanation of the
+intricacies of the wff-checker is beyond the scope of this document.</p>
+    <h4>6.2.3.b.  
+Precanonicalizations</h4>
+    <p>
+Precanonicalizations can cause terms that you mentioned in your EL
+input to completely disappear at the HL. A consequence of this is
+that if you are looking for an assertion via its index on that term,
+you will not find the assertion there because the term in question was
+precanonicalized away. If you are cognizant of precanonicalizations,
+you stand a chance of not being flummoxed by such missing terms.
+</p>
+    <h4>6.2.3.c.  
+Expands EL relations
+</h4>
+    <p>
+#$ELRelations are relations that exist only at the EL and not at the HL.
+A good example of this is #$lessThan. If you try to assert, for example,</p>
+    <font color='#339900'>
+      <tt><pre>
+  (lessThan 1 2)</pre></tt>
+    </font>
+
+<p>
+then that will be canonicalized as</p>
+    <font color='#339900'>
+      <tt><pre>
+(greaterThan 2 1)</pre></tt>
+    </font>
+
+<p>
+Instead of having two HL predicates #$lessThan and #$greaterThan, thus
+doubling the number of defining rules or HL modules needed to support
+them, we can avoid this entirely by automatically canonicalizing 
+sentences about #$lessThan into sentences about #$greaterThan. Note
+that this precanonicalization is only performed when the predicate is
+actually used as a predicate, i.e. in the arg0 position. If the
+predicate is used as a term, e.g.</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa lessThan BinaryPredicate)</pre></tt>
+    </font>
+
+<p>
+then no such transformation is performed.</p>
+    <h4>6.2.3.d.  
+Evaluates EL-evaluatable relations (see #$evaluateAtEL)</h4>
+    <p>
+Evaluatable relations (q.v.) can be marked with the meta-predicate
+#$evaluateAtEL, which means that the canonicalizer will evaluate them
+if possible. Suppose that</p>
+    <font color='#339900'>
+      <tt><pre>
+  (evaluateAtEL PlusFn)</pre></tt>
+    </font>
+
+<p>
+were asserted in the BaseKB. Then if you asserted</p>
+    <font color='#339900'>
+      <tt><pre>
+   (isa (PlusFn 1 2) PositiveInteger)</pre></tt>
+    </font>
+
+<p>
+in the BaseKB, this would canonicalize as</p>
+    <font color='#339900'>
+      <tt><pre>
+   (isa 3 PositiveInteger)</pre></tt>
+    </font>
+
+<p>
+#$evaluateAtEL makes strong semantic assumptions about the relation
+to which it is applied. For example, it assumes that the result of
+the evaluation is unchanging and independent of other knowledge in the
+KB. Furthermore, it assumes that you will never want to refer to the
+functional term (PlusFn 1 2). Use it with ontological caution.</p>
+    <h4>6.2.3.e.  
+Converts #$exceptFor and #$exceptWhen into #$abnormal</h4>
+    <p>
+#$exceptFor and #$exceptWhen are like #$ELRelations that have special
+support in code. For example 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(exceptWhen &lt;sentence-1> &lt;sentence-2>) </pre></tt>
+    </font>
+
+<p>
+denotes that &lt;sentence-2> is default true, but is not warranted when
+&lt;sentence-1> holds; this sentence is transformed by the precanonicalizer
+into</p>
+    <font color='#339900'>
+      <tt><pre>
+(implies &lt;sentence-1> (abnormal &lt;variables> &lt;kb-assertion>))</pre></tt>
+    </font>
+<p>
+where &lt;variables> are the EL variables appearing in &lt;sentence-2>, and
+&lt;kb-assertion> is the HL construct, already asserted in the Cyc
+knowledge base, derived from canonicalizing &lt;sentence-2>.
+</p>
+    <p>
+See #$EmptinessOfAbnormalityNote and the section on exceptions in
+inference for more information.</p>
+    <h4>6.2.3.f.  
+Clausification</h4>
+    <p>
+Clausification is why something you asserted might appear in a
+logical form which is quite different from what you asserted. For
+example, if you asserted</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+   (hasAttributes ?PERSON Single)
+   (not (#$hasAttributes ?PERSON Married)))</pre></tt>
+    </font>
+
+<p>
+it would canonicalize as</p>
+    <font color='#339900'>
+      <tt><pre>
+   (or
+     (not (hasAttributes ?PERSON Single))
+     (not (hasAttributes ?PERSON Married)))</pre></tt>
+    </font>
+
+<p>
+which would uncanonicalize (i.e. display in the Cyc Browser) as</p>
+    <font color='#339900'>
+      <tt><pre>
+   (not
+     (and
+       (hasAttributes ?PERSON Single)
+       (hasAttributes ?PERSON Married)))</pre></tt>
+    </font>
+
+
+<p>
+The following sections will explain what the Canonicalizer does with
+logical operators and quantifiers: #$and, #$or, #$not, #$implies,
+#$thereExists, and #$forAll. This explanation is not particularly
+Cyc-specific. Any decent book on first-order logic (e.g. <em>Logical
+Foundations of Artificial Intelligence</em> by Genesereth and Nilsson) ,
+or even a web search on "conjunctive normal form" or "skolemization"
+should have a reasonable explanation of the standard conversion of
+arbitrary FOL sentences into conjunctive normal form (CNF). The
+Canonicalizer basically follows the standard approach for
+clausification.</p>
+    <b>
+Expands implications</b>
+    <p>
+The canonicalizer eliminates all implications by converting them to an
+equivalent logical form, by repeatedly performing the following
+transformation:</p>
+    <font color='#339900'>
+      <tt><pre>
+(implies &lt;sentence-1> &lt;sentence-2>) -> (or (not &lt;sentence-1>) &lt;sentence-2>)</pre></tt>
+    </font>
+
+<b>
+Pushes negations inwards</b>
+    <p>
+Using DeMorgan's Law, double negation elimination, and other logical
+transformations, the Canonicalizer pushes all negations inwards until
+all negations apply directly to atomic formulas.</p>
+    <font color='#339900'>
+      <tt><pre>
+(not (#$and &lt;sentence-1> ...)) -> (or (not &lt;sentence-1>) ...)
+(not (or &lt;sentence-1> ...)) -> (and (not &lt;sentence-1>) ...)
+(not (forAll &lt;var> &lt;sentence>)) -> (thereExists &lt;var> (not &lt;sentence>)) 
+(not (thereExists &lt;var> &lt;sentence>)) -> (forAll &lt;var> (not &lt;sentence>))</pre></tt>
+    </font>
+
+
+<b>
+Standardizes variables</b>
+It is possible in CycL to have two different variables with the same name.
+This is usually an OE mistake, but the Canonicalizer will catch this mistake
+and rename such variables. For example, if you tried to assert
+
+
+<font color='#339900'>
+      <tt><pre>
+   (forAll ?X (elementOf ?X (TheSetOf ?X (isa ?X Thing))))</pre></tt>
+    </font>
+
+<p>
+This would canonicalize into something like</p>
+    <font color='#339900'>
+      <tt><pre>
+   (forAll ?X (elementOf ?X (TheSetOf ?Y (isa ?Y Thing))))</pre></tt>
+    </font>
+
+
+<p>
+because #$TheSetOf is a #$ScopingRelation with #$scopingArg 1, which
+means that the variable in argument position 1 of the relation
+#$TheSetOf is a scoped variable. Scoped variables cannot be
+referenced outside of their scoping expressions, in this case the
+#$TheSetOf formula. Thus the ?X in #$forAll ?X and the ?X in (#$isa
+?X #$Thing) are two different variables.</p>
+    <b>
+Converts existentials to Skolem functions</b>
+    <p>
+This section will not provide a detailed discussion of Skolemization
+since this can be found in textbooks on formal logic, but it give a
+brief overview, and then explain how Skolemization works in Cyc.</p>
+    <p>
+Basically, Skolemization is a method of eliminating existential
+quantification by introducing new functions. For example, the CycL
+sentence</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+     (isa ?PER Person)
+     (thereExists ?MOM
+       (mother ?PER ?MOM)))</pre></tt>
+    </font>
+
+
+<p>
+would skolemize into something like</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+     (isa ?PER Person)
+     (mother ?PER (SKF-8675309 ?PER)))</pre></tt>
+    </font>
+
+
+<p>
+In this particular case, #$SKF-8675309 is equivalent to #$MotherFn,
+the function that, for any given person, denotes his or her mother.
+Skolem functions are just like any other denotational functions in
+Cyc, except that they are automatically generated by the Canonicalizer
+any time a new assertion is made using an existential quantifier
+(e.g. #$thereExists). They are named #$SKF-n, for some arbitrarily
+chosen n. The arity, arg constraints, and result types are
+automatically determined by the Canonicalizer.</p>
+    <p>
+Skolem constants are implemented by zero-arity skolem functions, the
+result of which is effectively a Skolem constant. For example,
+#$SKF-8675309 might be a zero-arity Skolem function, but
+(#$SKF-8675309), the result of applying that Skolem function to zero
+arguments, would effectively be a Skolem constant.</p>
+    <p>
+Skolem functions have one or more defining assertions; they are only
+meaningful in the context of those assertions. Therefore, it is
+impermissible to make non-meta assertions about existing Skolem
+functions. You can make meta-assertions about them (e.g. #$comment),
+but no more. If you want to change the definition of a Skolem
+function, you must change its defining assertions, which is tantamount
+to killing the Skolem function and creating a new one.</p>
+    <b>
+Removes leading universals</b>
+    <p>
+Since all existentially quantified variables have been removed by
+Skolemization, all remaining free variables must be universally
+quantified. The redundant #$forAll wrappers are stripped from the
+CycL sentence before storing it in the KB. The Uncanonicalizer could
+recompute the #$forAll wrappers if it chose to, but there is a
+convention in CycL that free variables are implicitly universally
+quantified at the top level.</p>
+    <b>
+Pushes disjunctions inwards (or conjunctions, if a query)</b>
+    <p>
+The Canonicalizer uses the transformation
+</p>
+    <font color='#339900'>
+      <tt><pre>
+     (or P (and Q R)) -> (and (or P Q) (or P R))</pre></tt>
+    </font>
+
+<p>
+to transform the sentence into a conjunction of disjunctions of literals,
+if the sentence is being asserted into the KB. If the sentence is being
+asked as a query, then the dual transformation is applied, and the
+sentence is converted to disjunctive normal form (DNF) instead of CNF.</p>
+    <h4>6.2.3.g.  
+Clause Canonicalization</h4>
+    <b>
+Polycanonicalizes if necessary</b>
+    <p>
+The entire Cyc KB can be viewed as a huge conjunction of CycL
+assertions. (Of course, they would need to be decontextualized via
+#$ist in order to not lose the distinction between different
+microtheories.) Hence, if you assert an EL sentence of the form
+(#$and P Q), this will result in two assertions in the KB. Sometimes
+this result is not obvious, for instance a rule like</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (or P Q)
+     R)</pre></tt>
+    </font>
+
+
+<p>
+would be clausified into</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and 
+    (or (not P) R)
+    (or (not Q) R))</pre></tt>
+    </font>
+
+<p>
+which would also result in two assertions being added to the KB. When
+a single EL sentence results in more than one assertion being added to
+the KB, this is called polycanonicalization. The Uncanonicalizer is
+not aware of polycanonicalization (except for Skolem functions) and so
+it will not reconstruct the original EL sentence as you entered it,
+but will instead reconstruct two (or more) EL sentences, each of which
+will be a logical piece of the original input sentence.</p>
+    <b>
+Sorts arguments of commutative relations, including #$and and #$or</b>
+    <p>
+The Canonicalizer will sort the arguments of commutative relations
+into a canonical order. #$and and #$or are always commutative. A
+user-defined relation is commutative iff it is an instance of
+#$CommutativeRelation in a microtheory relevant to the given
+canonicalization.</p>
+    <p>
+The effect of this is that the assertions in the KB may have a
+different argument order than you originally wrote, and the order of
+the literals may be different. This has absolutely no bearing on
+inference efficiency; the inference engine will choose which literal
+to evaluate based on its own heuristics; not the order chosen by the
+Canonicalizer.</p>
+    <p>
+Implementation note: canonicalizing the order of arguments to
+commutative relations obviates rules that implement commutativity,
+such as:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies (different ?X ?Y) (different ?Y ?X))</pre></tt>
+    </font>
+
+
+<p>
+This requires that every component of the inference engine (e.g. the
+KB indexing mechanisms and HL modules) assume responsibility to
+correctly handle commutativity.</p>
+    <b>
+Converts some EL objects to HL objects, e.g. reifiable nauts and EL variables</b>
+    <p>
+In Cyc parlance, reifiable nauts are canonicalized into narts. A nart
+is a non-atomic reified term, and a naut is a non-atomic unreified
+term. Hence, non-atomic unreified terms whose functor is an instance
+of #$ReifiableFunction will be replaced by reified versions of those
+terms. The motivation for this is to support efficient indexing of
+non-atomic terms. In the standard Cyc Browser, you can tell the
+difference between a naut and a nart by the clickable left
+parenthesis; narts have clickable left parens, and nauts don't. They
+look very similar in the Cyc Browser, but at the HL they are totally
+different things.</p>
+    <p>
+EL variables are replaced by HL variables in order to support an
+effient unification algorithm in the inference engine.</p>
+    <p>
+EL sentences are replaced by HL assertions if indicated by arg-type
+constraints (e.g. #$CycLAssertion). This results in a meta-assertion.
+For more information on meta-assertions, see
+#$NoteAboutAssertionsAsArgConstraints and#$NoteAboutMetaAssertionsAcrossMts. Also see
+#$MetaAssertionsForPolyCanonicalizingAssertions for an explanation of
+how polycanonicalization interacts with meta-assertions.</p>
+    <b>
+Adds #$termOfUnit and #$evaluate literals when necessary</b>
+    <p>
+The canonicalizer may add some additional literals to the HL sentence,
+to facilitate the operation of the inference engine. #$termOfUnit
+relates a nart to its corresponding naut. It is an inference-internal
+predicate and you should never need to mess with it.
+</p>
+    <p>
+The canonicalizer will also add #$evaluate literals to facilitate the
+inference engine's handling of #$EvaluatableFunctions.</p>
+    <h4>6.2.3.h.  
+Simplification</h4>
+    <p>
+Simplification is performed at various points during canonicalization.
+This process includes such logical transformations as</p>
+    <font color='#339900'>
+      <tt><pre>
+(and P) -> P
+(or P) -> P
+(and False ...) -> False
+(or True ...) -> True
+(and True ...) -> (and ...)
+(or False ...) -> (or ...)
+
+(not (not P)) -> P</pre></tt>
+    </font>
+
+
+<p>
+and many others. Simplification is performed so as to map as many
+logically equivalent EL expressions as possible to the same HL
+expression.</p>
+    <h4>6.2.3.i.  
+Summary of how the Canonicalizer affects the OE process</h4>
+    <p>
+Often, the operation of the Canonicalizer is invisible to the
+ontological engineer, except for the occasional notification of
+ill-formedness. But sometimes, the Canonicalizer will cause
+assertions in the KB to look considerably different from the EL form
+you entered. Being aware of how the Canonicalizer works will help you
+to recognize these canonicalized assertions as your own, and to
+understand how and why they were transformed.</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

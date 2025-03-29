@@ -1,0 +1,190 @@
+00:00:00 --- log: started opencyc/02.12.18
+06:23:18 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+07:41:38 <yepster> so.. am I the only one that didn't notice 0.7 being release on sf 3 days ago?
+07:51:12 <yepster> shit it contains the old interface to oracle :-(
+08:17:03 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:30:40 <reed_> how do I fix the oracle interface for the next release?
+08:41:11 --- topic: set to 'Welcome to #opencyc, The IRC channel for the OpenCyc project. ***Release 0.7 is now available from http://sourceforge.net/projects/opencyc/' by Aeon
+08:42:50 --- nick: Aeon -> Graham
+08:44:34 --- topic: set to 'Welcome to #opencyc, The IRC channel for the OpenCyc project. ***Release 0.7.0 is now available from http://sourceforge.net/projects/opencyc/' by Graham
+08:49:37 <yepster> a new pdf is at http://217.117.225.187/~yeb/cycapi/ooi.pdf
+08:49:43 <yepster> I made it to work against 0.7
+08:50:07 <yepster> big difference is that it contains an install script; when opencyc and oracle
+08:50:15 <reed_> I'll go get it.
+08:50:24 <yepster> are installed on the same server, it's now just run and go.
+08:53:02 <reed_> got it and it will go out on the next release, in the meantime
+08:53:24 <reed_> I'll let John know so that he can make an announcment.
+08:53:36 <yepster> next release?
+08:53:56 <reed_> We plan for monthly releases from this point.
+08:54:16 <yepster> well it's not really important; nobody uses the interface currently
+08:54:24 <yepster> except for me I guess
+08:54:52 <yepster> but maybe that's also because it was linux only and installing it was a bit cumbersome
+08:56:05 <reed_> ok.
+09:46:30 --- quit: mdupont (Read error: 60 (Operation timed out))
+09:47:47 --- quit: yepster ()
+09:54:18 --- join: mdupont (mdupont@p5080E559.dip0.t-ipconnect.de) joined #opencyc
+10:04:25 --- quit: KinoC (Read error: 110 (Connection timed out))
+11:11:54 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+11:21:36 <dmiles> i fixed my  (ask-template '(?POS) (list #$partOfSpeech ?W ?POS str) #$EnglishMt 0 nil nil nil) .. it's  (ask-template '(?POS) (list #$partOfSpeech '?W '?POS str) #$EnglishMt 0 nil nil nil) riogth?
+11:21:54 <mdupont> hey dmiles
+11:22:00 <dmiles> hi there
+11:24:20 <dmiles> is CSETF going to be in 0.7 ?
+11:25:38 <dmiles> its needed in order to define things likes SETHASH / SET-AREF
+11:26:02 * dmiles looks to see if there are any other last minute requests:)
+11:29:37 <reed_> hmm I'll look
+11:31:36 <reed_> yes it is there but its use is for setting slots on structures
+11:32:51 <dmiles> right now only CLET and CSETQ 
+11:33:22 <dmiles> oh and rplaca/rplacd are woring 
+11:33:43 <reed_> Release 0.7 should have all the funs in http://www.cyc.com/cycdoc/ref/subl-reference.html
+11:33:59 <dmiles> one trick i am sdoing is when i make a new vetctor i initralize it with '(NIL)
+11:34:27 <dmiles> so i can rplaca onyto its cons
+11:34:30 <reed_> going to lunch now. - see you
+11:34:47 <dmiles> thank you .. good news about the reference
+12:08:56 <mdupont> hey dmiles
+12:09:44 <mdupont> is there any prolog interface you can recommend for rdf-daml processing?
+12:13:23 <dmiles> here is the documents ( http://www.xml.com/pub/a/2001/04/25/prologrdf/index.html ) for this interface ....
+12:14:37 <dmiles> http://www.swi-prolog.org/packages/rdf2pl.html
+12:15:01 * mdupont looks, thanks! pwi, i thought so, that has a rdf interface
+12:15:48 <dmiles> also look at http://gollem.swi.psy.uva.nl/twiki/pl/bin/view/Library/WebHome
+12:17:02 <dmiles> http://gollem.swi.psy.uva.nl/twiki/pl/bin/view/Library/RdfTools
+12:17:12 <mdupont> that is awsome
+12:17:27 <mea_culpa> dmiles!
+12:26:53 --- quit: KinoC (Read error: 110 (Connection timed out))
+12:35:36 <mdupont> thanks, what about Formal Coneptual Modelling
+12:36:01 <mdupont> with lattices
+12:36:13 <dmiles> oh :) .. you mean resolution?
+12:36:14 <mdupont> Context, Term 
+12:36:27 <mdupont> thanks, if that is the term? 
+12:36:31 * mdupont googles
+12:36:34 <dmiles> well there is no purely prolog way to create inheritance
+12:36:43 <dmiles> (between contexts)
+12:36:48 <dmiles> you have to wrap them
+12:39:43 <dmiles> (like accessin gthe page at the same time the triple)
+12:39:59 <mdupont> i am confused
+12:40:11 <mdupont> ah
+12:40:25 <mdupont> contexts of objects
+12:40:34 <mdupont> contexts of statements
+12:40:35 <dmiles> oh well i keyed into your "Context" but i think you are refering to the conaicalization of the RDF
+12:40:53 <mdupont> sets of Objects and Attributes
+12:40:54 <dmiles> oh the 2nd orderness and the first orderness 
+12:41:19 <dmiles> the attrribtyues are Prdicates
+12:41:28 <mdupont> setting up conaicalization?
+12:41:41 <dmiles> and seems most of the RDF stuff keeps predicate (arrtibutre) in the arg possition
+12:41:57 <dmiles> so you can treat it like any other object of any class
+12:42:43 <dmiles> triple(page1:'Joe',nameOf,page2:'Joseph')
+12:42:51 <mdupont> in redland, there is a RDF::Redland::Node, that can serve as a subject,predicate or object
+12:43:20 <dmiles> yeah thats a uninversally quantified variable that can get bound to any object
+12:43:35 <dmiles> err logical object
+12:43:36 <dmiles> subject,predicate or object
+12:44:43 <mdupont> via a field, that means the referrer gives the object its type, by giving it a form of context?
+12:45:00 <mdupont> the referrer being the statement that points at the object
+12:45:09 <dmiles> well its type is based of the domainOf predicate i think
+12:45:14 <mdupont> the object could be another statement for all we know
+12:45:23 <mdupont> daml?
+12:45:42 <dmiles> well i thought maybe that was in rdfs:
+12:45:57 <dmiles> nth-domain
+12:46:00 <dmiles> or something
+12:54:10 <mdupont> oh
+12:54:11 <mdupont> yes
+12:54:14 <mdupont> your right!
+12:54:19 * mdupont blushes
+12:59:01 <mdupont> dmiles: are you on #rdfig?
+12:59:12 <mdupont> it has a cool uri maching
+13:17:09 <mdupont> http://www.prudsys.com/Produkte/Algorithmen/Xelopes/
+13:26:45 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:42:19 <KinoC> ping
+14:12:37 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:30:39 --- quit: KinoC (Read error: 110 (Connection timed out))
+14:33:29 <mdupont> pong KinoC2
+14:33:31 <mdupont> night
+14:33:42 --- nick: mdupont -> mdupont-ZZZzzz
+14:48:50 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:49:03 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+16:08:43 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:23:19 --- quit: dmiles (forward.freenode.net irc.freenode.net)
+16:23:19 --- quit: ZivZ (forward.freenode.net irc.freenode.net)
+16:23:31 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+16:23:31 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+16:27:02 --- quit: KinoC (Read error: 110 (Connection timed out))
+16:49:07 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:08:16 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+17:26:26 --- quit: KinoC (Read error: 110 (Connection timed out))
+17:36:02 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:05:09 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:23:29 --- quit: KinoC (Read error: 110 (Connection timed out))
+18:41:39 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+19:46:28 --- quit: Cobwa ("[x]chat")
+20:20:57 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:37:04 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:54:02 --- quit: ZivZ (forward.freenode.net irc.freenode.net)
+20:54:02 --- quit: dmiles (forward.freenode.net irc.freenode.net)
+20:54:13 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+20:54:13 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+20:55:15 --- quit: KinoC (Read error: 110 (Connection timed out))
+21:12:26 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+21:17:43 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:39:09 --- join: dash (washort@adsl-17-166-22.bhm.bellsouth.net) joined #opencyc
+21:49:54 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:53:45 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+21:54:04 <yottzumm> cool!  Release 7!
+21:54:07 <yottzumm> .7
+21:54:33 <yottzumm> Here are the rules I am trying to codify.  I may develop wizards to put this into the system:
+21:54:44 <yottzumm> Rules to crazy eights:
+21:54:44 <yottzumm> Assumption:  There are four suit cards (spades, hearts, etc.) in a suit pile
+21:54:44 <yottzumm> which is inexhaustible.
+21:54:44 <yottzumm> A phase includes drawing one or more cards from a pile and discarding them
+21:54:44 <yottzumm> to another pile or hand. Turns are made up of one or more phases.
+21:54:45 <yottzumm> Setup Phase:
+21:54:47 <yottzumm> You must draw 7 cards from the draw pile and discard all 7 cards into your hand.
+21:54:49 <yottzumm> Setup Dealer Phase:
+21:54:51 <yottzumm> Dealer must draw 1 card from the draw pile and then discard the card you drew to
+21:54:53 <yottzumm> the discard pile, face up
+21:54:55 <yottzumm> Play Draw Half Phase:
+21:54:57 <yottzumm> You can draw from your hand at any time.
+21:54:59 <yottzumm> You can draw from the draw pile during your turn.
+21:55:01 <yottzumm> You can draw from the suit pile if you just discarded an eight to the
+21:55:03 <yottzumm> discard pile.  The card is copied, and a copy remains in the suit pile.
+21:55:07 <yottzumm> You can't draw from the discard pile.
+21:55:09 <yottzumm> You can't draw from other players' hands.
+21:55:11 <yottzumm> Play Discard Half Phase:
+21:55:13 <yottzumm> You can play a card to the discard pile if it matches the suit of the
+21:55:15 <yottzumm> top card on the discard pile and it's your turn.
+21:55:17 <yottzumm> You can play a card to the discard pile if it matches the value of the
+21:55:19 <yottzumm> top card on the discard pile and it's your turn.
+21:55:21 <yottzumm> You can play a card to the discard pile if it is an eight and it's your
+21:55:23 <yottzumm> turn
+21:55:25 <yottzumm> You can discard a suit card to the discard pile if the top card on the
+21:55:27 <yottzumm> discard pile is an eight, and it's your turn.
+21:55:27 --- part: dash left #opencyc
+21:55:29 <yottzumm> You can only discard one card at a time to the discard pile.
+21:55:31 <yottzumm> You can't discard to the draw pile.
+21:55:33 <yottzumm> You can't discard to other players' hands.
+21:55:37 <yottzumm> You can discard suit cards to the suit pile at any time.
+21:55:39 <yottzumm> You can only discard a suit card if the discard pile is showing an eight.
+21:55:41 <yottzumm> Turn-Taking:
+21:55:43 <yottzumm> Once you play a non-eight or a suit card to the discard pile, your turn
+21:55:45 <yottzumm> is over.  Player moves to the next player (in the list).
+21:55:47 <yottzumm> If there aren't anymore cards in the draw pile, and no one has won,
+21:55:49 <yottzumm> and the top card of the discard pile is not an eight, reshuffle the
+21:55:51 <yottzumm> discard pile and place the cards in the draw pile, except for the top card.
+21:55:53 <yottzumm> The suit cards are also removed from the game.
+21:55:55 <yottzumm> End Game:
+21:55:57 <yottzumm> If you have discarded the last card from your hand, you are the winner.
+21:56:13 <deltab> best to put that on a web page and point to it :-)
+21:56:22 <yottzumm> okay, I'll do that
+21:56:43 <deltab> what does inexhaustible mean here?
+21:57:17 <yottzumm> when you draw a card, it makes a copy instead of removing it from the pile
+21:57:19 --- quit: KinoC (Read error: 110 (Connection timed out))
+21:57:38 <yottzumm> it probably means nothing in opencyc
+21:57:50 <yottzumm> it's more for my java front end
+21:58:39 <deltab> I mean generally - an infinite supply of cards?
+21:58:53 <yottzumm> yes, but only suits, no values.
+21:59:03 <yottzumm> it's a way to name the suit after you play an eight
+21:59:18 <yottzumm> an infinite supply is right
+21:59:31 <yottzumm> but I only have 4 choices to choose from
+21:59:35 <yottzumm> not the whole deck
+22:06:19 <yottzumm> http://home.attbi.com/~carlsonj/crazy8s.html
+22:15:29 <yottzumm> Those are rules that I want to convert into opencyc, and then hook them into my Java GUI.  I have a couple of other options possible:  Create a new language or use EGGG to describe my rules, or write a wizard that a user uses to input the rules
+22:16:59 <yottzumm> I want to point my Java GUI at a microtheory that describes a card games rules, yet I can use my GUI for several different games when it is parameterized by the microtheory
+22:25:10 --- quit: yottzumm ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.12.18

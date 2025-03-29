@@ -1,0 +1,158 @@
+00:00:00 --- log: started opencyc/02.07.05
+01:09:18 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+01:09:18 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+01:19:35 <dmiles> SubL Interactor
+01:19:35 <CycLBot> java.lang.ClassCastException: org.opencyc.cycobject.CycSymbol
+01:19:35 <dmiles> Last Form Evaluated : 
+01:19:35 <dmiles> (eval (cyc-api-remote-eval '(write '(RANDOM 20)) "localhost" 3601))
+01:19:35 <dmiles> Results : 
+01:19:35 <dmiles> 8
+01:19:49 <dmiles> at http://opencyc249.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-start
+01:19:52 <dmiles> yay!
+01:20:25 <dmiles> i am setting up a daemon now on my machine for it to call to
+01:26:25 --- quit: dmiles ("JediKnight2 for MacOS X (2.0 (11/11/01))")
+01:26:45 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+01:32:06 <yepster> ?
+01:32:14 <yepster> is cyc-api-remote-eval already exposed?
+01:32:30 <dmiles> looks like on opencyc249 it is
+01:32:45 * yepster is off to 249
+01:33:11 * dmiles checks out the others
+01:34:30 <dmiles> on 250 Operator CYC-API-REMOTE-EVAL is not defined in the API
+01:36:27 <yepster> cool defun is exposed too :)
+01:36:59 <dmiles> yeah this makes things emensley powerfull
+01:37:14 <dmiles> whatever you do dont run apropos.. it will lock the machine
+01:37:25 <dmiles> i had dione that the other day
+01:37:32 <dmiles> steve had tio reboot
+01:37:40 <yepster> okidoki
+01:38:14 <dmiles> something abnout the Lisp denoted string table.. priobly doesnt respct a \0 terminated string
+04:22:23 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+05:46:56 --- quit: graylensman ("Client Exiting")
+06:56:04 --- join: urgen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+07:41:45 --- join: stubby (~schemer@folsom.officedepot.com) joined #opencyc
+07:44:13 <stubby> anyone??
+07:45:56 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+07:46:29 --- quit: stevereed (Read error: 113 (No route to host))
+07:47:31 <urgen> I need a donut
+08:37:28 <stubby> Anyone up for a Reifiable Functions vs. Non-Reifiable Functions question?
+08:38:52 <urgen> ohgawd.. um but I couldn't possibly answer it in any 'official' venue
+08:39:05 <stubby> Actually more of a NAT vs using simple constant...
+08:39:31 <stubby> Lets say I have a catalog of products which is the basis of the KB..
+08:40:00 <stubby> I have ~35 skus (product part numbers or identifiers)
+08:40:26 <stubby> Would one a) Create a constant for each sku ie. (create-constant "123456")
+08:40:41 <stubby> or b) Use a NAT (SkuFn 123456)???
+08:40:50 <urgen> :-)
+08:41:11 <stubby> that is 25K of skus or products
+08:41:11 <urgen> in case you need to identify the product a different way?
+08:42:09 <stubby> You are suggesting that b) is the way to go?
+08:42:26 <urgen> if there was a need to address the same product from a different angle, yes
+08:42:43 <urgen> I tend to be biased on erring toward open options
+08:42:53 <urgen> that is hardly ever the road taken in RL
+08:43:15 <urgen> complexity tends to reduce efficiency
+08:43:18 <yepster> I would create constants, but that's me
+08:43:32 <urgen> but you get stuck later
+08:43:45 <urgen> and sometimes that costs even more
+08:43:51 <urgen> so it's rather situation dependent
+08:43:55 <stubby> What is the downside in practical terms of using constants?
+08:43:57 <urgen> this seems simple so keep simple
+08:44:18 <urgen> it's getting easier to map across constants these days
+08:44:22 <urgen> maybe no downside
+08:44:51 <yepster> because the extension isn't likely to change
+08:45:12 <urgen> but for future skill, personal benefit.. go b whenever you can
+08:45:15 <urgen> ;-)
+08:45:19 <stubby> So what is a simple example where the SkuFn approach allows me to address the product from a different angle?  Can you give example?
+08:45:22 <yepster> which is different from e.g. 'governmentfn france'
+08:45:45 <yepster> if you want to assert that the government of france makes decisions
+08:46:04 <urgen> well, I was thinking a product that you could earn more from by calling it something because of the alternative set it belonged to
+08:47:26 <urgen> or didn't belong to
+08:47:34 <urgen> single items cost more
+08:47:38 <yepster> are the products individuals or collections?
+08:48:04 <yepster> and if theye are individuals, how to represent a specific instance that is bought by someone?
+08:48:18 * urgen runs off to find donuts
+08:48:26 <yepster> each products would be a firstordercollection
+08:49:25 <yepster> and those are constants, so you could name them by this skuf numbers
+08:49:26 <stubby> Its a catalog.  Skus are members of various collections, skus can be an alternateFor or substituteFor for another, manufacturedBy, hasAttribute, 
+08:50:00 <yepster> sounds like predicates relating a product to other constanst
+08:50:10 <yepster> gotta go :(
+08:50:32 --- quit: yepster ()
+08:50:34 <stubby> Will go with constants as first cut then...
+09:27:38 --- join: zool (~jo@pc-80-193-215-22-hw.blueyonder.co.uk) joined #opencyc
+09:27:47 * zool waves at dmiles
+09:28:45 <zool> running infobot reification, sort of first-order, on your box soon, if i dont lose connection
+09:29:20 <zool> might get hungry but hopefully not rudely so, about 60M ram
+10:54:50 <dmiles> prenty of free ram
+10:55:44 <zool> it building up list structures to reiterate
+10:56:02 <zool> i see some kind of vector maths missing, need to grok it wolfram
+10:56:35 <zool> in meantime take it slowly, wait for other pieces of picture to be built, day or two it go realtime, and  i try to make it live in logicmoo
+10:59:09 <dmiles> neat
+10:59:18 * zool nods
+10:59:47 * zool hopeful, and code pour out my head dmiles-stylee :)
+11:00:15 <zool> battery dying
+11:00:18 <zool> cu later
+11:00:28 * dmiles is just partially here - chicken had to sleep inside last night - july 4th - woke up with chicken style fireworks everywhere
+11:00:37 <zool> oosh :)
+11:00:44 --- quit: zool ("Client Exiting")
+11:04:57 <Cobra> hi dmiles.  Chicken?  And thanks for the tips on IrcChat.  I got it running...
+11:05:53 <Cobra> That's what I was up to when I tried 'hello' in here on CycLBot a couple days ago.  Comparing responses to my version.
+11:13:06 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+12:58:33 --- join: Vutral_ (~ss@pD904330A.dip.t-dialin.net) joined #opencyc
+13:19:04 <dmiles> Vutral_ :)
+13:19:34 <dmiles> stubby = graylensman ?
+13:20:05 <dmiles> hi urgen, Cobra and Steve
+13:20:26 <dmiles> Cobra: ah good.. so your irc bot worked then?
+13:20:37 <dmiles> time
+13:20:37 <CycLBot> the time was Fri Jul 05 05:59:27 EDT 2002
+13:20:45 <dmiles> Cobra_: time
+13:26:54 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+13:39:02 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+13:40:53 <dmiles> graylensman: you work for opefice depot?
+13:54:24 <graylensman> You looking for a good deal on pencils?
+13:56:51 <dmiles> was noticing stubbies hostmask
+13:57:14 <dmiles> but then noticing was differnt person as well ;P
+13:57:22 <graylensman> yea I saw that too.
+14:46:27 --- join: people (Snak@62.53.34.111) joined #opencyc
+14:53:40 <Cobra> dmiles: :) Those are both me... The bot is over in #cobra/cbot
+14:54:05 <Cobra> Didn't want to let a couple of them loose in here!
+15:20:53 --- quit: graylensman ("Client Exiting")
+15:36:54 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+15:37:46 * zool waves at dmiles
+15:38:07 <zool> funny, while talking earlier i wirelessing in a pub called the 'hen and chickens'
+15:38:24 <zool> sorry i jumped off so peremptorily
+15:38:47 * zool sleep soon, just pop in to wave
+15:39:00 * zool hopes the chicken is okay
+16:50:46 --- join: Vutral_ (~ss@pD90433F7.dip.t-dialin.net) joined #opencyc
+16:51:17 --- nick: Vutral_ -> Vutral
+17:06:24 <Cobra_> ask (#$isa #$salute #$GreetingSomeone)
+17:06:25 <CycLBot> no answers found
+17:06:33 <Cobra_> mt InferencePSC
+17:06:35 <Cobra_> ask (#$isa #$salute #$GreetingSomeone)
+17:06:36 <CycLBot> no answers found
+17:07:37 --- quit: zool ("Client Exiting")
+17:50:33 --- quit: Vutral (Read error: 110 (Connection timed out))
+19:10:41 <Cobra_> ask (thereExists Verb GreetingSomeone)
+19:10:42 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+19:10:42 <CycLBot> (#$thereExists #$Verb #$GreetingSomeone)
+19:10:43 <CycLBot> was not well formed because:
+19:10:44 <CycLBot> #$GreetingSomeone is not a well-formed formula.
+19:10:44 <CycLBot> Term #$Verb
+19:10:46 <CycLBot> violates #$defnIff EL-VARIABLE-P
+19:10:48 <CycLBot> of collection #$ELVariable
+19:10:50 <CycLBot> applicable to arg 1 of #$thereExists
+19:10:52 <CycLBot> in mt NIL.
+19:10:54 <CycLBot> Term #$Verb violates defns of arg-isa #$ELVariable
+19:10:56 <CycLBot> applicable to argument 1 of relation #$thereExists
+19:10:58 <CycLBot> in mt NIL.
+19:11:00 <CycLBot> Term #$GreetingSomeone
+19:11:02 <CycLBot> violates #$defnIff EL-SENTENCE-ASSERTIBLE?
+19:11:04 <CycLBot> of collection #$ELSentence-Assertible
+19:11:06 <CycLBot> applicable to arg 2 of #$thereExists
+19:11:08 <CycLBot> in mt NIL.")
+19:11:16 <Cobra_> mt InferencePSC
+19:11:33 <Cobra_> hello
+19:12:20 <Cobra_> dmiles: Sorry, think I broke him. :)
+19:28:45 <Cobra_> How can I extract the infinitive form of a constant?
+19:29:19 <Cobra_> The following query in the web interface: (#$infinitive ?A #$Salute-TheWord)
+19:29:40 <Cobra_> causes a response of: "Received signal 11 SIGSEGV (Segmentation violation)."
+19:30:15 <Cobra_> for the query abort.  cyc seems to still be running though, because the web interface still responds.
+19:35:47 --- quit: people (Read error: 110 (Connection timed out))
+19:56:58 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:59:59 --- log: ended opencyc/02.07.05

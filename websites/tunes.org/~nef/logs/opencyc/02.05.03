@@ -1,0 +1,418 @@
+00:00:00 --- log: started opencyc/02.05.03
+00:10:47 --- quit: dash (Read error: 113 (No route to host))
+01:19:02 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+01:19:04 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+01:20:02 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+01:20:18 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+01:34:45 --- join: ratmice (~matt@vespertine.pc.ashlandfiber.net) joined #opencyc
+01:56:47 --- quit: CycLBot (Remote closed the connection)
+01:57:09 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+01:57:09 <CycLBot> I am initializing
+01:57:10 <CycLBot> I am ready to chat
+02:19:38 <dmiles-> [02:22] *** masq (~steve@cs6668101-81.austin.rr.com) has joined #ai
+02:20:03 <dmiles-> is that you stevereed_home?
+02:22:16 --- quit: CycLBot (Excess Flood)
+02:22:29 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+02:24:13 --- quit: CycLBot (Excess Flood)
+02:24:27 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:15:19 <stevereed> at work now
+07:16:16 <stevereed> Win32 passed the inference tests last night, running CycLops (speed) benchmark now.
+07:16:30 <dmiles-> very excellent
+07:16:59 <dmiles-> brings up a question, about inference tests
+07:17:03 <stevereed> of course Win32 (desktop, not server) is much slower than linux on the same hardware
+07:17:10 <stevereed> ?
+07:17:19 <dmiles-> sometimes by looking at them if they arte a sieries of assertrs thebn a query or two,,
+07:17:36 <dmiles-> is that correct?
+07:17:49 <stevereed> Yes, there are high level tests.
+07:17:50 <dmiles-> (inference tests)
+07:17:54 <stevereed> yes
+07:17:56 <stevereed> but,
+07:18:06 <stevereed> most of the tests are code support for
+07:18:14 <dmiles-> would it be usefull for people to see those as an e3xample of knoledge engineering known to work in cyc?
+07:18:48 <stevereed> As long as they use API calls, then I see no reason why not.
+07:19:08 <stevereed> The inference benchmark uses the inference test framework.
+07:19:27 <stevereed> so I will get that working and open source with a future release.
+07:19:29 <dmiles-> at a high level: things lioke all Mammals have mothers.. Bill and Sue are Humans.. do bill and Sure have a moither?
+07:19:36 <stevereed> yes,
+07:20:09 <stevereed> low level, the various removal modules that you see in the inference examiner or in the
+07:20:18 <stevereed> explain feature after an ask.
+07:20:45 <stevereed> removal, because they remove literals from the query by finding bindings.
+07:20:58 <dmiles-> yes infernce output is the most nick picked (like proofs) :)
+07:21:10 <stevereed> yes,
+07:21:21 <stevereed> we need inference regression tests because of all the code.
+07:21:53 <stevereed> there are probably 20 modules patched daily here.
+07:22:02 <stevereed> for the overall code base,
+07:22:15 <stevereed> and many of those changes can impact inference.
+07:22:18 <dmiles-> yes. that was something i had to create for my old project.. so everytime i had a release i had about 2 hours .. ugh of tests
+07:22:40 <stevereed> we have a dept of two people who run tests.
+07:23:02 <dmiles-> and Adam required a full visible html document showing results :)
+07:23:09 <dmiles-> that is good
+07:23:18 <stevereed> he keeps good statistics.
+07:23:42 <dmiles-> yes definately.
+07:23:49 <stevereed> His AAAI workshop accepted my paper
+07:23:51 <dmiles-> so thats great news about the win32
+07:24:00 <stevereed> for the 2002 conference.
+07:24:06 <stevereed> Yes Win32,
+07:24:19 <stevereed> we have a definite preference,
+07:24:24 <stevereed> for Linux, unix
+07:24:30 <stevereed> but customers want Win32
+07:24:39 <stevereed> so from time to time we have done builds.
+07:24:45 <stevereed> This time, for OpenCyc,
+07:24:51 <stevereed> the process is more repeatable.
+07:25:03 <stevereed> and today I'll instruct our Builder person,
+07:25:11 <stevereed> on the scripts that I used.
+07:25:13 <dmiles-> yes.. i develope on linux way more then windows .. yet there is always that learning curve tear
+07:25:31 <dmiles-> and cygwin just never cuts it
+07:25:41 <dmiles-> (unless its hidden)
+07:25:43 <stevereed> We use MingW
+07:25:47 <stevereed> for the port.
+07:26:01 <stevereed> and Gygwin tools for the scripts.
+07:26:08 <stevereed> gcc, sh, gdb ...
+07:26:28 <dmiles-> most of the time there is only one dll afterwards thankfully
+07:26:37 <stevereed> right.
+07:26:42 <stevereed> we are an exe.
+07:26:47 <stevereed> console based
+07:26:52 <stevereed> easy - no gui.
+07:26:56 <stevereed> but big
+07:27:04 <stevereed> Windows desktops page,
+07:27:17 <stevereed> memory even if you have plenty.
+07:27:25 <stevereed> we page fault constantly.
+07:27:26 <dmiles-> that works good.. so there isnt going to be any diffences purposfull in the webserver of fasl port?
+07:27:29 <stevereed> and are slower.
+07:27:50 <stevereed> no, the distribution is identical except for exe and load file.
+07:28:09 <dmiles-> i have a gig on both my windows and linux machines with a 1.4 mhz proc (both:)
+07:28:10 <stevereed> java - write once - run everywhere.
+07:28:29 <stevereed> OpenCyc probably twice - three times faster on Linux.
+07:28:45 <stevereed> I'll know more after the Cyclops benchmark.
+07:28:48 <dmiles-> page faults though are catchable correct?
+07:29:00 <stevereed> the os takes care of them.
+07:29:07 <stevereed> you only see them in task manager.
+07:29:13 <stevereed> no disk activity.
+07:29:22 <dmiles-> right thats normal.. some very good MS based apps segfualt every few seconds
+07:29:23 <stevereed> the faults are between Cyc
+07:29:35 <stevereed> and the NT page pool.
+07:29:44 <stevereed> whereas Linux,
+07:29:50 <stevereed> simply gives you the memory.
+07:30:07 <stevereed> NT server may behave differently.
+07:30:21 <dmiles-> which version of windows are you testing with?
+07:30:27 <stevereed> NT at work, 
+07:30:33 <dmiles-> so win2k?
+07:30:39 <stevereed> Win2k and XP at home.
+07:31:09 <dmiles-> good.. win2k may page fault more then nt4 but thats really no big deal
+07:31:10 <stevereed> I have two linux, Win2K and WinXP (Dell laptop) at home.
+07:31:37 <dmiles-> not becasuer of machine performance.. it justs is tougher on apps
+07:32:01 <stevereed> Should be OK for opencyc becuase its just a server app.
+07:32:36 <dmiles-> yes.. when you want to make it a installable service let me know ;)
+07:32:50 <stevereed> anyway.. got to set up the test now.
+07:33:08 <stevereed> cool on the service.
+07:33:24 <dmiles-> cool hope the tests work out
+07:33:53 <dmiles-> i want to makwe an console snap-ibn
+09:28:33 <dmiles-> oops earlier i said SegFault.. meant PageFault!
+09:28:42 <dmiles-> :)
+09:45:43 --- join: plm (~chatzilla@207.207.8.46) joined #opencyc
+09:59:03 <dmiles-> (#$and (#$ist #$JamudMt (#$arity ?X 2))(?X #$dmiles-home ?Y))
+09:59:11 <dmiles-> i am trying to ask this..
+09:59:31 <dmiles-> but getting: "Don't know how to determine the extent of dmiles-home in JamudMt"
+10:00:06 <dmiles-> it is a DataMicrotheory
+10:00:39 <dmiles-> genlMted to a TheoryMicrotheory
+10:01:16 <dmiles-> my basic goal is simular to this:
+10:01:38 <dmiles-> to say a humam has 2 hands
+10:01:47 <dmiles-> and each hand has 5 digits
+10:01:59 <dmiles-> and to say there are 3 humans
+10:02:17 <dmiles-> i'll backup
+10:02:31 <dmiles-> TheoryMicrothery
+10:02:37 <dmiles->  to say a humam has 2 hands
+10:02:43 <dmiles->  and each hand has 5 digits
+10:02:52 <dmiles-> DataMicrothery
+10:02:57 <dmiles->  there are 3 humans
+10:03:18 <dmiles-> Now i want a list of all fingers
+10:03:36 <dmiles-> so need to get 30 skolems or narts
+10:04:04 <dmiles-> but i cant seem to get this
+10:05:03 <dmiles-> would i need a HypotheticalContext ?
+10:06:04 <dmiles-> or could i get those TheoryMicrothery forward channing assertions to deduce (green ball) 30 new fingers?
+10:07:17 <dmiles-> my guess there is a test case that looks simular to this
+10:07:51 <dmiles-> i printed out the cyc 101 manual
+10:08:58 <dmiles-> but not finding the right sequance in the browser to do this
+10:10:51 <dmiles-> i would think you could have a MyDataMt->MyMt->that poputlates back to MyDataMt 
+10:18:34 <dmiles-> query (physicalParts dmiles-home ?X)
+10:18:39 <CycLBot> ?X relation all exists fn dmiles -home physical part human shelter construction wall of a construction
+10:18:40 <CycLBot> ?X relation all exists fn dmiles -home physical part modern shelter construction window
+10:18:41 <CycLBot> ?X relation all exists fn dmiles -home physical part building doorway
+10:18:42 <CycLBot> ?X = dmiles -home
+10:23:19 --- join: Otto (~chatzilla@ss01.co.us.ibm.com) joined #opencyc
+10:23:42 --- quit: Otto (Client Quit)
+10:46:51 --- join: dash (washort@d124.narrowgate.net) joined #opencyc
+11:26:41 --- join: dmiles (mea_culpa@dialup-65.58.157.156.Dial1.Portland1.Level3.net) joined #opencyc
+11:27:01 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+11:27:10 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+11:39:08 <dash> dmiles: how's logicmoo?
+11:42:47 <dmiles--> good.. leaning cyc based KE right now..
+11:43:21 <dmiles--> trying to createa Mt that is complete a reification of a TheoryMicrotheory
+11:43:40 <dmiles--> have you learned that yet?
+11:46:37 <dmiles--> i can create it in the InferncePSC http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8251
+11:46:39 --- quit: dmiles (Read error: 113 (No route to host))
+11:47:06 <dmiles--> but have to understand how to make RelationAllExits into a Forward chaining rule
+11:47:17 <dmiles--> oh aybe that is the Key
+11:47:56 <dash> you're further ahead of me :)
+11:49:21 <dmiles--> oh my its a UnreifiableFunction
+11:49:37 <dmiles--> i just jump in ahead of my knowledge ussually
+11:50:01 <dmiles--> otherwise i never know where to start ;P
+11:50:12 <dmiles--> or have motivation
+11:54:11 <dash> *nod*
+11:55:11 <dmiles--> i just asserted the code rule:
+11:55:12 <dmiles--> (implies 
+11:55:12 <dmiles-->        (and 
+11:55:12 <dmiles-->            (isa ?TERM ?INDEP-COL) 
+11:55:12 <dmiles-->            (relationExistsAll ?PRED ?DEP-COL ?INDEP-COL)) 
+11:55:12 <dmiles-->        (isa 
+11:55:14 <dmiles-->            (RelationExistsAllFn ?TERM ?PRED ?DEP-COL ?INDEP-COL) ?DEP-COL))
+11:55:23 <dmiles--> as a Forward channing rule
+11:56:34 <dmiles--> but only should applied to a ReificationMicrothery Microtheory
+11:57:36 <dmiles--> OMG! i worked.. very scarey :)
+11:57:50 <dmiles--> refresh that URL
+11:57:57 <dmiles--> it put a basement in my home
+11:58:06 <dash> shazam
+11:58:11 <dash> nice.
+11:58:39 <dash> remind me what PSC stands for...?
+11:58:47 <dash> ah, right
+11:58:49 <dmiles--> Problem solving context
+11:58:51 <dash> problem solving context
+11:58:52 <dash> yeah :)
+12:00:08 <dmiles--> my KB is now growing at 100 assertions per second
+12:00:40 <dmiles--> if you refresh http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&5101
+12:00:56 <dmiles--> like two or three times All KB asserions is growing
+12:01:02 <dash> heh
+12:01:20 <dash> i assume this is a good thing? =)_
+12:01:27 <dmiles--> the beuty of forward chaining
+12:01:44 <dash> yeah
+12:01:47 <dmiles--> well i should have restricted it to as special new type of Microtheory
+12:02:25 <dmiles--> which i better do :)
+12:02:58 <dmiles--> mt BaseKB
+12:03:43 <dmiles--> assert: (isa ReifiedMicrotheory MicrotheoryType)
+12:03:47 <CycLBot> T
+12:04:03 <dmiles--> assert: (genls ReifiedMicrotheory Microtheory)
+12:04:05 <CycLBot> T
+12:04:39 <dmiles--> assert: (genls ReifiedMicrotheory HypotheticalContext)
+12:04:40 <CycLBot> T
+12:07:59 <dash> hmm
+12:08:08 <dmiles--> i just unasserted it
+12:08:17 <dmiles--> (as well as asserted those)
+12:08:25 <dash> heh heh, yeah
+12:08:29 <dash> it just went way down :)
+12:08:42 <dmiles--> now i have to do an ist type rule that checks the Mt type before forward chaining it
+12:09:55 <dash> i'm not sure i understand the purpose of RelationAllExistsFn
+12:10:13 <dmiles--> its a compression of...
+12:10:58 <dmiles--> expansion :  (implies 
+12:10:58 <dmiles-->    (isa ?TERM :ARG2) 
+12:10:58 <dmiles-->    (thereExists ?OTHER 
+12:10:58 <dmiles-->        (and 
+12:10:58 <dmiles-->            (isa ?OTHER :ARG3) 
+12:11:00 <dmiles-->            (:ARG1 ?TERM ?OTHER))))
+12:11:31 <dmiles--> so your KB can have one predicate that you can change the behavour of
+12:11:31 * dash squints
+12:11:57 <dmiles--> buit represnts thats forAll things that are of this type they have another type
+12:12:09 <dmiles--> so to say every mammal has a mnother..
+12:12:16 <dmiles--> err mother
+12:12:29 <dash> hmmm
+12:12:46 <dmiles--> (RelationAllExits Mammal mother Mammal)
+12:13:09 <dmiles--> well i have arg 1 and 2 mixed
+12:13:22 <dmiles--> or
+12:13:37 <dmiles--> (RelationAllExits mother Mammal FemaleMammal)
+12:14:29 <dmiles--> it expands to the formula above
+12:15:05 * dash stares at some more examples
+12:18:50 <dash> ok, i think i get it now
+12:20:13 <dash> heh. i should have tried "show english" first
+12:20:28 <dmiles--> yeah thats pretty usefull
+12:20:39 <dmiles--> for obscure predicates
+12:22:08 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+12:23:32 <dmiles--> there are alot of predicates that are reverse exopansions
+12:37:05 <dash> dmiles--: so how are you going to do it differently? to constrain it to a single mt, i mean
+12:40:42 <dmiles--> (#$implies 
+12:40:42 <dmiles-->    (#$and
+12:40:42 <dmiles-->       (#$ist ?MT (#$relationAllExists ?Pred ?ARG2 ?ARG3))
+12:40:42 <dmiles-->       (#$isa ?MT #$ReifiableMicrotheory)) 
+12:40:42 <dmiles-->    (#$thereExists ?OTHER 
+12:40:42 <dmiles-->            (#$and 
+12:40:44 <dmiles-->                (#$isa ?TERM ?ARG2)
+12:40:46 <dmiles-->                (#$arg1Isa ?Pred ?ARG2)
+12:40:48 <dmiles-->                (#$arg2Isa ?Pred ?ARG3)
+12:40:50 <dmiles-->                (#$isa ?OTHER ?ARG3) 
+12:40:52 <dmiles-->                (?Pred ?TERM ?OTHER))))
+12:41:06 <dmiles--> like that 
+12:42:40 <dash> interesting.
+12:42:58 <dmiles--> that becomes 5 entailmetns
+12:43:16 <dmiles--> each of the 5 are mostly independant
+12:43:41 <dmiles--> one skolem function that uses 4 varibles in it
+13:15:15 --- join: dash_ (washort@d119.narrowgate.net) joined #opencyc
+13:15:36 --- quit: dash (Killed (NickServ (Ghost: dash_!washort@d119.narrowgate.net)))
+13:15:40 --- nick: dash_ -> dash
+14:09:48 <dmiles--> how can i dump the cached results in InferncePSC ?
+14:42:07 --- part: plm left #opencyc
+14:59:45 --- join: Taral (~taral@cs6625132-47.austin.rr.com) joined #opencyc
+15:10:55 --- quit: Taral ("brb")
+15:11:20 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+15:34:27 --- quit: Taral ("tv")
+15:55:22 --- join: whitten (whitten@adsl-65-68-87-147.dsl.hstntx.swbell.net) joined #opencyc
+15:56:00 <whitten> hello one and all!
+15:56:01 <CycLBot> hello whitten
+15:56:23 <dmiles--> Hi David
+15:56:26 <whitten> cycl: (#$isa #$isa ?X)
+15:56:36 <dmiles--> query:
+15:56:37 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+15:56:56 <dmiles--> query/assert
+15:57:07 <whitten> hmm. that was disappointing ...
+15:57:24 <whitten> query: (#$isa #$isa ?X)
+15:57:25 <CycLBot> ?X = relation mathematical object
+15:57:26 <CycLBot> ?X = fixed arity relation
+15:57:28 <CycLBot> ?X = binary relation
+15:57:29 <CycLBot> ?X = binary predicates
+15:57:30 <CycLBot> ?X = taxonomic slot
+15:57:31 <CycLBot> ?X = taxonomic slot for any unit
+15:57:32 <CycLBot> ?X = default monotonic predicate
+15:57:33 <CycLBot> ?X = public constant
+15:57:34 <CycLBot> ?X = core constant
+15:57:35 <CycLBot> ?X = reformulator irrelevant f o r t
+15:57:35 <whitten> .
+15:57:36 <CycLBot> ?X = public constant - comment o k
+15:57:47 <dmiles--> noparaphrase #opencyc
+15:57:53 <whitten> And I guess that wasn't.
+15:58:27 <dmiles--> help CycLBot
+15:58:27 <whitten> I wonder if there could be a both option that would give the constantname and the paraphrase.
+15:58:27 <CycLBot> usage: help <hello|time|join|part|ask|query|assert|cyclify>
+15:58:42 <dmiles--> oh its not updated
+15:59:07 <dmiles--> takes about 2 minutes to add both:
+15:59:31 <whitten> Grin. Its your bot, eh?
+15:59:36 <dmiles--> maybe Constant "parapohrase " ?
+15:59:48 <whitten> Seems reasonable to me.
+15:59:51 <dmiles--> yeah.. one sec.. good idea
+16:00:17 <whitten> kind of a best of both worlds scenario.
+16:01:38 <whitten> Is your logicmoo a lambamoo type moo or are you just speaking generically as an object oriented mud?
+16:02:26 <dmiles--> a specfic Java based moo written 
+16:02:52 <dmiles--> called Jamud.. the author and i have been collaborating for a while
+16:03:05 <dmiles--> aso we have been putting in cyc specific support
+16:03:47 <whitten> I've read some of the logs over at http://tunes.org/~nef/logs/opencyc/
+16:04:23 <dmiles--> ah yeah.. been commited to getting logicmoo something useable
+16:05:31 <whitten> I did some work on a lambdaMOO to capture some of the Cyc ideas years ago. It is a LOT easier with OpenCyc out there, let me tell you.
+16:05:32 --- quit: CycLBot (Remote closed the connection)
+16:07:53 <whitten> I'm currently looking at ideas to leverage the OpenCyc strengths while maintaining the work already done in other software systems.
+16:09:28 <whitten> When working with Cyc, the tendency is to think large, but the most effective work is probably done by thinking small, and then building the small pieces together into something large.
+16:09:28 <dmiles--> yes on getting data from Cyc.. i have been working to make reification something usefull to the moo
+16:10:02 <dmiles--> getting data back to cyc is easy since it is just informational DataMt
+16:10:36 <dmiles--> yes.. i am working on the level of represnting one room right now..
+16:10:51 <dmiles--> and knowleing when the hasParts stops ;P
+16:11:17 <whitten> right. you almost need an active object that echoes the state of the relevant Cyc constant as a JaMud object.
+16:12:08 <whitten> Perhaps use the Java self-reflection api to echo predicates as properties?
+16:12:11 <dmiles--> the Jamud ovbjects whenever a side effect happens has the option to send reasserts to cyc
+16:12:17 <dash> hmmm
+16:12:46 <dmiles--> the jamud object has a proprty list (like slot) and one argumetn valuie
+16:13:21 <dmiles--> so each object has a collection of BinaryPredicates it has
+16:13:40 <dmiles--> right now they are all singleValued
+16:14:07 <whitten> I guess I was thinking of the changes taking place in Cyc, as a result of inference, etc. and making sure those changes were reflected in the JaMud. You seem to be describing changes occuring within JaMud and making sure OpenCyc has an accurate description.
+16:14:31 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:14:31 <CycLBot> I am initializing
+16:14:31 <dash> yeah, there needs to be some mechanism for cyc to call into application code
+16:14:31 <CycLBot> I am ready to chat
+16:14:59 <dash> writing such a thing would be easier if we had source =/
+16:15:02 <dmiles--> i would perfer all persistance to be in cyc actualy (or at least in one place)
+16:15:35 <whitten> That is fine as long as the arg2format is $SingleEntry.
+16:15:35 <dmiles--> but when jamud was started as a project it was a all java moo thing
+16:15:57 <dmiles--> ah yes i spoke SUO-KIF ..you translated :)
+16:16:47 <dmiles--> the object has a FlagList as well that can hold its isa
+16:16:48 <whitten> Another aspect is that there really is an advantage to representing change as multiple microtheories, each of which captures the world as of a particular 'time'.
+16:17:24 <dmiles--> that area really interests me.. about how to slice things
+16:17:36 <whitten> this would allow the Non-Player Characters to look at the past as it were, to understand the history of the current 'time'.
+16:17:56 <dmiles--> in big pictures of state or incremental event of property changes?
+16:18:47 <dmiles--> the property changes may or may not provide usefull infomration and may be expensive to deduce full state
+16:18:55 <whitten> well, it depends on what purpose the NPC has, of course.
+16:19:06 <dmiles--> yet the full states of time transitions.. sems large
+16:19:32 <dmiles--> the NPC is hoping to see its self as a series of state goals
+16:20:05 <dmiles--> so the plan it constructs may take 6 timeslices
+16:20:52 <whitten> true, the full states do seem large. Understanding how Cyc represents change would probably be useful here. If you represent in the 'natural' Cyc way, presumably there are optimized HL modules to make it more efficient.
+16:20:53 <dmiles--> it only may have to see 3 actions to the KE
+16:21:14 <dmiles--> os 1 goal may instance to 3 KE steps and 6 mud steps
+16:21:23 <whitten> Are you going to have the NPC do planning, or are you going to use the Cyc planner?
+16:21:37 <dmiles--> absulotely leverage cyc's planner
+16:22:00 <dmiles--> but if someone has other plan systems it definatley wont hurt
+16:22:26 <dmiles--> the NPCs are instances of MudObjectExists
+16:22:44 <whitten> Is this a spec of SomethingExisting ?
+16:23:01 <dmiles--> onTick.. query Cyc with proposed goals and cyc would return the plan
+16:24:24 <whitten> Assuming the Cyc planner works appropriately, the next question must be what vocabulary do you want to use to express your plans ?
+16:24:29 <dmiles--> not from SomethingExisting .. but from a code object in the Mud.. so i was going to mention the underlying method the NPC uses to get next actuion is not set to depend on Cyc
+16:25:15 <dmiles--> well yes that is a good question.. when using the planning system in ctyc .. what vocabularys should it use?
+16:25:51 <dmiles--> the worlsd would need to be seem the exact way planning needs it to be
+16:26:18 <dmiles--> so in the end the best representation would need to be gerard towards the must unmutable 
+16:26:24 <whitten> What I've read in comments seems to support the idea that the Cyc Planner uses CycL to describe the actions, goals, etc.  So you have a lot of flexibility.
+16:26:59 <dmiles--> so at some point all parts of cyc should be visivble to the planner
+16:27:13 <dmiles--> ?
+16:27:41 <dmiles--> or is all parts of the planner visible to cyc?
+16:28:26 <whitten> Well, I'm sure that the planner is an intricate piece of code, but I don't think it needs all parts of Cyc.  I didn't write the planner, nor have I spoken to the author of the planner, so most of my ideas are basic guesses and surmises.
+16:29:18 <dmiles--> yes. I believe that it will be hioghly usefull whatever the implemntation and planning has been a task done before this planner came in
+16:29:59 <whitten> When I spoke of the planner using CycL, I was trying to say that if there was a cyc predicate #$near , you could use it in expressing a goal to the planner
+16:31:18 <dmiles--> excellent, so if the Mud uses spaciallyIntersects, near is still usefull in planner
+16:31:33 <whitten> One of the tricky parts of any MUD design is its model of space.  Most muds don't really have the idea of an object's size, so you can have a thousand people all sitting inside a shoebox, discussing life and juggling elephants.
+16:32:35 <dmiles--> this particular mud was going to rely on a textual description of things like size
+16:32:48 <dmiles--> and we have been afraid to enforce laws of physics
+16:33:07 <whitten> Cyc, as I recall, does have some general predicates that express spatial connectivity, as well as size.  For many Mud designers, this is a very difficult task.
+16:33:22 <dmiles--> so a shoebox would have to intercecpt the onEnter event and check the size of enterent
+16:33:36 <whitten> which laws of physics are scary?
+16:34:04 <dmiles--> well we have this 'everything is a container' and can hold any refernce to any object
+16:34:30 <dmiles--> it has one collection closest to objectFoundInLocation
+16:34:51 <dmiles--> (as in each object)
+16:35:10 <whitten> Well, I assume since you have Cyc around, you can keep a lot of static information about sizes in Cyc, and let it tell the shoebox whether to allow the enter action to succeed.
+16:35:41 <dmiles--> well hoping that all movement could be a query to Cyc..
+16:36:00 <dmiles--> and Cyc could tell us what the proposed side effect would be
+16:36:15 <dmiles--> or is even possible
+16:36:36 <dmiles--> but that hasnt been coded in yet
+16:37:01 <dmiles--> mainly becasue the knowledge engineering to answer the query is difficult
+16:37:06 <whitten> I'm trying to recall if there is anything in the Cyc API to query the consequents of an assert.
+16:37:20 <dmiles--> i suppose TMS
+16:37:34 <dmiles--> but spacial legality.. hrrm
+16:38:05 <dmiles--> oh you can create a HypothethicalContext
+16:38:05 <whitten> I believe there is the concept of 'supports' in the TMS sense of the word
+16:39:05 <whitten> ah, but the trick is recognizing when the context is Hypothetical.
+16:39:52 <whitten> well, I need to go. It was fun chatting.
+16:40:05 <dmiles--> there is the MicrotheoryType
+16:40:30 <dmiles--> i enjoyed it.. please do come back in again
+16:40:50 <dmiles--> you are probly one of the few that uinderstand the problems 
+16:41:02 <dmiles--> and have experince with simular system
+16:41:21 <dmiles--> and you have the KE that i dont have yet
+16:41:26 <whitten> true. I wasn't saying it is tricky to determine if a particular microtheory is hypothetical. I was saying it is tricky knowing, before you do an action whether you need to use a hypothetical microtheory to do your query/assert etc.
+16:41:46 <whitten> It was fun. I'll try again later.
+16:41:51 --- quit: whitten ("using sirc version 2.211+ssfe")
+16:42:09 <dmiles--> absolutely.. one would have to make a specific theory and knowledge to be able to answer this
+17:14:46 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+17:14:46 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+17:14:53 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+17:14:56 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:03:30 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+18:03:30 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+18:26:38 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+18:26:38 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+18:26:51 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:27:03 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:31:45 --- quit: dash (Read error: 113 (No route to host))
+20:42:04 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+20:42:06 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+20:42:14 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:42:17 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+21:18:59 --- join: dash (washort@d151.narrowgate.net) joined #opencyc
+21:20:38 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+21:20:51 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:20:52 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:20:56 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+21:42:11 --- join: Taral (~taral@cs6625132-47.austin.rr.com) joined #opencyc
+21:45:59 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+21:46:07 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:46:33 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+21:46:35 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+22:16:06 --- quit: Taral ("SLEEP")
+22:32:14 --- part: ratmice left #opencyc
+23:14:00 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+23:14:09 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+23:14:12 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:14:14 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+23:39:43 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+23:39:44 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+23:39:47 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+23:39:56 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.05.03

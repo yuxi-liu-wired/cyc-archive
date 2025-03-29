@@ -1,0 +1,136 @@
+00:00:00 --- log: started opencyc/02.07.06
+02:24:18 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+02:27:53 <zool> ping
+02:27:53 <CycLBot> hello zool
+02:28:04 <zool> hello CycLBot!
+02:28:28 <zool> CycLBot, where are you?
+04:32:25 --- join: Don (Don@216.23.59.220.nw.nuvox.net) joined #opencyc
+05:20:49 --- quit: Don ()
+05:37:32 --- quit: Cobra_ (Read error: 113 (No route to host))
+05:40:16 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+05:47:35 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+06:20:40 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+06:20:56 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+06:23:26 <huthut> .c
+06:26:50 --- quit: Cobra_ ("[x]chat")
+07:16:21 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+07:39:44 <zool> bbl
+07:39:47 --- part: zool left #opencyc
+09:33:26 --- quit: graylensman ("Client Exiting")
+09:41:48 --- join: Vutral (~ss@pD90433F7.dip.t-dialin.net) joined #opencyc
+10:13:08 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+10:21:36 <Cobra_> Anyone around for a question?  How can I test a word (an english word) against some entry in cyc?
+10:21:56 <Cobra_> For example, I want to know if a word is a greeting.
+10:23:31 <Cobra_> I know that the cyc database contains #$GreetingSomeone, which ties to denotations such as #$Salute-TheWord.
+10:23:51 <Cobra_> Which in turn list infinitives for 'TheWord'.
+10:24:22 <Cobra_> ie:
+10:24:52 <Cobra_> ask (infinitive Salute-TheWord ?A)
+10:24:53 <CycLBot> ?A = salute
+10:26:25 <Cobra_> So say I have a sentence, and I want to pass each word in a query to cyc, to prove if it's a form of #$GreetingSomeone?
+10:26:57 <Cobra_> I tried something like:
+10:28:06 <Cobra_> ask (#$denotation ?A #$Verb 1 #$GreetingSomeone)
+10:28:07 <CycLBot> ?A = Salute-TheWord
+10:28:22 <Cobra_> and then:
+10:29:05 <Cobra_> ask (#$infinitive ?B ?A (#$denotation ?B #$Verb 1 #$GreetingSomeone)
+10:29:06 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+10:30:50 <Cobra_> oh, how about:
+10:31:02 <Cobra_>  ask (#$and (#$infinitive ?B ?A)  (#$denotation ?B #$Verb 1 #$GreetingSomeone))
+10:31:03 <CycLBot> ?B = Salute-TheWord, ?A = salute
+10:32:37 <Cobra_> cool
+10:49:17 --- quit: Vutral (Read error: 110 (Connection timed out))
+12:03:06 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+12:04:03 <zool> re
+13:14:25 <Cobra_> Another question...
+13:14:47 <Cobra_> What's the difference in Verb #'s?
+13:16:00 <Cobra_> ask (denotation Salute-TheWord Verb ?A GreetingSomeone)
+13:16:00 <CycLBot> ?A = 1
+13:16:25 <Cobra_> ask (denotation Greet-TheWord Verb ?A GreetingSomeone)
+13:16:25 <CycLBot> ?A = 0
+13:16:53 <Cobra_> And a more general question... What's a verb #?
+14:57:05 --- join: Vutral (~ss@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+18:35:40 --- quit: urgen (Read error: 104 (Connection reset by peer))
+18:35:44 --- join: urgyen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+18:48:10 --- quit: Cobra_ (Read error: 110 (Connection timed out))
+18:48:15 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+19:06:03 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:22:24 <dmiles> ask (denotation Greet-TheWord Verb ?A GreetingSomeone)
+19:22:24 <CycLBot> ?A = 0
+19:22:35 <dmiles> hrrm Verb Number
+19:22:39 <dmiles> not usre
+19:22:57 <dmiles> well the number does not app.ly to just verbs
+19:23:35 <dmiles> could it be based on 1st 2nd 3Rd person?
+19:26:53 <dmiles> but it also could be frequancy order Greet-TheWord is the most common Salute-TheWord is less. (this would have been borowed from WordNet)
+19:30:03 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+19:31:01 <dmiles> Cobra: i am guessing how common the word is.. but it is aslo it form mumber are related to the Synset
+19:32:58 <dmiles> the #$GreetingSomeone is the base meaning (SynsetID) that has multiple denational forms
+19:33:25 --- quit: Cobra_ (Read error: 110 (Connection timed out))
+19:34:53 <dmiles> the multiple forms # where important becasue later it combined with the Word will help identify what synset the word belonged to
+19:36:31 --- quit: Cobra (Read error: 110 (Connection timed out))
+19:36:57 * dmiles waiits until later to answer
+19:37:12 <graylensman> evening dmiles
+19:37:29 <dmiles> hi there
+19:37:37 <graylensman> what you up to these days?
+19:37:53 <dmiles> like 5 differnt things ;P
+19:37:56 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+19:38:10 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+19:38:54 <dmiles> Cobra: http://tunes.org/~nef/logs/opencyc/02.07.06
+19:38:55 --- quit: futhin ("bye")
+19:39:37 <dmiles> brb
+19:43:34 * dmiles returns
+19:44:00 * dmiles chicken jumped of the shower cuirtain and it fell down
+19:45:50 <dmiles> Cobra: i have been trying to figure out the best way to get most of the NL infor in one place
+19:50:35 * dmiles is suearching for a rule he uses
+19:53:53 * urgyen ponders the phrase chicken jumped off the shower curtain
+19:56:04 <dmiles> hrrm i didn find it it was forward chain rule.. it gathered denotational and and the strings for to go quicker from String form to Cyc
+19:56:26 <dmiles> brb
+19:58:19 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+20:43:13 * dmiles returns the pond pump had stopped again
+20:43:39 <futhin> oh no! save the algae!
+20:44:03 <dmiles> yes chickens, ponds, cats.. work work
+20:44:19 <dmiles> err only one chicken and it's a house chicken
+20:44:31 <dmiles> yeah the algae is bad no mater what
+20:45:07 <dmiles> well its natrtually occuring so i am content
+20:45:17 <dmiles> the koi are happy
+20:45:32 <futhin> no i mean save it, it is a lifeform, it mustn't die or we will all weep! ;P
+20:46:05 <dmiles> well the algae is happiner now the pump does not work 
+20:46:13 <dmiles> i am guessing
+20:46:34 <futhin> heh
+20:46:41 <dmiles> i think the pump for the fountian was shreding the poor algea
+20:46:51 <futhin> poor algae
+20:47:20 <futhin> but it must be done, for we humans will leap upon the algae and consume voraciously!
+20:47:46 <futhin> (won't it be fun to get our food from the bottom of the food chain) ;)
+20:47:54 <futhin> what are koi?
+20:50:21 <dmiles> they are a type of carp
+20:50:55 <dmiles> goldfish
+20:50:56 <futhin> ahhh excellent, humans will feast upon them too! muahahahah!
+20:51:35 <dmiles> well people eat them raw at heathenistic parties
+20:51:57 <dmiles> i should say alive
+20:52:05 <futhin> hedonistic? were the pursuit of pleasure is the purpose of life?!
+20:53:18 <dmiles> We recognize pleasure as the first good innate in us, and from pleasure we begin every act of choice and avoidance, and to pleasure we return again, using the feeling as the standard by which we judge every good.
+20:53:50 <futhin> there are two types of people in the world
+20:53:55 <futhin> those who are rationally selfish
+20:54:02 <futhin> and those who are irrationally selfish
+20:54:04 <dmiles> are limbic systems in our brain tend to do that vote.. it is the most natural 
+20:54:12 <futhin> ;)
+20:54:48 <futhin> rationally selfish understand that they come first, and take the actions to make sure they are successful and happy... they work hard to have a house, etc.  
+20:55:03 <futhin> irrationally selfish blahblahblah
+20:55:08 <futhin> i'm tired of this nevermind
+20:55:35 <dmiles> yes pure knowledge of consequences are something that we call that irrationality
+20:55:50 <dmiles> the lack of understandiong consequence
+20:56:13 <dmiles> thats why i think opencyc should rule the world ;P
+20:56:27 * dmiles attempts to tie to channel
+20:58:03 <dmiles> so .. tonight.. the work TODO.. must finish getting AliceBot coded in prolog.. so I can then try to put in opencyc
+20:59:02 <dmiles> there are 41 thousand rules
+21:02:10 <dmiles> no, not that tonight, intead a WorldForge event logger that places assertion into OpenCyc
+21:03:36 <dmiles> worldforge uses an event ontology each time a player do somthing it produces GAFs about what they did and the sate changes
+21:43:13 --- quit: futhin ("work hath drained my zip! :P")
+22:13:46 <Cobra> dmiles: Reading that link...  I taught the bot different words for hello.  So now it looks for any greeting cyc knows and responds if it gets a match.
+22:14:29 <Cobra> I just need a bunch more greeting words (although I added 4-5 basic ones.)
+22:15:50 <Cobra> It's over in #cobra when it's running.
+22:20:46 <Cobra> Ok, thanks for the verb # info.  I looked over at the docs, and at the cyc database a little more, and it seems related to tense/usage.
+22:21:46 <Cobra> For example, greet and salute are different, in that greet is a verb without add'l conjugation.
+22:22:41 <Cobra> To make it a conversational phrase, you'd say 'greetings'.
+22:26:31 <Cobra> hmm, but my argument just fell apart when I pulled out the dictionary on salute.  I was thinking of 'salude' (or however that's spelled, the word used for a toast, french maybe?)
+22:27:01 <Cobra> salute is also a verb tense.
+22:40:35 --- quit: graylensman ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.07.06

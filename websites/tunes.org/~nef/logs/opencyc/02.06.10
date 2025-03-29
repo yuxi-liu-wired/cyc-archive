@@ -1,0 +1,123 @@
+00:00:00 --- log: started opencyc/02.06.10
+01:23:18 --- join: cehbab (~cehbab@210.49.175.77) joined #opencyc
+01:23:28 <cehbab> hello
+01:23:29 <CycLBot> hello cehbab
+01:23:44 <cehbab> I only said that for the bot trigger :)
+01:32:43 --- quit: cehbab ("Client Exiting")
+01:42:15 --- join: cehbab (~cehbab@c17217.eburwd1.vic.optusnet.com.au) joined #opencyc
+01:52:27 --- join: rorian (~rorian@186.e.010.mel.iprimus.net.au) joined #opencyc
+02:34:31 <dmiles> ok i need to move from textual descriptions saved in cyc to the real thing now, paraphrasing from the items in the room
+02:34:32 --- quit: rorian (Read error: 104 (Connection reset by peer))
+02:35:33 <dmiles> need s hurdlu structure roo
+02:35:42 <dmiles> er shurdlu sctructured room
+02:36:06 <dmiles> i guess this will be a goo d excercise in CycL for me :)
+03:47:35 --- quit: dmiles (Read error: 110 (Connection timed out))
+04:04:24 --- quit: CycLBot (Read error: 110 (Connection timed out))
+06:28:37 <Yepster> Steve, could it be that cycaccess.createmicrotheory gives a classcastexception?
+06:54:11 <stevereed_home> I'll check it out.
+06:54:24 <stevereed_home> I have a JUnit test case for it.
+07:02:45 <Yepster> I just spend some time creating a wrapper in the oracle interface for it,
+07:03:10 <Yepster> trying to convert sql.Array into ArrayList. After 2 hours or so I found out
+07:03:30 <Yepster> that the occasional classcast I got was thrown at the call of the cycaccess
+07:03:30 <Yepster> method
+07:08:45 <Yepster> Somehow I don't get the complete stack trace from oracle, I think I have to
+07:09:05 <Yepster> load the cycaccess source so oracle compiles it itself
+07:15:14 <Yepster> *** SESSION ID:(12.2775) 2002-06-10 15:02:48.129
+07:15:14 <Yepster> [BaseKB, HumanSocialLifeMt]
+07:15:14 <Yepster> java.lang.ClassCastException
+07:15:14 <Yepster>   at org.opencyc.api.CycAccess.createMicrotheory
+07:15:14 <Yepster>   at CycJsprocs.createMicrotheory(CycJsprocs:162)
+07:25:31 <Yepster> Steve?
+07:26:13 <Yepster> I just saw that the mt is actually created in cyc.
+07:27:42 <Yepster> hmm but misses one genlMt, so the exception must be thrown somewhere in
+07:27:47 <Yepster> the arraylist iterator loop
+09:19:56 --- log: started opencyc/02.06.10
+09:19:56 --- join: clog (nef@bespin.org) joined #opencyc
+09:19:56 --- mode: carter.openprojects.net set +n
+09:19:56 --- names: list (clog)
+09:27:18 --- join: cehbab (~cehbab@c17217.eburwd1.vic.optusnet.com.au) joined #opencyc
+09:27:18 --- join: Graham (ggelling@207.207.8.145) joined #opencyc
+09:27:18 --- join: ziggyzag (ziggy@arty.rsiegler.org) joined #opencyc
+09:29:48 --- log: started opencyc/02.06.10
+09:29:48 --- join: clog (nef@bespin.org) joined #opencyc
+09:29:48 --- names: list (clog ziggyzag Graham cehbab)
+09:29:53 --- quit: ziggyzag (carter.openprojects.net irc.openprojects.net)
+09:29:53 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+09:29:53 --- quit: cehbab (carter.openprojects.net irc.openprojects.net)
+10:08:59 --- log: started opencyc/02.06.10
+10:08:59 --- join: clog (nef@bespin.org) joined #opencyc
+10:08:59 --- names: list (clog bruce stevereed_home)
+10:17:46 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+10:30:48 --- join: KingKire (hidden-use@207.106.4.130) joined #opencyc
+11:04:10 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+11:14:41 --- join: Graham (ggelling@207.207.8.145) joined #opencyc
+11:15:42 --- mode: ChanServ set +o Graham
+11:17:42 --- quit: KingKire ("ChatZilla 0.8.7 [Mozilla rv:1.0.0/20020530]")
+12:24:04 --- join: ziggyzag (ziggy@arty.rsiegler.org) joined #opencyc
+12:54:50 --- quit: futhin ("rbooting")
+12:58:07 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+13:45:03 --- quit: ziggyzag (carter.openprojects.net irc.openprojects.net)
+13:45:04 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+13:45:04 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+13:45:04 --- quit: futhin (carter.openprojects.net irc.openprojects.net)
+13:45:04 --- quit: bruce (carter.openprojects.net irc.openprojects.net)
+13:45:04 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+13:45:04 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+13:45:04 --- join: ziggyzag (ziggy@arty.rsiegler.org) joined #opencyc
+13:45:04 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+13:45:04 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+13:45:04 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+14:58:06 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+14:59:41 <Psion> Why doesn't ask find a proof of this? (implies (forAll ?P (implies (opinions SomeAgent ?P) ?P)) SomePredicate), if I have asserted that (opinions SomeAgent SomePredicate)?
+15:43:00 <stevereed> i'll look.
+15:52:03 <stevereed> I did this simplification to begin, and i get:
+15:52:07 <stevereed> (implies (forAll ?P (implies (opinions SomeAgent ?P) ?P)) SomePredicate)
+15:52:08 <stevereed> (implies (implies (opinions SomeAgent ?P) ?P) SomePredicate)
+15:52:08 <stevereed> (or (not (implies (opinions SomeAgent ?P) ?P)) SomePredicate)
+15:52:08 <stevereed> (or (not (or (not (opinions SomeAgent ?P)) ?P)) SomePredicate)
+15:52:08 <stevereed> (or (and (opinions SomeAgent ?P) (not ?P)) 
+15:52:08 <stevereed>     SomePredicate)
+15:52:29 <stevereed> I did this by hand, do you follow the steps?
+15:56:52 <Psion> Sorry, I was eating. I am back now.
+16:02:33 <Psion> Is there a CycL function to CNFify a formula?
+16:03:54 <Psion> assertion-cnf looks promising.
+16:05:23 <Psion> But it didn't work out....
+16:06:11 <Psion> Well, I don't see why the formula I first asked about isn't provable. I can do it in a "natural deduction" style.
+16:09:42 <stevereed> the function you want is not in the api but I'll put it there next release.
+16:11:22 <Psion> I only wanted it to check if the CNF version seemed correct also, since that seemed to be what you were doing.
+16:14:04 <stevereed> well I have to go now but send me details of your assertions and query: reed@cyc.com and I'll support you.
+16:16:01 <Psion> OK, thanks!
+17:30:44 --- join: banthapoo (~bsmall2@pcp422353pcs.martnz01.ga.comcast.net) joined #opencyc
+17:40:26 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:06:27 <Psion> Anyone know how I process unprocessed local queue operations?
+18:06:27 --- quit: banthapoo (Read error: 104 (Connection reset by peer))
+18:15:14 <graylensman> Hmmm.  How can you even see if you have unprocessed local queue operations??
+18:17:50 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:34:22 --- quit: graylensman ("Client Exiting")
+20:01:31 <Psion> Oo... just caused a SIGSEGV over the Java API
+21:05:31 --- quit: futhin ("good night")
+22:01:09 --- quit: ziggyzag (Remote closed the connection)
+22:02:21 <Psion> Anyone know where I can find out the roles for AilmentCondition?
+22:15:15 --- quit: Psion ("sleep")
+22:23:41 --- join: Edison (~tweber@pD9EB55F5.dip.t-dialin.net) joined #opencyc
+22:40:44 --- join: ChanServ (ChanServ@services.) joined #opencyc
+22:40:44 --- mode: carter.openprojects.net set +o ChanServ
+23:20:54 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+23:20:54 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+23:20:54 --- quit: Cobra (carter.openprojects.net irc.openprojects.net)
+23:20:54 --- quit: Edison (carter.openprojects.net irc.openprojects.net)
+23:20:57 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+23:20:57 --- quit: bruce (carter.openprojects.net irc.openprojects.net)
+23:20:57 --- quit: johnd (carter.openprojects.net irc.openprojects.net)
+23:23:46 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+23:24:57 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+23:25:56 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+23:25:56 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+23:32:44 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:32:44 --- mode: carter.openprojects.net set +o ChanServ
+23:34:00 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+23:36:22 --- join: Edison (~tweber@pD9EB55F5.dip.t-dialin.net) joined #opencyc
+23:36:22 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:58:03 --- quit: graylensman (carter.openprojects.net irc.openprojects.net)
+23:58:03 --- quit: Cobra (carter.openprojects.net irc.openprojects.net)
+23:59:59 --- log: ended opencyc/02.06.10

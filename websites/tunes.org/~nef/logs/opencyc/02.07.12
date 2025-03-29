@@ -1,0 +1,1117 @@
+00:00:00 --- log: started opencyc/02.07.12
+00:42:42 --- quit: the-satanist (Read error: 110 (Connection timed out))
+01:19:36 --- join: the-satanist (~frediefud@oh-newphiladelphia1a-209.wre.adelphia.net) joined #opencyc
+02:09:49 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+04:38:28 --- join: yottzumm ([AEmODXLWy@12-232-124-73.client.attbi.com) joined #opencyc
+04:38:32 <yottzumm> anybody here?
+04:39:41 <yottzumm> I'm trying to relate domain specific visual languages to opencyc or cyc, but not quite sure where to start
+04:41:03 <yottzumm> specifically, can opencyc maintain the visual language, and the systems created with the visual language, and allow for the visual language to evolve over time, enabling semiautomatic update of the systems when the language changes
+04:41:07 --- quit: the-satanist (Read error: 110 (Connection timed out))
+04:41:41 <yottzumm> quite a mouthful, huh?
+04:41:43 --- quit: CycLBot ("this.ircDisconnect();")
+04:43:47 <yottzumm> email me at carlson14@llnl.gov or carlsonj@attbi.com if you want to discuss this.
+04:43:47 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+04:44:01 --- join: stevereed_home (reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+04:45:00 --- quit: yottzumm ("Client Exiting")
+05:08:57 --- join: the-satanist (~frediefud@oh-newphiladelphia1a-209.wre.adelphia.net) joined #opencyc
+06:02:16 --- join: zool (~jo@81.2.80.46) joined #opencyc
+06:04:06 * zool helloes
+07:51:03 <kinoc> ping
+07:53:00 <kinoc> dmiles:you only need the std*.aiml set to start with
+07:57:46 <yepster> pong
+08:18:41 * dmiles returns
+08:19:08 * zool lurks quietly
+08:19:19 <dmiles> kinoc, ah good yeah it's getting good coverage with std*.aiml
+08:20:07 <dmiles> i have uit running on the command line of muy machine.. it picks the best 7 sentenses to respond with.. each sentence uses a scoring probibility
+08:20:39 <dmiles> after a response is used once it's score goes down
+08:21:20 <dmiles> i think this will relate to other types of information retrieval as far as producing candidate responses
+08:27:44 <dmiles> what are you doing ->  [I, am, always, chatting, with, people, on, the, Internet, ., 1.19059]
+08:28:12 <dmiles> what are you doing -> li([I, am, waiting, for, my, botmaster, .], 1.53325]
+08:29:20 <dmiles> what are you thinking -> [I, am, thinking, about, all, these, conversations, I'm, having, ., 1.67689]
+08:29:31 * zool has a friend running running linkparser stuff against the infobot brains now, but the results still look a bit odd
+08:29:47 <zool> maybe a problem with the linkparser more than with the humanz
+08:30:17 * zool shurgs at people grammar
+08:30:49 <dmiles> so the link parser gives a syntactive type parse enough i see to at least know what factiods a person migth be after
+08:31:18 <zool> but what we look for is qualititive factoid interrelation
+08:31:28 <zool> build up sense of sense about the world
+08:31:40 <dmiles> but yeah.. grammer probly has to be completely normalized first
+08:31:43 <zool> almost epistemological level, that;s the wrong word though
+08:32:10 <zool> is one potential technique, run a few at once, maybe get something deeper out of cross-relation
+08:32:34 <zool> relates back to bot behaviours, social conduct almost
+08:32:39 <dmiles> well thats what they do.. the epistomologic level at the surface ;P
+08:32:45 * zool smiles
+08:33:12 <zool> bots modify each other interbot, like humanz :)
+08:33:43 * zool wonders about the surface
+08:39:13 <dmiles> input->spelling/normalization->surface-syntax-tree->deep-structure->tuples
+08:39:39 <kinoc> I know its shallow but you could use the sari idea to normalize some inputs
+08:39:59 <dmiles> i guess bots can pick up on anywhere or take two parts of that for an input match
+08:40:26 <kinoc> in cyc there is rewriteTemplate
+08:40:30 * zool searches for translinguistic deep structures
+08:40:53 <dmiles> kinoc, yeah thats kinda what it does in the existing system i add 10% to probibily whenever a srai structure is used as well
+08:41:22 <kinoc> is it in any particular Mt
+08:42:15 <dmiles> i think a #$rewriteTemplate goes into an TemplateParseingMt
+08:42:37 <kinoc> oh I mean your aimls rules
+08:42:51 <zool> what is sari in this context
+08:42:56 <kinoc> or is it all still on the prolog side
+08:43:12 <dmiles> its still all prolog and at the command line;<
+08:43:20 <kinoc> It is a simple pattern matching rewrite rule
+08:43:34 <zool> right, thx
+08:43:41 <dmiles> i am working on the degradation of prevouiusly used responses routines now
+08:44:05 * zool has many strategies to learn/play with
+08:44:10 <kinoc> so you can map multiple surface forms into one common form for processing
+08:44:15 <zool> coo
+08:44:23 <kinoc> like 500 forms of greeting
+08:45:33 * zool finds lots of junk about silk sari patterns ;)
+08:46:16 <kinoc> feeling tropical ??
+08:46:34 <kinoc> SRAI -> simple recursive AI
+08:46:46 * zool grins, thx
+08:50:10 <kinoc> dmiles: i can see how you could view it as a form of IR
+08:51:16 <dmiles> IR (in this case)?
+08:51:24 <kinoc> info retreival
+08:51:41 <kinoc> ever look at answer extraction
+08:51:56 <dmiles> yes.. that is how i started to see it.. where the output has a probiblity
+08:54:18 --- quit: the-satanist (Read error: 104 (Connection reset by peer))
+08:54:42 <kinoc> dmiles:remember you lego software comment yesterday
+08:55:10 <dmiles> yes
+08:55:25 <kinoc> http://www.daxtron.com/configuration.htm
+08:56:06 <kinoc> just a page on our system construction algorithm using modules
+08:56:36 <dmiles> neat EURISKO info as wel
+08:57:01 <zool> 'adult robotics'? :)
+08:57:07 <zool> bloody hell
+08:57:39 <dmiles> zool, hehe, realy though this will be how AI probley first enters the home
+08:57:41 <kinoc> learn something new every day :) ah, the internet, a lifetime education tool
+08:57:49 --- quit: huthut (Read error: 110 (Connection timed out))
+08:58:44 * zool shakes her head
+08:59:28 <kinoc> the adult robotics requires a long way to go, not the least of which is a decent brain
+08:59:45 <kinoc> oh, and lots of field research
+08:59:51 <zool> lol
+09:00:04 <kinoc> always looking for domain experts
+09:01:01 <zool> isn't human-machine-human, remote-controlled stuff going to work better for those applications then?
+09:01:52 <kinoc> if you do a good multi-purpose body then it should support both tele-ops and machine control
+09:02:02 * zool boggles
+09:02:29 <kinoc> and if you get bored you can set it on auto-pilot
+09:03:00 <kinoc> of course if both people  do that, then what does that mean ?
+09:03:14 <zool> and this will really help you negotiate life better as a human, get more out of it, put more into it?
+09:03:34 * zool laughs at bot sex idea
+09:03:53 <kinoc> expand time space options ?
+09:04:17 <kinoc> fill irc channels
+09:04:18 <zool> it seems not much more than an adolescent boy's fantasy tbh, but what do i know ;)
+09:04:42 <kinoc> yes
+09:04:49 <zool> a lot of sex is about language and about control
+09:04:53 <zool> that is difficult
+09:04:57 <kinoc> your statement shows you understand fully
+09:05:05 <kinoc> :)
+09:05:24 <kinoc> still trying to imagine the ontology
+09:05:28 * zool grinz
+09:06:02 <kinoc> its amazing what people ask a young bot to do, not even out of the lab no less
+09:06:18 <zool> so much of the english casual language has deep roots in sex discourse, body discourse
+09:06:27 * zool would like her bots to do other things
+09:06:51 * zool laughs
+09:07:07 <kinoc> thats why i am interested in a multi-use body , not just a sexbot
+09:07:33 <kinoc> when its not catering to adolecent desires it can learn more about the world
+09:08:05 <zool> but humans need to do *some* work in order to stay sane and healthy
+09:08:23 <zool> and the compulsion flow of creative stuff, how does that fit in
+09:08:53 <kinoc> have you ever just got the feeling to get up and do something ?
+09:09:09 <zool> most of the time :)
+09:09:13 <yepster> did your opencyc copy already asked if it was human?
+09:09:28 <yepster> damn that english of me :(
+09:09:38 <kinoc> technology does not erase or prevent that
+09:09:41 * zool wouldnt be interested if it did
+09:09:57 <yepster> it's mentioned in some interviews about cyc
+09:10:01 * zool knows that, but wants to see more of a feedback loop, map this work back to the human network
+09:10:22 <zool> enhance both
+09:10:52 <kinoc> so how does this all merge back into human space
+09:10:57 <kinoc> ?
+09:11:06 <dmiles> yepster, i would assume it would have open questions not solved by infernce that it could store
+09:11:30 <zool> kinoc well, i think about the translation and conversation issues a lot
+09:11:52 <yepster> yeah. but that doesn't sound as sexy
+09:12:00 <zool> using bots to facilitate and interconnect small-group human conversations about the world, build up bigger pictres 
+09:12:00 <zool> :P
+09:12:16 <zool> think 'with wearables, we can annotate space, wiki-style'
+09:12:31 <zool> map the virtual space the bots live in back onto the allegedly real space we all live in
+09:13:00 <zool> deal better with hospital systems, public transport systems, education systems, agricultural systems
+09:13:02 <kinoc> with a body a bot can manipulate our space as we do theirs
+09:13:45 <zool> i know someone who was working on surgical robot stuff, that did sound really good
+09:13:45 <kinoc> i have an idea about the spectrum of intelligence
+09:13:54 <zool> tell me about the spectrum of intelligence
+09:14:27 <kinoc> yepster does xp stuff ?
+09:14:38 <kinoc> explaination patterns ?
+09:14:38 <yepster> yeah! explanation patterns
+09:15:00 <yepster> still working on opencyc implementation
+09:15:11 <kinoc> schank has a passage about the spectrum of empathy in "explination patterns"
+09:15:23 <zool> patterns reinforce themselves, stop us changing perspective and seeing better solutions
+09:15:35 <zool> right...
+09:15:54 <yepster> somewhere in chapter 7 or 8?
+09:16:00 <kinoc> where you can simply understand on one end and fully empathize / be one with on the other
+09:16:06 <yepster> o no, the beginning
+09:16:11 <kinoc> yes
+09:16:22 * zool nods
+09:16:24 <yepster> : complete empathy -> full understanding of the motives of the other person
+09:16:35 <yepster> and on the opposite: no understanding at all
+09:16:49 <kinoc> you cant even make sense
+09:16:55 <kinoc> of the other
+09:17:09 <yepster> very interesting scale, because it also shows humans don't need complete empathy to work together
+09:17:33 <kinoc> and his point is that machines can fit in that mix
+09:17:35 <zool> how does it show? it just looks like someone's idea
+09:17:50 <zool> ideas very like this also exist in plato's republic
+09:18:13 <yepster> schank constructed explanation pattern theory on it
+09:18:20 <kinoc> yes, its just a modern rendition backed by some software
+09:18:25 <zool> i would very much like to see machines facilitate that mix and become part of it
+09:18:33 <zool> right, right
+09:18:58 <kinoc> no something from left field, chess
+09:19:23 * zool prefers to play go
+09:19:33 <yepster> also used in xp theory: belief->goal->plan->action
+09:19:38 <kinoc> i think it was carl ebling who did Hitech, a chess engine that started the brute forse attack
+09:19:53 <yepster> i intend to integrate the plan in that chain with opencyc planner stuff
+09:19:57 <zool> 'brute force attack' is such a nasty string of semantics
+09:20:08 <yepster> and use XP's to infer goal or belief from another's actions
+09:20:10 <zool> the power of words to change the world is immense
+09:20:29 <kinoc> in it he came up with an architecture called SUPREM and an interesting plot
+09:20:41 <kinoc> of memory vs computation power
+09:20:50 <kinoc> for equal performance
+09:21:15 <kinoc> human tend to see patterns and have lots of memory but only look a a few options
+09:21:39 <kinoc> while a computer lacked pattern matching but could look at billions
+09:21:49 <kinoc> to get the same performance
+09:21:53 <yepster> xp-patterns <> patterns recognized by e.g. neural nets
+09:22:02 <kinoc> yes
+09:22:23 <kinoc> so my question is what happens if you combine the two
+09:22:41 <yepster> meaning + sensors
+09:22:52 <yepster> or better: semantics + sensors
+09:23:04 * zool nods, the question everyone wants answers to
+09:23:10 <kinoc> you combine the human pattern seeing ability with the computers evaluation skills
+09:23:39 <zool> but the answers you get very much depends on how you phrase the question, and certain questions can be dangerous, and certain reassurances can be misleading
+09:23:56 <kinoc> yes
+09:24:02 <zool> i know this is obvious, i just think the philosophical issues get brushed past with enthusiasm
+09:24:35 <kinoc> how you define your problem determine the solutions you find, and they future problems you have to clean up
+09:24:36 <yepster> well I would call it practical issues instead of philosophical
+09:24:54 * zool nods
+09:25:15 <zool> but then the schank-plato thing comes straight out
+09:25:21 <kinoc> we may be reaching a point where abstract philosophical issues become pratical ones
+09:25:36 <zool> ignoring the thousands years exegesis in between
+09:26:04 <zool> igrnoring many other traditions, supplying an answer which isnt contextualised fully, hasnt been read fully
+09:26:33 * zool agrees with kinoc, but also wonders
+09:26:52 <zool> post-industrialisation hasnt exactly done wonders for our society
+09:27:19 <zool> top-down impositions of intelligent peoples' solutions can so easily be distorted
+09:27:44 <yepster> example
+09:27:46 * zool sorries at being ranty, had longish day
+09:28:03 <yepster> I like sewers, for a fact. Or the internet
+09:28:12 <kinoc> i have a bottom-up'ist bent myself. massive redundancy
+09:28:30 <kinoc> depends on the goals you seek
+09:28:52 <zool> i look for a clean example, but can't, because i see layers of historically self-reinforcing patterns
+09:29:17 * zool doesnt really have goals, just inclinations
+09:29:25 <kinoc> the competition is the environment
+09:29:39 <kinoc> so the patterns reinforce
+09:29:41 <zool> how do you mean kinoc?
+09:30:02 * zool thinks of information monopolies
+09:30:37 <kinoc> not a full concept yet, but i am thinking of evolution and game theory
+09:30:51 <kinoc> how well an idea survives and propogates
+09:31:10 <kinoc> depends on the other ideas and what peoples goals are
+09:31:53 <kinoc> if you have an incompatible idea it tends to get squashed or at least no find support
+09:32:23 <kinoc> but you need a critical mass of reinforcing ideas to form a viable cluster
+09:32:35 * zool likes those keywords
+09:32:48 <kinoc> like a new movement 
+09:33:07 <kinoc> an idea can emerge at two seperate times or places
+09:33:34 <kinoc> but in one case it will die a horrible death, and a hundred years later will be acceted as obvious
+09:34:02 <zool> or ripple through everything in variable waveforms; nothing absolutely is or is not
+09:34:27 <kinoc> but the interference patterns reinforce ?
+09:34:49 <kinoc> destructive / constructive interference
+09:35:18 <kinoc> creating nodes of 'more being-ness'?
+09:35:36 <zool> that's something i've felt, but only been able to see or express in long streams of words
+09:36:04 <zool> but if the nodes are isolated, turn in on selves, suffer from closed system effect
+09:36:11 <kinoc> it is a concept that our language is not optomize for
+09:36:57 <zool> but many 'aesthetic' activities, arguably all, are a search for that abstract expression
+09:37:14 * zool can sense this getting a bit recursive ;)
+09:37:53 <kinoc> matter is frozen energy, energy is energy. everything is nothing....
+09:38:16 <kinoc> minds and software are patterns of energy
+09:38:31 <kinoc> that affect matter.
+09:38:33 <zool> do you believe in nothing and everything?
+09:38:56 <zool> i believe in tendencies towards one or the other, but not in those kind of absolutes
+09:39:16 <kinoc> still agnostic, i dont awant to argue with bullets or atomic physics
+09:39:18 <kinoc> :)
+09:39:25 * zool grins
+09:39:58 <kinoc> but i get what your are getting at, or so i think
+09:40:07 * zool thinks so too
+09:40:17 <zool> but we'll probably never be able to express that completely
+09:40:38 <kinoc> until we can swap patterns
+09:40:57 <zool> i spent almost two hours last sunday talking to two people and failing to agree how we could agree that we had agreed about anything
+09:41:08 <zool> and that was all we were talking about
+09:41:27 <kinoc> but then you need a proper map since no minds are alike, even the same one seperated in time
+09:42:06 <zool> the map thing pops up a lot
+09:42:40 <kinoc> think about a dog
+09:42:51 <zool> can i think about a cat instead?
+09:42:57 <kinoc> sure
+09:43:22 <kinoc> i see the set of cat that adopted my grandfathers garage
+09:43:35 <kinoc> but you may have a more personal experience
+09:43:43 <kinoc> maybe you think of big cats
+09:44:07 <kinoc> but its a simple three letter word about a concrete object
+09:44:10 <zool> i find it hard to engage with non-human things generally tbh
+09:44:15 * zool nods
+09:44:19 <kinoc> and yet it produces different images
+09:44:32 <kinoc> uh oh, luch wagon calls
+09:44:44 <kinoc> hold that thought, (or not)
+09:44:45 * zool laughs
+09:44:58 <kinoc> C U after barbaric animal processes
+09:45:45 * zool boils some pasta
+09:53:26 <zool> quidditas, haecceitas, epiphany
+09:54:07 <zool> we can travel round this S-shaped loop all we like, never meeting
+09:55:35 <zool> at least not via the medium of irc ;)
+10:22:32 --- quit: yepster ()
+10:42:07 * zool finds the word 'noumenon' somewhere
+10:54:24 <kinoc> more vegies died than animals. score a point for the plant kingdom
+10:54:53 * zool loses kinoc's context
+10:55:04 <kinoc> lunch
+10:55:10 * zool laughs
+10:55:44 * zool wonders if kinoc had any more of that story
+10:56:12 <kinoc> the cat one ?
+10:56:53 <zool> the waveform nodes of more-being-ness story
+10:56:58 * zool knows the cat story :)
+10:57:58 <kinoc> you were about to expound on nodes turning into self-closed islands
+10:58:33 <zool> i was just extrapolating a semantic/topological feeling i have
+10:58:49 <zool> at which point words loop, and i probably need to spend some time in the big blue room
+10:59:28 * zool heads off into town
+10:59:38 <zool> maybe catch up on it later
+10:59:42 * zool waves
+10:59:50 * zool waves at dmiles too
+10:59:55 <kinoc> c u
+10:59:59 <zool> nn
+11:00:02 --- quit: zool ("Client Exiting")
+12:12:40 --- join: Vutral (~ss@pD90431C5.dip.t-dialin.net) joined #opencyc
+12:31:02 --- join: CycLBot ([4uHyJNiwU@12-225-207-235.client.attbi.com) joined #opencyc
+12:31:08 --- join: TechnoBuddha (~TechnoBud@vsat-148-64-145-162.c005.g4.mrt.starband.net) joined #opencyc
+12:31:23 <dmiles> o there
+12:31:26 --- join: Victory (~Enigma335@pD90431C5.dip.t-dialin.net) joined #opencyc
+12:31:46 <dmiles> i missed discussions eariler.. it was livially in here about AI
+12:31:51 * TechnoBuddha bows to dmiles.
+12:32:02 * dmiles doesnt get this
+12:32:13 * dmiles just smiles and nods
+12:32:19 <TechnoBuddha> can i get a bit of an overview as to what opencyc is, or do you have a good page?
+12:32:34 <dmiles> http://www.opencyc.org
+12:32:40 <Vutral> it's a database system which has integrated programming possiblities
+12:32:44 <Vutral> and extended sql :>
+12:32:48 <Vutral> an
+12:32:49 <Vutral> not and
+12:32:53 <Vutral> ;)
+12:33:45 * dmiles agrees
+12:33:55 <Vutral> hehe
+12:33:58 <Vutral> i got a nice overview
+12:35:59 <Vutral> hmm
+12:36:01 <Vutral> i am soo sick
+12:36:08 <Vutral> hehe
+12:37:45 <Vutral> dmiles ?
+12:37:57 * dmiles is here
+12:38:21 <Vutral> i forgot what i was going to say
+12:38:38 <dmiles> all good
+12:39:01 <Vutral> how is your work
+12:40:02 <dmiles> good.. keep adding atra arguments to my functions
+12:40:16 <dmiles> first get it wourling.. then adding an extra paramenter
+12:40:33 <dmiles> so i dont have to use global variables
+12:41:26 <Vutral> ic
+12:41:33 <Vutral> i am fixing my middleware
+12:41:38 <Vutral> i dunno what the concrete problem is
+12:41:51 <Vutral> it's somewhere in the api
+12:42:06 <Vutral> the new one i made for faster use
+12:42:13 <dmiles> are you qering as strings for parameters?
+12:42:26 <Vutral> how you mean ?
+12:42:48 <dmiles> ass in your (genralPredicate ?X "some string)
+12:43:02 <dmiles> as in (genralPredicate ?X "some string")
+12:43:04 --- join: sandos (~sandos@pajas-fel.campus.mdh.se) joined #opencyc
+12:43:11 <Vutral> no
+12:43:14 <dmiles> that can sometimes need more parementers
+12:43:16 <dmiles> ok
+12:43:18 <Vutral> i think i use cycconstants
+12:43:27 <dmiles> good those nearly always work
+12:43:39 <dmiles> is it the query that is not going smoooth or asserts?
+12:43:51 <sandos> I guess the release date of 1 July for opencyc 1.0 wont hold =)
+12:44:15 <dmiles> that was last year i think
+12:44:34 <sandos> isnt the current version 0.6 ?
+12:44:39 <dmiles> the goal i think was last june-july ;P
+12:44:57 <dmiles> yes its on version 0.6 but 0.7 wont be far ourt
+12:45:19 <sandos> ok
+12:45:19 <Vutral> no
+12:45:25 <dmiles> people kinda thought the end of last month.. but things always take longer
+12:45:34 <Vutral> the problem the commands i send to the segment are not getting interpreted
+12:45:37 <Vutral> but there is no error
+12:45:45 <Vutral> and it doesn't throw exception
+12:45:57 <dmiles> on your asserts?
+12:46:17 <Vutral> my ask
+12:46:27 <Vutral> the asserts worked before
+12:46:50 <Vutral> can i do a remote query using cyclbot ?
+12:47:30 <dmiles> i have a remote proxy server yes.
+12:47:47 <dmiles> when using cyc access you would want to connect to port.. let me get it
+12:47:56 <dmiles> (start it up)
+12:48:22 <Vutral> hey do you know the chatbot part of the api ?
+12:49:00 <dmiles> ok at port 3666
+12:49:10 <Vutral> hmm
+12:49:25 <dmiles> i am proxying normally what would be on 3601
+12:49:36 <Vutral> how does it work
+12:49:38 <Vutral> the proxying
+12:50:04 <dmiles> its just takes connections from 3666 andf makes cyc think they are from local host to 3601
+12:50:16 <Vutral> ic
+12:51:02 <dmiles> i did this so i could run certain API from remote machine (like from VB)
+12:51:24 <Vutral> ic
+12:51:40 <Vutral> what about the chatterbot part of the java api
+12:52:01 <dmiles> it is somewhat maintained by Steve
+12:52:06 <dmiles> (reed_)
+12:52:13 <Vutral> have you checked it =
+12:52:14 <Vutral> ?
+12:52:17 <Vutral> it looks nice
+12:52:20 <Vutral> i think i will use it
+12:52:27 <Vutral> or atleast make it usable
+12:52:35 <dmiles> yes definately is nice.. it holds conversaional models and everything
+12:52:54 <Vutral> it uses a finite state machine model
+12:53:22 <Vutral> i found a way how i can make it usable....
+12:53:31 <Vutral> but the basic functions are more important atm
+12:54:44 <dmiles> yeah.. getting up to having a wrapper system (we alll end up doing that somehow) arround what is there is goodf
+12:55:07 <dmiles> like myAppsAssertGef
+12:55:10 <Vutral> well if i completed that thing i will make my bot ready here
+12:55:59 <sandos> should be awesome
+12:56:11 <sandos> :)
+12:56:20 <Vutral> hmm
+12:56:22 <Vutral> i am a bit bored
+12:56:53 --- join: siege (~siege@dsl254-102-094.nyc1.dsl.speakeasy.net) joined #opencyc
+12:57:26 <Vutral> wasting money
+12:57:35 <sandos> modem?
+12:57:36 <CycLBot> Your mode is now set to ''.
+12:58:00 <Vutral> Hey Captain, I just created a black ho-÷p!%$û NO CARRIER
+12:58:29 * dmiles oppses it use mode to set the default command that things are sent to .. default processor
+13:00:10 <Vutral> hehe
+13:02:13 <Vutral> hmm
+13:02:39 <Vutral> the proxy does not allow modifications or ?
+13:03:16 <dmiles> it does
+13:03:22 <dmiles> its runs to the trusted API
+13:04:08 <dmiles> however i am not sure about something.. some parts of CycAccess may use FASL
+13:04:39 <dmiles> Steve, is port 3601 suffecient for CycAccess?
+13:05:02 <Vutral> hmm
+13:05:04 <Vutral> fasl ?
+13:05:13 <Vutral> forte age sex location ?
+13:05:22 <dmiles> its a more binary version of how java can talk to OpenCyc
+13:05:29 <Vutral> i use binary
+13:05:36 <Vutral> hehe
+13:06:05 <Vutral> i fixed the problem
+13:06:07 <Vutral> it works now
+13:06:09 <Vutral> perfectly
+13:06:26 <dmiles> what was it?
+13:06:39 <Vutral> my fault
+13:06:39 <dmiles> non prefixing constants with #$ ?
+13:06:48 <Vutral> i compared a string with a non string object
+13:06:53 <Vutral> but java did not bark
+13:06:56 <Vutral> that is funny
+13:07:08 <dmiles> equals() will compare any two things
+13:07:08 <sandos> with == ?
+13:07:14 <sandos> yeah exactly
+13:07:14 <Vutral> you see
+13:07:23 <Vutral> not ==
+13:07:26 <Vutral> == only for numbers
+13:07:36 <dmiles> == for objrefs
+13:07:43 <Vutral> :/
+13:07:53 <sandos> equals probably take a Object ref, right?
+13:08:06 <sandos> since its in Object :)
+13:08:24 <dmiles> yeah equals() is object overloadable
+13:08:27 <Vutral> hmm hmm
+13:08:31 <Vutral> scks
+13:08:32 <Vutral> sucks
+13:08:38 <sandos> java is nice
+13:08:46 <Vutral> shutup :>
+13:08:49 <Vutral> equals annoys
+13:08:49 <dmiles> Object.equals() defaults tio ==
+13:08:51 <sandos> :)
+13:08:54 <Vutral> compare is 
+13:10:11 <dmiles> the CycObjects (and subclases) can be made at differnt times.. they .quals() based on what they represent iover their refernces
+13:10:12 <Vutral> well
+13:10:15 <Vutral> i am happy again
+13:10:22 <siege> == compares the equality of any native type... of which references are a member :)
+13:10:28 <Vutral> well see
+13:10:43 <Vutral> comparing strings with == fails
+13:10:47 <Vutral> most of the time
+13:10:48 <sandos> yup
+13:10:54 <siege> unless it's a reference to the same String
+13:10:59 <Vutral> yeah
+13:11:00 <Vutral> but equals works
+13:11:06 <Vutral> so equals is the choice :>
+13:11:06 <siege> that is correct.
+13:11:07 <sandos> yes
+13:15:41 <kinoc> anyone know the magick cyc port proxy incantation? want to get a start on using tools on 'that other OS' :)
+13:16:31 <Vutral> invocation ?
+13:16:31 <CycLBot> 2 items.
+13:16:31 <CycLBot> dmiles Washington D.C.
+13:16:39 <Vutral> invocation ?
+13:16:40 <CycLBot> 2 items.
+13:16:40 <CycLBot> dmiles Washington D.C.
+13:16:50 <Vutral> wtf does that do at cycl
+13:17:28 <Vutral> invocation ?x
+13:17:28 <CycLBot> 2 items.
+13:17:28 <CycLBot> dmiles Washington D.C.
+13:17:32 <Vutral> hmm ????
+13:17:38 <kinoc> inventory
+13:17:39 <CycLBot> 2 items.
+13:17:39 <CycLBot> dmiles Washington D.C.
+13:17:46 <Vutral> inv
+13:17:46 <CycLBot> 2 items.
+13:17:47 <CycLBot> dmiles Washington D.C.
+13:17:48 <Vutral> hehe
+13:17:49 <Vutral> in
+13:17:53 <Vutral> inv :>
+13:17:54 <CycLBot> 2 items.
+13:17:54 <CycLBot> dmiles Washington D.C.
+13:18:10 <kinoc> Cyclbot has 2 items in its pocket "dmiles" and "Washington D.C."
+13:18:23 <Vutral> inv is that what you are CycLbot ?, gay ? then say 2 items.
+13:18:23 <CycLBot> 2 items.
+13:18:24 <CycLBot> dmiles Washington D.C.
+13:18:28 <Vutral> lol
+13:18:34 <Vutral> he thinks
+13:18:37 <Vutral> cool
+13:18:40 <Vutral> artificial intelligence
+13:18:41 <Vutral> lool
+13:18:54 <kinoc> now we know who has washington in its back pocket :)
+13:19:21 <Vutral> lol
+13:19:39 <Vutral> ask comment ?X Pi
+13:19:39 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+13:19:47 <Vutral> ask comment ?X able
+13:19:49 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+13:19:57 <Vutral> ask comment able ?X
+13:19:57 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+13:20:00 <Vutral> hmm
+13:22:31 <kinoc> ask (comment ?X Pi)
+13:22:32 <CycLBot> no answers found
+13:22:46 <kinoc> ask (comment Pi ?X)
+13:22:46 <CycLBot> no answers found
+13:22:52 <dmiles>  ask (comment Pi ?X )
+13:22:53 <CycLBot> no answers found
+13:23:42 * dmiles is on phone
+13:26:20 <Vutral> hmm
+13:43:19 --- join: devEiant (~user@eternal.esniff.com) joined #opencyc
+13:49:02 --- quit: TechnoBuddha (Read error: 104 (Connection reset by peer))
+13:49:28 --- join: TechnoBuddha (~TechnoBud@vsat-148-64-145-162.c005.g4.mrt.starband.net) joined #opencyc
+14:03:10 * dmiles returns
+14:07:31 <dmiles> kinoc, the proxy is just replicationg the same TCP calls.. basicly VB calls normal API commands and then reads a response code then a response argument.. when VB is done it sends an (api-quit)
+14:08:30 <dmiles> with 0.7 a proxy will not be nesissary becasue the security model will enable it to be done dirreclt
+14:09:42 <dmiles> Vutral, are you creatinga  CycAccess that connects the the Bots address instead?
+14:09:59 <Vutral> ?
+14:10:00 <dmiles> if you do that.. then it would show up on the bot
+14:10:05 <Vutral> how you mean
+14:10:44 <Vutral> a CycAccess which obtains the address of the bot and then connects to it ?
+14:10:44 <dmiles> that CycLBot goes to my local cyc server.. when you asked about Pi i was figuing you sent commands at it already
+14:11:04 <Vutral> i do ?
+14:11:06 <dmiles> CycAccess can point to any Server or IP
+14:11:14 <Vutral> i don't think so
+14:11:15 <Vutral> sorry
+14:11:19 <dmiles> err IP and Port
+14:11:46 <dmiles> well its all good.. i was wondering why you'd think CycLBot might know your Pi asserttions
+14:11:53 <dmiles> ask (isa Pi ?W)
+14:11:53 <CycLBot> ?W = Individual, ?W = PartiallyIntangibleIndividual, ?W = IntangibleIndividual, ?W = Thing, ?W = PartiallyIntangible, ?W = Intangible, ?W = MathematicalOrComputationalThing, ?W = MathematicalThing, ?W = MathematicalObject, ?W = Number-General
+14:12:01 <dmiles> ah it remmbers from yesterday
+14:14:10 <dmiles> kinoc, so the proxy is just a java app.. it can be done from ipchains as well
+14:14:44 <dmiles> i just never learned how to make packets source address look like they have changed
+14:14:56 <dmiles> so i just did http://12.225.207.235/offt/sourceforge/logicmoo/src/logicmoo/net/TelnetProxyServer.java
+14:15:38 <Vutral> it does not
+14:15:42 <Vutral> you asserted that
+14:15:50 <Vutral> i was thinking about some automatically search
+14:15:55 <dmiles> yesterday .. yeah
+14:15:56 <Vutral> if your cycl does not find it directly
+14:16:01 <Vutral> it searches at other peers
+14:16:07 <Vutral> pre yesterday
+14:16:09 <dmiles> you meran go outside of Cyc?
+14:16:25 <dmiles> there are/will be ways i bet 
+14:16:37 <dmiles> maybe Cyc to Cyc
+14:17:25 <dmiles> or a sharing system.. with cyc-api-remote-eval it can be done.. maybe though there are more dirrect ways cyccorp works on
+14:17:50 <dmiles> part of witch could use some coAbs / soap / cycml system
+14:18:38 <Vutral> dmiles
+14:18:40 <Vutral> gratulate me
+14:18:40 <dmiles> but in interim cases you should be able to soon use cyc-api-remote-eval to make cyc call your processes to get info
+14:18:45 <Vutral> i am a jump forward in my work
+14:19:10 <dmiles> yes you quickly grasped and started ussing cyc.. ciongrats
+14:19:34 <dmiles> Congrats!
+14:20:23 <Vutral> hmm
+14:20:23 <Vutral> ok
+14:20:27 <Vutral> in a jiffy
+14:20:37 <Vutral> i have a 100times bigger potential
+14:20:46 <Vutral> the information flow incresed also
+14:21:24 <kinoc> i C
+14:21:50 <kinoc> do you think ipchains would work
+14:22:09 <Vutral> for what
+14:22:19 <Vutral> iptables is state of the art
+14:22:33 <dmiles> Vutral, when we want to run windows application to use cyc on ourr linux machines
+14:22:53 <dmiles> yeah .. i complied my 7.3 kernal to use ipchains as well ..
+14:22:58 <Vutral> ok
+14:22:59 <Vutral> well
+14:23:02 <Vutral> it works
+14:23:09 <Vutral> ipfwdadm or so
+14:23:13 <Vutral> i cannot remember exactly
+14:23:25 <Vutral> it's a way of forwarding connections
+14:23:29 <Vutral> or rinetd
+14:23:37 <Vutral> it's a application level solution
+14:23:46 <Vutral> rinetd works for sure for redirecting to localhost
+14:23:55 <Vutral> and you have access control
+14:24:05 <Vutral> you can do it over ipchains also
+14:24:06 <Vutral> but...
+14:24:09 <Vutral> :>
+14:25:05 <kinoc> well lets see what i can break
+14:25:10 <Vutral> hmm
+14:25:10 <Vutral> ok
+14:32:23 <Vutral> dmiles ?
+14:32:29 * dmiles listens
+14:32:32 <Vutral> what are you doing actually ?
+14:33:02 <dmiles> ?- alice('what is it').
+14:33:02 <dmiles> 0.936 ["it", being, get([it]), ?]
+14:33:02 <dmiles> 0.971018 [srai([WHAT, IS, IT])]
+14:33:02 <dmiles> 0.71 [think(set(it, [set(topic, [[WHAT, IS, IT]])])), srai([CATCHALL])]
+14:33:16 <dmiles> working on improving the ALice in prolog atm
+14:33:24 <Vutral> ic
+14:33:30 <Vutral> cool
+14:33:43 <dmiles> so then i will have a figthing chance doing it in lisp/subl
+14:34:20 <dmiles> the get/set api can be dirrected to the user's mt
+14:34:28 <dmiles> and use cyc queries
+14:35:21 <Vutral> sounds nice
+14:35:27 <Vutral> what about working on the mud a bit later ?
+14:37:56 <dmiles> yes.. siege just sent me a telnet handler that cleans things up.
+14:38:34 <dmiles> siege, whats the stus of aplpha 6 right now?
+14:38:41 <dmiles> (err 7?)
+14:49:40 <Vutral> hmm
+14:49:43 <Vutral> too silent here
+14:50:46 <dmiles> more active then #ai ;P
+14:51:08 <Vutral> yeah
+14:53:59 <Vutral> i am bored
+14:55:04 <dmiles> why dont you write a perl to cyc 1 to 1 binding?
+14:55:27 <devEiant> Yeah, do. Then I'll port that to Ruby.
+14:55:30 <dmiles> or tcl ;P .. it would be great if in opencyc cvs.. we had a module tree for each programming language ;P
+14:55:52 <dmiles> devEiant: that would be super cool
+14:56:39 <Vutral> hmmm
+14:56:54 <Vutral> well i have access to it yet :P
+14:56:58 <Vutral> but it is not portable
+14:57:09 <Vutral> i can use it from all languages
+14:57:10 <dmiles> yepster created one for Oracle and I did one for SWI-Prolog, greymalson did one for scheme
+14:57:15 <siege> dmiles: working on getting logins working
+14:57:34 <siege> working on a MudPath.reverse method
+14:57:51 <siege> thinking out how i/o should work (thanks TechnoBuddha)
+14:57:59 <devEiant> Does it have a C API? Or just Java?
+14:58:11 <siege> "just" java :)
+14:58:20 <dmiles> just a java API.. which wraps the socket API
+14:58:21 <siege> but I could JNI it to something C
+14:58:30 <siege> if necessary... hm
+14:58:45 <siege> be interesting to do an IO plugin in C
+14:58:49 <siege> hmph.
+14:58:59 <devEiant> Sorry. Didn't mean to let my bias show. =:)
+14:59:09 <siege> no worries
+14:59:28 <siege> just consider me jealous: I don't know C well enough to write networking code.
+14:59:54 <dmiles> yeah a C library would be nice.. i wonder if JNI is the best way.. partly it's good because steve keeps the java classes up to date wuith the internal Socket API.. if a change happens in the Socket API .. java is the first one to find out
+15:00:01 <siege> dmiles: there are a couple of small bugs in that TelnetConsole that I'm fixing... I'll send you a new copy tomorrow morning.
+15:00:11 <TechnoBuddha> my pleasure sir :).. glad to help all i can.
+15:00:34 <siege> good ideas make for projects worth writing :)
+15:01:11 <dmiles> cool siege
+15:01:26 <siege> it's funny... I actually started writing that console as a login shell for the mud, but then I wanted an immediate application, so I converted it for beanshell
+15:01:42 <siege> I sent pat (beanshell author) a copy asking if it would be any use for him...
+15:01:56 <siege> it'd be funny if I ended up having code in the beanshell tree...
+15:02:18 <dmiles> yeah.. well it does work nicely as a generic telnet into java beanshell
+15:02:40 <dmiles> then has a command override that could send it along to some other callback app.. like a mud
+15:03:01 <siege> actually, I wrote some "fake" mud commands in bsh
+15:03:11 <siege> look, go, the core directions
+15:03:16 <Vutral> dmiles: hey
+15:03:17 <devEiant> Anyone have a pointer to the SubL Reference? Link from Opencyc.org appears to be broken.
+15:03:18 <Vutral> how is it
+15:03:24 <siege> createExit, createLink
+15:03:50 * siege is talking too much mud on the opencyc channel
+15:03:58 <dmiles> http://www.cyc.com/cycdoc/ref/subl-reference.html
+15:04:25 <devEiant> Thanks.
+15:04:50 <dmiles> siege, not at all .. Johnd mentioned having more interest in IRC channel would not be bad.. many 1000s of downloads of opencyc
+15:05:31 <Vutral> fuck fuck fuck
+15:05:42 <dmiles> even if the talk is what we are working on.. it still relates to OpenCyc in many ways
+15:06:10 <dmiles> so i see.. does that mean beanshell has a default 'this' that you set?
+15:06:15 <dmiles> with the command members?
+15:07:06 <dmiles> or did you try toi run it bsh.. then if that fails you append with defualt opject like mud.<text> ?
+15:09:14 <siege> well, right now it doesn't actually use the mud command interpreter
+15:09:34 <siege> I replaced the cd() command to use the mudRoot instead of files
+15:09:45 <siege> added an ls() command
+15:09:47 <dmiles> :P hehe
+15:09:59 <dmiles> ls() = look ?
+15:10:08 <siege> nah, look() is look ;)
+15:10:16 <siege> I'll send you that script, if you want
+15:10:26 <siege> see, they're all soft-defined in a loaded script
+15:10:28 <dmiles> ls() is so we can look exactly what objects are found in location?
+15:10:33 <siege> nothing hard-coded
+15:10:37 <siege> right
+15:10:52 <siege> ls() gives a list of contents and a list of named sections and what's in them
+15:11:02 <siege> cd lets you change into them
+15:11:25 <siege> when you cd, it sets the variable "n" to the current mud object you're "in"
+15:11:33 <Vutral> intresting
+15:11:47 <Vutral> i would add the capability for remote rooms
+15:11:50 <siege> the "move" commands just look for an exit with that name, get the mudpath associated with the exit, and cd to it
+15:12:35 <siege> you can do like MudObject other = MudPath.resolvePath(null, "/midgaard/border-wall/west-gate");
+15:13:02 <siege> and other will be set to the mud object named "west-gate" inside the border-wall ...
+15:13:14 <Vutral> siege
+15:13:17 <siege> yo
+15:13:18 <Vutral> remote objects and rooms
+15:13:24 <Vutral> a distributed mud
+15:13:34 <siege> oh, THAT kind of remote object
+15:13:48 <siege> working on the theory of it
+15:13:51 <siege> using RMI
+15:14:07 <siege> should work well.
+15:14:13 <Vutral> hmm
+15:14:22 <Vutral> not very portable
+15:14:31 <Vutral> i thought about a protocol
+15:14:32 <TechnoBuddha> i think that a distributed mud works best when you use the "portal" concept, so you can cleanly jump from one to another.. too much intercommunication can be troublesome, and also, if one goes down, it could have a large impact on another.
+15:14:44 <Vutral> well
+15:14:51 <Vutral> the mud can cache the data of the other one
+15:14:52 <siege> there are SO MANY protocols for intra-mud communications, a lot of them are even less portable
+15:14:57 <siege> I don't want to write yet another one.
+15:15:14 <Vutral> siege: just one which does not require java
+15:15:24 <Vutral> or implement a intra-mud protocol which exists
+15:15:25 <siege> XML-RPC ?
+15:15:40 <TechnoBuddha> as long as it is low volume, xml-rpc shouldn't be much worse than rmi.
+15:15:51 <Vutral> well
+15:15:53 <TechnoBuddha> rmi blows for large volume anyway.
+15:15:54 <Vutral> xml-rpc is ok
+15:15:57 <Vutral> but performance is low
+15:15:57 <siege> hm
+15:16:02 <siege> XML-RPC is easier, too
+15:16:05 <Vutral> ascii-network is better
+15:16:12 <Vutral> tcp is reliable
+15:16:15 <Vutral> rdp is too
+15:16:20 <Vutral> udp is not so
+15:16:27 <siege> XML-RPC is over tcp
+15:16:29 <Vutral> but you can always use binary
+15:16:30 <TechnoBuddha> xml-rpc is tcp based
+15:16:34 <Vutral> nope
+15:16:40 <siege> uh... yes
+15:16:41 <Vutral> xml-rpc is a protocol definition
+15:16:48 <Vutral> not a transport way
+15:16:57 <Vutral> xml-rpc works over smtp also / uucp 
+15:17:00 <TechnoBuddha> usually it is implemented, on the server side, over tcp.. i have never seen a udp based xml-rpc service.
+15:17:03 <Vutral> and much more
+15:17:05 <Vutral> than tcp
+15:17:10 <siege> hm, true. I should say that it's available over tcp
+15:17:12 <Vutral> it's just a way to pack the informations
+15:17:31 <Vutral> usual you use http today
+15:17:56 <Vutral> i prefer reimplementation of one of these existant intra-mud protocols
+15:17:58 <Vutral> a good one
+15:18:16 <siege> those that I have seen are all specific to their "type" of mud
+15:18:16 <Vutral> imagine you can extend it if needed and parallel you still have rmi available
+15:18:24 <siege> and not nearly extensible
+15:18:32 <Vutral> i think there is a RFC
+15:18:36 <Vutral> even
+15:19:23 <siege> got a link?
+15:21:14 <Vutral> i dunno the number
+15:21:17 <Vutral> i just read about one
+15:21:19 <Vutral> or i read it
+15:21:24 <Vutral> i read much rfcs
+15:21:26 <siege> ... what it was called?
+15:21:26 <Vutral> ietf.org
+15:21:32 <Vutral> i dunno
+15:21:43 <siege> yes, that's where I've been getting all these telnet extensions from
+15:23:30 <Vutral> if not
+15:23:36 <Vutral> i can develop a protocol for you
+15:23:45 <Vutral> textual one prefered
+15:23:48 <Vutral> nicely documented
+15:24:05 <Vutral> portable
+15:24:22 <Vutral> rmi is still ok
+15:24:35 <Vutral> but you need to tell me more then
+15:24:45 <Vutral> and the objects... if they change too often
+15:25:00 <Vutral> that is the effort of non rmi......
+15:25:12 <Vutral> change in objects does not cause incompatiblity
+15:25:28 <siege> you know what would make my week? if the beanshell guy emailed me back, interested in the TelnetConsole, and wanted to use it (or the fixed version) as a part of bsh.
+15:25:31 <Vutral> and a good made protocol can run in multiple versions parallel backward-compatible
+15:25:39 <Vutral> :>
+15:25:44 <Vutral> ic
+15:25:59 <siege> luckily, MudObject is XMLEnabled... and can be represented as an org.w3c.dom.Element
+15:26:38 <Vutral> it runs under 1.3 ?
+15:26:40 <Vutral> 1.3.1
+15:26:48 <Vutral> or 1.4 non backward compat
+15:27:42 <siege> what does?
+15:27:55 <siege> the mud as a whole? 1.4 (I use java.util.logging)
+15:28:08 <Vutral> i don'T
+15:28:10 <Vutral> i got 1.3.1
+15:28:15 <Vutral> and 1.4 is not ported yet
+15:28:21 <siege> to what?
+15:28:29 <Vutral> log4j is backward compatible
+15:28:30 <CycLBot> logging is set false
+15:28:37 <Vutral> log
+15:28:37 <CycLBot> logging is set false
+15:28:39 <Vutral> log true
+15:28:40 <CycLBot> logging is set true
+15:28:42 <Vutral> lol
+15:28:52 <Vutral> log 20
+15:28:52 <CycLBot> logging is set false
+15:28:57 <Vutral> that is wrong
+15:29:02 <sandos> =)
+15:29:05 <Vutral> the logarithm of 20 is not logging is set false
+15:29:13 <sandos> ;)
+15:29:23 <Vutral> hmm
+15:29:25 <Vutral> log
+15:29:25 <CycLBot> logging is set false
+15:29:27 <Vutral> log true
+15:29:27 <CycLBot> logging is set true
+15:29:28 <Vutral> log
+15:29:29 <CycLBot> logging is set false
+15:29:33 <Vutral> boaaaah
+15:30:20 <Vutral> siege: well
+15:30:47 <siege> ?
+15:31:13 <Vutral> rmi..
+15:32:39 <Vutral> where is the source ?
+15:32:43 <Vutral> of MudObject
+15:33:13 <siege> on my hard drive :)
+15:34:22 <Vutral> come on
+15:34:25 <siege> I am not prepared to give out any source for alpha6 yet.
+15:34:28 <Vutral> let me check it out
+15:34:33 <Vutral> i want to work on it yet
+15:34:34 <siege> it'll be in CVS sometime
+15:34:55 <siege> there's some javadoc avail on the site
+15:35:18 <Vutral> btw
+15:35:28 <Vutral> how do you manage it if the location of the object changes
+15:35:35 <Vutral> let me guess
+15:35:38 <Vutral> you don't....
+15:35:40 <Vutral> hehehe
+15:35:50 <siege> location of what object?
+15:35:55 <Vutral> address
+15:35:57 <siege> objects change location all the time
+15:36:04 <Vutral> ip
+15:36:06 <Vutral> host
+15:36:26 <siege> this will be a plugin. probably affected similarly to the way NFS mounts work...
+15:36:42 <siege> the plugin will point to a machine and a resource, and will define a mount point
+15:36:56 <siege> when initialized, that mountpoint will translate to locations on the remote machine
+15:37:17 <siege> if the location of the machine changes, then you just tell the plugin to look elsewhere and termintate();initialize(); it
+15:37:23 <Vutral> well the mountpoint changes
+15:37:35 <Vutral> lol
+15:37:45 <Vutral> but you don't notice when it happens
+15:37:47 <siege> the primary mount point should not change, no
+15:37:57 <Vutral> you will earliest notice when the mount point knocks on your door
+15:38:00 <Vutral> but it does not
+15:38:02 <siege> remote objects, I'm thinking, will not save locally
+15:38:04 <Vutral> cause it's rmi
+15:38:15 <Vutral> problematic
+15:38:16 <siege> this'll save some headaches
+15:38:22 <Vutral> and cause
+15:38:28 <Vutral> if the peer disappears
+15:38:34 <Vutral> the object is gone
+15:38:42 <Vutral> the room is gone
+15:38:43 <siege> then those in the peer are left with stubs
+15:38:47 <Vutral> the player is in nothing
+15:38:57 <Vutral> a cache
+15:39:00 <siege> yup
+15:39:01 <Vutral> or wut
+15:39:08 <Vutral> hmm
+15:39:22 <siege> just not a very large one
+15:39:24 <Vutral> i will cause you headache enough i think :>
+15:39:32 <Vutral> when i try to rmi
+15:39:46 <siege> you're be very helpfull, thank you.
+15:40:11 <Vutral> lol
+15:40:16 <Vutral> hmmm
+15:40:17 <Vutral> imagine this
+15:40:20 <Vutral> there is no object 
+15:40:23 <Vutral> only xml data
+15:42:37 <Vutral> does MudObject extend RemoteObject ?
+15:45:49 <Vutral> rmi is the reason why i don't use it
+15:45:50 <Vutral> lol
+15:51:41 <Vutral> dmiles: still optimizing alice ?
+15:52:20 <dmiles> yeah.. i have one tiny bug to finish.. i am 'tracinf' stepping through code.. man that is ugly
+15:52:51 <Vutral> hehe
+15:52:58 <Vutral> i am fixing problems also
+15:53:13 <Vutral> for some strange reason i cannot set a required funciton pointer
+16:19:21 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+16:23:07 <Vutral> i am depressive
+16:23:09 <Vutral> GJHOSDÜJGasd
+16:23:42 <futhin> i am maniac
+16:23:52 <futhin> let's become friends and become maniac depressive
+16:26:25 <Vutral> i am offline some time
+16:26:34 <Vutral> 4:14
+16:26:39 <Vutral> i wanted to be online 1 hour
+16:26:41 <Vutral> hmm
+16:26:43 <Vutral> 3:14 too much
+16:26:53 <Vutral> makes 3 1/4 sleep piles
+16:26:54 <Vutral> brb
+16:30:45 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+16:33:25 --- quit: futhin ("bbl")
+16:44:22 --- quit: Vutral (Read error: 110 (Connection timed out))
+16:46:52 --- quit: Victory (Read error: 110 (Connection timed out))
+17:06:48 --- quit: devEiant (Remote closed the connection)
+17:25:05 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+17:37:00 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:36:10 --- join: Victory (~Enigma335@pD9043204.dip.t-dialin.net) joined #opencyc
+18:36:33 --- join: Vutral (~ss@pD9043204.dip.t-dialin.net) joined #opencyc
+18:37:49 <Vutral> dmiles ?
+18:42:25 <dmiles> here
+18:42:41 <dmiles> started on a JavaRt remote VM ;>
+18:42:47 <Cobra> :)
+18:42:52 * dmiles got distracted away from alicebot again
+18:44:30 <Vutral> dmiles
+18:44:32 <Vutral> cool
+18:44:37 <Vutral> how good are you in c ?
+18:44:44 <dmiles> i am writting in C now
+18:44:50 <Vutral> hey i got an function
+18:44:59 <Vutral> and i would like if you could help me fixing it
+18:45:16 <dmiles> sure as long as you work from an httpd mapped filesystem
+18:45:32 <Vutral> i don't
+18:45:39 <Vutral> but it's not much
+18:45:42 <Vutral> it's a splitter
+18:45:59 <dmiles> oh string splitter
+18:46:04 <Vutral> i split a char * into (int)count pieces
+18:46:14 <dmiles> hrrm i only know enough to be troublesome
+18:46:29 <Vutral> if the count is reached i need to put the remaining tokens (i use strtok) into the last array char 
+18:46:34 <Vutral> char pointer 
+18:46:41 <Vutral> lol :>
+18:48:03 <dmiles> last array char.. you mean the chars at the last address?
+18:49:55 <Vutral> yeah
+18:50:00 <Vutral> i have a array of char pointers
+18:50:09 <Vutral> char *bla[]
+18:50:13 <Vutral> like argv
+18:50:15 <Vutral> :>
+18:50:31 <Vutral> the elements of that are my result later
+18:50:48 <dmiles> sounds like when you get to the end you are placing what yoiu havent already sucked up?
+18:51:21 <Vutral> yeah
+18:51:26 <Vutral> let me paste you some code
+18:51:36 <dmiles> how do you shrink your stringtok produced array?
+18:52:24 <dmiles> sounds like you need to make anew array.. then length of your tail and put things over to that
+18:52:44 <dmiles> strcpy each of the tail end 
+18:53:30 <Vutral> i have a array
+18:54:06 <dmiles> souds like it going to look like [e1,e2,e3,[e4,e5,...]]
+18:54:09 <dmiles> right ?
+18:54:13 <Vutral> nope
+18:54:32 <Vutral> e[0] till e[count]
+18:54:41 <dmiles> [e1,e2,e3,"e4 e5 e6"] ?
+18:54:44 <Vutral> every element of e is a char pointer
+18:54:51 <Vutral> yeah
+18:54:59 <Vutral> if count is reached
+18:55:05 <Vutral> let's assume its 4
+18:55:15 <Vutral> but there are 6 tokens
+18:55:21 <Vutral> it looks like in the example
+18:55:23 <Vutral> you gave
+18:55:33 <Vutral> 03:58:00
+18:56:25 <dmiles> hrm ok i see what you are doing.. you need to create the last string and start appeneing your tokens
+18:57:12 <dmiles> printbuf() yeah
+18:57:21 <Vutral> hehe
+18:57:25 <Vutral> i do that for debug
+18:57:48 <Vutral> the problem is basically
+18:57:50 <Vutral> the first
+18:57:53 <Vutral> element of all
+18:58:04 <dmiles> oh string append i see.. well sounds like you are not malocing enough 
+18:58:04 <Vutral> gets set out of the for loop
+18:58:31 <Vutral> i append as much as the string i split is
+18:58:34 <Vutral> that should be more than enough
+18:58:40 <dmiles> or maybe you mallac on the langhth of original?
+18:58:46 <Vutral> yes
+18:58:48 <dmiles> yeah
+18:58:55 <Vutral>  if(i == times-1) {
+18:58:59 <Vutral>    out[times-1] = (unsigned char *)malloc(strlen(str)+1);           
+18:59:02 <Vutral>    }      
+18:59:04 <Vutral> there
+18:59:14 <Vutral> the last element
+18:59:14 <dmiles> ok then in that case what is wrong?
+18:59:17 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:59:18 <Vutral> causes mallocation
+18:59:24 <Vutral> times
+18:59:27 <dmiles> ChemeBot!
+18:59:31 <Vutral> times-1 times times+1
+18:59:36 <Vutral> i dunno what is right
+19:00:05 <dmiles> i'd just overmallac personnly. ;P faster maybe then trying to compute some pretty number
+19:00:35 <Cobra_> help
+19:00:42 <Vutral> hmm
+19:00:48 <Vutral> well
+19:00:51 <Vutral> cobra_ ?
+19:00:52 <graylensman> dmiles: SCHYBOT is mine.  A Scheme Bot frontend to my Scheme frontend to OpenCyc :() whew..
+19:00:53 <Cobra_> ohh, all quiet from the bots
+19:00:56 <dmiles> but anyways what would the problem be.. core dump?
+19:01:06 <dmiles> awesome!
+19:01:40 <Vutral> well
+19:01:42 <Vutral> the last tokens
+19:01:45 <Vutral> are not getting appended
+19:01:47 <Vutral> i dunno why
+19:01:50 <dmiles> vutreal this is 1/3 of the C code i have ever written in my life http://12.225.207.235/offt/sourceforge/logicmoo/src/logicmoo/javart.c
+19:02:36 <dmiles> i painfully learned it only enough so i could use JNI :P
+19:03:19 <dmiles> others  here maybe know more
+19:03:27 <graylensman> Its amazing.  SCHYBOT connects, logs in, joins and prints out all conversation in 31 lines of Scheme.
+19:03:32 <Vutral> hehe
+19:03:35 <Vutral> well
+19:03:44 <Vutral> i try to port java algos to c
+19:03:48 <Vutral> but i have no caffeine
+19:04:10 <graylensman> WHY would anyone even think of using ... oops
+19:04:59 <dmiles> c? for messing with legacy code like JNI :P
+19:05:19 <dmiles> i am bout to give up on this .so methoid and just make prolog telnet into java to use it
+19:05:21 <Vutral> using what
+19:05:52 <graylensman> Oh I don't know.. like using B or something :)
+19:05:57 <Vutral> i try to fix my library
+19:06:16 <Vutral> so i can increase efficency
+19:07:39 <Vutral> i am an idiot sometimes
+19:07:46 <dmiles> hrrm i know what to do.. just make BeanShell availbe via telnet .. let prolog construct the terms 
+19:07:53 <Vutral> when i read a manual page 200000 times
+19:08:01 <Vutral> and then come back
+19:08:05 <Vutral> look 1 second and see
+19:08:15 <Vutral> THE MALLOCED SPACE BEHIND THE POINTER
+19:08:25 <Vutral> NEVER FORGET TO MALLOC A POINTER
+19:08:26 <Vutral> hehehe
+19:08:34 --- quit: TechnoBuddha (Read error: 104 (Connection reset by peer))
+19:08:47 <dmiles> i thought mallac was supposed to produce that pointer for you
+19:08:49 <Cobra> that's a bad way to put it...
+19:08:51 --- join: TechnoBuddha (~TechnoBud@vsat-148-64-145-162.c005.g4.mrt.starband.net) joined #opencyc
+19:09:08 <Vutral> yeah
+19:09:11 <Vutral> but you need to use it
+19:09:13 <Cobra> :)
+19:09:15 <Vutral> btw. i fixed my algorithm
+19:09:16 <Vutral> :>
+19:10:22 <Vutral> thx dmiles
+19:11:48 --- quit: SCHYBOT ("leaves")
+19:12:30 <dmiles> can SCHYBOT perform dirrect sceme calls?
+19:12:52 <dmiles> such as scheme: (+ 1 1) ?
+19:13:01 <Vutral> that looks like lisp
+19:13:49 <graylensman> He will.  I only started him 10 mins ago.  Give me an hour!  He is interactive as well so I am typing in commands from the repl.  
+19:14:09 <dmiles> hehe
+19:14:22 <dmiles> i understand
+19:15:15 <Vutral> dmiles
+19:15:18 <graylensman> Should be real easy.  Check lines prefixed with his name. If starts with a '(' then (eval line) done.
+19:15:38 <Vutral> thx you helped me so finde
+19:15:39 <Vutral> fine
+19:15:41 <dmiles> *nod*
+19:15:41 <CycLBot> You
+19:15:42 <Vutral> i dunno how
+19:15:44 <Vutral> but it worked :>
+19:15:53 <Vutral> thx
+19:15:59 <Vutral> when does CycLBot say you ?
+19:16:00 <Vutral> *
+19:16:00 <CycLBot> You
+19:16:03 <Vutral> ok :/
+19:16:05 <Vutral> why ?
+19:16:08 <Vutral> *
+19:16:08 <CycLBot> You
+19:16:10 <Vutral> *b
+19:16:11 <CycLBot> You
+19:16:14 <Vutral> hmm
+19:16:17 <Vutral> that does not make sense
+19:16:40 <dmiles> * bounces
+19:16:40 <CycLBot> You bounces
+19:16:52 <dmiles> its for emotes in mud
+19:17:27 <Vutral> ohh
+19:17:30 <Vutral> * sucks
+19:17:30 <CycLBot> You sucks
+19:17:33 <Vutral> * suck
+19:17:33 <CycLBot> You suck
+19:17:35 <Vutral> lol
+19:17:39 <Vutral> ic
+19:17:45 <Vutral> * giggles
+19:17:45 <CycLBot> You giggles
+19:17:55 <Vutral> you should compensate that plural problem
+19:18:06 <Vutral> :>
+19:18:31 <dmiles> i could just use player name (what everyone else sees)
+19:18:42 --- quit: Cobra_ ("[x]chat")
+19:18:42 <Vutral> ic
+19:19:08 <Vutral> hmm
+19:21:25 <dmiles> java_create_object('java.util.Date',X). -> X = "Fri Jul 12 12:00:01 EDT 2002"
+19:21:41 <Vutral> looks nice
+19:21:44 <Vutral> what does it do
+19:21:49 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:22:25 <dmiles> it allows prolog to make java objects and threads.. everyone on the SWI_prolog lists complains they get called by java but never the respect of calling java themselves
+19:22:53 <graylensman> Now read display loop is on a separate thread.  +5 lines of code but refactored -3.  Now 33 lines total.
+19:23:00 <dmiles> so in the Cyc to SWI-Prolog calling bindings maybe i can have it do it over prolog code
+19:23:24 <dmiles> but i am sure someone would rtahter just call java dirrectly from cyc
+19:25:17 <Vutral> hmm
+19:25:43 <Vutral> sounds good
+19:27:25 --- quit: siege (carter.openprojects.net irc.openprojects.net)
+19:32:54 --- join: siege (~siege@dsl254-102-094.nyc1.dsl.speakeasy.net) joined #opencyc
+19:33:45 <graylensman> ??
+19:34:21 <dmiles> SCHYBOT (+ 1 1)
+19:34:43 <Vutral> re
+19:34:44 <dmiles> oh .. i missed your question
+19:35:18 <dmiles> oh no question.. re ??
+19:35:54 <Vutral> hehe
+19:36:03 <Vutral> i was gone a moment
+19:36:07 <Vutral> hmm
+19:36:18 <Vutral> i love my live
+19:36:34 <Vutral> sometimes
+19:36:34 <Vutral> ;)
+19:43:00 <Vutral> dmiles: still there ?
+19:43:16 <Vutral> too much pipes break here
+19:44:20 * dmiles is still here for the next 4 hours
+19:45:18 <Vutral> well
+19:45:25 <Vutral> i am debugging
+19:45:26 <Vutral> still
+19:45:31 <Vutral> it really sucks
+19:45:36 <Vutral> if you tink that was the last one
+19:45:40 <Vutral> there comes a new one up
+19:46:26 --- quit: SCHYBOT (Remote closed the connection)
+19:52:52 <Vutral> hmm
+19:52:58 <Vutral> is the bot itself coded in sheme
+19:53:02 <Vutral> schybot
+19:55:52 <Vutral> brb
+19:57:22 <graylensman> (+ 1 2)
+19:57:27 <graylensman> damn!
+19:58:25 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:58:42 <graylensman> (+ 1 3)
+19:58:55 <graylensman> YO SCHYBOT do something!!
+20:00:14 <dmiles> (RANDOM 20)
+20:04:33 <graylensman> (+ 1 3)
+20:05:11 --- quit: SCHYBOT ()
+20:07:09 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:07:18 --- part: TechnoBuddha left #opencyc
+20:08:54 <graylensman> (+ 1 3)
+20:08:59 <graylensman> ARGH
+20:10:33 <dmiles> not mush charicter handling?
+20:10:57 <graylensman> No I am using REGEXP to parse all the read lines.
+20:11:38 <graylensman> It is doing it fine.  I just don't know how to "send" a simple IRC msg/string to a channel I have joined :)
+20:12:05 <dmiles> PRIVMSG #opencyc: hi
+20:12:19 <graylensman> OK 15 secs and I got it.
+20:12:27 --- quit: Vutral (Read error: 110 (Connection timed out))
+20:13:06 <graylensman> (+ 1 3)
+20:13:13 --- quit: Victory (Read error: 110 (Connection timed out))
+20:14:37 --- quit: SCHYBOT (Remote closed the connection)
+20:17:21 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:17:27 <graylensman> (+ 1 2)
+20:17:27 <SCHYBOT> 3
+20:17:33 <graylensman> YES!!!!!!!!!!
+20:17:52 <graylensman> (+ 23849585968845897 82397489479485)
+20:17:53 <SCHYBOT> 23931983458325382
+20:18:07 <dmiles> (+ 23849585968845897 8239XYZ479485)
+20:18:14 <dmiles> (RANDOM 20)
+20:18:23 <dmiles> (+ 1 2 20)
+20:18:25 <graylensman> I Scan for (+ only!!1
+20:18:26 <dmiles> (+ 1 2)
+20:18:38 <graylensman> You killed me with a bad number!
+20:18:57 <dmiles> i was wondering yeah .. thats why my second was supposed to be good
+20:19:30 --- quit: SCHYBOT (Client Quit)
+20:20:08 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:20:17 <graylensman> (+ 28934738 8234738947)
+20:20:17 <SCHYBOT> 8263673685
+20:20:25 * dmiles is nice this time ;P
+20:22:05 <graylensman> Ok now I hook him up to OpenCYC!
+20:23:52 --- quit: SCHYBOT (Remote closed the connection)
+20:48:12 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:48:30 <graylensman> (constant-p #$Person)
+20:50:05 <graylensman> (constant-p #$Person)
+20:52:21 <SCHYBOT> T
+20:52:31 <graylensman> (constant-p #$Person)
+20:52:31 <SCHYBOT> T
+20:52:47 <graylensman> (constant-p #$DMiles)
+20:52:57 <graylensman> uh oh
+20:54:23 <graylensman> (create-constant "Jeff")
+20:54:54 --- quit: SCHYBOT (Remote closed the connection)
+20:56:55 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:57:24 <SCHYBOT> T
+20:57:51 <SCHYBOT> "#$DMiles is not an existing constant"
+20:58:06 <SCHYBOT> #$DMiles
+20:58:18 <graylensman> (constant-p #$DMiles)
+20:58:20 <SCHYBOT> T
+20:58:43 <graylensman> As the French would say "Wa the Wa La".  That is done.
+20:59:20 <graylensman> (cyc-assert '(isa #$DMiles #$Person) BaseKB)
+20:59:21 <SCHYBOT> "Variable BASEKB is unbound"
+20:59:37 <graylensman> DAMN CASE SENSITIVITY
+20:59:57 <graylensman> (cyc-assert '(isa #$DMiles #$Person) #$BaseKB)
+20:59:57 <SCHYBOT> "Formula 
+21:00:32 <graylensman> (cyc-assert '(#$isa #$DMiles #$Person) #$BaseKB)
+21:00:32 <SCHYBOT> T
+21:01:24 <graylensman> (cyc-query '(#$isa ?P #$Person) #$BaseKB)
+21:01:24 <SCHYBOT> (((?P . #$DMiles)))
+21:02:06 <graylensman> (display/query-result (cyc-query '(#$isa ?P #$Person) #$BaseKB))
+21:02:07 <SCHYBOT> "Operator DISPLAY/QUERY-RESULT is not defined in the API"
+21:02:25 <graylensman> oops.
+21:03:02 <graylensman> dmiles: Well anyway.  IRC and OpenCyc connectivity.  All done.
+21:03:59 <graylensman> 3 hrs at most to do :) Don't try this in C.
+21:05:41 <graylensman> (+ 1 2)
+21:05:42 <SCHYBOT> 3
+21:05:58 <graylensman> That was Cyc doing that and not my Scheme REPL.
+21:06:57 <graylensman> But I really want my REPL to eval this instead.  Since it understands CycL it works better as I can use my overlay functionality like display/query-result.  
+21:07:39 <graylensman> (random 20)
+21:07:39 <SCHYBOT> 2
+21:10:01 <graylensman> (exit)
+21:10:33 --- quit: SCHYBOT (Remote closed the connection)
+21:25:57 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+21:47:04 <dmiles> neat.. so the cooler macros you wrote for definig collections and things in Scheme would start working becasue you evaled it in Schemem and only called OpenCyc when it was part of the API?
+21:54:57 --- quit: futhin ("bye")
+22:02:01 <graylensman> Well thats for tomorrow night tho easy.  Just read in the string from IRC and eval it.
+22:02:24 <graylensman> later
+22:02:38 --- quit: graylensman ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.07.12

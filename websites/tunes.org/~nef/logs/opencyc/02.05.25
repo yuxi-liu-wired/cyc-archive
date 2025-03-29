@@ -1,0 +1,194 @@
+00:00:00 --- log: started opencyc/02.05.25
+00:00:02 --- log: started opencyc/02.05.25
+00:00:02 <dmiles> well i guess it could be
+00:00:11 <dmiles> do they give you massive machines at work?
+00:00:17 <bruce> nah
+00:00:22 <bruce> we're a very small company
+00:00:32 <bruce> i got this machine cuz another company was closing and had a firesale :)
+00:00:43 <dmiles> stuff we have at home is ussually better then work
+00:00:47 <bruce> yeah
+00:01:09 <dmiles> it used to drive me nuts at my last job.. they only gave me a p3-500 with one monitor
+00:01:16 <bruce> i have purify on solaris @ home ... i don't have that sort of thing @ work.
+00:01:17 <dmiles> and 256meg ram
+00:01:23 <bruce> heh
+00:01:50 <dmiles> i require at least 2 machines to do anything sourous with >3 monitors
+00:01:53 <bruce> i think i have about 2G of RAM at home.
+00:02:06 <bruce> (not counting the RAM on video cards, etc)
+00:02:39 <dmiles> that works out :)
+00:03:28 <bruce> yeah .. but it also leads to the part of working with opencyc that is the hardest for me to get used to
+00:03:40 <bruce> i'm so used to performance work that it seems strange to just *use* something
+00:03:57 <dmiles> :)
+00:04:28 <dmiles> well maybe in a while opencyc will have an iteration that invoves the kernel for us to try to improve
+00:05:19 <dmiles> i was messing with 'using' prolog kernels for a while.. then starting hacking their C code for perfomance and new structs
+00:05:52 <bruce> you might check out valgrind sometime on Linux
+00:06:03 <bruce> it is a Purify-like memory checker .. but works by simulating the x86
+00:06:05 <dmiles> opencyc's release gave me an excuse to get back to logic and out of that area
+00:06:31 <dmiles> (the area of imporving logic solvers)
+00:06:53 <dmiles> which all work in that area is to create something i can just use
+00:06:55 <bruce> and then to be more fun, it can simulate the L1 and L2 caches and do function-by-function analysis or line-by-line source code annotation to let you know stats about cache reads/writes/misses for data and instructions.
+00:07:02 * bruce nods.
+00:07:50 <dmiles> nice analysis tool
+00:08:07 <bruce> yeah, it is really sweet.
+00:08:54 <dmiles> it would be good to be able to connect your code dirrectly to use when it's not asm
+00:09:05 <bruce> ?
+00:09:12 <dmiles> rr cpu use
+00:10:10 <dmiles> meaning it would be good to be able to see the relationship to your source vs what actually happens asm-wise
+00:10:26 <bruce> ahh, intel's VTune does that nicely on Windows.
+00:10:38 <bruce> and the latest version has a datacollection backend for Linux
+00:23:26 <dmiles> English Translation : 
+00:23:26 <dmiles> A Corridor contains portal from to fn A Corridor East Transporter Room.
+00:23:49 <dmiles> ussing CycNL generator for room descriptions now
+00:24:21 <dmiles> trying to make the room descriptions generated from whats in there
+00:26:02 <bruce> hmmmm, i think that tends to be pretty hard to do attractively/effectively.
+00:26:40 <dmiles> it is.. i am mainly concerend with things names getting used and portal connectors
+00:26:53 <dmiles> i am not going to try to go overboard spending a week at it
+00:27:19 <dmiles> although one could have alot of fun with it
+00:29:12 <dmiles> worked:  a passage #$East-Generally leading to #$Area1005
+00:42:46 <dmiles> (implies 
+00:42:46 <dmiles> 	(nameString ?Nart ?Text)
+00:42:46 <dmiles> 	(ist EnglishParaphraseMt (genFormat ?Nart ?Text !NIL)))
+00:43:12 <dmiles> i wonder why i had to do that
+01:21:55 <dmiles> hrrm my email to list never formats correclty
+01:22:12 <bruce> it'd be nice if the forums weren't used
+01:22:18 <bruce> and there was a real mail list
+01:22:43 <dmiles> i am wornering why sourceforge makes the distinctions between them
+01:23:00 <dmiles> there are also mailing lists
+01:23:21 <dmiles> but i notive everyone uses forums over lists.. not just opencyc
+01:23:43 <dmiles> maybe SF interface is more accessable in the forum nature
+01:24:43 <dmiles> i think they could or chould be merged.. from mail to look/feel like a mailing list.. and provide the current forum display
+01:25:00 <dmiles> (the way everyone else does it :)
+01:25:07 <dmiles> like MUD-DEV
+01:25:21 <bruce> yeah. i'm not a really big fan of sourceforge overall.
+01:26:12 <dmiles> i set up a mailing list on logicmoo once and it never told me my password or let it set it.. now i am locked out
+01:26:53 <dmiles> and every day i have kersral ontology agent request to send me a huge ontology file .. and at it to the list
+01:27:08 <dmiles> err and add it to the list
+01:27:24 <dmiles> i am locked out so i just have to delete SF notification
+01:28:02 <dmiles> telling me i am supposed to admin the list ;P
+01:28:26 <bruce> contact their support?
+01:28:55 <dmiles> i need to.. but i already set up a mail rule lowering the priority
+01:29:11 <dmiles> (the prioprty of emailing their support)
+01:29:36 <bruce> hmmm, i hate porting things to OS X
+01:29:52 <dmiles> too bad they used BSD
+01:30:03 <bruce> nah, that's not what makes it a pain.
+01:30:18 <bruce> the pain is in their freak linker, freak dynamic libraries
+01:30:52 <dmiles> yeah sounds painfull that everyting should work .. but it's a discovery to what wont
+01:31:24 <dmiles> i can imagine things like ncurses compatability
+01:31:53 <dmiles> or anything that is ussually linked
+01:32:14 <dmiles> what are you prting right now?
+01:34:16 <bruce> the Nebula Device
+01:34:37 <bruce> http://www.radonlabs.de/ or http://www.sf.net/projects/nebuladevice/
+01:35:19 <dmiles> cool
+01:35:37 <dmiles> any chance at abstracting all persistance to cyc kb?
+01:35:47 <dmiles> :)
+01:35:54 <bruce> "?
+01:36:47 <dmiles> well i am looking arround for a engine (like we are doing to Jamud) that is arready written to use a RDBMS
+01:37:29 <dmiles> i dont *really* enjoy writting a client
+01:37:47 <bruce> oh, someone else and I have a block storage library
+01:37:59 <dmiles> i mean i see logicmoo as a pain in the buttox :)
+01:38:09 <dmiles> but really really *want* it
+01:38:14 <bruce> but that wouldn't really help you as far as I can tell
+01:39:12 <dmiles> i did a few sources on SF for games written in programming languages i know.. that have a sepearate live DB
+01:39:21 <dmiles> err searches.. found some..
+01:39:39 <dmiles> well they are all under developement
+01:39:54 <dmiles> but was looking for one that is complete
+01:40:02 <dmiles> enought to be at least fun
+01:41:13 <dmiles> i dont want to abondon siege and i's project but understand we are in no hurry and ui have time to play arround
+01:41:22 <dmiles> (Jamud that is)
+01:41:58 <dmiles> and whatever i do in the meantime, will translate back out for Jamud in time
+01:42:33 <dmiles> so currently as you know i take a low common denomiator like circlemud and am cloning it
+01:43:06 <dmiles> doing very neat stuff.. but if i could take an existing engine and spend 3 days abstacting things to use Cyc instead of SQL that would be good
+01:43:19 <dmiles> that would require the engine used no *real caching*
+01:43:37 <dmiles> and thats always the bibnding factor
+01:44:11 <dmiles> most programs like to build structs and objects once for the DB
+01:44:34 <dmiles> err from the DB.. i am trying to find something that always believes the DB needs read
+01:44:59 <dmiles> and every update results in a DB sideeeffect
+01:45:52 <bruce> it can cache
+01:46:04 <bruce> it just has to have a protocol for handling cache invalidation and distributed locking
+01:46:08 <bruce> which is non-trivial.
+01:46:29 <dmiles> well if it used a client to client mesdsaging for expiration thats understandable
+01:46:53 <dmiles> but its no fun when those messages subsume all changes
+01:47:17 <dmiles> meaning theyt update each others caches
+01:47:51 <dmiles> a new object created in cyc woiuldnt be able to tell everyone that it satarted existing
+01:48:37 <dmiles> or if it could the game would have to be kick butt enough to be worth spending that much time working with SubL
+01:49:49 <dmiles> i just cant find any cool codebases that always expect they need to update their caches
+01:50:36 <dmiles> for example: http://sourceforge.net/projects/arianne/ <-0 looks neat
+01:51:38 <dmiles> but not relying enpough on SQL
+01:51:55 * bruce wouldn't rely on SQL at all for that sort of app.
+01:52:05 <dmiles> well at least a DB
+01:52:15 <bruce> yeah, i've traditionally used an OODB
+01:52:36 <dmiles> cyc + javaAPI can spoof a OODB
+01:53:59 <dmiles> if i had dirrect params expected of the OODB, i would go nuts writting code
+01:54:38 <dmiles> especially if i knew i didnt need to touch game code
+01:55:24 <dmiles> but that also the client came to reenumarte things every once in a while
+01:55:50 <dmiles> so that if cyc pops out a new thing.. the clients will all eventually notice
+01:57:11 <dmiles> futher more though it would be nice to work in a way that i could instanciate an NPC somehopw
+01:57:33 <dmiles> but i can use the current model
+01:57:43 <dmiles> a program ticking and updfating Cyc
+01:58:17 <dmiles> the toplevel loop of a proposed mob is super super simele
+01:58:45 <dmiles> simple.. query (whatNext ?MyName ?MyNextCommand)
+01:59:02 <dmiles> ewvery 5 seconds
+01:59:39 <dmiles> ?MyNextCommand of course has to be converted to somnething the engine understands
+02:01:05 <dmiles> oh as well as.. a message like query (someOneDoesSomething ?Who ?whattheyDid ?MyReactionIfAny)
+02:02:04 <dmiles> so a NPC is realized completely in only two predicates that are queried on
+02:02:35 <bruce> hmmm
+02:04:08 <dmiles> you can see its not alot to ask for in a RPG game.
+02:04:20 <dmiles> except for the interdepdnace with a OODB
+02:05:04 <dmiles> but when you say OODB, possibly the Server is an super dupper OODB.. not just a persistance mananger
+02:06:04 <dmiles> but alos containg the complete extent of legalisms?
+02:06:49 <bruce> hmmm, just got the OS X loadable module thingy to link for Nebula Device.
+02:07:03 <dmiles> ah good
+02:07:06 <bruce> our OODB contains everything ..d ata, objects, code
+02:07:55 <dmiles> i see so if one was to incoprperate cyc in it its not just replacing 'data' area is it?
+02:08:37 <bruce> well, i'm interested in cyc cuz OO modelling is not working as well as it might and a logic-based model would have some advantages in writing the code as well as in maintaining it over time
+02:08:40 <dmiles> since the objects are just the results of data?
+02:11:27 <bruce> well, all data is on objects
+02:12:12 <dmiles> so if someone went in and hulked out all the object to client Cyc would that result into making in logic based?
+02:12:43 <dmiles> (thats the basic methodolgy with jamud) all getSets are Queries/asserts
+02:14:37 <bruce> nah, you'd need to represent a lot of the code as CycL or SubL too
+02:14:44 <dmiles> with the only other part making sure the factories alos work with cyc 
+02:15:20 <dmiles> CycL is cool.. what would need SubL ?
+02:18:59 <bruce> unclear
+02:25:36 <dmiles> well the current plan probly could remain.. create a simple text mud that realies 100% on cyc.. let people play it and see the possiblities
+02:26:30 <dmiles> i just tring to aviod finishing coding all the commands :)
+02:27:04 <dmiles> i have look and movement done
+02:27:15 <dmiles> woking on take/drop etc
+02:27:30 <dmiles> as well as on the side dealing with some cyc issues
+02:28:31 <dmiles> but if all i was really doing was brokering data/objects this would be easier
+02:29:12 <dmiles> instead of writting the player interface at the same time
+02:44:01 <bruce> I am off to sleep ...
+02:44:03 <bruce> good night
+02:44:12 <dmiles> take care, good night
+06:52:43 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+08:57:56 --- join: delYsid (mlang@212186194087.graz.teleweb.at) joined #opencyc
+10:52:46 --- quit: delYsid (Remote closed the connection)
+10:54:49 --- join: delYsid (mlang@212186194087.graz.teleweb.at) joined #opencyc
+11:57:01 <delYsid> Is there any way to get html docs for opencyc?
+14:46:46 <bruce> e
+16:57:20 --- quit: delYsid (Remote closed the connection)
+17:57:48 * dmiles returns
+18:07:00 --- join: Don (Don@ip-216-23-123-46.adsl.one.net) joined #opencyc
+18:22:43 --- quit: Don ()
+23:16:28 * bruce yawns.
+23:21:22 <dmiles> bruce.. a deflection in what i am doing.. yet another
+23:21:36 <dmiles> of found this phpRPG
+23:21:46 <dmiles> its a completly SQL based mud
+23:22:14 <dmiles> meaning i am now protring a java SQL server to reflect its persistance in Cyc
+23:22:22 <dmiles> err porting
+23:22:55 <dmiles> this could be usefull beyond since it can make a Cyc KB look/feel like a SQL server
+23:23:26 <dmiles> i wont have to touch any RPG code at first
+23:23:46 <dmiles> since it is the phpRPG project on SF
+23:24:07 <dmiles> all i have to do is make Cyc get out SELECT and do INSERt
+23:24:38 <dmiles> since the entire RPG uses no caching .. nly clients some SQL table
+23:24:44 <dmiles> tables
+23:25:56 <dmiles> but work i have been doing with the logicmoo client would at least have a dirrected idea of what 'has' to be in cyc instead of me adhoc learning
+23:26:40 <dmiles> guestimating predicates 
+23:27:49 * bruce nods.
+23:28:08 <dmiles> and if i spend 16 hours cloning a SQLD for cyc i may have something :)
+23:29:13 <dmiles> so i found the hsqld written in java.. so i only have to find and hulk out its bussiness logic
+23:40:09 <bruce> i've been having fun porting
+23:40:13 <bruce> and stuff
+23:40:15 <bruce> but so tired
+23:44:23 --- join: Taral (~taral@cs6625132-47.austin.rr.com) joined #opencyc
+23:58:32 <dmiles> ok my brain hurts.. i am back to MudClient.java
+23:58:57 <dmiles> saving the sqld to where i am moire ambitous
+23:59:59 --- log: ended opencyc/02.05.25

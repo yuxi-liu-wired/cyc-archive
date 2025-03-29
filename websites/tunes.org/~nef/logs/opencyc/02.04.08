@@ -1,0 +1,434 @@
+00:00:00 --- log: started opencyc/02.04.08
+00:32:31 * QuantumG just read the scrollback, you have a logicMOO?  Can I play with it? :)
+00:33:16 <QuantumG> http://logicmoo.sourceforge.net/ <- be what dmiles was talking about?
+00:33:44 <dmiles> its close to being played with...
+00:34:06 <dmiles> to being able to be played with
+00:36:09 --- join: Edison (~tweber@pD9541E4E.dip.t-dialin.net) joined #opencyc
+00:36:18 <QuantumG> can you talk to the NPCs?
+00:36:28 <dmiles> QuantumG: right now i am getting the hang of linking opencyc to jamud api
+00:36:47 <dmiles> yes.. and the NPC desions on wehat to do next are based on cyc queries
+00:37:13 <QuantumG> cool.
+00:37:27 <dmiles> so the idea is ussing CycL to program the NPC behavour
+00:37:35 <QuantumG> What sort of natural language parsing if any do you have in it?
+00:38:01 <dmiles> currently the domain of iperative Moo commands is small
+00:38:17 <dmiles> but i would like to see the ablity to ask a NPC for help with a process
+00:38:56 <dmiles> then that agent would use a planing library to execute the request
+00:39:06 <QuantumG> right, well it sounds interesting.  I was rambling about Interactive Fiction on the forum a while ago.
+00:39:29 <dmiles> the real goal is to get cyc to play the all powerfull DM
+00:39:52 <dmiles> but the natural language parts.. i'd rather see others work on
+00:40:11 <dmiles> i am a faan of doing stuff once i know 100% of what the user meant
+00:40:36 <dmiles> the proccess of text to CycL..
+00:41:09 <dmiles> is very interesting .. but a very complex subject.. cyc could be used as a broker to help a parser decide what the use could mean
+00:41:32 <dmiles> err to enumerate the possible parsing templates
+00:41:39 <QuantumG> I was considering writing a lojban to CycL translator, but I'm pretty sure no-one wants to learn lojban to play a game, so it would have limited appeal.
+00:42:23 <dmiles> well a liogban to CycL transator would still be very cool
+00:42:30 <dmiles> err lojban
+00:43:00 <QuantumG> yep.  I havn't had much support from the Lojban people in the past however.  They seem to be all dead.
+00:43:07 <dmiles> i am on the lojban mailing list but rearly can read it ;P
+00:44:35 <dmiles>   Pcs     I1 (+Pers1 +Sing +Anim +Humn)
+00:44:35 <dmiles>           have1 (+Past +T1)
+00:44:35 <dmiles>             Dsub    havn't1 (+Pers3 +Sing)
+00:44:35 <dmiles>             Dobj    support1 (+Pers3 +Sing +Count +Mass)
+00:44:35 <dmiles>                       Ops     much1 (+Quant +Sing)
+00:45:11 <dmiles> i am trying to map that output to CycL soon
+00:45:49 <dmiles> but my first priorty is the get logicMOO released into a form thats most usefull
+00:47:52 <dmiles> man tghe StreamTokenizer in java cant parse mulple lines inside a quote string.. yuck
+00:48:23 <dmiles> then it leaves the tokenizer in a state that cant read the rest of the string
+00:48:46 <dmiles> unless you turn off the quotablity
+00:49:12 <dmiles> then keep reading and appending to the string
+00:51:01 <dmiles> QuantumG: you good with Java?
+00:52:13 <dmiles> 12 second lagg .. oops
+00:53:00 <dmiles> [dmiles PING reply]: 34secs
+01:09:35 <QuantumG> sorry, I'm at work, yes, I'm ok with Java.
+01:11:07 <QuantumG> StreamTokenizer, I remember hating on that thing at one point.
+01:13:37 <dmiles> well i think i have it handled .. but man its a painin the butt
+01:14:06 <dmiles> i am sitting mid string trying to read up to the last "
+01:15:45 <dmiles> however when it hits the next " .. it will try to suck up whats after it.. and thats unfiortualy not part of the string
+01:22:31 <QuantumG> maybe the regexp support would be of some use to you.  I've never looked into it.
+01:25:56 <dmiles> might be
+01:35:22 <QuantumG> so what codebase of jaMud have you inherited?  Are you heavily modifying it?
+01:36:36 <dmiles> OLC interfaces
+01:36:50 <dmiles> the command line parsers
+01:37:27 <dmiles> but i am concerned i will have to replace the MudObject to make its get/set members assert/retract
+01:37:45 <dmiles> err and query for get
+01:37:48 <dmiles> in opencyc
+01:38:13 <dmiles> since opencyc has no methods for accessing java objects
+01:38:35 <dmiles> (durring inference like subl module)
+01:40:19 --- join: nefph (ZQWER@dialup-65.58.221.227.Dial1.Portland1.Level3.net) joined #opencyc
+01:40:37 <nefph> [01:38] <QuantumG> so what codebase of jaMud have you inherited?  Are you heavily modifying it?
+01:40:39 <nefph> [01:39] <dmiles> OLC interfaces
+01:40:41 <nefph> [01:40] <dmiles> the command line parsers
+01:40:43 <nefph> [01:40] <dmiles> but i am concerned i will have to replace the MudObject to make its get/set members assert/retract
+01:40:46 <nefph> [01:41] <dmiles> err and query for get
+01:40:48 <nefph> [01:41] <dmiles> in opencyc
+01:40:50 <nefph> [01:41] <dmiles> since opencyc has no methods for accessing java objects
+01:40:52 <nefph> [01:41] <dmiles> (durring inference like subl module)
+01:40:56 <nefph> i pinged ut
+01:41:00 <nefph> err pinged out
+01:41:42 <nefph> so the issue being how much of Jamud has to change..
+01:42:24 <nefph> i am hoping to only add a single subclass of MudObject called MooObject
+01:44:08 <nefph> but the problem is the dataholders are retrived from the objects then walked over in java.. i dont want to subclass every dataholder object...
+01:44:25 <nefph> for example a room may have three subobjects called exits
+01:44:42 <nefph> these exits are not MudObjects yet
+01:45:04 <nefph> they are actual funny shapped dataclasses
+01:45:19 <nefph> speicicly for holding an exit tpye
+01:46:10 <nefph> the room should be getting its data from a cyc query
+01:46:33 <nefph> the cyc query results need to then map themselves into the Exit objects for example
+01:47:06 <QuantumG> public class Entrance extends MudObjectViewable
+01:47:43 <nefph> that means each room.getExists()  will need to 3 new Entrance() publulated with cyc infernce results
+01:48:33 <nefph> yes true mudObjectVewable() could get replaced
+01:49:24 <nefph> siege is woring on making all objects an XML Node 
+01:50:06 <nefph> that means all Objects will be MudObject()
+01:50:11 <nefph> even Entrance
+01:50:28 <nefph> see the deal with entrance is...
+01:50:43 <nefph> it may have all the MudObjectViewable...
+01:51:04 <nefph> but it contains extras.. that not held there.
+01:51:33 <nefph> in a normal MudObjwectViewable
+01:51:39 <QuantumG> sounds like he's reinventing moo.
+01:51:56 <nefph> yes.. he was exacly
+01:52:04 <nefph> err and is.. 
+01:52:48 <nefph> he is depreciaing MudObjectConatiner() to a MudObject()
+01:53:01 <nefph> and Body() 
+01:53:11 <QuantumG> cool, make everything a container
+01:53:16 <nefph> since anything should be able to be a conartiner
+01:53:21 <nefph> exactly
+01:54:03 <nefph> the convincing factor was how many toXML()s he'd need to write ;P
+01:54:14 <QuantumG> friend of mine coded a simulated village in C++ and ended up doing the same thing.  ahhh.. those who fail to study history eh.
+01:54:42 <QuantumG> actually "friend" is a little too strong a word.
+01:55:13 <nefph> well it's tempting myself to just recode jamud 
+01:55:55 <nefph> to re-invent.. 1) at least i have a definate target 2) i will 100% understand the codebase 3) it will do exactly what i want
+01:56:40 <nefph> however i'd rather have help and improvents while i sleep
+01:57:18 <nefph> so working with the jamud developers is worth it
+01:57:59 <QuantumG> read the lambdaMOO white papers.
+01:58:02 <graylensman> nefph<->dmiles Still coding on that mud/moo.  No more SWI, now just Cyc.  Hey it rhymes.
+01:58:38 <nefph> hehe.. well i'd rather not spend even two more weeks trying to get inference stablized
+01:59:09 <nefph> so Cyc works out
+01:59:37 <nefph> then when i have time, maybe mess with some more prolog
+02:00:20 <graylensman> Dont know why you need the Java crap.  Doesn't OpenCYC already have somekind of Web/Java interface.
+02:00:49 <nefph> yes OpenCyc has a very nice java interface
+02:01:11 <nefph> i would not know how to interface to it except from java
+02:01:43 <nefph> but openCyc is missing some tools like loading Kif files
+02:02:46 <graylensman> I started working on a Kif (well Protegee Kif) reader for my Scheme framer this weekend.  Unfortunately in Scheme.
+02:03:08 --- quit: dmiles (Read error: 113 (No route to host))
+02:03:17 --- nick: nefph -> dmiles
+02:03:39 --- nick: graylensman -> JustRay
+02:04:05 <dmiles> so it suffs it into the scheme frames?
+02:04:42 <dmiles> well sceme based property lists
+02:04:51 <JustRay> No creates CLOS classes.  My base class is Frame with :instance :class :slot and :facet subtypes.
+02:05:05 <dmiles> Instance -> priorty -> value ?
+02:05:10 <dmiles> err proterty
+02:05:15 <dmiles> grr property
+02:05:32 <JustRay> (slot value)
+02:06:04 <JustRay> For a classification system still no problem.  Inferencing... well I still haven't a clue.
+02:06:17 <dmiles> so the slot vlaue has a type that is deducaable so you dont need store the type in the instance
+02:06:48 <dmiles> well :facet i guess 
+02:06:51 <JustRay> I can do that no problem.  Storing "trigger" methods in a slot is easy.
+02:07:06 <JustRay> Is doing elephants and their mothers thats hard.
+02:08:09 <JustRay> I was ready Cyc's tutorial.  They had a section on a logic KB vs a Frame/OO KB.  They are all for logic based.  I continue to lean to Frame/OO.  
+02:09:04 <dmiles> well you can re-ifiy a logic kb to apear as a Frame/OO
+02:09:21 <JustRay> Except for Learner and FramerD I can't find any other Frame Based inferencing systems.
+02:10:26 <JustRay> Absolutely.  You can read CYC into a Frame system no problem.  Did it actually with FramerD.  But again its just a dumb DB without real inferencing.
+02:11:19 <dmiles> part o fwhat i want to discover is how/when to be in a dumb db/ or in inference 
+02:11:20 <JustRay> I am still planning on merging Schelog for Prolog / Horn unification.  But I am trying to find something more....  don't know.. still searching.  
+02:12:11 <dmiles> well in prolog something that is fun is a predicate dirived from a horn backchain verses and asserted literal is the same
+02:12:40 <dmiles> so a slot valuie can be a result of an infernce at any time
+02:13:12 <dmiles> when you go back to add a new slot value its all good
+02:13:47 <dmiles> but to "change" the value is more complex
+02:14:05 <dmiles> you need to forward proogate the changes
+02:14:53 <JustRay> Well I am still on Phase I.  Use Protege to create ontology.  Load Protege Pons and Pins file into system.  Phase II is working with relationship predicates. 
+02:17:04 <dmiles> what is the relationship predicates about?
+02:18:19 <JustRay> I have an Elephant class.  Then create two instances E1 and E2. Each has attributes, size weight yada yada.
+02:18:37 <JustRay> Easy in Frame system.  
+02:19:08 <JustRay> But now define relationships.  E2 is mother of E1.  List all female elephants.
+02:19:16 <JustRay> Hard in Frame system.
+02:25:44 <QuantumG> what is easy in a frame system and hard in a logic system though?
+02:32:05 <JustRay> I can't answer that.  I just don't sit right with a CYC like system.  #$SetOfGovFn #$France => #$Paris is not as clean to me as ((isA Country) (name France) (capital Paris) ...)
+02:33:27 --- quit: JustRay (" (<=> (class ?X) (not (individual ?X)))")
+02:33:48 <QuantumG> so define a frame based system (preferably with some reasonable looking syntax) and translate.
+02:33:50 <QuantumG> and he's gone.
+02:33:51 <QuantumG> yah
+02:48:41 <dmiles> i aj away back in 15 minutes
+03:19:18 --- quit: Nolan (Read error: 110 (Connection timed out))
+03:20:02 * bruce yawns.
+04:53:07 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+06:12:20 --- join: kirk (~kirk@boss.braille.uwo.ca) joined #opencyc
+06:34:39 --- part: Edison left #opencyc
+06:38:16 --- join: msbaltz (~msbaltz@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+07:15:27 * Graham is back
+07:53:42 --- quit: Nolan (Read error: 110 (Connection timed out))
+08:54:11 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+08:58:32 --- quit: dmiles (Read error: 110 (Connection timed out))
+09:09:52 --- join: Hedgehog (Filimon@213.233.71.145) joined #opencyc
+09:11:55 <Hedgehog> Hi all
+09:12:27 <Hedgehog> I have a problem with "my Cyc". Is anybody here can help me?
+09:16:27 --- quit: Hedgehog ()
+09:29:05 <Graham> hmm too late
+09:47:33 <stevereed> Post problem details and we will respond asap
+09:59:15 --- quit: Nolan (Read error: 110 (Connection timed out))
+10:54:42 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+12:16:44 --- join: dmiles (ZQWER@dialup-65.58.6.73.Dial1.Portland1.Level3.net) joined #opencyc
+12:22:13 * dmiles returns
+12:28:12 <dmiles> wqhat does ?  org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A STRING at 0x412ec86c is not a f_13442.")
+12:28:15 <dmiles> mean?
+12:29:09 <dmiles> i am trying to troublshoot exactly what i am doing wrong
+12:32:29 --- quit: dmiles ("be back in a few")
+13:21:02 --- quit: kirk ("Leaving")
+13:58:40 --- join: dmiles (ZQWER@dialup-65.58.156.193.Dial1.Portland1.Level3.net) joined #opencyc
+14:00:57 <dmiles>  is not a f_13442.  <- is that an untranlated message code?
+14:02:04 <Graham> when are you getting this?
+14:02:31 <dmiles> i am asserting from java some cycl read from a text file
+14:03:07 <dmiles> well actually i am just using the CycListParser
+14:03:17 <dmiles> at times that parser makes new constants
+14:04:09 <dmiles> maybe i am trying to make a constant that contyains bad chariters?
+14:04:20 <Graham> Steve, you know more about the CycListParser and the java pieces
+14:04:28 <Graham> you'd be better at helping him.,
+14:04:48 <dmiles> what its trying to read is a runnon string...
+14:05:16 <dmiles> well a sting that spans multipl,e lines
+14:05:18 <dmiles> (documentation instance "An object is an instance a Class if 
+14:05:18 <dmiles> it is a member of that Class.  An individual may be an instance of many 
+14:05:18 <dmiles> classes, some of which may be subclasses of others.  Thus, there is no 
+14:05:18 <dmiles> assumption in the meaning of instance about specificity or uniqueness.")
+14:05:40 <Graham> hat it looks like to me is that the string it's reading for some rteason is not being recognized as  aproper data type
+14:06:16 <Graham> hmmm it is probably the carriage returned and new lines that might be giuving it a hard time
+14:06:18 <dmiles> well the StreamTokenizer used is a nasty aniomal at times in java when it spans multiple lines
+14:06:26 <dmiles> i bet your correct 
+14:07:08 <dmiles> before sending it a StrteamTokenizer i tried a couple things like telling the StreamTokenizer endofline is not sugnificant
+14:07:39 <dmiles> but it seems like the quoted String reader grabs the "An object is an instance a Class if 
+14:07:39 <dmiles> [14:08] <dmiles> it is a member of that Class.  An individual may be an instance of ma
+14:08:06 <dmiles> err then its left in a state where the rest of the string needs to be concated
+14:08:19 <dmiles> unfortumately the remaning toekns are..
+14:08:40 <dmiles>  it , is ,a , member..
+14:08:55 <dmiles> then it gets to ") as the last token
+14:09:07 <dmiles> which it likes to call a string ;<
+14:09:45 <dmiles> so one would need to concat all the tokens up to ") then create one that was a )
+14:10:26 <dmiles> but the use of StreamTokenizer is a very cool idea of steves
+14:10:51 <dmiles> as in there is no more appropiriate object
+14:11:05 * stevereed is back
+14:11:29 <dmiles> hi Steve
+14:11:32 <stevereed> Would it be helpful if I supplied
+14:11:39 <stevereed> a sample java program for 
+14:11:44 <stevereed> string assertions
+14:11:46 <stevereed> ?
+14:11:52 <dmiles> yeah be very good
+14:12:03 <dmiles> well.. for a Reader
+14:12:10 <stevereed> OK
+14:12:12 <dmiles> if that is ok?
+14:12:23 <stevereed> send me some specs reed@cyc.com
+14:12:44 <stevereed> I'll put it into the programming tutorial i'm developing
+14:13:04 <dmiles> ok will do
+14:13:21 * stevereed is away: I'm busy
+14:13:31 <dmiles> balls in my court ;
+14:13:32 <dmiles> P
+14:26:11 <dmiles> ok sent.
+15:05:56 --- quit: msbaltz ()
+15:37:21 --- join: Hedgehog (Filimon@213.233.71.121) joined #opencyc
+15:38:21 <Hedgehog> Hi all. Is anybody can help me with "my Cyc"?
+15:43:24 <Graham> I can't helpo yopu right now, but if you explain it, maybe I or someone else can help you soon
+15:44:34 <Hedgehog> When I try to create a constant I receive the message: HTML Transfer error... : Error on ioctl() call
+15:46:38 <Hedgehog> This was hapened on two diferent computer (On Steve's machine this problem doesn't apear)
+15:50:19 <Hedgehog> When I try again the system tell me that the constant already exist but when I make an assertion the constant cannot be used.
+15:56:39 <dmiles> have you pressed the cyclify button before assertion?
+15:57:50 <dmiles> if your assertion doesnt have #$ in front of constants, then you press cyclify it allows you to see what cyc will see and it will add the #$ in front of the constants it knows
+15:58:13 <dmiles> (cyc people am I correct?) 
+15:58:59 <dmiles> i think cyclify is working on all webbrowsers
+16:00:26 <dmiles> Hedgehog, do you see a cycclify button?
+16:00:51 <Hedgehog> My problem apear when I try to create a new constant not when I try to make an assertion.
+16:01:27 <dmiles> are you on localhost?
+16:01:37 <Hedgehog> yes
+16:01:46 <dmiles> Linux Netscape?
+16:02:01 <Hedgehog> KDE default browser
+16:02:12 <dmiles> how many ip's does that machine have?
+16:02:29 <Hedgehog> 1
+16:02:58 <dmiles> i needed to run the java org.opencyc.webserver.WebServer 
+16:03:26 <dmiles> it is a proxy that accesses the tcp server at 3600
+16:04:17 <Hedgehog> sorry?
+16:04:28 <dmiles> do yuo hava the java classes?
+16:04:34 <dmiles> err the .java files?
+16:04:42 <dmiles> and jdk installed?
+16:04:47 <Hedgehog> No
+16:05:08 <dmiles> hrrm well then i guess i would deal with the problem and not workarround it as i did
+16:05:23 <Hedgehog> Tell me
+16:06:01 <dmiles> well i have jdk installed.. and used to builduing java apps on my machine
+16:06:20 <dmiles> so i compiled and exected the WebServer proxy
+16:06:34 <dmiles> mainly becasue i wanted to access it from my windows machines on the lan
+16:06:52 <dmiles> if it doesnt see your client from localhost it is not happy
+16:07:05 <Hedgehog> I know
+16:07:32 <dmiles> the WebServer proxy solves this issue.. and i am just guessing ti might fix what your having as well
+16:07:49 <dmiles> otherwise it could be KDE nastiness
+16:08:05 <dmiles> i'd try the Netscape 
+16:08:50 <Hedgehog> My problem not apear on the browser side but on server when this try to write on my disk!
+16:09:17 <Hedgehog> 1st I think is the rights problem but I'm wrong
+16:09:39 <dmiles>  ioctl()  could be anything.. even tcp based
+16:09:50 <Hedgehog> aha
+16:10:51 <dmiles> KDE may have some strange pipings before render.. it may try to make your localhost->localhost appear as myIOtherIp->localhost at inapropriate times
+16:10:51 <Hedgehog> I'll install the java 2 the I'll try to recompile
+16:11:26 <dmiles> when you do you only have to javac WebServer.java
+16:11:41 <Hedgehog> K
+16:12:03 <dmiles> then make sure your classpath points to the location of the dirrect that 'org' is at
+16:12:32 <dmiles> hrrm well.. actually you know what.. there is a jar file built
+16:12:34 <Hedgehog> K
+16:12:56 <Hedgehog> I sow that jar
+16:12:57 <dmiles> OpenCyc.jar somewhere
+16:13:02 <dmiles> yip
+16:13:34 <dmiles> you can set your classpath to point at the Jar file as well
+16:13:48 <Hedgehog> dmiles can I contact U by mail?
+16:14:06 <dmiles> well i am just a user.. and about tio run for dinner in a bit..
+16:14:19 <dmiles> my email is dmiles@users.sourceforge.net
+16:14:33 <dmiles> but yes you can contact me by email
+16:14:46 <Hedgehog> thank U very much (razvanf@ici.ro)
+16:15:27 <Hedgehog> my localtime is now 2:15 AM but tomorow I try to recompile the server
+16:15:50 <dmiles> i'll be arround.. in about an hour and probly here nearly all the time
+16:16:03 <Hedgehog> C U
+16:16:41 <dmiles> it depends if my fiance/gf talks me into a drive after dinner.. ;) 
+16:57:39 --- quit: Nolan (Read error: 110 (Connection timed out))
+16:58:10 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+17:21:33 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+17:36:57 <dmiles> back
+17:51:25 --- quit: Nolan (Read error: 110 (Connection timed out))
+18:17:44 --- join: johndcyc (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+18:41:26 --- join: MarkWattier (~mark@apx1-04-164.pdx.du.teleport.com) joined #opencyc
+18:41:56 --- quit: Hedgehog (Read error: 113 (No route to host))
+18:43:38 <bruce> dmiles: making headway?
+18:47:54 <MarkWattier> I am trying to create a constant MarkWattier, so I can then assert that I am a H
+18:47:55 <MarkWattier> umanCyclist. I get an error on the web browser complaining about ioctl ( sorry I
+18:47:55 <MarkWattier>  didn't get that error copied ). Then I try to look up this constant, using Alph
+18:47:55 <MarkWattier> abetical search, and the constant is not there. I then try to create the constan
+18:47:55 <MarkWattier> t again, but it complains that the constant already exists. I also get the follo
+18:47:55 <MarkWattier> wing error on the screen where I invoked ./run-cyc.sh :
+18:47:57 <MarkWattier> [2002/04/08 17:37:26 3602 server: Exiting server on error: End of file on stream
+18:47:59 <MarkWattier>  #<STREAM :DESCRIPTOR (8) :INPUT from NIL (open) 402768DC>.]
+18:48:01 <MarkWattier> I have tried re-installing opencyc from the tarball, and the problem is the same
+18:48:03 <MarkWattier>  with both Netscape and Mozilla browsers.
+18:48:05 <MarkWattier> Any suggestions?
+18:48:38 <bruce> if you re-install, could you note the ioctl() error?
+18:48:50 <MarkWattier> OK, just a minute
+18:51:49 <MarkWattier> HTML Transfer halted due to script error:  Error on ioctl() call.
+18:52:20 <MarkWattier> That is all it says. Do I need to install the java stuff just to use the browser interface?
+18:52:38 * bruce doesn't know.
+18:52:53 <bruce> I was just hoping that the error would be more enlightening so that I'd be able to help.
+18:53:07 * bruce isn't an OpenCyc-knowledgable person (yet?)
+18:53:56 <bruce> I guess the other obvious question is which version of Linux you're running under and whether or not it is one of the explicitly supported versions
+18:54:45 <MarkWattier> RedHat 7.1 with no further updates.
+18:55:25 <MarkWattier> I have not seen any more deatil than "Red Hat Kernel" on the web.
+18:56:11 <bruce> hmmm.
+18:56:17 <bruce> I haven't a clue then whatsoever.
+18:56:24 <MarkWattier> OK, thanks.
+18:57:15 <dmiles> bacvk in 5 minutes
+18:57:17 <MarkWattier> Does anyone have a more explicit list of what kernel versions, browser versions, etc that opencyc was tested with?
+18:58:41 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+19:02:37 * stevereed_home is back (gone 21:41:26)
+19:03:04 <stevereed_home> we develop on red hat 7 and at home I use mandrake 8
+19:03:42 <stevereed_home> we test on netscape(linux + windows), mozilla (linux) and MS IE browsers (windows)
+19:06:45 <MarkWattier> OK, I am good on those counts I suppose. I notice that the error in the server window indicates that the server is exiting, but I am still able to browse OK, but I keep getting the error again: [2002/04/08 17:37:26 3602 server: Exiting server on error: End of file on stream
+19:06:46 <MarkWattier>  #<STREAM :DESCRIPTOR (8) :INPUT from NIL (open) 402768DC>.]
+19:07:07 <stevereed_home> what linux distribution?
+19:07:48 <MarkWattier> Red Hat 7.1, with no further updates to the kernel or browsers. I have not had problems, so no updates.
+19:08:00 <stevereed_home> Hmm we use that too
+19:08:47 <stevereed_home> you say it works on my public servers?
+19:09:37 <MarkWattier> I haven't tried the public server, since I am trying to create a new constant, and I don't believe you allow that ( with good reason).
+19:10:03 <stevereed_home> This server is beta and actually allows updates
+19:10:10 <MarkWattier> I will try browsing the public server in a minute.
+19:10:16 <stevereed_home> if you signon as CycAdministrator
+19:10:35 <stevereed_home> I reboot every day to reset their environments
+19:11:03 <stevereed_home> Within a release or two we will introduce a security model and some kind of sandbox
+19:11:09 <stevereed_home> to support distributed ai
+19:12:17 <stevereed_home> try:  http://opencyc251.homelinux.org:3603/cg?cb-start
+19:12:33 <stevereed_home> login as CycAdministrator
+19:12:46 <stevereed_home> redo exactly what causes your error 
+19:12:55 <stevereed_home> I hope it breaks for me too!
+19:13:12 <MarkWattier> It worked fine!
+19:14:13 <MarkWattier> Are there any further steps to install besides what's in the README?
+19:15:03 <MarkWattier> I have not installed java yet. I am planning on playing with that later. Could that be the difference?
+19:15:58 <stevereed_home> no java is for interfacing to your apps
+19:16:40 <stevereed_home> I will look over constant creation for the failure point.
+19:17:19 <MarkWattier> I would grep the source myself if I could :-)
+19:17:47 <stevereed_home> well its in lisp
+19:18:13 <stevereed_home> and it should be coming out bit by bit
+19:18:41 <stevereed_home> You signed on as CycAdministrator on your system?
+19:18:53 <MarkWattier> yes
+19:19:07 <MarkWattier> and no errors at that point
+19:19:34 <MarkWattier> I also get the error even after successful queries.
+19:20:05 <stevereed_home> besides update you get the error other places?
+19:20:38 <MarkWattier> yes, once I get it, it comes up with ( almost? ) every operation.
+19:21:59 <stevereed_home> You used the same browser with my server and that works OK - right?
+19:22:39 <MarkWattier> yes, the same invokation of the browser - I just went to the announcement in the news and clicked on the link
+19:23:11 <MarkWattier> to get to your server
+19:23:27 <stevereed_home> lets try creating a constant from the command line
+19:24:26 <MarkWattier> OK, I will need to read up on the syntax
+19:25:06 <stevereed_home> (cyc-create-new-permanent "MyNewConstant")
+19:25:46 <MarkWattier> Error: Error on ioctl() call.
+19:26:23 <stevereed_home> I get #$MyNewConstant
+19:26:54 <stevereed_home> this is from the Cyc(n): prompt?
+19:27:16 <MarkWattier> Yes, CYC(1):
+19:27:52 <stevereed_home> This is a good clue because constant creation should not require any network services
+19:28:11 <MarkWattier> yep, this eliminates the browser
+19:29:33 <stevereed_home> can you send me an email at reed@cyc.com to which I can correspond?
+19:30:51 <stevereed_home> I would like you to kill (Ctrl-C) the server, restart it and try the cyc-create.. form again
+19:31:22 <stevereed_home> If it fails immediately it would narrow the code I must inspect
+19:32:37 <MarkWattier> same error
+19:33:07 <MarkWattier> I sent you email
+19:34:18 <bruce> why not strace/truss the server process and see what ioctl() it is doing?
+19:34:33 <bruce> (it is strace on Linux, right?)
+19:35:10 <stevereed_home> actually I never used it should work
+19:35:24 <MarkWattier> I am reading the man page for strace
+19:35:47 <stevereed_home> I will look up ioctl()  maybe its not a socket but a file io operation
+19:36:17 <stevereed_home> when a constant is created, transcript entries get written
+19:37:22 <MarkWattier> What is the file name for this transcript? Is it human-readable?
+19:37:45 <stevereed_home> in your case there will be a file in opencyc-0.6.0/run/transcripts/0534/
+19:38:35 <stevereed_home> human and machine readable
+19:38:46 <MarkWattier> The directory is empty, I own it and have write perms.
+19:39:08 <stevereed_home> I'll bet we are getting closers
+19:39:12 <stevereed_home> err closer
+19:39:15 <MarkWattier> And about 14GB free
+19:39:26 <stevereed_home> transcript files are small
+19:41:08 <MarkWattier> But it still should at least exist, by default?
+19:41:45 <stevereed_home> Only when you create something
+19:42:04 <stevereed_home> Cyc is entirely memory based for the KB,
+19:42:40 <stevereed_home> so ioctl should be for the transcript operation attempt - I believe based on the evidence
+19:42:47 <MarkWattier> I have 512MB of ram
+19:43:17 <stevereed_home> No problem there
+19:43:48 <stevereed_home> Let me look at ioctl for a moment, I will have to wait for the morning to see the source.
+19:44:13 <dmiles> there is also gdb
+19:44:38 <dmiles> run-cyc is a script right?
+19:45:38 <dmiles> cd ../../run ; gdb bin/latest.bin
+19:45:48 <dmiles> run  -w world/latest.load
+19:46:13 <dmiles> i dont know how informative it will be but at least you ghet more verbose debug towards sytstem calls
+19:46:51 <MarkWattier> I would need to run strace on the file latest.bin, I take it?
+19:46:56 <stevereed_home> we stripped out gdb debug to save 10 MB in the download
+19:47:25 <stevereed_home> but we use gdb all the time for development.  
+19:47:52 <stevereed_home> ioctl() is mainly for sockets according to doc
+19:48:10 <dmiles> the error looks like Cyc is catching the ioctl() problem.. and not having enough info to give why
+19:48:18 <stevereed_home> when a new constant is created, we may be trying to reach the transcript server which is not a part of open cyc
+19:48:37 <dmiles> that does make sense
+19:48:46 <stevereed_home> it is a non-scalable way to replicate kb content for up to 100 kbs.
+19:48:57 <dmiles> in the persons config you can decide how/what to talk to
+19:49:21 <stevereed_home> no you write to the transcript server,
+19:49:34 <stevereed_home> and it broadcasts to everyone (not scalable),
+19:49:47 <stevereed_home> and you can filter operations you dont want
+19:50:03 <stevereed_home> we will have something better by release 1.0 that is scalable and secure
+19:50:32 <stevereed_home> the transcript server access should be shut off by a setting in parameters.lisp,
+19:50:39 <stevereed_home> in the init directory.
+19:51:23 <dmiles> makes sense
+19:52:08 <stevereed_home> Mark I will correspond via email to resolve this, then publish the fix to all.
+19:52:24 <stevereed_home> got to go now, back in the am.
+19:52:30 <MarkWattier> Would it then help to try setting my comm preference to Do Not Record?
+19:52:42 <MarkWattier> OK, email is fine.
+19:52:47 <stevereed_home> yes I should have thought of that!!
+19:52:58 <stevereed_home> no record means no transcript.
+19:53:15 <MarkWattier> I have been wanting to play with Cyc sine I heard of it on TV 10? years ago, another day is not a problem!
+19:53:39 <stevereed_home> OK
+19:54:37 <MarkWattier> BTW, I get the ioctl error with Comm set to Do Not Record
+19:54:52 <MarkWattier> OK, off to email land...
+19:55:14 --- part: MarkWattier left #opencyc
+19:55:32 * stevereed_home is away: I'm busy
+20:11:18 <dmiles> java.lang.RuntimeException: Unknown cfasl opcode: -1
+20:11:18 <dmiles> 	at org.opencyc.api.CfaslInputStream.reportUnhandledCfaslOpcode(CfaslInputStream.java:336)
+20:12:26 <dmiles> oh.. cyc was not running
+20:19:48 <bruce> heh
+20:53:14 --- quit: Seth ()
+21:13:56 --- quit: dmiles (Read error: 110 (Connection timed out))
+21:50:03 --- quit: johndcyc ()
+22:28:32 --- join: catskul (~djmama@AJS372.rh.psu.edu) joined #opencyc
+23:07:42 --- join: dmiles (ZQWER@dialup-65.58.223.65.Dial1.Portland1.Level3.net) joined #opencyc
+23:52:57 --- join: Edison (~tweber@pD9541332.dip.t-dialin.net) joined #opencyc
+23:59:59 --- log: ended opencyc/02.04.08

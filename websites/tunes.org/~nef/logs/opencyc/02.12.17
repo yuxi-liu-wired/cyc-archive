@@ -1,0 +1,168 @@
+00:00:00 --- log: started opencyc/02.12.17
+01:11:08 <dmiles> is cyc.com down?
+01:14:44 <deltab> yes
+01:15:46 <dmiles> ok, hrrm
+01:16:53 <dmiles> i cant get SETHASH to work or (CSETF (GETHASH ....) ...) .. CSETF and SETHASH not in API
+01:17:10 <dmiles> for a workarround i can use association lists.. but i think it's much slower
+01:49:17 <dmiles> SET-AREF mnot working 
+01:49:56 <dmiles> and cant workarround it with CSETFing  (AREF ..)
+03:15:07 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+04:29:30 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+04:30:02 <ZivZ> yo, yepster, how's it going?
+04:39:43 <yepster> ok
+04:48:25 <ZivZ> I have a question for you, if you wouldn't mind.
+04:49:29 <ZivZ> You wrote the Oracle interface, does it work with the Win32 version or just the Linux version?
+04:50:36 <ZivZ> and how specific is it to Oracle? Can it be easily converted to SQL server?
+04:51:39 <yepster> I haven't tested it against the windows version
+04:51:53 <yepster> but it should work
+04:52:16 <yepster> it's very oracle specific; afaik sql server does not have a built-in jvm
+04:53:00 <ZivZ> I have downloaded the file twice, and each time I get the message that the file is corrupt.  can you check it?
+04:53:20 <yepster> which file?
+04:53:31 <yepster> ooi-0.7.tgz?
+04:54:04 <ZivZ> ooi-0.7.tgz
+04:54:39 <yepster> hmm. you got it from 217.117.225.187?
+04:54:44 <yepster> or from cvs?
+04:54:59 <ZivZ> Straight from SourceForge.
+04:55:10 <ZivZ> cvs
+04:55:38 <ZivZ> dk ip.
+04:55:53 <yepster> it works fine over here
+04:56:09 <yepster> download from sourceforge into winzip
+04:56:11 <ZivZ> OK, maybe it's just winrar.
+04:56:53 <yepster> it's actually not pkzipped, it's gzipped, maybe winrar doesn't handle that
+04:57:26 <ZivZ> I didn't know if I should trust the file I downloaded.
+04:58:02 <yepster> well I didn't name it ooi-0.7.rar ;-)
+04:58:11 <ZivZ> I'd like to say, to all the folks that worked on 0.7.0, Thank you.
+04:59:08 <ZivZ> I just prefer using rar. it is easier to perform a lot of stuff.
+05:00:09 <ZivZ> sizing compressed files to fit different media for example.
+05:00:24 <yepster> If you don't want oracle, maybe http://hsqldb.sourceforge.net/ is an alternative to
+05:00:39 <yepster> load the java classes of the opencyc java api into
+05:00:59 <yepster> it has java stored procedures
+05:01:41 <ZivZ> Its not that I dont want Oracle, on the contrary, I need Oracle.  I just need to use other databases also, as we have many different systems.
+05:02:34 <ZivZ> All of which must be interfaced to a single Administration system.
+05:02:36 <yepster> you could use oracle as db gateway
+05:03:47 <ZivZ> I gave thought to that, and it is always a viable option.  Sometimes the job is best done using native interfaces, though.
+05:04:12 <yepster> what is a native interface?
+05:04:24 <ZivZ> especially, since I have never used oracle as a gateway.
+05:04:33 <yepster> I meant:
+05:04:55 <yepster> sqlserver -> odbc link to oracle
+05:05:16 <yepster> oracle -> select cyc.assergaf('isa dfkjdsf jhdfsd') from yourtable
+05:05:21 <yepster> to put stuff in cyc
+05:05:48 <ZivZ> Well SQL (the language), using ADO (my preference)MS is easier from .net.
+05:06:10 <yepster> I don't know .net
+05:06:31 <ZivZ> I'm still learning :-)
+05:06:45 <ZivZ> But it rocks.
+05:07:23 <ZivZ> Its great to do VB with inheritance and overloading.
+05:07:44 <ZivZ> has an excellent Object browser.
+05:08:11 <yepster> PL/SQL also has overloading and oracle 9i does inheritanca
+05:08:15 <ZivZ> and mixed language is pretty easily accomplished also.
+05:08:52 <yepster> Why not make a .net -> opencyc interface ?
+05:09:09 <ZivZ> We may be forced to.
+05:09:33 <yepster> I use oracle ;-p
+05:10:12 <ZivZ> I need to get OpenCyc to run on my machine at work first, after doing some other work on Big Blew's Notes.
+05:12:52 <ZivZ> I picture using the KB to figure out "unknown" or new job roles, among other scenarios.
+05:15:41 <yepster> have fun!
+05:23:24 <ZivZ> It is going to be an uphill climb, steep learning curve, but then I have paid to go "rock climbing" for fun. :D
+05:24:07 <ZivZ> Thanks.
+06:52:56 <yepster> Does this make sense?
+06:53:30 <yepster> Suppose I have a PersonTypeByActivity 'HouseDoctor'
+06:55:15 <yepster> isa ?PERSON HouseDoctor -> skillCapableOf ?PERSON HouseDoctorActivities performedBy
+07:13:06 --- nick: Aeon -> Graham
+08:31:52 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:46:39 --- quit: yepster (forward.freenode.net irc.freenode.net)
+08:52:42 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+09:02:38 --- quit: Graham (Read error: 60 (Operation timed out))
+09:02:55 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+09:02:59 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+09:04:23 --- quit: reed__ (Read error: 110 (Connection timed out))
+09:22:32 --- join: DemiGod (~Demi@207.207.8.145) joined #opencyc
+09:22:53 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+09:31:06 --- quit: reed_ (Read error: 60 (Operation timed out))
+09:39:25 --- quit: Graham (Read error: 110 (Connection timed out))
+09:40:50 --- quit: KinoC (Read error: 110 (Connection timed out))
+09:45:06 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+09:53:49 --- quit: mdupont-ZZZZ (Read error: 110 (Connection timed out))
+09:55:02 --- join: mdupont-ZZZZ (mdupont@p5080E989.dip0.t-ipconnect.de) joined #opencyc
+12:07:23 --- quit: KinoC (Read error: 110 (Connection timed out))
+12:10:49 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:11:00 --- nick: mdupont-ZZZZ -> mdupont
+13:29:59 <dmiles> i cant get SETHASH to work or (CSETF (GETHASH ....) ...) .. CSETF and SETHASH not in API
+13:30:13 <dmiles> having the same issue wih SET-AREF
+13:30:57 <dmiles> i for a workarround for now ussing association lists 
+13:31:18 <dmiles> (for the HASH)
+13:32:18 <yepster> I can only give you mental support, because I have to write a formal definition of the language cycl for my supervisor
+13:32:28 <yepster> blerh
+13:32:39 <dmiles> ah.. too bad there is not a cut apist version
+13:33:02 <yepster> yeah :-|
+13:33:47 <dmiles> well i would be searching.. someone has to have something suimular on web (if not cycorp)
+13:33:51 <yepster> well i learned a few things on the way, did you know |?!$%(^&*1)|
+13:34:01 <yepster> is a good name for a variable?
+13:34:12 <dmiles> you can do that?
+13:34:21 <yepster> I tried it in 0.7
+13:34:26 <yepster> and it worked
+13:34:33 <dmiles> (|?!$%(^&*1)| that that| ?
+13:34:39 <dmiles> erm
+13:34:50 <dmiles> (|S#36363| that that| ?
+13:34:54 <dmiles> oops
+13:34:56 <dmiles> (|S#36363| that that)
+13:34:56 <yepster> hehe
+13:35:30 <yepster> what is S#36363?
+13:35:59 <dmiles> its a gynsymed value ussing refering to a macro expansion
+13:36:15 <dmiles> err gensym
+13:36:25 <yepster> o
+13:36:46 <yepster> well try asking (#$isa |?!$%(^&*1)|
+13:36:53 <yepster> #$Something)
+13:36:57 <yepster> its work
+13:37:14 <dmiles> ah neat ..yeah i had just tried.. it also works as defined operators
+13:39:09 * mea_culpa pokes dmiles
+13:39:40 <dmiles> bbias
+13:42:25 <dmiles> Last Form Evaluated : 
+13:42:25 <dmiles> (|S#20| that that)
+13:42:25 <dmiles> Results : 
+13:42:25 <dmiles> THAT
+13:42:52 <dmiles> i guess they point to something
+13:48:57 --- quit: KinoC (Read error: 110 (Connection timed out))
+13:55:59 --- nick: mdupont -> mdupont-ZZZZzzzz
+13:56:43 <mdupont-ZZZZzzzz> night
+13:58:13 <dmiles> g'night
+14:26:47 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:02:36 --- quit: yepster ()
+15:21:24 --- quit: KinoC (Read error: 110 (Connection timed out))
+16:12:32 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:42:37 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:49:07 --- quit: deltab (forward.freenode.net irc.freenode.net)
+16:49:07 --- quit: Cobra (forward.freenode.net irc.freenode.net)
+16:49:07 --- quit: dmiles (forward.freenode.net irc.freenode.net)
+16:49:30 --- join: deltab (~deltab@espians.com) joined #opencyc
+16:49:30 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+16:49:30 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+17:30:18 <dmiles> (ask-template '(?POS) (list #$partOfSpeech ?W ?POS str) #$EnglishMt 0 nil nil nil)
+17:30:18 <dmiles> Results : 
+17:30:18 <dmiles> ERROR : 
+17:30:18 <dmiles> Variable ?W is unbound
+17:30:26 <dmiles> i do i anonymize ?W ?
+17:38:49 --- quit: KinoC (Read error: 60 (Operation timed out))
+18:14:29 --- quit: Cobra (forward.freenode.net irc.freenode.net)
+18:14:29 --- quit: dmiles (forward.freenode.net irc.freenode.net)
+18:14:29 --- quit: deltab (forward.freenode.net irc.freenode.net)
+18:15:26 --- join: deltab (~deltab@espians.com) joined #opencyc
+18:15:26 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+18:15:26 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:54:45 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+18:54:54 --- join: Aeon (~Demi@207.207.8.145) joined #opencyc
+19:03:16 --- quit: reed__ (Read error: 60 (Operation timed out))
+19:05:36 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:12:15 --- quit: DemiGod (Read error: 110 (Connection timed out))
+19:30:37 --- quit: dmiles (Excess Flood)
+19:30:49 --- join: dmiles (alife@12.211.42.52) joined #opencyc
+20:10:14 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:28:19 --- quit: KinoC (Read error: 110 (Connection timed out))
+20:43:42 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:46:32 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+21:03:54 <KinoC> Happy 0.7 to one and all
+21:34:50 <ZivZ> Aint it jus' that, Kinoc?  Gotta love it.
+21:39:05 <KinoC> ++good
+22:38:59 --- quit: KinoC (Read error: 110 (Connection timed out))
+22:39:18 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:24:18 --- nick: mdupont-ZZZZzzzz -> mdupont
+23:42:31 --- quit: KinoC (Read error: 110 (Connection timed out))
+23:59:59 --- log: ended opencyc/02.12.17

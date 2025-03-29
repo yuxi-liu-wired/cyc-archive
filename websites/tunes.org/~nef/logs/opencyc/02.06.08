@@ -1,0 +1,290 @@
+00:00:00 --- log: started opencyc/02.06.08
+00:53:55 --- quit: yottzumm ("Client Exiting")
+02:00:31 --- quit: CycLBot (Remote closed the connection)
+03:15:52 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+03:24:08 <Yepster_home> dmiles, the createmob jsp has very interesting data on it!
+03:24:27 <dmiles> yes its some things to create conflicrt for entropy stirring
+03:25:03 <dmiles> the idea is NPC run arround trying to get what they can from others
+03:25:19 <dmiles> but their basic instincts getting in the way
+03:26:00 <dmiles> alos glad the page is still working
+03:26:18 <dmiles> i have been adjusting how the combo boxes enumerate
+03:27:11 <dmiles> i made this thing called JspUtils. to make html generation simplier and some pages are probly broken
+03:27:16 <dmiles> like  the file uploader
+03:27:45 <Yepster_home> Isn't much of the 'knows' of stuff implicit? e.g. every knows how to breathe
+03:28:09 <dmiles> yes.. i am thinking that i could start out with some highlighted options
+03:28:25 <dmiles> and a little pick ramndom on the html side
+03:28:36 <Yepster_home> shouldn't those things be asserted (default) to the NPC constant?
+03:29:16 <dmiles> yes.. the NPC has a hierarchy of normal Mts that give them what they should normaL keep in their heads
+03:29:40 <dmiles> so like basic animal abilities should be in the AllNPCsMrt
+03:30:22 <dmiles> so i am thinking that creation page should make a new Mt fopr that char.. and genlMt to some basics
+03:30:45 <dmiles> and assert the scripots they puicked out specific for that NPC
+03:30:51 <dmiles> (as available)
+03:31:29 <dmiles> might be also nice to make an NPC part of some Mob that has certain normal defualts
+03:31:41 <Yepster_home> how do you plan to connect (progam)logic to these script abilities?
+03:32:21 <dmiles> each toplevel tick (NPC heartbeat in Java) a single query (doWhatNext MyConstant ?Action)
+03:32:54 <dmiles> then that quwery gets the NPC ideal next plan thing..
+03:33:08 <dmiles> then Java object invokes the "command"
+03:33:11 <Yepster_home> And knows about a script implies knows about a few actions in those scripts?
+03:33:32 <dmiles> yes.. meaning its likely to contribute to the deciding of next Action
+03:33:39 <Yepster_home> Steve mentioned a planner coming available in some next release
+03:33:58 <dmiles> i am hoping that the way NPCs are constructed will be compatable with that planner
+03:34:25 <dmiles> meaning they have a list of goals and a list of actions
+03:34:32 <dmiles> (and a current state)
+03:34:48 <dmiles> goals as being a target state
+03:35:05 <dmiles> i think that is compatable with most planning systems
+03:35:22 <dmiles> currently i think you can do that in CycL vanilla
+03:35:43 <dmiles> the Stanford planner is a speciazed optiomal form
+03:36:23 <dmiles> that maybe could be a SbHl type module in cyc
+03:36:37 <Yepster_home> I know nothing about planners.
+03:36:54 <Yepster_home> should though
+03:37:10 <dmiles> basicly they are an enumeration of State,Gaol,Bag of State->Action->State, rules
+03:37:47 <Yepster_home> ahh like soar
+03:37:48 <dmiles> so they brute force back chain a search to find the next series of actions
+03:38:01 <dmiles> yeah
+03:38:39 <Yepster_home> schank also mentioned belief: belief->goal->action
+03:38:45 <dmiles> as you knew it can be quite a bit of background knowledge to really deduce state->action->state
+03:39:10 <dmiles> yes some current state is based on 'belief'
+03:39:28 <dmiles> in a good system anyways
+03:39:28 <Yepster_home> goal is based on belief
+03:39:40 <dmiles> ah true.. i see that point
+03:39:42 <Yepster_home> in the xp's that is
+03:40:11 <Yepster_home> e.g. john beliefs that rich people are happy
+03:40:19 <Yepster_home> goal : have more money
+03:40:25 <Yepster_home> or be rich
+03:40:30 <Yepster_home> action: make more money
+03:40:48 <Yepster_home> can be subgoaled/action though
+03:40:52 <dmiles> yes.. and johns belief that he is not rich
+03:41:05 <Yepster_home> jup
+03:41:48 <dmiles> yes.. cycs scripts are pretty good in that they can be wide or narrow on the action resolution
+03:42:20 <dmiles> there arte often 1 script that subsumes a few
+03:42:33 <dmiles> (primitives)
+03:43:08 <dmiles> goals have tangable (assertable) have i reach it yet or not values
+03:43:21 <Yepster_home> In my graduation project I need to understand the reason a user asks a certain question to the kb
+03:43:44 <Yepster_home> i.e. infer his goal from his action
+03:43:55 <dmiles> if you fuigure that out you could really parse their NL too :)
+03:44:13 <dmiles> once you know goalCatagoryForAgent
+03:44:28 <Yepster_home> also the question can be stated a bit wrong, once I know the goal, I can give a better answer
+03:45:17 <Yepster_home> funny is that things people can ask questions about is also modeled in cyc
+03:45:35 <dmiles> you mean cyc has all the answers ?
+03:45:46 <Yepster_home> so the total model will be also envelope the user in the kb -> he could actually ask
+03:45:46 <dmiles> :)
+03:45:52 <Yepster_home> questions about himself.
+03:46:06 <Yepster_home> or: cyc: explain why you gave me that answer
+03:46:24 <dmiles> yes.. "whart kinds of problems have my questions led to solving?"
+03:46:26 <Yepster_home> that's why I found cyclbot being in cyc interesting
+03:46:50 <Yepster_home> cyc: i infered these goals from that question
+03:47:27 <Yepster_home> but i am not focusing on NL-cycl, actually, everything will be cycl, or some web forms
+03:48:12 <dmiles> yeah.. i try avoind NL myself the least interesting parts of AI :) 
+03:48:39 <Yepster_home> yes
+03:48:40 <dmiles> but have this semi-project to model some NL U for soem things
+03:50:05 <dmiles> but yes things are tangly enough once you know what is being communicated
+03:50:37 <dmiles> err even once you do
+03:50:41 <dmiles> and more interesting
+03:52:57 <dmiles> so confronting th eproblems of users goals
+03:53:04 <dmiles> is very interestingh
+03:53:34 <dmiles> so you start by having Cyc have a klist of suggested goals?
+03:54:03 <dmiles> then eliminate them as you go
+03:55:07 <Yepster_home> what i'd really want is especially the action part of goals to be a bit 'dynamic'
+03:55:32 <Yepster_home> i.e. if an observer sees repeating behavious, it might infer 'some new goal'
+03:55:47 <Yepster_home> with those actions in it
+03:56:18 <Yepster_home> and could actually ask someone 'why do you do this or that' -> name new goal
+03:56:23 <dmiles> based on the observers specific beliefs .. i suppose you cvould create multiple observers
+03:56:31 <Yepster_home> but that is grad project v2.0
+03:57:04 <dmiles> (just so you can have more scoping control of search)
+03:57:19 <Yepster_home> observer on same level with some mt
+03:57:25 <dmiles> definately
+03:57:37 <Yepster_home> in accordance with axiom that all in the kb are nothing more than observations
+03:57:54 <dmiles> thats true for all of cyc even 
+03:58:00 <Yepster_home> :)
+03:58:39 <Yepster_home> my grad project supervisors disagree, but I think they have to become acqainted with cyc
+03:59:01 <Yepster_home> and cyc's mt's. They know prolog and standard fol systems
+03:59:24 <Yepster_home> and for small, isolated psm's the closed world assumption is no problem
+03:59:33 <dmiles> yes.. cyc is a prolog with greate inheritance and partitioning
+04:00:11 <dmiles> that you actually can write software in, in a way that gives you some maintainaence abilities
+04:00:14 <Yepster_home> so am actually really glad that you agree with me on this
+04:00:44 <dmiles> well the closed worlkd situations are covered in Cyc only when you actually want them
+04:01:02 <dmiles> you have both negation models
+04:01:59 <dmiles> i wrote a prolog inference engine a whikle back and people wondered why with all of prolog normal capabilty it had to be 4000 lines long
+04:02:16 <dmiles> before it even started to do anything :)
+04:02:27 <Yepster_home> you made good commenting doc between the lines
+04:02:38 <dmiles> unfortuanlty i wash i did
+04:02:45 <dmiles> err wish
+04:02:46 <Yepster_home> hehe
+04:03:17 <dmiles> instead i made predicates named getNextNearestSubclassWithClassChacing
+04:03:17 <Yepster_home> "real programmers don't comment their code, if it's hard to write it should be hard to understand"
+04:04:01 <dmiles> well it gets so big that comments become more distracting
+04:04:39 <Yepster_home> sounds a bit like a nearest neighbor algoritm in a logic system
+04:04:52 <dmiles> yes.. thats what that is
+04:05:13 <Yepster_home> which is actually a stupid remark because rules in a logic system is something
+04:05:14 <dmiles> but would be horrid to explain that function in english 
+04:05:28 <Yepster_home> different than source data for a statistical algoritm
+04:05:30 <dmiles> not that but 100s of them
+04:06:03 <dmiles> trimTheOutsideEdgesOfMySearchTree
+04:06:35 <Yepster_home> I found it also difficult to comment on assertions, they get large when
+04:06:50 <Yepster_home> I want to write down why i modelled it like that.
+04:07:12 <dmiles> definately
+04:07:27 <Yepster_home> well gotta go, ttyl8r
+04:07:52 <dmiles> yes.. i will be arround should have working demo of liogicmoo + web by maybe next week
+04:08:05 <dmiles> err by tghe weekdays comming up
+05:10:20 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+06:02:47 --- quit: damski (Read error: 104 (Connection reset by peer))
+06:38:55 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:55:31 --- quit: CycLBot (Remote closed the connection)
+08:41:50 --- join: jlatour- (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+08:41:51 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+09:35:56 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+09:36:07 --- join: danbri (~danbri@pc-62-31-92-16-az.blueyonder.co.uk) joined #opencyc
+09:36:34 <dmiles> ask: (isa ?W Person)
+09:36:35 <CycLBot> (((?W . CycAdministrator)) ((?W . Guest)) ((?W . HYP-Person-8358)))
+09:36:49 <dmiles> mt BaseKB
+09:37:03 <dmiles> ask: (isa ?W HumanCyclist)
+09:37:04 <CycLBot> (((?W . CycAdministrator)) ((?W . Guest)))
+09:37:35 <dmiles> danbri, it also does other command
+09:37:38 <dmiles> help
+09:37:39 <CycLBot> usage: help <hello|time|join|part|ask|query|assert|cyclify>
+09:37:40 * danbri wants to be impressed by Cyc
+09:38:00 <dmiles> i need to update the help command still :9
+09:38:20 <dmiles> but basiclly it does ask,assert
+09:38:28 --- join: Guha_ (~chatzilla@209.157.132.197) joined #opencyc
+09:38:43 * danbri was asking dmiles to impress us with Cyc's AIness
+09:39:03 <dmiles> oh will its a SubL, CycL shell :) with a Mud linked in
+09:39:15 <danbri> dmiles, can you show us it being clever?
+09:39:25 <dmiles> sure lets see...
+09:39:35 <dmiles> look dmiles
+09:39:36 <CycLBot> Nothing appearent about dmiles '#$dmiles'
+09:39:41 <danbri> "am I human, master..." that sort of thing
+09:39:51 <dmiles> ask: (nearestIsa dmiles ?W)
+09:39:52 <CycLBot> (((?W . PlayerInstance)))
+09:40:17 <dmiles> well i had a NLUnderstander written for it in prolog..
+09:40:29 <dmiles> it used the Cyc Assertions propogated over
+09:40:43 <dmiles> but i havbe been making it more oo desqing so it offline
+09:40:55 <dmiles> but i'll pull up  a channel log wiith it working
+09:41:05 <dmiles> so you can see irt performs
+09:41:28 --- nick: jlatour- -> jlatour
+09:41:37 <Guha_> danbri --- there isn't *nearly* enough of Cyc in OpenCyc for it to do very many interesting things ...
+09:41:41 <danbri> I guess I don't doubt its a useful KB system with plenty of smarts, I just can't believe we're _still_ seeing press about it learning childlike about its surroundings...
+09:41:50 * danbri has no idea how much got released
+09:42:12 <Guha_> < 10%
+09:42:17 <danbri> I'll stick with the insects
+09:42:31 <dmiles> here is some http://tunes.org/~nef/logs/opencyc/02.06.03
+09:43:00 <dmiles> yes the KB is stirpped ofg most instances
+09:43:16 <Guha_> and axioms. Cyc doesn't have too many instances.
+09:43:29 <dmiles> you can really see that in the missing links in the #$comment text
+09:44:02 <danbri> nl stuff seems handy
+09:44:30 <dmiles> in that url i gave at 05:44:45 is an example
+09:44:37 --- join: weinholt (vnTq4YpVrD@kallisti.fnord.2y.net) joined #opencyc
+09:45:18 <danbri> Guha, you still an AI believer?
+09:45:32 <dmiles> i wonder though if all the missing axioms where for perfomance
+09:45:48 <Guha_> One can believe or not believe in propositions. Not in things.
+09:46:02 <Guha_> One cannot believe or not believe in the moon or the number 2
+09:46:15 <dmiles> but also many things got compressed intio relataionAllExits
+09:46:31 <Guha_> No, dmiles, if cycorp were to give everything away, including all the axioms, where would their value add come from.
+09:47:05 <dmiles> yeah you mean its 'technology over time' ?
+09:47:44 <dmiles> or do you mean get much deeper in before you get the goods?
+09:47:50 --- join: eikeon (~user@jungle.ne.client2.attbi.com) joined #opencyc
+09:49:26 <dmiles> (addressed to Guha)
+09:49:55 <dmiles> the value add comes from them knowing how to best intergrate it into someones end goal
+09:50:31 <dmiles> meaning the learning curve is steep enough, company X will hire cyccorp firstly when they get interested in ussing it
+09:51:19 <Guha_> yes, but that is a services business. I think doug would like to be in the software business as well. much better margins.
+09:52:13 <dmiles> but hrrm what kind of software could they produce?
+09:53:40 <dmiles> seems like even a really good idea/inovation is still stuckurd in that people need it in the end form.. before you talk other companies into making you big
+09:56:27 <dmiles> i dont understand yet though the entire system for making profits but i am just a casual user hoping all axioms will everntly come into it
+09:57:11 <dmiles> and not understanding why holding back axioms will improve anything .. unless the value of software is just persistance
+09:57:26 <dmiles> (meaning the browser)
+10:07:22 <dmiles> so danbri, basicly tyhe bot to do impressive stuff is that it sees its self as a player in the world of the Mud
+10:08:01 <dmiles> which is a reification of some closed world 
+10:08:10 * danbri should take another look at the mud/moo sometime
+10:08:21 <danbri> not likely to get back to that stuff for a while though :(
+10:08:43 <dmiles> its all good. i just been in code mode.. and still have much more to do
+10:09:10 <dmiles> 1 to 2 more weeks i see .. i have the basic mud working from telnet and the bot
+10:09:49 <dmiles> but its sparse becasue of two infernceing issues i am having that skolems wont forward chain..
+10:10:28 <dmiles> and Mts wont produce from thereExists statemetns
+10:11:14 <dmiles> so i cant do a forAll Players thereExists some Mt that the player is scoped to
+10:11:47 <dmiles> but cyccorp is dealling now with issue one
+10:36:55 --- quit: weinholt (carter.openprojects.net irc.openprojects.net)
+10:37:34 --- join: weinholt (vnTq4YpVrD@kallisti.fnord.2y.net) joined #opencyc
+10:50:20 --- quit: Guha_ ("ChatZilla 0.8.7 [Mozilla rv:1.0.0/20020530]")
+11:07:25 <Yepster_home> People at my company (in nl) looked very carefully at the opencyc license. Oracle for 45k euro / cpu is way to expensive,
+11:08:19 <dmiles> i have never read the opencyc licience.. whats it like?
+11:08:35 <Yepster_home> but a free download + license fee for commercial use would sound fine to me
+11:08:55 <dmiles> so it doesnt scare people away?
+11:09:10 <Yepster_home> somthing like: you can do whatever you want, as long as you don't reverse engineer it
+11:09:44 <Yepster_home> I think the way oracle does it ok: you can download unlimited copies of the db
+11:09:59 --- part: weinholt left #opencyc
+11:10:02 <Yepster_home> so developers can install it e.g. at home
+11:10:28 <dmiles> yes.. if someone came up with a comercial site ussing cyc..
+11:10:45 <dmiles> i am sure cyccorp would rather point to it as a good exmaple model
+11:11:01 <dmiles> instead of asking where their money was
+11:11:38 <dmiles> most new or venture software really barely can make money 
+11:12:00 <dmiles> no mater how usefull in the world
+11:12:49 <dmiles> especially with so much free software out there
+11:14:00 <dmiles> so i think opencyc wiould rather have people learn and use the system and get it out there all over the worlkd.. then try to make monery off it
+11:14:34 <Yepster_home> Well I don't know cyc's business model, but I know that if it would have cost say
+11:14:53 <Yepster_home> 5k or so, and we could try it out first, we would have bought it
+11:15:42 <dmiles> yeah 5k is fair as long as thats for the non-free commercial licience one-time fee
+11:16:29 <Yepster_home> yes, per system built with it or so
+11:16:59 <dmiles> i once was interested in using AMZI prolog with a company.. we asked them.. and they wanted 30k
+11:17:26 <dmiles> of course the comapny could aford it.. but man thankgosh for the trial edition
+11:17:44 <dmiles> to see we didnt want it even for free
+11:18:59 <dmiles> since it already cost us many developer ours to see that we didnt get what it said it came with
+11:19:07 <dmiles> err developer hours
+11:19:36 <dmiles> at the end of the period we should have billed them :)
+11:20:15 <dmiles> so whenever i see something i have to buy.. i get more scared
+11:24:59 <CycLBot> dmiles says, "Hi :0"
+11:25:06 <CycLBot> vutral says, "test"
+11:25:12 <CycLBot> vutral says, "cool"
+11:25:17 <CycLBot> vutral says, "i  like the prompt"
+11:25:21 <dmiles> oopps
+11:25:29 <CycLBot> vutral says, "but i see what i do myself, that annoys"
+11:25:40 <dmiles> say It comming onto irc
+11:25:41 <CycLBot> You say, "It comming onto irc"
+11:25:41 <CycLBot> CycLBot says, "It comming onto irc"
+11:25:46 <dmiles> hehe
+11:25:57 <CycLBot> dmiles says, "yeah i have to fix that"
+11:26:02 <dmiles> join #ai
+11:49:09 --- quit: CycLBot (Excess Flood)
+11:50:29 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+11:53:32 <dmiles> ok i am taking a break for a buit
+13:22:37 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+14:35:41 <dash> hmm
+14:46:33 --- quit: Yepster_home ()
+15:42:42 --- quit: graylensman ("Client Exiting")
+15:43:21 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+17:03:25 --- quit: jlatour ()
+17:30:20 <graylensman> CycLBot: (genls #$Person)
+18:12:59 --- join: yottzumm ([dxxH8l4Gf@12-232-76-192.client.attbi.com) joined #opencyc
+18:14:56 <yottzumm> I'm getting values out of a (cyc-query '(#$possesses #$DrawPile ?CARD) #$SBJMt) using converseList, and I'm using CycListVisitor to traverse the results, but all I am getting is ?CARD, and not the actual value.  when I did a CycList.cyclify() I could see the values of the CARDs
+18:19:49 <yottzumm> HELP
+18:19:49 <CycLBot> usage: help <hello|time|join|part|ask|query|assert|cyclify>
+19:06:20 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+19:06:30 <Psion> Can anyone tell me how I create a non-Guest user?
+19:10:02 <yottzumm> I think there's a CycAdministrator user.  You can see what assertions there are, and make the same (sounds like a lot of work)
+19:10:17 <yottzumm> for your new user
+19:11:26 <Psion> Oh, I didn't realize that was there. That's good enough to use. Thanks =)
+19:18:37 <yottzumm> Okay, I figured out my CycList problem.  I didn't realize I could use iterator() from the super class right away
+19:55:46 --- join: bbz (~chatzilla@cs24243226-150.austin.rr.com) joined #opencyc
+20:16:42 <stevereed_home> anyone come here because of slashdot?
+20:26:27 <yottzumm> let me check /.
+20:30:00 <stevereed_home> cmdr taco (the webmaster) posted a reference to an AP story breaking this weekend about Cyc - no real news - just what Cyc and Cycorp are up to.
+20:33:13 <stevereed_home> off to bed, will catch up in the am.
+20:33:22 <yottzumm> night
+20:33:45 <graylensman> well I am back because of  /.  
+20:44:06 <yottzumm> I'm working on a card game backed by cyc rules
+20:49:32 <graylensman> And I am trying to get it to infer I must have a mother.  But now it has me starting to wonder ...
+20:52:19 <yottzumm> if animal then has mother
+20:53:35 <yottzumm> so if you're an animal, you have a mother.
+20:58:16 <graylensman> Docment system is not working all I am getting is blank frames from opencyc.org...
+20:58:29 <yottzumm> try reload
+20:59:14 <yottzumm> they may have written their own web server
+21:00:01 <yottzumm> apparently opencyc isn't documented in cyc which is a shame
+21:01:38 <yottzumm> a lot of the documentation apparently is somewhat out of date
+21:03:14 <yottzumm> they should have cyc updating the docs
+21:17:18 <graylensman> Arg could not figure out why my asserts failed.  needed to create constant first.
+21:24:50 <yottzumm> constants, then isas then genls
+21:34:34 <yottzumm> anybody want to talk about security and OpenCyc.  It would be interesting to get a "capabilties" type model in it.  So that people normally have no access unless you specifically give them a capabilty token.  I'm running into this in my card game, because people can just browse the Mt to see the card in my hand.  I would like to protect my hand
+21:41:56 --- quit: yottzumm ("Client Exiting")
+21:50:11 --- quit: graylensman ("Client Exiting")
+22:26:06 --- quit: CycLBot (Remote closed the connection)
+22:37:11 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:01:21 --- quit: eikeon (Remote closed the connection)
+23:59:59 --- log: ended opencyc/02.06.08

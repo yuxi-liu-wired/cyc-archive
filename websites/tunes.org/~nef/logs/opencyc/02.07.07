@@ -1,0 +1,481 @@
+00:00:00 --- log: started opencyc/02.07.07
+00:11:38 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+00:15:02 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+00:37:43 --- quit: huthut (Read error: 104 (Connection reset by peer))
+00:38:25 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+01:47:14 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+02:01:06 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+02:01:19 <dmiles> Cobra: missed your responses
+02:01:24 <dmiles> computer got shutoff
+02:01:31 <dmiles> will look at logs
+02:16:49 <zool> poink
+02:42:29 <zool> No pleasure is a bad thing in itself, but the things which produce certain pleasures entail disturbances many times greater than the pleasures themselves. - epicurus
+02:43:09 <zool> Unlimited time and limited time afford an equal amount of pleasure, if we measure the limits of that pleasure by reason.
+02:43:33 * zool smiles quietly
+03:17:25 --- quit: dmiles ("eeks one more reboot")
+03:58:03 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:14:32 <Vutral> hey dmiles
+05:14:35 <Vutral> are you there ?
+05:23:59 <dmiles> am here
+05:24:02 <dmiles> hi :)
+05:24:06 <Vutral> hehehe
+05:24:13 <Vutral> how are you ?
+05:24:14 <dmiles> i havent been much in this window
+05:24:20 <Vutral> i noticed that
+05:24:36 <dmiles> working on WorldForge codec.. so OpenCyc can read events
+05:24:47 <Vutral> ic
+05:25:04 <dmiles> what are you up to?
+05:25:16 <Vutral> well well
+05:25:20 <Vutral> i work around on my middleware
+05:25:38 <Vutral> and write down some things for later work
+05:25:46 <Vutral> and the rest of the time i am bored
+05:25:52 <Vutral> and search people to talk with
+06:26:18 <zool> this article about alicebot author is INTENSE
+06:26:30 <zool> http://www.nytimes.com/2002/07/07/magazine/07WALLACE.html 
+06:26:47 <zool> u/p london.pm/london.pm, please dont pass on
+06:28:10 <dmiles> thank you
+06:28:12 <dmiles> looking
+06:29:41 * zool has context for Zipf's Law now, the number of words in linguistic continuum
+06:30:34 <dmiles> for the longest time while i was broke i kept trying to go his route of SSI :)
+06:30:55 <zool> ssi?
+06:31:45 <zool> oh
+06:32:03 <dmiles> alot of programmers that cant afford school go that route
+06:32:48 <dmiles> very very very neat article
+06:49:07 --- quit: CycLBot ("this.ircDisconnect();")
+06:51:08 <Cobra> ooh, quit messages...
+06:51:45 <Cobra> dmiles: so, the short version of my earlier comment is that I found verb #'s described in the web docs.
+06:52:00 <Cobra> Sounds like it means different usage of the same word.
+06:54:11 --- join: CycLBot ([loMyvrsyB@12-225-207-235.client.attbi.com) joined #opencyc
+06:54:23 <dmiles> ah good that you found it
+06:54:30 <dmiles> now thats a very weird identd
+06:54:47 <Cobra> loM... ? cute.
+06:55:03 <dmiles> looks like my auth daemon is making up random text
+06:55:29 <dmiles> i have no idea.. why thou ;P
+06:55:43 <dmiles> i just installed rh7.3 and havint done wierd things yet
+06:55:46 <Cobra> Oh, and I've got the bot checking greetings out of cyc.  So it responds if it recognizes as a greeting.
+06:55:57 <dmiles> awesome
+06:56:05 <Cobra> :) fun
+06:56:22 <dmiles> the cyc java api really opens up alot
+06:57:01 <Cobra> is there much online doc for the template or fsm parts?
+06:57:58 <dmiles> fsm = ?
+06:58:14 <Cobra> hmm, I should look at the api doc more, maybe that would help.  I just didn't see anything in the cyc 101 section.
+06:59:06 <Cobra> yeah, the ChatterBot code in cvs looks like it relies on some template parsing code and the Finite State Machine (fsm) code?
+06:59:21 <Cobra> for NL handling...
+07:02:14 <Cobra> I'm guessing it uses that to maintain some context on a conversation?  Not really sure yet though.
+07:03:01 <dmiles> i think Steve has been working interleaved on that Code
+07:03:11 <Cobra> (the fsm part, not templates)
+07:03:21 <dmiles> like wnet very far with it for a bit.. but probly busy with other things
+07:04:04 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+07:05:52 <Cobra> ok.  That matches what I see in the code.  Plus I'm not sure all the pieces are there on the cyc side either.  I ran across a Lexical...PSC something which doesn't exist in my database.
+07:06:48 <dmiles> take a look on http://opencyc249.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-start
+07:06:53 <dmiles> alot of new things there
+07:10:20 <Cobra> neat, so I could browse and see if any of these pieces made it into his copy yet.
+07:10:52 <dmiles> maybe so.. i saw some new predicates and new NL stuff at least in CycL
+07:47:08 <Vutral> is cycl distributed ?
+07:49:06 <dmiles> it can be easierly in 0.7
+07:49:20 <dmiles> you can do a remote API call to a differnt Cyc server
+07:49:36 <dmiles> which can be a requested evaluatuion of CycL
+07:49:57 <Vutral> hmm
+07:50:19 <dmiles> it also can call intto your app
+07:50:31 <dmiles> and your app can return values to variables
+07:51:40 <Vutral> hmmm
+07:51:42 <Vutral> intresting
+07:51:46 <dmiles> as far as making cycl easily distribatble .. one can use a (istAtServer #$Servername #$ThatServersMt (#$isa ?W #$Human))
+07:51:52 <Vutral> i wonder if i will connect it to my distributed orbit
+07:52:11 <dmiles> you would only need to convert your outoput to S-Expressions
+07:52:22 <dmiles> your ussing UDP right?
+07:52:25 <Vutral> s-expressions ?
+07:52:29 <Vutral> i not only use udp
+07:52:31 <dmiles> you'd want to make a TCP proxy for it
+07:52:32 <Vutral> i use much
+07:52:55 <dmiles> ah well it can call you at whatever port you want.. and you can call it as well
+07:53:29 <dmiles> your calls to it can also make it call you back
+07:54:03 <Vutral> hmmm
+07:54:06 <Vutral> sounds intresting
+07:55:28 <dmiles> (cyc-remote-eval "vutrual.de" 444 'Hello)
+07:55:52 <dmiles> that evals to whatever you return back
+07:56:06 <dmiles> for Hello 
+07:56:12 <Vutral> hmmm
+07:56:21 <Vutral> ic
+07:56:46 <dmiles>  (cyc-remote-eval "vutrual.de" 444 (RANDOM 30))  would send you a random number.. etc
+07:58:14 <Vutral> hmm hmm
+07:58:22 <Vutral> it remembers me of prolog a bit
+07:59:32 <dmiles> its like prolog except it adds the abilty to expand a function into a result as well as bind varibles
+07:59:52 <Vutral> ic
+08:00:02 <Vutral> opencyc-0.6.0b ?
+08:00:23 <dmiles> thats the name iof the current release.. its fully function for local evaluation of calls
+08:00:36 <dmiles> its not until 0.7 that it will do remote API
+08:00:50 <Vutral> hell
+08:00:57 <dmiles> thats any day now
+08:01:04 <dmiles> like probly next week maybe
+08:01:06 <Vutral> does it have a plugin api ?
+08:01:15 <dmiles> for external code?
+08:01:40 <Vutral> well see
+08:01:48 <dmiles> well you can make it talk to a local engine over TCP.. that my inital approach
+08:01:52 <Vutral> i need to modify the opencyc code so it can interact with my orbit
+08:02:11 <dmiles> well you can do that in about 5 lines of CycL
+08:02:18 <Vutral> a plugin would save me from doing it with each release
+08:02:31 <zool> then write one!
+08:02:36 <dmiles> oh.. well the 5 lines.. can be loaded from a file
+08:02:38 <Vutral> does it have a plugin api ?
+08:02:47 * zool recurses
+08:02:53 <Vutral> ?
+08:02:59 <dmiles> for example.. wenever io load my Cyc i run some pluginish scripts
+08:03:09 <dmiles> adding in rthe knowledge and runig this irc bot
+08:03:12 <Vutral> but in CycL
+08:03:14 <Vutral> or ?
+08:03:30 <dmiles> so i instance a JVM that instances the "plugins"
+08:03:44 <Vutral> ????
+08:03:50 <Vutral> crazy
+08:03:51 <dmiles> so right now .. i amn running a telnetd mud, ircbot, and 14 NPCs
+08:03:57 <Vutral> show me the 5 lines
+08:04:33 <dmiles> one sec
+08:04:49 <Vutral> ok
+08:05:45 <Vutral> i am downloading now
+08:06:42 --- quit: CycLBot (Remote closed the connection)
+08:08:24 <dmiles> (implies (evaluate ?Y (EvaluteSubLFn (ExpandSubLFn ?X '(cyc-remote-eval "localhost" 4444 ?X ))) (myCycLEval ?X ?Y))
+08:08:27 --- join: CycLBot ([CeDnURN3d@12-225-207-235.client.attbi.com) joined #opencyc
+08:09:16 <Vutral> hmm
+08:09:45 <dmiles> (implies (myCycLEval (write-string ?X) ?Y) (callMyString ?X ?Y))
+08:10:35 <dmiles> (noBackchain myCycLEval)
+08:10:44 <dmiles> err oops
+08:10:56 <dmiles> well anyways .. with this kind of thing you can make it work
+08:11:28 <Vutral> hmm hmm hmm
+08:11:32 <dmiles> so you may want to launch cyc from inside you system
+08:11:59 <dmiles> instead of it launching your applications
+08:12:02 <Vutral> yeah
+08:12:17 <Vutral> i have no applications only interfaces :P
+08:12:30 <dmiles> well you have listerning daeomons
+08:12:42 <dmiles> thats makes things good for cyc
+08:14:05 <dmiles> currly you can order cyc arround in Java,Oracle and Prolog
+08:14:24 <dmiles> when you dont want to do it over the Socket
+08:14:42 <dmiles> they all at somepiont do socket to get to cyc 
+08:15:02 <Vutral> hmm
+08:15:07 <Vutral> well see
+08:15:19 <Vutral> i have complex systems for interacting with these daemons
+08:15:41 <dmiles> you may need to make a S-Expression wrapper
+08:15:54 <dmiles> (thats whta i did for prolog)
+08:16:02 <Vutral> S-Expression wrapper ?
+08:16:16 <dmiles> so when it calls cyc it first converts the output to something that looks like lisp
+08:16:35 <dmiles> then when i get the return back.. i decompose it back into prolog 
+08:16:58 <Vutral> strange
+08:17:05 <Vutral> it makes no sense to me
+08:17:21 <dmiles> well at least for example..
+08:17:35 <dmiles> you want to ask isa ?X KnownProgram
+08:17:47 <dmiles> to get a list of programs for example
+08:18:11 <dmiles> you would need to send it (cyc-query (isa ?X KnownProgram)...)
+08:18:20 <dmiles> so maybe let say your using TCL]
+08:18:29 <dmiles> since you have TCL RPC right?
+08:19:05 <dmiles> you might create a TCL fuction called.. getMeKnown("Programs")
+08:19:26 <dmiles> err  getMeList "KnoienPrograms"
+08:19:34 <Vutral> hmm
+08:19:52 <dmiles> that would actually call (cyc-query (isa ?X KnownProgram)...) and parse that back into a TCL list
+08:19:57 <Vutral> irritating
+08:20:17 <dmiles> well though.. think about talking to any other programmming language
+08:20:25 <dmiles> its the same thing you been doing ;P
+08:20:38 <dmiles> converting one API to the Next
+08:20:48 <Vutral> well
+08:20:48 <Vutral> it cannot talk to c
+08:20:52 <Vutral> i think
+08:20:52 <Vutral> hehehe
+08:21:00 <dmiles> c can talk to Cyc
+08:21:06 <Vutral> sure
+08:21:16 <Vutral> can cyc talk to java
+08:21:16 <Vutral>  ?
+08:21:42 <dmiles> not yet.. but i know some people (like myslf) are goi9ng to make 2 way interfaces between Java and Cyc
+08:21:53 <dmiles> as soon as 0.7 come out
+08:22:23 <dmiles> heck alread wrote a Java IPC system.. thats how i call it form prolog
+08:22:29 <Vutral> in which language is it programmed ?
+08:22:31 <dmiles> err from prolog
+08:22:51 <dmiles> so i just have to make it take S-Expressions as well as PExporessions
+08:22:56 <Vutral> in which language is opencyc written
+08:23:00 <dmiles> in Lisp
+08:23:07 <Vutral> ic
+08:23:17 <dmiles> thats why its heavily waited towards what Lisp reads/writes
+08:23:25 <dmiles> err weighted
+08:23:48 <dmiles> graylensman made a Scheme system that calls into Cyc pretty easily
+08:24:23 <Vutral> well i got a list interface
+08:24:27 <dmiles> moduified his sceme reader
+08:25:12 <Vutral> hmm
+08:25:20 <dmiles> then if you just convert to Lisp .. there is your S-Expression translator
+08:25:25 <Vutral> well you know i got this cross-programming engine
+08:25:29 <dmiles> you could just pipe everything through that
+08:25:29 <Vutral> which supports also prolog
+08:25:40 <Vutral> that thing supports lisp
+08:25:43 <zool> shiny
+08:25:55 <Vutral> shiny ?
+08:25:59 <Vutral> what ?
+08:26:08 <zool> crossprogramming engine sounds shiny :)
+08:26:35 <dmiles> i think even perl and TCL was the first part right?
+08:26:47 <dmiles> then you keep adding them in
+08:26:54 <Vutral> yeah
+08:27:00 <Vutral> it can do perl, tcl, java, prolog, lisp, sheme
+08:27:11 <Vutral> hehe
+08:27:18 <Vutral> and some others :>
+08:27:56 <dmiles> i am just wanting a global heap sopace a Blackboard for them all to keep global data in
+08:28:12 <Vutral> hmm
+08:28:27 <zool> gosh
+08:28:28 <Vutral> i will modify it so it works with my orbit
+08:28:44 <Vutral> then i have the best interface possible
+08:28:53 <dmiles> i have been trying tio central my programs instance data into get/sets that expect data to be asserted somewhere in opencyc
+08:29:31 <Vutral> hmm
+08:29:35 <Vutral> well
+08:29:44 <dmiles> and object data data to be serilized somehow between that and java
+08:30:16 <Vutral> i have no problem with that
+08:30:38 <Vutral> i have an object which can convert on the fly
+08:30:43 <Vutral> it does not matter where the data is
+08:30:53 <Vutral> the data has an address
+08:30:59 <Vutral> and you get it always in the required format
+08:32:15 <dmiles> sometimes just a "object345345345" refernce is good
+08:32:50 <Vutral> well
+08:32:53 <dmiles> at least in prolog and OpenCyc when dealing with a java object 
+08:33:03 <Vutral> it's jst a big object oriented thing
+08:33:17 <Vutral> cyc-243652
+08:33:45 <Vutral> perl-varname-type
+08:33:50 <Vutral> or similar things are possible
+08:33:57 <dmiles> sure for Cyc stuff.. mainly though an object in cyc is a #$constant or (first order term)
+08:34:53 <dmiles> so for example if i wanted to refernce a City
+08:35:02 <dmiles> and i want to get its .population()
+08:35:14 <Vutral> hmm
+08:35:22 <Vutral> i like object-orientation as long as you don't force me
+08:35:26 <Vutral> hehehe
+08:35:36 <dmiles> i would (population IowaCity ?What)
+08:35:58 <Vutral> it looks turned around
+08:36:14 <dmiles> yeah objects are like things that exists in the KB somplace
+08:36:21 <dmiles> and members are predicates
+08:36:42 <dmiles> predicates in which hold facts about that object
+08:36:58 <dmiles> kinda a slot thing
+08:37:45 <Vutral> hmm
+08:38:21 <Vutral> how can i query your CycLbot
+08:39:09 <urgyen> ya dm, any docs out yet?
+08:40:06 <dmiles> urr.. oops
+08:40:18 <Vutral> btw. i will put up a public accessible bot also
+08:40:31 <Vutral> for accessing cyc
+08:40:48 <dmiles> mt InferencePSC
+08:41:04 <dmiles> ask (isa ?What Person)
+08:41:04 <CycLBot> ?WHAT = CycAdministrator, ?WHAT = Guest
+08:41:21 <dmiles> ask (isa ?What PlayerInstance)
+08:41:22 <CycLBot> no answers found
+08:42:08 <dmiles> assert (isa dmiles Person)
+08:42:09 <CycLBot> no answers found
+08:42:12 <dmiles> ask (isa ?What Person)
+08:42:12 <CycLBot> ?WHAT = CycAdministrator, ?WHAT = Guest, ?WHAT = dmiles
+08:42:31 <dmiles> the no answers found after assertion is kinda  aregression
+08:42:50 <dmiles> subl (RANDOM 30)
+08:42:50 <CycLBot> 24
+08:42:52 <Vutral> dmiles
+08:43:18 <Vutral> cyc should get knowledge about the reality
+08:43:21 <Vutral> actual things
+08:43:26 <Vutral> the time and more
+08:43:32 <Vutral> the irc room
+08:43:40 <dmiles> that would be cool
+08:44:39 <Vutral> hmm
+08:44:44 <dmiles> you can create data spaces in Cycs Mts
+08:45:01 <dmiles> so you can organize how the data fits together
+08:45:04 <Vutral> i am thinking
+08:46:17 <Vutral> yes
+08:49:53 --- quit: graylensman ("Client Exiting")
+08:52:45 --- quit: Vutral (Read error: 104 (Connection reset by peer))
+08:57:09 --- join: Vutral (~ss@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+08:57:57 <Vutral> hell
+08:57:59 <Vutral> my swap was gone
+09:02:15 --- join: Victory (~Enigma335@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+09:03:00 --- quit: Victory (Remote closed the connection)
+09:04:08 <Vutral> dmiles: you there ?
+09:04:18 <Vutral> i just had to restart all my components
+09:06:13 --- join: Victory (~Enigma335@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+09:06:28 --- part: Victory left #opencyc
+09:06:33 --- join: Victory (~Enigma335@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+09:07:40 <dmiles> back now
+09:10:25 <Vutral> ok
+09:10:30 <Vutral> hey
+09:10:35 <Vutral> i noticed a funny thing
+09:10:40 <Vutral> your bot reacts on same commands as mine
+09:12:12 * zool smiles
+09:12:50 * Vutral dmiles
+09:12:50 <Vutral> *gg*
+09:12:51 <CycLBot> You
+09:12:56 <Vutral> smiles dmiles
+09:13:05 <Vutral> mt (lol)
+09:15:45 --- part: CycLBot left #opencyc
+09:15:49 --- join: CycLBot ([CeDnURN3d@12-225-207-235.client.attbi.com) joined #opencyc
+09:15:53 --- part: Victory left #opencyc
+09:15:57 --- join: Victory (~Enigma335@brln-d9b80c2c.pool.mediaWays.net) joined #opencyc
+09:16:05 <Vutral> hey
+09:16:08 <dmiles> ;P
+09:16:09 <Vutral> hehe
+09:16:36 <Vutral> i wonder
+09:16:51 <Vutral> when will your mud be working ?
+09:17:40 <dmiles> well it runs now at prt 4444
+09:17:45 <dmiles> but not much going omn there
+09:17:52 <dmiles> oops i hadnt loaded the instance data
+09:17:56 <dmiles> the mapsd
+09:18:04 <dmiles> since my last unexpected rebot
+09:18:15 <Vutral> hmm
+09:18:19 <dmiles> err reboot
+09:18:24 <Vutral> i wish it would be playable
+09:18:37 <dmiles> one sec.. well you can take things and look at things
+09:18:47 <dmiles> thatand move from room to room
+09:19:02 <zool> i'd be into doing some proper writing for the descriptions ;P
+09:19:14 * zool grinz
+09:19:22 <Vutral> that bores still
+09:19:26 <Vutral> you need quests
+09:19:32 <dmiles> ;P well part of it is ussing small bits of CycL genertation.. 
+09:19:39 <zool> the proper writing for the continuity
+09:19:53 <zool> otherwise it turns into a babbling bloglike inanity
+09:19:58 <Vutral> hmm
+09:20:01 <zool> quests still need some kind of prosaic form
+09:20:06 * zool shurgs
+09:20:11 <Vutral> yeah
+09:20:14 <zool> not like pre-set stuff
+09:20:34 <zool> semi-generative but with aesthetic thingummyjiggles
+09:20:58 <dmiles> yeah.. it needs to make the geratives colorfull
+09:21:00 * zool doesnt know, i'm not really a hardcore mud person
+09:21:06 <dmiles> that still takes artisticness
+09:21:33 <dmiles> so when there is many ways of describing the same assertions.. 
+09:21:39 * zool shurgs, nips out for cycle ride, see you later
+09:21:50 <Vutral> hmm
+09:22:13 <Vutral> there are quite many ways to describe nothing
+09:22:21 <dmiles> i am loading the StarTrek map in there right now
+09:22:23 <Vutral> nothing is the missing of something
+09:24:25 <dmiles> [dmiles@Area1001 mud]$ look
+09:24:25 <dmiles> Geordi's Quarters is an indoor space
+09:24:25 <dmiles> Geordi's Quarters is inside surface
+09:24:25 <dmiles> Geordi's Quarters is a geographical region
+09:24:25 <dmiles> dmiles is contained in Geordi's Quarters
+09:24:43 <dmiles> A portal East is contained in Geordi's Quarters
+09:25:01 <dmiles> hehe..  NLReviewer leaves to the East-Generally
+09:25:29 <Vutral> ehhehehe
+09:25:54 <dmiles> [dmiles@Area1001 mud]$ look east
+09:25:57 <Vutral> that is funny
+09:26:03 <dmiles> mud description A portal East A corridor is East.
+09:26:58 <dmiles> you can telnet in at 12.225.207.235 4444
+09:28:21 <Vutral> Welcome to the LogicMoo.
+09:28:26 <Vutral> username ?
+09:28:31 <dmiles> Vural
+09:28:35 <dmiles> err Vutral
+09:28:43 <Vutral> Passwords are not implemented on this development version.
+09:28:49 <Vutral> hhe
+09:29:02 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8555
+09:29:04 <dmiles> thats you
+09:29:10 <Vutral> a help command would be cool
+09:30:00 <dmiles> in #logicmoo  the bot is telling whats happing
+09:30:33 <dmiles> yeah.. i have been hoping a generic solution to help will happen
+09:32:27 <zool> our bots all support irc /msg help is useful standard
+09:32:37 * zool really goes now :)
+10:03:50 <Cobra_> ask (infinitive Greet-TheWord ?A)
+10:03:51 <CycLBot> no answers found
+10:04:42 <Cobra_> Can't open private msg windows to the bots, can we?
+10:05:32 <Cobra_> I tried "/msg CycLBot help", but nothing comes back (on irc, although the response shows up in the console.)
+10:06:23 <dmiles> it would be simple to fix in code
+10:06:42 <dmiles> it was just a starter class
+10:06:57 <dmiles> its the serveiceIRCMessage
+10:07:14 <dmiles> the destination return path was differnt for a msg then a channel
+10:07:42 <dmiles> but it always pretends its a channel
+10:07:59 <dmiles> the reason i left ti out is i thought it was going to respond to its own output
+10:08:11 <Cobra_> ok, figured as much.  Worth fixing?
+10:08:22 <Cobra_> Or, implementing, rather.
+10:08:27 <dmiles> since it would mesg the channel and ineffect mthik it was a message from itself
+10:08:37 <dmiles> yeah worth it
+10:09:05 <dmiles> let me see what it needs
+10:09:36 <Cobra_> great!
+10:10:22 <Cobra_> My version's running over in #cobra, although it doesn't do more than the greeting recognition yet.
+10:17:38 <dmiles> i may not get to it right away.. i have been getting read to sleep
+10:18:55 <dmiles> but this afternoon
+10:19:20 <dmiles> mainly its only 5 minutes of work.. but have to use a clas that extends the current IrcChat.java
+10:19:36 <dmiles> cycbot had to extend something else
+10:19:47 <dmiles> so i had to put his code iseparte
+10:20:20 <dmiles> the pain that java does not let you extend two classes at once
+11:05:58 <Vutral> hehe
+11:13:42 <dmiles> ok i added it so the bot could be used with private messages and not just in channel to CVS
+11:14:20 <dmiles> i should restart the JVM real quick
+11:15:19 --- quit: CycLBot (Remote closed the connection)
+11:17:35 --- join: CycLBot ([avSejW8to@12-225-207-235.client.attbi.com) joined #opencyc
+11:17:50 <Cobra_> :)
+11:18:14 <dmiles> ping
+11:18:15 <CycLBot> hello dmiles
+11:18:17 <Cobra_> hmm...
+11:18:18 <dmiles> hrrm 
+11:18:28 <dmiles> oh i fogot to run ant ;P
+11:18:59 --- quit: CycLBot (Remote closed the connection)
+11:19:07 <urgyen> oh
+11:19:16 --- join: CycLBot ([9R+ePGj8a@12-225-207-235.client.attbi.com) joined #opencyc
+11:19:36 <dmiles> ok urgyen, fixed that comma problem as well
+11:20:13 <dmiles> not that it was big deal.. butalso changed things so commands ruin faster
+11:20:23 <urgyen> I changed to win tin
+11:20:32 <dmiles> run faster becasue it doesnt reload the command interpetor each command
+11:21:08 <urgyen> I really need to sit this stuff down in front of me and get some headway
+11:21:19 <urgyen> got any beginner pointers?
+11:21:28 <Cobra_> still missing something
+11:21:57 * urgyen sorely lacking inference engine experience
+11:22:19 <dmiles> http://www.opencyc.org/doc/#CycL_Exercises
+11:22:28 <urgyen> tnx
+11:23:05 <dmiles> actuall this is good too: http://www.opencyc.org/doc/tut/
+11:23:10 <dmiles> thats the one i did first
+11:24:59 <Cobra_> yes, excellent place to start
+11:27:11 <urgyen> and about what amount of time should I allocate?
+11:28:28 <urgyen> I mean to gain some semblence of ability...
+11:33:12 <Cobra_> How would you define 'semblance of ability'  (coming from someone with just a touch of exposure to cyc, mind you.)
+11:33:17 <Cobra_> ?
+11:33:36 <urgyen> being able to produce something
+11:33:55 <urgyen> map a model and put it in action
+11:33:59 <dmiles> well you would want to understand that there are rules and facts.. and with rules there are forward and backchaining rules
+11:34:21 <dmiles> and when you make a query the types of things to ask it
+11:34:31 <dmiles> it helps to start with a specific task in mind
+11:34:38 <urgyen> right
+11:34:53 <dmiles> for example.. organizing a set of verb string actions
+11:35:24 <dmiles> seeing if you can findhow the order is kept in existing Cyc event ontology
+11:35:52 <dmiles> and how for example.. one could tie their set of verb type languag eto events
+11:36:13 <dmiles> but getting to the point you can assert and query comes first
+11:36:29 <dmiles> the techincal details of basic operations 
+11:36:56 <dmiles> the 101 tutorial is actually pretty in depth
+11:37:03 <urgyen> someone publish any books yet?
+11:37:12 <dmiles> Doug Lanate did.. 
+11:37:25 <dmiles> they are on Citeseer it htink
+11:37:32 <urgyen> 'k
+11:37:38 <dmiles> i am looking
+11:40:04 <urgyen> my poor computer is dying
+11:40:13 <urgyen> 'bout time to go shopping again
+11:43:12 <dmiles> here is a long paper on Cyc: http://citeseer.nj.nec.com/cache/papers/cs/5893/http:zSzzSzwww.ai.mit.eduzSzpeoplezSzdenizzSzpszSzcyc96.pdf/yuret96binding.pdf
+11:44:49 <dmiles> it can be negative towards parts.. but you wonder why it spends so much time explianing the pricimples 
+11:45:14 <dmiles> and by the end is saying good things
+11:47:43 <dmiles> but materials published on Cyc are not very instructional.. just theory
+13:20:51 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+15:05:32 --- join: Vutral_ (~ss@pD9042E79.dip.t-dialin.net) joined #opencyc
+15:15:01 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:16:20 <kinoc> ping
+15:16:20 <CycLBot> hello kinoc
+15:20:10 --- quit: Vutral (Read error: 113 (No route to host))
+15:21:34 --- quit: Victory (Read error: 113 (No route to host))
+15:21:53 --- join: Victory (~Enigma335@pD9042E79.dip.t-dialin.net) joined #opencyc
+15:38:04 <kinoc> dmiles??
+15:41:36 <Vutral_> heya
+15:48:42 <kinoc> hiya
+16:19:54 <graylensman> hoya! your as welcome as could be.  M . I . C ..
+16:21:33 <kinoc> whose home?
+16:23:15 <Cobra_> K . E . Y ...
+16:24:07 <Cobra_> (Try and teach a bot that.)
+16:25:19 <kinoc> M.O.O.S.E....
+16:26:43 --- join: people (Snak@62.53.34.33) joined #opencyc
+16:29:46 <Cobra_> :)
+16:59:48 --- join: Taral (~taral@cs6625132-47.austin.rr.com) joined #opencyc
+17:20:42 <graylensman> Scheme rules-> (cyc-create-microtheory #$CatalogMt isa #$GeneralMicrotheory genlsMt #$BaseKB in #$BaseKB)
+17:23:21 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+17:25:35 --- quit: Victory (Read error: 110 (Connection timed out))
+17:38:06 --- quit: zool (Read error: 110 (Connection timed out))
+17:57:22 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+18:38:49 --- quit: Taral ("ircII EPIC4-1.1.5 -- Are we there yet?")
+18:51:08 --- quit: graylensman (Remote closed the connection)
+21:07:56 --- join: demoncrat (darius@shell.accesscom.com) joined #opencyc
+21:35:55 --- quit: people (Read error: 110 (Connection timed out))
+22:07:46 --- quit: Cobra_ ("[x]chat")
+22:17:48 <dmiles> hi kinoc
+22:18:09 <dmiles> brb
+22:22:22 * dmiles returns
+22:35:00 --- quit: demoncrat ("Leaving")
+22:40:34 --- join: irc (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+22:41:40 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+22:41:43 --- nick: irc -> dmiles
+23:14:39 --- join: dmiles2 (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+23:15:57 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/02.07.07

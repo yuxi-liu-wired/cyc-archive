@@ -1,0 +1,163 @@
+00:00:00 --- log: started opencyc/03.01.01
+00:08:56 --- nick: mdupont|ZZZZ -> mdupont
+00:09:04 <mdupont> happy 2003!
+02:04:34 <mdupont> anyone awake?
+03:19:30 <mdupont> http://xbean.cs.ccu.edu.tw/~dan/opencyc-0.6.0/doc/org/opencyc/xml/ExportDaml.html
+03:19:37 <mdupont> Exception in thread "main" java.lang.NoSuchMethodError: main
+03:52:47 <mdupont> this opencyc cvs is all messed up
+04:53:31 --- nick: mdupont -> mdupont|away
+07:33:06 --- join: mdupont_ (mdupont@p5080E31F.dip0.t-ipconnect.de) joined #opencyc
+07:34:41 --- nick: mdupont_ -> mdupont
+07:35:57 <ZivZ> Well Wishes and a Happy New Year.
+07:36:00 --- quit: mdupont|away (Read error: 110 (Connection timed out))
+07:40:50 <mdupont> same to you
+07:43:10 --- quit: mdupont ("Client Exiting")
+08:00:15 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+08:01:14 <ZivZ> Happy New Year.
+09:36:19 <ZivZ> Anyone else been awake for 5 hours or is everyone still sleeping last night off?
+09:41:16 <Cobwa> :) Happy NY.  cya later :)
+09:41:23 --- quit: Cobwa ("[x]chat")
+10:25:33 --- join: mdupont (mdupont@p5080E169.dip0.t-ipconnect.de) joined #opencyc
+10:25:38 <mdupont> hello
+10:31:19 <ZivZ> Hi
+10:32:41 <mdupont> hey ZivZ
+10:38:30 <mdupont> you know anyone who compiled the opencyc java stuff?
+10:52:12 <ZivZ> I believe it was John DeOlivera.
+10:52:49 <ZivZ> Sorry it took me that long to respond, I was in the shower.
+10:53:26 <mdupont> ok, cause he does not use linux :)
+10:53:28 <mdupont> thats ok, i got cyc running
+10:53:30 <mdupont> but i cannot run the damlExport
+10:53:32 <mdupont> it does not have a main compiled in!
+10:53:34 <mdupont> and I cannot compile the thing
+10:55:19 <ZivZ> Ouch.  you have your classpath set?
+10:55:43 <mdupont> it is not set right
+10:55:52 <mdupont> the ant file is not working
+10:56:06 <ZivZ> there's a bat file in the scripts dir.
+10:56:36 <ZivZ> or shell script on linux.
+10:57:17 <ZivZ> did you get the linux version or the windows?
+10:57:35 <mdupont> i can run it all fine
+10:57:44 <mdupont> i hacked the linux run program
+10:57:55 <mdupont> but the jar file is really missing a main routine
+10:58:01 <mdupont> for the daml exporter
+10:58:31 <mdupont> and I must be doing something wrong with the ant file to get it to recognised the jars in needs for compilation
+10:59:16 <ZivZ> I haven't got that deep into it, yet.  I was attempting to convert the bin file before 0.7.0 came out.
+10:59:40 <mdupont> the bin into what?
+11:00:27 <ZivZ> you specify the jar just like a directory in your classpath. see the .sh file for the form.
+11:00:59 <mdupont> in the ant file :
+11:01:01 <mdupont>       classpath="~/development/opencyc/opencyc-0.7.0/lib/junit.jar;~/development/opencyc/opencyc-0.7.0/lib/jakarta-oro-2.0.3.jar;~/development/opencyc/opencyc-0.7.0/lib/commons-collections.jar:~/development/opencyc/opencyc-0.7.0/lib/FIPA_OSv2_1_0.jar:~/development/opencyc/opencyc-0.7.0/lib/ViolinStrings.jar:~/development/opencyc/opencyc-0.7.0/lib/commons-collections.jar:~/development/opencyc/opencyc-0.7.0/lib/dynamicjava.jar:~/development/op
+11:01:01 <mdupont> yc/opencyc-0.7.0/lib/icu4j.jar:~/development/opencyc/opencyc-0.7.0/lib/jakarta-oro-2.0.3.jar:~/development/opencyc/opencyc-0.7.0/lib/jdom.jar:~/development/opencyc/opencyc-0.7.0/lib/jena.jar:~/development/opencyc/opencyc-0.7.0/lib/jug.jar:~/development/opencyc/opencyc-0.7.0/lib/junit.jar:~/development/opencyc/opencyc-0.7.0/lib/rdf-api-2001-01-19.jar:."/>
+11:01:21 <mdupont> i guess that is how you do it?
+11:01:37 <mdupont> oh, there is a semicolon..
+11:01:38 <mdupont> hmm
+11:02:22 <ZivZ> I hope the missing en is just where you didn't copy well.
+11:02:41 <ZivZ> enc rather
+11:02:42 <mdupont> en?
+11:02:48 <mdupont> enc?
+11:02:56 <ZivZ> between those two lines.
+11:04:28 <ZivZ> end of the first goes "(...)/op", then the next has "yc/(...)".
+11:04:52 <ZivZ> where it should have read "/opencyc/"
+11:06:02 <mdupont> sure, that is just the chat withdow
+11:06:05 <mdupont> window
+11:06:19 <ZivZ> in linux dont you use a $ to denote a parameter?
+11:06:54 <ZivZ> If I am remembering my unix properly.
+11:10:00 <mdupont> yes
+11:10:05 <mdupont> in bash, like perl
+11:10:14 <mdupont> a variable is accessed by a $
+11:10:26 <mdupont> so "echo $PATH" will show you the path
+11:10:51 <mdupont> and 'export PATH="blagh:$PATH"' will prepend it
+11:11:20 <ZivZ> OK, so java recognizes your classpath?
+11:12:11 <mdupont> when i run it,
+11:12:15 <mdupont> how can i debug ant?
+11:12:24 <mdupont> like in make, i say make -p or make -d
+11:14:36 <ZivZ> I'm not really that great in java.  When I search for a file with "main" in it ExportEldDaml.java has it in it.
+11:15:26 <ZivZ> but I couldn't find it in ExportDaml.java
+11:15:51 <mdupont> i did
+11:15:56 <mdupont> search
+11:16:00 <mdupont> javap 
+11:16:02 <ZivZ> public static void main (String[] args) {
+11:16:11 <mdupont> told me to go to hell
+11:16:17 <ZivZ> heheh
+11:16:35 <ZivZ> damnable compiler!
+11:17:37 <ZivZ> the only main I find in ExportDaml.java is part of the word "domain"
+11:18:01 <ZivZ> what is ant?
+11:18:47 <mdupont> ant is the thing that reads the build.xml 
+11:19:05 <mdupont> and it does what make does 
+11:19:08 <mdupont> run the compiler
+11:19:17 <mdupont> i know, the export daml is crippled
+11:19:25 <mdupont> that does the ExportEdDaml do?
+11:21:40 <ZivZ> I dont know.  But my guess is it has something to do with daml.  Reading through the file it has stuff like "exportDaml.outputPath = "open-cyc.daml";                exportDaml.export(ExportDaml.EXPORT_ENTIRE_KB);            }            if "
+11:21:51 <mdupont> oh,
+11:21:54 <mdupont> let me try that then
+11:21:55 <mdupont> thanks
+11:30:06 --- quit: ChanServ (Shutting Down)
+11:30:12 --- join: ChanServ (ChanServ@services.) joined #opencyc
+11:30:12 --- mode: calvino.freenode.net set +o ChanServ
+11:33:38 <ZivZ> BTW. mdupont, StevenReed authored all the stuff in the xml directory by the looks of it.
+11:34:09 <ZivZ> as in reed__
+11:35:02 <mdupont> yes, i have been waiting for him to come around, i bet he is still sleeping off his handover
+11:35:11 <mdupont> or sittting under a palm tree somewhere
+11:35:12 <ZivZ> but I imagine that's his machine at work.
+11:36:30 <ZivZ> All the CycCorp guys seem to be on during regular work hours, in Texas time. or Central to the rest of the world.
+11:36:54 <mdupont> oh, he is a full time cyccorper?
+11:36:57 <mdupont> ahhh
+11:37:10 <mdupont> well i have a could of problems with the cyc class model
+11:37:12 <mdupont> as well
+11:37:16 <ZivZ> I think so, but dont quote me on that.
+11:37:47 <mdupont> Why is belgium a Agent, but Germany is GeographicalRegion
+11:38:07 <ZivZ> different MTs I think.
+11:39:03 <mdupont> MT?s
+11:39:21 <ZivZ> MicroTheories.
+11:45:36 <ZivZ> Belgium is probably an agent as in government. But Germany is probably only entered as a place.
+11:46:17 <ZivZ> So Belgium does things.  Germany is where things happen.
+11:52:48 <mdupont> hmm, 
+11:53:05 <mdupont> belgium and germany are both soverign states like usa
+11:53:15 <mdupont> no difference to cyc
+11:54:03 <ZivZ> It only knows what its been told.
+11:54:19 --- join: apluc_aem (~mea_culpa@12-213-238-134.client.attbi.com) joined #opencyc
+11:54:40 <mdupont> i am just saying, garbage in garbage out
+11:54:59 <ZivZ> you could likely go in and create similar for each, so they would both be regions and agents.
+11:55:08 <mdupont> there are a couple of problems in the opencyc data model
+11:55:29 <mdupont> i am taking parts out of it to create a ont. for billing applications
+11:55:43 <mdupont> apluc_aem: merry christmas and happy new year
+11:56:01 <ZivZ> wouldn't surprise me.  it's huge, collaborative software, and beta.
+11:56:10 <mdupont> and after comparing the stuff to my data model, there are lots of bugs
+11:56:24 <mdupont> one thing that i cannot figure out, maybe you can help
+11:56:52 <mdupont> #$ContactLocation
+11:57:00 <mdupont> how is that connected to a person or agent
+11:57:07 <mdupont> i cannot seem to find a connection
+11:57:27 <mdupont> and how can I see what classes are subclassed off a given class?
+11:57:28 <ZivZ> lemme fire up my image and take a look.
+11:57:36 <mdupont> thks
+11:59:57 <mdupont> my soup is getting cold
+12:00:03 <mdupont> i have to goto dinner
+12:00:13 <mdupont> sorry to hit and run, back in 30 mins
+12:04:48 <ZivZ> comment :  "A specialization of PartiallyTangible. Each instance of ContactLocation is a location at which some particular agent (e.g. a person or a corporation) may be contacted by any of several means, for any of several purposes. ContactLocations include any place to which one may direct one or more of the following: letters, packages, phone calls or voice messages, bills, email, faxes, pages, subpoenas. Contact locations must be fairly specifi
+12:06:35 <mdupont> yes i have that
+12:06:45 <mdupont> but how is it connected to a agent
+12:06:51 <mdupont> i cannot seem to trace the links
+12:07:03 * mdupont goes an gets dinner
+12:09:54 <ZivZ> are you in the Hierarchy Browser?
+12:11:38 <ZivZ> If yo go to Tools in the upper frame click on Hier, Enter "ContactLocation" as your starting term, then show hierarchy.
+12:12:39 <ZivZ> In the left frame click Applicable Relations.  BooYA! Scads o info.
+12:13:24 <ZivZ> I gotta go myself.  There are OH radicals to be consumed somewhere and I have to help.
+12:15:04 <ZivZ> Display Hierarchy rather than show...
+12:15:09 <mdupont> ok thaks
+12:15:23 <mdupont> show hierarchy
+12:15:24 <mdupont> ok
+12:29:59 <mdupont> what predicate should I use?
+12:32:42 <mdupont> i see, Applicables Relations
+12:32:54 <mdupont> OH radicals? is that like THC?
+12:33:04 --- nick: mdupont -> mdupont-away
+13:43:14 <mdupont-away> Hierarchy browser is not intuitive
+14:07:10 --- quit: mdupont-away ("Zzzz")
+17:21:34 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:09:52 --- join: nephrael (alife@12-211-42-52.client.attbi.com) joined #opencyc
+18:10:32 --- nick: nephrael -> dmiles_brb
+18:30:55 --- quit: KinoC (Read error: 110 (Connection timed out))
+18:47:04 <dmiles_brb> brb
+18:47:08 --- quit: dmiles_brb ()
+19:37:12 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:55:45 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:57:25 --- quit: KinoC (Read error: 110 (Connection timed out))
+22:08:40 <KinoC2> ping
+23:59:59 --- log: ended opencyc/03.01.01

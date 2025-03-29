@@ -1,0 +1,592 @@
+<html>
+
+<title>The CYC&reg; Agenda and CYC&reg Transcripts</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-old.gif border=0 alt="OpenCyc.org Homepage"></a>The CYC&reg; Agenda and CYC&reg Transcripts</h2>
+
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+
+<hr>
+
+Managing KB Changes in a Multiple-Image Environment<p>
+<b>NOTE: Most of this document does not apply to OpenCyc images, but the document is included to illustrate one way that Cyc (in 2002) handles a multiple-image environment.</b><p>
+<hr>
+
+<h2>Contents:</h2>
+<ul>
+  <li><a href=#transcripts>CYC&reg; Transcripts</a>
+  <ul>
+    <li><a href=#ts-file-names>Transcript File Names</a>
+    <li><a href=#com-modes>Communication Settings</a>
+    <li><a href=#queues-and-fi>Queues and the Functional Interface</a>
+    <li><a href=#ts-contents>What is in a Transcript</a>
+  </ul>
+  <li><a href=#cyc-agenda>The CYC&reg; Agenda</a>
+</ul>
+<hr>
+
+<a name="transcripts"><h2>CYC&reg; Transcripts</h2></a>
+
+If every CYC&reg; image has a separate copy of the CYC&reg
+Knowledge Base (KB), how are the different copies of the KB kept in
+sync with each other?
+
+<p>
+This is accomplished by having each image write operations
+to, and read operations from, one or more transcript files.
+
+<dl>
+
+<dt><a name="ts-file-names"><h3>Transcript File Names</h3></a>
+
+<dd> For each CYC&reg; image (each copy of the CYC&reg KB), there are two transcript files it uses: <dl>
+<dt><h4>Master Transcript</h4> 
+<dd>The master transcript file is a complete
+record of all the operations (changes to the KB) which, when "run" or
+evaluated, will result in the next (newest) canonical version of the
+KB.  When a CYC&reg; image is started, its copy of the KB is brought into
+sync with those of other running images (assuming they all have the
+same version of the KB) by loading the operations in the master
+transcript file for that KB version.
+
+<dt><h4>Local Transcript</h4>
+<dd>The local transcript file is a record of the operations which have been run by a CYC&reg; image.  In the course of a knowledge editing session a new local transcript may be started several times.
+</dl>
+
+<dt><a name="com-modes"><h3>Communication Settings</h3></a>
+<dd>
+
+There are two parts to the communication status:
+
+<dd>
+<h4>What do you want to do with the operations you generate?</h4>
+<dl>
+<dd><b>Send immediately to the master transcript</b> - local operations are sent to the master transcript as they are processed.  Local operations that are sent to the master transcript are also sent to the local transcript.<p>
+<dd><b>Store for later</b> - local operations are sent to the local transcript and then stored for possibly sending to the master transcript later.<p> 
+<dd><b>Do not record</b> - local operations are processed and are NOT recorded.  Your image will show the effects of their outcome but you will not have a record of them.
+</dl>
+
+<dd>
+<h4>Do you want to receive operations from others?</h4>
+<dl>
+<dd><b>Yes</b> - You want to process the operations that others are sending to the master transcript.<p>
+<dd><b>No</b> - You do NOT want to process the operations from the master transcript.
+</dl>
+
+<dd><p>Therefore, there are six possible combinations for the communication status:
+<dl>
+<dd>- Sending and Receiving
+<dd>- Sending
+<dd>- Storing and Receiving
+<dd>- Storing
+<dd>- Not Recording but Receiving
+<dd>- Not Recording or Receiving
+</dl>
+
+<dd><p>
+The Communication Status page is where you can view and change your communication settings.  When Storing operations, a new section of the communication status page will appear.  In this section you are given the option of sending your stored operations or clearing them from storage.  Selecting either option will cause a new local transcript to be started for the image.  Selecting clear does NOT mean the stored operations will be erased(they will still be in the local transcript).
+
+
+
+
+
+<dt><a name="queues-and-fi"><h3>Queues and the Functional Interface</h3></a>
+<dd>
+
+State-controlling variables that experienced users of CYC&reg;
+should know about are *use-local-queue?* and *run-own-operations?*.  <p>
+
+The value of *use-local-queue?* determines whether or not operations
+performed in the local image will be executed immediately (thus
+blocking the execution of other processes), or pushed onto the local
+queue to be executed at a time determined by the CYC&reg; Agenda.  The
+possible values for this variable are T and NIL.  In most cases (most
+of the time), *use-local-queue?* will be set to T.  This means that
+every KB-modifying operation performed using any of the top-level
+Functional Interface (FI) functions (e.g., FI-ASSERT) will
+automatically be pushed onto *local-queue* to be executed by the CYC&reg;
+Agenda.  Usually this is a good thing, because otherwise the operation
+would be executed immediately where you typed it in (or where it was
+evaluated internally through the web browser interface).  If it
+happened to be a long operation, you would be forced to wait before
+you (or another application) could continue to interact with CYC&reg;.
+However, you may sometimes want the evaluation of a Functional Interface
+function to happen immediately.  In this case, set the value of
+*use-local-queue?* to NIL by evaluating<p>
+
+<pre>
+  (CSETQ *use-local-queue?* NIL)
+</pre><p>
+
+in the Interactor web interface page.  If you are typing SubL
+expressions directly to a read-eval-print loop (extremely rare for
+doing knowledge entry), use the procedure SAFE-FI.<p>
+
+<pre>
+  (SAFE-FI <keyword> <arguments>)
+</pre><p>
+
+For example, instead of typing the form<p>
+
+<pre>
+  (FI-ASSERT '(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Siegel <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>) <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>)
+</pre><p>
+
+you would type<p>
+
+<pre>
+  (SAFE-FI :assert '(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Siegel <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>) <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>) 
+</pre><p>
+
+The value of *run-own-operations?* determines whether or not your
+local CYC&reg; image will process operations originating from it when
+reading operations from a transcript file.  In most cases this
+should be set to NIL.  However, if an image dies and needs to be
+restarted (due, e.g., to a power failure or irrecoverable memory
+error), you will usually want it to evaluate its own operations
+when it is restarted and loads the master transcript file, so
+that it will be in sync with the other running images.  This is
+just something to be aware of and watch for -- the right thing
+should happen automatically, and you should never have to
+manually set the value of this variable.  <p>
+
+<dt><a name="ts-contents"><h3>What is in a transcript file?</h3></a>
+<dd>
+
+Each expression in a transcript file is a list
+of four elements, with the following form:
+<p>
+<b>([user] [image-id] [date] [encapsulated op]) </b>
+<dl>
+<dt><dd>  <b>[user]</b> = the originating user's name
+<dt><dd>  <b>[image-id]</b> = the ID of the originating CYC&reg; image
+<dt><dd>  <b>[date]</b> = date the operation was added to the transcript file
+<dt><dd>  <b>[encapsulated op]</b> = an encapsulated FI operation
+</dl>
+<p>
+An encapsulated operation is one in which all CYC&reg; constants
+(e.g., <b><a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a></b>) are referred to as lists including name-id
+pairs (e.g., <b>(:HP "isa" 260))</b> rather than as Cyc-constant
+data objects.
+
+
+<dt><a name="loading-ts"><h3>Loading an Arbitrary Transcript File</h3></a>
+<dd>
+
+Arbitrary transcript files can be loaded in two ways.  The easiest way
+is to click on the [Load Transcript File] link in the CYC&reg; Navigator,
+and follow the instructions presented there.<p>
+
+In a read-eval-print loop, you can also call the function
+LOAD-TRANSCRIPT-FILE with the appropriate arguments.  These
+arguments include the pathname of the file to be loaded, a
+boolean value (T or NIL) indicating whether or not operations
+that originated in the local image should be loaded, and a
+keyword indicating onto which queue the loaded operations should be
+pushed.  The possibilities for the last argument (the queue
+keyword) are :local, :remote, and :none.  :None means that the
+Functional Interface commands in the transcript will be evaluated
+immediately, and other processes will be forced to wait until
+they are finished.
+
+
+<dt><a name="fi-direct"><h3>Calling FI Functions Directly</h3></a>
+<dd>
+
+Direct calls to FI functions act just like editing commands from
+the CYC&reg; Web Interface: by default, they are queued for execution
+by the agenda and saved in transcript files.  It is important to
+be aware of this behavior to avoid sharing unintended operations
+with other CYC&reg; Servers at a site.<p>
+
+When a CYC&reg; image is started and the CYC&reg init file is loaded, the
+global variables *use-local-queue?* and *use-transcript?* are
+initialized to T. With these settings, every FI command you
+evaluate (even including fi-ask), will be added to your
+transcript queue and (if your agenda is running) saved to a
+transcript file. If you are <b>Sending</b> operations or <b>Storing</b> and
+you send your stored operations, the operations will be appended to the master transcript file, and everyone who is reading from the master file will run your operations.<p>
+
+Changing your communication status is one way to safely alter the
+setting of these variables.  For example, if you go into a <b>Not Recording</b> mode
+then no operations performed in your CYC&reg; image will be added to its
+transcript queue.  In rare cases, a user might want to "manually" set
+*use-transcript?* to NIL.  If you think you need to manually set these
+variables, check with your contact at Cycorp.
+
+Here is a way to handle a common situation -- you want to run some
+cleanup operations that will be included in the next KB dump, but you
+don't want everyone to be forced to run the cleanup: <p>
+
+Cycorp has adopted the informal policy of using one CYC&reg; image as a
+dedicated KB cleanup and dump image.  If you want to run large
+numbers of cleanup operations to be included in the next dump, you can
+run them in the dedicated image with the communication status set
+to <b>Storing</b> and then clear the operations from storage. The local transcript file containing the operations can then be loaded on the dump image (make sure not to send them to the master transcript) immediately before the next dump.  <p>
+
+
+If in the context of some cleanup you write code or evaluate FI
+commands "manually" (in a SubL read-eval-print loop), use the
+generalized "safe" dispatcher function for FI commands called
+SAFE-FI.  Within calls to SAFE-FI, *use-local-queue?* and
+*use-transcript?* are bound to NIL, so there is no danger of
+unintended operations ending up in a transcript file.  For
+example, instead of calling: <p>
+
+<pre>
+  (FI-ASK '(<a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a> <a href=/cycdoc/vocab/organization-vocab.html#customers>#$customers</a> ?Y) <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>)
+</pre><p>
+
+you could call:<p>
+
+<pre>
+  (SAFE-FI :ask '(<a href=/cycdoc/vocab/fundamental-vocab.html#arity>#$arity</a> <a href=/cycdoc/vocab/organization-vocab.html#customers>#$customers</a> ?Y) <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>)
+</pre>
+<p>
+
+Note that the first expression above would not return an answer
+unless *use-local-queue?* were set to NIL. Instead, the result of
+the evaluation would be pushed onto the local queue, and the evaluated
+form would return the keyword :queued.  However, the second
+expression is guaranteed to return a result, since *use-local-queue?*
+is internally bound to NIL.
+
+
+<dt><a name="more-comments"><h3>Additional Comments</h3></a>
+<dd>
+
+Just about everything described above -- transcript file management,
+setting the values of variables, etc. -- should happen automatically.
+You should never have to name a local or master transcript file,
+specify a version number, append files, or directly set a variable's
+value. If for some reason you believe that you need to do one of these
+things (or something more arcane), please contact Keith Goolsbey, Nick
+Siegel, or another member of the Cycorp Technical Board.
+
+<dt><a name="dump"><h3>What "dump" Means</h3></a>
+<dd>
+
+Readers of this documentation will occasionally encounter the
+term "dump" and the phrases "do a dump" or "dump the KB".
+"Dumping the KB" means that one CYC&reg; image will be used to save
+the current state of its KB out to a set of specially formatted
+files (.cfasl files).  These files will then be used to construct
+a new version of the KB.  In effect, this is like taking a
+snapshot of the current state of the KB in the dump image and
+using that snapshot as the starting place for the next image to
+be built.  When a dump has started, the dump image will read
+<b>no further operations from the master transcript file</b>,
+and any operations written to that file after the dump
+has started will not be included in the new image to be built.
+
+<p>
+
+Note that users of other copies of the current CYC&reg; image (copies
+other than the particular image being used to do the dump) can
+always continue to work (do new knowledge entry) after a dump has
+started.  Just switch to a non-sending communication status.  This
+will start a local transcript file for your new operations.
+After a new image is built and you have started it, you can then
+load your transcript file, specifying that the operations should
+go on the local queue.  The operations will then be treated as if
+they had just now been performed in the new image, and they will
+be included in the new master transcript file.
+
+</dl>
+
+
+<hr>
+
+
+<a name="cyc-agenda"><h2>The CYC&reg; Agenda</h2></a>
+What controls how often, or how frequently, operations are
+written from the transcript queue to a transcript file?  What do all those numbers on the "Server Status" ("System Area") page REALLY mean?<p>
+
+The CYC&reg; Agenda is the process running in a CYC&reg image which performs all
+the tasks needed to manage CYC&reg; operations:  moving operations from one
+queue to another, executing operations, reading from transcript files,
+writing to transcript files, and loading CYC&reg; source code patches.<p>
+
+In computer science terms, the CYC&reg; Agenda is a finite state
+machine which continually moves from state to state, testing for
+a certain set of conditions in each state, and causing specific
+actions to be performed when the conditions hold.<p>
+
+Or you can think of the agenda as a manager who spends all day checking
+her watch and running back and forth between the offices of her
+employees, telling each one when it is time to do something.<p>
+
+<a name="agenda-flow"><h3>A Flowchart for the CYC&reg; Agenda</h3></a>
+
+Here is an informal description of the states through which the CYC&reg;
+Agenda moves, and what it does in each state (leaving out error
+handling and other technicalities):
+
+<hr>
+<dl>
+<dt><b>(0)</b> Start Agenda
+
+<dt><b>(1)</b>
+<dd>
+
+<ul>
+    <li> <b>IF</b> someone has given the command to halt the agenda,
+    <li> <b>THEN</b> halt,
+    <li> <b>ELSE</b> go to <b>(2)</b>
+</ul>
+
+<dt><b>(2)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> it is time to reset the image-specific random id
+      seed (to minimize the potential for id conflicts with newly-created
+      CYC&reg; constants),
+  <li> <b>THEN</b> do it, and go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(3)</b>
+</ul>
+
+<dt><b>(3)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> this CYC&reg; image is supposed to be saving operations and 
+      (a) the transcript queue is long enough to worry about
+      some operations maybe getting lost in a power
+      failure (i.e., > 20 operations), or (b) the transcript queue 
+      contains operations and the time to save transcript operations
+      has arrived,
+  <li> <b>THEN</b> save the operations to the write transcript file, and
+      go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(4)</b>
+</ul>
+
+<dt><b>(4)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> the transmit queue is long enough to worry about,
+  <li> <b>THEN</b> write operations to the master transcript <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(5)</b>
+</ul>
+
+<dt><b>(5)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> the auxiliary queue contains operations to run,
+  <li> <b>THEN</b> run one operation, and go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(6)</b>
+</ul>
+
+<dt><b>(6)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> the local queue contains operations to run,
+  <li> <b>THEN</b> run one operation, and go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(7)</b>
+</ul>
+
+<dt><b>(7)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> this CYC&reg; image is supposed to be loading patches
+      to the code and the time to load patches has arrived,
+  <li> <b>THEN</b> load patches and go to <b>(1)</b>,
+  <li> <b>ELSE</b> else go to <b>(8)</b>.
+</ul>
+
+<dt><b>(8)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> the transmit queue contains any operations,
+  <li> <b>THEN</b> write them to the master transcript <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(9)</b>
+</ul>
+
+<dt><b>(9)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> the remote queue contains operations to run,
+  <li> <b>THEN</b> run one operation, and go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(10)</b>
+</ul>
+
+<dt><b>(10)</b>
+<dd>
+
+<ul>
+  <li> <b>IF</b> this CYC&reg; image is supposed to be receiving operations and 
+      the time to read operations has arrived,
+  <li> <b>THEN</b> read some new (unprocessed) operations from the
+      read transcript file, put them on the remote queue,
+      and go to <b>(1)</b>,
+  <li> <b>ELSE</b> go to <b>(1)</b>
+</ul>
+
+</dl>
+
+<dt><a name="server-status-page"><h3>The Server Status page</h3></a>
+<dd>
+
+The [Server Status] web browser page contains a section which
+looks something like this:
+
+<pre>
+<hr>
+<strong>System Area </strong>
+
+<strong>Here are your system settings.</strong>
+
+Current machine:  <strong>Lenny</strong>
+Current image number: <strong>LENNY-293-19980105094631</strong>
+Current KB: <strong>111.545</strong>
+System and patch level: <strong>54.44</strong>
+
+<strong>Click here to halt this CYC&reg; image.</strong>
+
+<hr>
+Queue Information: 
+
+Master Transcript Operations Read But Unprocessed: 0
+Master Transcript Operations Read: 545
+
+Unprocessed Local Queue Operations: 0
+Local Queue Operations Processed But Unrecorded: 0
+Current Local Transcript Operations Processed And Recorded: 1
+
+<hr>
+
+Transcript Information:
+
+Master Transcript: ./transcripts/0111/cyc-kb-111.ts
+Characters: 251230
+Estimated Ops: 1219
+Operations Read: 545
+
+Local Transcript: ./transcripts/0111/LENNY-293-19980105094631-local-0.ts
+Operations: 1
+
+<hr>
+
+Historical Information:
+
+Remote Operations Processed: 545
+Local Operations Processed: 1
+Local Operations Sent To Master Transcript: 0
+
+<hr>
+  Copyright © 1995, 1996, 1997 Cycorp. All rights reserved.
+</pre>
+
+Here is a line-by-line explanation of the various bits of information
+displayed in this section:
+
+<dl>
+
+<dt><h4>Current machine: [machine-name]</h4>
+<dd>
+
+Indicates the machine that CYC&reg is running on
+
+<dt><h4>Current image number: [CYC&reg; image id]</h4>
+<dd>
+
+Indicates the unique id of the CYC&reg; image currently running.
+A CYC&reg; image id consists of three elements: a machine name,
+a process ID integer, and a large integer indicating the universal time
+at which the image was started.  (Thus, every image started from
+a CYC&reg; executable will have a different, unique ID, even if two or
+more images are started on the same machine).
+
+<dt><h4>System and patch level: [patch level]</h4>
+<dd>
+
+Indicates the version number (system number and patch level) of the
+CYC&reg; image.
+
+<dt><h4>Master Transcript Operations Read But Unprocessed: [n]</h4>
+<dd>
+
+The integer [n] indicates the number of operations that have
+been read from the master transcript but have not yet been processed.
+
+<dt><h4>Master Transcript Operations Read: [n]</h4>
+<dd>
+
+The integer [n] indicates the number of operations that have been read and processed from the master transcript. 
+
+<dt><h4>Unprocessed Local Queue Operations: [n]</h4>
+<dd>
+
+The integer [n] indicates the current number of operations sitting in
+the local queue waiting to be processed.
+
+<dt><h4>Local Queue Operations Processed But Unrecorded: [n]</h4>
+<dd>
+
+The integer [n] indicates the current number of operations that have
+been processed from the local queue and pushed into the transcript queue,
+but have not yet been saved to the local transcript.
+
+<dt><h4>Current Local Transcript Operations Processed And Recorded: [n]</h4>
+<dd>
+
+The integer [n] indicates the number of local operations that have
+been processed and saved to the current local transcript.
+
+<dt><h4>Master Transcript: [transcript file name]</h4>
+<dd>
+
+The name of the master transcript is provided.  This file can be examined
+by clicking on the file name.
+
+<dt><h4>Characters: [n]</h4>
+<dd>
+
+The integer [n] specifies the number of characters in the master transcript.
+
+<dt><h4>Estimated Ops: [n] </h4>
+<dd>
+
+The integer [n] specifies the approximate number of operations in the master transcript.
+
+<dt><h4>Operations Read: [n] </h4>
+<dd>
+
+The integer [n] specifies the  number of operations read from the master transcript.  This number will be equal to the sum of Master Transcript Operations Read But Unprocessed and Master Transcript Operations Read fro the Queue Information section.
+
+<dt><h4>Local Transcript: [transcript file name]</h4>
+<dd>
+
+The name of the local transcript is provided.  This is the file that all operations generated by this image are being recorded in.  This file can be examined by clicking on the file name.
+
+<dt><h4>Operations: [n]</h4>
+<dd>
+
+The integer [n] specifies the number of operations in the local transcript file listed above.
+
+</dl>
+
+<p>
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<html>
+<head>
+ <link rel="icon" href="/favicon.ico">
+ <link rel="shortcut icon" href="/favicon.ico"> 
+ <meta HTTP-EQUIV="imagetoolbar" CONTENT="no">
+ <title>Cycorp, Inc.</title>
+
+ <style type='text/css'>
+
+                body { font-family: Arial, Verdana, sans-serif; font-size:10pt;  background-color: #FFFFFF }
+                table { font-family: Arial, Verdana, sans-serif; font-size:10pt }
+
+		a:link {color: #5D478B; text-decoration: none}
+		a:visited {color: #5D478B; text-decoration: none}
+		a:hover {color: #458383; text-decoration: underline}
+
+
+
+#backgroundtop         { position: absolute; z-index: 10; top: 11px; left: 15px; width: 520px; height: 40px; visibility: visible }
+
+#breadcrumbs         { position: absolute; z-index: 10; top: 11px; left: 15px; width: 540px; height: 40px; visibility: visible }
+
+   #title        { position: absolute; z-index: 10; top: 90px; left: 18px; width: 500px; height: 20px; visibility: visible }
+
+#cYcorp       { position: absolute; z-index: 80; top: 132px; left: 591px; width: 159px; height: 45px; visibility: visible }
+
+#logo         { position: absolute; z-index: 80; top: 59px; left: 594px; width: 80px; height: 80px; visibility: visible }
+
+#submenu     { position: absolute; z-index: 90; top: 180px; left: 594px; width: 250px; height: 400px; visibility: visible }
+
+#linux_menu  { position: absolute; z-index: 100; top: 142px; left: 14px; width: 500px; height: 16px; visibility: visible; background: #DCDCDC }
+
+#text     { position: absolute; z-index: 60; top: 160px; left: 14px; width: 500px; height: 575px; visibility: visible; background: white}
+
+.bibliography P {
+  text-align: justify;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 2cm;
+  margin-right: 1cm;
+  text-indent: -1cm;
+}
+
+</style>
+
+
+<script type='text/javascript'>
+  function Go(){return}
+</script>
+<script type='text/javascript' src='/cyc/menu/nav/menu_defns.js'></script>
+
+</head>
+<body marginwidth='0' marginheight='0'>
+
+  <script type='text/javascript' src='/cyc/menu/nav/menu_com.js'></script>
+  <noscript>
+    <a href="company">company</a> | <a href="technology">technology</a> | <a href="cycrandd">Cyc R&amp;D</a> |
+    <a href="applications">applications</a> | <a href="opencyc">editions</a> | <a href="contact">contact us</a>
+  </noscript>
+
+
+
+
+
+
+
+
+		<div id="backgroundtop">
+			<a name="top"><img src="images/4lightlogo.gif" alt="background logo" width="480" border="0"></a></div>
+
+		<div id="cYcorp">
+                        <a href="/cyc">
+			<img src="images/logo_word.gif" width="156" height="40" border="0" alt="Home"></div>
+                        </a>
+
+		<div id="logo">
+                        <a href="/cyc">
+			<img src="images/logo_knot.gif" width="75" height="71" border="0" alt="Home"></div>
+                        </a>
+
+		<div id="text">
+			<table border="0" cellpadding="10" cellspacing="0" align="left" width="550">
+				<tr><td><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+
+
+<br>
+
+      <p>In the past year over 40,000 copies of OpenCyc have been downloaded
+from <a href="http://www.sourceforge.net/projects/opencyc" target="external">SourceForge</a>. How
+should these separate Cyc-enabled computers collaborate to create a whole
+which is much smarter than the sum of its parts?  And while one Cyc server
+can easily support a dozen clients at the same time, handling operations
+from thousands of clients would overwhelm a computer-bound Cyc server.  
+How do we address this scalability issue?</p>             
+      <p>Current state-of-the-art suggests that a <a
+ href="http://citeseer.nj.nec.com/cache/papers/cs/26821/http:zSzzSzwww.kbs.uni-hannover.dezSzArbeitenzSzPublikationenzSz2002zSzdraft_superhub.pdf/nejdl02superpeerbased.pdf" target="external">Super-Peer network</a>
+is the solution. &nbsp;Cyc's context mechanism provides a natural partitioning
+of knowledge suitable for distributed implementation.</p>
+      <p>In fact, this is how humans work: we <i>specialize</i> and <i>collaborate</i>.
+ Although most humans share a core of common  knowledge which allows them
+to communicate, no one human possesses all the knowledge of the  human race.
+ Instead, we have experts in law, medicine, construction, automotive repair,
+and  software design.  When a human lacks the knowledge to solve a problem,
+he can often find a  solution by collaborating with an expert.  When you go
+to the doctor with a persistent headache,  the doctor's knowledge of medicine
+combines with your knowledge of your symptoms to produce a  solution that
+neither could have reached alone.</p>
+      <p>In a distributed Cyc architecture, the network is populated with
+Cyc agents, each of which  shares a common core of knowledge as well as a 
+unique extension of expert knowledge in a particular domain.  Most importantly, 
+the various  Cyc agents
+are endowed with the ability to communicate with each other and to perform
+inferencing  in a collaborative fashion.  The inter-agent communication can
+be handled flexibly by using CycML, <a
+ href="http://www.w3.org/TR/owl-guide/" target="external">OWL</a>, or some other knowledge-sharing
+ protocol, or it can be implemented using a more efficient Cyc-specific protocol.</p>
+      <p>Cyc agents in a distributed architecture share knowledge describing
+how they can be reached  (via which network address, port, and protocol)
+and what their areas of expertise are.  During  inferencing, when an agent
+tries to expand a formula whose content lies outside its area of  expertise,
+it determines (by consulting its own knowledge base or consulting with a
+central  knowledge-broker agent) whether another agent is available that
+might be able to help.  If so,  the agent sends a message to its remote counterpart
+asking it to help expand the formula in  question.  The answer may be a complete
+set of bindings, but more commonly it is simply a  partial result, still
+containing unbound variables.  The local agent incorporates the result  into
+its own proof tree just as if it had done the work itself, and continues
+its task.  In  many cases, the local agent may need to consult the remote
+agent, or several remote agents,  multiple times in the course of its inferencing
+process.</p>     
+      <p>Cycorp has cooperated with the Computer Science Department of the
+University of Maryland in  Baltimore County (<a
+ href="http://www.cs.umbc.edu/" target="external">UMBC</a>) to develop a demo of such a  distributed
+architecture.  In the demo, three Cyc agents communicate with each other
+using KQML.   While all three agents possess the same core knowledge base,
+each possesses additional knowledge  about an additional domain in which
+it is considered to be an expert: the GeoAgent in geography,  the PolAgent
+in politics, and the EcoAgent in economics.  Working together, they can answer
+queries  that no one of them could have answered alone.</p>
+      <p>For example, suppose a user asks the GeoAgent for "elected heads
+of government of countries  north of the equator".  This might be represented
+as:</p>
+      <p>
+<font face="Courier">(#$and<br>
+&nbsp;&nbsp;&nbsp;(#$headOfGovernmentOf ?x ?y)<br>
+&nbsp;&nbsp;&nbsp;(#$hasAttributes ?x #$Elected)<br>
+&nbsp;&nbsp;&nbsp;(#$northOf ?y #$Equator))</font></p>
+                   
+      <p>The GeoAgent is able to find bindings for the third clause by using
+its own knowledge of the geography domain: </p>
+             
+      <ul>
+        <li>Britain is in Europe.</li>
+        <li>Europe is in the northern hemisphere.</li>
+        <li>The northern hemisphere is north of the equator.</li>
+        <li>If region A is part of region B, and region B is north of region
+C, then region A is north of region C.</li>
+        <li>Therefore, Britain is north of the equator.</li>
+      </ul>
+
+      <p>But to find bindings for the first two clauses, the GeoAgent must enlist outside
+help.  It sends these as queries to the PolAgent, which is able to find bindings
+for them using its knowledge of politics domain:             
+      <ul>
+        <li>Heads of government of democratic countries are elected.</li>
+        <li>Great Britain is a democratic country.</li>
+        <li>Tony Blair is the head of government of Britain.</li>
+        <li>Therefore, Tony Blair is the elected head of government of Great
+Britain.</li>
+      </ul></p>
+
+      <p>When the GeoAgent agent receives this answer back from the PolAgent, it combines
+it with its own partial answer to produce the final result: TonyBlair.</p>
+                    
+      <p><i>For more details on the Cycorp/UMBC demo of the distributed Cyc
+architecture, see <a
+ href="http://www.cs.umbc.edu/%7Efinin/papers/cfn95.pdf" target="external">"The Cycic Friends
+Network: getting Cyc agents to reason together"</a>, a paper describing the
+project which was presented at the 1995 CIKM conference.  Also see <a
+ href="http://www.cs.umbc.edu/kqml/" target="external">The UMBC KQML Web</a>,
+a page at UMBC describing the concept in greater detail.</i></p>
+             
+      <p>It should also be pointed out that, while the description above
+assumes that all the agents participating in the distributed architecture
+are Cyc agents, this is not a requirement.  Cycorp has defined a very simple
+protocol for implementing cooperative inferencing, and any agent which has
+been taught to adhere to this protocol, and which possesses knowledge of
+interest to other agents, can meaningfully participate in such an architecture.
+ For instance, the role normally played by a Cyc agent in a distributed architecture
+could equally well be filled by a gateway to
+             
+      <ul>
+        <li>an expert system implemented in Prolog</li>
+        <li>an SQL database</li>
+        <li>a special-purpose inferencing tool (e.g. for spatial inferencing)
+          </li>
+        <li>a human expert</li>
+        <li>etc.</li>
+             
+      </ul></p>
+
+<p>
+In fact, the WWW Information Retrieval application builds on the distributed
+Cyc architecture by filling that role with a gateway to a WWW information
+source.</p>             
+<br>
+
+			</td></tr>
+                               <tr>
+                                   <td><br>
+                                   <br><center>
+               <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">
+               Copyright &copy;&nbsp;2002-2009               Cycorp, Inc. All Rights Reserved. | <a href="/cyc/site/privacy">privacy statement</a> 
+               | <a href="/cyc/contact/">contact us</a> | <a href="/cyc">home</a>
+                              </font>
+
+                                       </center></td>
+                               </tr>
+			</table>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1494002-1";
+urchinTracker();
+</script>
+	</div>
+
+
+		<div id="submenu">
+                    <font size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+<table width="200">
+<tr><td valign="bottom"> 
+<a class="submenu" href="/cyc/cycrandd/overview">
+<img src="images/lavender_ball.gif" border="0"> overview</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/distributedai">
+<img src="images/lavender_ball.gif" border="0"> distributed AI</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/is">
+<img src="images/lavender_ball.gif" border="0"> intelligent search</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/kfd">
+<img src="images/lavender_ball.gif" border="0"> knowledge formation &amp; dialog</a><br>
+<nobr>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/nlu">
+<img src="images/lavender_ball.gif" border="0"> natural language understanding</a>
+</nobr><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/sw">
+<img src="images/lavender_ball.gif" border="0"> the Semantic Web</a><br>
+<nobr>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/sksi">
+<img src="images/lavender_ball.gif" border="0"> semantic knowledge source integration</a>
+</nobr></br>
+
+</td></tr>
+</table>
+		</div>
+
+		<div id="breadcrumbs">
+                   <table><tr><td><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3">
+                       <a href="/cyc">home</a> > 
+<a href="/cyc/cycrandd">Cyc R&D</a> > 
+<a href="distributedai">distributed AI</a>
+                   </font></b></td></tr></table>
+                </div>
+
+		<div id="title">
+			<h3>
+                               distributed AI
+                        </h3>
+                </div>
+
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<html>
+
+
+<title>The OpenCyc KB Browser</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0></a>The OpenCyc KB Browser</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 3/29/2002<br>
+
+<i>Copyright&copy; 1997-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+
+<hr>
+<a href="http://www.cyc.com/cycdoc/toc.html"><img src="/cycdoc/img/cyc-ball-sm.gif " border=0>Return to Table of Contents</a><br>
+
+<hr>This document describes how to use the Cyc KB Browser and related tools. The OpenCyc KB Browser includes a subset of the functionality of the Cyc KB Browser. The content can be used both as an introductory document for beginners, and as a reference document for more experienced users.<hr>
+<p>
+<h3>Contents</h3>
+<ul>
+<li><a href="#intro">Introduction to the OpenCyc KB Browser</a>
+  <ul>
+  <li><a href="#layout">Layout of the OpenCyc KB Browser</a>
+  <li><a href="#frames-java">Note about Frames and JavaScript</a>  
+  </ul>
+<li><a href="#general">What To Know Before You Begin</a>
+  <ul>
+  <li><a href="#start-image">How to Start a New OpenCyc image</a>
+  <li><a href="#urls">How to Get to the KB Browser (and other places)</a>
+  <li><a href="#help-pages">Getting Help Using the KB Browser</a>
+  <li><a href="/cycdoc/help/browser-icon-key.html">Key for Icons Used in the KB Browser</a>
+  </ul>  
+<li><a href="#setup">Setting Up Your New Image</a>
+  <ul>
+  <li><a href="#login">Logging In</a>
+  <li><a href="#agenda-start">Starting the Cyc Agenda</a>
+  <li><a href="#errors">Changing Error Handling Modes</a>
+  <li><a href="#modes">Changing Communication Modes</a>
+  <li><a href="#toolbar">Updating the Toolbar (Gaining Access to Tools)</a>
+  <li><a href="#options">Setting Other Options</a>
+  </ul>
+<li><a href="#using">Viewing and Modifying the OpenCyc KB</a>
+  <ul>
+  <li><a href="#search-constant">Searching for Constants</a>
+  <li><a href="#view-constant">Viewing Constants</a>
+  <li><a href="#operate-constant">Creating and Performing Operations on Constants</a>
+  <li><a href="#search-assert">Searching for Assertions in the KB</a>
+  <li><a href="#view-assert">Viewing Assertions</a>
+  <li><a href="#operate-assert">Performing Operations on Assertions</a>
+  <li><a href="#entry">Adding New Assertions to the OpenCyc KB</a>
+  <li><a href="#transcripts">Loading a Transcript File</a>
+  </ul>
+<li><a href="#trouble">Troubleshooting</a>
+  <ul>
+  <li><a href="#restart">Restarting Your OpenCyc image</a>
+  <li><a href="#ether">Your OpenCyc image is Not Responding</a>
+  <li><a href="#ports">You're Unable to Get an OpenCyc image to Start Up</a>
+  </ul>
+<li><a href="#finish">Finishing Touches</a>
+  <ul>
+  <li><a href="#halt">How to Safely Halt Your OpenCyc image</a>
+  </ul>
+</ul>
+<p>
+<hr>
+<p>
+<h3><a name="intro">Introduction to the OpenCyc KB Browser</a></h3>
+<p>
+The OpenCyc KB Browser is the main interface tool for accessing the Cyc Knowledge Base (Cyc KB).  It provides a means for browsing the KB in a number of different ways, a means for querying the KB, and (for registered users) a means for modifying or adding to the KB itself.
+<p>
+The OpenCyc KB Browser can also be viewed as one of several "launching points" into the Cyc System.  From the KB Browser, it is possible to reach virtually all other areas of the Cyc System simply by following HTML links.  One of the chief access points is the Cyc Navigator, but there are many other routes that can be followed.  More information on navigating around is provided farther down in this document, as well as in the help documentation that can be accessed from the KB Browser itself. Before you try to do anything else with the KB, it is recommended that you read the relevant sections of this document. It will tell you how to start an OpenCyc image, log into the system, view and modify the KB, and use the various options provided with the browser. 
+<p>
+A useful companion document to this one is a tutorial entitled <a href="/cycdoc/course/web-interface-module.html">"Using the Cyc Web Interface"</a>.  The tutorial provides a handy walk-through of many of the facilities of the Cyc System.  If available, it is located in the "Cyc Course Materials" section of the Cyc Documentation: Table of Contents.  
+<p> 
+<h4><a name="layout">Layout of the OpenCyc KB Browser</a></h4>
+<p>
+The display for the OpenCyc KB Browser consists of three main frames/areas:
+<ul>
+<li>Top Frame: the top frame is the Toolbar Frame.  It is used for searching for constants in the Cyc Knowledge Base (KB), navigating around the KB Browser via various tools, and logging in.  The Toolbar Frame is always present in the KB Browser.  If frames are turned off, the Toolbar will appear at the top of each page.
+<li>Middle Frame: the middle frame is the Main Display Frame.  It is used to display constants, assertions, help documentation, and various KB Browser tools.  There is no standard display for the Main display frame; rather, the display changes when various links are clicked in any of the three main frames.  If frames are turned off, this part of the display will appear under both the Toolbar and the Agenda Status Bar.
+<li>Bottom Frame: the bottom frame is the Agenda Status Bar.  It provides information about the Cyc Agenda and the local OpenCyc image, and also provides means for controlling the behaviour of the Cyc Agenda.  If frames are turned off, the Agenda Status Bar will appear immediately below the Toolbar, at the top of each page.
+</ul>
+<p>
+The OpenCyc KB Browser offers essentially the same interface for all different platforms.  Not all versions of the Cyc System have the same exact features, however, and so there will be a few visible differences between versions.  For example, the C version may have different options than the LISP version, or an extra diagnostic tool may be available in the Cycorp internal version that is not available in a released version.  When possible, these minor discrepancies have been pointed out in the help documentation, though it is not always possible to describe differences in detail; simply be aware that such differences do exist.
+<p>
+<h4><a name="frames-java">Note about Frames and JavaScript</a></h4>
+<p>
+The enabling or disabling of frames and JavaScript will have an effect on the display features and capabilities of the KB Browser.  These differences will be described in the help documentation when they are relevant to that particular section of the KB Browser.
+<p>
+However, there are a couple of things to keep in mind as you use the Browser:
+<ul>
+<li>Constant completion requires that JavaScript be enabled.  If it is turned off, no [<i>Complete</i>] buttons will appear, and completion will not be possible.
+<li>Turning frames off will change the overall layout as mentioned above, plus all references to frames in the documentation will be irrelevant; however, the names of the tools (e.g., Agenda Status Bar) will still be applicable.  Also, though "Update" and "Refresh" links throughout the Browser are designed to affect only a single frame, when frames are turned off they will refresh the entire HTML page.
+</ul> 
+<p>
+<hr>
+<p>
+<h3><a name="general">What To Know Before You Begin</a></h3>
+<p>
+<h4><a name="start-image">How to Start a New OpenCyc image</a></h4>
+<p>
+A "Cyc Image" is simply a version of Cyc running on an individual computer. Before you can use the browser in order to look at the KB, you must get a new image running on your computer. The steps for doing so differ by platform:
+
+		<p>
+		<ul>
+			<li><b>NT image:</b>
+			
+			<ul>
+				<li>(not yet available)
+			</ul>
+			<br>
+			<li><b>C image for Unix (LINUX):</b>
+			<ul>
+				<li>Connect to the directory with the Cyc executable:
+				<ul>
+					<p>cd  OpenCyc-x.x.x/scripts/linux [where <i>x.x.x</i> = current version]<br>
+					</p>
+				</ul>
+				<li>Launch the Cyc server:
+
+				<ul>
+					<p>./run-cyc.sh<br>
+						<br>
+					</p>
+				</ul>
+			</ul>
+		</ul>
+		<h4><a name="urls">How to Get to the KB Browser (and other places)</a></h4>
+		<p>To get to the KB browser, first start up Netscape Navigator. Then, you can access the following useful URLs for navigating around:</p>
+		<p><b>The OpenCyc KB Browser (http://&lt;hostname&gt;/cgi-bin/cyccgi/cg?cb-start)</b>: the main tool for accessing the Cyc Knowledge Base (KB). If you've just started up your image for the first time, this should probably be the URL to go to.</p>
+		<p><b>The Cyc Navigator (http://&lt;hostname&gt;/cgi-bin/cyccgi/cg?cyc-navigator)</b>: a suite of tools for the Cyc System.</p>
+		<p><b>The Cyc Documentation Table of Contents (http://&lt;hostname&gt;/cycdoc/toc.html)</b>: documentation for anything and everything in the Cyc System.<br>
+		</p>
+		<p><b>Note:</b> With all of these URLs, please replace the string &quot;&lt;hostname&gt;&quot; with the name of your webserver. If your web<i>server</i> is running under NT, you'll need to replace the &quot;cg?&quot; with &quot;cg<b>.</b>exe?&quot;.</p>
+		<p></p>
+		<h4><a name="help-pages">Getting Help Using the KB Browser</a></h4>
+		<p>Each of the pages in the KB Browser has its own help page. This can be accessed by clicking on the red question mark <img src=/cycdoc/img/cb/help_btn_s.gif> .</p>
+		<p>A complete listing of the help pages is available here for your convenience:</p>
+		<p></p>
+		<table>
+			<tr>
+				<td>
+					<ul>
+						<li><a href="/cycdoc/help/cb-advanced-inference-settings.html">Advanced Inference Settings Help</a>
+						<li><a href="/cycdoc/help/cb-agenda.html">Agenda Process Control Help</a>
+						<li><a href="/cycdoc/help/cb-server-status.html">Agenda Status Bar Help</a>
+						<li><a href="/cycdoc/help/cb-alpha-index.html">Alphabetical Search Help</a>
+						<li><a href="/cycdoc/help/cb-applicable-relations.html">Applicable Relations Help</a>
+						<li><a href="/cycdoc/help/cb-arguments.html">Arguments Help</a>
+						<li><a href="/cycdoc/help/cb-source.html">Argument Source Help</a>
+						<li><a href="/cycdoc/help/cb-handle-ask.html">Ask a Query Help</a>
+						<li><a href="/cycdoc/help/cb-diagnose-assertion.html">Assertion Diagnostics Help</a>
+						<li><a href="/cycdoc/help/cb-af.html">Assertion Display Frame Help</a>
+						<li><a href="/cycdoc/help/cb-justify.html">Assertion Justification Help</a>
+						<li><a href="/cycdoc/help/cb-assert-internal.html">Assert Simlar Formula Help</a>
+						<li><a href="/cycdoc/help/cb-auxiliary-indices.html">Auxiliary Indices Help</a>
+						<li><a href="/cycdoc/help/cb-history.html">Browser History Help</a>
+						<li><a href="/cycdoc/help/cb-options.html">Browser Options Help</a>
+						<li><a href="/cycdoc/help/cb-tools.html">Browser Tools Help</a>
+						<li><a href="/cycdoc/help/cb-change-direction.html">Change Assertion Direction Help</a>
+						<li><a href="/cycdoc/help/cb-change-mt.html">Change Assertion Mt Help</a>
+						<li><a href="/cycdoc/help/cb-change-strength.html">Change Assertion Strength Help</a>
+						<li><a href="/cycdoc/help/cb-mode.html">Communication Status Area Help</a>
+						<li><a href="/cycdoc/help/cb-confirm-kill.html">Confirm Constant Kill Help</a>
+						<li><a href="/cycdoc/help/cb-all-assertions-tms-handler.html">Confirm Constant TMS Page Help</a>
+						<li><a href="/cycdoc/help/cb-diagnose-constant.html">Constant Diagnostics Help</a>
+						<li><a href="/cycdoc/help/cb-describe-constant.html">Constant Information Display Help</a>
+						<li><a href="/cycdoc/help/cb-create.html">Create Constant Help</a>
+						<li><a href="/cycdoc/help/cb-create-similar.html">Create Similar Constant Help</a>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li><a href="/cycdoc/help/cb-dependents.html">Dependents Help</a>
+						<li><a href="/cycdoc/help/cb-show-when.html">Display by Date Help</a>
+						<li><a href="/cycdoc/help/cb-assert-internal.html">Edit Assertion Help</a>
+						<li><a href="/cycdoc/help/cb-confirm-halt-cyc.html">Halt OpenCyc image Help</a>
+						<li><a href="/cycdoc/help/hb-print-nodes.html">Hierarchy Browser Help</a>
+						<li><a href="/cycdoc/help/hb-parameters.html">Hierarchy Browser Parameters Help</a>
+						<li><a href="/cycdoc/help/cb-hypothesize-handler.html">Hypothesize Help</a>
+						<li><a href="/cycdoc/help/cb-index-overlap.html">Index Overlap Help</a>
+						<li><a href="/cycdoc/help/cb-ask-resources.html">Inference Resource Constraints Help</a>
+						<li><a href="/cycdoc/help/cb-search-node.html">Inference Tree Examiner Help</a>
+						<li><a href="/cycdoc/help/cb-literal-query.html">Literal Query Help</a>
+						<li><a href="/cycdoc/help/cb-load-api.html">Load API Help</a>
+						<li><a href="/cycdoc/help/cb-show-local-ops.html">Local Operations Help</a>
+						<li><a href="/cycdoc/help/cb-login.html">Login Area Help</a>
+						<li><a href="/cycdoc/help/cb-public-assertions.html">Public Assertions Help</a>
+						<li><a href="/cycdoc/help/cb-rename.html">Rename Constant Help</a>
+						<li><a href="/cycdoc/help/cb-restore-interface-state.html">Restore Interface State Help</a>
+						<li><a href="/cycdoc/help/cb-save-interface-state.html">Save Interface State Help</a>
+						<li><a href="/cycdoc/help/cb-handle-interactor.html">SubLisp Interactor Help</a>
+						<li><a href="/cycdoc/help/cb-system.html">System Area Help</a>
+						<li><a href="/cycdoc/help/cb-c-index.html">Term Index Help</a>
+						<li><a href="/cycdoc/help/cb-toolbar-frame.html">Toolbar Help</a>
+						<li><a href="/cycdoc/help/cb-system-show-specific-transcript-file.html">Transcript File Help</a>
+						<li><a href="/cycdoc/help/cb-transcript-viewer.html">Transcript Viewing Area Help</a>
+						<li><a href="/cycdoc/help/cb-view-mt.html">View Mt Help</a>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<p></p>
+		<h4><a name="icons">Key for Icons Used in the Browser</a></h4>
+		<p>A link to the icon legend for the KB Browser can be found at the top of the Term Index help page. Click here to go directly to the <a href="/cycdoc/help/browser-icon-key.html" target="documentation-window">Key for Icons Used in the Browser</a>.</p>
+		<p></p>
+		<hr>
+		<p></p>
+		<h3><a name="setup">Setting Up Your New Image</a></h3>
+		<p></p>
+		<h4><a name="login">Logging In</a></h4>
+<b>NOTE: On a newly installed copy of OpenCyc, you need to log in first as CycAdministrator. Then, while logged in, you can go back to the login screen and enter a new name to log in as. A new contstant will be created using the new name, and it will be asserted to be an instance of HumanCyclist.</b><p>
+		<p>The first thing to do when you've started up a new OpenCyc image is to log in. To do this, click on the &quot;Login&quot; link in the Toolbar (the top frame of the KB Browser). In the window, enter the Cyc constant that refers to you (e.g., #$Fred). This is not (necessarily) the same as any site login (e.g., LINUX filesystem) that may be implemented. If the appropriate Cyc constant does not yet exist, you'll be asked if you want Cyc to create one for you.</p>
+		<p>For more detailed information on logging in, see the <a href="/cycdoc/help/cb-login.html">Login Help</a>.</p>
+		<p></p>
+		<h4><a name="agenda-start">Starting the Cyc Agenda</a></h4>
+		<p>The &quot;Cyc Agenda&quot; handles operations to the KB. When you first start up Cyc, the agenda will be halted. After logging in, the next thing to do is to start up the Cyc Agenda. To do this, click on the &quot;Agenda&quot; link in the Agenda Status Bar (the bottom frame of the KB Browser), which will bring up the Agenda Process Control. Press the [<i>Start Agenda</i>] button to start the Cyc Agenda.</p>
+		<p>For more detailed information on starting the Agenda, see the <a href="/cycdoc/help/cb-agenda.html">Agenda Process Control Help</a><br>
+			For detailed help on the Cyc Agenda, read the <a href="/cycdoc/ref/system.html#cyc-agenda">Cyc Agenda Documentation</a></p>
+		<p></p>
+		<h4><a name="errors">Changing Error Handling Modes</a></h4>
+		<p>Now that the Cyc Agenda is running, you should tell it how to handle any errors it may encounter. The default error handling mode is to Halt and Display Reason, which means that errors will cause the Agenda to halt, and will be displayed on the Agenda Process Control page. If this is the desired behavior, ignore this section and continue on. To change to a different mode, click on the &quot;Agenda&quot; link in the Agenda Status Bar (the bottom frame of the KB Browser), which will bring up the Agenda Process Control. Click on a new error handling mode and press the [<i>Submit New Mode</i>] button.</p>
+		<p>For more detailed information on setting a new error handling mode, see the <a href="/cycdoc/help/cb-agenda.html">Agenda Process Control Help</a>. For detailed help on the Cyc Agenda, read the <a href="/cycdoc/ref/system.html#cyc-agenda">Cyc Agenda Documentation</a>.</p>
+		<p></p>
+		<h4><a name="modes">Changing Communication Status</a></h4>
+<b>NOTE: There is no Master Transcript Server with OpenCyc. Synching knowledge with remote OpenCyc installations will be a challenging undertaking that will require several partial solutions. Several partial-solution candidates exist and will be discussed on the OpenCyc forums.</b><p> 
+		<p>Even though the Cyc Agenda is running, it will not receive or send any operations perfomed on the KB (like creating constants, asserting or unasserting, etc.) unless the communication status is set so as to allow this. The default setting is &quot;Storing Only&quot;, which means that operations performed locally will be stored for possible sending to the Master Transcript later, but no operations are read from the Master Transcript. If this is the desired behavior, ignore this section and continue on. To change the communication status, click on the &quot;Comm&quot; link in the Agenda Status Bar (the bottom frame of the KB Browser), which will bring up the Communication Status Area. Make changes to the settings press the relevant [<i>Submit</i>] button.</p>
+		<p>For more detailed information on setting the communication status, see the <a href="/cycdoc/help/cb-mode.html">Communication Status Area Help</a>. For detailed help on Communication Status, read the <a href="/cycdoc/ref/system.html#com-modes">Cyc Communication Status Documentation</a>.</p>
+		<p></p>
+		<h4><a name="toolbar">Updating the Toolbar (Gaining Access to Tools)</a></h4>
+		<p>The OpenCyc KB Browser includes a number of tools to assist with knowledge entry and browsing. To see a list of these tools, click on the &quot;Tools&quot; link in the Toolbar (the top frame of the KB Browser). Clicking on the name of a tool will take you there. However, it's often useful to have frequently used tools just a single click away. To this end, it's possible to add desired tools to the Toolbar. Simply click on the &quot;Tools&quot; link as before, but instead of clicking on the tool name, click the box to the left of the name, and then press the [<i>Update Toolbar</i>] button. Any tools you have selected will now appear as links in the Toolbar.</p>
+		<p>For more detailed information on various tools, see the <a href="/cycdoc/help/cb-tools.html">Browser Tools Help</a>.</p>
+		<p></p>
+		<h4><a name="options">Setting Other Options</a></h4>
+		<p>In addition to customizing your Toolbar, there may be other options that you wish to set initially. To do this, go to the Browser Options tool by clicking on the &quot;Options&quot; link on either the Browser Tools page, or in the Toolbar (if you've added it there). If you can't find the link, look in the section above, <a href="#toolbar">Updating the Toolbar (Gaining Access to Tools)</a>. The options on this page are set to defaults that are figured to be most useful to the common user, and therefore won't usually need to be modified. However, there may be one or two options which you'll want to change before you start browsing the KB:</p>
+		<p><b>Server Update Interval:</b> Look at the Agenda Status Bar. When the communication mode is set, the Agenda is started or halts, or the Agenda processes operations, the Agenda Status Bar is not automatically updated. Instead, you'll need to click on the &quot;Update&quot; link. To have everything updated automatically, enter a number into the Server Update Interval window of the Browser Options Page, press the [<i>Change Options</i>] button, and click on the &quot;Update&quot; link one final time. Every X seconds, the information will be updated. A recommended interval is 15 seconds.<br>
+			For more detailed information on the Agenda Status Bar, see the <a href="/cycdoc/help/cb-server-status.html">Agenda Status Bar Help</a>.</p>
+		<p><b>Default Content:</b> When you display a constant in the KB Browser, a certain set of assertions comes up automatically. This is the Default Content. The default setting for this is to display up to 30 assertions. If you would prefer to see a different kind of information initially displayed with the constant, choose one of the other 3 options in the Default Content section of the Browser Option page, and then press the [<i>Change Options</i>] button. You can also increase or decrease the number of assertions displayed if you choose to keep the default option.<br>
+			For more detailed information about the kinds of assertions, see the <a href="/cycdoc/help/cb-c-index.html#categories">Index Categories</a> section of the <a href="/cycdoc/help/cb-c-index.html">Term Index Help</a>.</p>
+		<p><b>Wrap Assertions:</b> When you display assertions in the KB Browser, the default is for each assertion to be allotted a single line in the KB. This maximizes the number of assertions that can be displayed at any one time. However, a few very long axioms may go off the edge of the screen as a result. While it's still possible to view the assertion by enlarging the window or displaying the assertion in detail by clicking on the colored ball, many users prefer to set the Wrap Assertions option. Setting this option causes assertions to be displayed entirely on the screen, though it allows for fewer assertions to be seen at any given time.</p>
+		<p>For more detailed information about the different browser options, see the <a href="/cycdoc/help/cb-options.html">Browser Options Help</a>.</p>
+		<p></p>
+		<hr>
+		<p></p>
+		<h3><a name="using">Viewing and Modifying the OpenCyc KB</a></h3>
+		<p>The OpenCyc KB is essentially a sea of constants and a sea of assertions. There are many different ways to locate and view both constants and assertions, as well as many different operations that can be performed on them. This section describes how to view and make modifications to the KB.</p>
+		<p>For each of the sections/tools below, there is most likely a corresponding section/reference in the <a href="/cycdoc/course/web-interface-module.html">&quot;Using the Cyc Web Interface&quot;</a> tutorial mentioned earlier.</p>
+		<p></p>
+		<h4><a name="search-constant">Searching for Constants</a></h4>
+<b>NOTE: The GREP facility is not currently available in OpenCyc, but it will be made available as soon as a programmer has the time to migrate it from the full Cyc version.</b><p>
+		<p>The easiest way to search for constants in the KB is to use the search facility located in the Toolbar Frame. Simply enter in a constant name (without the &quot;#$&quot;) and click the [<i>Show</i>] button. It is also possible in this window to use strings (via wildcards or unix GREP) to search for constant names. For details on all of these options, see the <a href="/cycdoc/help/cb-toolbar-frame.html">Toolbar Help</a>.</p>
+		<p>A second way to find constant names is to use the [<i>Complete</i>] button next to many of the input windows throughout the Browser. Simply enter the first part of a constant name and press the [<i>Complete</i>] button. Possible completions will be displayed in a separate completion window which will be reused for future completions. Completion is case sensitive, and requires that JavaScript is enabled in your browser.</p>
+		<p>One final way to search for constants is to use the Alphabetical Search, which provides an alphabetical listing of constant names. The Alphabetical Search can be reached via the &quot;A&quot; <img src=/cycdoc/img/cb/alpha.gif> link in the Browser, and will appear automatically if Cyc is unable to find a matching constant when using the search facility in the Toolbar. For details, see the <a href="/cycdoc/help/cb-alpha-index.html">Alphabetical Search Help</a>.</p>
+		<p></p>
+		<h4><a name="view-constant">Viewing Constants</a></h4>
+		<p>To view a constant that appears anywhere in the KB Browser, such as in an assertion, in a constant completion list, or in the Browser History, simply click on the highlighted constant name. The one exception to this is in the left-hand frame of the Term Index, where constant names are actually assertion categories. For details, see the <a href="/cycdoc/help/cb-c-index.html">Term Index Help</a>.</p>
+		<p>One other method of viewing constants is the Hierarchy Browser, which provides a hierarchical listing of constants. The Hierarchy Browser can be reached by clicking on the &quot;Hier&quot; link in the Toolbar or Browser Tools pages, via the red diamond <img src=/cycdoc/img/cb/red_diam.gif> link in the Browser, or as a link in the Cyc Navigator. For details on the Hierarchy Browser, see the <a href="/cycdoc/help/hb-print-nodes.html">Hierarchy Browser Help</a>.</p>
+		<p></p>
+		<h4><a name="operate-constant">Creating Constants and Performing Operations on Constants</a></h4>
+		<p>There are several ways to create new Cyc constants. Perhaps the easiest way is to use the Create tool, which allows the user to create a new constant as an individual operation. The Create tool can be reached by clicking on the &quot;Create&quot; link in the Toolbar or Browser Tools pages, as well as through the Cyc Navigator. Details on using this tool are provided in the <a href="/cycdoc/help/cb-create.html">Constant Creation Help</a>.</p>
+		<p>Operations such as renaming and killing constants are relatively easy to do in Cyc (though they should be done sparingly). Simply display the constant in the KB Browser (see above for how to do this). Under the constant name in the Term Index will be links titled &quot;Rename&quot; and &quot;Kill&quot;. Clicking on these will take the user to the Rename and Kill facilities, respectively. Be sure to read the help documentation linked to those pages, as well as the document <a href="/cycdoc/ref/renames-kills.html">Renaming and Killing Constants</a>.</p>
+		<p></p>
+		<h4><a name="search-assert">Searching for Assertions in the KB</a></h4>
+		<p>As mentioned above, the KB is a sea of assertions. How to find the one you want?</p>
+		<p>If you know one of the terms involved in the assertion you're looking for, the easiest way to find the assertion is to display that constant in the KB. You can then choose one of the categories in the left-hand frame of the Term Index to display a desired subset of the assertions involving that constant. Clicking on &quot;All Assertions&quot; will display all the assertions for that constant. You can use the search facility of your HTML browser (Netscape, Explorer) to scan through the assertions for the desired one. See the <a href="/cycdoc/help/cb-c-index.html">Term Index Help</a> for descriptions of the Term Index categories.</p>
+		<p>If you know more than one involved term, there are several options. You can display one of the constants, and then use the second one as a Term Index category (if applicable) or as a search term in the HTML browser search. Better yet, the Index Overlap tool compiles a list of all assertions involving two or more specified constants. Simply use this tool to narrow down choice of assertions to those involving all of the terms specified. When you use the Overlap tool, it is necessary to include the "#$&quot; in the constant names. See the <a href="/cycdoc/help/cb-index-overlap.html">Index Overlap Help</a> for further details.</p>
+		<p></p>
+		<h4><a name="view-assert">Viewing Assertions</a></h4>
+		<p>There are several ways to view sets of assertions in the KB Browser. The standard way is to display a constant, and then use the categories in the Term Index to view the desired set of assertions for that constant, as described above. The second way is to use the Index Overlap tool, also described above. One final way is to use the Literal Query tool to display more assertions of a certain type. This can be done by clicking on the &quot;+&quot; icons next to category names in the Term Index. See the <a href="/cycdoc/help/cb-literal-query.html">Literal Query Help</a> for details.</p>
+		<p>To view a single assertion in more detail, click on the colored ball in front of the desired assertion. See the <a href="/cycdoc/help/browser-icon-key.html" target="documentation-window">Key for Icons in the Browser</a> for descriptions of the meanings of the different balls (and other icons).</p>
+		<p></p>
+		<h4><a name="operate-assert">Performing Operations on Assertions</a></h4>
+		<p>Operations such as editing, deleting, and copying (asserting similar) assertions are fairly straightforward in the KB Browser. First, locate the target assertion and display it in detail by clicking on the colored ball next to it. You'll see a list of operations that can be performed. Here are a few:</p>
+		<p>Edit: allows the user to edit the assertion.</p>
+		<p>Unassert: deletes the assertion from the KB (for locally asserted axioms).</p>
+		<p>Blast: deletes the assertion from the KB (for deduced assertions).</p>
+		<p>Assert Similar: makes a copy of the assertion, allowing the user to edit the new version, while the original is retained in the KB.</p>
+		<p>See the <a href="/cycdoc/help/cb-af.html">Assertion Display Frame Help</a> for a complete list of operations and more detailed descriptions. Also see the <a href="/cycdoc/help/cb-assert-internal.html">Assert Formula Help</a> for help with the Edit Formula and Assert Similar Formula tools.</p>
+		<p></p>
+		<h4><a name="entry">Adding New Assertions to the OpenCyc KB</a></h4>
+		<p>There are several methods for adding new knowledge (assertions) to the KB. For single assertions, it's fastest to use the Assert Formula tool in the Browser; just click on the &quot;Assert&quot; link in the Toolbar or Browser Tools page, or access it via the &quot;Browsing and Editing&quot; menu of the Cyc Navigator. This tool allows the user to add one assertion to the KB. See the <a href="/cycdoc/help/cb-assert-internal.html">Assert Formula Help</a> for details.</p>
+		<p></p>
+		<h3><a name="transcripts">Loading a Transcript File</a></h3>
+<b>NOTE: There is no Master Transcript Server with OpenCyc. Synching knowledge with remote OpenCyc installations will be a challenging undertaking that will require several partial solutions. Several partial-solution candidates exist and will be discussed on the OpenCyc forums.</b><p> 
+		<p>Operations in the current local transcript can be sent to the Master Transcript simply by sending stored operations from the Communication Status Area. However, it is sometimes desirable to load a transcript manually. (Examples of transcripts to be loaded manually include: transcripts from a previous OpenCyc image,, transcripts containing operations that were cleared instead of being sent to the Master Transcript, or transcripts from other OpenCyc images whose operations have never been sent to the Master Transcript, but it's desireable to have them included in the current local image. Manually loaded transcripts can be loaded up on the local machine and sent (or not) at a later time; the user is never committed to sending operations unless the communication status is set to &quot;Send Immediately&quot;.</p>
+		<p>To manually load a transcript file, select the &quot;Navigator&quot; link from the Toolbar Frame or the Browser Tools page. Click on &quot;Load Transcript File&quot; in the &quot;File Handling&quot; section and follow the instructions there.</p>
+		<p>To view the current local transcript (or the Master Transcript), click on the &quot;System&quot; link in the Agenda Status Bar, and then click on the relevant highlighted transcript name. It is also possible to view all local transcripts for the current OpenCyc image in the Transcript Viewing Area. To get there, click on the &quot;Viewer&quot; link in the Browser Tools.</p>
+		<p>For more help with transcripts, see the <a href="/cycdoc/ref/system.html#transcripts">Cyc Transcript Documentation</a>, as well as the <a href="/cycdoc/help/cb-system.html">System Area Help</a>, the <a href="/cycdoc/help/cb-transcript-viewer.html">Transcript Viewing Area Help</a>, and the <a href="/cycdoc/help/cb-system-show-specific-transcript-file.html">Transcript File Help</a>.</p>
+		<p></p>
+		<hr>
+		<p></p>
+		<h3><a name="trouble">Troubleshooting</a></h3>
+		<p>Unfortunately, even the most experienced users of the perfect program run into trouble at times. Here is an extremely short section (to be expanded over time) to assist during those times.</p>
+		<p></p>
+		<h4><a name="restart">Restarting Your OpenCyc image</a></h4>
+		<p>Occasionally, it will be necessary to restart your local OpenCyc image. To restart your image, follow the instructions in the next section for halting an OpenCyc image (<a href="#halt">How to Safely Halt Your OpenCyc image</a>), then go to the top of this document and follow the instructions for starting up a new image in the <a href="#start-image">How to Start a New OpenCyc image</a> section.</p>
+		<p></p>
+		<h4><a name="ether">Your OpenCyc image is Not Responding</a></h4>
+		<p>If your OpenCyc image doesn't seem to be responding, do not despair. There are several possible reasons for this:</p>
+		<p><i>The Cyc Agenda is processing a long operation:</i> Certain operations, most notably unasserts or edits which involve deeply embedded knowledge, may take some time to process. This is normal. Remember that when an assertion is removed from the KB (and edit operations involve an unassert), the TMS (Truth Maintenance System) must look at all of that assertion's dependents and reevaluate if they should remain in the KB. For each of those that is subsequently removed, the procedure must be repeated. Eventually, the Agenda will finish with the operation, and the OpenCyc image will free up. See the <a href="/cycdoc/ref/system.html#cyc-agenda">Cyc Agenda Documentation</a> for details on how the Cyc Agenda works.</p>
+		<p><i>The Cyc Agenda is stuck in an error break: </i>If the error handling mode is set to &quot;Enter the Debugger&quot;, an error in the Cyc Agenda will freeze up the OpenCyc image until the error is dealt with. To avoid having your OpenCyc image freeze up when the agenda runs across an error, set the error handling mode to &quot;Halt and Display Reason&quot;. The Agenda will still halt, but the OpenCyc image itself will still be usable, even if the error is not dealt with right away. For help with the error handling modes, see the <a href="/cycdoc/help/cb-agenda.html">Agenda Process Control Help</a>.</p>
+		<p></p>
+		<h4><a name="ports">You're Unable to Get an OpenCyc image to Start Up</a></h4>
+		<p>If your OpenCyc image is not starting up, and you see a message like:</p>
+		<pre>
+  Loading init file: init/opencyc-init.lisp
+  Error: Can't bind port XXXX.
+</pre>
+		<p>This almost always means you already have a version of Cyc running. You must quit this version to start up a new one.</p>
+		<p>If you are unable to connect to the image and unable to find the emacs buffer it is running in, you can kill the image manually, using something like the following in a Unix/xterm window:</p>
+		<pre>
+  ps auxww | grep cyc  (to find the process id of cyc)
+  kill -9 process_id   (use that process id to kill cyc)
+</pre>
+		<p></p>
+		<hr>
+		<p></p>
+		<h3><a name="finish">Finishing Touches</a></h3>
+		<p></p>
+		<h4><a name="halt">How to Safely Halt Your OpenCyc image</a></h4>
+		<p>There are many ways to halt an OpenCyc image. However, there is one easy way which will ensure that the image is halted safely, and that no sub-processes that it created remain in the system. Failing to safely halt an image may create problems when trying to start up a new OpenCyc image in the future.</p>
+		<p>Note that users logged in as #$Guest will be unable to halt an OpenCyc image since it may disrupt others' work.</p>
+		<p>To safely halt an OpenCyc image:</p>
+		<p>Click on the &quot;System&quot; link in the Agenda Status Bar (the bottom frame of the KB Browser), which will bring up the System Area page. Click on the &quot;here&quot; link in the phrase &quot;Click here to halt this OpenCyc image.&quot; You'll be asked to confirm that you really do want to halt the image. Once an image is halted, there is no way to restart it, except to start up an entirely new image. Remember that halting the Cyc Agenda and halting an OpenCyc image are two completely different things. To truly halt the image, click on the &quot;Yes&quot; link; to abort the halt and return to the KB Browser, click on the &quot;No&quot; link. If you clicked &quot;Yes&quot;, you should see a message confirming your decision to halt the image.<br>
+			For more detailed information about halting the OpenCyc image, see the <a href="/cycdoc/help/cb-confirm-halt-cyc.html">Halt OpenCyc image Help</a>.<br>
+		</p>
+		<p>To start up a new OpenCyc image, follow the instructions in the <a href="#start-image">How to Start a New OpenCyc image (LINUX/C)</a> section.</p>
+		<p></p>
+		<hr>
+		<p><a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+		</p>
+	</body>
+
+
+
+</html>

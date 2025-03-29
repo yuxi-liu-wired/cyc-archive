@@ -1,0 +1,497 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON path-traversal-note.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Introduction to Paths and Traversals</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.cyc.com><img src=/cycdoc/img/cyc-logo-10-t.gif border=0></a>Introduction to Paths and Traversals</h2>
+
+E-Mail Comments to: <a href=mailto:doc@cyc.com>doc@cyc.com</a><br>
+
+
+Last Update: 10/30/1998 16:25:38<br>
+
+
+<i>Copyright&copy 1996, 1997, 1998 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<a href=/cycdoc/find-constant.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Search for Constants by Name</a> (In all files, not just this one.)<br>
+
+
+<hr>
+
+<h2>Detailed Introduction to Paths and Traversals in Cyc</h2>
+<h2>DRAFT ONLY</h2>
+by Fritz Lehmann, Oct. 1997
+<hr>
+<p>
+The system of paths and traversals in Cyc has to cover two different kinds of applications: first, the real-world paths (roads, sea-lanes, air-lanes, footpaths, blood vessels, wires, etc.) of everyday life, and, second, the abstract paths of links in formal systems such as transition diagrams, graph theory, or symbolic representations of real-world systems.  Cyc's path system is designed to use the same basic language, as much as possible, to describe both kinds.  This makes the system more complicated than usual models of networks.
+
+<p>
+
+Cyc has separate concepts of: paths, directed paths, traversals, and trajectories.  Every motion has a <a href=/cycdoc/vocab/path-traversal-vocab.html#Trajectory>#$Trajectory</a>, but a motion may or may not stay on pre-existing paths.  If it does follow paths in some path network, it follows a certain <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> of those paths (a traversal follows paths in a certain direction and in a certain order). 
+
+<p>
+
+A path (<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> in Cyc) may be a physical object or place (or series of them) in the world, or it may be a purely abstract thing.  Either kind can be associated with a formally specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, and in the case of abstract paths they are represented only with respect to a specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  Structurally, every <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> is either a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Simple>#$Path-Simple</a> (with no cycles) or else a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a> (a cycle).
+
+<p>
+
+There are things in the world that are commonly used as paths (roads, footpaths, pipes, wires, etc.).  These are usually things or places along which certain things (or fluids or items of information) customarily move.  Usually, something ordinarily moves in at one end and moves out at the other end (either in one direction only, or in both directions).  These are instances of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> in Cyc.  Under this description, an orange is not a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>, even though some ants might very well use an orange as a path in some circumstances.
+
+<p>
+<img src="/cycdoc/img/path-top-hier.gif" align=left>
+<p>
+(Keep in mind that, in Cyc, <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> siblings are not necessarily disjoint.)
+<p>
+
+Most kinds of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> are also kinds of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Spatial>#$Path-Spatial</a>, i.e., paths through space.
+
+<p>
+
+A path may be a path within a specified path system (a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>), but the path system may be left unspecified for customary paths.  A <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> may or may not be associated with a specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, whereas any other <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> is always associated with a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  In a specified system of ant paths, for example, an orange could indeed be used as a link or path, even though that is not its most customary use.  For these systems, the system itself is named in most path-related statements; for a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>, though, an assumed path system may be mentioned or it may be omitted.  Even if it is omitted, there is an assumed background <a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a> for every type of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>.
+
+
+See below for a more detailed list of kinds of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>.  [Note that there is no collection in Cyc called "PathInSystem"; almost anything could be designated as a path in some particular system -- the predicate (<a href=/cycdoc/vocab/path-traversal-vocab.html#pathInSystem>#$pathInSystem</a> PATH SYSTEM) is used in that case.]
+
+<p>
+
+A single path cannot cross itself or go back along itself.  In a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Simple>#$Path-Simple</a>, the two end nodes must be distinct, and no point can occur on the path more than once.  In a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a>, the beginning and ending nodes are the same.  (A figure-eight is neither a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Simple>#$Path-Simple</a> nor a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a>, because it is self-crossing.  In Cyc, a figure-eight is not a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> at all, although a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> or <a href=/cycdoc/vocab/path-traversal-vocab.html#Trajectory>#$Trajectory</a> may follow a figure-eight pattern.  The figure-eight is a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> containing two <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a>s.)
+
+
+
+
+<h3>The Basic Elements</h3>
+
+The basic elements of Cyc's path representation are non-self-crossing paths and things (called "points") on paths.
+
+
+
+<h4>Path Systems</h4>
+
+
+As stated above, paths may be described as paths in particular <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>s, but for a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> the surrounding network of paths (of the same general kind) can often be assumed and not mentioned explicitly; it is called a <a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a>.
+
+<p>
+
+Unlike the <a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a>, a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> must be specified as specific sets of points, nodes, and zero or more links (and possibly loops).  A single node with no links or loops qualifies as a (degenerate case of) <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  
+
+
+Several Cyc predicates assume that the path is in a specified path system; these predicates' names end with "InSystem".  An object itself, whether tangible or abstract, is not inherently a "node" or "link"; it is only a node or link in one or more particular <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>s.
+
+<p>
+
+A path system may be specified by some external authority (e.g., the Internet backbone, or the US Interstate Highway System), or you may specify it directly in Cyc as a <a href=/cycdoc/vocab/math-vocab.html#Tuple>#$Tuple</a> of sets, or in any other way that clearly determines the elements.  
+
+<p>
+
+<h4>If A Path System Is Specified</h4>
+
+<p>
+
+If a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> is specified, the following elements are given: certain designated points are called "nodes" of the system, there are node-to-node links of the system, there may be other (non-node) "points" along the links of the system, and paths of the system.  (In certain discretely formalized path systems, there may also be also "loops" of the system; a loop goes from a node back to itself with no other points along it.)
+  
+<p>
+<img src="/cycdoc/img/path-diagram.gif" align=left>
+<p>
+
+These are not collections in Cyc; they are indicated by predicates that require specifying a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  These include: <a href=/cycdoc/vocab/path-traversal-vocab.html#pointInSystem>#$pointInSystem</a>, <a href=/cycdoc/vocab/path-traversal-vocab.html#pathInSystem>#$pathInSystem</a>,  <a href=/cycdoc/vocab/path-traversal-vocab.html#linkInSystem>#$linkInSystem</a>, <a href=/cycdoc/vocab/path-traversal-vocab.html#nodeInSystem>#$nodeInSystem</a>, <a href=/cycdoc/vocab/path-traversal-vocab.html#loopInSystem>#$loopInSystem</a>, <a href=/cycdoc/vocab/path-traversal-vocab.html#deadEndInSystem>#$deadEndInSystem</a>, <a href=/cycdoc/vocab/path-traversal-vocab.html#junctionInSystem>#$junctionInSystem</a> and <a href=/cycdoc/vocab/path-traversal-vocab.html#cycleInSystem>#$cycleInSystem</a>.  Reasons: First, anything could be a point on some path or other, depending on how we look at it, and what systems we consider it to be in -- and anything can be deemed a path.  Second, whether a point on a path is a node and whether a certain path is a link depend on the specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.   The <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> determines not only how they are related to other points and paths, but also it determines which intermediate points along a path are designated as nodes of the system.
+
+<p>
+
+
+A link is a path between two nodes, with no intervening nodes.  There can be any number of "points" along a link, but no nodes.  There could be zero points, one point, two points, any finite number of points, or an infinite numbers of points along the link.  Every junction, and every dead-end, and every isolated point of the system must be a node of the system.  
+
+<p>
+
+
+A node of a #PathSystem can be a junction (with three or more paths joining at it) of the system, a dead end (with only one link ending there) of the system, or it can be a designated intermediate point along a path (two links join at such a node).
+
+<p>
+
+
+Multiple, distinct links may join the same two nodes.  (In graph theory a system with such "parallel" links is sometimes called a "multigraph"; Cyc has <a href=/cycdoc/vocab/path-traversal-vocab.html#Multigraph>#$Multigraph</a>.)  In the real world there are often two or more parallel roads connecting the same two nearby towns.
+
+<p>
+
+
+A path may consist of part of a link, a single link, two or more links joined end-to-end, or one or more links along with parts of the end-links.  Thus a path could start at a (non-node) "point" part-way along link A, continue through links B and C, and go partway along link D, stopping at a (non-node) point along link D.
+
+<p>
+
+
+In some <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>s, in addition to paths between nodes there are "loops" -- a loop is a path that goes out from a node and returns directly back to that node without passing through any other points.  A loop is a special case of a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a>.  (See the Technical Note below.)  Loops are useful in some formal path systems like <a href=/cycdoc/vocab/path-traversal-vocab.html#Multigraph>#$Multigraph</a>s.
+
+<p>
+
+
+For a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> that is not defined in terms of any particular <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, a so-called "point" may be a large area.  Austin can be a "point" on highway I-35 while at the same time Texas is a "point" on I-35.  Thus one so-called "point" on such a path can overlap or be entirely within another "point".  The relation of this type of "point" to the path is indicated by the predicate <a href=/cycdoc/vocab/path-traversal-vocab.html#pointOnPath>#$pointOnPath</a>.  The more general <a href=/cycdoc/vocab/path-traversal-vocab.html#onPath>#$onPath</a> predicate can also be used, to refer to 'path-on-path' or 'movingObject-on-path' relations, or the like.
+
+<p>
+
+
+In a specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, on the other hand, distinct "points" are always separate and non-overlapping, whether the paths are customary or not, and the relation to the path is <a href=/cycdoc/vocab/path-traversal-vocab.html#pointOnPath>#$pointOnPath</a>.
+
+<h4>If No PathSystem Is Specified:</h4>
+
+A <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> might not have an associated specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  In that case, there are a number of features that assume that the related items are all paths of the same general type (highways, railroads, veins, bronchial tubes, etc.).  The "general type" means the customary type (<a href=/cycdoc/vocab/transportation-vocab.html#PathType>#$PathType</a>) associated with the main use or function.  (For roads, it is usually the most general collection of specializations of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> that allows driving.  For pipes, the most specific type that allows passageFor each of these <a href=/cycdoc/vocab/transportation-vocab.html#PathType>#$PathType</a>s, any instance may be deemed to occur within a possibly-unspecified <a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a>.
+
+<p>
+<img src="/cycdoc/img/path-list-no-sys.gif" align=left>
+<p>
+
+An individual element of the collection <a href=/cycdoc/vocab/path-traversal-vocab.html#JunctionOfPaths>#$JunctionOfPaths</a>, in the case of  #$BronchialTubes, is a junction of bronchial tubes (#$BronchialTubeSegment) where three or more bronchial tubes (#$BronchialTubeSegments) join together; blood vessels are not involved.
+
+<p>
+
+
+Similarly a railroad track may end at a <a href=/cycdoc/vocab/path-traversal-vocab.html#pathTerminus>#$pathTerminus</a> that is a dead end for the railroad line even if there may be a footpath that extends beyond the end.
+
+<p>
+
+A <a href=/cycdoc/vocab/group-vocab.html#SimpleSegmentOfPath>#$SimpleSegmentOfPath</a> is any <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> that has no branches along it.  Such "branches" would have to be branch paths of the same general type, thus a railroad track section is a <a href=/cycdoc/vocab/group-vocab.html#SimpleSegmentOfPath>#$SimpleSegmentOfPath</a> even if several dirt roads "branch off" of it.  (Two specializations are: <a href=/cycdoc/vocab/group-vocab.html#SimpleUnloopedSegmentOfPath>#$SimpleUnloopedSegmentOfPath</a> and <a href=/cycdoc/vocab/group-vocab.html#SimpleLoopedSegmentOfPath>#$SimpleLoopedSegmentOfPath</a>).
+
+<p>
+
+A branching of a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> can be indicated with one of two predicates, <a href=/cycdoc/vocab/spatial-vocab.html#branchesInto>#$branchesInto</a> or <a href=/cycdoc/vocab/path-traversal-vocab.html#sideBranches>#$sideBranches</a>, and the branching junction can be reified as an instance of <a href=/cycdoc/vocab/path-traversal-vocab.html#BranchingJunction>#$BranchingJunction</a> or <a href=/cycdoc/vocab/path-traversal-vocab.html#SideBranchJunction>#$SideBranchJunction</a>, respectively.
+In a <a href=/cycdoc/vocab/path-traversal-vocab.html#BranchingJunction>#$BranchingJunction</a> a main path ends where it <a href=/cycdoc/vocab/spatial-vocab.html#branchesInto>#$branchesInto</a> smaller paths, whereas in a <a href=/cycdoc/vocab/path-traversal-vocab.html#SideBranchJunction>#$SideBranchJunction</a> a small side path joins a main path that continues on.
+
+
+
+<h4>Directed Links and Paths</h4>
+
+Links and paths as described so far have no associated directionality.  A link simply joins node "a" with node "b" and "b" with "a".
+
+<p>
+
+However, an instance of <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a> (a specialization of <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>) may assign "direction" to one or more of its links.  In such a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, a directed link may be from "a" to "b", which does not imply that the link is a directed link from "b" to "a".  The predicate <a href=/cycdoc/vocab/path-traversal-vocab.html#linkFromToInSystem>#$linkFromToInSystem</a> is used for such links.  For example, this is used to state the directions of one-way streets in a specified municipal street system.
+
+<p>
+
+A link with direction from "a" to "b" can also be given the other direction from "b" to "a", thus it has both directions making it a "bidirected link" or "undirected link".   If all links of a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> are bidirected/undirected, it is an <a href=/cycdoc/vocab/path-traversal-vocab.html#BidirectedPathSystem>#$BidirectedPathSystem</a>.
+
+<p>
+
+If the <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> has loops, they are all considered to be bidirected/undirected.  (There are reasons for this.  See the Technical Note below.)
+
+<p>
+
+Within a <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a>, directed paths of the system are determined by their directed links.  In a directed path, all its links must be directed in the same way along the path.  Bidirected links point both ways and are always allowed in a directed path.
+
+
+<p>
+
+The hierarchy of specified-path-system collections includes the following:
+<hr>
+
+<p>
+<img src="/cycdoc/img/path-system-hierarchy.gif" align=left>
+<p>
+
+<hr>
+
+<h4>Traversals</h4>
+
+The notion of traversal is separate from that of path.  
+
+<p>
+
+A traversal is the trace of a (real or possible) "walk" or movement along some links or sub-paths of a path system.  Unlike a path, a traversal can cross itself and/or go back along itself.  Every traversal has a corresponding sequence of (not-necessarily-distinct) sub-paths passed through in the traversal.  A traversal of a path system must go along (be confined to) its paths.  
+
+<p>
+
+If a traversal is along directed paths (of a <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a>), it must go in the directions of the paths it is on.  A traversal generates a sequence of paths passed through, including the links traversed.  A traversal may go around a cycle many times before exiting, and it may include traversing loops.  (In contrast, a path cannot include cycles or loops part-way along it.)
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> is a collection.  A single traversal is representable as a sequence (represented using <a href=/cycdoc/vocab/group-vocab.html#TheList>#$TheList</a> and #$TraversalFromToFn) of paths traversed.  Many different sequences of paths traversed may correspond to the same traversal; it depends how the whole traversal is decomposed into subpaths traversed.  A traversal can be a trace within a specified <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, or it can be a trace of any end-to-end customary paths (<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>).
+
+<p>
+
+To represent a traversal with a list of paths, it is necessary also to include the starting point or node; otherwise, in the case of one or more links between a total of two nodes, the list of links would be ambiguous as to which direction they are traversed through.
+
+
+
+<h3>Trajectories</h3>
+
+A <a href=/cycdoc/vocab/path-traversal-vocab.html#Trajectory>#$Trajectory</a> consists of the actual points of space swept through by a moving object, or traced by a particular point in the object.  A trajectory is not the same as a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> of a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  A moving object has a trajectory whether or not it follows any <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>.  If a trajectory moves along paths in a given spatial path system, and stays within the confines of the paths, then it corresponds to a particular <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> in the system.  The definitions that determine which trajectories are considered to "follow" or "obey" or "be confined to" the path system (i.e., to go only along paths) depend on the path system or the types of the paths.  Even if the trajectories stay within a path system, many different trajectories may have the same traversal; there could be trivial variations in a vehicle's path on a highway, for example, all of which traverse that section of highway.
+
+<p>
+
+A trajectory that is also a traversal may trace over a simple path, or a cycle (a single trajectory can go around and around a cycle any number of times), or a complicated network.  Descriptions of trajectories are almost always given relative to a particular background space that is considered fixed.
+
+
+
+<h3>Example: A Car Drive</h3>
+
+You drive your car from a location in Austin to a location in San Antonio.  Interstate 35 is a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a>, as are the streets of Austin and San Antonio.  I-35 is also a path-in-system, where the system is the US Interstate Highway system.  It is also a path-in-system of many different path systems, such as the Paved Roads In Texas system.  Suppose that, in the US Interstate Highway system, only big cities and junctions of interstates are considered "nodes".  Then your trip will pass through a few "nodes" and an infinite number of intermediate "points" on the way.  Little towns on I-35 between Austin and San Antonio would be "points" in this system.  In the Paved Roads of Texas system, however, you may pass through hundreds of nodes, at least one for each highway or street intersection you pass through.
+
+<p>
+
+Your trajectory would be the actual space of your motion.  Suppose you make a U turn and then make a second U turn and continue on.  The U turns would be reflected in your trajectory and possibly in your traversal, but they would not alter the underlying "path".  A single path does not cross the same point in space twice (unlike a traversal or trajectory, which may).  If you drive erratically veering all over the highway it affects your trajectory but it has no effect on the traversal -- you have traversed a directed link if you enter it at the start end and exit it at the other end, regardless of your trajectory within the link.
+
+<p>
+<hr>
+<h2>The Key Collections, Predicates and Functions</h2>
+
+The following are very terse remarks about each concept, relation and function.  For more detail, see the actual comment on each item.
+<hr>
+
+<h3>Specified Path Systems</h3>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> -- a specified system of points, nodes and zero or more links, (and possibly loops) that are indicated by predicates -- it may be an elaborate network.
+<p>
+
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SimplePathSystem>#$SimplePathSystem</a> -- same, but at most only one direct link between any two nodes, and no loops allowed.
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a> -- every link has one direction or both directions (any loops are bidirectional).
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#DirectedPathSystem>#$DirectedPathSystem</a> -- every link has just one direction (but any loops are bidirectional).
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#BidirectedPathSystem>#$BidirectedPathSystem</a> -- (undirected) every link has both directions (any loops are also bidirectional).
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Multigraph>#$Multigraph</a> -- discrete path system with no non-node points.  May have parallel links between two nodes, and loops.
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#DirectedMultigraph>#$DirectedMultigraph</a>  -- same, but with directed links.
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SimpleGraph-GraphTheoretic>#$SimpleGraph-GraphTheoretic</a> -- discrete bidirected path system with no non-node points, no loops, and at most one link between any two nodes. The intersection of Multigraph and SimplePathSystem.
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#ConnectedPathSystem>#$ConnectedPathSystem</a> -- single-piece path system with no 
+disconnected pieces.
+
+<p>
+
+<h3>Collections Not Requiring A Specified Path System</h3>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> -- any kind of non-self-crossing path, either natural, or abstract-in-a-system; simple or cyclic
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> -- something normally used as a path for movement or information transfer.  There may or may not be an explicitly given PathSystem.  When there is none, then the assumed path system is a not-formally-specified #$CustomarySystemOflinks based on the general <a href=/cycdoc/vocab/transportation-vocab.html#PathType>#$PathType</a>.  (Often it is also a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Spatial>#$Path-Spatial</a>.)
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#PathArtifact>#$PathArtifact</a>  -- something deliberately made for use as a path
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Simple>#$Path-Simple</a> -- two-ended path, no cycles
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Cyclic>#$Path-Cyclic</a> -- cycle with start/end point
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#JunctionOfPaths>#$JunctionOfPaths</a>  -- junction of paths of same general type
+
+<p>
+
+<a href=/cycdoc/vocab/group-vocab.html#ThreeWayJunctionOfPaths>#$ThreeWayJunctionOfPaths</a>
+
+<p>
+
+<a href=/cycdoc/vocab/group-vocab.html#FourWayJunctionOfPaths>#$FourWayJunctionOfPaths</a>
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#BranchingJunction>#$BranchingJunction</a> -- one main path stops and <a href=/cycdoc/vocab/spatial-vocab.html#branchesInto>#$branchesInto</a> little ones
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SideBranchJunction>#$SideBranchJunction</a> -- a main path has <a href=/cycdoc/vocab/path-traversal-vocab.html#sideBranches>#$sideBranches</a> joining it and it continues on past the junction
+
+<p>
+
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#NonintrusiveJunction>#$NonintrusiveJunction</a>  -- main path continues past junction where other path doesn't affect main path
+
+<p>
+
+<a href=/cycdoc/vocab/group-vocab.html#SimpleSegmentOfPath>#$SimpleSegmentOfPath</a> -- path with no junctions along it
+
+<p>
+
+<a href=/cycdoc/vocab/group-vocab.html#SimpleLoopedSegmentOfPath>#$SimpleLoopedSegmentOfPath</a> -- same, as loop from point back to itself
+
+<p>
+
+<a href=/cycdoc/vocab/group-vocab.html#SimpleUnloopedSegmentOfPath>#$SimpleUnloopedSegmentOfPath</a>  -- same, but not a loop, hence two distinct ends
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a> -- a system of <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> links
+
+
+
+
+<h3>Path Predicates Not Requiring a Specified Path System</h4>
+
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#onPath>#$onPath</a> -- thing a is on path p <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pointOnPath>#$pointOnPath</a> -- thing a is a stationary thing on path p <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#betweenOnPath>#$betweenOnPath</a> -- a is between b and c on path p <br>
+<a href=/cycdoc/vocab/transportation-vocab.html#subPaths>#$subPaths</a> -- p is a sub-path of q <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pathTerminus>#$pathTerminus</a> -- point a is an end of path p with no further paths of the same general type extending beyond it <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#adjacentPathsAtJunction>#$adjacentPathsAtJunction</a> -- paths that join at junction <br>
+<a href=/cycdoc/vocab/group-vocab.html#endsOfPathSegment>#$endsOfPathSegment</a> -- relates path to its endpoints <br>
+<a href=/cycdoc/vocab/spatial-vocab.html#branchesInto>#$branchesInto</a> -- main path branches into little paths <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#sideBranches>#$sideBranches</a> -- a side path connects along a main path <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pathBetween>#$pathBetween</a> -- p is a path with a and b as ends <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pathConnects>#$pathConnects</a> -- path p connects a and b (and may go on) <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#linksOfCustomarySystem>#$linksOfCustomarySystem</a> -- relates a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Customary>#$Path-Customary</a> or <br>
+<a href=/cycdoc/vocab/group-vocab.html#SimpleSegmentOfPath>#$SimpleSegmentOfPath</a> to a <a href=/cycdoc/vocab/path-traversal-vocab.html#CustomarySystemOfLinks>#$CustomarySystemOfLinks</a> <br>
+ <br>
+
+
+<h3>Path Predicates Requiring A Specified Path System</h3>
+
+The following predicates are always used with a specified PathSystem as the last argument:
+
+<p>
+
+ <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pointInSystem>#$pointInSystem</a> -- any point in a system, whether it is a node or not. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#nodeInSystem>#$nodeInSystem</a>  --  a node -- a point that is a junction, dead-end, designated intermediate point or an isolated point. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#deadEndInSystem>#$deadEndInSystem</a>  -- a node with only one link joining it. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#junctionInSystem>#$junctionInSystem</a> -- a node at which three or more links join, or at which loops and links join. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#threeWayJunctionInSystem>#$threeWayJunctionInSystem</a> <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#fourWayJunctionInSystem>#$fourWayJunctionInSystem</a> <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#isolatedNodeInSystem>#$isolatedNodeInSystem</a>  -- an isolated point, not linked to any other, and having no loop. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#linkInSystem>#$linkInSystem</a> -- a link of a path system. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#loopInSystem>#$loopInSystem</a> -- a loop of a path system (a path from a node back to itself containing no other points) . <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pathInSystem>#$pathInSystem</a> -- a path which is within a path system. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#cycleInSystem>#$cycleInSystem</a> -- a cycle: a loop or else a cycle made of two or more links (and the same number of nodes). <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#linkBetweenInSystem>#$linkBetweenInSystem</a> -- a link links two specified nodes. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pathBetweenInSystem>#$pathBetweenInSystem</a> -- a path joins two specified points. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#connectedInSystem>#$connectedInSystem</a> -- there is some path connecting two specified points <br>
+ <br>
+ <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#subPathSystems>#$subPathSystems</a> -- subsystem (a subgraph if the system is discrete and has no non-node points). <br>
+ <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#linkClosedSubSystems>#$linkClosedSubSystems</a>  -- sub system with all links induced by set of points. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pointClosedSubSystems>#$pointClosedSubSystems</a> -- sub system preserving all the path-points from the larger system <br>
+ <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#maximalConnectedSubSystems>#$maximalConnectedSubSystems</a> -- maximal connected piece <br>
+#$reductionOfPathSystems -- relating a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> and its underlying <a href=/cycdoc/vocab/path-traversal-vocab.html#Multigraph>#$Multigraph</a>.
+<a href=/cycdoc/vocab/path-traversal-vocab.html#underlyingGraph>#$underlyingGraph</a> -- relates <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> to the <a href=/cycdoc/vocab/path-traversal-vocab.html#Multigraph>#$Multigraph</a> that is underlying the given <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>. <br>
+
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#directionPreservingSubSystems>#$directionPreservingSubSystems</a> -- subsystem that preserves directions of links.
+<p>
+
+The following two functions are used to retrieve paths
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#JoinPathsFn>#$JoinPathsFn</a>  -- function takes a chain of paths, returns their concatenation. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SubPathBetweenFn>#$SubPathBetweenFn</a> -- function takes a path and two points on it, returns the unique sub-path. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#JoinPathsIntoCycleFn>#$JoinPathsIntoCycleFn</a> -- function takes a chain of paths, returns a cycle that is obtained by concatenating the paths in the chain.<br>
+
+<h3>The following functions retrieve sets of elements of a path system:</h3>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#PointsFn>#$PointsFn</a> -- result is the set of "points" of a path system <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#NodesFn>#$NodesFn</a> -- result is the set of nodes of a path system <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#LinksFn>#$LinksFn</a> -- result is the set of links of a path system <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#LoopsFn>#$LoopsFn</a> -- result is the set of loops of a path system <br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SetOfLoopsAtNodeFn>#$SetOfLoopsAtNodeFn</a> -- result is the set of all loops at a given node in a system. <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SetOfLinksAtNodeFn>#$SetOfLinksAtNodeFn</a> -- result is the set of all links at a given node in a system. <br>
+#$NumberOfLinksAtNodeFn -- result is the cardinality of the set of links at a given node in a system. <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#LinksCut-SubSystemFn>#$LinksCut-SubSystemFn</a> -- result is the subsystem of a given <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, obtained by cutting off the given set of links. <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#NodesCut-SubSystemFn>#$NodesCut-SubSystemFn</a> -- result is the subsystem of a given <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a>, obtained by cutting off the given set of nodes.  <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#PathFromFn>#$PathFromFn</a> -- result is the point in the given <a href=/cycdoc/vocab/path-traversal-vocab.html#DirectedPathSystem>#$DirectedPathSystem</a>, which is the starting point of the given path in the system.  <br>
+<a href=/cycdoc/vocab/path-traversal-vocab.html#PathToFn>#$PathToFn</a> -- result is the the point in the given <a href=/cycdoc/vocab/path-traversal-vocab.html#DirectedPathSystem>#$DirectedPathSystem</a>, which is the ending point of the given path in the system. <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#SingleSourceFn>#$SingleSourceFn</a> -- result is the single source node in the given <a href=/cycdoc/vocab/non-public-ikb-vocab.html#BoundedDirectedPathSystem>#$BoundedDirectedPathSystem</a>.  <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#SingleSinkFn>#$SingleSinkFn</a> -- result is the single sink node in the given <a href=/cycdoc/vocab/non-public-ikb-vocab.html#BoundedDirectedPathSystem>#$BoundedDirectedPathSystem</a>. <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#OutwardLinkSetFn>#$OutwardLinkSetFn</a> -- result is the set of outward links at a given node in a <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a>. <br>
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#InwardLinkSetFn>#$InwardLinkSetFn</a> -- result is the set of inward links at a given node in a <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a>. <br>
+
+<p>
+
+<h3>Beyond Paths: Traversals and Trajectories</h3>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> -- all the paths traversed in a walk through a path system, in order.  May be self-crossing.  Often represented using (TraversalFn POINT LISTOFPATHS POINT).
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#TraversalFn>#$TraversalFn</a> -- A function that returns a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a>.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalFrom>#$traversalFrom</a> -- relating a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> and a "starting point" of it.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalTo>#$traversalTo</a> -- relating a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> and an "ending point" of it.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#pointOnTraversal>#$pointOnTraversal</a> -- relating a point and a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> in the sense that the point is somewhere along the <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a>.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#subTraversals>#$subTraversals</a> -- relating a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> and its subtraversals.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalFromToInSystem>#$traversalFromToInSystem</a> -- a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> presented in a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> with its definite "starting point" and "ending point" in the system.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalPassesThrough>#$traversalPassesThrough</a> -- relating a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> and a point on it in such a way that the <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> does not stop when reached that point.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalInSystem>#$traversalInSystem</a> -- a traversal is within (by homomorphism) a PathSystem, i.e. is a "walk" in the system.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#traversalInSystem-OrderObserved>#$traversalInSystem-OrderObserved</a> -- a <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> presented in a <a href=/cycdoc/vocab/path-traversal-vocab.html#Semi-DirectedPathSystem>#$Semi-DirectedPathSystem</a> whose direction is consistent with the direction of links in the system.<br>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#SubSystemUnderTraversalFn>#$SubSystemUnderTraversalFn</a> -- every <a href=/cycdoc/vocab/path-traversal-vocab.html#Traversal>#$Traversal</a> presented in a <a href=/cycdoc/vocab/path-traversal-vocab.html#PathSystem>#$PathSystem</a> determines a unique subsystem of it that the traversal traversed.
+
+<p>
+
+<a href=/cycdoc/vocab/path-traversal-vocab.html#Trajectory>#$Trajectory</a> -- the line of points in space traced by a moving object or by some point in the object.  May be self-crossing.
+
+<p>
+
+<a href=/cycdoc/vocab/non-public-ikb-vocab.html#Trajectory-SweptSpace>#$Trajectory-SweptSpace</a>  -- the points in space swept through by all the points in a moving object during its movement.  May be self-crossing.
+
+<p>
+
+   <!--  COMMENTED OUT
+
+#$trajectoryStaysOnPaths  -- all of a trajectory stays within the paths of a given physical PathSystem.
+
+<p>
+
+#$movementTraversesPath -- a movement (tangible or abstract) enters one end of a <a href=/cycdoc/vocab/path-traversal-vocab.html#Path-Generic>#$Path-Generic</a> and reaches the other end and exits.
+
+<p>
+
+  COMMENTED OUT -->
+
+<h3>A Technical Note on Loops</h3>
+
+Currently, there can't be a "point" along a loop (other than its one node).  
+See <a href=/cycdoc/vocab/path-traversal-vocab.html#loopInSystem>#$loopInSystem</a>.  For real-world path systems (including non-discrete ones), though, it may be desirable to allow loops with "points", and hence subpaths, along loops.  A road could exit a designated node, wander around, and return to the node without passing through any other nodes.  This road could have any arbitrary number of points, hence subpaths, on it.  There are few practically useful cases of this (where you could not simply designate one of the points to be a node, thereby converting the loop into an ordinary cycle), but a fully general system might allow this.  Unfortunately, this would impose a considerable technical burden on the axiom-writer.  Not only must points on loops, and paths including parts of loops, be considered as special conditions of many rules, but the two special cases of loops with no points, and with exactly one point, are degenerate cases for which directionality, etc., is hard to define properly.
+
+<p>
+
+[A loop in such a system may have a direction like any other Path-Generic in the system, UNLESS the loop is discrete and it has only one point, or no points, other than the node from which it originates.  In the latter special cases, the loop would not have two distinguishable directions, so all such loops might always be considered bidirectional.] 
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>

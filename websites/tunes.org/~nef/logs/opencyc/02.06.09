@@ -1,0 +1,964 @@
+00:00:00 --- log: started opencyc/02.06.09
+00:10:33 --- quit: Psion ()
+00:20:49 --- join: remnant-_ (altruist@07-150.093.popsite.net) joined #opencyc
+00:22:16 --- join: ramblingfool (~mjwhaite@c-24-127-92-244.we.client2.attbi.com) joined #opencyc
+00:23:53 <dmiles> morning
+00:25:18 --- part: remnant-_ left #opencyc
+00:25:21 <ramblingfool> hello
+00:25:22 <CycLBot> hello ramblingfool
+00:26:16 <dmiles> :) its  pinglike trigger.. not a smart bot yert
+00:27:12 <ramblingfool> amusing all the same
+00:27:24 <ramblingfool> and smart bots scare me sometimes :)
+00:27:50 <dmiles> hehe
+00:29:40 <dmiles> its basiclly a cyc cleint
+00:30:08 <dmiles> ask: (isa ?Who Person)
+00:30:09 <CycLBot> (((?WHO . CycAdministrator)) ((?WHO . Guest)) ((?WHO . HYP-Person-8358)))
+00:30:26 <ramblingfool> ah,  well,  I've done a whole ten minutes of research :)  so forgive if it takes a bit to catch on
+00:32:12 <ramblingfool> I'm rather curious what the limits of the cyc engine are?
+00:33:10 <dmiles> most 'limits' are things to overcome.
+00:34:08 <dmiles> but mainly spped and size are still workable
+00:38:12 <ramblingfool> workable...
+00:39:01 <ramblingfool> I suppose that is proportional to the amount of data being analyzed
+00:41:20 <dmiles> yes.. and good partitional tools to keep search restraind is there
+00:42:07 --- join: cehbab (~cehbab@c17217.eburwd1.vic.optusnet.com.au) joined #opencyc
+00:42:10 <cehbab> hellos.
+00:42:19 <ramblingfool> hola
+00:43:20 * cehbab was just down opencyc, and a knowlege database file and was VERY impressed ;)
+00:43:40 <cehbab> s/down/shown mistakes on my first post!, I will not last long.
+00:43:54 <ramblingfool> dmiles:are those partitional tools automated?
+00:44:50 <dmiles> yes well you make asserttyions through the satnadard API tjhat these partiions have certain relatinships
+00:44:58 <dmiles> of inheritance and siblinghood
+00:45:40 <cehbab> is siblinghood a contraption of your own ?
+00:46:18 <dmiles> well its based on the Microtheory type ands shared parrents
+00:47:06 <dmiles> a #$BroadMicrotheory is more likely to be explored
+00:47:46 <dmiles> wjhere a NLMicrotheory might be looked at durring evaluation more then search
+00:49:23 * cehbab deduced 1 + 1 = 2, through a small amount of knowlege and a small deduction engine.. this is SO much knowlege!
+00:49:53 <ramblingfool> and the bot here is an implementation of this?
+00:50:53 <dmiles> it has a calls into an existing webserver api
+00:51:13 <dmiles> so some commands one can invoke from the web interface are here on irc
+00:51:27 <ramblingfool> very tidy
+00:51:28 <cehbab> it doesn't understand 'hello' ;)_
+00:51:40 <ramblingfool> hello
+00:51:41 <CycLBot> hello ramblingfool
+00:52:48 <dmiles> thats testing it ability to get a $NICK  :)
+00:53:04 <ramblingfool> seems to be working
+00:53:13 <dmiles> back when getting on IRc and finding message riginator was not done
+00:53:21 <cehbab> hello
+00:53:22 <CycLBot> hello cehbab
+00:53:33 <cehbab> i did a direct message beffre hmm..
+00:53:44 <cehbab> who wants to play publicly!. :(
+00:54:59 <ramblingfool> hmm
+00:55:06 <dmiles> yeah thats why its still there until for when /msg gets finished :)
+00:58:47 <dmiles> ramblingfool: have you seen the java API yet?
+00:59:12 <ramblingfool> I'm still getting my bearings on all this
+00:59:27 <ramblingfool> I take it it's rather inclusive?
+01:01:14 <dmiles> well it lets you do most things that cyc can dio in a more programming interface to put it into your research of bussiness apps
+01:04:41 <ramblingfool> does it have any real potential for creativity?  or would I have to tie in another engine for that?
+01:06:09 <dmiles> its very deduictive
+01:06:22 <dmiles> i dont see the differnce between deductiuon and creativity :)
+01:06:51 <dmiles> creativity = deduiction + unbound variabnles :)
+01:07:37 <ramblingfool> hmmmm so it all depends how it's tied together
+01:07:37 <cehbab> unboundedness is very dangerous though, it leads to the thousand monkeys typing principle...
+01:07:50 <cehbab> but it can be directed creativity ;). wieghted as such.
+01:08:30 <cehbab> then at least your creations are a little more meaningful.
+01:08:50 <dmiles> :) 
+01:08:52 <ramblingfool> enough cycles and I'll have a thousand monkeys :)
+01:09:24 <cehbab> ;)
+01:09:24 <dmiles> yes some tjhings in cyc can be invoked as a query.. meaning you can get a process done for each query
+01:09:52 <cehbab> ramblingfool: that is VERY cool. make your thousand monkeys, and set them each tasks to do ;)
+01:09:58 <cehbab> the same task.
+01:10:05 <cehbab> write hemingways greatest novel :)
+01:10:35 <cehbab> the one that deduces he is hemingway will win ;)
+01:11:18 <ramblingfool> well I'd prefer summaries hashed out of a data pool with a few conclusions and maybe an inspired insight or two
+01:11:52 <dmiles> on a side note: the reason i like KB based AI .. is its not like NN thats hoping if you run it long enough it will type shaspeare
+01:12:26 <cehbab> ramblingfool: I wrote an interpretter, and I have been able to get it to produce more scripts of its own, run them and deduce whether it was inteligible or not :).. ( dont want to think about whether the scripts it makes are VALUEABLE or not, just that they are valid ;)
+01:13:02 <ramblingfool> well once you cut out the invalid ones you can rehash them for likelyness
+01:13:28 <cehbab> ramblingfool: I was just bored one day :)
+01:13:45 <ramblingfool> I'd be interested in getting hold of that interpreter :)
+01:14:51 <ramblingfool> it's so much easier to patch together other peoples work than to try and whip it out from scratch :)  provided of course that code makes sense to me 
+01:15:33 <cehbab> ramblkingfool: I doesn't make sense to me anymore ;). I was tripping fairly hard ;)
+01:15:58 <ramblingfool> too bad
+01:16:10 <cehbab> iXml.sf.net  the scriptbuilder.script is  long gone. the interpretter still exists and c and java source for the vm.
+01:16:11 <ramblingfool> good to know I'm allmost making sense though
+01:16:28 <cehbab> nearly ;)
+01:18:50 <ramblingfool> now I just need to find a nice image descriptor language
+01:22:31 <ramblingfool> do you know of any other logic engines worth playing with?
+01:32:44 --- quit: danbri ("[x]chat")
+01:33:30 <cehbab> ramblingfool: write it yourself!, String[] words = parseImage(image); returns your description of your image, ~1000 words in every image ;)
+01:35:18 <cehbab> use a database of shapes that correspond to realobjects once again, ie is there a cat anywhere ? zoom and rotate a cat image around your image. deduce whats in their :).
+01:35:23 * cehbab HAS NO IDEA SORRY!
+01:36:31 <ramblingfool> sigh
+01:36:40 <ramblingfool> I enjoy coding as much as I enjoy working on cars
+01:36:41 <cehbab> ramblingfool: why I say this crap, is because a long time ago I wanted to do a thesis on text2image conversion ;). and implement a natural language to scenegraph type thing... yours is the exact opposite.. somehow :)
+01:37:26 <ramblingfool> true,  I just want to be able to logically analyze images
+01:37:31 <cehbab> and I cant figure out how to do image2text, OTHER that image2svg exists, perhaps these internal definitions of an image cvan help you in some way.
+01:38:36 <ramblingfool> perhaps
+01:38:48 <cehbab> rfool: lots of work anyways, sorry dude.
+01:39:03 <cehbab> I think I heard the army has that one though, or the cia ?
+01:39:14 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+01:39:46 <ramblingfool> does me little good :)
+01:40:21 <cehbab> well you all got cyc ;)
+01:40:37 <ramblingfool> true,  and that was the nastiest part
+01:40:58 <ramblingfool> I can script my way through for now while I figure cyc out
+01:41:05 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+01:41:09 <cehbab> re dmiles.
+01:41:49 <dmiles> i got cut for a few
+01:43:52 --- quit: ramblingfool ("Trillian (http://www.ceruleanstudios.com)")
+01:46:27 <cehbab> trillian is very cool too :)
+02:01:02 --- join: klooie (kloo@213-84-79-23.adsl.xs4all.nl) joined #opencyc
+02:01:05 <klooie> hey.
+02:01:38 <cehbab> hoo har.
+02:02:03 <cehbab> dang, soccer has started again. :(
+02:02:28 <dmiles> channel has been busy since slashdot :) this is good
+02:03:06 * klooie is not here via slashdot.
+02:03:17 <dmiles> ah just as good
+02:03:18 <cehbab> neither is cehbab. ;)
+02:03:25 <dmiles> nor myself :)
+02:03:25 <klooie> i may be doing real work with opencyc. :)
+02:03:30 <cehbab> 'word of developer'
+02:03:50 <cehbab> kloolie: tell us ?
+02:03:52 <dmiles> klooie: neat.. what kinds of things? real work?! :)
+02:04:35 <klooie> hmm, i will have to ask if it's alright to detail it, sorry.
+02:04:46 <dmiles> i am sure it is ;P
+02:04:58 <cehbab> dmiles: theres your introduction ;). be careful.
+02:05:00 <klooie> we're evaluating opencyc, but there doesn't seem to be too much competition. :)
+02:05:19 <dmiles> yes really it fills a great nitch
+02:05:29 * cehbab might use it for a location based thing, with cars and gps and planes and stuff ;)
+02:06:03 * cehbab likes inferrel database schema's ;).. rle mapping is quite cool!
+02:06:10 * dmiles is ussing it to persit and keep a world together for a Mud type thing
+02:06:26 <klooie> i'm quite ignorant about it, will do the tutorial after breakfast.
+02:06:41 <klooie> will my limited prolog experience be helpful in understanding it?
+02:06:51 <cehbab> dmiles: your is incredible . seriuously, it's so ingenious!.. it's why I think mappiong. but it's an inferred map!.
+02:06:53 <dmiles> well when you need help with Java API some of us are good at helping
+02:07:39 <dmiles> yes map can be inferred and told both in the same environment
+02:08:07 <dmiles> all forrests have at least one tree
+02:08:16 <dmiles> there exists a forest at the border of the city
+02:08:17 <cehbab> i've been trying to compress images to about 10 bytes ;) *you know, the holy grail of imaging!*  and it's all interrelated ;)
+02:09:07 <dmiles> yes.. tghe good thing with Backchaining in Cyc you can describe massive things with small rules
+02:09:14 <cehbab> dmiles: how is it's maths knowlege, on ranges of numbers, and useability ?
+02:09:21 <dmiles> and get the massive results you want
+02:09:52 <dmiles> it does everything it should or needs to do math wise
+02:10:06 <cehbab> so it infers 1+1=2 ?
+02:10:07 <dmiles> it it needs an abstract representation it will do so
+02:10:23 <dmiles> ask( equals ?W (plusFn 1 1 ))
+02:10:27 <dmiles> ask ( equals ?W (plusFn 1 1 ))
+02:10:28 <CycLBot> (((?W plusFnLogic 1 1)))
+02:10:34 <dmiles> ask ( equals ?W (PlusFn 1 1 ))
+02:10:34 <CycLBot> (((?W PlusFn 1 1)))
+02:10:40 <cehbab> it's SO iXML it's NOT FUNNY dmiles!!!!
+02:10:42 <dmiles> ask ( evaluate ?W (PlusFn 1 1 ))
+02:10:43 <CycLBot> (((?W . 2)))
+02:10:53 <cehbab> no-one understands iXml though!, cept you now ! hahaha....
+02:10:57 <dmiles> ask ( evaluate 2 (PlusFn ?X 1 ))
+02:10:58 <CycLBot> no answers found
+02:11:04 * cehbab thinks... how can I combine Cyc and iXml ;).
+02:11:07 <dmiles> ask ( equals 2 (PlusFn ?X 1 ))
+02:11:07 <CycLBot> no answers found
+02:11:26 <dmiles> it does do algebra though i am just miswing the correct predicate
+02:11:57 <cehbab> I understand.. dont bother with it ;).. I understand it a lot ;)
+02:12:07 <dmiles> yeah they both are imple,mentations of unification based grammers
+02:12:43 <dmiles> varaibnles agauinst a term (can be xml) to come up with filling slots
+02:13:14 <dmiles> and when you connect these unifuications they create engine
+02:13:16 <cehbab> dmiles: reading no prob, then I have to be able to infer from it, through iXml, in effect fucking off Cyc, but thats what I do best ;). leaving Cyc as an embeddedable inference engine, in as little ram as possible ;)
+02:13:40 <dmiles> sounds like you can embed cyc as a node unit?
+02:14:07 <dmiles> like you could actually make it (bind it) to some command
+02:14:35 <dmiles> so you can say set this exmpl expression into the cycnode
+02:14:42 <cehbab> I can I think.. that is knowlege.. so thats merely a loop through it all and dump as nodes.. the inference engine I have to figure a lot out about. and emulate using itself... starting with langauge/datastructure makes it easy to do things with, it wont be as hard as you think :)
+02:14:48 <dmiles> or get from cyc node
+02:15:27 <dmiles> yeah.. you are already comming to it from the same language specs pretty much
+02:16:32 <dmiles> ok.. time for me to make that NClassLoader work
+02:16:36 <cehbab> my last inference engine was pretty bad but it got their, this time I start with a single object type, makes it very neat/fast. and I have to think a lot about what I am inferring from those kif files ;)
+02:17:01 <cehbab> I have only inferred maths cause I was asked to one week!. tries to remember all that sheeesh.
+02:17:18 <cehbab> goodluck dmiles. I wont annoy ya anymore, much,.
+02:17:24 <dmiles> yes the partitioning of how tight loops (or wide) can get uis always an issue
+02:17:41 <dmiles> do you want to loop the entire thing .. etc
+02:17:53 <cehbab> memory constaints within th vm determine that ;)...for maximum scope!. haha
+02:18:24 * cehbab thinkins about knowlege. *DAMN YOU ALL IN #openCyc* !
+02:18:39 <cehbab> and memes :(
+02:20:44 <dmiles> ok the class loader stuff is impleem,tned.. time to test
+02:21:00 <cehbab> *crosses fingers*
+02:21:00 <CycLBot> You "fingers*"
+02:21:01 <CycLBot> CycLBot "fingers*"
+02:21:16 --- quit: CycLBot (Remote closed the connection)
+02:21:25 <cehbab> hahaha.. did I do that ?
+02:21:37 <dmiles> not sure kinda.. but i was already killing the VM
+02:21:47 <cehbab> k ;).
+02:21:54 <dmiles> i woder if the combo if the java vm unloaduing and the *
+02:21:55 <cehbab> hahah I think I see your kinda point ;)
+02:22:18 <dmiles> and why whenver i replace the MudActor i dont want to kill the bot each time
+02:22:35 <dmiles> (part of the need for your classloader)
+02:22:36 <cehbab> NCLassLoader;)
+02:23:38 <cehbab> should work on any jvm, 1.0 and 1.1 does just loading, 1.2 and up should do reloading, dunno about 1.3 ;) never read the spec. got lazy.
+02:27:46 <cehbab> dmiles: I get my point now between iXml and Cyc, what I have found/been given from you and Cyc, is all the knowlege I can get, *there abouts* and import easily. what to do with it, is STILL your biggest question ;)
+02:29:14 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+02:29:24 <cehbab> and the army would have undoubtably recorded as much of their environment as they can within Cyc knowlege, but this in unavailable to us.
+02:30:09 <dmiles> well they probly paid a specific amount of monery for the data to be entered.. i am sure cyccorp put as much into the opencyc as possible
+02:30:17 <cehbab> all the xyz mapping data I require... so I can add it to Cyc myself, my envirnment, or do in another way. Cyc is bizaar.
+02:30:45 <cehbab> blows my mind anyway ;)
+02:30:51 <dmiles> yes you can add it in yourself there are documetns that contain information about phycal locations on the daml website
+02:31:00 * cehbab starts recording stock market history within Cyc.
+02:31:11 <cehbab> ;)
+02:31:14 <dmiles> http://www.daml.org/ontologies/
+02:31:43 <dmiles> those are many public instance data documents that have things loike geopgraophy in them
+02:32:19 <dmiles> so one couyld import those data things into Cyc 
+02:32:29 <cehbab> Q: What makes this announcement so historic and important?
+02:32:29 <cehbab> A: From this point forward, real-world common sense can be expected to play an integral part of software applications. For the first time, the world's only large-scale, task-independent, language-independent, extensible, reusable, common-sense knowledge base is being made available to the world. Beginning now, software can become increasingly and arbitrarily smarter.
+02:32:32 <cehbab> is very very cool ;)
+02:33:38 <cehbab> hahah. I MUST USE THIS DATA SOMEHOW!!. haha
+02:34:21 <dmiles> here is the geographical mapping you were asking about http://www.daml.org/ontologies/245
+02:34:31 <cehbab> http://www.daml.org/cgi-bin/dumpont?http://www.daml.org/2001/02/geofile/geofile-ont.daml#GeographicLocation WOAH.
+02:34:51 <dmiles> threre you found it :)
+02:37:13 <cehbab> looking a lot, it'll take bloody ages to absorb it. ;).. finding a SPECIFIC item somewhere, like here is a Geogrphical Area at location x,y or something is what I am trying to find, then I will persue it a HEAP!
+02:37:43 <cehbab> have found only definitions. not instancs of things, this was your .kif file :)
+02:38:43 <dmiles> i know there is some file with latitude/logitudes somewhere in there
+02:38:57 <cehbab> where the kifs were ?
+02:39:06 <dmiles> nope on the daml site
+02:39:33 <dmiles> http://www.daml.org/ontologies/269
+02:39:41 <dmiles> GPS dbs
+02:40:30 <dmiles> hrrm odd maybe thats like DTD ish defines
+02:40:43 <cehbab> I underdstand that I do!... does that mean that all we have to do is used THAT namespace, THAT IS WHAT THE kifs are (datatype descriptors, and what functions they have)
+02:40:51 <cehbab> and use a webserver to ask it things ?
+02:41:13 <dmiles> hey! http://www.daml.org/data/
+02:41:15 <cehbab> so thats why you always rely on the opencyc server for that ?
+02:41:18 <dmiles> thats what you want :)
+02:42:12 <dmiles> royal92.ged is a public domain GEDCOM file containing information on 3010 individuals and 1422 families of European royalty. royal92.daml was produced using ged2daml. 
+02:42:29 <dmiles> stuff with data in it 
+02:42:53 <dmiles> oops meant Geofile
+02:43:19 <dmiles> well generally i think cyc is expected to answer queries on those things
+02:43:31 <dmiles> yes those files anounce how to understand the data files
+02:44:40 <dmiles> The Geofile is a reference database that describes world locations. There are about 56700 locations in the file
+02:45:03 <cehbab> GNS includes information on about 3.84 million features and 5.28 million names worldwide, exluding the United States and Antarctica.
+02:45:13 <cehbab> dmiles; you are a legend.. I WANT that database!
+02:45:22 <dmiles> wow that thing is huge :)
+02:45:26 <cehbab> yup!.
+02:45:37 <dmiles> well i just know where things are is all
+02:45:53 <cehbab> cool... I'll hunt around and see what I can find for myself.
+02:47:10 <cehbab> I understand... I may just have to write a http://www.daml.org/cgi-bin/ ripper ;).. or do as everyone does... use it live.
+02:47:26 <cehbab> this was my question before, do you all hit back to a webserver for the DATA ;)..
+02:47:49 <cehbab> everyting I had before was definnitions. but no data, I can get that from daml.org, is this what everyone does ?
+02:48:02 <dmiles> i think that if someone works as the librarian and keeps it current then it probly is gone to instead of locally stored
+02:48:34 <cehbab> very cool ;)
+02:48:38 <dmiles> so i think that its expected that each webserver could store 
+02:49:14 <cehbab> I deal only with network connected devices at present, so this is not an issue :)
+02:49:25 <dmiles> and for speed reasons maybe each webserver could have their own cyc 
+02:49:46 <dmiles> that the cycs can all work together.. etc
+02:50:01 <cehbab> modCyc for apache ;)
+02:50:34 <dmiles> yeah that would be super cool
+02:51:10 <dmiles> there is also a channel called #rdfig that specifically address daml like issues as well
+02:52:03 <dmiles> they are w3c foljks working on making the daml systems structrured enough for engines like cyc to work with
+02:57:20 --- quit: CycLBot (Remote closed the connection)
+03:04:35 * cehbab had never heard of daml before tonight. oh my god.
+03:09:26 <cehbab> dmiles: sorry for this comment, but I have been thinking about your mud interface, do you think a gui 2d game type interface would be EASIER ?? then there is no typing, you assign actions to buttons when you interact with them graphically ;). a simple 2d sprite engine suffices here ;)
+03:09:55 <cehbab> in effect this is what I need to write ;)
+03:10:51 <cehbab> for gps following. hmm. I HAVE to look more at that moo site, was was the url again ?
+03:11:44 <dmiles> http://logicmoo.sourceforge.net/
+03:11:48 <cehbab> tah.
+03:11:56 <cehbab> tried www.logicmoo.org ;). gave up.
+03:12:05 <dmiles> well there is more good 2D support in the instance data
+03:12:22 <dmiles> at least easier to translate for common sense decriptions
+03:13:18 <dmiles> hrrm
+03:13:19 <dmiles> java.lang.ClassCastException: logicmoo.MudActor
+03:13:40 <dmiles> 	    nclassloader = new NClassLoader(".",".class","");
+03:13:40 <dmiles> 	    Class mAC = nclassloader.loadClass("logicmoo.","MudActor");
+03:13:40 <dmiles> 	    me = (MudActor)mAC.newInstance();
+03:14:22 <dmiles> i know its the correct class.. you think the class loader is somehow remaning it from the linker?]
+03:15:08 <dmiles> i shoiuld add some System.outs :)
+03:15:15 <cehbab> what is the vm, is it TOMCAT ?
+03:15:16 <dmiles> and find out what is so differnt
+03:15:29 <dmiles> yes.. but tomcat is just ussing the 1.4 VM
+03:15:42 <cehbab> yar I know the problem I get it always... two fixes ;)
+03:16:09 <cehbab> 1) change code to say /FULL/PATH/TO/CLASSES or
+03:16:28 <cehbab> 2) change tomcat script to START tomcat from YOUR directory, THEN you can use relative paths to obtain files :)
+03:16:37 <cehbab> simple really, it's ALL about the "." ;)
+03:16:45 <dmiles> you mean loke me = (logicmoo.MudActor)mAC.newInstance(); as well?
+03:17:16 <cehbab> loader = new NClassLoader(transletpath,".class","");!
+03:17:16 <dmiles> Class mAC = nclassloader.loadClass("logicmoo",".MudActor"); ?
+03:17:36 <dmiles> oh yeah i see
+03:17:45 <cehbab> you have "." where I have transletpath,  just make a String, and set it to your full path for now, later add this path as a ServletInitParameter ;). in your web.xml
+03:17:51 <cehbab> cool you gotit !
+03:18:12 <dmiles> File place= new File("."); nclassloader = new NClassLoader(getFulePath,".class","");
+03:18:27 <dmiles> i see.. one sec
+03:18:38 <cehbab> "." dont work under tomcats NORMAL startup.sh, I have to force it to start in my webapps dir, then all is fine, it's like a one line patch in startup.sh
+03:18:51 <cehbab> that'll work ;)
+03:18:58 <dmiles> i thats right .. unf
+03:19:15 <dmiles> i was previpous not ussing tomcZt
+03:19:17 <cehbab> dmiles: you will HAVE to now System.out.println(place.getFullPath());   to SEE where it is looking though.
+03:19:30 <dmiles> hehe i is probly in WEB-INF :)
+03:20:14 <cehbab> easiest to set a web.xml servletInit parameter, and change as you cahnge where your classes sit.
+03:21:08 <dmiles> yup yup .. man i sure dont like having config specific iissues especially when eventual i want to support it on other peoples machies.. i wish that java could get from Enviroment varaibles still
+03:21:50 <dmiles> there is no way to get a shell exported env from java anymore rigth?
+03:21:51 <cehbab> I changed startup.sh as I said ;). made it global. then "." works ;)... trick was to call tomcat.sh FROM my working dir.
+03:22:14 <cehbab> you can pass it in as an arg, but then not to tomcat.
+03:23:04 <dmiles> yeah.. hrrm (all just use a ~installuer' i gues ;P
+03:23:13 <dmiles> err '~installuser'
+03:23:29 <dmiles> then have people create a user for the app
+03:23:55 <cehbab> dmiles: you see the problems now though :).. If I did .getClass().loadResourceAsStream(yourclass);  then I cant check it's modified time.
+03:24:02 <dmiles> then maybe have a dirrectory structure expected for user
+03:24:19 <cehbab> if you ALWAYS want a new one, then simple remove the NFileHolder logic, and use resource streams from the classpath :)
+03:24:22 <dmiles> yeah i can see that now.. since you need a real location
+03:24:38 <cehbab> need a filemodified stamp ;)
+03:24:44 <dmiles> yeah
+03:25:15 <cehbab> for just now, hardcode to your FULL working path.. fix tomorrow ;). test if reloading will help you anyways :)!
+03:25:36 <dmiles> :) yeah i am just typing in my disk path
+03:25:38 <cehbab> *its the thought that counts*
+03:26:24 * cehbab codes by a rule of 'what if' dunno if thats good or bad ;)O
+03:26:26 <dmiles> hehe
+03:28:44 <dmiles> yep all fixed
+03:28:54 * cehbab awaits the bot!
+03:28:57 <dmiles> now time to test the reload
+03:29:20 <dmiles> since the bot gets spammy i do things like this in #cycbot
+03:39:40 <cehbab> dmiles: i put it up at http://home.anyware-it.org:81/anyware/com/shit/irc ;)
+03:40:35 <cehbab> all commands it runs are classes themselves for programmability, and allI have is a simple connector, dcc, and user objects and handler interfaces to handle messgaes coming to/from anywhere ;).
+03:40:40 <cehbab> no app uses it yet.
+03:41:44 <dmiles> neat .properties file
+03:42:38 <cehbab> it supports dcc transfers as well, sorry one app was written with it ;). a criten.net #tmd-moviez divx movie ripper ;). hahaha
+03:42:51 <cehbab> hahahaha
+03:55:29 <dmiles> cool.. yeah i want the bot to be able to recive a CycL file
+03:55:40 <dmiles> of a kif file from an IRC user
+03:56:15 <dmiles> our irc bot has api for that kind of thing!
+03:56:21 <dmiles> err your
+03:59:01 <cehbab> interfaces are different, rip the guts out of it !
+04:32:51 --- quit: dmiles (Excess Flood)
+04:33:07 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+04:44:16 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+05:39:00 * cehbab is away: zZz
+07:21:40 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+09:52:57 <graylensman> Anyone alive?
+10:26:03 <dmiles> hi graylensman :)
+10:29:39 <graylensman> dmiles: I need help!
+10:30:49 <graylensman> dmiles: Q1.  Is there an emacs interface to OpenCyc, like ilisp to CMUCL??
+10:31:16 <dmiles> ther eis the WEbServer and the SubL prompt
+10:31:37 <dmiles> also there is a easy to write for Socket server
+10:32:02 <dmiles> i was able to make use of its API and parse it w/in a couple hundred lines of prolog
+10:32:10 <dmiles> (the socket server)
+10:32:52 <dmiles> if you wanted to talk to it over CLOS it would only be a maybe 30 lines .. since its socket is a List term
+10:32:59 <graylensman> dmiles: Ok.  I select SubL and want to do following. craete a new constant #$Ray, then assert (#$isa #$Ray #$Person).  I would like to have these statements in a file and "load" it into OpenCyc.
+10:33:30 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+10:33:46 <dmiles> subl: (create-constant "Ray")
+10:33:46 <CycLBot> Ray
+10:34:31 <dmiles> subl: (create-constant "RaysMt")
+10:34:32 <CycLBot> RaysMt
+10:35:21 <dmiles> subl: (cyc-assert'(#$isa #$RaysMt #$Microtheory) #$BaseKB  )
+10:35:21 <CycLBot> T
+10:36:13 <dmiles> one sec looking up @#Person
+10:37:19 <dmiles> subl: (cyc-assert'(#$genlMt #$RaysMt #$BiologyMt) #$BaseKB  )
+10:37:20 <CycLBot> T
+10:37:37 <graylensman> I did an apropos create.  I dont even see create-constant from the OpenCyc REPL.
+10:37:48 <dmiles> subl: (cyc-assert'(#$genlMt #$RaysMt #$HumanActivitiesMt) #$BaseKB  )
+10:37:49 <CycLBot> T
+10:38:02 <graylensman> Where are you finding the doc on cyc-assert, create-constant, ....
+10:38:23 <dmiles> http://www.opencyc.org/doc/cycapi/
+10:38:52 <dmiles> subl: (cyc-assert'(#$isa #$Ray #$Person) #$RaysMt  )
+10:38:53 <CycLBot> T
+10:38:56 <graylensman> thanks looking...
+10:39:25 <graylensman> We is there not an emacs inferior mode for this.... It cries out its necessity.
+10:39:30 <dmiles> opencyc used a SubLisp
+10:39:47 <dmiles> that is more Cified for operations it need to do very quickly
+10:41:06 <dmiles> defiatley would be usefull.. i agree
+10:42:02 <graylensman>  I am missing something still.  I am looking at the SubL Reference and the function create-constant is not listed!
+10:42:21 <dmiles> function CREATE-CONSTANT : (name &optional external-id)
+10:42:21 <dmiles> Return a new constant named NAME. Use EXTERNAL-ID if non-null, else create a new ID.
+10:42:21 <dmiles> Single value returned satisfies CONSTANT-P. 
+10:42:41 <dmiles> 2.1 KB representation
+10:42:41 <dmiles> Methods for directly manipulating KB datastructures 
+10:42:41 <dmiles> 2.1.1 Constants
+10:46:52 <graylensman> I see it here no problem.  From the web interface on a local install, click Doc, Programming, SubL Reference.  This doc never mentions create-constant...
+10:47:10 <graylensman> Your URL is fine.
+10:47:16 <dmiles> hrrm
+10:47:25 <dmiles> it could be the install docs path
+10:47:36 <dmiles> did you run the java webserver?
+10:49:14 <graylensman> This is where I ended up.  http://www.cyc.com/cycdoc/ref/subl-reference.html
+10:49:24 <dmiles> ah :)
+10:49:38 <dmiles> that needs some work since not all the SubL work
+10:49:45 <graylensman> Try and find create-constant in there :)
+10:52:30 <graylensman> Ok what is best way to "load" a file containing subl code, just simple asserts and such.  From Web Interface -> Tools -> Load API Expression is the best I see now.  [this the standard OpenCyc Web interace from run-cyc.sh]  I have not tried any of the Java stuff at all.  I just downloaded this morning.
+10:53:24 <graylensman> Seems the Java code is dependent on some old jars from Apache.  I haven't seen anything using the old oro pacages in years.  org.apache.oro....
+10:53:36 <dmiles> ;)
+10:53:56 <dmiles> well i have a dir full of the jars you may need
+10:54:28 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/lib/
+10:55:04 <dmiles> well we are waiting on a tutorial for a SubL written Module
+10:55:20 <dmiles> but you can run (load "file with subl")
+10:55:30 <graylensman> Ok got it.  
+10:55:37 <dmiles> it will act like you just types all that in the prompt
+10:55:44 <graylensman> Will steal your jars later this evening.
+10:56:29 <graylensman> For example, Where the heck does one find ViolinStrings.jar????
+10:56:35 <dmiles> wow i wish i could delte or prune SF dirs
+10:57:03 <graylensman> Oldest complaint on record for CVS.
+10:57:20 <dmiles> i found it by typing java ViolinStrings.* on google
+10:58:18 <dmiles> hehe 8 results (normal one can expect a 100s)
+10:59:08 <dmiles> then snuck arround people sites until i found thweir jars
+11:00:17 <graylensman> The OpenCyc download should include these things.  Otherwise the Java Interface is useless.
+11:00:28 <dmiles> well at least pointers refernces
+11:01:20 <dmiles> i agree though
+11:09:45 <graylensman> Ok just started looking at JavaDoc.  CycAccess, ApiDemo.  Looks nice. Will steal your jars and attempt a build later this evening. 
+11:09:51 <graylensman> Gotta go.
+11:10:10 <dmiles> cool.. i'll be arround
+11:12:52 --- quit: graylensman ("Client Exiting")
+11:23:42 --- join: elurch (ratetmal@193.159.77.195) joined #opencyc
+11:34:01 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+11:34:10 <Psion> How can I save the world image with the Java API?
+11:37:33 <dmiles> converseVoid("(write-image "<filename>")
+11:37:54 <dmiles> new CycAccess.converseVoid("(write-image "\<filename>\")");
+11:38:12 <dmiles> () :)
+11:38:27 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+11:38:53 <dmiles> find it?
+11:39:25 <futhin> talking to me or someone else?
+11:39:34 <dmiles> yes.. was.. hi there
+11:40:17 <Psion> Ah, thank you.
+11:53:16 --- quit: elurch (Read error: 110 (Connection timed out))
+12:02:26 <Psion> Where can I find the jars I need to use the Java API?
+12:03:52 --- quit: CycLBot (Remote closed the connection)
+12:06:58 <Psion> I found Apache ORO, but I don't know if there's other stuff that just isn't used by classes I've loaded so far =)
+12:20:17 <Psion> Anyone know why a write-image initiated with the Java API would hang while doing it at the prompt works fine?
+12:29:04 <dmiles> yes becasue a gc MAY NEED TO HAPPEN
+12:29:07 <dmiles> oops
+12:29:11 <dmiles> didnt mean to caps
+12:29:35 <dmiles> this might be a bug .. have to ask stevereed
+12:29:57 <dmiles> meaning your socket might be in the way
+13:13:43 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+13:23:02 <Psion> I have found it also hangs when I try to do a write-image when I start the server with a new image that I previously wrote :-\
+13:23:20 <dmiles> well you cant overwrite the image tyour ussing
+13:23:50 <Psion> Oh
+13:23:58 <dmiles> its a dick locking thing
+13:24:02 <dmiles> err disk
+13:24:12 <dmiles> man my typing is bad enough to justify
+13:24:13 <Psion> Hm, so what's the procedure for saving your changes? You have to copy files around?
+13:24:22 <dmiles> (if you ever saw the logs )
+13:24:44 <dmiles> well i usually save to the run dir
+13:24:55 <dmiles> then i have a startup method that takes a file argumetn
+13:25:06 <dmiles> one sec.. give you the script
+13:25:21 <Psion> OK, thanks!
+13:25:45 <Psion> Though if it's just a matter of having a "last saved" file that you copy over to the main place each time you run it, I can handle writing that myself =)
+13:26:06 <dmiles> yeah.. you should backup the ditro image etc
+13:26:19 <dmiles> err distro image 
+13:26:27 <dmiles> many times it has bailed me out
+13:26:35 <Psion> Right, I'm working off of a separate one.
+13:27:12 <dmiles> but yeah you will need to restart the server i think between moves
+13:27:30 <dmiles> mv'ing the prevoius away
+13:27:49 <dmiles> oh my script was just where i pass in $1 :)
+13:27:50 <dmiles> cd ../../run
+13:27:50 <dmiles> bin/latest.bin -w $1
+13:27:54 <dmiles> hehe
+13:28:18 <dmiles> so i can run cyc under differnt images
+13:28:40 <dmiles> i generally only backup when i think things are working
+13:28:59 <dmiles> or load things like thoughttreasure and dont want to spend a ling time reloading
+13:29:25 <dmiles> i dont actually6 swap out images
+13:33:42 <CycLBot> tek123 says, "from mud"
+13:43:26 <Psion> What do I use with the Java API to get the CycFort for a metatheory?
+13:43:30 <Psion> er micro ;-)
+13:44:31 <dmiles> cycFort mymt = cycAccess.makeCycConstant("MyMt");
+13:44:37 <dmiles> uh
+13:44:49 <dmiles> CycFort mymt = myCycAccess.makeCycConstant("MyMt");
+13:45:06 <dmiles> CycConstants are subclasses of CycFort
+13:45:10 <Psion> Oh
+13:45:11 <Psion> Thank you
+13:56:59 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+14:33:16 <Psion> How do I enable backchaining for a CycAccess?
+14:33:33 --- join: Don (Don@ip-216-23-123-46.adsl.one.net) joined #opencyc
+14:33:48 <dmiles> what indicates its ot backchaining?
+14:33:59 <dmiles> that it's not?
+14:34:38 <dmiles> if you want to set the BACKCHAIN depth.. lemme find it
+14:34:55 <Psion> The ask is unsuccessful in the web interface with backchaining off, but it succeeds with it on.
+14:35:03 <Psion> The same query is unsuccessful in my Java program.
+14:35:13 <Psion> So I assume it's because backchaining is not in there =)
+14:35:13 <dmiles> ok i'll find the option
+14:35:31 <dmiles> is it HL backchinaing or is it just unbound depth?
+14:35:57 <Psion> Well, switching from "No Backchaining" to "Backchain Forever" made it work.
+14:36:28 <Psion> And setting 1 backchain step also works fine
+14:36:30 <dmiles> ok will find it
+14:39:05 --- part: Don left #opencyc
+14:41:53 <Psion> I see an option with fi-ask, but the docs say it is deprecated.
+14:43:10 <dmiles> o have been searching the weblogs :)
+14:43:20 <dmiles> err i have been day by day
+14:43:29 <dmiles> http://tunes.org/~nef/logs/opencyc/
+14:43:36 <dmiles> steve one day explained how
+14:45:01 <Psion> Well, I have it working using fi-ask.
+14:45:05 <Psion> Which is fine, I guess.
+14:46:34 <dmiles> ok good.. yeah i was getting lost in reading the logs :)
+14:49:32 <dmiles> oh i found it
+14:50:25 <dmiles> subl: (cyc-query '(#$isa #$Collection ?what-collection) #$BaseKB '(:backchain 1))
+14:50:26 <CycLBot> ((?WHAT-COLLECTION . CycLReifiableDenotationalTerm))
+14:50:27 <CycLBot> ((?WHAT-COLLECTION . CycLReifiedDenotationalTerm))
+14:50:27 <CycLBot> ((?WHAT-COLLECTION . HLReifiedDenotationalTerm))
+14:50:28 <CycLBot> ((?WHAT-COLLECTION . ELExpression))
+14:50:28 <CycLBot> ((?WHAT-COLLECTION . CycLClosedDenotationalTerm))
+14:50:29 <CycLBot> ((?WHAT-COLLECTION . CycLClosedAtomicTerm))
+14:50:29 <CycLBot> ((?WHAT-COLLECTION . CycLRepresentedTerm))
+14:50:31 <CycLBot> ((?WHAT-COLLECTION . CycLRepresentedAtomicTerm))
+14:50:33 <CycLBot> ((?WHAT-COLLECTION . CycLDenotationalTerm))
+14:50:35 <CycLBot> ((?WHAT-COLLECTION . CycLAtomicTerm))
+14:50:37 <CycLBot> ((?WHAT-COLLECTION . HLExpression))
+14:50:39 <CycLBot> ((?WHAT-COLLECTION . SubLExpression))
+14:50:41 <CycLBot> ((?WHAT-COLLECTION . CycLTerm))
+14:50:43 <CycLBot> ((?WHAT-COLLECTION . CycLExpression))
+14:50:44 <dmiles> . .
+14:50:45 <CycLBot> ((?WHAT-COLLECTION . CycLClosedExpression))
+14:50:47 <CycLBot> ((?WHAT-COLLECTION . CycLIndexedTerm))
+14:50:48 <dmiles> .
+14:50:49 <CycLBot> ((?WHAT-COLLECTION . HLIndexedTerm))
+14:50:51 <CycLBot> ((?WHAT-COLLECTION . CycLConstant))
+14:50:53 <CycLBot> ((?WHAT-COLLECTION . PublicConstant))
+14:50:55 <CycLBot> ((?WHAT-COLLECTION . CoreConstant))
+14:50:55 <dmiles> probly the same as you found
+14:50:57 <CycLBot> ((?WHAT-COLLECTION . VariableOrderCollection))
+14:50:59 <CycLBot> ((?WHAT-COLLECTION . Collection))
+14:51:01 <CycLBot> ((?WHAT-COLLECTION . Thing))
+14:51:03 <CycLBot> ((?WHAT-COLLECTION . PartiallyIntangible))
+14:51:05 <CycLBot> ((?WHAT-COLLECTION . Intangible))
+14:51:07 <CycLBot> ((?WHAT-COLLECTION . MathematicalOrComputationalThing))
+14:51:09 <CycLBot> ((?WHAT-COLLECTION . MathematicalThing))
+14:51:11 <CycLBot> ((?WHAT-COLLECTION . SetOrCollection))
+14:51:13 <CycLBot> ((?WHAT-COLLECTION . SetOrCollectionType))
+14:51:15 <CycLBot> ((?WHAT-COLLECTION . CollectionType))
+14:51:17 <dmiles> 3 is more typical
+14:51:50 <dmiles> 19:30:56 <stevereed_home> we ordinarily backchain no deeper than 3 because of combinatorial explosion, but there
+14:51:50 <dmiles> 19:31:15 <stevereed_home> are cases where inference path can go much deeper with hints.
+14:51:50 <dmiles> 19:31:29 <stevereed_home> ok lets try time
+14:54:43 <dmiles> i have to run for a while.. talk to you all later
+15:28:45 --- quit: futhin ("restarting my router")
+15:33:08 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+16:11:51 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:56:21 <Psion> How do I use the Java API to get the natural language name of a constant?
+17:00:21 <cehbab> dmiles: dunno if youare about or not, did you get the reloading going ?
+17:03:01 <Psion> Anyone know how to set the natural language text used for a given constant?
+17:04:11 <stevereed_home> take a look at CycAccess methods with "GeneratePhrase" in the name.
+17:04:12 <CycLBot> Take what?
+17:04:20 <stevereed_home> e.g. getImprecisePluralGeneratedPhrase (CycFort cycFort)
+17:04:46 <stevereed_home> these methods send a "(generate-phrase ...)" form to the Cyc SubL api,
+17:04:59 <stevereed_home> and I can demonstrate if CycLBot is here:
+17:05:13 <stevereed_home> subl: (generate-phrase #$Dog)
+17:05:14 <CycLBot> dog
+17:05:39 <stevereed_home> subl: (generate-phrase #$UnitedStatesOfAmerica)
+17:05:40 <CycLBot> the United States
+17:05:50 <stevereed_home> works for assertions too
+17:06:04 <Psion> Excellent, and how do I set the text used for a constant?
+17:06:14 <stevereed_home> let me look,
+17:06:16 <cehbab> ad a defnition ?
+17:07:22 <stevereed_home> Look at the "lexical info" for several constants
+17:08:36 <stevereed_home> You can see what lexical assertions are required for terms like the one you wish to create or modify.
+17:09:13 <stevereed_home> See also doc at www.opencyc.com/doc
+17:09:44 <Psion> OK, thanks
+17:10:41 <cehbab> stevereed_home: that is very cool, I only found out about cyc and daml stuff last night.. have a LOT to learn :). I'll be listening a lot to pick up things :)
+17:16:23 <dmiles> cehbab: yes the class loader works great now.. the problems is it was not ussing system classloader for internal field mthods
+17:16:40 <cehbab> dmiles: FARK!!!!
+17:16:47 <cehbab> ;) well done moiboi!
+17:17:16 <dmiles> field members.. for exmaple i loaded a CycAcesss with the system class loader
+17:17:34 <dmiles> then later i i load CycActor which used CycAccess
+17:17:53 <dmiles> it trying to load the sendong CycAccess under its loader
+17:18:05 <dmiles> second class
+17:18:33 <dmiles> so i just set some requestname.StartsWith() logic about what should already be loaded
+17:18:37 <cehbab> makes sense, you got around it all ?? is MudActor LIVE YET ?
+17:19:11 <dmiles> yes works great now .. can even use its private cammand interpretor to reload its parent class
+17:19:29 <dmiles> (i dont know why that even works :0
+17:19:52 <dmiles> but it does an MudAcotro client can reload everyones
+17:20:02 <dmiles> i checked it into CVS so you can peek
+17:20:16 <cehbab> hahaha... it can reload it's parent. thats pretty fluky !.. haha.. amazing!
+17:20:33 <cehbab> nice ;)
+17:21:39 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/agent/ <- happenn in all Moo* files
+17:22:03 <dmiles> i took your suggestion and made a single abstract class 
+17:22:21 <dmiles> (MooAgentThread.java)
+17:23:28 <dmiles> what we called MudActor is now ActorCommandParser
+17:24:17 <cehbab> hahah.. you went downt the abstract path and it STILL WORKED!! that was a guess mr. miles ;)... as I said I'd never treid it, just maybe !
+17:24:24 <dmiles> so look at  public void reloadInterpretor(CycFort name)
+17:24:28 <cehbab> it is very nice code.
+17:25:25 <graylensman> stevereed_home: Is there an Emacs inferior mode to connect to the OpenCyc REPL??
+17:25:42 <cehbab> instance level classloader ;). I am learning from this now as well :)
+17:26:44 <dmiles> yeah the classloader lives long enough to just get me the object.. then at that point me and the class loader only had to agree on the Interface
+17:27:16 <dmiles> then the class loader is gone.. and my object is one foot into the grave .. i just have to release it later
+17:27:33 <cehbab> nad in the end, all you wanted was this line to work ;)   me = (IActorCommandParser)meclass.newInstance();  ;) well done!
+17:28:11 <dmiles> yeah part of it was actually using the whole step of meclass + freeing it after i makeInstance()
+17:29:06 <cehbab> well done though, you would have been screaming, I was worried after I left but I was too tired to help :).. I thought you may tear your hair out as you had to chop your code around :).. you rock!
+17:29:49 <dmiles> well i saw it work once so i knew it was close and worth the extra 1/2 hr of trying things
+17:30:45 <dmiles> is there anyway in the system class loader to know hwat classes are completely loaded?
+17:31:44 <cehbab> dmiles: nope I dont think so, the only way is to set your classloader as the system default loader, and make ANOTHER one for the reloading ;)   using -D somehow when starting java interpreter.
+17:32:02 <cehbab> you can log all the system classes then. but it's a lot of work for no real gain :)
+17:32:41 <dmiles> yeah the problkem was solved wonce i made a StartsWith("logicmoo.cmd. ") use this .. else use System
+17:33:10 <dmiles> which leads me to think why you had a "org" rukle
+17:33:14 <cehbab> hhaha!!! yeah that makes sense to ! java.lang.Exception and so on :) you were god for a little bit in your jvm :)
+17:33:56 <dmiles> yeah exactly :) 
+17:36:05 <cehbab> import ViolinStrings.Strings; hahaha :)
+17:37:09 <dmiles> just hhow many times can you have you own mypaackage.util.MyStrings() beffore your start to use others ;P
+17:37:55 <dmiles> i used ViolinStrings.Strings alot since its needed by opencyc
+17:38:29 <dmiles> hrrm whuich i wonder if packed in opencyc.jar
+17:38:38 <cehbab> ;)
+17:38:44 * cehbab is a good debugger ;)
+17:39:00 <dmiles> i am going to (after i get sleep next) get things built for a download for the MUD-DEV list
+17:39:05 <cehbab> cehbab==hrd == human readable debugger
+17:39:29 <dmiles> and announce it.. as a simple tinymud thing that it is
+17:39:30 <cehbab> rapid development will make your developers very happy mr. miles ;)
+17:39:40 <dmiles> then start buffing it out with better CycL
+17:39:40 <cehbab> I would appreciate your extension.
+17:40:18 <dmiles> yeah cool.. it will be nice to get it finally set up others can imporve it 
+17:40:30 <cehbab> you have also solved most dynamic updating of clients with this excercise as well :)... will help soon when you deploy and update ;)
+17:41:15 <dmiles> yeah .. i might do that to a couple other classes.. will be nice since i find that NPC classes may want to be dynamically looaded
+17:42:00 * cehbab plokns a big *geek* ink stamp on dmiles' forehead :)
+17:42:08 <Psion> Ugh.... I just can't figure out how to associate natural language text with my constants.
+17:42:54 <dmiles> nameString 
+17:43:01 <dmiles> is the key for constants
+17:43:26 <dmiles> for example Steve showed you how United States got NL
+17:43:35 <Psion> Hm
+17:43:38 <dmiles> look at the assertion containing that sTing
+17:43:42 <dmiles> err string
+17:43:58 <dmiles> in the cycKb...
+17:44:30 <dmiles> ask: (?P UnitedStatesOfAmerica ?String)
+17:44:31 <CycLBot> ((?P . genStringAssertion) (?STRING . assertion-with-id:30690))
+17:44:31 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "the United States"))
+17:44:32 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "the U.S.A."))
+17:44:32 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "the U.S."))
+17:44:33 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "America"))
+17:44:34 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "the USA"))
+17:44:34 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "the US"))
+17:44:36 <CycLBot> ((?P . countryName-LongForm) (?STRING . "the United States of America"))
+17:44:38 <CycLBot> ((?P . abbreviationString-PN) (?STRING . "USA"))
+17:44:40 <CycLBot> ((?P . abbreviationString-PN) (?STRING . "US"))
+17:44:42 <CycLBot> ((?P . isa) (?STRING . Entity))
+17:44:44 <CycLBot> ((?P . isa) (?STRING . PublicConstant))
+17:44:46 <CycLBot> ((?P . isa) (?STRING . IndustrializedCountry))
+17:44:48 <CycLBot> ((?P . isa) (?STRING . IndependentCountry))
+17:44:50 <CycLBot> ((?P . nameString) (?STRING . "the U.S. of A."))
+17:44:52 <CycLBot> ((?P . nameString) (?STRING . "the US of A"))
+17:44:54 <CycLBot> ((?P . comment) (?STRING . "The United States of America, a large independent country constisting of the territory, population, and infrastructure of the United States, considered as a whole
+17:44:57 <dmiles> oh my.. i though it would not do any chianing
+17:44:57 <CycLBot> i.e., an instance of #$GeopoliticalEntity.  The nation is mostly in the #$ContinentOfNorthAmerica south and west of #$Canada and north of #$Mexico.  It was founded in 1776 by emigrants from Europe."))
+17:45:15 <cehbab> dmiles: I'M GLAD IT DID!., that was NICE!
+17:45:38 <Psion> Well, I put in a nameString thing, but that doesn't change how it's paraphrased.
+17:45:49 <dmiles> in what context MT ?
+17:45:55 <cehbab> ask: (?P Australia ?String)
+17:45:56 <CycLBot> ((?P . comment) (?STRING . "Australia, the country that occupies the #$ContinentOfAustralia (and also #$TasmaniaIslandAustralia) dividing the eastern #$IndianOcean from the southwestern #$PacificOcean
+17:45:57 <CycLBot> In the #$DualistGeopoliticalMt, this constant includes both physical and political aspects of Australia."))
+17:45:57 <CycLBot> ((?P . nameString) (?STRING . "Australia"))
+17:45:58 <CycLBot> ((?P . isa) (?STRING . PublicConstant))
+17:45:58 <CycLBot> ((?P . isa) (?STRING . Entity))
+17:45:59 <CycLBot> ((?P . isa) (?STRING . IndependentCountry))
+17:46:00 <CycLBot> ((?P . isa) (?STRING . IndustrializedCountry))
+17:46:02 <CycLBot> ((?P . abbreviationString-PN) (?STRING . "AUS"))
+17:46:04 <CycLBot> ((?P . abbreviationString-PN) (?STRING . "AU"))
+17:46:04 <Psion> Oh, I guess it must be English, eh?
+17:46:06 <CycLBot> ((?P . sharedNotes) (?STRING . IslandAndContinentNote))
+17:46:08 <CycLBot> ((?P . countryName-LongForm) (?STRING . "the Commonwealth of Australia"))
+17:46:10 <CycLBot> ((?P . countryName-ShortForm) (?STRING . "Australia"))
+17:46:12 <CycLBot> ((?P . genStringAssertion) (?STRING . assertion-with-id:18655))
+17:46:18 <dmiles> i think it needs to be in English*Mt
+17:46:19 <Psion> That did it. Thanks =)
+17:46:42 <cehbab> hahah Australia IslandAndCOntinentNote ;)
+17:47:33 <dmiles> yes that might be something that needs extra support in cyc
+17:47:41 <dmiles> cool though
+17:49:04 <cehbab> dmiles: from daml data, you cant go backwards :(.. from a final entity of data, I cannot find anything in it that referes me back to how I found it :(... it's a one way datamine :(
+17:49:14 <dmiles> Psion: there are issues when genrating NL that sometimes if they are NARTS you have to (argFormat myconst "sdfsdf" NIL)
+17:49:57 <dmiles> yeah .. you mean that the page does not jhave refresh source?
+17:50:18 <cehbab> the page does not have source referer.... no pointers backwards.
+17:50:33 <cehbab> not html source, xml source :)
+17:50:56 <graylensman> dmiles: The Java src that came OpenCyc dowload seems incomplete.  For example, where is org.opencyc.kif...  
+17:50:57 <dmiles> yeah .. i guess that is suppoed to be what the _# is
+17:51:25 <dmiles> meaning they use a package scope that is default 'this'
+17:51:43 <dmiles> and denote by leaving the namepace in front of # blank
+17:51:50 * cehbab has a LOT to learn :)
+17:51:55 <dmiles> so you have to translterate that in from where you got it
+17:52:30 <dmiles> i had a problem when i wrote a prolog daml graber.. i had to prefix the blanks with source.. which sometime was the disk
+17:52:43 <dmiles> (not the real url)
+17:53:21 <dmiles> i understand it would be nice if it was truely self referential
+17:54:12 <dmiles> the ontologies i thought wjhere descriptive and the data only pointed to the ontology it used
+17:54:44 <cehbab> <?xml version='1.0' encoding='ISO-8859-1'?>
+17:54:44 <cehbab> <rdf:RDF
+17:54:44 <cehbab>   xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+17:54:44 <cehbab>   xmlns:NS0='http://www.daml.org/2002/04/geonames/geonames-ont#'
+17:54:44 <cehbab>  >
+17:54:45 <cehbab> <rdf:Description rdf:about=''>
+17:54:47 <cehbab> <rdf:type rdf:resource='http://www.daml.org/2002/04/geonames/featureTypes#AREA'/>
+17:54:49 <cehbab> <NS0:uniqueIdentifier>18652</NS0:uniqueIdentifier>
+17:54:51 <cehbab> <NS0:latitude>51.5333333</NS0:latitude>
+17:54:53 <cehbab> <NS0:longitude>9.2166667</NS0:longitude>
+17:54:55 <cehbab> <NS0:primaryCountry rdf:resource='http://www.daml.org/2001/09/countries/fips#GM'/>
+17:54:57 <cehbab> <NS0:name rdf:resource='http://www.daml.org/cgi-bin/geonames?n22610'/>
+17:54:59 <cehbab> </rdf:Description>
+17:55:03 <cehbab> </rdf:RDF>
+17:55:05 <cehbab> sorry for flood, but that would be an ontology yes ?
+17:55:54 <cehbab> and it points to <?xml version='1.0' encoding='ISO-8859-1'?>
+17:55:54 <cehbab> <rdf:RDF
+17:55:54 <cehbab>   xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+17:55:54 <cehbab>   xmlns:NS0='http://www.daml.org/2002/04/geonames/geonames-ont#'
+17:55:54 <cehbab>  >
+17:55:55 <cehbab> <rdf:Description rdf:about=''>
+17:55:57 <cehbab> <rdf:type rdf:resource='http://www.daml.org/2002/04/geonames/geonames-ont#Name'/>
+17:55:59 <cehbab> <NS0:fullName>Warburger Börde</NS0:fullName>
+17:56:03 <cehbab> <NS0:shortName></NS0:shortName>
+17:56:05 <cehbab> </rdf:Description>
+17:56:07 <cehbab> </rdf:RDF>
+17:56:19 <cehbab> Warburger Borde, but can only get INTO that data, cannot get out again :).. other things point to it though.
+17:56:25 <Psion> Hm, where is the assertion that specifies that (#$isa A B) should be "A is B"?
+17:57:05 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+17:57:22 <cehbab> greonames-ont#, very cool.
+17:58:45 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+17:59:23 <dmiles> subl: (cyc-generate '(#$isa A B))
+17:59:23 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator CYC-GENERATE is not defined in the API")
+17:59:42 <dmiles> subl: (generate-phrase '(#$isa A B))
+17:59:43 <CycLBot> the symbol A is the symbol B
+17:59:48 <dmiles> subl: (generate-phrase '(#$isa #$A #$B))
+17:59:49 <CycLBot> java.lang.NullPointerException
+18:00:15 <cehbab> hahahahaha....
+18:00:17 --- quit: CycLBot (Remote closed the connection)
+18:00:28 <dmiles> that was odd
+18:00:40 <dmiles> i wonder if thats refresh based.. hrrm
+18:00:54 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+18:01:04 <dmiles> subl: (generate-phrase '(#$isa #$A #$B))
+18:01:04 <CycLBot> java.lang.NullPointerException
+18:01:15 <cehbab> ask: (?execute '(#$isa Purple Color)')
+18:01:15 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+18:01:18 * cehbab gueses only.
+18:01:23 <dmiles> subl: (generate-phrase '(#$isa  "B" "A"))
+18:01:24 <CycLBot> B is A
+18:01:36 <dmiles> subl: (generate-phrase '(#$isa  "A" "Collection Of As"))
+18:01:36 <CycLBot> A is Collection Of As
+18:02:06 <dmiles> subl: (generate-phrase '(#$isa #$Purple #$Color))
+18:02:06 <CycLBot> purple is color
+18:02:19 <cehbab> thankyou ;)
+18:02:53 <cehbab> subl: (generate-phrase '(#$isa #$Dog #$Animal))
+18:02:54 <CycLBot> dogs are an animal
+18:03:14 <cehbab> subl: (generate-phrase '(#$isa #$Umbrella #$Thing))
+18:03:15 <CycLBot> umbrella is something
+18:03:20 <cehbab> hahah ;). it's is SO NICE!
+18:03:39 <Psion> OK, and how do I set the rules used by generate-phrase?
+18:03:55 <dmiles> #$genFormat
+18:04:06 <dmiles> for example look at #$isa
+18:04:20 <dmiles> ask (genFormat isa ?S)
+18:04:21 <CycLBot> no answers found
+18:04:36 <dmiles> ask (#$genFormat #$isa ?S)
+18:04:37 <CycLBot> no answers found
+18:04:50 <dmiles> ask (#$argFormat #$isa ?S)
+18:04:51 <CycLBot> no answers found
+18:04:58 <dmiles> its there somewhere :)
+18:05:00 <dmiles> oh!
+18:05:07 <Psion> I don't see anything for isa and genFormat.
+18:05:21 <dmiles> ask (#$argFormat #$isa ?String ?Params)
+18:05:21 <CycLBot> (((?STRING . 1) (?PARAMS . SetTheFormat)) ((?STRING . 2) (?PARAMS . SetTheFormat)))
+18:05:30 <cehbab> subl: (generate-phrase "(#$isa #$Error (generate-phrase '(#$isa #$Xdsaw #$Thing))'))"
+18:05:31 <CycLBot> java.lang.RuntimeException: Invalid expression, sval: null  st: Token[EOF], line 1  tok: -1
+18:05:41 <cehbab> hahah ;).. /me still learning ;)
+18:06:02 <cehbab> subl: (generate-phrase '(#$isa #$Xdsaw #$Thing))
+18:06:03 <CycLBot> xdsaw is something
+18:06:04 <dmiles> ask (#$genFormat #$isa ?String ?Params)
+18:06:04 <CycLBot> no answers found
+18:06:21 <cehbab> everything is something.
+18:07:31 <Psion> dmiles, so,..... what are you saying I should use? =)
+18:07:56 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&11013
+18:08:05 <dmiles> look at that assertion
+18:08:36 <dmiles> also antother example is http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&66856
+18:08:40 <Psion> Ah, looks good.
+18:09:15 <dmiles> but opencyc is moving towards a morte advanced system: 
+18:09:16 <dmiles> (verbSemTrans Possess-TheWord 0 TransitiveNPCompFrame 
+18:09:16 <dmiles>        (possesses :SUBJECT :OBJECT)) in GeneralEnglishMt
+18:09:32 <dmiles> since that works for generation and NL both
+18:09:47 <cehbab> dmiles: cycbot needs a startup script ;).. like an autoexec section in a properties file. svae you typing a bit :P)
+18:09:59 <dmiles> the genFormat is a quick dirty way to get what you want though
+18:10:28 <dmiles> yeha i obnly set him to jin 2 channels
+18:10:45 <dmiles> err jin otherwise he pplugs up the channel logs with join parts
+18:10:53 --- quit: jlatour ()
+18:10:56 <dmiles> as you saw eariler
+18:11:09 <dmiles> in the channel he is set to autojoin
+18:11:36 <dmiles> once i know his life expecancy is greater then 2 minutes.. i put this back on autojoin ;)
+18:11:58 <dmiles> but yeah a beanscript would be cool and usefull
+18:12:15 <cehbab> if you want, cut and paste the method that does it from my bot.. all you need to do is execute the props from the props file one by one in order ;).. or open properties, and loop through startup.(counter) from 1-> till counter doesn't exist ;)
+18:12:31 <cehbab> ahh cool.. he has autojoin.
+18:12:45 <dmiles> cool yeah that would be nice.. well i have it stuck in the code
+18:13:00 <dmiles> he joins #cycbot and logicmoo preently
+18:13:22 <cehbab> you can then say /join #whatever;   /msg #whatever hello peoples ;)
+18:13:33 <dmiles> i took this channel off autojoin cause simetimes i was revompiling him back and forth every few minutes.. like all day
+18:13:41 <cehbab> makes it SO much more annoying ;)
+18:13:59 <cehbab> hence the classloader! again ;)
+18:15:20 <dmiles> yep
+18:18:53 <cehbab> dmiles: I'm beginning to understand hor to infer the knowledge.... with your kif files ;) with iXml.. i'm gunna have a fun day..
+18:19:59 <dmiles> yeah you can see it as a unification and forward propigate the right side of +>/implies
+18:21:34 <cehbab> lots of study :)
+18:21:48 <cehbab> and i've been out of uni for 5 years :)
+18:24:29 <dmiles> you just have to take the laptop or notebook everywhere you go.. 
+18:24:43 <dmiles> like even while making coffee
+18:25:18 <dmiles> obscession is the key
+18:25:34 <cehbab> dmiles: you saw iXml.. I have a head start :)
+18:25:51 <dmiles> definatley a great system for handling daml
+18:26:24 <dmiles> (not just coause the format)
+18:26:37 <cehbab> i can make your bot commands SO much more logical.. this is where I would like to help.. make it EASIER to use the knowlege retriever.
+18:26:46 <dmiles> but you expect xml to be functional
+18:27:05 <dmiles> yes.. the bot cool
+18:27:07 <cehbab> it gives life to daml data as well you are correct.. wow ;)
+18:27:33 <cehbab> wow... *your giving me about 5 years work mr miles ;)*
+18:27:49 <dmiles> if you want to work with the code i can give you CVs access to logicmoo
+18:28:15 <Psion> So I've made some relations in a specific MT, and I want to use genFormat or something like it to control how they are translated to NL. It won't let me assert these in EnglishParaphraseMt, however, apparently because my assertions that these things are predicates are in the other MT. What is the best way for me to do this?
+18:28:18 <cehbab> I have wget -R for read access ;).. I am good at making mirrors ;)
+18:30:41 <cehbab> dmiles: I'll get back to you on my commitment to this.. if I am comitted I'll be asking for cvs access, I see you need a hand... I think your use of cyc is incredible ;).. (if only it were MORE knowlegeable, down to a brick in a house ;))  I'll be talking to a mate in about ten mins, to show him what I have discovered in daml, for a gps mapping project (not a company thing, personal/free only) and have your use of cyc in the background..
+18:31:27 <dmiles> EnglishParaphraseMt handles more The-Word specifc things
+18:31:45 <Psion> OK, so where do I assert these?
+18:31:53 <dmiles> genFormat can be anywhere i think .. dont quote me
+18:31:58 <cehbab> bbl.
+18:32:10 <dmiles> ok see you soon
+18:32:52 <Psion> I have it in the mt where I have the info on my relations, but that doesn't affect the way predicates are paraphrased.
+18:33:18 <dmiles> you can genlMt to a Mt you create as type EnglishLexicalMicrotheory
+18:33:46 <dmiles> as well as a ParaphraseMicrotheory 
+18:34:06 <Psion> How do I genlMt? Assert it in a random mt?
+18:34:37 <dmiles> you must put genlMts in BaseKB
+18:34:42 <Psion> OK
+18:35:12 <dmiles> and your (isa myNewParapthraseMt ParaphraseMicrotheory )
+18:35:23 <dmiles> aslo in baseKB
+18:36:04 <dmiles> the idea is you can keep your langue specific things separet in your myNewParapthraseMt
+18:36:28 <dmiles> and (genlMt  myIdeaMt myNewParapthraseMt) in baseKb
+18:36:54 <dmiles> of course you should create contants for everything etc
+18:37:00 <dmiles> (err need to :)
+18:38:34 <dmiles> aslo assert (genlMt EnglishParaphraseMt myNewParapthraseMt)
+18:38:47 <dmiles> so your language will always be found
+18:39:11 <dmiles> (i asm ussing ComputereseLexicalMt as an example)
+18:39:56 <dmiles> anohter good exmaple is RelationParaphraseMt
+18:40:04 <dmiles> ok i have to run for a bit
+18:40:08 <Psion> Thanks
+18:47:07 <graylensman> echo one
+18:47:08 <CycLBot> one
+18:59:24 <graylensman> can anyone address practical limit of rules, assertions for OpenCyc?  does it "swap or page out" or is entire KB assumed to be memory resident?
+18:59:29 <stevereed_home> graylensman - we do not have an emacs inferior mode for SubL but do commonly operate Cyc from within an emacs shell session.
+18:59:59 <stevereed_home> We use emacs and the Franz Common Lisp software on Linux to develop SubL.
+19:00:33 <graylensman> Assumed as much.. Thanks.  
+19:02:31 <stevereed_home> An option for the future is to perform SubL development from within the Cyc server itself.
+19:02:53 <stevereed_home> So we would need incremental compilation and linking/loading and the other features
+19:03:01 <stevereed_home> that Franz Allegro gives us.
+19:03:18 <stevereed_home> but then you all would have an easier time contributing in SubL.
+19:03:59 <stevereed_home> graylensman - the limit on the 32-bit linux Cyc platform is about 3 million assertions.
+19:04:19 <stevereed_home> there are about 113K assertions in OpenCyc now, and 1.6 million in full cyc.
+19:04:39 <stevereed_home> as releases are done, we will vet and put more of full cyc into OpenCyc.
+19:05:10 <stevereed_home> Doug Lenat announced the goal of releasing all of what is now full cyc within the next two years.
+19:05:30 <stevereed_home> .. except proprietary (someone paid for) knowledge.
+19:09:03 <Psion> What does this error from the web interface mean?
+19:09:03 <Psion> HTML Transfer halted due to script error:
+19:09:03 <Psion> |S#125-S#2369-METHOD| does not have a function value.
+19:17:37 <Psion> Is this a known problem with the "lexify" interface?
+19:23:57 <stevereed_home> if you were using lexify at the time, we have one or more fixes applied since rel 0.6
+19:24:07 <stevereed_home> that will appear in rel 0.7
+19:24:23 <stevereed_home> What did you try so that I can verify any bugs are fixed?
+19:26:43 <Psion> I just clicked on the OK button to begin lexifying something
+19:26:52 <stevereed_home> got it.
+19:52:14 <Psion> How can I unassert all assertions that match a certain form?
+20:51:16 --- quit: bbz (Remote closed the connection)
+21:04:49 <futhin> how can opencyc be applied to OS development _or_ designing an OS? :)
+21:12:32 --- quit: graylensman ("Client Exiting")
+21:23:44 <cehbab> futhin: strangely ;)..
+21:24:30 <cehbab> futhin: you could make a dtd for an os, and let cyc try and run it ;)
+21:50:31 <Psion> What does this mean in the web ask interface? Query halted because : Unexpected halt status NIL
+22:06:12 --- quit: Psion ()
+22:20:01 <futhin> dtd?
+22:22:07 <cehbab> futhin: youd have to define a virual operating system environment first... and then fill it up with instances..
+22:22:20 <cehbab> fill in whatever words are appropriate for your methodology :)
+22:23:01 <cehbab> your namespace :)
+22:24:40 <futhin> i know absolutely _nothing_ about opencyc
+22:25:04 <futhin> well, i lie
+22:25:10 <futhin> i read a few of the questions in the faq
+22:25:27 <cehbab> you know more than me already.. but I found thousands of links to dtd's ;(
+22:25:31 <futhin> (btw, i didn't really think the www.opencyc.org site was very readable)
+22:25:32 <cehbab> SO HUGE!
+22:25:35 <futhin> what is DTD?
+22:25:39 <cehbab> ME NEITHER!
+22:25:47 <cehbab> umm....    document.dtd
+22:25:55 <cehbab> it's what nodes are allowed in an xml file.
+22:26:19 <cehbab> like a schema.  dtd stands for something, cant remember what
+22:26:41 <futhin> ah, who cares about xml? :P
+22:26:54 <futhin> i know nothing about xml yet, yay
+22:27:05 <cehbab> me, it's how the final data is stored. that it all infers from.
+22:27:23 <futhin> do you know about software metrics?
+22:27:44 <cehbab> AHHHHHHGH!.. they sometimes apply ;).. we just get quicker cpus to handle them !:)
+22:28:43 <futhin> ?????
+22:29:12 <futhin> software metrics isn't necessarily something that you execute..
+22:29:17 <cehbab> what about them.
+22:29:21 <futhin> i'm talking about designing an os
+22:29:35 <futhin> and i think using software metrics would be helpful in taking the right path
+22:29:42 <futhin> and as i don't understand opencyc
+22:29:46 <cehbab> well maybe ;).
+22:29:49 <cehbab> explain ?
+22:29:51 <futhin> i asked "how can opencyc help me design an os"
+22:30:02 <futhin> so as to get some explanation of what opencyc _really_ is
+22:30:19 <cehbab> it's an inference engine.
+22:30:27 <cehbab> as far as I can tell.
+22:30:30 <futhin> ok
+22:30:45 <futhin> what the heck do i need to infer in the design of an os? :)
+22:31:40 <cehbab> well, perhaps all underlying data in the os is in cyc, and you can infer how it operates ? looks ? ;)
+22:32:20 <cehbab> is there a window under the mouse that just clicked ?
+22:32:25 <cehbab> window move
+22:32:36 <futhin> heh
+22:32:39 <cehbab> but window isn't defined yet, thats what I meant about defining a dtd for your os.
+22:33:26 <cehbab> I half wrote an os in a prologue style language :).. i'm gunna try and load daml data into it.
+22:33:52 <cehbab> for what purpose I still do not know.
+22:34:18 <futhin> cyc reads from dtd ?
+22:34:46 <cehbab> dunno... data is defined in a dtd-verified xml files
+22:35:02 <cehbab> i know fuck all though about cyc so far, so I could be wrong, I get confused ;)
+22:35:28 <cehbab> Xml is the data.
+22:35:56 <futhin> why the hell can't people write properly..   www.opencyc.org causes my eyes to glaze over..  poorly written technically perfect but not easily absorbable!
+22:36:07 <cehbab> Dtd is another file that is the RULES for the layout of the Xml file, it says person(arms|legs) and so on... then people.xml can contain people with arms and legs and so on ;).
+22:36:52 <cehbab> futhin: my current commercial venture is the same ;).. www.onyaphone.com   <- mine,  but I wrote it so it's illegible like you hate :) I CANT FIND SOMEONE TO REWRITE IT!
+22:39:15 <futhin> here's the one rule you need to know
+22:39:22 <futhin> about good writers
+22:39:39 <futhin> good writers use more nouns and verbs!
+22:39:57 <futhin> poor writers just use a shit load of adjectives, adverbs whatever
+22:40:06 <futhin> lots and lots of nouns and verbs makes for an easier to read content!
+22:40:30 <futhin> get rid of all the stupid adverbs and adjectives and ad whatevers
+22:40:32 <CycLBot> Take what?
+22:40:46 <futhin> Onyaphone is a software system that enables the end-user to access, control and share the resources of a Java-capable machine, from any supported networkable client device in its own format.
+22:40:58 <futhin> ew, that's a long sentence :P
+22:41:27 <cehbab> futhin: I cant write for shit.... it compiles under j++, and for tini and midlets as well now :)
+22:42:08 <futhin> Onyaphone is a remote access application that runs in Java.  :P
+22:42:20 <futhin> (i can't write that well either lol)
+22:42:40 <cehbab> yup with services, and capable of spitting out client content in it's own format... so wap->j2me phone and so on.
+22:43:56 <cehbab> miniture device transocder. very small and fast, and lotsa formats.
+22:46:32 <futhin> Onyaphone is a remote access java application.  It allows the end-user to access, control and share the resources on the host computer.  The application is usable through any supported network devices.
+22:46:55 <cehbab> see I cant even say what it really is!
+22:47:59 <futhin> Onyaphone is a remote access java application.  It allows the end-user to access, control and share the resources on the host computer.  The application can personalize the format it sends to the network devices.
+22:48:10 <futhin> (i'm trying to help you rewrite the first sentence lol)
+22:48:13 <futhin> um
+22:48:17 <futhin> don't know what it is?
+22:48:23 <futhin> make up a new name for it
+22:48:35 <cehbab> futhin: if you read it, and you would like to, I can pay you to rewrite it over the next week :).. 
+22:48:53 <futhin> then define it by making a bullet list of features
+22:49:24 <futhin> heh, i'm interested..  you are trying to make money off of your onyaphone project?
+22:49:29 <cehbab> have registered onyaphone, and xds are the only two fixed names we have, everything else is flexible, I have a user doco I wrote that can be intergtrated as wel, and a 2nd attempt at the site at http://home.ozium1.org:10984/site/
+22:50:00 <futhin> i'll book mark these urls
+22:50:08 <futhin> unfortunately i have to go to bed really soon
+22:50:13 <futhin> have to get up in 5 hours :(
+22:50:21 <futhin> for work heh
+22:50:31 <cehbab> haha ;)... I'll hang around in here for a few days, see if I can understand cyc or not :).
+22:50:39 <futhin> yeah
+22:51:02 <futhin> i didn't understand anything today, all the chatting on here was in a foreign language lol
+22:51:20 <cehbab> haha ;).. you play with CycLBot yet ?
+22:51:35 <futhin> yeah i did, on #mud
+22:51:45 <futhin> (that's how i discovered #opencyc, thru dmiles)
+22:52:05 <futhin> i have a bit of a pet project to code a mud in forth because i'm trying to learn forth
+22:52:31 <futhin> you know what a mud is right? :P
+22:52:45 <cehbab> subl: (generate-phrase '(#$isa #$Purple #$Color))
+22:52:46 <CycLBot> purple is color
+22:52:53 <futhin> look
+22:52:54 <CycLBot> You find yourself in the middle of a well lit corridor on the Enterprise.
+22:52:54 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+22:52:55 <CycLBot> sample eliza yottzumm [north] [East] [South] [west] Guest dmiles
+22:53:17 <cehbab> I do.. for my thesis, I wanted to write a natural language parser to scene graph renderer ;).. for muds to play in 2d or 3d ;)
+22:53:18 <futhin> cehbab: what's your email address?
+22:53:26 <cehbab> craigh@onyaphone.com
+22:53:55 <futhin> ah yeah, a mud that can be played in both 2d and 3d depending on what the user feels like?
+22:54:13 <cehbab> yup.. the hard part is the natural language parser
+22:54:14 <futhin> <-- wondered about a textual & graphical mud..   one person telnets & gets text, the other person has a graphical client
+22:54:52 <cehbab> I believed that if someone wrote that, the parser, then ALL muds get a new life ;).... xbox people could play them like final fantasy and so on ;)
+22:55:02 <cehbab> muds are an awesome invention.
+22:55:10 <futhin> yeah
+22:55:13 <cehbab> moo's now.
+22:55:24 <futhin> i'm curious about making a mud where ALL descriptions are dynamically generated
+22:55:33 <futhin> object description, person's description, room descriptions
+22:55:57 <cehbab> all you need is a mud world generator.. if it's totally generated, then it can never sync players.
+22:56:06 <futhin> like.. a room description could be generated from the landmarks in the area, the type of land, the time of the day, the weather, the people in the area, the objects the person is wearing (flashlight or something else)
+22:56:32 <cehbab> dmiles is generating his mud world from cyc's real world knowlege :). he is so smart!
+22:56:40 <cehbab> thats what sparked me.. ;)
+22:57:42 <cehbab> I am firstly wanting to extract all lat and longitude data from cyc, and use this for map generation from a gps ;) and it seems dmiles has done a lot of work in this area, of extracting geographical data through cyc.
+22:58:01 <futhin> ah cool
+22:58:09 <futhin> yeah
+22:58:13 <futhin> i'm still learning about opencyc
+22:58:20 <futhin> need to figure out how to use it heh
+22:58:29 <cehbab> me too.. heaps :)
+22:58:37 <futhin> but from what dmiles told me it sounds usable in cool ways
+22:59:38 <futhin> ok, i'm going to sleep
+22:59:43 <futhin> so good night
+23:00:05 <futhin> i will talk to you tomorrow or some time later in the week
+23:07:15 --- quit: futhin (Success)
+23:14:13 <cehbab> what language do you speak to CycLBot ?
+23:14:24 <cehbab> is it related to OIL ?
+23:29:10 --- quit: cehbab ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.06.09

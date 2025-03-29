@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   TextProcessing.xsd
+
+   To generate code internally at Cyorp, use something like:
+     pushd  ~/src/head/cycorp/cyc/java/library/xml/textProcessing/resource/xml
+     xjc -d ~/src/head/cycorp/cyc/java/library/xml/textProcessing/generated TextProcessing.xsd -extension -b customization.xml
+     popd
+-->
+
+<xsd:schema           
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2004/10/XMLSchema-instance"
+            targetNamespace="http://cure.cyc.com:8080/xsd/TextProcessing"
+            xmlns:tns="http://cure.cyc.com:8080/xsd/TextProcessing"
+            xmlns:concepts="http://cure.cyc.com:8080/xsd/CycConcepts"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+            elementFormDefault="qualified">
+
+ 	<xsd:import schemaLocation="http://www.w3.org/2001/03/xml.xsd" namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xsd:import namespace="http://cure.cyc.com:8080/xsd/CycConcepts"
+                schemaLocation="http://cure.cyc.com:8080/xsd/CycConcepts.xsd"/>
+  
+  <xsd:annotation>
+    <xsd:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.cyc.xml.textprocessing"/>
+      </jaxb:schemaBindings>
+    </xsd:appinfo>
+  </xsd:annotation>
+    <xsd:complexType name="Document">
+      <xsd:choice>
+        <xsd:element name="error" type="tns:Error"/>
+        <xsd:sequence>
+          <xsd:element name="meta"   type="tns:Meta"/>
+          <xsd:element name="tagset" type="tns:TagSet"/>
+        </xsd:sequence>
+      </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="Meta">
+        <xsd:sequence>
+            <xsd:element name="title" type="xsd:string"/>
+            <xsd:element name="uri"   type="xsd:anyURI"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TagSet">
+        <xsd:sequence>
+            <xsd:element name="element" type="tns:Element" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Element">
+        <xsd:sequence>
+            <xsd:element name="source"            type="tns:Source"/>
+            <xsd:element name="referencesElement" type="tns:ElementReference" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="sense"             type="tns:Sense"            minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id"               type="xsd:ID"     use="optional"/>
+        <xsd:attribute name="childElementRefs" type="xsd:IDREFS" use="optional"/>
+    </xsd:complexType>
+    <xsd:complexType name="Sense">
+        <xsd:sequence>
+            <xsd:element name="userAssignedWeight" type="tns:UserAssignedWeight" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="concept"            type="concepts:Concept"/>
+        </xsd:sequence>
+        <xsd:attribute name="weight" type="xsd:double" use="optional"/>
+    </xsd:complexType>
+    <xsd:complexType name="UserAssignedWeight">
+        <xsd:attribute name="weight"    type="xsd:double"/>
+        <xsd:attribute name="user"      type="xsd:string"/>
+        <xsd:attribute name="timeStamp" type="xsd:dateTime"/>
+    </xsd:complexType>
+    <xsd:complexType name="Source">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="start" type="xsd:nonNegativeInteger"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="ElementReference">
+      <xsd:attribute name="ref" type="xsd:IDREF"/>
+  </xsd:complexType>
+  <xsd:complexType name="Error">
+    <xsd:sequence>
+      <xsd:element name="message" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute ref="xml:lang"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="details" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute ref="xml:lang"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="document" type="tns:Document"/>
+</xsd:schema>

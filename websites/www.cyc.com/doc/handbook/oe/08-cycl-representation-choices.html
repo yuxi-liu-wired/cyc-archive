@@ -1,0 +1,1306 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 8. 
+CycL Representation Choices
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 8. 
+CycL Representation Choices
+</h2>
+    <p></p>
+    <b>8.1.  <a HREF='#137143680'>
+Davidsonian Representations</a></b>
+    <br>
+    <font size='-1'>8.1.1.  <a HREF='#137151936'>
+The basic idea</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.2.  <a HREF='#137205392'>
+Events and roles</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.3.  <a HREF='#137257968'>
+Event ontology</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.4.  <a HREF='#137314880'>
+Subevents</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.5.  <a HREF='#137332576'>
+Situations</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.6.  <a HREF='#137368464'>
+The ActorSlot hierarchy</a>
+      <br>
+    </font>
+    <font size='-1'>8.1.7.  <a HREF='#137414968'>
+Temporal properties of events in the Davidsonian representation
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>8.2.  <a HREF='#137466304'>
+Rule Direction and When to Use Forward Rules</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <p></p>
+    <b>8.3.  <a HREF='#137565416'>
+SubcollectionFn</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <p></p>
+    <b>8.4.  <a HREF='#137570696'>
+Avoiding Higher Arity Predicates
+</a></b>
+    <br>
+    <font size='-1'>8.4.1.  <a HREF='#137572008'>
+Higher arity predicates run a higher risk of minimal re-usability. </a>
+      <br>
+    </font>
+    <font size='-1'>8.4.2.  <a HREF='#137587736'>
+A higher-arity predicate should not be a "conjunction" of other predicates. </a>
+      <br>
+    </font>
+    <font size='-1'>8.4.3.  <a HREF='#137614992'>
+GAFs are better than rules -- but not at all costs!</a>
+      <br>
+    </font>
+    <font size='-1'>8.4.4.  <a HREF='#137648184'>
+NL motivations for higher arity predicates do not necessarily align with OE
+motivations.</a>
+      <br>
+    </font>
+    <font size='-1'>8.4.5.  <a HREF='#137656264'>
+If the arguments of a predicate implicitly constrain each other, then the 
+arity is too high.</a>
+      <br>
+    </font>
+    <p></p>
+    <b>8.5.  <a HREF='#137731080'>KE Facilitation</a></b>
+    <br>
+    <font size='-1'>8.5.1.  <a HREF='#137745344'>
+Basic Vocabulary and Background</a>
+      <br>
+    </font>
+    <font size='-1'>8.5.2.  <a HREF='#137766976'>
+KE Facilitation Rules</a>
+      <br>
+    </font>
+    <font size='-1'>8.5.3.  <a HREF='#137796520'>
+KE Facilitation Rule Macros</a>
+      <br>
+    </font>
+    <font size='-1'>8.5.4.  <a HREF='#137820416'>
+Known Limitations</a>
+      <br>
+    </font>
+    <font size='-1'>8.5.5.  <a HREF='#137836104'>
+Philosophical Issues</a>
+      <br>
+    </font>
+    <font size='-1'>8.5.6.  <a HREF='#137849440'>
+Authoring KE Facilitation Assertions</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 8. 
+    
+CycL Representation Choices
+</h1>
+    <h2>8.1.  <a NAME='137143680'>
+Davidsonian Representations</a>
+    </h2>
+    <h3>8.1.1.  <a NAME='137151936'>
+The basic idea</a>
+    </h3>
+    <p>
+Suppose you know that</p>
+    <p>
+(J) Jill bakes a cake for Joe's birthday in her kitchen using her new
+  convection oven.
+</p>
+    <p>
+Then, it seems, you would thereby know each of the following facts:</p>
+    <li>Jill bakes a cake in her kitchen.</li>
+    <li>Jill bakes a cake with her new convection oven.</li>
+    <li>Jill bakes a cake for Joe's birthday.</li>
+    <li>Jill bakes a cake.</li>
+    <p>
+So far, there is no surprise. But there are a couple of things worth noticing here:
+</p>
+    <blockquote>
+      <ul>
+        <li>
+          <p>
+First, although (J) entails each of the 4 statements above, the
+  conjunction of 1. through 4. (or any other partial combination of
+  conjunctions of them) does not entail (J). For it is possible that
+  Jill baked a cake for her own enjoyment in her kitchen, and that Jill
+  baked another cake for Joe's birthday in the pastry shop where she works,
+  and Jill baked yet another cake for Sue's birthday in her oven, and so
+  forth. If all this were the case then each of 1. through 4. would be
+  true, but (J) would not.</p>
+          <p>
+  What is missing from the conjunction '1 and 2 and 3 and 4'? What else
+  would have to be the case for (J) to be entailed? The natural response
+  is: it would have to be the case that 1, 2, 3 and 4 are all true because
+  of the same occurrence of baking -- rather than because of the
+  multiple, distinct baking "episodes" described in the counterexample.</p>
+        </li>
+        <li>
+          <p>
+Second, if we represent (J) in a formal language (CycL, or first
+  order logic) we should be able to capture the correct entailment
+  relation. But the fact that (J) entails each of the 4 shorter statements
+  seems difficult to explain if we interpret bakes in (J) as a
+  predicate, which is traditionally how verb phrases are formalized in
+  these languages. In (J), we would have to represent bakes as a
+  5-place predicate relating, resp., Jill (1), the cake (2), Joe's birthday
+  (3), her kitchen (4) and the oven (5). But in the sentence Jill
+    bakes a cake in her kitchen the predicate has only 3 places.
+  Furthermore, the relation expressed by the predicate in the latter
+  sentence -- i.e., the relation between an agent, the thing baked, and
+  the place in which baking takes place -- is not the relation expressed
+  by the predicate in Jill bakes a cake with her new convection
+    oven, which is between an agent, the thing baked and the device used
+  in the baking.</p>
+        </li>
+      </ul>
+    </blockquote>
+    <p>
+Both of these points were raised by the philosopher Donald Davidson in a
+famous paper called 'The logical form of action sentences', in which he
+sought to clarify the proper way to interpret, i.e., to represent formally,
+sentences such as (J). Davidson argued that such sentences should be
+interpreted as implicitly referring to a particular event,
+characterized by the verb used. According to the Davidsonian
+interpretation, therefore, the correct meaning of (J) would be expressed
+more explicitly by a statement like
+</p>
+    <p>
+(J*) There is a particular baking event in which Jill baked a cake for
+  Joe's birthday in her kitchen using her convection oven,
+</p>
+    <p>
+Notice that if this is in fact the meaning of (J), then not only does (J)
+entail the conjunction of 1 through 4 as stated above, but it also entails
+that there is one and the same baking to which 1 through 4 apply.
+</p>
+    <p>
+We call (J*) the Davidsonian representation of (J) (more
+precisely, of the logical form of (J)). The characteristic of Davidsonian
+representation is that we regard action sentences as implicit existential
+assertions about event particulars.</p>
+    <h3>8.1.2.  <a NAME='137205392'>
+Events and roles</a>
+    </h3>
+    <p>
+As of this writing (August 2001), we represent actions and events in CycL
+by using Davidsonian representations. In order to formalize something like
+(J*) we analyze it as including 2 basic components: 
+<blockquote>
+        <ol>
+          <li>
+the assertion that there exists a particular event of a given type</li>
+          <li>
+the
+roles that other individual things play in that event</li>
+          <li>
+and of
+course, the fillers of those roles.</li>
+        </ol>
+      </blockquote>
+
+For instance, in the event
+supposedly described by (J) Jill fills an agentive role -- she causally
+initiates and controls the baking -- while the cake is the object
+resulting from the baking, and fills an ''outputs'' role. The overall result
+of this sort of analysis in the given example would be, in ''semi-formal''
+terms:
+</p>
+
+There exists an X such that
+  <blockquote>
+      <ul>
+        <li>X is a baking event</li>
+        <li>the active agent of X is Jill</li>
+        <li>the object produced in X is a cake</li>
+        <li>the purpose of X is Joe's birthday</li>
+        <li>the place where X occurs is Jill's kitchen</li>
+        <li>the device used in X is Jill's convection oven.</li>
+      </ul>
+    </blockquote>
+    <p>
+In CycL, the type of a particular event is represented by a particular
+collection. The collection <em><tt>Event</tt></em> includes all events; therefore a
+certain type of event will be a specialization of <em><tt>Event</tt></em> -- in
+this particular example, we would use <em><tt>#$BakingFood</tt></em>.
+</p>
+    <p>
+Roles are expressed in CycL by instances of <em><tt>BinaryRolePredicate</tt></em>,
+and in particular by instances of <em><tt>ActorSlot</tt></em>, a spec of
+<em><tt>BinaryRolePredicate</tt></em>. Thus a partial representation of the
+occurrence of Jill's baking in Cyc might look like this:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(thereExists ?EVENT
+      (and
+       (isa ?EVENT BakingFood)
+       (performedBy ?EVENT Jill)
+       (outputsCreated ?EVENT Cake023
+       (eventOccursAt ?EVENT Kitchen023)))
+</pre></tt>
+    </font>
+<p>
+Davidsonian representations are indefinitely extensible, in that one can
+always add a clause to a conjunction of this form. If the baking, e.g., had
+actually been performed by Jill and David jointly, you would simply extend
+the conjunction with the clause <em><tt>
+(performedBy ?EVENT David)</tt></em>.
+</p>
+    <h3>8.1.3.  <a NAME='137257968'>
+Event ontology</a>
+    </h3>
+    <p>
+Clearly a natural question in a Davidsonian representation framework is:
+exactly what sort of things are events? More precisely, what is
+characteristic of Davidsonian representation is that it posits the
+existence of event particulars. We think of them as, primarily,
+specific occurrences of a particular type of occurrence.
+</p>
+    <p>
+To bring out the implicit contrast between event particulars and event
+types, consider an example. In ordinary discourse, we might have an exchange
+such as the following:
+</p>
+    <p>You: I got a speeding ticket yesterday on I-35.
+</p>
+    <p>I: The same thing happened to me a month ago.</p>
+    <p>
+In Davidsonian style, your utterance would be interpreted as referring
+(implicitly) to a certain ticketing-someone which occurred yesterday, at
+your expense, on that route. But when I utter the words 'the same thing'
+clearly I'm not referring to that: I couldn't be saying that the
+same occurrence of ticketing happened to me, since I'm placing that
+occurrence at a completely different time. What I'm actually saying must be
+something like: the same type of thing happened to me.
+</p>
+    <p>
+So in this discourse, my words are not about the event particular you are
+describing, but about the event type which that particular occurrence
+instantiates. As this example suggests, we think of an event particular as
+something that has a specific location in space-time: something that occurs
+at or over the course of a particular time (or rather time interval), and
+at a particular place or set of places.
+</p>
+    <p>
+An event in this sense (an event particular, that is) need not be a fully
+connected whole, either spatially or temporally (cf.
+<em><tt>#$temporallyContinuous</tt></em>: my writing this particular letter, e.g.,
+could take place in several locations (some at my desk, some on a bus, and
+so on), and at discontinous chunks of time.
+</p>
+    <p>
+The <em><tt>Event</tt></em> hierarchy is quite rich in the Cyc KB. Among the salient types
+of events are:</p>
+    <blockquote>
+      <ul>
+        <li>Actions, cf. <em><tt>#$Action</tt></em>: events that are done by an agent (not
+  necessarily an intelligent agent); the spec <em><tt>#$PurposefulAction</tt></em>
+  covers in which the agentive role is filled by intentional agents.</li>
+        <li>Physical events, in which physical objects are involved; these are a
+  spec of <em><tt>#$Event-Localized</tt></em>, the collection of occurrences that take
+  place within specified space locations. Related to this (though not
+  included) are the families <em><tt>#$CreationOrDestructionEvent</tt></em> and
+  <em><tt>#$IntrinsicStateChangeEvent</tt></em>: the former includes types of events
+  in which something fills the roles <em><tt>#$inputs</tt></em> or <em><tt>#$outputs</tt></em>,
+  the latter those in which some change in the state of an object is
+  effected.
+</li>
+        <li>Events in which something is transferred, cf.
+  <em><tt>#$GeneralizedTransfer</tt></em>: these include, among others, physical
+  transfers, such as <em><tt>#$MovementEvent</tt></em>, and transfers of information,
+  for which cf. <em><tt>#$InformationTransferEvent</tt></em>.</li>
+      </ul>
+    </blockquote>
+    <h3>8.1.4.  <a NAME='137314880'>
+Subevents</a>
+    </h3>
+    <p>
+Temporal parts of events -- for which cf. the relation <em><tt>#$subEvents</tt></em>
+-- are also events. Note that a subevent need not be a proper temporal
+part of the event itself: in a orchestral performance, e.g., the first
+violinist's actions are a subevent of the whole performance, but begin and
+end at the same times as the performance itself.
+</p>
+    <p>
+Since any temporal part of an event (up to granularity considerations:
+i.e., any part longer than a certain time granule) is itself an event,
+<em><tt>#$Event</tt></em> is an instance of <em><tt>#$TemporalStuffType</tt></em>. However, many
+specs of the collection <em><tt>#$Event</tt></em>, i.e. many types of events, are not
+temporally stuff-like. For instance, baking a cake is not temporally
+stuff-like, since many temporal segments of a cake-baking event cannot be
+described as events in which a cake is baked. For a more fine-grained
+classification along these lines, compare <em><tt>#$AccomplishmentType</tt></em> and
+<em><tt>#$CumulativeEventType</tt></em>. 
+</p>
+    <h3>8.1.5.  <a NAME='137332576'>
+Situations</a>
+    </h3>
+    <p>
+Events in Cyc are a kind of situations: more precisely, the
+collection <em><tt>#$Event</tt></em> is a spec of the collection
+<em><tt>#$Situation-Temporal</tt></em>. Generally, the distinction between situations
+and events is that the latter sort of occurrences involve change,
+while situations can simply be conceived as states of affairs. Thus my
+writing this paragraph corresponds to (or coincides with, or brings about)
+a modification in the state of things, in that after it there exists a
+paragraph in (let's hope) English which didn't exist before my writing.
+</p>
+    <p>
+On the other hand, my sitting in a certain room on a certain chair for a
+number of hours while I write this document does not purport of change:
+it's a condition or state of things that endures unchanged through time.
+That is a situation -- actually an instance of <em><tt>#$Situation-Temporal</tt></em>
+since it has a specified duration or existence through time.
+<em><tt>#$Situation</tt></em>, which is more general, also includes the collection
+<em><tt>#$StaticSituation</tt></em> which is disjoint from <em><tt>#$Event</tt></em>, and certain
+abstract types of situations: for instance, the collections <em><tt>#$List</tt></em>
+and <em><tt>#$RelationalStructure</tt></em>, both specs of
+<em><tt>#$MathematicalObject</tt></em>, are specs of <em><tt>#$Situation</tt></em>, although not
+of <em><tt>#$Situation-Temporal</tt></em>.
+</p>
+    <p>
+A cautionary note: at least by design, situations and events are
+ontologically very similar in Cyc. Both are represented in the Davidsonian
+framework: we posit the existence of events and situations as
+spatio-temporal particulars. However, often a situation (especially
+''static'' ones) is more naturally described not by specifying roles and
+fillers like in the Davidsonian schema, but by indicating what holds
+  true in the situation (usually with an <em><tt>#$holdsIn</tt></em> clause). While
+this is relatively common practice at the moment, I believe that the
+resulting notion of situation is not the same as the Davidsonian
+one. (Some of these issues are the object of ''experimental'' OE work.)
+</p>
+    <h3>8.1.6.  <a NAME='137368464'>
+The ActorSlot hierarchy</a>
+    </h3>
+    <p>
+      <em><tt>#$ActorSlot</tt></em> is a collection of binary predicates, each instance of
+which is a specialization of the predicate <em><tt>#$actors</tt></em>. Here, and in
+common Cyclish parlance, instances of this collection are referred to just
+as 'actor slots'. Actor slots are by far the most common way to represent
+roles in Davidsonian descriptions of events and action; each of these
+predicates associates a role with the individual object that fills that
+role in the given event.
+</p>
+    <p>
+Every instance of actor slots satisfies these conditions:</p>
+    <blockquote>
+      <ol>
+        <li>it is a binary predicate
+</li>
+        <li>it has <em><tt>#$actors</tt></em> as a #$genlPreds
+</li>
+        <li>the first argument is an instance of <em><tt>#$Event</tt></em>
+        </li>
+        <li>the second argument is an instance of <em><tt>#$SomethingExisting</tt></em>
+        </li>
+      </ol>
+    </blockquote>
+    <p>
+The 3rd and 4th conditions actually are logical consequences of the 2nd.
+</p>
+    <p>
+What exactly counts as an ''actor'' in Cyc? Basically any existing object or
+individual that plays a relevant causal role in a particular event. An
+individual need not have an active or agentive role to be an actor: see,
+e.g., <em><tt>#$patient-Generic</tt></em> or <em><tt>#$objectActedOn</tt></em>. Furthermore,
+something can fill an actor slot with respect to a particular event without
+being directly involved in the event: for instance, you may fill the
+<em><tt>#$maleficiary</tt></em> role of a <em><tt>#$Fraud</tt></em> event though being completely
+unaware of what is going on (note: the 'maleficiary' in Cyc is the actor
+harmed, not the actor causing harm).
+</p>
+    <p>
+Notice that <em><tt>#$actors</tt></em> is a specialization of
+<em><tt>#$temporallyIntersects</tt></em>: it is a necessary condition for a thing A to
+be an actor in an event E that A's duration (the time throughout which A
+exists) and E's duration (the time throughout which A occurs) have some
+common segment -- they must have some time interval in common. But having
+shared temporal extent is not a sufficient condition for being
+an actor in our sense.
+</p>
+    <p>
+A major distinction within the <em><tt>#$ActorSlot</tt></em> hierarchy is that
+between <em><tt>#$preActors</tt></em> and <em><tt>#$postActors</tt></em>: predicates relating an
+event to an actor that pre-exists the event itself are specializations of
+<em><tt>#$preActors</tt></em>. Conversely, predicates corresponding to roles filled by
+actors that in normal condition continue to exist after the event are
+specializations of <em><tt>#$postActors</tt></em>.
+</p>
+    <h3>8.1.7.  <a NAME='137414968'>
+Temporal properties of events in the Davidsonian representation
+</a>
+    </h3>
+    <p>
+The representation of events and action is inextricably linked to the
+representation of time. In the most general ontological terms, events
+correspond to the occurrence of change. We noted that Davidsonian events
+and situations are inherently temporal objects: they occur at times, and
+they generally have duration (presumably an event could be instantaneous,
+i.e., have zero duration, but it would still occur at a time
+point).
+</p>
+    <p>
+Moreover, event and action types are typically used in Cyc as the
+denotation of verbs and verb phrases, and those expressions have
+<em><tt>tense</tt></em>, which is used to express temporal relations. In the
+Davidsonian representation framework, all this is done by explicitly
+describing the temporal properties and relation of events. Suppose, e.g.,
+that #$Bake001 is the event in which Jill bakes Joe's birthday cake; here are
+a few things we might assert about the temporal properties of this event in
+the style of Davidsonian representation:
+</p>
+    <blockquote>
+      <ul>
+        <li>
+          <p>Bake001 occurs on Feb. 20:</p>
+          <font color='#339900'>
+            <tt><pre>
+                <em><tt>   (dateOfEvent Bake001 Feb20)</tt></em>
+              </pre></tt>
+          </font>
+          <p>which implies that this particular baking event is entirely subsumed
+  <em><tt>(#$temporallySubsumes)</tt></em> by the day of Feb. 20.</p>
+        </li>
+        <li>
+          <p>Bake001 occurs right before Joe's birthday party:</p>
+          <font color='#339900'>
+            <tt><pre>
+    (thereExists ?PAR
+          (and
+           (isa ?PAR BirthdayParty)
+           (eventHonors ?PAR Joe)
+           (contiguousAfter ?PAR Bake001)))
+</pre></tt>
+          </font>
+</li>
+<li>
+          <p>This specifies that the party begins right after the end of the
+  baking. But this might be too strict: we may want to state just that the
+  party begins sometime after the baking, without being specific about when
+  the earlier one ends and the other begins. In this case we would use</p>
+          <font color='#339900'>
+            <tt><pre>
+    (startsAfterStartingOf ?PAR Bake001)
+</pre></tt>
+          </font>  
+<p>in place of the last clause in the previous formula.</p>
+        </li>
+        <li>
+          <p>Jill began the baking by mixing various ingredients: in terms of our
+  representation, this amounts to saying that the overall baking event
+  temporally included an initial mixing subevent:</p>
+          <font color='#339900'>
+            <tt><pre>
+    (thereExists ?MIX
+          (and
+           (isa ?MIX Mixing)
+           (firstSubEvents Bake001 ?MIX)))
+</pre></tt>
+          </font>
+</li>
+</ul>
+    </blockquote>
+
+<p>
+The predicates used in these examples are all instances of
+<em><tt>#$TemporalRelation</tt></em>: in particular, predicates in the spec
+<em><tt>#$ComplexTemporalRelation</tt></em> can be used to relate temporal things
+that, like Davidsonian particulars, have temporal extent.
+</p>
+    <h2>8.2.  <a NAME='137466304'>
+Rule Direction and When to Use Forward Rules</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <h2>8.3.  <a NAME='137565416'>
+SubcollectionFn</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <h2>8.4.  <a NAME='137570696'>
+Avoiding Higher Arity Predicates
+</a>
+    </h2>
+    <p>
+Sometimes a Cyclist will try to pack too much information into a single predicate,
+resulting in the creation of a relation with unnecessarily high arity.  It should be
+understood, however, that there is nothing intrinsically wrong with high-arity 
+predicates -- a CycL predicate of, say, arity 5, is a welcome addition to the 
+KB under all the same conditions that a predicate of arity 2 is welcome 
+(see the Chapter entitled "The Syntax of CycL").  One important
+general principle to follow when designing any predicate -- high arity or low -- 
+is that the arity one gives it is the arity that the predicate needs.  What follows 
+are some principles to help the Cyclist determine whether a given higher arity 
+predicate really does need the arity that has been assigned to it.  In some cases, 
+this will mean that the predicate simply needs to have its arity reduced; in others, 
+this will mean that the predicate is just poorly motivated.</p>
+    <p>
+Examples have been provided to help make this distinction clearer.  For purposes of this
+discussion, a "higher arity" predicate is any predicate with an arity of at least 3.</p>
+    <h3>8.4.1.  <a NAME='137572008'>
+Higher arity predicates run a higher risk of minimal re-usability. </a>
+    </h3>
+    <p>A Cyclist 
+should always take special care to consider how the arity of a proposed predicate 
+will affect its re-usability.  Take for instance the following ternary predicate, 
+actually created by a test cyclist (a "SME") during an experiment.  Let's call this 
+predicate "#$occurInSequence":
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (occurInSequence EventType001 EventType002 EventType003)</pre></tt>
+    </font>
+
+<p>
+This says that events of type #$EventType001 always precede events of type 
+#$EventType002, which always precede events of type #$EventType003.  Clearly, 
+such a predicate is useful for relating exactly three types of events.  However, 
+it is absolutely useless for expressing the temporal relations between two 
+types of events.  Moreover, in order to express temporal relations between, say, 
+four types of events, it must be used in such a way so as to express some
+information redundantly, e.g.,
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (and
+          (occurInSequence EventType001 EventType002 EventType003)
+          (occurInSequence EventType002 EventType003 EventType004))</pre></tt>
+    </font>
+
+<p>
+says that events of type #$EventType001 always precede events of type 
+#$EventType002, which always happen before events of type #$EventType003, 
+which follow events of type #$EventType002, but precede events of type #$EventType004.  
+One could correct this by making #$occurInSequence a variable arity predicate, but then 
+one would need to explicitly assert the temporal relationship between, 
+e.g., #$EventType001 and &lt;EventTypeN> anytime one wanted to assert the
+relationship between &lt;EventTypeN> and any other type of event.  The correct solution 
+is to simply use a binary predicate, by which we can explicitly represent the 
+temporal relationship between any two types of events, and infer relationships 
+where they are not explicitly stated.</p>
+    <h3>8.4.2.  <a NAME='137587736'>
+A higher-arity predicate should not be a "conjunction" of other predicates. </a>
+    </h3>
+    <p>New Cyclists sometimes feel as though they should be as terse as possible 
+when composing CycL assertions, and this feeling sometimes motivates the Cyclist 
+to create predicates that artificially combine two or more 
+(already existing or possible) predicates.  For example, one might create a
+predicate #$doneByAtRate,</p>
+    <font color='#339900'>
+      <tt><pre>
+        (doneByAtRate &lt;EVENT> &lt;ACTOR> &lt;RATE>)</pre></tt>
+    </font>
+
+<p>
+to say that an event was done by someone or something at a certain rate.  But 
+a sentence of this form is clearly just a conjunction:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (and
+          (doneBy &lt;EVENT> &lt;ACTOR>)
+          (eventRate &lt;EVENT> &lt;RATE>))</pre></tt>
+    </font>
+
+<p>
+Thus doneByAtRate is utterly redundant with existing vocabulary -- it does not
+ contribute anything over and above the contributions made by #$doneBy and 
+#$eventRate -- and thus has no place in the KB.   By "utterly redundant" I mean 
+that it makes no contribution over and above the contributions
+that #$doneBy and #$rateOfEvent make.  Plenty of predicates in the KB are 
+redundant -- </p>
+    <font color='#339900'>
+      <tt><pre>
+   (genls :ARG1 :ARG2)</pre></tt>
+    </font> <p>
+is redundant with
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (relationAllInstance isa :ARG1 :ARG2)</pre></tt>
+    </font> 
+
+<p>
+-- but most of those are useful in their own right (e.g., #$genls allows for rapid 
+inheritance reasoning), and so are not considered "utterly redundant".</p>
+    <p>
+It is important to realize that even if we did not already have #$doneBy and 
+#$eventRate, #$doneByAtRate would still be a bad predicate.   If a predicate is a
+mere conjunction of two or more (good) predicates -- even of two or more 
+predicates that do not yet exist -- it should be replaced by those predicates.</p>
+    <h3>8.4.3.  <a NAME='137614992'>
+GAFs are better than rules -- but not at all costs!</a>
+    </h3>
+    <p>Oftentimes, a predicate of
+unnecessarily high arity results from a Cyclist's desire to create vocabulary 
+that will enable him or her to assert a GAF instead of a rule.  Let's say that 
+the creator of #$doneByAtRate wants to be able to say that every event of a certain 
+type, when done by any instance of a given type, has a certain rate.  Thus he 
+creates a new predicate, #$rateOfTypeDoneByType, which allows him to assert the GAF,
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (rateOfTypeDoneByType BuildingADam Beaver 
+           (LowAmountFn EventRate))</pre></tt>
+    </font>
+
+<p>
+in lieu of the following rule:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+            (and
+               (isa ?X Beaver)
+               (isa ?Y BuildingADam)
+               (doneBy ?Y ?X))
+           (eventRate ?Y 
+               (LowAmountFn EventRate))</pre></tt>
+    </font>
+
+<p>
+Given that #$rateOfTypeDoneByType allows us to construct GAFs where rules are 
+otherwise needed, AND given that this predicate it is not merely a conjunction of 
+other predicates (in the way that #$doneByAtRate was), what's wrong with 
+#$rateOfTypeDoneByType?  The problem is that this predicate is simply a type-level 
+"macro" for certain quantified assertions expressible with #$doneByAtRate, where 
+#$doneByAtRate is not a well-motivated predicate.  Some "type-level"
+predicates are useful and interesting in their own right, in that they are not 
+definable in terms of an "individual-level" predicate plus quantification 
+(see, for example #$needsType).  Other "type-level" predicates -- 
+#$subEventTypes and #$partTypes, for example -- are simply macros:  They allow us to 
+make assertions in GAF form that otherwise we would make using a particular 
+"individual-level" predicate and quantifiers.  Thus </p>
+    <font color='#339900'>
+      <tt><pre>
+   (subEventTypes TYPE1 TYPE2)</pre></tt>
+    </font>
+
+<p>
+simply means</p>
+    <font color='#339900'>
+      <tt><pre>
+   (relationAllExists subEvents TYPE1 TYPE2)</pre></tt>
+    </font>
+
+<p>
+and nothing more.  Predicates such as #$subEventTypes are only as ontologically 
+motivated as the "individual-level" predicates from which they derive their meaning.  
+So if, for example, #$subEvents had turned out to be a bad predicate, #$subEventTypes 
+would be a bad predicate, too.  In the current example, #$rateOfTypeDoneByType 
+bears the same sort of relationship to #$doneByAtRate that #$subEventTypes bears 
+to #$subEvents: Since #$doneByAtRate is a bad predicate, so is #$rateOfTypeDoneByType. </p>
+    <p>
+However, if we hadn't already introduced and discussed #$doneByAtRate, the problem with
+#$rateOfTypeDoneByType would not be so easy to see.  So, in order to catch this sort of
+problem, one should, as a general rule of thumb, consider a possible expansion for 
+one's higher arity predicates.  If one can expand the predicate into existing 
+vocabulary, one should then ask if the predicates used in the expansion 
+(other than those used to establish the quantification implicit in the 
+predicate's meaning, such as #$isa, #$genls, or #$thereExists) could be replaced 
+with a new predicate -- of the same arity as the predicate in question --
+that combines them.  If so, then the predicate in question is probably not 
+well motivated.</p>
+    <p>
+Keeping with the current example, the expansion for #$rateOfTypeDoneByType would be,</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+           (and
+              (isa ?X :ARG1)
+              (isa ?Y :ARG2)
+              (doneBy ?Y ?X))
+           (rateOfEvent ?Y :ARG3))</pre></tt>
+    </font>
+
+<p>
+The predicates #$doneBy and #$rateOfEvent can be combined thusly:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+           (and
+              (isa ?X :ARG1)
+              (isa ?Y :ARG2))
+           (&lt;combinedPred> ?Y ?X :ARG3))</pre></tt>
+    </font>
+
+<p>
+and so #$rateOfTypeDoneByType would appear to be mere shortcut for certain
+quantified expressions involving an unmotivated, conjunctive predicate.</p>
+    <h3>8.4.4.  <a NAME='137648184'>
+NL motivations for higher arity predicates do not necessarily align with OE
+motivations.</a>
+    </h3>
+    <p>
+Sometimes, it is tempting to create a higher arity predicate because doing so
+will make parsing easier.  For example, a given text might contain the sentence, 
+"when beavers build dams, they do it slowly."  If one were doing OE work as part 
+of a project that requires that this sentence be parsed, one might be tempted to 
+create a single predicate that, through the use of parsing templates, could serve 
+as the arg0 for the CycL representation of this sentence.  That is, one might be 
+tempted to create something like #$rateOfTypeDoneByType, and
+give it the following template:</p>
+    <p>
+ "When/Whenever &lt;Noun => :ARG1> &lt;Verb => :ARG2>, they do it/so &lt;Adverb => :ARG3>."</p>
+    <p>
+Expedient though this might be, #$rateOfTypeDoneByType, is still a poorly motivated 
+predicate from an OE perspective.  For more information, see the section on 
+"How OE differs from NL".</p>
+    <h3>8.4.5.  <a NAME='137656264'>
+If the arguments of a predicate implicitly constrain each other, then the 
+arity is too high.</a>
+    </h3>
+    <p>
+Consider the following assertion:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (typesDifferInAttribute MaleAnimal FemaleAnimal GenderOfLivingThing      
+           hasGender)</pre></tt>
+    </font>
+
+<p>
+This says that males differ from females in that the gender of each male is different 
+from the gender of any female (and vice versa).  This predicate is Quaternary, but it
+does not need to be.  At first glance, each argument appears to be well-motivated: 
+the arg1 and arg2 are needed to identify the collections whose instances differ 
+from one another; the arg3 gives the type of attribute in which instances of 
+arg1 differ from instances of arg2; and the arg4 gives the relevant predicate that 
+relates instances of arg1 and arg2 to the relevant instance of the arg3.  Thus
+the expansion for this predicate might be something like,</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+           (and
+              (isa ?X :ARG1)
+              (isa ?Y :ARG2))
+           (thereExists ?ATT1
+              (thereExists ?ATT2
+                (and
+                   (isa ?ATT1 :ARG3)
+                   (isa ?ATT2 :ARG3)
+                   (:ARG4 ?X ?ATT1)
+                   (:ARG4 ?Y ?ATT2)
+                   (different ?ATT1 ?ATT2)))))</pre></tt>
+    </font>
+
+<p>
+Thus all of the arguments seem to be needed in order to capture the intended meaning of
+#$typesDifferInAttribute.  However, as the name of the predicate suggests, the 
+#$arg3Isa of #$typesDifferInAttribute is #$AttributeType.  And, given the intended 
+meaning of #$typesDifferInAttribute, the arg4 must be a predicate that is capable 
+of relating instances of the arg1 and the arg2 to any instance of the arg3.  In 
+other words, the arg4 must be a predicate capable for relating things to their 
+attributes.  And that means the arg4 must be a predicate P such that </p>
+    <font color='#339900'>
+      <tt><pre>
+   (genlPreds P hasAttributes)  </pre></tt>
+    </font>
+
+<p>
+From this it follows that if</p>
+    <font color='#339900'>
+      <tt><pre>
+        (typesDifferInAttribute ARG1 ARG2 ARG3 ARG4)</pre></tt>
+    </font>
+
+<p>
+is true, for any ARG1, ARG2, ARG3, and ARG4, then, necessarily,</p>
+    <font color='#339900'>
+      <tt><pre>
+        (typesDifferInAttribute ARG1 ARG2 ARG3 #$hasAttributes)</pre></tt>
+    </font>
+
+<p>
+is also true.  In effect, the arg3 constraint on #$typesDifferInAttribute constrains 
+the arg4 to be <em>some</em> specialization of #$hasAttributes.  Now, let us suppose we are 
+not concerned with <em>which</em> specialization of #$hasAttributes is the right one.  
+In that case, it becomes obvious that we can drop the ARG4 from 
+#$typesDifferInAttribute, thus changing it from a quaternary
+predicate to a ternary predicate.  All that's needed is an adjustment to its expansion:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+           (and
+              (isa ?X :ARG1)
+              (isa ?Y :ARG2))
+           (thereExists ?ATT1
+              (thereExists ?ATT2
+                (and
+                   (isa ?ATT1 :ARG3)
+                   (isa ?ATT2 :ARG3)
+                   (hasAttributes ?X ?ATT1)
+                   (hasAttributes ?Y ?ATT2)
+                   (different ?ATT1 ?ATT2)))))</pre></tt>
+    </font>
+
+<p>
+However, what if we <em>are</em> interested in knowing which spec pred of #$hasAttributes 
+is the right one?  By dropping the ARG4 from #$typesDifferInAttribute, haven't we 
+robbed Cyc of its ability to infer </p>
+    <font color='#339900'>
+      <tt><pre>
+   (different ?X ?Y) </pre></tt>
+    </font>
+
+<p>
+from </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Male001 ?X) 
+</pre></tt>
+    </font>
+<p>
+and </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Female001 ?Y) </pre></tt>
+    </font>
+    <p>
+?</p>
+    <p>
+As it so happens, the answer is, "No."  If </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Male001 ?X) </pre></tt>
+    </font>
+
+<p>
+and </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Female001 ?Y) </pre></tt>
+    </font>
+
+<p>
+were, in fact, consistent with </p>
+    <font color='#339900'>
+      <tt><pre>
+   (not 
+     (different ?X ?Y)) </pre></tt>
+    </font>
+
+<p>
+in CycL, that would mean that </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasAttributes Male001 ?X)
+
+   (hasAttributes Female001 ?Y) </pre></tt>
+    </font>
+
+<p>
+and </p>
+    <font color='#339900'>
+      <tt><pre>
+  (not
+    (different ?X ?Y)) </pre></tt>
+    </font>
+
+<p>
+would also be consistent.  But, because we have asserted</p>
+    <font color='#339900'>
+      <tt><pre>
+    (typesDifferInAttribute MaleAnimal FemaleAnimal GenderOfLivingThing)</pre></tt>
+    </font>
+
+<p>
+and because in our example ?X and ?Y are both constrained by the definition of 
+#$hasGender to be instances of #$GenderOfLivingThing, these three sentences are 
+provably inconsistent.  Thus </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Male001 ?X) 
+
+   (hasGender Female001 ?Y) </pre></tt>
+    </font>
+
+<p>
+and </p>
+    <font color='#339900'>
+      <tt><pre>
+   (not 
+     (different ?X ?Y)) </pre></tt>
+    </font>
+
+<p>
+are likewise inconsistent in CycL -- i.e., Cyc knows that if </p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Male001 ?X) </pre></tt>
+    </font>
+
+<p>
+and</p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasGender Female001 ?Y)</pre></tt>
+    </font> 
+
+<p>
+then </p>
+    <font color='#339900'>
+      <tt><pre>
+   (different ?X ?Y)</pre></tt>
+    </font>  <p>
+So it turns out that we don't lose anything by
+reducing the arity of #$typesDifferInAttribute.  Thus the arity should be reduced.</p>
+    <h2>8.5.  <a NAME='137731080'>KE Facilitation</a>
+    </h2>
+    <h3>8.5.1.  <a NAME='137745344'>
+Basic Vocabulary and Background</a>
+    </h3>
+    <p>
+In order to assist Cyc in gathering knowledge about the world,
+a suite of predicates pertaining to ke-facilitation are 
+currently in development.  These predicates are
+meta-relations designed to work in concert with a tool to furnish
+suggestions (or in some cases, mandates) to a user concerning what he
+or she is creating.  Their utility consists largely in the fact that
+the assertions involving them collectively encode a partial
+declarative representation of how to do KE.  Having such a
+representation  is useful not only for guiding naive users and clients
+in doing elementary KE, but also for aiding Cyc in reasoning about its
+own knowledge acquisition processes.
+</p>
+    <p>
+KE facilitation depends upon four basic predicates:  </p>
+    <blockquote>
+      <ol>
+        <li>keRequirement</li>
+        <li>keStrongSuggestion</li>
+        <li>keWeakSuggestion</li>
+        <li>keNeighborSuggestion</li>
+      </ol>
+    </blockquote>
+    <p>
+As the names suggest, these predicates are used to encode different
+'strengths' of suggestion, running all the way from things that are
+considered mandatory to things that are suggested only because they
+are true of something's siblings or 'neighbors'.  Each of the
+predicates is binary, taking a #$Thing and an #$ELSentenceAssertible
+as its arguments.  Where FACPRED is one of these four predicates, the
+meaning of (FACPRED TERM SENTENCE) is that SENTENCE is something which
+Cyc should know to be true of TERM, with the strength of the 'should'
+being expressed by FACPRED itself:  required, strong, weak, or
+neighbor.  It is therefore presupposed that SENTENCE references TERM
+in some way, i.e., that (#$assertedTermSentences TERM SENTENCE).  
+</p>
+    <h3>8.5.2.  <a NAME='137766976'>
+KE Facilitation Rules</a>
+    </h3>
+    <p>
+The four previously mentioned predicates are seldom used to make local
+GAF assertions on individual terms:  there is little point in the
+creator of a term asserting that something that is assertible in CycL
+should be known to be true about a term when s/he can easily assert
+this very thing!  Rather, the principle utility of ke facilitation
+predicates lies in their ability to be used in rules that conclude
+suggestions for entities satisfying the conditions stated in the
+antecedent of the rule.  </p>Here are a few examples of such rules:
+
+<font color='#339900'>
+      <tt><pre>
+(implies 
+  (isa ?TERM Relation) 
+  (keRequirement ?TERM 
+    (thereExists ?COL 
+      (and 
+        (isa ?COL RelationshipTypeByArity) 
+        (isa ?TERM ?COL)))))
+</pre></tt>
+    </font>
+<p>
+If TERM is an instance of #$Relation, then Cyc is required to know
+of a #$RelationshipTypeByArity that TERM is an instance of (i.e.,
+there needs to be an arity asserted for every CycL relation).</p>
+    <font color='#339900'>
+      <tt><pre>
+(implies 
+  (genls ?CHANGE_TYPE IntrinsicStateChangeEvent) 
+  (keStrongSuggestion ?CHANGE_TYPE 
+    (thereExists ?OBJECT_TYPE 
+      (relationAllExists objectOfStateChange ?CHANGE_TYPE ?OBJECT_TYPE))))
+</pre></tt>
+    </font>
+<p>
+If CHANGE-TYPE is a kind of #$IntrinsicStateChangeEvent, it is
+strongly suggested that Cyc know of a kind of #$SomethingExisting such
+that every instance of CHANGE-TYPE has an object of this kind as the #$objectOfStateChange.</p>
+    <font color='#339900'>
+      <tt><pre>
+(implies 
+  (genls ?EVENT-TYPE CreationEvent) 
+  (keWeakSuggestion ?EVENT-TYPE 
+    (thereExists ?ATT 
+      (and 
+       (isa ?ATT OutputEfficiency) 
+       (relationAllInstance hasAttributes ?EVENT-TYPE ?ATT)))))
+</pre></tt>
+    </font>
+<p>
+If EVENT-TYPE is a kind of #$CreationEvent it is weakly suggested that Cyc know
+about an #$OutputEfficiency such that all instances of EVENT-TYPE are
+asserted to have this efficiency.</p>
+    <p>
+Rules like these are used in turn by two sorts of applications.  The
+first type summarizes suggested assertions for a newly-created term;
+the second walks over a pre-specified set of terms in search of terms for which
+unsatisfied suggestions exist.  The procedure in both cases is to run
+the equivalent of a set of undercover, 1 backchain Asks on a given
+term, asking for all keRequirements, all keStrongSuggestions and all
+keWeakSuggestions, and then checking to see if these suggestions are
+already known by Cyc.  Those suggestions which are not provable in the
+knowledge base are then presented to the user in the form of open
+formulae for the user to fill in.  Supposing for the sake of
+example that a user had defined a new relation [RELN] but had not yet
+specified a RelationshipTypeByArity for it, the user would be asked to
+specify an [ARITY-TYPE] such that</p>
+    <font color='#339900'>
+      <tt><pre>
+      (and 
+        (isa [ARITY-TYPE] RelationshipTypeByArity) 
+        (isa [RELN] [ARITY-TYPE])))))
+</pre></tt>
+    </font>
+
+<p>
+was true.  Obviously, if this information was already known, the
+suggestion would not be presented.</p>
+    <p>
+The planned implementation of the predicate keNeighborSuggestion is
+slightly different from that of the others.  Here the idea is to look
+at the assertions on a terms 'neighbors' in the Cyc KB, where
+'neighbor' is defined using some sort of weak definition of
+siblinghood that might conceivably vary with context:  it might, in
+some cases, simply be terms that the term in question could be
+concluded to be #$similarTo.  In cases where SIBLING-TERM has been
+identified as a 'neighbor' of TERM, using whatever criterion, and it
+is known that (assertedTermSentences SIBLING-TERM ASSERTION), and
+(SubstituteFormulaFn TERM SIBLING-TERM ASSERTION) is not known
+to be true, i.e. Cyc believes (unknownSentence (SubstituteFormulaFn
+TERM SIBLING-TERM ASSERTION)), then (SubstituteFormulaFn TERM
+SIBLING-TERM ASSERTION) may be offered to the user as a keNeighborSuggestion.
+</p>
+    <h3>8.5.3.  <a NAME='137796520'>
+KE Facilitation Rule Macros</a>
+    </h3>
+    <p>
+There are several cases where numerous ke facilitation rules can be
+subsumed under more economical 'rule macro predicates'.  Four of the
+most common patterns seen among ke facilitation rules are:</p>
+    <blockquote>
+      <ol>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+   (implies
+     (isa ?TERM [COL])
+     (keStrongSuggestion
+       (thereExists ?INST
+         [BIN-PRED] ?TERM ?INST)))
+ </pre></tt>
+          </font>
+ </li>
+
+ <li>
+          <font color='#339900'>
+            <tt><pre>
+   (implies
+     (isa ?TERM [COL])
+     (keStrongSuggestion
+       (thereExists ?INST
+         [BIN-PRED] ?INST ?TERM)))
+ </pre></tt>
+          </font>
+ </li>
+
+ <li>
+          <font color='#339900'>
+            <tt><pre>
+   (implies
+     (genls ?TERM [COL])
+     (keStrongSuggestion
+       (thereExists ?INST
+         [BIN-PRED] ?TERM ?INST)))
+ </pre></tt>
+          </font>
+ </li>
+
+ <li>
+          <font color='#339900'>
+            <tt><pre>
+   (implies
+     (genls ?TERM [COL])
+     (keStrongSuggestion
+       (thereExists ?INST
+         [BIN-PRED] ?INST ?TERM)))
+ </pre></tt>
+          </font>
+ </li>
+</ol>
+    </blockquote>
+
+<p>
+1, 2, 3, and 4 are implemented, respectively, by the predicates
+keStrongSuggestionPreds, keStrongSuggestionInverse,
+keGenlsStrongSuggestionPreds, and keGenlsStrongSuggestionInverse.
+Analogous forms for the weak suggestions are implemented by
+keWeakSuggestionPreds, keWeakSuggestionInverse,
+keGenlsWeakSuggestionPreds, and keGenlsWeakSuggestionInverse.</p>
+    <p>
+In addition to these macros, there are several others defined in the
+present system.  One can see the entire inventory by doing a search on
+the instances of KEFacilitationPredicate, the PredicateCategory which
+subsumes all of the ke facilitation relations.  As using these
+predicates saves greatly on the expense of searching for ke
+facilitation suggestions, Cyclists authoring ke facilitation
+assertions are encouraged to use them whenever possible.
+</p>
+    <h3>8.5.4.  <a NAME='137820416'>
+Known Limitations</a>
+    </h3>
+    <p>There are three main limitations on the current implementation of
+ke facilitation assertions in the Knowledge Base.</p>
+    <p>
+The first has to do with the fundamental logical limitations of
+unknownSentence.  Because CycL is a semi-decideable language, it is
+not possible, in the limit and for an arbitrarily chosen assertible
+sentence, that this sentence is not provable in a selected
+context of the KB.  Thus, it is impossible to guarantee with ironclad
+certainty that a suggestion that is proferred to the user is not
+already satisfied by the current state of the KB.  However, for the
+vast majority of cases that we care about, search with delimited
+parameters (indeed, search by straight look-up) is believed
+sufficient.  Thus, this is not at present regarded as one of the more
+serious limitations attaching to this methodology.</p>
+    <p>
+The second limitation is that it is impossible to impose a fundamental
+ordering on the sequence in which suggestions are offered, for the
+same reason that heuristic search methodology renders it impossible
+to guarantee that the answers to a query will return in a
+pre-specified order.  This is a fundamental limitation and a spur to
+further work, as there are many cases for which it would be desirable
+to be able to order suggestion prompts.</p>
+    <p>
+The third limitation is that suggestion strength is probably not a
+monolithic concept, but is instead sensitive to such details as
+context and user interest.  The hope (as of August of 2001) is that 
+more sophisticated user modeling and context handling techniques will
+enable us to vary suggestion strengths from discourse context to
+discourse context as appropriate. 
+</p>
+    <h3>8.5.5.  <a NAME='137836104'>
+Philosophical Issues</a>
+    </h3>
+    <p>The KE facilitation vocabulary represents an early step on the road
+toward providing a declarative superstructure to support Cyc in
+reasoning about the contents of its own knowledge base, and
+ultimately, in making adjustments thereto on the basis of such
+reason.  The ke facilitation vocabulary is comparatively limited in
+this respect, supporting only changes in knowledge acquisition behavior
+on the basis of new knowledge acquired, and fairly delimited changes
+at that.  More dramatic metareasoning support will probably need to be
+implemented in the future, if Cyc is ever to realize the vision of
+becoming a self-extensive, self-modifying system that can gracefully
+adjust its semantics to cope with a continuously evolving world.  Only
+thus will Cyc be able to cope with criticisms that Cyc doesn't
+really represent artificial intelligence. </p>
+    <p>
+However, this raises a fundamental question:  since metavocabulary is
+as subject to revision as anything else in the Cyc system, does the
+proposal to automate or partially automate knowledge acquisition and
+KR update by declarative means implicate us, ultimately, in a regress?
+Will we find ourselves at some point in the future introducing
+second-order metavocabulary to shape modifications in second-order
+reasoning in the same way we are now proposing to do with
+metavocabulary and first-order reasoning.  If this happens, it is
+almost certainly a sign that the program is on the wrong track.</p>
+    <p>
+There is reason to hope, however, in that we can already see cases of
+meta-assertions that are effectively self-referential; e.g.,</p>
+    <font color='#339900'>
+      <tt><pre>
+(implies 
+  (isa ?TERM Relation) 
+  (keRequirement ?TERM 
+    (thereExists ?COL 
+     (and 
+       (isa ?COL RelationshipTypeByArity) 
+       (isa ?TERM ?COL)))))
+</pre></tt>
+    </font>
+<p> 
+applies to keRequirement itself, and to any other ke facilitation
+relation that anybody cares to create.  Such potential for
+self-referentiality holds out the hope that we can have a potential
+for arbitrarily nested 'meta-deliberation' embodied in a finite set of
+assertions.  It also holds out the prospect for a certain measure of
+constrained chaotic feedback within the system:  but then,
+it has long been surmised that chaos is a part of natural intelligence.
+</p>
+    <h3>8.5.6.  <a NAME='137849440'>
+Authoring KE Facilitation Assertions</a>
+    </h3>
+    <p>
+Any ontological engineer engaged in creating a new collection should
+ask him/herself if there are any suggestions that he or she would
+offer a user creating either an instance of spec of this collection,
+either simpliciter or with further qualifications.  
+If such suggestions exist, the ke facilitation vocabulary should be
+used to encode them.</p>
+    <p>
+Likewise, any ontological engineer creating a new relation should (obviously) have some
+idea in mind of the circumstances in which this relation ought to be
+applied.  To the extent that a description of these circumstances can
+be encoded using the ke facilitation vocabulary, this should be done.
+</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

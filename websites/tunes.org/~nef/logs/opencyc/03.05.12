@@ -1,0 +1,108 @@
+00:00:00 --- log: started opencyc/03.05.12
+04:27:54 --- quit: Cobra (calvino.freenode.net irc.freenode.net)
+04:27:54 --- quit: EdTivrsky (calvino.freenode.net irc.freenode.net)
+04:27:54 --- quit: yepster (calvino.freenode.net irc.freenode.net)
+04:28:00 --- join: EdTivrsky (mea_culpa@12-212-98-134.client.attbi.com) joined #opencyc
+04:32:06 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+04:32:06 --- join: yepster (~yepster@a80-127-208-130.adsl.xs4all.nl) joined #opencyc
+05:09:37 <yepster> kinoc?
+06:38:47 --- join: Aeon (~Demi@207.207.8.145) joined #opencyc
+06:47:19 --- quit: DemiGod (Read error: 60 (Operation timed out))
+07:21:31 --- nick: Aeon -> Graham
+07:38:03 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+07:38:38 <kinoc> ...
+07:38:42 <yepster> yo
+07:38:57 <kinoc> how goes it?
+07:39:06 <yepster> i demod rosetta to the supervisor of my masters project
+07:39:31 <yepster> after a demom of the scriptbot (that takes cycl action sentences as input)
+07:40:02 <yepster> he err how to say it
+07:40:45 <yepster> was very clear to say that i should not try to integrate it into the scriptbot
+07:41:54 <yepster> quote: 'it'll take at least several phd's for nl understanding'
+07:42:22 <kinoc> ah, ha.... challenge ... :-)
+07:42:38 <kinoc> or should that be ;-)
+07:43:47 <yepster> well at least i may not spent time on it when the masters project is not ifnished
+07:44:05 <kinoc> found some others working on either flat or LGP based cycl processing
+07:45:17 <yepster> cycorp
+07:45:31 <kinoc> outside cycorp
+07:48:58 <kinoc> a two guys in australia I think
+07:50:39 <kinoc> one did ExtrAns a few years ago
+07:51:06 <kinoc> another is building a lgp to predicate logic generator
+07:54:42 <kinoc> well we will keep working on it
+07:54:59 <kinoc> (you when every you want to )
+07:55:09 <yepster> sorry, was a bit busy
+07:55:39 <kinoc> I had a minor side track into converting some of the JAVA  API into my VB control
+07:58:05 <kinoc> which is useful for extracting some of the NL stuff
+07:59:00 <yepster> minor? didn't work?
+07:59:24 <kinoc> one of the things I wish dmiles left was a pointer to his MS LISP'ish package
+07:59:58 <kinoc> I got it to work, just had to change communications methods to handle long responses from cyc
+08:00:34 <yepster> so you implemented cycconnection / cycaccess etc in VB?
+08:00:52 <kinoc> pretty much
+08:01:08 <yepster> cool
+08:01:57 <kinoc> the control has connection properties (ip,port,microtheory) and methods that wrapper all the communications and parsing
+08:02:52 <kinoc> so you can say 'bDoggy=cyclink.isgenls("#$Dog","#$Mammal") ' in VB
+08:03:35 <kinoc> it also can return the answer to a query as a db recordset
+08:04:05 <kinoc> trying to make the "cycl like sql" analogy
+08:04:28 <kinoc> plus you can just send queries direct
+08:04:58 <yepster> but I thought rosetta is written in c?
+08:05:04 <kinoc> it is
+08:05:13 <kinoc> multiple languages
+08:05:57 <kinoc> rosetta is in C, I do a lot of GUI in VB and everything else in whatever seems appropriate
+08:05:58 <yepster> i've been programming some more on the scriptbot (only java)
+08:06:24 <yepster> i must say that it's still.. i need so much lines of code for one thought
+08:07:34 <yepster> I'd like something like 'for each ?X,?Y in (pred ?X ?Y) { things }'
+08:07:41 <kinoc> yeah, the problem of 'level bands in language'. 
+08:09:00 <kinoc> oh, one of the things you can do with the control is pass a query, and it triggers a call back event for each element'
+08:09:14 <yepster> cool
+08:09:30 <yepster> i think
+08:09:35 <kinoc> so you could say "cyclink.askcyc("pred ?X ?Y")" and the call back will trigger for each ?X ?Y
+08:12:51 <kinoc> or in a GUI control you can set a tag value to a query. so with a list box you can say. list1.tag ="LIST:isa dog ?WHAT", cyclink.ProcessQueryTags 
+08:13:03 <kinoc> then the list box will fill with the results of the query
+08:14:57 <kinoc> The problem with lower level languages that are complete is sometimes its hard to describe higher level concepts
+08:15:42 <kinoc> Wave files are complete, but its hard to assemble a symphony by manipulaitng each byte
+08:46:17 <kinoc> The unfortunate thing is it does not duplicate the whole java set just yet with the objects like cyclist
+08:51:36 <kinoc> yepster, is it you doing work with Z ?
+08:52:08 <kinoc> http://www.jfsowa.com/talks/clprop.htm   has a related formalism called CL, that you might wish to look at if you are interested in Z 
+09:41:02 --- join: DemiGod (~Demi@207.207.8.145) joined #opencyc
+09:58:37 --- quit: Graham (Read error: 110 (Connection timed out))
+09:59:17 --- quit: kinoc (Read error: 110 (Connection timed out))
+10:18:45 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:42:39 --- join: dv (~May2003@terrato.org) joined #opencyc
+11:02:46 --- quit: kinoc (Read error: 110 (Connection timed out))
+12:08:46 <yepster> kinoc: at my university 'they' teach Z. when after a few sessions i realized that the sentence
+12:10:43 <yepster> (#$interArgIsa #$outputsCreated etc etc) was perhaps not readable for people spending less than
+12:11:00 <yepster> 1 hour a day in cycl, i decided to write down things in z
+12:11:20 <yepster> also, axiom systems in z look cool
+12:11:28 <yepster> (see e.g. http://wwwhomselect * from table (select CYC.askwithvariable( '(#$ist-Asserted #$RegelingPGBMt ?AXIOM)', '?AXIOM', '#$EverythingPSC' ) from dual)
+12:11:34 <yepster> oops!
+12:11:44 <yepster> that was a wrong paste!!
+12:12:13 <yepster> i meant: http://wwwhome.portavita.nl/~yeb/d-opdracht/afstudverslag.pdf
+12:15:07 <yepster> section 3.2.3 is my personal favorite (formal specification of script theory)
+12:20:48 <yepster> interesting site though: http://www.jfsowa.com/ontology/causal.htm
+12:34:32 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:35:34 <yepster> hullo
+12:35:52 <yepster> it's raining cats and dogs outside and i'm my bike :-(
+12:35:58 <yepster> (and elephants as well)
+13:04:45 --- quit: kinoc (Read error: 60 (Operation timed out))
+13:52:08 --- quit: EdTivrsky ("out in the yard planting flowers")
+14:51:48 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:28:50 --- quit: Aglanor ("Client exiting")
+15:47:19 --- quit: kinoc (Read error: 110 (Connection timed out))
+17:07:35 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:12:38 --- quit: Cobra (Remote closed the connection)
+17:13:19 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+17:20:07 <kinoc> ...
+17:20:20 <kinoc> hope the rain got better
+17:20:43 <kinoc> zool in #logicmoo gave me the link
+17:41:28 --- quit: Cobra ("[x]chat")
+17:42:59 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+17:46:48 --- quit: Cobra (Client Quit)
+17:47:26 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+17:50:00 --- quit: kinoc (Read error: 60 (Operation timed out))
+18:04:11 --- quit: Cobra ("[x]chat")
+18:04:57 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+19:36:28 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:45:01 --- quit: kinoc (Read error: 60 (Operation timed out))
+21:52:15 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:21:01 --- join: KinoC2 (~kino@dialup-67.30.32.222.Dial1.Dallas1.Level3.net) joined #opencyc
+23:41:09 --- quit: kinoc (Read error: 110 (Connection timed out))
+23:59:59 --- log: ended opencyc/03.05.12

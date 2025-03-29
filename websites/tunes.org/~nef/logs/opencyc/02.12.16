@@ -1,0 +1,236 @@
+00:00:00 --- log: started opencyc/02.12.16
+08:23:24 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+08:23:29 --- join: DemiGod (~Demi@207.207.8.145) joined #opencyc
+08:40:19 --- quit: Graham (Read error: 110 (Connection timed out))
+08:40:23 --- quit: reed__ (Read error: 110 (Connection timed out))
+09:04:41 --- nick: DemiGod -> Graham
+09:53:06 --- quit: mdupont (Read error: 110 (Connection timed out))
+09:53:37 --- join: mdupont (mdupont@p5080E811.dip0.t-ipconnect.de) joined #opencyc
+12:18:25 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+12:18:25 --- join: DemiGod (~Demi@207.207.8.145) joined #opencyc
+12:20:17 <mdupont> hey guys
+12:20:29 <mdupont> how do you store stats in opencyc/daml
+12:20:41 <mdupont> if i collect data samples about object to build classes
+12:35:54 --- quit: reed_ (Read error: 110 (Connection timed out))
+12:35:54 --- quit: Graham (Read error: 110 (Connection timed out))
+12:44:26 --- quit: reed__ (Read error: 60 (Operation timed out))
+12:44:26 --- quit: DemiGod (Read error: 60 (Operation timed out))
+12:44:26 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+12:44:31 --- join: DemiGod (~Demi@207.207.8.145) joined #opencyc
+13:03:28 --- join: Aeon (~Demi@207.207.8.145) joined #opencyc
+13:03:58 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+13:11:59 --- quit: DemiGod (Read error: 60 (Operation timed out))
+13:21:23 --- quit: reed_ (Read error: 110 (Connection timed out))
+14:32:33 <mdupont> any ph4 hackers with c/extension experience?
+15:23:46 --- nick: mdupont -> mdupont-ZZZzzz
+15:34:43 <dmiles> SETHASH is not in the API so i need csetf the GETHASH.. csetf is not in the API eigther
+15:35:10 <dmiles> mainly need to see how to sethash on a a hashtable
+15:40:31 <dmiles> (define NLFORM-HASH-WSTR (str)
+15:40:31 <dmiles>      (clet (
+15:40:31 <dmiles>         (hsh (MAKE-HASH-TABLE 5 #'eql))
+15:40:31 <dmiles> 	(*cache-inference-results* t)
+15:40:31 <dmiles> 	(*compute-inference-results* nil)
+15:40:31 <dmiles> 	(*unique-inference-result-bindings* t) 
+15:40:33 <dmiles> 	(*generate-readable-fi-results* nil))
+15:40:35 <dmiles> 	    (SETHASH-Q ':string hsh str)
+15:40:37 <dmiles> 	    (SETHASH-Q ':the-word hsh (WORDS-OF-STRING str))
+15:40:39 <dmiles> 	    (CDOLIST binding 
+15:40:41 <dmiles> 		(ask-template '(?W ?F) 
+15:40:43 <dmiles> 			(append '(#$wordForms ?W ?F) (LIST str)) #$EnglishMt 0 nil nil nil)
+15:40:45 <dmiles> 		(SETHASH-Q (car binding) hsh (cadr binding))) hsh))
+15:41:38 <dmiles> there is probly more streamlined approaches
+15:43:18 <dmiles> the same problem i having with sethash...
+15:43:19 <dmiles> (define NLARRAY-FOR-STRING (str &optional (vtoks (VECTOR 0)))
+15:43:19 <dmiles> 	  (fif (clet ((spaceloc (POSITION  #\Space str ))))
+15:43:19 <dmiles> 		(NLARRAY-FOR-STRING2 
+15:43:19 <dmiles> 			(SUBSEQ str (+ spacloc 1))
+15:43:19 <dmiles> 			(clet (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR (SUBSEQ str 0 spacloc)))))
+15:43:20 <dmiles> 		(clet (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR str)))))
+15:43:23 <dmiles> 		 
+15:43:32 <dmiles> err i will stip out codes
+15:44:24 <dmiles> (define NLARRAY-FOR-STRING (str &optional (vtoks (VECTOR 0)))
+15:44:24 <dmiles>           (fif (clet ((spaceloc (POSITION  #\Space str ))))
+15:44:24 <dmiles>                 (NLARRAY-FOR-STRING 
+15:44:24 <dmiles>                         (SUBSEQ str (+ spacloc 1))
+15:44:24 <dmiles>                         (clet (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR (SUBSEQ str 0 spacloc)))))
+15:44:25 <dmiles>                 (clet (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR str)))))
+15:45:41 <dmiles> i have with set array
+15:45:58 <dmiles> there is only a clet/csetq
+15:46:11 <dmiles> (in the API)
+15:46:40 <dmiles> so i am having a heck of a time 
+16:03:52 <dmiles> should realy be (define NLARRAY-FOR-STRING (str &optional (vtoks (VECTOR 0)))
+16:03:52 <dmiles>           (fif (csetf spaceloc (POSITION  #\Space str ))
+16:03:52 <dmiles>                 (NLARRAY-FOR-STRING 
+16:03:52 <dmiles>                         (SUBSEQ str (+ spacloc 1))
+16:03:52 <dmiles>                         (csetf (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR (SUBSEQ str 0 spacloc)))))
+16:03:53 <dmiles>                 (csetf (AREF vtoks (+ (AREF vtoks 0) 1) (NLFORM-HASH-WSTR str)))))
+16:03:56 <dmiles> right?
+16:04:33 <mdupont-ZZZzzz> hey dmiles
+16:04:39 <mdupont-ZZZzzz> hows it going?
+16:04:42 <mdupont-ZZZzzz> long time no hear
+16:05:01 <dmiles> yeah :) been busy with a few things
+16:05:23 <mdupont-ZZZzzz> check out our newest patch for the gcc at introspector.sf.net cvs, and on #introspector@openprojects.
+16:05:31 <mdupont-ZZZzzz> check out our port of mingw32 cross compiling at http://introspector.sourceforge.net/dia_win32.htm
+16:06:14 <dmiles> looking
+16:06:15 <mdupont-ZZZzzz> http://introspector.sourceforge.net/2002/12/16/tmp_rdf-core.h_.tu__global__Mon_Dec_16_23_38_43_2002_34-dump.ntriple#id-980
+16:06:20 <mdupont-ZZZzzz> that is an example file
+16:07:13 <mdupont-ZZZzzz> http://rdfig.xmlhack.com/2002/12/16/2002-12-16.html#1040078904.309617
+16:07:21 <mdupont-ZZZzzz> that contains some of the links i posted to rdfig
+16:08:19 --- nick: mdupont-ZZZzzz -> mdupont
+16:13:47 <dmiles> looks like it's been hard work on your part
+16:18:41 <mdupont> well, 
+16:18:52 <mdupont> been working on this for 3 years at least
+16:19:24 <mdupont> have two active devlopers, and a couple of sympathists
+16:19:31 <mdupont> now i am looking at cyc
+16:19:36 <mdupont> the daml is good,
+16:19:50 <mdupont> and will be writing an import
+16:20:04 <mdupont> i have a n3 copy of the opencyc.daml
+16:20:10 <mdupont> and am working with it a bit
+16:21:06 <mdupont> say hi to mea_culpa
+16:21:42 <mdupont> btw, what do you know about the creating of some processing for this daml
+16:21:54 <mdupont> do i need to use opencyc?
+16:25:03 <dmiles> the opencyc.daml is i think for alligning .daml documents that opencyc would serv up
+16:26:16 <dmiles> the issue (this is just my observation about daml) is that it normally has the end goal of stating facts
+16:26:43 <dmiles> like address lists and things
+16:27:10 <dmiles> so if there was a cg?CB-DAML-QUERY
+16:27:37 <dmiles> the results page would be conforming to a opencyc.daml document
+16:27:56 <dmiles> (as a possiblility)
+16:28:13 <dmiles> (someone correct me if i am missing the mark)
+16:29:11 <mdupont> ok, 
+16:29:18 <mdupont> so i checked out opencyc daml
+16:29:23 <dmiles> i know that particualr daml export is cool.. but thinking about the volume of what content is needed to really semantically describe things is more then just a isa/genls/genPreds that daml documents tend to show 
+16:29:27 <mdupont> so what can i use to make compliant docs
+16:29:59 <mdupont> the opencyc itself uses only a few predicates
+16:30:53 <mdupont> i am working on a ontology extraction tool
+16:31:05 <mdupont> to crush down the gcc rdf into an ontology
+16:31:15 <mdupont> by extracting statistical data
+16:31:22 <mdupont> and presenting decisions to a user
+16:32:03 <dmiles> yeah
+16:32:09 <dmiles> that is neat
+16:33:50 <dmiles> maybe there is also some specialzed cyc inferences yoyu can use
+16:38:10 <dmiles> like as far as making opencyc more aware of your gcc  ontology
+16:38:41 <dmiles> then possibly having some equivalancy rules
+16:42:09 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:45:07 <mdupont> ok, 
+16:45:22 <mdupont> so when can i download some source code for the engine
+16:45:28 <mdupont> the part that handles such things
+16:45:33 <dmiles> (just ideas)
+16:45:51 <dmiles> well in cyc 0.7.0 the SubL API will be opened
+16:46:12 <dmiles> so really the internals of cyc source code is bnot importnat
+16:46:22 <dmiles> thats not yet available
+16:46:47 <dmiles> think of the cycl source like as interesting a libc library
+16:46:56 <dmiles> rrr the engines sources
+16:47:15 <dmiles> its something you'd be more inclined to use in your programs
+16:47:26 <dmiles> the use of the libraries 
+16:48:35 <dmiles> also looks like soon it will instance it's own JVM and also be able to load .so/.dlls
+16:49:45 <dmiles> what cyc really is, is a platform that can orchistrate infernce and apps into the same blackboard
+16:50:01 <dmiles> (in my observations)
+16:51:04 <dmiles> i lately ben looking more into porting app's bussiness logic to SubL + some CycL for maintainace
+16:51:56 <mdupont> well, i am going to avoid making the space for it
+16:52:08 <mdupont> untill it is free. I will stick to the daml for now,
+16:52:17 <mdupont> i have alot more to do
+16:52:29 <mdupont> no dis intended
+16:52:58 <dmiles> thats understandable
+16:53:20 <dmiles> (i have expermented with making more or less time space for it)
+16:54:16 <dmiles> i have some apps that i definatly want to use it with (since this Feb)
+16:55:00 <dmiles> and sometimes i work on something too hard 
+16:55:33 <dmiles> like i made  a text to FOL translator using the exported CycL in prolog
+16:55:49 <dmiles> then wrote a Prolog to SubL converter
+16:56:24 <dmiles> so now i am taking the translated code and fixing it up in SubL
+16:56:49 <dmiles> but the trhing is any month now cycorp will be releasing the exact same thing ( NLU)
+16:58:02 <dmiles> the Prolog to SubL translator though is still usefull
+16:58:35 <dmiles> but requires more work on my part converting some of the non-deterministic predicates to work right
+16:59:12 <mea_culpa> *poke*
+17:01:25 <mdupont> hey
+17:01:33 <mea_culpa> hi mdupont
+17:01:40 <mdupont> yes, you were telling me about this prolog stuff
+17:01:51 <mdupont> hey mea_culpa, did dmiles let you on the computer?
+17:02:17 <mdupont> sabine has her own dhcp ethernet connection into my dsl server
+17:02:43 <mea_culpa> mdupont: huh?
+17:02:50 <mdupont> :)
+17:03:04 <mdupont> dmiles: what is a FOl and SubL
+17:03:21 <dmiles> (phone call)
+17:03:26 <dmiles> First order logic
+17:03:41 <dmiles> well text to meaningfull logical form
+17:03:47 <mdupont> mea_culpa: what part was not clear?
+17:03:49 <dmiles> SubL is the language that Cyc runs
+17:03:49 <mdupont> that is cool
+17:03:55 <mdupont> oh, ok
+17:04:16 <dmiles> (so the idea is i want Cyc to take my prolog code and run it)
+17:04:18 <mdupont> i would like to translate the expressions in the gcc into something that can be logically resoned about
+17:04:33 <mdupont> what about having prolog run you cyc code
+17:04:35 <mdupont> ?
+17:04:38 <dmiles> i think thats veryt doable
+17:04:42 <mea_culpa> mdupont:  did dmiles let you on the computer?
+17:04:48 <dmiles> i think you can optimize a program from infernce
+17:04:50 <mea_culpa> was not clear
+17:04:57 <dmiles> ?
+17:04:58 <mdupont> then we dont need this funky java stuff
+17:05:11 <dmiles> well java is really nice when it come to OO thinking
+17:05:25 <mdupont> mea_culpa: sorry, i am making the silly assumtions that you are sharing one computer, how silly
+17:05:31 <mdupont> ok,
+17:05:31 <dmiles> (alot of good agenty tools are already reusable from java)
+17:05:43 <mdupont> well, i dont have space for it
+17:05:48 <mdupont> uh
+17:06:11 <mea_culpa> mdupont: no... we aren't even living together right now
+17:06:20 <dmiles> in 3 days we will be
+17:06:23 <mdupont> but i would like to import this silly rdf i am producing
+17:06:24 <mea_culpa> this is his compy tho
+17:06:33 <mea_culpa> yes 3 days we will be :)
+17:06:41 <mdupont> sorry to ask such personal questions 
+17:06:45 * mdupont is ashamed
+17:06:52 <mea_culpa> heheheh
+17:06:57 <dmiles> so the RDF is GCC ontollogy?
+17:07:04 <mea_culpa> mdupont: don't worry about it
+17:07:06 <mdupont> yes and no
+17:07:21 <mdupont> i use RDF/ntriples to store the output of the gcc
+17:07:29 <dmiles> well i se its the semantics that the programer didnt knew he used?
+17:07:30 <mdupont> and the ontology is not built let
+17:07:52 <mdupont> right now, i got the output, we are freezing it
+17:08:11 <mdupont> then we will derived the ontology out of the output data
+17:08:16 <mdupont> by creating test cases
+17:08:31 <mdupont> and associating the concepts in the test cases with the output 
+17:08:37 * mea_culpa tackles dmiles
+17:08:53 <dmiles> is it at the level of "this is a loop" "this gets user to say yes/no" "this is adding two numbers" ?
+17:09:07 <mdupont> that should help create standard output
+17:09:28 <mdupont> like x isa parameter
+17:09:32 <mdupont> x has a name y
+17:09:38 <mdupont> y has a string Z
+17:09:45 <mdupont> f has a parameter p
+17:09:56 <mdupont> p is in a list, the next object is p2
+17:10:05 <mdupont> p2 has a type it is t1
+17:10:12 <mdupont> t1 has a decl, it is d2
+17:10:20 <mdupont> d2 has a name it is id2
+17:10:30 <mdupont> id2 has a string "ddd"
+17:10:33 <mdupont> and so on
+17:10:45 <dmiles> do you think that this output good to make queries on and infernce?
+17:10:53 <mdupont> i want to be able to process
+17:10:56 <mdupont> sure
+17:11:08 <mdupont> i have in the third generation, read this all into a postgres db
+17:11:10 <dmiles> (just getting on the same page)
+17:11:15 <mdupont> and done nice queries
+17:11:39 <mdupont> guys, it is 2am here, gtm -1 
+17:11:43 <mdupont> in need to sleep
+17:11:44 <dmiles> !
+17:11:46 <dmiles> :)
+17:12:07 <dmiles> well we can talk soon
+17:12:11 --- nick: mdupont -> mdupont-ZZZZ
+17:12:24 <dmiles> gnite
+17:12:27 <mdupont-ZZZZ> if you have any ideas how i can load this rdf into prolog
+17:12:33 <mdupont-ZZZZ> i would appreciate
+17:12:33 <mea_culpa> night mdupont-ZZZZ
+17:12:40 <dmiles> i know how to do that
+17:12:49 <mdupont-ZZZZ> it would be great to use prolog to examine this data
+17:12:52 <dmiles> if i am not arround Bjan is good at it to
+17:12:59 <mdupont-ZZZZ> you can write cool stuff
+17:13:02 <mdupont-ZZZZ> in prolog
+17:13:06 <mdupont-ZZZZ> night mea_culpa
+17:13:16 <mdupont-ZZZZ> night dmiles
+17:13:17 <mea_culpa> :) sleep well
+17:52:08 --- join: mikeb1 (~mikeb1@0-1pool228-103.nas19.philadelphia1.pa.us.da.qwest.net) joined #opencyc
+18:12:05 <dmiles> after 3 days of googling i found a copy of the CoABS grid jar
+18:12:06 --- quit: mikeb1 (Read error: 104 (Connection reset by peer))
+18:12:24 <dmiles> well i cant say i really spent 18 hours strigth :)
+18:13:05 <dmiles> would have been easier sending email to globalinfotek
+20:43:23 --- quit: Cobwa ("[x]chat")
+23:59:59 --- log: ended opencyc/02.12.16

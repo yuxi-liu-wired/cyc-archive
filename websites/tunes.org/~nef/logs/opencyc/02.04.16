@@ -1,0 +1,229 @@
+00:00:00 --- log: started opencyc/02.04.16
+01:25:35 --- join: Yepster (~yhavinga@cust-217-117-225-39.utelisys.net) joined #opencyc
+01:42:34 --- quit: bruce (Read error: 113 (No route to host))
+01:56:54 --- join: bruce (~bruce@dnvrdslgw17poola13.dnvr.uswest.net) joined #opencyc
+06:00:29 <dmiles> http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-content-frame&8263 <- check
+07:59:10 <Yepster> I've installed opencyc and have been browsing tutorials since yesterday. I've only one small question: when something is asked, is the asked (el?)expression reified as fact somewhere?
+08:01:44 <Graham> From the Ask tool you mean?
+08:03:25 <Yepster> or from the api
+08:06:22 <Graham> No, as far as I know, asks are not entered into the KB
+08:06:48 <Graham> at least not from the api or the ask tool
+08:07:08 <Graham> The RKF tools fuinction differently, but they are not in this release yet.
+08:07:57 <Yepster> ok, thanks
+08:47:28 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+08:58:26 --- join: plm (~miraglia@207.207.8.46) joined #opencyc
+09:01:00 <plm> exit
+09:01:11 <plm> EXIT
+09:01:15 <plm> sorry...
+09:01:21 --- part: plm left #opencyc
+09:02:06 <Yepster> Error: Operator DEFVAR-PRIVATE is not defined in the API
+09:02:41 <Yepster> I get this error when trying to run the inference benchmarks
+09:44:20 <stevereed> The inference benchmarks will run in a subsequent release of OpenCyc, the api sandbox is being
+09:44:45 <stevereed> progressively relaxed to permit the full range of SubL coding and to support the SubL source code that
+09:44:51 <stevereed> we will release.
+09:45:25 <stevereed> Additionally, we are working on a security model that will further control what SubL code you allow other
+09:45:36 <stevereed> cyc instances to run on your cyc server(s)
+10:52:42 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+10:52:53 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+11:32:00 --- join: gecko_x2 (relic@ui240i8hel.dial.kolumbus.fi) joined #opencyc
+14:23:35 <dmiles> is there any extra support that happens for HYP-This234 is they are created buy user.. as in HL modules that look at their constant names?
+14:25:35 <dmiles> i am tracking the HYP- i make in java ( so i can remove them out later ) but maybe there a make sKolem routine?
+14:25:42 <dmiles> http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-cf&8363  <-example
+14:26:38 <dmiles> when a java object is instanced in the java interpretor i am working on it propicates to Cyc prefixed with HYP-
+14:54:26 <stevereed> Not any special support that I know of.  You can make them elements of some special collection, and
+14:54:39 <stevereed> then iterate over that collection  to remove them.
+14:55:15 <dmiles> good, that seems like the best thing
+15:28:15 --- quit: Seth ()
+16:44:40 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+16:45:18 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:50:18 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+17:44:29 <dmiles> steve?
+17:45:26 <dmiles>     public Object makePrimitiveObjectForCyc(Object value) {
+17:45:26 <dmiles>         Class jclass = value.getClass();
+17:45:26 <dmiles>         if ( jclass == Integer.TYPE ) return new Integer((int)value);
+17:45:26 <dmiles>         if ( jclass == Long.TYPE ) return new Long((long)value);
+17:45:26 <dmiles>         if ( jclass == Double.TYPE ) return new Double((int)value);
+17:45:27 <dmiles>         if ( jclass == Character.TYPE return  "\"" + value + "\"";
+17:45:29 <dmiles>         if ( jclass == Float.TYPE return  "|" + Float + "|";
+17:45:31 <dmiles>     }
+17:45:56 <dmiles> i am trying to make sur ei am construcvting good CycLists...
+17:46:19 <dmiles> so i a need to make sure my conversion matrixes are right
+17:47:04 <dmiles> oops  if ( jclass == Double.TYPE ) return "|" + value + "|";
+17:47:11 <dmiles> am i on the right track?
+17:47:52 <dmiles> my question is when asserting CycList i need to make sure each item works in the CycList
+17:48:38 --- quit: Seth ()
+18:18:19 <dmiles>     public Object makePrimitiveObjectForCycList(Object value) {
+18:18:19 <dmiles>         Class jclass = value.getClass();
+18:18:19 <dmiles>         if ( jclass == java.lang.Boolean.TYPE ) if ( (boolean)value ) return cycTrue;
+18:18:19 <dmiles>             else return cycFalse;
+18:18:19 <dmiles>         if ( jclass == java.lang.Integer.TYPE ) return new Integer((int)value);
+18:18:20 <dmiles>         if ( jclass == java.lang.Byte.TYPE ) return new Integer((byte)value);
+18:18:22 <dmiles>         if ( jclass == java.lang.Void.TYPE ) return  "\"" + value + "\"";
+18:18:24 <dmiles>         if ( jclass == java.lang.Long.TYPE ) return new Long((long)value);
+18:18:26 <dmiles>         if ( jclass == java.lang.Character.TYPE ) return  "\"" + value + "\"";
+18:18:28 <dmiles>         if ( jclass == java.lang.Double.TYPE ) return new CycSymbol("|" + value + "|");
+18:18:30 <dmiles>         if ( jclass == java.lang.Float.TYPE ) return new CycSymbol("|" + value + "|");
+18:18:32 <dmiles>     }
+18:19:04 <dmiles> Hoping that works Steve, what do you think?
+18:32:51 <dmiles> oops wont work..
+18:33:00 <dmiles> | is not a valid symbol constant
+18:33:14 <dmiles> i need to find a valid way to send in a Float
+18:33:37 <dmiles> the toString() on a flat does not at | on both ends
+18:33:41 <dmiles> err
+18:33:58 <dmiles> the toString() on a Float does not at | on both ends.. Cyc complains that they need them 
+18:34:39 <dmiles> is my problem clear?
+18:34:50 <dmiles> i cant seem to get assertions into cyc that use floats
+18:39:35 <dmiles> well the | sneaks its way in so it seems to worl
+18:39:44 <dmiles> at least for now
+18:40:05 <dmiles> as long as isValidSymbolName() is never called
+19:41:00 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:44:55 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:46:43 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:47:59 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:12:26 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:16:10 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:21:54 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:23:38 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:53:15 <bruce> hey dmiles
+20:53:26 <dmiles> hi
+20:57:04 <bruce> how goes it with logicmoo?
+20:57:19 <dmiles> good .. just expermented with a naive import
+20:57:57 <dmiles> http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-cf&8691
+20:58:06 <dmiles> now am cleaning up the names and making it work right
+20:58:26 <dmiles> that is an examle
+20:59:19 <dmiles> but now i am cleaning up arrays/classes/instances/values
+20:59:40 <dmiles> intio only iformation relitive to a moo
+20:59:46 <dmiles> err realivant
+21:00:15 <dmiles> err realivent to a MUD game
+21:00:42 <dmiles> but things are working good.. Cyc makes a constant and an ontolgy of java classes
+21:00:58 <dmiles> err a constant for each MooClass
+21:01:34 <dmiles> and now making the class heiracy get used for serizing the instances of MUD objects
+21:02:00 <dmiles> once its into a data microtheory.. will need to make the updater method
+21:04:30 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:05:07 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:13:36 <bruce> sorry, got distracted by a work thing.
+21:14:12 <dmiles> thats alright.. i am just wking on stuff in another window
+21:14:58 <bruce> I haven't had the time in the last week or two to think further about those problems that I was having with concerns about game design being hurt by extra rules that are 'common sense' but that don't apply to the game.
+21:15:58 <dmiles> yeah .. its possible for cyc to dedcuce things that are very irrealivant to what woukld happen in the game
+21:16:11 --- quit: gecko_x2 (Read error: 110 (Connection timed out))
+21:16:11 <dmiles> and could see it trying to thingify the new parts
+21:16:37 <dmiles> so the RPG -> Cyc may make sense in most cases..
+21:16:46 <dmiles> but the other way is pretty tangly
+21:17:30 <bruce> well, RPG -> Cyc and keeping all of the Cyc microtheories and having them apply has some of the same scariness .. but ditching the microtheories means that you lose a lot of the advantage of interop of knowledge ...
+21:17:57 <dmiles> well i am seeing the game dump to one Mt.. first
+21:18:16 <dmiles> then having rules and other Mts.. antedceed from the single one
+21:18:28 * bruce nods.
+21:18:39 <dmiles> otherwise i see a big mess like you do
+21:18:43 <bruce> i, uhh, took the liberty of forwarding your forum posting to that mailing list that i told you about.
+21:18:50 <dmiles> cool
+21:19:01 <dmiles> whenabouts?
+21:19:16 <bruce> well, it went through moderation today .. i forwarded it yesterday sometime though.
+21:19:31 <bruce> i have product launch in 3 weeks, so i'm in a bit of a nightmare with no real time.
+21:20:44 <dmiles> what kind of product exacly again?
+21:20:47 <dmiles> is iot the RPG ?
+21:21:05 <dmiles> i am not finding the mail.. hrrm'
+21:22:13 <bruce> another game .. but no OpenCyc usage. :)
+21:23:19 <dmiles> still neat .. you probly know so much about the game you could opnecycy it 
+23:17:59 <stevereed_home> I fixed the bad dns on one of my servers and fixed the missing gateway route on the 
+23:18:07 <stevereed_home> other server, so
+23:18:26 <stevereed_home> http://opencyc250.homelinux.org:3603/cg?cb-start
+23:18:28 <stevereed_home> and
+23:18:42 <stevereed_home> http://opencyc251.homelinux.org:3603/cg?cb-start
+23:18:54 <stevereed_home> are again fully available for public use
+23:21:39 <stevereed_home> I see your question about floats in cyclists
+23:22:28 <stevereed_home> there should be an example in the org.opencyc.api.UnitTest class that uses floats
+23:22:35 <dmiles> looking nowe
+23:22:52 <stevereed_home> or in the org.opencyc.cycobject.UnitTest class
+23:22:56 <stevereed_home> I'll look too
+23:24:14 <dmiles> org.opencyc.cycobject.UnitTest no double or float there
+23:24:35 <dmiles> byte arrays and things!
+23:25:46 <stevereed_home> In org.opencyc.api.CfaslOutputStream,
+23:26:00 <stevereed_home> the java objects get transformed into 
+23:26:39 <dmiles> i see it there
+23:26:40 <stevereed_home> cfasl (old lispy term) binary objects
+23:26:53 <stevereed_home> so CycLists must contain
+23:27:02 <stevereed_home> java Float or Double objects
+23:27:04 <stevereed_home> should work
+23:27:24 <dmiles> well thats the thing.. most cases the toString seems to be fine
+23:27:54 <dmiles> but if the double is too long it needs | |
+23:28:06 <dmiles> so cyc sees it as a real
+23:28:11 <stevereed_home> hmm... 
+23:28:14 <dmiles> at least thats the api exception i get
+23:28:31 <stevereed_home> what is too long... 
+23:28:43 <dmiles> let me check real quick...
+23:29:01 <stevereed_home> the bars make the input into a symbol, not a number
+23:30:04 <dmiles> (equals
+23:30:04 <dmiles> 	(PicoFn ?UNIT)
+23:30:04 <dmiles> 	(MeasureFn .000000000001 ?UNIT))
+23:30:29 <stevereed_home> ok
+23:30:31 <dmiles> ah i wasnt sure what bars were about
+23:30:40 <stevereed_home> lisp
+23:30:54 <dmiles> just came up in an exception.. but didnt toubleshoot very harxd
+23:31:22 <dmiles> it was when i was loading the math theories
+23:31:42 <dmiles> but it said could not convert to SubLReal or something
+23:32:08 <dmiles> or <somekindof>REal
+23:32:26 <dmiles> "suggest using |   "
+23:32:49 <dmiles> but now that you mehton its for symbols.. that makes sense that the reasder needed a 0.00001
+23:32:54 <stevereed_home> (+ 1 .000000000001) --> 1.000000000001
+23:32:54 <dmiles> instead of .0000
+23:33:14 <stevereed_home> so cyc can handle the number from the ascii api (command line)
+23:33:40 <dmiles> (equal
+23:33:40 <dmiles> 	(TeraFn ?UNIT)
+23:33:40 <dmiles> 	(MeasureFn 1000000000000 ?UNIT))
+23:33:49 <dmiles> how about that one?
+23:34:37 <dmiles> i gather i will be safe using Float() and Real() in cyclist
+23:34:42 <stevereed_home> CYC(2): (- 1000000000000 1) --> 999999999999
+23:34:52 <stevereed_home> works on the ascii api
+23:35:05 <stevereed_home> Float() and Double()
+23:35:33 <dmiles> my eerror may have come from the streamtokenizer giving a bad parse.. so this wont effect what i am doing currently.. i am serializing java bojecvts to CycL
+23:35:50 <dmiles> oh yeahh.. too many programmming languges ;)
+23:36:08 <stevereed_home> like linux configs
+23:36:31 <stevereed_home> ok got to go, leave more questions...
+23:36:41 <dmiles> sure wil .. i have one real quick?
+23:36:48 <stevereed_home> ok
+23:37:26 <dmiles>    public Object makePrimitiveObjectForCycList(Class jclass, Object value) {
+23:37:27 <dmiles>         if ( jclass == java.lang.Boolean.TYPE ) if ( value==true ) return cycTrue;
+23:37:27 <dmiles>             else return cycFalse;
+23:37:27 <dmiles>         if ( jclass == java.lang.Integer.TYPE ) return new Integer(""+value);
+23:37:27 <dmiles>         if ( jclass == java.lang.Byte.TYPE ) return new Integer(""+value);
+23:37:27 <dmiles>         if ( jclass == java.lang.Void.TYPE ) return cycVoid;
+23:37:29 <dmiles>         if ( jclass == java.lang.Long.TYPE ) return new Long(""+value);
+23:37:31 <dmiles>         if ( jclass == java.lang.Character.TYPE ) return  new String("`" + value);
+23:37:33 <dmiles>         if ( jclass == java.lang.Double.TYPE ) return new CycSymbol("|" + value + "|");
+23:37:35 <dmiles>         if ( jclass == java.lang.Float.TYPE ) return new CycSymbol("|" + value + "|");
+23:37:37 <dmiles>         return null;
+23:37:39 <dmiles>     }
+23:37:41 <dmiles>     public Object makeNonPrimitiveObjectForCycList(Object value) {
+23:37:43 <dmiles>         if ( value instanceof String ) return value;
+23:37:45 <dmiles>         if ( value instanceof Boolean )  if ( value.equals(new Boolean(true)) ) return cycTrue;
+23:37:47 <dmiles>             else return cycFalse;
+23:37:49 <dmiles>         if ( value instanceof Character ) return  new String("`" + value);
+23:37:51 <dmiles>         if ( value instanceof Integer ) return value;
+23:37:53 <dmiles>         if ( value instanceof Long ) return value;
+23:37:55 <dmiles>         if ( value instanceof Double ) return new CycSymbol("|" + value + "|");
+23:37:57 <dmiles>         if ( value instanceof Float ) return new CycSymbol("|" + value + "|");
+23:37:59 <dmiles>         if ( value instanceof Byte ) return(Integer)value;
+23:38:01 <dmiles>         return null;
+23:38:03 <dmiles>     }
+23:38:07 <dmiles> widen that Cliebnt ;P
+23:38:09 <dmiles> do this look about correct.. miunus the changes we just talked about?
+23:38:18 <dmiles> asking about Character and Byte mainly
+23:39:10 <stevereed_home> study org.opencyc.api.CfaslOutputStream for the types the api supports
+23:39:24 <stevereed_home> in particular,
+23:39:29 <dmiles> ok .. that should work good for me.. now i know its there
+23:39:31 <stevereed_home> the writeObject() method
+23:39:54 <stevereed_home> on the server side,
+23:40:09 <stevereed_home> some SubL code performs the reverse operation
+23:40:17 <dmiles> ahah
+23:40:19 <stevereed_home> making native cyc objects
+23:40:26 <stevereed_home> which are C structs
+23:40:47 <stevereed_home> in a garbage collected object pool
+23:41:02 <dmiles> good beacue i was about to get into guid and all those other thigns as well
+23:41:13 <dmiles> very nice
+23:41:19 <stevereed_home> ok?
+23:41:31 <dmiles> yes.. i am going to start talking to the fasl more
+23:41:38 <dmiles> thanks.. i am set
+23:41:42 <stevereed_home> ok, on to sleep
+23:41:48 * stevereed_home is away: I'm busy
+23:41:49 <dmiles> take care
+23:59:59 --- log: ended opencyc/02.04.16

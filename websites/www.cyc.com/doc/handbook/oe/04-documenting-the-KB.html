@@ -1,0 +1,825 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 4. 
+Documenting the KB</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 4. 
+Documenting the KB</h2>
+    <p></p>
+    <b>4.1.  <a HREF='#137143568'>
+Comments</a></b>
+    <br>
+    <font size='-1'>4.1.1.  <a HREF='#137156600'>
+Collection: StuffType</a>
+      <br>
+    </font>
+    <font size='-1'>4.1.2.  <a HREF='#137190744'>
+Predicate: inputsCommitted.</a>
+      <br>
+    </font>
+    <font size='-1'>4.1.3.  <a HREF='#137207760'>
+Example Set 1: coworkers, competitors, and hasAssistants</a>
+      <br>
+    </font>
+    <font size='-1'>4.1.4.  <a HREF='#137226232'>
+Example 2: Connection-Configuration</a>
+      <br>
+    </font>
+    <font size='-1'>4.1.5.  <a HREF='#137234544'>
+Example 3: ConstructionArtifact and FixedStructure</a>
+      <br>
+    </font>
+    <font size='-1'>4.1.6.  <a HREF='#137247000'>
+Example 4: FriedrichNietzsche</a>
+      <br>
+    </font>
+    <p></p>
+    <b>4.2.  <a HREF='#137257904'>
+
+A Style Guide for Writing #$comments
+</a></b>
+    <br>
+    <font size='-1'>4.2.1.  <a HREF='#137269584'>
+
+GENERAL GUIDELINES for Composing Comments 
+</a>
+      <br>
+    </font>
+    <font size='-1'>4.2.2.  <a HREF='#137313224'>
+
+Specialized Style Suggestions
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>4.3.  <a HREF='#137446440'>
+cyclistNotes</a></b>
+    <br>
+    <p></p>
+    <b>4.4.  <a HREF='#137471256'>
+sharedNotes</a></b>
+    <br>
+    <p></p>
+    <b>4.5.  <a HREF='#137496976'>
+exampleSentences</a></b>
+    <br>
+    <hr>
+    <h1>
+    Chapter 4. 
+    
+Documenting the KB</h1>
+    <h2>4.1.  <a NAME='137143568'>
+Comments</a>
+    </h2>
+    <p>
+Every constant in Cyc should be well-documented. While the term "documentation" refers
+to any English text in the Knowledge Base used to explain the intended meaning of a
+CycL constant, ontological engineers are only required to give every constant a comment, 
+which is the the most common form of documentation in the KB.  Whenever a constant 
+is created, it is important to attach a clear and illuminating #$comment to it. 
+While it may appear to the Cyclist creating the constant that the name of the constant 
+gives all the significant information, future Cyclists may not agree. By 
+reading the comment, Cyclists should be able to understand both the meaning of a 
+CycL assertion containing the constant (assuming she understands the meaning of all 
+of the other constants in the assertion), as well as how to construct future assertions 
+using this new constant. </p>
+    <p>
+More detailed guidelines on writing comments are available in the next section, "A Style Guide for Writing #$comments." It may also be useful to look at the comment on #$comment. </p>
+    <p>
+When writing a comment, be sure to mention what type of thing is denoted by the constant
+(i.e. individual, collection, function, or predicate). Then use clear
+and grammatically correct prose to attempt to explain what counts as a proper use 
+of the constant. </p>
+    <p>
+Let's look at some examples of well-written comments:</p>
+    <h3>4.1.1.  <a NAME='137156600'>
+Collection: StuffType</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+comment: "The collection of all collections that are stuff-like in at least one respect. 
+          A collection COL is stuff-like just in case there is some sense of 'part' 
+          according to which every part of an instance of COL is itself an instance of COL. 
+          More precisely, for a collection to be a StuffType it is sufficient that there 
+          be some spec-pred of #$parts, PARTPRED, such that if (isa OBJECT1 COL) 
+          and (PARTPRED OBJECT1 OBJECT2), then (isa OBJECT2 COL). 
+          (See CyclistNotes for more detail). Here are two examples. Consider #$Breathing. 
+          Take an instance of that, say, a ten minute long period in which I am breathing. 
+          Imagine some two minute snippet of that, one of its #$timeSlices 
+          (a spec-pred of #$parts). That, too, is an instance of #$Breathing. So
+          #$Breathing is a #$StuffType, since all #$timeSlices of an instance of 
+          #$Breathing are also instances of #$Breathing. Consider #$Water. Take 
+          any instance of #$Water -- say the water in the Pacific Ocean. Now take 
+          any portion of that water -- say a handful that I scoop up near 
+          Honolulu, one of its #$physicalPortions (a spec-pred of #$parts). 
+          That handful is itself an instance of #$Water. Hence #$Water is a 
+          #$StuffType, in virtue of the fact that all #$physicalPortions of all instances 
+          of #$Water are themselves instances of #$Water. Other examples
+          are: #$AbstractInformationalThing, which is stuff-like with respect 
+          to #$subInformation; #$CharacterString, which is stuff-like with respect 
+          to #$subCharacterStrings; and #$List, which stuff-like with respect to 
+          #$sublists. These examples are somewhat exceptional -- most #$StuffTypes 
+          are like the examples of #$Breathing and #$Water. Before using #$StuffType read
+          the cyclistNotes. See #$ObjectType, for the contrasting notion of being 
+          object-like."
+</pre></tt>
+    </font>
+<p>
+StuffType is a particularly technical and complicated concept in the Cyc KB, one not
+easily understood by new Cyclists; it is likewise a very important concept in the 
+knowledge base, hence requiring a particularly perspicuous comment. It is a virtue,
+then, that this comment is so very clear, accurately defining the concept in a manner
+that even someone unfamiliar with CycL will understand.</p>
+    <p>
+There are several desirable features of this comment:</p>
+    <blockquote>
+      <ol>
+        <li>
+          <p>
+The author of the comment told us that, for collections to be StuffTypes, they 
+must be stuff-like in at least one respect. Often, comment writers take for granted that
+other Cyclists know whether, in order for something to meet a criterion outlined in 
+a comment, some part must fulfill the criterion in some respect, the whole must fulfill
+the criterion in every respect, or some gradation in between will suffice.</p>
+        </li>
+        <li>
+          <p>
+The author clearly defined "stuff-like" in both Cyc-terms ("there is some 
+spec-pred of #$parts, PARTPRED, such that if (isa OBJECT1 COL) and (PARTPRED OBJECT1
+OBJECT2), then (isa OBJECT2 COL"), and in English.</p>
+        </li>
+        <li>
+          <p>
+The author gives us two positive examples and carefully explains how they 
+meet the criteria for being instances of #$StuffType (again both in English 
+and in Cyc-terms). </p>
+        </li>
+        <li>
+          <p>
+The author gives additional examples and briefly explains them. These examples 
+are particularly useful because, while they do not meet the criteria in the paradigmatic
+way in which #$Water and #$Breathing do, they are in fact examples. Their differences 
+from the prototypical cases demonstrate how broad the usage of the constant is
+permitted to be. </p>
+        </li>
+        <li>
+          <p>
+The author points to two additional sources of information anyone intending to 
+use this constant might want to examine: the cyclistNote and the "contrasting notion",
+#$ObjectType.</p>
+        </li>
+      </ol>
+    </blockquote>
+    <p>
+Also examine: 
+</p>
+    <h3>4.1.2.  <a NAME='137190744'>
+Predicate: inputsCommitted.</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+comment : "The predicate #$inputsCommitted is used when some input to a particular event 
+           is incorporated into some output of that event, but remains recognizable 
+           rather than being destroyed. (#$inputsCommitted EVENT OBJECT) means that 
+           OBJECT exists before EVENT and continues to exist afterwards, and as 
+           a result of EVENT, OBJECT becomes incorporated into something created 
+           during EVENT. Once incorporated into the output of EVENT, OBJECT can't 
+           be independently incorporated in any other creation event. For example, 
+           bricks that are used to build a wall continue to exist as bricks once the 
+           wall has been built. While a part of the wall, a brick cannot be used 
+           as an independent input in another creation event. (See also #$outputsCreated.) 
+           Note: there is a grey area between #$inputsCommitted and #$inputsDestroyed (q.v.);
+           the less possible it is to take apart the relevant outputs of EVENT and 
+           get OBJECT back as an independent thing, the more likely it is that the 
+           relationship between EVENT and OBJECT should be #$inputsDestroyed, 
+           rather than #$inputsCommitted." </pre></tt>
+    </font>
+
+
+<p>
+Again, the author gives a clear explanation of the proper use of the predicate, both in 
+English, and in giving a translation from CycL to English. Furthermore, she identifies a
+problem in using this constant: it is sometimes very difficult to tell whether it is 
+more proper to use #$inputsCommited or #$inputsDestroyed. Here she gives us a rough
+guideline to follow should we be in the "grey area" between two constants. </p>
+    <p>
+Neither of these constants use negative examples, but these can be very useful as well 
+because they can assist Cyclists in determining just how closely the criteria have to be
+met in order to determine whether a constant should be used. </p>
+    <p>
+Poorly written comments lead to a great deal of confusion. If a comment does not 
+constrain a constant's use effectively, that constant might become something of a
+junkyard of unrelated uses. #$MentalObject had to be killed, for instance, because 
+just such a morass of assertions and spec-collections made this a useless and ill-defined
+constant. Alternatively, should a comment be too confusing, Cyclists, rather than 
+trying to guess at its appropriate use, will ignore the constant entirely. Worse, some
+Cyclist might create a constant which performs an identical function without realizing it. 
+Thus some critical assertions would be made on one constant and other assertions
+on another, while both sets of assertions should be on the same constant. </p>
+    <p>
+The following comments from the Cyc KB are unilluminating or bad for various reasons.  
+These comments will be changed in the knowledge base, making the constants 
+themselves more usable.</p>
+    <p>
+Avoid making similar mistakes when writing comments:</p>
+    <h3>4.1.3.  <a NAME='137207760'>
+Example Set 1: coworkers, competitors, and hasAssistants</a>
+    </h3>
+    <h4>4.1.3.a.  
+Predicate: coworkers.</h4>
+    <p>
+comment: "Entries are the persons who work with ARG1 as members of a TaskGroup."</p>
+    <h4>4.1.3.b.  
+Predicate: competitors</h4>
+    <p>
+comment: "(competitors AGENT1 AGENT2) means that AGENT1 and AGENT2 are competitors."</p>
+    <h4>4.1.3.c.  
+Predicate: hasAssistants.</h4>
+    <p>
+comment: "Entries are the persons who are U's assistants".</p>
+    <p>
+These examples are instances where it seems as if the authors of the comments believed 
+the use to be so obvious that no further explanation is necessary. While it may even
+be the case that the usage is obvious to most people, even in these cases clearer 
+comments should be written.</p>
+    <h3>4.1.4.  <a NAME='137226232'>
+Example 2: Connection-Configuration</a>
+    </h3>
+    <h4>4.1.4.a.  
+Collection: Connection-Configuration.</h4>
+    <font color='#339900'>
+      <tt><pre>
+comment: "This is the parent unit for all the connection units. A connection is used
+        to describe a relation that one cannot (or does not wish to) represent as a binary 
+        predicate or if you want to say something very specific about that specific relation. 
+        In general, if a binary predicate is available then the connection unit is not 
+        required. eg. The time relations are expressed in terms of binary relations and 
+        hence don't come under this. (Though in some abstract sense they are also connections.)" </pre></tt>
+    </font>
+
+
+<p>
+This is a case where the use of the constant is so obscured in the prose in the comment 
+(and lack of examples), that the collection has become fairly useless. </p>
+    <h3>4.1.5.  <a NAME='137234544'>
+Example 3: ConstructionArtifact and FixedStructure</a>
+    </h3>
+    <h4>4.1.5.a.  Collection:
+ConstructionArtifact.</h4>
+    <font color='#339900'>
+      <tt><pre>
+comment: "A collection of artificial tangible objects. Each element of 
+        #$ConstructionArtifact is a structure designed and built by humans. This 
+        collection includes buildings and parts of buildings, as well as things like dams, 
+        railroad lines, and roads. Examples: the #$RomanColiseum, the #$ArcDeTriomphe, 
+        #$HooverDam, the #$WorldTradeCenter, #$HollywoodBowl. For further information, 
+        see #$FixedStructure, an important subset.</pre></tt>
+    </font>
+
+
+<h4>4.1.5.b.  
+Collection: FixedStructure.</h4>
+    <font color='#339900'>
+      <tt><pre>
+comment: "A collection of artifacts. Each element of #$FixedStructure is a 
+         humanly-constructed, freestanding object that exists in a fixed location; 
+         e.g., buildings, pyramids, the Great Wall of China, dams, elevated roadways, 
+         canals, etc. Such structures may have parts which are also elements of 
+         #$FixedStructure (e.g. bridge pilings) and parts which are not
+         freestanding (e.g., the span of a bridge, or a room in a building)."</pre></tt>
+    </font>
+
+
+<p>
+It is unclear what the distinction between these two constants might be. The 
+comment on #$ConstructionArtifact states that #$FixedStructure is "an important 
+subset" of #$ConstructionArtifact, but neither comment explains what additional 
+criteria elements of #$FixedStructure must meet. At first it appears that 
+parts of structures can count as construction artifacts and perhaps only 
+full-structures can count as fixed structures. But this assumption is falsified 
+by the observation that bridge pilings can be fixed structures. It may 
+be the case the elements of #$ConstructionArtifact needn't be freestanding the 
+way that elements of #$FixedStructure do. Or, alternatively, perhaps elements of 
+#$ConstructionArtifact need not be fixed locations, so that a space station or a 
+camping trailer might be elements of #$ConstuctionArtifact, but not of #$FixedStructure.
+But these are merely guesses, and not explicitly stated in the comment. 
+Furthermore, all of the examples appear to be equally plausible as instances 
+of both collections. If creating a constant which may easily be confused with 
+another, be sure to state explicitly the distinguishing characteristics.</p>
+    <h3>4.1.6.  <a NAME='137247000'>
+Example 4: FriedrichNietzsche</a>
+    </h3>
+    <h4>4.1.6.a.  
+Constant: FriedrichNietzsche.</h4>
+    <font color='#339900'>
+      <tt><pre>
+comment: "The German rhetorical stylist, philosopher of ethics and essayist 
+         who is famous for his development of #$Nietzschean-Superman, or 
+         UberMensch, a person who sets his/her own moral standards and is not 
+         dependent on the approval or approbation of his social group. Despite 
+         his remarkable misanthropy and misogyny, Nietzsche never directed his bile
+         against any ethnic grouping in fact, it was a distaste for racism in 
+         general that caused him to end his friendship with the German composer Richard 
+         Wagner. Nonetheless, his moral standpoint was open to misinterpretation, 
+         and his philosophies on the superman mentality were later adopted 
+         and perverted by the #$GermanNaziParty.".</pre></tt>
+    </font>
+
+
+<p>
+In addition to its grammatical errors, this comment contains quite a bit of 
+editorializing on the part of the author. It is considered inappropriate to 
+make controversial claims in a constant's comment without expressly stating 
+the position is a disputed one. Inside jokes and cheeky remarks are also to be 
+avoided when writing comments.  While a particular constant may not be part 
+of the public ontology currently, it may be made public eventually, and 
+the comments on public constants must be acceptable to people other than 
+Cyclists. Any notes that are only of use to fellow Cyclists should be included 
+in #$cyclistNotes.</p>
+    <h2>4.2.  <a NAME='137257904'>
+
+A Style Guide for Writing #$comments
+</a>
+    </h2>
+    <p>
+The predicate #$comment is used to attach a string of explanatory text to a CYC constant. Whenever a CYC constant is created, a #$comment assertion should be written for it. This page gives some guidelines for the content and style of text in comments. Clarity is the most important stylistic criterion, because we want readers to understand the intended meaning and proper usage of our constants.</p>
+    <h3>4.2.1.  <a NAME='137269584'>
+
+GENERAL GUIDELINES for Composing Comments 
+</a>
+    </h3>
+    <blockquote>
+      <ol>
+        <li>
+          <p>
+Mention at the outset the type of constant you're describing (e.g., collection, predicate, function). Guidelines for explaining specific types of constant are given below.</p>
+        </li>
+        <li>
+          <p>
+Explain the meaning of the constant in clear and economical prose, correctly punctuated and spelled. Use complete sentences, except perhaps for the very first one, which can be a dictionary-like phrase such as "A collection of events."</p>
+        </li>
+        <li>
+          <p>
+Be precise in your use of CYC constant names within #$comment text:
+</p>
+          <blockquote>
+            <ol>
+              <li>
+                <p>
+In #$comment text, CYC constant names should be preceded by the "#$" prefix, so that links from your comment to those constants can be generated in the html browser. Misspelled names will not link. Note that CYC's code can handle a leading or ending parenthesis, and a trailing comma, period, semicolon, colon, question mark, exclamation point, hyphen, or plurals formed with "s" and "es." It cannot, however, handle plurals formed by removing "y" and adding "ies"; for example, '#$Microtheories' (from #$Microtheory) would not be recognized.</p>
+              </li>
+              <li>
+                <p>
+Don't confuse the names of CYC constants (e.g., #$Animal) with their English homonyms (e.g., 'animal'). The name of a CYC collection (e.g., #$Person, #$Speaking) is not the same thing as an English noun. Don't say, for example, "#$Person is the collection of those #$Animals which...." Instead, say "#$Person is the collection of those animals which...;" or, alternatively, "#$Person is a specialization of #$Animal." Although an experienced Cyclist could recognize that 'Flipper is a #$Dolphin' "means" that Flipper is an element of the CYC collection #$Dolphin, rather than that he is the same type of thing as that collection, the sentence is potentially confusing. Such casual "insider" usages exist in the KB, but we try to avoid adding similar violations in new work. </p>
+              </li>
+            </ol>
+          </blockquote>
+        </li>
+        <li>
+          <p>
+To help explain the meaning of a constant, give some example instances of collections and some typical uses of a predicate or a function. It is permissible to use made-up constant names for examples, with the following proviso: If a made-up constant represents a concept that CYC should eventually know about, write its name preceded by "#$" (e.g., #$SpaceStation). If it is only a random example, such as Dog001 or KarensLeftEar, omit the '#$' prefix. </p>
+        </li>
+        <li>
+          <p>
+Mention and perhaps illustrate any special restrictions on the meaning or use of the constant. 
+</p>
+        </li>
+        <li>
+          <p>
+Use a Note at the end of the #$comment text for any extra clarifications or details relevant for a general user. A Note may be used to present exceptions, borderline examples, one or more "footnotes," or pointers to related constants that a reader might want to examine (especially if those are not displayed already in the #$isa, #$genls, #$genlPreds, or other prominent assertions about the constant being commented). Formally separate the Note from the main body of the text with a single carriage return, to begin a new paragraph, or by typing two carriage returns in a row, to insert a blank line.</p>
+        </li>
+        <li>
+          <p>
+Use a #$cyclistNotes assertion for technical matters of concern only to knowledge enterers.
+</p>
+        </li>
+        <li>
+          <p>
+ALWAYS PROOFREAD your comments in the html browser after entering them, as well as in your text file beforehand.</p>
+        </li>
+      </ol>
+    </blockquote>
+    <h3>4.2.2.  <a NAME='137313224'>
+
+Specialized Style Suggestions
+</a>
+    </h3>
+    <h4>4.2.2.a.  
+
+Comments on CYC COLLECTIONS:
+</h4>
+    <blockquote>
+      <ol>
+        <li>
+Refer to a collection as a collection, rather than as a 'group' or 'class' or 'category'. Refer to the elements of a collection -- the values on its #$isa relation -- as elements or instances, rather than as 'members' or 'parts'. The #$genls relation may be described by talking about subsets and supersets, although it should be noted that CYC collections are more restrictive than mathematical sets (cf. #$Collection, #$Set-Mathematical). In general, avoid words that are open to misinterpretation, such as "member," "sample," "illustration," "class," "category," "type," "assemblage," "grouping," "process," "activity," "circumstance"; prefer words which permit less ambiguity, such as "element" and "set" and "event." </li>
+        <li>
+          <p>
+Begin by stating, for a collection #$COL, "#$COL is a [or 'the'] collection of ...", or "#$COL is a subset of ...." A dictionary-like introductory fragment, such as "A [or 'The'] collection of ...." is also acceptable. For example:</p>
+          <font color='#339900'>
+            <tt><pre>
+"#$Movement-Rotation is a subset of #$MovementEvent. Elements of 
+#$Movement-Rotation are those moving events in which the #$objectMoving 
+rotates about an internal or external axis. For example, the daily 
+rotation of the Earth on its axis, or the rotation of a clock hand about 
+its fastened end."</pre></tt>
+          </font>
+</li>
+
+<li>
+          <p>
+Give one or more examples of your collection. As examples, mention some elements or some subsets. It is best if those examples are actual instances in the KB (e.g., #$JohnsHopkinsUniversity as an example of #$University), but examples may also be identified using ordinary English. For example, "The collection #$Movement-Rotation includes rotations of the Earth on its axis." It is permissible to make up constant names for non-existent constants, if they are entities which should eventually be known to CYC, e.g., #$YulBrynner; but avoid those that name an obviously poor constant, e.g., #$YulBrynnersScalp. (The latter implies that CYC might need to have trillions of constants such as 'MarySimpsonsLeftIndexFinger'!)
+</p>
+        </li>
+      </ol>
+    </blockquote>
+    <p>
+Here is a sample of a long comment on an important, broad collection of events:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+#$MovementEvent is the most general collection for events that are physical 
+movements. Each instance of #$MovementEvent is a rotation or translation of 
+some instance of #$PartiallyTangible, where movement occurs relative to a 
+frame of reference which is not part of the #$objectMoving. Thus, Neil 
+Armstrong's stepping onto the Moon's surface from the lunar landing module 
+is an element of #$MovementEvent. Such movements may be periodic (e.g., the 
+turning of the Earth on its axis 31 times during the month of August 1996) 
+or complex (e.g., Li Xiaoshuang's compulsory floor exercise in the 1996 
+Olympics Men's Gymnastics Team Competition).
+
+Note: #$MovementEvent is the most generic collection for physical movements. 
+For representing specific events, one or more of the following subsets of 
+#$MovementEvent may be more precise: #$Movement-TranslationEvent, 
+#$Movement-Rotation, #$Movement-Periodic, #$Movement-NonPeriodic, 
+#$Translation-Flow, #$Translation-Complete, #$Translation-SingleTrajectory, 
+#$Translation-MultiTrajectory. Some questions to consider in selecting the 
+best collection to represent a physical movement include: (1) is the movement 
+translational or rotational motion? (2) is it periodic or nonperiodic? 
+(3) does it involve a discrete motion (i.e., an object's moving completely 
+from one place to another) or a continuous flow? (4) does it involve a change 
+of location or no location change? (5) does it involve a single pathway or 
+more than one? 
+
+Note on what is NOT included in #$MovementEvent: Consider a person's raising 
+her hand and waving, or a tree's bending as its branches sway in a strong wind, 
+while the person and the tree remain in the same place. The movements of the 
+person and the tree do NOT qualify as instances of #$MovementEvent, because 
+the 'doer' in any element of #$MovementEvent must rotate or translate as a whole. 
+The hand movement and the movement of the branches do, however, qualify as 
+objects moving in the proper sense. So, for example, an instance of #$WavingAHand 
+(done by a person) would have #$subEvents which ARE elements of #$MovementEvent, 
+in which the person's hand is the #$objectMoving. Note also that instances of 
+#$TransformationEvent (such as a caterpillar turning into a butterfly), or of 
+#$ShapingSomething (such as molding a piece of clay into the bust of Napoleon), 
+are also not elements of #$MovementEvent, because they do not involve motion of 
+the whole object with respect to some frame of reference. 
+(See also #$FrameOfReference.)</pre></tt>
+    </font>
+
+
+
+
+
+
+
+
+
+
+<h4>4.2.2.b.  
+
+Comments on CYC INDIVIDUALS [optional]:</h4>
+    <blockquote>
+      <ol>
+        <li>
+          <p>
+This is the only general class of exceptions to the 'always write a comment' rule. Information about individuals represented in the CYC KB (e.g., #$JohnKennedy, #$UnitedStatesOfAmerica, #$MississippiRiver) may be captured exhaustively in the CycL assertions on the constant itself. Add an English comment only if there is an unusual need for further characterization of the individual.</p>
+        </li>
+        <li>
+          <p>
+The names of CYC constants that represent individuals may be used in #$comment text like English proper nouns. Examples: "#$JohnKennedy was the 35th President of the #$UnitedStatesOfAmerica." Another example: "#$Cycorp is headed by Doug #$Lenat."</p>
+        </li>
+      </ol>
+    </blockquote>
+    <h4>4.2.2.c.  
+
+Comments on CYC PREDICATES:
+</h4>
+    <blockquote>
+      <ol>
+        <li>
+          <p>
+Begin the comment with a general description about what the predicate relates or what it is used for. For example, "The CYC predicate #$employees relates a particular employer to one of its paid employees...." 
+</p>
+        </li>
+        <li>
+          <p>
+In every case, the comment should contain a sentence of the following form: "(#$&lt;;predicate-name= ARG1-METAVAR [ARG2-METAVAR ... ARGN-METAVAR]) means that ...." That sentence should be either the first sentence in the comment or should follow a first sentence of the type mentioned in (1) above. In general, it is helpful to use mnemonic meta-variables rather than simply X, Y, Z, etc. See also (4) below.</p>
+        </li>
+        <li>
+          <p>
+To describe the constraints on arguments to a predicate:
+</p>
+          <blockquote>
+            <ol>
+              <li>
+                <p>
+One approach, which violates the guideline about not using CYC constant names as English words, is to use the name of the argument-constraining constant as a modifier in the following way: "(#$geographicalSubRegions SUPER SUB) means that the #$GeographicalRegion SUPER contains all of the #$GeographicalRegion SUB." That was widely done in the past.</p>
+              </li>
+              <li>
+                <p>
+A clearer style yields this version: "The binary predicate #$geographicalSubRegions relates a geographical region to the geographical regions it spatially contains. Both arguments to #$geographicalSubRegions must be elements of #$GeographicalRegion. (#$geographicalSubRegions SUPER SUB) means that the region SUPER contains all of the region SUB."</p>
+              </li>
+            </ol>
+          </blockquote>
+        </li>
+        <li>
+          <p>
+Use meta-variables in comments on predicates. In an explanatory sentence such as: </p>
+          <font color='#339900'>
+            <tt><pre>
+(#$geographicalSubRegions SUPER SUB) means that the region SUPER contains 
+all of the region SUB</pre></tt>
+          </font>
+<p>
+SUPER and SUB are meta-variables, because in the comment text they are placeholders that could be replaced by the names of individuals as well as by variables (with appropriate quantification and/or restriction). Write meta-variables by omitting the prefix '?' used with actual variables in the CYC system.</p>
+          <p>
+Also see (5) below regarding quoting rules in comment text.</p>
+        </li>
+        <li>
+          <p>
+If you quote a rule from the CYC KB, then variables in the rule should be quoted as actual variables, just as they are in the KB; e.g., (#$implies (#$and (#$isa ?E1 #$Action) (#$subEvents ?E ?E1) (#$doneBy ?E ?P) (#$isa ?E #$SingleDoerAction)) (#$doneBy ?E1?P)).</p>
+          <p>
+In general, quote a rule in order to illustrate the use of a predicate in CycL. If you are using the rule to explain the meaning of a particular predicate, it's probably better to state the rule in English rather than to quote the formal rule. For example, paraphrase the above rule as follows, for clarity: "If a particular action is of the kind that can be done only by a single agent, then all of its sub-actions have the same agent as does the overall action."</p>
+        </li>
+        <li>
+          <p>
+Here is the full comment from #$employees, as an example:
+</p>
+          <p>
+The predicate #$employees relates a particular employer to one of its paid employees. (#$employees EMPLOYER WORKER) means WORKER regularly performs work for EMPLOYER, and EMPLOYER pays WORKER for that activity (often by paycheck). EMPLOYER directs the manner in which WORKER performs the work and may provide the workplace, tools, capital, and other assistance for the work. EMPLOYER is commonly an organization but may be a person. E.g., (#$employees PerryMason PaulDrake); (#$employees #$Cycorp #$Lenat). Uses of this predicate require proper temporal qualification; e.g., (#$holdsIn #$TheYear1995 (#$employees #$CarnegieMellonUniversity #$Derthick)).
+Notice that meta-variables in the above are upper-case and lack the preceding '?' used with actual variables in CycL. Also note that names of individuals who are used as examples but who are not in fact in the CYC KB lack a preceding '#$'.</p>
+          <p>
+Another example: the #$comment text for #$likesObject:</p>
+          <p>
+(#$likesObject AGT OBJ) means that when the sentient agent AGT is interacting in some way with OBJ, that agent feels some measure of #$Enjoyment --- that is, (#$feelsEmotion AGT #$Enjoyment). The kinds of interactions that produce #$Enjoyment depend largely on what kind of thing OBJ is. Thus, 'Joe likes the Mona Lisa' implies that Joe feels #$Enjoyment when viewing the Mona Lisa. But 'Joe likes pizza' implies that Joe feels #$Enjoyment when eating that kind of food. Note: There are some specialized predicates of #$likesObject that give more information about the kind of interaction between AGT and OBJ that results in #$Enjoyment; see, e.g., #$likesSensorially and #$likesAsFriend.</p>
+        </li>
+      </ol>
+    </blockquote>
+    <h4>4.2.2.d.  
+Comments on CYC FUNCTIONS:</h4>
+    <blockquote>
+      <ol>
+        <li>
+          <p>
+Mention the type of function being described. Usually it is either #$CollectionDenotingFunction or #$IndividualDenotingFunction, but you may want to mention a more specific group of functions to which the target function belongs, e.g., #$UnitOfMeasure.
+</p>
+        </li>
+        <li>
+          <p>
+Mention the argument type(s) of the function, as well as its result type (i.e., #$resultIsa and/or #$resultGenls). </p>
+        </li>
+        <li>
+          <p>
+Describe generally, or make clear by example(s), how the function is used.</p>
+        </li>
+      </ol>
+    </blockquote>
+    <p>
+Here is an example, the #$comment text for #$GroupFn:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+#$GroupFn, an instance of #$CollectionDenotingFunction, is used for 
+representing specialized subsets of #$Group. (#$GroupFn OBJ-TYPE) 
+denotes the collection of all groups whose members are instances of 
+OBJ-TYPE. Note that an application of #$GroupFn refers to a COLLECTION 
+which has groups as elements, rather than to an individual group. 
+#$GroupFn takes any element of #$ObjectType as its argument, returning 
+the subset of #$Group that contains groups having instances of that 
+#$ObjectType as its #$groupMembers. For example, 
+(#$GroupFn #$BallisticMissile) represents the collection of all groups 
+of ballistic missiles, which includes Russia's ballistic missiles, 
+China's ballistic missiles, the U.S.'s ballistic missiles, etc. Another 
+example: A group of 101 particular Dalmatians is an instance of 
+(#$GroupFn #$Dog). Collections of groups of events may also be denoted; 
+e.g., Columbus's voyages to North America may be considered as a group 
+(of events) which would be an element of (#$GroupFn #$Travel-TripEvent).</pre></tt>
+    </font>
+
+
+<h4>4.2.2.e.  
+Comments on Ground Atomic Formulas (GAFs) and Rules:</h4>
+    <p>
+Use the predicate #$salientAssertions if you want to indicate that a particular assertion is essential to the meaning of some CYC constant. Example: (#$salientAssertions #$SingleDoerAction (#$implies (#$and (#$isa ?E1 #$Action)(#$subEvents ?E ?E1)(#$doneBy ?E ?P)(#$isa ?E #$SingleDoerAction))(#$doneBy ?E1 ?P))).</p>
+    <p>
+Note that, although it is possible and sometimes useful to write a #$comment text for a particular CYC rule or GAF, that is not a common practice (nor should it be). To place a comment on a rule or GAF, make the formula itself the first argument to #$comment. Example: (#$comment (#$genls #$Person #$Animal) "This GAF really doesn't need a comment.").</p>
+    <p>
+Finally, here are some special requirements for html-based interfaces such as CYC presently uses: 
+</p>
+    <p>
+Some characters require special handling:
+</p>
+    <blockquote>
+      <ul>
+        <li>
+          <p>
+Double-quotation marks must be preceded in your text by a backslash (or simulated with two single quotes)
+</p>
+        </li>
+        <li>
+          <p>
+Left- and right-angle brackets must be written in your text as "&amp;lt" for left-angle bracket and "&amp;gt" for right-angle bracket</p>
+        </li>
+        <li>
+          <p>
+Avoid using ampersands or other non-printing ascii characters (except for spaces)</p>
+        </li>
+      </ul>
+    </blockquote>
+    <h2>4.3.  <a NAME='137446440'>
+cyclistNotes</a>
+    </h2>
+    <p>
+Any documentation in the Knowledge Base that is only of use to other Cyclists 
+should be contained in #$cyclistNotes. Like #$comment, #$cyclistNotes is a 
+binary predicate which takes a #$CycLIndexedTerm as its first argument and 
+a #$SubLString as its second. #$cyclistNotes are found most often on 
+constants, but are sometimes found on assertions as well. The SubLString should 
+contain any information that is not contained in the constant's comment that 
+might be useful to anyone doing OE or KE.  Also, while every constant should
+have a comment, cyclist notes are used as deemed appropriate.</p>
+    <p>
+Here are some examples of how and when to write #$cyclistNotes:
+</p>
+    <li>
+To note the source of information for a particular constant. If 
+          the constant needs a "bibliography" of sorts, #$cyclistNotes is a good 
+          place to record all the relevant information.</li>
+    <li>
+If the constant is still being developed, or is part of a larger, 
+          experimental set of constants. This lets other Cyclists know that the
+          current constant is not fully defined and that there's still more work 
+          to be done. Also, this might dissuade others from using a constant that 
+          is still experimental.</li>
+    <li>
+For observing changes or future work. If the constants will undergo some 
+          massive cleanup, especially if it will result in killing a constant, 
+          it is important to let others know before they make assertions on a constant. 
+          This is also important in case that some work on a constant or an assertion 
+          is part of an OE work-around that should be eliminated when proper OE or 
+          support has been done.  This is also a good place to note that a constant 
+          or suite of constants are replacing more problematic ones.</li>
+    <li>
+For explaining techincal details or issues re the meaning or use of the
+          constant that are relevant only in special circumstances and might not
+          be appropriate for the comment.</li>
+    <p>
+When writing a #$cyclistNote containing current information about the KB, please
+be sure to date the note. </p>
+    <p>
+For example,</p>
+    <font color='#339900'>
+      <tt><pre>
+cyclistNote: Currently (February 2001), this predicate 
+still lacks code support.</pre></tt>
+    </font>
+
+
+<p>
+Also, if the #$cyclistNotes contain suggestions, objections, or promises for future OE, 
+be sure to "sign" the note by including the names of the Cyclists making the
+suggestions. This can be added conveniently with the date at the end of the note.  This 
+is unnecessary if the suggestion is made exclusively by the Cyclist making the assertion.</p>
+    <h2>4.4.  <a NAME='137471256'>
+sharedNotes</a>
+    </h2>
+    <p>
+If it is appropriate to make the same comment on several constants, it may be 
+advisable to write a #$SharedNote. #$sharedNotes assertions are created 
+differently than #$comments or #$cyclistNotes. First, it is necessary to create 
+the #$SharedNote. The note has its own constant, which is an instance of 
+#$SharedNote. Where TOPIC is the topic of the note, the constant should be named 
+'SharedNoteOnTOPIC' or 'NoteOnTOPIC' unless the note compares the use of two topics. 
+The #$comment on this constant will apply to all the
+constants that share the note. Once the #$SharedNote has been created, 
+it is then linked using the predicate #$sharedNote to the constants for 
+which it contains information. </p>
+    <p>
+This #$SharedNote is currently in the KB:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   Constant : ThereExistsVsThereExistAtLeast1
+   Mt: BaseKB
+   isa: SharedNote
+
+   comment:"There is no difference in meaning between (#$thereExists X PROP) 
+   and (#$thereExistAtLeast 1 X PROP). It is better style to use #$thereExists 
+   in these cases."
+
+   Mt : BaseKB
+
+   (sharedNotes thereExistAtLeast ThereExistsVsThereExistAtLeast1)
+   (sharedNotes thereExists ThereExistsVsThereExistAtLeast1)</pre></tt>
+    </font>
+
+<p>
+This note is part of the documentation for the constants #$thereExists and 
+#$thereExistsAtLeast. </p>
+    <p>
+Note that #$sharedNotes formulae are also useful as a consequent to a forward rule. 
+Before writing a rule of this sort, please remember to read and follow the guidelines for 
+creating any forward rule. </p>Examine this #$SharedNote:
+
+
+<font color='#339900'>
+      <tt><pre>
+   Constant : NoteAboutRedo
+   Mt : BaseKB
+   isa : SharedNote 
+
+   comment : "Don't use me. I'm a constant that has been flagged with the 
+   predicate redo, which means that I should be killed once a good replacement 
+   for me has been fashioned and any useful information hung on me has been 
+   moved over. If you need to use me, why not do that cleanup yourself now?" 
+
+   (implies 
+     (and 
+       (isa ?CONSTANT CycLReifiableDenotationalTerm) 
+       (redo ?CONSTANT ?STRING)) 
+     (sharedNotes ?CONSTANT NoteAboutRedo)) in BaseKB
+
+
+   (implies 
+     (and 
+      (redo ?CONSTANT) 
+      (isa ?CONSTANT CycLReifiableDenotationalTerm)) 
+     (sharedNotes ?CONSTANT NoteAboutRedo)) in BaseKB
+</pre></tt>
+    </font>
+
+<p>
+Both of the above rules are propagated forward in the knowledge base, so 
+whenever anyone makes an assertion flagging a constant or an assertion 
+for "redo", the above comment automatically becomes part of the documentation 
+for that constant. Because the following denotatonal term is found on #$ReligiousPerson:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (redo ReligiousPerson "The rules seem to consider that ReligiousPerson 
+   means a person who is observant in a religion. The comment and some of 
+   the specs indicate that the meaning is a member of some religion. For some 
+   reason, JewishPerson is not a spec of this, evidently because the meaning 
+   implicit in the rules is being considered.")</pre></tt>
+    </font>
+
+
+<p>
+the comment on the #$NoteAboutRedo will appear on the "Documentation" 
+page for that constant. </p>
+    <p>
+Note that #$redo is a powerful documentation constant as well. Be sure to read 
+the comment and cyclistNotes about it in the Knowledge Base. </p>
+    <h2>4.5.  <a NAME='137496976'>
+exampleSentences</a>
+    </h2>
+    <p>
+It is sometimes very helpful to other Cyclists and guests to Cyc alike to see 
+what a well-formed and semantically useful assertion using a Cyc term might 
+look like. This is especially true for predicates. In those cases, it is a 
+good idea to create an #$exampleSentences assertion. In the case of predicates, 
+use its spec-pred, #$examplePredSentences. (There is also #$exampleNATs 
+for non-atomic terms.) </p>
+    <font color='#339900'>
+      <tt><pre>
+  (examplePredSentences differentInAttribute 
+    (differentInAttribute MarieAntoinette RembrandtVanRijn GenderOfLivingThing))</pre></tt>
+    </font>
+<hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

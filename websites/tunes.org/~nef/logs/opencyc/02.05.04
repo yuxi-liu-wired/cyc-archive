@@ -1,0 +1,176 @@
+00:00:00 --- log: started opencyc/02.05.04
+01:59:30 --- quit: dash ("zzzz")
+03:14:25 --- quit: CycLBot (Remote closed the connection)
+03:14:39 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:14:39 <CycLBot> I am initializing
+03:14:40 <CycLBot> I am ready to chat
+03:27:32 --- quit: CycLBot (Remote closed the connection)
+03:27:46 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:27:46 <CycLBot> I am initializing
+03:27:47 <CycLBot> I am ready to chat
+03:47:14 --- quit: CycLBot (Remote closed the connection)
+05:18:33 --- join: theos (~torsten@port-213-20-65-166.reverse.qdsl-home.de) joined #opencyc
+05:30:41 --- quit: Seth (Read error: 110 (Connection timed out))
+05:36:18 --- part: theos left #opencyc
+06:11:27 --- quit: dmiles-- (carter.openprojects.net irc.openprojects.net)
+06:11:32 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+06:11:50 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+06:11:50 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+08:25:10 <dmiles--> YC(1): ./run-cyc.sh: line 29: 16137 Segmentation fault      (core dumped) bin/latest.bin -w world/latest.load
+08:25:29 <dmiles--> i am loading files containg alot of forward channing
+08:26:04 <dmiles--> default world file
+11:10:50 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+11:10:51 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+11:10:51 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+11:11:01 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+11:55:57 <dmiles> stevereed: i now have object rtransparency between Jamud and Cyc
+11:56:17 <dmiles> this means everything in Jamud is visible to Cyc
+11:56:32 <dmiles> so all objects now have a query/update method from Cyc
+11:56:48 <dmiles> and they still work in the mud
+11:57:23 <dmiles> cyc assertions on objects are pushed into juamd (within a propogation time)
+11:58:03 <dmiles> whenever this happens cyc also queries (walks the model of the jamud)
+11:58:18 <dmiles> and updates itself
+11:58:34 <dmiles> the nice thing is that forward chaining rules now happen on objects
+11:59:25 <dmiles> so every 1 minute a thread calls query all then assert all.. then query all.. ewtc
+11:59:53 <dmiles> i wil be able to release logicmoo beginning of next week
+12:00:01 <dmiles> the remaining work is all KE
+12:43:59 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+12:44:00 <CycLBot> I am initializing
+12:44:00 <CycLBot> I am ready to chat
+13:03:30 --- quit: CycLBot (Remote closed the connection)
+13:04:59 --- join: whitten (whitten@adsl-65-68-87-147.dsl.hstntx.swbell.net) joined #opencyc
+13:05:17 <whitten> Good day, one and all.
+13:07:20 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+13:07:20 <CycLBot> I am initializing
+13:07:21 <CycLBot> I am ready to chat
+13:08:15 <dmiles> Hello!
+13:08:39 <dmiles> i have been working on the syncronization intervals bettween java and Cyc
+13:09:08 <dmiles> Jamud -> Cyc -> Jamud -> Cyc
+13:09:30 <dmiles> so forward chaining assertions seem to go into the Mud
+13:11:24 <dmiles> http://12.225.207.235:8080/logicmoo/index.jsp
+13:11:59 <dmiles> act6ually http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-start
+13:12:11 <dmiles> and search for MIDGAARD
+13:12:41 <dmiles> your concept david aboud java relfection you will see implemented
+13:13:04 <dmiles> sorry about name case
+13:13:15 <dmiles> (i am not good at typing on IRC)
+13:25:29 <dmiles> ok restarting with new updates
+13:25:35 --- quit: CycLBot (Remote closed the connection)
+13:26:08 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+13:26:09 <CycLBot> I am initializing
+13:26:09 <CycLBot> I am ready to chat
+13:26:27 --- quit: CycLBot (Remote closed the connection)
+13:26:44 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+13:26:45 <CycLBot> I am initializing
+13:26:45 <CycLBot> I am ready to chat
+13:32:06 <dmiles> query (hasSlotValue dmiles getParentContainer ?
+13:32:07 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+13:32:12 <dmiles> query (hasSlotValue dmiles getParentContainer ?Where)
+13:32:14 <CycLBot> ?WHERE = dmiles -home ((((?WHERE . dmiles-home))))
+13:32:53 <dmiles> noparaphrase #opencyc
+13:33:06 <dmiles> query (hasSlotValue dmiles ?X ?Y)
+13:33:08 <CycLBot> ((?X . Tid) (?Y . "dmiles-body"))
+13:33:08 <CycLBot> ((?X . getParentContainer) (?Y . dmiles-home))
+13:33:09 <CycLBot> ((?X . Race_getSet) (?Y . "dwarf"))
+13:33:09 <CycLBot> ((?X . Job_getSet) (?Y . "mage"))
+13:33:10 <CycLBot> ((?X . Gender_getSet) (?Y . "male"))
+13:33:10 <CycLBot> ((?X . ShortDescription_getSet) (?Y . ""))
+13:33:11 <CycLBot> ((?X . Description_getSet) (?Y . ""))
+13:33:12 <CycLBot> ((?X . Name_getSet) (?Y . ""))
+13:34:42 <dmiles> query (hasSlotValue dmiles-home ?X ?Y)
+13:34:44 <CycLBot> ((?X . Exits) (?Y . Down))
+13:34:44 <CycLBot> ((?X . Tid) (?Y . "dmiles-home"))
+13:34:45 <CycLBot> ((?X . getParentContainer) (?Y . nullJava))
+13:34:45 <CycLBot> ((?X . Race_getSet) (?Y . "thing"))
+13:34:46 <CycLBot> ((?X . Job_getSet) (?Y . "junk"))
+13:34:46 <CycLBot> ((?X . Gender_getSet) (?Y . "thing"))
+13:34:47 <CycLBot> ((?X . ShortDescription_getSet) (?Y . "dmiles's Home"))
+13:34:48 <CycLBot> ((?X . Description_getSet) (?Y . "  Welcome Home"))
+13:34:52 <CycLBot> ((?X . Name_getSet) (?Y . "dmiles's Home"))
+13:35:57 <dmiles> query (nearestIsa dmiles-home ?What)
+13:35:58 <CycLBot> (((?WHAT . Building)) ((?WHAT . MudObjectContainerInstance)) ((?WHAT . MudObjectInstance)))
+13:36:21 <dmiles> query (nearestIsa dmiles ?What)
+13:36:22 <CycLBot> (((?WHAT . MudObjectContainerInstance)) ((?WHAT . MudObjectInstance)))
+13:37:15 <dmiles> query (hasSlotValue dmiles-home getParentContainer ?Y)
+13:37:16 <CycLBot> (((?Y . nullJava)))
+13:37:28 <dmiles> query (hasSlotValue dmiles getParentContainer ?Y)
+13:37:29 <CycLBot> (((?Y . dmiles-home)))
+13:37:45 <dmiles> query (hasSlotValue dmiles getParentContainer ?Y)
+13:37:45 <CycLBot> (((?Y . dmiles-home)))
+13:38:16 <dmiles> hrrm i dont know if 2nd time discovery i have set to change things
+13:38:20 <dmiles> query (hasSlotValue dmiles getParentContainer ?Y)
+13:38:21 <CycLBot> (((?Y . dmiles-home)))
+13:39:28 <dmiles> query (relationAllExists getParentContainer MudObjectInstance ?Y)
+13:39:29 <CycLBot> no answers found
+13:39:40 <dmiles> query (relationAllExists ?X MudObjectInstance ?Y)
+13:39:43 <CycLBot> ((?X . STATE_INITIALIZED_field) (?Y . intInstance))
+13:39:43 <CycLBot> ((?X . STATE_TERMINATING_field) (?Y . intInstance))
+13:39:44 <CycLBot> ((?X . STATE_INITIALIZING_field) (?Y . intInstance))
+13:39:44 <CycLBot> ((?X . STATE_TERMINATED_field) (?Y . intInstance))
+13:39:45 <CycLBot> ((?X . ATTRIB_OPENSTATE_LOCKED_field) (?Y . intInstance))
+13:39:46 <CycLBot> ((?X . ATTRIB_OPENSTATE_CLOSED_field) (?Y . intInstance))
+13:39:46 <CycLBot> ((?X . ATTRIB_OPENSTATE_OPEN_field) (?Y . intInstance))
+13:39:48 <CycLBot> ((?X . ATTRIB_OPENSTATE_field) (?Y . StringInstance))
+13:39:50 <CycLBot> ((?X . ATTRIB_VISIBILITY_INVIS_field) (?Y . intInstance))
+13:39:52 <CycLBot> ((?X . ATTRIB_VISIBILITY_HIDDEN_field) (?Y . intInstance))
+13:39:54 <CycLBot> ((?X . ATTRIB_VISIBILITY_SHOW_field) (?Y . intInstance))
+13:39:56 <CycLBot> ((?X . ATTRIB_VISIBILITY_field) (?Y . StringInstance))
+13:39:58 <CycLBot> ((?X . MARKUP_field) (?Y . StringInstance))
+13:40:00 <CycLBot> ((?X . Class_getSet) (?Y . ClassInstance))
+13:40:02 <CycLBot> ((?X . Keywords_getSet) (?Y . FlagListInstance))
+13:40:04 <CycLBot> ((?X . ShortDescription_getSet) (?Y . StringInstance))
+13:40:06 <CycLBot> ((?X . Description_getSet) (?Y . StringInstance))
+13:40:08 <CycLBot> ((?X . Name_getSet) (?Y . StringInstance))
+13:40:10 <CycLBot> ((?X . Trust_getSet) (?Y . intInstance))
+13:40:12 <CycLBot> ((?X . Race_getSet) (?Y . RaceInstance))
+13:40:14 <CycLBot> ((?X . Job_getSet) (?Y . JobInstance))
+13:40:16 <CycLBot> ((?X . Gender_getSet) (?Y . GenderInstance))
+13:40:18 <CycLBot> ((?X . TemplateId_getSet) (?Y . StringInstance))
+13:40:20 <CycLBot> ((?X . LoadId_getSet) (?Y . longInstance))
+13:40:22 <CycLBot> ((?X . childContainer_getAdd) (?Y . MudObjectContainerInstance))
+13:40:24 <CycLBot> ((?X . ParentContainer_getSet) (?Y . MudObjectContainerInstance))
+13:40:26 <CycLBot> ((?X . attributes_getAdd) (?Y . AttributesInstance))
+13:40:28 <CycLBot> ((?X . Source_getSet) (?Y . StringInstance))
+13:40:45 <dmiles> query (hasSlotValue dmiles ParentContainer_getSet ?Y)
+13:40:46 <CycLBot> no answers found
+13:42:25 <dmiles> query (hasSlotValue dmiles-home getParentContainer ?Y)
+13:42:26 <CycLBot> (((?Y . nullJava)))
+13:42:37 <dmiles> query (hasSlotValue dmiles getParentContainer ?Y)
+13:42:38 <CycLBot> (((?Y . dmiles-home)))
+13:42:47 <dmiles> but i am not there almore.. hrrm
+13:43:28 <dmiles> have to work on Event updates
+16:28:40 --- join: dash (washort@d140.narrowgate.net) joined #opencyc
+16:50:16 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+17:03:47 --- quit: Don ()
+17:28:04 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+17:28:09 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+17:28:09 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+17:28:14 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+17:59:24 <whitten> hello all, I'm back. dmiles, are you there?  I tried to go to the address you suggested. Obviously  you have figured out how to work around the only-on-local-machine are connections allowed-issue.
+17:59:25 <CycLBot> hello whitten
+18:30:55 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+18:30:55 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+18:30:57 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+18:31:04 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:03:42 <whitten> dmiles?
+19:26:00 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+19:26:00 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:26:01 --- quit: mea_culpa (Success)
+19:26:11 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:13:59 --- quit: dash ("it's the IDEA that's lasted. the SYSTEM.")
+20:59:47 --- join: dash (dash@d150.narrowgate.net) joined #opencyc
+21:16:08 --- quit: mea_away (carter.openprojects.net irc.openprojects.net)
+21:16:08 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+21:16:08 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+21:16:13 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+21:16:13 --- quit: dash (carter.openprojects.net irc.openprojects.net)
+21:17:11 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:17:11 --- join: dash (dash@d150.narrowgate.net) joined #opencyc
+21:17:11 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+21:17:11 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+21:17:11 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+21:17:11 --- mode: carter.openprojects.net set +o ChanServ
+22:17:08 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+22:17:08 --- quit: dmiles-- (Connection reset by peer)
+22:17:08 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+22:17:11 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.05.04

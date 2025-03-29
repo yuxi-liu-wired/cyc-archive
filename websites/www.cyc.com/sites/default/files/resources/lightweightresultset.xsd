@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   LightWeightResultSet.xsd
+   
+   This is a schema for terse, minimal result sets. It was originally developed
+     by Dave Schneider to provide auto-complete suggestions for partially-typed
+     concept nl/constants in the Cyc browser (accessible at
+     HOST:PORT/cgi-bin/cg?xml-complete&filter=c297&prefix=), and was codified as
+     a schema by Nathan Winant on June 7, 2011.
+
+   To generate code internally at Cyorp, use something like:
+     pushd  ~/src/head/cycorp/cyc/java/library/xml/lightWeightResultSet/resource/xml
+     xjc -d ~/src/head/cycorp/cyc/java/library/xml/lightWeightResultSet/generated LightWeightResultSet.xsd -extension -b customization.xml
+     popd
+-->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
+            targetNamespace="http://ws.opencyc.org/xsd/LightWeightResultSet"
+            xmlns:lwrs="http://ws.opencyc.org/xsd/LightWeightResultSet"
+            xmlns:xml="http://www.w3.org/XML/1998/namespace"
+            elementFormDefault="qualified">
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+             schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+  <xsd:complexType name="ResultSet">
+    <xsd:sequence>
+      <xsd:element name="Term" type="lwrs:Term" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Term">
+    <xsd:attribute name="cycl"           type="xsd:string" use="required"/>
+    <xsd:attribute name="nl"             type="xsd:string" use="required"/>
+    <xsd:attribute name="hlId"           type="xsd:string" use="optional"/>
+    <xsd:attribute name="disambigString" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+
+  <xsd:element name="ResultSet" type="lwrs:ResultSet"/>
+</xsd:schema>

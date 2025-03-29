@@ -1,0 +1,1473 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <style type='text/css'>
+    p {font-family: Arial, sans-serif }
+    a {font-family: Arial, sans-serif }
+    h1 {font-family: Arial, sans-serif }
+    h2 {font-family: Arial, sans-serif }
+    h3 {font-family: Arial, sans-serif }
+     p {font-size: 100%}
+  </style>
+    <title>
+
+OpenCyc Tutorial : An Introductory Walk 
+Through Ontological Engineering
+
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'></td>
+        <td align='center'>
+          <p>
+            <b><font size='+2'>OpenCyc Tutorial : An Introductory Walk <br>Through Ontological Engineering</font>
+            </b>
+          </p>
+          <p>Version 0.7</p>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <hr>
+    <b><p>
+        <font size='+1'>Contents</font>
+      </p><p></p><p>
+        <a HREF='#intro'>
+Introduction
+</a>
+      </p><p></p><p>
+        <a HREF='#step1'>Step One: Find Relevant, Already-existing Constants
+</a>
+      </p><p></p><p>
+        <a HREF='#step2'>
+Step Two: Create New Constants</a>
+      </p><p></p><p>
+        <a HREF='#step3'>
+Step Three: Make Assertions On New Constants in your own Microtheory</a>
+      </p><p></p><p>
+        <a HREF='#step4'>
+Step Four: Testing in your own Microtheory</a>
+      </p></b>
+    <hr>
+    <a NAME='intro'></a>
+    <h3>
+Introduction
+</h3>
+    <p>
+In this tutorial you will witness the creation of two new constants, and the making of some simple assertions on those constants.</p>
+    <p>
+Suppose that you have just acquired two kittens (who shall be referred to as "Billy" and "Peter") and they are so enchanting that you feel they should be represented in your version of the OpenCyc KB. Here is how one ontologist would go about such a process, described in first-person terms. I encourage you to follow me as I walk you through the steps I would take, using your browser. Ontological engineering - like any other engineering - is an intensely practical (albeit virtual), task which can really only be learned by doing it.</p>
+    <p>
+The process I will go through can be broken down into four main steps. Ok, let's begin. 
+</p>
+    <a NAME='step1'></a>
+    <h3>Step One: Find Relevant, Already-existing Constants
+</h3>
+    <p>
+First of all, I will try and find relevant, already-existing constants - constants that I will be able to use to make the assertions about Billy and Peter that I want to make. Of course I could create every constant I wish to use to talk about Billy and Peter, but why reinvent the ontological wheel? (Beware: this task is often harder than it looks...many a cyclist has torn out hair having just worked hard to create a new constant which they perceived as filling a hole in the ontology (say..."<nobr>
+        <tt><font size='+1'>
+moneyAmountOfCoin</font></tt>
+      </nobr>"), only to find an equivalent lurking in the KB under a name they did not expect (say..."<nobr>
+        <tt><font size='+1'>
+tenderValue</font></tt>
+      </nobr>")). </p>
+    <p>
+First and most obviously, I guess I will want to say that Billy and Peter are kittens. That is probably the most salient piece of information I have about them. Is there a Cyc term that means "kitten"? </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "kitten" in the text field next to the "Complete" button in the top frame and click on the "Show" button...</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Complete.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+Unfortunately this turns up nothing. There is no constant called <nobr>
+        <tt><font size='+1'>
+#$Kitten</font></tt>
+      </nobr> in the OpenCyc KB.</p>
+    <p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/whyhash_dollar.html','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/whyhash_dollar.html','','height=250,width=385, scrollbars=yes'))">What does the '#$' in front of "#$Kitten" mean?</a>
+    </p>
+    <p>
+Maybe, instead of saying that Billy and Peter are kittens, I can say that they are juvenile cats. So now let's try "cat".</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "cat" in the text field next to the "Complete" button in the top frame and click on the "Show" button.</font>
+    </p>
+    <p>
+No luck there, either....In cases such as this, my next step will be to try something more general. Hmmmm....how about "pet"? </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "pet" in the text field next to the "Complete" button in the top frame and click on the "Show" button.</font>
+    </p>
+    <p>Cyc presents a choice of two constants:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+DomesticPet
+NonPersonAnimal</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+How does Cyc produce these two constants from a string ("pet") which is different than both of them? The answer lies with Cyc's 'natural language support'. For example, the KB contains the following two "assertions" (or facts) related to #$DomesticPet:
+</p>
+    <pre>
+Mt : GeneralEnglishMt
+  (denotation Pet-TheWord SimpleNoun 0 DomesticPet)
+  M(multiWordString ("domestic") Pet-TheWord SimpleNoun DomesticPet)</pre>
+
+<p>
+The first assertion above relates the word "pet" to the Cyc constant "#$DomesticPet". The second on relates the phrase "domestic pet" to the same Cyc constant.</p>
+    <p>
+      <a HREF=' http://www.cyc.com/cycdoc/ref/nl.html ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF=' http://www.cyc.com/cycdoc/ref/nl.html ' TARGET='reading_window'>Further reading on Cyc NL</a>
+    </p>
+    <p>
+      <nobr>
+        <tt><font size='+1'>
+#$DomesticPet</font></tt>
+      </nobr> is a more specific constant than <nobr>
+        <tt><font size='+1'>
+#$NonPersonAnimal</font></tt>
+      </nobr>, since <nobr>
+        <tt><font size='+1'>
+#$DomesticPet</font></tt>
+      </nobr> is a specialization of <nobr>
+        <tt><font size='+1'>#$DomesticatedAnimal</font></tt>
+      </nobr>, which is a specialization of <nobr>
+        <tt><font size='+1'>
+#$TameAnimal</font></tt>
+      </nobr>, which is a specialization of <nobr>
+        <tt><font size='+1'>
+#$NonPersonAnimal</font></tt>
+      </nobr>. </p>
+    <table border='0' width='70%' cellpadding='2' align='center'>
+      <tr>
+        <td align='center'>
+          <img src='http://www.cyc.com/cycdoc/img/cb/collections_hierarchy.gif'></td>
+      </tr>
+      <tr>
+        <td>
+          <font size='-1'>
+            <p>Note: More specific collections 'inherit' the information that exists on
+the collections they are specializations of, and have further information
+as well. This hierarchy is ordered using the predicate #$genls.</p>
+          </font>
+        </td>
+      </tr>
+    </table>
+    <p>
+      <nobr>
+        <tt><font size='+1'>
+#$DomesticPet</font></tt>
+      </nobr> is therefore better for me to use to describe Billy and Peter. The reason for this may be summarized in the  '<a NAME='maximeo'>Maxim of Efficient Ontologizing</a>': 
+</p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>The Maxim Of Efficient Ontologizing: Be as specific as possible without being false.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+I should say that, strictly speaking, this maxim applies to the writing
+of individual <em><b>assertions</b></em> (which state facts) and not to the writing of
+<em><b>rules</b></em> (which allow Cyc to deduce things from the facts it knows). When
+it comes to rules, the more general you can be (without being false) the
+better! But this is an introductory tutorial and we will therefore be
+confining ourselves to individual assertions.</p>
+    <p>
+      <nobr>
+        <tt><font size='+1'>#$DomesticPet</font></tt>
+      </nobr> is a collection, so to use this constant to make assertions about Billy and Peter I am going to have to assert that they are both members of this collection. </p>
+    <p>
+What are some other things I am likely to want to say about Billy and Peter? Well, another interesting fact about them is that they are brothers. Does this mean that, as was the case with <nobr>
+        <tt><font size='+1'>
+#$DomesticPet</font></tt>
+      </nobr>, they should be asserted to be a member of a collection called, say, <nobr>
+        <tt><font size='+1'>
+#$Brother</font></tt>
+      </nobr>? (There is actually a problem with this. Can you see what it is?) 
+</p>
+    <p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/brother.html','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/brother.html','','height=250,width=385, scrollbars=yes'))">What's wrong with making a collection called #$Brother?</a>
+    </p>
+    <p>
+Billy and Peter are not just brothers per se, they are brothers <em><b>of each other</b></em>. Such relationships between two or more things are handled in Cyc using predicates rather than collections. </p>
+    <p>
+      <a HREF=' http://www.cyc.com/cycdoc/vocab/fundamental-vocab.html#Predicate ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF=' http://www.cyc.com/cycdoc/vocab/fundamental-vocab.html#Predicate ' TARGET='reading_window'>Further reading on Predicates</a>
+    </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>Specific relationships between two or more things are handled in Cyc using predicates rather than collections.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>Is there a predicate called <nobr>
+        <tt><font size='+1'>#$brothers</font></tt>
+      </nobr>?</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "brothers" in the text field next to the "Complete" button in the top frame and click on the "Show" button..</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Complete.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+No there is not. </p>
+    <p>
+Again, I realize that I better back up and try something more general. What is a more general version of the concept of brotherhood? Billy and Peter are...related to one another, i.e. they are relatives. Let's try "relatives".... </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "relatives" in the text field  next to the "Complete" button in the top frame and click on the "Show" button.</font>
+    </p>
+    <p>
+Yes, there is a <nobr>
+        <tt><font size='+1'>
+#$relatives</font></tt>
+      </nobr>! However, don't forget the <a HREF='#maximeo'>Maxim of Efficient Ontologizing</a>. Perhaps there is something a bit more specific, if not as specific as "brothers" would be, that we can use. </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>From the "2 possible terms" page, click on the relatives link to get to view the details of <nobr>
+          <tt><font size='+1'>#$relatives</font></tt>
+        </nobr>. With <nobr>
+          <tt><font size='+1'>#$relatives</font></tt>
+        </nobr> up, look at the left-hand frame (the "Term Index Frame"), under Arg2, and click on "genlPreds".</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_genlPreds.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/term_index_frame.html','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/term_index_frame.html','','height=250,width=385, scrollbars=yes'))">How do I use the Term Index Frame?</a>
+    </p>
+    <p>
+This presents a list of all the predicates which are direct specializations of <nobr>
+        <tt><font size='+1'>
+#$relatives</font></tt>
+      </nobr>, as follows:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Mt : BiologicalSocialVocabularyMt
+  (genlPreds grandchildren relatives)
+  (genlPreds cohabitingFamilyMembers relatives)
+  (genlPreds children relatives)
+  (genlPreds coreRelatives relatives)
+
+Mt : BiologyVocabularyMt
+  (genlPreds siblings relatives)
+  (genlPreds biologicalRelatives relatives)
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+      <table border='0' width='70%' cellpadding='2' align='center'>
+        <tr>
+          <td align='center'>
+            <img src='http://www.cyc.com/cycdoc/img/cb/predicates_hierarchy.gif'></td>
+        </tr>
+        <tr>
+          <td>
+            <font size='-1'>
+              <p>Note: Just as Cyc collections are arranged in an information-inheriting
+hierarchy ordered using the predicate #$genls, Cyc predicates are arranged
+in an information-inheriting hierarchy ordered using the predicate #$genlPreds.</p>
+            </font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      <a HREF='http://www.cyc.com/doc/tut/ppoint/SecondOrderPredicates_files/frame3.htm ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/doc/tut/ppoint/SecondOrderPredicates_files/frame3.htm ' TARGET='reading_window'>Tutorial lesson on predicates and the predicate hierarchy</a>
+    </p>
+    <p>
+Aha! <nobr>
+        <tt><font size='+1'>#$siblings</font></tt>
+      </nobr> is more specific than <nobr>
+        <tt><font size='+1'>#$relatives</font></tt>
+      </nobr>, and it is also true of Billy and Peter. So we can use that. </p>
+    <p>
+What else do I want to say about Billy and Peter? They like each other a lot (though they also roll around on the floor a lot biting each other...). So the next thing to do (which should not by now be too surprising) is to type in "likes", to see if there is some term (probably a predicate) I can use to say that Billy and Peter like each other.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "likes" in the text field  next to the "Complete" button in the top frame and click on the "Show" button.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Complete.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+You should see Cyc produce a constant with the somewhat bizarre name of <nobr>
+        <tt><font size='+1'>
+#$likes-Generic</font></tt>
+      </nobr>. Some background information is in order here: making a name of the form "[X]-generic" is something of a Cyc convention which means that the constant in question tops a hierarchy of terms regarding [X], which have been defined more specifically. </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>A constant with a name of the form "[X]-generic" tops a hierarchy of
+more specifically defined terms regarding [X].
+</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+In our case, obviously, [X] will be something to do with 'liking'). Such a term is often an 'umbrella term', designed to gather together more specific terms, rather than having actual assertions made on it. Let's therefore look for something more specific. With <nobr>
+        <tt><font size='+1'>
+#$likes-Generic</font></tt>
+      </nobr> up, let's see how its comment echoes my remark above:</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>The right frame should say "Predicate : likes-Generic" at the top. Scroll down in the right frame until you reach "<b>comment:</b>".</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_comment.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+(likes-Generic SUBJ OBJ) means that SUBJ likes OBJ. This
+         is a very general liking relation which is most useful for
+         organising liking relations and for use during inference; for
+         representation purposes, use a spec-Pred.</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+So let's find the appropriate 'spec-Pred' (this is Cyc-talk for 'more specialized predicate') for <nobr>
+        <tt><font size='+1'>
+#$likes-Generic</font></tt>
+      </nobr>. </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>'Spec-Pred' is Cyc-talk for 'more specialized predicate'.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+Here we could just do what we did for <nobr>
+        <tt><font size='+1'>
+#$relatives</font></tt>
+      </nobr>, which was to look at the left-hand frame, under Arg2, and click on "genlPreds". </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>With #$likes-Generic still up , look at the left-hand frame, under Arg2, and click on "genlPreds".</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_genlPreds.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+You should see just one assertion:
+</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Mt : AgentGVocabularyMt
+  (genlPreds likesObject likes-Generic)</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+What is this <nobr>
+        <tt><font size='+1'>
+#$likesObject</font></tt>
+      </nobr>? Let's have a look:</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the word "likesObject" in the assertion.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_likesObject.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Mt : AgentGVocabularyMt
+comment : "(likesObject AGT OBJ) means that when the sentient agent
+AGT is interacting in some way with OBJ, that agent feels some measure
+of Enjoyment --- that is, (feelsEmotion AGT Enjoyment). The kinds of
+interactions that produce Enjoyment depend largely on what kind of thing
+OBJ is. Thus, `Joe likes the Mona Lisa' implies that Joe feels Enjoyment
+when viewing the Mona Lisa. But `Joe likes pizza' implies that Joe feels
+Enjoyment when eating that kind of food. There are some specialized
+predicates of likesObject that give more information about the kind of
+interaction between AGT and OBJ that results in Enjoyment; see, e.g.,
+#$likesSensorially and #$likesAsFriend." </pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+I'm not sure that I want to assert <nobr>
+        <tt><font size='+1'>
+#$likesObject</font></tt>
+      </nobr> of Billy and Peter. Billy doesn't quite like Peter in the way that Joe likes pizza (Billy's frequent biting of Peter notwithstanding). Hmmmm.....And what are these <nobr>
+        <tt><font size='+1'>
+#$likesSensorially</font></tt>
+      </nobr> and <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr> that appear in the comment? Why did they not appear when I clicked on "genlPreds"? (Can you figure it out?) </p>
+    <p>
+In fact the answers are different for the two different predicates. The answer for <nobr>
+        <tt><font size='+1'>
+#$likesSensorially</font></tt>
+      </nobr> is that it is a Cyc constant that was not made public - it thus does not exist in the OpenCyc KB. (You can tell this because it is printed in black, not clickable blue).</p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>The Cyc constants you see which are not links were not made public and therefore do not exist in the OpenCyc KB.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+The answer for <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr> is a little more complicated. Merely clicking on the "genlPreds" under "Arg2" produces all assertions directly made of the form <nobr>
+        <tt><font size='+1'>
+(genlPreds ?X likes-Generic)</font></tt>
+      </nobr>, but a list of all such ?X is <em><b>not</b></em> a list of all the spec-Preds of <nobr>
+        <tt><font size='+1'>
+#$likes-Generic</font></tt>
+      </nobr>. This is because <nobr>
+        <tt><font size='+1'>
+#$genlPreds</font></tt>
+      </nobr> is a transitive predicate (i.e. if X is a spec of Y and Y is a spec of Z then X is a spec of Z). So there can be many more specs of a given constant than there are 'direct specs' (specs linked to that constant by specific assertions). </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>#$genlPreds is a transitive predicate (i.e. if X is a spec of Y and Y is a spec of Z then X is a spec of Z). So there can be many more specs of a given constant than there are 'direct specs' (specs linked to that constant by specific assertions).</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+There is actually a cool tool for viewing <em><b>all</b></em> the specs of a given constant, though. If you look slightly to the right of the "genlPreds", you will see a green plus. </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the green plus <img src='http://www.cyc.com/cycdoc/img/cb/plus-green.gif'> slightly to the right of "genlPreds".</font>
+      <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_greenCross.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p><p>
+You should see the following:
+</p><table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Last query in AgentGVocabularyMt :
+(genlPreds ?ARG1 likes-Generic)
+
+3 answers for ?ARG1 :
+likes-Generic   likesAsFriend   likesObject</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>   
+
+<p>
+      <em><b>Now</b></em>
+      <nobr>
+        <tt><font size='+1'>#$likesAsFriend</font></tt>
+      </nobr> appears. </p><p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/likes-generic.html','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/likes-generic.html','','height=250,width=385, scrollbars=yes'))">Why does #$likes-Generic also appear in the list?</a>
+    </p>
+    <p>
+By the way, you probably noticed that as well as the green plus <img src='http://www.cyc.com/cycdoc/img/cb/plus-green.gif'> next to "genlPreds", there is also a red diamond <img src='http://www.cyc.com/cycdoc/img/cb/red_diam.gif'>. This is in some ways an even cooler tool. You might like to click on it and see what it does....
+</p><p>
+So let's have a look at <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr>:</p><p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the word "likesAsFriend" in the main frame of the KB browser.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_likesAsFriend.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Mt : AgentGVocabularyMt
+comment : "(likesAsFriend AGT1 AGT2) means that AGT1 enjoys
+interacting socially with AGT2. See also the #$FeelingAttributeTypes
+Friendliness. Note: this predicate does not imply that AGT1 likes AGT2
+only as a friend -- there may be romantic feelings, and other feelings, as
+well." </pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+This sounds more like Billy and Peter to me, if "interacting socially" is not just restricted to human society and also covers such activities as eating together and rolling around on the floor chewing one another's ears. This does seem plausible to me. To be sure, let's check what are called the 'argument-constraints' on <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr>. If this predicate is intended only to apply to human beings, then next to the <nobr>
+        <tt><font size='+1'>
+#$arg1Isa</font></tt>
+      </nobr> and <nobr>
+        <tt><font size='+1'>
+#$arg2Isa</font></tt>
+      </nobr> predicates in the main frame for <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr> (assuming it has been well-ontologized) <nobr>
+        <tt><font size='+1'>
+#$Person</font></tt>
+      </nobr> should appear. Let's check that...
+</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Look immediately above the comment I just quoted and find arg1Isa and arg2Isa.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_arg1Isa.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+In fact <nobr>
+        <tt><font size='+1'>
+#$Person</font></tt>
+      </nobr> does not appear there, only <nobr>
+        <tt><font size='+1'>
+#$PerceptualAgent</font></tt>
+      </nobr>. Will Billy and Peter meet this criterion? Yes they will, once they have been asserted to be members of the collection <nobr>
+        <tt><font size='+1'>
+#$DomesticPet</font></tt>
+      </nobr>, as <nobr>
+        <tt><font size='+1'>
+(#$genls #$DomesticPet #$PerceptualAgent)</font></tt>
+      </nobr> is true. (Can you verify this? Hint: you can do this using the green plus <img src='http://www.cyc.com/cycdoc/img/cb/plus-green.gif'> you just learned about). So I <em><b>will</b></em> use <nobr>
+        <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+      </nobr>.
+</p>
+    <p>
+Lastly, how about saying how old Billy and Peter are? They are currently 11 weeks old. Let's type in "age".</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "age" in the text field  next to the "Complete" button in the top frame and click on the "Show" button.
+</font>
+    </p>
+    <p>
+There is an <nobr>
+        <tt><font size='+1'>#$age</font></tt>
+      </nobr>! It too turns out to be a predicate. Here are some of its defining assertions:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Mt : BaseKB
+arg1Isa : SomethingExisting 
+arg2Isa : Time-Quantity 
+arg1Format : SetTheFormat 
+arg2Format : IntervalEntry</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+What does this mean? It means that the predicate <nobr>
+        <tt><font size='+1'>
+#$age</font></tt>
+      </nobr> takes two arguments and the first argument (the thing which has the age) must be an instance of <nobr>
+        <tt><font size='+1'>
+#$SomethingExisting</font></tt>
+      </nobr>, and the second argument (the age of the thing) must be an instance of <nobr>
+        <tt><font size='+1'>
+#$Time-Quantity</font></tt>
+      </nobr>. Are Billy and Peter instances of <nobr>
+        <tt><font size='+1'>
+#$SomethingExisting</font></tt>
+      </nobr>? Yes they are. (You might like to verify this - again, using the green plus <img src='http://www.cyc.com/cycdoc/img/cb/plus-green.gif'>.) </p>
+    <p>
+The "formats" of the two arguments are a somewhat more technical affair.
+The <nobr>
+        <tt><font size='+1'>#$arg1Format</font></tt>
+      </nobr> assertion basically means that different things may occupy
+the <nobr>
+        <tt><font size='+1'>arg1</font></tt>
+      </nobr> position for any given <nobr>
+        <tt><font size='+1'>arg2</font></tt>
+      </nobr> (Thus, not just one but an arbitrary
+number of creatures may be, say, 10 years old at any given time). The
+<nobr>
+        <tt><font size='+1'>#$arg2Format</font></tt>
+      </nobr> assertion means that the age given may be a single, discrete
+value, or it may be a range (say, between 3 and 4 years). See the comment
+on <nobr>
+        <tt><font size='+1'>#$IntervalEntry</font></tt>
+      </nobr> for more details on this.
+</p>
+    <a HREF='http://www.cyc.com/cycdoc/vocab/fundamental-vocab.html#arg1format ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/cycdoc/vocab/fundamental-vocab.html#arg1format ' TARGET='reading_window'>Further reading on argument formats (#$arg1Format)</a><p>
+What exactly is a <nobr>
+        <tt><font size='+1'>
+#$Time-Quantity</font></tt>
+      </nobr>, though? Is '11 weeks' an instance of it? Let's take a look at this constant. I can't find any assertion of the form <nobr>
+        <tt><font size='+1'>
+(#$isa "11weeks" #$Time-Quantity)</font></tt>
+      </nobr>. Hmmmm.... What I do find out, however (with the help of some considerable experience with such matters :-)) is that instances of <nobr>
+        <tt><font size='+1'>
+#$Time-Quantity</font></tt>
+      </nobr> are the results of a set of <em><b>functions</b></em> (functions which are gathered together in a collection called <nobr>
+        <tt><font size='+1'>
+#$UnitOfTime</font></tt>
+      </nobr>). We have so far encountered collections, individual instances of collections, predicates and microtheories. A function is yet another Cyc animal (a "new beast for our zoo [of logical forms]", as Bertrand Russell once put it).</p><p>
+      <a HREF='http://www.cyc.com/cycdoc/ref/cycl-syntax.html#functions ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/cycdoc/ref/cycl-syntax.html#functions ' TARGET='reading_window'>Further reading on functions in Cyc</a>
+    </p>
+    <p>
+Let's browse the list of functions collected under <nobr>
+        <tt><font size='+1'>
+#$UnitOfTime</font></tt>
+      </nobr> (by looking under "Arg2" in the frame on the left, and clicking on "isa"). </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "UnitOfTime" in the text field  next to the "Complete" button in the top frame and click on the "Show" button.. When its definitional information appears in the main frame, look at the left-hand frame, under Arg2, and click on "isa".
+</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_isa.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+You should see the following:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Collection : UnitOfTime
+GAF Arg : 2
+Mt : BaseKB
+
+(isa DaysDuration UnitOfTime)
+  (isa SecondsDuration UnitOfTime)
+  (isa QuartersDuration UnitOfTime)
+  (isa HoursDuration UnitOfTime)
+  (isa WeeksDuration UnitOfTime)
+  (isa DecadesDuration UnitOfTime)
+  (isa YearsDuration UnitOfTime)
+  (isa MonthsDuration UnitOfTime)
+  (isa MinutesDuration UnitOfTime)</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+      <nobr>
+        <tt><font size='+1'>
+#$WeeksDuration</font></tt>
+      </nobr> looks promising. Let's take a look at that.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the word "WeeksDuration" in the main frame of the KB browser. 
+</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_WeeksDuration.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+Its comment says:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+            "A UnitOfTime function that takes one or two real numbers as
+          arguments and returns, as its value, a comparable Time-Quantity
+          attribute measured in weeks. More precisely, an expression of the
+          form (WeeksDuration NUM) denotes the ("point-value")
+          Time-Quantity of being exactly NUM weeks in duration, and an
+          expression of the form (WeeksDuration MIN MAX) denotes the
+          (properly interval-like) Time-Quantity of being at least MIN
+          weeks and at most MAX weeks in duration." </pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+What this means is that I can use "<nobr>
+        <tt><font size='+1'>
+(#$WeeksDuration 11)</font></tt>
+      </nobr>" to represent 11 weeks, and that the result of applying the function in this way will be an instance of <nobr>
+        <tt><font size='+1'>
+#$Time-Quantity</font></tt>
+      </nobr> (which is what I need, since I want to plug it into an assertion using the predicate <nobr>
+        <tt><font size='+1'>#$age</font></tt>
+      </nobr>, in the second argument position. The exact way in which this will happen will be explained in <a HREF='#step3'>Step 3</a>.).</p>
+    <em><p>
+Step One Summary: We have now identified the following constants which can be used to make assertions about Billy and Peter:</p><blockquote>
+        <ul>
+          <li>
+            <nobr>
+              <tt><font size='+1'>
+#$DomesticPet</font></tt>
+            </nobr>
+          </li>
+          <li>
+            <nobr>
+              <tt><font size='+1'>
+#$siblings</font></tt>
+            </nobr>
+          </li>
+          <li>
+            <nobr>
+              <tt><font size='+1'>
+#$likesAsFriend</font></tt>
+            </nobr>
+          </li>
+          <li>
+            <nobr>
+              <tt><font size='+1'>
+#$age</font></tt>
+            </nobr>
+          </li>
+          <li>
+            <nobr>
+              <tt><font size='+1'>
+#$WeeksDuration</font></tt>
+            </nobr>
+          </li>
+        </ul>
+      </blockquote></em>
+    <a NAME='step2'></a>
+    <h3>
+Step Two: Create New Constants</h3>
+    <p>
+      <b>In the previous step, we identified some constants which can be used to make assertions about Billy and Peter. Let's now create new constants to represent Billy and Peter themselves.</b>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/exclamation_yellow_tri.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>
+        <em>Before taking this step, if you are logged in as <nobr>
+            <tt><font size='+1'>Guest</font></tt>
+          </nobr>, you will need to <a HREF='http://www.opencyc.org/cb/welcome/getting_started#step3' TARGET='right_frame'>log in</a> again as <nobr>
+            <tt><font size='+1'>CycAdministrator</font></tt>
+          </nobr>, as it is not possible to create new constants as <nobr>
+            <tt><font size='+1'>Guest</font></tt>
+          </nobr>.
+</em>
+      </font>
+    </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>You must be logged in as <nobr>
+                <tt><font size='+1'>CycAdministrator</font></tt>
+              </nobr> in order to create new constants. In OpenCyc, <nobr>
+                <tt><font size='+1'>Guest</font></tt>
+              </nobr> does not have the same privileges as <nobr>
+                <tt><font size='+1'>CycAdministrator</font></tt>
+              </nobr>.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+Let's start with Billy. Go to the Tools page and click on "Create".</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Tools.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the Tools page. Click on the "Create" link in the column on the left.<font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Create.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font>
+      </font>
+    </p>
+    <p>
+The first thing to do is to choose a name for the new constant. "Billy" seems a logical choice. Of course if there were other Billys, Bills, etc. already in the KB, it might be wise to differentiate this constant a little further via its name. When this is desired, a Cyc convention is to append "-The[something]" at the end of a constant name (e.g. <nobr>
+        <tt><font size='+1'>Othello-TheGame</font></tt>
+      </nobr>, <nobr>
+        <tt><font size='+1'>Othello-TheMovie</font></tt>
+      </nobr>). So I could do "Billy-TheKitten". </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>To differentiate constants by name, a Cyc convention is to append "-The[something]" at the end of a constant name (e.g. <nobr>
+                <tt><font size='+1'>Othello-TheGame</font></tt>
+              </nobr>, <nobr>
+                <tt><font size='+1'>Othello-TheMovie</font></tt>
+              </nobr>).</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter the word "Billy" in the main frame of the KB browser. Click on the "Create Constant" button.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_CreateConstant.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+Now, merely clicking on the button "Create Constant" is enough to give Billy a place in the ontology. I can now call up the <nobr>
+        <tt><font size='+1'>#$Billy</font></tt>
+      </nobr> constant, just like any other Cyc constant - though if I do this, all I will see so far is 'bookkeeping assertions' - assertions about who created the constant and when it was created. </p>
+    <p>
+Let's now create <nobr>
+        <tt><font size='+1'>
+#$Peter</font></tt>
+      </nobr> in the same way that we created <nobr>
+        <tt><font size='+1'>
+#$Billy</font></tt>
+      </nobr>.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>On the "Constant Create operation completed" page, click on the "Back to previous (stale) page" button. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_BackToCreate.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring you to the "Browser Tools" page. Enter the word "Peter" in the field in the main frame. Click on the "Create Constant" button. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_CreateConstant.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font>
+      </font>
+    </p>
+    <em><p>
+Step Two summary - We now have two new constants, one for each kitten, on which we can start making assertions (or, as it is sometimes put, 'entering knowledge').</p></em>
+    <a NAME='step3'></a>
+    <h3>
+Step Three: Make Assertions On New Constants in your own Microtheory</h3>
+    <b><p>In the previous step, we created some constants that we will use as we make new assertions in Step 3. If you have not yet created those new constants, please go back and complete <a HREF='#step2 '>Step 2</a>.</p></b>
+    <p>
+The next step is to make assertions in the KB using my new constants. Every Cyc assertion is made in some <em><b>microtheory</b></em>. </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>Every Cyc assertion is made in some microtheory.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      <a HREF='http://www.cyc.com/doc/tut/ppoint/Microtheories_files/frame3.htm ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/doc/tut/ppoint/Microtheories_files/frame3.htm ' TARGET='reading_window'>Tutorial lesson on microtheories</a>
+    </p>
+    <p>
+Note: At this point in the walk through, you have a choice to make. You can go through the quicker version that avoids (for now) some of the details about working with microtheories; or you can click <a HREF='http://www.cyc.com/cycdoc/walkthroughs/oeintro_cats_frames_long.html#step3long'>here</a> to use the more detailed version, where you will do some looking for the right microtheories to assert in and ask from. To use the shorter version of the walk through, just keep reading. The long version is 30-60 minutes longer than the short version.</p>
+    <p>
+In order to prepare for adding assertions to the KB, we're going to set up one new microtheory into which we will put all of our assertions about Billy and Peter. The microtheory will need to "see" all microtheories that contain assertions relevant to knowledge about Billy and Peter.</p>
+    <p>
+In Step One, we identified the following constants that we'll use to make assertions about Billy and Peter: <nobr>
+        <tt><font size='+1'>#$DomesticPet</font></tt>
+      </nobr>, <nobr>
+        <tt><font size='+1'>#$siblings</font></tt>
+      </nobr>, <nobr>
+        <tt><font size='+1'>#$likesAsFriend</font></tt>
+      </nobr>, <nobr>
+        <tt><font size='+1'>#$age</font></tt>
+      </nobr>, <nobr>
+        <tt><font size='+1'>#$WeeksDuration</font></tt>
+      </nobr>. To use these constants in our new microtheory, we'll need <nobr>
+        <tt><font size='+1'>#$genlMt</font></tt>
+      </nobr> links from our new microtheory to microtheories containing "definitional assertions" about these constants.</p>
+    <p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/definitionala.html ','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/definitionala.html ','','height=250,width=385, scrollbars=yes'))">What are definitional assertions?</a>
+    </p>
+    <p>
+      <a HREF=' http://www.cyc.com/cycdoc/ref/glossary.html#genlMt' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF=' http://www.cyc.com/cycdoc/ref/glossary.html#genlMt' TARGET='reading_window'>Further reading on #$genlMt</a>
+    </p>
+    <p>
+Now, let's quickly tell Cyc about our new microtheory, which we'll call "Cats-PracticeMt". First, go to the proper tool screen.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the top frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Tools.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the Tools page. Click on the "Compose" link in the column on the left. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Compose.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the Compose KE Text Expressions page. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_ComposePage.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font>
+      </font>
+    </p>
+    <p>
+This is where you can enter many assertions at one time in a kind of short-hand called KE Text format. Instead of typing in the assertions about our new microtheory by hand, you can copy and paste the assertions.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Copy  all of the text from the shaded area below and paste it into the large text box on the Compose page. Make sure the box is checked next to "Remove non-printing characters in strings". Click the [Eval] button.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Eval.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Default Mt: BaseKB.
+
+Constant: Cats-PracticeMt.
+isa: Microtheory.
+genlMt: BiologyMt HumanActivitiesMt AgentGMt.
+
+comment: "This microtheory is used by an OpenCyc 'walk through' exercise as a place to make 
+assertions and ask questions about a few domestic cats.".
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+The new page that comes up should contain the following sentence:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Your KE-Text (from ke-text compose) has been successfully parsed into the below lists.
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+So now we're ready to add these assertions to the Agenda (which means that they'll be added to the KB).</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click the link that says, "Add Forms to Agenda".</font>
+    </p>
+    <p>
+You should see a new page that says:
+</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+KE-Text: Forms Added to Agenda</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>These steps should have successfully created our new microtheory and connected it to other useful microtheories. There is one more thing we can do to streamline our work with microtheories. Let's make our new microtheory appear as the default choice when making assertions.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link once again in the top frame. This will bring up the Tools page. Click on the "Options" link in the right column. This will bring up the Browser Options page. Scroll down to the section of the screen with the heading, "History and Browser Tool Options". Change the Default Mt on the right to read "Cats-PracticeMt" (without the quotes). <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_DefaultMt.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Click the [Change Options] button at the top or bottom of the screen.</font>
+    </p>
+    <p>
+The page that comes up after you click on the [Change Options] button should say "KB Browser Options have been modified". Now, whenever you use the Assert tool, <nobr>
+        <tt><font size='+1'>#$Cats-PracticeMt</font></tt>
+      </nobr> will be the default microtheory.</p>
+    <p>
+Let's start making some assertions about Billy and Peter. We'll start by saying that Billy is a domestic pet.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Bring up the Assert page by clicking on the Tools link in the left corner of the top frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Tools.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the Tools page. Click on the "Assert" link in the column on the left.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Assert.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+This should bring up the assertion-making tool. The "Assert" tool is used to make one assertion at a time. It is not the only way in which assertions can be entered in the KB, but it is the easiest and most straightforward. </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>The Assert tool is used to make one assertion at a time. It is not the only way in which assertions can be entered in the KB, but it is the easiest and most straightforward.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      <a HREF='http://www.cyc.com/cycdoc/help/cb-assert-internal.html ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/cycdoc/help/cb-assert-internal.html ' TARGET='reading_window'>Further reading on making assertions</a>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>With the "Assert Formula" page still up, enter
+"<nobr>
+          <tt><font size='+1'>(isa Billy DomesticPet)</font></tt>
+        </nobr>" in the large text box. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AssertText.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Don't forget the parentheses. Click on the Cyclify button immediately above the large text box. You should see '#$' characters appear at the beginning of each term in the large text box. (If you do not, you may have misspelled something.) Click the Assert Formula button.</font>
+    </p>
+    <a NAME='confirmAssertionAdd'></a>
+    <p>
+To confirm that the assertion has been entered into the KB, pull up the Term Content Screen for <nobr>
+        <tt><font size='+1'>#$Billy</font></tt>
+      </nobr>.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Type "Billy" into the completion box in the top frame and hit the enter key on your keyboard.</font>
+    </p>
+    <p>
+Do you see the new assertion in the large frame on the right? <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_TermContentScreen.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+Now let's go ahead and make the same assertion on <nobr>
+        <tt><font size='+1'>
+#$Peter</font></tt>
+      </nobr>.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Bring up the Assert page by clicking on the Tools link in the left corner of the top frame. Click on the "Assert" link in the column on the left. Enter
+"<nobr>
+          <tt><font size='+1'>(isa Peter DomesticPet)</font></tt>
+        </nobr>" in the large text box. Click on the Cyclify button immediately above the large text box. Click the Assert Formula button.</font>
+    </p>
+    <p>
+You can now try asserting that Billy and Peter are siblings, using the predicate <nobr>
+        <tt><font size='+1'>
+#$siblings</font></tt>
+      </nobr>.</p>
+    <p>
+Let's go back to the Assert page and enter
+<nobr>
+        <tt><font size='+1'>
+(#$siblings #$Billy #$Peter)</font></tt>
+      </nobr>, with Cats-PracticeMt entered up in the Mt text field. (Don't forget to Cyclify!)</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the "Back to previous (stale) page" button at the top of the main frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_BackToAssert.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Enter "<nobr>
+          <tt><font size='+1'>(siblings Billy Peter)</font></tt>
+        </nobr>". Click on the "Cyclify" button. Click on the "Assert Formula" button. </font>
+    </p>
+    <p>
+You now know <a HREF='#confirmAssertionAdd'>how to check</a> to see if that assertion has been added to the KB, so let's go on and assert that Billy is an animal.
+</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. Click on the "Assert" link in the column on the left.  Enter "(isa Billy Animal)" in the large text box. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AssertText.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Click on the "Cyclify" button. Click on the "Diagnose Formula" button (above <b>Direction :</b>). Finish asserting by clicking on the "Back" button of the Formula Diagnosis page <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_DiagnoseBack.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> and then clicking on the "Assert Formula" button. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AssertFormula.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font>
+      </font>
+    </p>
+    <p>
+Now let's do the same for Peter.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the "Back to previous (stale) page" button at the top of the main frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_BackToAssert.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Change "#$Billy" to "#$Peter". Click on the "Cyclify" button (immediately above the large text box). Click on the "Diagnose Formula" button (above <b>Direction :</b>). Click on the "Back" button of the Formula Diagnosis page and then click on the "Assert Formula" button. </font>
+    </p>
+    <p>
+Let's make another assertion with the predicate <nobr>
+        <tt><font size='+1'>#$likesAsFriend</font></tt>
+      </nobr>.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. Click on the "Assert" link in the column on the left. Enter "(likesAsFriend Billy Peter)" in the large text box. Click on the "Cyclify" button. Click on the "Assert Formula" button. </font>
+    </p>
+    <p>
+      <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/likesAsFriend.html ','','height=250,width=385, scrollbars=yes'))"><img border='0' src='http://www.cyc.com/cycdoc/img/cb/questionmark.gif' width='22' alt='Click here for further explanation of why you just did the above.'></a>&nbsp;&nbsp;
+  <a HREF="javascript:void(window.open('http://www.cyc.com/cycdoc/walkthroughs/likesAsFriend.html ','','height=250,width=385, scrollbars=yes'))">Do I now also need to assert (likesAsFriend Peter Billy)?</a>
+    </p>
+    <p>
+Finally let's assert the ages of Billy and Peter by going back to the Assert page and, in the large text field, enter <nobr>
+        <tt><font size='+1'>
+(age Billy (WeeksDuration 11))</font></tt>
+      </nobr>. </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. Click on the "Assert" link in the column on the left. Enter "(age Billy (WeeksDuration 11))" in the large text box.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AssertText.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>Note the way in which the function <nobr>
+        <tt><font size='+1'>
+#$WeeksDuration</font></tt>
+      </nobr>, and its single argument, <nobr>
+        <tt><font size='+1'>
+11</font></tt>
+      </nobr>, are surrounded by parentheses to create a single entity which then serves as the second argument to the predicate <nobr>
+        <tt><font size='+1'>
+#$age</font></tt>
+      </nobr> (which is defined as having two arguments and two arguments only). Such an entity, composed of a function and one or more arguments, is known in Cyc-talk as a NAT, which stands for "Non-Atomic Term". </p>
+    <p>
+      <a HREF='http://www.cyc.com/cycdoc/ref/cycl-syntax.html#NATs ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/cycdoc/ref/cycl-syntax.html#NATs ' TARGET='reading_window'>Further reading on NATs</a>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'> Finish asserting by clicking on the "Cyclify" button and then clicking on the "Assert Formula" button.</font>
+    </p>
+    <p>Now that you are familiar with one method of dealing with microtheories, you can either move on to Step Four to test what you've entered, or, if you would like a more detailed explanation of how to use microtheories and where to place assertions in the microtheory hierarchy, then read the considerably <a HREF='http://www.cyc.com/cycdoc/walkthroughs/oeintro_cats_frames_long.html#step3long'>longer version of this walkthrough</a>.</p>
+    <em><p>
+Step Three summary - we have now made a number of interesting assertions on our new constants <nobr>
+          <tt><font size='+1'>
+#$Billy</font></tt>
+        </nobr> and <nobr>
+          <tt><font size='+1'>
+#$Peter</font></tt>
+        </nobr>. Maybe you can think of a few more....(For instance, they are both males, surprise surprise!) We also made a new microtheory, #$Cats-PracticeMt, that can "see" all necessary microtheories and will be used to hold all of the knowledge that we assert about Billy and Peter.</p></em>
+    <a NAME='step4'></a>
+    <h3>
+Step Four: Testing in your own Microtheory</h3>
+    <b><p>In the previous two steps, we created some constants (including a new microtheory called #$Cats-PracticeMt) and we made some new assertions. In Step 4, we'll be testing Cyc to make sure that the implications of those new assertions are there. If you have not yet created those new constants and/or assertions, please go back and complete <a HREF='#step2 '>Step 2</a> and <a HREF='#step3'>Step 3</a>.</p></b>
+    <p>
+We are not finished yet, however! A good engineer does not just design and build things, but also <em><b>tests</b></em> those things, to see if they are doing what they are supposed to do. Once again, ontological engineering is no exception. </p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>
+              <p>
+Question: How does one test an ontology? </p>
+              <p>
+Answer: Using the Cyc inference engine!</p>
+            </font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+We will now explore Cyc's question-and-answer functionality. Let's go back to the Tools page and click on "Ask".</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Tools.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the "Browser Tools" page. Click on the "Ask" link in the column on the left. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Ask.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the "Ask a Query" page.</font>
+    </p>
+    <p>
+As an ontological engineer, having finished making some assertions I will ask myself, what are some things that I would expect Cyc to know based on the information I've just entered? Of course I would expect Cyc to know <nobr>
+        <tt><font size='+1'>
+(isa Billy DomesticPet)</font></tt>
+      </nobr> and <nobr>
+        <tt><font size='+1'>
+(likesAsFriend Billy Peter)</font></tt>
+      </nobr> as I explicitly asserted those. But what about something a little less obvious, something that will make Cyc think a bit? ...What could such a question be? What about, say, the fact that Billy takes up space?</p>
+    <p>
+Let's ask.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Enter "(isa Billy SpatialThing)" in the large text box. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskText.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Enter "Cats-PracticeMt" in the box to the right of <b>Mt:</b>. Click on the "Cyclify" button (immediately above the large text box). <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskCyclify.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Click on the "Ask Query" button (immediately above the <b>Mt :</b> text box). <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskQuery.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font>
+      </font>
+    </p>
+    <p>You should see the following:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Ask a Query
+   [Skip to Inputs]
+
+Last query in Cats-PracticeMt :
+(isa Billy SpatialThing)
+
+Query halted because : Search space was exhausted.
+
+Query was proven True   [Explain]
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+Yes, Cyc <em><b>does</b></em> know that Billy is a spatial thing! How does Cyc know this? </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the link "Explain" (immediately above the line that separates the result of the query and the tools for asking another query).</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Explain.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+This useful tool should produce the following:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Inference Answer Detail   [Refresh]   [Continue Ask]
+-------------------------------------------------------
+Query in Cats-PracticeMt :
+(isa Billy SpatialThing)
+
+One Justification :
+:ISA   (isa Billy SpatialThing) in Cats-PracticeMt 
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+"ISA:" is what is known as an HL module, a specialized inference-performing module of which Cyc has a great many. Clicking on it provides a summary of the particular inferences the module performed in this case.</p>
+    <p>
+      <a HREF='http://www.cyc.com/doc/tut/ppoint/InferenceLogicalAspects_files/frame3.htm' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/doc/tut/ppoint/InferenceLogicalAspects_files/frame3.htm' TARGET='reading_window'>Tutorial lesson on Inference in Cyc</a>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the link "ISA:", under <b>One Justification :</b>.</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskISA.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+You should see the following:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+HL Support Detail   [Refresh]
+---------------------------------
+Strength : Default   Module : ISA
+
+Mt : Cats-PracticeMt
+HL Formula : 
+(isa Billy SpatialThing)
+
+Justification : 
+(isa Billy Animal) in Cats-PracticeMt
+(genls Animal AnimalBLO) in BiologyMt
+(genls AnimalBLO BiologicalLivingObject) in BiologyVocabularyMt
+(genls BiologicalLivingObject ComplexPhysicalObject) in BaseKB
+(genls ComplexPhysicalObject PartiallyTangible) in BaseKB
+(genls PartiallyTangible TwoOrHigherDimensionalThing) in BaseKB
+(genls TwoOrHigherDimensionalThing SpatialThing) in BaseKB</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+Now, just out of curiosity, let's ask if Billy is a person, and see what happens. (What would you expect to happen?)</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Back button on your web browser. This should take you to the Inference Answer Detail page. Click on the link "Continue Ask" in the upper right hand corner. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_ContinueAsk.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> This will bring up the Ask a Query page. Enter "(isa Billy Person)" in the large text box. <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskText.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Click on the "Cyclify" button (immediately above the large text box). <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskCyclify.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> Click on the "Ask Query" button (immediately above the <b>Mt :</b> text box).</font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskMt.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>You should see the following:</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+Ask a Query
+   [Skip to Inputs]
+
+Last query in Cats-PracticeMt :
+(isa Billy Person)
+
+Query halted because : Search space was exhausted.
+
+Query was not proven
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+Why didn't Cyc say that this statement was false?</p>
+    <p>
+      <table border='6' cellpadding='6' align='center'>
+        <tr>
+          <td bgcolor='#3399FF'>
+            <font color='white' size='+1'>The Cyc inference engine never returns "false" -- but only "true" or "not proven" -- as the answer to a query.</font>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>In fact the Cyc inference engine never returns false - only true or not proven. Cyc knows a great deal but has sufficient humility not to assume that
+its failure to prove an assertion P is a sound basis for concluding that P
+is false. However, let's try asking <nobr>
+        <tt><font size='+1'>(not (isa Billy Person))</font></tt>
+      </nobr>, i.e. "Is it not the case that Billy is a person?"</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Scroll down below "Query was not proven" on the "Ask a Query" page. The query we just asked is still entered into the fields there. Insert "(not" just before "(isa Billy Person)" and add another ")" at the end of the query, so that you have "(not(#$isa #$Billy #$Person))" entered in the large text box. Click on the "Cyclify" button. Click on the "Ask Query" button. </font>
+    </p>
+    <p>
+You should see this proven True! Why is this? Click on the link "Explain"....and again click on the link to the ISA: inference module.</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the link "Explain" (next to "True" and immediately above the line that separates the result of the query and the tools for asking another query). <font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_Explain.gif' TARGET='map_window'>Show me</a> ]</nobr>
+        </font> From the "Inference Answer Detail" page, click on the link "<b>ISA:</b>", under <b>One Justification :</b>. </font><font size='-1'>
+  &nbsp; <nobr>[ <a HREF='http://www.cyc.com/cycdoc/img/cb/map_AskISA.gif' TARGET='map_window'>Show me</a> ]</nobr>
+      </font>
+    </p>
+    <p>
+You should see something that looks like this:
+</p>
+    <table width='100%' border='0' align='center'>
+      <tr>
+        <td bgcolor='#d3d3d3'>
+          <font color='black'>
+            <tt><pre>
+HL Support Detail   [Refresh]
+---------------------------------
+Strength : Default   Module : ISA
+
+Mt : Cats-PracticeMt
+HL Formula : 
+(not 
+   (isa Billy Person))
+
+Justification : 
+(isa Billy DomesticPet) in Cats-PracticeMt
+(genls DomesticPet DomesticatedAnimal) in HumanActivitiesMt
+(genls DomesticatedAnimal NonPersonAnimal) in DomesticBreedsVocabularyMt
+(disjointWith Person NonPersonAnimal) in BiologyMt
+</pre></tt>
+          </font>
+        </td>
+      </tr>
+    </table>
+
+<p>
+This provides a summary of the inferencing which the :ISA inference module
+went through in this case. Can you see what went on? Basically, it
+followed the genls hierarchy from the collection <nobr>
+        <tt><font size='+1'>#$DomesticPet</font></tt>
+      </nobr> (which
+Billy belongs to) up to the collection <nobr>
+        <tt><font size='+1'>#$NonPersonAnimal</font></tt>
+      </nobr>. It then found
+an assertion that the collections <nobr>
+        <tt><font size='+1'>#$Person</font></tt>
+      </nobr> and <nobr>
+        <tt><font size='+1'>#$NonPersonAnimal</font></tt>
+      </nobr> are
+'disjoint' - i.e. they have no instances in common (which makes sense,
+given their names). The module then concluded that since Billy is a
+member of the collection <nobr>
+        <tt><font size='+1'>#$NonPersonAnimal</font></tt>
+      </nobr>, he cannot be a member of the
+collection <nobr>
+        <tt><font size='+1'>#$Person</font></tt>
+      </nobr>.
+</p>
+    <p>
+Note that it is <em><b>not</b></em> the case that every query which returns "Not Proven"
+can be made to return "True" when negated. Consider, for example, <nobr>
+        <tt><font size='+1'>(isa
+Billy Dog)</font></tt>
+      </nobr>. Try asking this both with and without a (not ...) surrounding it.
+</p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. This will bring up the "Browser Tools" page. Click on the "Ask" link in the column on the left. This will bring up the "Ask a Query" page. Enter "(isa Billy Dog)" in the large text box. Click on the "Cyclify" button (immediately above the large text box). Enter "Cats-PracticeMt" in the text box next to "<b>Mt :</b>". Click on the "Ask Query" button (immediately above the <b>Mt :</b> text box). </font>
+    </p>
+    <p>
+      <img border='0' src='http://www.cyc.com/cycdoc/img/cb/keyboard_icon.gif' width='30' alt='Try it yourself! Enter this into your copy of OpenCyc.'> &nbsp;&nbsp;
+  <font color='#660033'>Click on the Tools link in the left corner of the top frame. This will bring up the "Browser Tools" page. Click on the "Ask" link in the column on the left. This will bring up the "Ask a Query" page. Enter "(not (isa Billy Dog))" in the large text box. Click on the "Cyclify" button (immediately above the large text box). Enter "Cats-PracticeMt" in the text box next to "<b>Mt :</b>". Click on the "Ask Query" button (immediately above the <b>Mt :</b> text box). </font>
+    </p>
+    <p>
+It turns out that Cyc cannot prove that Billy is or is not a dog. Cyc does
+not know enough about Billy to decide either way. Of course if Cyc knew
+that Billy were a cat then perhaps Cyc could decide this question. Remember
+that we did not manage to assert that Billy and Peter were cats because
+there was no <nobr>
+        <tt><font size='+1'>#$Cat</font></tt>
+      </nobr> constant. And of course, the relevant inference
+would only go through if such a constant were intelligently ontologized.
+</p>
+    <p>
+If you would like to, go ahead and create a constant <nobr>
+        <tt><font size='+1'>#$Cat</font></tt>
+      </nobr> (a
+collection, of course), assert that Billy and Peter are instances of it,
+make whatever assertions on it you think are required to capture the
+meaning of 'cat' and, in particular, make whatever <nobr>
+        <tt><font size='+1'>#$disjointWith</font></tt>
+      </nobr>
+assertions are required for Cyc to be able to prove that Billy is not a
+dog. (Make sure you test with an actual 'Ask' to verify!)
+</p>
+    <p>
+Now, if you are up to a challenge, see if you can make whatever
+<nobr>
+        <tt><font size='+1'>#$disjointWith</font></tt>
+      </nobr> assertions are required for Cyc not to conclude <em><b>any
+analogous wrong thing</b></em> about Billy....:-)</p>
+    <a HREF='http://www.cyc.com/cycdoc/ref/negation.html ' TARGET='reading_window'><img border='0' src='http://www.cyc.com/cycdoc/img/cb/book_icon.gif' width='30' alt='Click here for suggested reading on this topic'></a>&nbsp;&nbsp;
+  <a HREF='http://www.cyc.com/cycdoc/ref/negation.html ' TARGET='reading_window'>Further reading on negation in CycL</a><p>
+What else should we expect Cyc to be able to infer about Billy and Peter? </p><p>
+Here are some suggestions for further Asks:
+</p><blockquote>
+      <ul>
+        <li>
+          <p>
+Is Billy light enough to be carried around? (Can be proven True, under
+the right circumstances)</p>
+        </li>
+        <li>
+          <p>
+Have Billy and Peter ever met or come into physical contact? (Can be
+proven True, though this one is harder than the last! Hint: the relevant
+predicate may take some digging up.)</p>
+        </li>
+      </ul>
+    </blockquote><p>
+I encourage you to try doing some other asks, then making some other assertions, then doing still further asks....You are now on your way to becoming a Cyc-savvy ontological engineer. Have fun!!</p><p>Now that you hav completed the shorter versions of steps three and four, if you would like a more detailed explanation of how to use microtheories and where to place assertions in the microtheory hierarchy, then read the considerably <a HREF='http://www.cyc.com/cycdoc/walkthroughs/oeintro_cats_frames_long.html#step3long'>longer version of this walkthrough</a>.</p><em><p>
+Step four summary - we have performed some inference-testing and found out that Cyc does not only know what we told it in Step 3, it is able to make certain inferences based on that knowledge, which shows that it has integrated that knowledge into the larger KB. </p></em><hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 08/28/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

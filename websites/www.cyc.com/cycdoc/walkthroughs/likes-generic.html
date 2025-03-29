@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <style type='text/css'>
+    p {font-family: Arial, sans-serif }
+    a {font-family: Arial, sans-serif }
+    p {font-size: 100%}
+    </style>
+  </head>
+
+  <body bgcolor='white'>
+
+<p><b>Why does #$likes-Generic also appear in the list?</b></p>
+
+<p>The short answer is because #$likes-Generic is a genlPred of itself. How can that be? Look at one of the rules that defines #$genlPreds:</p>
+
+<tt>
+<pre>
+(implies 
+       (and 
+           (?PRED ?ARG1 ?ARG2) 
+           (genlPreds ?PRED ?GENL-PRED)) 
+       (?GENL-PRED ?ARG1 ?ARG2))
+</pre>
+</tt>
+
+<p>This says that if PRED holds of some ARG1 and ARG2 and ?PRED is a specialized form of ?GENL-PRED, then GENL-PRED also holds of ARG1 and ARG2. There's nothing to say that PRED and GENL-PRED can't be the same predicate.
+</p>
+
+<p>
+By the way, the same holds true for collections using #$genls. This is reminiscent of one of the first things you learn in school about sets: the set {1,2,3} is a subset of the set {1,2,3}.</p>
+
+  </body>
+</html>

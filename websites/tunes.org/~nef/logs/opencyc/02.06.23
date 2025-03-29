@@ -1,0 +1,473 @@
+00:00:00 --- log: started opencyc/02.06.23
+00:46:31 --- quit: CycLBot (Remote closed the connection)
+00:50:56 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+00:57:57 --- join: zool (~jo@81.2.80.46) joined #opencyc
+00:58:02 <zool> hello
+00:58:02 <CycLBot> hello zool
+00:58:08 <dmiles> hi zool
+00:58:42 <zool> ah, context :)
+00:58:59 <zool> a strange australian's been telling me about your bot-cyc interface
+00:59:12 <zool> i fired up opencyc for the first time this morning and was a bit appalled, frankly
+00:59:12 <dmiles> oh its an interface into opencyc
+00:59:23 <dmiles> give me the grievances
+00:59:26 <zool> whichever ;)
+00:59:55 <dmiles> i am trying to understand .. i hear alot of people unhappy but never have had one explain why
+01:00:18 <zool> bugger, i've lost my own rants in scrollback ;)
+01:00:28 <dmiles> this or #rdfig?
+01:01:03 <dmiles> i have infinate scrollback
+01:01:06 <zool> no, on rhizomatic where i whisked urgen off to 
+01:01:29 <dmiles> ah
+01:01:41 <zool> i did a search for 'anxiety', came across some IntelligentAgent subclass
+01:01:44 <dmiles> well is it performance or usebilty based?
+01:02:08 <dmiles> so its the current loaded ontologies?
+01:02:42 <zool> and ran across AgentTypeByEmotionalState
+01:02:59 <zool> [[Def]] "A specialization of IntelligentAgent. Each instance is an agent in the emotional state of being nervous."
+01:03:02 <dmiles> looking at it
+01:03:14 <zool> which strikes me as both completely pointless, and actually quite sick
+01:03:37 <dmiles> well yeah it looks like an optimization of using Collection to seach on hasAttrributes
+01:03:48 <zool> generally, it's the presumption of the ontology at all - the presumption that there's any such thing as consensus reality ;)
+01:04:14 <dmiles> i could see your concern that it is in the BaseKB
+01:04:49 <dmiles> Collection denoting properties on objects should be oganized out of the general soup
+01:05:15 <zool> i basically feel that top-down, monolithic systems like (open)cyc looks like are the wrong way to approach the problem
+01:05:22 <zool> but i can't rigourously justify that
+01:05:33 <zool> the general soup? :)
+01:05:49 <dmiles> well take daml for instance
+01:05:54 <zool> so, how can i get CycLBot to teach me about its interface
+01:06:08 <dmiles> the intial daml+iol is the upperlevel ontolgy
+01:06:31 <dmiles> you are asking that would be all cyc should have?
+01:06:40 <zool> that strikes me as a soup of words
+01:07:05 <zool> i really havent spent enough time looking at cyc to form a decent opinion about that
+01:07:30 <dmiles> i spennt a liong time writting resolution solver systems simular to opencyc
+01:08:08 <dmiles> the nice thing with cyc is it maintain content and allows us to wietght it down
+01:08:12 <zool> resolution solvers? what kind of apps? call centres, sort of thing?
+01:08:29 <dmiles> propositional resolutioin
+01:08:37 <dmiles> automated theorem provers
+01:08:44 <zool> it seems so very - idiosyncratic, obscure, a little old-fashioned also?
+01:09:04 <zool> that's in an academic context?
+01:09:20 <dmiles> well its only a platfiorm that enables one day writting an AI like program
+01:09:36 <dmiles> thats what opencyc is to me
+01:09:45 <dmiles> a programming language like SQL++
+01:10:15 <dmiles> so my expectations are not set as high i guess and thats why i dont mind it
+01:10:50 <dmiles> the content in it is often not appropriate for AI .. but sometimes it might be usefull
+01:11:02 <zool> i have more inclinations than expectations
+01:11:12 <dmiles> at least better then not having it at all
+01:11:22 * zool nods
+01:11:43 <zool> single-source, monolithic, centralised it is though, and that feels wrong
+01:11:43 <dmiles> so i like to stick cycs contents outside a scope on my Microtheory and use it as a programming system
+01:12:06 <dmiles> and dip into microtheories that might be usefull containing information
+01:12:07 <zool> what's your Microtheory? back to the resolution?
+01:12:31 <dmiles> a microtheory is a axiom scope a user can create in opencyc
+01:12:39 <dmiles> like defining a module
+01:12:43 <zool> sorry if i'm going too slowly, it's been a long overnight sesh
+01:12:48 <dmiles> you can import content for other pklaces
+01:12:59 <zool> like  a package space in perl
+01:13:04 <zool> right
+01:13:05 <dmiles> exacrtly
+01:13:20 <dmiles> those axioms you say can be excluded from your cyc scope
+01:13:32 <dmiles> err those axioms you mentioned
+01:13:42 <zool> okay
+01:13:55 <dmiles> so then you have a nice clean slate to write software into
+01:14:03 <zool> in a peruser not a per-installation way?
+01:14:34 <dmiles> user you can have a scope.. you can share your package scopes with oothers
+01:14:46 <dmiles> depends if they want them
+01:14:52 <zool> and you're using the cyc ontology more like a protocol
+01:14:56 <dmiles> they are inheriatble heirarchy
+01:15:05 <zool> that sounds nice, very nice
+01:15:22 <zool> so how do you plug into the rdf activity?
+01:15:41 <dmiles> daml pages export a Mapping to opencyc
+01:16:06 <dmiles> so when you load a dmal page with cyc you can place it in microtheories
+01:16:36 <dmiles> and make rdfish queries against the info
+01:16:55 <zool> okay, i think i get that
+01:17:23 <dmiles> cyc give the ability to manage the content
+01:17:44 <dmiles> and export out (serve up) daml content
+01:18:50 <dmiles> not all of the functionality is complete
+01:19:36 <dmiles> but you can spoon feed cyc rdf from any programming language
+01:19:43 * zool peers intently at http://www.daml.org/2000/12/daml+oil.daml
+01:20:12 <zool> i could see infobotNG plugging into that a bit easily
+01:20:55 <dmiles> yes.. everything at some points maps up to that
+01:21:07 <zool> yeah, it's starting to make a lot more sense now
+01:21:42 <zool> but why's it taking so long to take off? fear of overcomplexity?
+01:21:55 <dmiles> which project?
+01:22:34 <zool> the whole semantic web project, i suppose ;)
+01:23:01 <dmiles> oh.. well it was waiting on software to leaverage the entire endouvour
+01:23:16 * zool nods
+01:23:21 <dmiles> otherwsie these guys just make rdf and data documents to spend their funding
+01:23:28 * zool laughs
+01:23:40 <dmiles> then when the money runs out.. nothing gained
+01:23:49 <dmiles> so it needs software of course
+01:24:00 <dmiles> but yet every good software turns out to be topy
+01:24:05 <dmiles> err toy
+01:24:19 <dmiles> for example the XSB dabase groups
+01:24:39 <dmiles> cannot load somethibng even small as a wordnet ontology
+01:25:01 <dmiles> we need our systems to loads and search billions of factys
+01:25:26 <dmiles> or have some organization or a perfect co-routined search
+01:25:29 <zool> but if you plug enough toys together with a common language and enough bandwidth...
+01:25:43 <dmiles> yeah thus coabs grid
+01:25:53 <zool> coabs grid?
+01:26:09 <zool> sorry, i feel i'm full of stupid questions today
+01:26:12 <dmiles> http://coabs.globalinfotek.com/public/Grid/What_is_Grid.htm
+01:26:25 <zool> thankyou
+01:26:47 <dmiles> but at least the grid work turning into something the entire internet benefits from
+01:27:18 <dmiles> a agent orietanted way of getting things donew
+01:27:48 <zool> whoosh, that top-level description is very similar to the workings of my bot swarm
+01:28:01 <zool> i guess it's an idea there to be had
+01:28:38 <dmiles> well we have to do somehting and its the only apporoach imagainable
+01:28:57 <zool> so i have a trivial irc-based implementation of that registering, discovery, method passing
+01:29:11 <dmiles> yes.. it could translate out to that
+01:29:27 <dmiles> i worked with an OS based on IRC that ran on under windows
+01:29:36 <zool> yes! and i've been looking for some way to structure a more verbose non-irc layer, which is crashingly RDF, which i didnt know about
+01:29:41 <dmiles> each application had a channel
+01:29:44 <zool> sweet!
+01:29:59 <dmiles> and some channels were only to offer certain services
+01:30:11 <dmiles> like calc.exe
+01:30:43 <dmiles> so an agent had a channel that was its own and and there where channels the user ung on
+01:31:18 <dmiles> anyways .. that project has been scraped (i left that company_)
+01:31:34 <dmiles> but not wjhy they scrapped it
+01:31:45 <dmiles> they just didn't see the income source
+01:32:04 <dmiles> but anyways..
+01:32:17 <zool> i must admit to difficulty seeing it myself ;)
+01:32:26 <dmiles> they scrapped a couple other super powerfull projects 
+01:32:36 <zool> ugh
+01:32:47 <zool> the atrophying effect of money
+01:33:11 <dmiles> yeah.. i am going to release one of their scrapped endeavours if i ever get time
+01:33:53 <dmiles> source: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/vworlds/
+01:34:30 <zool> right! i was looking at that earlier today... i didnt get to downloading anything... saw it in #rdfig's blog
+01:35:09 <dmiles> but the system is so big and cumbersone (vworlds) i rather make that a litter phase then try to support it
+01:35:17 <dmiles> err a later phase
+01:35:29 <zool> i saw this earlier:
+01:35:31 <zool> http://lists.w3.org/Archives/Public/www-archive/2002Apr/0071.html
+01:35:39 <dmiles> but its a VR world that operates around a OODB.. i want to eventually use cyc
+01:35:51 <zool> MOO/IRC/RDF fusion
+01:36:29 <dmiles> yeah definately a good connection there
+01:36:53 <zool> perl fragments in RDF is also rather sick, though :)
+01:37:23 <dmiles> danbri and I are very into getting a IRC wiki put together
+01:37:29 <zool> that's why i'm obsessing about natural-language-esque method invocation with an infobot like syntax
+01:37:31 <dmiles> err moo wiki
+01:37:51 <zool> okay, you all match up!
+01:37:53 * zool grins
+01:38:03 <dmiles> well one could take the most common systeaxs to make an infobot
+01:38:25 <dmiles> i have source for an infobot i wrote in prolog
+01:39:02 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicserver/mod/mod_nani.pl?rev=1.3&content-type=text/vnd.viewcvs-markup
+01:39:27 <dmiles> well you miz that with a couple other files like...
+01:39:43 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicserver/mod/ <- the ones in here
+01:40:09 <zool> it eats and pukes!
+01:40:25 <dmiles> its not perl .. its Prolog
+01:40:41 * zool had noticed :)
+01:42:01 <dmiles> but what i have decided the most important task is getting the things to have goals of its own to loop therough
+01:42:20 <dmiles> we can offer as humans suggestions to have it incorperate
+01:42:33 * zool nods
+01:42:34 <dmiles> like suggest to it it resturns us data
+01:42:51 <zool> but then it acts of its own free will? :)
+01:42:54 <dmiles> then it decides the workflow to alievate the goal
+01:43:03 <zool> sure
+01:43:36 <dmiles> once you have done that.. and thats always the certaing of any dispartte process
+01:43:54 <zool> in the little prototype i built last week, bots cant and dont want to differentiate between bots and humans
+01:44:42 <dmiles> yes i havent seen a good reson to separate their understanding of the differnce unless hey have some better datashare techniques
+01:44:44 <zool> and bot A could rattle off and teach bot C how to call bot B's functoids quite independently
+01:45:08 <zool> but i havent yet come up with an application in which it would want to 
+01:45:33 <dmiles> hrrm there is alot of needs for techsupport botas
+01:45:37 <dmiles> err bots
+01:45:42 <zool> but then we're back to 
+01:45:44 <zool> ""Function, even ostensible function, is n
+01:45:44 <zool> ot the way to look at this. All function, in these terms, is ostensible. Tempora
+01:45:44 <zool> ry. What he wants is a network in place. then he can figure out what to do with 
+01:45:44 <zool> it."' "
+01:45:57 <zool> sozspam
+01:46:30 <dmiles> you mean to context of the query?
+01:46:40 <dmiles> or how to cache results?
+01:46:45 <zool> ah, i'm very much focused on having fun with my bots though, i hook into the infobotNG thing, but alone i just do generative art experiments 
+01:47:48 <zool> caching is there... context is the part of the problem i'm not addressing properly, i suppose
+01:48:05 <zool> which is how i ended up on the RDF trail
+01:49:00 <dmiles> hrrm yeah.. i have beren trying to get brains to woirk without worrying about having them comunicate to the outside world
+01:49:15 <dmiles> in a structured tuple form
+01:49:25 <dmiles> then was going to worry about language later
+01:49:59 <dmiles> but the issue of usablity and tanglible results always force me but into NL transaltion
+01:50:09 * zool nods
+01:50:29 <dmiles> there are about 5 different vertexs that data works in in NL
+01:50:45 <zool> i'm approaching the problem the other way, hoping that the ontology will almost emerge from the hypercommunicating network of dumb agents
+01:51:11 <dmiles> like basic rule classes.. that process between them
+01:51:28 <zool> i havent done any formal NL work at all, just played with the perl toolboxes, played with wordnet a lot
+01:51:40 <dmiles> by making the agents speak deepstructure to each other?>
+01:52:30 <dmiles> we have to pick out a single deepstructure conveyance language sometimes
+01:52:48 * zool chews her lip
+01:53:09 <dmiles> thats why i got into rdf and cycl
+01:53:51 <dmiles> hoping i could get everyone to pick out the ontology ;P
+01:54:06 <dmiles> and i could try to write software to use it
+01:54:06 <zool> what's the story in which there are a long chain of linguistic ancestors- gah, its a pratchett novel but let that pass - in which each person can talk to their immediate ascendants and descendants, and the message manages to pass seamelssly down the chain
+01:54:19 <zool> right
+01:55:05 <zool> well, i think you could still do that over the more interconnected version, and maybe you wouldnt have to do so much work
+01:55:32 <dmiles> yes.. hoping that each agent module can be checked into onbe good system
+01:55:33 <zool> rdf makes utter sense, mostly because it is there
+01:55:46 <dmiles> and each module could be simple
+01:55:56 <zool> yes
+01:56:08 <dmiles> which is nice about the infobotNG web
+01:56:37 <dmiles> if it fits their query pragma they'll answer of pass it on
+01:56:49 <dmiles> err or just pass it along
+01:57:47 <zool> k, i've got to go for a wander, my back's starting to suffer too much
+01:57:47 <dmiles> moo space has been interesting.. becasue it allows each tuiny agent to have their own way of looking at the same data
+01:57:55 <zool> nice
+01:58:03 <zool> i'll look harder at logicmoo later
+01:58:21 <dmiles> cool.. i am writting the NPC scriopting system tonight
+01:58:28 <zool> :)
+01:58:36 <dmiles> so they can be dispactched from p,layer connds
+01:58:41 <zool> whoosh, it's 10 am already
+01:58:53 <dmiles> are you in liverpool?
+01:59:03 <zool> good luck! you've given me a week's worth of food for thought, thankyou
+01:59:10 <zool> no, in north london
+01:59:12 <dmiles> cool.. tt you soon ;P
+01:59:34 <zool> l8rz :)
+01:59:45 * zool lurks quietly
+02:02:37 <dmiles> subl: (cyc-query '(#$effectOfActionIf-Props ?Act ?Before ?After) #$InferencePSC '(:backchain 2))
+02:02:56 <CycLBot> true sentence
+02:04:15 <dmiles> subl: (ask-template '(?Act  ?Before ?After) '(#$effectOfActionIf-Props ?Act  ?Before ?After) #$InferencePSC 2 nil nil nil)
+02:04:33 <CycLBot> ((?ACT ?BEFORE ?AFTER))
+02:06:09 <dmiles> subl: (ask-template '(EventType  ?Before ?After) '(#$effectOfActionIf-Props ((PredicateForActionFn ?EventType) ?X ?Y) ?Before ?After) #$InferencePSC 2 nil nil nil)
+02:06:10 <CycLBot> no answers found
+02:06:36 <dmiles> subl: (ask-template '(?EventType  ?Before ?After) '(#$effectOfActionIf-Props ((#$PredicateForActionFn ?EventType) ?X ?Y) ?Before ?After) #$InferencePSC 2 nil nil nil)
+02:11:41 <dmiles> hello CycLBot
+02:11:56 <dmiles> still working on it
+02:19:53 <dmiles> i need a way to interupt a thread in opencyc
+02:19:59 <dmiles> or a wya to get a list of threads
+02:25:07 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+02:25:52 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+02:38:32 --- join: damski (damski@CPE-144-132-178-3.nsw.bigpond.net.au) joined #opencyc
+03:50:37 <zool> that's some fancy-lookin lisp you got there boy
+03:51:38 <dmiles> cyc query api
+03:52:59 <dmiles>  subl: (ask-template '?X '(#$isa ?X #$Animal) #$InferencePSC 1 1 1 1)
+03:53:02 <CycLBot> (Guest)
+03:53:09 <dmiles>  subl: (ask-template '?X '(#$isa ?X #$Animal) #$InferencePSC 1 3 1 1)
+03:53:10 <CycLBot> ((GenericInstanceFn Dog) CycAdministrator Guest)
+03:53:49 <dmiles> i am trying to get cyc to make termOfUnit assertion though
+03:54:01 <dmiles> i am not sure why thjis is so herd to do rioght now
+03:55:27 <dmiles>  subl: (ask-template '?X '(#$isa #$PredicateForActionFn ?X) #$InferencePSC 1 10 nil nil)
+03:55:29 <CycLBot> PartiallyIntangible
+03:55:29 <CycLBot> Intangible
+03:55:30 <CycLBot> MathematicalOrComputationalThing
+03:55:30 <CycLBot> MathematicalThing
+03:55:31 <CycLBot> MathematicalObject
+03:55:31 <CycLBot> Relation
+03:55:32 <CycLBot> FunctionalRelation
+03:55:34 <CycLBot> Function-Denotational
+03:55:36 <CycLBot> IndividualDenotingFunction
+03:55:38 <CycLBot> PredicateDenotingFunction
+03:55:59 <zool> w00t
+03:56:25 <dmiles> however should have come back as UnaryFunction too
+03:56:37 <zool> how is an Object differentiated from a Thing? that seems obscure
+03:57:12 <dmiles> what kind of Object?
+03:57:35 <dmiles> Thing is the top of all classes.. if tomething is a Thing then it means it can be talked about
+03:58:11 <dmiles> oh in Daml?
+03:58:54 <dmiles> no Object in IL
+03:58:58 <dmiles> err OIL
+03:59:45 <dmiles> But an Object usually is based on NL.. the nous 'Object'
+04:00:37 --- join: qmacro (~dj@pd9e42a6d.dip.t-dialin.net) joined #opencyc
+04:01:10 <zool> okay... i was just looking at MathematicalThing/Object there
+04:02:05 <dmiles>  MathematicalObject object as its something that is not part of the physical world
+04:02:21 <zool> and MathematicalThing is?
+04:02:45 <dmiles> of Object is Inbtangible
+04:02:48 <dmiles> err
+04:02:51 <dmiles> oh Object is Inbtangible
+04:02:57 <dmiles> Intangible
+04:03:05 <dmiles> Thing does not have to be
+04:03:36 <dmiles>  specialization of both MathematicalThing and IntangibleIndividual. Each instance of MathematicalObject is a purely abstract mathematical thing which is also an individual (see Individual). 
+04:03:55 * zool boggles
+04:05:04 <dmiles> '1' is a mathmatical object
+04:05:13 <dmiles> '2' is a mathmatical object
+04:05:30 * zool laughs a little bit
+04:05:47 <dmiles> 1 thorugh 10 is a mathmatical thing 
+04:06:25 <dmiles> ask: (isa PredicateForActionFn UnaryFunction)
+04:06:26 <CycLBot> true sentence
+04:13:19 <dmiles> i need force termOfUnits to be created for a function
+05:05:49 --- quit: qmacro ("leaving")
+05:17:41 --- join: people (Snak@62.53.34.33) joined #opencyc
+06:02:13 <zool> dmiles: i have the inclination to stick much of the scrollback of our conversation somewhere where the london bots people can see it: would you mind that awfully? you can say no and i will calmly acquiesce
+06:36:09 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+07:44:36 <people> hiyer anyone :) i'm looking at the web based version of cyc and going through some of it's help file and it says this on one page "...into the Formula: input window, click the "Ask Query" button. In a KB with the proper knowledge, the interface would display a page with information such as:...." does that mean the the web based version of cyc is sort of a shell version? or does it mean simply that the line of questioning that the query is taking isn't full enough
+07:44:47 <people> it's from this page - http://www.cyc.com/cycdoc/course/basic-ask.html
+08:01:42 <graylensman> The web interface probably does a http get/post to opencyc.  It will send an http response with the query results (if the kb has the knowledge necessary to answer your query) in html.  You see it in your browser.
+08:02:28 <graylensman> OpenCyc listens on a simple telnet port for ascii command strings.  It also listens for "binary" formatted commands on another port as well.
+08:03:07 * zool sees that on 3600 and http on 3602
+08:04:15 <people> yeah, i get that, but in the manual it says "In a KB with the proper knowledge, the interface would display a page..."  is the version of cyc on http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg not actually a proper full version of opencyc?
+08:04:46 <people> or is it just the example in the manual isn't properly informing cyc, in full?
+08:11:30 <graylensman> I am interpreting "In a KB with the proper knowledge..." as meaning that the KB is able to provide an answer to your query.  Which would display a page.  Witht the answer. I understand it is a "full" engine.  But only! ~118k assertions or so.  OpenCyc V1.0 will contain something like ~300K in its base ontology.  I think someone told me this here awhile back.
+08:12:54 <people> right. but you don't think there's any big difference in the amount of data the web version has with the version that you install into linux - they're the same roughly?
+08:17:50 <graylensman> By web version you mean http://localhost:3602 for the linux install on your localbox on some online version at www.cyc.com?  If the later.  I don't know.  It probably does have the full 300K+ of assertions/relations.  I know the V0.6's KB is incomplete with regard to what is expected to be released with opencyc v1.0.  But I think the "engine" is the same.  Not sure.
+08:19:07 <people> by web version i mean - http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg
+08:21:57 <people> i'm just wondering if what i'm using (http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg) is a limited smaller version than i'd get if i were to install the downloadable version (V0.6) into linux, or are they much the same?  i guess and hope they're much the same. when i say the same, i mean the amount of data/info/knowledge it has
+09:36:11 --- join: AlonzoTG (~alangrime@66-44-64-64.s64.tnt6.lnhva.md.dialup.rcn.com) joined #opencyc
+09:50:59 --- join: person (Snak@62.53.34.4) joined #opencyc
+09:59:45 --- quit: people (Read error: 110 (Connection timed out))
+10:00:17 --- part: person left #opencyc
+10:16:11 --- join: people (Snak@62.53.34.4) joined #opencyc
+10:36:50 --- part: zool left #opencyc
+11:48:00 --- quit: people (Read error: 110 (Connection timed out))
+12:39:30 --- join: theos (~torsten@port-213-20-65-53.reverse.qdsl-home.de) joined #opencyc
+13:13:06 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+13:27:50 --- part: theos left #opencyc
+13:37:40 --- quit: AlonzoTG ()
+14:00:47 --- join: people (Snak@62.53.34.26) joined #opencyc
+15:58:25 --- join: nrv8 (~sensory@emotionally.unstable.org) joined #opencyc
+17:24:39 <dmiles> i think people: http://opencyc249.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-login
+17:24:44 <dmiles> is the newest versiobn
+17:25:04 <dmiles> it has more exposed SubL then the other two serrrvers
+18:06:26 --- part: people left #opencyc
+18:35:45 <dmiles> oops i typed (apropos 'A) on Thinker in SubL window
+18:36:14 <dmiles> think i did a bad thing
+18:36:50 <dmiles> host is not responding
+18:37:14 <nrv8> dmiles
+18:37:15 <nrv8> what is it
+18:37:43 <dmiles> its does a search for defining comments for macro calls
+18:38:17 <dmiles> Thinker (an  OpenCyc server) has exposed API calls
+18:38:42 <dmiles> so i was trying out a couple EVALs 
+18:39:03 <dmiles> but may have left it in an ussable state
+18:40:34 <dmiles> http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-start  <- another OpenCyc server
+18:42:22 <dmiles> oh wait Thinker is Steves home machine
+19:35:50 <stevereed_home> no problem I just restarted Thinker.
+19:36:16 <stevereed_home> I did not know the api port was enabled to get thru the norton person firewall I have
+19:36:21 <stevereed_home> but that is ok.
+19:36:22 <dmiles> was it the apropos call?
+19:36:25 <stevereed_home> ?
+19:36:52 <dmiles> oh i did iot from the SubL prompt
+19:37:03 <dmiles> err the SubL interactor in the UI
+19:37:13 <dmiles> (WebUI)
+19:38:09 <stevereed_home> apropos should not be in the api.
+19:38:27 <stevereed_home> we have it in SubL, but dont use it much because
+19:38:41 <dmiles> hrrm was it my command that brought thinking down?
+19:38:48 <stevereed_home> the franz common lisp/emacs environment supports better lookup tools.
+19:38:52 <dmiles> err Thinker
+19:39:06 <stevereed_home> probably you took down thinker.
+19:39:16 <stevereed_home> but thats fine -- no problem.
+19:39:32 <stevereed_home> we dont have a security model in cyc yet.
+19:39:52 <dmiles> yeah sorry about that,, i did subl: (apropos 'A)
+19:39:55 <stevereed_home> it will be a while coming because the imact is everywhere.
+19:39:59 <dmiles> fine w/o security for me
+19:40:50 <dmiles> the last thing i like doing is worring some code is going to not work becasue of sucurity model
+19:40:59 <stevereed_home> thinker is back up.
+19:42:33 <dmiles> 2http://opencyc249.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-login <- right?
+19:42:41 <stevereed_home> right
+19:42:43 <stevereed_home> I jo
+19:42:49 <stevereed_home> just did the apropos
+19:42:58 <dmiles> you killed it this time ;P
+19:43:04 <stevereed_home> command and it is dumping all of the wordnet termss
+19:43:09 <stevereed_home> thousands.
+19:43:23 <dmiles> interesting
+19:43:52 <dmiles> an unhooked (non terminated string)
+19:44:55 <dmiles> like maybe the code hits a string area poited to
+19:45:01 <dmiles> pointed to
+19:45:13 <stevereed_home> yes I killed the image and just restarted it.
+19:45:26 <stevereed_home> I'll look into this further at the office.
+19:45:34 <stevereed_home> Now is time to move the computers.
+19:45:52 <stevereed_home> so mccarthy and turing will be down 30 minutes (or less).
+19:45:52 <dmiles> well whatever you do.. hiopefully it will not hide any API 
+19:46:08 <dmiles> ok all good ;P
+19:46:12 <stevereed_home> no the api should get bigger, not smaller.
+19:46:17 <dmiles> yay!
+19:46:44 <stevereed_home> bye for now.
+20:31:36 <stevereed_home> mccarthy and turing comfortable back in the garage.
+20:32:04 <stevereed_home> gettng a bit warm in Austin, let's see how they do at 100 degrees.
+20:32:21 <stevereed_home> lots of moving air but no ac in the garage.
+20:32:43 <dmiles> i was wondering about that.. if computer in Tx fans were a bigger deal
+20:33:33 <dmiles> garages here in Washinton are much cooler then houses
+20:34:41 <dmiles> had a question about post 0.6 builds.. and if they talk to non localhost clients
+20:35:58 <dmiles> is http://opencyc249.homelinux.org:3603 over the java proxy?
+20:37:01 <dmiles> but yes my question is about 3600 - 3603 (not just the WebUI)
+20:38:14 <dmiles> i dont see a real gain by restriction accesses to only localhosts for now
+21:36:18 <stevereed_home> in post-0.6 you will have the option exposed to enable non-localhost clients
+21:36:49 <stevereed_home> we want to model OpenCyc security like Apache, powerful but you have to turn it on
+21:36:51 <stevereed_home> yourself.
+21:37:08 <stevereed_home> not like microsoft - powerful, but on from install.
+21:37:21 <stevereed_home> We want no bad hacking news stories.
+21:47:09 <dmiles> good methodology
+21:49:53 <graylensman> hey dmiles.  Up late.  How goes your moo/mud.
+21:51:41 <dmiles> pretty alright you can telnet in at port 4444
+21:51:55 <dmiles> i just has basic mvement and look
+21:52:17 <dmiles> right now though before each NPC command invokation it queries opencyc for the next command
+21:52:37 <dmiles> that is laging the Mud becoasue there are bout 15 NPCs in it rgith now
+21:53:36 <dmiles> so its forward progress anyways.. alos i made it before each command is executed it reloads the command interpretor class
+21:53:52 <graylensman> When you say query for next command... A NPC is being script driven (sorta) from cyc.
+21:54:05 <dmiles> so i can compile and replace the interpretor w/o reloading the players or NPCs
+21:54:12 <dmiles> is 
+21:54:25 <dmiles> ask (nextCommand ?Dmiles ?W)
+21:54:27 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+21:54:27 <CycLBot> (#$nextCommand ?DMILES ?W)
+21:54:28 <CycLBot> was not well formed because:
+21:54:29 <CycLBot> (#$nextCommand ?DMILES ?W) is not a well-formed formula.
+21:54:29 <CycLBot> Perhaps #$nextCommand is insufficiently defined.")
+21:55:03 <dmiles> one sec .. getting the Const
+21:56:14 <dmiles> ask (nextNpcCommand dmiles ?W)
+21:56:20 <CycLBot> no answers found
+21:56:39 <dmiles> ask (nextNpcCommand   (GenericInstanceFn Dog)  ?W)
+21:56:44 <CycLBot> (((?W not (bodilyDoer (GenericInstanceFn Dog) Dying))) ((?W performedBy Breathing (GenericInstanceFn Dog))))
+21:57:34 <dmiles> each NPC queries for his next command based on his authorityForMt scope
+21:58:00 <dmiles> which follows normal genlMts
+21:58:01 <graylensman> Who many command?  _ask (nextNpcCommand ?W ?C)  How often does each NPC query?  
+21:58:12 <graylensman> How many...
+21:58:23 <dmiles> right now if they get a possitive response they do it each second
+21:58:37 <dmiles> if they get no answers back they wait 1 minute
+21:58:46 <dmiles> mainly i am adjusting it based on lag
+21:58:58 <graylensman> So 15 reqs/sec or less is dragging opencyc to a halt?
+21:59:40 <graylensman> not that 15 req/s is not bad.  just wondering what its capable of...
+21:59:42 <dmiles> no its just the fact ehri queirys are so deep and ussually result in a unassert/assert of possition changes
+22:00:07 <dmiles> so playter movement creates a small amount of use
+22:00:17 <graylensman> so cyc is keeping state as well.
+22:00:25 <dmiles> its when you add all the forward chaining happing durring assert time
+22:00:49 <dmiles> yes.. much easier for it to maintain state then try to figure it out
+22:01:08 <dmiles> (on a need to know basis)
+22:01:27 <graylensman> rete is best... lots of rules slowly changing facts.  if you are ass/unass for all position changes for whole world.. lots of flux.
+22:01:27 <dmiles> so right now Cyc is keeping the entire game in JamudMt
+22:02:08 <dmiles> yes .. exacly .. i could organize it better that the flux has no side effects
+22:02:37 <dmiles> but right now its more of learning hgow exactly things should go
+22:02:52 <dmiles> i am keeping everything in one Mt 
+22:03:14 <dmiles> so side effects of flux is greater
+22:03:32 <dmiles> i should partition it out better
+22:03:44 <graylensman> I have been experimenting with using Scheme to generate SubL code.  Looks promising.  Get to use an IDE, macros the works.  The generated code runs local in cyc or in my Scheme process which is sending it to cyc telnet port.
+22:04:07 <dmiles> like keep state in a place only rules only client from anteceedant
+22:04:46 <dmiles> yeah i bet since Cyc api is all nice pretty conses you almost feel cyc is embedded rtight there for you
+22:05:00 <graylensman> Exactly.
+22:05:19 <dmiles> very shortly cyc will be able to call you back on a telnet
+22:05:30 <dmiles> identical to how you talk to it
+22:06:00 <dmiles> so that way maybe cyc's can work together
+22:06:36 <dmiles> but anyways you might be able to hold data there in your scem,e world and have cyc come back to you
+22:06:50 <dmiles> (durring the middle of a query)
+22:07:03 <dmiles> with a performSubLFn
+22:07:37 <dmiles> but having Cyc so accessable to you the way it is now.. how do you like it?
+22:08:55 <dmiles> btw .. also teh sceme system you created to interface to opencyc would be usefull for others to use i bet
+22:09:21 <graylensman> That is what I did today.  I am keeping a symbol table of constants on the Scheme side of all defined constants.  The code is identical if I run it in my Scheme interpreter OR in OpenCyc. 
+22:10:33 <dmiles> ah very very cool
+22:10:40 <graylensman> This way I can do (constant-p #$Dog) instead of (constant-p "#$Dog") which is not transparent.
+22:11:22 <dmiles> the #$ really complicated things?
+22:11:47 <graylensman> Not at all.  Its actually desirable.
+22:12:03 <dmiles> i see so you have a better more exacting control over thing
+22:12:31 <graylensman> I couple of custom reader tweaks is all
+22:14:12 <graylensman> The REALLY big win is being able to use a macro to define an assertions etc.. 
+22:14:16 <graylensman> (cyc-assert '(#$isa #$drinks #$BinaryPredicate) #$HouseMt)
+22:14:16 <graylensman> (cyc-assert '(#$arg1Isa #$drinks #$NationalOrigin) #$HouseMt)
+22:14:16 <graylensman> (cyc-assert '(#$arg2Isa #$drinks #$Beverage) #$HouseMt)
+22:14:33 <graylensman> Becomes much easier and consice with a macro.
+22:16:13 <dmiles> so your internal cyc-assert is a reader macro?
+22:16:37 <dmiles> i got confused.. explain
+22:17:24 <graylensman> I am defining every (most) SubL function as a Scheme procedure.  
+22:18:09 <dmiles> ah so they may point to (my-call-to-api-port ....)
+22:18:32 <dmiles> but your making them feel like thay are in sceme
+22:18:56 <dmiles> they are in scheme
+22:18:57 <graylensman> Then I can define my own procedures and macros that all depend on SubL.  As I execute my procedures or expand a macro it all ultimately invokes SubL primative procedures.  They just send the commands to cyc.
+22:19:23 <dmiles> i see so you can execture you code from eighter place this way
+22:19:34 <graylensman> Yes.
+22:21:53 <graylensman> (define-cyc-assertion drinks Person Beverage theory HouseMt) would be a macro that expands into a series of SubL calls. It knows its a BinaryPredicat, it generates the argXIsa, etc...
+22:23:38 <dmiles> yeah one of the first things you do is make the current api mre suitable for kbnowledge engineering ;P
+22:23:47 <graylensman> Everything works so well because SubL is almost more Scheme then CL :)  The real trick is that Scheme handles s-exp really well.  No impedance issues like with Java types <-> Subl types.
+22:25:22 <dmiles> yeah true
+22:26:21 <dmiles> i started writting a prolog app arround the cyc SubL calls.. man much prtettier then java Subl types.
+22:26:22 <dmiles> [22:30] <dmiles> yeah true
+22:26:49 <dmiles> odd paiste.. ;P
+22:27:02 <dmiles> was trying ti get "Java types <-> Subl types."
+22:27:53 <graylensman> I am using PLT so I can write my SchubL in modules, and use ML Unit/Sigs.  I can write higher level methods.  4 lines of SubL to define an assertion was getting to me.
+22:28:31 <dmiles> defiantely
+22:29:04 <dmiles> definatatley.. first thing i saw was how hard it was to assert that Fido was a Dog
+22:29:35 <graylensman> I am only 15% done with translating every SubL into a Scheme procedure.  Most of today was defining a system to keep track of #$Constants on the Scheme side.  I keep them in a RedBlack tree.
+22:30:40 <graylensman> Should make faster progress now.  
+22:30:56 <graylensman> Anyway.  Bed time for me.  Later....
+22:31:16 <dmiles> good work.. talk to you soon
+22:34:08 --- quit: graylensman ("Client Exiting")
+23:34:42 --- quit: CycLBot (Remote closed the connection)
+23:37:21 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.06.23

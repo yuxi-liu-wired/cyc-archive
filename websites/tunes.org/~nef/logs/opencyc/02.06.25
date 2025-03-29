@@ -1,0 +1,798 @@
+00:00:00 --- log: started opencyc/02.06.25
+04:39:14 --- quit: jlatour ()
+08:10:54 --- join: people (Snak@62.53.34.87) joined #opencyc
+08:14:30 <people> hiyer dmiles - you said that opencyc is available via telnet - where abouts is that? where would i find out about opencyc/telnet?
+08:24:34 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+08:39:19 <people> or anyone else - accessing cyc via a telnet connection?
+08:40:06 <nrv8> cyc isnt the greatest
+08:40:33 <people> in what respect?
+08:41:09 <nrv8> sorry
+08:41:14 * nrv8 goes back into hiding
+08:41:34 <people> that's alright nrv8. not to worry
+08:41:37 <people> ?
+08:42:17 <nrv8> nooo
+08:42:20 <nrv8> i gotta go back to sleep
+08:42:29 <people> sorry
+08:42:42 <nrv8> no problem
+09:04:45 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+09:05:47 <people> jlatour - do you by any chance know anything about accessing cyc via telnet? 
+09:09:23 * jlatour shakes.
+09:09:55 <people> ok thanks anyway
+09:13:51 <jlatour> You're welcome ;)
+09:14:42 --- quit: Graham (Read error: 104 (Connection reset by peer))
+09:36:12 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+09:36:46 --- mode: ChanServ set +o Graham
+09:50:14 --- join: zool (~jo@81.2.80.46) joined #opencyc
+09:50:38 * zool waves at dmiles
+09:50:45 * zool waves at damski too
+10:04:30 --- join: person (Snak@62.53.34.9) joined #opencyc
+10:27:18 --- join: person2 (Snak@62.53.34.7) joined #opencyc
+10:29:21 <person2> does anyone know anything about how to go about communicating with cyc via telnet? anyone know where there might be some info on this?
+10:30:48 --- quit: people (Read error: 110 (Connection timed out))
+10:31:41 --- join: people (Snak@62.53.34.26) joined #opencyc
+10:32:42 <people> does anyone know anything about conecting to cyc via telnet? where i might find out something about this?
+10:49:58 --- quit: person (Read error: 110 (Connection timed out))
+10:50:58 --- quit: person2 (Read error: 110 (Connection timed out))
+10:59:20 <stevereed> You can connect to your own copy of OpenCyc from telnet on that computer (port 3601).
+10:59:30 <nrv8> telnet
+10:59:31 <nrv8> yuck
+10:59:43 <stevereed> In the next release of OpenCyc, users will be able to allow remote connections.
+11:00:03 <stevereed> that are turned off in the current release to forestall hacking.
+11:00:30 <stevereed> telnet is simply the SubL api that for example CycLBot understands - just the protocol - not
+11:00:33 <stevereed> the interfaace
+11:00:34 <stevereed> .
+11:01:17 <stevereed> In fact the preferred api port is 3614 which is the binary api port.
+11:01:35 <stevereed> Its just that testing api commands is easier if you can read them yourself - telnet.
+11:03:01 <nrv8> sshhh
+11:03:02 <nrv8> !
+11:25:34 --- quit: people (Read error: 110 (Connection timed out))
+11:33:24 --- join: stubby (~schemer@folsom.officedepot.com) joined #opencyc
+11:49:07 --- join: people (Snak@62.53.34.106) joined #opencyc
+12:03:47 --- join: person (Snak@62.53.34.46) joined #opencyc
+12:06:19 <person> opencyc is available via telnet apparently, but i can't find out where or how - just wondering if anyone can point me in the right direction? thanks
+12:16:24 <Graham> telnet to port 3601
+12:26:17 <person> oh right thanks
+12:26:43 <stevereed> it should be on your own copy of opencyc though
+12:26:45 <person> is there any further info like the server name?
+12:26:57 <person> i haven't got a copy of opencyc
+12:27:13 <stevereed> OK you dont need to telnet to see opencyc
+12:27:53 <person> i knowit's available via a web server - html forms but i'm quite interested in the telnet version
+12:28:07 <stevereed> take a look at http://opencyc251.homelinux.org:3603/cg?cb-start
+12:28:08 <CycLBot> Take what?
+12:28:16 <stevereed> hello CycLBot
+12:28:17 <CycLBot> hello stevereed
+12:29:00 <person> i want to access opencyc via a php server - and i thought that the telnet way would be amore direct immediate route
+12:29:41 --- quit: people (Read error: 110 (Connection timed out))
+12:29:50 <stevereed> Yes you will be able to do that when we release again.
+12:30:01 <stevereed> what OS can you run OpenCyc on - win32?
+12:31:03 <person> when we release again? not sure what you mean
+12:31:09 <person> i'm on mac os9
+12:31:38 <person> that url you just posted doens't seem to be working the moment
+12:31:52 <person> i've seen this page - http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-handle-ask - is that the same thing?
+12:32:05 <stevereed> Yes I see it froze, try opencyc250...
+12:32:50 <stevereed> We have interest in a MAC OS X port.
+12:33:16 <stevereed> So on the next release I'll open a port on my public servers for remote
+12:33:18 <stevereed> api access.
+12:34:10 <person> what i want to do is access opencyc from my webserver, which can be done via that html/form page you just linked to, but i was figuring that a telnet connection would be faster and mmore immediate
+12:34:56 <person> dmiles said that open cyc was available via telnet. i didn't even know what telnet was but now i've found out roughly that seems like a better way to do it
+12:35:10 <person> and php can do telnet connections apparently
+12:36:21 <person> so is it not available via telnet now? but will be? is that the situation?
+12:37:49 <stevereed> within a couple of weeks, I am working on a trial build now. I'll take it home when I get
+12:38:00 <stevereed> it built and open up the telnet port.
+12:38:28 <person> oh right. i see. i was under the impression it already existed. i see. thanks
+12:38:36 <stevereed> You can email me at reed@cyc.com and I will give you notice
+12:38:59 <stevereed> well someone else may have redirected their telnet port to the web.
+12:39:10 <stevereed> keep trying here , maybe dmiles knows.
+12:39:36 <person> oh right - yeah i guess he must do because he said it was available via telnet
+12:40:06 <person> another Q - do you know if there's a version of linux that is a powerpc version that is compatable with opencyc?
+12:40:41 <person> if that's even possibel? (installing linux then opencyc into that on a mac(os9 not osx))
+12:49:29 <person> i've only just noticed "You can email me at reed@cyc.com and I will give you notice" - ok i will, thanks very much :)
+12:51:58 <stevereed> on the forum at sourceforge there was an early report of use of a redhat emulator and OpenCyc for the mac working.
+12:52:20 <Graham> person, you can try linuxppc.org or .com
+12:52:44 <person> okey dokey. thanks
+12:53:58 <person> i'll email you now steve
+14:54:54 --- quit: nrv8 (Remote closed the connection)
+16:55:12 <person> why does it always say "Query halted because : Search space was exhausted." on the web version of cyc?
+16:56:56 <dmiles> Means it could not really say no .. but according to all parameters of search it considered everything
+16:57:29 <person> oh ok thanks
+16:57:59 <person> hey dmiles - you said that the cyc was available via telnet
+16:58:09 <dmiles> yes over port 3601
+16:58:22 <dmiles> meaing you can invoke API commands and get results
+16:58:46 <person> isn't there any further info needed - like the server name?
+16:59:02 <dmiles> here i'll give you an example:
+16:59:06 <person> surely there's more than 3601 isn't there?
+16:59:19 <person> ok great
+16:59:20 <dmiles> yes 3601 is the simplest from plain text
+16:59:30 <dmiles> but there are other ports it uses
+17:00:28 <person> on this server - http://opencyc250.homelinux.org ? so it's port 3601 on there?
+17:01:02 <dmiles> [root@titan cyphesis-C++]# telnet localhost 3601
+17:01:02 <dmiles> Trying 127.0.0.1...
+17:01:02 <dmiles> Connected to mccarthy (127.0.0.1).
+17:01:02 <dmiles> Escape character is '^]'.
+17:01:02 <dmiles> (cyc-query '(#$isa ?X #$Dog) #$InferencePSC)
+17:01:03 <dmiles> 200 (((?X #$GenericInstanceFn #$Dog)))
+17:01:22 <dmiles> i typed: (cyc-query '(#$isa ?X #$Dog) #$InferencePSC)
+17:02:02 <dmiles> it returned 200 (Ok)
+17:02:08 <person> into a telnet piece of software
+17:02:10 <dmiles> then A cons for the result
+17:02:23 <person> right
+17:02:36 <dmiles> so all respooses are 2 terms
+17:02:58 <person> it says localhost - so does that mean that you have cyc on your machine? and it's accessing cyc from your machine?
+17:03:06 <zool> yes
+17:03:09 <dmiles> yes.. in this case correct
+17:03:24 <person> oh
+17:03:46 <dmiles> Thinker (the machine you went to) does not alow remote hosts to have accesss
+17:03:57 <dmiles> this will be changed in 0.7
+17:04:08 <dmiles> that you may turn the option on/off
+17:04:11 <person> right
+17:04:35 <person> i got the wrong end of the stick - i thought that the telnet connection was possable over the net
+17:04:38 <person> i guess it will be but isn't yet right?
+17:05:00 <dmiles> well .. heheh.. i have a Proxy i use..
+17:05:20 <dmiles> one sec
+17:05:30 <person> ok
+17:05:30 <dmiles> but yeah telnet over the interent!??!
+17:05:38 <dmiles> ;P
+17:05:43 * zool grins
+17:06:07 <person> i thought that was the point - remote access ?
+17:06:14 <person> the point of telnet that is
+17:06:58 <person> i didn't even know what telnet was until you mentioned it yesturday - i still don't obviously :)
+17:07:05 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/logicmoo/net/TelnetProxyServer.java
+17:07:46 <person> ok great thanks
+17:07:54 * zool applauds dmiles general courtesy
+17:08:21 <dmiles> this makes a server on 3666 that alows access
+17:08:47 <person> ok i'll have a go with it
+17:08:47 <person> thanks
+17:09:31 <person> if you remember i was talking about accessing cyc via my php server via html forms - making form submission emulations to access it. you mentioned telnet and having read a bit on telnet it seems that it would be a much quicker more direct way of doing it. and php can do telnet connections apparently
+17:09:32 <dmiles> zool :)
+17:10:10 <dmiles> yes.. actualyl that would be very usefull to have php calls to make queries and such
+17:10:27 <dmiles> so by doing it with telnet from php would be very powerful
+17:10:32 <person> that's what i was thinkin'
+17:10:54 <person> better than a cumbersome html form emulated submission
+17:11:27 <dmiles> in this case yeah.. the telnet socket api is most likely going to be the longest living 
+17:11:56 <person> and it saves me going through the hastle of installing cyc onto a system i'm not even sure will really run it - mac os9
+17:12:10 <person> great :)
+17:13:00 <person> so when you access that address which software, or what do you use?
+17:13:19 <dmiles> ask me again
+17:13:20 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+17:14:07 <dmiles> oh that .java file?>
+17:14:09 <person> which software do you use to access that telnet address?
+17:14:22 <person> yeah
+17:14:28 <dmiles> i run opencyc 0.6 on a machine running the JVM1.4
+17:14:46 <dmiles> so i instance that program.. with...
+17:14:52 <person> right
+17:16:25 <dmiles> java -cp . logicmoo.net.TelentProxyServer 3666 3601
+17:17:07 <dmiles> but thats becasue i am dfamiliar with making java classes
+17:18:07 <dmiles> actually i'll run a remote server for you
+17:18:09 <person> oh i see that address is code that will access cyc on telnet - not the actual address to access cyc on telnet - got the wrong end of the stick again :)
+17:18:10 <dmiles> to connect to
+17:18:27 <person> yeah?
+17:18:32 <person> what via the telnet thing?
+17:18:41 <dmiles> yes.. one sec
+17:18:54 <dmiles> i'll launch it andf give you a the params to connect
+17:19:09 <person> you can just do that can you? great! :)
+17:19:16 <person> do you work for cyc?
+17:19:45 <dmiles> ok telnet to 12.225.207.235 port 3666
+17:20:07 <dmiles> if it doesnt respond let me know.. i may have that port filetered off
+17:20:13 <person> right. thanks
+17:20:22 <person> ok
+17:20:25 <dmiles> i am slef employed
+17:20:40 <person> right
+17:20:50 <dmiles> i guess. well only working as a contractor for a comapny that is ussing cyc
+17:20:58 <person> how can you have just set it up so quick? :) that was about 3 seconds
+17:21:17 <person> i see
+17:21:27 <dmiles> oh i have been working on a VB application from windows.. so i needed it formelf to access it from test machines
+17:21:49 <person> right
+17:21:56 <dmiles> teh VB com activeX classes go to that  telnet proxy
+17:22:05 <person> is it going to be there for a little while or is it temperory?
+17:22:14 <person> ok
+17:22:14 <dmiles> pretty transient
+17:22:27 <dmiles> but should be up at least for thuis evening
+17:22:38 <dmiles> just dount exiect (exit) or (quit)
+17:22:46 <dmiles> it will crash the cyc server
+17:22:55 <person> ok thanks
+17:23:19 <dmiles> if you colse the socket the server will sense and free up the workspace
+17:25:16 <dmiles> that cyc server is also avaible from http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-start
+17:26:06 <person> right
+17:28:55 <dmiles> [root@titan cyphesis-C++]# telnet 12.225.207.235 3666
+17:28:55 <dmiles> Trying 12.225.207.235...
+17:28:55 <dmiles> Connected to 12-225-207-235.client.attbi.com (12.225.207.235).
+17:28:56 <dmiles> Escape character is '^]'.
+17:28:58 <dmiles> (cyc-query '(#$isa ?X #$Dog) #$InferencePSC)
+17:29:00 <dmiles> 200 (((?X #$GenericInstanceFn #$Dog)))
+17:29:55 <dmiles> (api-quit)
+17:30:03 <dmiles> that makes it doesconnect me
+17:30:23 <dmiles> err diconnect
+17:30:28 <person> i thought you weren't supposed to quit
+17:30:35 <dmiles> but its safer to just close the socket.. then have it
+17:30:48 <dmiles> (api-quit)
+17:30:52 <dmiles> is differnt
+17:30:58 <dmiles> was looking it up
+17:31:09 <dmiles> (quit) is what crashes it
+17:31:18 <person> :) right
+17:38:56 <person> i type (api-quit) and it went funny
+17:38:58 <person> :)
+17:39:05 <person> hope i didn't crash it
+17:42:40 <dmiles> yeah.. once you quit for mit its fine
+17:42:49 <dmiles> jo its the java code not being happy
+17:43:07 <person> right
+17:43:38 <dmiles> the server closes.. and the proxy dont react right
+17:43:49 <dmiles> so it starts sending you nulls
+17:44:02 <dmiles> unil you disconnect your end
+17:44:29 <person> ok
+17:44:32 <person> well i'm amazed - i just downloaded a bit of telnet software and connected to that server straight away. well after i added ":" into the address
+17:45:50 <dmiles> cool
+17:46:02 <dmiles> http://www.opencyc.org/doc/cycapi <- the dfocs of what can be done over telent
+17:46:35 <person> great thanks
+17:46:43 <dmiles> 100s commands and more getting added
+17:47:43 <person> does cyc have a list of thing built into it... like $dog - does it have a whole load of types of dogs already in it or do you have to specify that/
+17:47:43 <person> ?
+17:48:19 <person> i mean does it know all the types of dogs?
+17:49:02 <dmiles> currently only #$Dog 
+17:49:09 <dmiles> no subtypes.. 
+17:49:13 <zool> angry dogs, smelly dogs, peripatetic dogs
+17:49:13 <dmiles> that would need to be defined
+17:49:36 <person> i see
+17:50:10 <person> is that going to change - will it in the future know all the dog types?
+17:50:57 <zool> in the future, we will live in our own cathedrals
+17:51:11 <person> right
+17:51:40 <dmiles> you could do a multi-inhereted specialization between dog classes like sweatsmellingthings and dogs
+17:51:43 <zool> sorry, i'm having a late night attack of poesis
+17:52:25 <dmiles> of for all living things that or of a species there exists at least one collection of the smellier of each
+17:52:58 <dmiles> or the hairless viarety of every species of mammals
+17:53:16 <dmiles> so that why you have some deduction that cyc would ionvent subclasses
+17:53:59 <dmiles> err invent subclasses
+17:54:22 <person> i was assuming that cyc would know different types of dogs without you telling it
+17:55:14 <person> i suppose that would be one hell of an amount of info to know that sort of detail about everything
+17:55:51 <person> so what are your employers wanting you to do with cyc?
+17:57:30 <dmiles> they want it to help break sentences into parts that they can write reaction scripts arround
+17:58:00 <dmiles> also want it to keep track of facts they want to store about inverviews
+17:58:36 <person> and how's it going?
+17:58:58 <person> would it be impossable without cyc?
+17:59:07 <dmiles> well i was supposed to start yesterday.. but they sent the packets to my worong addresses
+17:59:29 <person> right :)
+17:59:31 <dmiles> they pulled my address of an old website ;P
+17:59:54 <person> have you used cyc quite a bit?
+17:59:58 <dmiles> yes
+18:00:08 <dmiles> but just for fun
+18:00:21 <dmiles> at my last job we used cyc extensivly
+18:00:33 <person> this your first commercial use?
+18:00:37 <person> oh right
+18:00:48 <dmiles> http://www.teknowledge.com/
+18:01:06 <person> is that you?
+18:01:06 <person> what is it?
+18:01:15 <dmiles> that was my last employer
+18:01:30 <person> does the site use cyc?
+18:01:33 <dmiles> they parnered with Cyccorpp for many years
+18:01:53 <dmiles> working on various grants 
+18:02:10 <dmiles> the cyc doent use cyc .. to serve content
+18:02:15 <dmiles> err site
+18:02:28 <dmiles> i spell engluish photentically ;P
+18:02:36 <person> yup
+18:03:22 <dmiles> but anyways the new emp[loyer.. would not be able to do what they want w/o cyc
+18:03:23 <person> do you know of any sites that use cyc ? i mean for the actual site in anyway? that's what i want to use it for
+18:03:38 <person> right
+18:03:46 <dmiles> if they wanted to i could hack them together a solution in Prolog.. but i rather use cyc
+18:04:22 <dmiles> using cyc makes it simplier for doing more general things later
+18:04:34 <person> broader
+18:04:38 <person> i guess
+18:04:40 <dmiles> cyc will live beyond project shortterm goals
+18:05:17 <dmiles> thats why i am so sold on it.. it is a platform
+18:05:34 <dmiles> like Oracle application server
+18:06:25 <dmiles> aS far as what it does inference wise it is usefull
+18:06:28 <person> so do you know of any sites that use cyc in an web page?
+18:06:55 <dmiles> http://12.225.207.235:8080/logicmoo/index.jsp
+18:06:58 <dmiles> this does
+18:07:06 <dmiles> it uses it to pupulate combo boxes
+18:07:27 <person> pupulate?
+18:07:33 <dmiles> it uses JSP to make querie4s to producce HTML
+18:07:34 <person> populate right
+18:07:56 <dmiles> yes
+18:08:00 <person> cyc queries?
+18:08:23 <dmiles> for example: http://12.225.207.235:8080/logicmoo/createnpc.jsp
+18:08:50 <dmiles> next to "basicly isa" it queies (genls IndividualAgent)
+18:08:57 <dmiles> next to "basicly isa" it queies (genls ?X IndividualAgent)
+18:09:09 <dmiles> ask: (genls ?X IndividualAgent)
+18:09:10 <CycLBot> Your question returned 153 answers .. please refine. (here are the first five)
+18:09:11 <CycLBot> (((?X . WildAnimal)) ((?X . DomesticatedAnimal)) ((?X . TameAnimal)) ((?X . Vermin)) ((?X . NonPersonAnimal)))
+18:10:08 <dmiles> so for websites you wish to change the dynamic choises.. like DB driven Sites
+18:10:22 <dmiles> Cyc is an awesome choice
+18:10:49 <person> yup i reckon there's potential for some clever things there possabily
+18:10:59 <person> i love the idea of doing stuff on the fly
+18:11:06 <person> that's why i got into php
+18:11:20 <person> and mixing in some cyc with that could be great
+18:11:27 <dmiles> yeah.. PHP was actually my first active scripting language
+18:12:02 <dmiles> i do ASP and JSP as well
+18:12:18 <dmiles> but PHP was the most dirrect
+18:12:43 <person> right. well i've never really done any programming, apart from just recently, i decided to have a look at html and very quickly went onto php
+18:12:56 <person> for it's server side on the fly logic bit
+18:12:58 * zool likes mod_perl, lets you right into the guts of apache at most levels
+18:14:14 <dmiles> yeah.. perl intergrates with appache with mod_perl w/o making a separate shell as well?
+18:14:53 <dmiles> (not that i am afraid of spawning) it just i am wondering if was the reasoning behind mod_perl
+18:15:19 <dmiles> wait this is ActivePErl ?
+18:15:44 <dmiles> <% my perl code? %> ?
+18:16:30 <dmiles> now we just need to be able to easiely switch between programming languages  in our active scripting
+18:18:19 <person> going back to that thing about the dogs - it doesn't know all the types - is that something in the future it'll know or will it always be expected for you to supply that sort of detail?
+18:19:17 <dmiles> i think people will public their content of dog types to the internet in the form of a daml page
+18:19:35 <dmiles> so cyc will know how to find that content
+18:19:42 <person> i see
+18:19:58 <dmiles> so it may not be in your KB .. but cyc can at least know when it needas to know 
+18:20:20 <dmiles> the Semantic Web is for this type of thing
+18:20:35 <person> right
+18:20:48 <person> is there a particular part of opencyc that has that sort of detail now? - a particular area/subject?
+18:22:07 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&1249
+18:22:13 <zool> person: try  http://www.semanticweb.org, various links to web ontologies there too
+18:22:36 <dmiles> bodily movemnts are pretty complete BodyMovementEvent
+18:23:06 <person> ok so bodymovements would be a good thing to play with
+18:23:13 <dmiles> excelent site zool
+18:24:09 <dmiles> well BodyMovent domain has alot of ontolgy arround it weas all
+18:25:47 <person> do you use the commercial version of cyc for work? is that more comprehensive?
+18:26:02 <dmiles> no we want to use OpenCyc
+18:26:07 <person> or stick with opencyc?
+18:26:22 <person> right
+18:27:25 <dmiles> i dobnt know what the details for using full cyc is.. or even if its better
+18:28:00 <person> i read that in general it's going to be a year or two ahead of opencyc. don't know if that's the case right now
+18:28:25 <dmiles> you mean for content ?
+18:28:37 <person> urm, i think so
+18:28:47 <person> not sure now
+18:29:10 <person> yeah i think it was for content
+18:29:18 <dmiles> well cyccorp will quickly learn the software industry only want free prioducts with expensive servicers
+18:29:32 <dmiles> like that is how sun java works
+18:29:40 <person> yeah
+18:29:50 <dmiles> free full software
+18:29:58 <person> the more people who use something, the more useful it becomes
+18:30:07 <dmiles> heck you cant even give this stuff away for free unless you promise some cool perk
+18:30:36 <dmiles> and millions of dollars in free tech support
+18:30:42 <person> making it easy to use would be the key best perk for me
+18:30:44 * zool giggles
+18:31:28 <dmiles> if cyccopr makes money they will be doing it by porting a SQL app to a opencyc app
+18:31:51 <dmiles> for a big company
+18:32:19 <dmiles> then offering knowledge netry tools
+18:32:46 <dmiles> not selling Cyc :P
+18:32:54 <dmiles> but we'll see
+18:33:00 <person> yup
+18:33:31 <person> when's 7.0 coming out?
+18:33:39 <dmiles> right you see how much is to be done to making it simple and easy for you to use
+18:34:05 <person> yup
+18:34:10 <person> certainly do
+18:34:40 <person> not 7.0
+18:34:43 <person> 0.7
+18:34:46 <person> ?
+18:34:49 <dmiles> i saw an opencyc email on the discussion list were Steve eluses to a .7 arround the end of june...
+18:35:17 <person> like now, well very soon
+18:35:28 <dmiles> it was in response to a windows version
+18:36:04 <person> steve mentioned the possability of a mac osx version
+18:36:27 <dmiles> http://sourceforge.net/forum/forum.php?forum_id=85727
+18:36:54 <dmiles> Availability on Windows platform   
+18:37:11 <dmiles> By: johndcyc ( John De Oliveira ) 
+18:37:11 <dmiles>  RE: Availability on Windows platform   
+18:37:11 <dmiles> 2002-06-14 07:33  
+18:37:11 <dmiles> A Windows NT/2000/XP version should be available later this month (June).  
+18:37:41 <dmiles> guess it was Jon
+18:37:46 <dmiles> err John
+18:38:37 <person> oh yeah
+18:42:13 <dmiles> zool: neat page http://www.semanticweb.org/inference.html 
+18:43:50 <person> so what does that do exactly  - (cyc-query '(#$isa ?X #$Dog) #$InferencePSC) - inferencepsc is the microtheory right? which gives it a sort of context? then is says the variable x is a dog?
+18:44:19 <zool> dmiles: that's going whoosh just over my head, at the moment :)
+18:45:08 <zool> but i got my interbot rdf trivially working today, and got my head round redland, so i've used up most of my neuron allocation i think
+18:45:50 <dmiles> person: exacly what that query does.. correct
+18:46:02 <person> and once you've said that and it's taken in that x is a dog, x is then subject to what things effect a dog?
+18:46:26 <dmiles> X is a slot that cyc must fill in
+18:47:03 <person> is it? i thought it was just a variable?
+18:47:07 <person> x could be 'redsetter'
+18:47:13 <person> or anything you wanted?
+18:47:16 <dmiles> yes variable .. slot.. same concept
+18:47:26 <person> i see
+18:47:44 <person> what does it's response mean - 200 (((?X #$GenericInstanceFn #$Dog))) - that it's taken it in and understood - confirmation?
+18:50:05 <dmiles> X = (#$GenericInstanceFn #$Dog)
+18:50:33 <dmiles> means that (#$isa  (#$GenericInstanceFn #$Dog) #$Dog)
+18:50:35 <person> i see
+18:51:02 <dmiles> redland?
+18:51:06 <dmiles> Redmopnd?
+18:52:40 <zool> dmiles, dajobe's thing: http://www.redland.opensource.ac.uk has a nice, though buggy in places, perl api
+18:52:52 <zool> rdf application framework
+18:53:12 <zool> nice data stores, lot of potential
+18:53:23 <zool> has helped me see the way of triplespace
+18:58:46 <dmiles> redland is nice
+18:58:52 <dmiles> cool
+18:58:57 * zool nods
+18:59:24 <dmiles> bijan is working on one in prolog
+18:59:34 <zool> i'll never be able to thank yoz enough for introducing me to the #pants people
+18:59:39 <zool> smart
+18:59:51 <dmiles> i havent talked to him in a few months.. but i bet things are much better now then they where last year when it comes to RDF infernce
+19:00:25 <zool> dajobe was muttering darkly about RDQL and moons on sticks
+19:01:43 <zool> i  shall attempt to get my head round inference in the morning
+19:05:57 <person> night night all. thanks for your help dmiles :)
+20:14:50 --- join: jlatour- (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+20:14:50 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+20:26:53 <dmiles> #pants ?
+20:27:05 <dmiles> g'night person
+20:27:20 <zool> pants.heddley.com
+20:27:30 <zool> the uberchump!
+20:28:25 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+20:28:36 <dmiles> hehe look like AaronSW projhect
+20:29:22 <zool> they have some enmity going seems
+20:30:42 --- join: yottzumm ([79F2j8I8L@12-232-124-73.client.attbi.com) joined #opencyc
+20:30:51 <dmiles> hi yottzumm
+20:31:01 <yottzumm> my connection is unreliable, if you want to talk to me
+20:31:05 <yottzumm> hi dmiles
+20:31:13 <dmiles> johnd expressed interest in posting or using your examle of a the Card game
+20:31:41 <dmiles> since there is a need for example applications
+20:31:54 <dmiles> also very shortly the Cyc planner is getting put in
+20:31:58 <yottzumm> which part, Cyrd.java, or the final thing
+20:32:07 <dmiles> so you will be able to get it to plan out plays
+20:32:10 <dmiles> yeah
+20:32:26 <dmiles> well the final thing wiould use Cyrd.java i bet
+20:32:42 <yottzumm> which part, Cyrd.java, or the final thing
+20:32:48 <dmiles> the final thing
+20:33:07 <dmiles> no hurry .. but it least lets you know you have an audiance
+20:33:59 <yottzumm> that would be fine with me.  I'm not exactly sure when the final thing will be out.  The cable people are coming on Friday to look at my connection.
+20:34:01 <dmiles> since you have a good example of ussing Cyc
+20:34:04 --- quit: person (Read error: 110 (Connection timed out))
+20:34:15 <dmiles> ah that will be nice!
+20:34:28 <dmiles> i was on dialup for a few days last week
+20:34:33 <dmiles> horrible i know
+20:35:35 <dmiles> also very shortly cyc is getting a new Uber SOcket thing
+20:35:52 <dmiles> you saw Steve's email about letting cyc call out over a socket
+20:36:16 <dmiles> i am starting on a subl listerner that lets you manipulate java objects
+20:36:27 <dmiles> so you can make commands like./...
+20:37:09 <dmiles> (cyc-api-remote-eval '(#$getProerty MyJavaObject3455 "getString" ?X)
+20:37:55 <dmiles> err (cyc-api-remote-eval '(#$getProerty #$MyJavaObject3455 "getString" ?X)) -> "you java objects getString result"
+20:38:19 <dmiles> err (cyc-api-remote-eval '(#$getProerty #$MyJavaObject3455 "hasCode" ?X)) ->3455
+20:38:30 <dmiles> err hasCode
+20:38:36 <dmiles> erer hashcode!
+20:39:16 <dmiles> oh well it takes argumetns for "server" Port
+20:39:35 <dmiles> http://sourceforge.net/forum/forum.php?thread_id=695189&forum_id=85727
+20:39:50 <dmiles> By: stephenreed ( Stephen L. Reed ) 
+20:39:50 <dmiles>  RE: Uber simple socket support from SubL?   
+20:39:50 <dmiles> 2002-06-21 11:41  
+20:39:50 <dmiles> I've marked the following function as included in the API for the next relase: 
+20:39:50 <dmiles> cyc-api-remote-eval (api-request machine port) 
+20:39:50 <dmiles> "Evaluate API-REQUEST on MACHINE using the CYC-API server at TCP PORT"  
+20:40:17 <dmiles> so maybe in 0/7 (the next release it will be there
+20:40:39 <dmiles> thaty migh make some of your stuff easier
+20:40:59 <dmiles> since the workflow process can happen more in SubL..
+20:41:34 <dmiles> so all i am doing is making a little callback that lets you make and destory object.. and call things on them
+20:41:48 <yottzumm> maybe.  That would be cool for linking cyc the web
+20:41:49 <yottzumm> maybe.  That would be cool for linking cyc to the web
+20:41:53 <yottzumm> talk now
+20:42:01 <yottzumm> talk now
+20:42:09 <yottzumm> well, I've got another person on my team who is going to port to .net, I guess once opencyc comes out on windows
+20:42:19 <dmiles> yeah i could see making it easier to do remote web query
+20:42:52 <dmiles> yes you should be able to wrap the talk to port 3601 easiely into a .Net object
+20:43:50 <dmiles> so for .NET you might be able to myCyc = new CycAcces()
+20:44:06 <dmiles> or some object set up to have all the calls you need
+20:44:11 <dmiles> is that the approach?
+20:45:21 <dmiles> By: johndcyc ( John De Oliveira ) 
+20:45:21 <dmiles>  RE: Availability on Windows platform   
+20:45:21 <dmiles> 2002-06-14 07:33  
+20:45:21 <dmiles> A Windows NT/2000/XP version should be available later this month (June).  
+20:45:26 <yottzumm> so you can call any java method from subl? cool!
+20:45:34 <dmiles> exactly
+20:45:49 <zool> dmiles, to what extent can one visit logicmoo in moospace at the moment
+20:45:50 <dmiles> i just keep a hashmap between constant and java object
+20:46:15 <dmiles> the use the normal reflection invoke()
+20:46:56 <dmiles> zool: [root@titan cyphesis-C++]# telnet 12.225.207.235 4444
+20:46:57 * zool sees the link on logicmoo.sf.net
+20:47:00 <zool> thx
+20:47:19 <dmiles> oh that link may be broken
+20:47:33 <dmiles> if you cliekc try now .. the menu has a good link
+20:48:38 <zool> Trying 12.255.207.235...
+20:49:39 <dmiles> 12.225.207.235:4444
+20:49:44 <dmiles> hrrm not answering?
+20:49:58 <zool> [jo@yoz botz]$ telnet 12.255.207.235 4444
+20:49:58 <zool> Trying 12.255.207.235...
+20:50:00 <zool> no
+20:50:09 <dmiles> ok checking ipchains
+20:51:35 <yottzumm> do some IRC servers run UDP and some TCP?  This server seems a lot more reliable.
+20:52:00 <dmiles> this one just isnt under constant abuse.. they are nearly all TCP
+20:52:00 * zool attempts an nmap
+20:52:14 <dmiles> also it doent require identd
+20:52:19 <dmiles> zool cool
+20:52:35 <dmiles> yeah 4444 is open on ipchains
+20:52:44 <dmiles> ACCEPT     tcp  ------  0.0.0.0/0            12.225.207.235        * ->   4444
+20:52:53 <zool> hm, k thx
+20:53:05 <dmiles> is nmap saying sopmethings there?
+20:54:21 <dmiles> i dont have another shell box on the outside to test
+20:54:29 <zool> initial run said no route, do you not accept pings, trying harder scan now
+20:54:48 <dmiles> well i may not repkly to icmp
+20:55:21 <zool> no, i got no route there, it looks, but then the nets generally in a bit of a state
+20:56:23 <zool> no hang on, i have a typo
+20:56:26 * zool bites self
+20:56:39 <dmiles> ;P
+20:57:39 * yottzumm bits this
+20:57:39 <yottzumm> bites
+21:00:58 <dmiles> urgen is contained in A Corridor
+21:01:07 <dmiles> guest logic is contained in A Corridor
+21:02:42 <dmiles> say hi to zoot
+21:02:43 <CycLBot> You "said, "hi to zoot""
+21:02:58 <dmiles> err zool
+21:03:06 * zool sniggers
+21:03:28 <dmiles> south
+21:03:31 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+21:03:32 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+21:03:32 <CycLBot> in - cont generic cyc l bot A Corridor
+21:03:33 <CycLBot> in - cont generic zool A Corridor
+21:03:34 <CycLBot> in - cont generic urgen A Corridor
+21:03:34 <CycLBot> in - cont generic guest logic A Corridor
+21:03:35 <CycLBot> in - cont generic dmuiles 666 A Corridor
+21:03:36 <CycLBot> in - cont generic null A Corridor
+21:03:38 <CycLBot> in - cont generic A portal westerly A Corridor
+21:03:40 <CycLBot> in - cont generic A portal South A Corridor
+21:03:42 <CycLBot> in - cont generic A portal East A Corridor
+21:03:44 <CycLBot> in - cont generic A portal north A Corridor
+21:03:46 <CycLBot> isa A Corridor indoor space
+21:03:48 <CycLBot> isa A Corridor inside surface
+21:03:50 <CycLBot> isa A Corridor geographical region
+21:04:11 <dmiles> the telnet forms bettyer sentences
+21:04:33 <dmiles> i need to get CycLBot using the same client libs still
+21:05:02 * zool nods
+21:05:30 <dmiles> just a start.. i am not sure how much work though should be dedicated to the moo
+21:05:43 <dmiles> you know there muight be a better solution
+21:05:47 <zool> time is precious
+21:05:48 <CycLBot> the time was Tue Jun 25 13:44:16 PDT 2002
+21:06:22 <dmiles> yeah, if i end up just having a really nice text mud.. what completely would that gian
+21:06:23 <zool> you were talking wiki/moo, i'm wishing wiki/irc
+21:06:43 <zool> it would be wonderful to map back into a negotiable space where once could home and build though, the moo thing
+21:06:55 <dmiles> look (SKF-1971975003)
+21:06:57 <CycLBot> mud description Thing 1971975003-0000 Guinan is a strange being. She's lived for thousands of
+21:06:58 <CycLBot> years and experienced many things, but now she's decided  to work on the Enterprise as a bartender.
+21:06:58 <CycLBot> mud position Thing 1971975003-0000 posture standing
+21:06:59 <CycLBot> in - cont generic Thing 1971975003-0000 Main Engineering
+21:06:59 <CycLBot> isa Thing 1971975003-0000 intelligent agent
+21:07:00 <CycLBot> isa Thing 1971975003-0000 npc col 1007
+21:07:01 <zool> but theres a clear 3way correlation perhaps further
+21:07:01 <CycLBot> isa Thing 1971975003-0000 Skolem term
+21:07:19 <dmiles> sorry didnt mean to spam
+21:07:21 <zool> woot
+21:07:29 <zool> that's very interesting though
+21:07:31 <yottzumm> so how do I reject an assertion that doesn't agree with the existing Mt
+21:07:31 <yottzumm> or do I have do queries beforehand to make sure the assert will work
+21:07:47 <dmiles> <zool> it would be wonderful to map back into a negotiable space where once could home and build though, the moo thing
+21:08:14 <dmiles> yes thats the goal uis to have a manafestation in each of those forms
+21:08:44 <dmiles> so building sites and content shouldbe easier
+21:09:06 <dmiles> you can query beforehand
+21:09:17 <dmiles> yottzumm: so you can make a queriy.. first...
+21:09:32 <dmiles> like (#$consistent ?Sentence)
+21:09:57 <dmiles> comment :  "(consistent SENTENCE) means that the ELSentence-Assertible SENTENCE is consistent with the outer context in which SENTENCE is made."  
+21:10:23 <dmiles> meaning it does not violate anything
+21:11:50 <zool> i feel lost without being able to emote ;)
+21:13:27 <dmiles> emote stuill quotes yeah
+21:13:27 <CycLBot> You "stuill quotes yeah"
+21:23:49 <zool> nn, l8rs, thx
+21:23:52 --- quit: zool ("Client Exiting")
+21:27:07 --- quit: yottzumm (Read error: 110 (Connection timed out))
+21:43:39 --- join: yottzumm ([Knrwc7dFe@12-232-124-73.client.attbi.com) joined #opencyc
+21:47:05 --- join: urgen (urgen@65.113.147.42) joined #opencyc
+21:47:07 <urgen> yo
+21:47:10 <yottzumm> looks like () is being returned by #$consistent
+21:47:10 <dmiles> hi urgen
+21:47:15 <urgen> hey
+21:47:32 <dmiles> yottzumm: what if you ask in the webUI ?
+21:47:42 <dmiles> becasue that my mean "Yes"
+21:47:57 <yottzumm> hang on
+21:47:59 <dmiles> [dmiles@Area1002 mud]$ say but on openprojects.. is rhizomatic
+21:47:59 <dmiles> ("urgen  said: I'll head there.. what channel?")
+21:48:06 <urgen> hee
+21:48:13 <urgen> rhizomatic is a server
+21:48:30 <dmiles> so its sending a LF .. first to jump out of the luine you are typing
+21:48:49 <urgen> it's not fair to judge by telnet-ish things
+21:48:53 <dmiles> then writing the event.. then sending a new LF with a prompt
+21:49:04 <urgen> because it interrupts what I am typing when something comes through
+21:49:12 <dmiles> i should have diffenrt modes i think.. 
+21:49:17 <urgen> there is suppose to be an input window.. like here in irc 
+21:49:27 <dmiles> since you type into a buffer then press enter with zMud
+21:49:39 <dmiles> (for example)
+21:50:04 <urgen> it would be nice to adapt to a telnet like interface..
+21:50:05 <dmiles> so i am creating extra spam i guess by doinga buffer flush
+21:50:28 <dmiles> yeah the lowest common denominator
+21:50:30 <urgen> I was trying to think of a macro or something I could adapt
+21:51:09 <urgen> I got the thing looking ok,, 
+21:51:11 <dmiles> maybe i can test to see if it has interupted or not
+21:51:31 <dmiles> has interputed what you are tpying.. if so.. then restart your line for you
+21:51:37 <urgen> couldn't figure out the ^J in front of the line it repeated back to me with a You Said:
+21:51:43 <urgen> I remember there was a command to turn that off
+21:51:50 <urgen> it's been years since I was in a MOO
+21:52:37 <urgen> that would be tough.. the buffer is on my side, I'm sure
+21:52:42 <dmiles> so should there be a mode the server knows to turn something on/off?
+21:52:54 <urgen> to turn off repeat what you say
+21:53:00 <dmiles> well if you have a buffer then i should see you havient been typing
+21:53:22 <dmiles> and then when i give an event not redraw the prompt and things
+21:53:31 <urgen> ohyeah
+21:53:41 <dmiles> or just redraw pompt but not send an extrea linefeed
+21:54:09 <urgen> heheh.. to get 'perfect' you'd even want to clean the screen before it scrolls
+21:54:18 <urgen> I think I remember someone did that once
+21:54:30 <urgen> kind of clumsy but cleaner than nothing
+21:54:48 <dmiles> maybe seend 1000 LFs ?
+21:54:52 <dmiles> err 100
+21:54:53 <dmiles> ;P
+21:55:19 <urgen> what about wrapping telnet in vt100?
+21:55:37 <urgen> that way you could make that artificial text entry window
+21:55:45 <urgen> then request vt100 on telnet
+21:56:05 <urgen> like the text based irc
+21:56:15 <dmiles> true there must be a lib that will do that.. that will let me think in a window conrtext but for a player give them that vt100
+21:57:02 <urgen> I think I remember one... a MUD in IRC mode adaptor
+21:57:16 <dmiles> one sec
+21:58:33 <dmiles> back
+21:58:43 <dmiles> is it java based?
+21:58:49 <dmiles> (the telnetd)
+21:58:58 <dmiles> i am mainly in that realm
+21:59:33 <dmiles> http://telnetd.sourceforge.net/api/dtw/telnetd/io/terminal/vt100.html
+21:59:36 <dmiles> cool
+21:59:41 --- join: urgyen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+21:59:50 <urgyen> -once upon a time-
+21:59:55 <urgyen> DNS died for a sec
+22:00:00 <dmiles> ;P
+22:00:01 <yottzumm> I've got a java based shell program that acts like a tty
+22:00:18 <yottzumm> the paper kind
+22:00:47 <yottzumm> I tried the consistent thing in the web interface, and got  Search space was exhausted up to the depth cutoff.
+22:02:04 <dmiles> hrrm
+22:03:16 <yottzumm> trying infinite depth
+22:03:34 <dmiles> right what its doing is looking for any reason to say no
+22:03:39 <dmiles> and its fai,.ling to find it
+22:03:42 --- quit: graylensman ("Client Exiting")
+22:03:59 <dmiles> which is good i guess
+22:04:08 <yottzumm> I turned everything on, and got Search space was exhausted
+22:04:22 <dmiles> that means it is consistent i think
+22:04:22 <yottzumm> which means "false"?
+22:04:38 <dmiles> well give me a exmaple of a query.. i'll try
+22:04:40 <yottzumm> I was trying something inconsistent
+22:04:55 <yottzumm> (consistent
+22:04:55 <yottzumm>    (and
+22:04:55 <yottzumm>        (or
+22:04:55 <yottzumm>            (and
+22:04:55 <yottzumm>                (suitOf ?TOPCARD ?TOPSUIT)
+22:04:56 <yottzumm>                (topCard ?TOPCARD DiscardPile)
+22:04:58 <yottzumm>                (suitOf FiveOfHeartsCard ?TOPSUIT))
+22:04:58 <dmiles> can you prove its inconsistant?
+22:05:02 <yottzumm>            (and
+22:05:04 <yottzumm>                (valueOf ?TOPCARD ?TOPVALUE)
+22:05:06 <yottzumm>                (topCard ?TOPCARD DiscardPile)
+22:05:08 <yottzumm>                (valueOf FiveOfHeartsCard ?TOPVALUE))
+22:05:10 <yottzumm>            (valueOf FiveOfHeartsCard EightCard))
+22:05:12 <yottzumm>        (possesses JohnHand FiveOfHeartsCard)))
+22:05:18 <yottzumm> let me try a consistent one and I'll report
+22:05:31 <dmiles> cool
+22:07:07 <yottzumm> the consisten one also exhausts the search
+22:07:15 <yottzumm> err consistent
+22:07:17 <dmiles> urgen: i am guessing the use of the telnetd project might be good
+22:07:32 <yottzumm> let me try grabbing the latest from cvs
+22:08:04 <urgyen> I'm looking up unix MOO clients
+22:08:47 <dmiles> hrrm like tintin++
+22:09:29 <urgyen> ya
+22:09:33 <urgyen> gettin it
+22:11:05 <yottzumm> (#$consistent 
+22:11:05 <yottzumm>   (#$and 
+22:11:05 <yottzumm>     (#$or 
+22:11:05 <yottzumm>       (#$and 
+22:11:05 <yottzumm>         (#$suitOf ?TOPCARD ?TOPSUIT) 
+22:11:06 <yottzumm>         (#$topCard ?TOPCARD #$DiscardPile) 
+22:11:08 <yottzumm>         (#$suitOf #$SevenOfClubsCard ?TOPSUIT)) 
+22:11:10 <yottzumm>       (#$and 
+22:13:27 <dmiles> consistent is kind like asking "Possible"
+22:13:28 <yottzumm>         (#$valueOf ?TOPCARD ?TOPVALUE) 
+22:13:28 <yottzumm>         (#$topCard ?TOPCARD #$DiscardPile) 
+22:13:28 <yottzumm>         (#$valueOf #$SevenOfClubsCard ?TOPVALUE)) 
+22:13:28 <yottzumm>       (#$valueOf #$SevenOfClubsCard #$EightCard)) 
+22:13:28 <yottzumm>     (#$possesses #$JohnHand #$SevenOfClubsCard)))
+22:14:11 <dmiles> if it cant say yes for sure then it is possible it does not know for sure
+22:14:41 <dmiles> for example  (#$possesses #$JohnHand #$SevenOfClubsCard)
+22:14:56 <yottzumm> I want to test to see whether the card the player is discarding is of the same suit or value of the top card on the DiscardPile, or an EightCard
+22:15:11 --- quit: urgen (Read error: 110 (Connection timed out))
+22:15:25 <urgyen> weird
+22:15:36 <dmiles> that it took so long?
+22:15:46 <urgyen> I even pinged it
+22:16:02 <dmiles> yeah ussually that will get the server to kick it off quicker
+22:16:16 <dmiles> you mean it replied?
+22:16:23 <urgyen> heheh
+22:16:28 <urgyen> now that would be weird
+22:17:00 <dmiles> theats odd i never knew other poeple ping their dead clients to get the server more interested in checking to see if it's stoned
+22:17:37 <yottzumm> (possesses JohnHand FiveOfHeartsCard)
+22:17:37 <yottzumm> [Def](possesses JohnHand SevenOfClubsCard)
+22:17:37 <yottzumm> [Def](possesses JohnHand ThreeOfSpadesCard)
+22:17:39 <yottzumm> [Def](possesses JohnHand TenOfHeartsCard)
+22:17:41 <yottzumm> [Def](possesses JohnHand EightOfSpadesCard)
+22:17:43 <yottzumm> [Def](possesses JohnHand NineOfSpadesCard)
+22:17:45 <yottzumm> [Def](possesses JohnHand TwoOfClubsCard)
+22:18:31 <dmiles> how many cards can he have?
+22:19:42 <dmiles> if the card the player is discarding is of the same suit or value of the top card on the DiscardPile.. should he instead take the discarded card?
+22:19:53 <yottzumm> helps get the packets through or something
+22:21:53 <yottzumm> no, the player can only play a card of the same suit, value of the top card on the discard pile, or discard an eight
+22:21:53 <yottzumm> otherwise must draw
+22:21:55 <yottzumm> Maybe I should work on a subl function
+22:22:34 <dmiles> this sounds more like a rulew then a good candicated for consitent i think
+22:23:08 <dmiles> my initaial idea about #$consistent may not be fully the same in OpenCyc then in Cyc
+22:23:10 <dmiles> odd
+22:23:53 <yottzumm> a hand can contain about 50 cards, but unlikely
+22:23:53 <yottzumm> more like 39 or less
+22:23:54 <yottzumm> I'm starting with 7 cards
+22:24:36 <dmiles> (#$consistent ?X) should mean i fail to prove (#$not ?X)
+22:24:59 <yottzumm> well, how do I write a rule
+22:25:08 <dmiles> meaing i have no evidence to suppiort the negation.. therefore its consistant with the known world
+22:25:44 <urgyen> hmn blah. readline not compatible or something
+22:25:58 <dmiles> this is rpm ?
+22:26:10 <urgyen> no
+22:26:16 <dmiles> i get that all the time with rpm -i
+22:26:21 <dmiles> oh
+22:26:28 <urgyen> I'm checking install locations tho
+22:27:01 <dmiles> ok a rule to test..
+22:27:55 <dmiles> (#$and  (#$suitOf ?TOPCARD ?TOPSUIT)   (#$topCard ?TOPCARD #$DiscardPile)    (#$suitOf ?MYCARD ?TOPSUIT))
+22:28:02 <dmiles> oops
+22:28:37 <dmiles> (implies (#$and  (#$suitOf ?TOPCARD ?TOPSUIT)   (#$topCard ?TOPCARD #$DiscardPile)    (#$suitOf ?MYCARD ?TOPSUIT)) (#$okToDiscard ?MyCard)
+22:29:00 <dmiles> like breaking it into smaller tests
+22:29:15 <dmiles> so you can test you logic with queries to   (#$okToDiscard ?MyCard)
+22:30:17 <dmiles> oh but yeah you have other Ors
+22:30:40 <dmiles> #$JohnHand becomes ?PYLAYERHAND
+22:31:06 <dmiles> you know turn that query inside consistant into a Rule
+22:31:25 <dmiles> as the left hand side of implies
+22:32:19 <dmiles> replace #$SevenOfClubsCard and #$JohnHand with variables
+22:33:09 <dmiles> make sure the right side of the implies contains the varaiibles
+22:34:01 <dmiles> the (#$valueOf #$SevenOfClubsCard #$EightCard) should always be inconsitent though
+22:34:10 <dmiles> way up there
+22:34:44 <yottzumm> that would be useful for when I need to determine when to draw a card from the draw pile
+22:34:45 <yottzumm> get search space exhausted when I try #$not
+22:34:46 <CycLBot> Take what?
+22:34:50 <dmiles> and ifg one litteral is inconsitant of your query then the answer shhould be the whole thing is
+22:35:37 <dmiles> yeah exhasted #$not is pretty much how #$consisant should work
+22:35:44 <urgyen> ok, compiling..
+22:36:05 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+22:36:09 <dmiles> urgen .. so you are part of the semantic web?
+22:36:17 <urgyen> ha, in my dreams
+22:36:26 <urgyen> umm ya yes, I am .. ;-)
+22:36:43 <dmiles> i just saw you and danbri discussing ;P
+22:36:44 <urgyen> I'm a lowly digital evangelist
+22:36:53 <urgyen> someday I'll reach lord semevangelist
+22:37:52 <dmiles> yotzumm does opencyc know that (#$not (#$valueOf #$SevenOfClubsCard #$EightCard) ) should be true?
+22:38:34 <dmiles> that might be important to make sure thats an infernce it can do
+22:39:03 <dmiles> from your asserted knowledge.. otherwise it could be floundering
+22:40:16 <dmiles> semantic web looks like fun stuff
+22:43:01 <dmiles> 19:57:38 <urgen> trying to establish a transport protocol from which we could use RDF to define locations in the "metaverse"
+22:43:01 <dmiles> 19:58:02 <urgen> which perhaps,,, if I am lucky,,, could be 3d objects endowed with semantics
+22:43:01 <dmiles> 19:58:30 <urgen> like the 3d reps of information I've seen only, a bit more mature and... cool
+22:43:32 <dmiles> sounds exactly like things i am interested in
+22:44:26 <yottzumm> what's on the right side of implies?
+22:44:27 <yottzumm> oh, I see
+22:44:41 <yottzumm> I think I'll do something like (#$okToDiscard ?Hand ?Card)
+22:45:22 <urgyen> still trying
+22:45:35 <urgyen> from description of vision to implementation is a long road
+22:45:45 <dmiles> yeah.. sometimes just getting together rules that describe your constraints helps test things peionce by poiece
+22:45:46 <urgyen> I'm talking 'smartDNS" now
+22:45:53 <urgyen> samething... different words
+22:47:36 <dmiles> err piece by piece 
+22:47:48 <dmiles>  <urgyen> from description of vision to implementation is a long road
+22:50:38 <dmiles> urgen: what if you started with a robust metaverse implementation thebn spent time making RDF query interfaces?
+22:51:39 <urgyen> that would be like not having to walk down the street to knock on your friends door
+22:51:45 <urgyen> instead it would float up to you....
+22:52:41 <dmiles> ohh so you need things to always be in a context of one players view? at least an client level interface?
+22:52:43 <urgyen> seems like the sensitivity of the navigation would be answered the same anyway
+22:53:23 <urgyen> I'm actually interested in allowing some kind of alternative backup Net to form... I'm paranoid that someone will take this all away from me so I want to learn how to do it myself....
+22:53:51 <urgyen> the goal is to aid individual navigation, yes, but also these indivs can be agents
+22:54:05 <urgyen> so that the navigation can become extensions of it's own
+22:54:18 <yottzumm> dmiles: I've put a variable in there now, for SevenOfClubs.  That was just for my example
+22:54:18 <yottzumm> It was a variable, but I replaced it with SevenOfClubs for my test
+22:55:28 <dmiles> urgyen: so if an existing world server had lots of clients levels it would be nice it sounds
+22:55:55 <dmiles> agnet that is like a angent that moves by walking around
+22:56:08 <urgyen> I've been in IRC a loooong time so it seems like I would naturally try to use this structure
+22:56:49 <urgyen> but that means the 'channels' become like floating inside of agents, which can chain, connecting different server nets based on a topic/interest
+22:57:03 <urgyen> that's where the categorical semantic rdf stuff comes in
+22:57:08 <urgyen> how do you dial it?
+22:57:20 <urgyen> so that you find what or who you are interested in?
+22:57:33 <urgyen> just a search engine grown up
+22:57:47 <dmiles> i gues s achannel object witch is a denotation of conversation space is like a information bearing thing
+22:58:07 <urgyen> I think that's why ppl like IRC
+22:58:34 <dmiles> yes.. topics or contexts can happen in channels
+22:58:55 <urgyen> and technology should never be the limiting factor
+23:01:16 <dmiles> never.. precisely
+23:10:52 <yottzumm> [B](implies (and (valueOf ?CARD EightCard) (possesses ?HAND ?CARD)) (okToDiscard ?HAND ?CARD))
+23:10:52 <yottzumm> [B](implies (and (topCard ?TOPCARD DiscardPile) (valueOf ?TOPCARD ?TOPVALUE) (valueOf ?CARD ?TOPVALUE) (possesses ?HAND ?CARD)) (okToDiscard ?HAND ?CARD))
+23:10:52 <yottzumm> [B](implies (and (topCard ?TOPCARD DiscardPile) (suitOf ?TOPCARD ?TOPSUIT) (suitOf ?CARD ?TOPSUIT) (possesses ?HAND ?CARD)) (okToDiscard ?HAND ?CARD))
+23:12:12 <dmiles> yeah 
+23:15:02 <dmiles> that definately looks good having rules 
+23:19:58 <yottzumm> still getting search space exhausted
+23:20:41 <yottzumm> tried (#$okToDiscard #$JohnHand #$JackOfSpadesCard)
+23:21:15 <dmiles> try (#$okToDiscard #$JohnHand ?W)
+23:22:05 <yottzumm> I think I have my predicates messed up
+23:30:08 <yottzumm> wow, I can see all possible plays in all decks of cards
+23:32:16 <dmiles> there lays the power ;P]
+23:32:36 <yottzumm> It's cool!
+23:46:31 --- quit: yottzumm ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.06.25

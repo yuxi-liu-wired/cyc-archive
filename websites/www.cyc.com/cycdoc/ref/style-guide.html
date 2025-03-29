@@ -1,0 +1,372 @@
+<html>
+
+<title>A Style Guide for #$comments</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>A Style Guide for #$comments</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+
+<p>
+
+The predicate <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> is used to attach a string of explanatory text
+to a Cyc&reg; constant.  Whenever a Cyc constant is created, a
+<a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> assertion should be written for it.  This page gives some
+guidelines for the content and style of text in comments.
+<i>Clarity</i> is the most important stylistic criterion, because we
+want readers to understand the intended meaning and proper usage of
+our constants. <p>
+Other instances of #$DocumentationPredicate are available for providing 
+comments of a more specific, 
+more technical or more transient nature. These include #$cyclistNotes, 
+#$examples-Positive and #$examples-Negative. While this document primarily 
+focuses on the #$comment predicate, certain guidelines (e.g., prefixing 
+constant names with "#$&quot;) will clearly apply to use of these other 
+predicates as well.
+<p>
+<hr>
+<p>
+
+<h3>A. Follow these GENERAL GUIDELINES when composing comments:</h3>
+1. Mention at the outset the type of constant you're describing (e.g.,
+collection, predicate, function).  Guidelines for explaining specific
+types of constant are given below. <p>
+
+2. Explain the meaning of the constant in clear and economical prose,
+correctly punctuated and spelled.  Use complete sentences, except
+perhaps for the very first one, which can be a dictionary-like phrase
+such as "A collection of events."<p>  
+
+3. Be precise in your use of Cyc constant names within <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a>
+text:<p>
+
+<blockquote>(a) In <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text, Cyc constant names should be
+preceded by the "#$&quot; prefix, so that links from your comment to those
+constants can be generated in the html browser.  Misspelled names will
+not link.  Note that Cyc's code can handle a leading or ending
+parenthesis, and a trailing comma, period, semicolon, colon, question
+mark, exclamation point, hyphen, or plurals formed with "s" and "es."
+It cannot, however, handle plurals formed by removing "y" and adding
+"ies"; for example, '#$Microtheories' (from <a href=/cycdoc/vocab/mt-expansion-vocab.html#Microtheory>#$Microtheory</a>) would not
+be recognized.
+</blockquote><p>
+
+<blockquote>(b) Don't confuse the names of Cyc constants (e.g., <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>)
+with their English homonyms (e.g., `animal').  The name of a Cyc collection
+(e.g., <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>, <a href=/cycdoc/vocab/info-vocab.html#Speaking>#$Speaking</a>) is not the same thing as an English
+noun.  Don't say, for example, "<a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a> is the collection of those
+<a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>s which...." Instead, say "<a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a> is the collection of those animals which...;" or,
+alternatively, "<a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a> is a specialization of <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>."  Although
+an experienced Cyclist could recognize that `Flipper is a #$Dolphin' "means"
+that Flipper is an element of the Cyc collection #$Dolphin, rather
+than that he is the same type of thing as that collection, the
+sentence is potentially confusing.  Such casual "insider" usages exist
+in the KB, but we try to avoid adding similar violations in new
+work. </blockquote> <p>
+
+
+4. To help explain the meaning of a constant, give some example
+instances of collections and some typical uses of a predicate or a
+function.  It is permissible to use made-up constant names for
+examples, with the following proviso: If a made-up constant represents
+a concept that Cyc should eventually know about, write its name
+preceded by "#$&quot; (e.g., #$SpaceStation).  If it is only a random
+example, such as Dog001 or KarensLeftEar, omit the `#$' prefix. <p>
+
+5. Mention and perhaps illustrate any special restrictions on the
+meaning or use of the constant. <p>
+
+6. Use a Note at the end of the <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text for any extra
+clarifications or details relevant for a general user.  A Note may be
+used to present exceptions, borderline examples, one or more
+"footnotes," or pointers to related constants that a reader might want
+to examine (especially if those are not displayed already in the
+<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a>, or other prominent assertions about the
+constant being commented).  Formally separate the Note from the main
+body of the text with a single carriage return, to begin a new
+paragraph, or by typing two carriage returns in a row, to insert a
+blank line. <p>
+
+7.  Use a <a href=/cycdoc/vocab/doc-vocab.html#cyclistNotes>#$cyclistNotes</a> assertion for technical matters of concern only to
+knowledge enterers.<p>
+
+8. ALWAYS PROOFREAD your comments in the html browser <b>after</b>
+entering them.<p>
+<p>
+
+
+<h3>B. Specialized style suggestions:</h3>
+
+Comments on Cyc <b>COLLECTIONS</b>:<p>
+
+1. Refer to a collection as a collection, rather than as a `group' or
+`class' or `category'.  Refer to the elements of a collection -- the
+values on its <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> relation -- as elements or instances, rather than
+as `members' or `parts'.  The <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> relation may be described by
+talking about subsets and supersets, although it should be noted that
+Cyc collections are more restrictive than mathematical sets
+(cf. <a href=/cycdoc/vocab/fundamental-vocab.html#Collection>#$Collection</a>, <a href=/cycdoc/vocab/math-vocab.html#Set-Mathematical>#$Set-Mathematical</a>).  In general, avoid words that
+are open to misinterpretation, such as "member," "sample,"
+"illustration," "class," "category," "type," "assemblage," "grouping,"
+"process," "activity," "circumstance"; prefer words which permit less
+ambiguity, such as "element" and "set" and "event."  <p>
+
+2. Begin by stating, for a collection #$COL, "#$COL is a [or `the']
+collection of ...", or "#$COL is a subset of ...."  A dictionary-like
+introductory fragment, such as "A [or `The'] collection of ...." is
+also acceptable.  For example:<p>
+
+<blockquote> "<a href=/cycdoc/vocab/movement-vocab.html#Movement-Rotation>#$Movement-Rotation</a> is a subset of
+<a href=/cycdoc/vocab/movement-vocab.html#MovementEvent>#$MovementEvent</a>. Elements of <a href=/cycdoc/vocab/movement-vocab.html#Movement-Rotation>#$Movement-Rotation</a> are those moving
+events in which the <a href=/cycdoc/vocab/actor-vocab-complete.html#objectMoving>#$objectMoving</a> rotates about an internal or
+external axis. For example, the daily rotation of the Earth on its
+axis, or the rotation of a clock hand about its fastened
+end."</blockquote> <p>
+
+
+3. Give one or more examples of your collection.  As examples, mention
+some elements or some subsets.  It is best if those examples are
+actual instances in the KB (e.g., #$JohnsHopkinsUniversity as an
+example of <a href=/cycdoc/vocab/organization-vocab.html#University>#$University</a>), but examples may also be identified using
+ordinary English.  For example, "The collection <a href=/cycdoc/vocab/movement-vocab.html#Movement-Rotation>#$Movement-Rotation</a>
+includes rotations of the Earth on its axis." It is permissible to
+make up constant names for non-existent constants, if they are
+entities which should eventually be known to Cyc, e.g.,
+#$YulBrynner; but avoid those that name an obviously poor constant,
+e.g., #$YulBrynnersScalp.  (The latter implies that Cyc might
+need to have trillions of constants such as
+`DougLenatsLeftElbow'!)<p>
+
+
+Here is a sample of a comment, a cyclist note, and a negative example on an important, broad
+<b>collection</b> of events:<p>
+
+<b>comment:</b>
+<blockquote>
+A specialization of #$GeneralizedTransfer.  Each instance of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> is an event in which at least one object translates some distance, or in which at least one object moves from one rotational orientation to another rotational orientation.  Each instance of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> is thus a rotation or translation of some object (an instance of <a href="/cycdoc/vocab/top-vocab.html#SomethingExisting">#$SomethingExisting</a>), where the movement occurs relative to a frame of reference which is not part of the rotating or translating object.  Notable specializations of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> include <a href="/cycdoc/vocab/top-vocab.html#SomethingExisting">#$Translocation</a>, <a href="/cycdoc/vocab/movement-vocab.html#Rotation-NonPeriodic">#$Rotation-NonPeriodic</a>, and <a href="/cycdoc/vocab/movement-vocab.html#Movement-Periodic">#$Movement-Periodic</a>.
+</blockquote><p>
+
+<b>cyclistNotes:</b>
+<blockquote>
+<a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> is the most generic collection for physical
+movements.  For representing specific events, one or more of the following
+subsets of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> may be more precise:
+<a href="/cycdoc/vocab/movement-vocab.html#Movement-TranslationEvent">#$Movement-TranslationEvent</a>, <a href="/cycdoc/vocab/movement-vocab.html#Movement-Rotation">#$Movement-Rotation</a>, <a href="/cycdoc/vocab/movement-vocab.html#Movement-Periodic">#$Movement-Periodic</a>,    
+<a href="/cycdoc/vocab/movement-vocab.html#Movement-NonPeriodic">#$Movement-NonPeriodic</a>, <a href="/cycdoc/vocab/movement-vocab.html#Translation-Flow">#$Translation-Flow</a>, <a href="/cycdoc/vocab/movement-vocab.html#Translation-Complete">#$Translation-Complete</a>,
+<a href="/cycdoc/vocab/movement-vocab.html#Translation-SingleTrajectory">#$Translation-SingleTrajectory</a>, <a href="/cycdoc/vocab/movement-vocab.html#Translation-MultiTrajectory">#$Translation-MultiTrajectory</a>.  Some
+questions to consider in selecting the best collection to represent a
+physical movement include: (1) is the movement translational or rotational
+motion? (2) is it periodic or nonperiodic? (3) does it involve a discrete
+motion (i.e., an object's moving completely from one place to another) or
+a continuous flow? (4) does it involve a change of location or no location
+change? (5) does it involve a single pathway or more than one?  Note on   
+what is NOT included in <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a>: Consider a person's raising her  
+hand and waving, or a tree's bending as its branches sway in a strong
+wind, while the person and the tree remain in the same place. The
+movements of the person and the tree do NOT qualify as instances of
+<a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a>, because the `doer' in any element of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a> must
+rotate or translate as a whole.  The hand movement and the movement of the
+branches do, however, qualify as objects moving in the proper sense.  So,
+for example, an instance of #$WavingAHand-Gesture (done by a person) would
+have #$subEvents which ARE elements of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a>, in which the
+person's hand is the <a href="http://www.cyc.com/cycdoc/vocab/actor-vocab.html#objectMoving">#$objectMoving</a>.
+</blockquote><p>
+
+<b>examples-Negative:</b>
+<blockquote>
+Some instances of <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#AthleticActivity">#$AthleticActivity</a> such as instances of <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#SportsEvent">#$SportsEvent</a> or <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#SportsCompetition">#$SportsCompetition</a> do involve <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvents</a>, however, they involve numerous complex combinations of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvents</a> with mumerous distinct <a href="http://www.cyc.com/cycdoc/vocab/actor-vocab.html#objectMoving">#$objectMovings</a>, <a href="http://www.cyc.com/cycdoc/vocab/top-vocab.html#toLocation">#$toLocations</a>, <a href="http://www.cyc.com/cycdoc/vocab/movement-vocab.html#toOrientation">#$toOrientations</a> and so on.  These <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvents</a> would be <a href="http://www.cyc.com/cycdoc/vocab/top-vocab.html#subEvents">#$subEvents</a> of some <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#SportsEvent">#$SportsEvent</a> or <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#SportsCompetition">#$SportsCompetition</a>.  Since, for example, there is no one focal <a href="http://www.cyc.com/cycdoc/vocab/top-vocab.html#toLocation">#$toLocation</a> or set of <a href="http://www.cyc.com/cycdoc/vocab/top-vocab.html#toLocation">#$toLocations</a> that some focal <a href="http://www.cyc.com/cycdoc/vocab/actor-vocab.html#objectMoving">#$objectMoving</a> or set of <a href="http://www.cyc.com/cycdoc/vocab/actor-vocab.html#objectMoving">#$objectMovings</a> goes to at the end of the event, it would not be appropriate to assert (<a href="http://www.cyc.com/cycdoc/vocab/fundamental-vocab.html#genls">#$genls</a> <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#AthleticActivity">#$AthleticActivity</a> <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a>). However, particular instances of <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#AthleticActivity">#$AthleticActivity</a> such as 'JoesSuccessfulClimbUpEverest' does have a well defined <a href="http://www.cyc.com/cycdoc/vocab/top-vocab.html#toLocation">#$toLocation</a> and <a href="http://www.cyc.com/cycdoc/vocab/actor-vocab.html#objectMoving">#$objectMoving</a> which is focal to the meaning of the event.  Therefore it is an <a href="http://www.cyc.com/cycdoc/vocab/social-vocab.html#AthleticActivity">#$AthleticActivity</a> which would be an appropriate element of <a href="/cycdoc/vocab/movement-vocab.html#MovementEvent">#$MovementEvent</a>.
+</blockquote><p>
+
+
+Comments on Cyc <b>INDIVIDUALS</b> [optional]:<p>
+
+1. This is the only general class of exceptions to the `always write a
+comment' rule.  Information about individuals represented in the Cyc
+KB (e.g., #$JohnKennedy, <a href=/cycdoc/vocab/hormuz-area-vocab.html#UnitedStatesOfAmerica>#$UnitedStatesOfAmerica</a>, #$MississippiRiver)
+may be captured exhaustively in the CycL assertions on the constant
+itself.  Add an English comment only if there is an unusual need for
+further characterization of the individual.<p>
+
+2. The names of Cyc constants that represent individuals may be used
+in <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text like English proper nouns.  Examples: "#$JohnKennedy
+was the 35th President of the <a href=/cycdoc/vocab/hormuz-area-vocab.html#UnitedStatesOfAmerica>#$UnitedStatesOfAmerica</a>."  Another
+example: "#$Cycorp is headed by Doug #$Lenat."<p>
+
+
+
+Comments on Cyc <b>PREDICATES</b>:<p>
+
+1. Begin the comment with a general description about what the
+predicate relates or what it is used for.  For example, "The Cyc
+predicate <a href=/cycdoc/vocab/professional-vocab.html#employees>#$employees</a> relates a particular employer to one of its paid
+employees...."  <p>
+
+2. In every case, the comment should contain a sentence of the
+following form: "(#$&lt;;predicate-name&gt; ARG1-METAVAR [ARG2-METAVAR
+... ARGN-METAVAR]) means that ...."  That sentence should be either
+the first sentence in the comment or should follow a first sentence of
+the type mentioned in (1) above.  In general, it is helpful to use
+mnemonic meta-variables rather than simply X, Y, Z, etc.  See also (4)
+below.<p>
+ 
+3. To describe the constraints on arguments to a predicate:<p>
+
+<blockquote>(a) One approach, which violates the guideline about not
+using Cyc constant names as English words, is to use the name of
+the argument-constraining constant as a modifier in the following way:
+"(<a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a> SUPER SUB) means that the
+<a href=/cycdoc/vocab/geography-vocab.html#GeographicalRegion>#$GeographicalRegion</a> SUPER contains all of the <a href=/cycdoc/vocab/geography-vocab.html#GeographicalRegion>#$GeographicalRegion</a>
+SUB."  That was widely done in the past.</blockquote><p>
+
+<blockquote>(b) A clearer style yields this version: "The binary
+predicate <a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a> relates a geographical region to
+the geographical regions it spatially contains.  Both arguments to
+<a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a> must be elements of <a href=/cycdoc/vocab/geography-vocab.html#GeographicalRegion>#$GeographicalRegion</a>.
+(<a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a> SUPER SUB) means that the region SUPER
+contains all of the region SUB."</blockquote><p>
+
+4. Use meta-variables in comments on predicates. In an explanatory
+sentence such as: <p>
+
+<blockquote>"(<a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a> SUPER SUB) means that the
+region SUPER contains all of the region SUB," </blockquote><p>
+
+SUPER and SUB are meta-variables, because in the comment text they are
+placeholders that could be replaced by the names of individuals as
+well as by variables (with appropriate quantification and/or
+restriction).  Write meta-variables by omitting the prefix `?' used
+with actual variables in the Cyc system.<p>
+
+Also see (5) below regarding quoting rules in comment text.<p>
+
+
+5. If you quote a rule from the Cyc KB, then variables in the
+rule should be quoted as actual variables, just as they are in the KB;
+e.g., (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?E1 <a href=/cycdoc/vocab/doing-vocab.html#Action>#$Action</a>) (<a href=/cycdoc/vocab/top-vocab.html#subEvents>#$subEvents</a> ?E ?E1)
+(<a href=/cycdoc/vocab/actor-vocab-complete.html#doneBy>#$doneBy</a> ?E ?P) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?E <a href=/cycdoc/vocab/doing-vocab.html#SingleDoerAction>#$SingleDoerAction</a>)) (<a href=/cycdoc/vocab/actor-vocab-complete.html#doneBy>#$doneBy</a> ?E1?P)).<p>
+
+In general, quote a rule in order to illustrate the <i>use</i> of a
+predicate in CycL.  If you are using the rule to explain the
+<i>meaning</i> of a particular predicate, it's probably better to
+state the rule in English rather than to quote the formal rule.  For
+example, paraphrase the above rule as follows, for clarity: "If a
+particular action is of the kind that can be done only by a single
+agent, then all of its sub-actions have the same agent as does the
+overall action."<p>
+
+
+6. Here is the full comment from <a href=/cycdoc/vocab/professional-vocab.html#employees>#$employees</a>, as an example:<p>
+
+<blockquote>
+This predicate relates employers to their paid employees.  (<a href=/cycdoc/vocab/professional-vocab.html#employees>#$employees</a> EMPLOYER WORKER) means WORKER regularly performs work for EMPLOYER, and EMPLOYER pays WORKER for that work (often by paycheck).  EMPLOYER directs the manner in which WORKER performs the work and may provide the workplace, tools, capital, and other assistance for the work.  EMPLOYER is commonly an organization but may be a person. E.g., (<a href=/cycdoc/vocab/professional-vocab.html#employees>#$employees</a> PerryMason PaulDrake).  Uses of this predicate require proper temporal qualification; e.g. (<a href=/cycdoc/vocab/time-vocab.html#holdsIn>#$holdsIn</a> (
+<a href=/cycdoc/vocab/time-vocab.html#YearFn>#$YearFn</a> 1999) (<a href=/cycdoc/vocab/professional-vocab.html#employees>#$employees</a> #$NBC-TVNetwork #$KatieCouric)).
+</blockquote><p>
+
+Notice that meta-variables in the above are upper-case and lack the
+preceding `?' used with actual variables in CycL. Also note that names
+of individuals who are used as examples but who are not in fact in the
+Cyc KB lack a preceding `#$'. <p>
+
+Another example: the <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text for <a href=/cycdoc/vocab/emotion-vocab.html#likesObject>#$likesObject</a>:<p> 
+
+<blockquote> (<a href=/cycdoc/vocab/emotion-vocab.html#likesObject>#$likesObject</a> AGT OBJ) means that when the sentient agent AGT
+is interacting in some way with OBJ, that agent feels some measure of
+<a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a> --- that is, (<a href=/cycdoc/vocab/emotion-vocab.html#feelsEmotion>#$feelsEmotion</a> AGT <a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a>). The kinds of
+interactions that produce <a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a> depend largely on what kind of
+thing OBJ is. Thus, `Joe likes the Mona Lisa' implies that Joe feels
+<a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a> when viewing the Mona Lisa. But `Joe likes pizza' implies
+that Joe feels <a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a> when eating that kind of food.  Note: There
+are some specialized predicates of <a href=/cycdoc/vocab/emotion-vocab.html#likesObject>#$likesObject</a> that give more
+information about the kind of interaction between AGT and OBJ that
+results in <a href=/cycdoc/vocab/emotion-vocab.html#Enjoyment>#$Enjoyment</a>; see, e.g., <a href=/cycdoc/vocab/emotion-vocab.html#likesSensorially>#$likesSensorially</a> and
+<a href=/cycdoc/vocab/social-vocab.html#likesAsFriend>#$likesAsFriend</a>.</blockquote><p>
+
+
+
+Comments on Cyc <b>FUNCTIONS</b>:<p>
+
+1. Mention the type of function being described.  Usually it is either
+<a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a> or <a href=/cycdoc/vocab/fundamental-vocab.html#IndividualDenotingFunction>#$IndividualDenotingFunction</a>, but you
+may want to mention a more specific group of functions to which the
+target function belongs, e.g., <a href=/cycdoc/vocab/quantity-vocab.html#UnitOfMeasure>#$UnitOfMeasure</a>.<p>
+
+2. Mention the argument type(s) of the function, as well as its result
+type (i.e., <a href=/cycdoc/vocab/fundamental-vocab.html#resultIsa>#$resultIsa</a> and/or <a href=/cycdoc/vocab/fundamental-vocab.html#resultGenl>#$resultGenl</a>s).  <p>
+
+3. Describe generally, or make clear by example(s), how the function
+is used. <p>
+
+Here is an example, the <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text for <a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a>:<p> 
+
+<blockquote>
+An instance of <a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a> used for representing specializations of <a href=/cycdoc/vocab/group-vocab.html#Group>#$Group</a>.  (<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> OBJTYPE) denotes the collection of all groups whose members (see <a href=/cycdoc/vocab/group-vocab.html#groupMembers>#$groupMembers</a>) are instances of OBJTYPE.  Note that an application of <a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> denotes a _collection_ that has groups as instances, rather than an individual group. For example, (<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> #$BallisticMissile) denotes the collection of all groups of ballistic missiles, which includes Russia's ballistic missiles, China's ballistic missiles, the US's ballistic missiles, etc.  Also, a particular group of 101 Dalmatians is an instance of (<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>).
+</blockquote><p>
+
+
+
+<blockquote><a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a>, an instance of <a href=/cycdoc/vocab/fundamental-vocab.html#CollectionDenotingFunction>#$CollectionDenotingFunction</a>, is
+used for representing specialized subsets of <a href=/cycdoc/vocab/group-vocab.html#Group>#$Group</a>.  (<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a>
+OBJ-TYPE) denotes the collection of all groups whose members are
+instances of OBJ-TYPE.  Note that an application of <a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> refers
+to a COLLECTION which has groups as elements, rather than to an
+individual group. <a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> takes any element of <a href=/cycdoc/vocab/top-vocab.html#ObjectType>#$ObjectType</a> as its
+argument, returning the subset of <a href=/cycdoc/vocab/group-vocab.html#Group>#$Group</a> that contains groups having
+instances of that <a href=/cycdoc/vocab/top-vocab.html#ObjectType>#$ObjectType</a> as its <a href=/cycdoc/vocab/group-vocab.html#groupMembers>#$groupMembers</a>. For example,
+(<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> #$BallisticMissile) represents the collection of all groups
+of ballistic missiles, which includes Russia's ballistic missiles,
+China's ballistic missiles, the U.S.'s ballistic missiles, etc.
+Another example: A group of 101 particular Dalmatians is an instance
+of (<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>). Collections of groups of events may also be
+denoted; e.g., Columbus's voyages to North America may be considered
+as a group (of events) which would be an element of
+(<a href=/cycdoc/vocab/group-vocab.html#GroupFn>#$GroupFn</a> #$Travel-TripEvent).</blockquote><p>
+
+
+Comments on <b>Ground Atomic Formulas (GAFs)</b> and <b>Rules</b>:<p>
+
+Use the predicate <a href=/cycdoc/vocab/doc-vocab.html#salientAssertions>#$salientAssertions</a> if you want to indicate that a
+particular assertion is essential to the meaning of some Cyc
+constant.  Example: (<a href=/cycdoc/vocab/doc-vocab.html#salientAssertions>#$salientAssertions</a> <a href=/cycdoc/vocab/doing-vocab.html#SingleDoerAction>#$SingleDoerAction</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?E1 <a href=/cycdoc/vocab/doing-vocab.html#Action>#$Action</a>)(<a href=/cycdoc/vocab/top-vocab.html#subEvents>#$subEvents</a> ?E ?E1)(<a href=/cycdoc/vocab/actor-vocab-complete.html#doneBy>#$doneBy</a> ?E ?P)(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>
+?E <a href=/cycdoc/vocab/doing-vocab.html#SingleDoerAction>#$SingleDoerAction</a>))(<a href=/cycdoc/vocab/actor-vocab-complete.html#doneBy>#$doneBy</a> ?E1 ?P))).<p>
+
+Note that, although it is possible and sometimes useful to write a
+<a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> text for a particular Cyc rule or GAF, that is not a
+common practice (nor should it be).  To place a comment on a rule or
+GAF, make the formula itself the first argument to <a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a>.
+Example: (<a href=/cycdoc/vocab/doc-vocab.html#comment>#$comment</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a> <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>) "This GAF really
+doesn't need a comment.").<p>
+
+
+Finally, here are some special requirements for html-based interfaces
+such as Cyc presently uses: <p>
+
+Some characters require special handling:<br>
+
+<ul> <li>Double-quotation marks must be preceded in your text by a
+backslash (or simulated with two single quotes);<br> <li>Left- and
+right-angle brackets must be written in your text as "<i>&</i>lt" for
+left-angle bracket and "<i>&</i>gt" for right-angle bracket.<br>
+<li>Avoid using ampersands or other non-printing ascii characters
+(except for spaces).</blockquote> </ul> <p>
+
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+</body>
+
+
+
+
+</html>

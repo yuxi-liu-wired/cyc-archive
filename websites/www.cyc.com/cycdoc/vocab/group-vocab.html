@@ -1,0 +1,886 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/WD-html-in-xml/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Groups</title></head>
+    <body>
+        <h2>
+            <a href="http://www.opencyc.org"><img alt="OpenCyc Homepage"
+                    border="0"
+        src="/cycdoc/img/opencyc-logo.gif" /></a>Groups</h2>E-Mail
+        Comments to: <a
+        href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a><br />Last
+        Update: 12/13/02<br />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a><br />
+        <hr />
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+        <br />
+        <hr />
+        <br />
+        <font size="+1">
+            <a name="Group">#$Group<i>&nbsp;&nbsp;&nbsp;groups</i></a></font>
+        <blockquote> A collection of temporal objects. Each instance of
+                <a href="./group-vocab.html#Group">#$Group</a> is a
+            composite object made up of one or more individual objects
+            or events. A group is related to each of its members by the
+            predicate <a
+            href="./group-vocab.html#groupMembers">#$groupMembers</a>
+            (q.v.). Note that instances of <a
+            href="./group-vocab.html#Group">#$Group</a> are _not_
+            collections. A group has temporal extent and might have
+            spatial location, while a collection is timeless and
+            nonspatial. It is of course possible to define a collection
+            parallel to any given group, so that the instances of the
+            collection are exactly the group-members of that group; e.g.
+            each toe on my left foot (and nothing else) is both an
+            instance of the collection of my left toes and a member of
+            the group of toes on my left foot. But that group (of my
+            left toes) is a spatiotemporal thing while the correlated
+            collection (of my left toes) is not. Similarly, if a certain
+            flock of pigeons is considered as having a location, a
+            spatial extent, and a time of existence, then the flock is
+            being considered a _group_ and not a collection. Finally,
+            unlike a collection, a group cannot be empty, but must have
+            _at_least_one_ group-member. As a default, a group whose
+            group-members all are instances of <a
+            href="./time-vocab.html#SomethingExisting">#$SomethingExisting</a>
+            is itself an instance of <a
+            href="./time-vocab.html#SomethingExisting">#$SomethingExisting,</a>
+            and a group whose group-members all are <a
+            href="./time-vocab.html#Event">#$Events</a> is itself an <a
+            href="./time-vocab.html#Event">#$Event.</a> Instances of <a
+            href="./group-vocab.html#Group">#$Group</a> include
+            #$QueensGuard, #$ThreeWiseMen, #$SantasReindeer, and #$InternationalCommunity.<br />
+            <b>guid: </b>bd58e6a0-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a href="./top-vocab.html#ObjectType">#$ObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./time-vocab.html#TemporalThing">#$TemporalThing</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./group-vocab.html#PhysicalSeries">#$PhysicalSeries</a>
+                <a href="./group-vocab.html#Mob">#$Mob</a>  <a
+            href="./organization-vocab.html#Holdings">#$Holdings</a>  </blockquote>
+        <font size="+1">
+            <a name="GroupFn">#$GroupFn<i>&nbsp;&nbsp;&nbsp;group fn</i></a></font>
+        <blockquote> An instance of <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction.</a>
+            When applied to an instance COL of #$FirstOrderCollection,
+                <a href="./group-vocab.html#GroupFn">#$GroupFn</a>
+            returns the collection of all groups whose members (see <a
+            href="./group-vocab.html#groupMembers">#$groupMembers)</a>
+            are instances of COL. Note that an application of <a
+            href="./group-vocab.html#GroupFn">#$GroupFn</a> is a
+            _collection_ that has groups as instances, rather than an
+            individual group. For example, <a
+            href="./group-vocab.html#GroupFn">(#$GroupFn</a>
+            #$BallisticMissile) denotes the collection of all groups of
+            ballistic missiles, which includes Russia's ballistic
+            missiles, China's ballistic missiles, the US's ballistic
+            missiles, and so on.<br />
+            <b>guid: </b>c0fd79df-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+            #$UnaryFunction  <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="subGroups">#$subGroups<i>&nbsp;&nbsp;&nbsp;subgroup
+                    (reflexive binary predicate) (transitive binary
+                    predicate) (cotemporal predicate)</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> This predicate relates a group to its subgroups. <a
+            href="./group-vocab.html#subGroups">(#$subGroups</a> GROUP
+            SUBGROUP) means that (1) all <a
+            href="./group-vocab.html#groupMembers">#$groupMembers</a> of
+            SUBGROUP are members of GROUP (2) if SUBGROUP is different
+            from GROUP, then the members of SUBGROUP constitute a <a
+            href="./group-vocab.html#Group">#$Group</a> in their own
+            right that is some sort of specialization within GROUP, and
+            (3) if a new member were to join SUBGROUP, by doing so it
+            would also become a member of GROUP. Examples: the stars in
+            #$BigDipper-Asterism constitute one of the <a
+            href="./group-vocab.html#subGroups">#$subGroups</a> of
+            #$MilkyWay-Galaxy; the Democrats in the House of
+            Representatives in a given year constitute a subgroup of the
+            group of #$USRepresentatives for that year. CounterExample:
+            the groupe of Democrats in the House of Representatives and
+            the group of people currently located in the territory of
+            the #$DistrictOfColumbia -- even if every member of the
+            first group is a member of the second, and it isn't totally
+            happenstance, a member of SUBGROUP could cease membership in
+            GROUP without ceasing membership in SUBGROUP.<br />
+            <b>guid: </b>bd58c466-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#CotemporalObjectsSlot">#$CotemporalObjectsSlot</a>
+            #$ReflexiveBinaryPredicate  #$TransitiveBinaryPredicate  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./time-vocab.html#temporalBoundsIntersect">#$temporalBoundsIntersect</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="groupMembers">#$groupMembers<i>&nbsp;&nbsp;&nbsp;group member</i></a></font>
+        <blockquote> This predicate relates a group (see <a
+            href="./group-vocab.html#Group">#$Group)</a> to its
+            individual members. <a
+            href="./group-vocab.html#groupMembers">(#$groupMembers</a>
+            GROUP MEMBER) means that MEMBER is a member of GROUP. For
+            example, #$PyramidOfCheops is a group-member of the
+            #$SevenWondersOfTheAncientWorld, and #$BillClinton is a
+            group-member of the #$DemocraticParty.<br />
+            <b>guid: </b>bd58fe04-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#CotemporalObjectsSlot">#$CotemporalObjectsSlot</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./time-vocab.html#temporallyIntersects">#$temporallyIntersects</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="cardinality">#$cardinality<i>&nbsp;&nbsp;&nbsp;cardinality
+                    (intensional representation predicate) (interval
+                    based quantity slot) (quantity slot)</i></a></font>
+        <blockquote> <a
+            href="./group-vocab.html#cardinality">(#$cardinality</a>
+            SETORCOL N) means that the <a
+            href="./math-vocab.html#SetOrCollection">#$SetOrCollection</a>
+            SETORCOL has N members. For instance, <a
+            href="./group-vocab.html#cardinality">(#$cardinality</a> <a
+            href="./math-vocab.html#TheEmptySet">#$TheEmptySet</a> 0).
+            Note that the concept of cardinality is clearest for finite
+            sets; only in special branches of mathematics does one speak
+            of the cardinality of infinite sets. See also
+            #$entityCardinality,
+            #$Note-cardinality-vs-entityCardinality, <a href="./group-vocab.html#groupCardinality">#$groupCardinality.</a><br />
+            <b>guid: </b>bd58bbcf-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$CollectionPredicate  <a
+            href="./quantity-vocab.html#IntervalBasedQuantitySlot">#$IntervalBasedQuantitySlot</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="groupCardinality">#$groupCardinality<i>&nbsp;&nbsp;&nbsp;group cardinality</i></a></font>
+        <blockquote> A predicate used to indicate the total number of
+            members there are in a particular group. <a
+            href="./group-vocab.html#groupCardinality">(#$groupCardinality</a>
+            GROUP NUM) means that the number of members in the <a
+            href="./group-vocab.html#Group">#$Group</a> GROUP is the
+            #$Cardinal-Mathematical NUM. For example <a
+            href="./group-vocab.html#groupCardinality">(#$groupCardinality</a>
+            #$SevenWondersOfTheAncientWorld 7). Cyc infers that the <a
+            href="./group-vocab.html#groupCardinality">#$groupCardinality</a>
+            of pairs is 2, and dozens, 12. For stating the cardinalities
+            of sets or collections rather than groups, see <a
+            href="./group-vocab.html#cardinality">#$cardinality</a> and #$entityCardinality.<br />
+            <b>guid: </b>bd58b9c3-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  <a
+            href="./quantity-vocab.html#IntervalBasedQuantitySlot">#$IntervalBasedQuantitySlot</a>  </blockquote>
+        <font size="+1">
+            <a name="Mob">#$Mob<i>&nbsp;&nbsp;&nbsp;mobs</i></a></font>
+        <blockquote> A specialization of <a
+            href="./group-vocab.html#Group">#$Group.</a> Each instance
+            of <a href="./group-vocab.html#Mob">#$Mob</a> is a group
+            that contains a large number of objects or events of the
+            same type. Mobs typically have more members than would be
+            feasible to enumerate or reify. One rarely refers to
+            particular members of a given mob; and when one does, it is
+            usually only to relatively few of them. Examples: the
+            #$Andes-Mountains is a mob of mountains; each instance of
+            #$Galaxy is a mob of stars; a cupful of sand is a mob of
+            grains of sand; and making popcorn involves a mob of corn
+            kernel bursting events. See also <a href="./group-vocab.html#MobFn">#$MobFn.</a><br />
+            <b>guid: </b>bd58ed36-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingStuffType">#$ExistingStuffType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./group-vocab.html#Group">#$Group</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="MobFn">#$MobFn<i>&nbsp;&nbsp;&nbsp;mob</i></a></font>
+        <blockquote> An instance of <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction.</a>
+            When applied to any collection COL that is both an instance
+            of <a href="./top-vocab.html#ObjectType">#$ObjectType</a>
+            and a specialization of <a
+            href="./time-vocab.html#TemporalThing">#$TemporalThing,</a>
+                <a href="./group-vocab.html#MobFn">#$MobFn</a> returns a
+            subcollection of <a href="./group-vocab.html#Mob">#$Mob,</a>
+            namely the collection of those mobs whose group-members (see
+            the predicate <a
+            href="./group-vocab.html#groupMembers">#$groupMembers)</a>
+            all are instances of COL. For example, a clump of hair on a
+            person's head is an instance of <a
+            href="./group-vocab.html#MobFn">(#$MobFn</a> #$Hair-Strand);
+            the collection #$Galaxy is a specialization of <a
+            href="./group-vocab.html#MobFn">(#$MobFn</a> #$Star); and
+            the collection #$Applauding-Clapping (i.e. all applause
+            events) could be referred to as <a
+            href="./group-vocab.html#MobFn">(#$MobFn</a>
+            HandClappingEvent ).<br />
+            <b>guid: </b>c0fd7f53-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+            #$UnaryFunction  <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="groupMembers">#$groupMembers<i>&nbsp;&nbsp;&nbsp;group member</i></a></font>
+        <blockquote> This predicate relates a group (see <a
+            href="./group-vocab.html#Group">#$Group)</a> to its
+            individual members. <a
+            href="./group-vocab.html#groupMembers">(#$groupMembers</a>
+            GROUP MEMBER) means that MEMBER is a member of GROUP. For
+            example, #$PyramidOfCheops is a group-member of the
+            #$SevenWondersOfTheAncientWorld, and #$BillClinton is a
+            group-member of the #$DemocraticParty.<br />
+            <b>guid: </b>bd58fe04-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#CotemporalObjectsSlot">#$CotemporalObjectsSlot</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./time-vocab.html#temporallyIntersects">#$temporallyIntersects</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="groupMemberType">#$groupMemberType<i>&nbsp;&nbsp;&nbsp;type
+                    of group member</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The predicate <a
+            href="./group-vocab.html#groupMemberType">#$groupMemberType</a>
+            is used in characterizing the members of a particular group.
+                <a
+            href="./group-vocab.html#groupMemberType">(#$groupMemberType</a>
+            GROUP TYPE) means that all of GROUP's members are elements
+            of the collection TYPE. For example, to state that the <a
+            href="./group-vocab.html#groupMembers">#$groupMembers</a> of
+            the Austin City Council are humans, one would write <a
+            href="./group-vocab.html#groupMemberType">(#$groupMemberType</a>
+            AustinCityCouncil <a
+            href="./biology-vocab.html#Person">#$Person).</a> The
+            members of a particular group might be characterized in more
+            than one way; e.g., a Hispanic Business Council may have
+            both the <a
+            href="./group-vocab.html#groupMemberType">#$groupMemberType</a>
+            #$EthnicGroupOfHispanics and the <a
+            href="./group-vocab.html#groupMemberType">#$groupMemberType</a>
+                <a
+            href="./professional-vocab.html#BusinessPerson">#$BusinessPerson</a>
+            (provided that all of its members are Hispanic business
+            people). For 'typical' or 'expected' characteristics of
+            members, see also #$memberTypes and #$typeHasTypicalMemberTypes.<br />
+            <b>guid: </b>bd58ef50-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="groupPrototype">#$groupPrototype<i>&nbsp;&nbsp;&nbsp;group prototype</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The predicate <a
+            href="./group-vocab.html#groupPrototype">#$groupPrototype</a>
+            is used to identify the individual prototype for a
+            particular group. <a
+            href="./group-vocab.html#groupPrototype">(#$groupPrototype</a>
+            GROUP PROTO) means that the prototype of GROUP is PROTO.
+            PROTO is an individual which is (or becomes), intentionally
+            or unintentionally, the model for the <a
+            href="./group-vocab.html#groupMembers">#$groupMembers</a> of
+            GROUP, which share some feature(s) of the prototype. A group
+            may or may not have a prototype. A group has only one
+            prototype (if it has any). A prototype exists prior to other
+            members of the group; it may or may not itself be a member
+            of the group (by default, Cyc assumes it is). For example,
+            the prototype for the class of Saturn V rockets; or,
+            Casanova as the prototypical romantic adventurer.<br />
+            <b>guid: </b>bd589581-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  <br />
+            <b>direct specialization of: </b>
+            <a href="./group-vocab.html#groupMembers">#$groupMembers</a>  </blockquote>
+        <font size="+1">
+            <a name="List">#$List</a>  is the atomic form of
+            (#$ListOfTypeFn #$Thing)(#$ListOfTypeFn <a href="./fundamental-vocab.html#Thing">#$Thing</a>)</font>
+        <blockquote> A specialization of <a
+            href="./math-vocab.html#Tuple">#$Tuple.</a> Each instance of
+                <a href="./group-vocab.html#List">#$List</a> is a finite
+            sequence of things with a first and last member-position,
+            with each member-position other than the last having a
+            successor member-position. As with tuples generally, lists
+            allow for repetition of their members, so that the same item
+            can appear at multiple member-positions in the same list. A
+            list can be represented formally as a function from a finite
+            index set of counting numbers, beginning with one, into the
+            domain of all <a
+            href="./fundamental-vocab.html#Thing">#$Things</a> (but note
+            that <a href="./group-vocab.html#List">#$Lists</a> are _not_
+            explicitly represented as functions in the Cyc ontology).
+            Unlike an instance of <a
+            href="./group-vocab.html#Series">#$Series</a> (q.v.), a list
+            is purely abstract (i.e. not spatio-temporal), and the only
+            implied relation between an item and its successor in a list
+            is the successor relation of the list itself. Technically,
+                <a href="./group-vocab.html#List">#$List</a> is more
+            specific than <a href="./math-vocab.html#Tuple">#$Tuple</a>
+            only in that the index set (see #$tupleIndexSet) for a given
+            list must be the counting numbers in their usual order (or
+            some initial segment thereof), whereas the index set for a
+            tuple, generally speaking, might be any set whatsoever.<br />
+            <b>guid: </b>bed50053-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StuffType
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of: </b>
+            <a href="./math-vocab.html#Tuple">#$Tuple</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./geography-vocab.html#PostalCode">#$PostalCode</a>
+                <a
+            href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition</a>
+            #$AccessNumber  <a
+            href="./geography-vocab.html#StreetAddress">#$StreetAddress</a>
+                <a href="./doc-vocab.html#SharedNote">#$SharedNote</a>
+                <a
+            href="./geography-vocab.html#PhoneNumber">#$PhoneNumber</a>
+                <a
+            href="./social-vocab.html#HumanNameString">#$HumanNameString</a>
+            #$NumericString  #$SerialNumber-String  #$ProgramIdentifier
+            #$MACAddress  <a
+            href="./path-traversal-vocab.html#PathChain">#$PathChain</a>
+            #$SubLString  #$IPAddress  <a
+            href="./merged-ontology-vocab.html#TextString">#$TextString</a>
+            #$SocialSecurityNumber  #$NLSentence  #$ContactInfoString
+            #$EMailAddress  #$UniformResourceLocator  #$MailingAddress
+            #$ShippingAddress  <a
+            href="./social-vocab.html#HumanFamilyNameString">#$HumanFamilyNameString</a>
+            #$IDNumber  <a
+            href="./geography-vocab.html#Address-LocationDesignator">#$Address-LocationDesignator</a>
+                <a
+            href="./social-vocab.html#HumanGivenNameString">#$HumanGivenNameString</a>
+                <a
+            href="./info-vocab.html#CharacterString">#$CharacterString</a>  </blockquote>
+        <font size="+1">
+            <a name="TheList">#$TheList<i>&nbsp;&nbsp;&nbsp;the list</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a href="./group-vocab.html#TheList">#$TheList</a>
+            is a function that combines its arguments into a list. For
+            any ITEM(1), ..., ITEM(n), each of which is an instance of
+                <a href="./fundamental-vocab.html#Thing">#$Thing,</a> <a
+            href="./group-vocab.html#TheList">(#$TheList</a> ITEM(1) ...
+            ITEM(n)) gives the instance of #$List-Extensional whose
+            first member is ITEM (1), ..., and whose last member is
+            ITEM(n). Note that in general ITEM(1), ..., ITEM(n) do not
+            have to be distinct, though they do if <a
+            href="./group-vocab.html#TheList">(#$TheList</a> ITEM(1) ...
+            ITEM(n)) is an instance of <a href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition.</a><br />
+            <b>guid: </b>bdcc9f7c-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnreifiableFunction  <a
+            href="./fundamental-vocab.html#VariableArityRelation">#$VariableArityRelation</a>
+                <a
+            href="./fundamental-vocab.html#IndividualDenotingFunction">#$IndividualDenotingFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="TheEmptyList">#$TheEmptyList<i>&nbsp;&nbsp;&nbsp;the
+                    empty list</i></a></font>
+        <blockquote> An instance of <a
+            href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition.</a>
+                <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> is
+            a list that has no members (see <a
+            href="./group-vocab.html#listMembers">#$listMembers).</a>
+            Note that any list that has no members is identical with <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList;</a>
+            thus <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> is
+            the only list whose length is 0. Note also that <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> is
+            a sublist (see #$subLists) of every list. Note finally that
+                <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> is
+            not the same as <a
+            href="./math-vocab.html#TheEmptySet">#$TheEmptySet</a> (q.v.).<br />
+            <b>guid: </b>bd79c885-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="ListWithoutRepetition">#$ListWithoutRepetition<i>&nbsp;&nbsp;&nbsp;OSETs</i></a></font>
+        <blockquote> A specialization of <a
+            href="./group-vocab.html#List">#$List.</a> An instance LIST
+            of <a href="./group-vocab.html#List">#$List</a> is also an
+            instance of <a
+            href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition</a>
+            just in case each of the members of LIST occurs in only one
+            member-position in LIST.<br />
+            <b>guid: </b>bdb9081e-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a href="./top-vocab.html#ObjectType">#$ObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+                href="./math-vocab.html#WellOrdering">#$WellOrdering</a>&nbsp;&nbsp;<a href="./group-vocab.html#List">#$List</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="listMembers">#$listMembers<i>&nbsp;&nbsp;&nbsp;list members</i></a></font>
+        <blockquote> A predicate that relates an ordered n-tuple, or <a
+            href="./group-vocab.html#List">#$List</a> (q.v.), to each of
+            the items on that list. <a
+            href="./group-vocab.html#listMembers">(#$listMembers</a>
+            LIST MEMBER) means that MEMBER is a member of LIST. For
+            example, if LIST = <a
+            href="./group-vocab.html#TheList">(#$TheList</a> A B C B)
+            then LIST has exactly three members: A, B, and C. See also #$SetOfListMembersFn.<br />
+            <b>guid: </b>be6f9d0b-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$EvaluatablePredicate
+            #$AsymmetricBinaryPredicate  #$IntangibleObjectPredicate  <br />
+            <b>direct specialization of: </b>#$tupleMembers  </blockquote>
+        <font size="+1">
+            <a
+                    name="LengthOfListFn">#$LengthOfListFn<i>&nbsp;&nbsp;&nbsp;length
+                    of list fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The function <a
+            href="./group-vocab.html#LengthOfListFn">#$LengthOfListFn,</a>
+            applied to a list, gives the length of the list, a
+            non-negative integer. Note that the length of LIST should
+            not in general be considered the same as the cardinality of
+            (#$SetOfListMembersFn LIST). For example, given that LIST =
+                <a href="./group-vocab.html#TheList">(#$TheList</a> A B
+            C B D), <a
+            href="./group-vocab.html#LengthOfListFn">(#$LengthOfListFn</a>
+            LIST) is 5 while the cardinality of (#$SetOfListMembersFn
+            LIST) is 4. When LIST is an instance of <a
+            href="./group-vocab.html#ListWithoutRepetition">#$ListWithoutRepetition,</a>
+            nevertheless, the length of LIST is identical to the
+            cardinality of (#$SetOfListMembersFn LIST).<br />
+            <b>guid: </b>c10b0ebc-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="FirstInListFn">#$FirstInListFn<i>&nbsp;&nbsp;&nbsp;first
+                    in list fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The function <a
+            href="./group-vocab.html#FirstInListFn">#$FirstInListFn,</a>
+            applied to a list as in <a
+            href="./group-vocab.html#FirstInListFn">(#$FirstInListFn</a>
+            LIST), results in the first item on the list. For each
+            nonempty <a href="./group-vocab.html#List">#$List,</a> <a
+            href="./group-vocab.html#FirstInListFn">(#$FirstInListFn</a>
+            LIST) = <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST 1). <a
+            href="./group-vocab.html#FirstInListFn">(#$FirstInListFn</a>
+            LIST) is undefined if LIST is <a href="./group-vocab.html#TheEmptyList">#$TheEmptyList.</a><br />
+            <b>guid: </b>c068f9a4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="LastInListFn">#$LastInListFn<i>&nbsp;&nbsp;&nbsp;last
+                    in list fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The function <a
+            href="./group-vocab.html#LastInListFn">#$LastInListFn,</a>
+            applied to a list as in <a
+            href="./group-vocab.html#LastInListFn">(#$LastInListFn</a>
+            LIST), results in the last item on the list. For each
+            nonempty <a href="./group-vocab.html#List">#$List</a> LIST,
+                <a
+            href="./group-vocab.html#LastInListFn">(#$LastInListFn</a>
+            LIST) = <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST (LengthOfListFn LIST)). <a
+            href="./group-vocab.html#LastInListFn">(#$LastInListFn</a>
+            LIST) is undefined if LIST is <a href="./group-vocab.html#TheEmptyList">#$TheEmptyList.</a><br />
+            <b>guid: </b>c0ae0876-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="RestOfListFn">#$RestOfListFn<i>&nbsp;&nbsp;&nbsp;rest
+                    of list fn</i></a></font>
+        <blockquote> An instance of <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction.</a>
+            When applied to an instance LIST of <a
+            href="./group-vocab.html#List">#$List,</a> <a
+            href="./group-vocab.html#RestOfListFn">#$RestOfListFn</a>
+            returns another list having as members all but the first
+            item in LIST, in the same order. To put it more precisely,
+            for each instance LIST of <a
+            href="./group-vocab.html#List">#$List</a> with LIST not
+            equal to <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList,</a>
+                <a
+            href="./group-vocab.html#RestOfListFn">(#$RestOfListFn</a>
+            LIST) is the list obtained from LIST by taking away the
+            first member of LIST. If the first member of LIST is ITEM
+            and LIST = <a
+            href="./group-vocab.html#JoinListsFn">(#$JoinListsFn</a> <a
+            href="./group-vocab.html#TheList">(#$TheList</a> ITEM)
+            THE-LIST-OF-THE-REST), then <a
+            href="./group-vocab.html#RestOfListFn">(#$RestOfListFn</a>
+            LIST) = THE-LIST-OF-THE-REST. Note that <a
+            href="./group-vocab.html#RestOfListFn">(#$RestOfListFn</a>
+            LIST) is undefined if LIST is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a>
+            and that <a
+            href="./group-vocab.html#RestOfListFn">(#$RestOfListFn</a>
+            LIST) is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> if
+            the length of LIST is 1.<br />
+            <b>guid: </b>c02afce7-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$PartialDenotationalFunction
+            #$UnaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="NthInListFn">#$NthInListFn<i>&nbsp;&nbsp;&nbsp;nth
+                    in list fn</i></a></font>
+        <blockquote> An instance of both <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+            and #$PartialDenotationalFunction. For each LIST in <a
+            href="./group-vocab.html#List">#$List</a> with length M
+            (i.e., <a
+            href="./group-vocab.html#LengthOfListFn">(#$LengthOfListFn</a>
+            LIST) = M), and for each <a
+            href="./math-vocab.html#PositiveInteger">#$PositiveInteger</a>
+            N that is less than or equal to M, <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST N) is the member of LIST that occurs at the Nth
+            position of LIST. For example, given that LIST = <a
+            href="./group-vocab.html#TheList">(#$TheList</a> A B C D A E
+            F), <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST 1) = A, <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST 2) = B, <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST 5) = A and <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST 7) = F. Note that when N is greater than the length of
+            LIST or LIST is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList,</a>
+            then <a
+            href="./group-vocab.html#NthInListFn">(#$NthInListFn</a>
+            LIST N) is undefined.<br />
+            <b>guid: </b>bda6dd00-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$PartialDenotationalFunction
+            #$BinaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="PositionsInListFn">#$PositionsInListFn<i>&nbsp;&nbsp;&nbsp;positions
+                    in list fn</i></a></font>
+        <blockquote> An instance of both #$BinaryFunction and <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction.</a>
+            When applied to two lists, as in <a
+            href="./group-vocab.html#PositionsInListFn">(#$PositionsInListFn</a>
+            LIST1 LIST2), <a
+            href="./group-vocab.html#PositionsInListFn">#$PositionsInListFn</a>
+            finds every occurrence of LIST1 as a sublist of LIST2, and
+            returns a list of all the positions in LIST2 (i.e., a list
+            of <a
+            href="./math-vocab.html#PositiveInteger">#$PositiveIntegers)</a>
+            where a copy of LIST1 starts. For any instances LIST1 and
+            LIST2 of <a href="./group-vocab.html#List">#$List,</a> <a
+            href="./group-vocab.html#PositionsInListFn">(#$PositionsInListFn</a>
+            LIST1 LIST2) is the list LIST* of <a
+            href="./math-vocab.html#PositiveInteger">#$PositiveIntegers</a>
+            defined below. Let L be the length of LIST1. The first
+            member of LIST*, if there is any, is the smallest positive
+            integer N1 such that LIST1 = <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST2 N1 N1+L). The second member of LIST*, if there is any,
+            is the second smallest positive integer N2 such that LIST1 =
+                <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST2 N2 N2+L). ... The last member of LIST* is the greatest
+            positive integer N such that LIST1 = <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST2 N N+L). Note that if LIST1 is not a sublist of LIST2
+            or LIST2 is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList,</a>
+            then <a
+            href="./group-vocab.html#PositionsInListFn">(#$PositionsInListFn</a>
+            LIST1 LIST2) is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList.</a>
+            Note also that if LIST1 is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a>
+            while LIST2 is not, then <a
+            href="./group-vocab.html#PositionsInListFn">(#$PositionsInListFn</a>
+            LIST1 LIST2) returns a list of _all_ the positions in LIST2
+            (e.g., if LIST2 = <a
+            href="./group-vocab.html#TheList">(#$TheList</a> A B C), <a
+            href="./group-vocab.html#PositionsInListFn">(#$PositionsInListFn</a>
+                <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a>
+            LIST2) = <a href="./group-vocab.html#TheList">(#$TheList</a>
+            1 2 3)).<br />
+            <b>guid: </b>be223d0c-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="ReverseListFn">#$ReverseListFn<i>&nbsp;&nbsp;&nbsp;reverse
+                    list fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The function <a
+            href="./group-vocab.html#ReverseListFn">#$ReverseListFn</a>
+            applied to a <a href="./group-vocab.html#List">#$List,</a>
+            as in <a
+            href="./group-vocab.html#ReverseListFn">(#$ReverseListFn</a>
+            LIST), results in the same list, but in reverse order. For
+            example, if LIST is <a
+            href="./group-vocab.html#TheList">(#$TheList</a> A B C A D),
+            then <a
+            href="./group-vocab.html#ReverseListFn">(#$ReverseListFn</a>
+            LIST) = <a href="./group-vocab.html#TheList">(#$TheList</a>
+            D A C B A).<br />
+            <b>guid: </b>bf3f0990-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="SublistFromToFn">#$SublistFromToFn<i>&nbsp;&nbsp;&nbsp;sublist
+                    from to fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The function <a
+            href="./group-vocab.html#SublistFromToFn">#$SublistFromToFn</a>
+            applied to a list and two numbers, as in <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST X Y), picks out the sublist of LIST from position X to
+            position Y, inclusive. For each nonempty <a
+            href="./group-vocab.html#List">#$List</a> LIST, and for each
+            pair of positive integers M and N such that M is less than
+            or equal to N and such that N is less than or equal to the
+            length of LIST, <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST M N) denotes the sublist SUBLIST of LIST such that the
+            first member of SUBLIST is the Mth member of LIST and the
+            last member of SUBLIST is the Nth member of LIST. See
+            #$subLists. Note that <a
+            href="./group-vocab.html#SublistFromToFn">(#$SublistFromToFn</a>
+            LIST M N) is not defined if LIST is <a
+            href="./group-vocab.html#TheEmptyList">#$TheEmptyList</a> or
+            M is greater than N or N is greater than the length of LIST.<br />
+            <b>guid: </b>c1311405-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryFunction  <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="JoinListsFn">#$JoinListsFn<i>&nbsp;&nbsp;&nbsp;join
+                    lists fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> This function attaches lists together to make
+            longer lists. For any instances LIST(1), ..., LIST(n) of <a
+            href="./group-vocab.html#List">#$List,</a> <a
+            href="./group-vocab.html#JoinListsFn">(#$JoinListsFn</a>
+            LIST(1) ... LIST(n)) denotes the list, i.e., the instance of
+                <a href="./group-vocab.html#List">#$List,</a> that is
+            obtained by concatenating LIST(1), ..., LIST(n) end to end
+            in the order from 1 to n. Note that LIST(1), ..., LIST(n) do
+            not have to be distinct.<br />
+            <b>guid: </b>bfa7f158-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#VariableArityRelation">#$VariableArityRelation</a>
+                <a
+            href="./fundamental-vocab.html#EvaluatableFunction">#$EvaluatableFunction</a>
+            #$AssociativeRelation  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="Series">#$Series<i>&nbsp;&nbsp;&nbsp;series</i></a></font>
+        <blockquote> A specialization of <a
+            href="./time-vocab.html#TemporalThing">#$TemporalThing.</a>
+            Each instance of <a
+            href="./group-vocab.html#Series">#$Series</a> is a complex
+            temporal thing in which two or more other things are ordered
+            in a linear fashion. Examples include a line of people at a
+            ticket booth (an instance of the specialization <a
+            href="./group-vocab.html#PhysicalSeries">#$PhysicalSeries)</a>
+            and a series of pitches in a baseball game (an instance of
+            the specialization #$EventSeries). In each instance of <a
+            href="./group-vocab.html#Series">#$Series,</a> there is some
+            relation by which its members are ordered (see the related
+            predicate <a
+            href="./group-vocab.html#seriesOrderedBy">#$seriesOrderedBy);</a>
+            this relation often varies from series to series.<br />
+            <b>guid: </b>be8e694c-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$FirstOrderCollection  <br />
+            <b>direct specialization of: </b>
+            <a href="./time-vocab.html#TemporalThing">#$TemporalThing</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./group-vocab.html#PhysicalSeries">#$PhysicalSeries</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="PhysicalSeries">#$PhysicalSeries<i>&nbsp;&nbsp;&nbsp;physical series</i></a></font>
+        <blockquote> A specialization of both <a
+            href="./group-vocab.html#Series">#$Series</a> and <a
+            href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible.</a>
+            Each instance of <a
+            href="./group-vocab.html#PhysicalSeries">#$PhysicalSeries</a>
+            is a group of partially tangible objects ordered in a linear
+            fashion, most likely according to some spatial relationship.
+            Instances would include a group of people in line at a
+            ticket booth, or the vertebrae in a person's spine.<br />
+            <b>guid: </b>c04cb9b8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./group-vocab.html#Group">#$Group</a>&nbsp;&nbsp;<a
+                href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible</a>&nbsp;&nbsp;<a href="./group-vocab.html#Series">#$Series</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="SeriesWithoutRepetition">#$SeriesWithoutRepetition<i>&nbsp;&nbsp;&nbsp;series
+                    without repetition</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A <a
+            href="./group-vocab.html#SeriesWithoutRepetition">#$SeriesWithoutRepetition</a>
+            is a <a href="./group-vocab.html#Series">#$Series</a> in
+            which each member occurs only once.<br />
+            <b>guid: </b>bf7c353a-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#Collection">#$Collection</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./group-vocab.html#Series">#$Series</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="subSeries">#$subSeries<i>&nbsp;&nbsp;&nbsp;sub series</i></a></font>
+        <blockquote> <a
+            href="./group-vocab.html#subSeries">(#$subSeries</a> SERIES
+            SUBSERIES) means that SUBSERIES is a sub-series of SERIES.
+            This means that all the members of SUBSERIES are
+            series-members (see the predicate #$seriesMembers) of
+            SERIES, that SERIES and SUBSERIES share the same ordering
+            principle, and that, if the first member of SUBSERIES is the
+            Mth member of SERIES, the Nth member of SUBSERIES is the (N
+            + M - 1)th member of SERIES.<br />
+            <b>guid: </b>bd5944c9-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$AntiSymmetricBinaryPredicate
+            #$ReflexiveBinaryPredicate  #$TransitiveBinaryPredicate  <a
+            href="./part-vocab.html#PartPredicate">#$PartPredicate</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./part-vocab.html#parts">#$parts</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="seriesMemberIsa">#$seriesMemberIsa<i>&nbsp;&nbsp;&nbsp;series
+                    member isa</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./group-vocab.html#seriesMemberIsa">(#$seriesMemberIsa</a>
+            SERIES COL) means that each of the #$seriesMembers of SERIES
+            SIT is an instances of the collection COL.<br />
+            <b>guid: </b>bd6c22c9-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="seriesLength">#$seriesLength<i>&nbsp;&nbsp;&nbsp;series length</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./group-vocab.html#seriesLength">(#$seriesLength</a>
+            SER LEN) means that the series, SER, is LEN members long.
+            Note that some <a
+            href="./group-vocab.html#Series">#$Series</a> have an
+            unknown or infinite number of members.<br />
+            <b>guid: </b>bfe12eb2-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  </blockquote>
+        <font size="+1">
+            <a
+                    name="seriesOrderedBy">#$seriesOrderedBy<i>&nbsp;&nbsp;&nbsp;series
+                    ordered by</i></a></font>
+        <blockquote> This predicate relates series to relations that
+            order them linearly. <a
+            href="./group-vocab.html#seriesOrderedBy">(#$seriesOrderedBy</a>
+            SERIES PRED) means that PRED is a relation that imposes a
+            linear, or total, ordering (see <a
+            href="./math-vocab.html#TotalOrdering">#$TotalOrdering)</a>
+            on the #$seriesMembers of SERIES. PRED is both a
+            #$TransitiveBinaryPredicate and an
+            #$AntiSymmetricBinaryPredicate, and each member of SERIES
+            stands in the relation PRED to all of the succeeding
+            members. For example, if SERIES is a line of cars driving
+            north, it might be ordered by #$northOf (and perhaps also by
+            ahead of ).<br />
+            <b>guid: </b>c0dbc44e-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="seriesOrderedByInverse">#$seriesOrderedByInverse<i>&nbsp;&nbsp;&nbsp;series
+                    ordered by inverse</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./group-vocab.html#seriesOrderedByInverse">(#$seriesOrderedByInverse</a>
+            SER PRED) means that PRED is the relation that imposes an
+            order on the members of SER. Each member of the series
+            stands in the relation PRED to the series members that come
+            before it. For example, if SER is a line of cars driving
+            south, the ordering relation might be #$northOf (or
+            ''behind''). See also <a href="./group-vocab.html#seriesOrderedBy">#$seriesOrderedBy.</a><br />
+            <b>guid: </b>bd70bf75-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalPredicate
+            #$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="NthInSeriesFn">#$NthInSeriesFn<i>&nbsp;&nbsp;&nbsp;nth
+                    in series fn</i></a></font>
+        <blockquote> An instance of both #$PartialDenotationalFunction
+            and <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction.</a>
+                <a
+            href="./group-vocab.html#NthInSeriesFn">(#$NthInSeriesFn</a>
+            SERIES N) is the Nth member (see #$seriesMembers) of the <a
+            href="./group-vocab.html#Series">#$Series</a> SERIES,
+            provided that N is less than or equal to the length (see <a
+            href="./group-vocab.html#seriesLength">#$seriesLength)</a>
+            of SERIES. When N is greater than the length of SERIES, then
+                <a
+            href="./group-vocab.html#NthInSeriesFn">(#$NthInSeriesFn</a>
+            SERIES N) is undefined.<br />
+            <b>guid: </b>be877e49-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$PartialDenotationalFunction
+            #$BinaryFunction  <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="structureRelations">#$structureRelations<i>&nbsp;&nbsp;&nbsp;structure relations</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./group-vocab.html#structureRelations">(#$structureRelations</a>
+            STRUCT REL) means that the situation or structure STRUCT has
+            REL as one of its associated relations between its
+            structure-members. This is very general and it could be an
+            abstract predicate, relation or function, defined on the structure-members.<br />
+            <b>guid: </b>be1e710b-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryPredicate  <br />
+            <b>direct specialization of: </b>
+            <a href="./part-vocab.html#parts">#$parts</a>  </blockquote>
+        <p />
+        <hr />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a></body></html>

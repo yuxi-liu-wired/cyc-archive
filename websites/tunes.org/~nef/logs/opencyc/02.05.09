@@ -1,0 +1,391 @@
+00:00:00 --- log: started opencyc/02.05.09
+00:54:09 --- join: dash_ (washort@d119.narrowgate.net) joined #opencyc
+01:10:57 --- quit: dash (Read error: 113 (No route to host))
+01:11:05 --- nick: dash_ -> dash
+01:19:14 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+01:19:14 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+02:15:23 --- quit: dash ("it's the IDEA that's lasted. the SYSTEM.")
+03:18:08 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+03:18:13 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+03:18:15 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+03:18:31 --- join: ChanServ (ChanServ@services.) joined #opencyc
+03:18:31 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+03:18:31 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+03:18:31 --- mode: carter.openprojects.net set +o ChanServ
+09:00:04 <dmiles-> creatpredicate.jsp is not working right now
+09:00:15 <dmiles-> (whoever goes there)
+09:01:23 <dmiles-> 207.207.8.57 - - [09/May/2002:01:35:52 -0800] "GET /logicmoo/createpredicate.jsp HTTP/1.1" 200 999
+09:01:51 <dmiles-> will have working again sometime later tody ;>
+09:02:12 <stevereed> It was me.
+09:02:35 <dmiles-> ok good was confirming it wasnt johndcyc
+09:02:53 <dmiles-> since he wouldnt be here to know it was down
+09:03:42 <dmiles-> what i did was changed how the properties from the eviroment work.. so that compboboxes poputlate from a user defined constrained microtheory
+09:03:49 <dmiles-> kept in the jsp session
+09:03:53 <stevereed> ok.
+09:04:49 <dmiles-> other pages work since they are updated
+09:04:56 <dmiles-> like createnpc.jsp
+09:05:14 <dmiles-> as an example of how combo boxes are a single Jsp query
+09:06:23 <dmiles-> i also adding small amopunt of javascript on the createpredicate jsp so we'll get the number of of argIsa/Genls baed on predicate arity
+09:08:21 <dmiles-> oh i have a question for you
+09:08:26 <dmiles-> Steve
+09:08:29 <stevereed> ?
+09:08:57 <dmiles-> when i am construction a function-denotational in Java i am ussing a CycNart
+09:09:10 <stevereed> right
+09:09:30 <dmiles-> its stringApiValue() is quoted which i wanted to confirm that is correct
+09:10:03 <stevereed> example?
+09:10:28 <dmiles-> so if i wanted to make a (termOfUnit (CapitolFn USA)(CapitolFn USA))
+09:10:46 <dmiles-> should those be quoted?
+09:10:54 <dmiles-> '(CapitolFn USA)
+09:11:07 <stevereed> You should not have to make the termOfUnit assertions yourself
+09:11:18 <dmiles-> bad example
+09:11:43 <dmiles-> (isa (CapitolFn USA) CityOfUSA)
+09:11:51 <stevereed> got it.
+09:12:20 <stevereed> the EL (external lispy form) of a nart is a parenthesised list.
+09:12:22 <dmiles-> i am not sure if i should use a CycList() or CycNart() but i want to have a inferface class 
+09:12:34 <stevereed> use CycNart
+09:12:42 <stevereed> the CycList is ambiguous.
+09:12:53 <stevereed> you construct the CycNart
+09:12:55 <stevereed> and then
+09:13:04 <stevereed> put it into the the assertion or query
+09:13:25 <stevereed> I should have examples in the unit test cases for CycNart.
+09:13:33 <stevereed> I'll go look.
+09:13:51 <dmiles-> ok good.. i just noticed i was constuction mud exits as Narts
+09:14:05 <dmiles-> but they are function denotationals
+09:14:47 <dmiles-> a mud exit loooks like (mudExit midg_002 (ExitLeadsToFn North midg_001))
+09:15:24 <dmiles-> so  (ExitLeadsToFn North midg_001) is expected to be a non atomic reifiacle term
+09:15:34 <stevereed> right
+09:16:03 <stevereed> you construct it like this..
+09:16:13 <dmiles-> but i was afarid in inference (mudExit ?From (ExitLeadsToFn ?D ?To)) it might not tranlate
+09:16:27 <dmiles-> go on (was typed before)
+09:17:55 <stevereed> CycNart myCycNart = new CycNart(exitLeadsToFnConstant, argList);
+09:18:15 <stevereed> where exitLeadsToFnConstant is the java CycConstant object, and
+09:18:48 <stevereed> arglist is a CycList whose contents are the args North and midg_001 as CycConstant objects.
+09:19:11 <stevereed> You make,
+09:19:29 <stevereed> or get references to the CycConstants before
+09:19:38 <stevereed> constructing the CycNart from them.
+09:19:47 <dmiles-> (yes i saw how valuable caching is)
+09:20:38 <dmiles-> i see
+09:20:54 <stevereed> When you assert or query at the EL layer.
+09:21:04 <stevereed> you can just use the list form 
+09:21:16 <stevereed> in which the CycNart is represented,
+09:21:22 <stevereed> by a CycList
+09:21:38 <stevereed> you dont have to construct the CycNart object in those two cases.
+09:21:40 <dmiles-> i see becasue inference will defrefernce the quote list if it was quoted in assertion since it is considered EL
+09:21:48 <stevereed> right.
+09:22:16 <stevereed> We are introducing another version of cycobject, named cyclobject,
+09:22:33 <stevereed> in which this distinction between HL and EL is more clear.
+09:22:55 <dmiles-> ah yes.. a superclass of all Cyc*()
+09:23:05 <stevereed> so a new java api alternative will be released when we done.
+09:23:18 <stevereed> the top of the hierarchy will be CycLTerm
+09:23:30 <dmiles-> exactly good
+09:23:34 <stevereed> bottoming out at CycString, CycConstant, ..
+09:23:59 <stevereed> It will follow the CycL grammar in the KB exactly.
+09:24:08 <stevereed> both api versions will be supported.
+09:24:26 <stevereed> the new one will have CycML back and forth to the server.
+09:24:29 <stevereed> because,
+09:24:41 <stevereed> cfasl is hl only (or lists only for the EL stuff).
+09:24:50 <dmiles-> ah very good.. yes they will all have a .cyclify() .stringApiValue .safeToString() .toString()
+09:25:01 <stevereed> yes,
+09:25:20 <stevereed> the api will become multithreaded per client session.
+09:25:48 <stevereed> another programmer is helping me so I do not have the exact behavior available to discuss.
+09:26:18 <dmiles-> having a heirarchy like that is realy nice 
+09:26:20 <stevereed> will commit to cvs soon.
+09:26:37 <dmiles-> good i am glad this was important
+09:26:39 <stevereed> it will be classic interface and impl classes.
+09:27:09 <stevereed> i'll give you a heads-up here when i commit.
+09:27:26 <stevereed> but the first code will compile but not work all the way thru.
+09:27:27 <dmiles-> yes.. i wondered if thats how it worked ICyclifiable .. etc
+09:27:35 <dmiles-> very good, thank you
+09:27:53 <stevereed> the xml parser in subl is not started yet.  I have the generator nearly done.
+09:28:10 <stevereed> the xml parser for CycML is almost trivial.
+09:28:15 <stevereed> because,
+09:28:24 <dmiles-> so you'll have a toCycMl()
+09:28:25 <stevereed> you substitue parenthesis for xml tags.
+09:28:33 <stevereed> something like that.
+09:28:49 <stevereed> may use the method names already there.
+09:29:12 <dmiles-> yes toXML() should definately be considered appropriate
+09:29:24 <dmiles-> (if that was what it was named)
+09:29:31 <stevereed> i believe so.
+09:29:49 <stevereed> got the win32 port running ok.
+09:29:59 <dmiles-> very excelent
+09:30:07 <stevereed> will release with CycML
+09:30:22 <dmiles-> yes that should be a sound 0.7
+09:30:35 <stevereed> JohnD will set the date when I get CycML working ok.
+09:30:55 <dmiles-> yeah.. you have to do it both in List and Java both i figurted
+09:31:00 <dmiles-> err lisp
+09:31:25 <dmiles-> well the reading part is the hardest
+09:32:05 <stevereed> we will see, havent done it yet.
+09:32:18 <dmiles-> hopefully its not too much of a moving target
+09:32:54 <dmiles-> since you could end up seeing verbs related to transactions as well as content
+09:32:59 <dmiles-> :)
+09:33:08 <stevereed> right
+09:33:31 <stevereed> I have defined operations for create, kill, rename, assert, query and such.
+09:34:06 <dmiles-> good.. then it would weven be possible to create CycML documents that make of a highlevel test suite
+09:34:18 <stevereed> right.
+10:44:53 --- join: mea_culpa (mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+10:45:00 <dmiles-> hi mea :)
+10:45:13 <mea_culpa> hi dmiles- :))
+10:47:56 --- quit: CycLBot (Remote closed the connection)
+10:48:14 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+10:53:44 <dmiles-> is it normal to genlPreds to to Predicates?
+10:53:51 <dmiles-> err to two predicates?
+10:53:59 <dmiles-> (or at least usefull?)
+10:56:08 <dmiles-> http://12.225.207.235:8080/logicmoo/createpredicate.jsp (is why)
+11:03:30 <dmiles-> same question with http://12.225.207.235:8080/logicmoo/createfunction.jsp (genlFuncts Multiselect?)
+11:23:44 <stevereed> typically genPreds to one predicate, but more than one can make sense for a given situation.
+11:26:42 <dmiles-> ok then on that page i'll make it multiselectable
+12:20:41 --- quit: CycLBot (Remote closed the connection)
+12:21:18 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+12:39:32 --- quit: CycLBot (Remote closed the connection)
+12:49:34 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+12:51:02 --- quit: CycLBot (Remote closed the connection)
+12:52:34 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+12:52:49 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+12:55:54 --- quit: CycLBot (Remote closed the connection)
+12:57:10 <dmiles-> brining him down since doing some trial/error programmming
+13:14:36 --- quit: quux (Remote closed the connection)
+13:25:10 --- nick: dmiles- -> dmiles
+13:41:46 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+13:45:03 --- join: dash (washort@d132.narrowgate.net) joined #opencyc
+14:30:31 --- quit: Taral ("bbbl")
+14:36:57 --- join: dash_ (washort@d140.narrowgate.net) joined #opencyc
+14:37:25 --- quit: dash (Killed (NickServ (Ghost: dash_!washort@d140.narrowgate.net)))
+14:37:27 --- nick: dash_ -> dash
+14:53:36 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+14:54:34 <dmiles> query: (mudobjectFoundInArea joe ?W)
+14:54:36 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+14:54:37 <CycLBot> (#$mudobjectFoundInAreaLogic #$joe ?W)
+14:54:37 <CycLBot> was not well formed because:
+14:54:39 <CycLBot> (#$mudobjectFoundInAreaLogic #$joe ?W) is not a well-formed formula.
+14:54:39 <CycLBot> Perhaps #$mudobjectFoundInAreaLogic is insufficiently defined.")
+14:54:48 <dmiles> query: (mudObjectFoundInArea joe ?W)
+14:54:48 <CycLBot> no answers found
+14:55:11 <dmiles> query: (mudObjectFoundInArea joe joe-home)
+14:55:12 <CycLBot> no answers found
+14:55:31 <dmiles> query: (mudObjectFoundInArea Cyc ?W)
+14:55:31 <CycLBot> no answers found
+14:55:43 <dmiles> query: (mudObjectFoundInArea ?What ?Where)
+14:55:46 <CycLBot> ?WHAT = the Equator, ?WHERE = m i d g a a r d (((?WHAT . Equator) (?WHERE . MIDGAARD)))
+14:55:47 <CycLBot> ?WHAT = Africa, ?WHERE = m i d g a a r d (((?WHAT . ContinentOfAfrica) (?WHERE . MIDGAARD)))
+14:55:48 <CycLBot> ?WHAT = the Indian Ocean, ?WHERE = m i d g a a r d (((?WHAT . IndianOcean) (?WHERE . MIDGAARD)))
+14:55:49 <CycLBot> ?WHAT = continent of south america, ?WHERE = m i d g a a r d (((?WHAT . ContinentOfSouthAmerica) (?WHERE . MIDGAARD)))
+14:55:51 <CycLBot> ?WHAT = Europe, ?WHERE = m i d g a a r d (((?WHAT . ContinentOfEurope) (?WHERE . MIDGAARD)))
+14:55:51 <CycLBot> ?WHAT = the Caribbean, ?WHERE = m i d g a a r d (((?WHAT . CaribbeanRegion) (?WHERE . MIDGAARD)))
+14:55:52 <CycLBot> ?WHAT = midg_ 001, ?WHERE = m i d g a a r d (((?WHAT . midg_001) (?WHERE . MIDGAARD)))
+14:55:53 <CycLBot> ?WHAT = midg_ 002, ?WHERE = m i d g a a r d (((?WHAT . midg_002) (?WHERE . MIDGAARD)))
+14:55:55 <CycLBot> ?WHAT = dmiles -home, ?WHERE = m i d g a a r d (((?WHAT . dmiles-home) (?WHERE . MIDGAARD)))
+14:55:55 <CycLBot> ?WHAT = Germany, ?WHERE = m i d g a a r d (((?WHAT . Germany) (?WHERE . MIDGAARD)))
+14:55:57 <CycLBot> ?WHAT = North America, ?WHERE = m i d g a a r d (((?WHAT . ContinentOfNorthAmerica) (?WHERE . MIDGAARD)))
+14:55:59 <CycLBot> ?WHAT = Asia, ?WHERE = m i d g a a r d (((?WHAT . ContinentOfAsia) (?WHERE . MIDGAARD)))
+14:56:01 <CycLBot> ?WHAT = the Pacific Ocean, ?WHERE = m i d g a a r d (((?WHAT . PacificOcean) (?WHERE . MIDGAARD)))
+14:56:03 <CycLBot> ?WHAT = the Atlantic Ocean, ?WHERE = m i d g a a r d (((?WHAT . AtlanticOcean) (?WHERE . MIDGAARD)))
+14:56:05 <CycLBot> ?WHAT = the Mediterranean Sea, ?WHERE = m i d g a a r d (((?WHAT . MediterraneanSea) (?WHERE . MIDGAARD)))
+14:56:07 <CycLBot> ?WHAT = Scandinavia, ?WHERE = m i d g a a r d (((?WHAT . Scandinavia) (?WHERE . MIDGAARD)))
+14:56:09 <CycLBot> ?WHAT = the North Pole, ?WHERE = m i d g a a r d (((?WHAT . NorthPole) (?WHERE . MIDGAARD)))
+14:56:11 <CycLBot> ?WHAT = magic wand 1, ?WHERE = midg_ 001 (((?WHAT . magicWand1) (?WHERE . midg_001)))
+14:56:13 <CycLBot> ?WHAT = dmiles -sword, ?WHERE = dmiles -home (((?WHAT . dmiles-sword) (?WHERE . dmiles-home)))
+14:56:15 <CycLBot> ?WHAT = dmiles -torch, ?WHERE = dmiles -home (((?WHAT . dmiles-torch) (?WHERE . dmiles-home)))
+14:57:21 <dmiles> query: (mudExit ?W ?T)
+14:57:22 <CycLBot> ?W = midg_ 001, ?T exit to fn north midg_ 002, ?W = midg_ 002, ?T exit to fn south midg_ 001 ((((?W . midg_001) (?T ExitToFn North midg_002)) ((?W . midg_002) (?T ExitToFn South midg_001))))
+14:58:58 <dmiles> assert (mudExit dmiles-home  (ExitToFn Down midg_001))
+14:58:59 <CycLBot> Using microtheory#$dmilesChatMt for assertions until dmiles types "mt <something>"
+14:59:01 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+14:59:01 <CycLBot> (#$mudExit #$dmiles-home (#$ExitToFn #$Down #$midg_001))
+14:59:03 <CycLBot> was not well formed because:
+14:59:03 <CycLBot> Term #$dmiles-home violates arg-isa #$MudArea
+14:59:04 <CycLBot> applicable to argument 1 of relation #$mudExit
+14:59:04 <CycLBot> in mt #$dmilesChatMt.
+14:59:06 <CycLBot> Term #$Down violates arg-isa #$MudPath
+14:59:08 <CycLBot> applicable to argument 1 of relation #$ExitToFn
+14:59:10 <CycLBot> in mt #$dmilesChatMt.
+14:59:12 <CycLBot> Term #$midg_001 violates arg-isa #$MudArea
+14:59:14 <CycLBot> applicable to argument 2 of relation #$ExitToFn
+14:59:16 <CycLBot> in mt #$dmilesChatMt.")
+14:59:16 <dmiles> mt JamudMt
+14:59:20 <dmiles> assert (mudExit dmiles-home  (ExitToFn Down midg_001))
+14:59:23 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+14:59:24 <CycLBot> (#$mudExit #$dmiles-home (#$ExitToFn #$Down #$midg_001))
+14:59:24 <CycLBot> was not well formed because:
+14:59:26 <CycLBot> Term #$Down violates arg-isa #$MudPath
+14:59:28 <CycLBot> applicable to argument 1 of relation #$ExitToFn
+14:59:30 <CycLBot> in mt #$JamudMt.")
+14:59:48 <dmiles> assert (isa Down MudPath)
+14:59:49 <CycLBot> T
+14:59:51 <dmiles> assert (mudExit dmiles-home  (ExitToFn Down midg_001))
+14:59:52 <CycLBot> T
+15:01:25 <dmiles> assert (mudExit dmiles-home  (!quote (ExitToFn Down midg_001)))
+15:01:27 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+15:01:28 <CycLBot> (#$mudExit #$dmiles-home '(#$ExitToFn #$Down #$midg_001))
+15:01:28 <CycLBot> was not well formed because:
+15:01:29 <CycLBot> Term '(#$ExitToFn #$Down #$midg_001) violates arg-isa #$MudEntrance
+15:01:29 <CycLBot> applicable to argument 2 of relation #$mudExit
+15:01:30 <CycLBot> in mt #$JamudMt.")
+15:05:15 <Seth> Is\was there any CycCorp prescence at www2002 ?
+15:05:51 <stevereed> no but I'll be at AAAI 2002 for the "ontologies for the semantic web" workshop.
+15:13:24 <dmiles> is that near Palo Alto?
+15:13:59 <dmiles> oh its the whole conference n/m
+15:18:21 <stevereed> AAAI 2002 is the National Conference on Artificial Intelligence to be held in Edmonton Canada July 28-Aug 1.
+15:37:21 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:38:01 --- join: dmiles (nephrael@dialup-65.58.159.48.Dial1.Portland1.Level3.net) joined #opencyc
+16:03:38 --- quit: CycLBot (Remote closed the connection)
+16:10:55 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:29:15 <dmiles> query: (isa MIGGAARD MudArea)
+16:29:16 <CycLBot> no answers found
+16:29:23 <dmiles> query: (isa MIGGAARD MudArtifact)
+16:29:24 <CycLBot> no answers found
+16:29:41 <dmiles> query: (nearestIsa MIGGAARD ?W)
+16:29:42 <CycLBot> no answers found
+16:29:47 <dmiles> query: (nearestIsa MIGAARD ?W)
+16:29:48 <CycLBot> no answers found
+16:30:01 <dmiles> query: (nearestIsa MIDGAARD ?W)
+16:30:03 <CycLBot> ?W = mud object instance ((((?W . MudObjectInstance))))
+16:30:27 <dmiles> query: (isa MIDGAARD MudArea)
+16:30:27 <CycLBot> no answers found
+16:30:36 <dmiles> query: (isa MIDGAARD MudArtifact)
+16:30:37 <CycLBot> no answers found
+16:31:39 <dmiles> finally MIDGAARD works as an indepant object
+16:31:55 <dmiles> i been fighting this all day ;P
+16:34:08 <dash> dmiles: hooray
+16:36:46 <dmiles> no i have left over to keep the KB version not killing the Jamud version
+16:36:51 <dmiles> err now i have to
+16:36:59 <dmiles> since Cyc loaded before Jamud
+16:37:38 <dmiles> when Cyc belives something exits (should exists) in Jamud.. Java creates the object
+16:37:52 <dmiles> but some opbjects like players only load when the play logs in
+16:38:15 <dmiles> so if cyc knows about the player while they are logged off.. it creates a proxy
+16:38:28 <dmiles> when the player logs in... it creates and exception
+16:39:10 <dmiles> so i have to figure out when cyc give answer results that they are not locally asserted
+16:46:54 <dmiles> so what i need is a way to query that only uses asserted gafs.. not even forward cahined deductions
+16:54:48 <dmiles> i supposed i need a query that is like (assertedByKE ?Someformula)
+16:58:41 <dmiles> there it is: keAssertedTermSentences
+17:25:45 --- quit: dash ("you cant fight here, this is the war room")
+17:38:58 --- quit: Seth ()
+17:40:29 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+18:01:41 --- quit: CycLBot (Remote closed the connection)
+18:01:53 --- quit: dmiles (Read error: 113 (No route to host))
+18:03:03 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+18:07:20 --- quit: CycLBot (Remote closed the connection)
+18:40:35 --- join: dmiles (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+18:40:38 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+18:41:37 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:41:41 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:42:19 --- join: dmiles (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+19:01:04 --- quit: dmiles- (Read error: 110 (Connection timed out))
+19:04:30 --- quit: grove (Read error: 110 (Connection timed out))
+19:05:41 --- join: grove (~grove@193.69.113.28) joined #opencyc
+20:03:24 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:03:35 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+20:18:38 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:19:13 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+20:21:17 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:24:02 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+20:24:07 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:24:16 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:25:19 --- join: dmiles (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+20:42:44 --- quit: dmiles- (Read error: 110 (Connection timed out))
+21:19:58 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:20:05 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:21:33 --- join: dmiles (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+21:37:39 --- quit: dmiles- (Read error: 110 (Connection timed out))
+21:45:18 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+21:45:25 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+22:03:27 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+22:20:12 --- quit: dmiles- (Connection timed out)
+22:33:26 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+22:51:16 --- quit: dmiles (Read error: 110 (Connection timed out))
+22:53:28 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:02:58 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+23:04:11 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+23:05:22 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+23:05:31 --- join: dm (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+23:10:48 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:11:18 --- join: yottzumm ([7uwePP1eV@12-232-76-192.client.attbi.com) joined #opencyc
+23:14:03 <dm> mt JamudMt
+23:14:18 <dm> query: (isa ?W MudArtifact)
+23:14:20 <CycLBot> ?W = (PronounFn ThirdPerson-NLAttr Singular-NLAttr Feminine-NLAttr ObjectPronoun) (((?W . (PronounFn ThirdPerson-NLAttr Singular-NLAttr Feminine-NLAttr ObjectPronoun))))
+23:14:21 <CycLBot> ?W = (GenericInstanceFn Dog) (((?W . (GenericInstanceFn Dog))))
+23:14:22 <CycLBot> ?W = dmiles -torch (((?W . dmiles-torch)))
+23:14:24 <CycLBot> ?W = dmiles -sword (((?W . dmiles-sword)))
+23:14:25 <CycLBot> ?W = magic wand 1 (((?W . magicWand1)))
+23:14:26 <CycLBot> ?W = Cyc administrator (((?W . CycAdministrator)))
+23:14:27 <CycLBot> ?W = Guest (((?W . Guest)))
+23:14:28 <CycLBot> ?W = m i d g a a r d (((?W . MIDGAARD)))
+23:17:18 <yottzumm> what are all those parentheses?  hugs?  :) :) :)
+23:17:53 <dm> well its a binding set of binding lists
+23:18:06 <dm> noparphrase #opencyc
+23:18:09 <yottzumm> I'll try to guess what it means, I know some Lisp
+23:18:18 <dm> query: (isa ?W MudArtifact)
+23:18:19 <CycLBot> ?W = (PronounFn ThirdPerson-NLAttr Singular-NLAttr Feminine-NLAttr ObjectPronoun) (((?W . (PronounFn ThirdPerson-NLAttr Singular-NLAttr Feminine-NLAttr ObjectPronoun))))
+23:18:21 <CycLBot> ?W = (GenericInstanceFn Dog) (((?W . (GenericInstanceFn Dog))))
+23:18:22 <CycLBot> ?W = dmiles -torch (((?W . dmiles-torch)))
+23:18:23 <CycLBot> ?W = dmiles -sword (((?W . dmiles-sword)))
+23:18:24 <CycLBot> ?W = magic wand 1 (((?W . magicWand1)))
+23:18:25 <CycLBot> ?W = Cyc administrator (((?W . CycAdministrator)))
+23:18:26 <CycLBot> ?W = Guest (((?W . Guest)))
+23:18:26 <dm> oops
+23:18:27 <CycLBot> ?W = m i d g a a r d (((?W . MIDGAARD)))
+23:18:32 <dm> noparaphrase #opencyc
+23:18:35 <dm> query: (isa ?W MudArtifact)
+23:18:43 <CycLBot> ((?W . (PronounFn ThirdPerson-NLAttr Singular-NLAttr Feminine-NLAttr ObjectPronoun)))
+23:18:43 <CycLBot> ((?W . (GenericInstanceFn Dog)))
+23:18:44 <CycLBot> ((?W . dmiles-torch))
+23:18:44 <CycLBot> ((?W . dmiles-sword))
+23:18:45 <CycLBot> ((?W . magicWand1))
+23:18:45 <CycLBot> ((?W . CycAdministrator))
+23:18:46 <CycLBot> ((?W . Guest))
+23:18:48 <CycLBot> ((?W . MIDGAARD))
+23:18:56 <yottzumm> much better :)
+23:18:56 <dm> thats a little nicer
+23:19:14 <dm> its tying to show a paraphrase but can get messier
+23:19:24 <dm> is so things like this look beter..
+23:19:39 <dm> paraphrase: (isa Fido Dog)
+23:19:42 <CycLBot> fido is a dog
+23:20:05 <dm> paraphrase: (implies (isa ?X Dog)(isa ?X Mammal))
+23:20:05 <CycLBot> every dog is a mammal
+23:20:36 <yottzumm> okay, now it's beginning to look like SQL
+23:20:47 <dm> well think of it as a SQL++
+23:21:03 <yottzumm> cool stuff!
+23:21:16 --- quit: dmiles (Success)
+23:21:57 <yottzumm> paraphrase (implies (isa ?X Dog)(is ?Y Cat))
+23:21:57 <CycLBot> is everything cat
+23:22:19 <dm>  (implies (isa ?X Dog)(isa ?Y Cat))
+23:22:30 <dm>  paraphrase (implies (isa ?X Dog)(isa ?Y Cat))
+23:22:31 <CycLBot> everything is cat
+23:22:54 <dm> because (isa ?X Dog) is always true
+23:22:59 <yottzumm> right
+23:23:43 <yottzumm> (implies (isa Fido Dog)(isa Tyson Cat))
+23:23:49 <yottzumm> paraphrase (implies (isa Fido Dog)(isa Tyson Cat))
+23:23:51 <CycLBot> if fido are a dog, then tyson are cat
+23:24:37 <yottzumm> needs work on verb choice
+23:24:53 <dm> well it doent know about Fido or Tyson
+23:25:10 <dm> they could be like Fish
+23:25:55 <dm> but is could or shoild check to see if collections are first order
+23:26:14 <yottzumm> I'm going to look at the source code some more
+23:27:17 <dm> thaT bot is checked into cvs .. but paraphrasing happens in lisp
+23:27:52 <dm> uses Api call gen-phrase
+23:28:44 <dm>  Quit (Success) ? odd
+23:29:03 <dm> my connection being is being highjacked
+23:29:17 <yottzumm> Is that what that means?
+23:29:39 <dm> not sure but i did not type /quite Success
+23:29:46 --- quit: yottzumm ("Client Exiting")
+23:30:43 --- join: yottzumm1 ([b4p1+zOkc@12-232-76-192.client.attbi.com) joined #opencyc
+23:31:00 <yottzumm1> did mine say (Success)?
+23:31:08 --- nick: dm -> dmiles--
+23:31:26 <dmiles--> it sent  /quit "Client Exiting"
+23:31:30 <dmiles--> to the server
+23:31:48 <dmiles--> your client has that as defualt
+23:31:56 <dmiles--> mine is set up with no quit message
+23:32:18 <dmiles--> so maybe the server masked my timeout error
+23:32:33 <dmiles--> becasue that clinet was never really connected
+23:32:41 <dmiles--> at least not controlled by me
+23:33:14 --- join: dash_ (dash@d125.narrowgate.net) joined #opencyc
+23:34:11 <dmiles--> anyways.. the java stuff is going to be making more sense with the next CVS commit by CycCorp
+23:34:40 <dmiles--> they are adding in an interface class of CyclTerm
+23:35:13 <yottzumm1> Do you have a pointer to the Cycl javadoc?
+23:35:53 <dmiles--> http://www.cyc.com/doc/opencyc_api/java_api/
+23:37:54 <dmiles--> org.opencyc.cycobject <- is where things are built from
+23:38:08 <dmiles--> CycAccess does the buisiness
+23:38:52 <dmiles--> (in org.opencyc.api.* )
+23:39:59 <yottzumm1> well, I've got to head for bed.  nice talking to you
+23:41:29 --- quit: yottzumm1 ("Client Exiting")
+23:42:11 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+23:59:59 --- log: ended opencyc/02.05.09

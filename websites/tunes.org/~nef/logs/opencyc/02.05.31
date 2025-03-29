@@ -1,0 +1,226 @@
+00:00:00 --- log: started opencyc/02.05.31
+01:16:36 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+01:19:16 --- join: grove (~grove@193.69.113.28) joined #opencyc
+09:13:07 --- join: Yepster (~yhavinga@cust-217-117-225-39.utelisys.net) joined #opencyc
+09:24:14 <Yepster> anybody there?
+09:32:16 * jlatour nods.
+09:39:30 <Yepster> nod
+09:40:00 <Yepster> Do you know oracle rdbms?
+09:41:54 * jlatour shakes.
+09:42:00 <jlatour> ...his head
+09:42:17 <Yepster> nederlands of niet?
+09:44:11 <reed_> I do not know Oracle but have worked for years with IBM DB2,
+09:44:18 <reed_> and recently with MySQL.
+09:44:38 <reed_> also ODBC and JDBC interfaces.
+09:44:49 <Yepster> Uhm I have a question
+09:45:09 <reed_> ?
+09:45:30 <Yepster> I am currently writing some java stored procedures that interface between (PL)SQL and CycAccess.java
+09:45:58 <Yepster> I think it's very cool, but it seems to me that Oracle might be to big a step for most people.
+09:46:39 <reed_> We call that SKSI (Sturctured Knowledge Source Integration),
+09:46:57 <reed_> and will have code and KB support for any JDBC compliant RDB.
+09:47:14 <reed_> working on it now with 1 1/2 people.
+09:47:27 <reed_> Demo this summer in OpenCyc.
+09:47:51 <reed_> The definitions are declared in the KB - all open source KB content.
+09:48:00 <Yepster> Does that mean that e.g. select cyc.assertgaf(something) from table where etc. is possible?
+09:48:11 <reed_> Indirectly.
+09:48:21 <reed_> You define predicates,
+09:48:35 <reed_> whose bindings are obtained by selects.
+09:49:07 <reed_> the arguments of the gaf,
+09:49:14 <Yepster> Hmm.. let me thing on that for a while
+09:49:19 <reed_> are columns in a table (or view)
+09:49:43 <reed_> Does not replace your hand-coded Oracle connection,
+09:50:00 <reed_> just provides a more general integration framework.
+09:50:16 <reed_> The objective is to make the db content appear to cyc as
+09:50:23 <Yepster> Uhm how to ask this..
+09:50:26 <reed_> though it were in the kb.
+09:50:42 <Yepster> Would that enable for example checking a cyc query in a db trigger?
+09:50:53 <reed_> no.
+09:51:02 <reed_> Cyc's sksi,
+09:51:12 <reed_> is entirely driven by the kb.
+09:51:37 <reed_> db triggers are part of the (your) application.
+09:52:09 <Yepster> Ok, then I haven't been working for nothing ;)
+09:52:13 <reed_> but the triggered query,
+09:52:27 <reed_> could subsequently use sksi.
+09:52:47 <reed_> so you might end up with less hand written code.
+09:53:06 <reed_> ok?
+09:53:40 <Yepster> Well I think I have to see a bit sksi to fully understand it.
+09:53:46 <Yepster> Another question:
+09:53:51 <Yepster> if I may
+09:53:55 <reed_> ?
+09:54:17 <Yepster> In CycAccess.java there is a reference to RemoteCycConnection,
+09:54:30 <Yepster> I uncommented it so I could load the classes in Oracle.
+09:55:06 <Yepster> But since java has no #ifdef, that uncomment can never reach the 'real' code.
+09:56:01 <Yepster> I'd still like to make some sort of 'howto integrate cyc and oracle' doc with a few examples,
+09:56:17 <Yepster> but that becomes difficult after updates of CycAccess.
+09:57:12 <Yepster> There is a workaround for the ifdef,
+09:57:18 <reed_> RemoteCycConnection is the proxy object used for api calls across an agent community.
+09:57:48 <Yepster> but it depends on the compiler if it works. (define static boolean var and use normal if construct)
+09:58:03 <reed_> I did interface Cyc to a government Oracle DB for a workshop last December without problem.
+09:58:20 <Yepster> did u use loadjava and java stored procedures?
+09:58:27 <reed_> no.
+09:58:42 <reed_> Just selects of data to be parsed by Cyc's NL parsers.
+09:58:57 <reed_> Used JDBC.
+09:59:36 <Yepster> The cool thing of putting it 'inside' the dbms, is that cyc's expressive power is put inside the transaction mechanism of oracle.
+10:00:20 <Yepster> Now at every place in the db where I can do SQL, be it from an external app, or an internal trigger or procedure,
+10:00:27 <Yepster> I can use CYC stuff.
+10:01:42 <Yepster> I think I have to make a doc or something.
+10:03:00 <Yepster> To get back to the question, what is your standpoint on integrating changes made to CycAccess?
+10:09:13 <Yepster> poke reed_
+10:17:17 <Yepster> Well anyway, Cyc's cool but so is Oracle :-) I'm off for the weekend, ttyl8r!
+10:17:25 --- part: Yepster left #opencyc
+15:46:37 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+15:47:05 <dmiles> prolog:  noun_phrase('?Var','?SomeRelation',Meaning,[a,era],[]),writeq(Meaning)
+15:47:06 <CycLBot> '#$thereExists'('?Var', '#$and'('#$isa'('?Var', '#$TimeInterval'), '?SomeRelation'))
+15:47:37 <dmiles> have it now that SWI-prolog persists CycNL expresions
+15:47:47 <jlatour> Hrm.
+15:48:05 <dmiles> it implements each of the NL predicates
+15:48:17 <jlatour> Fun
+15:48:24 <dmiles> prolog:  noun_phrase('?Var','?SomeRelation',Meaning,[all,era],[]),writeq(Meaning)
+15:48:25 <CycLBot> '#$forAll'('?Var', '#$implies'('#$isa'('?Var', '#$TimeInterval'), '?SomeRelation'))
+15:49:09 <dmiles> prolog:  noun_phrase('?Var','?SomeRelation',Meaning,[a,task, group],[]),writeq(Meaning)
+15:49:10 <CycLBot> '#$thereExists'('?Var', '#$and'('#$isa'('?Var', '#$ActivityTypeFocusGroup'), '?SomeRelation'))
+15:50:00 <dmiles> it reverses gen* Predicates to make templates
+15:50:35 <dmiles> and genFormats are used to create idiomatic text recognition
+15:51:13 <jlatour> What'd you write CycLBot in?
+15:51:16 <dmiles> Java
+15:51:45 <dmiles> the NLParser is a daemon i wrote that java talks to in the same way as cyc
+15:52:15 <dmiles> it has both high level task based calls as well as lowlovel execture this prolog command
+15:53:20 <dmiles> i have pretty much completed noun phrase recongnition
+15:53:25 <jlatour> That was to be expected. The Java part.
+15:53:49 <dmiles> now i have to leverage the verb forms better
+15:55:31 <dmiles> prolog: sentence(Meaning, [an,adult,person,that,paints,likes,monet],[]),writeq(Meaning)
+15:55:31 <CycLBot> '#$thereExists'(_G98, '#$and'('#$and'('#$isa'(_G98, '#$HumanAdult'), '#$isa'(_G98, paint)), like(_G98, monet)))
+15:56:47 <dmiles> about 3 more days work
+15:56:55 <dmiles> hoepfully thats all :)
+15:57:33 <dmiles> i am going to valitdate parses againt Cyc KB.. ussing WFF checks and (#$consistant ?Form)
+15:58:10 <dmiles> so for every sentence there can be many possible parses.. hopefully Cyc can tell me which ones to use
+16:00:19 <dmiles> the initall enumerated cahce of nouns looks likeL: http://12.225.207.235/offt/sourceforge/logicmoo/src/foo
+16:00:51 <jlatour> Sorry, was away for a moment
+16:01:07 <jlatour> As in, momentarily drifted into a light sleep. I should go to bed.
+16:02:04 <dmiles> prolog: predicate_property(posm_cached(_,_,_,_,_),number_of_clauses(Y)),writeq(Y)
+16:02:05 <CycLBot> 16455
+16:02:29 <dmiles> it recognises 16455 noun phases litterals
+16:02:43 <dmiles> (at the moment) but that is expected to grow
+16:02:53 * jlatour nods.
+16:04:24 <dmiles> i needed to write this so NPCs could get instuctions in the Mud
+16:04:33 * jlatour nods.
+16:05:23 <dmiles> but i think it will be usefull in OpenCyc as a prioxy until an english to cycl converter is done
+16:05:49 <jlatour> Any idea when that's planned?
+16:06:40 <dmiles> i am guessing that the demands on it are set pretty high
+16:06:48 <dmiles> well expectations
+16:06:55 <jlatour> Probably
+16:07:13 <dmiles> it seems like mst people came over to cyc specifically for this purpose
+16:07:53 <dmiles> so i knew it's very important to cyccorp .. but when.. hrrmm.. guessing 0.8 ?
+16:08:09 <dmiles> when is 0.7 and 0.8 ?
+16:08:41 <jlatour> Wouldn't know. They're all very busy though :)
+16:08:41 <dmiles> i was reading up and seeing that Sql interactions can happen over the NL features
+16:09:15 <dmiles> thats a good idea
+16:12:39 <jlatour> I should go to bed. Goodnight.
+16:13:15 <dmiles> goodnight
+16:14:03 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+19:09:36 --- quit: CycLBot (Remote closed the connection)
+19:18:37 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+19:18:58 <dmiles> made some breakthroush with the english to Cyc proccessor
+19:19:22 <dmiles> e2c: an adult person likes the USA
+19:19:23 <CycLBot> '#$thereExists'(_G103, '#$and'('#$isa'(_G103, '#$HumanAdult'), '#$likes-Generic'(_G103, '#$UnitedStatesOfAmerica')))
+19:19:53 <dmiles> e2c: Russia
+19:20:10 <dmiles> e2c: the Russia
+19:20:18 <dmiles> hrrm will debug a couple things
+19:20:29 <dmiles> e2c: an adult person kills monet
+19:20:30 <CycLBot> '#$thereExists'(_G100, '#$and'('#$isa'(_G100, '#$HumanAdult'), '#$and'('#$isa'('?ACTION', '#$Killing-Biological'), '#$inputsDestroyed'('?ACTION', monet), '#$doneBy'('?ACTION', _G100))))
+19:20:50 <dmiles> e2c: an adult person smells food
+19:21:27 <dmiles> e2c: an adult person smells the food
+19:21:28 <CycLBot> '#$thereExists'(_G103, '#$and'('#$isa'(_G103, '#$HumanAdult'), '#$thereExists'(_G340, '#$and'('#$isa'(_G340, '#$FoodAndDrink'), '#$smells'(_G103, _G340)))))
+19:22:42 <dmiles> e2c: the woman smells the food
+19:22:43 <CycLBot> '#$thereExists'(_G100, '#$and'('#$isa'(_G100, '#$AdultFemalePerson'), '#$thereExists'(_G328, '#$and'('#$isa'(_G328, '#$FoodAndDrink'), '#$smells'(_G100, _G328)))))
+19:23:05 <dmiles> e2c: the woman kills the food
+19:23:05 <CycLBot> '#$thereExists'(_G100, '#$and'('#$isa'(_G100, '#$AdultFemalePerson'), '#$thereExists'(_G1021, '#$and'('#$isa'(_G1021, '#$FoodAndDrink'), '#$and'('#$isa'('?ACTION', '#$Killing-Biological'), '#$inputsDestroyed'('?ACTION', _G1021), '#$doneBy'('?ACTION', _G100))))))
+21:57:26 --- join: yottzumm ([UR1ML3udC@12-232-76-192.client.attbi.com) joined #opencyc
+22:09:30 <yottzumm> any rumors about when a windows binary will be made available?
+22:26:51 <dmiles> not known by me
+22:29:50 <yottzumm> dmiles: do you care if I float your resume around here?
+22:30:05 <dmiles> sure .. sounds good..
+22:30:13 <dmiles> btw look at this
+22:30:19 <dmiles> its been a couple days creating..
+22:30:41 <dmiles> e2c: a happy adult person likes the woman
+22:30:42 <CycLBot> '#$thereExists'(_G106, '#$and'('#$and'('#$isa'(_G106, '#$HumanAdult'), '#$hasAttributes'(_G106, '#$Happiness')), '#$thereExists'(_G352, '#$and'('#$isa'(_G352, '#$AdultFemalePerson'), '#$likes-Generic'(_G106, _G352)))))
+22:31:20 <yottzumm> wow
+22:31:22 <dmiles> i am working on a NL Parser that works with Cyc
+22:31:41 <dmiles> it increases as the cyc kb does
+22:32:10 <dmiles> i am not validating parses yet against cyc.. but it will enumerate possiblities
+22:32:23 <dmiles> then each will go thru wff checks
+22:33:17 <dmiles> right now the NL thing is a socket server written in prolog
+22:33:40 <dmiles> but it will be simple to prot to SubL when it becomes available
+22:33:49 <damski> is there going to be some NL parser api examples with beta 1.0 ?
+22:34:58 <dmiles> i am pretty sure there will be
+22:35:15 <dmiles> i am not the knower of release cycle
+22:36:05 <damski> why are u working on an independant parser or are u not using the java NL api ?
+22:36:17 <dmiles> this is just something i am working on for an intermediate time
+22:36:27 <damski> cant wait eh ? : )
+22:36:51 <dmiles> yeah :) and the cyc NL system is pretty much horncluase grammer against whats already in KB
+22:37:14 <dmiles> like rule driven BNFs
+22:37:41 <damski> wot about conencting to word net - looks as if the api is separate to the NL api...?
+22:37:54 <dmiles> but it takes cycs generaized knowledge to validate and really do NL
+22:38:05 <dmiles> like in the case of syntactical deletions
+22:38:42 <dmiles> wordnet imports into Cyc very well
+22:39:05 <damski> yeah could be interesting 
+22:39:29 <damski> looks more accessible than say the grok project.....
+22:39:30 <dmiles> he prolog stuff currently queries into CycAPI and turns the things into relations of prolog predicates
+22:40:14 <dmiles> then a simple DCG for creating propositional logic uses the cyc predicates
+22:40:49 <damski> can u give a numerical weighting to those relations ?
+22:41:20 <dmiles> kidof.. i could create an odering wrapping
+22:41:47 <dmiles> that is a predicate that looks at a number to decide what order to return tries
+22:42:23 <dmiles> so the BNF templates can be tried in a specific order
+22:42:42 <damski> wot about updating the KB in real time ?
+22:42:50 <dmiles> that could implement weitghings
+22:43:19 <dmiles> currently .. i have the 3 steps.. take in english, validate cycl, assert cycl
+22:43:34 <dmiles> (or query)
+22:44:13 <dmiles> so i hope to cunstruct a test suite that puts in english forms.. then does a query from english
+22:45:14 <dmiles> then when english-to-cycl makes it into API i can just replace how i do it
+22:45:40 <damski> so beta 1 could be ages u reckon ?
+22:46:05 <dmiles> well if we are .6 then .7 is soon and .8 maybe 2 months later?
+22:46:27 <dmiles> so i am reallyy guessing.. and cannot speack with knoledge
+22:46:44 <dmiles> so hrrm maybe 3-4 months?
+22:47:00 <dmiles> before one can really say 1.0 could be ready
+22:47:16 <damski> yeah that would be good - i need a few good api examples to get going.......
+22:47:18 <dmiles> i really am just shooting from hip.. 
+22:47:57 <yottzumm> I'm working on how I want to introduce you
+22:51:20 <damski> e2c:  I'm working on how I want to introduce you
+22:51:33 <damski> doesnt work for us ? : )
+22:52:09 <dmiles> it doesnt return anything it doesnt parse in under 1 second
+22:53:19 <damski> similiar settings to this : http://www.link.cs.cmu.edu/link/
+22:54:10 <damski> e2c: I'm going to watch the football
+22:54:23 <damski> hmm
+22:55:17 --- join: dash (washort@d154.narrowgate.net) joined #opencyc
+22:55:21 <dmiles> e2c: I going to watch the football
+22:55:29 <dmiles> e2c: I watch the football
+22:55:38 <dmiles> e2c: I see the football
+22:55:50 <dmiles> e2c: the man sees the football
+22:55:58 <dmiles> e2c: the man sees the human
+22:55:58 <CycLBot> '#$thereExists'(_G100, '#$and'('#$isa'(_G100, '#$MalePerson'), '#$and'('#$isa'('?ACTION', '#$VisualPerception'), '#$performedBy'('?ACTION', _G100), '#$perceivedThings'('?ACTION', '#$HomoGenus'))))
+22:56:19 <damski> not bad though!
+22:57:21 <dmiles> i can load the extra wordnet things and thought treasure.. i had forgoten to before that last Sync
+23:00:13 <damski> e2c: the man walks under the bridge
+23:01:05 <dmiles> ah propistional content
+23:01:12 <dmiles> err prepositional
+23:01:24 <dmiles> here is the current source: http://12.225.207.235/offt/sourceforge/logicmoo/src/e2c2.pl
+23:44:26 <yottzumm> dmiles: have you looked into the Proxy class yet?
+23:47:13 <dmiles> the CycProxy things i beleive are relient on a grid of cyc servers
+23:47:42 <dmiles> which i cannot tell if they are mannaged from java.. or somethig cyc does itself
+23:48:05 <dmiles> for example a Transcript server keeps everyone on the same page..
+23:48:29 <dmiles> but the CycProxy distributiuon system relies on Java being the frontline for everyone
+23:48:30 <yottzumm> java.lang.reflect.Proxy is what I am refering to
+23:49:22 <dmiles> ah i know there are times that i should have used it and havent ;)
+23:50:05 <dmiles> from my COM background.. the class interfaces are subliminally cached in my mind
+23:50:20 <yottzumm> I think aspectj is probably a better solution than Proxy though
+23:50:30 <dmiles> meaning that if a proxy gains a new method.. will people know its there?
+23:50:51 <dmiles> unless they reload its class
+23:52:46 <dmiles> oh i see.. so invoke() is _always_ called 
+23:53:53 <yottzumm> I don't really understand the Proxy class, but my friend at sun thinks it's neat
+23:53:55 <dmiles> i could see Proxy as usfull there was time i was making a Java<->Prolog two way interface
+23:54:38 <dmiles> and i ended up giving prolog the abiluty to hold refences to instances.. someone sujjected i could have used Proxy arround each of them
+23:54:53 <dmiles> instead of making a wrapper holder for each
+23:55:34 <dmiles> so every method a class once had now worked the same but when used from prolog converted the datatypes
+23:55:54 <dmiles> so something the interpretor could look at
+23:58:02 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/JavaRt.java?rev=1.5&content-type=text/vnd.viewcvs-markup <- the program that should have used 'Proxy'
+23:59:59 --- log: ended opencyc/02.05.31

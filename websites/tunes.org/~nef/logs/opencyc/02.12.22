@@ -1,0 +1,414 @@
+00:00:00 --- log: started opencyc/02.12.22
+00:04:57 --- nick: mdupont-sleep -> mdupont
+00:57:50 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+00:57:58 <mdupont> morning KinoC
+00:58:15 <mdupont> or should i say, evening?
+01:08:54 <KinoC>  morning
+01:14:12 <mdupont> hows things? i have seen you around here alot
+01:23:04 <KinoC> ok, sorry in slow time, past 3am here doing other stuff
+01:32:43 <mdupont> ok, another time
+03:31:37 --- quit: KinoC (Read error: 60 (Operation timed out))
+03:48:01 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+03:59:03 --- join: dmiles (alife@12-211-42-52.client.attbi.com) joined #opencyc
+03:59:37 <mdupont> your up late!
+03:59:40 <mdupont> dmiles: 
+03:59:48 <dmiles> up early 4 am for me
+03:59:53 <mdupont> :)
+04:00:30 <dmiles> trying to decide between .. working on nl understanding code in SubL
+04:00:40 <mdupont> nl?
+04:00:46 <dmiles> or in Java working on javashell
+04:00:47 <mdupont> natural lang
+04:00:50 <dmiles> yeah
+04:01:08 <mdupont> hmm
+04:01:14 <mdupont> nl is cool
+04:01:18 <dmiles> or working on CycMoo .. but moving more into SubL
+04:01:19 <mdupont> java is not as cool
+04:01:28 <mdupont> go for the cool factor
+04:02:03 <dmiles> well i need to find how to go from text word to "N00234234" in SubL
+04:02:50 <dmiles> i found after i copied the old wordnet1.6 data dirrectory into new 0.7 i could load it with HANDLE-LOAD-WN
+04:02:55 <mdupont> sorry, i dont know that
+04:03:12 <mdupont> you are using wordnet in cyc
+04:03:15 <mdupont> programming in subl
+04:03:21 <dmiles> then from there i could nowe type in text tinto the wordnet page and it would foind them
+04:03:30 <mdupont> and running that in java?
+04:03:41 <dmiles> i can live with or without java
+04:03:58 <mdupont> i just dont know enough, what is this running on?
+04:03:59 <dmiles> well i made a neat NL understander ussing Cyc's data in prolog
+04:04:03 <mdupont> ok
+04:04:08 <mdupont> that i understand
+04:04:12 <mdupont> that is cool
+04:04:15 <dmiles> ok .. i got too many soplutions going ;P
+04:04:35 <dmiles> Java is used for interfacing to Cyc only when you need java there
+04:04:49 <dmiles> in the NL case i dont
+04:04:58 <mdupont> and you can read the wordnet files into prolog and crossref that to cyc?
+04:05:13 <dmiles> yes and i can move cyc assertions into prolog as well
+04:05:17 <mdupont> cool
+04:05:23 <dmiles> also call Cyc via the Socket connection from prolog
+04:05:34 <mdupont> so, if i gave you 10000 identifiers from the gcc,
+04:05:47 <mdupont> could you find out the meanings using wordnet?
+04:06:04 <dmiles> is there that many op-tokens?
+04:06:05 <mdupont> i mean, of course we would have to parse the hungarian notation
+04:06:20 <mdupont> i mean just the names of the identifiers, all of them
+04:06:22 <dmiles> oh you mean things programs made up on the fly
+04:06:26 <mdupont> variables, functions
+04:06:41 <dmiles> i see .. might be neat
+04:06:41 <mdupont> the names that are used by the gcc hackers working on the gcc
+04:06:55 <dmiles> oh so they are not program specific
+04:07:10 <mdupont> well the names of the internal gcc functions are specific
+04:07:11 <dmiles> well except gcc
+04:07:25 <mdupont> that is the meta language, it talks about other programs
+04:07:40 <dmiles> well i supose wordnet would help diseminate less then 1/2 
+04:07:45 <mdupont> so the other programs, of course, we can extract those as well, that is just as easy
+04:08:07 <dmiles> you'd need tp de hungarian them
+04:08:39 <mdupont> sure, but if you have a name like "BUILT_IN_DWARF_FP_REGNUM"
+04:08:46 <mdupont> FP would be a function pointer
+04:08:51 <mdupont> REG would be a register
+04:08:54 <mdupont> NUM a number
+04:09:03 <mdupont> DWARF is a short dude
+04:09:05 <mdupont> :)
+04:09:18 <dmiles> even normal english needs some of that.. like fishing, flatten, golden
+04:09:55 <mdupont> golden?
+04:09:58 <mdupont> flatten?
+04:10:01 <mdupont> fishing?
+04:10:05 * mdupont is confused
+04:10:10 <dmiles> flatten = make flat
+04:10:36 <dmiles> golden = made of gold
+04:10:39 <mdupont> ok, fishing to go fishing
+04:10:58 <mdupont> and wordnet has problems with that
+04:11:00 <mdupont> ?
+04:11:23 <dmiles> not a problem.. just had to be done correctly
+04:11:32 <dmiles> err has to
+04:11:40 <dmiles> well m0ost of the time it's pre done
+04:11:50 <mdupont> how about :tree_vec_elt_check_failed
+04:12:01 <mdupont> tree vector element check failed
+04:12:03 <dmiles> but there are alway of cases like adding -ly
+04:12:22 <mdupont> well it would be really cool to be able to do nl on the gcc
+04:12:38 <mdupont> and process the names in a funky fashion
+04:12:49 <dmiles> :0 it would be neat
+04:12:53 <mdupont> the interesting thing is that we can relate the names to each other
+04:13:08 <dmiles> the space i have though.. is dedicated first to english speakers though
+04:13:21 <mdupont> like a function that is call tree_dump that deals with a tree_node
+04:13:41 <dmiles> yeah i think automating the creating of a UML would be good
+04:13:59 <mdupont> so we can show that this function uses this type
+04:14:08 <mdupont> i have alot of this information now,
+04:14:18 <dmiles> oh this gets me started on my beef with linux
+04:14:32 <mdupont> http://introspector.sourceforge.net/2002/12/16/tmp_rdf-core.h_.tu__global__Mon_Dec_16_23_38_43_2002_34-dump.ntriple
+04:14:35 <dmiles> the fact that call params are not embedded in .so
+04:14:48 <mdupont> that is a rdf file of the redland core
+04:15:08 <mdupont> extracted with the introspector
+04:15:14 <mdupont> from the redland source code
+04:15:17 <dmiles> most .so i have on my machine (over a gig) are worthless to me in that i cant dlopen() them and know how to use them
+04:15:41 <dmiles> they only tell me their names.. not their calling params
+04:15:42 <mdupont> do you have the development header
+04:15:45 <mdupont> ?
+04:16:05 <dmiles> i wish .. i guess most of the time one can google
+04:16:09 <mdupont> i can tell you any parameters you need, dude
+04:16:23 <mdupont> what about nm?
+04:16:25 <dmiles> ok one sec.. i'll give you one
+04:16:34 <dmiles> nm tells me the names i can call
+04:16:42 <dmiles> but not anything about the data that follows
+04:16:54 <mdupont> and if it is c++, the mangled name tells you alot more
+04:16:55 <dmiles> or what the return types are
+04:17:13 <mdupont> if it is c, then you just need to look at the header
+04:17:19 <mdupont> or the debug tables
+04:17:24 <dmiles> it would take like like then 256 byetes to pkzip the .h in there
+04:17:37 <mdupont> ok, well work with me dude
+04:17:51 <dmiles> :)
+04:18:04 <mdupont> we can add in the introspector meta-data as a separate package you can install along side your module
+04:18:15 <mdupont> to get at the full meta-data of the program
+04:18:35 <mdupont> like under debian : apt-get install-meta package 
+04:18:38 <dmiles> god that would be nice
+04:18:50 <mdupont> i have the dumper working right now
+04:19:03 <mdupont> it uses redland and can dump c, c++, and even java into rdf
+04:19:20 <mdupont> you can gzip that up and pack it up
+04:19:29 <mdupont> but you still need tools to process it, and it is fat
+04:19:37 <mdupont> and contains lots of infos you dont need
+04:19:42 <mdupont> but, that is just detail
+04:19:59 <dmiles> definately trhe more data the better
+04:20:00 <mdupont> i figure that we can have a p2p system that serves all the meta-data you need
+04:20:19 <mdupont> you just put a gnutella like request in, and it streams you the rdf file
+04:21:04 <dmiles> that is neat.. should create an upload site for source
+04:21:21 <dmiles> then alow it to metadata it
+04:21:26 <dmiles> then sit and wiki it
+04:21:42 <dmiles> yeah what you are saying
+04:22:05 <dmiles> would be nice
+04:22:22 <mdupont> ok, well we are not that far away
+04:22:28 <mdupont> can you process ntriples?
+04:22:32 <mdupont> or rdf?
+04:22:42 <mdupont> i am still working on a daml model of the data
+04:22:46 <dmiles> i just put in a grant request or command control system for automoated program flow design
+04:23:15 <dmiles> sorta releates 
+04:23:34 <dmiles> but i need to get over the understanding of user fierst ;P
+04:23:36 <mdupont> that would be a client of such data
+04:23:47 <dmiles> then i gotta understand programs in such terms
+04:24:14 <mdupont> well, i have all the expressions that make up a program
+04:24:24 <mdupont> call_expr, assing_expr etc
+04:24:37 <mdupont> conditionals
+04:24:42 <dmiles> yeah interesting.. and anything that gcc's translates to that?
+04:24:42 <mdupont> each is its own node type
+04:25:02 <mdupont> well i have not tested fortran,ada or pascal
+04:25:13 <mdupont> but we have started to test c++, c, java
+04:25:25 <mdupont> there are some things that are not dumped 100% 
+04:25:38 <dmiles> could a programming language come out of just understanding that litteral compinier code?
+04:25:47 <mdupont> as i said we are testing, need more testrs
+04:26:12 <mdupont> a programming language? yes, the rdf is a form of an abstract programming language itself
+04:26:23 <mdupont> 1 is a id
+04:26:31 <mdupont> 1 has-string "x"
+04:26:34 <dmiles> so what would be easier .. ASM or the GCC-ASM ?
+04:26:53 <mdupont> this is not asm dude, this is the input into the code generator
+04:26:58 <mdupont> it is very close to the user input
+04:27:08 <mdupont> like, you can generate code that is readable out of it
+04:27:22 <dmiles> ok i was checking.. i was thinking of like how big a open-file-pointer might be
+04:27:24 <mdupont> the gcc works like 
+04:27:43 <mdupont> LANGFRONTEND --> TREES --> RTL --> ASM
+04:27:48 <mdupont> i am working on the trees
+04:27:57 <mdupont> rtl is the register transfer lang
+04:28:08 <mdupont> that is used to generate the asm
+04:28:10 <mdupont> for a machine
+04:28:16 <dmiles> ok .. right.. i was thinking there was some RTL that was unavoiable
+04:28:28 <dmiles> if so, still ok
+04:28:38 <mdupont> so we have all the names of the variables, all the functions, all the expressions as they were captured by the compiler
+04:28:52 <mdupont> the rtl is created just after i do the dumping
+04:29:22 <dmiles> neat .. so RDF yes is god for the Tree
+04:29:23 <mdupont> the compile builds the asts in memory, then we dump, then it does optimisations on the ast, then it generates rtl
+04:29:26 <dmiles> err good
+04:29:32 <mdupont> yes it it very good
+04:29:41 <mdupont> each node is a object, local to the file
+04:30:02 <mdupont> each predicate is a pointer betweens nodes
+04:30:16 <dmiles> so could one do a VM that runs the tree representation?
+04:30:17 <mdupont> <#id-1247> <http://purl.oclc.org/NET/introspector/2002/11/24/gcc/node_fields#lngt> "19" .
+04:30:18 <mdupont> <#id-1247> <http://purl.oclc.org/NET/introspector/2002/11/24/gcc/node_fields#strg> "__builtin_ptrdiff_t" .
+04:30:18 <mdupont> <#id-1247> <http://purl.oclc.org/NET/introspector/2002/11/24/gcc/node_fields#tree-code> <http://purl.oclc.org/NET/introspector/2002/11/24/gcc/node_types#identifier_node> .
+04:30:59 <mdupont> this is an identifier node, number 1247 , __builtin_ptrdiff_t
+04:31:12 <mdupont> <#id-1246> <http://purl.oclc.org/NET/introspector/2002/11/24/gcc/node_fields#name> <#id-1247> .
+04:31:28 <mdupont> it is the name of 1246, an integer type
+04:31:38 <dmiles> nice the _builtin_ptrdiff_t implimentation code is in the tree as well?
+04:32:00 <mdupont> sure, all the built-in types are there
+04:32:01 <dmiles> oh well it is in some tree if not from that file :0
+04:32:14 <mdupont> down to the int and the char
+04:32:26 <dmiles> neat
+04:32:27 <mdupont> sure, it is all there.
+04:32:31 <mdupont> it is fun to work with
+04:32:42 <mdupont> and i think that prolog would be great to use on it,
+04:32:50 <dmiles> i definatly agree
+04:32:54 <mdupont> if we can get the data in, and make some interactive queries
+04:33:12 <dmiles> especialy transformations.. and even execution
+04:33:20 <mdupont> sure, you can execute it
+04:33:39 <mdupont> that would be soooo coool
+04:33:47 <dmiles> optimisations would go furthur then gcc folks dreamed ;P
+04:33:51 <mdupont> :9
+04:33:54 <mdupont> :=)
+04:34:10 <mdupont> we could even eliminate entire functions via inlining
+04:34:23 <mdupont> most people try and layer and layer and layer
+04:34:38 <mdupont> but these layers could be disolved
+04:35:21 <mdupont> my dream is to make a correllation between the gcc mailling list archive and the source code
+04:35:22 <dmiles> yeah.. i am sure it hasnt been done becasue teaching unifuication concepts to the mid level programmers who already mistrust logical languages is hard
+04:35:45 <mdupont> well, mecury has a gcc backend
+04:35:53 <mdupont> mercury
+04:36:15 <mdupont> plus, we can get all the information from make, bash, m4 etc
+04:36:19 <dmiles> yeah.. been playing with mercury.. i have a background ask of writting a edinbourgh prolog in it
+04:36:20 <mdupont> not just the gcc
+04:36:32 <dmiles> err bg task
+04:36:43 <mdupont> well, step by step.
+04:36:57 <mdupont> perl already has all the dumping, just needs to be hooked up
+04:37:00 <mdupont> bash as well,
+04:37:04 <mdupont> m4 is very simple
+04:37:14 <mdupont> make cant be that hard
+04:37:31 <mdupont> basically it is just finding the right diagnostic output to hack
+04:37:42 <mdupont> replacing the printfs with calls to redland
+04:37:51 <mdupont> the gcc is about 200 lines of code
+04:37:58 <mdupont> to link in redland
+04:38:18 <dmiles> yup.. i can see the process
+04:38:23 <mdupont> of course, you need to have a place to hack into
+04:38:44 <mdupont> so with all the information about the project
+04:38:57 <mdupont> includeing the debian/rpm package information
+04:39:03 <dmiles> well you are talking about nearly a rewrite of gcc
+04:39:18 <mdupont> then you can make some really interesting conclusions about existing software
+04:39:32 <mdupont> wait, first i just want to make some deductive tools
+04:39:40 <mdupont> that can deal with this data
+04:39:48 <mdupont> what uses this function?
+04:39:59 <mdupont> what identifiers start with these letters?
+04:39:59 <dmiles> yeah that can be done.. 
+04:40:23 <mdupont> you could even say, what functions are related to this word (using wordnet)
+04:40:43 <mdupont> anyway, my girlfriend is hungry
+04:40:50 <mdupont> i need to cook some food
+04:40:56 <dmiles> hrrm.. well i see a todo list that stuff i am doing may helkp with
+04:41:03 <mdupont> that is cool
+04:41:20 <mdupont> i think that we might find some interesting synergies
+04:41:24 <dmiles> cycorp has even some things that will help
+04:41:38 <dmiles> they are working on UML introspections
+04:41:41 <mdupont> ok, well i have made some space
+04:41:58 <mdupont> tell me what packages i need, opencyc, swi prolog, what else?
+04:42:08 <mdupont> i got java 1.4 yesterday
+04:42:08 <dmiles> working on auto-code generations of UML programs
+04:42:22 <mdupont> sure, that is cool stuff,
+04:42:24 <dmiles> those are the tthree i work with ;P
+04:42:40 <mdupont> ok, well let me try and get this funky opencyc installed
+04:42:53 <mdupont> then i'll get back to you
+04:42:58 <dmiles> oh and a realy nice win32 text editor to edit files over Samba
+04:43:28 <dmiles> those 4 tools together make unstoppable programming
+04:43:34 <mdupont> i use emacs on win32 and linux
+04:44:09 <mdupont> gotta run, hungry cries are coming through the door
+04:44:19 --- nick: mdupont -> mdupont-breakfas
+04:44:26 <dmiles> cool.. well i am going to beat on opencyc a bit and see if i can get it to give me synset id's for words
+04:55:04 <mdupont-breakfas> ok, later dude
+04:55:09 <dmiles> take care
+06:50:57 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+06:58:34 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+07:00:00 --- join: dmiles (alife@12-211-42-52.client.attbi.com) joined #opencyc
+07:00:28 --- nick: mdupont-breakfas -> mdupont-away
+07:12:17 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+08:10:50 <dmiles> i am working on a tempory NLU system in SubL rioght now untiol cycorp has theirs ready for relkease
+08:11:10 <dmiles> it ill work in 0.7 it looks
+08:11:47 <dmiles> it takes however an hour or so to load!
+08:11:56 <dmiles> becasue it makes tons of new cycl assertions
+08:21:27 <Cobwa> really?  cool!
+08:22:18 <Cobwa> That's the part of opencyc I've been looking forward to.  How fast a box is that on?
+08:22:31 <dmiles> the main thing is getting hooked into #$wordForms which seems the string indexical spindel
+08:23:09 <Cobwa> I need to pull .7 and check it out... "string indexical spindel", yipe.
+08:23:11 <dmiles> well the box is a 1.4ghz 1 gig ram
+08:23:21 <Cobwa> pretty fast
+08:23:36 <dmiles> well its about like loading thought treasure
+08:23:59 <dmiles> about the same level of KE for the data
+08:24:32 <dmiles> it does some nastiness though it creates 64,000 NARTs
+08:24:41 <dmiles> :)
+08:24:41 <Cobwa> :) wow
+08:24:53 <dmiles> well it creates a nart for each wordnet object
+08:25:15 <dmiles> (#$WordNetLexicalFn "A00345345")
+08:25:59 <dmiles> (ASSERT-NO-WFF '(#$and (#$wordnetSynset 
+08:26:00 <dmiles>          (#$WordNet1997LexicalFn "A00002687") #$Abducent-TheWord) (#$wordnetAdjective #$Abducent-TheWord "abducent")) #$Wordnet1997CompleteMt)
+08:26:12 <Cobwa> And wordnet was already linked into opencyc in .6 right?  I noticed that.
+08:26:24 <dmiles> well not in a location accessable
+08:26:41 <dmiles> i was hoping to be able to resolve WN sysnsets for strings
+08:27:34 <dmiles> it can be loaded into OpenCyc.. the WN database
+08:27:52 <dmiles> but once loaded i cant find the *wordnet-dictionary* 
+08:27:53 <Cobwa> yeah, I remember trying that.  Been a while though
+08:28:33 <dmiles> i noticved a coolness though
+08:28:39 <dmiles> you may want to try tis in .7
+08:29:15 <dmiles> copy your opencyc-0.6.0/run/data/wn*/ dir into the same place in .7
+08:29:57 <dmiles> then do a 3602/cgi-bin/cyccgi/cg?HANDLE-LOAD-WN
+08:30:19 <dmiles> it will load the wordnet DB
+08:30:35 <Cobwa> wow, ok, I'll make a note of that
+08:31:24 <dmiles> then in cg?wn-to-cyc-specify you can type the word
+08:31:41 <dmiles> click view word and it will take you to the correct place
+08:32:51 <dmiles> i think this works arround a bug Steve was saying was in 0.7
+08:33:58 <dmiles> part of the nature of this is based on a preemtpive load of WN built into 0.7 forgot to come with the string-to-synset collection
+08:34:09 <dmiles> err hashmap/dictionary
+08:34:20 <Cobwa> ahh..
+08:34:44 <Cobwa> Now where did I put my .6 notes?
+08:34:50 <dmiles> what cycorp was trying to do is save us fromn the nasty .. load wordnet of 0.6
+08:35:05 <Cobwa> Yeah, that took a while
+08:56:56 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+09:02:40 <ZivZ> Hi Yeb.
+09:03:33 <dmiles> hrrm when words are morphilocal i worder if it's safe to add them as a Leixcal word
+09:03:52 <dmiles> like Painfull is Pain-TheWord + "full"
+09:03:58 <yepster> hello
+09:04:10 <dmiles> if i created Painfull-TheWord .. i wonder hat it #$isa
+09:05:11 <dmiles> i guess better call them #$ComplexWords
+09:05:41 <yepster> why not just painfull-theword?
+09:05:48 <yepster> it is a word
+09:05:51 <dmiles> that is what i am calling it
+09:05:57 <yepster> and has a relation with pain and full
+09:06:11 <dmiles> but there is some kind of tendancy to think in baseForms
+09:06:42 <yepster> well..
+09:06:53 <yepster> (baseForm Painfull-TheWord Pain) ?
+09:07:06 <yepster> I am just shooting blind here btw
+09:07:08 <dmiles> ah yeah i think you got it there
+09:07:18 <dmiles> i can align later
+09:07:23 <yepster> I am not into nl parsing /semantics at all
+09:07:42 <dmiles> hehe nor had i been .. but i *need* any form of opencyc nlu i can get
+09:07:55 <yepster> why is nl so important?
+09:08:06 <dmiles> doimng a command/control projecyt
+09:08:31 <dmiles> doing a command/control project
+09:08:35 <yepster> hmm better to have the commands right then!
+09:08:46 <yepster> 'fire on that thing of there!'
+09:08:48 <yepster> over
+09:09:16 <yepster> who? me?
+09:09:23 <yepster> fire as in: shoot?
+09:09:30 <dmiles> :)
+09:09:55 <yepster> this makes me think of something
+09:10:14 <yepster> a friend of mine got his phd a few months ago
+09:10:34 <yepster> at the reception afterwards i spoke a while to one of his profressors
+09:10:53 <yepster> interesting because he wanted very badly to say that as far as he was concerned
+09:11:11 <yepster> things should have been done different
+09:11:38 <yepster> to the point:
+09:11:54 <yepster> what he said was: if you have a representation of things you can expect
+09:12:14 <yepster> you can make a statistical model that..
+09:12:18 <yepster> how to say it
+09:12:36 <yepster> gives for something you observe a likelyhood for each thing you might expect.
+09:12:59 <yepster> like for example there is a picture of a chair
+09:13:09 <yepster> and there is a 3d model of a car, chair, table etc
+09:13:37 <yepster> then the likelyhoodfunction with input the picture and the 3d model says what the change is
+09:13:44 <yepster> that it is the object observed
+09:14:05 <yepster> so if you know what of commands you can expect..
+09:14:15 <yepster> parse against that
+09:14:48 <yepster> but i know not much about nl processing
+09:15:02 <dmiles> generally a taskology (the available commands) can be used to generate the parsing templates
+09:15:45 <dmiles> the idea though is interuptions and side-jobs and conversations about expanding the tasks need to be done also
+09:16:04 <dmiles> so describing a new task (the subtasks that make up a new task)
+09:16:22 <dmiles> means a vocubulary about the vocabulary
+09:17:01 <dmiles> by the time you get arround to it.. you may as well see how context free you can get away with first
+09:17:21 <dmiles> then take that .. and hone it to the tasks at hand
+09:18:23 <dmiles> context free generally means generating a list of disabigation possiblities
+09:18:41 <dmiles> then asking the user which of them theyt meant
+09:19:06 <dmiles> then remembering that per user catagory i think
+09:19:11 <yepster> context free rings a bell.. somewhere. context free grammar? damn, i've completely forgotten
+09:19:43 * yepster is making coffee
+10:01:40 --- quit: mdupont-away (Read error: 110 (Connection timed out))
+10:02:11 --- join: mdupont-away (mdupont@p5080E97E.dip0.t-ipconnect.de) joined #opencyc
+10:36:52 --- quit: Cobwa ("[x]chat")
+10:46:12 --- quit: yepster ()
+10:46:49 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+10:50:28 --- join: NeAck (Charl@cp134668-a.venra1.lb.home.nl) joined #opencyc
+10:52:06 --- part: NeAck left #opencyc
+11:47:50 <yepster> handy, oracle interface:
+11:47:50 <yepster> -- get the formulas
+11:47:50 <yepster> DECLARE
+11:47:50 <yepster>   formula VARCHAR(2000);
+11:47:50 <yepster>   cursor assertion_cur is
+11:47:51 <yepster>     select id from assertions for update;
+11:47:53 <yepster>   assertion_rec assertion_cur%ROWTYPE;
+11:47:55 <yepster> BEGIN
+11:47:57 <yepster>     FOR assertion_rec IN assertion_cur()
+11:47:59 <yepster> 	LOOP
+11:48:01 <yepster>       SELECT cyc.converseObjectTostring( '(assertion-el-formula (find-assertion-by-id ' || assertion_rec.id || '))' )
+11:48:04 <yepster>   		 INTO formula
+11:48:06 <yepster> 		 FROM dual;
+11:48:08 <yepster>       UPDATE assertions
+11:48:10 <yepster>         SET gaf = formula
+11:48:12 <yepster>         WHERE id = assertion_rec.id;
+11:48:14 <yepster>     END LOOP;
+11:48:16 <yepster> END;
+12:41:30 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+12:58:51 --- join: dkf (~dkf@ip68-2-40-59.ph.ph.cox.net) joined #opencyc
+12:59:30 <dkf> hello
+13:00:14 <dkf> I'm planning to work on an AI reasoning/parsing system; does anyone know if there is a common sense / knowledge base that is free (other than opencyc, of course)
+13:03:57 <yepster> no
+13:04:15 <yepster> at least not in the same league
+13:26:55 <dkf> Which other knowledge bases do you know of?
+13:32:56 --- quit: dmiles (Read error: 60 (Operation timed out))
+13:34:20 --- quit: Cobwa ("[x]chat")
+13:34:50 <yepster> the only one of which i know that comes with some predefined knowledge is the knowledge machine
+13:35:18 <yepster> or at least there are some 'common classes' downloadable
+13:37:48 <dkf> ah
+13:38:05 <dkf> The name (i.e. I should google for) "Knowledge Machine" ?
+13:38:25 <yepster> 'the knowledge machine' utexas
+13:38:56 <dkf> Found it, thanks.
+13:40:14 --- quit: ZivZ ()
+13:50:47 <yepster> dkf: the component library is a bit hidden, you can find a link ok
+13:50:49 <yepster> ok=on
+13:50:51 <yepster> http://www.cs.utexas.edu/users/mfkb/RKF/products.html
+13:51:07 <dkf> Cool, thanks
+13:51:13 --- quit: dkf ("homework")
+14:20:56 --- quit: yepster ()
+14:25:01 --- nick: mdupont-away -> mdupont
+14:42:07 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+14:48:29 <mdupont> anyone have a debian package of opencyc?
+15:14:14 --- nick: mdupont -> mdupont-ZZZzzz
+15:22:17 <ZivZ> I wouldn't think that it would make much difference what flavor of Linux you use.
+20:02:15 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:23:45 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:41:43 --- quit: KinoC (Read error: 110 (Connection timed out))
+22:00:44 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+22:29:59 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/02.12.22

@@ -1,0 +1,1258 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 2. 
+The Syntax of CycL
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 2. 
+The Syntax of CycL
+</h2>
+    <p></p>
+    <b>2.1.  <a HREF='#136465952'>
+Constants</a></b>
+    <br>
+    <font size='-1'>2.1.1.  <a HREF='#137160776'>
+Constant Names</a>
+      <br>
+    </font>
+    <font size='-1'>2.1.2.  <a HREF='#137162608'>
+Naming Conventions</a>
+      <br>
+    </font>
+    <font size='-1'>2.1.3.  <a HREF='#137183024'>
+Naming Strategies</a>
+      <br>
+    </font>
+    <font size='-1'>2.1.4.  <a HREF='#137186472'>
+Significance of Names</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.2.  <a HREF='#136573768'>
+Variables</a></b>
+    <br>
+    <font size='-1'>2.2.1.  <a HREF='#137212392'>
+Variable Names</a>
+      <br>
+    </font>
+    <font size='-1'>2.2.2.  <a HREF='#137216776'>
+Naming Conventions</a>
+      <br>
+    </font>
+    <font size='-1'>2.2.3.  <a HREF='#137224512'>
+"Don't-Care" Variables </a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.3.  <a HREF='#137257456'>
+Sentences</a></b>
+    <br>
+    <font size='-1'>2.3.1.  <a HREF='#137263888'>
+#$CycLSentence-Assertible</a>
+      <br>
+    </font>
+    <font size='-1'>2.3.2.  <a HREF='#137269176'>
+Atomic Sentences</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.4.  <a HREF='#137273664'>
+Predicates</a></b>
+    <br>
+    <font size='-1'>2.4.1.  <a HREF='#137283088'>
+Predicate Arity</a>
+      <br>
+    </font>
+    <font size='-1'>2.4.2.  <a HREF='#137292872'>
+Predicate Argument Types</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.5.  <a HREF='#137307672'>
+Logical Connectives
+</a></b>
+    <br>
+    <font size='-1'>2.5.1.  <a HREF='#137312512'>
+#$not</a>
+      <br>
+    </font>
+    <font size='-1'>2.5.2.  <a HREF='#137324472'>
+#$and</a>
+      <br>
+    </font>
+    <font size='-1'>2.5.3.  <a HREF='#137330600'>
+#$or</a>
+      <br>
+    </font>
+    <font size='-1'>2.5.4.  <a HREF='#137343184'>
+#$implies</a>
+      <br>
+    </font>
+    <font size='-1'>2.5.5.  <a HREF='#137359944'>
+Well-Formedness of Complex Sentences</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.6.  <a HREF='#137382672'>
+Quantification</a></b>
+    <br>
+    <font size='-1'>2.6.1.  <a HREF='#137387368'>
+#$forAll</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.2.  <a HREF='#137397056'>
+Multiple Quantification
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.3.  <a HREF='#137404776'>
+Unbound Variables
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.4.  <a HREF='#137424776'>
+#$thereExists</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.5.  <a HREF='#137433760'>
+#$thereExistExactly, #$thereExistAtLeast, #$thereExistAtMost
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.6.  <a HREF='#137444592'>
+Well-Formedness of Quantified Sentences
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.6.7.  <a HREF='#137445960'>
+Skolemization</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.7.  <a HREF='#137460296'>
+Non-Atomic Terms</a></b>
+    <br>
+    <font size='-1'>2.7.1.  <a HREF='#137476208'>
+Functions</a>
+      <br>
+    </font>
+    <font size='-1'>2.7.2.  <a HREF='#137480416'>
+Function Arity
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.7.3.  <a HREF='#137485928'>
+Function Argument Types and Result Types
+</a>
+      <br>
+    </font>
+    <font size='-1'>2.7.4.  <a HREF='#137501152'>
+#$IndividualDenotingFunction vs. #$CollectionDenotingFunction</a>
+      <br>
+    </font>
+    <font size='-1'>2.7.5.  <a HREF='#137517536'>
+Reifiable Functions vs. Unreifiable Functions
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>2.8.  <a HREF='#137544016'>
+Assertions</a></b>
+    <br>
+    <font size='-1'>2.8.1.  <a HREF='#137563880'>
+Sentences</a>
+      <br>
+    </font>
+    <font size='-1'>2.8.2.  <a HREF='#137565216'>
+Microtheories</a>
+      <br>
+    </font>
+    <font size='-1'>2.8.3.  <a HREF='#137570224'>
+Truth Values</a>
+      <br>
+    </font>
+    <font size='-1'>2.8.4.  <a HREF='#137581464'>
+Directions</a>
+      <br>
+    </font>
+    <font size='-1'>2.8.5.  <a HREF='#137601984'>
+Supports</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 2. 
+    
+The Syntax of CycL
+</h1>
+    <p>
+CycL is a formal language whose syntax derives from first-order predicate calculus (the language of formal logic) and from Lisp. In order to express common sense
+knowledge, however, it goes far beyond first order logic. The vocabulary of CycL consists of terms. The set of terms can be divided into constants, non-atomic terms
+(NATs), variables, and a few other types of objects. Terms are combined into meaningful CycL expressions, which are used to make assertions in the CYC knowledge base. </p>
+    <p>
+This document will be sloppy with respect to the distinction between the formal language CycL and the datastructures used to represent CycL expressions in the CYC KB.
+Of course these are two separate things, but for explanatory purposes it is useful to overload the vocabulary. </p>
+    <h2>2.1.  <a NAME='136465952'>
+Constants</a>
+    </h2>
+    <p>
+Constants are the "vocabulary words" of the CYC knowledge base. 
+The CYC KB is an attempt to model the world as most sane, adult
+humans perceive it, so each constant stands for some thing or concept
+in the world that we think many people know about and/or 
+that most could understand.</p>
+    <p>
+The KB contains constants that denote collections of other concepts,
+such as #$AnimalWalkingProcess (the set of all actions in which 
+some animal walks) or #$Typewriter (the set of all typewriters). 
+It can have constants that denote individual things, some of which
+are more-or-less permanently in the KB, like #$InternalRevenueService,
+and some of which might get created only when reasoning about some
+state of affairs, like #$Walking00036 (a particular case of walking). Some 
+of the individuals represented in the KB are predicates, such as 
+#$isa or #$likesAsFriend, that allow one to express relationships
+among constants. Others are functions, such as #$GovernmentFn, which 
+take constants or other things as arguments, and denote 
+new concepts, i.e., (#$GovernmentFn #$Canada).</p>
+    <p>
+Each constant has its own data structure in the KB, consisting of the constant 
+and the assertions which describe it. </p>
+    <h3>2.1.1.  <a NAME='137160776'>
+Constant Names</a>
+    </h3>
+
+All CYC constants have a unique name, such as #$GeorgeWBush, #$massOfObject,
+or #$MapleTree. CYC constants are referred to with the prefix "#$" (read
+"hash-dollar"). These characters are sometimes omitted in documents describing 
+CycL, and they may be omitted by certain interface tools. But in these CYC 
+Documentation pages, the policy will be to use the "#$" prefix when referring 
+to CYC constants.
+
+<h3>2.1.2.  <a NAME='137162608'>
+Naming Conventions</a>
+    </h3>
+    <p>
+The name of a CYC constant -- the part after the "#$" prefix -- must 
+follow these rules: All CYC constant names must be at least 2 characters 
+long (not including the #$ prefix).</p>
+    <p>
+Constant names can include any uppercase or lowercase letter, any digit, 
+and the symbols "-" (dash), "_" (underscore), and "?" (question mark). 
+No other characters, such as "!", "&amp;", or "@" are allowed. This policy is 
+enforced in the CYC Functional Interface and in the CYC Web Interface.
+</p>
+    <p>
+CYC constant names are case-sensitive: #$foo is not the same as #$Foo. 
+However, distinguishing two constant names solely on the basis of capitalization 
+is prohibited by the system.</p>
+    <p>
+All CYC predicate names must begin with a lowercase character. All 
+non-predicate constant names must begin with an uppercase character. Non-predicate
+constant names may also begin with a numeric character (e.g., #$3MCorporation). 
+We may also allow predicates to begin with numeric characters, if someone
+makes a compelling argument for why this should be allowed.</p>
+    <p>
+Constant names should not be plural nouns. Even in the case of collections 
+the associated constant name should be the singular noun which describes individual
+members of the collection, e.g. the collection of all dogs is #$Dog, not #$Dogs.</p>
+    <p>
+All CYC constant names should be composed of one or more meaningful "words" 
+in sequence, with no breaks except for dashes or underlines (e.g. #$isa and
+#$SportsCar). A sequence of numeric characters may count as a "word" 
+(e.g., #$FrontOfficeOf123Corp). With the exception noted above for predicate 
+names, each (non-numeric) "word" in a sequence must begin with a capital letter. 
+An acronym may count as a "word", but all its characters will be the same case 
+(e.g., lower cas if the acronym begins the name of a predicate constant; 
+otherwise uppercase).</p>
+    <p>
+These conventions make for easier reading by ontological engineers, as well as
+better English generation for unlexified terms.</p>
+    <p>
+Hyphens are used to set off parts of names which restrict or refine the 
+meaning of the name, as in #$Fruit-TheWord or #$Horse-Domesticated.</p>
+    <h3>2.1.3.  <a NAME='137183024'>
+Naming Strategies</a>
+    </h3>
+    <p>
+All things being equal, it's best to give related constants names which 
+are alphabetically proximal. Some of our interface tools make it easy to search for all
+constants whose name begins with a certain string of characters, and it's easier 
+to find all constants having to do with horses if they have been given names like
+#$Horse-Domesticated and #$Horse-Wild than if they have been given names 
+like "DomesticatedHorse" and "WildHorse".</p>
+    <p>
+However, as Cyc's natural language capability improves, and as new lexical 
+lookup utilities are added, it becomes easier to look up constants by any of the 
+string that are known to refer to them, rather than by their constant name. 
+An example of this is if you type in "FBI" into the Complete box in the Cyc 
+browser, it offers #$FederalBureauOfInvestigation as a disambiguation. Hence, 
+naming constants is only one piece of the work; doing thorough lexification is 
+also very important.</p>
+    <p>
+When naming a constant, it's important to assign a name that distinguishes 
+the denoted concept from other concepts it might get confused with. So 
+"Bow" would be a terrible name for a constant. Instead, names like 
+"Bow-BoatPart", "BowTheWeapon", "Bowing-BodyMovement" should be used, depending 
+on the underlying concept denoted.</p>
+    <p>
+Sometimes it is possible to take this principle of specificity in names to an 
+extreme, and attempt to embody the whole meaning of the constant in its name. This is
+discouraged. For example, one might be tempted to give the constant #$physicalParts 
+the name "distinctIdentifiablePhysicalParts", but it is better to leave the 
+name a bit terser since it isn't easily confused with some other concept, and 
+put the additional information in the constant documentation. </p>
+    <h3>2.1.4.  <a NAME='137186472'>
+Significance of Names</a>
+    </h3>
+    <p>
+It's important to remember that the names we assign to constants mean nothing to 
+CYC. It doesn't matter whether the concept green is represented by #$Green,
+#$GreenColor, #$Verde, #$Gruen, or #$EMRG.</p>
+    <p>
+It's also very important never to assume that you, the observer of the CYC KB, 
+can know with certainty what a constant denotes to the system, just from seeing its
+name and nothing else.</p>
+    <p>
+The meaning of a constant in CycL is determined by the assertions 
+in the KB that use that constant. For example, from the 
+following assertions, it is easy to tell what the hypothetical constant #$EMRG means: </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$isa #$EMRG #$Color)
+     (#$colorOfObject #$Grass37 #$EMRG)
+     (#$forAll ?O (#$implies (#$isa ?O #$Okra) (#$colorOfObject ?O #$EMRG)))</pre></tt>
+    </font>
+
+<p>
+For convenience, we choose names for CYC constants that will indicate 
+to human users what the constant is intended to mean. (For example, #$PurpleColor
+or #$RedColor.) But remember, CYC doesn't understand those strings. Don't be 
+misled by evocative names like #$LittleRedHairedGirlLikedByCharlieBrown. Unless that
+constant is appropriately related to other CYC constants such as #$FemaleChild, 
+#$hairColor, #$RedHairColor, #$CharlieBrown, and #$likesAsFriend, it is meaningless to CYC.</p>
+    <h2>2.2.  <a NAME='136573768'>
+Variables</a>
+    </h2>
+    <p>
+Quantified CycL expressions (discussed below) contain one or more variables which stand
+for constants whose identities are not specified. A variable may appear (nearly)
+anywhere a constant can appear. </p>
+    <h3>2.2.1.  <a NAME='137212392'>
+Variable Names</a>
+    </h3>
+
+Variable names must begin with a question mark and are ordinarily written 
+in capital letters ("?FOO"). Variable names are subject to the same restrictions 
+on usable characters as constant names. 
+
+<h3>2.2.2.  <a NAME='137216776'>
+Naming Conventions</a>
+    </h3>
+    <p>
+In sentences in which only one variable is used, it is common to use a 
+single-letter variable, such as "?X". However, when a sentence contains more 
+than one variable, it will be much more readable if you give the variables 
+mnemonic names. Here's an example:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$and
+              (#$isa ?TRANSFER #$TransferringPossession)
+              (#$fromPossessor ?TRANSFER ?FROM))
+           (#$isa ?FROM #$SocialBeing))</pre></tt>
+    </font>
+
+<p>
+     "The initial possessor in a possession transfer is a social being." </p>
+    <h3>2.2.3.  <a NAME='137224512'>
+"Don't-Care" Variables </a>
+    </h3>
+    <p>
+Variables beginning with two question marks instead of just one, for instance 
+??WHATEVER, are called "don't-care" variables.</p>
+    <p>
+This is just a naming convention indicating that we don't care about the bindings
+for that variable; operationally, it currently makes no difference. </p>
+    <p>
+     Consider a rule like </p>
+    <font color='#339900'>
+      <tt><pre>
+       (#$implies
+         (#$hasDegreeIn ?PERSON ?DEGREE)
+         (#$hasAttribute ?PERSON #$CollegeGraduate))</pre></tt>
+    </font>
+
+<p>
+Here, ?DEGREE is not otherwise mentioned, which is a pragmatically 
+infrequent occurrence (but not logically incorrect). We can communicate that 
+this is nevertheless intentional by saying </p>
+    <font color='#339900'>
+      <tt><pre>
+         ??DEGREE </pre></tt>
+    </font>
+
+<p>
+so that diagnostics etc. know not to complain about the anomaly. </p>
+    <p>
+Finally, consider the difference between these queries </p>
+    <font color='#339900'>
+      <tt><pre>
+   (#$isa ?X #$Person)
+      =>
+   (((?X . #$BritneySpears)) ((?X . #$HenryKissinger)) ...lots more...)
+
+     (#$thereExists ?X (#$isa ?X #$Person))
+       =>
+   (((T . T)))</pre></tt>
+    </font>
+
+
+In the second case, we don't care who ?X is, just if at least one exists at all. 
+One proof is as good as any, so it could likely quit with the first one rather than 
+compute all of them. In this case, ?X is acting as a don't care variable in the query. 
+
+
+<p>
+The explicit existential closure makes this intent clear. However, it might 
+be nice to have the shorthand </p>
+    <font color='#339900'>
+      <tt><pre>
+       (#$isa ??X #$Person)</pre></tt>
+    </font>
+
+<p>
+as a tipoff to a query interface that we desire ??X to be a don't care variable, 
+and thus it is free to existentially close it. For example, a query interface 
+like the HTML interface may choose to automatically existentially close 
+"don't care" variables so that their bindings aren't displayed. </p>
+    <em><p>
+Aside : This is analogous to using "pragmas" or "declarations" in 
+software engineering to give hints to the compiler about the code. In 
+this case, it's like explicitly labelling the unused variable Y in the function </p><font color='#339900'>
+        <tt><pre>
+      (define foo (x y))      
+       (ignore y)
+         (ret x))</pre></tt>
+      </font>
+
+<p>
+with IGNORE so that the compiler won't complain about Y never being used. The 
+ignore has no effect on the compiled code -- it's a message to the compiler.</p></em>
+    <h2>2.3.  <a NAME='137257456'>
+Sentences</a>
+    </h2>
+    <p>
+CycL sentences combine terms into meaningful expressions.
+</p>
+    <p>
+Every sentence has the structure of a Lisp list. It is enclosed in parentheses, 
+and consists of a list of objects which are commonly designated ARG0, ARG1, ARG2,
+etc. The object in the ARG0 position may be a predicate, a logical connective,
+or a quantifier. The remaining arguments may be constants, non-atomic terms, 
+variables, numbers, English strings delimited by double quotes ("), or other sentences. </p>
+    <h3>2.3.1.  <a NAME='137263888'>
+#$CycLSentence-Assertible</a>
+    </h3>
+    <p>
+This is the class of well-formed sentences in CycL. If a CycL sentence satisfies
+all the constraints on the number and types of arguments to the relations that 
+appear in it, the system will recognize it as an instance of the collection 
+#$CycLSentence-Assertible.</p>
+    <h3>2.3.2.  <a NAME='137269176'>
+Atomic Sentences</a>
+    </h3>
+    <p>
+The simplest kind of sentence is an atomic sentence: a sentence in which the 
+ARG0 position is occupied by a predicate, and all the other argument positions are 
+filled with terms: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$likesAsFriend #$MattDamon #$BenAffleck)
+        (#$skillCapableOf #$LinusVanPelt #$PlayingAMusicalInstrument #$performedBy)
+        (#$colorOfObject ?CAR ?COLOR)</pre></tt>
+    </font>
+
+<p>
+The first two of the atomic sentences above are ground atomic formulas (GAFs), 
+since none of the terms filling the argument positions ARG1, ARG2, etc. are
+variables. Here the word "formula" is used to mean a term composed of other terms; 
+e.g. either a NAT or a sentence. Ground atomic sentence, or GAS, would be a
+more precise name, but GAF is the more common usage.</p>
+    <h2>2.4.  <a NAME='137273664'>
+Predicates</a>
+    </h2>
+    <p>
+Every CycL atomic sentence must begin with a predicate in order to be well-formed. 
+</p>
+    <h3>2.4.1.  <a NAME='137283088'>
+Predicate Arity</a>
+    </h3>
+    <p>
+Most predicates are defined to take a fixed number of arguments. There are no 
+optional predicate arguments in CycL. However, a few predicates, such as
+#$different, can take a variable number of arguments. Such predicates are elements 
+of the collection #$VariableArityRelation. In most cases, arity is 
+automatically inferred by CYC when a relation or predicate is made an instance 
+of a certain type of collection (e.g. #$BinaryPredicate). However, arity can also 
+be asserted directly, via the binary predicate #$arity.</p>
+    <p>
+The number of arguments a predicate takes is determined by its arity. A predicate 
+is described as unary, binary, ternary, quaternary, or quintary, according to
+whether it takes 1, 2, 3, 4, or 5 arguments. Only a handful of CycL predicates 
+take 6 more arguments.</p>
+    <p>
+To be well-formed, an atomic sentence must have the right number of arguments 
+for the predicate filling the ARG0 position. So, </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$likesAsFriend #$Colette #$AudreyHepburn #$GeorgeWBush)</pre></tt>
+    </font>
+
+<p>
+is not well-formed, since the arity of #$likesAsFriend is 2, but this sentence 
+gives 3 arguments to #$likesAsFriend. </p>
+    <h3>2.4.2.  <a NAME='137292872'>
+Predicate Argument Types</a>
+    </h3>
+    <p>
+The type of each argument must be specified in the definition of the predicate, 
+using the predicates #$arg1Isa, #$arg2Isa, etc. For example, suppose the predicate
+#$residesInDwelling is defined by the following: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$isa #$residesInDwelling #$BinaryPredicate)
+        (#$arg1Isa #$residesInDwelling #$Animal)
+        (#$arg2Isa #$residesInDwelling #$ShelterConstruction)</pre></tt>
+    </font>
+
+<p>
+To be well-formed, every sentence which has #$residesInDwelling in the ARG0 
+position must have a term which is an instance of #$Animal in the ARG1 position, and
+term which is an instance of #$ShelterConstruction in the ARG2 position. So, if Bag 
+End is the residence of Bilbo Baggins, </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$residesInDwelling #$ChryslerBuilding #$BagEnd)
+</pre></tt>
+    </font>
+<p>
+is probably not well-formed. Though we can never be absolutely certain just 
+from the names, but #$ChryslerBuilding is probably not an instance of #$Animal. </p>
+    <h2>2.5.  <a NAME='137307672'>
+Logical Connectives
+</a>
+    </h2>
+    <p>
+Complex sentences can be built up out of atomic sentences or other complex 
+sentences by using logical connectives, which are special constants analogous 
+to the logical operators of formal logic. The most important logical 
+connectives in CycL are #$not, #$and, #$or, and #$implies. </p>
+    <h3>2.5.1.  <a NAME='137312512'>
+#$not</a>
+    </h3>
+    <p>
+The connective #$not takes a single sentence as an argument. Like the "not" 
+of formal logic, it reverses the truth value of its argument. Thus,</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$not (#$colorOfObject #$FredsBike #$RedColor))</pre></tt>
+    </font>
+
+<p>
+will be true if and only if (#$colorOfObject #$FredsBike #$RedColor) is false. 
+Likewise, </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$not (#$not (#$colorOfObject #$FredsBike #$RedColor))) 
+</pre></tt>
+    </font>
+<p>
+will have the same truth value as (#$colorOfObject #$FredsBike #$RedColor).
+</p>
+    <h3>2.5.2.  <a NAME='137324472'>
+#$and</a>
+    </h3>
+    <p>
+     The connective #$and takes one or more sentences as arguments. Like the "and" 
+of formal logic, the conjunction is true if and only if each of its arguments is true.</p>
+    <p>
+     Here's an example:</p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$and
+        (#$colorOfObject #$FredsBike #$RedColor)
+        (#$objectFoundInLocation #$FredsBike #$FredsGarage))</pre></tt>
+    </font>
+
+<p>
+     This sentence states that Fred's bike is red and that it is located in 
+Fred's garage. If both of those things are true then the whole sentence is true, 
+but if one or both are false, then the whole sentence is false. </p>
+    <h3>2.5.3.  <a NAME='137330600'>
+#$or</a>
+    </h3>
+    <p>
+     The connective #$or takes one or more sentences as arguments. Like the
+"or" of formal logic, the disjunction is true if and only if at least one 
+of its arguments is true. Here's an example:</p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$or
+        (#$colorOfObject #$FredsBike #$RedColor)
+        (#$objectFoundInLocation #$FredsBike #$FredsGarage)
+        (#$owns #$Fred #$FredsBike))</pre></tt>
+    </font>
+
+<p>
+This assertion states that either Fred's bike is red, or it is located in 
+Fred's garage, or Fred owns it, or all three. (The word "or" in English is 
+sometimes taken to imply that one alternative or the other is true, but not both. 
+That is not the case with #$or.) If any or all of these three statements is true, 
+then the whole sentence is true. All would have to be false for the sentence 
+as a whole to be false. </p>
+    <h3>2.5.4.  <a NAME='137343184'>
+#$implies</a>
+    </h3>
+    <p>
+The connective #$implies takes exactly two sentences as arguments. Like 
+the "if-then" statement of formal logic, the implication is true if and only
+if it is not the case that its first argument is true and its second argument
+is false. Here's an example: </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$implies
+        (#$owns #$Bike001 #$Fred)
+        (#$colorOfObject #$Bike001 #$RedColor))</pre></tt>
+    </font>
+
+<p>
+This assertion states that if #$Bike001 is owned by #$Fred, then it is red. 
+Newcomers to formal logic may misinterpret #$implies as implying a causal relationship.
+But, strictly speaking, a #$implies assertion says only that either the first
+argument is false, or the second argument is true. So, for example, the assertion </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$implies
+        (#$isa #$RichardNixon #$Fruit)
+        (#$colorOfObject #$GeorgeWBush #$MintColor))</pre></tt>
+    </font>
+
+<p>
+is true, because the first argument is false.</p>
+    <p>
+Assertions involving #$implies are very common in the CYC KB. We also call 
+them conditionals or rules, and we refer to the first argument as the antecedent
+and the second argument as the consequent. Note, however, that the particular 
+sentence above is not representative of assertions likely to be found in the CYC KB.
+We will come to some more representative examples in a moment. </p>
+    <h3>2.5.5.  <a NAME='137359944'>
+Well-Formedness of Complex Sentences</a>
+    </h3>
+    <p>
+Any complex sentence formed by using the logical connectives will be well-formed 
+if the sentences given as arguments to the connectives are also well-formed and
+if the right number of arguments are given. (The sentences given as arguments to 
+the logical connectives need not be atomic sentences, like most of the examples
+above, but can be any well-formed sentence.) Another way of saying this is that 
+#$not, #$and, #$or and #$implies produce CycLSentences when they are given arguments 
+which are also CycLSentences.</p>
+    <p>
+     Suppose A and B are syntactically legal, and C is not. Then, 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$not A)
+        (#$and A)
+        (#$and A B)
+        (#$or A)
+        (#$or A B)
+        (#$implies A B)
+</pre></tt>
+    </font>
+<p>
+     would all be CycLSentences. But 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$not A B)
+        (#$and)
+        (#$and A C)
+        (#$implies A)</pre></tt>
+    </font>
+
+<p>
+would NOT be CycLSentences. Why? (#$not A B) violates the requirement that 
+#$not take only one sentence as an argument. (#$and) and (#$implies A) also 
+violate restrictions on the number of sentences these connectives take 
+as arguments. (#$and A C) is not well-formed because C is not; any complex 
+sentence that contained C would be syntactically bad for the same reason.</p>
+    <p>
+It should also be noted that #$and and #$or are elements of 
+#$VariableArityRelation: hence, if A, B, C, and D are well-formed CycL expressions, </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$and A B C D)</pre></tt>
+    </font>
+
+<p>
+     would be well-formed and also 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$or A B C D)</pre></tt>
+    </font>
+
+<p>
+     would be well-formed.</p>
+    <h2>2.6.  <a NAME='137382672'>
+Quantification</a>
+    </h2>
+    <p>
+So far, we have only looked at ways to make statements about specific objects, 
+like #$FredsBike. But CycL, like first-order predicate calculus, also gives us 
+two ways to talk about objects without being specific about the identity of the 
+objects involved: universal quantification and existential quantification. 
+Universal quantification corresponds to English expressions like every, 
+all, always, everyone, and anything, while existential quantification corresponds 
+to English expressions like someone, something, and somewhere. CycL contains one 
+universal quantifier, #$forAll, and many existential quantifiers, including #$thereExists, 
+#$thereExistAtLeast, #$thereExistAtMost, and #$thereExistExactly. </p>
+    <h3>2.6.1.  <a NAME='137387368'>
+#$forAll</a>
+    </h3>
+    <p>
+The quantifier #$forAll takes two arguments, a variable and a sentence in 
+which the variable appears. In practice, the sentence is almost always a conditional 
+in which the antecedent is used to restrict the scope of the variable. Here's an example: </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$forAll ?X
+        (#$implies
+           (#$owns #$Fred ?X)
+           (#$objectFoundInLocation ?X #$FredsHouse)))</pre></tt>
+    </font>
+
+<p>
+This sentence states that it is true, concerning every object in the CYC 
+ontology, that if #$Fred owns that object, then that object is located in 
+#$FredsHouse. In other words, all Fred's stuff is in his house. </p>
+    <h3>2.6.2.  <a NAME='137397056'>
+Multiple Quantification
+</a>
+    </h3>
+    <p>
+Sentences may contain more than one quantifier, as in the following: </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$forAll ?X
+        (#$forAll ?Y
+           (#$implies
+              (#$and
+                 (#$owns #$Fred ?X)
+                 (#$owns #$Fred ?Y))
+              (#$near ?X ?Y))))</pre></tt>
+    </font>
+
+<p>
+which says that any two things owned by Fred are near each other. 
+Note that each quantifier introduces a new variable, and that each variable 
+must have a different name. </p>
+    <h3>2.6.3.  <a NAME='137404776'>
+Unbound Variables
+</a>
+    </h3>
+    <p>
+Normally, variables need to be introduced ("bound") by a quantifier before 
+they are used. Each quantifier binds exactly one variable, and every variable 
+used should be bound by exactly one quantifier. Furthermore, a variable has 
+no meaning outside the scope of the quantifier which binds it.
+</p>
+    <p>
+However, if a unbound variable appears in a CycL sentence, it is always 
+assumed to be universally quantified, with the result that</p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$implies
+        (#$owns #$Fred ?X)
+        (#$objectFoundInLocation ?X #$FredsHouse))</pre></tt>
+    </font>
+
+<p>
+is exactly equivalent to </p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$forAll ?X
+        (#$implies
+           (#$owns #$Fred ?X)
+           (#$objectFoundInLocation ?X #$FredsHouse)))</pre></tt>
+    </font>
+
+<p>
+Since the former is easier to write and read, it is almost always preferred 
+in practice, and you will rarely see a #$forAll while browsing the CYC KB. 
+Note, however, that unbound variables which appear only in the consequent of 
+a conditional, and not in the antecedent, may have drastic and undesired 
+consequences. Take, for example, the following:</p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$implies
+        (#$owns #$Fred ?WHATEBER)
+        (#$objectFoundInLocation ?WHATEVER #$FredsHouse))</pre></tt>
+    </font>
+
+<p>
+Because of the typo, the variable ?WHATEVER will range over the entire 
+CYC ontology. In other words, the assertion above states that as long 
+as Fred owns one thing, everything is located in #$FredsHouse--probably 
+not what we wanted. See the section on "don't-care" variables for ways 
+in these kinds of mistakes can be detected. </p>
+    <h3>2.6.4.  <a NAME='137424776'>
+#$thereExists</a>
+    </h3>
+    <p>
+The quantifier #$thereExists takes two arguments, a variable and a sentence 
+in which the variable appears. In practice one uses #$thereExists only in 
+certain ways,  of which the following is a good example: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$isa ?A #$Animal)
+           (#$thereExists ?M
+              (#$mother ?A ?M)))</pre></tt>
+    </font>
+
+<p>
+This assertion states that, for every animal, there exists at least one object 
+which is that animal's mother. The object which is the animal's mother may be 
+an object which is already represented by a CYC constant, or it may be a new 
+object of which CYC has no knowledge. But unless and until it is told otherwise, 
+CYC will assume that the object is a new one not identical with any "known" object.</p>
+    <h3>2.6.5.  <a NAME='137433760'>
+#$thereExistExactly, #$thereExistAtLeast, #$thereExistAtMost
+</a>
+    </h3>
+    <p>
+These three quantifiers are similar to #$thereExists, but provide greater 
+quantitative expressiveness. Each of them takes three arguments: a positive 
+integer, a variable, and a sentence in which the variable appears. Their 
+meaning should be fairly self-explanatory. Look at the following examples: 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$isa ?P #$Person)
+           (#$thereExistExactly 2 ?LEG
+              (#$and
+                 (#$isa ?LEG #$Leg)
+                 (#$anatomicalParts ?P ?LEG))))</pre></tt>
+    </font>
+
+<font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$isa ?T #$Table)
+           (#$thereExistAtLeast 3 ?LEG
+              (#$and
+                 (#$isa ?LEG #$Leg)
+                 (#$physicalParts ?T ?LEG))))</pre></tt>
+    </font>
+
+<font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$isa ?P #$UnitedStatesPerson)
+           (#$thereExistAtMost 1 ?SPOUSE
+                 (#$spouse ?P ?SPOUSE)))</pre></tt>
+    </font>
+
+<h3>2.6.6.  <a NAME='137444592'>
+Well-Formedness of Quantified Sentences
+</a>
+    </h3>
+    <p>
+As you probably by now expect, any sentence beginning with a quantifier is 
+well-formed if and only if its arguments are of the right number, of the 
+right types, in the right order, and its sentence argument is well-formed.</p>
+    <h3>2.6.7.  <a NAME='137445960'>
+Skolemization</a>
+    </h3>
+    <p>
+People writing assertions for entry into the CYC KB use #$thereExists 
+quite frequently. But when you browse the KB, you rarely see #$thereExists 
+in an assertion. That's because once assertions are entered into the KB, 
+occurences of #$thereExists are automatically converted into Skolem 
+functions. The only exceptions are certain cases where #$thereExists 
+is used within an expression that is an argument to a predicate. Thus, 
+an assertion which was entered as: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$implies
+           (#$isa ?A #$Animal)
+           (#$thereExists ?M
+              (#$and (#$mother ?A ?M)
+                      (#$isa ?M #$FemaleAnimal))))</pre></tt>
+    </font>
+
+<p>
+will appear in the KB as 4 different assertions: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$isa #$SKF-8675309 #$SkolemFunction)
+        (#$arity #$SKF-8675309 1)
+        (#$implies
+          (#$isa ?A #$Animal)
+          (#$mother ?A (#$SKF-8675309 ?A)))
+        (#$implies 
+          (#$isa ?A #$Animal)
+          (#$isa (#$SKF-8675309 ?A) #$FemaleAnimal))</pre></tt>
+    </font>
+
+<p>
+For more details, look at "An Introduction to CYC Inferencing". </p>
+    <h2>2.7.  <a NAME='137460296'>
+Non-Atomic Terms</a>
+    </h2>
+    <p>
+A non-atomic term (NAT) is a way of specifying a term as a function of some 
+other term(s). Every NAT is composed of a function and one or more arguments to that
+function.</p>
+    <p>
+Consider, for example, the function #$FruitFn, which takes as an argument a type 
+of plant and denotes the collection of the fruits of that type of plant. This 
+function can be used to build the following NATs: </p>
+    <font color='#339900'>
+      <tt><pre>
+    (#$FruitFn #$AppleTree)
+    (#$FruitFn #$PearTree)
+    (#$FruitFn #$WatermelonPlant)
+    . . . .</pre></tt>
+    </font>
+
+<p>
+Note that there may or may not be a named CYC constant corresponding to the 
+collection of apples (that is, a constant called #$Apple). The NAT (#$FruitFn
+#$AppleTree) provides a way of talking about this collection even if the 
+corresponding constant does not exist.</p>
+    <p>
+NATs can be used anywhere a constant can be used. One could write, for example: </p>
+    <font color='#339900'>
+      <tt><pre>
+   (#$implies
+       (#$isa ?APPLE (#$FruitFn #$AppleTree))
+       (#$colorOfObject ?APPLE #$RedColor))</pre></tt>
+    </font>
+
+<h3>2.7.1.  <a NAME='137476208'>
+Functions</a>
+    </h3>
+    <p>
+Since all NATs are built around functions, it's important to understand more about them.</p>
+    <h3>2.7.2.  <a NAME='137480416'>
+Function Arity
+</a>
+    </h3>
+    <p>
+Like predicates, most functions have a fixed arity. A function is 
+described as unary, binary, ternary, quaternary, or quintary, according 
+to whether it takes 1, 2, 3, 4, or 5 arguments. Currently, there are only Skolem
+functions that take more than 5 arguments.</p>
+    <p>
+A few functions do not have a fixed arity, but can take a variable number of 
+arguments. Mathematical functions like #$PlusFn are one example.</p>
+    <h3>2.7.3.  <a NAME='137485928'>
+Function Argument Types and Result Types
+</a>
+    </h3>
+    <p>
+Functions with fixed arity are similar to predicates in that the 
+definition of the function must specify the type of each argument, using 
+the predicates #$arg1Isa, #$arg2Isa, etc.</p>
+    <p>
+Functions with no fixed arity are defined using the predicate #$argsIsa, which 
+specifies a single type of which every argument must be an instance.</p>
+    <p>
+Functions differ from predicates in that they return a CYC term as a result. 
+Accordingly, function definitions must also describe the type of the result 
+to be returned, using the predicate #$resultIsa. Consider, for example, the 
+function #$GovernmentFn: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$arity #$GovernmentFn 1)
+        (#$arg1Isa #$GovernmentFn #$GeopoliticalEntity)
+        (#$resultIsa #$GovernmentFn #$RegionalGovernment)</pre></tt>
+    </font>
+
+<p>
+The argument to #$GovernmentFn must always be an instance of 
+#$GeopoliticalEntity, and a NAT created using #$GovernmentFn will always 
+be an instance of #$RegionalGovernment. So, for instance, </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$isa (#$GovernmentFn #$UnitedStatesOfAmerica) #$RegionalGovernment)</pre></tt>
+    </font>
+
+<h3>2.7.4.  <a NAME='137501152'>
+#$IndividualDenotingFunction vs. #$CollectionDenotingFunction</a>
+    </h3>
+    <p>
+Most functions are instances of either #$IndividualDenotingFunction or 
+#$CollectionDenotingFunction. #$GovernmentFn is an example of the former, 
+since a NAT like (#$GovernmentFn #$UnitedStatesOfAmerica) denotes an 
+individual government. On the other hand, #$FruitFn is an example of the 
+latter, since a NAT like (#$FruitFn #$AppleTree) denotes the collection of all 
+apples, not an individual apple.</p>
+    <p>
+The distinction between individuals and collections is an important one in 
+CycL. For more on this topic, look at the constants #$Individual and #$Collection.</p>
+    <p>
+The definition of an instance of #$CollectionDenotingFunction should specify, 
+not only its argument types and result type, but also the collection that the 
+result will have as genls. This is done using the predicate #$resultGenl. 
+For example, if the function #$LeftPairMemberFn is defined by:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$isa #$LeftPairMemberFn #$CollectionDenotingFunction)
+        (#$arity #$LeftPairMemberFn 1)
+        (#$arg1Isa #$LeftPairMemberFn #$SymmetricalPartType)
+        (#$resultIsa #$LeftPairMemberFn #$ExistingObjectType)
+        (#$resultGenl #$LeftPairMemberFn #$LeftObject)</pre></tt>
+    </font>
+
+<p>
+then the following must be true concerning a NAT constructed from 
+#$LeftPairMemberFn and #$Shoe:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$isa (#$LeftPairMemberFn #$Shoe) #$ExistingObjectType)
+        (#$genls (#$LeftPairMemberFn #$Shoe) #$LeftObject)</pre></tt>
+    </font>
+
+<p>
+In other words, the set of left shoes is an instance of #$ExistingObjectType 
+and a subset of #$LeftObject. </p>
+    <h3>2.7.5.  <a NAME='137517536'>
+Reifiable Functions vs. Unreifiable Functions
+</a>
+    </h3>
+    <p>
+Many CycL functions are instances of #$ReifiableFunction. Each time an instance
+of #$ReifiableFunction is used with a new set of arguments to build a NAT, that
+NAT is reified. Reified NATs, also called NARTs, don't have proper constant 
+names, but can always be referred to by their NAT expression.</p>
+    <p>
+When a new NART is first created, CYC automatically sets up the correspondence 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$termOfUnit NART NAUT)</pre></tt>
+    </font>
+
+<p>
+where NART is the automatically created term and NAUT is the non-atomic 
+unreified term that can be used to refer to it. In the CYC web interface, such an
+assertion might look like this: </p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$termOfUnit (#$GovernmentFn #$Canada) (#$GovernmentFn #$Canada))</pre></tt>
+    </font>
+
+<p>
+It looks like the first and second arguments are the same, but that's because 
+NARTs are printed out using their EL formulas, i.e. their corresponding NAUT. If you
+look very carefully at any #$termOfUnit assertion in the web interface, you will 
+see that the opening parenthesis of ARG1 is a followable link (depending on the
+web-browser you use, it may be underlined, or a different color), but the opening 
+parenthesis of ARG2 is just opaque text. Clicking on the opening paren of a NAT
+will display the page for the NART the expression denotes.</p>
+    <p>
+Moreover, a NART can be explicitly equated with an existing constant using the 
+predicate #$rewriteOf:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (#$rewriteOf #$TheYear1996 (#$YearFn 1996))
+        (#$rewriteOf #$Apple (#$FruitFn #$AppleTree))</pre></tt>
+    </font>
+
+<p>
+When a NART is equated with a constant using #$rewriteOf, the two are asserted 
+to be de dicto equivalent.</p>
+    <p>
+     Skolem functions are reifiable.</p>
+    <p>
+Unreifiable functions include mathematical functions like #$PlusFn. Just
+because we use a NAT like (#$PlusFn 59 64) doesn't mean we want to add to 
+the KB a NART denoting the number 123. There are infinite ways to denote 123 by this 
+method. If we want to talk about the number 123, we'll just refer to it directly.</p>
+    <p>
+Also, #$UnitOfMeasure is not a subset of #$ReifiableFunction, so terms such as 
+(#$Inch 37) and (#$Meter 500) are not reified when they are referred to. </p>
+    <h2>2.8.  <a NAME='137544016'>
+Assertions</a>
+    </h2>
+    <p>
+So far this document has dealt mostly with the syntax of sentences in CycL. 
+This is the syntax used by people or external programs when they assert things into a version
+of the CYC KB or query the KB. Now we will shift our focus to what sentences look 
+like once they have been asserted into the KB.</p>
+    <p>
+The CYC KB consists of a large number of assertions. When a sentence is successfully 
+asserted into the KB, it is stored as one of these. Each assertion is composed of a 
+number of elements: </p>
+    <li>a sentence</li>
+    <li>
+a microtheory</li>
+    <li>
+a truth value</li>
+    <li>
+a direction (or access level)</li>
+    <li>
+a support </li>
+    <p>
+     We'll discuss each of these and point out where they come from. It's important 
+that you be familiar with all of them: </p>
+    <h3>2.8.1.  <a NAME='137563880'>
+Sentences</a>
+    </h3>
+    <p>
+You are already familiar with sentences--they are the CycLSentence-Assertibles we 
+use to state things in the CYC KB.</p>
+    <h3>2.8.2.  <a NAME='137565216'>
+Microtheories</a>
+    </h3>
+    <p>
+Every assertion is contained in some microtheory. A particular sentence may be 
+asserted into (or concluded in) more than one microtheory; when this is the
+case, there will be an assertion which has that sentence in each of those 
+microtheories. The largest number of assertions are currently in the #$BaseKB.</p>
+    <p>
+Microtheories are covered in more detail here, as well as in the constant vocabulary, 
+under #$Microtheory. Where does the microtheory information on assertions come 
+from? That depends on the origin of the assertion. If an assertion is added to the 
+KB by the inference engine as the result of firing a rule, the inference engine 
+code decides what microtheory the conclusion should be added in and records it 
+at add time. If an assertion is the result of a person or external program 
+asserting a sentence into the KB, at that time the asserter must specify which 
+microtheory the sentence is to go in. Some interfaces for  knowledge entry 
+may not require the user to specify a microtheory for new assertions, and will 
+then either try to choose the right one or will use #$BaseKB as a default. If you 
+use such an interface make sure you know what the default behavior is, 
+because the BaseKB is usually far too general a place for new knowledge. 
+</p>
+    <h3>2.8.3.  <a NAME='137570224'>
+Truth Values</a>
+    </h3>
+    <p>
+Attached to every assertion is a truth value that indicates its degree 
+of truth. CycL contains five possible truth values, of which the most 
+common are default true and monotonically true.</p>
+    <p>
+Assertions that are monotonically true are held to be true in every 
+case, that is, for every possible set of bindings to the universally quantified 
+variables (if any) in the assertion, and cannot be overridden. In the 
+case of a monotonically true assertion with universally quantified variables 
+in its sentence, if an object is found for which the assertion is not true, 
+an error is signalled. In the case of a ground assertion that is monotonically true, 
+if the negation of that sentence is ever asserted or arrived at during inference 
+(in the same microtheory), an error is signalled.</p>
+    <p>
+Assertions that are default true, in contrast, are held to be true in most 
+cases, and can be overridden. If the negation of an existing ground, default 
+assertion is asserted in the same microtheory, or is arrived at through inference, 
+no error is signalled. Instead, the argumentation mechanism is invoked to decide what
+the final truth value of the assertion will be.</p>
+    <p>
+By default, GAFs which begin with the predicates #$isa and #$genls are 
+monotonically true, while all other assertions (including rules) are default true.</p>
+    <h3>2.8.4.  <a NAME='137581464'>
+Directions</a>
+    </h3>
+    <p>
+Direction is a value associated with every assertion that determines when 
+inferencing involving that assertion should be performed. There are three 
+possible values for direction: forward, backward, and code. Inferencing 
+involving assertions with direction forward is performed at assert time 
+(that is, when a new assertion is added to the KB), while inferencing involving 
+assertions with direction backward is postponed until a query occurs and 
+that query allows backward inference. By default, GAFs have direction 
+forward, while rules have direction backward. Only in very special cases should 
+rules have direction forward.</p>
+    <p>
+Assertions with direction code are not used in normal inference at all; 
+instead, special HL modules have been written to supplant the need for 
+inference using the assertion itself, and the assertion remains in the KB 
+for documentation purposes only. Code assertions cannot be edited via the HTML 
+interface. </p>
+    <p>
+ One way of viewing directions is as a hierarchy of "when it gets used" :</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+:code </em>
+        </dt>
+        <dd>
+Assertions declared :code are exhaustively supported directly by HL modules. </dd>
+        <dt>
+          <em>
+:forward</em>
+        </dt>
+        <dd>
+Assertions declared forward are used exhaustively in forward inference. All 
+   :code assertions are also used implicitly at this level since the HL modules
+   supplanting them are used here.</dd>
+        <dt>
+          <em>
+:backward</em>
+        </dt>
+        <dd>
+Assertions declared backward are only used in backward inference. All :forward 
+   assertions are also used at this level, and the HL modules supplanting
+   :code assertions are again used at this level.</dd>
+      </dl>
+    </blockquote>
+    <h3>2.8.5.  <a NAME='137601984'>
+Supports</a>
+    </h3>
+    <p>
+Attached to every assertion is a support, which consists of one or more 
+justifications which form the support for the presence of the assertion in 
+the KB. In  many cases, at least one of the supporting justifications is 
+local, indicating that the assertion was added to the KB from an outside 
+source (most commonly, a human KEer). In other cases, a supporting 
+justification is a source which indicates the assertion was inferred and 
+which outlines the final step of some argument, or chain of reasoning, 
+which supports the assertion.</p>
+    <p>
+The support is the one element of an assertion which need not be 
+specified by the KEer when performing knowledge entry. It is created and updated 
+automatically. However, supports can be displayed by KB browsing tools.
+</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

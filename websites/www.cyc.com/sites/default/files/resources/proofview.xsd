@@ -1,0 +1,71 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  xmlns:cycml='http://www.opencyc.org/xml/cycML/'
+  targetNamespace='http://www.opencyc.org/xml/proofView/'
+  xmlns:proofview='http://www.opencyc.org/xml/proofView/'
+  xmlns:jaxb='http://java.sun.com/xml/ns/jaxb' jaxb:version='2.0'>
+
+  <import
+    namespace='http://www.opencyc.org/xml/cycML/'
+    schemaLocation='http://www.cyc.com/resource/xsd/cycml.xsd'    
+    />
+
+    
+  <annotation>
+    <appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name='org.opencyc.xml.proofview'/>
+      </jaxb:schemaBindings>
+    </appinfo>
+  </annotation>
+ 
+  <element name='proof-view'>    
+    <complexType>
+      <all>
+        <element ref='proofview:proof-view-entry'/>
+      </all>
+      <attribute name='id' type='integer' use='required'/>
+    </complexType>
+  </element>
+  
+  <element name='proof-view-entry'> 
+    <complexType>   
+      <all>
+        <element ref='cycml:paraphrase' minOccurs='0'/>
+        <element ref='proofview:cycl' minOccurs='0'/>
+        <element ref='proofview:silk' minOccurs='0'/>
+        <element ref='proofview:content' minOccurs='0'/>
+        <element ref='proofview:sub-entries' minOccurs='0'/>
+      </all>
+      <attribute name='id' type='integer' use='required'/>
+      <attribute name='expand-initially' type='boolean'/>
+      <attribute name='label' type='string'/>
+      <attribute name='object-type' type='string'/>
+      <attribute name='abduced-support' type='boolean'/>
+    </complexType>
+  </element>
+  
+  <element name='content'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+        <element ref='cycml:sentence'/>
+        <element ref='cycml:string'/>
+        <element ref='cycml:number'/>
+      </choice>
+    </complexType>
+  </element>
+  
+  <element name='sub-entries'>
+    <complexType>
+      <sequence minOccurs='1' maxOccurs='unbounded'>
+        <element ref='proofview:proof-view-entry'/>
+      </sequence>
+    </complexType>
+  </element>
+  
+  <element name='cycl' type='string'/>
+  
+  <element name='silk' type='string'/>
+</schema>

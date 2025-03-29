@@ -1,0 +1,624 @@
+00:00:00 --- log: started opencyc/02.04.29
+00:02:05 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+00:02:05 <CycLBot> I am initializing
+00:02:06 <CycLBot> I am ready to chat
+00:02:43 --- quit: CycLBot (Remote closed the connection)
+01:04:18 --- join: dash (washort@d155.narrowgate.net) joined #opencyc
+01:28:20 <dmiles-> hi dash
+01:28:28 <dash> dmiles-: hello!
+01:28:43 * dmiles- is AKA nephrael
+01:28:49 <dash> aha.
+01:28:57 <dash> i knew i'd seen that nick before. :)
+01:29:04 <dmiles-> reconized your host
+01:29:18 <dmiles-> so what are you up to?
+01:29:21 <dash> i recently discovered opencyc.... wow, it's interesting :)
+01:29:33 <dmiles-> very.. its da' bomb ;P
+01:29:34 <dash> it's a crack magnet
+01:29:52 <dmiles-> true, 
+01:30:03 <dmiles-> have you an application for it?
+01:30:15 <dmiles-> your a lisp programmer right?
+01:30:19 <dash> yeah
+01:30:41 <dash> well... i'm wondering how hard it'd it would be to summarise (or at least identify) IRC conversation threads.
+01:30:55 <dmiles-> i tried that a while back
+01:31:01 <dmiles-> in #linux on Efnet
+01:31:14 <dmiles-> it was easier becasue people tended to prefix names
+01:31:21 <dash> right
+01:31:31 <dmiles-> but in slower channels it was based on keyword intersection
+01:31:38 <dmiles-> as well as time distance
+01:31:58 <dash> also, i'm noticing that a lot of the cyc code is java. any idea how hard it'd be to glue cyc to another language?
+01:32:02 <dash> say, a prolog or similar
+01:32:07 <dmiles-> so a qery '?' sopned up a pairup
+01:32:19 <dmiles-> well the API is java
+01:32:40 <dmiles-> i can easily interface the Java API over JNI to other languages..
+01:32:43 <dmiles-> i did for prolog
+01:32:50 <dash> well
+01:32:53 <dash> hm
+01:33:10 <dmiles-> but with prolog you kinda want a predicate cache/reflection
+01:33:10 * dash isn't very familiar with cyc's structure
+01:33:24 <dash> dmiles-: well, i'm thionking of Oz, actually
+01:33:28 <dmiles-> meaing you want cyc queries to look like prolog predicates
+01:33:45 <dmiles-> Oz.. i barely studied it.. refresh my memory
+01:33:57 <dash> it's a constrained-choice logic language
+01:34:07 <dmiles-> its its Peter <something> ?
+01:34:22 <dash> Van Roy?
+01:34:26 <dmiles-> yeah ;P
+01:34:47 <dmiles-> yeah i downloaded and tried it for a few a long whiule ago
+01:35:08 <dmiles-> as long as Oz allows C interface
+01:35:16 <dash> oh yes, definitely
+01:35:17 <dmiles-> is Oz a threading language?
+01:35:34 <dash> it doesn't use kernel threads, now
+01:35:35 <dash> s/now/no/
+01:35:56 <dmiles-> meaning.. when i linked in a SWI-Prolog to Ctyc i had to have one master thread that let sibling threads mutex it
+01:36:21 <dmiles-> so only one trhead used it at a time.. but that was a JNI and my knolwedge limits
+01:36:52 <dmiles-> so if its single threaded its much easier to make one .so use it
+01:37:19 <dmiles-> my thing is one thread loaded the .so .. and i couldnt figure out how to make that share between threads
+01:37:25 <dash> dmiles-: yeah, oz does its own concurrency stuff
+01:38:51 <dmiles-> well the nice thing with Cyc is it talks pretty well between sockerts
+01:39:02 <dmiles-> in fact thats its only connection tyio Java currently
+01:39:04 <dash> hm
+01:39:17 <dmiles-> and that is very multithreaded
+01:39:25 <dash> hmmm
+01:39:33 <dmiles-> to talk via the fasl port is simple
+01:40:17 <dmiles-> how would oz wish to view Cyc do you think? as queries and a database?
+01:40:29 <dash> hmmmmm
+01:40:48 <dmiles-> or like java it veiws Cyc as a place to make objects
+01:40:51 <dash> being able to use cyc terms as predicates would be nice
+01:40:59 <dmiles-> so an assertion is a collection of CycConstants
+01:41:07 <dash> actually
+01:41:39 <dmiles-> so Oz wuolld probly see it the way prolog would
+01:41:42 <dash> yeah
+01:42:21 <dmiles-> thats not hard as long as you figure you'd be in control of a caching/assertion/query/to proedicate system
+01:42:40 <dash> hm.
+01:42:49 <dmiles-> and then export that outside a wrap that makes those predicates feel like normal ones
+01:42:59 <dash> yeah
+01:43:11 <dash> before i get wrapped up in doing something like that
+01:43:17 <dash> i probably ought to learn cycL
+01:43:23 <dmiles-> ;)
+01:43:48 <dmiles-> dran iu ma loading a huge Microtheory right now on my machine so the bot is off
+01:44:02 <dmiles-> i have an IRC bot that lets you proactice CycL
+01:44:34 <dmiles-> its loading 60,000 assetions right now
+01:44:39 <dash> hee
+01:44:58 <dmiles-> oh but the web services are up
+01:44:58 <dash> that's the other thing i was wondering about, what's the most practical way to build a new microtheory at this point
+01:45:12 <dmiles-> what whould be in that microtheory?
+01:45:25 <dmiles-> is it data that applies to an application?
+01:45:40 <dmiles-> a Mircotheory is gernally a bag of facts and rules
+01:46:10 <dmiles-> so when building one i do this...
+01:46:27 <dmiles-> i create an application space.. for example geography
+01:46:32 <dash> i guess so, i'm thinking irc-conversation-summariser again, for the dev channel for a project;  i think i'd want to feed it knowledsge about developers and our various projects and interests
+01:47:02 <dmiles-> ah, then you may want a Mt that first is a time based liog
+01:47:14 <dmiles-> and one to hold infomation rthat you deducve
+01:47:38 <dmiles-> so then you put rules into the seciond one that read and view the first
+01:48:29 <dash> interesting
+01:48:31 <dmiles-> http://12.225.207.235:8080/logicmoo/ <- is a running Cyc you can look at
+01:48:40 <dash> yeah, i've got it running here
+01:48:45 <dmiles-> ok good
+01:49:20 <dash> well, thanks for the help
+01:49:24 <dash> i shall continue to read. :)
+01:50:22 <dash> by the way
+01:51:21 <dash> i dont suppose there's any place i could get the source the cyc world file?
+01:51:33 <dmiles-> there are some exports yes
+01:51:45 <dmiles-> in the SubL API docs io think
+01:51:54 <dash> er, source for
+01:52:19 <dmiles-> but source you may be interested in: http://www-ksl-svc.stanford.edu:5915/doc/hpkb/cyc2/index.html
+01:52:37 <dash> hm, interesting
+01:52:46 <dmiles-> some bvaraous subprojects have been dumping source to clone cyc
+01:53:28 <dmiles-> or do you mean the lisp code?
+01:53:33 <dash> right, the lisp code
+01:53:54 <dmiles-> well there are some SubL modules
+01:53:55 <dmiles-> http://www-ksl-svc.stanford.edu:5915/doc/hpkb/index.html
+01:54:18 <dash> cool. thanks
+01:54:57 <dmiles-> if you find a dump to CycL.. in the APi let me know about it
+02:03:50 --- quit: dash ("it's the IDEA that's lasted. the SYSTEM.")
+05:29:18 --- join: ErinnaGradjeva (~BZMMLLZD@162.160.30.61.isp.tfn.net.tw) joined #opencyc
+05:29:24 <ErinnaGradjeva> 8,4 Site Fixed and UPDATED 23/04 - Add 21 Full Movies ( 16.4 GB ) - XXX MOVIES - Like hardcore sex movies? Want to see tons of live streaming clips of everything from amateurs to pornstars getting it on? XXX Movie Vault is the place to be. Get your popcorn ready and start stroking to these movies JOIN NOW :  12,0 www.punheteiroshq.kit.net 
+05:29:26 --- part: ErinnaGradjeva left #opencyc
+06:26:01 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:26:01 <CycLBot> I am initializing
+06:26:02 <CycLBot> I am ready to chat
+06:28:12 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+06:28:41 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:28:41 <CycLBot> I am initializing
+06:28:42 <CycLBot> I am ready to chat
+06:34:36 --- quit: CycLBot (Remote closed the connection)
+06:34:56 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:34:56 <CycLBot> I am initializing
+06:34:56 <CycLBot> I am ready to chat
+07:18:06 <dmiles-> hrrm
+07:18:07 <dmiles-> Mt : BaseKB
+07:18:07 <dmiles-> Formula : 
+07:18:07 <dmiles-> (implies 
+07:18:07 <dmiles->    (isa 
+07:18:07 <dmiles->        (BorderBetweenFn ?X ?Y) Border) 
+07:18:09 <dmiles->    (bordersOn ?X ?Y))
+07:18:11 <dmiles-> Diagnosis : 
+07:18:13 <dmiles-> Term Border is isa-disjoint with arg-isa Collection
+07:18:15 <dmiles-> applicable to argument 2 of relation isa
+07:18:17 <dmiles-> in mt BaseKB.
+07:18:19 <dmiles-> Term (isa (BorderBetweenFn ?X ?Y) Border)
+07:18:21 <dmiles-> violates defnIff EL-SENTENCE-ASSERTIBLE?
+07:18:23 <dmiles-> of collection ELSentence-Assertible
+07:18:25 <dmiles-> applicable to arg 1 of implies
+07:18:27 <dmiles-> in mt BaseKB.
+07:18:52 <dmiles-> query: (isa (BorderBetweenFn ?X ?Y) Border)
+07:18:53 <CycLBot> java.lang.NullPointerException
+07:19:14 --- quit: CycLBot (Remote closed the connection)
+07:19:44 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:19:45 <CycLBot> I am initializing
+07:19:45 <CycLBot> I am ready to chat
+07:20:03 <dmiles-> query: (isa (BorderBetweenFn ?X ?Y) Border)
+07:20:03 <CycLBot> Your question returned 51 answers .. please refine. (here are the first five)
+07:20:05 <CycLBot> ?X = niger, ?Y = algeria
+07:20:06 <CycLBot> ?X = algeria, ?Y = tunisia
+07:20:07 <CycLBot> ?X = turkmenistan, ?Y = iran
+07:20:08 <CycLBot> ?X = algeria, ?Y = libya
+07:20:09 <CycLBot> ?X = pakistan, ?Y = iran
+07:21:26 <dmiles-> i would normally believe that any query could be a potentual anteceedant
+07:22:08 <dmiles-> why would i have the Wff above?
+07:22:55 <dmiles-> (the wff error)
+07:39:24 --- quit: CycLBot (Remote closed the connection)
+07:39:45 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:39:45 <CycLBot> I am initializing
+07:39:46 <CycLBot> I am ready to chat
+07:40:50 --- quit: CycLBot (Remote closed the connection)
+07:41:06 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:41:06 <CycLBot> I am initializing
+07:41:07 <CycLBot> I am ready to chat
+07:44:55 --- quit: CycLBot (Remote closed the connection)
+07:45:27 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:45:27 <CycLBot> I am initializing
+07:45:28 <CycLBot> I am ready to chat
+07:46:20 --- quit: CycLBot (Remote closed the connection)
+07:46:59 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:46:59 <CycLBot> I am initializing
+07:47:00 <CycLBot> I am ready to chat
+07:52:38 <stevereed> ask: (isa Border Collection)
+07:53:01 <CycLBot> Using microtheory#$stevereedChatMt for assertions until stevereed types "mt <something>"
+07:53:03 <CycLBot> the empty list
+07:53:33 <dmiles-> mt InferencePSC
+07:53:42 <dmiles-> that will set your 'ask'
+07:53:48 <stevereed> ok
+07:54:06 <stevereed> above non-wff says Border is not a Collection
+07:54:10 <dmiles-> 'query' uses EverythingPSC
+07:54:10 <stevereed> in BaseKB
+07:54:14 <stevereed> ok
+07:54:21 <dmiles-> lemme check it out reasl quick
+07:54:28 <stevereed> query: (isa Border Collection)
+07:54:29 <CycLBot> the empty list
+07:54:43 <dmiles-> query: (isa Border ?W)
+07:54:56 <CycLBot> ?W = CycL reifiable denotational term
+07:55:00 <CycLBot> ?W = fort
+07:55:02 <CycLBot> ?W = fort
+07:55:03 <CycLBot> ?W = e l expression
+07:55:05 <CycLBot> ?W = cyc l closed denotational term
+07:55:07 <CycLBot> ?W = cyc l closed atomic term
+07:55:09 <CycLBot> ?W = cyc l represented term
+07:55:10 <CycLBot> ?W = cyc l represented atomic term
+07:55:12 <CycLBot> ?W = cyc l denotational term
+07:55:14 <CycLBot> ?W = cyc l atomic term
+07:55:15 <CycLBot> ?W = hl expression
+07:55:16 <CycLBot> ?W = sub l expression
+07:55:18 <CycLBot> ?W = CycL term
+07:55:20 <CycLBot> ?W = cyc l expression
+07:55:21 <CycLBot> ?W = cyc l closed expression
+07:55:23 <CycLBot> ?W = cyc l indexed term
+07:55:25 <CycLBot> ?W = hl indexed term
+07:55:27 <CycLBot> ?W = ART
+07:55:28 <CycLBot> ?W = public constant
+07:55:31 <stevereed> Border is defined in BordersVocabularyMt
+07:55:35 <CycLBot> ?W = thing
+07:55:37 <CycLBot> ?W = partially intangible thing
+07:55:38 <CycLBot> ?W = intangible
+07:55:40 <CycLBot> ?W = mathematical or computational object
+07:55:41 <CycLBot> ?W = mathematical concept
+07:55:43 <CycLBot> ?W = intensional or extensional set
+07:55:57 <dmiles-> aha
+07:56:05 <stevereed> so the rule needs to be defined there (or below BordersVocabularyMt)
+07:56:17 <stevereed> By release 1.0,
+07:56:28 <stevereed> we will move *all* 
+07:56:34 <CycLBot> ?W = types of things
+07:56:35 <CycLBot> ?W = type of object
+07:56:36 <stevereed> definitional assertions to BaseKB
+07:56:41 <dmiles-> ..
+07:56:50 <stevereed> so avoid this type of problem
+07:56:56 <stevereed> and make cyc faster
+07:56:58 <dmiles-> That makes Very good sense
+07:57:14 <dmiles-> its seems like partitioning arround predicate classes is a very good rthing
+07:57:20 <stevereed> yes
+07:57:50 <stevereed> does CycLBot know about true assertions which have no variables?
+07:57:50 <dmiles-> i noticed comment is sometimes in BaseKB for everyones sake.. then more sopecific in Mt
+07:58:21 <stevereed> for example,
+07:58:26 <dmiles-> well it returns an em,pty list
+07:58:43 <dmiles-> since the query is converseArrayList
+07:58:46 <stevereed> should receive ((T . T)) from cyc
+07:59:01 <dmiles-> rr converse*List
+07:59:05 <stevereed> if not, then a bug
+07:59:19 <stevereed> can you do:
+07:59:39 <stevereed> query: (isa Border Collection)  
+07:59:41 <CycLBot> the empty list
+07:59:45 <stevereed> --> True
+08:00:15 <dmiles-> i believe so.. lets check..
+08:00:17 <stevereed> Let me look at an api test case.
+08:00:35 <stevereed> it will take a few minutes to get the environment set up.
+08:00:53 <dmiles-> subl: (cyc-ask '(#$isa #$Border #$Collection)  #$InferencePSC)
+08:00:54 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator CYC-ASK is not defined in the API")
+08:01:03 <dmiles-> subl: (cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)
+08:01:05 <CycLBot> the empty list
+08:01:16 <dmiles-> it may be how i am parsing out CycLists
+08:01:23 <dmiles-> in fact i'll check
+08:01:48 <dmiles-> oh
+08:02:04 <dmiles-> noparaphrase #opencyc
+08:02:08 <dmiles-> subl: (cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)
+08:02:09 <CycLBot> (NIL)
+08:02:38 <dmiles-> thsts the toString()
+08:03:22 <dmiles-> bsh: res= CycLBot.converse("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)")
+08:03:23 <CycLBot> Sourced file: <Inline eval of: res= CycLBot.converse("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)"); > : Error in method invocation: Method converse( java.lang.String ) not foun
+08:03:23 <CycLBot> in class'logicmoo.MooIrcBot' : at Line: 1 : in file: <Inline eval of: res= CycLBot.converse("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)"); > : CycLBot .converse ( "(cyc-quer
+08:03:24 <CycLBot> '(#$isa #$Border #$Collection)  #$InferencePSC)" )
+08:03:35 <dmiles-> bsh: res= CycLBot.converseObject("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)")
+08:03:36 <CycLBot> Sourced file: <Inline eval of: res= CycLBot.converseObject("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)"); > : Error in method invocation: Method converseObject( java.lang.Strin
+08:03:36 <CycLBot> ) not found in class'logicmoo.MooIrcBot' : at Line: 1 : in file: <Inline eval of: res= CycLBot.converseObject("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)"); > : CycLBot .converseObjec
+08:03:37 <CycLBot> ( "(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)" )
+08:03:53 <dmiles-> bsh: res= CycMoo.converseObject("(cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)")
+08:03:55 <CycLBot> (NIL)
+08:04:14 <dmiles-> bsh: res.getClass()
+08:04:15 <CycLBot> class org.opencyc.cycobject.CycList
+08:04:47 <dmiles-> bsh: res= CycMoo.converseObject("(cyc-query '(#$isa #$isa #$BinaryPredicate)  #$InferencePSC)")
+08:04:47 <CycLBot> (NIL)
+08:05:03 <dmiles-> bsh: res.getClass()
+08:05:03 <CycLBot> class org.opencyc.cycobject.CycList
+08:05:09 <dmiles-> bsh: res.first()
+08:05:09 <CycLBot> NIL
+08:05:14 <dmiles-> bsh: res.rest()
+08:05:15 <CycLBot> ()
+08:05:45 <dmiles-> bsh: res.size()
+08:05:46 <CycLBot> 1
+08:06:22 <dmiles-> so evidently it is (NIL) as opposed to NIL
+08:06:49 <dmiles-> bsh: res= CycMoo.converseObject("(cyc-query '(#$isa #$isa #$TernaryPredicate)  #$InferencePSC)")
+08:06:50 <CycLBot> NIL
+08:07:07 <dmiles-> bsh: res.getClass()
+08:07:07 <CycLBot> class org.opencyc.cycobject.CycSymbol
+08:07:39 <dmiles-> bsh: res= CycMoo.converseBoolean("(cyc-query '(#$isa #$isa #$TernaryPredicate)  #$InferencePSC)")
+08:07:40 <CycLBot> false
+08:07:49 <dmiles-> bsh: res= CycMoo.converseBoolean("(cyc-query '(#$isa #$isa #$BinaryPredicate)  #$InferencePSC)")
+08:07:49 <CycLBot> false
+08:08:04 <dmiles-> not that that should of worked .. just testingh
+08:09:02 <dmiles-> so the deferecne is (NIL) = True , NIL = False
+08:10:47 <stevereed> when i put (cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)
+08:11:04 <stevereed> into the cyc command line,
+08:11:22 <stevereed> i get back ((T . T))
+08:11:28 <dmiles-> i just got:
+08:11:29 <dmiles-> CYC(1):  (cyc-query '(#$isa #$Border #$Collection)  #$InferencePSC)
+08:11:29 <dmiles-> (NIL)
+08:11:29 <dmiles-> :NUMBER
+08:11:47 <stevereed> Let me look at OpenCyc, I was using a full cyc.
+08:12:36 <dmiles-> :P
+08:12:54 <stevereed> OK, I got the same result as you did.
+08:13:00 <stevereed> So no bug.
+08:13:29 <stevereed> but (1) let me figure out the difference between OpenCyc and full cyc for this assertion.
+08:13:30 <dmiles-> i can detect the type of parphrase
+08:13:37 <dmiles-> yes
+08:13:46 <stevereed> (2) and let me find another better example.
+08:14:43 <dmiles-> ok
+08:18:48 <stevereed> looks like a problem with cyc-query
+08:18:55 <dmiles-> (NIL) makes sense.. "i return one possitive result (therefore non NIL) and carry no varible bindings so internally that result is NIL"
+08:19:07 <dmiles-> ah
+08:19:14 <stevereed> performs differently in Allegro lisp
+08:19:24 <stevereed> vs. compiled C version
+08:19:40 <stevereed> go to go for a while but will debug more.
+08:19:52 <dmiles-> cool.. i will be one later
+08:20:11 <dmiles-> i am about to drop for the morning ;P
+08:20:19 <dmiles-> back in 4 hours
+08:26:39 <stevereed> ok, no bug.
+08:27:32 <stevereed> cyc-query returns (nil), for a tautology (true sentence, without variable bindings)
+08:27:56 <stevereed> and it uses fi-ask internally which returns ((T . T))
+08:28:09 <stevereed> cyc-query returns nil for no bindings.
+08:28:53 <stevereed> so you can make cyc-query transform an answer of (nil) to 'true sentence'
+08:29:31 <stevereed> and an answer of nil to 'no answers found'
+08:30:17 <stevereed> in a later release, we will provide an easy way to retrieve the query termination reason.
+08:31:12 <stevereed> that says why no answers were found: out-of-time, number-of-answers-cuttof-reached, search-space-exhausted, tautology.
+08:59:21 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+13:29:39 --- quit: Taral ("bbl")
+14:25:31 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+16:02:46 --- quit: Method (carter.openprojects.net irc.openprojects.net)
+16:02:46 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:03:02 --- quit: mea_away (carter.openprojects.net irc.openprojects.net)
+16:03:02 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:03:02 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+16:03:02 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:03:02 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+16:03:19 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:03:19 --- mode: carter.openprojects.net set +o ChanServ
+16:03:26 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+16:03:26 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:03:26 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:03:26 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:03:26 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:03:26 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:05:24 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:05:24 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+16:05:24 --- quit: mea_away (carter.openprojects.net irc.openprojects.net)
+16:05:27 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:05:30 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:05:30 --- quit: Method (carter.openprojects.net irc.openprojects.net)
+16:05:30 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+16:05:55 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:05:55 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:05:55 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:05:55 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:05:55 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:05:55 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:05:55 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+16:05:55 --- mode: carter.openprojects.net set +o ChanServ
+16:06:40 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+16:06:40 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:06:47 --- quit: mea_away (carter.openprojects.net irc.openprojects.net)
+16:06:47 --- quit: Method (carter.openprojects.net irc.openprojects.net)
+16:06:47 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:06:47 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:06:47 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+16:07:04 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:07:04 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:07:04 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:07:04 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:07:04 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:07:04 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:07:04 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+16:07:04 --- mode: carter.openprojects.net set +o ChanServ
+16:07:20 --- quit: ChanServ (Killed (pratchett.openprojects.net (devlin.openprojects.net <- carter.openprojects.net)))
+16:07:20 --- quit: Method (Killed (pratchett.openprojects.net (devlin.openprojects.net <- carter.openprojects.net)))
+16:07:31 --- quit: mea_away (Killed (pratchett.openprojects.net (devlin.openprojects.net <- carter.openprojects.net)))
+16:07:49 --- quit: Graham (Killed (pratchett.openprojects.net (devlin.openprojects.net <- carter.openprojects.net)))
+16:07:49 --- quit: stevereed_home (Killed (pratchett.openprojects.net (devlin.openprojects.net <- carter.openprojects.net)))
+16:08:05 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:08:06 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:08:27 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:08:27 --- quit: mea_culpa (carter.openprojects.net irc.openprojects.net)
+16:08:34 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:08:34 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:08:50 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:08:50 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:08:50 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:08:50 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:08:50 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:08:50 --- mode: carter.openprojects.net set +o ChanServ
+16:08:50 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:09:28 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+16:11:12 <dmiles-> res.first().equals(new org.opencyc.cycobject.CycSymbol("NIL"))
+16:11:25 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+16:11:25 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+16:11:25 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:11:25 --- quit: mea_culpa (carter.openprojects.net irc.openprojects.net)
+16:11:27 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:11:27 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:11:43 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:11:43 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:11:43 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:11:43 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:11:43 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:11:43 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:11:43 --- mode: carter.openprojects.net set +o ChanServ
+16:12:01 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+16:12:01 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:12:01 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+16:12:01 --- quit: mea_culpa (carter.openprojects.net irc.openprojects.net)
+16:12:07 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+16:12:07 --- quit: dmiles- (carter.openprojects.net irc.openprojects.net)
+16:12:17 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:12:17 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+16:12:17 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+16:12:17 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+16:12:17 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:12:17 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:12:17 --- mode: carter.openprojects.net set +o ChanServ
+16:18:55 --- quit: CycLBot (Remote closed the connection)
+16:19:20 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:19:21 <CycLBot> I am initializing
+16:19:21 <CycLBot> I am ready to chat
+16:19:49 <dmiles-> query: (isa Border Collection)  
+16:19:50 <CycLBot> the empty list
+16:20:11 <dmiles-> query: (isa Border Border)  
+16:20:11 <CycLBot> no answers found
+16:20:29 <dmiles-> ok the no ansers fond works
+16:21:25 --- quit: CycLBot (Remote closed the connection)
+16:21:45 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:21:46 <CycLBot> I am initializing
+16:21:46 <CycLBot> I am ready to chat
+16:21:49 <dmiles-> query: (isa Border Collection)  
+16:21:54 <CycLBot> true sentence
+16:22:50 <dmiles-> query: (isa Border Border)  
+16:22:51 <CycLBot> no answers found
+16:23:24 <dmiles-> help query
+16:23:25 <CycLBot> usage: help <hello|time|join|part|ask|query|assert|cyclify>
+16:24:13 <dmiles-> bsh: CycMoo.createRooms()
+16:26:06 <dmiles-> hrrm,  
+16:26:26 <dmiles-> subl: (generate-phrase '(CoastlineFn Algeria)
+16:26:27 <CycLBot> java.lang.RuntimeException: Invalid expression, sval: null  st: Token[EOF], line 1  tok: -1
+16:26:34 <dmiles-> subl: (generate-phrase '(CoastlineFn Algeria))
+16:26:34 <CycLBot> the symbol COASTLINEFN the symbol ALGERIA
+16:26:44 <dmiles-> subl: (generate-phrase '(#$CoastlineFn #$Algeria))
+16:26:45 <CycLBot> coastline fn algeria
+16:27:15 <dmiles-> query: (?X CoastlineFn ?Y)
+16:27:17 <CycLBot> ?X = isa, ?Y = individual-denoting function
+16:27:18 <CycLBot> ?X = isa, ?Y = reifiable function
+16:27:19 <CycLBot> ?X = isa, ?Y = unary function
+16:27:20 <CycLBot> ?X = arity, ?Y = 1
+16:27:22 <CycLBot> ?X = arg 1 isa, ?Y = geographical region
+16:27:22 <CycLBot> ?X = comment, ?Y =  ( #$CoastlineFn ?REG ) denotes the entirety of the coastline of the region ?REG. This may involve a few discontinuous pieces, as with ( #$CoastlineFn #$Spain ) . The coastlin
+16:27:23 <CycLBot> of a region may include the coast of an #$InlandSea, if that inland sea provides easy access to #$TheOceanSea. For example, #$Iran's piece of the #$CaspianSea does not count as part of the 
+16:27:24 <CycLBot> #$CoastlineFn #$Iran ) , since the #$CaspianSea provides no ocean access; but #$Ukraine's border with the #$BlackSea does count as part of the ( #$CoastlineFn #$Ukraine ) , since the #$BlackSe
+16:27:27 <CycLBot> provides access to the #$MediterraneanSea.
+16:27:29 <CycLBot> ?X = result isa, ?Y = topographical feature
+16:28:06 <dmiles-> mt EverythingPSC
+16:28:57 <dmiles-> query: (?X UnitedKingdomOfGreatBritainAndNorthernIreland ?Y)
+16:28:59 <CycLBot> ?X = isa, ?Y = independent country
+16:29:00 <CycLBot> ?X = isa, ?Y = western european country
+16:29:01 <CycLBot> ?X = isa, ?Y = h p k b - scenario agent
+16:29:02 <CycLBot> ?X = isa, ?Y = entity
+16:29:03 <CycLBot> ?X = isa, ?Y = nuclear weapon state under n n p t
+16:29:04 <CycLBot> ?X = isa, ?Y = public constant
+16:29:05 <CycLBot> ?X = conceptually related, ?Y = great britain - the island
+16:29:07 <CycLBot> ?X = controls, ?Y = (TerritorialSeaFn UnitedKingdomOfGreatBritainAndNorthernIreland)
+16:29:07 <CycLBot> ?X = geographical sub regions, ?Y = (CoastlineFn UnitedKingdomOfGreatBritainAndNorthernIreland)
+16:29:08 <CycLBot> ?X = geographical sub regions, ?Y = scotland
+16:29:10 <CycLBot> ?X = geographical sub regions, ?Y = city of belfast northern ireland
+16:29:12 <CycLBot> ?X = geographical sub regions, ?Y = city of cardiff wales
+16:29:14 <CycLBot> ?X = geographical sub regions, ?Y = city of bristol england
+16:29:16 <CycLBot> ?X = geographical sub regions, ?Y = city of aberdeen scotland
+16:29:18 <CycLBot> ?X = geographical sub regions, ?Y = city of grangemouth u k
+16:29:19 <dmiles-> ..
+16:29:20 <CycLBot> ?X = geographical sub regions, ?Y = great britain - the island
+16:29:22 <CycLBot> ?X = geographical sub regions, ?Y = northern ireland
+16:29:24 <CycLBot> ?X = geographical sub regions, ?Y = fenland
+16:29:26 <CycLBot> ?X = national language, ?Y = English
+16:29:47 <dmiles-> query: (prettyString UnitedKingdomOfGreatBritainAndNorthernIreland ?Y)
+16:29:48 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+16:29:49 <CycLBot> (#$prettyString #$UnitedKingdomOfGreatBritainAndNorthernIreland ?Y)
+16:29:51 <CycLBot> was not well formed because:
+16:29:51 <CycLBot> (#$prettyString #$UnitedKingdomOfGreatBritainAndNorthernIreland ?Y) is not a well-formed formula.
+16:29:51 <CycLBot> Perhaps #$prettyString is insufficiently defined.")
+16:29:59 <dmiles-> query: (prettyName UnitedKingdomOfGreatBritainAndNorthernIreland ?Y)
+16:30:00 <CycLBot> no answers found
+16:30:09 <dmiles-> query: (nameString UnitedKingdomOfGreatBritainAndNorthernIreland ?Y)
+16:30:10 <CycLBot> no answers found
+16:31:28 <dmiles-> oh.. i havetn loaded the paraphrase info
+16:31:44 <dmiles-> i was trying to find a problem.. but i havent loaded the extra Mts
+16:36:46 <dmiles-> but the (NIL)/NIL is fixed
+16:42:45 --- join: dash (washort@d157.narrowgate.net) joined #opencyc
+16:43:40 <dmiles-> noparaphrase #opencyc
+16:44:40 <dmiles-> query: (isa Border Collection)
+16:44:41 <CycLBot> true sentence
+16:44:56 <stevereed> cool
+16:45:09 <dmiles-> good it works whether or not paraphrase is on
+16:45:17 <dmiles-> just checked it in
+16:45:27 <stevereed> very cool
+16:46:31 <dmiles-> do you know of some accedently left public cycl files from IKB ?
+16:46:44 <dmiles-> not at cyccorp but parners
+16:46:50 <dmiles-> err partners 
+16:47:14 <dmiles-> i am trying to get as much ground instantance data i can
+16:47:37 <dmiles-> i found some hpkb material at stanford 
+16:48:32 <dmiles-> but looking to get my world file as close to ikb as possible
+16:49:32 <stevereed> hmm...
+16:49:51 <stevereed> that would have happened during the HPKB project.
+16:49:51 <dmiles-> here was all i found so far http://www-ksl-svc.stanford.edu:5915/doc/hpkb/cyc2/index.html
+16:50:07 <stevereed> and that's was finishing as I arrived at Cycorp.
+16:50:40 <stevereed> If we stay on track with OpenCyc releases,
+16:50:45 <dmiles-> ah.. i am thinking maybe some daml things may reflect it
+16:51:04 <stevereed> you should see IKB level of content by year end
+16:51:18 <stevereed> we have 100,000 axioms in OpenCyc now
+16:51:33 <stevereed> that could double by year end
+16:51:33 <dmiles-> yeah, it will be nice when there is obnly one cyc to maintain
+16:51:53 <stevereed> we use a KB subset process, so there is always just one here.
+16:52:13 <stevereed> We mark the constants to relase, and make a subset world build
+16:52:31 <dmiles-> yeah.. as long as that process has ther same names for constants its probly pretty ok
+16:52:44 <stevereed> more than that,
+16:52:47 <stevereed> the guids match.
+16:53:03 <stevereed> but the old KIF stuff
+16:53:04 <dmiles-> like i notice CycSystem* has become SubL*
+16:53:09 <stevereed> may have renames.
+16:53:13 <stevereed> right - renames.
+16:53:43 <stevereed> I would not spend too much time on IKB stuff, because it will eventually be public,
+16:53:57 <stevereed> except for military stuff recently developed.
+16:54:16 <stevereed> but kif content developed by other companies/universities,
+16:54:20 <stevereed> is interesting.
+16:54:21 <dmiles-> i am mostly looking to get a strong list of geographical regions.. more like world fact book info
+16:54:28 <dmiles-> but wuith bordersOn
+16:54:33 <stevereed> we have that and you will see tt soon.,
+16:54:48 <stevereed> As soon I get CycML working
+16:55:10 <stevereed> We have the CIA World Factbook in cyc
+16:55:22 <dmiles-> yeah .. alot of companies would do dumps from cyc then try to reinvent it 
+16:55:26 <stevereed> no review is required
+16:55:41 <stevereed> its just facts, no rules.
+16:56:05 <stevereed> So I'll keep you posted on that content.
+16:56:16 <dmiles-> that is good.. yes just facts
+16:56:17 <stevereed> you should be able to get it within a month.
+16:56:35 <stevereed> I'll send you a CycML file as the beta tester.
+16:56:46 <dmiles-> excellent
+16:56:49 <stevereed> got to go now..
+16:56:52 <stevereed> bye!
+16:57:06 <dmiles-> is loadCycMl going to get into the Java API?
+16:57:20 <stevereed> It will be SubL and open source.
+16:57:21 <dmiles-> ok take care.. thank you
+16:57:32 <stevereed> parser and generator.
+16:57:55 <dmiles-> good so we can make it into a java class then.. i'll add an http get assist
+16:58:36 <dmiles-> and maybe a sample jsp giver based on the generator
+16:58:47 <stevereed> sure.
+16:59:01 <stevereed> but really got to go.
+16:59:07 <dmiles-> ok see you soon!
+17:55:20 --- quit: dash ("0xDEADBEEF")
+18:00:56 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+18:01:01 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+18:01:09 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:01:10 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+18:42:25 --- join: dash (washort@d123.narrowgate.net) joined #opencyc
+18:44:34 <dmiles> hi dash
+18:44:38 <dash> hello hello
+18:44:39 <CycLBot> hello dash
+18:44:49 <dmiles> oh you has a hello 'png'
+18:44:52 <dmiles> err he
+18:44:55 <dmiles> rr it
+18:45:02 <dash> CycLBot: you're getting quite friendly
+18:45:07 <dash> dmiles: heh heh
+18:47:00 <dmiles> i am interested in your ideas about IRC conversion threading
+18:47:13 <dash> i dont have any specific ideas yet
+18:47:39 <dmiles> would be interesting to have CycLBot log into a microtheory with times
+18:52:25 <dash> dmiles: right now i'm trying to figure out how to do NLP using cyc
+18:53:30 <dmiles> cyc has good generation abiltyies
+18:53:47 <dmiles> paraphrase (isa Fido Dog)
+18:53:48 <CycLBot> fido is a dog
+18:54:03 <dash> well, for the irc stuff i'd be interested in understanding, of course
+18:55:23 <dmiles> yes, cyc stores the common sense to make understanding possible
+18:55:38 <dash> yeah, i've seen it, i'm just not sure how to best use it :)
+18:56:35 <dmiles> well if i was doing it.. i would probly use a link to prolog DCGs gebnerated by cyc
+18:56:43 <dash> Hm.
+18:57:07 <dmiles> meaning i would start out with based controlled nartual language DCGs that deal with language types
+18:57:30 <dmiles> then have cyc label the words
+18:57:44 <dmiles> well acrtually
+18:57:51 <dmiles> input->cyc labels->
+18:57:58 <dmiles> prolog DCG
+18:58:20 <dash> hm.
+18:58:53 <dmiles> i am not sure how Cycs NL researchers are targeting it
+18:59:16 <dmiles> then once prolog DCG thinks it has a possiblity
+18:59:23 <dmiles> query cyc to see if its possible
+18:59:23 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+18:59:47 <dmiles> as in fits a well formed concept
+19:00:28 <dmiles> but there are some levels between input and labling.. like spelling grammer/ idiomatic detection
+19:00:43 <dmiles> like "raining cats and dogs"
+19:02:15 <dmiles> i suspect cyc is planning to do NL to CycL though
+19:02:24 <dmiles> i just dont see where it is in the API yet
+19:03:35 <dmiles> i always bring this up when talking about NL, but i saw a demo from MS one (i think i demo'd it in #lisp on efnet a couple years ago)
+19:03:48 <dmiles> in the prolog boty
+19:04:14 <dmiles> but MS has a parsing tool that will be pubklic soon that producces goo dlogical propositional form
+19:04:23 <dash> interesting
+19:04:47 <dmiles> their parser uses the PLNLP methodogy
+19:05:01 <dmiles> (by Karen Jensen)
+19:05:55 <dash> i really know very little about NLP... i need to figure out what's reasonably possible and what isn't
+19:10:54 <dmiles> not sure myself yet 
+19:13:38 <dmiles> i am myself not working on NLP, but in a few weeks i am going to make a NLP-MELD sockect server.. you send NL to it and it returns the LF proposition
+19:14:44 <dmiles> i am hoping to use it when trying to talk to Cyc in engluish.. it will go there to get the LF but wont use cyc in that portion yet
+19:16:07 <dmiles> yet as in i'd like to but not sure how to get into the inner loop of the MELD server
+19:48:15 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:48:29 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:56:40 --- quit: CycLBot (Remote closed the connection)
+19:58:22 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+19:58:22 <CycLBot> I am initializing
+19:58:23 <CycLBot> I am ready to chat
+20:27:27 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+20:27:39 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:27:50 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:28:27 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+20:39:41 --- quit: CycLBot (Excess Flood)
+20:39:50 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+20:41:08 --- quit: CycLBot (Excess Flood)
+20:43:03 --- quit: Method (Connection timed out)
+20:43:57 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+20:43:58 <CycLBot> I am initializing
+20:43:58 <CycLBot> I am ready to chat
+21:16:54 --- join: Method (Method@ip68-12-88-154.ok.ok.cox.net) joined #opencyc
+22:10:19 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+22:10:19 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+22:10:25 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+22:10:29 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+22:42:28 <dash> how do you do lexification from the api?
+23:42:38 --- quit: dash (Read error: 113 (No route to host))
+23:59:59 --- log: ended opencyc/02.04.29

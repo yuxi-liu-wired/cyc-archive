@@ -1,0 +1,219 @@
+00:00:00 --- log: started opencyc/02.04.10
+00:21:33 --- join: sandro_ (~sandro@tux.w3.org) joined #opencyc
+00:22:15 --- quit: sandro (Read error: 104 (Connection reset by peer))
+01:00:59 --- quit: dmiles (Read error: 110 (Connection timed out))
+01:04:17 --- join: jdigital (~josh@203.89.194.197) joined #opencyc
+01:04:28 <jdigital> hi
+01:10:48 --- quit: jdigital ("[BX] You can breathe without BitchX, but I wouldn't recommend it")
+02:27:14 --- quit: sandro_ (Read error: 104 (Connection reset by peer))
+02:27:56 --- join: sandro_ (~sandro@tux.w3.org) joined #opencyc
+02:31:42 --- quit: Nolan (Read error: 110 (Connection timed out))
+02:32:44 --- join: DonF (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+02:34:59 --- quit: DonF (Client Quit)
+02:39:38 --- quit: sandro_ (Read error: 104 (Connection reset by peer))
+03:04:58 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+03:31:52 --- quit: Nolan (Read error: 110 (Connection timed out))
+03:37:20 --- join: dmiles (ZQWER@dialup-65.58.222.229.Dial1.Portland1.Level3.net) joined #opencyc
+03:37:34 <dmiles> success!
+03:37:42 <dmiles> i can load the IEEE ontology in OpenCyc
+03:38:00 <dmiles> now i have to make an additional alignment Mt
+03:38:43 <dmiles> its a slow as heck process of loading the 2600 assertions though
+03:39:27 <dmiles> Msg for Steve: my problem was i was not setting the Cyclist in the assertWithTranscript
+03:39:40 <dmiles> well in the CycAccess..
+03:39:55 <dmiles> also found i was not setting kePurpose
+03:41:36 <dmiles> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula 
+03:41:36 <dmiles>   (#$isa #$Becquerel #$SystemeInternationalUnit) 
+03:41:36 <dmiles> was not well formed because: 
+03:41:36 <dmiles> NIL")
+03:42:10 <dmiles> hrrm NIL is for prevoiuslty asserted forms?
+04:09:23 <bruce> dmiles: congrats!
+04:18:19 <dmiles> yes now have to make a desision...
+04:18:30 <dmiles> should mappings be a rtranslation..
+04:18:35 <dmiles> or asserted rules
+04:18:53 <dmiles> i need to find a mode that turns off TMS
+04:19:11 <dmiles> temporarily so i can create a mapping 
+04:20:04 <dmiles> i could just aupotmatically put a prednameSumo on the end of all of them
+04:20:35 <dmiles> err constant-SUMO
+04:21:02 <dmiles> so when one uplated the file they can pick a Constant suffix
+04:21:33 <dmiles> some issues is that they are the same predicates with CASE diffent
+04:21:52 <dmiles> cyc really doesnt like to see constants of the same name at a differnt case
+04:57:11 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+05:05:29 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+05:25:30 <dmiles> morning Seth
+05:25:53 <dmiles> i am Linking IEEE SUMO into Cyc
+05:26:21 <dmiles> have to decide.. maybe you can help since you have been reading and active on list
+05:27:08 <dmiles> if everything should get genled or if it should be text transiterated
+05:27:17 <dmiles> or if its not even nessiary ;P
+05:27:50 <dmiles> mainly i am hoping to start using ieee kif files in cyc
+05:29:06 <dmiles> sure.. could map isa/genls to instance/subclass .. but for example.. should it be in the text before load or (genlPreds subclass genls) ?
+06:05:14 <dmiles> what are the alterniatives to ke-assert-now
+06:05:17 <dmiles> ?
+06:19:28 --- quit: Nolan (Read error: 110 (Connection timed out))
+06:37:53 <dmiles> How do I reove an entire Mt in SubL ?
+06:38:04 <dmiles> (err remove)
+06:47:19 <dmiles> found the Blast
+07:06:00 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+08:22:36 --- quit: Nolan (Read error: 110 (Connection timed out))
+09:06:31 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+09:53:43 --- quit: dmiles (Read error: 113 (No route to host))
+09:55:26 * stevereed is away: I'm busy
+09:56:17 <stevereed> very busy today on darpa stuff but will be lurking.. congrats dmiles on kif import
+09:57:19 <stevereed> there is a way to turn off wff checking when asserting but it then is easy to make non-wff assertions in the kb
+09:57:57 <stevereed> turning off wff checking is for when you know that the input is wff because it is computer generated
+09:58:16 * stevereed is back
+10:20:30 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+10:23:04 <theos_wrk> evenin
+10:35:52 <johnd> dmiles, I'd like to discuss your SUMO import, when you're around
+10:36:02 * johnd is back (gone 78:48:43)
+10:36:25 <theos_wrk> johnd: I am not dmiles, but anyway I'd like to discuss a few things too :)
+10:36:36 <johnd> what's up
+10:37:00 <theos_wrk> I think I had a talk with Graham, but anyway here is the issue
+10:37:17 * theos_wrk .oO(How to tell...)
+10:37:19 <theos_wrk> anyway
+10:37:43 <theos_wrk> I am just initiating a phd around context awareness
+10:38:01 <theos_wrk> that can be titled like : "context awareness without using artificial sensors"
+10:38:04 <theos_wrk> meaning
+10:38:13 <theos_wrk> user and machine only
+10:38:24 <theos_wrk> preferrabla dialog (speech) interaction
+10:38:26 <johnd> like, you walk up to a mall, and...
+10:38:32 <theos_wrk> well
+10:38:36 <theos_wrk> something like that
+10:38:38 <theos_wrk> or
+10:38:38 <johnd> I read some of the log on this
+10:38:44 <theos_wrk> aha
+10:38:53 <theos_wrk> silver ufo shaped like building?
+10:38:56 <theos_wrk> hehe
+10:39:07 <johnd> have you heard of autoidcenter.org
+10:39:16 <theos_wrk> no
+10:39:21 * theos_wrk fires up galeon
+10:39:55 <theos_wrk> I think first of all the self location should be realized
+10:40:17 <theos_wrk> ahh
+10:40:17 <johnd> they're pushing for standards for RFIDs. That's what you get when you mix a GUID with a cheap $0.05 radio transmitter.
+10:40:28 <theos_wrk> ahh
+10:40:36 <johnd> Everything EVERYTHING gets labeled in the environment
+10:40:40 <theos_wrk> I know
+10:40:46 <johnd> being tested in places like wallmart
+10:40:52 <theos_wrk> but labels are not exactly what I would preferr
+10:40:53 <johnd> no scanning necessary
+10:41:06 <johnd> your computer could just know where everything is
+10:41:14 <johnd> what things are in front of it
+10:41:16 <theos_wrk> I know the chief of the medialab at mit, as well as thad and the guys
+10:41:19 <johnd> how they are oriented
+10:41:23 <theos_wrk> well
+10:41:39 <theos_wrk> the enviromental approach is one thing, that has many downsides
+10:41:53 <johnd> so, it needs a system that understands what all that stuff is
+10:42:12 <theos_wrk> for why? Is that really necessary
+10:42:27 <johnd> what? knowing what's there?
+10:42:38 <theos_wrk> Suppose I want to visit you
+10:42:46 <theos_wrk> I am in town and give you a phone call
+10:43:07 <theos_wrk> without any beacon and so on, I will find my way after you giving me the rough landmarks
+10:43:56 <theos_wrk> the environment tagging approach is one that tries to compesate for the inabilities of the "other" approaches
+10:44:08 <johnd> yes
+10:44:34 <theos_wrk> but it won't work
+10:44:42 <johnd> The argument is, why should I make a vision system try to figure out what it is. Man made it, man should mark it with info of what it is.
+10:44:48 --- quit: Seth ()
+10:44:57 <theos_wrk> that is one thing
+10:45:00 <theos_wrk> or
+10:45:04 <johnd> Why won't it work? I certainly haven't studied it enough
+10:45:29 <theos_wrk> Consider under water, consider rarely visited places
+10:45:37 <theos_wrk> or simply
+10:46:10 <johnd> so you're saying it won't work in all situations. that's fine. i'll take land, in ordinary inhabited places. that's a good start.
+10:46:10 * theos_wrk gets a phone call, plz give me a minute, the argument follows
+10:51:22 <theos_wrk> the use of such beacons iplies that you are forced to talk to them in their language
+10:51:40 <theos_wrk> in turn you would have to standardize this 
+10:51:47 <theos_wrk> reserving frequencies and so on
+10:51:56 <theos_wrk> then
+10:52:21 <theos_wrk> if you might wnat to change something you would have to change all the beacons everywhere
+10:52:25 <theos_wrk> or
+10:52:31 <theos_wrk> be backward compatible forever
+10:52:38 <johnd> yes, i think standardizing is what that group is all about
+10:52:40 <theos_wrk> that is definitely not a good roadmap
+10:52:54 <johnd> what would have to stay same forever. frequencies?
+10:53:01 <johnd> UHF has been same for 80 years
+10:53:18 <theos_wrk> the message of the beacon surely is not changeable
+10:53:29 <theos_wrk> unless you would find a way of making them updatable 
+10:53:41 <johnd> the beacon doesn't really transmit with it's own power, it's passive
+10:53:49 <theos_wrk> I know
+10:53:59 <theos_wrk> so you pull information from it, right?
+10:54:05 <johnd> the only message is the unique (instance-level-unique) id number
+10:54:38 <johnd> you can make that number mean anything, externally
+10:54:50 <theos_wrk> true
+10:55:10 <johnd> in fact, it can mean different things in different places
+10:55:17 <theos_wrk> that is the problem
+10:55:32 <johnd> in the factory, it could mean a coffee cup has made it through QC
+10:55:44 <johnd> at home, it could mean I left it in the livingroom
+10:56:04 <theos_wrk> true
+10:56:30 <theos_wrk> and what advantage is that?
+10:56:37 <johnd> first you said the problem was that it was too rigid (changing the infrastructure would be difficult)
+10:56:53 <johnd> then you said the problem was it was too flexible
+10:57:13 <johnd> House Computer, where did I leave my coffee cup?
+10:57:24 <theos_wrk> ;)
+10:57:29 <johnd> Computer: "It's in the living room."
+10:57:45 <johnd> I have to go to a meeting.
+10:57:47 --- join: Hedgehog (Filimon@213.233.66.135) joined #opencyc
+10:58:02 <johnd> I'd like to continue this when we're both here again.
+10:58:18 * johnd is away: I'm busy
+11:31:04 * theos_wrk is away: Humans distracting me!
+11:31:36 --- quit: Hedgehog (Read error: 113 (No route to host))
+12:03:03 <theos_wrk> johnd: will be there tomorrow 10:00-22:00 CEST
+13:16:08 --- quit: theos_wrk ("Client Exiting")
+13:44:58 --- join: dmiles (ZQWER@dialup-65.58.1.154.Dial1.Portland1.Level3.net) joined #opencyc
+13:45:19 <dmiles> hi
+13:45:31 <dmiles> steve: you got my messafge the problem is solved
+13:46:05 <dmiles> it was a Cyclist 
+13:46:18 <dmiles> null asserter 
+13:47:02 <dmiles> next question.. i dont even know if this is publicly askable
+13:47:10 <dmiles> i need an assert that doesnt start TMS
+13:47:43 <dmiles> something simular to ke-assert-now 
+13:47:59 <dmiles> so i can load up a Mt .. then start TMS on it
+13:48:32 <dmiles> is that really applicably possible?
+13:48:57 <dmiles> not that i am trying to curcumvent partial ordering of asserions
+13:49:28 <dmiles> or would this.. be better... ?
+13:49:46 <dmiles> create a KIFtoCycLMt 
+13:49:57 <dmiles> then create mapping rules...
+13:50:28 <dmiles> then genlMt the loading Mt to KIFtoCycLMt 
+14:00:18 <dmiles> updated http://logicmoo.sourceforge.net to include OpenCyc
+14:42:20 --- join: DonF (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+14:52:21 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+15:00:38 <dmiles> Hi Seth 
+15:01:57 <dmiles>  (#$isa #$JavaFieldAccessFn #$Function) 
+15:02:08 <dmiles> Term #$Function violates arg-isa #$Collection
+15:02:08 <dmiles> applicable to argument 2 of relation #$isa
+15:03:02 <dmiles> oh #$Function is not a Funtion 
+15:03:14 <dmiles> Err Collection
+15:19:46 <dmiles> Ok i need some help..
+15:19:59 <dmiles> i have this message
+15:20:00 <dmiles> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula 
+15:20:00 <dmiles>   (#$isa #$JavaComparableValueCollection #$CollectionType) 
+15:20:00 <dmiles> was not well formed because: 
+15:20:00 <dmiles> NIL")
+15:20:16 <dmiles> Returning NIL.. is that because its already known or asserted?
+15:23:17 --- join: kirk (~kirk@CPE014320108614.cpe.net.cable.rogers.com) joined #opencyc
+16:05:24 --- join: DouglasMiles (ZQWER@dialup-65.58.223.212.Dial1.Portland1.Level3.net) joined #opencyc
+16:30:05 --- quit: dmiles (Read error: 110 (Connection timed out))
+16:41:14 <DouglasMiles> I need a constant rename from CycAccess() what is the converse() string?
+16:41:41 <DouglasMiles> is there a document that shows some of the SubL macros ?
+17:54:48 --- quit: Nolan (Read error: 110 (Connection timed out))
+18:10:04 --- quit: kirk (K-lined)
+18:15:26 --- join: kirk (~kirk@CPE014320108614.cpe.net.cable.rogers.com) joined #opencyc
+18:32:08 --- part: DonF left #opencyc
+19:02:10 --- quit: kirk ("Leaving")
+19:11:12 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+19:29:22 <DouglasMiles> by making a Collection a CollectionType..
+19:29:39 <DouglasMiles> example:
+19:29:57 <DouglasMiles> (isa MyCollectionType CollectionType)
+19:30:15 <DouglasMiles> (isa MyCollectionType1 MyCollectionType)
+19:30:31 <DouglasMiles> (isa something MyCollectionType1)
+19:30:44 <DouglasMiles> third assertion fails
+19:31:17 <DouglasMiles> yet..
+19:31:18 <DouglasMiles> Query in BaseKB :
+19:31:18 <DouglasMiles> (implies 
+19:31:18 <DouglasMiles>    (isa ?CV CollectionType) 
+19:31:18 <DouglasMiles>    (isa ?CV Collection))
+19:31:18 <DouglasMiles> One Justification ::ISA   (isa HYP-CollectionType-8261 Collection) in Proof-HypotheticalContext-8263 
+19:31:56 <DouglasMiles> is TMS not allowed to Query for my ArgIsa ?
+22:27:27 <DouglasMiles> I need a constant rename from CycAccess() what is the converse() string?
+22:28:07 <DouglasMiles> alot of my questions are subL based, is the an web doc with the "SubL" API?
+23:33:43 --- quit: DouglasMiles (Read error: 110 (Connection timed out))
+23:58:34 --- join: dmiles (ZQWER@dialup-65.58.223.209.Dial1.Portland1.Level3.net) joined #opencyc
+23:59:59 --- log: ended opencyc/02.04.10

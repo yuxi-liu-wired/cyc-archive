@@ -1,0 +1,283 @@
+00:00:00 --- log: started opencyc/03.04.03
+00:01:10 --- join: Michael^2 (~sing@adsl-63-201-33-29.dsl.snfc21.pacbell.net) joined #opencyc
+00:09:40 --- quit: Michael^ (Read error: 60 (Operation timed out))
+00:41:43 --- join: mea_culpa (mea_culpa@12-212-98-134.client.attbi.com) joined #opencyc
+01:33:57 --- join: yepster (~yepster@a80-127-229-6.dial.xs4all.nl) joined #opencyc
+05:41:10 --- join: yepster-- (~yepster@a80-127-228-39.dial.xs4all.nl) joined #opencyc
+05:52:40 --- quit: yepster (Read error: 110 (Connection timed out))
+06:10:03 --- quit: Michael^2 (Read error: 54 (Connection reset by peer))
+06:11:56 --- join: Michael^2 (~sing@adsl-63-201-33-123.dsl.snfc21.pacbell.net) joined #opencyc
+06:19:02 --- nick: yepster-- -> yepster
+08:07:31 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:09:04 <kinoc2> yepster: been working on some LGP-to-logic form
+08:09:30 <kinoc2> sort of foundation work for LGP-to-CD
+08:09:49 <kinoc2> "John gave an orange to Bill for his cold"
+08:10:01 <kinoc2>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 gave-v)
+08:10:02 <kinoc2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 John)
+08:10:02 <kinoc2>  (#$ThereExists ?ITEM9 (is-node ?ITEM9 cold-n)
+08:10:02 <kinoc2>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 Bill)
+08:10:02 <kinoc2>  (#$ThereExists ?ITEM4 (is-node ?ITEM4 orange-n)
+08:10:02 <kinoc2>  (and  (AGENT ?EVENT2 ?ITEM1)
+08:10:04 <kinoc2>  (singular ?ITEM1)
+08:10:06 <kinoc2>  (XPROPERTY ?EVENT2 ?ITEM9)
+08:10:08 <kinoc2>  (XTIME ?EVENT2 ?ITEM9)
+08:10:10 <kinoc2>  (XBENIFITIARY ?EVENT2 ?ITEM9)
+08:10:12 <kinoc2>  (BENF ?EVENT2 ?ITEM9)
+08:10:14 <kinoc2>  (XDESTINATION ?EVENT2 ?ITEM6)
+08:10:16 <kinoc2>  (DEST ?EVENT2 ?ITEM6)
+08:10:18 <kinoc2>  (OBJECT ?EVENT2 ?ITEM4)
+08:10:20 <kinoc2>  (singular ?ITEM4)
+08:10:22 <kinoc2>  (AMOUNT ?ITEM4 an)
+08:10:24 <kinoc2>  )  ) ) ) ) ) 
+08:11:03 <kinoc2> or the better interpertation
+08:11:04 <kinoc2> (#$ThereExists ?EVENT2 (is-verb ?EVENT2 gave-v)
+08:11:04 <kinoc2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 John)
+08:11:04 <kinoc2>  (#$ThereExists ?ITEM9 (is-node ?ITEM9 cold-a)
+08:11:04 <kinoc2>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 Bill)
+08:11:04 <kinoc2>  (#$ThereExists ?ITEM4 (is-node ?ITEM4 orange-n)
+08:11:05 <kinoc2>  (and  (AGENT ?EVENT2 ?ITEM1)
+08:11:07 <kinoc2>  (singular ?ITEM1)
+08:11:09 <kinoc2>  (XPROPERTY ?EVENT2 ?ITEM9)
+08:11:11 <kinoc2>  (XTIME ?EVENT2 ?ITEM9)
+08:11:13 <kinoc2>  (XBENIFITIARY ?EVENT2 ?ITEM9)
+08:11:15 <kinoc2>  (BENF ?EVENT2 ?ITEM9)
+08:11:17 <kinoc2>  (XDESTINATION ?EVENT2 ?ITEM6)
+08:11:19 <kinoc2>  (DEST ?EVENT2 ?ITEM6)
+08:11:21 <kinoc2>  (OBJECT ?EVENT2 ?ITEM4)
+08:11:23 <kinoc2>  (singular ?ITEM4)
+08:11:25 <kinoc2>  (AMOUNT ?ITEM4 an)
+08:11:27 <kinoc2>  )  ) ) ) ) ) 
+08:12:17 <kinoc2> not done yet though. I have been taking the tack of trying to ontologize what knowledge is embedded in the LGP output
+08:15:11 <kinoc2> nesting the initial node creation #$ThereExists with the matching closing parens was the real trick, coupled with treating the lgp nodes as variables
+08:15:34 <kinoc2> thanks for the representational clue on doing it that way
+08:16:16 <kinoc2> so the next step would be to redo the pattern matching rules to produce CD structures
+08:17:03 <kinoc2> one background output of the system is a file that lists all the patterns that were NOT matched, already in a pattern rule format
+08:17:31 <kinoc2> so its easy to just cut, paste, and fill in the desired structure you want it to generate
+08:20:08 <kinoc2> Another approach is to leave it as it is, and then do the LGP to CD conversion as cyc inference
+08:21:42 <kinoc2> so you might have (implies (is-verb ?E gave-v)(isa ?E CD-ATRANS))
+08:22:16 <kinoc2> or as complex a rule set as required
+08:22:49 <kinoc2> thus bringing the KB more into the parsing process
+08:24:06 <kinoc2> lots to do still, but think I have the basic outliine of a engine to do it
+08:42:52 <yepster> kinoc2: reading
+08:44:53 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:44:54 <yepster> I think LGP to CD should be done (coded) outside cyc, put different, not with cycl rules
+08:47:32 <yepster> because if done in cyc, all knowledge that could possibly influence e.g. (isa ?E CD-ATRANS) must also be present in cyc
+08:48:18 * kinoc sorry, firewall based reset
+08:48:20 <yepster> decision of which symbol to pick in cyc -> could maybe be done by classifying sort of neural network
+08:48:50 <yepster> for each primitive act: train a network with sample sentences and output 0 or 1 for the primitive act
+08:49:42 <kinoc> ever look up 'context vectors' ?
+08:49:43 <yepster> : as example of a cd producing program that could not be implemented with simple cycl rules
+08:50:00 <yepster> nope
+08:50:37 <yepster> but about using cyc to decide which action. there is a predicate..
+08:50:57 * kinoc CV are like a Seft-organizing map (SOM) representation on the word/phrase/sentence/doc level
+08:51:08 * kinoc all in the same rep space
+08:51:15 <kinoc> go on
+08:51:23 <yepster> look at the predicate extent of #$verbSemTrans
+08:52:04 <kinoc> got to fire it up...
+08:52:21 <yepster> example:
+08:52:21 <yepster> (verbSemTrans Employ-TheWord 1 TransitiveNPCompFrame (hasWorkers :SUBJECT :OBJECT))
+08:52:36 <yepster> or
+08:52:36 <yepster> (verbSemTrans Lease-TheWord 0 TransitiveNPCompFrame (and (isa :ACTION Renting) (buyer :ACTION :SUBJECT) (objectPaidFor :ACTION :OBJECT)))
+08:52:43 <yepster> there are 668 of them
+08:53:28 <yepster> (verbSemTrans Let-TheWord 0 (PPCompFrameFn DitransitivePPCompFrame To-TheWord) (and (isa :ACTION Renting) (seller :ACTION :SUBJECT) (objectPaidFor :ACTION :OBJECT) (buyingPerformer :ACTION :OBLIQUE-OBJECT)))
+08:54:25 <kinoc> yeah. I guess I was thinking there may be some way to tap into that
+08:54:45 <kinoc> or conversely extract it
+08:55:36 <kinoc> changing (is-verb ?E gave-v) into (is-word ?E gave-TheWord) is easy
+08:57:17 <kinoc> (verbSemTrans Give-TheWord 0 (PPCompFrameFn DitransitivePPCompFrame To-TheWord) (and (isa :ACTION GivingSomething) (toPossessor :ACTION :OBLIQUE-OBJECT) (objectOfPossessionTransfer :ACTION :OBJECT) (fromPossessor :ACTION :SUBJECT)))
+09:03:10 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+09:22:32 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+09:22:46 * kinoc2 restart
+09:23:11 <kinoc2> I will have to think about it a bit. The knowledge needs to be somewhere in the chain
+09:40:48 --- quit: kinoc (Read error: 110 (Connection timed out))
+09:54:44 --- quit: yepster ()
+10:00:43 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+10:01:09 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:01:18 <kinoc> ...
+10:01:45 <kinoc> using the verbSemTrans as a guide 
+10:01:47 <kinoc>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 gave-v)
+10:01:47 <kinoc>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 John)
+10:01:47 <kinoc>  (#$ThereExists ?ITEM9 (is-node ?ITEM9 cold-n)
+10:01:48 <kinoc>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 Bill)
+10:01:48 <kinoc>  (#$ThereExists ?ITEM4 (is-node ?ITEM4 orange-n)
+10:01:48 <kinoc>  (and  (isa ?EVENT2 GivingSomething)
+10:01:50 <kinoc>  (fromPossessor ?EVENT2 ?ITEM1)
+10:01:52 <kinoc>  (AGENT ?EVENT2 ?ITEM1)
+10:01:54 <kinoc>  (singular ?ITEM1)
+10:01:56 <kinoc>  (XPROPERTY ?EVENT2 ?ITEM9)
+10:01:58 <kinoc>  (XTIME ?EVENT2 ?ITEM9)
+10:02:00 <kinoc>  (XBENIFITIARY ?EVENT2 ?ITEM9)
+10:02:02 <kinoc>  (BENF ?EVENT2 ?ITEM9)
+10:02:04 <kinoc>  (toPossesor ?EVENT2 ?ITEM6)
+10:02:06 <kinoc>  (XDESTINATION ?EVENT2 ?ITEM6)
+10:02:08 <kinoc>  (DEST ?EVENT2 ?ITEM6)
+10:02:10 <kinoc>  (objectOfPossessionTransfer ?EVENT2 ?ITEM4)
+10:02:12 <kinoc>  (OBJECT ?EVENT2 ?ITEM4)
+10:02:14 <kinoc>  (singular ?ITEM4)
+10:02:16 <kinoc>  (AMOUNT ?ITEM4 an)
+10:02:18 <kinoc>  )  ) ) ) ) ) 
+10:46:56 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:50:42 <KinoC2> yepster: what is your website for XP?
+11:05:54 --- quit: kinoc (Read error: 110 (Connection timed out))
+11:26:00 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+11:43:39 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:34:14 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:42:45 --- quit: Michael^2 (Read error: 60 (Operation timed out))
+12:43:00 --- join: Michael^2 (~sing@adsl-67-124-230-54.dsl.snfc21.pacbell.net) joined #opencyc
+12:52:54 --- quit: kinoc (Read error: 110 (Connection timed out))
+13:44:13 --- join: yepster (yepster_@vetteaap.xs4all.nl) joined #opencyc
+13:45:13 <yepster> KinoC2: it's kindoff permanent offline because our company moved location and with it provider + ip range
+13:45:26 <yepster> of the office lan, on which the xp page was located
+13:47:25 <yepster> i'm going to make a new home for it tomorrow
+14:03:07 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+15:08:44 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:18:12 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:20:00 <KinoC2> ...
+16:20:25 <KinoC2> did some test merging using the verbSemTrans
+16:20:43 <KinoC2> "Bill will drink the orange juice"
+16:21:04 <KinoC2> <cyc-hypolinks>
+16:21:04 <KinoC2>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 will-v)
+16:21:04 <KinoC2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 Bill)
+16:21:04 <KinoC2>  (#$ThereExists ?EVENT3 (is-verb ?EVENT3 drink-v)
+16:21:04 <KinoC2>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 juice-n)
+16:21:04 <KinoC2>  (#$ThereExists ?ITEM5 (isa-attrib ?ITEM5 orange-a)
+16:21:06 <KinoC2>  (and  (AGENT ?EVENT2 ?ITEM1)
+16:21:08 <KinoC2>  (singular ?ITEM1)
+16:21:10 <KinoC2>  (performedBy ?EVENT3 ?ITEM1)
+16:21:12 <KinoC2>  (AGENT ?EVENT3 ?ITEM1)
+16:21:14 <KinoC2>  (linkedv ?EVENT2 ?EVENT3)
+16:21:16 <KinoC2>  (inputsDestroyed ?EVENT3 ?ITEM6)
+16:21:18 <KinoC2>  (isa ?EVENT3 DrinkingEvent)
+16:21:20 <KinoC2>  (OBJECT ?EVENT3 ?ITEM6)
+16:21:22 <KinoC2>  (singular ?ITEM6)
+16:21:24 <KinoC2>  (DET ?ITEM6 the)
+16:21:26 <KinoC2>  (mass-noun ?ITEM6)
+16:21:30 <KinoC2>  (uncountable-noun ?ITEM6)
+16:21:30 <KinoC2>  (ATTRIB ?ITEM6 ?ITEM5)
+16:21:32 <KinoC2>  )  ) ) ) ) ) 
+16:21:34 <KinoC2> </cyc-hypolinks>
+16:24:56 <KinoC2> or "John happily departed from the boring meeting."
+16:25:08 <KinoC2> <cyc-hypolinks>
+16:25:09 <KinoC2>  (#$ThereExists ?EVENT3 (is-verb ?EVENT3 departed-v)
+16:25:09 <KinoC2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 John)
+16:25:09 <KinoC2>  (#$ThereExists ?ITEM7 (is-node ?ITEM7 meeting-n)
+16:25:09 <KinoC2>  (#$ThereExists ?ITEM6 (isa-attrib ?ITEM6 boring-a)
+16:25:09 <KinoC2>  (and  (doneBy ?EVENT3 ?ITEM1)
+16:25:11 <KinoC2>  (AGENT ?EVENT3 ?ITEM1)
+16:25:13 <KinoC2>  (singular ?ITEM1)
+16:25:15 <KinoC2>  (MANR ?EVENT3 happily)
+16:25:17 <KinoC2>  (isa ?EVENT3 LeavingAPlace)
+16:25:19 <KinoC2>  (fromLocation ?EVENT3 ?ITEM7)
+16:25:22 <KinoC2>  (PROP ?EVENT3 from ?ITEM7)
+16:25:24 <KinoC2>  (XSOURCE ?EVENT3 ?ITEM7)
+16:25:25 <KinoC2>  (DET ?ITEM7 the)
+16:25:27 <KinoC2>  (singular ?ITEM7)
+16:25:29 <KinoC2>  (ATTRIB ?ITEM7 ?ITEM6)
+16:25:31 <KinoC2>  )  ) ) ) ) 
+16:25:33 <KinoC2> </cyc-hypolinks>
+16:30:15 <KinoC2> still a lot of verb mining knowledge source mining to do
+16:30:30 <KinoC2> and just checking
+16:30:59 <KinoC2> I wonder what the real parsers output looks like ?
+16:31:10 <Cobra> What's a cyc-hypolinks ?
+16:31:47 <Cobra> And are you generating the 'is-verb' types from the NL input?
+16:32:04 <KinoC2> I have been modifying a tool called the 'link grammar parser'. one of the outputs formats is targeted for opencyc
+16:32:11 <KinoC2> yes
+16:32:29 <Cobra> Ahh, interesting.
+16:32:48 <KinoC2> the <cyc-hypolinks> is to demark the cyc related output in the long list of other outputs
+16:34:22 <KinoC2> yepster was working on 'conceptual dependency' processing. I wanted to see if I could adapt the LGP to produce cyc useful output.
+16:35:11 <Cobra> Sounds good.  I've been wondering about the parser myself, but not that far into it yet.
+16:35:34 <KinoC2> So he got me into embracing the 'sea of assertions' model, combined with all the nested existentials
+16:35:37 <Cobra> I was looking at tying the POS entries in the cyc db directly to cyc constants.
+16:35:55 <KinoC2> that would be nice
+16:36:21 <KinoC2> eventually I will have to face that
+16:36:38 --- join: cy (~cy@kevb.net) joined #opencyc
+16:36:50 <KinoC2> tying the parser extracted term into cyc constants
+16:36:53 <Cobra> engl (house the)
+16:36:54 <cy> ("TeachMe-Engl-HOUSE" The-TheWord)
+16:37:08 <Cobra> something like that...
+16:37:13 --- quit: kinoc (Read error: 110 (Connection timed out))
+16:37:22 <KinoC2> ghost is gone
+16:37:42 <Cobra> It's not that robust yet.
+16:37:46 --- quit: cy (Remote closed the connection)
+16:38:48 <KinoC2> One option I might have is to also list the creation of constants if required
+16:39:04 <KinoC2> since the parser may be used for knowledge input
+16:39:29 <KinoC2> in that case having the paser capable of generating new constants might make sense
+16:39:30 <Cobra> Yes, that's sounds like something that will be needed
+16:40:21 <KinoC2> the flipside of that is making unconnected constants when one just like it exists with pages of info already
+16:41:54 <KinoC2> That's why I am now looking at using cyc as a reference source for the parser definitions. So as much of the parser is already defined in cyc terms
+16:41:55 <Cobra> Yes.  I was thinking that an interactive mode, allowing some display of existing db content would help.
+16:42:28 <Cobra> Then the user can based new content on existing definitions, rather than making them unconnected.
+16:43:08 <KinoC2> makes sense
+16:43:42 --- join: cy (~cy@kevb.net) joined #opencyc
+16:44:02 <Cobra> What's interesting is, something like:
+16:44:07 <Cobra> engl (the house)
+16:44:08 <cy> (The-TheWord "TeachMe-Engl-HOUSE")
+16:44:23 <Cobra> Finds  (House-TheWord Household-TheWord HouseholdAppliance Houseware-TheWord)
+16:45:28 <Cobra> In cyc, but because 'House-TheWord' doesn't have a POS entry yet, I don't locate it.  It does have other NL entries though, which could be found.  Or taught by the user.
+16:46:47 <KinoC2> yeah. It does say its a verb, mass noun, count noun (at least 0.7 does)
+16:47:43 <KinoC2> one benifit of the LGP is it will generate house-n versus house-v so you can key on the POS entry
+16:48:01 <Cobra> That would be nice
+18:05:17 --- part: cy left #opencyc
+18:23:45 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+18:24:26 --- nick: Michael^2 -> Michael^
+18:51:17 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+18:54:16 --- join: mea_culpa (mea_culpa@12-212-98-134.client.attbi.com) joined #opencyc
+19:03:48 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:38:54 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:39:07 <KinoC2> ...
+19:40:01 <KinoC2> taped into denotation predicate
+19:40:17 <KinoC2> "Bob needed to rent a truck to move his house."
+19:40:32 <KinoC2> <cyc-hypolinks>
+19:40:32 <KinoC2>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 needed-v)
+19:40:32 <KinoC2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 Bob)
+19:40:32 <KinoC2>  (#$ThereExists ?EVENT4 (is-verb ?EVENT4 rent-v)
+19:40:32 <KinoC2>  (#$ThereExists ?EVENT8 (is-verb ?EVENT8 move-v)
+19:40:32 --- quit: KinoC2 (Excess Flood)
+19:41:09 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:41:16 <KinoC2> oops
+19:41:35 <KinoC2> <cyc-hypolinks>
+19:41:35 <KinoC2>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 needed-v)
+19:41:35 <KinoC2>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 Bob)
+19:41:35 <KinoC2>  (#$ThereExists ?EVENT4 (is-verb ?EVENT4 rent-v)
+19:41:35 <KinoC2>  (#$ThereExists ?EVENT8 (is-verb ?EVENT8 move-v)
+19:41:36 <KinoC2>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 truck-n)
+19:41:38 <KinoC2>  (#$ThereExists ?ITEM10 (is-node ?ITEM10 house-n)
+19:41:40 <KinoC2>  (and  (AGENT ?EVENT2 ?ITEM1)
+19:41:42 <KinoC2>  (singular ?ITEM1)
+19:41:44 <KinoC2>  (isa ?EVENT4 Renting)
+19:41:46 <KinoC2>  (cyc-word ?EVENT4 Rent-TheWord)
+19:41:48 <KinoC2>  (buyer ?EVENT4 ?ITEM1)
+19:41:50 <KinoC2>  (performedBy ?EVENT4 ?ITEM1)
+19:41:52 <KinoC2>  (seller ?EVENT4 ?ITEM1)
+19:41:54 <KinoC2>  (objectOfPossessionTransfer ?EVENT4 ?ITEM1)
+19:41:56 <KinoC2>  (AGENT ?EVENT4 ?ITEM1)
+19:41:58 <KinoC2>  (linkedv ?EVENT2 ?EVENT4)
+19:42:00 <KinoC2>  (linkedv ?EVENT4 ?EVENT8)
+19:42:02 <KinoC2>  (isa ?ITEM6 Truck)
+19:42:04 <KinoC2> (cyc-word ?ITEM6 Truck-TheWord)
+19:42:06 <KinoC2>  (objectPaidFor ?EVENT4 ?ITEM6)
+19:42:08 <KinoC2>  (transferredThing ?EVENT4 ?ITEM6)
+19:42:10 <KinoC2>  (objectActedOn ?EVENT4 ?ITEM6)
+19:42:12 <KinoC2>  (transportees ?EVENT4 ?ITEM6)
+19:42:14 <KinoC2>  (OBJECT ?EVENT4 ?ITEM6)
+19:42:16 <KinoC2>  (singular ?ITEM6)
+19:42:18 <KinoC2>  (DET ?ITEM6 a)
+19:42:20 <KinoC2>  (isa ?EVENT8 MovementEvent)
+19:42:22 <KinoC2>  (cyc-word ?EVENT8 Move-TheWord)
+19:42:24 <KinoC2>  (isa ?EVENT8 GeneralizedTransfer)
+19:42:26 <KinoC2>  (objectActedOn ?EVENT8 ?ITEM10)
+19:42:28 <KinoC2>  (isa ?EVENT8 CausingAnotherObjectsTranslationalMotion)
+19:42:30 <KinoC2>  (OBJECT ?EVENT8 ?ITEM10)
+19:42:32 <KinoC2>  (singular ?ITEM10)
+19:42:34 <KinoC2>  (DET ?ITEM10 his)
+19:42:36 <KinoC2>  )  ) ) ) ) ) ) 
+19:42:38 <KinoC2> </cyc-hypolinks>
+19:59:27 --- quit: kinoc (Read error: 110 (Connection timed out))
+20:19:45 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+21:18:43 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:42:01 --- join: Michael^2 (~sing@adsl-67-124-228-200.dsl.snfc21.pacbell.net) joined #opencyc
+21:44:01 --- quit: Michael^ (Read error: 54 (Connection reset by peer))
+22:00:42 --- quit: kinoc (Read error: 110 (Connection timed out))
+22:58:39 --- join: kinoc (~kino@dialup-65.56.123.91.Dial1.Dallas1.Level3.net) joined #opencyc
+23:22:24 --- join: KinoC2 (~kino@dialup-67.29.253.217.Dial1.Dallas1.Level3.net) joined #opencyc
+23:42:16 --- quit: kinoc (Read error: 110 (Connection timed out))
+23:59:59 --- log: ended opencyc/03.04.03

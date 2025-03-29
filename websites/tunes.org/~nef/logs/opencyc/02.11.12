@@ -1,0 +1,101 @@
+00:00:00 --- log: started opencyc/02.11.12
+01:10:00 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+01:10:01 <fleeky> hi
+01:58:50 <yepster> hello
+05:33:34 --- nick: dmileszZzZ -> dmiles
+06:26:02 <dmiles> morning
+07:09:41 <yepster> morning
+07:10:17 <yepster> he dmiles, I think you might be interested in my implementation of epistemic logic
+07:10:28 <yepster> it's actually very simple
+07:11:28 <yepster> 1- don't make difference between K and B (that has to do with necessity, not with beliefs of an agent)
+07:11:45 <yepster> 2- put all beliefs of an agent in a microtheory
+07:12:50 <yepster> comment of 'KnowledgeMicrotheory':
+07:12:53 <yepster> The collection of all instances of Microtheory which contain the knowledge and believes of an Agent. The agent is related to its KnowledgeMicrotheory with hasKnowledge. There is no different notion between knowledge and believe, in contrast to conventional epistemic logic. An agent may know or believe almost everything, independent of whether the beliefs can be known a priori or not. (see AprioriMicrotheory). The purpose of modeling knowledge this way is t
+07:14:22 <yepster> propositions, since that makes it harder to implement logical reasoning of 'perfect rational' (like OpenCyc) agents.
+07:14:50 <yepster> "(hasKnowledge AGENT MT) means that the IndividualAgent AGENT knows or beliefs the propositions that are asserted (ist-Asserted) in the KnowledgeMicrotheory MT."
+07:14:59 <yepster> (implies (and (hasKnowledge ?AGT ?MT) (ist-Asserted ?MT ?PROP)) (beliefs ?AGT ?PROP))
+07:15:56 <yepster> Now all the stuff like canonicalization and distribution is handled by opencyc automatically
+07:20:01 <yepster> now the question is: when to assert something in an agent's knowledgemt
+07:20:51 <yepster> (it that called belief abduction?)
+07:23:38 <yepster> I am waiting a bit for 0.7 to package this defintion together with the apriorimicrotheory stuff and make it available in cycml format
+07:40:33 * dmiles returns
+07:53:43 <dmiles> almost returns.. ironing a shirt now
+07:55:43 --- quit: kinoc (Read error: 104 (Connection reset by peer))
+08:01:41 --- join: Kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:02:18 <yepster> I am very curious which events you modeled in logicmoo
+08:02:32 <yepster> is there a url to browse the kb?
+08:53:52 <dmiles> well i was going to record use of ActionPredicate
+08:54:21 <dmiles> ther is a Davidsonian veiw of Event
+08:55:00 <dmiles> although Event is prefersed now in infernce.. i think there is less coipying becasue you get dirrect binary predicates
+08:55:06 <dmiles> so you can give better details
+08:55:51 <dmiles> as in shoot dirrectly to the exact relation your going for
+08:56:09 <dmiles> but as far as agents contructing and invoking events.. ActionPredicate seems easier
+08:57:20 * dmiles is reading yepster above now
+08:57:56 <dmiles> K and B in there separet Mts ?
+08:58:43 <dmiles> hrrm i see your point
+09:00:14 <dmiles> your idea also flows right with the use of Mts 
+09:01:43 <dmiles> and how since vocubular is now universal it expects KBs to contain knowledge instead of definationals
+09:02:09 <dmiles> so any assertions in there are more about the brians and not the discorse
+09:02:10 <yepster> what do you mean with less copying bec. direct binary predicates?
+09:02:34 <yepster> about K and B:
+09:02:41 <dmiles> well in infernce lets say we wanted to assert all things a person touches in an event they know exist now
+09:02:51 <yepster> the conventional notion of K and B is discarded
+09:03:04 <dmiles> so in their touching event you can get dirrectly tp objkects involved
+09:03:10 <yepster> in other words; I don't care if somebody believes or knows something
+09:03:33 <dmiles> and not have to use only one varible like (personThrowsThingAt ?Person ?Thing ?ToWhat)
+09:03:47 <yepster> since somebody might say 'I know that my bike is outside'
+09:04:05 <dmiles> then have to do a (occursAt ?Time (personThrowsThingAt ?Person ?Thing ?ToWhat))
+09:04:13 <yepster> then I assert in mt of the agent (location if his bike outside etc)
+09:04:42 <yepster> reading what you wrote now..
+09:04:52 <dmiles> the event aproach makes it (isa ?Evt ThrowingEvent) (thrower ?Evt ?person) .. etc
+09:05:11 <dmiles> (so you can get dirrectly to the slot you want)
+09:06:04 <yepster> and that is the davidsonian event representation, if i'm correct?
+09:06:12 <dmiles> correct
+09:06:22 <dmiles> (i hope i dont have it backwards ;P)
+09:07:10 <yepster> how to you present relationes between events?
+09:07:18 <yepster> like causes-EventEvent
+09:07:47 <dmiles> that is my intent
+09:08:05 <yepster> btw, I got schanks script book from the library
+09:08:07 <dmiles> ThrowingEvetn casues a moving Event
+09:08:17 <dmiles> which one ? SPGU ?
+09:08:18 <yepster> there is one page with a schematic view of the script
+09:08:23 <yepster> jup
+09:08:30 <dmiles> aeesome
+09:08:36 <dmiles> love that book
+09:08:40 <yepster> err. 'the script' means the restaurant script
+09:08:43 <yepster> you ahve it?
+09:08:45 <dmiles> yes
+09:08:48 <yepster> hehe
+09:09:25 <yepster> So i was wondering; somewhere up the event genls tree, relations between the generalized events would in fact <i>be</i> a scrip
+09:09:30 <dmiles> i have to run here in a minute
+09:09:36 <dmiles> havbe a meeting in Redmond ;P
+09:09:42 <yepster> m$
+09:09:46 <dmiles> yup
+09:09:52 <yepster> well nice tty
+09:10:18 <dmiles> dan i wish i could stay here klonger.. been a long time
+09:10:22 <dmiles> err damn
+09:10:49 <yepster> well I'm sure all things won't be solved tonight ;-)
+09:12:11 <yepster> wait you are actually going to microsoft? for their english parser or so?
+09:13:08 <yepster> well have fun anyways, ttyl8r
+09:14:40 <dmiles> yes .. take care!
+14:42:43 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:19:51 <ZivZ> Gosh, I wish 0.7 would come out.  At least the latest.bin equivalent.  I have been researching how I am going to go about porting...
+16:20:23 <ZivZ> Everything is written for *NIX.
+16:21:29 <ZivZ> seems to be nothing in cvs for the bin.
+16:23:31 <ZivZ> wow, dmiles.  Wonder if they are going to make an offer?
+16:53:58 --- quit: Cobwa ("[x]chat")
+17:26:28 --- join: graylensman (~ray@fl-wbu2c6-461.pbc.adelphia.net) joined #opencyc
+20:30:11 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+20:30:35 --- quit: yottzumm (Client Quit)
+20:44:40 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+20:45:47 <yottzumm> I was just wondering if I could use opencyc to teach a human about a particular microtheory or group of microtheories.  Does OpenCyc University give out degrees?
+20:48:22 --- quit: graylensman ("Client Exiting")
+20:54:35 --- quit: yottzumm ("Client Exiting")
+20:57:24 <fleeky> ~~~  
+21:39:34 --- join: dmilezZ (backup@12.211.42.52) joined #opencyc
+21:42:41 --- join: mea_cu|pa (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+21:49:26 --- quit: mea_cu|pa (Read error: 104 (Connection reset by peer))
+21:50:20 --- join: mea_cu|pa (~mea_culpa@12.229.4.229) joined #opencyc
+21:52:43 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:56:16 --- quit: mea_culpa (Connection timed out)
+23:59:59 --- log: ended opencyc/02.11.12

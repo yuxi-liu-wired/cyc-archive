@@ -1,0 +1,458 @@
+00:00:00 --- log: started opencyc/02.05.22
+09:01:42 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+10:47:04 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+10:54:45 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+17:46:01 <bruce> yet another quiet day here
+17:46:53 * jlatour grins. "As usual."
+17:47:28 <bruce> yeah. what do you do with OpenCyc?
+17:48:08 <jlatour> At the moment, nothing. I plan to use it as the base of http://www.sanddunes.org/, but that depends on the people at Cycorp.
+17:49:08 <bruce> based on the 30 second glance, it looks 1) interesting and 2) in line with what OpenCyc is supposed to enable
+17:49:25 <jlatour> That's what Reed said :)
+17:50:08 <jlatour> And you?
+17:50:30 <bruce> i'm into gaming applications for large scale, virtual world type stuff
+17:50:34 <bruce> (phone for a bit)
+17:50:57 <jlatour> Talk to you later then. It's already very late here, and I was on my way to bed.
+17:51:06 <jlatour> Goodnight.
+17:52:36 <dmiles> hi all
+17:52:49 <dmiles> ah, everyones leaving
+17:52:58 <jlatour> That's typical. Just when I'm about to leave, the activity starts :)
+17:53:00 <dmiles> well i have the import from CircleMud done
+17:53:28 <dmiles> its a java file that pushes circlemud data ionto a opencyc kb
+17:53:47 <dmiles> from there it can be played with a specialized client i have been working on
+17:54:16 <jlatour> Sounds interesting. Eyes are dropping closed though. Sorry to walk away from you, but if I don't get to bed soon, I'm going to be very sleepy tomorrow :)
+17:54:17 <dmiles> the idea is that knowledge can help dictate howe the mud works and hopw NPC interact
+17:54:24 <dmiles> ok talk to you soon
+17:54:32 <jlatour> Bye
+17:54:42 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+17:57:53 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/dump
+17:59:12 <dmiles> its strill writting the file on the disk.. as it loads Cyc it is dumpling the kif file
+18:00:39 <dmiles> it takes it about 15 minutes to completely load the 8000 location mnap
+18:01:04 <dmiles> but thats no bad though in my opinion
+18:01:14 <dmiles> since its performing TMS
+18:01:46 <dmiles> i could in a mater of 3 secionds write the output as a .cycl file then consult that in
+18:02:02 <dmiles> but i think it would take rthe same amopunt of time
+18:02:47 <dmiles> i suppose if this version of the mud and client is distributed .. i woukld make a .load file set up first
+18:09:40 <dmiles> bruce, so i now have import of .mob .wld .obj .zon files
+18:40:32 --- join: INFDWERTW (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+18:40:40 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:45:45 --- nick: INFDWERTW -> dmiles
+18:50:16 --- join: yottzumm ([hWZbRGucf@12-232-76-192.client.attbi.com) joined #opencyc
+18:51:42 --- quit: yottzumm (Client Quit)
+18:53:02 --- join: yottzumm ([Nm24R+veE@12-232-76-192.client.attbi.com) joined #opencyc
+18:53:20 <yottzumm> I'm using the CYC command line (with run-cyc.sh)
+18:53:38 <bruce> dmiles: what's 'TMS' ?
+18:53:41 <bruce> hey yottzumm 
+18:54:08 <yottzumm> I want to know how to assert an isa, like (isa #$USCity #$CityOfLivermore).  I've alread defined the #$CityOfLivermore constant
+18:54:44 <yottzumm> I tried (cyc-assert (isa #$USCity #$CityOfLivermore) #$SBJMt)
+18:54:59 <yottzumm> #$SBJMt is our microtheory
+18:55:21 <yottzumm> TMS is truth maintenance system
+18:55:29 <bruce> thanks :)
+18:55:43 <bruce> hmmm, what error do you get what that SubL expression?
+18:56:18 <yottzumm> All I get back is NIL
+18:56:22 <yottzumm> no errors
+18:56:24 <dmiles> TMS = truth maintence (or well formedness chacks)
+18:56:37 <dmiles> yottzumm: NIL means its 'deducable'
+18:57:07 <bruce> from doc:
+18:57:07 <bruce> @return booleanp; t iff the assert succeeded. If the assertion
+18:57:07 <bruce> already existed, it is considered a success.
+18:57:07 <bruce> SENTENCE must satisfy POSSIBLY-SENTENCE-P.
+18:57:07 <bruce> MT must satisfy (NIL-OR HLMT-P).
+18:57:07 <bruce> PROPERTIES must satisfy ASSERT-PROPERTIES-P.
+18:57:08 <dmiles> oh reading, yottzumm aswered correctly and with speeling :)
+18:58:50 <dmiles> hrrm, the NIL return from cyc-assert is considered an ApiException in Java 
+18:59:07 <yottzumm> bruce,dmiles: can you give an example of how to make CityOfLivermore an instance of USCity?
+18:59:11 <dmiles> i have to make the java ignore it as well
+18:59:43 <yottzumm> I think I can do it in Java.  I don't want to teach my coworker two languages at once.  It's her first one
+19:00:15 <dmiles> what is CityOfLivermnoor currently?
+19:00:24 <dmiles> just a City ?
+19:00:38 <dmiles> oh i see
+19:00:46 <dmiles> you have the argumetns switched arround
+19:01:07 <dmiles>  (cyc-assert (isa #$CityOfLivermore #$USCity ) #$SBJMt)
+19:01:08 <yottzumm> let me try it the other way
+19:01:39 <dmiles> if it still returns NIL it will be becasue Cyc found that to be basicly arroundy true in KB
+19:02:14 <dmiles> for example.. once you assert it is a USCity .. then tried to assert it as City it may return NIL on the second
+19:07:10 <yottzumm> Error: A SYMBOL at 0x4001001c is no a f_6469.
+19:07:15 <yottzumm> Error: A SYMBOL at 0x4001001c is not a f_6469.
+19:08:53 <dmiles> #$isa
+19:09:10 <bruce> that could probably be a nicer error message though :)
+19:10:18 <bruce> (that'd be a good bug to file probably)
+19:11:04 <yottzumm> Error: Operator #$isa was not a symbol
+19:11:48 <dmiles> (cyc-assert '(#$isa #$CityOfLivermore #$USCity ) #$SBJMt)
+19:12:05 <dmiles> the ' quote is needed
+19:12:42 <yottzumm> NIL
+19:13:04 <yottzumm> that's good?
+19:13:16 <dmiles> yes
+19:13:36 <dmiles> (cyc-query '(#$isa ?Where #$USCity ) #$SBJMt)
+19:15:11 <yottzumm> got back
+19:15:12 <yottzumm> NIL
+19:15:13 <yottzumm> then
+19:15:15 <yottzumm> :ERROR
+19:15:51 <yottzumm> (isa #$CityOfLivermore #$USCity) prints out two NILs
+19:19:04 <yottzumm> but (isa? #$USCity #$CityOfLivermore) prints NIL then T
+19:19:22 <yottzumm> this is really confusing
+19:21:44 <dmiles> #$isa
+19:22:14 <dmiles> without the #$ a constant is nopt known to Cyc
+19:22:36 <dmiles> it treats it as a symbol wghich could translate to a macro
+19:24:49 --- join: \n ([kruEzKUdO@12-232-76-192.client.attbi.com) joined #opencyc
+19:25:21 <yottzumm> My coworker, \n is here
+19:25:27 <yottzumm> I am showing her IRC
+19:25:33 <dmiles> neat
+19:25:41 <dmiles> welcome \n
+19:26:10 <\n> hi
+19:26:45 <yottzumm> \n, this is the opencyc chat room where I've been getting help
+19:27:15 <\n> neat
+19:27:25 <dmiles> most of us are just users of cyc at differnt points of learning
+19:28:24 <\n> I'm still very confused.  This is the first computer language I am trying to learn
+19:28:35 <dmiles> cycL ?
+19:28:46 <\n> yes
+19:29:40 <dmiles> very neat
+19:34:47 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&10913
+19:34:51 <dmiles> rar!
+19:35:56 <dmiles> now i am changing it over to reduce the number of mud* speciality predicates
+19:36:57 <dmiles> that is CircleMud 3.0 tranlitered into Cyc
+19:37:19 <yottzumm> sounds like fun
+19:37:47 <dmiles> fixing it up now to work with the cyc ontolgy but had to bascliy get started so i made up alot of the flags as collections
+19:41:08 <yottzumm> #$isa doesn't work for us...says it's not a symbol
+19:42:03 <dmiles> show me the exact line
+19:42:32 <yottzumm> I can't copy and paste between VNC and IRC for some reason
+19:42:44 <yottzumm> I don't know how to copy from VNC to my desktop
+19:43:29 <dmiles> i'll launch the irc bot so we can do it in here to test
+19:44:38 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+19:45:23 <yottzumm> (#$isa #$CityOfLivermoreCA #$USCity)
+19:45:23 <dmiles> subl: (create-constant "CityOfLivermore")
+19:45:24 <CycLBot> CityOfLivermore
+19:45:58 <dmiles> subl: (create-constant "SBJMt")
+19:45:59 <CycLBot> SBJMt
+19:46:48 <dmiles> subl: (cyc-assert '(#$isa #$SBJMt #$Mircotheory) #$BaseKB)
+19:46:50 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+19:46:51 <CycLBot> (#$isa #$SBJMt #$Mircotheory)
+19:46:51 <CycLBot> was not well formed because:
+19:46:52 <CycLBot> Term #$Mircotheory violates arg-isa #$Collection
+19:46:53 <CycLBot> applicable to argument 2 of relation #$isa
+19:46:53 <CycLBot> in mt #$BaseKB.
+19:46:55 <CycLBot> Term #$Mircotheory violates arg-isa #$SetOrCollection
+19:46:57 <CycLBot> applicable to argument 2 of relation #$isa
+19:46:59 <CycLBot> (via #$elementOf)
+19:47:01 <CycLBot> in mt #$BaseKB.
+19:47:03 <CycLBot> Term #$Mircotheory violates arg-genls #$Thing
+19:47:05 <CycLBot> applicable to argument 2 of relation #$isa
+19:47:07 <CycLBot> in mt #$BaseKB.")
+19:47:09 <dmiles> subl: (cyc-assert '(#$isa #$SBJMt #$Microtheory) #$BaseKB)
+19:47:09 <CycLBot> T
+19:47:29 <dmiles> ok now try to assert the CityOfLivermoore
+19:47:31 <yottzumm> I actually create the Mt with java.
+19:47:40 <dmiles> ok good
+19:48:01 <dmiles> subl: (cyc-assert '(#$isa #$CityOfLivermoreCA #$USCity) #$SBJMt)
+19:48:04 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+19:48:04 <CycLBot> (#$isa #$CityOfLivermoreCA #$USCity)
+19:48:04 <CycLBot> was not well formed because:
+19:48:05 <CycLBot> Term #$USCity violates arg-isa #$Collection
+19:48:06 <CycLBot> applicable to argument 2 of relation #$isa
+19:48:06 <CycLBot> in mt #$SBJMt.
+19:48:08 <CycLBot> Term #$USCity violates arg-isa #$SetOrCollection
+19:48:10 <CycLBot> applicable to argument 2 of relation #$isa
+19:48:12 <CycLBot> (via #$elementOf)
+19:48:14 <CycLBot> in mt #$SBJMt.
+19:48:16 <CycLBot> Term #$USCity violates arg-genls #$Thing
+19:48:18 <CycLBot> applicable to argument 2 of relation #$isa
+19:48:20 <CycLBot> in mt #$SBJMt.
+19:48:24 <CycLBot> Consider asserting
+19:48:26 <CycLBot> (#$isa #$CityOfLivermoreCA #$USCity)
+19:48:28 <CycLBot> in mt #$WorldGeographyMt.")
+19:48:58 <yottzumm> subl: (#$isa #$CityOfLivermoreCA #$USCity)
+19:48:59 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator #$isa was not a symbol")
+19:49:08 <dmiles> subl: (cyc-assert '(#$genlMt #$SBJMt #$WorldGeographyMt) #$BaseKB)
+19:49:09 <CycLBot> T
+19:49:19 <dmiles> subl: (cyc-assert '(#$isa #$CityOfLivermoreCA #$USCity) #$SBJMt)
+19:49:20 <CycLBot> T
+19:50:06 <yottzumm> okay, so I need to assert that my Mt is a specialization of #$WorldGeographyMt?
+19:50:22 <dmiles> that is how you gain access to #$USCity
+19:50:38 <dmiles> subl: (cyc-query '(#$isa ?Where #$USCity) #$EverythingPSC)
+19:50:39 <CycLBot> ?WHERE = Washington D.C., ?WHERE = city of livermore c a ((((?WHERE . CityOfWashingtonDC)) ((?WHERE . CityOfLivermoreCA))))
+20:11:30 --- quit: yottzumm ("Client Exiting")
+21:03:19 <dmiles> hrrm i am trying to find how to represnt somnething is airbourne in cyc
+21:04:40 <dmiles> somehow above ground or flyiong
+21:07:39 <dmiles> i think FreeSpaceContent
+21:08:00 <dmiles> must be how to represent
+21:32:44 --- quit: \n ("Client Exiting")
+21:33:07 --- join: yottzumm ([e9JH0Dp3G@12-232-76-192.client.attbi.com) joined #opencyc
+21:35:29 <bruce> howdy
+21:36:06 <yottzumm> hi
+21:40:35 <bruce> how's it going?
+21:45:35 <yottzumm> how do you save your work?
+21:46:26 <yottzumm> or do you start Cyc with a text file?
+21:46:27 <bruce> mmmmm, hmmmm.
+21:46:50 <bruce> i just play currently, nothing that I save .. but there's a command to write out the current image .. looking for it.
+21:47:30 <bruce> ahh, (write-image "image-name")
+21:47:39 <yottzumm> yhanks
+21:47:42 <bruce> "but, you need to always save to a new image name or something I think
+21:47:53 <yottzumm> okay
+21:47:57 <bruce> and then you'dhave to modify the start script to point to the last image or something.
+21:48:03 <bruce> its been discussed in the forums
+21:48:10 <yottzumm> or use a parameter
+21:50:02 <bruce> did you find that documented somewhere?
+21:50:06 <bruce> it wasn't in the cycapi docs
+21:52:02 <bruce> i wouldn't mind writing some improved docs for OpenCyc if I only knew the info
+21:52:21 <bruce> ahh, it is mentioned in the install doc
+21:52:49 <yottzumm> it's in the SubL docs
+21:58:19 <bruce> cool
+21:58:34 <yottzumm> any ideas about how I might write a card game in OpenCyc.  Are there any microtheories available?
+21:58:43 <bruce> I wouldn't know.
+21:58:44 <yottzumm> like zillions of games
+21:58:55 <bruce> I'm not really OpenCyc-knowledgeable yet.
+21:59:08 <bruce> beyond having read docs, talking with dmiles, and doing some small experiments.
+21:59:14 <yottzumm> well, you may have stumbled on something
+22:00:16 <dmiles> ok how to represent a spellLevel in OpenCyc
+22:00:26 <bruce> yottzumm: i haven't :/
+22:00:28 <yottzumm> as a number?
+22:00:34 <dmiles> something like Behaouvour capable of
+22:00:42 <yottzumm> can you use an enum?
+22:00:49 <yottzumm> like color
+22:00:58 <dmiles> yes a number is good.. and need a predicate to tie it topgether
+22:01:10 <bruce> yottzumm: hey, did you file a bug on that odd/useless error message that you got earlier?
+22:01:31 <yottzumm> I think it had something to do with how my microtheories were set up
+22:02:10 <yottzumm> I don't know what to pass cycAccess.createMicrotheory() as the last paramter
+22:02:13 <yottzumm> parameter
+22:02:32 <dmiles> whats the API's argument?
+22:03:23 <yottzumm> ArrayList genlMts
+22:03:43 <dmiles> you will want to at least tuie it to BaseKB
+22:03:59 <dmiles> new ArryList(cycAccess.baseKB)
+22:04:12 <yottzumm> there's a CycFort isaMt as another parameter
+22:04:31 <dmiles> this one? 
+22:04:31 <dmiles>     public CycConstant[] createMicrotheorySystem (String mtRootName,
+22:04:31 <dmiles>                                                   String comment,
+22:04:31 <dmiles>                                                   ArrayList genlMts)
+22:04:47 <dmiles> oh wait i see the otehr
+22:04:57 <yottzumm> yeah, that one
+22:05:59 <dmiles> soething like cycAccess.findCycConstantByName("DataMicrotheory")
+22:06:10 <dmiles> look at Microtheory Types
+22:06:40 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-gaf-arg&4&2&1
+22:07:58 <yottzumm> I think I should put al = new ArrayList() al.add(cycAccess.getConstantByName("DataMicrotheory")
+22:08:31 <dmiles> you souldnet have to a CycFort is a CycConstant() or CycNart()
+22:09:10 <dmiles> rr should use a list
+22:09:15 <dmiles> err shouldnt :0
+22:10:27 <dmiles> yottzumm: you see what i mean about isaMt?
+22:12:22 <yottzumm> you mean genlMt?
+22:12:47 <dmiles> therirt paramt should be a CycConstant()
+22:13:21 <dmiles> it is a subclass from cycFort
+22:18:14 <yottzumm> I have
+22:18:16 <yottzumm> CycConstant createMicrotheory(java.lang.String mtName, java.lang.String comment, CycFort isaMt, java.util.ArrayList genlMts) 
+22:18:21 <yottzumm> no
+22:18:52 <yottzumm> let me get an xterm going
+22:19:25 <dmiles> CycFort isaMt  <- should be a CycConstant or CycNart .. not an ArrayList 
+22:19:52 <dmiles> re: <yottzumm> I think I should put al = new ArrayList() al.add(cycAccess.getConstantByName("DataMicrotheory")
+22:20:48 <yottzumm> Yes, I have BaseKB there
+22:21:13 <dmiles> ok :) that works
+22:21:48 <dmiles> we had isaMt and genMt crossed
+22:22:01 <dmiles> or, i did
+22:22:32 <dmiles> DataMicrotheory <- not gnelMtable just isaMtable
+22:24:02 <yottzumm> I have createMicrotheory("SBJMt", "Sara, Brett and John's Microtheory", kb, genlmt);
+22:24:24 <dmiles> what is the type of kb ?
+22:25:15 <yottzumm> return value from getKnownConstantByName("BaseKB");
+22:25:16 <dmiles> (the java non abstract type)
+22:25:21 <yottzumm> CycFort
+22:25:49 <dmiles> cycFort is correct but BaseKB will not work
+22:26:16 <dmiles> it needs to bes something the is a MicrotheoryType in the KB
+22:26:49 <dmiles> such as DataMicrotheory BroadMicrotheory TheoryMicrothery
+22:27:26 <dmiles> this tells Cyc what kind of search pattern and when to use it
+22:27:51 <yottzumm> oh
+22:27:53 <yottzumm> okay
+22:29:29 <yottzumm> what do you use for logicmoo.  What if I were writing a card game or a first person shooter
+22:29:52 <dmiles> i am breaking into 3 Mts.. 
+22:30:12 <dmiles> one Theory, one Vocab and the other Data
+22:30:21 <dmiles> rules are going into Theory
+22:30:36 <dmiles> isa and definationals go into Vocab
+22:30:53 <dmiles> Data is reserved for FirstOreder instances
+22:31:08 <dmiles> mainly Gafas that are nopt definational 
+22:31:18 <dmiles> rr Ground facts
+22:31:39 <dmiles> the Theory is considered BroadMicrotheory
+22:32:15 <dmiles> while i am debugging learning i have been putting them into a single GenralMicrotheory
+22:32:54 <dmiles> both GeneralMicrotheory BroadMicrotheory 
+22:33:26 <dmiles> then when i think i have it under control will start breaking them out again
+22:34:34 <yottzumm> Maybe I'll use GeneralMicrotheory
+22:35:26 <dmiles> i would do
+22:36:20 <dmiles> err would to
+22:39:35 <yottzumm> Now when I make my assertions, I get a T followed by a NIL
+22:39:57 <yottzumm> oops, mistake
+22:40:16 <dmiles> in the Cyc(1) propmt on in convertse* ? 
+22:41:10 <dmiles> oh T for its good and NIL for the ApiExcetion
+22:41:31 <dmiles> it returns Object[]
+22:41:42 <dmiles> er Object[1]
+22:42:07 <dmiles> 0..1
+22:43:13 <yottzumm> brb
+22:43:16 --- quit: yottzumm ("Client Exiting")
+22:44:17 --- join: yottzumm ([N43vUHazB@12-232-76-192.client.attbi.com) joined #opencyc
+22:45:29 <dmiles> hrrm spellLevel.. i think i will denote as a NaturalLanguge called Wizzardy that has an educational factor
+22:47:18 <yottzumm> Ah, I should have use UnitedStatesGeographyMt
+22:49:44 <dmiles> that would work
+22:51:42 <yottzumm> (cyc-query '(#$isa #$CityOfWashingtonDC #$USCity) #$UnitedStatesGeographyMt) is returning NIL, then :EXHAUST
+22:51:58 <yottzumm> even with a fresh start
+22:53:12 <dmiles> subl: (cyc-query '(#$isa #$CityOfWashingtonDC #$USCity) #$UnitedStatesGeographyMt)
+22:53:13 <CycLBot> true sentence
+22:53:34 <dmiles> hrrm lets see
+22:53:38 <dmiles> bsh: 1+1
+22:53:38 <CycLBot> java.lang.NullPointerException
+22:54:14 <dmiles> subl: (cyc-query '(#$isa ?X  #$USCity) #$UnitedStatesGeographyMt)'
+22:54:15 <CycLBot> ?X = Washington D.C. ((((?X . CityOfWashingtonDC))))
+22:54:45 <yottzumm> now I'm getting (NIL) :NUMBER
+22:54:47 <dmiles> hrrm have to reboot something
+22:55:39 <dmiles> odd what happens when you query..
+22:55:52 <dmiles> subl: (cyc-query '(#$isa #$Dog  #$USCity) #$UnitedStatesGeographyMt)'
+22:55:53 <CycLBot> no answers found
+22:56:05 <dmiles> minus the trailing '
+22:57:14 <dmiles> ok the diffence is a (NIL) vs NIL
+22:57:40 <dmiles> thios ia bug related to the compiler that opencyc used
+22:57:48 <dmiles> it should retirn (T.T)
+22:57:55 <yottzumm> oh, terrific :(
+22:58:10 <yottzumm> did they use 2.95
+22:58:15 <dmiles> but whats happening is you have 1 answer with no varible bindings
+22:58:27 <dmiles> (NIL)
+22:58:34 <dmiles> vs nothing NIL
+22:58:35 <yottzumm> I don't have any variables in my query
+22:58:49 <dmiles> right so thats why there is a NIL in the ()
+22:59:03 <yottzumm> okay
+22:59:38 <yottzumm> what is :NUMBER
+22:59:42 <dmiles> so whay you have is a lisp "non NIL" result since its a list with one member
+23:00:18 <yottzumm> I've studied some lisp (franz).  a long time ago
+23:00:54 <dmiles> the :NUMBER is an odd atrifact
+23:00:56 <yottzumm> so does logicmoo depend on rooms for interactions, or a space
+23:01:36 <dmiles> currentluy it uses instances of GeoographicalRegions expected to be large enoungh to contain a human
+23:02:02 <yottzumm> so have you been doing much bordersOn
+23:02:06 <yottzumm> or are you using exits
+23:02:38 <dmiles> i have been but now i am ussing       	assertData("("+"portalConnectsRegions " + exitToFn + " " + getAsArea(vnum) + " " + getAsArea(splitter[2]) +")" );
+23:02:58 <dmiles> String exitToFn = "("+"PortalFromToFn " + getAsArea(vnum) + " " + (direction) + " " + getAsArea(splitter[2]) + " )"; 
+23:03:15 <dmiles> 		(resultIsa PortalFromToFn Portal) 
+23:03:58 <yottzumm> have you looked at WebWork?
+23:04:31 <yottzumm> they use .properties files for assembling JavaBeans and .jsps into applications
+23:04:57 <dmiles> oh thats very neat
+23:05:12 <dmiles> makes me realize i never have to learn swing ;P
+23:05:12 <yottzumm> you have a function which returns a string.  It looks up that string within the context of the bean the method runs on, and it gets the jsp
+23:05:57 <dmiles> ah so it goes both way
+23:06:24 <yottzumm> yeah, you look up the bean based on what's in the Action attribute of the HTML form
+23:06:47 <dmiles> iteresting
+23:06:59 <yottzumm> in the same properties file
+23:07:32 <dmiles> so it uses as much javascript as possible?
+23:07:55 <dmiles> for whern it cionverts your app to jsp
+23:08:30 <yottzumm> the goal is to eliminate java from the JSP.  Webwork and JavaScript are orthogonal.  But WebWork can do validation for the fields in a Bean
+23:09:13 <dmiles> i see
+23:09:22 <yottzumm> no, you write both the Bean and the JSP.  Webwork provides classes to inherit your beans & validators from.
+23:09:39 <yottzumm> Webwork contains a taglib
+23:10:16 <yottzumm> the tag lib contains stuff to pull values out of the bean, do iterators, and if tests
+23:10:39 <yottzumm> and ui tags, i18n etc
+23:10:56 <dmiles> i see that is usefull
+23:12:05 <dmiles> i have been trying to put together some cyc tools like http://12.225.207.235/offt/sourceforge/logicmoo/src/org/opencyc/jsp/JspUtils.java
+23:13:19 <dmiles> i have of course to clean it up quite a bit
+23:13:49 <yottzumm> it's in your CVS tree I assume
+23:13:55 <yottzumm> I have your cvs tree
+23:14:08 <dmiles> yes.. i havent added it into opencyc yet until its clean and good
+23:14:39 <dmiles> oh that lives outside logicmoo actually.. i just do a checkinout of opencyc in that subdirt
+23:15:08 <yottzumm> brb
+23:15:10 --- quit: yottzumm ("Client Exiting")
+23:15:53 --- join: yottzumm ([swHLukg2P@12-232-76-192.client.attbi.com) joined #opencyc
+23:16:17 <yottzumm> could you give that URL again.  I was inside a VNC viewer window, and it was too small
+23:16:27 <dmiles> but my goaL evenually is to have a complete jsp version of the CycKb browser
+23:16:45 <yottzumm> cool
+23:16:48 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/org/opencyc/jsp/JspUtils.java
+23:17:09 <dmiles> i run it uder tomcat but its down at this moment
+23:17:21 <dmiles> since the OLC of Logicmoo is a sieries of webpages
+23:17:51 <dmiles> i am trying to create an intergration that expeiates things like creating microtheories
+23:18:15 <dmiles> and also of couyrse Mobs and objects :P
+23:18:31 <yottzumm> yeah, I just looked at your java code.  The goal of WebWork is to separate the HTML from the Java
+23:18:32 <dmiles> but the interface is very separtable
+23:18:47 <dmiles> hehe yeah thats why its call JspUtils :)
+23:19:07 <yottzumm> taglibs could probably handle it.  Maybe you should write a taglib
+23:19:17 <dmiles> that would be cool
+23:19:52 <yottzumm> but look at WebWork first.  It's open source, and may save you a ton of work
+23:19:52 <dmiles> i have to learn how that works.. are there some obnline examples?
+23:20:01 <yottzumm> yeah, they have tons of examples
+23:20:20 <yottzumm> but you have to know how to set up webapps, and deal with .tld and .xml files
+23:21:26 <dmiles> Tomcat under JDK1.4 does not properly extract the taglib.tld from the webwork.jar. To fix this, you will need to extract the tld from the jar and change the web.xml to point to the actual file. 
+23:21:47 <yottzumm> yeah, my coworker ran into that problem
+23:21:48 <dmiles> cool though its very well documented
+23:22:36 <yottzumm> My coworker complained that the docs assumed you already had a lot of knowledge.  But that probably wouldn't bother you
+23:23:15 <dmiles> well i am ambitous.. so i tend to fill in gaps
+23:23:27 <yottzumm> I haven't checked out 1.0.3.  the docs may be a whole lot improved
+23:25:22 <dmiles> i learned JSP/Java only 2 years ago to fill iun a company void .. i havnet use .propety files as much as i should have
+23:26:05 <dmiles> but i may get hired by this company to intergrate cyc into their app and they are major java heads about things like that ;P
+23:26:56 <yottzumm> how much MB does it take to hold all of cyc?
+23:27:55 <dmiles> you mean memory foot print? rigt now its ussing 133 meeg on my machuine
+23:28:12 <yottzumm> I guess diskspace is less?
+23:28:21 <dmiles> but i just put in 100k assertions
+23:29:04 <dmiles> cuyc makes good use of space since its a dictionary+index
+23:29:08 <yottzumm> You mean opencyc and what you've added or the whole cyc DB
+23:29:29 <dmiles> i just added the 8000 rooms of midgaard
+23:29:36 <yottzumm> wowo
+23:30:07 <dmiles> about to reload it though since i changed it to better reuse cycs existing ontolgy 
+23:30:21 <yottzumm> maybe we could incorporate EGGG into opencyc
+23:30:57 <dmiles> Automated programming for game generation?
+23:31:17 <dmiles> cool looking.. i hadn';t seen it
+23:31:24 <yottzumm> you write the rules, and EGGG spits out a ton of perl, and plays as a computer player
+23:31:48 <dmiles> i think its a good match between eggg and opencyc
+23:31:48 <yottzumm> there's a syntax at the back of his thesis
+23:32:58 <yottzumm> http://orwant.com/eggg.html
+23:35:45 <dmiles> look very good.. and nice and proposional
+23:35:56 <dmiles> i am suppirsed there was not as much Prolog in it]
+23:36:36 <yottzumm> The parser he wrote for it was too slow, so he just hacked some perl together to "parse" the files
+23:36:57 <dmiles> yeah it gets the concept gioing to have some implementation
+23:38:08 <yottzumm> I wrote a program to generate rules from the syntax, but it's pretty stupid right now.
+23:38:29 <dmiles> so it makes something close to CycL ?
+23:38:35 <yottzumm> The most interesting game it produced was something like "words meaning turns reverse"
+23:39:06 <dmiles> so you mean there is a two way cobnversion factor
+23:39:09 <yottzumm> no, it produces rules, to like tic-tac-toe
+23:39:30 <dmiles> ah explain the process
+23:39:39 <yottzumm> yes, I generate from the BNF grammar a "legal" game
+23:40:01 <yottzumm> but it's just picking random number and strings
+23:41:11 <yottzumm> I'm writing game rules
+23:41:38 <dmiles> so that planner could be incorporated?
+23:41:43 <yottzumm> but it's REALLY stupid.
+23:41:53 <dmiles> er.. not 'that' but 'a'
+23:42:06 <yottzumm> something that has the goal of writing a new game?
+23:42:21 <yottzumm> designing I mean
+23:42:29 <yottzumm> the terms are confusing to me
+23:42:39 <yottzumm> because EGGG generates perl
+23:42:55 <dmiles> yes that kind of planner as well would work.. something stringing the code together.. but i was saying a play planner
+23:43:28 <dmiles> i see both 
+23:43:37 <yottzumm> I think EGGG contains a planner, or at least when I read the thesis, I remember him talking about it
+23:43:58 <yottzumm> only problem with EGGG is that it doesn't really know about scoring, just winning and losing
+23:44:09 <yottzumm> so pinochle might not work
+23:44:16 <yottzumm> humans would have to do the scoring
+23:44:33 <dmiles> i guess every hand is a complete game
+23:44:40 <yottzumm> zillions of games is supposed to have a pretty good planner
+23:45:08 <dmiles> with win/loss based on score thresholds
+23:45:26 <dmiles> (i havent played pinocle)
+23:45:51 <yottzumm> you get points for certain card combinations, and for taking tricks
+23:46:12 <yottzumm> game is to 100-150 points no matter how many hands you deal
+23:47:05 <yottzumm> the tricks that contain A,K,10 make a point for each one of these cards
+23:47:59 <dmiles> so a definate high score exists for each possible hand
+23:48:31 <yottzumm> you can meld two runs, which is 150 points
+23:48:36 <dmiles> but i see the code gen problem
+23:48:54 <yottzumm> explain
+23:49:21 <dmiles> as in the turn based appoach needs score buildups
+23:49:32 <yottzumm> okay
+23:49:34 <dmiles> since the end goal is a complete application
+23:50:35 <dmiles> you almost have to turn the score peg into a little man piece running towards some goal and the only way he fgets there is playing hands
+23:51:10 <yottzumm> you can have negative hands in pinocle too
+23:52:33 --- quit: CycLBot (Remote closed the connection)
+23:52:41 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:53:02 <yottzumm> subl: (exit)
+23:53:03 <CycLBot> java.lang.RuntimeException: Unknown cfasl opcode: -1
+23:53:08 <yottzumm> ah!
+23:53:20 --- quit: CycLBot (Remote closed the connection)
+23:53:34 <dmiles> :) its all good
+23:54:01 <dmiles> i am making sure he runs the beanshell interpretor and loads the mud at the same time
+23:54:14 <yottzumm> cool
+23:54:41 <yottzumm> I remeber when I wrote bots to do BSXMUD over IRC.
+23:54:51 <yottzumm> graphical IRC
+23:54:56 <yottzumm> that was a long time ago
+23:55:13 <yottzumm> and there was a problem with the size of a packet, flooding etc
+23:55:41 <dmiles> yeah been thinking about that
+23:55:57 <dmiles> how to make that workout ok
+23:56:10 <dmiles> the bot will be considered one client
+23:56:22 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:56:38 <dmiles> bsh: 1+1
+23:56:49 <dmiles> hrrm
+23:57:14 <dmiles> oh he ias a busy boy loading kif
+23:57:15 <CycLBot> 2
+23:57:52 <dmiles> ok now in the other thread start pushing the moo
+23:59:24 <yottzumm> how programmable are the muds you are integrating.  can you do a LPMUD or a LambdaMoo?
+23:59:59 --- log: ended opencyc/02.05.22

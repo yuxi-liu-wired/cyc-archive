@@ -1,0 +1,715 @@
+00:00:00 --- log: started opencyc/02.06.28
+00:33:19 --- join: hellsing` (~jay@pcp01116682pcs.flint01.mi.comcast.net) joined #opencyc
+00:33:19 --- quit: nrv8- (Read error: 104 (Connection reset by peer))
+00:51:34 --- quit: people (Read error: 110 (Connection timed out))
+00:58:56 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+00:59:03 --- join: irc (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+00:59:19 --- nick: irc -> dmiles
+01:42:04 <aigan> CycLBot?
+02:27:10 --- join: people (Snak@62.53.34.39) joined #opencyc
+03:24:07 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+03:25:48 <yepster> I want to do some reasoning with #$knows, to be exact: what my cyc image knows
+03:27:37 <yepster> but #$cyc is not an #$IntelligentAgent (arg1isa of knows) and #$CycProgram isn't
+03:27:40 <yepster> defined in the kb
+03:30:34 <yepster> Also:
+03:30:46 <yepster> ask: (indexicalReferent Cyc ?X)
+03:30:47 <CycLBot> no answers found
+03:31:11 <yepster> should return the program, if I read the #$IndexicalConcept correct
+03:32:45 --- quit: hellsing` (Read error: 110 (Connection timed out))
+03:46:52 <aigan> yepster: I think you kan change the Mt
+04:04:28 <yepster> to do what?
+04:05:08 <yepster> Ah it doesn't really matter any more, I just made a new constant #$CycAgent
+04:09:12 <yepster> cool:
+04:09:13 <yepster> (#$implies
+04:09:13 <yepster>   (#$ist-Asserted #$VWSRegelingHulpmiddelenMt ?PROP)
+04:09:13 <yepster>   (#$knows #$CycAgent ?PROP))
+04:40:41 <aigan> What is good ways to find the right Mt for aserting things?
+04:40:59 <aigan> Seems I just have to look at everything relating to the things...
+04:43:52 <yepster> I think you want to create your own mt
+04:44:13 <yepster> and if you want to link against knowledge in other mt's
+04:44:20 <aigan> Thre are a couple of existing countries in OpenCyc
+04:44:38 <yepster> assert (genlMt YourMt HumanSocialLifeMt) BaseKB, for example
+04:44:51 <aigan> I'm starting out with adding my own country
+04:45:13 <aigan> I created my own project
+04:45:18 <yepster> so that if a concept is defined in HumanSoclifeMt, it's also known in your mt
+04:45:20 <yepster> project <> mt
+04:45:24 <aigan> So everything I says is connected to that project
+04:45:35 <yepster> that is something with bookkeeping or so
+04:45:37 <aigan> yes, I knwo
+04:45:56 <aigan> But I think that other countries should be placed in the same Mt as the existing ones
+04:52:09 <yepster> I'd still start in your own mt
+04:52:35 <yepster> because everything in e.g. basekb (see 'France) is a public constants
+04:52:54 <aigan> Then I would have to create one Mt for each other Mt
+04:53:49 <yepster> Perhaps this is something Steve should answer.. but I would start simple (and write down assertions in a script for later re-import)
+04:55:21 <yepster> Also, if you'd put all your 'public' locations in a separate Mt, I think it would be easy
+04:55:41 <yepster> for the opencyc people to integrate it into a later release of opencyc
+04:55:59 <aigan> I'm in experimentation mode right now
+04:56:14 <aigan> working in a copy of the world
+04:57:48 <aigan> What is the diffrenc between Monotonically True and Default True?  France, for example has (isa France IndustrializedCountry) in two diffrent Mt's
+04:58:24 <aigan> I dont't think it should be located in WorldGeographyMt
+04:59:06 <people> i know that - monotnically means it is *always* right full stop. default true means that it is usually true but not always. it can be not true.
+04:59:08 <people> i think
+05:01:33 <yepster> default is e.g. people have two legs
+05:01:44 <aigan> ah
+05:02:08 <aigan> That is: It's true unless stated otherwise
+05:03:24 <yepster> so you can have a one-legged person
+05:03:30 <yepster> without a contradiction
+05:06:18 <aigan> But Why is it that instanses of Country have assertions in the  WorldGeographyMt Mt?  It should be in WorldGeographyDualistMt, shouldn't it?
+05:07:37 <aigan> Should I report it as a bug or report for brain surgery?
+05:08:50 <yepster> ask Steve
+05:08:51 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+05:09:22 <aigan> :)
+05:09:50 <aigan> stevereed:  Why is it that instanses of Country have assertions in the  WorldGeographyMt Mt?  It should be in WorldGeographyDualistMt, shouldn't it?
+05:10:01 <aigan> Or he may prefere mail...
+05:11:15 <aigan> ... How can I list the contents of a Mt?
+05:11:27 <yepster> in the kb browser?
+05:11:30 <aigan> yes
+05:13:33 <aigan> What if I want to se everything in the WorldPoliticalGeographyDataVocabularyMt?
+05:13:33 --- quit: yepster (Read error: 104 (Connection reset by peer))
+05:13:58 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+05:26:09 <yepster> stevereed: can I use completeExtentKnown on predicates that are asserted with forward chaining?
+05:27:24 <yepster> I have asserted 'completeExtentKnown knows', but when I ask about something that is not asserted
+05:27:37 <yepster> cyc answers 'not proven' where I expected to get 'false'
+05:28:05 <dmiles> there is something called minimizeExtent
+05:28:23 <dmiles> i think it is a weaker form
+05:28:38 <yepster> yeah, read about it (being a weaker form)
+05:29:12 * dmiles just interjecting was not paying complete attention to what was up
+05:29:28 <yepster> but now i read the comment of it: I think that should work, lets try
+05:30:24 <yepster> sh*t, still not proven
+05:31:01 <aigan> Is there no way to see how a Mt is used?  What assertions it holds?
+05:31:02 <yepster> maybe it has something to do with the Mt i assert *extent in
+05:31:38 <yepster> (#$implies 
+05:31:38 <yepster>   (#$ist-Asserted #$VWSRegelingHulpmiddelenMt ?PROP) 
+05:31:38 <yepster>   (#$knows #$CycAgent ?PROP))
+05:32:19 <yepster> asserted in the same VWSRegelingHulpmiddelenMt
+05:32:22 <dmiles> btw.. i did something like that.. and ran into trounles.. it was not populating
+05:32:32 <dmiles> i was ussing authorityForMt
+05:32:48 <dmiles> to grab: #$VWSRegelingHulpmiddelenMt
+05:32:50 <yepster> I want to use this to answer why something is not proven
+05:33:02 <dmiles> (#$implies 
+05:33:17 <dmiles> (#$authorityFoMt ?Agent ?Mt)
+05:33:28 <dmiles>  (#$ist-Asserted ?Mt ?PROP) 
+05:33:45 <dmiles> ((#$knows ?Aghent ?PROP))
+05:33:57 <dmiles> opps i forgot an #$and
+05:34:10 <yepster> i see
+05:34:25 <yepster> and this helps enabling negation as failure for #$knows?
+05:34:51 <dmiles> well i did it as a forward rule
+05:34:55 <yepster> me too
+05:35:00 <dmiles> and it was not propgating
+05:35:05 <yepster> I now have 12000 assertions in my mt
+05:35:07 <dmiles> is yours?
+05:35:14 <dmiles> ok you got lucky ;P
+05:35:16 <yepster> all greens
+05:35:20 <dmiles> it didnt no
+05:35:40 <dmiles> i may have just used (3$ist 
+05:35:43 <yepster> but when I watch the justification of the (knows agent prop) question I ask, I see that
+05:36:05 <dmiles> so now you wannt negation by fail on knows ?
+05:36:13 <yepster> it shows the implies rule, I expected it to use the forward chained stuff
+05:36:14 <dmiles> i see what your doing
+05:36:49 <yepster> I want to answer what is not known that causes something to be not proven
+05:37:07 <yepster> people ask 'why not?' questions all the time, I have to justify the answer
+05:37:38 <dmiles> hrrmm (genlPreds knows naf-knows)
+05:38:21 <dmiles> then completeExient the naf-knows
+05:38:36 <dmiles> just maybe
+05:38:49 <yepster> subl: (constant-apropos "knows")
+05:38:49 <CycLBot> knowing knows that :ARG2
+05:38:58 <yepster> duh?
+05:39:16 <yepster> what is 'naf-knows'?
+05:39:31 <dmiles> something i just made up
+05:39:47 <dmiles> as in something to define to use normal knows
+05:40:05 <dmiles> but can be marked negation by failure
+05:40:24 <dmiles> via (genlPreds knows naf-knows)
+05:40:36 <dmiles> or (knows-asserted
+05:40:50 <yepster> lemme try
+05:42:24 <yepster> hmm in create similar of knows I now see that it's a modality predicate in modalitymt
+05:42:35 <yepster> maybe I should genlMt VWSREsdjkhfjs ModalityMt
+05:42:56 <yepster> lemme try that first
+05:43:35 <yepster> shoot, still not proven
+05:46:11 <yepster> with the naf-knows and genlPreds, still not proven %-\
+05:47:45 <dmiles> try a quick query on naf-knows to see if its even picking it up
+05:47:57 <dmiles> backcain probly need +1 greater then normnal
+05:50:35 <yepster> well I didn't assert anyhing on naf knows, only on knows
+05:51:55 <yepster> perhaps I better start with a fresh test, all in e.g. basekb. If it still don't work -> bummer
+06:01:56 <dmiles> naf-knows would have picked it up becasue if any of its child preds had an assertion it would have had it as well
+06:09:53 <yepster> ?
+06:10:01 <yepster> nah
+06:10:12 <dmiles> just saying that genlPreds should have let you query on it
+06:10:24 <yepster> off to genlPreds comment
+06:11:47 <yepster> i see..
+06:12:09 <yepster> will I already stopped the previous image, too late now
+06:12:43 <dmiles> i may have to leave in a bit.. but keep posting your results if you have time
+06:13:03 <yepster> don't worry, I will (if it works)
+06:19:41 <aigan> Do'h. Found it
+06:25:24 --- quit: people (Read error: 110 (Connection timed out))
+06:27:46 <yepster> dmiles: about the forward chain not working, i had the same right now because of a mistake
+06:28:53 <yepster> the Mt in which the implies rules was given, wasn't genlMt'd to the mt of the ist-asserted statement
+06:29:31 <yepster> after putting the genlMt in, the repropagate worked fine ;-)
+06:29:40 <dmiles> oh.. well.. ist-asserted should break out of mt deops
+06:30:05 <dmiles> but makes sense.. but should not require genlMt
+06:30:33 <dmiles> kinda like #$ist
+06:30:38 <dmiles> but cool ;P
+06:33:33 <aigan> What should we do with the OpenCyc KB?
+06:33:49 <aigan> I'l looked a little at countries...
+06:33:57 <aigan> It's very inconsistent
+06:34:44 <aigan> I can't se the logic in why the same type of assertion is in diffrent Mt's for diffrent countries
+06:35:03 <aigan> Should we just redo everything?
+06:35:40 <dmiles> its the furthest i have ever seen it
+06:35:54 <dmiles> oopps wrong irc server ;P
+06:36:27 <yepster> now I'm curious!
+06:36:45 <dmiles> we are building a Asherons call server
+06:36:59 <dmiles> trying to build the client 
+06:37:13 <dmiles> (in this case)
+06:38:13 <dmiles> nope it failed ;(
+06:39:49 <dmiles> its a very high end 3d RPG gameing system that cetters its data in SQL
+06:40:12 <dmiles> so i am working on it to try ussing opencyc
+06:40:24 <dmiles> see how it does ;P
+06:41:29 <yepster> completeExtent with genlPredded predicate: also not proven instead of false.
+06:42:03 <dmiles> completeExtent really implies negation by failure?
+06:42:23 <yepster> The practical import of asserting (completeExtentKnown PRED) is that, if a given PRED-based GAF (PRED ARG1 ... ARGn) is not already in the KB, then the system "assumes" that it is not true, and will conclude that its negation (not (PRED ARG1 ... ARGn)) is true
+06:42:33 <yepster> maybe I should ask for not, a sec
+06:42:42 <dmiles> yep thats what it means to!
+06:42:50 <dmiles> yes do that!
+06:43:03 <yepster> also not proven
+06:43:07 <dmiles> oh ;(
+06:44:04 <dmiles> yeah i am glag cyc makes the distinction between proving something true vs proviong something false that they are not really connected
+06:44:19 <dmiles> err glad
+06:44:41 <yepster> me too, but I'd like it to make a not true <-> false connection on predicate level
+06:47:27 <yepster> Query in KnowsMt :
+06:47:27 <yepster> (knows CycAgent 
+06:47:27 <yepster>    (isa GPHHulpmiddel HulpmiddelType))
+06:47:27 <yepster> Justification 1 of 2:(knows CycAgent 
+06:47:27 <yepster>        (isa GPHHulpmiddel HulpmiddelType)) in KnowsMt 
+06:47:28 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+06:47:28 <yepster> Justification 2 of 2:(isa GPHHulpmiddel HulpmiddelType) in VWSRegelingHulpmiddelenMt 
+06:47:30 <yepster> (implies 
+06:47:32 <yepster>        (ist-Asserted VWSRegelingHulpmiddelenMt ?PROP) 
+06:47:34 <yepster>        (knows CycAgent ?PROP)) in KnowsMt 
+06:48:12 <yepster> Now I ask for something that isn't asserted:
+06:48:14 <dmiles> ok so its doing good with proving something yes
+06:48:42 <yepster> Current Query State : [Socratic Ask]
+06:48:43 <yepster> (and
+06:48:43 <yepster>   (knows CycAgent 
+06:48:43 <yepster>     (isa GPHHulpmiddel IndicatieType)))--------------------------------------------------------------------------------One Child[R(1,2)] module : TRANS-PREDICATE-POS
+06:48:43 <yepster> (implies 
+06:48:44 <yepster>     (ist-Asserted VWSRegelingHulpmiddelenMt ?PROP) 
+06:48:46 <yepster>     (knows CycAgent ?PROP)) in KnowsMt
+06:48:48 <yepster> state : (and
+06:48:50 <yepster>   (ist-Asserted VWSRegelingHulpmiddelenMt 
+06:48:52 <yepster>     (isa GPHHulpmiddel IndicatieType)))
+06:49:11 <yepster> here, it only shows the implies rules with which all knows predicates were created
+06:49:28 <dmiles> but still is uproven right?
+06:49:32 <yepster> yes
+06:49:38 <dmiles> err unpropven
+06:49:42 <dmiles> ?
+06:50:00 <yepster> nod
+06:50:28 <dmiles> and (not (knows  ...)) ?/
+06:50:42 <dmiles> somethig it does no
+06:50:44 <yepster> not proven
+06:50:55 <dmiles> and the opioosisite>?
+06:51:33 <dmiles> (4 cases here)
+06:52:16 <yepster> ask for trueprop -> true
+06:52:17 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+06:52:42 <yepster> ask for not knows trueprop -> not proven
+06:52:43 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+06:53:13 <yepster> azk for knows falseprop -> not proven
+06:53:33 <yepster> azk for not knows falseprop -> not proven
+06:54:56 <dmiles> hrrm.. maybe HL predicate backchaining turned on and Backchain depth 3 and unbound predicate backchining.. 
+06:55:20 <dmiles> unbound predicate backchining since you are ?ELSentence
+06:55:36 <dmiles> but you have forward chained all you want already
+06:55:59 <yepster> hmm shit my agenda was ahlted a while ago i see now
+06:57:21 <yepster> cool!
+06:57:32 <yepster> azk for not knows falseprop -> true
+06:58:09 <yepster> Query in InferencePSC :
+06:58:09 <yepster> (not 
+06:58:09 <yepster>    (knows CycAgent 
+06:58:09 <yepster>        (isa GPHHulpmiddel IndicatieType)))
+06:58:09 <yepster> One Justification ::MINIMIZE   (unknownSentence 
+06:58:09 <yepster>    (knows CycAgent 
+06:58:09 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+06:58:11 <yepster>        (isa GPHHulpmiddel IndicatieType))) in InferencePSC 
+06:58:14 <yepster>  
+06:58:16 <yepster> (completeExtentKnown knows) in KnowsMt 
+06:58:44 <yepster> azk for knows falseprop -> not proven
+06:59:10 <dmiles> wow good news
+07:00:25 <yepster> now i have to think again why I wanted this
+07:00:27 <dmiles> well  azk for knows falseprop -> not proven
+07:00:38 <dmiles> i am not sure thats good?
+07:01:11 <yepster> al long as I can ask for the negative, it's fine by me
+07:01:14 <dmiles> actually.. if someone kmnows a formulat.. then dont that mean they know how to use it?
+07:01:47 <dmiles> err knows a rule ;P
+07:02:17 <yepster> I am going to use the knows for some insurance rules.
+07:02:38 <yepster> e.g. you get shortage if you had no accident the last year
+07:02:46 <yepster> you ask cyc: do I get shortage
+07:02:49 <yepster> cyc: dunno
+07:02:52 <yepster> you: why not?
+07:03:08 <yepster> cyc: don't know if you had no accident the last yer
+07:03:35 <yepster> but when I look at it now:
+07:03:57 <dmiles> exactly right
+07:04:05 <yepster> this only answers: don't know because '(shortage dmiles)' is an unknownsentence
+07:04:18 <yepster> sigh
+07:04:40 <yepster> this problem is thougher than I thought
+07:04:41 <dmiles> yeah.. you may need (shortage dmiles) vs (not (shortage dmiles))
+07:05:25 <yepster> I should model: not shortage dmiles -> possibly implies unknownsentence no accident the last year
+07:05:39 <urgyen> when I worked in medical the docs wanted to know if they had missed a test that would kick them to the next insurance pay level
+07:05:41 <yepster> and maybe automatically create that knowledge from the primary assertions
+07:05:47 <urgyen> that's checking for missing against a known list
+07:06:39 <yepster> I know the list: it's the antecendent of shortage
+07:06:46 <dmiles> well now at least you should have a knows/unkown/knows false
+07:06:48 <yepster> but that would require some subl code
+07:07:21 <dmiles> the forth value should never be true in cyc
+07:07:21 <yepster> I'd prefer to solve it in cycl alone
+07:07:33 <yepster> unknown true?
+07:07:58 <dmiles> knows true, knows false, down not know
+07:08:29 <dmiles> so you have to create a knows based access that does...
+07:09:00 <dmiles> (impoies (knows (not ?X)) (knows-not ?X) )
+07:09:03 <yepster> I am going to think about this some time..
+07:09:41 <dmiles> so you may want three distingk predicates...
+07:10:04 <dmiles> (knows-true .. ) (knows-flase.. ) (knows-unkown ...)
+07:10:25 <dmiles> and define them according how you beleive they should work
+07:11:06 <yepster> ok
+07:11:20 <dmiles> knows-flase is pretty difficult
+07:11:24 <yepster> thanks for the help
+07:16:55 <aigan> I can't figure aout the diffrence between vocabulary MTs compared with the nonvocabulary counterpart
+07:18:14 <dmiles> you mean why they exist seoparately?
+07:18:32 <aigan> it says...
+07:18:44 <dmiles> vocabularyMts maybe can all be genlPreded specially.. and apply to WFF checkcs
+07:18:56 <dmiles> err genlMts to other vocabMt
+07:18:59 <aigan> The collection of all microtheories which specify the vocabulary for some topic, but have no rules or other non-definitional assertions.
+07:19:19 <aigan> What does that mean?
+07:19:54 <dmiles> means that the meta languages is kept in the vocaubualry.. like arity, argIsa, 
+07:20:38 <dmiles> cyc/system dependant definitionalls go into vocabMts.. thing that wiould let you validate WFFs
+07:20:58 <dmiles> but not say inything interesting about the Mt it vocabs for
+07:21:50 <dmiles> so its saying its a place maninly for Cyc definationals
+07:22:07 <dmiles> isa Foo UnraryPredicate
+07:22:27 <dmiles> argFormat Foo 1 SetTheFormat 
+07:23:15 <aigan> I interpret this as: stay away from them
+07:24:05 <dmiles> well when you are creating any new relations or collections.. you would want that in the VocabularyMt
+07:24:34 <aigan> The only thing I am trying to di is to describe the country Sweden
+07:24:48 <aigan> I want to say that it's part of Scandinavia
+07:25:02 <aigan> And I have spent the last hours trying to find the right Mt for it
+07:25:51 <dmiles> that would go into a DataMicrothery ... TheoryMicrory just maybe
+07:26:05 <aigan> Let me ask you...
+07:26:25 <dmiles> so there are 3 basics DataMicrothery facts,, TheroyMicrothery Rules.. Vocabulary Defintionals
+07:26:31 <aigan> Why are there a lot of geo info in Vocabulary Mts?
+07:26:56 <dmiles> because the concept that Names are defined in Vocabulary
+07:27:01 <aigan> Like this: (isa Bangladesh IndependentCountry)  in WorldPoliticalGeographyDataVocabularyMt
+07:27:20 <dmiles> and the Geo is many a collection of declaration of 1st order entityness of things
+07:28:03 <dmiles> this means the all who genlMt to WorldPoliticalGeographyDataVocabularyMt .. are refering to the sme Bangladesh
+07:28:21 <dmiles> the same uniquename Bangladesh
+07:28:45 <dmiles> even though they would be anyways
+07:29:25 <dmiles> WorldPoliticalGeographyDataVocabularyMt defines the vocabulary of (isa ?X IndependentCountry)
+07:30:05 <dmiles> so we all can know how to talk about IndependentCountries in the same definational way
+07:30:10 <aigan> What is a vocabulary?
+07:30:25 <dmiles> its a way that we used our cyc constants
+07:30:54 <aigan> The same constant can mean diffrent things i diffrent Mts?
+07:30:58 <dmiles> its our definations of what these constants mean 
+07:31:20 <dmiles> yes in an abstract unpredicable way
+07:31:40 <dmiles> Bangladesh isa IndependentCountry to those who genlMt WorldPoliticalGeographyDataVocabularyMt
+07:32:24 <dmiles> Bangladesh isa StatualLocation in PlaceOfInterestDataVocabularyMt
+07:32:42 <dmiles> to those who genlMt to it
+07:33:14 <aigan> who-hoo. It accepted my assertion
+07:33:31 <dmiles> so when you are doing assertion consistancy check .. (like argumetn constraints) you have definate parameters
+07:34:24 <dmiles> i may not want Bangladesh to be GeopoliticalEntity in my Mt
+07:34:47 <dmiles> or maybe i do but never used it as one
+07:35:38 <dmiles> VocabularyMts are disjoint when it comes to isa/genls relations
+07:35:47 <dmiles> where other Mts arnt
+07:36:03 <aigan> Could this be correct: (isa Sweden Country) in  WorldGeographyDualistMt  and then (geographicalSubRegions Scandinavia Sweden) in same Mt?
+07:36:26 <dmiles> well not really a good idea.. but i guess sometimes that happens :(
+07:36:51 <aigan> Whats not a good ieda?
+07:37:07 <dmiles>  (isa Sweden Country) should be in WorldPoliticalGeographyDataVocabularyMt]
+07:37:17 <dmiles> or
+07:37:24 <dmiles>  (isa Sweden Country) should be in WorldGeographyDataVocabularyMt
+07:37:28 <aigan> I thought I should stay away from Vocabularies
+07:37:53 <aigan> Did'nt you say that they only hold definitions of properties or something like that?
+07:37:56 <dmiles> i dont see a reason to stay away for vocabularies
+07:38:21 <dmiles> they hold a descripiotn of what constants are and how they are going to be used
+07:38:43 <dmiles> but not how they relate to other constants
+07:38:53 <aigan> oh
+07:39:23 <dmiles> that way you and I could agree on a vocabulary .. even though our Mts dont agree
+07:40:16 <dmiles> we can easily agree that Sweden is a Country
+07:40:30 <dmiles> and thats how we both use it
+07:41:04 <aigan> So why does it say (isa Japan IndustrializedCountry) in WorldGeographyMt?
+07:41:17 <dmiles> and we can say what geographicalSubRegions means definationally.. even when we dont have the same ones between our disagreeing Mts
+07:41:48 <aigan> I understand the thing about agreeing on vocabularies
+07:41:51 <dmiles> beacuse someone forgot to move it to WorldPoliticalGeographyDataVocabularyMt
+07:42:10 <dmiles> when they started deciding on this new breakage
+07:42:10 <aigan> It makes sense. I't just that I cant se the patterns and thats why I try to se if those words means something else
+07:42:13 <aigan> My confusion
+07:42:51 <dmiles> before there was not a separion of vocab/theory/data in cyc
+07:43:27 <dmiles> they got put into general mts .. more based on who or what would care
+07:43:59 <aigan> What is the diffrence between vocab and data then?
+07:44:02 <dmiles> but now these gernal mts are gett5ing partitiooned to vocab/theory/data
+07:44:25 <dmiles> data is to hold gafs about what countries are bordering other contries
+07:45:08 <dmiles> or populations .. number of cities.. what cities are inside
+07:45:15 <aigan> Got it
+07:45:20 <aigan> thank you
+07:45:55 <dmiles> theoryMt are rules of ducductions for understanding facts
+09:00:33 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+09:05:42 --- quit: DavidP ()
+09:08:27 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+10:19:15 --- quit: yepster ()
+10:50:23 --- join: johnd (~chatzilla@207.207.8.65) joined #opencyc
+10:51:05 <johnd> CycLBot: help
+11:07:50 --- join: people (Snak@62.53.34.57) joined #opencyc
+11:50:51 --- join: nrv8 (~nrv8@emotionally.unstable.org) joined #opencyc
+12:02:03 --- join: person (Snak@62.53.34.78) joined #opencyc
+12:02:31 <johnd> Are you 'person' or 'people'?
+12:02:46 <person> either
+12:03:03 <person> at the moment i'm person
+12:03:31 <johnd> Have you downloaded OpenCyc?
+12:03:42 <person> no
+12:03:52 <johnd> What OS do you use?
+12:04:03 <person> i'm downloading linux for powerpc at the moment -  i've got mac os9
+12:04:11 <johnd> Ah!
+12:04:28 <person> i'm a bit unsure about installing linux
+12:04:36 <johnd> We have someone internally who wants to work on a port to Mac OS X.
+12:04:38 <person> i have no idea how that'll work in my system
+12:04:49 <johnd> But it will take some time. A little tricky.
+12:04:58 <person> i guess that would be good
+12:05:08 <johnd> Which linux are you downloading.
+12:05:20 <person> hangon
+12:05:45 <DavidP> John, let me join the crowd of users who are hoping for a Mac OS X port.
+12:05:48 <person> MandrakeLinux-8.2
+12:06:02 <johnd> Okay, David.
+12:06:07 <person> yeah a mac version'd be good
+12:06:17 <person> i guess an os9 version is out of the question
+12:06:26 <johnd> I installed Mandrake about 6 weeks ago. Pretty smooth.
+12:06:35 <person> what on?
+12:06:43 <johnd> Wintel box.
+12:06:54 <Graham> well porting to OSX will be much easier than posting to OS9
+12:06:56 <person> right
+12:07:05 <Graham> *porting
+12:07:06 <CycLBot> You
+12:07:11 <johnd> Actually WAMD box. WAthlon box.
+12:07:27 <person> cause it's unix based - osx that is
+12:07:35 <Graham> BSD, but yes
+12:07:38 <johnd> What is CycLBot talking about?
+12:07:54 <johnd> Hello, CycLBot.
+12:08:02 <johnd> Hello Cyc.
+12:08:02 <CycLBot> hello CycLBot
+12:08:16 <johnd> Ooh, a little confused.
+12:09:55 <person> inanycase is there any real disadvantage to using the web version?
+12:10:08 <person> it's essentially the same thing right?
+12:10:29 <johnd> You can't save out your own stuff. (Which you can't easily with v0.6 anyway.
+12:10:53 <johnd> You can't add new facts and rules and expect them to be there tomorrow.
+12:10:56 <person> oh
+12:11:15 <person> i see
+12:11:29 <johnd> Eventually, when there's a knowledge grid, it would be better if everyone were contributing processing cycles.
+12:12:04 <johnd> The machines will be able to collaborate with distributed specialized knowledge.
+12:13:47 <DavidP> I gather that non-Cyc employees must use the guest login when accessing the public cyc servers. Yes?
+12:14:11 --- quit: people (Read error: 110 (Connection timed out))
+12:14:28 <johnd> No. If you can get on as CycAdministrator, feel free. Some functoins may be disabled. Not sure.
+12:14:32 <johnd> Gotta go.
+12:15:00 <Graham> the public cyc servers are not being hosted by Cycorp.
+12:15:00 --- quit: johnd (Remote closed the connection)
+12:15:03 <person> ok
+12:15:20 <Graham> the main one happens to be hosted by a Cycorp employee
+12:15:20 <person> what is CycAdministrator?
+12:15:30 <Graham> one of the possible loginins
+12:15:39 <Graham> there are two default logins
+12:15:53 <Graham> Guest and CycAdministrator
+12:16:10 <person> right
+12:16:14 <Graham> more can be added, but you'll find those in jsyt about every OpenCyc release
+12:17:26 <person> what is the problem with logging in as guest?
+12:17:45 <Graham> many of the functions will be disabled
+12:17:58 <Graham> it's just set up so that there are a lot of places Guest can't go or do.
+12:18:20 <Graham> it's usually best(standard) to log in as CycAdministrator
+12:18:31 <person> i see. i didn't realise adding was important
+12:18:33 <Graham> and then create a login for yourself 
+12:18:52 <Graham> some of the screens won;t be accessible by Guest either
+12:18:57 <person> isn't there a danger of people adding nonsensicle stuff
+12:19:04 <Graham> usually
+12:19:14 <Graham> we are working on ways to weed that out
+12:19:39 <person> so if you log in as admin, you can add willy nilly to the main database/knowledge?
+12:20:14 <Graham> yes,
+12:20:30 <person> oh i didn't realise that
+12:20:35 <Graham> all logings besides Guest pretty muich have equalk abilities
+12:21:47 <person> how much difference is there between cyc and opencyc? i read that there was going to be a 1 or 2 year lag
+12:22:15 <Graham> the final lag will probably be between 2-4 years
+12:22:34 <Graham> but currently since wer are still in pre-release
+12:22:34 <person> crikey
+12:22:37 <Graham> it's a little jumbled
+12:22:44 <Graham> it may be less
+12:22:59 <person> how much difference is there now?
+12:23:34 <Graham> it's really hard to quantify
+12:23:43 <person> right
+12:23:55 <Graham> we are still building it up and adding more and more
+12:24:49 <person> there's no chance of it going completely open source?
+12:26:39 <Graham> all of cyc
+12:26:50 <person> yeah
+12:26:57 <Graham> we'd go out of business
+12:27:13 <person> oh
+12:27:34 <person> that's a shame
+12:27:39 <Graham> hard to make money if you give it up for free
+12:27:47 <Graham> but a 2-4 year lag is pretty good
+12:27:51 <Graham>  and standard
+12:28:04 <person> apart from then there's more of a chance of it being used more
+12:28:12 <person> you know - metcalf's law
+12:28:16 <Graham> you makje money on the custom tasks and the "most-up-to date" knowlegde
+12:28:43 <person> the more people who use it, the more usefull it is
+12:28:45 <Graham> with OpenCyc we will get a pretty good distribution.
+12:29:02 <Graham> and even 2 year oldf stuff will be real useful.
+12:29:15 <person> i spose
+12:29:53 <person> how likely/close is it to understanding/comprehending normal english?
+12:32:50 <Graham> I'm noit enough of an expert on that subject to really say for sure.
+12:32:57 <Graham>  but it's pretty good
+12:33:16 <Graham> Is it perfect, nope, can it do most things, yes it seems so to me
+12:33:29 <person> right
+12:33:41 <person> ok i got to pop out a min :) 
+12:34:15 <Graham> okay
+12:35:19 --- part: nrv8 left #opencyc
+13:43:21 <person> .
+14:07:12 --- join: people (Snak@62.53.34.44) joined #opencyc
+14:18:20 --- quit: DavidP ()
+14:29:41 --- quit: person (Read error: 110 (Connection timed out))
+15:33:07 <aigan> Last time it took less than a minute to save the world
+15:33:24 <aigan> It has taken a couple of hours now
+15:33:27 <aigan> still not saved
+15:33:40 <aigan> and maby one more fact since last time...
+15:35:15 <Graham> doing a write-image?
+15:35:26 <aigan> CYC(3): (write-image "world/rit.load")
+15:35:26 <aigan> Doing a GC.
+15:35:35 <Graham> what speed machine
+15:35:48 <Graham> yeah there is something not okay
+15:35:58 <Graham> it never takes an hour to do a write image
+15:36:01 <aigan> Well. I't much slower this time
+15:36:43 <aigan> size is stable.  Must be some loop
+15:37:05 <Graham> sounds like a GC error, or it locked up
+15:37:28 <aigan> Is there an option to run in debug mode?
+15:38:01 <Graham> not internal to the program
+15:38:02 <aigan> 666 MHz.
+15:38:27 <Graham> yeah something crashed
+15:38:41 <Graham> hard to say what tho
+15:38:57 <aigan> Now RSS is 32. It was 33 just before
+15:39:07 <aigan> 32 MB...
+15:39:57 <aigan> I had a assertion anc changed its Mt a couple of times
+15:40:05 <aigan> Maby that left some sort of mark
+15:41:06 <aigan> transcript just 14 lines...
+15:41:45 <aigan> I'm not sure what the proper way of administer the server is
+15:42:03 <aigan> Should I just let it run and i some way import the log if it craches?
+15:42:26 <aigan> Or set up some sort of cron job?
+15:43:48 <Graham> wel My suggestion is to go ahead and kill the running cyc image
+15:43:54 <Graham> and then try again
+15:43:56 <aigan> Graham: Do you know if there is going to be any more cleanup of the Gography Mt's between 0.6 and 0.7?
+15:44:08 <aigan> oups
+15:44:09 <Graham> I believe you can load transcripts in 0.6
+15:44:11 <aigan> Geography
+15:44:20 <Graham> not really sure about the OE chnages
+15:44:31 <Graham> it shouldn't be muich longer
+15:44:59 <Graham> well I have to go now
+15:45:25 <aigan> Bye :)
+15:45:33 <Graham> my suspicion is that if yoiu just kill the image and start ity again write-image will work, if not there may be a bug
+15:45:43 <Graham> and if so, let us know 
+15:46:00 <aigan> ok. Thank you
+15:48:50 <aigan> oups. Should have backet up that world ;)
+15:49:00 <aigan> backed up
+15:52:46 --- join: yottzumm ([AuJI5+HJ7@12-232-124-73.client.attbi.com) joined #opencyc
+15:54:08 <yottzumm> can I change the "owner" of a card or object in one step, or do I have to use two steps, and assert, and then a kill
+15:54:38 <yottzumm> an assert, and then a kill
+15:54:56 <yottzumm> say I want to replace a constant in a predicate
+15:54:56 <CycLBot> You said: I want to replace a constant in a predicate
+15:55:08 <yottzumm> I know what I said
+15:55:23 <aigan> He... Don't ask me
+15:55:40 <aigan> say after me
+15:55:40 <CycLBot> You said: after me
+15:56:12 <yottzumm> the atmosphere is getting a little mooish around here
+15:56:21 <yottzumm> say simon says
+15:56:21 <CycLBot> You said: simon says
+15:56:42 <yottzumm> CycLBot?
+15:57:30 <aigan> The creator of thins are stored as assertions. I gues sthey could be changed by themself
+15:58:11 <yottzumm> I'm not worried about the creator.  I want to change who #$possesses a card
+15:59:47 * aigan tries to recover from a crach
+15:59:54 <yottzumm> I use assertGaf to intially give someone or some pile a card
+16:01:12 <aigan> Yezz. Back on track
+16:02:10 <aigan> Are you talking about a card game? Some demo?
+16:02:21 <yottzumm> yeah, crazy eights
+16:02:32 <aigan> Is that part of 0.6 distro?
+16:02:41 <yottzumm> I want to change the possessor of a card from someone's hand to the discard pile
+16:03:00 <yottzumm> I'm writing it with some people.  I am the main developer
+16:03:45 <aigan> Games and muds and bots. :-)  The open source community is great! ;)
+16:05:10 <aigan> Eh. But back on note.  I'm still learning.  Haven't come to changing assertions yet.
+16:11:39 <yottzumm> looks like I can use cyc-unassert
+16:24:55 <yottzumm> can I unassert with variables in the sentence?
+16:25:52 <yottzumm> okay, I got possesses working
+16:45:22 * aigan is away: Going home...
+16:55:21 * dmiles returns
+17:25:05 <yottzumm> dmiles can I do an unassert and assert in one step, that is, can I change a predicate once it has been asserted?
+17:25:36 <yottzumm> (now that I think about it, I probably want to do it in two steps anyway
+17:25:55 <dmiles> yes two steps
+17:26:37 <dmiles> there is a FI-REASSERT but i dopnt know all of its semantics.. its mainly to change dirrection and stregth .. not content
+17:28:43 <yottzumm> guess the docs are out of date.  I don't see it in the cycapi
+17:34:35 <yottzumm> psc
+17:34:39 <yottzumm> oops
+17:35:26 <yottzumm> dang.  Now that I am changing possession, I have to redeal each time
+17:44:11 <yottzumm> would there be an easy way to sort objects into a CycList by the above-Touching predicate
+17:45:01 <yottzumm> some kind of topological sort
+17:45:58 <yottzumm> but linear is OK, since it's a stack of cards (zero or one cards on top of or below a card)
+18:01:17 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+18:03:58 --- quit: Cobra ("[x]chat")
+18:08:53 <yottzumm> I'm having trouble with this: (cyc-unassert '(#$topCard ?ANYCARD #$DiscardPile) #$SBJMt)
+18:08:58 --- quit: people ()
+18:09:54 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:14:05 <yottzumm> Let me check the KB
+18:21:23 <yottzumm> subl: (cyc-query '(#$isa ?X #$Person))
+18:21:25 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "(#$isa ?X #$Person) NIL does not adequately specify a microtheory.")
+18:22:00 <yottzumm> subl: (cyc-query '(#$isa ?X #$Person) #$BaseKB)
+18:22:00 <CycLBot> no answers found
+18:22:09 <yottzumm> subl: (cyc-unassert '(#$isa ?X #$Person) #$BaseKB)
+18:22:10 <CycLBot> no answers found
+18:22:26 <yottzumm> subl: (cyc-query '(#$isa ?X #$HumanCyclist) #$BaseKB)
+18:22:27 <CycLBot> no answers found
+18:22:34 <yottzumm> hmm
+18:23:25 <yottzumm> subl (cyc-assert '(#$isa #$John #$Person) #$BaseKB)
+18:23:26 <CycLBot> no answers found
+18:23:32 <yottzumm> subl: (cyc-assert '(#$isa #$John #$Person) #$BaseKB)
+18:23:32 <CycLBot> no answers found
+18:23:45 <yottzumm> subl: (cyc-query '(#$isa #$John #$Person) #$BaseKB)
+18:23:45 <CycLBot> true sentence
+18:23:59 <yottzumm> subl: (cyc-unassert '(#$isa ?P #$Person) #$BaseKB)
+18:23:59 <CycLBot> no answers found
+18:24:02 <yottzumm> subl: (cyc-query '(#$isa #$John #$Person) #$BaseKB)
+18:24:03 <CycLBot> true sentence
+18:24:15 <yottzumm> subl: (cyc-unassert '(#$isa #$John #$Person) #$BaseKB)
+18:24:15 <CycLBot> no answers found
+18:24:25 <yottzumm> does unassert even work??????????????????/
+18:25:42 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:25:43 <CycLBot> ?CITY = CityOfWashingtonDC
+18:26:14 <yottzumm> subl: (cyc-assert '(#$isa #$CityOfSacramento #$USCity) #$BaseKB)
+18:26:15 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+18:26:16 <CycLBot> (#$isa #$CityOfSacramento #$USCity)
+18:26:16 <CycLBot> was not well formed because:
+18:26:17 <CycLBot> Term #$USCity violates arg-isa #$Collection
+18:26:18 <CycLBot> applicable to argument 2 of relation #$isa
+18:26:18 <CycLBot> in mt #$BaseKB.
+18:26:19 <CycLBot> Term #$USCity violates arg-isa #$SetOrCollection
+18:26:21 <CycLBot> applicable to argument 2 of relation #$isa
+18:26:24 <CycLBot> (via #$elementOf)
+18:26:26 <CycLBot> in mt #$BaseKB.
+18:26:27 <CycLBot> Term #$USCity violates arg-genls #$Thing
+18:26:30 <CycLBot> applicable to argument 2 of relation #$isa
+18:26:31 <CycLBot> in mt #$BaseKB.
+18:26:35 <CycLBot> Consider asserting
+18:26:38 <CycLBot> (#$isa #$CityOfSacramento #$USCity)
+18:26:40 <CycLBot> in mt #$WorldGeographyMt.")
+18:26:55 <yottzumm> subl: (cyc-assert '(#$isa #$CityOfSacramento #$USCity) #$WorldGeographyMT)
+18:26:56 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+18:26:56 <CycLBot> (#$isa #$CityOfSacramento #$USCity)
+18:26:56 <CycLBot> was not well formed because:
+18:26:57 <CycLBot> Mt #$WorldGeographyMTLogic is invalid.
+18:26:58 <CycLBot> (#$isa #$CityOfSacramento #$USCity) is not a well-formed formula in #$WorldGeographyMTLogic.
+18:26:58 <CycLBot> Perhaps #$isa is insufficiently defined in mt #$WorldGeographyMTLogic.")
+18:27:05 <yottzumm> subl: (cyc-assert '(#$isa #$CityOfSacramento #$USCity) #$WorldGeographyMt)
+18:27:07 <CycLBot> no answers found
+18:27:47 <yottzumm> (cyc-unassert '(#$isa ?CITY #$USCity) #$WorldGeographyMt)
+18:28:02 <yottzumm> subl: (cyc-unassert '(#$isa ?CITY #$USCity) #$WorldGeographyMt)
+18:28:02 <CycLBot> no answers found
+18:28:16 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$WorldGeographyMt)
+18:28:16 <CycLBot> ?CITY = CityOfSacramento
+18:28:37 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$WorldGeographyMt '(:number 5))
+18:29:14 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$WorldGeographyMt)
+18:29:14 <CycLBot> ?CITY = CityOfSacramento
+18:29:42 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:29:43 <CycLBot> ?CITY = CityOfWashingtonDC, ?CITY = CityOfSacramento
+18:29:55 <yottzumm> subl: (cyc-unassert '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:29:56 <CycLBot> no answers found
+18:29:58 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:29:59 <CycLBot> ?CITY = CityOfWashingtonDC, ?CITY = CityOfSacramento
+18:30:31 <Cobra> InferencePSC isn't an MT is it?
+18:30:48 <yottzumm> it works like one, I think
+18:31:05 <yottzumm> for doing inferencing
+18:31:40 <yottzumm> subl: (cyc-unassert '(#$isa ?CITY #$USCity) #$WorldGeographyMt)
+18:31:41 <CycLBot> no answers found
+18:31:44 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:31:45 <CycLBot> ?CITY = CityOfWashingtonDC, ?CITY = CityOfSacramento
+18:31:49 <Cobra> Might that prevent unassert's?
+18:32:23 <yottzumm> I just tried it with the world geography mt, and it didn't work either
+18:32:54 <yottzumm> I don't really have a clue
+18:33:08 <yottzumm> subl: (cyc-unassert '(#$isa #$CityOfSacramento #$USCity) #$WorldGeographyMt)
+18:33:08 <CycLBot> no answers found
+18:33:13 <yottzumm> subl: (cyc-query '(#$isa ?CITY #$USCity) #$InferencePSC)
+18:33:13 <CycLBot> ?CITY = CityOfWashingtonDC
+18:33:38 <yottzumm> see, you can't use a variable when you're unasserting, apparently
+18:34:13 <Cobra> Can't use?  Didn't you just prevent it being a member of USCity?
+18:34:38 <yottzumm> what?
+18:35:05 <yottzumm> I just removed Sacramento from the KB
+18:35:20 <yottzumm> I was testing if non-variable unasserts worked
+18:35:30 <yottzumm> I want a variable unassert
+18:35:33 <Cobra> ah, ok.
+18:36:05 <Cobra> umm, variable unasserts?  Are variable's KB members?
+18:36:28 <Cobra> Variables like ?CITY, right?
+18:36:40 <yottzumm> I want to remove allUS Cities, without having to specify each one individually
+18:36:47 <yottzumm> yes, like ?CITY
+18:37:30 <Cobra> unassert USCity ?
+18:38:02 <yottzumm> you mean, like kill the USCity constant?
+18:38:23 <Cobra> You could break the relationship, without removing all the cities...  (so, yes)
+18:39:07 <yottzumm> what do you suggest for breaking the relationship without removing all the cities.  I'm all ears
+18:39:44 <yottzumm> I actually want to do this on the #topCard predicate
+18:39:49 <yottzumm> I actually want to do this on the #$topCard predicate
+18:40:33 <Cobra> Well, USCity isn't a constant, right?  It's a collection...  small distinction there.
+18:40:43 <yottzumm> but I think I may have to do a query for all topCards on a stack, then get rid of them individually
+18:40:54 <yottzumm> do you have a solution, or are you blowing hot air
+18:41:51 <Cobra> I wasn't claiming a solution.  Don't be rude.  
+18:42:16 <Cobra> I've now idea what a topcard is, since it isn't in the standard ontology.
+18:42:19 <yottzumm> I suppose you were proposing solutions
+18:42:29 <yottzumm> like the top card in a stack of cards
+18:42:29 <Cobra> s/now/no/
+18:43:27 <yottzumm> I need to keep track of it for drawing, and restricting what can be played to the discard pile in crazy eights
+18:43:37 <Cobra> Oh, sorry.  Just commenting on how USCity and some related stuff is structured.
+18:44:43 <yottzumm> I can't get rid of the #$topCard predicate, because I have two piles that depend on it.  I suppose I could use a different predicate for each
+18:45:06 <yottzumm> s/predicate/constant/
+18:45:37 --- quit: damski (Read error: 104 (Connection reset by peer))
+18:45:44 <Cobra> Different piles?  That makes sense.
+18:47:24 <yottzumm> I have predicates like (#$topCard #$AceOfSpadesCard #$DrawPile) and (#$topCad #$KingOfHeartsCard #$DiscardPile)
+18:47:31 <yottzumm> I have predicates like (#$topCard #$AceOfSpadesCard #$DrawPile) and (#$topCard #$KingOfHeartsCard #$DiscardPile)
+18:48:11 <yottzumm> I want to get rid of the second one so I can put a new discard on it
+18:54:10 <Cobra> hmm, seems more like the cards need properties.  on top of, in pile, below... something like that.  It's a linked list, right?
+18:55:16 <yottzumm> I'm working towards a linked list.  I have asserted above-Touching on the cards, but I'm not doing anything with it yet
+18:55:34 <yottzumm> so if there was some way to sort by above-Touching, I could get the top card.
+18:55:57 <yottzumm> or if I could get the card which didn't have any cards above it
+18:56:32 <yottzumm> This is starting to seem amazingly difficult
+18:57:32 <yottzumm> If SubL had a Swing GUI, I would be tempted to use it
+18:59:48 <yottzumm> I have valueOf and suitOf on the cards now
+19:00:46 <yottzumm> A pile or hand possesses many cards
+19:00:51 <Cobra> hmm, so why use cyc?  Seems like a common language and a ordered data structure is the easier way to go.  Making some kind of demo?
+19:01:06 <yottzumm> I'm trying to learn cyc
+19:01:14 <Cobra> good reason
+19:01:22 <yottzumm> what do you suggest I use to try to learn cyc?
+19:03:23 <Cobra> I've been through the online tutorial once.  It's not enough yet, but I need to go back through parts of it again.  Did you try it?  There are some exercises that help understand how it works.
+19:04:30 <yottzumm> I read one of the tutorial, I think, or at least some set of slides.  I got the basic idea.  It doesn't really cover the Java stuff, from what I've seen, but maybe they've expanded it since I looked
+19:06:24 <yottzumm> I think I'll contact technical support and see if I can get unassert with a variable added as a feature
+19:06:43 <Cobra> no, I haven't seen anything on the java side either.
+19:07:07 <urgyen> wouldn't an unassert be better as a verify false?
+19:07:09 <Cobra> There are some docs on the functions in cvs for the java
+19:07:21 <urgyen> need a way to establish authority and point it to the trusted negation
+19:07:57 <Cobra> not sure what you mean by verify false?
+19:08:06 <urgyen> that's ok, me neither
+19:08:10 <Cobra> :)
+19:08:10 <yottzumm> you mean the javadoc?
+19:08:21 <urgyen> I have a perspective of plain ol' logic
+19:08:44 <urgyen> but setting and unsetting on whim isn't really teachings
+19:08:46 <urgyen> -s
+19:09:51 <yottzumm> Maybe I should just get rid of my #$topCard predicates
+19:09:59 <yottzumm> ??
+19:11:07 <yottzumm> (#$and (#$possesses #$DiscardPile #$Card) (#$not (#$above-Touching ?ANY #$Card)))????
+19:11:30 <yottzumm> but I'll have to unassert my above-Touchings when I draw a card
+19:11:50 <Cobra> hmm, don't see any of the java function docs I thought I found.  Maybe I'm thinking of something else.
+19:13:32 <yottzumm> there should be a query&remove function
+19:13:53 <yottzumm> delelete from foo where ....
+19:16:20 <Cobra> oh, there it is.  In the distro, there is a doc directory.  doc/org/opencyc/chat had html pages for the chat stuff.  Don't know how complete it is.
+19:17:18 <yottzumm> you mean this: http://www.cyc.com/doc/opencyc_api/java_api/
+19:17:30 <yottzumm> that's javadoc
+19:19:05 <yottzumm> start at doc/index.html
+19:19:26 <yottzumm> in the distro
+19:21:33 <yottzumm> distrotheque?
+19:22:14 <Cobra> hmm, no, not the same.  I'll have to look at that.
+19:30:32 <stevereed_home> yottzumm: send me an email about your unassert/assert because I think there is an fi-edit api, reed@cyc.com
+19:31:01 <stevereed_home> bye.
+19:35:44 * dmiles returns
+20:21:40 <yottzumm> how is fi-unassert different than cyc-unassert?
+20:23:18 <yottzumm> will fi-unassert take variables?
+20:24:38 <yottzumm> cd
+23:02:29 --- quit: urgyen ()
+23:19:34 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+23:19:48 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:42:37 --- quit: yottzumm ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.06.28

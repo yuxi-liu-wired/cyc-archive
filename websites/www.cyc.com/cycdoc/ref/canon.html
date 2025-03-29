@@ -1,0 +1,267 @@
+<html>
+
+<title>The Cyc&reg; Canonicalizer</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>The Cyc&reg; Canonicalizer</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  See <a href=/cycdoc/legal-terms.html>Terms of Usage.</a><br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+<p>
+It is useful to consider two representational levels of knowledge in
+Cyc.  Before knowledge is exploited by Cyc to solve problems it must first
+be conceived and articulated and then stored internally as
+data structures accessible by the inference engine.  Knowledge is
+articulated (e.g., by human knowledge engineers, by a front end NL
+module that is processing text, by a machine learning program, ...) at
+the epistemological level (EL) as formulae in a notation very similar to
+first-order logic (FOL).  Knowledge
+is stored internally at the heuristic level (HL), primarily as formulae in
+conjunctive-normal form (CNF).
+<p>
+FOL is appropriate for the EL because it is widely known and used among
+knowledge engineers, and it is both expressive and precise.  CNF is
+appropriate for the HL because it both maximizes the modularity of the
+knowledge and supports fast inference algorithms (e.g., clause
+resolution).  Separating the articulation representation from the
+internal representation benefits both the knowledge engineers, who need
+only learn a stable representation language, and the system designers,
+who are free to modify the internal data structures as needed without
+changing the EL and thus without disrupting the efforts of the knowledge
+engineers.  The translation of formulae from the El to the HL is
+performed automatically by the CycL canonicalizer.
+<p>
+<b>Canonicalization Objectives:</b>
+<p>
+(a) compression: mapping equivalent EL formulae into a common HL
+    construct <br>
+(b) correctness: only equivalent EL formulae are mapped into a common HL
+    construct <br>
+(c) speed
+<p>
+The raison d'etre of the canonicalizer is to soundly translate
+equivalent EL formulae into a single HL construct.  This avoids
+redundantly adding one formula that is simply a rephrasing of another
+formula.  For example, the following are all equivalent EL formulae that
+map into a single HL construct:
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> 
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?y <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?x ?y))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (#$sociallyDominates ?x ?y) (#$sociallyDominates ?y ?x)))
+
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> 
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?y <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?y ?x))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (#$sociallyDominates ?x ?y) (#$sociallyDominates ?y ?x))) 
+
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> 
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?y <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?x ?y))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (#$sociallyDominates ?x ?y) (#$sociallyDominates ?y ?x)))
+
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> 
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?y <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>) (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?y ?x))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (#$sociallyDominates ?y ?x) (#$sociallyDominates ?x ?y)))
+
+(<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a>
+   (#$sociallyDominates ?x ?y) 
+   (#$sociallyDominates ?y ?x)
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?y <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>))
+   (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?x ?y)))
+</pre>
+The second differs from the first only in the order of the arguments to
+the symmetric predicate <a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a>.  The third differs from the first
+only in the order of the antecedent literals.  Achieving a single HL construct also involves
+canonicalizing the order of arguments to a commutative relation, in this
+case <a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>.  The fourth differs from the first only by variable naming.
+The fifth differs from the first by a few applications of standard
+logical transformations (e.g., DeMorgan's Law).  Attempting to add all
+five formulae to the Cyc KB results in only one HL construct.
+<p>
+An important secondary objective of the canonicalizer is speed; it is
+not uncommon for users to load transcripts containing thousands of EL
+formulae, each of which must be canonicalized.  Therefore,
+canonicalization must be as fast as possible.  However, the goal of
+efficient translation is directly at odds with the goal of detecting and
+removing duplication (which can involve arbitrary theorem proving).  To
+balance this trade-off, the canonicalizer uses a limited set of rules
+for simplifying and transforming formulae that has been tuned with
+hundreds of thousands of examples; not all equivalent formulae simplify
+to the same expression.  These rules reflect a pragmatic compromise
+between efficiently translating EL formulae into HL constructs and
+detecting and eliminating duplication, and they are truth-preserving.
+Thus the canonicalizer does not (cannot) guarantee to map all equivalent
+EL formulae into a single HL construct (after all, FOL is undecidable);
+however, it can guarantee soundness (only truly equivalent formulae are
+mapped into a common HL construct), and it can guarantee a relatively
+fast response.
+<p>
+Implementation note: canonicalizing the order of arguments to
+commutative relations obviates rules that implement commutativity, such
+as: 
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?x ?y) (<a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a> ?y ?x))
+</pre>
+This requires that every component of the inference engine (n.b. the <a href="kb-indexing.html">KB
+indexing</a> mechanisms) assume responsibility to correctly handle
+commutativity.
+<p>
+<b>Canonicalizer components:</b>
+<p>
+(a) critic: test for syntactic and semantic well-formedness<br>
+(b) translation pre-processor: handle exceptions<br>
+(c) translator: map assertions into CNF, queries into DNF<br>
+(d) translation post-processor: handle rule macros<br>
+<p>
+The critic ensures that a given EL formula is both syntactically and
+semantically well-formed, as defined by the CycL specification.
+The syntactic check simply involves parsing the formulae with the BNF
+grammar.  The semantic check involves enforcing both arity constraints
+and argument constraints (e.g., <a href=/cycdoc/vocab/fundamental-vocab.html#arg1Isa>#$arg1Isa</a>).  Formulae that are not 
+syntactically well-formed canonicalize to nil; formulae that are not
+semantically well-formed canonicalize to <a href=/cycdoc/vocab/math-vocab.html#True>#$True</a>, <a href=/cycdoc/vocab/math-vocab.html#False>#$False</a>, or nil.
+<p>
+Relations in CycL are declared to be of  either fixed or variable arity.
+The arity of fixed arity relations is declared and constant (but may be
+microtheory specific). Variable arity relations
+(e.g., <a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#different>#$different</a>) accept zero or more arguments.  The critic
+ensures the semantic constraint that each relation referenced in a formula 
+has a declared arity (variable or a non-negative integer) and that the 
+number of arguments satisfies the arity.  
+<p>
+Relations in CycL are typed; one or more typing constraints can be
+defined for each argument.  Furthermore, the type of the result of
+functions in CycL can be defined.  All relation typing declarations are
+microtheory-specific.  The critic invokes the arg-type module to
+insure that all argument-typing constraints applicable to a formula are
+satisfied.
+<p>
+Implementation note: because the critic enforces microtheory-specific
+constraints, the behavior of the canonicalizer is microtheory-specific.
+That is, a formula is canonicalized with respect to a designated
+microtheory, and canonicalizing the same formula in two different
+microtheories may produce different results.
+<p>
+After ensuring that an EL formula is well-formed, the canonicalizer
+transforms the formula into an HL construct.  This transformation
+basically converts a FOL formula into clausal normal form (e.g., CNF).
+However, special support for particular syntactic constructs require
+special processing.  The translation pre-processor handles those
+special transformations that are easiest to accomplish prior to conversion
+to clausal normal form; the post-processor handles those special
+transformations easiest to accomplish after conversion to clausal normal
+form.
+<p>
+Two special constructs handled by the pre-processor are
+exceptions:  #$ExceptWhen and #$ExceptFor literals are transformed into
+<a href=/cycdoc/vocab/fundamental-vocab.html#abnormal>#$abnormal</a> assertions.  For example 
+<pre>
+(#$ExceptWhen &lt;formula-1&gt; &lt;formula-2&gt;)  
+</pre>
+denotes that &lt;formula-2&gt; is default true, but is not warranted when
+&lt;formula-1&gt; holds; this formula is transformed by the pre-processor
+into
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> &lt;formula-1&gt; (<a href=/cycdoc/vocab/fundamental-vocab.html#abnormal>#$abnormal</a> &lt;variables&gt; &lt;kb-assertion&gt;))
+</pre>
+where &lt;variables&gt; are the EL variables appearing in &lt;formula-2&gt;, and
+&lt;kb-assertion&gt; is the HL construct, already asserted in the Cyc
+knowledge base, derived from canonicalizing &lt;formula-2&gt;.
+<p>
+The translator maps formulae into clausal normal form:  assertions are
+mapped into CNF; queries are mapped into DNF.  This uses a standard
+algorithm (see "Logical Foundations of Artificial Intelligence" by
+Genesereth and Nilsson); the approach is outlined below as six
+steps:
+<p>
+(1) remove implications:
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> &lt;formula-1&gt; &lt;formula-2&gt;) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> &lt;formula-1&gt;) &lt;formula-2&gt;)
+</pre>
+(2) distribute negations
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> &lt;formula-1&gt; ...)) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> &lt;formula-1&gt;) ...)
+(<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> &lt;formula-1&gt; ...)) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> &lt;formula-1&gt;) ...)
+(<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> &lt;var&gt; &lt;formula&gt;)) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> &lt;var&gt; (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> &lt;formula&gt;)) 
+(<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> &lt;var&gt; &lt;formula&gt;)) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> &lt;var&gt; (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> &lt;formula&gt;))
+</pre>
+(3) standardize variables
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> &lt;var&gt; &lt;formula&gt;) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#forAll>#$forAll</a> &lt;unique var name&gt; &lt;formula&gt;)
+(<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> &lt;var&gt; &lt;formula&gt;) -> (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> &lt;unique var name&gt; &lt;formula&gt;)
+</pre>
+(4) remove existential quantifiers
+<p>
+Substitute a unique skolem function in for every existentially
+quantified formula.
+<p>
+(5) remove universal quantifiers
+<p>
+Since every variable is now unique and universally quantified, all
+universal quantifiers can be dropped.
+<p>
+(6) distribute disjunctions and conjunctions to put into CNF or DNF
+<p>
+These six steps produce one or more clauses for each well-formed EL
+formula being canonicalized.  The translation post-processor
+performs a series of additional transformations that are convenient to
+apply to clauses.
+<p>
+The first step of the post-processor handles a class of
+specially-supported constructs referred to as "rule macros".  Each rule
+macro is a compressed construct (typically a single literal) that
+denotes or expands into a non-atomic (e.g., disjunctive) formula.
+Typically, there are special inference modules that support each rule
+macro.  For example, the formula
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x #$Poodle) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>))
+</pre>
+is transformed by the translator into the CNF:
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#or>#$or</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x #$Poodle)) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>))
+</pre>
+which is then transformed by the post-processor into the literal:
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> #$Poodle <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>).
+</pre>
+Here, <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> is a rule macro; (<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> ?x ?y) denotes, or expands into, 
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x #$Poodle) (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?x <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>))
+</pre>
+The inference engine has a special HL module that reasons efficiently
+with <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> literals (see [:genls HL module]).
+<p>
+The next step of the of the translator post-processor is to canonicalize
+the components of the clauses.  This involves three steps:
+<p>
+(a) canonicalizing the order of commutative arguments, including a
+decomposing heuristic technique for canonicalizing the order of
+non-atomic terms (e.g., literals) and using a simple lexical technique
+for ordering atomic terms
+<p>
+(b) reifying function terms
+<p>
+(c) replacing EL variables with HL variables (aka KB variables or
+inference variables)
+<p>
+The first step is performed in order to avoid redundantly adding to the
+KB two formulae which simply rephase each other.  The second  step is
+performed in order to support efficient indexing of assertions in
+the KB (see <a href="kb-indexing.html">KB Indexing</a>).  The third step is performed in order to
+support an effient unification algorithm.
+<p>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+</html>

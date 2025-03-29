@@ -1,0 +1,188 @@
+00:00:00 --- log: started opencyc/02.07.08
+00:34:30 --- quit: huthut ()
+03:05:46 --- quit: zool (Read error: 104 (Connection reset by peer))
+04:39:18 --- join: urgen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+04:39:37 --- quit: urgyen (Read error: 104 (Connection reset by peer))
+04:58:50 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+05:31:49 --- quit: graylensman ("Client Exiting")
+06:13:48 --- quit: Cobra ("[x]chat")
+07:31:45 <kinoc> ping
+07:31:46 <CycLBot> hello kinoc
+07:35:48 <dmiles2> hi kinoc
+07:35:58 <dmiles2> hey goes things?
+07:36:43 <dmiles2> (i am loading AIML into prolog now) and trying out the best ways to stuff it into Cyc
+07:37:45 <dmiles2> but one thing that may be more helpfull first is execution of AIML from a purely prolog context.. that way i can get a real grasp enough to know the Cyc represention makes sense
+07:41:19 <dmiles2> this linke is 4 MBs.. http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/aiml/e.pl  it is the .aiml files loaded into a single .pl file
+07:41:40 <kinoc> makes sense 
+07:41:45 <kinoc> jebus!
+07:42:06 <dmiles2> yeah 41 thousand data structures
+07:42:12 <kinoc> well thats one way to do it
+07:42:20 <dmiles2> some of a  A that is not 'quoted' is a replacement varible
+07:42:44 <dmiles2> for example var_in_in(['A', 'LONG', 'LONG', A], ['A', 'LONG', A]).
+07:43:01 <dmiles2> means delete one of theLongs
+07:43:39 <dmiles2> i use a e_match prolog routine that does wildcard on variables.
+07:43:59 <dmiles2> nomral in pure prolog it would look like var_in_in(['A', 'LONG', 'LONG'| A], ['A', 'LONG'| A]).
+07:44:07 <kinoc> Ok, like normal list iteration
+07:44:18 <kinoc> yea
+07:44:42 <dmiles2> right.. my e_match allows varibles to be used in a list for so the first represents the same as the second
+07:45:22 <kinoc> So your lists look more like the regular expressions
+07:45:22 <dmiles2> i having seen any AIML that so far expects to match on only one world by using * or _
+07:45:27 <dmiles2> correct
+07:45:53 <dmiles2> err.. so far none expects to match on only one word by using * or _
+07:46:13 <dmiles2> so i always expect to match on 1 or more worlrds
+07:46:23 <kinoc> are you using std-*.aiml
+07:46:49 <dmiles2> maybe could.. i seek advice on that before trying
+07:47:11 <dmiles2> the http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/aiml/  <- is what i am loading
+07:47:51 --- quit: stubby ("Client Exiting")
+07:47:56 <dmiles2> you mean like sub-*.aiml correct?
+07:48:13 <dmiles2> i handt seen std-*.aiml
+07:48:48 <kinoc> do you want a more generic bot or more innate personality ?
+07:48:53 <dmiles2> oh those are domains right?
+07:49:07 <dmiles2> std-happytalk.aiml ?
+07:49:46 <kinoc> yes, check under the standard directory
+07:49:54 <dmiles2> i guess the ?.aiml are the generics right .. and std-*.aiml are the specifics?
+07:50:44 <dmiles2> iam hoping to export an API like loadAiml("location/blahblah.aiml").
+07:51:28 <dmiles2> so personally io want to load as much of everything as i can.. just to get bulletproofhood
+07:52:19 <kinoc> what is in the standard sub directory is the "generic" bot
+07:52:43 <dmiles2> it is the one that is A.iaml B.aiml C.aiml
+07:52:53 <dmiles2> (i was guessing)
+07:53:16 <kinoc> the categories are broken out by domains, a is a little easier to change the "personality"
+07:53:43 <dmiles2> yeah these files seem to have no domain.. it has only one topic in this large set
+07:54:03 <kinoc> The A/B/C...aiml one is probably Alice. Its easier to find and edit a specific pattern
+07:54:19 <kinoc> Since it is alpha sorted
+07:54:24 <dmiles2> yeah thats what i had done was download that ;P
+07:54:48 <kinoc> both have basically the same pattern sets
+07:54:48 --- quit: urgen (Read error: 104 (Connection reset by peer))
+07:54:50 <dmiles2> oh i do infact have standard: http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/aiml/standard/
+07:54:52 --- join: urgyen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+07:55:08 <dmiles2> i can load those as well
+07:55:36 <kinoc> they both have the same pattern sets but may have different responses
+07:55:58 <dmiles2> i was hoping to derive topical priority
+07:56:08 <dmiles2> the <THAT> tag kinda helps flow
+07:56:15 <kinoc> since the Alice one is Rich's personal bot entry, and standard is the offical starts
+07:56:39 <dmiles2> ah.. i see
+07:56:48 <kinoc> So how do you handle <THAT> and "it" and the predicates/variables ?
+07:57:07 <dmiles2> i keep a buffer of last thing the bot said
+07:57:14 <kinoc> just asserts and retracts ?
+07:57:26 <dmiles2> (for that) and then just an asserted slots for the sets
+07:57:33 <dmiles2> yeah assert/retract
+07:58:09 <kinoc> you would just translate that into Mt assert/retracts I guess.
+07:58:37 <dmiles2> my big blocker right now is fireing order of the in_in var_in_in.. i couldnt find a spec on it
+07:58:53 <dmiles2> yeah there could be Mts for things like that
+07:59:08 <dmiles2> most prolog programs tranfer into Cyc better then prolog
+07:59:41 <dmiles2> re bloker, like what order to fire the aiml structures
+08:00:13 <dmiles2> i would assume the in 2 in's without varibles first
+08:00:57 <kinoc> seems like a good guess
+08:01:05 <dmiles2> so in that file you saw... i have del_in_resp_out,in_in,in_var_in.. etc
+08:01:32 <dmiles2> those are catagorized into about 10 classes of aiml content
+08:02:14 <kinoc> I can't get the e.pl open
+08:02:15 <dmiles2> now deciding the order they are applied
+08:02:52 <dmiles2> 4158862 Jul  4 22:02 /usr/lib/pl-5.0.7/library/e.pl
+08:03:10 <dmiles2> aproximate file size is right?
+08:03:33 <kinoc> says I can not get to the address
+08:03:33 <CycLBot> You said: I can not get to the address
+08:05:06 <dmiles2> ok looks like our DCC is working
+08:05:37 <kinoc> Thanks
+08:06:00 <dmiles2> i use SWI-Prolog cuz it loads that file in less then 4 seconds easily
+08:06:36 <dmiles2> but thats just a data dump.. not the actual program
+08:07:21 <dmiles2> the program that created that is http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/opencyc_aiml.pl
+08:08:57 <dmiles2> opencyc_chatterbot.pl ias what i am working on to use it
+08:10:35 <kinoc> did you play with the commandTemplate stuff ?
+08:10:54 <dmiles2> i did .. i am not sure if you got a chance to see it
+08:11:04 <dmiles2> at least asserted intio into OpenCyc
+08:11:31 <dmiles2> but didnt have the SubL api to figure out how to use it
+08:12:08 <dmiles2> i am guessing its for the exact use we want
+08:12:40 <dmiles2> that in open dialog with a user cyc can use assertTemplate,queryTemplate and commandTemplate
+08:13:18 <kinoc> The only thing missing is a "responseTemplate", but I guess you could duplicate and modify commandTemplate
+08:13:37 <kinoc> for times you wnat to just make a non-logical response
+08:13:57 <dmiles2> yeah it could be partitioned off like that
+08:14:19 <dmiles2> many of the predicates for mathcing input are not presesnt in openCyc.. they are there in comment strings .. but not as constants
+08:14:36 <dmiles2> the gernate response predicates and fuunctions all exist
+08:14:51 <dmiles2> but some of the matching things arnt ;(
+08:15:15 <kinoc> maybe by 0.7/0.8/1.0 ?
+08:15:19 <dmiles2> but i would guess between 0.7-0.8 they will be added back in
+08:15:25 <dmiles2> yeah
+08:16:09 <dmiles2> i think some of the stripping to make opencyc was to reduce search space and deal with pathology.. and then slowwly things get rebuilt into it
+08:16:43 <kinoc> "when in doubt rip it out"
+08:17:10 <kinoc> maybe they didn't expect you to get this far this soon
+08:17:37 <dmiles2> hehe,, i wonder if someone pressed "kill this constant" to see what 10% of the kb would dropoff at times
+08:17:48 <dmiles2> well yeah.. there are a few dirrections i would love to see cyc get into
+08:18:13 <dmiles2> and i just kinda go with them as far as i can get.. then fork to another.. then to another
+08:18:57 <kinoc> best-first, breath-first, depth-first, A* ...?
+08:19:28 <dmiles2> i am moving breadth i think
+08:19:30 <dmiles2> hehe
+08:19:40 <kinoc> exploring the cyc space
+08:19:53 <kinoc> well you will get a good overview that way
+08:20:12 <kinoc> and find the shortest part to each goal
+08:20:13 <dmiles2> yeah.. i am learning the whole time
+08:21:19 <dmiles2> so i am guessing even in Cyc's current state.. i can load the AIML in there and use the external prolog automation
+08:21:37 <dmiles2> where cyc is working as the broker
+08:21:59 <dmiles2> but yeah would be much funner if it was SubL of std cyc inference
+08:22:13 <dmiles2> s/of/or/g
+08:27:16 <dmiles2> there was the structure i was starting with: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-all-asserted-knowledge&8564
+08:27:35 <dmiles2> then creating one rule to pull that into responseTemplate appropriately
+08:28:28 <dmiles2> (thats the origibnal ELiza data) but easily insert AIML there.. with adding <that>
+08:29:06 <dmiles2> the $MatchEnglishFn  is not standard to cycl
+08:30:18 <dmiles2> the first argument is just a search index term
+08:31:05 <dmiles2> that content is made from a dirrect connection between prolog and Cyc.. 
+08:37:12 <kinoc> cool. so the new version should be relatively easy to implement
+08:37:12 <dmiles2> exactly
+08:37:12 <kinoc> someone had some stats on AIML tag use in the standard bot
+08:37:12 <dmiles2> that would be great
+08:37:12 <kinoc> 16771 <srai> 9946 <star index...> 1758 <person> 1267 <that> 1117 <random>
+08:37:12 <kinoc> 352<that index...> 75 <input index...> 53 <topic>( 46 different topics)
+08:37:12 <kinoc> 8 <condition> 2 <gossip> 2<person2> 0 <gender> 0 <javascript>
+08:37:12 <kinoc> so you can gauge the relative importance of the various tags
+08:37:12 <dmiles2> in alice there is not much use of <topic> probly becasue the bot just worked.. i am not seeing much aiml leveraging <topic> do you know of where i'd find it?
+08:37:18 <kinoc> topic is set alot but not used very much
+08:37:41 <dmiles2> yeah comparivly it sure isnt
+08:49:02 <dmiles2> i loaded the std aiml as well.. nice it addded 3 MB of info
+11:02:51 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+11:14:14 --- join: Gambas-fr (Abidoo@Mix-Poitiers-105-4-196.abo.wanadoo.fr) joined #opencyc
+11:14:25 <Gambas-fr> hello
+11:14:50 <Gambas-fr> ...
+11:15:26 --- quit: Gambas-fr (Client Quit)
+11:30:18 --- join: stubby (~schemer@folsom.officedepot.com) joined #opencyc
+12:54:44 --- quit: stubby ("Client Exiting")
+13:56:58 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+16:03:12 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+16:04:26 --- quit: dmiles2 (Read error: 104 (Connection reset by peer))
+16:35:33 --- join: Victory (~Enigma335@pD904331B.dip.t-dialin.net) joined #opencyc
+16:37:31 --- join: Vutral_ (~ss@pD904331B.dip.t-dialin.net) joined #opencyc
+16:38:11 --- quit: Victory (Remote closed the connection)
+16:59:53 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+18:26:41 --- join: ray_ (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:27:01 --- quit: ray_ (Remote closed the connection)
+18:30:19 <graylensman> Ok What gives.  Here at home the REPL prompt when I run run-cyc.sh does not have any readline support i.e I can't backspace.  But I today on another box, by accident I noticed I could edit, backspace etc at the prompt.  What is different?  Is there readline support? How do I enable it?
+18:34:12 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:55:14 --- join: Vutral_ (~ss@pD9042F36.dip.t-dialin.net) joined #opencyc
+19:09:26 --- join: Taral (~taral@cs6625132-47.austin.rr.com) joined #opencyc
+19:09:44 <Cobra> heya Vutral_. :)
+19:09:55 <Vutral_> heya
+19:10:00 <Vutral_> i am just fixing some bugs ;)
+19:10:05 <Cobra> cool
+19:24:31 <Vutral_> bugs are not cool
+19:24:35 <Vutral_> they are pissing at me
+19:24:36 <Vutral_> heheh
+19:28:43 <Cobra> :)
+19:29:38 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:34:44 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+19:37:35 --- quit: graylensman ("Client Exiting")
+19:40:03 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+19:40:12 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+20:10:20 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+20:29:19 --- quit: Taral ("ircII EPIC4-1.1.5 -- Are we there yet?")
+21:25:20 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+22:49:33 --- quit: urgyen (Read error: 104 (Connection reset by peer))
+23:31:01 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+23:31:01 --- quit: Cobra (carter.openprojects.net irc.openprojects.net)
+23:31:04 --- quit: futhin (carter.openprojects.net irc.openprojects.net)
+23:31:04 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+23:31:04 --- quit: reed_ (carter.openprojects.net irc.openprojects.net)
+23:31:28 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+23:31:28 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+23:31:28 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+23:31:28 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:31:28 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+23:31:53 --- quit: futhin ("sleep")
+23:59:59 --- log: ended opencyc/02.07.08

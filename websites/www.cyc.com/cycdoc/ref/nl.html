@@ -1,0 +1,479 @@
+<html>
+<title>Cyc&reg;-NL Documentation</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href="http://www.opencyc.org"><img src="/cycdoc/img/opencyc-logo-small.gif" border=0 alt="OpenCyc.org Homepage"></a>Cyc&reg;-NL Documentation</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 3/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+
+This is an introduction to Cyc's natural language processing System
+	(Cyc-NL).  
+
+<hr>
+<h2>Contents:</h2>
+<ul>
+  <li> <a href="#general">Introductory Information</a>
+  <li> <a href="#lexicon">The Cyc Lexicon</a>
+  <li> <a href="#morphology">The Morphology Component</a>
+  <li> <a href="#parser">The Parsers</a>
+  <li> <a href="#generation">NL Generation</a>
+  <li> <a href=dict-assist.html>Adding to the Cyc Lexicon </a>
+</ul>
+<hr>
+
+<h1><a name="general">Introductory Information About Cyc-NL</a></h1>
+
+
+Cyc-NL is the natural language processing system associated with the
+Cyc knowledge base. The OpenCyc NL release includes a lexicon, a
+morphology component and a generation system, each
+of which is described in more detail below. In future versions, several 
+parsers will be included as well.<p>
+
+Our goals for the Cyc-NL system include both understanding and
+generation. In the first case, we want to translate natural language
+texts into CycL, Cyc's internal representation language (see <a
+href=cycl-syntax.html>The Syntax of CycL</a> for more information). In
+the second case, we want to provide natural language translations for
+CycL expressions. Building upon these two capabilities, Cyc and the
+Cyc-NL system can be applied to a wide array of tasks, including
+document indexing and retrieval, database querying, machine translation,
+enhanced speech recognition, and so on.<p>
+
+Large-scale natural language processing (NLP) is a famously difficult
+undertaking, for many reasons. Syntactic parsing, lexical
+representation, semantic interpretation, pragmatic processing, and
+discourse management, among other tasks, would be required to produce
+a truly functional natural-language dialogue system. Researchers have
+made important strides in many of the above-mentioned areas, but
+artificial language technology available today does not come close to
+mimicking conversation between human beings. See, for example, Ron
+Cole, Joseph Mariani, Hans Uszkoreit, Giovanni Batista Varile, Annie
+Zaenen, Antonio Zampolli, and Victor Zue (eds.), "Survey of the State
+of the Art in Human Language Technology (1997)" for a discussion of
+the challenges presented by various aspects of natural language
+processing, and the level of performance that existing NL systems can
+achieve.<p>
+
+  
+We believe that any application relying on large-scale natural
+language processing would benefit from a broad and deep repository of
+commonsense knowledge such as Cyc. Here are a number of representative
+linguistic problems which NL systems have been called upon to solve in
+the past few decades, and for which, we claim, an adequate solution
+requires an NL system to work in tandem with a knowledge base like
+Cyc:<p>
+
+<b>Lexical Ambiguity and Polysemy</b><br> 
+
+The majority of the most common words in English have multiple
+meanings: "bat", "bank", "table", "can", "will", etc. In applications
+such as machine translation and document indexing/retrieval, it is
+crucial to be able to figure out which meaning of an ambiguous word is
+intended. For example, if a user queries a text database for "bats and
+other small mammals", a standard Boolean search engine will also
+deliver documents about baseball bats, even though it is obvious to
+any reasonable human that this is not what the querier intended. The
+background knowledge in Cyc can be used in attempting to choose the
+most appropriate meaning of a word in context. <p>
+
+<b>Syntactic Ambiguity</b><br> 
+
+Syntactic ambiguity occurs when an input string has more than one
+possible syntactic structure. For example, in the sentence "Fred
+brought German beer and potato chips to the party", syntactic
+information alone cannot tell us whether both the potato chips and the
+beer were German, or whether just the beer was German. As with lexical
+ambiguity, NL applications need to be able to select the intended
+structure. Another pervasive type of syntactic ambiguity is
+prepositional phrase attachment. In the sentence "John washed the
+dishes on the table", the syntax alone allows two possibilities: John
+washed the dishes which are now on the table, or John did the
+dishwashing on the table. A system with access to a repository of
+commonsense knowledge like Cyc would have an advantage over
+non-knowledge-based systems in ruling out the second interpretation in
+a principled manner. Cyc knows that dishwashing typically occurs in
+sinks or dishwashers, not on tables, and this information could be
+used to select the appropriate syntactic structure underlying the
+sentence.<p>
+
+<b>Coreference Resolution</b><br> 
+
+In interpreting text, new pieces of information must be integrated
+with what has been mentioned before. A pronoun may be used to refer
+back to something already in the universe of discourse. For example,
+in "Fred went to the store, bought a candy bar with his credit card,
+walked to the park, and ate it", the pronoun "it" refers back to
+"candy bar". Syntactically, the potential referents of "it" are the
+nouns "store", "candy bar", "credit card", and "park".  Cyc has rules
+from which it can infer that parks, stores, and credit cards aren't
+things which are normally eaten, and can thus help in determining that
+"candy bar" is the only referent for "it" which makes sense in this
+example. <p>
+
+<h1><a name="lexicon">The Cyc Lexicon</a></h1>
+
+The Cyc lexicon is a subset of the KB which contains all the
+information about particular words needed by the parser to translate
+English expressions into CycL. This lexical information is also used
+by the English generation system to generate English text from CycL
+expressions. Currently, lexical information is only available for
+English. However, we have striven to make the Cyc ontology as
+language-neutral as possible, so that, in the future, lexicons for
+multiple languages can be integrated.<p>
+
+The basic kinds of information represented in the lexicon are: <p>
+<ul> <li>String to part-of-speech correspondences (e.g. "flew" is a
+verb; "music" is a noun). This information is used by the syntactic
+parsers to process the input expression.
+<p>
+<li> Word-to-concept correspondences (e.g. the word "eating" means
+  the same thing as the Cyc concept <a href=/cycdoc/vocab/food-vocab.html#EatingEvent>#$EatingEvent</a>; the word "yellow" means 
+  the same as the Cyc concept #$YellowColor). This information is
+  used to transform parses into CycL expressions.
+</ul>
+<p>
+
+<b>Representing Words In The Lexicon: Syntactic Information</b><br>
+
+Information in the Cyc lexicon centers around "word units", which are
+actually instances of the collection <a
+href=/cycdoc/vocab/linguistic-vocab.html#EnglishWord>#$EnglishWord</a>. Each
+word unit represents information about a root word in English. That
+information is organized by part of speech and word sense. For
+example, the word "bat" is represented by the Cyc constant
+#$Bat-TheWord. "Bat" can be a noun; as a noun, it has (at least) three
+word senses. "Bat" can also be a verb; as a verb, it has (at least)
+three word senses. <p>
+
+Syntactically, the crucial information about a word includes its part
+of speech, and the features it carries (plural, past tense, etc.).
+This information is recorded using predicates which are instances of
+the collection<a
+href=/cycdoc/vocab/linguistic-vocab.html#NLSyntacticPredicate>#$NLSyntacticPredicate</a>. For
+each of the main parts of speech, there is a set of corresponding
+predicates. Each predicate within a set indicates a distinctive
+feature for members of that part-of-speech (pos) category. For example, the predicates
+<a href=/cycdoc/vocab/lexicon-vocab.html#singular>#$singular</a> and
+<a href=/cycdoc/vocab/lexicon-vocab.html#plural>#$plural</a> are used
+to represent information about nouns. The former indicates a singular
+form, and the latter indicates a plural form. Predicates like <a
+href=/cycdoc/vocab/lexicon-vocab.html#singular>#$singular</a> and <a
+href=/cycdoc/vocab/lexicon-vocab.html#plural>#$plural</a> relate a Cyc
+word unit to a character string. From these assertions, forward
+inference derives assertions of the form (<a
+href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a>
+[word-unit] [pos]), where [pos] is an instance of the collection <a
+href=/cycdoc/vocab/lexicon-vocab.html#SpeechPart>#$SpeechPart</a>. <a
+href=/cycdoc/vocab/lexicon-vocab.html#SpeechPart>#$SpeechPart</a> contains all parts of speech recognized by the Cyc-NL
+parser. Example uses of some of the syntactic predicates, and the <a
+href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a>
+statements which they trigger, follow. <p>
+
+<h4> Count Nouns</h4>
+[NOTE: #$SimpleNoun will be renamed as #$CountNoun in (or before) OpenCyc v1.0.]<p>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#singular>#$singular</a> #$Dog-TheWord "dog")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#plural>#$plural</a> #$Child-TheWord "children")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Dog-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#SimpleNoun>#$SimpleNoun</a>)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Child-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#SimpleNoun>#$SimpleNoun</a>)<br>
+<br>
+
+<h4> Mass Nouns</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#massNumber>#$massNumber</a> #$Sand-TheWord "sand")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Sand-TheWord <a href=/cycdoc/vocab/linguistic-vocab.html#MassNoun>#$MassNoun</a>)<br>
+<br>
+
+<h4> Proper Nouns</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#pnSingular>#$pnSingular</a> #$Honda-TheWord "Honda")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#pnPlural>#$pnPlural</a> #$Welshman-TheWord "Welshmen")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#pnMassNumber>#$pnMassNumber</a> #$Valium-TheWord "Valium")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Honda-TheWord #$ProperNoun)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Welshman-TheWord #$ProperNoun)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Valium-TheWord #$ProperNoun)<br>
+<br>
+
+<h4>Agentive Nouns</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#agentive-Sg>#$agentive-Sg</a> #$Type-TheWord "typist")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#agentive-Pl>#$agentive-Pl</a> #$Fish-TheWord "fishermen")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#agentive-Mass>#$agentive-Mass</a> #$Cleanse-TheWord "cleanser")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Type-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#AgentiveNoun>#$AgentiveNoun</a>)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Fish-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#AgentiveNoun>#$AgentiveNoun</a>)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Cleanse-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#AgentiveNoun>#$AgentiveNoun</a>)<br>
+<br>
+
+<h4> Adjectives</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#regularDegree>#$regularDegree</a> #$Red-TheWord "red")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#comparativeDegree>#$comparativeDegree</a> #$Red-TheWord "redder")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#superlativeDegree>#$superlativeDegree</a> #$Red-TheWord "reddest")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#nonGradableAdjectiveForm>#$nonGradableAdjectiveForm</a> #$Main-TheWord "main")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Red-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adjective>#$Adjective</a>)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Main-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#NonGradableAdjective>#$NonGradableAdjective</a>)<br>
+
+
+<br>
+
+<h4> Adverbs</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#regularAdverb>#$regularAdverb</a> #$Happy-TheWord "happily")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#comparativeAdverb>#$comparativeAdverb</a> #$Good-TheWord "better")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#superlativeAdverb>#$superlativeAdverb</a> #$Good-TheWord "best")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Happy-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adverb>#$Adverb</a>)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Good-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adverb>#$Adverb</a>) <br>
+
+<h4> Verbs</h4>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#infinitive>#$infinitive</a> #$Eat-TheWord "eat")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#thirdPersonSg>#$thirdPersonSg</a> #$Eat-TheWord "eats")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#gerund>#$gerund</a> #$Eat-TheWord "eating")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#pastTense>#$pastTense</a> #$Eat-TheWord "ate")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#perfect>#$perfect</a> #$Eat-TheWord "eaten")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#posForms>#$posForms</a> #$Eat-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Verb>#$Verb</a>)<br><br>
+
+To relate a word unit to a string where the part of speech is not one of
+the main content classes outlined above, the predicate #$partOfSpeech is
+used. Some example uses of this predicate follow:<br><br>
+
+(#$partOfSpeech #$From-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Preposition>#$Preposition</a> "from")<br>
+(#$partOfSpeech #$Since-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#SubordinatingConjunction>#$SubordinatingConjunction</a> "since")<br>
+(#$partOfSpeech #$Myself-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#ReflexivePronoun>#$ReflexivePronoun</a> "myself")<br><br>
+
+Proper names can be represented in different ways in Cyc. <a
+href=/cycdoc/vocab/lexicon-vocab.html#ProperCountNoun>#$ProperCountNoun</a>
+and <a
+href=/cycdoc/vocab/lexicon-vocab.html#ProperMassNoun>#$ProperMassNoun</a>
+are useful for names that act like words (in other words, names that
+can undergo inflection such as pluralization, for example "Frenchman"
+or "Christmas"). In other cases, where names are generally inflexible
+in form, instances of <a
+href=/cycdoc/vocab/lexicon-vocab.html#ProperNamePredicate-General>#$ProperNamePredicate-General</a>
+should be used. Specialized proper name predicates are available for
+names of people, places, and other categories. Here are some examples
+of the uses of these predicates:<p>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#givenNames>#$givenNames</a> #$FredSmith "Frederick")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#familyName>#$familyName</a> #$FredSmith "Smith")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#givenNames>#$nicknames</a> #$FredSmith "Freddie")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#acronymString>#$acronymString</a> #$UNICEF "UNICEF")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#initialismString>#$initialismString</a> #$YMCA-Organization "YMCA")<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#placeName-LongForm>#$PlaceName-LongForm</a> #$Cambodia "the People's Republic of Kampuchea")<br><br>
+
+
+<b>Representing Words In The Lexicon: Semantic Information</b><br>
+The semantic information contained in the Cyc lexicon forms the core of
+our NL system. The power of Cyc-NL comes from
+the links between word units and Cyc concepts. Cyc provides a clean
+semantics to map words of the Cyc lexicon onto.<p>
+
+The most basic word-to-concept link is expressed with the predicate
+<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a>. Here are a few example <a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> assertions:<br><br>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> #$Bat-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#SimpleNoun>#$SimpleNoun</a> 0 #$Bat-Mammal)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> #$Bat-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#SimpleNoun>#$SimpleNoun</a> 1 #$BaseballBat)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> #$Bat-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Verb>#$Verb</a> 0 #$BaseballBatting)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> #$Red-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adjective>#$Adjective</a> 0 #$RedColor)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> #$Walk-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Verb>#$Verb</a> 0 <a href=/cycdoc/vocab/physiology-vocab.html#AnimalWalkingProcess>#$AnimalWalkingProcess</a>)<br><br>
+
+The first argument to <a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> is an instance of <a href=/cycdoc/vocab/linguistic-vocab.html#LexicalWord>#$LexicalWord</a>. The
+second argument is an instance of <a href=/cycdoc/vocab/lexicon-vocab.html#SpeechPart>#$SpeechPart</a>. The third argument is an
+integer representing the word sense number, and the fourth argument is a
+Cyc constant. The first assertion above, for example, means that word
+sense number 0 of the noun form of "bat" denotes the Cyc concept
+#$Bat-Mammal. "Bat" as a noun has another word sense, which denotes
+#$BaseballBat. It should be noted here that the word sense numbers do
+not indicate frequency of occurrence of a particular word sense; they
+simply act as unique identifiers of word senses. <p>
+
+Another useful semantic predicate is 
+<a href=/cycdoc/vocab/lexicon-vocab.html#denotationRelatedTo>#$denotationRelatedTo</a>. This is used in cases where an exact mapping between a word and a Cyc concept is not available, but where you want to indicate that there is some relation between the two. For example, "shuffling", "perambulating", and "striding" are all types of walking, but currently, there are not distinct Cyc concepts representing each of these forms. In this case, then, we could assert<p>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotationRelatedTo>#$denotationRelatedTo</a> #$Shuffle-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adjective>#$Verb</a> 0 #$AnimalWalkingProcess)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotationRelatedTo>#$denotationRelatedTo</a> #$Perambulate-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adjective>#$Verb</a> 0 #$AnimalWalkingProcess)<br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#denotationRelatedTo>#$denotationRelatedTo</a> #$Stride-TheWord <a href=/cycdoc/vocab/lexicon-vocab.html#Adjective>#$Verb</a> 0 #$AnimalWalkingProcess)<br><p>
+
+
+Besides the <a href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> links, the Cyc lexicon also provides more
+precise mappings between words and phrases and Cyc concepts. <p>
+
+For many nouns, the <a
+href=/cycdoc/vocab/lexicon-vocab.html#denotation>#$denotation</a> link
+is all that is needed to specify the meaning of a word in CycL. In
+some cases, though, the meaning of a noun is a more complicated Cyc
+formula. Here, we use the predicate <a
+href=/cycdoc/vocab/lexicon-vocab.html#nounSemTrans>#$nounSemTrans</a>
+to express that relation. Here are a couple of examples: <br><br>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#nounSemTrans>#$nounSemTrans</a> #$Bachelor-TheWord 0 (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> :NOUN
+#$AdultMalePerson) (<a href=/cycdoc/vocab/social-vocab.html#maritalStatus>#$maritalStatus</a> :NOUN #$Single)))<br><br>
+(<a href=/cycdoc/vocab/lexicon-vocab.html#nounSemTrans>#$nounSemTrans</a> #$Barmaid-TheWord 0 (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> :NOUN #$Bartender) 
+(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> :NOUN <a href=/cycdoc/vocab/biology-vocab.html#FemalePerson>#$FemalePerson</a>)))<br><br>
+
+The first rule states that the word "bachelor" can be used to refer to an unmarried adult male. The
+second rule states that the word "barmaid" can be used to refer to a female bartender.<p>
+
+For verbs, adjectives, and adverbs, simple denotation rules are
+provided, but more precise mapping templates are required as well. Verbs act
+as
+the "glue" in a sentence; verbs display different argument patterns, and
+it is important to specify how these argument positions are filled in.
+Look at these examples:<br><br>
+
+John bores Fred.<br>
+John likes Fred.<br>
+John gave Fred a car.<br>
+John wanted Fred to leave.<br><br>
+
+In the first sentence, we must capture the fact that it is the direct
+object, Fred, who is experiencing the boredom. The second sentence looks
+similar on the surface, but here it is the subject, John, who is
+experiencing the liking. The last two sentences demonstrate
+verb-argument patterns other than the simple transitive structure seen
+in the first two sentences.<p>
+
+Mappings for verbs are given by assertions using the predicate
+<a href=/cycdoc/vocab/lexicon-vocab.html#verbSemTrans>#$verbSemTrans</a>. Here are a few examples:<br><br>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#verbSemTrans>#$verbSemTrans</a> #$Eat-TheWord 0 <a href=/cycdoc/vocab/lexicon-vocab.html#TransitiveNPCompFrame>#$TransitiveNPCompFrame</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> :ACTION
+<a href=/cycdoc/vocab/food-vocab.html#EatingEvent>#$EatingEvent</a>) (<a href=/cycdoc/vocab/actor-vocab-complete.html#doneBy>#$doneBy</a> :ACTION :SUBJECT) (<a href=/cycdoc/vocab/actor-vocab-complete.html#inputsDestroyed>#$inputsDestroyed</a> :ACTION
+:OBJECT)))<br><br>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#verbSemTrans>#$verbSemTrans</a> #$Feed-TheWord 0 <a href=/cycdoc/vocab/lexicon-vocab.html#DoubleObjectFrame>#$DitransitiveNPCompFrame</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>
+:ACTION <a href=/cycdoc/vocab/poss-transfer-vocab.html#FeedingEvent>#$FeedingEvent</a>) (<a href=/cycdoc/vocab/actor-vocab-complete.html#fromPossessor>#$fromPossessor</a> :ACTION :SUBJECT)
+(<a href=/cycdoc/vocab/financial-vocab.html#objectOfPossessionTransfer>#$objectOfPossessionTransfer</a> :ACTION :OBJECT) (<a href=/cycdoc/vocab/actor-vocab-complete.html#toPossessor>#$toPossessor</a> :ACTION
+:INDIRECT-OBJECT)))<br><br>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#verbSemTrans>#$verbSemTrans</a> #$Like-TheWord 0 <a href=/cycdoc/vocab/lexicon-vocab.html#TransitiveNPCompFrame>#$TransitiveNPCompFrame</a> (<a href=/cycdoc/vocab/emotion-vocab.html#likesObject>#$likesObject</a>
+:SUBJECT :OBJECT))<br><br>
+
+The first rule provides a template for interpreting "eat" when used
+transitively. The rule gives a CycL translation, with keyword variables
+as "placeholders" for arguments which will fill them. In this rule,
+slots are reserved for the syntactic subject and direct object. The
+second rule gives a translation for "feed" when used ditransitively, as
+in "I fed the horse an apple."  In addition to subject and object slots,
+this rule also provides for an indirect object slot. The third rule
+demonstrates that verbs may refer to constants which are not <a href=/cycdoc/vocab/time-vocab.html#Event>#$Events</a>. Many
+verbs have "stative" meanings; they denote not an action, but a state of
+affairs holding. In these cases, typically, the verb will translate into a Cyc
+predicate. In this case, transitive "like" maps onto the predicate
+<a href=/cycdoc/vocab/emotion-vocab.html#likesObject>#$likesObject</a>. Each of these rules mentions the appropriate <a href=/cycdoc/vocab/emotion-vocab.html#SubcategorizationFrame>#$SubcategorizationFrame</a> in which the given translation holds.<p>
+
+Finally, Cyc-NL has mechanisms for handling phrasal structures. See <a href=/cycdoc/vocab/emotion-vocab.html#multiWordString>#$multiWordString</a> and <a href=/cycdoc/vocab/emotion-vocab.html#compoundString>#$compoundString</a> for information on how to handle multi-word terms like "swimming pool" or "attorney general".<p>
+
+<h1><a name="morphology"></a>The Morphology Component</h1> 
+
+The Cyc-NL morphology component includes a set of <a
+href=subl-reference.html>SubL</a> functions which handle the
+recognition and generation of regular inflectional forms of root
+words.  This greatly reduces the number of assertions we need in the
+Cyc lexicon.<p>
+
+For nouns, the plural is the only inflectional variant. A noun is
+assumed to have a regular plural variant if the plural is formed by
+adding "-s" or "-es" to the singular. So, "lunch" and "dog" have regular plurals,
+while "child" and "deer" do not.<p>
+
+For verbs, the infinitive is the root form, while the inflected forms
+are the gerund, the third person singular, the past tense, and the
+perfect. The gerund form is regular if it is formed by adding "-ing"
+to the infinitive (whether or not a consonant is doubled; so, both
+"singing" and "mapping" are considered regular forms). The third
+person singular form is regular if it is formed by adding "-s" or
+"-es" to the infinitive.  The past tense and perfect forms are regular
+if they are formed by adding either "-d", "-ied", or "-ed" to the
+infinitive. So, "baked", "hurried", and "washed" are regular, but "eaten" and "went" are not.<p>
+
+Regularly inflected verb and noun forms need not be entered in the
+lexicon. Therefore, all uses of <a href=/cycdoc/vocab/lexicon-vocab.html#plural>#$plural</a>, <a href=/cycdoc/vocab/lexicon-vocab.html#gerund>#$gerund</a>, <a href=/cycdoc/vocab/lexicon-vocab.html#pastTense>#$pastTense</a>,
+<a href=/cycdoc/vocab/lexicon-vocab.html#thirdPersonSg>#$thirdPersonSg</a>, and <a href=/cycdoc/vocab/lexicon-vocab.html#perfect>#$perfect</a> should involve irregular forms.<p>
+
+For derivational morphological variants, instances of <a href=/cycdoc/vocab/lexicon-vocab.html#DerivedWordFormingFunction>#$DerivedWordFormingFunction</a> can be used to create new lexical items. For example, a lexical entry for "unhappy" can be composed as follows:<p>
+
+(<a href=/cycdoc/vocab/lexicon-vocab.html#WordWithPrefixFn>#$WordWithPrefixFn</a> <a href=/cycdoc/vocab/lexicon-vocab.html#Un_Neg-ThePrefix>#$Un_Neg-ThePrefix</a> <a href=/cycdoc/vocab/lexicon-vocab.html#Happy-TheWord>#$Happy-TheWord</a>). If the appropriate rules are stated using <a href=/cycdoc/vocab/lexicon-vocab.html#baseForm>#$baseForm</a>, <a href=/cycdoc/vocab/lexicon-vocab.html#posBaseForm>#$posBaseForm</a>, and  <a href=/cycdoc/vocab/lexicon-vocab.html#generalSemantics>#$generalSemantics</a>, important syntactic and semantic information will be inferred about the derived word. <p>
+
+It should be noted that these derivational morphology functions are quite new, and have not yet been fully implemented. Therefore, you will find word units of both forms in the lexicon: compositional word units like<p>
+
+(WordWithPrefixFn Un_Neg-ThePrefix Happy-TheWord)<p>
+as well as atomic word units like this:<p>
+
+Unconscious-TheWord<p>
+
+
+
+<h1><a name="parser">The Parsers</a></h1>
+Parsing in Cyc relies on a number of different components. Some existing Cyc-based applications rely on a hybrid top-down/bottom-up parser which allows for a balance between speed and flexibility.<p>
+
+
+The Text Processor guides the NLU process. It controls the application of the various parsing
+subcomponents, using a heuristic best-first search mechanism that has
+information about the individual parsers, their applicability to coarse
+syntactic categories, cost, expected number of children, and so on. This
+information is used to perform a syntax-driven search over the parse space,
+applying relevant parsers to the sub-constituents until all are resolved,
+or until the parsing options have been exhausted. The parsers at the disposal of
+the Text Processor are the Template parser, the Noun Compound parser, and
+the Phrase Structure parser.<p>
+
+
+The Template parser is essentially a string-matching mechanism driven by a
+set of templates compiled into an efficient internal format.  These
+templates, like those used for generation, employ a simple format so that
+users can add templates as they are entering new knowledge into the system.
+The template parser is relatively fast, but is of limited flexibility. It
+tabulates semantic constraints during a parse, but does not attempt to
+verify them; that task is passed along to the next processing layer.<p>
+
+
+
+The Noun Compound parser uses a set of semantic templates combined with a
+generic chart-parsing approach to construct representations for noun
+compounds such as ``anthrax vaccine stockpile''. Unlike other parsing
+components, it makes heavy use of the Cyc ontology, and can therefore resolve
+many ambiguities that are impossible to handle on a purely syntactic level
+(e.g. ``Mozart symphonies'' vs. ``Mozart expert''). See <a href=/cycdoc/vocab/lexicon-vocab.html#NounCompoundRule>#$NounCompoundRule</a> for examples of rules used by the Noun Compound parser.<p>
+
+ 
+The Phrase Structure parser takes a similar bottom-up approach to
+constructing parses. After completing a syntactic parse, it uses semantic
+constraints gleaned from the KB to perform pruning and to build the
+semantic representation. Specialized sub-parsers are used to parse noun
+phrases and verb phrases; resulting constituent parses are combined to
+produce a complete semantic translation.<p>
+
+
+
+
+
+<h1><a name="generation">NL Generation</a></h1>
+The natural language generation system produces a word-, phrase-, or
+sentence-level paraphrase of KB concepts, rules, and queries. The NLG
+system relies on information contained in the lexicon, and is driven by
+generation templates stored in the KB. These templates are not solely
+string-based; they contain linguistic data which allows, for example, for
+correct grammatical agreement to be generated. The NLG system is capable of
+providing two levels of paraphrase, depending on the demands of the
+application. One type of generated text is terse but potentially ambiguous,
+and the other is precise but potentially wordy and stilted. Through the
+ <a href=/cycdoc/ref/dict-assist.html>Dictionary Assistant Tool</a>, users can add generation templates for
+new terms as soon as they are introduced into the knowledge base. See <a href=/cycdoc/vocab/lexicon-vocab.html#genTemplate>#$genTemplate</a> for examples of NLG templates.<p>
+
+The Cyc NLG system allows users to view any rule or statement in Cyc as an English sentence instead of a CycL formula. In order to see the English version of a CycL statement, click on the ball next to the rule, and then, on the next page, click [Show English]. You can also choose to see all assertions in English as the default, by going to the "Options" menu and selecting "Show assertions in English".<p>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+
+
+</html>

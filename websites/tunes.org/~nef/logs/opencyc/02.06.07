@@ -1,0 +1,191 @@
+00:00:00 --- log: started opencyc/02.06.07
+01:46:53 * theos__wrk is back (gone 18:44:25)
+01:46:58 --- nick: theos__wrk -> theos_wrk
+01:48:44 --- quit: theos_wrk ("Client Exiting")
+01:49:16 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+02:53:38 --- quit: CycLBot (Remote closed the connection)
+03:01:45 --- join: Yepster (~yhavinga@cust-217-117-225-39.utelisys.net) joined #opencyc
+03:05:06 * theos_wrk is away: grabbing food
+03:10:11 --- quit: Yepster ("using sirc version 2.211+KSIRC/1.1")
+03:10:30 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+04:46:44 <Yepster> Does anybody know if there is a function that returns the time-quantity from a timeinterval?
+04:50:53 <dmiles> If TEMPTHING is itself a TimeInterval (q.v.), the sentence means that TEMPTHING has a duration of TIMEQUANT. The standard unit of Time-Quantity in Cyc is SecondsDuration 
+04:51:07 <dmiles> so its #$durraction
+04:51:17 <dmiles> err #$duration :)
+04:51:28 <dmiles> good morning
+04:52:47 <dmiles> ask:  (duration (TimeIntervalInclusiveFn (YearFn 1970) (YearFn 2000)) ?Quant)
+04:52:54 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+04:52:58 <dmiles> ask:  (duration (TimeIntervalInclusiveFn (YearFn 1970) (YearFn 2000)) ?Quant)
+04:53:00 <CycLBot> ((?QUANT RelationAllExistsFn (TimeIntervalInclusiveFn (YearFn 1970) (YearFn 2000)) duration TemporalThing Time-Quantity))
+04:53:29 <dmiles> ask:  (duration ?Quant (TimeIntervalInclusiveFn (YearFn 1970) (YearFn 2000)))
+04:53:30 <CycLBot> no answers found
+04:53:39 <dmiles> ok yeah the Time-Quanty is arg2
+04:54:28 <dmiles> eariler you were mentioning ussing mts
+04:55:18 <dmiles> for each kind of observer view.. which i think is correct
+04:57:48 <dmiles> btw i fixed the telnetd for logicmoo
+04:58:10 <Yepster> Hmm back: I though mirc would blink if there was activty (just installed it)
+04:58:30 <dmiles> its something that one turns on i guess
+04:59:15 <dmiles> mine just turns the button red (but i have a special mopnnitor for just runing mirc)
+04:59:41 <dmiles> trying to have a monitor for each process
+05:00:15 <Yepster> But duration returns a truth value or not?
+05:00:37 <Yepster> ask: (resultIsa ?X Time-Quantity)
+05:00:38 <dmiles> well the second variable from durration is bound with a time-quantity
+05:00:38 <CycLBot> ((?X . WeeksDuration))
+05:00:39 <CycLBot> ((?X . DecadesDuration))
+05:00:39 <CycLBot> ((?X . HoursDuration))
+05:00:40 <CycLBot> ((?X . QuartersDuration))
+05:00:40 <CycLBot> ((?X . YearsDuration))
+05:00:41 <CycLBot> ((?X . MinutesDuration))
+05:00:41 <CycLBot> ((?X . SecondsDuration))
+05:00:43 <CycLBot> ((?X . MonthsDuration))
+05:00:44 <CycLBot> ((?X . DaysDuration))
+05:01:00 <Yepster> neither of these have an interval as argument :(
+05:01:24 <dmiles> time to think in a joiner pred.. functions are just rewrite of preds
+05:01:24 <CycLBot> the time was Thu Jun 06 21:40:32 PDT 2002
+05:02:06 <dmiles> they alow your CycL to be smaller or expressive but functions are just predicates
+05:02:12 <Yepster> ask: (indexicalReferent Today-Indexical ?X)
+05:02:13 <CycLBot> (((?X DayFn 6 (MonthFn June (YearFn 2002)))))
+05:03:38 <dmiles> ask: (duration (YearFn 2002) ?W)
+05:03:40 <CycLBot> ((?W MonthsDuration 12))
+05:03:41 <CycLBot> ((?W YearsDuration 1))
+05:03:41 <CycLBot> ((?W RelationAllExistsFn (YearFn 2002) duration TemporalThing Time-Quantity))
+05:03:52 * theos_wrk is back (gone 01:58:47)
+05:04:21 <dmiles> i think when cyc does comparison it converts things to Seconds
+05:04:57 <dmiles> ask: (duration (YearFn 2002) (SecondsDuration ?Secs))
+05:04:58 <CycLBot> no answers found
+05:05:12 <Yepster> ask: (#$duration 
+05:05:12 <Yepster>   (#$TimeIntervalBetweenFn #$Today-Indexical 
+05:05:12 <Yepster>     ((#$DayFn 30) 
+05:05:12 <Yepster>       (#$MonthFn #$July) 
+05:05:12 <Yepster>       (#$YearFn 2003))) ?X)
+05:05:12 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+05:05:16 <Yepster> shit
+05:05:33 <theos_wrk> happens
+05:05:45 <dmiles> hey theos
+05:06:05 <theos_wrk> re dmiles
+05:07:09 <Yepster> ask: (#$duration (#$TimeIntervalBetweenFn #$Today-Indexical ((#$DayFn 30) (#$MonthFn #$July)(#$YearFn 2003)) ) ?X)
+05:07:10 <CycLBot> no answers found
+05:07:53 <dmiles> well i fixed the logicmoo multithreading issues so the telnet server works.. i need now to make a classloader so i can swap out the command interface durring runtime updates
+05:08:32 <dmiles> i meade an event system that will reload everyones (includuing irc bots) parser
+05:08:56 <Yepster> what does that mean?
+05:09:02 <dmiles> just have to fuigure out how to reall unload a java class from memory
+05:09:35 <dmiles> means the debug and test cycle can happen while things are running w/o damamging 
+05:10:04 <Yepster> aha
+05:10:08 <dmiles> and means that .class files to add new commands are possible
+05:11:48 <dmiles> late class loading mean that people could add some runningable proceses that happen on a tirggfer
+05:12:31 <dmiles> its not the loading part , its the uunloading i still havent figured out yet
+05:17:40 <Yepster> why is it a problem people have to reconnect?
+05:18:53 <dmiles> its not that much a problem its just awefull when the CycLbot disconnects/reconnects all night long
+05:19:21 <dmiles> and the jsp pages have to go offline for tomcat
+05:19:32 <dmiles> since i am restarting the whole jvm
+05:21:03 <Yepster> you know resin?
+05:21:24 <dmiles> what is it? i know junit can refresh a .class file
+05:22:12 <Yepster> it's a servlet engine
+05:22:23 <Yepster> www.caucho.com if i'm correct
+05:22:47 <Yepster> 2 years ago they said their jsp was faster than mod_php3
+05:24:42 <dmiles> i made a series jsp pages for opencyc.. currently running under tomcat.. tomcat will reload the classes ussily
+05:24:58 <dmiles> but thats becasue it uses its own class loader
+05:25:17 <dmiles> but speed is a good thing
+05:25:49 <dmiles> once tomcat sees the jsp file it makes it a class.. until the page is modified
+05:26:17 <dmiles> but doesnt refresh .class that are made from .java
+05:26:54 <dmiles> looks like resin does
+05:27:26 <dmiles> Resin simplifies creating Java classes by automatically recompiling and reloading the Java when the source changes. Resin will automatically compile a Java class like WEB-INF/classes/TestBean.java to TestBean.class. So programming JSP beans just involves editing Java code and pressing the browser's reload button. 
+05:28:17 <dmiles> which means the whole class in the JVM obviously will reload (since i share the same jvm with the telnet server)
+05:29:00 <dmiles> by making it an 'application' object that loads on first hit to page
+05:29:41 <Yepster> Well I programmed my first jsp in resin. Last year I came into a project where weblogic was used.
+05:30:06 <Yepster> there I first heard of the problem of manually needing to reload class files
+05:30:32 <Yepster> There was an option in weblogic to turn it on though.
+05:30:43 <dmiles> ah that a saving featuire :)
+05:31:42 <Yepster> But I still don't like ejb. Jsp is ok though
+05:32:14 <Yepster> bit off topic.
+05:32:46 <dmiles> well i think i found a howtow page that shows me how to refresh a class
+05:41:05 <Yepster> btw, did you know you downloaded oracle application server instead of oracle database?
+05:41:26 <dmiles> yeah i caught that, thank you, have 2/3 of the CDs now :)
+05:42:37 <Yepster> a strange question perhaps, could you dcc me your mirc icon? its missing (the install hanged, i killed it but could start it)
+05:42:46 <Yepster> but the icon that can be animated is missing
+05:43:05 <dmiles> ok .. one sec.. i'll see if i can dcc from this machine
+05:43:52 <dmiles> hrrm .. mine are packed in the EXE
+05:44:17 <Yepster> hmm then i must reinstall i guess
+05:44:17 <dmiles> you put mirc in youer tray right?
+05:44:22 <Yepster> jup
+05:44:28 <Yepster> but it simply doesn't animate
+05:44:30 <dmiles> and it doesnt animate?
+05:44:41 <dmiles> do other things in your tray?
+05:45:07 <Yepster> irc
+05:45:10 <Yepster> uh
+05:45:11 <Yepster> icq
+05:45:29 <dmiles> ah .. there is also a mirc option to turn animation on/off
+05:45:53 <Yepster> ah I just need to have a clean install I think -> it failed at the end -> registry stuff I guess
+05:46:29 <dmiles> you have "Animate Icon when there is Activity" checked?
+05:46:42 <Yepster> nod
+05:46:53 <dmiles> ok .. knew you'd know better but was checking
+05:49:20 <Yepster> bbl8r
+05:49:29 --- quit: Yepster ()
+06:11:00 --- quit: CycLBot (Remote closed the connection)
+06:30:51 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:45:10 --- quit: theos (Remote closed the connection)
+06:56:32 --- quit: theos_wrk ("Client Exiting")
+07:48:51 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+08:27:21 --- join: belimawr (~belimawr@208.199.120.95) joined #opencyc
+09:22:39 --- join: theos (~torsten@port-212-202-178-134.reverse.qdsl-home.de) joined #opencyc
+11:59:14 --- part: theos left #opencyc
+13:08:11 --- join: mowerm (matt_mower@dekard.demon.co.uk) joined #opencyc
+13:09:05 --- quit: mowerm (Client Quit)
+13:28:48 --- part: belimawr left #opencyc
+16:23:50 --- quit: reed_ ("[x]chat")
+18:30:06 * dmiles returns
+18:30:26 <dmiles> hi Yepster, how goes the knowledge engineering?
+18:31:42 <CycLBot> dmiles says, "test"
+18:32:08 <CycLBot> dmiles says, "Hello from the mud"
+18:59:22 --- quit: CycLBot (Remote closed the connection)
+19:01:37 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+19:02:46 <dmiles> Yepster, that Rep&Change.pdf is a very awesome book.. thank yiou
+19:09:47 --- quit: CycLBot (Remote closed the connection)
+19:54:07 <dmiles> Yepster, http://12.225.207.235:8080/logicmoo/createmob.jsp  <- this is the intital creation page 
+19:59:30 --- join: yottzumm ([YG15nl2kZ@12-232-76-192.client.attbi.com) joined #opencyc
+20:11:36 <yottzumm> Well, I implemented SuitOf and ValueOf (maybe should be suitOf and valueOf)  I didn't get rid of any of my genls or isas, just reused them in the predicates
+20:14:06 <dmiles> good .. yeah lowercase is ussualy used for predicates
+20:15:20 <dmiles> hrrm i am getting thread blocking issues tring to launch the irc bot inside the moo now
+20:15:52 <dmiles> so i broke the class into an application class +  an access class
+20:16:08 <dmiles> should havbe solved it
+20:16:30 <dmiles> i extended CycAccess with the extra methods on it
+20:19:54 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+20:20:20 <dmiles> ok i see.. i use start() instead of run() .. heh
+20:28:57 <yottzumm> yeah, that's pretty critical in Threads
+20:29:07 <dmiles> hehe oops :)
+20:46:46 <dmiles> this is back online: http://12.225.207.235:8080/logicmoo/
+20:48:19 <dmiles> its to speed up creation of predicates and functionsd
+20:48:24 <dmiles> (and microtheories)
+21:11:39 * dmiles is afk for a while
+21:13:15 <yottzumm> back
+21:27:37 <yottzumm> org.apache.jasper.JasperException: Unable to compile class for JSPNote: sun.tools.javac.Main has been deprecated.
+21:27:37 <yottzumm> /opt/jakarta-tomcat-4.0.1/work/localhost/logicmoo/areas$jsp.java:3: Package jamud not found in import.
+21:27:37 <yottzumm> import  jamud.*;
+21:27:37 <yottzumm>         ^
+21:32:30 --- join: dash (washort@adsl-32-101-223.bhm.bellsouth.net) joined #opencyc
+21:51:01 <dmiles> ah need to fix that.. tonight is my night going through the entire site making everything works again
+21:51:39 <yottzumm> cool, I'm starting to think about interactive HTML environments like ICBM.
+21:52:00 <dmiles> now that the Mud also has a basic sanity.. things that ARE CREATED FROM THE SITE WILL WORK IN THE MUD
+21:52:09 <dmiles> oops InVerTed Caps
+21:52:20 <yottzumm> how do I quit the mud?
+21:52:26 <dmiles> typoe exit
+21:52:30 <dmiles> err or quit
+21:52:36 <dmiles> yeah quit
+21:52:37 <yottzumm> quit works
+21:53:08 <dmiles> i am working on the file uploader section right now
+21:53:27 <dmiles> since on the SUO list people are looking for a logic engine that will run their KIF
+21:54:08 <dmiles> hoping to be able by this weekend to anouunce an intial download on SUO,OpenCyc list
+21:54:12 <yottzumm> so KIF was developed independently of some logic engine?
+21:54:32 <dmiles> yes.. well three engines have been trying to work better
+21:54:46 <dmiles> stanford has an engine and one that i create for an x company
+21:55:37 <dmiles> but we had troubles beacuse when i styarted the project i had 3 other developers
+21:55:57 <dmiles> everyone left but me.. so i had to maintain and do everyones jobs :)
+21:56:10 <yottzumm> no one else wanted to hire on?
+21:56:18 <dmiles> needless to say was unable to meet a 2 week buuild bug fix cycle
+21:56:48 <dmiles> things were not that public 
+21:57:02 <dmiles> our KIOF was over SUO.. but the engine wasnt
+21:57:50 <dmiles> and some people actually didnt qquit but where cuty
+21:57:54 <dmiles> err cut
+21:58:14 <dmiles> so we put some ads out for java develoeprs
+21:58:30 <dmiles> (for the ones that did quit)
+23:59:59 --- log: ended opencyc/02.06.07

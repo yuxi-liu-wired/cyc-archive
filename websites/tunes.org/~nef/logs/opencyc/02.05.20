@@ -1,0 +1,256 @@
+00:00:00 --- log: started opencyc/02.05.20
+00:02:39 <dmiles> so if spacial relations all mostly had a realtion to directionBetweenObjects
+00:02:56 <dmiles> that would be optimal when possible
+00:20:44 --- quit: CycLBot (Remote closed the connection)
+00:21:34 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+00:40:29 <dmiles> bruce are you still here?
+00:40:34 <bruce> yep
+00:40:48 <dmiles> i am wondering.. if we had a world file of siome format
+00:41:07 <dmiles> more advanced then a lambdaCore file
+00:41:20 <dmiles> err lambdaMoo world file
+00:41:32 <dmiles> and we wanted to import into cyc
+00:41:46 <dmiles> i am sure the RPGs you workied with have a loadable format
+00:42:07 <dmiles> what type of infomration does it convey?
+00:42:44 <dmiles> and what predicates (spatial or not) would it use?
+00:43:16 <bruce> mmmmm
+00:43:29 <dmiles> this would give a sense of what minumum suppport is needed
+00:43:29 <bruce> we don't have a loadable format for our stuff that would work
+00:43:57 <bruce> we have an OODB that just serializes out the objects .. one game is 80M of data, the other about 2.5G
+00:44:33 <dmiles> even 80 megs of data should be doable in Cyc
+00:44:38 <bruce> but, the predicates are going to be highly game dependent .. most games have very simplistic models. we've got a lot of very complex stuff.
+00:44:44 <bruce> but, brb.
+00:47:48 <bruce> okay ..
+00:48:01 <bruce> in the basic thing, all that matters is who is in any given room.
+00:48:23 <bruce> then, you can add on top of that the more localized relations .. I'm near X
+00:48:28 <bruce> and then there are relations-with-intent
+00:48:49 <bruce> I'm leaning on X, I'm sitting on X, laying on X, engaged-in-melee-combat-with X
+00:49:16 <bruce> and there are also stances ...
+00:49:37 <dmiles> yes.. a look can be subjetive to Visible from where a person is spatially to  leaning on X
+00:49:49 <bruce> i'm in an off-guard stance, or defensive, or floating in mid-air .. or hovering (flying), or flying around .. or leaning against
+00:50:30 <bruce> i've tended to think that the spatial circumstances should be specified separately from attempting to signify intent
+00:51:27 <dmiles> yes the intent is a client to the facts that represent spatial
+00:51:58 <dmiles> (if the intent based things need spatial information)
+00:52:07 <bruce> well, to put it differently ... there are 3 factors at play.
+00:52:09 <dmiles> (err if/when)
+00:52:14 <bruce> where am I specifically (coordinates)?
+00:52:24 <bruce> how am I physically relating to the things around me?
+00:52:50 <bruce> what is the intent of my current position?
+00:52:52 <bruce> oops, 4
+00:53:09 <bruce> and what is my current stance?
+00:53:19 <dmiles> ussually one of those are picked out as the genric data holder that the other 3 will be dirrived from
+00:53:24 <bruce> but I think that analyzing stance would tend to break it down as well.
+00:53:38 <bruce> into combat-readiness state, and other stuff
+00:54:32 <bruce> probably ought to note that one of my other interests is semiotics. :)
+00:54:43 <dmiles> " how am I physically relating to the things around me " + "what stance am i in" seem to be the things represented in cyc well
+00:55:17 <dmiles> where cowardinates would hacve to be a list of invisible objects that all objects whould somehow get related to
+00:55:34 <dmiles> no frued slip.. just mispelling
+00:55:40 <bruce> i'd probably not store coordinate data in Cyc at all.
+00:56:03 <bruce> that's something that really needs to be spatially indexed properly/correctly to get any sort of effective/decent query efficiency.
+00:56:31 <dmiles> so one if they really wanted to draw a visable picurte they could dirreve some coordinates from the spaclial relations
+00:57:54 <dmiles> when a person turns arround (intent?) they see they have a differnt set of things they see
+00:58:47 <bruce> oh, yeah .. direction/facing. :)
+00:58:50 <dmiles> so intent and stance could be enumerated?  but i am wondering how that could be realted to objects in room
+00:58:53 <bruce> that's not an intent or stance.
+00:59:12 <dmiles> explain intent?
+00:59:57 <bruce> hmmm
+01:00:07 <dmiles> stance can be enumerated then to battle-ready, sitting, laying, kneeling, 
+01:00:42 <bruce> I've got a spatial relation to my chair .. I'm above it.
+01:00:53 <bruce> but the intent of my placement is that I'm sitting on it and it is supporting me.
+01:01:52 <dmiles> i see .. so they could be combined in ways .. since sitting on a chair is much differnt then standing on it.. both would be subclass to being above it
+01:02:32 <dmiles> so placemnt alone 'above' would not be enough.. but could be dirreved from sitting,standingon
+01:02:32 <bruce> and both cases are 'being supported by it' .. while floating.. I'm above the chair, but not being supported or anything else.
+01:02:44 <dmiles> so floating above it
+01:02:57 <bruce> (and an 'above the chair' can't be derived from 'I am floating)
+01:03:03 <dmiles> is not subclass to being supoported by it
+01:03:28 <dmiles> true unless you where floating + above chair
+01:03:45 <bruce> which i should be able to be ...
+01:05:00 <bruce> proximity can also matter for social reasons ...
+01:05:08 <bruce> not just combat.
+01:05:28 <bruce> you have to be near them to hug them
+01:05:30 <dmiles> (equiv (and (isa ?X FloatingObjectCurrently)(above ?X ?Y))(floatingAbove ?X ?Y))
+01:07:11 <dmiles> yes.. so each action needs a queryialbe requiremnt
+01:07:36 <bruce> well, intent can come back into play there again.
+01:07:46 <dmiles> which can be defined heirarcially that saves space
+01:07:51 <bruce> maybe i allow people to approach me for X reasons, but not Y reasons.
+01:08:38 <bruce> (not to mention, I let X people approach me, but not Y people)
+01:09:20 <dmiles> approach i guess could be a dirrect act of an indirrect result of approaching something you hold
+01:09:32 <dmiles> (or sitting on)
+01:10:19 <bruce> probably :)
+01:10:19 <dmiles> so an equivalancy to deciding on if that action/evnet took place is cyc assertable
+01:10:49 <dmiles> but yes.. its interesting to know how many rules it takes to create something more realistic like we want
+01:11:37 <dmiles> so getting the representation of spacially related objects is good as far as a above/rigth/left/near/far
+01:12:02 <bruce> but .. the problems are that different games have vastly different requirements for how much they care about these sorts of interactions .. and it'd be nice if the vocabulary for dealing with this was flexible enough to suit different sorts of games (and even be useful beyond games, since it seems like this directly ties into hte sorts of things covered in the Cyc stuff already)
+01:12:05 <dmiles> i up/downness/ fornt/backness and a far/closeness
+01:12:52 <dmiles> absolutely
+01:13:49 <dmiles> they baseline hope is something like being in a home for example like a kitchen full of objects
+01:14:08 <dmiles> and being able to describe at least that
+01:14:33 <dmiles> ovens/toasters/towls on racks
+01:15:21 <bruce> i need to be able to feed whatever i'm working on into a 3d representation ..
+01:15:29 <bruce> otherwise, it'd be useless for most of my work. :)
+01:15:45 <dmiles> yes.. it may be easier to take a 3d model as the 'source'
+01:16:12 <dmiles> then dirrive assertions and relations from whats tangable in the 3D
+01:16:13 <bruce> and longer term, far more useful than assuming a text-based representation.
+01:16:59 <dmiles> i picked up on text since thats where most of the work was done and is simple enough yet nice and tagled in use
+01:17:11 <dmiles> err yet nice and tangled
+01:17:59 <dmiles> if 3D was the proper object store at sopme point it is text once it becomes vissible to cyc
+01:18:19 <dmiles> as in X above Y
+01:18:30 <dmiles> "you see X above Y"
+01:19:17 <dmiles> the difficulty of getting cyc to see a 3d world is the same difficulty as convwerting a 33D world into a contolled text descritipn
+01:20:02 <dmiles> which not hard or easy.. its just jhow many things would want to deduce spacially
+01:20:20 <dmiles> into important descriptveness
+01:21:18 <dmiles> so tokenizing the 3D into text.. probly starts with a list of above/belowness then what else?
+01:21:39 <bruce> degrees of proximity, facing/direction.
+01:22:23 <dmiles> so dirrection could be northerdlyness?
+01:22:33 <bruce> but really, the instances of #$SpatialPredicate cover it nicely.
+01:23:34 <dmiles> yes .. so then one goal would be to get a oodb like you have into a assertionlist of gafs ussing those predicates
+01:26:39 <dmiles> degrees of proximity (including touching with support), facing/direction, aboveness/belowness what other things?
+01:27:55 <bruce> http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-c-total&404 is a better list than I'll come up with.
+01:27:59 <bruce> and is suitably rich.
+01:28:15 <bruce> and covers things that we haven't mentioned at all.
+01:30:24 <dmiles> definately, when a human then controls and moves things a trasnition between those predicates would exist
+01:31:09 <dmiles> in a 3D realm updates to those spacial relations are easier to deduce
+01:31:39 <dmiles> then to control the update via text
+01:33:21 <bruce> we have a lot of that in text in one of our games .. it isn't *that* bad.
+01:33:36 <bruce> but one thing i haven't yet seen in cyc is the intent stuff
+01:33:40 <dmiles> the 3D sense breaks into primitive movemnets.. could those primitive movemnts transition objects in such a way that those spatial predicates are nearly 1 to 1?
+01:33:41 <bruce> and that can be fun/amusing.
+01:34:15 <bruce> am i carrying this sword? am I wielding it? am I wielding it to poke? to slash? or am i preparing to stab someone in the back with it?
+01:34:30 <bruce> dmiles: unsure.
+01:34:43 <bruce> i'm also tired and must sleep cuz i have to be at work in a bit under 6 hours.
+01:35:16 <dmiles> :)
+01:36:08 <dmiles> well i am going to work with the simplier mud tonight and try not to hose the abilty to use those facotrs
+01:36:21 <dmiles> of intent, posture etc
+01:36:26 * bruce nods.
+01:36:34 <bruce> did you get the city-construction to work then?
+01:36:57 <dmiles> will rely first on spatiallyContains
+01:37:14 <dmiles> yes.. when i started using Function-Denoptionals
+01:37:32 <dmiles> to depict the parts of the city
+01:37:47 <dmiles> so the TownHallOf.. the GatesOf
+01:37:56 <bruce> ahh, cool.
+01:38:04 <bruce> i'd like to see the working CycL for that sometime :)
+01:38:07 <bruce> btw, http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-content-frame&8157
+01:38:20 <dmiles> i just hoped i dindt really have to do that.. but it was the only way to make it 'work'
+01:38:32 <bruce> that covers things in the NaiveSpatialVocabularyMT which was one of the things that contained some of the nice instances of #$SpatialPredicate
+01:38:43 --- quit: phj ("Liece")
+01:39:49 <bruce> but, i'm off to sleep
+01:39:51 <bruce> good night
+01:40:09 <dmiles> good night 
+01:40:15 <dmiles> hope to see you tommorow
+03:09:07 --- quit: CycLBot (Remote closed the connection)
+03:09:07 --- quit: DemiGod (Read error: 104 (Connection reset by peer))
+03:34:08 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:34:32 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:34:36 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:34:38 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:34:51 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:35:14 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:36:14 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:36:14 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:36:14 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:37:04 --- quit: CycLBot (Remote closed the connection)
+03:37:07 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:37:07 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:37:07 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:37:34 --- quit: CycLBot (Remote closed the connection)
+03:38:13 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:38:56 --- quit: CycLBot (Remote closed the connection)
+03:39:53 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:39:54 --- quit: CycLBot (Remote closed the connection)
+03:41:49 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:41:50 --- quit: CycLBot (Remote closed the connection)
+03:45:18 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:45:20 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:45:21 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+03:45:21 --- quit: CycLBot (Remote closed the connection)
+03:48:19 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:48:21 --- quit: CycLBot (Remote closed the connection)
+03:51:03 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:58:22 --- quit: CycLBot (Remote closed the connection)
+03:58:29 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+04:13:14 --- quit: CycLBot (Remote closed the connection)
+06:41:26 --- join: quux (~user@135.207.24.19) joined #opencyc
+09:06:57 --- quit: quux (Remote closed the connection)
+10:35:54 --- quit: stevereed_home1 (Read error: 104 (Connection reset by peer))
+17:16:09 --- join: stevereed_home1 (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+17:55:11 * bruce yawns.
+17:58:14 <bruce> stevereed_home1: any chance you're around/alive/awake?
+19:18:35 <stevereed_home1> here for a moment
+19:18:42 <bruce> hey
+19:19:07 <stevereed_home1> ?
+19:19:10 <bruce> I was wondering if the command line that you get when you start up OpenCyc is really a full SubL interpreter or not ...
+19:19:15 <stevereed_home1> yes
+19:19:24 <stevereed_home1> but we,
+19:19:35 <stevereed_home1> run it through a function which guards
+19:19:38 <bruce> okay, I filed a bug about a bunch of stuff that doesn't work from it or the telnet-accessible port...
+19:19:54 <stevereed_home1> at sourceforge right?
+19:19:58 * bruce nods.
+19:20:03 <stevereed_home1> let me look.
+19:20:54 <bruce> my next question isn't a yes/no and would take more time, but I'd like to know how to have a rule execute SubL
+19:21:33 <stevereed_home1> OK the bug is easy to fix, I have to mark all those functions api fns.
+19:21:57 <bruce> okay, should i exhaustively go through the SubL reference then and list each one that doesn't work in the bug?
+19:22:07 <bruce> or will you be able to do that easier when you fix?
+19:22:52 <stevereed_home1> I can do, or have a Cycorp staffer do it.  There are many more
+19:23:00 <stevereed_home1> low level fns we should add to the api.
+19:23:07 <stevereed_home1> the issue is security.
+19:23:09 <bruce> okay, what's a literal char in SubL btw?
+19:23:11 * bruce nods.
+19:23:39 <stevereed_home1> have to look it up... same as Common Lisp
+19:23:47 <bruce> okay, i'll look it up then.
+19:24:45 <bruce> is the execution of SubL from a CycL rule something difficult?
+19:28:05 <stevereed_home1> #\ reads the remaining expression as a character object. Characters can have names. Examples:  #\a #\A #\Return
+19:28:14 <stevereed_home1> from a common lisp spec.
+19:28:34 <stevereed_home1> re SubL from Rule.. I'll look that up too.
+19:28:43 <bruce> okay. i'm patient.
+19:28:45 <bruce> (mostly)
+19:29:04 <bruce> i'm exhausted, so unlikely to be doing anything with OpenCyc tonight :)
+19:34:44 <stevereed_home1> one is EvaluateSubLFn
+19:34:49 <stevereed_home1> there are more...
+19:35:51 <stevereed_home1> performSubL
+19:36:12 <stevereed_home1>  trueSubL
+19:36:31 <bruce> ahh, *SubL* is a handy thing
+19:36:57 <stevereed_home1> and the last: ExpandSubLFn
+19:37:05 <stevereed_home1> they are all commented in the KB.
+19:37:28 * bruce nods.
+19:37:30 <stevereed_home1> I had to find them by the arg-type:
+19:37:52 <bruce> (arg1isa ?E SubLExpression)
+19:38:11 <bruce> oops, no, that wouldn't find all
+19:38:15 <stevereed_home1> SubLExpression
+19:38:22 <stevereed_home1> right
+19:39:07 <stevereed_home1> I have not used them, but I made sure that these were in the public release - early
+19:39:22 <stevereed_home1> because they woould be useful for getting cyc to "do stuff"
+19:39:38 <stevereed_home1> you put them mostly in the consequents of a rule.
+19:40:00 <stevereed_home1> when the antecedent is satisfied during forward or backwards inference..
+19:40:06 <stevereed_home1> then the consequent fires off.
+19:40:23 <stevereed_home1> Give me some feedback if you use them.
+19:40:33 <stevereed_home1> got to go now..
+19:40:36 <bruce> okay .. be interesting to see what can be done with them.
+19:40:42 <stevereed_home1> see ya.
+19:40:44 <bruce> cya!
+19:40:46 <bruce> thanks again
+20:40:59 --- join: yottzumm ([BCyT1pWVB@12-232-76-192.client.attbi.com) joined #opencyc
+20:41:05 <yottzumm> list
+20:41:13 <yottzumm> where are the logs kept?
+20:44:00 <bruce> they're linked from the bottom of http://www.opencyc.org/doc/
+20:46:43 <yottzumm> thanks
+20:46:54 <bruce> to save you time though ..
+20:47:06 <bruce> no one answered your question and I don't know the answer to it myself yet.
+20:47:56 <yottzumm> thanks.  I'm finding the logs interesting even without the answer
+20:48:46 <bruce> however .. i just looked for the answer
+20:49:11 <yottzumm> did you find anything
+20:49:12 <bruce> If you check out http://www.opencyc.org/doc/cycapi .. that seems to work from the command line that you get back
+20:49:20 <bruce> CYC(15): (create-constant "FooBarBruce")
+20:49:20 <bruce> #$FooBarBruce
+20:49:25 <bruce> (for example)
+20:49:57 <yottzumm> Okay, I'm not familiar with the "stuff in quotes"
+20:50:09 <yottzumm> but I get the idea
+20:50:35 <bruce> that was just a random name that I used to test.
+20:50:38 <bruce> after that, I did:
+20:50:41 <yottzumm> (worked this time)
+20:50:45 <bruce> CYC(16): (constant-p #$FooBarBruce)
+20:50:46 <bruce> T
+20:50:46 <bruce> CYC(17): (remove-constant #$FooBarBruce)
+20:50:46 <bruce> NIL
+20:56:04 <yottzumm> thanks
+20:56:09 <bruce> you're welcome
+21:03:09 --- part: yottzumm left #opencyc
+23:59:59 --- log: ended opencyc/02.05.20

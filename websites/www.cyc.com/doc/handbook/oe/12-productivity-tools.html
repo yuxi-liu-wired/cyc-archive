@@ -1,0 +1,380 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 12. Productivity Tools</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 12. Productivity Tools</h2>
+    <p></p>
+    <b>12.1.  <a HREF='#136466184'>
+Template-based OE</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <p></p>
+    <b>12.2.  <a HREF='#137153928'>
+Index Overlap
+</a></b>
+    <br>
+    <p></p>
+    <b>12.3.  <a HREF='#137178216'>
+Similarity Tool</a></b>
+    <br>
+    <font size='-1'>12.3.1.  <a HREF='#137180952'>
+Introduction</a>
+      <br>
+    </font>
+    <font size='-1'>12.3.2.  <a HREF='#137188584'>
+Walkthrough</a>
+      <br>
+    </font>
+    <p></p>
+    <b>12.4.  <a HREF='#137235208'>
+Salient Descriptor</a></b>
+    <br>
+    <hr>
+    <h1>
+    Chapter 12. 
+    Productivity Tools</h1>
+    <h2>12.1.  <a NAME='136466184'>
+Template-based OE</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <h2>12.2.  <a NAME='137153928'>
+Index Overlap
+</a>
+    </h2>
+    <p>
+With this tool it is possible to find all assertions in which all the requested 
+terms are terms in the assertion. </p>
+    <p>
+The Index Overlap tool is found on the Tools page of the Cyc Browser, in the second 
+column of tools:</p>
+    <pre>
+                     Overlap Term     Index Overlap
+</pre>
+<p>
+It is possible to add this, or any Cyc Browser tool to your Cyc Browser's toolbar by 
+depressing the button to the left of the tool option and then clicking "Update Toolbar" 
+at the top of the tools page.  (Please see the chapter titled "Using the KB Browser" for 
+more information).</p>
+    <p>
+Once the "Overlap" tool is opened, a screen with a large white entry box is displayed. 
+When two or more Cyc constants are entered (with or without the #$ prefix), the tool
+will return all the CycL assertions that contain all those terms. If I'm looking for 
+all the CycL assertions that contain the terms #$evokes and
+#$Cuteness-EmotionalResponse, I would enter those terms (with or without the #$, 
+although asking Cyc to Cyclify the terms would reveal whether I had entered all the
+terms correctly) in the white box and click on "Search".</p>
+    <p>
+The Index Overlap tool would return the following assertions:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (implies 
+      (and 
+        (isa ?A NonPersonAnimal) 
+        (wearsClothing ?A ?C)) 
+       (evokes ?A Cuteness-EmotionalResponse Positive)) in HumanSocialLifeMt
+
+    (not 
+      (and 
+        (isa ?ANIMAL BeastOfBurden) 
+        (evokes ?ANIMAL Cuteness-EmotionalResponse Positive))) in BaseKB
+
+    (implies 
+       (isa ?BABY HumanInfant) 
+       (evokes ?BABY Cuteness-EmotionalResponse HighToVeryHigh)) in BaseKB
+
+    (implies 
+      (isa ?BABY HumanToddler) 
+      (evokes ?BABY Cuteness-EmotionalResponse HighToVeryHigh)) in BaseKB
+
+    (implies 
+      (and 
+        (isa ?AN JuvenileAnimal) 
+        (isa ?AN Mammal) 
+        (isa ?AN NonPersonAnimal)) 
+      (evokes ?AN Cuteness-EmotionalResponse Positive)) in HumanSocialLifeMt
+
+   (implies 
+     (isa ?X HumanPreSchoolageChild) 
+     (evokes ?X Cuteness-EmotionalResponse Positive)) in HumanSocialLifeMt
+
+   (implies 
+     (and 
+       (isa ?E HelpingAnAgent) 
+       (beneficiary ?E ?Y) 
+       (isa ?Y HumanChild) 
+       (performedBy ?E ?X) 
+       (isa ?X HumanChild)) 
+    (evokes ?E Cuteness-EmotionalResponse Positive)) in HumanSocialLifeMt
+
+   (adjSemTrans Cute-TheWord 0 Inf-NPGapFrame 
+     (evokes :CLAUSE Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+   (adjSemTrans Adorable-TheWord 0 Inf-NPGapFrame 
+     (evokes :CLAUSE Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+   (adjSemTrans Darling-TheWord 0 Inf-NPGapFrame 
+     (evokes :CLAUSE Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+  (adjSemTrans Cute-TheWord 0 RegularAdjFrame 
+    (evokes :NOUN Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+  (adjSemTrans Adorable-TheWord 0 RegularAdjFrame 
+    (evokes :NOUN Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+  (adjSemTrans Darling-TheWord 0 RegularAdjFrame 
+    (evokes :NOUN Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+  (adjSemTrans Precious-TheWord 0 RegularAdjFrame 
+    (evokes :NOUN Cuteness-EmotionalResponse Positive)) in GeneralEnglishMt
+
+   (implies 
+     (and 
+      (isa ?EVENT CarryingOnFoot) 
+      (deviceUsed ?EVENT ?DEVICE) 
+      (isa ?DEVICE Luggage) 
+      (in-ContGeneric ?ANIMAL ?DEVICE) 
+      (isa ?ANIMAL NonPersonAnimal)) 
+    (evokes ?EVENT Cuteness-EmotionalResponse Positive)) in MainstreamAmericanCultureMt
+
+   (implies 
+     (and 
+       (isa ?FEED FeedingAnAnimal) 
+       (performedBy ?FEED ?AGENT) 
+       (isa ?AGENT HumanChild)) 
+     (evokes ?FEED Cuteness-EmotionalResponse Positive)) in MainstreamAmericanCultureMt
+
+  (implies 
+     (isa ?MY-PONY MyLittlePony) 
+     (evokes ?MY-PONY Cuteness-EmotionalResponse Positive)) in ProductGMt
+</pre></tt>
+    </font>
+
+<p>
+I can further restrict this set by adding a third term "#$HumanChild", and Cyc will 
+only return the following assertions:</p>
+    <font color='#339900'>
+      <tt><pre>
+Search Terms: 
+evokes
+Cuteness-EmotionalResponse
+HumanChild
+
+
+Index Overlap: 
+
+   (implies 
+     (and 
+      (isa ?E HelpingAnAgent) 
+      (beneficiary ?E ?Y) 
+      (isa ?Y HumanChild) 
+      (performedBy ?E ?X) 
+      (isa ?X HumanChild)) 
+    (evokes ?E Cuteness-EmotionalResponse Positive)) in HumanSocialLifeMt
+
+
+
+   (implies
+     (and 
+      (isa ?FEED FeedingAnAnimal) 
+      (performedBy ?FEED ?AGENT) 
+      (isa ?AGENT HumanChild)) 
+     (evokes ?FEED Cuteness-EmotionalResponse Positive)) in MainstreamAmericanCultureMt
+</pre></tt>
+    </font>
+
+
+
+
+<h2>12.3.  <a NAME='137178216'>
+Similarity Tool</a>
+    </h2>
+    <h3>12.3.1.  <a NAME='137180952'>
+Introduction</a>
+    </h3>
+    <p>
+The Similarity Tool is designed to provide a more visual comparison of the definitions 
+of CycL constants. In other words, it shows a minimized set of similarities and 
+differences between the given constants' #$isa and #$genls assertions. Currently 
+only #$isa and #$genls and thier specPreds are supported, but this could be extended 
+if needed.</p>
+    <p>
+Since the tool attempts to compress much information in a single browser pane, it can be
+confusing to read. Provided here will be a short walkthrough to compare the two 
+constants #$Cat and #$Dog.</p>
+    <p>
+To function the tool must be given at least two constants to compare, but an 
+indefinite number can be compared together. Of course, the comparison can become 
+difficult to read if too many constants are compared at the same time.</p>
+    <h3>12.3.2.  <a NAME='137188584'>
+Walkthrough</a>
+    </h3>
+    <p>
+Instead of making the user type in a list of constants to compare, the browser history is
+leveraged so that the user can choose input constants from their list of browsed 
+constants. To view the history, choose "History" from the tools menu. The 
+Similarity Tool only allows input from the history, so you must first browse the 
+constants you wish to compare.</p>
+    <p>
+Look at the constants #$Cat and #$Dog to add them to your history.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure1-similarity.jpg'></center>
+    <p>
+Now that the constants are in the history, we can start the Similarity Tool by choosing
+"Similarity" from the Tools menu.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure2-similarity.jpg'></center>
+    <p>
+The opening screen will show your constants' history with a checkbox next to each 
+constant. Choose at least two input constants to compare, then select 
+<nobr>
+[Run Similarity Tool].</nobr>
+    </p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure3-similiarity.jpg'></center>
+    <p>
+The tool now performs comparisons of the constants and displays a table of 
+the results. In this table, there is a column for each input constant, and a row 
+for each constant that has a relation with one or more of the input constants. 
+In each cell below an input constant and to the left of another constant, a relation 
+is shown between the constants. The predicate used is shown in a purple
+row and the microtheory in a light blue row. To deconstantine which predicate and 
+microtheory are relevant to a cell, simply look for the nearest predicate and 
+microtheory above the row the cell is in.</p>
+    <p>
+If the cell is grey, there is no relation found (asserted or trivially deduced) 
+between the constants. If the cell is colored, the relation is one of the ones 
+in the following legend.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure4-similarity.jpg'></center>
+    <p>
+The assertion balls indicate assertions made in the KB and clicking one will browse the
+relevant assertion. A checked checkbox exists for each assertion that is asserted 
+in the KB (as opposed to deduced). A yellow cell indicates that the assertion is 
+asserted, but not redundant. A red cell indicates that the assertion is asserted 
+but redundant with another asserted assertion. A green cell means that the 
+relationship can be deduced from other assertions through the SBHL.</p>
+    <p>
+Since the checkboxes indicate whether an assertion exists in the KB, this layout 
+suggests  that one can check or uncheck boxes to assert or unassert assertions, 
+respectively.  This is indeed the case. Simply check the assertions you wish to add or 
+unckeck  the ones to remove and click the [Submit] button to add the operations to 
+the agenda. If javascript is enabled, small dots will appear to the left of the checkbox
+rows allowing quick checking and unchecking of all the checkboxes in a row.</p>
+    <p>
+To complete the walkthrough, we will go through an explanation of a couple of parts of 
+the Similarity Tool results for the input constants #$Cat and #$Dog.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure5-similiarity.jpg'></center>
+    <p>
+In figure 5, we see a comparison of the #$isa assertions for #$Cat and #$Dog. 
+Some things to notice include: In #$BaseKB, #$Cat and #$Dog are both inferred to 
+be instances of #$Thing and asserted (monotonic) to be instances of 
+#$OrganismClassificationType. Also, #$Cat is asserted to be an instance of 
+#$IKBConstant, while dog is asserted to be a #$PublicConstant, which
+implies memebership in the #$IKBConstant collection. In #$BiologyMt, both are asserted
+instances if #$BiologicalSpecies, but #$Dog also has a redundant assertion making it an
+instance of #$BiologicalTaxon.</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/figure6-similiarity.jpg'></center>
+    <p>
+In figure 6, we see a comparison of the #$genls assertions for #$Cat and #$Dog. In
+particular, we see that there are two asseritions here: </p>
+    <font color='#339900'>
+      <tt><pre>
+   (genls Cat FelidaeFamily)</pre></tt>
+    </font> 
+
+<p>
+and
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (genls Dog CanineAnimal)</pre></tt>
+    </font>
+
+<p>
+The collection #$FelidaeFamily and #$CanineAnimal intersect at the collections 
+#$Carnivore, #$Mammal, and #$NonPersonAnimal, to which a minimal set of
+all the collections both #$Dog and #$Cat belong.</p>
+    <h2>12.4.  <a NAME='137235208'>
+Salient Descriptor</a>
+    </h2>
+    <p>
+The Salient Descriptor is an RKF (Rapid Knowledge Formation) tool,
+whose purpose is to present the user with prompts for expected
+knowledge about a given term.  It relies on information in the Knowledge
+Base (KB) about what knowledge is expected for different types of things.  This
+information is expressed via rules concluding to literals whose
+predicate is one of</p>
+    <blockquote>
+      <ul>
+        <li>
+          <em><tt>
+#$keRequirement</tt></em>
+        </li>
+        <li>
+          <em><tt>
+#$keStrongSuggestion</tt></em>
+        </li>
+        <li>
+          <em><tt>
+#$keWeakSuggestion</tt></em>
+        </li>
+      </ul>
+    </blockquote>
+    <p>
+Before the Salient Descriptor was implemented as a full-fledged RKF
+tool available via the UIA, there was an initial implementation in the
+Cyc Browser, which is available by clicking on the [Salient Describe]
+option when browsing a term.  The "Requirements", "Strong
+Suggestions", and "Weak Suggestions" checkboxes correspond to the
+aforementioned three predicates, respectively.  The "Neighbors"
+option is not yet implemented.</p>
+    <p>
+The intent is that for each suggestion, the user will be prompted to
+fill in a value, choose from a list of possible values, or answer a
+Yes/No question.  This is correctly implemented in the UIA, but the
+version available in the Cyc Browser is a legacy implementation and
+does not currently allow the user to make any assertions.  However, it
+does allow you to see the conclusions of the inference as to what
+knowledge is required, strongly suggested, and weakly suggested.</p>
+    <p>
+Eventually this tool will have full functionality both in the UIA
+and the Cyc Browser.</p>
+    <p>
+
+For more information, please see the section on "KE Facilitation" in the chapter entitled "CycL Representation Choices".</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

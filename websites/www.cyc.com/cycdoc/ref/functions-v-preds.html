@@ -1,0 +1,135 @@
+<html>
+
+<title>Functions vs. Predicates</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0></a>Functions vs. Predicates</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 3/31/2002<br>
+
+<i>Copyright&copy 1997-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+
+<p>
+This document should provide insight into the discussion of when to use functions and when to use predicates.
+<p>
+<hr>
+<p>
+Given a real-world relationship between N items that is functional in
+at least one of those items, should one create a <a href=/cycdoc/vocab/fundamental-vocab.html#Predicate>#$Predicate</a> or a
+<a href=/cycdoc/vocab/fundamental-vocab.html#Function-Denotational>#$Function-Denotational</a> to represent that relationship?  If the
+relationship is not at all functional, of course a Predicate must be
+used.  But if at least one of the "arguments" is functional, the
+relationship could be represented with either a function or a
+predicate.  For example, one could represent the "successor"
+relationship with either a <a href=/cycdoc/vocab/fundamental-vocab.html#BinaryPredicate>#$BinaryPredicate</a>,
+<pre>
+  (#$successor 1 2)
+</pre>
+or with a #$UnaryFunction, 
+<pre>
+  (<a href=/cycdoc/vocab/math-vocab.html#SuccessorFn>#$SuccessorFn</a> 1) which returns 2.  
+</pre>
+Which is better? 
+
+<ol>
+<li>There can be multiple, independent reasons to choose one or the
+other.  This means that sometimes, the best thing is to have BOTH a
+predicate and the corresponding function.
+
+Aside: 
+In the case where we do have equivalent functions and predicates, it
+will be appropriate to write an axiom such as this in some appropriate mt: 
+<p>
+<pre>
+  (#$implies (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> ?X (<a href=/cycdoc/vocab/geography-vocab.html#GovernmentFn>#$GovernmentFn</a> ?C)
+        (#$government ?C ?X))
+</pre>
+<p>
+<li>If you want to be able to add new terms to your language on the
+fly, during inference, you must have the function version (else use a
+SkolemFunction).  For example, we know that practically every country
+has a government.  If all we had was #$government, we could use the
+expression
+<pre>
+  (#$government ?C ?G) 
+</pre>
+to bind ?G to the government of ?C, but we would only find bindings in
+cases where someone had bothered to introduce, by hand, a term
+corresponding to the government of ?C.
+<p>
+Named functions are more desirable than Skolem functions, partly due to
+clarity.
+<p>
+<li>If you want to be able to associate a piece of code to compute the
+functional "argument", you should represent the relationship with an
+EvaluatableFunction.  What if we represented "plus" with a predicate? 
+<pre>
+   (#$plus 2 2 ?X)
+</pre>
+It is possible to make a predicate an instance of
+<a href=/cycdoc/vocab/fundamental-vocab.html#EvaluatableRelationship>#$EvaluatableRelationship</a>, but the current system only supports an
+<a href=/cycdoc/vocab/fundamental-vocab.html#evaluationDefn>#$evaluationDefn</a> which expects all arguments to be fully-bound.  So if
+"plus" were an evaluatable predicate, we could answer the question
+<pre>
+   (#$plus 2 2 4) 
+</pre>
+<p>
+as True, but we couldn't use the defn to find bindings for
+?X as in the expression further above.
+<p>
+<li>In cases where you want to frequently assign a value to the
+functional "argument", a predicate is most useful.  For example, the
+"height" relationship is functional -- for every PartiallyTangible,
+there is some Distance that is the height of the object.  We could use
+a function --
+<pre>
+   (#$HeightFn #$Karen) 
+</pre>
+-- to generate that Distance. However, this would only be useful in
+certain cases.  If we want to declare that Karen has a particular
+height, this is best accomplished with a Predicate:
+<pre>
+   (<a href=/cycdoc/vocab/material-vocab.html#heightOfObject>#$heightOfObject</a> #$Karen (<a href=/cycdoc/vocab/quantity-vocab.html#Foot-UnitOfMeasure>#$Foot-UnitOfMeasure</a> 5.3)), 
+</pre>
+<p>
+<li>In cases where you want to compare or constrain the value of a
+functional arguement, a function version is useful:
+<pre>
+   (<a href=/cycdoc/vocab/quantity-vocab.html#greaterThan>#$greaterThan</a> (#$HeightFn #$Karen) (#$HeightFn #$Muffet))
+</pre>
+<li>There are several reasoning modules with special support that can
+be applied to Predicates: <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#genlInverse>#$genlInverse</a>, <a href=/cycdoc/vocab/fundamental-vocab.html#negationPreds>#$negationPreds</a>,
+<a href=/cycdoc/vocab/fundamental-vocab.html#negationInverse>#$negationInverse</a>, etc.  In order to use these, you have to have a
+predicate.
+<p>
+<li>If the relationship is functional in more than one argument, you
+can get by with a single Predicate but would require more than one
+Function.  For example, "atomic number" is a one-to-one relationship.
+We can have a single predicate
+<pre>
+   (<a href=/cycdoc/vocab/chemistry-vocab.html#atomicNumber>#$atomicNumber</a> #$Helium 2)
+</pre>
+which is functional in both of its arguments.  Or, we could have 
+<pre>
+   (#$AtomicNumberFn #$Helium) -> 2
+   (#$AtomicNumberOfFn 2) -> #$Helium
+</pre>
+<li>There is better indexing support for <a href=/cycdoc/vocab/fundamental-vocab.html#Predicate>#$Predicate</a>s, especially if the
+function version would not be reifiable. 
+</ol>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+</html>

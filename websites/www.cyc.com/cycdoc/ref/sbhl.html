@@ -1,0 +1,322 @@
+<html>
+
+<title>SBHL: Subsumption-Based Heuristic Modules</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>SBHL: Subsumption-Based Heuristic Modules</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+
+<hr>
+
+<p>
+The SBHL modules are a growing collection of modules that
+support very fast inference involving subsumption tests with respect to
+particular subsumption hierarchies.  Each module is associated with a
+particular hierarchy, and each hierarchy is defined by ground, atomic
+assertions in the KB having a particular transitive predicate.  Four of
+the most commonly used modules and their associated predicates are:
+<pre>
+SBHL Module       predicate
+-----------       ---------
+:genls            <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a>
+:genl-mts         <a href=/cycdoc/vocab/mt-expansion-vocab.html#genlMt>#$genlMt</a>
+:genl-predicates  <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a>
+:genl-attributes  <a href=/cycdoc/vocab/fundamental-vocab.html#genlAttributes>#$genlAttributes</a>
+</pre>
+The SBHL modules are implemented with special datastructures and over fifty 
+special-purpose API functions that make use of that datastructure.
+<p>
+Importantly, the domains of each of the SBHL predicates are disjoint.
+Therefore, only collections will have other collections as their
+superiors, inferiors, and negations; only predicates will have other
+predicates as their superiors, inferiors, and negations; etc.  Since
+collections, predicates, microtheories, and attributes do not include
+all constants in the KB, not all constants will have entries on their
+SBHL slots.
+<p>
+The SBHL methods are described in the Cyc API, but here are some plain 
+English descriptions of some of their capabilities:
+
+<UL>
+<LI>Get the plural generated phrase for the OpenCyc term (intended for classes).</LI></UL>
+
+
+
+<UL>
+<LI>Get the singular generated phrase for the OpenCyc term (intended for individuals).</LI></UL>
+
+
+
+<UL>
+<LI>Get the default generated phrase for the OpenCyc term (intended for properties).</LI></UL>
+
+
+
+<UL>
+<LI>Get the paraphrase for the OpenCyc statement.</LI></UL>
+
+
+
+<UL>
+<LI>Get the comment for the OpenCyc term.  Embedded quotes are replaced by spaces.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the types for the OpenCyc term.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the directly asserted true super classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the minimum (most specific) super classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the directly asserted true sub classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the least specific sub classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the direct super classes of the direct sub classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the siblings (direct sub classes of the direct super classes) for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the siblings (direct sub classes of the direct super classes) for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of all of the direct and indirect super classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of all of the direct and indirect sub classes for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of all of the direct and indirect super classes for the OpenCyc term1 which are also sub classes of OpenCyc term2.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of all of the dependent sub classes for the OpenCyc class.  Dependent sub classes are those direct and indirect sub classes of the class such that every path connecting the sub class to a super class of the class passes through the class.  In a typical taxonomy it is expected that all-dependent-sub classes gives the same result as all-sub classes.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list with the sub classified number of sample sub classes of a OpenCyc class.  Attempts to return leaves that are maximally different with regard to their all-super classes.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc term1 is a direct or indirect sub class of OpenCyc term2.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc term1 is a direct or indirect super class of OpenCyc term2.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc class1 and OpenCyc class2 are tacitly coextensional via mutual super classes of each other.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc class1 and OpenCyc class2 are asserted coextensional.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc class1 and OpenCyc class2 intersect with regard to all-sub classes.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc class1 and OpenCyc class2 are in a hierarchy.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the justifications of why OpenCyc term1 is a sub class of OpenCyc term2.</LI></UL>
+
+
+
+<UL>
+<LI>Get an English paraphrase of the justifications of why OpenCyc term1 is a sub class of OpenCyc term2.</LI></UL>
+<DIR>
+<DIR>
+
+<P>getWhyGenlParaphrase("Dog", "Animal") --&gt;</P>
+<P>"a dog is a kind of canine"</P>
+<P>"a canine is a kind of non-human animal"</P>
+<P>"a non-human animal is a kind of animal"</P>
+</DIR>
+</DIR>
+
+
+<UL>
+<LI>Get a list of the justifications of why OpenCyc class1 and a OpenCyc class2 intersect.</LI></UL>
+
+
+
+<UL>
+<LI>Get an English paraphrase of the justifications of why OpenCyc class1 and a OpenCyc class2 intersect.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the class leaves (most specific of the all-sub classes) for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the classes asserted to be disjoint with a OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if OpenCyc class1 and OpenCyc class2 are disjoint.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the most specific classes (having no subsets) which contain a OpenCyc term term.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the instances (who are individuals) of a OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the instance siblings of a OpenCyc term, for all classes of which it is an instance.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the classes of which the OpenCyc term is directly and indirectly an instance.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of all the direct and indirect instances (individuals) for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc term is a instance of OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the justifications of why the OpenCyc term is an instance of the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Get an English paraphrase of the justifications of why the OpenCyc term is an instance of OpenCyc class.</LI></UL>
+<DIR>
+<DIR>
+
+<P>getWhyGenlParaphase("Brazil", "Country") --&gt;</P>
+<P>"Brazil is an independent country"</P>
+<P>"an  independent country is a kind of country"</P>
+</DIR>
+</DIR>
+
+
+<UL>
+<LI>Get a list of the super properties for the OpenCyc property.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the domain types for the OpenCyc property.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the range type for the OpenCyc property.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc property is Unique.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc property is Unambiguous.</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the disjoint classes for the OpenCyc class</LI></UL>
+
+
+
+<UL>
+<LI>Get a list of the coExtensionals for the OpenCyc class.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc term is a Class.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc term is an Individual.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the OpenCyc term is a Property.</LI></UL>
+
+
+
+<UL>
+<LI>Return true if the candidate name is a valid OpenCyc term name.</LI></UL>
+<p>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

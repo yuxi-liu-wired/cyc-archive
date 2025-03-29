@@ -1,0 +1,496 @@
+00:00:00 --- log: started opencyc/02.07.01
+00:19:59 <dmiles> zool: did you see http://step.psy.cmu.edu/scripts/ ?
+00:21:09 <zool> gosh no, didnt find that... thx... that's loads
+00:21:40 <dmiles> the scripts are dialog managemnt of interviewing of machine-human
+00:22:19 <zool> i'd thought about trying to write something that taught perl, the feedback coached thing, feeding back from the right patterns and the wrong ones
+00:22:58 <zool> can't see it very clearly yet though
+00:23:23 <zool> i've learned a lot about my own programming style and strategy from teaching beginners, only done a couple of classes though
+00:24:57 <dmiles> ah.. i am still trying to get an overview of e-prime scripts.. and how reusable they are.. are they many for generarion teaching materials?
+00:26:22 <dmiles> err it seems like its primary use if for generatation teacher-student scripts
+00:27:17 <dmiles> a home grown perl like implimentation would be good
+00:27:43 <dmiles> and then allowing user to execute the perl they are writting
+00:28:28 * dmiles thinks about cyclbot trying to teach cycl
+00:31:18 <zool> :)
+00:42:44 <dmiles> Cobra: i'll have a version checked in in morning (8 hours fromn now) of IrcChat.java that removes the unsed DCCShatServer
+00:43:16 <dmiles> err ChatServer :)
+00:59:54 <dmiles> ok CycLBot's machine is back up
+01:00:02 <dmiles> a few more mihutes
+01:19:44 --- join: irc (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+01:20:44 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+01:21:07 --- nick: irc -> dmiles
+01:23:37 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+01:24:40 <dmiles> brb.. ip change
+01:30:30 --- join: irc (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+01:32:37 --- quit: dmiles (Connection reset by peer)
+01:41:08 --- nick: irc -> dmiles
+01:44:42 <yepster> good morning
+01:45:25 <dmiles> good morning
+01:46:00 <yepster> i don't like time zones: when my day is finished, people at cyc just had their first cup of coffee..
+01:46:34 <yepster> can I ask you some questions about cyclbot?
+01:47:13 <yepster> well I'm going to anyway
+01:47:37 <yepster> can it answer questions about what it can do and can't?
+01:48:02 <yepster> or better: can it answer questions about the model of the knowledge in which it is described?
+01:49:08 <dmiles> i am trying to get to that level
+01:49:21 <dmiles> to where it parses basic english queries
+01:49:28 <dmiles> then that information can be in the KB
+01:50:07 <dmiles> i could set up trigger queries.. less genricv now
+01:50:31 <yepster> example; suppose you modeled a script with actions a b and c in only that possible order
+01:50:33 <dmiles> predefined scripts that invoke an process that uses varaIIBLE from the english
+01:50:57 <yepster> could it answer 'cannot do c yet because a is not finished' or sth?
+01:51:09 <dmiles> i am hoping that one response try could be a chat level script that changes the basic set of context scripts it knows
+01:51:26 <dmiles> i think with the planning suituation it could
+01:51:31 <dmiles> in pure CycL
+01:51:53 <dmiles> so then it would be a mater of parsing the query to the correct CycL query
+01:52:07 <yepster> I am thinking about how to model the 'agent knows / not knows' stuff
+01:52:29 <dmiles> yeah.. that knows not knows.. is a good candidate for plannning
+01:52:45 <yepster> I think I have to make some rules that take el-sentences from the kb model as argument that produces knows predicates
+01:52:46 <dmiles> if not know, then assqure info
+01:53:09 <dmiles> or wants Agent to know
+01:53:09 <yepster> to reifify the model as 'agent knows about rules' stuff in the kb
+01:53:24 <dmiles> yeah.. so how did the forward chaining method work?
+01:53:38 <dmiles> did you resolve a true/falseness like you needed?
+01:54:07 <dmiles> (true knows/true not knows)
+01:54:11 <yepster> not yet
+01:54:52 <dmiles> i kinda think negation by failure would be a nice senetence operator
+01:55:08 <yepster> I am unsure about why modalityMt doesn't contain 'unknows' or so. Maybe it's because unknown can be written as knows (not knows a)
+01:55:15 <dmiles> like (#$failsToProve ?ElSentence)
+01:55:59 <dmiles> roight #$unkown is what your really after
+01:56:27 <dmiles> not that its in there.. but needs something like that
+01:56:43 <yepster> but asking right now for (not (knows agent ?prop)) returns nothing -> that's ok and understandable
+01:57:00 <dmiles> i think (#$noty (#$knows ?A ?Sent)) is what you really want yes
+01:57:13 <yepster> because I can ask cyc to prove A
+01:57:14 <dmiles> too bad its knot working yet :(
+01:57:28 <yepster> but to answer why a is not known
+01:57:47 <yepster> i have to assert not knows a then
+01:58:00 <dmiles> that will be the most probible infernce path.. and the leaf failure
+01:58:12 <dmiles> as to why Agent does not know
+01:58:15 <yepster> and use the 'normal' implies ante A to infer what might be unknown
+01:59:16 <yepster> if (knows (not knows agent A) and (implies (and b c) a) -> default b and c unknown
+01:59:37 <yepster> missed 1 parenthesis
+02:00:20 <yepster> so b and c are known to be unknown until they are asserted true
+02:00:41 <yepster> that way once I assert a unknown, b and c become unknown unless they are already known
+02:00:56 <dmiles> yes in this only gafs are negation by failure.. rules arnt
+02:01:48 <yepster> I think something like this can be useful for all kinds of things
+02:02:09 <dmiles> absolutely.. and possibly needs to be optimised inference module in Cyc
+02:02:43 <dmiles> i am hoping the planner can look at sentences known 
+02:02:57 <dmiles> you know use this kibnd of view of the KB
+02:03:45 <dmiles> so the plan list woiuld be a list of the search tree it used
+02:04:07 <dmiles> but then also the subgoal of all this is to really do not knows correctly
+02:04:08 <yepster> e.g. if cyclbot knows that to open a door you need either some key and it must be some time
+02:04:33 <yepster> ask cyclbot can the door be opened?
+02:04:35 <yepster> false
+02:04:37 <yepster> why?
+02:04:48 <dmiles> becasue it does not know where the key is
+02:04:51 <yepster> or no, not false: not proven actually
+02:05:24 <yepster> yes, and that answer cannot be given without explicit modeling something like this explicitly
+02:05:31 <dmiles> becasue it could not satify a 'get key' in current state
+02:06:33 <dmiles> for the reason 'get key' requires 'find key' which is marked as requirting time
+02:06:38 <yepster> I am not sure whether the planner should be used
+02:07:04 <yepster> or something planner like
+02:07:06 <dmiles> find key requires.. 'know in-ContGeneric' or Key
+02:07:39 <dmiles> well the only reason i am seeing the planner is it makes Cyc inference path make more sense
+02:07:46 <yepster> because the questions is 'cyclbot: do you know why the door can't be opened' -> this should be able to be answered without trying to open it
+02:08:23 <yepster> that's like driving a car to find out how much fuel is in it
+02:08:26 <dmiles> since also the planner would lift the realivant sections of KB.. with a more controlled manner
+02:08:44 <dmiles> well the planbner does not require state change.. 
+02:08:54 <yepster> hmmm
+02:09:03 <dmiles> the plan does not actually have to have action.. just knows begats knows
+02:09:20 <dmiles> i know this then i know that.. then i know that other thing
+02:09:31 <dmiles> based on imples
+02:09:56 <dmiles> even though normally one would really rather uses causes
+02:10:28 <yepster> I think the planner isn't optimized to find all stop conditions
+02:10:41 <dmiles> but i gues the same can be done w/o any planner just in CycL
+02:11:01 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+02:11:11 <dmiles> oops no identd
+02:11:16 <yepster> I am sure somebody must have worked this out in some sort of logic
+02:11:28 <yepster> but I'm unable to find any reference
+02:11:32 <dmiles> yes.. and it should be located somewehre arround #$knows :)
+02:11:57 <yepster> If we could only have a 5 minute peek in cyc
+02:12:24 <dmiles> i wish we could mark a prediucate to only be used if the current query depth is less then X
+02:12:56 <yepster> why?
+02:13:02 <dmiles> that way if #$knows was implimented like that it could be constrained if the query was really fgor that
+02:13:20 <dmiles> i think some of why it's not working the way we want is path timidness
+02:13:58 <dmiles> meaning to actually have knows woprk based on negation by failure would mean that knows would be overly prductive
+02:14:30 <dmiles> you have seen how modus tollens worksd right?
+02:14:45 <dmiles> (at least the conscpet)
+02:15:51 <dmiles> what happens is when you fuilly canonical implication.. you tend to produce much more entailmetns of negativity (modus tolens) then you do positive implication (modus ponens)
+02:16:07 <dmiles> like for example.. all dogs are mamals
+02:16:23 <dmiles> yiou can prove something is not a dog by disproving it is a mamal
+02:16:42 <dmiles> with a definate return
+02:17:03 <dmiles> so (not (isa ?X Dog)) should be a easy to solve infernce
+02:17:19 <dmiles> by proving (not (isa ?X Mammal))
+02:17:25 <yepster> i see
+02:17:47 <dmiles> so that would be a very productive search space to go (not (isa ?X Dog)) then fail on (isa ?X Dog)
+02:17:53 <yepster> yes limiting the depth would be very useful
+02:18:28 <dmiles> so whats happening is once a negation starts it gets more combinatoric then positiveness
+02:18:50 <dmiles> so cyc tends to avoid in time/space the negatibve paths
+02:19:13 <dmiles> i would want to overriude this avoidance
+02:19:26 <dmiles> by marking depth on the level of proving a litteral
+02:19:35 <yepster> this sounds a bit like a remarks eca did a while ago
+02:19:59 <yepster> somewhere in the sf forum
+02:20:06 <dmiles> instead of depth bound on toplevel qquery only
+02:20:37 <dmiles> yeah.. but an argument against this is that that makes knowledge engineering more complex
+02:20:44 <yepster> no way
+02:21:00 <dmiles> you shouldnty have to worry about implementation level things when you enter data
+02:21:12 <yepster> now we have to model negative things explicitly
+02:21:29 <dmiles> you should just be able to give cyc a firehosre of jknowledge and rules.. let the inference programmers sort out your mess
+02:22:15 <dmiles> but ok.. we'll give them abilty to assert (extentKnown.. minimizeExtent.. etc
+02:22:34 <dmiles> extentKnown makes sense to a logician
+02:22:53 <dmiles> minimizeExtent means nothing to them.. just that its about how cyc operates at some low level
+02:23:18 <yepster> btw, do you know a quick way to transform (a and b or c) into (c and (a or b) ?
+02:23:52 <yepster> there must be a name for this conversion, but my logic course was about 6 years ago (and in dutch)
+02:23:53 <dmiles> i need parens on the fir4st
+02:24:04 <dmiles> to see what the first means
+02:24:39 <yepster> ((a and b) or c)  to ((a or b) and c)
+02:24:49 <yepster> hmm this is too easy
+02:25:03 <dmiles> on sec.. i'll see if this is DNF or CNF
+02:25:19 <dmiles> Conjuctive of Clausual normal form
+02:25:58 <dmiles> ok that is converting to Disjunctive nomal form
+02:26:11 <yepster> if this first list is the antecedent of something, and is known to be unknown
+02:26:27 <yepster> then the second list states things that are unknown:
+02:26:30 <yepster> (a or b)
+02:26:32 <yepster> and
+02:26:33 <yepster> c
+02:26:45 <dmiles> well you know how to convert that to horne clauses?
+02:26:59 <yepster> nope
+02:27:06 <dmiles> let me see if this is correct
+02:27:47 <dmiles> ok C is proved by disproving (a and b)
+02:28:18 <dmiles> so se would be Proved by disproving Not a or not b
+02:28:21 <dmiles> err
+02:28:25 <dmiles> so C would be Proved by disproving Not a or not b
+02:28:58 <dmiles> A could be proved by proving C fals and B true
+02:29:10 <yepster> hmm i should rephrase the question, a sec
+02:29:42 <dmiles> meaning horn clause can be used to convert the probklm to explicit negation
+02:30:14 <yepster> in this rule:
+02:30:29 <yepster> (implies
+02:30:29 <yepster>   (and
+02:30:29 <yepster>      (implies A B)
+02:30:29 <yepster>      (knows (not knows B)))
+02:30:29 <yepster>   (knows (not knows A')))
+02:30:43 <yepster> I have to convert A into A'
+02:31:28 <dmiles> i see 
+02:31:38 <yepster> hmm and the A' should be cut into atomic values
+02:31:43 <yepster> without or's
+02:31:48 <dmiles> it needs excape into s doamin of talking about KB
+02:31:51 <yepster> or ands
+02:31:53 <yepster> arg
+02:32:13 <yepster> yes, without ands
+02:32:30 <dmiles> where are the ands bad?
+02:32:46 <dmiles> ok you have given argument to why i request sentenceeImplies :)
+02:32:48 <yepster> I have to ask 'what are possible reasons B is unknown'
+02:32:56 <yepster> and should get multiple answers
+02:33:09 <dmiles> you want t avoid modus tolens
+02:33:11 <yepster> i.e. 'haven't got key' or time is bad
+02:33:32 <yepster> yes, reification if rules
+02:33:38 <dmiles> your adding the ' is a hack to avoid odus tolens
+02:34:02 <dmiles> and does kinda work that way
+02:34:09 <dmiles> its simular to ...
+02:34:22 <dmiles> (thereExists ?AQ ..
+02:34:30 <dmiles> weiat
+02:34:36 <dmiles> (implies
+02:34:36 <dmiles> [02:36] <yepster>   (and
+02:34:36 <dmiles> [02:36] <yepster>      (implies A B)
+02:34:36 <dmiles> [02:36] <yepster>      (knows (not knows B)))
+02:35:23 <dmiles> err
+02:35:40 <dmiles>  (knows (not knows (meaningOf A))))
+02:35:55 <dmiles> or something like that
+02:36:04 <dmiles> a functional wrapper arround the resuot
+02:36:19 <dmiles> that way modus tolens inference is guarinteed to fail
+02:37:10 <dmiles> thats is kinda a hack. but i guess your stack quiteing it in wwith some kind of function
+02:37:23 <dmiles> err stuck quoting it
+02:37:25 <yepster> yes
+02:37:37 <yepster> but I'm not going to try it in the 0.6 subl!
+02:37:45 <yepster> no defun
+02:37:59 <dmiles> well you can define a unary idenety function
+02:38:24 <dmiles> any unrary function aCTUALy
+02:38:37 <yepster> hmm
+02:38:39 <dmiles> err unary name dentational
+02:38:52 <dmiles> but you should not have to
+02:38:57 <dmiles> what you really want is...
+02:39:44 <dmiles> (sentenceImples (and (implies A B) (knows (not knows B))) (knows (not knows A)))
+02:40:24 <dmiles> then it dont have a nasty arbitray function
+02:40:52 <yepster> I want A to be decomposed
+02:41:24 <dmiles> just the first one right?
+02:41:38 <yepster> no, the last A
+02:42:02 <dmiles> decomposed means?
+02:42:02 <yepster> becauce parts of A can already be known to be true
+02:42:53 <yepster> without the ands
+02:43:23 <yepster> or no, de or's
+02:43:29 <yepster> it's A, not A'
+02:44:43 <dmiles> well so your expecing the first ?A to match to a sentence? and not a rule with one antecedant?
+02:45:02 <yepster> no, to a rule
+02:45:15 <yepster> ante of a rule
+02:45:40 <dmiles> would (implies ?A ?B) be able to find (implies (and.. ) B) ?
+02:46:02 <yepster> I think I am going to experiment with manually asserting the
+02:46:03 <yepster> (implies
+02:46:03 <yepster>   (and
+02:46:03 <yepster>      (implies A B)
+02:46:03 <yepster>      (knows (not knows B)))
+02:46:03 <yepster>   (knows (not knows A')))
+02:46:14 <yepster> for some implies rule
+02:46:27 <dmiles> seems combinitoric ;P
+02:46:38 <dmiles> howe bout making B .. B'
+02:47:03 <dmiles> as only a decomposed single conseqwuent
+02:47:03 <yepster> why?
+02:47:12 <yepster> ah
+02:47:15 <yepster> yes
+02:47:28 <yepster> in HL that always the case or not?
+02:47:29 <dmiles> i guess you could..
+02:48:01 <yepster> always the case bluuu englified dutch
+02:48:11 <dmiles> and (not decomposed  A) (decomposed B) type part in your antecedant
+02:48:31 <dmiles> well i see two depths of HL 
+02:48:41 <dmiles> and i dont know if Cyc does
+02:48:57 <dmiles> there is KB + Entailment = HL rules
+02:49:17 <dmiles> meaning HL i thought was a collection of entailment rules
+02:49:31 <dmiles> meaning all HL have one consequent
+02:50:20 <dmiles> that have explicit negation or postive literal
+02:50:21 <dmiles> so HL is i thought supposed to become a unification level proposutions
+02:51:20 --- join: irc (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+02:51:32 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+02:51:44 <irc>  however i am seeing this is not always the case in Cyc
+02:51:44 <yepster> I'm going to do some experimenting now, thanks for the ideas!
+02:51:46 --- nick: irc -> dmiles
+02:52:44 <dmiles> ok.. i am going to try hard on discussion list totalk about HL as horne vs HL as Random Anything
+02:53:02 <dmiles> then writting what you want would not be as unpredicatible
+02:53:46 <yepster> You mean meaning of the term 'HL'?
+02:53:59 <dmiles> Heurisic Level
+02:54:02 <yepster> when used in discussion about opencyc?
+02:54:34 <dmiles> Heurisic Level right now means anything that cyc has as an output of canonicalization
+02:54:57 <yepster> i suppose that's ok
+02:55:37 <dmiles> yes ;P.. but that means we have tio know exacly how the canonicaller interacts with Heristics
+02:55:58 <dmiles> knowing it converts to Conjuctive Normal Form is good
+02:56:16 <dmiles> so at least we can 'read' it
+02:56:34 <dmiles> but in hl implies is used inapropriately
+02:57:12 <dmiles> in HL  there is no sucjh thing as 'implies' it uses only 'sentenceImplies'
+02:57:34 <dmiles> yet in the broswer it shows as 'implies' 
+02:57:37 <yepster> well i can't tell one from the other
+02:58:25 <dmiles> sentenceimplies is ngeation by failure
+02:58:38 <dmiles> implies is explicit negation
+02:58:45 <dmiles> oopps
+02:58:56 <dmiles> sentenceimplies is  explicit negation
+02:59:18 <dmiles> implies is a simplicifcation rewruite of multiple sentenceimplies 
+03:00:47 <dmiles> (implies ?A ?B) ===== (and (sentenceImplies ?A ?B)(sentenceImplies (not ?B)(not ?A)))
+03:01:57 <dmiles> EL  ==== HL
+03:02:22 <dmiles> sentenceImplies works perfect for Knows
+03:02:52 <dmiles> implies is unpredictable
+03:03:17 * zool smiles
+03:03:21 <dmiles> sentenceImplies only looks at decomposed forms
+03:03:56 <yepster> ah
+03:04:01 <dmiles> and only consequents in decomposed forms
+03:04:50 <dmiles> thats why the says that the sentence itself is expected to do quantification
+03:05:59 <dmiles> zool: bijan and I have had this exact discussion over RDF
+03:06:30 <dmiles> him and I agree.. but yet no one knows what we are tying to say
+03:07:09 <dmiles> that there is two types of implication.. and we need N3 to do both!
+03:08:35 <dmiles> its like an even split.. when people say 'implies' in RDF logic... 50% of the time we have no idea what they meant
+03:09:27 <dmiles> in Cyc i am guessing Monotonicly True.. and Default  True .. is how you destinguish the differnce
+03:09:44 <dmiles> of what implies mean in a rule
+03:10:18 <dmiles> however where yepster uses 'implies' in the center of his rule.. which does cy cthink we meant?
+03:11:48 <dmiles> with model logic .. we expect or guess it to be senetenceImplies
+03:12:39 <dmiles> the faxct he explicitly negates means he is intendeding to senetenceImplies
+03:13:04 <dmiles> but if not.. should we have decued the modus tolens version?
+03:13:10 <dmiles> err duduced
+03:13:59 <zool> dmiles right
+03:14:04 <dmiles> ok i think i explained it enough to send an email
+03:14:15 <dmiles> yeah.. its a rough call
+03:14:40 <dmiles> i wrote  a theorm prover once to detect model logic and assume user meant modality
+03:15:20 <dmiles> but everytime you assert/retracted a predicaTE model ytou had to completely recompile the HL all over again
+03:15:30 <dmiles> which can be a huge task
+03:16:39 <dmiles> (of the entire KB)
+03:20:11 <dmiles> subL: (constant-apropos "sentenceImplies')
+03:20:11 <CycLBot> java.lang.RuntimeException: Invalid expression, sval: null  st: Token[EOF], line 1  tok: -1
+03:20:31 <dmiles> subL: (constant-apropos "sentenceImplies")
+03:20:32 <CycLBot> sentence implies
+03:20:44 <dmiles> heh
+03:20:56 <dmiles> subL: (constant-apropos "implies")
+03:20:56 <CycLBot> cf implies implies sentence implies
+03:21:09 <dmiles> oh thats a seach ;P
+04:01:54 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+06:13:33 --- join: people (Snak@62.53.34.11) joined #opencyc
+06:19:22 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+06:20:14 <Seth> quick question, what is the predicate in cycL that is called 'domain' in suo kif ?
+06:22:23 <dmiles> argIsa
+06:22:32 <Seth> thanks :)
+06:22:58 <dmiles> dont forget domainSubclass (argGenl)
+06:23:28 <Seth> but in the diagram http://robustai.net/mentography/arity.gif
+06:23:58 <Seth> what i had called nthDomain would be translated into argIsa ... right?
+06:24:24 <dmiles> yeah nthDomain was converted by Ian to just domain
+06:24:41 <Seth> k
+06:40:42 --- quit: stevereed_home (Read error: 110 (Connection timed out))
+07:08:31 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+07:10:07 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+07:10:58 --- quit: CycLBot (Remote closed the connection)
+07:11:19 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+07:16:00 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+08:30:00 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+08:31:05 --- join: dmiles (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+08:35:36 --- quit: CycLBot (Read error: 110 (Connection timed out))
+08:48:15 --- quit: yepster (Read error: 113 (No route to host))
+09:10:34 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+09:43:32 --- join: DavidP1 (~david193@crtntx1-ar1-138-007.crtntx1.dsl-verizon.net) joined #opencyc
+09:52:03 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+09:52:03 --- quit: Cobra (carter.openprojects.net irc.openprojects.net)
+09:52:14 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+09:52:14 --- quit: DavidP1 (carter.openprojects.net irc.openprojects.net)
+09:52:14 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+09:52:15 --- quit: aigan (carter.openprojects.net irc.openprojects.net)
+09:52:15 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+09:52:20 --- quit: DavidP (carter.openprojects.net irc.openprojects.net)
+09:52:20 --- quit: Seth (carter.openprojects.net irc.openprojects.net)
+09:52:20 --- quit: people (carter.openprojects.net irc.openprojects.net)
+09:52:20 --- quit: urgen (carter.openprojects.net irc.openprojects.net)
+09:52:20 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+09:52:36 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+09:52:36 --- join: DavidP1 (~david193@crtntx1-ar1-138-007.crtntx1.dsl-verizon.net) joined #opencyc
+09:52:36 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+09:52:36 --- join: dmiles (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+09:52:36 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+09:52:36 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+09:52:36 --- join: people (Snak@62.53.34.11) joined #opencyc
+09:52:36 --- join: urgen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+09:52:36 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+09:52:36 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+09:52:36 --- join: aigan (~jonas@jonas.rit.se) joined #opencyc
+09:52:36 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+09:52:36 --- mode: carter.openprojects.net set +o Graham
+09:52:50 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+09:52:50 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+09:52:50 --- quit: Cobra (carter.openprojects.net irc.openprojects.net)
+09:52:54 --- quit: aigan (carter.openprojects.net irc.openprojects.net)
+09:52:54 --- quit: DavidP1 (carter.openprojects.net irc.openprojects.net)
+09:52:54 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+09:52:56 --- quit: DavidP (carter.openprojects.net irc.openprojects.net)
+09:52:56 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+09:52:57 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+09:52:57 --- quit: urgen (carter.openprojects.net irc.openprojects.net)
+09:52:57 --- quit: people (carter.openprojects.net irc.openprojects.net)
+09:52:57 --- quit: Seth (carter.openprojects.net irc.openprojects.net)
+09:53:06 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+09:53:06 --- join: DavidP1 (~david193@crtntx1-ar1-138-007.crtntx1.dsl-verizon.net) joined #opencyc
+09:53:06 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+09:53:06 --- join: dmiles (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+09:53:06 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+09:53:06 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+09:53:06 --- join: people (Snak@62.53.34.11) joined #opencyc
+09:53:06 --- join: urgen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+09:53:06 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+09:53:06 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+09:53:06 --- join: aigan (~jonas@jonas.rit.se) joined #opencyc
+09:53:06 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+09:53:06 --- mode: carter.openprojects.net set +o Graham
+10:00:57 --- quit: DavidP (Read error: 110 (Connection timed out))
+10:09:30 --- quit: zool (Read error: 110 (Connection timed out))
+10:13:50 <DavidP1> subl: (+ 3 2)
+10:13:54 <CycLBot> 5
+10:14:16 --- nick: DavidP1 -> DavidP
+10:32:28 --- quit: people (Read error: 110 (Connection timed out))
+11:48:59 * dmiles returns
+12:43:45 --- join: people (Snak@62.53.34.71) joined #opencyc
+13:04:50 --- join: roadhog (~roadhog@209.40.149.2) joined #opencyc
+13:05:05 --- part: roadhog left #opencyc
+13:22:23 --- quit: people ()
+13:46:33 --- quit: Graham ("xchat exiting..")
+13:50:04 --- join: people (Snak@62.53.34.100) joined #opencyc
+14:12:57 --- quit: jlatour (Remote closed the connection)
+14:31:07 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+15:05:20 --- join: cybur (~root@MTL-ppp-150284.qc.sympatico.ca) joined #opencyc
+15:08:44 <cybur> hi, I have a problem when running bin/latest.bin -w world/latest.load I get "Implementation error: MAX_TYPE has changed; Can't load this world"
+15:09:01 <cybur> has anyone see anything like this?
+15:09:07 <stevereed> no 
+15:09:29 <stevereed> did you first write out the image or is the plain download image?
+15:09:41 <cybur> it's the download image
+15:09:55 <stevereed> did it ever work ok?
+15:10:20 <cybur> nope, just installed linux only for this program, it's been a day so far
+15:10:41 <stevereed> ok so lets talk about your linux first...
+15:10:46 <stevereed> what linux?
+15:10:53 <cybur> red hat 7.3
+15:11:04 <stevereed> how much memory on your computer?
+15:11:15 <cybur> 320megs ram , athlon 850
+15:11:29 <stevereed> should be no problem ..
+15:11:36 <stevereed> we run AMD and red hat here.
+15:11:40 <cybur> about 300mb hard drive left
+15:12:10 <stevereed> so you unarchived the file as per the readme..
+15:12:32 <cybur> I read that there are some java extras that I need but nowhere can I find which ones they are
+15:12:44 <stevereed> no need for java until you program.
+15:12:52 <cybur> yes
+15:12:58 <cybur> ah
+15:13:05 <stevereed> cyc should run using the ./run-cyc.sh command
+15:13:30 <stevereed> which does the command you first stated.
+15:13:32 <cybur> I get another error when running it, so I executed the command manually
+15:13:38 <stevereed> oh?
+15:13:57 <cybur> bad interpreter
+15:14:06 <cybur> ...  no such file or directory
+15:14:09 <stevereed> that would be the bash shell
+15:14:20 <stevereed> could be a path problem
+15:14:53 <cybur> when I type bash, or /bin/bash they both work
+15:15:15 <stevereed> how about sh
+15:15:28 <cybur> works
+15:15:53 <stevereed> we only need two things to make cyc work.
+15:16:07 <cybur> ok
+15:16:12 <stevereed> the file latest.bin and the file latest.load
+15:16:37 <stevereed> can you navigate to your bin directory and give me the file size of latest.bin?
+15:17:02 <cybur> 16672032
+15:17:22 <cybur> world is 54883200
+15:18:32 <stevereed> hmm I have 54722560
+15:18:57 <cybur> hmmm
+15:19:03 <stevereed> let me look further and check to be sure that is what you should have.
+15:19:17 <cybur> be right back, I will check a few things...
+15:21:21 <stevereed> I have 39955940 as the size of opencyc-0.6.0.tgz file
+15:23:38 <cybur> same
+15:24:21 <stevereed> ok I suggest that you remove the current directory tree contain opencyc and untar the archive file
+15:24:26 <stevereed> to recreate it.
+15:24:43 <cybur> thank-you very much, I found the problem
+15:25:10 <stevereed> got to go home now but my email is reed@cyc.com - any time for any problem.
+15:25:15 <cybur> I had uncompressed it with windows awhile ago (was eager to look in) and that one gave the wrong size
+15:25:24 <cybur> it's up and running now
+15:25:29 <stevereed> sweet.
+15:25:41 <cybur> cheers to you
+15:26:32 <cybur> take care...
+15:26:35 <CycLBot> Take what?
+15:30:49 <aigan> care!
+15:35:02 --- quit: cybur ("using sirc version 2.211+KSIRC/1.2.1")
+15:43:12 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+15:58:29 <Cobra> dmiles: Thanks for looking at IrcChat.
+16:05:07 --- join: person (Snak@62.53.34.44) joined #opencyc
+16:11:16 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+16:27:59 --- quit: people (Read error: 110 (Connection timed out))
+17:01:44 <graylensman> dmiles: Evening.  What you working on now?
+17:32:56 --- quit: DavidP (Read error: 104 (Connection reset by peer))
+17:33:49 --- join: DavidP (~david193@crtntx1-ar1-138-007.crtntx1.dsl-verizon.net) joined #opencyc
+17:59:00 <Cobra> dmiles: Thanks for your comments on DccThread..., I got it running.  Didn't realize it was unused.
+18:19:02 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:34:45 <Cobra_> hello
+18:34:46 <CycLBot> hello CycLBot
+18:34:51 <Cobra_> help
+18:35:12 <Cobra_> CycLBot: hello
+18:35:19 <Cobra_> hello CycLBot
+18:35:20 <CycLBot> hello CycLBot
+18:35:24 <Cobra_> hmm
+18:43:49 --- quit: graylensman ("Client Exiting")
+18:44:05 <Cobra_>  ask (#$isa #$Dog #$Thing)
+18:44:06 <CycLBot> true sentence
+18:44:13 <Cobra_> goodbye
+18:44:23 <Cobra_>  ask (#$isa #$Dog #$Thing)
+18:44:24 <CycLBot> true sentence
+18:47:25 <Cobra_> ask (#$isa #$Dog #$CanineAnimal)
+18:47:26 <CycLBot> no answers found
+18:47:37 <Cobra_> mt InferencePSC
+18:47:47 <Cobra_> ask (#$isa #$Dog #$CanineAnimal)
+18:47:48 <CycLBot> no answers found
+18:49:26 <Cobra_> ask (#$genls #$Dog #$CanineAnimal)
+18:49:26 <CycLBot> true sentence
+19:37:56 --- quit: Cobra_ ("[x]chat")
+19:42:51 --- quit: person ()
+20:33:53 <dmiles> oh hey
+20:34:08 <dmiles> i dozed off Cobra
+20:34:29 <dmiles> this version of CycLbot is slightly dirrefent then whats in CVS
+20:34:52 <dmiles> that is why is didn'ty respond to hello
+21:15:12 --- quit: urgen (Read error: 104 (Connection reset by peer))
+21:21:52 <dmiles> Cobra: i commited the IrcChat.java into CVS.. sorry it had taken so long.. it was only commenting out two lines.. but I was having a hard tiome mountiong the type of filesystem that i keep the CVS checked out onto
+21:22:29 <dmiles> this bot on IRC is a derived subclass of that one
+21:25:26 <dmiles> this particular bots source is at:
+21:25:28 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/agent/
+21:26:33 <dmiles> @  MooIrcBot.java 
+23:06:03 --- quit: CycLBot (Remote closed the connection)
+23:06:04 --- quit: Seth (Read error: 104 (Connection reset by peer))
+23:40:05 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.07.01

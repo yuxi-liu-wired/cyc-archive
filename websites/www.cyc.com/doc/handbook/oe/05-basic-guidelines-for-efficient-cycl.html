@@ -1,0 +1,751 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 5. 
+Basic Guidelines for Efficient CycL</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 5. 
+Basic Guidelines for Efficient CycL</h2>
+    <p></p>
+    <b>5.1.  <a HREF='#136575872'>
+Simpler is (usually) better</a></b>
+    <br>
+    <p></p>
+    <b>5.2.  <a HREF='#137184904'>
+Reusability</a></b>
+    <br>
+    <font size='-1'>5.2.1.  <a HREF='#136574168'>
+Careful identification of the microtheories in which knowledge should be
+stored.</a>
+      <br>
+    </font>
+    <font size='-1'>5.2.2.  <a HREF='#136574592'>
+Temporary microtheories for unfinished/application-specific work:</a>
+      <br>
+    </font>
+    <p></p>
+    <b>5.3.  <a HREF='#137218984'>
+How OE Differs From NL</a></b>
+    <br>
+    <font size='-1'>5.3.1.  <a HREF='#137302368'>
+Generic and Underspecified Terms</a>
+      <br>
+    </font>
+    <p></p>
+    <b>5.4.  <a HREF='#137307760'>
+Prefer GAFs to Rules</a></b>
+    <br>
+    <p></p>
+    <b>5.5.  <a HREF='#137384224'>
+Avoiding Existential Quantification</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <p></p>
+    <b>5.6.  <a HREF='#137418256'>
+Good Variables and Bad Variables
+</a></b>
+    <br>
+    <p></p>
+    <b>5.7.  <a HREF='#137475112'>
+Attribute Policy</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <hr>
+    <h1>
+    Chapter 5. 
+    
+Basic Guidelines for Efficient CycL</h1>
+    <h2>5.1.  <a NAME='136575872'>
+Simpler is (usually) better</a>
+    </h2>
+    <p>
+Creating new vocabulary, so long as it is properly defined and axiomatized, is an 
+inexpensive way to make inferencing in Cyc easier. Following the "Rule of 10", if 10
+interesting things can be said about a concept, then it is probably a constant worth
+reifying in the KB. </p>
+    <p>
+Imagine that of the object denoted by the constant #$JoesDog, the following statements 
+are true:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasAttributes JoesDog BlackColor)
+   (hasAttributes JoesDog Viciousness)
+   (hasAttributes JoesDog Hungry)
+   (hasAttributes JoesDog Healthy)</pre></tt>
+    </font>
+
+
+<p>
+If hasAttributes is the only predicate relating objects to attributes they might have, 
+that predicate could quickly become overloaded. Searching the KB for all the things
+that are black could take a seriously long time. Inferencing is made simpler, then, 
+by making spec-predicates of hasAttributes. </p>
+    <font color='#339900'>
+      <tt><pre>
+       (mainColorOfObject JoesDog BlackColor)
+       (personalityAttributes JoesDog Viciousness)
+       (hungerLevelOf Hungry JoesDog)
+       (stateOfHealth JoesDog Healthy)</pre></tt>
+    </font>
+
+
+<p>
+Instead of running the query </p>
+    <font color='#339900'>
+      <tt><pre>
+    (hasAttributes ?X Viciousness) </pre></tt>
+    </font>
+
+<p>
+in the inference engine, which would require Cyc considering the entire predicate extent 
+of hasAttributes in order to find all vicious things, this query can be simplified:</p>
+    <font color='#339900'>
+      <tt><pre>
+    (personalityAttributes ?X Viciousness)
+</pre></tt>
+    </font>
+<p>
+The predicate extent of personalityAttributes is considerably smaller than the predicate 
+extent of hasAttributes. This query would limit the inference space, and, as a result,
+the time it takes to run a query. </p>
+    <p>
+Creating new vocabulary, such as quite precise spec-predicates, drastically increases 
+Cyc's reasoning power. Furthermore, since these predicates are spec-preds of
+hasAttributes, it is still possible to collect together all the characteristics of 
+Joe's dog. Assuming that all the predicates used earlier are spec-preds of hasAttributes, 
+the query</p>
+    <font color='#339900'>
+      <tt><pre>
+   (hasAttributes JoesDog ?ATT)</pre></tt>
+    </font>
+
+<p>
+would return the following bindings for ?ATT:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  BlackColor
+  Viciousness
+  Hungry
+  Healthy</pre></tt>
+    </font>
+
+
+
+<p>
+Likewise, it is difficult for Cyc to reason with long and complicated rules.
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+      (and
+        (isa ?DOG Dog)
+        (carriesInfectionType ?DOG Rabies)
+        (thereExists ?BITING
+          (and
+            (isa ?BITE Biting)
+            (doneBy ?BITING ?DOG))))
+       (thereExists ?TRANS
+     (thereExists ?HOST
+       (and
+        (isa ?TRANS InfectionTransmissionEvent)
+        (isa ?HOST Animal)
+        (transmissionFromHost ?TRANS ?DOG)
+        (transmissionToHost ?TRANS ?HOST)))))</pre></tt>
+    </font>
+
+
+<p>
+This rule is almost certainly functionally useless. The only way this rule would 
+be called, first of all, is in the case that we are querying the consequent, 
+which would be highly unlikely. This rule is not reusable: it is called only in very 
+few cases. </p>
+    <p>
+Second, even if it is true that every bite done by a dog with rabies causes a 
+transmission of the rabies infection, isn't this also true for any animal with rabies? 
+Since the only performers of biting events are animals or insects, the (isa ?DOG Dog) 
+is unnecessarily and inappropriately limiting. </p>
+    <p>
+Smaller, simpler, more modular rules would be more effective.</p>
+    <p>
+Rules should be short: in order to use a rule in inference, Cyc must check all the 
+conditions in the antecedent to see if there are bindings for the variables that cause the
+antecedent to be true. Thus, if there are ten variables in the antecedent, the inference 
+engine must check to see if there are bindings for all ten variables. This could take
+quite a long time to determine. Chances are, a large and awkward rule can be broken down 
+into many smaller rules, and, ideally, GAFs, which do not require backchaining in 
+inference.</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+    (and 
+     (carriesInfectionType ?ANIMAL Rabies)
+     (thereExists ?BITE
+       (and
+       (isa ?BITE Biting) 
+       (doneBy ?BITE ?ANIMAL))))
+    (thereExists ?TRANS
+     (isa ?TRANS TransmissionEvent)))</pre></tt>
+    </font>
+
+
+<p>
+This rule is still rather unwieldy with several variables to bind in the antecedent, 
+and it does have an existential quantification in the consequent, but it is much 
+simpler and more reusable than the first. Furthermore, the transmission event from 
+the consequent in this rule can be added to the antecedent of another rule. </p>
+    <p>
+A better way to express this might be to create a predicate that relates an infection type
+to actions that cause its transmission. This would then create small, managable
+rules as opposed to frightening, non-modular, and inferentially inert rules.</p>
+    <h2>5.2.  <a NAME='137184904'>
+Reusability</a>
+    </h2>
+    <p>
+One of the paramount concerns of ontologists must be the reusability of their
+work. Since logical correctness underdetermines the logical form used to
+express any particular set of propositions, other considerations must also be
+taken into account when making choices about the representation of a domain.
+These choices can lead to knowledge which is represented in an idiosyncratic
+way that is not useful for purposes which are even slightly more general than
+those which the author had in mind when the domain was originally designed.</p>
+    <p>
+This is one of the major areas where the engineering aspect of ontological
+engineering comes into play.  In many ways, this is like software engineering
+more generally.</p>
+    <p>
+The first thing to realize is that, in designing software, we cannot expect to
+anticipate all of our future needs. This is true as well for knowledge represented in
+the KB. If we cannot do a perfect job of anticipating all of our needs then
+the next best thing is to design systems which can be easily extended to handle
+later requirements. One of the main tools which is used to ensure this in
+software engineering is the use of hierarchically ordered structures and
+inheritance. Since all of the concepts in the knowledge base are ordered in
+this way we receive much of the benefit these approaches provide for
+extensibility already. This is one reason, however, why it is generally worth
+a little extra care in making sure that the hierarchy itself is solid (see
+Finding the Right Level of Generality).</p>
+    <p>
+The above ongoing additions are much of what is done under the heading of
+software maintenance. Once it is realized that most software will require
+maintenance of this kind the problem reduces to one of trying to do a good
+job of making it easy to identify components of a system and for components to
+work with each other. It is to handle this problem that software engineering
+emphasizes the value of modularity and interfaces. By creating a number of
+stand-alone components which provide stated functionality we can create an
+environment in which developers can rely on the functions contained in the
+published interfaces of modules while leaving the maintainer of that module
+free to modify the inner workings of that module at will (since no one else
+has access to it).</p>
+    <p>
+This kind of modularity should be seen as a desirable goal of ontological
+as well as software engineering, but currently there are not clear
+mechanisms for implementing modular additions to the knowledge base. There are,
+however, several things that can be done to help with this problem. We
+currently use microtheory space to divide up our workspace (among many other
+things). It is hoped that, over time, we will add new ways of identifying
+public and private work in the knowledge base as well as ways to achieve the
+benefits of carefully designed modules and interfaces between them. Here are
+a few of the mechanisms currently used for this purpose that take advantage of
+microtheory inheritance in order to achieve some of these benefits.</p>
+    <h3>5.2.1.  <a NAME='136574168'>
+Careful identification of the microtheories in which knowledge should be
+stored.</a>
+    </h3>
+    <p>
+By placing knowledge in microtheories which correspond to natural divisions in
+how we expect that knowledge to be used we can segregate rules about a
+particular domain allowing them to be modified without altering other areas
+of the knowledge base. In order for this to work it is important that we
+ensure that microtheories do not "over-inherit" from others in order to
+minimize the impact of later changes. This segregation is usually done by
+domain area though there are other effective ways of doing this as well. In
+particular, data can often be usefully collected in microtheories dependent on
+either the content or the source of the data. This allows the data to be
+used together in contexts where it is appropriate and to be excluded from 
+contexts in which it is not.</p>
+    <h3>5.2.2.  <a NAME='136574592'>
+Temporary microtheories for unfinished/application-specific work:</a>
+    </h3>
+    <p>
+While working on new domains it is a good practice to make sure that the newly
+added knowledge is located in a part of the microtheory hierarchy where it is
+unlikely to interfere negatively with others' work. This can be accomplished
+by putting the information into a temporary microtheory which is not used
+by anyone else. This information can be moved to the microtheory in which it
+belongs when it has been completed and tested (remember it is easier to merge
+microtheories than to split them).</p>
+    <p>
+Additionally, it is important to consider the right level of generality when
+constructing rules.  By making rules as general as possible (without permitting
+untrue cases), unanticipated applications can be accommodated.  In general, short,
+satisfiable rules are to be preferred over longer, more specific ones.  For
+more information on this topic, please see the Cyc101 lecutre on "Modularity and
+Reusability".</p>
+    <h2>5.3.  <a NAME='137218984'>
+How OE Differs From NL</a>
+    </h2>
+    <p>
+It is easy to
+believe that English translates neatly into CycL because CycL terms
+are simple to create, and Cyclists strive for the names of CycL terms
+to be reasonably recognizable based on the English meaning of words. 
+In truth, however, very few common English words delineate
+exclusively one concept.  In extreme cases, an English word can be
+represented by dozens of CycL terms which may or may not be related. 
+ The English term may fit in more than one part of speech, and the
+meaning of the term can depend on the context.  Since our goal is to
+define completely any constant with axioms, it is most appropriate to
+have a single Cyc constant represent a single concept. Thus, it would
+be inappropriate to use the same CycL constant #$Bank for the same
+English word in the following two sentences: </p>
+    <p>
+"The banks of
+Mississippi have high interest rates."</p>
+    <p>
+and</p>
+    <p>
+"The banks of
+the Mississippi are composed of very rich soil."</p>
+    <p>
+Fortunately, the
+two distinctly different concepts are represented by different Cyc
+constants. The most appropriate CycL translation of "bank"
+in the first sentence would be #$BankCompany, while #$RiverBank would
+be the best translation of "bank" in the second. </p>
+    <p>This case may be
+obvious because there is really little commonality between a river
+bank and an investment company, but all the definitions of vague
+English words, for example "game", have a little more in
+common.  Axiomatizing the word without regard to the distinctly
+different concepts it represents will result in an ill-defined
+constant that is relatively useless. Therefore, it is important to
+tease out precisely which concepts are contained in a single English
+word in order to axiomatize the concept, not the word. 
+</p>
+    <p>Consider the case
+of the English word "has".  We might be tempted to believe
+that this is best represented by some sort of possessive relation. 
+When we say that "John has the flu", "John has blue
+eyes", "John has an idea", and "John has $50",
+there seems to be some sort of possession concept in common between
+the four uses.  But once we try and tease out, through rules, what
+that possession concept may be, we find ourselves unable to say
+anything useful about the strange predicate in the various cases.  We
+cannot say that if John "has" something, he owns it: how
+would he own the flu?  Nor can we assert that having something
+implies that it is on someone's person, as John could have his $50 in
+a safe at home.  In short, relating a predicate for "has"
+to anything else in the KB with rules could be a nearly impossible
+task. 
+</p>
+    <p>Hence, "has"
+has various senses:</p>
+    <table cellpadding='6'>
+      <tr>
+        <th align='left'>English</th>
+        <td></td>
+        <th align='left'>CycL</th>
+      </tr>
+      <tr>
+        <td>John has a stomach ache.</td>
+        <td></td>
+        <td>
+          <em><tt>(ailmentTypeAffects Stomachache John)</tt></em>
+        </td>
+      </tr>
+      <tr>
+        <td>John has a shallow personality.</td>
+        <td></td>
+        <td>
+          <em><tt>(personalityAttributes John ShallowPersonality Positive)</tt></em>
+        </td>
+      </tr>
+      <tr>
+        <td>John has pride.</td>
+        <td></td>
+        <td>
+          <em><tt>(feelsEmotion John Pride)</tt></em>
+        </td>
+      </tr>
+      <tr>
+        <td>John has a son.</td>
+        <td></td>
+        <td>
+          <em><tt>(children John JohnsSon)</tt></em>
+        </td>
+      </tr>
+      <tr>
+        <td>John has blue eyes.</td>
+        <td></td>
+        <td>
+          <em><tt>(eyeColor John BlueEyeColor)</tt></em>
+        </td>
+      </tr>
+      <tr>
+        <td>John has $50.</td>
+        <td></td>
+        <td>
+          <em><tt>(ownsWealth John (Dollar-US 50))</tt></em>
+        </td>
+      </tr>
+    </table>
+    <p>These predicates, all representing some sense of "has",
+permit us to make rules, draw inferences, and, we hope, make
+interesting conclusions about John. 
+</p>
+    <h3>5.3.1.  <a NAME='137302368'>
+Generic and Underspecified Terms</a>
+    </h3>
+    <p>Cyc constants with names ending
+in "-Underspecified" are exclusively used for parsing natural language to
+CycL. When the natural language parsing tools come across a word, 
+for example "is", that has many disparate meanings, 
+the parser maps this term to an underspecified predicate.  
+Postprocessing steps make an attempt to discover which
+CycL term best represents the meaning of the English term given the
+context, or ask the user (entering English) to attempt to clarify
+her meaning. Ontologists should never use an underspecified
+constant when making assertions, as these terms are absolutely
+useless in any kind of inference, and are often direct specifications
+of very broad terms, if they are specifications of any term at all.  
+</p>
+    <p>Generics, identifed in the KB by the "-Generic" suffix, are the most broad 
+terms possible and are also used primarily for parsing.  These terms are loosely
+axiomatizable, and thus serve as the highest generalization for a 
+particular concept.  Ideally, assertions should be written not using
+these generic terms, but instead the most appropriate specialization
+of the generic term.   Because it is possible to axiomatize these
+terms in a very loose way, Cyclists are encouraged to do so. 
+Furthermore, they are quite useful for argument constraints on
+particularly broad predicates.  In keeping with the ontology goals of
+finding the right level of generality or specificity (see "Finding
+the Right Level Of Generality, in the chapter called "From Constants to Assertions"), however, it is best to
+make assertions using the most specific specialization of the term. 
+For instance, if, while John is hanging portraits on the wall, he
+uses his hammer, it is far preferable to assert (deviceUsed
+JohnsPortraitHanging JohnsHammer) over (instrument-Generic
+JohnsPortraitHanging JohnsHammer), although both are true.</p>
+    <h2>5.4.  <a NAME='137307760'>
+Prefer GAFs to Rules</a>
+    </h2>
+    <p>
+In order for Cyc to reason about rules, Cyc requires backchaining steps. This involves 
+trying to prove the consequent of a rule by checking to see if there are any bindings for
+the antecedent. Requiring additional rules, thereby adding backchaining steps to a query 
+is quite expensive: it increases the search space and thus dramatically increases the
+amount of time it takes for the inference engine to return the results of the query. 
+GAFs (Ground Atomic Formulae - formulae that do not contain any free variables) 
+are much easier to reason about. Cyc can reason about them without using backchaining 
+steps, but can instead rely on less backchaining overall, and can instead solve 
+queries using lookup and other HL modules. A supported predicate, such as #$genlPreds, 
+defines a relation in order to reduce the number of rules required to solve a query. </p>
+    <p>
+This is also handy because more reasoning can be done at the type level. There are 
+relatively few well-defined individuals in the Knowledge Base: the KB contains by far 
+more rules relating types of objects. This fulfills the goal of creating "common sense" 
+reasoning. When confronting with instances, Cyc knows what to do with them. Of course, 
+inputting instances into Cyc involves adding data, not common sense, the stuff for Cyc 
+to use. But in the absence of instances, it is still good to be able to reason at the 
+type level. </p>
+    <p>
+Rule macro predicates take common types of rules and make it possible to write GAFs that 
+function in the same fashion in order to replace them. This is useful both for type
+level reasoning, and easing the work placed on the inference engine.  The most common
+rule macro predicate is #$genls, which represents the subset relation. But #$genls is
+a really a rule macro for:</p>
+    <font color='#339900'>
+      <tt><pre>
+        (implies
+           (isa ?INST ?COLL)
+           (isa ?INST ?SUPER-COLL))</pre></tt>
+    </font>
+
+
+<p>
+But rule macros are used for many different kinds of common rules. For instance, it 
+is quite true that:</p>
+    <p>
+(a)
+<font color='#339900'>
+        <tt><pre>
+    (implies
+         (brothers ?AGENT ?BROTHER)
+         (siblings ?AGENT ?BROTHER))</pre></tt>
+      </font>
+    </p>
+
+
+<p>
+Every brother of a person is also a sibling of that person, since sibling is a 
+generalization of brother. If it were necessary to write rules for every relation of 
+this sort, the strain on the inference engine would be unbearable. Fortunately, 
+however, there is a rule macro predicate that replaces (a) with the GAF:</p>
+    <p>
+(b)
+<font color='#339900'>
+        <tt><pre>
+    (genlPreds brothers siblings)</pre></tt>
+      </font>
+    </p>
+
+<p>
+The two formulae are functionally equivalent: using either in an inference, for instance, 
+would produce the same result. The latter assertion, (b) is supported by an HL
+module and requires no backchaining. Furthermore, it permits type level reasoning that 
+the equivalent rule (a) does not. Imagine that:</p>
+    <p>
+(c)
+<font color='#339900'>
+        <tt><pre>
+    (genlPreds siblings familyMembers) </pre></tt>
+      </font>
+    </p>
+
+<p>
+Since genlPreds is a transitive relation, the inference engine can automatically conclude:
+</p>
+    <p>
+(d)<font color='#339900'>
+        <tt><pre>
+    (genlPreds brothers familyMembers)
+</pre></tt>
+      </font>
+    </p>
+<p>
+Consider the equivalent rules. This includes the above rule (a) and the additional rule:
+</p>
+    <p>
+(e)<font color='#339900'>
+        <tt><pre>
+    (implies
+        (siblings ?SIB ?FAM)
+        (familyMembers ?SIB ?FAM))
+</pre></tt>
+      </font>
+    </p>
+
+
+<p>
+To draw the conclusion that </p>
+    <font color='#339900'>
+      <tt><pre>
+         (implies
+           (brothers ?BRO ?FAM)
+           (familyMembers ?BRO ?FAM))</pre></tt>
+    </font>
+
+<p>
+The inference engine would require a backchain step for each rule. This is expensive, 
+while the HL module which supported the rule macro predicate #$genlPreds is relatively cheap.</p>
+    <p>
+The Cyc KB is populated with a host of useful rule macro predicates. Among the more 
+useful are those that replace rules of this type:</p>
+    <p>
+(f)<font color='#339900'>
+        <tt><pre>
+ (implies
+       (isa ?VERT Vertebrate)
+       (thereExists ?HEAD
+         (and
+           (isa ?HEAD Head-Vertebrate)
+           (anatomicalParts ?VERT ?HEAD))))</pre></tt>
+      </font>
+    </p>
+<p>
+This rule states that for every vertebrate, there is a vertebrate head that is an 
+anatomical part of that vertebrate. These are just the types of rules that are
+extraordinarily useful throughout the KB. This can be handled by another sort of 
+rule macro predicate. This rule collapses into this GAF:</p>
+    <p>
+(g)<font color='#339900'>
+        <tt><pre>
+ (relationAllExists anatomicalParts Vertebrate Head-Vertebrate)</pre></tt>
+      </font>
+    </p>
+
+<p>
+The above rule (f) is equivalent with the GAF (g). The comment on the rule macro 
+predicate #$relationAllExists reads:</p>
+    <font color='#339900'>
+      <tt><pre>
+     "(relationAllExists SLOT COL1 COL2) means that, for every instance of 
+     COL1 (INS1), there is some instance of COL2 (INS2) such that (SLOT
+     INS1 INS2) holds. relationAllExists is thus redundant with a huge set of
+     commonly-occurring rules. By having this predicate (along with an axiom
+     defining it, and, eventually, coded support for quick inferencing with it), 
+     those rules can be stated more tersely and reasoning at the collection 
+     level is possible."</pre></tt>
+    </font>
+
+<p>
+Likewise, a similar GAF, #$relationAllInstance should replace all rules of the form 
+"Every x bears the relation R to a, where a is an individual instance. As the comment
+reads: </p>
+    <font color='#339900'>
+      <tt><pre>
+     "(relationAllInstance PRED COL1 INS2) means that, for every instance of
+     COL1 (INS1) there is a relation PRED with INS2, i.e. (PRED INS1 INS2) 
+     holds. It allows assertions that correspond more directly to common
+     database entries e.g. 'the maximum speed of a golf cart is 15 mph' to be
+     represented by a single GAF (relationAllInstance maxSpeed GolfCart
+     (MilesPerHour 15)) rather than by a rule (implies (isa ?CART GolfCart)
+     (maxSpeed ?CART (MilesPerHour 15)). relationAllInstance is thus
+     redundant with a huge set of commonly-occurring rules. One must be aware
+     of the implicit quantification underlying this predicate. "</pre></tt>
+    </font>
+
+
+<p>
+The GAF </p>
+    <font color='#339900'>
+      <tt><pre>
+  (relationAllInstance tasteOfObject Absinthe BitterTaste)</pre></tt>
+    </font>
+
+
+<p>
+should be read: "All absinthe has a bitter taste", and is equivalent to the rule:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+      (isa ?ABS Absinthe)
+      (tasteOfObject ?ABS BitterTaste))</pre></tt>
+    </font>
+
+
+<p>
+There are a suite of rule macro predicates that behave in this fashion. Be sure to read 
+the comments on relationInstanceAll, relationAllAll, relationExistsExists, and
+relationExistsAll. </p>
+    <p>
+Using rule macro predicates such as these increase Cyc's capacity for type level 
+reasoning and dramatically cuts the load on the inference engine, resulting in shorter 
+return times for inferences. </p>
+    <h2>5.5.  <a NAME='137384224'>
+Avoiding Existential Quantification</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <h2>5.6.  <a NAME='137418256'>
+Good Variables and Bad Variables
+</a>
+    </h2>
+    <p>
+When writing rules, it is important that the rules are clear and easy to read. 
+Cyc is quite dynamic: rules that are asserted today might change, depending on changing
+vocabulary, a year from now. It is very important that people making assertions are 
+able to read the assertions previously made. Also, no one's rule writing talent is perfect
+and no one's reviews are perfectly thorough. Finally, as rules are added to a 
+constant, a constant is thus defined and gives clues to usage that may not be apparent 
+from the constant's comment. Thus, rules should be easy to read. </p>
+    <p>
+Those coming to Cyc from a logic background will be used to writing formulae of this sort: 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    " <font face='Symbol'>"</font>x <font face='Symbol'>$</font>y [ (Fx &amp; Gy) <font face='Symbol'>&Eacute;</font> Jxy ]"
+</pre></tt>
+    </font>
+    <p>
+As a result, when they start to write rules in CycL, they often use the same difficult 
+to read variables. </p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+     (#$and
+       (#$startsAfterEndingOf ?X ?Y)
+       (#$temporallySubsumes ?X ?Z))
+     (#$startsAfterEndingOf ?Y ?Z))
+</pre></tt>
+    </font>
+
+<p>
+The assertion above has an error, and it is difficult to spot it because the 
+variable names don't give us any clues to the intended meaning of the rule. This is 
+the same rule written with clearer variable names:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$and 
+     (#$startsAfterEndingOf ?LATE ?EARLY)
+     (#$temporallySubsumes ?LATE ?LATE-SUB))
+   (#$startsAfterEndingOf ?EARLY ?LATE-SUB))</pre></tt>
+    </font>
+
+
+<p>
+Suddenly, the error becomes obvious. Variables are most helpful when they are English
+names or abbreviations. Instead of <nobr>?X</nobr>, <nobr>?Y</nobr>, <nobr>?X1</nobr>, <nobr>?XX</nobr>, etc., use <nobr>?SUBEVENT</nobr>, 
+<nobr>?EVENT</nobr>, <nobr>?AGENT</nobr>, <nobr>?DOG</nobr>, <nobr>?MOON</nobr>, etc. </p>
+    <p>
+A word of caution, however. Just because a speaker of English can read the word that 
+is being used as a variable, this does not mean that Cyc can. Until a variable is
+constrained, it remains universally quantified. For instance,</p>
+    <font color='#339900'>
+      <tt><pre>
+    (#$implies
+      (#$isa ?HORSE #$Horse)
+      (#$thereExists ?HEAD
+         (#$anatomicalParts ?HORSE ?HEAD)))</pre></tt>
+    </font>
+
+<p>
+While it is clear that the Cyclist was trying to say that "Every horse has a head 
+as an anatomical part", what the Cyclist accidentally entered is that 
+"For every horse, there is something that is an anatomical part of that horse". 
+He should have instead asserted:</p>
+    <font color='#339900'>
+      <tt><pre>
+     (#$implies
+       (#$isa ?HORSE #$Horse)
+       (#$thereExists ?HEAD
+         (#$and
+           (#$isa ?HEAD #$Head-AnimalBodyPart)
+           (#$anatomicalParts ?HORSE ?HEAD))))</pre></tt>
+    </font>
+
+
+<p>
+Of course, this is an undesirable assertion for several reasons. Please see <a HREF=' 03-from-constants-to-assertions.html#137403040'>"Finding the Right Level Of Generality"</a>, <a HREF=' 05-basic-guidelines-for-efficient-cycl.html#137189928'>"Reusibility"</a>, and 
+<a HREF=' 05-basic-guidelines-for-efficient-cycl.html#137382952'>"Avoiding Existential Quantification"</a>.</p>
+    <h2>5.7.  <a NAME='137475112'>
+Attribute Policy</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

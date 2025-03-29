@@ -1,0 +1,62 @@
+00:00:00 --- log: started opencyc/02.06.24
+02:59:01 --- join: people (Snak@62.53.34.113) joined #opencyc
+05:36:44 --- quit: CycLBot (Remote closed the connection)
+05:53:36 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:05:23 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+07:27:58 --- quit: people (Read error: 110 (Connection timed out))
+08:45:04 --- quit: johnd ("Client Exiting")
+08:45:17 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+09:07:41 --- join: people (Snak@62.53.34.102) joined #opencyc
+09:23:57 --- quit: johnd ("Client Exiting")
+09:28:04 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+09:28:14 --- mode: ChanServ set +o Graham
+09:51:12 <Yepster> time
+09:51:12 <CycLBot> the time was Mon Jun 24 02:29:32 PDT 2002
+09:56:21 --- nick: nrv8 -> nrv8|idle
+10:01:41 --- quit: people ("Snak 4.8.4 IRC For Mac - http://www.snak.com")
+10:16:42 <Yepster> hehe, mac
+10:36:28 --- quit: Yepster (Read error: 104 (Connection reset by peer))
+10:41:32 --- quit: nrv8|idle (Remote closed the connection)
+10:42:37 --- join: nrv8|idle (~sensory@emotionally.unstable.org) joined #opencyc
+12:00:00 --- join: people (Snak@62.53.34.75) joined #opencyc
+12:02:58 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+13:49:15 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+14:38:05 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+15:04:33 --- nick: nrv8|idle -> nrv8
+15:11:37 --- quit: stubby ("Client Exiting")
+16:08:40 --- quit: futhin ("gtg")
+18:14:46 --- part: nrv8 left #opencyc
+18:15:08 --- quit: people ("Snak 4.8.4 IRC For Mac - http://www.snak.com")
+21:12:51 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+21:13:17 <graylensman> hey dmiles
+21:13:25 <dmiles> hi there
+21:13:47 <graylensman> dmiles: I hacked the reader for mzscheme to interpret #$xxx as a normal symbol :)
+21:13:56 <graylensman> > (define #$ray 3)
+21:13:56 <graylensman> > #$ray
+21:13:56 <graylensman> 3
+21:14:09 <dmiles> excelent
+21:14:49 <graylensman> I was doing all kinks of stupid tricks to handle #$xxxx.  It was a cut and paste of 3 lines of code in the read.c file for mzscheme.
+21:14:59 <dmiles> hehe
+21:15:24 <dmiles> just allowing the #$ to workl like letters?
+21:16:30 <graylensman> yes.  is now valid for a symbol.  
+21:17:04 <dmiles> is there some kind of $ denoted string $ ?
+21:17:16 <dmiles> or # denoted macro # normally?
+21:18:01 <dmiles> (i am not as familiar with scheme)
+21:18:35 <graylensman> Only hash # something is an escape. So $ is letter like any other.
+21:18:42 <graylensman> > (define $ "euro")
+21:18:42 <graylensman> > $
+21:18:42 <graylensman> "euro"
+21:18:42 <graylensman> > (define $ray$ "rich")
+21:18:42 <graylensman> > $ray$
+21:18:42 <graylensman> "rich"
+21:18:45 <graylensman> >
+21:19:01 <dmiles> i see
+21:19:13 <dmiles> that is nice
+21:20:02 <graylensman> another example is #\x for a letter.  #\x is the letter 'x'
+21:21:06 <dmiles> so then thats goo0d it doent interfer with normal scheme code 
+21:22:45 <graylensman> exactly.  #(...) is a vector.  Prior to the hack #$xxx was "Bad Syntax Error."
+21:24:44 <graylensman> The hack should be side-effect free.  #(any letter here) is kinda reserved.  #$ was not being used by anything. So should be safe.
+21:55:41 --- quit: graylensman ("Client Exiting")
+23:26:28 --- join: nrv8 (~sensory@emotionally.unstable.org) joined #opencyc
+23:50:44 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.06.24

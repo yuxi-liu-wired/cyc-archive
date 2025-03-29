@@ -1,0 +1,129 @@
+00:00:00 --- log: started opencyc/02.06.13
+00:53:11 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+00:53:52 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+01:48:00 --- quit: dmilez (Read error: 110 (Connection timed out))
+01:50:42 --- join: dmiles (OULWC@dialup-64.158.122.239.Dial1.Portland1.Level3.net) joined #opencyc
+03:04:54 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+03:04:54 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+03:05:13 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+03:08:57 <Yepster> Steve are you there?
+03:10:33 <Yepster> I've defined something as isa collectiontype. Now if I define something else as
+03:11:07 <Yepster> isa something, then it isn't recognized as a collection. Should I make the 
+03:11:15 <Yepster> isa something collection explicit?
+03:11:42 <dmiles> well the intial ccollection must be specific
+03:11:51 <dmiles> as asserted being so first
+03:12:10 <Yepster> ?
+03:12:12 <dmiles> then the instances of it are not required to be defined except by collection
+03:13:00 <dmiles> what proceedure are you doing.. maybe its the order.. or the Mt scope
+03:13:28 <dmiles> not all collections are vissible to all Mts
+03:13:40 <dmiles> oh yeah.. that problem
+03:13:45 <dmiles> CollectionType
+03:13:47 <Yepster> I define everything in the same mt
+03:14:02 <dmiles> i made a forward chaining rule to get arround it ;P
+03:14:33 <Yepster> implies isa ?x collectiontype isa ?x collection?
+03:14:42 <dmiles> (implies (isa ?X colletiontype) (implies ?X collectionm))
+03:14:49 <dmiles> err yes
+03:14:58 <dmiles> (implies (isa ?X colletiontype) (isa ?X collection))
+03:15:04 <Yepster> thanks
+03:15:23 <dmiles> another thing is a SecondOrderCollection
+03:15:36 <dmiles> thats another way of say CollectionType often
+03:16:15 <dmiles> a secondorder collection is a collection of firstordercollections
+03:16:46 <Yepster> Does secondordercollection identify it's instances as collections correct?
+03:17:01 <dmiles> yes
+03:17:07 <Yepster> ah :_)
+03:17:15 <dmiles> but i dont know if it will pass TMS problems tyou ran intio
+03:17:53 <Yepster> I'll try it. Made an oracle sql scripts that does all assertions
+03:17:55 <dmiles> i ussualy assert gafs w./o wff checks 
+03:18:22 <dmiles> for non debufg runs you may want to turn TMS off by default
+03:19:04 <Yepster> well my mt isn't really big.
+03:19:22 <dmiles> (without-wff-semantics .. ) is the wrapper
+03:21:49 <Yepster> hmm all instances of firstordercollections are individuals. ok.
+03:22:59 <dmiles> yes.. so its more specific then CollectionType
+03:23:10 <dmiles> (the Se4condOrderCollection)
+03:24:07 <dmiles> becasue you know it defines co,lections holding indiviguals
+04:07:57 <Yepster> hmm did you get that dcc thing?
+04:09:19 <dmiles> no it never notified me ;(
+04:09:43 <dmiles> hrrm sinc ei am on dialup all the things that used tio work dont
+04:09:57 <dmiles> let me see if mirc has it set on ignore
+04:10:44 <dmiles> ok i set it to autoacdwept download
+04:38:04 --- join: jg (~user@romuald.isty-info.uvsq.fr) joined #opencyc
+04:41:21 <jg> ask: (isa ?Who Person)
+04:41:57 --- part: jg left #opencyc
+05:20:45 <stevereed_home> do not confuse TMS with the WF-checker
+05:21:19 <stevereed_home> TMS is the Truth Maintenance System with retracts all derived facts when a sole supporting fact is retracted.
+05:21:41 <stevereed_home> It is somewhat similar to referential integrity in a database.
+05:22:55 <stevereed_home> the WF-checker which is controlled by (without-wff-semantics ... checks each assertion for well-formedness, according to definitial assertions for each of embedded predicates, functions and collections.
+05:23:45 <Yepster> This is cool stuff for my 'opencyc for oraclists' tutorial!
+05:23:57 <Yepster> on delete cascade ~= TMS
+05:24:33 <stevereed_home> busy today with official visitors that administer the darpa DAML program.
+06:11:09 <Yepster> hmm function CYC-ASSERT : (sentence &optional mt properties)
+06:11:09 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+06:11:17 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+06:11:27 <Yepster> properties; :strength el-strength-p (:default or :monotonic)
+06:11:27 <Yepster> :direction direction-p (:forward or :backward)
+06:12:45 <Yepster> (cyc-assert '(#$implies (#$isa ?X #$IndicatieType) (#$isa ?X #$FirstOrderCollection))
+06:12:46 <Yepster> #$VWSRegelingHulpmiddelenMt :direction :forward)
+06:12:46 <Yepster> 500 "Function CYC-ASSERT called with improper arguments."
+06:18:21 <Yepster> I'm having trouble specifying direction forward..
+08:16:05 <Yepster> hmm
+08:52:52 <Yepster> this is not my lucky day
+08:52:52 --- quit: johnd_ (Read error: 104 (Connection reset by peer))
+08:53:08 <Yepster> I cannot get hypothesize to work
+09:03:17 <Yepster> found it; last assertion was not well formed because of arggenls violation.
+09:09:01 --- quit: dmiles (Connection timed out)
+09:52:42 --- quit: Yepster ()
+10:53:31 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+11:23:03 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+11:57:37 --- join: jg (gros@bourgogne.ens.uvsq.fr) joined #opencyc
+12:02:11 --- part: jg left #opencyc
+12:30:48 --- join: Edison (~tweber@pD9E5AE67.dip.t-dialin.net) joined #opencyc
+12:32:33 --- quit: Edison (Client Quit)
+14:04:02 --- join: dmiles (OULWC@dialup-64.158.121.159.Dial1.Portland1.Level3.net) joined #opencyc
+14:37:06 --- quit: dmiles (Read error: 110 (Connection timed out))
+15:09:12 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+16:37:19 --- quit: Psion (carter.openprojects.net irc.openprojects.net)
+16:37:19 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+16:37:19 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+16:37:24 --- quit: bruce (carter.openprojects.net irc.openprojects.net)
+16:43:08 --- join: x-man (~Shadow@213.174.10.12) joined #opencyc
+16:43:08 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+16:49:52 <x-man> hi
+16:54:46 --- quit: x-man (" Protections, quotes, tools, jokes and much more you find in  »¡« Scøøp Script 2001 »!«  get yours copy at www")
+16:57:39 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+16:57:39 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+16:57:39 --- join: Graham (ggelling@207.207.8.145) joined #opencyc
+17:55:03 --- join: ejacobs (~ejacobs@dsl093-055-199.blt1.dsl.speakeasy.net) joined #opencyc
+17:55:17 --- quit: ejacobs (Client Quit)
+19:38:16 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+20:07:12 --- quit: Psion (Read error: 104 (Connection reset by peer))
+22:28:33 --- quit: futhin ("sleep")
+23:27:00 --- join: Edison (~tweber@pD9EB54AC.dip.t-dialin.net) joined #opencyc
+23:52:38 --- join: meds (~Wouldnt@northwood-158-121.reshall.umich.edu) joined #opencyc
+23:52:50 <meds> anyone awake here?
+23:54:28 <Edison> me
+23:54:30 <Edison> hello!
+23:54:44 <meds> hi edison
+23:54:45 <meds> how you doing?
+23:54:50 <Edison> fine, thx. 
+23:55:01 <meds> are you involved with opencyc?
+23:55:07 <Edison> I'm not involved in opencyc, so i'm a guest here. 
+23:55:16 <meds> how much do you know about it?
+23:55:58 <Edison> not much. I'm member of OpenAI and both projects are in the same foundry. So i'm listening to this channel.
+23:56:12 <meds> but you know about AI i assume?
+23:56:19 <meds> i had a few questions
+23:57:03 <Edison> hmm. Shoot. But i'm more like a framework architect. I don't deal with actual AI components.
+23:57:28 <meds> well i just heard about how cyc has come along and i got excited
+23:57:32 <meds> right now i'm a medical student
+23:57:42 <meds> I was thinking about taking a year off maybe
+23:57:48 <meds> and starting a project
+23:57:54 <meds> where you can type in a patients history
+23:58:06 <meds> and have cyc come up with a differencial diagnosis
+23:58:17 <meds> but i don't know anything about AI
+23:58:22 <meds> i'm good with computers
+23:58:32 <meds> so i wanted to know how feasable that would be
+23:58:34 <Edison> heh. This would be a _very_ tough one.
+23:59:10 <meds> tough project?
+23:59:16 <meds> tought question to answer?
+23:59:48 <Edison> I dont know much about medics. But i think its more than 'hurt A' + 'illness B' = 'illness C in 5 years'
+23:59:58 <meds> yes!
+23:59:59 --- log: ended opencyc/02.06.13

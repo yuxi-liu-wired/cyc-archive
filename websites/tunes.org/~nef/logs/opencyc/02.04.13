@@ -1,0 +1,590 @@
+00:00:00 --- log: started opencyc/02.04.13
+00:58:29 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+01:48:52 <dmiles> here
+01:48:52 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+01:48:59 <dmiles> man i have weird hours ;P
+01:49:32 <dmiles> ok .. to fix the moo stuff
+05:15:17 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+05:15:31 <dmiles> hi Don
+05:15:37 <Don> good morning
+05:15:48 <dmiles> yes, how are you, what are you uyp to?
+05:16:15 <Don> just checking in to see what's the buzz this morning about opencyc
+05:17:08 <dmiles> what do you plan on using opencyc fow?
+05:17:31 <dmiles> i am wondering what kind of applicationsd might be written arround it
+05:18:04 <dmiles> s/fow/for
+05:18:14 <Don> I have just a general interest in this level of AI.  I have written a couple of backward and forward chaining expertr systems in the past and am curious about more robust apporaches.
+05:18:36 <dmiles> i like the area of "good old fashoined AI" 
+05:18:49 <Don> a la "strong AI"?
+05:18:52 <dmiles> (actually i have never go past that ;P)
+05:20:18 <dmiles> i was saying i like that becasue that is what usually people interested in these things (Expert Systems) like my self are told we are interested in 
+05:20:31 <Don> Based on your previous posts here, you seem to have some degree of expetise in using opencyc
+05:20:56 <dmiles> well i have a definate use and some experence with what it's supposed to do
+05:21:15 <dmiles> nowe i am learning how to make it do certain things thru API interfacersd
+05:21:38 <dmiles> hopefully creating an interface that is personal to my needs
+05:21:47 <dmiles> and maybe others will find it usefull
+05:22:13 <Don> I, for one, am just getting started.  I have been hooked on the idea since seeing "2001" way back when (I saw it first run in the movie theatre).
+05:22:16 <dmiles> for example.. wrapping both ask and assert into one window
+05:22:44 <dmiles> so right now i am learning how to use the API by writting JSP pages to port the existing web interface
+05:23:22 <dmiles> then after i get that down.. will convert the Mud/MOO to ussing OpenCyc 
+05:23:54 <Don> I've been popping in and out of here kinda waiting on stevereed.  I have a question about the limitation of the browser interface to localhost.
+05:24:14 <dmiles> oh, did we talk how to get it off localhost before?
+05:24:27 <dmiles> i was able to do it over the Java WebServer proxy
+05:24:44 <Don> can you tell me more?
+05:24:44 <dmiles> it basicly rewrites your requests to like like localhost
+05:24:51 <dmiles> err to look like
+05:25:10 <dmiles> that is how steve does it at home i believe
+05:25:17 <dmiles> and i am doing it on my machine
+05:25:51 <dmiles> i have ten compiler erros to bust thru right now.. but when i am done i can show you the example
+05:26:11 <dmiles> do you know java at all?
+05:26:19 <Don> I can block any external opencyc requests at my external router; I'd like local LAN browser requests to be accepted.
+05:26:45 <dmiles> well you can do that from java pretty easy
+05:27:05 <dmiles> when the request hits the proxy you can decide to respond or not
+05:27:05 <Don> I am not Java literate but I am proficient in many other languages (C, Perl, PHP, etc)
+05:27:27 <dmiles> this would just having to know how to change a couple lines that make sense
+05:27:41 <dmiles> like port numbers.. etc
+05:27:42 <Don> I would appreciate any help in making opencyc more useful
+05:28:22 <dmiles> do you have JDK installed on tyour machine and have set CLASSPATH before?
+05:29:18 <dmiles> (the machine you want to use opencyc from)
+05:29:29 <Don> I have done this on other machines (WinNT) before, I am not sure about the exact status of this Linux box
+05:30:33 <dmiles> well its about 3 lines you type into another shell spawn.. one set CLASSPATH to find your installation. two compile the org.opencyc.webserver.WebServer class
+05:30:47 <dmiles> three run it.. (it will want port 80)
+05:31:23 <dmiles> so you could change that in org/opencyc/webserver/WebServer.java
+05:31:28 <Don> Just a further word of explanation, I am at home and have 3 Linux boxes and 3 Win boxes (98, ME, 2000).  I'd like to have access to opencyc from the Win machines.  Port 80 is available on the Linux box hosting opencyc.
+05:32:16 <dmiles> yes you could then access it from the windows macines once the java version proxies and makes your requests look like localhost
+05:32:47 <dmiles> (otherwsie run netscape under Exceed ;P)
+05:33:04 <Don> I have another one of the linux boxes hosting squid; is there anyway benefit to using that?
+05:33:23 <dmiles> maybe. i tryied doing it with apache rewrite as well..
+05:33:49 <dmiles> it *may* work if squid wont use the public adapter to talk to 127.0.0.1
+05:34:22 <Don> tell me how to inspect my classpath
+05:34:33 <dmiles> echo $CLASSPATH 
+05:34:51 <Don> it's blank/null
+05:35:08 <dmiles> what is the pwd of your root opencyc ?
+05:35:36 <dmiles> also what about $JAVA_HOME ?
+05:35:59 <dmiles> export J2EE=/opt/j2ee
+05:35:59 <dmiles> export JAVA_HOME=/opt/jdk
+05:36:05 <dmiles> (example dirs)
+05:36:20 <Don> trying to key in slashes in irc...
+05:36:30 <dmiles> :)
+05:36:38 <Don> \/home
+05:36:41 <Don> hmm
+05:36:46 <dmiles> oke then...
+05:36:51 <Don> wait
+05:37:13 <Don> \home\don\opencyc-0.6.0\scripts\linux
+05:37:19 <Don> forward slashes
+05:37:28 <dmiles> export CLASSPATH=$J2EE/lib/j2ee.jar:/home/opencyc/src/
+05:37:33 <dmiles> ohh..
+05:37:47 <dmiles> export CLASSPATH=$J2EE/lib/j2ee.jar:/home/don/opencyc-0.6.0/src/
+05:37:51 <dmiles> oops
+05:38:07 <dmiles> export CLASSPATH=$J2EE/lib/j2ee.jar:$JAVA_HOME/lib/tools.jar:/home/don/opencyc-0.6.0/src/
+05:38:09 <Don> JAVA_HOME is also null/blank
+05:38:27 <dmiles> well thats something you may need to download from http://java.sun.com
+05:38:27 <Don> I'll do your last one, wait...
+05:39:02 <Don> BTW $J2EE is also null
+05:39:03 <dmiles> it may work under your current java config (default one)
+05:39:06 <dmiles> yeah
+05:39:22 <Don> I think I need to download somthing, right?
+05:39:28 <dmiles> in that case export CLASSPATH="/home/don/opencyc-0.6.0/src/"
+05:39:36 <dmiles> well type.. 
+05:39:39 <dmiles> which javac
+05:39:41 <dmiles> which java
+05:39:54 <dmiles> oh you have the JAR file..
+05:39:56 <dmiles> cool
+05:40:09 <dmiles> one sec i'll construct the cmdline
+05:40:15 <Don> thanks
+05:41:08 <dmiles>  java -cp ../opencyc/lib/OpenCyc.jar org.opencyc.webserver.WebServer
+05:41:26 <dmiles> well to your lib/OpenCyc.jar
+05:41:32 --- join: IRCMonkey1 (~chatzilla@los.nsi.psu.ru) joined #opencyc
+05:41:39 <dmiles>  java -cp /home/don/opencyc-0.6.0/lib/OpenCyc.jar org.opencyc.webserver.WebServer
+05:42:03 <dmiles> maybe the Kaffee install on your machine will work
+05:42:12 <Don> bash: java: command not found
+05:42:46 <dmiles> ah you'd at least need to dolwload and install the JDK 
+05:43:01 <dmiles> Redhat ?
+05:43:08 <Don> Mandrake
+05:43:17 <Don> which JDK?
+05:43:19 <dmiles> not full install?
+05:43:36 <dmiles> you shoud at least have support for Kaffee JAva
+05:43:58 <Don> dunno it's been awhile   Mandrake 7.2 I believe
+05:44:33 <dmiles> you will need to get JDK (1.3 or 1.4) from http://java.sun.com
+05:44:51 <Don> OK  I'll look at that right away
+05:44:57 <dmiles> i use 1.4 
+05:45:20 <Don> then I'll go after 1.4
+05:47:47 <Don> I don't see J2EE JDK 1.4, the latest seems to be 1.3.1, true?
+05:48:41 <Don> oops now I see it
+05:48:54 <Don> It's J2SE
+05:49:16 <Don> Which do I use?
+05:50:52 --- quit: IRCMonkey1 ("ChatZilla 0.8.4 [Mozilla rv:0.9.3+/20010902]")
+05:51:43 <dmiles> JDK 1.4/J2SE1.3
+05:51:54 <dmiles> they are ywo differnt products
+05:52:02 <dmiles> you wont need J2SE
+05:52:16 <dmiles> errm.. actually 
+05:52:25 <dmiles> J2EE = 1.3
+05:52:32 <dmiles> JDK  = 1.4
+05:52:50 <dmiles> J2EE is J2SE i think
+05:52:59 <dmiles> the EE = Enterpise edition
+05:53:11 <dmiles> so on my machine i have...
+05:53:16 <dmiles> JDK1.4
+05:53:34 <Don> I am looking at http://java.sun.com/j2se/1.4/download.html  do I want the JRE or SDK
+05:53:49 <dmiles> j2re1.4.0  j2sdk1.4.0  
+05:53:56 <Don> both?
+05:54:05 <dmiles> you only need j2sdk1.4.0  
+05:54:16 <dmiles> j2re1.4.0  <- is for other things 
+05:54:22 <dmiles> the Runtine Edition
+05:54:22 <Don> ok  getting the Linux Red Hat RPM now...
+05:55:07 <dmiles> yes installing that will at least get you the abilty to "java -cp /home/don/opencyc-0.6.0/lib/OpenCyc.jar org.opencyc.webserver.WebServer"
+05:56:53 <Don> yes thanks  as you can tell Java is a new opportunity for me
+05:57:18 <Don> I have the 39MB j2sdk downloading now
+05:57:19 <dmiles> i did not inow java at all last year.. and inherited this extremely large app...
+05:57:49 <dmiles> was like 200 .java files and tons of feature requests ;P
+05:58:01 <Don> that's "motivation to learn"
+05:58:48 <dmiles> yeah and they wanted my to *also* write an expert system for it to connect to
+06:00:05 <Don> oh, the old "while you're in there"...
+06:00:15 <dmiles> it i think was originally designed to connect to opencyc ;P
+06:00:34 <dmiles> too bad i cant use it now
+06:00:41 <Don> really?  did the opencyc delay affect the project timeline?
+06:01:18 <dmiles> well kidding about opencyc.. but its the same concept
+06:01:32 <Don> ah OK
+06:01:34 <dmiles> and the API i can see now with opencyc is almost the same
+06:01:53 <Don> sounds like a good fit
+06:02:19 <Don> my JDK download is 70% done - DSL makes this stuff do-able
+06:02:39 <dmiles> the day opencyc was release i was stuill moving here and on dialup
+06:02:47 <dmiles> took 7 hours
+06:02:55 <dmiles> hehe.. i have 1.5mbit now
+06:02:59 <Don> I can't imagine using a dial-up anymore
+06:03:32 <Don> I am 768k down and 4something-something-K up
+06:03:45 <Don> 90%
+06:03:53 <dmiles> i am not sure my up wuith a cable modem yet
+06:04:30 <Don> I think is the same, I'm on ADSL and the A is Asymmetric meaning the up/down speeds are not the same
+06:05:57 <dmiles> ah my puiblic version is starting to work again http://12.225.207.235/logicmoo/index.jsp
+06:06:43 <dmiles> oh i reshaped the classes so the wrappers arround cyc ar all errro 500
+06:08:15 <dmiles> i am moving all the html out of the java classes 
+06:08:38 <Don> I just went there, just a javascript error on the way in, but it looks good
+06:08:56 <Don> menu.9 is null or not an object
+06:09:19 <dmiles> hrrm oops.. i still am cleaning up the menus
+06:09:26 <Don> no problem
+06:09:54 <dmiles> http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-start
+06:10:07 <dmiles> thats juyst the java wrapper
+06:10:34 <Don> ok please help "old neophyte" here...
+06:11:02 <dmiles> rpm -i <packagename>  
+06:11:33 <Don> OK  trying
+06:12:23 <Don> that's what I thought "error: j2sdk.....-rpm.bin does not appear to be an RPM package"
+06:15:31 <Don> the link on Sun's site says it a "shell script"
+06:15:37 <Don> I'll execute it
+06:16:53 <Don> ah progress...
+06:17:32 <dmiles> oh yerah gotta read it ;P
+06:17:50 <Don> now I have an RPM
+06:17:59 <Don> doing the RPM -i
+06:20:08 <Don> ok  it's done
+06:20:13 <Don> how do I check it?
+06:20:55 <Don> $CLASSPATH is still null
+06:22:46 <dmiles> need need for classpath if you use that one liner
+06:22:50 <dmiles> err no need
+06:23:20 <dmiles> you may still need to log in again though
+06:23:26 <dmiles> if it updated APTH
+06:23:30 <dmiles> er PATH
+06:24:13 <Don> no "java stuff" in $PATH
+06:24:39 <Don> java: command not found
+06:26:31 <dmiles> hrrm ok.. now you have to find it ;P
+06:26:59 <dmiles> i rememvber doing that.. and putting it in my /opt dirt
+06:27:03 <Don> exited everything and restarting X
+06:29:50 <Don> the stuff is sitting in /usr/java/j2sdk1.4.0
+06:30:00 <Don> add that to the path?
+06:30:33 <Don> (the bin directory under that?)
+06:31:06 <dmiles> /usr/java/j2sdk1.4.0/bin/java -cp /home/don/opencyc-0.6.0/lib/OpenCyc.jar org.opencyc.webserver.WebServer
+06:31:21 <Don> ok trying
+06:33:42 <Don> Listening on port 80
+06:34:09 <dmiles> excelnt
+06:34:36 <dmiles> it might mnow be able to find the root of the doc and image path
+06:34:42 <Don> it's reporting file not found on my GETs
+06:34:43 <dmiles> errmight now
+06:34:53 <Don> root (/) not found
+06:35:01 <dmiles> yeah// its compiled ot like in a hard location on disk
+06:35:10 <Don> ok
+06:35:13 <dmiles> oh you have to start from...
+06:35:31 <dmiles> cgi-bin/cyccgi/cg?cb-start
+06:35:58 <Don> duh ok
+06:38:24 <Don> it might be helpful if Cyc was running before I issue the request?
+06:38:33 <dmiles> oh yeah ;P
+06:39:10 <dmiles> but your first page hit will still be to /cgi-bin/cyccgi/cg?cb-start
+06:40:00 <Don> Since opencyc came up second, I'm going to restart the web server process
+06:41:46 <Don> it's seeing the GET, but nothing is coming back to the browser
+06:44:47 <Don> requests to localhost:3602 still work, but localhost:80 also don't return
+06:46:23 <dmiles> hrrm 
+06:46:36 <dmiles> 3602
+06:46:46 <dmiles> what ssuppsoed to be there i wonder
+06:47:04 <dmiles> oh the webserver
+06:47:20 <dmiles> cyc running at 3602 and 3600 ?
+06:47:42 <dmiles> 3600 FASL port and 3602 must be httpd
+06:53:26 <dmiles> how goes it?
+06:54:19 --- join: Don1 (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+06:54:56 <Don1> got knocked off irc and lost my transcript :(
+06:54:57 <dmiles> [06:48] <Don> requests to localhost:3602 still work, but localhost:80 also don't return
+06:54:57 <dmiles> [06:49] <dmiles> hrrm 
+06:54:57 <dmiles> [06:49] <dmiles> 3602
+06:54:57 <dmiles> [06:50] <dmiles> what ssuppsoed to be there i wonder
+06:54:57 <dmiles> [06:50] <dmiles> oh the webserver
+06:54:58 <dmiles> [06:50] <dmiles> cyc running at 3602 and 3600 ?
+06:55:00 <dmiles> [06:51] <dmiles> 3600 FASL port and 3602 must be httpd
+06:55:02 <dmiles> [06:56] <dmiles> how goes it?
+06:55:27 <Don1> Ignore Don, I'm now Don1
+06:55:42 <dmiles> ok
+06:56:09 <Don1> I just saw your messages starting with "hrrm"
+06:56:34 <Don1> the cyc seems to be at 3602 on localhost
+06:58:29 <Don1> ah Java connection timeout errors
+06:58:46 <dmiles> how about 3600 ?
+06:58:52 <dmiles> there should be both
+06:59:11 <dmiles> the hjava server connects to 3600
+06:59:25 <dmiles> its a little more then a proxcy
+06:59:38 <dmiles> it connects to an API port 3600
+06:59:51 <Don1> localhost:3600/cgi...etc doesn't respond
+07:00:02 <dmiles> can you telnet there to confirm somnething listens?
+07:00:32 <dmiles> you then have to }d
+07:00:40 <dmiles> err control D
+07:00:44 <dmiles> enter
+07:01:01 <dmiles> or ^]
+07:01:18 <dmiles> then exit
+07:01:32 <dmiles> just to make sure something runs on that port
+07:02:42 <dmiles> <crtl-]><enter>exit<enter>
+07:02:45 <Don1> a portscan of the machine from mine shows:
+07:02:46 <Don1> 10.145.89.39   :3600  unknown service.
+07:02:46 <Don1> 10.145.89.39   :3601  unknown service.
+07:02:46 <Don1> 10.145.89.39   :3602  unknown service.
+07:02:51 <dmiles> ok good
+07:03:18 <Don1> can't seem to connect to 3600 from telnet
+07:03:22 <dmiles> so rthe java webserver should be working if you hit the cgi first
+07:03:37 <dmiles> otherwise it shoud 404
+07:03:51 <dmiles> since you dont have a default documetn on the java websderver
+07:04:05 <dmiles> (the one on 80)
+07:04:33 --- quit: Don (Read error: 110 (Connection timed out))
+07:04:45 <dmiles> so is something running on 80 now ?
+07:05:19 <dmiles> you hava to leave the java command running (you know that but confirming)
+07:05:26 <Don1> localhost:3602 works, localhost:80 doesn't, 10.145.89.39:80 or 3602 doesn't from my other machine
+07:06:07 <Don1> yeah I have 2 console windows open in KDE, one for webserver and one for opencyc
+07:06:08 <dmiles> what message doe sthe webserver give at the command line?
+07:07:06 <Don1> GET /cgi-bin/cyccgi/cg?cb-start HTTP/1.0 from localhost.localdomain  or....
+07:07:35 <dmiles> ok good.. 
+07:07:39 <Don1> HTTP/1.1 from 10.145.89.34 (my Win2K machine)
+07:07:44 <dmiles> i'd kill both process and restart them
+07:07:51 <dmiles> when the webserver starts...
+07:07:54 <Don1> ok  seems reasonable
+07:08:05 <Don1> start opencyc first?
+07:08:18 <dmiles> yes
+07:08:20 <dmiles> OpenCyc Web Server
+07:08:20 <dmiles> Listening on port 80
+07:08:20 <dmiles> Cyc connections directed to port 3600
+07:08:39 <dmiles> (java output)
+07:10:34 <Don1> opencyc came up saying "enabling base TCP services to 3600"
+07:10:40 <dmiles> good
+07:11:00 <Don1> webserver says "cyc connections directed to port 3600"
+07:11:04 <Don1> but no joy
+07:11:47 <Don1> my web browser doesn't get anthing back
+07:12:12 <Don1> there are not messages in the webserver console window after acknowleding the GET
+07:12:20 <Don1> not=no
+07:13:18 <Don1> I was wondering about your "(java output)" part
+07:13:24 <dmiles> what was tyhe bootup of the java webserver?
+07:13:53 <Don1> the messages?
+07:13:56 <dmiles> yes
+07:14:03 <Don1> OpenCyc Web Server
+07:14:09 <Don1> Listebing on port 80
+07:14:22 <dmiles> Cyc connections directed to port 3600 ?
+07:14:25 <Don1> cyc connections directed to port 3600
+07:14:31 <Don1> serving from /
+07:14:34 <dmiles> ok then ..
+07:14:37 <Don1> then GET
+07:14:41 <Don1> then nothing
+07:14:46 <dmiles> telnet 10.145.89.39 80
+07:14:57 <dmiles> GET */*
+07:15:00 <dmiles> <enter>
+07:15:01 <dmiles> <enter>
+07:15:17 <dmiles> anything ?
+07:15:37 <dmiles> err GET*/*
+07:15:40 <Don1> 404 file not found
+07:15:44 <dmiles> ok good
+07:15:54 <Don1> then it closed the telnet connection
+07:16:01 <dmiles> GET/cgi-bin/cyccgi/cg?cb-start
+07:16:30 <dmiles> i dont know if the spcae is needed or not (i usualy use a webbroswer ;P)
+07:16:47 <dmiles> you should at least get HEADERs
+07:16:56 <dmiles> <enter>
+07:16:56 <dmiles> <enter>
+07:16:57 <Don1> i out the space in, 
+07:17:01 <Don1> nothing back yet
+07:17:11 <Don1> webserver console saw GET
+07:17:21 <Don1> no HTTP version (duh)
+07:17:25 <dmiles> ok then java is getting plugged by Cyc
+07:17:30 <Don1> no reply
+07:17:35 <dmiles> well the version is still optional
+07:17:40 <Don1> sure
+07:17:45 <deltab> GET / HTTP/1.0
+07:18:27 <dmiles> ah someone who does it ;P
+07:18:28 <Don1> nothing to the GET / deltab
+07:18:36 <dmiles> <enter><enter>
+07:19:00 <Don1> lol  I've whacked enter 2,3 and 4 times
+07:19:11 <dmiles> ah ^]
+07:20:08 <dmiles> deltab: is http://12.225.207.235/logicmoo/createcollection.jsp working for you?
+07:20:47 <dmiles> at least the page.. and [update]
+07:20:50 <deltab> looks like it
+07:21:00 <deltab> I see a form
+07:21:00 <dmiles> [create] is still being worked on
+07:21:14 <dmiles> you getthe </html> at the bottem ?
+07:21:34 <deltab> yes
+07:21:39 <dmiles> exelent !
+07:23:06 <dmiles> i am movbing the java classes arround to noty put html in my bussiness code.. so i have to fix each page a t a time
+07:25:24 <dmiles> i am making an htmnl controls thing so cyc queries results get formated into html.. and HTML controls can be the result of queries
+07:26:10 <dmiles> String genls = HTMLUtils.writeHttpValueOptions(pageContext,"genls","(#$isa ?SEL #$Collection )","Thing",true);
+07:28:04 <Don1> Well, I'm at a deadend.  I can't see why the webserver doesn't hand me back anything
+07:28:42 <dmiles> something is plugged up between java and the 3600
+07:28:58 <dmiles> i hand compiled mine...
+07:29:12 <dmiles> so maybe thats why mine worked
+07:29:35 <dmiles> i haddent tried the Jar
+07:30:30 <dmiles> the hand compile .. is where you set your classpath and build it with javac
+07:31:00 <dmiles> but the problem.. is the webserver my depend on other classes that depend on other classes that depenbd on 3rd party .jars
+07:31:54 <Don1> right
+07:32:10 <dmiles> ahah
+07:32:11 <dmiles>     protected String cycHost = "localhost";
+07:32:20 <dmiles> well i see what you can do...
+07:32:26 <dmiles> . /etc/hosts
+07:32:40 <dmiles> add mcarthy 127.0.0.1
+07:32:46 <Don1> ok
+07:32:51 <dmiles> protected String cycHost = "mccarthy";
+07:32:55 <dmiles> is in there
+07:33:08 <dmiles> mccarthy 127.0.0.1
+07:33:56 <dmiles> so it may be stuck at the DNS resolver
+07:34:00 <Don1> actually the other way around, right?  127.0.0.1 mccarthy
+07:34:06 <dmiles> yes
+07:34:26 <Don1> does it need the domain column?
+07:34:49 <dmiles> nope
+07:34:53 <Don1> k
+07:35:25 <Don1> do I need to stop/start anything, like inetd
+07:35:36 <dmiles> nope just the java webserver
+07:35:39 <Don1> k
+07:36:03 <Don1> YES!!
+07:36:10 <dmiles> hehe
+07:36:24 <Don1> allright  5 stars there, dmiles
+07:37:25 <dmiles> ;P.. cool.. so you had wrote ort worked on an inference engine?
+07:37:59 <dmiles> am interested in hearing aout it.. i had myself
+07:38:11 <dmiles> but opencyc made it not as nessisary
+07:38:17 <Don1> yes  a did a backward-chaining one several years ago in C, I recently crafted a forward chaining one in PHP
+07:38:46 <dmiles> wow
+07:39:20 <dmiles> did you end up with a prolog like lanfguage for the one in C ?
+07:39:25 <Don1> one small issue still: the web browser isn't finding the question mark gif at http://10.145.89.39/cycdoc/img/cb/help_btn_s.gif
+07:39:50 <dmiles> yeah .. that would take a recomplie of the .class file in the .jar
+07:40:03 <dmiles> maybe a symlnk ;P
+07:40:17 <dmiles> i wonder where its trying to get it of the disk
+07:40:32 <deltab> check in the error log
+07:40:48 <Don1> well one crisis at a time, it's probably not the wisest thing to try to learn java by studying opencyc
+07:41:14 <Don1> like trying to learn to fly by climbing in the space shuttle :)
+07:41:52 <Don1> where's the error log, deltab?
+07:42:10 <dmiles> ok its set     protected static String DEFAULT_DIR = "/";
+07:42:21 <deltab> maybe /usr/local/apache/logs/error.log
+07:42:44 <dmiles> ln -s / /cycdoc
+07:43:25 <dmiles> oops ;P
+07:43:33 <Don1> is apache running? I though this was a java webserver (showing my ignorance).
+07:43:58 <Don1> ps -A doesn't show httpd
+07:43:59 <deltab> I dunno
+07:44:04 <deltab> oh
+07:44:20 <dmiles> ln -s /cycdoc /home/don/opencyc-0.6.0/doc
+07:44:24 <dmiles> oops
+07:44:27 <dmiles> the other way
+07:44:30 <deltab> well, maybe there's a log file somewhere
+07:44:39 <Don1> great point on the log file
+07:44:42 <dmiles> ln -s /home/don/opencyc-0.6.0/doc /cycdoc
+07:45:01 <dmiles> nope dont listen to me 
+07:45:11 <dmiles> i have given it wrong 4 time!
+07:45:12 <deltab> does the server use chroot?
+07:45:31 <Don1> excuse my ignorance, chroot?
+07:45:40 <deltab> dmiles: yeah, that's why they added cp -s
+07:46:01 <dmiles> run/httpd/htdocs
+07:46:05 <dmiles> there is is
+07:46:30 <deltab> chroot is a unix system that changes the root directory for a process
+07:46:34 <dmiles> ln -s /home/don/opencyc-0.6.0/run/httpd/htdocs/cycdoc /cycdocs
+07:46:39 <deltab> ^system call
+07:46:40 <dmiles> oh cool
+07:46:49 <Don1> didn't know that
+07:46:50 <dmiles> i never knew how to chroot 
+07:46:58 <Don1> lol
+07:47:01 <dmiles> i thought it was just broken ;P
+07:47:09 <Don1> at least we're all learning
+07:47:11 <dmiles> like GUID perms
+07:47:19 <dmiles> err GID
+07:47:48 <dmiles> somewehere between RH4.3 and 7.1 they fixed the Group perms
+07:48:06 <deltab> dmiles: so are you doing that ln inside a chroot?
+07:48:20 <Don1> dmiles: on the last ln, one ends in cycdoc and the other in cycdoc*s*, is this right?
+07:48:34 <dmiles> nope i just do funky stuff on my developemnt macvhines
+07:49:01 * dmiles hides his "/" from everyone in embarassment
+07:49:36 <deltab> the vfs root is very rarely the webserver's document root
+07:50:13 <dmiles> deltab, what is the cmdline for change root so he can run java to make "/" "/home/don/opencyc-0.6.0/run/httpd/htdocs/" ?
+07:51:09 <deltab> dmiles: I don't think you mean to do that
+07:51:44 <dmiles> oh then it confuses everthing ?
+07:51:52 <dmiles> root@titan src]# chroot /root/ /bin/sh
+07:51:52 <dmiles> chroot: cannot execute /bin/sh: No such file or directory
+07:51:55 <dmiles> hehe
+07:52:24 <deltab> right, because there's no bin/sh inside /root
+07:52:38 <Don1> i think the ln idea makes sense (but what do I know, as I've demonstrated)
+07:53:01 <dmiles> the 'ln' would temporily work..
+07:53:08 <deltab> is that ln supposed to affect URLs?
+07:53:22 <dmiles> yes.. his webserver root is /
+07:53:35 <Don1> i think it would affect where the process looks
+07:54:03 <dmiles> [root@titan src]# ls ../opencyc/run/httpd/htdocs/
+07:54:03 <dmiles> cycdoc
+07:54:03 <dmiles> [root@titan src]#
+07:54:09 <dmiles> ah good only one dir
+07:55:58 <dmiles> ln -s <yourcycroot>run/httpd/htdocs/cycdoc /cycdocs  
+07:56:08 <dmiles> err
+07:56:10 <dmiles> ln -s <yourcycroot>run/httpd/htdocs/cycdoc /cycdoc
+07:56:34 <dmiles> then the webserfver will just pull out of /cycdoc/your stuff
+07:57:18 <Don1> I shut down the web server and in that console window did ls /cycdoc, it shows what's in /home/don/run/httpd/htdocs/cycdoc
+07:57:37 <deltab> can't you just tell the server to look in /home/don/run/httpd/htdocs ?
+07:57:38 <Don1> after running ln
+07:57:43 <dmiles> need opencyc-yourversion
+07:57:58 <Don1> um yeah that's what i meant
+07:58:16 <dmiles> ln -s /home/don/opencyc-0.6.0/run/httpd/htdocs/cycdoc /cycdoc
+07:58:37 <dmiles> yeah.. if this doesnt work your obnly missing the .gif files
+07:58:38 <deltab> why do you keep saying that?
+07:58:57 <dmiles> each time its with one less typio
+07:59:07 <deltab> but why use that command?
+07:59:09 <dmiles> typographical error
+07:59:35 <dmiles> the class has the webserver path hard compiled in
+07:59:45 <deltab> and you can't change it?
+07:59:54 <dmiles> the source code would have to changed and then recompiled
+08:00:03 <Don1> would need to recompile ::shudder::
+08:00:03 <deltab> is it fixed at / ?
+08:00:13 <dmiles> yes
+08:00:16 <deltab> why?
+08:00:28 <dmiles> ask Steve Reed 
+08:00:29 <Don1> it's the dependencies issue I'd like to not get into
+08:00:34 <dmiles> i didn't mind
+08:00:46 <dmiles> i built it on my machine fromn tghe java
+08:01:05 <deltab> seems very risky
+08:01:08 <dmiles> and its hard cop[iled to go to a machine called mccarthy that must be localhost
+08:01:24 <deltab> yuck
+08:01:50 <dmiles> well most people use opencyc from the normal webserver
+08:02:05 <Don1> it was an understandable security protection, but some of us want to run this with Linux as a server and Windows as a client
+08:02:08 <dmiles> the class he's running is still not even ready for productuion use
+08:02:36 <deltab> security protection?
+08:02:42 <dmiles> but it gets him past the security problem
+08:02:46 <Don1> I could burn the 3600-series ports at my router so no one can hack my opencyc
+08:02:56 <deltab> doesn't it make your entire filesystem readable by anyone?
+08:03:07 <dmiles> yep
+08:03:09 <dmiles> as root even
+08:03:32 <dmiles> since it runs on 80.. the user has to be root
+08:04:00 <dmiles> that doesnt bother me personally
+08:04:19 <Don1> (we bow to the Java wizard :)
+08:05:13 <Don1> that link still doesn't seem to help
+08:05:23 <dmiles> your gifs still not chowing>?
+08:05:28 <dmiles> showing?
+08:05:31 <Don1> no gif joy
+08:05:47 <dmiles> ls /cycdoc
+08:05:52 <Don1> unless you like red Xs in boxes
+08:06:45 <dmiles> you may need to rm it and ln again with something correct for youer system
+08:07:04 <Don1> duh
+08:07:04 <dmiles> ls /cycdoc should see gifs
+08:07:15 <Don1> let me see what I did
+08:08:46 <dmiles> man, my httpd logs are fun 100s of fellow @Home users  /scripts/..%%35%63../winnt/system32/cmd.exe?/c+dir
+08:09:11 <dmiles> i get about 100 hits an our by compirmissed machineas
+08:09:17 <dmiles> err per hour
+08:10:29 <Don1> aw shucks, ln /cycdocs is pointing too high in the directory tree, just rm it?
+08:10:49 <dmiles> yes rm -i /cycdoc
+08:11:47 <dmiles> you should comnfirm if it is plural or singular
+08:12:34 <dmiles> GET /cycdoc/img/cb/help_btn_s.gif HTTP/1.1 from lotus.tekno
+08:13:02 <Don1> ah, sweet success
+08:14:41 <dmiles> excelent
+08:15:20 <Don1> again, many thanks, you made the difference in me getting "up on" opencyc in a useable way
+08:18:58 <Don1> just sitting here documenting this, and have a review question...
+08:20:15 <Don1> "way back" when I did the java -cp from my lib/OpenCyc.jar org.opencyc.webserver.WebServer, what does that do?
+08:21:43 <dmiles> runs the org.opencyc.webserver.WebServer class with a CLASSPATH= default java paths + lib/OpenCyc.jar
+08:22:24 <Don1> ah, cp changes the CLASSPATH?
+08:22:27 <dmiles> OpenCyc.jar is a ZIP file that contains a dirrecory structrctur the same as src/
+08:23:06 <dmiles> exactly
+08:23:24 <dmiles> you couald do the exact same with..
+08:23:35 <dmiles> export CLASSPATH=lib/OpenCyc.jar
+08:23:43 <dmiles> java org.opencyc.webserver.WebServer
+08:24:00 <Don1> great, thanks again
+08:26:47 <dmiles> http://12.225.207.235/logicmoo/createpredicate.jsp <- complete
+08:27:13 <dmiles> well i have to make it when you chose the Arity of the predicate to offer arg constrants
+08:27:36 <dmiles> or if you genlPred it to something.. it restricts you argIsa constraints
+08:32:07 <deltab> ah, you can change the directory served using properties
+08:32:21 <deltab> I still think / is a bad default though
+08:34:01 <dmiles> ah.. cool though.. i havent used properties in java before.. is that param you pass to the java command?
+08:34:13 <deltab> org.opencyc.webserver.dirs
+08:36:22 <dmiles> ah i might be better of with my version to set the properies as well.. i just hard compkied in my path
+08:46:18 <dmiles> deltab: it it possible to pass a null init an int ?
+08:46:27 <dmiles> err s/init/into
+08:47:13 <dmiles> i have an method that takes an int.. but if it is unspecified .. i want to send a null
+08:47:29 <dmiles> (java)
+08:47:54 <dmiles> i guess i could use -1 to specify null
+08:48:02 <deltab> dunno
+08:49:03 <dmiles> i can stick to a -1 i think
+08:49:36 <dmiles> since i should not assume null is lagal for int
+08:49:47 <dmiles> legal
+09:02:58 <Don1> dmiles, I thought in java that a function could have different calling conventions or default parameters.
+09:03:33 <Don1> sorry function=method
+09:08:25 <dmiles> yes.. i am trying to decide what the best method argumetns will be
+09:08:41 <dmiles> for arity i was going to send an int
+09:09:01 <dmiles> but a person may specify VariableArity or not specify anything
+09:10:41 <dmiles> so i could do VariableArity = 0 not specify anything = -1
+09:11:44 <dmiles> if nothing is specified it checks to see if a genlPreds in known about
+09:12:11 <dmiles> that it can inherit the arity settings
+09:12:43 <dmiles>     public void createPredicate(
+09:12:43 <dmiles> 			       String microtheoryname,String username, 
+09:12:43 <dmiles> 			       String predicatename, String genlpredsname, String arityname,
+09:12:43 <dmiles> 			       String commentname, String categoryname,
+09:12:44 <dmiles> 			       String[] arg, String[] isagenl ) throws CycApiException {
+09:35:50 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+11:05:39 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+11:23:29 --- quit: Don1 (Read error: 110 (Connection timed out))
+11:57:21 <dmiles> a little better now http://12.225.207.235/logicmoo/
+12:14:03 <kirk> Miles, have you figured out how to save stuff so you have it the next time you start cyc?  It seems to keep losing my Kirk CycList entry.
+12:32:23 --- join: reenignE (~bob@pb194.luban.sdi.tpnet.pl) joined #opencyc
+13:34:23 --- quit: Don ()
+13:52:40 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+13:58:28 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+14:49:38 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:06:17 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+15:13:12 <dmiles> kirk: in the subL weidnow...
+15:13:22 <dmiles> (write-image "/mysave")
+15:14:10 <dmiles> re  <kirk> Miles, have you figured out how to save stuff so you have it the next time you start cyc?  It seems to keep losing my Kirk CycList entry.
+15:14:51 <dmiles> i suppose you could have it overwrite the load file if you knew for sujre it was backed up
+15:30:31 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:31:14 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:39:46 --- quit: Seth ()
+17:10:58 --- quit: dmiles (Read error: 110 (Connection timed out))
+18:55:13 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:57:43 <kirk> Hi dmiles, up for a question or two?  Also, how's logicmoo going?
+19:07:22 <dmiles> good
+19:07:44 <dmiles> yes ask
+19:09:46 <kirk> I'm wondering how to save work I've done so it'll come back on my next start of opencyc?  I've created my name constant a number of times but each time I logout/exit the next time it doesn't remember and wants me to create it all over again.  I'm missing something simple but I don't seem to be able to nail it down.
+19:10:23 <dmiles> (write-image "/mysave")
+19:10:47 <dmiles> then when you exit .. copy it over your workld file
+19:11:10 <kirk> .so you have to do that at the cyc(?) prompt rather than from the web interface?
+19:11:38 <dmiles> from the cyc propt works
+19:11:51 <dmiles> but from the web you can do it in the SubL window
+19:13:13 <kirk> I guess I hadn't looked in there yet.
+19:13:45 <dmiles> you';l want to back up you opencyc/run/world/latest.load
+19:13:52 <dmiles> then try replaacing it
+19:14:01 <dmiles> with your saved image
+19:14:10 <dmiles> and try to reload cyc.. it may work
+19:14:32 <kirk> Do you have to save after each session?
+19:14:37 <dmiles> CYC(1):  (write-image "/mysave")
+19:14:37 <dmiles> Doing a GC.
+19:14:37 <dmiles> Snapping symbol indirections.
+19:14:37 <dmiles> Writing the header.
+19:14:37 <dmiles> Writing statics.
+19:14:37 <dmiles> Writing chunks.
+19:14:39 <dmiles> Done.
+19:14:41 <dmiles> T
+19:14:43 <dmiles> CYC(2):
+19:14:47 <dmiles> yes
+19:15:25 <dmiles> cyc is built in such a way if you want to persit your images you do it programically.. its persumptous for it to presume the changes are saved
+19:15:57 <dmiles> meaning it doesnt do something it wasnt told to ;P
+19:17:19 <kirk> Okay, I'll try that thank you.  They sure aren't clear about some things and crystal on others.
+19:17:27 <dmiles> right now i specifically am glad its not saving.. but in a bit i am going to have to write  acript so i can make it
+19:18:11 <kirk> Well, it makes power outages potentially very dangerous.
+19:18:37 <kirk> .disappointing anyway.
+20:26:33 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+20:26:48 * stevereed_home is away: I'm busy
+20:28:02 --- quit: reenignE (Read error: 60 (Operation timed out))
+20:39:30 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:22:17 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:23:37 <dmiles> back
+23:13:08 --- quit: kirk ("Leaving")
+23:42:54 <dmiles> anyone awake?
+23:59:59 --- log: ended opencyc/02.04.13

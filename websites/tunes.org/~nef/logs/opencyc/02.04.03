@@ -1,0 +1,313 @@
+00:00:00 --- log: started opencyc/02.04.03
+00:12:00 <eca> Happy 2:12! (:
+02:12:06 --- quit: Seth ()
+07:08:16 * stevereed is back
+07:08:19 * stevereed is away: I'm busy
+07:11:02 * Graham is back
+10:01:40 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+10:37:54 <eca> anyone care to place a bet on when the release will be?  My bet is 11:59pm CST tonight (:
+10:41:35 <Graham> I'll take 10pm tonight
+10:41:55 <Graham> but then you have more of an inside track then me.
+10:42:05 --- join: theos (~torsten@port-213-20-65-75.reverse.qdsl-home.de) joined #opencyc
+10:42:09 <theos> lo all
+10:42:34 <Graham> hello theos
+10:42:51 <theos> re
+10:43:36 <theos> passed by couse I wondered if opencyc might be the solution to my problem
+10:43:51 <theos> got a minute so I can outline?
+10:44:14 <Graham> I can try and help
+10:44:41 <theos> well
+10:44:55 <theos> then
+10:45:19 <theos> wher to start? Backgrounder about me:
+10:46:25 <theos> free lancer, supporting open source projects (financially/hardware), have a lab with 10 workers, doing a quick PhD sideways involving AI etc.
+10:46:50 <Graham> *nod*
+10:47:13 <theos> now the PhD is about "sensorless context awareness" 
+10:47:43 <theos> wint sensorless I mean no artificial sensors, just using the human senses and interaction with a machine, ie. a wearable computer 
+10:48:37 <theos> well
+10:48:52 <theos> I better describe the problem with an example
+10:49:05 <Graham> okay
+10:49:49 <theos> suppose you are standing in a foreign town, you wearable device with you (peferrably speech interaction)
+10:50:20 <theos> You tell the machine:
+10:51:18 <theos> "I am standing here at this flat ufo shaped silver building."
+10:52:08 <theos> In the town where I coem from this is the Universum Museum, looking like a squshed ufo, or a whale, in silver comming out of a real pond
+10:52:45 <theos> The machine could/should realize this and thus selflocate itself.
+10:52:59 <theos> Next is, you say:
+10:53:10 <theos> "I wanna go to the Main Station"
+10:53:15 <theos> Maschine:
+10:53:48 <theos> "Do you see that big black cubelike building near the road?" 
+10:53:52 <theos> You:
+10:53:55 <theos> "Yes."
+10:53:58 <theos> Machine:
+10:54:30 <theos> "Go there and turn right, following the sidewalk. There is the main station"
+10:54:30 <theos> A bit like
+10:55:02 <theos> You as a foreigner would phone someone up familiar with the town, telling you how to get to him....
+10:55:03 <theos> .
+10:55:16 * theos wonders if it sounds understandable
+10:55:24 <Graham> yeah I understand.
+10:55:29 <theos> good
+10:55:42 <Graham> and in theory, yes that ios quite possible to do with Cyc
+10:55:49 <theos> great
+10:56:13 <theos> what would it require, roughly?
+10:56:27 <Graham> it would require Cyc being told all about the area.
+10:56:51 <theos> so
+10:56:59 <Graham> so tell it about the rough landmarks
+10:57:16 <Graham> maybe cyclify the street layout
+10:57:26 <theos> landmarks is just what I wanted to continue wiht :) kewl
+10:57:45 <theos> cyclify?
+10:58:03 <Graham> I am not sure if the final version of OpenCyc will have terrain understanding or not
+10:58:31 <Graham> cyclify, is the term we use to taking knowledge and entering it into Cyc in the form it understands, ie CycL
+10:58:48 <theos> k
+10:59:06 <theos> well
+10:59:43 <theos> 1st thing is how to generate the landmarks, it would be nice to be able to automatically produce them out of detailed enough digital maps
+10:59:45 <theos> otherwise
+11:00:01 <theos> that can be a profitable service for 3rd parties
+11:00:01 <Graham> In theory, assuming you told Cyc enough about the landmarks and thr major builds and what they were used for, you could say
+11:00:19 * theos listens
+11:00:28 <Graham> "I'm standing infront of this whale shaped building and I need to find a train"
+11:01:25 <Graham> Cyc can respond "Do you want a local train, or a inter-city train"
+11:01:36 <theos> hehe, great
+11:01:40 <Graham> "I want to go to Stockholm"
+11:02:06 <theos> Hey kewl, how did you know I am living there 1/3 of the year?
+11:02:40 <Graham> "Okay, then go to the large black building at the end of the street and turn left
+11:02:42 <Graham> etc.
+11:03:12 <theos> sounds interesting
+11:04:15 <theos> as I understand, the cyclifying of the landmarks is crucial and might be done by hand in the first approach
+11:04:35 <Graham> yes
+11:05:20 <Graham> the most important and time consuming work will be to tell Cyc all about the area.  That's the majority of what is done with Cyc.
+11:05:31 <theos> another question comes up: can you load cycl knowledge dynamically, eg. entering a shopping mall, you get higher detailed local landmarks?
+11:06:18 <Graham> Depending on what is included in OpenCyc, I'm not sure specfics yet, you may need to give it some iunformation about cities in general and navigation.
+11:06:57 <Graham> well all of Cyc's knowledge is stored in a single file called a world
+11:07:20 <Graham> but extra knowledge can be stored out and added into the world in various forms
+11:08:07 <Graham> if you were looking for as small a Knowledge Base as possible you could dynamiclly load such saved out files only when needed
+11:08:26 <theos> and that is a point where profit might come in
+11:08:34 <theos> eg.
+11:09:30 <theos> as you saind a first quite rough knowledge about, lets say a town, together with the knowledge of where to get forther landmark packs (the local malls, etc,)
+11:10:18 <theos> and if the machine "senses a nearby" landmark pack, it can dynamically retrieve it, resulting in quite interesting scenario... 
+11:12:56 <Graham> *nod*
+11:13:38 <theos> *renod*
+11:13:38 <Graham> I'm personally against, that sort of thing.. bnut yesh that's how it could work, I'm not impressing my beliefs on anyone else here :)
+11:13:55 <Graham> anyways, I am going to have to go.  I hope I've been of some help
+11:14:04 <theos> Graham: what is it that makes you turn against it, I am open to critics
+11:14:56 <Graham> Infectious advertising, ads that know too much about who you are and where your going, It too easy to abuse..
+11:14:59 <Graham> like pop up ads
+11:15:12 <Graham> Pop up ads are excellent examples
+11:15:23 <theos> thouhgt about that also
+11:15:31 --- nick: Graham -> Graham-away
+11:15:41 <theos> laterz
+11:45:15 --- part: theos left #opencyc
+12:00:40 --- nick: Graham-away -> Graham
+12:56:40 * stevereed is back
+16:20:20 <eca> we should get a bunch of people in here tonight for an IRC release party...
+16:33:21 <Seth> announce it on comp.ai.*
+16:33:41 <Seth> is it really comming out tonight?
+17:19:01 <eca> yes, it's really coming out tonight
+17:19:23 <eca> but let's not announce it on comp.ai.* yet until we've had a few successful installs
+17:22:02 <eca> steve man, op me so I can change the title and generally wreak havoc (:
+17:23:11 <Seth> how many hours from now?
+17:46:16 <stevereed> Sorry not an op myself
+17:47:22 <stevereed> about to send the tarball to my home linux computer for the install test
+17:49:00 <Seth> so what are the system requirements for installing?  can i be doen on a win ME platform?
+17:52:55 <stevereed> win 32 build is later, we will port with gnu MinGW
+17:53:34 <Seth> well guess ill go to sleep then
+17:53:36 <stevereed> on linux we need 256MB
+17:54:07 <stevereed> We will put a read-only interface on www.opencyc.org in the next day or two
+17:58:53 --- part: Seth left #opencyc
+18:08:46 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+19:19:50 <eca> it's there
+19:20:06 <stevereed> cool
+19:20:20 --- topic: set to 'opencyc-0.6.0b.tgz available on sourceforge.net' by eca
+19:20:39 <eca> Is that a good topic, Steve?
+19:20:52 <stevereed> perfect
+19:21:32 <eca> actually, I think it needs one minor change...
+19:21:36 --- topic: set to 'opencyc-0.6.0b.tgz available on sourceforge.net!' by eca
+19:23:10 <stevereed> !!
+20:08:11 --- join: eca-home (~spy@cs2874-71.austin.rr.com) joined #opencyc
+20:08:34 <eca-home> hey Steve, any traffic while I was in traffic?
+20:15:30 <stevereed> no, but I just downloaded the sourceforge tarball and will launch it here in a moment
+20:16:55 --- join: ynaats (stany@Dworkin.NotBSD.org) joined #opencyc
+20:17:04 <eca-home> hiya
+20:17:09 <ynaats> hello
+20:17:35 <eca-home> opencyc v0.6b just came out tonight, I'm d/l'ing it right now
+20:17:44 <stevereed> me too
+20:17:55 <ynaats> Same here.  I figured I'll join and idle for a bit, and see what problems others encounter
+20:18:04 <stevereed> But eca and I uploaded it!
+20:18:15 <eca-home> yes, we just uploaded it about an hour ago (:
+20:18:41 <stevereed> The download tarball untarred and installed ok - works
+20:18:49 <eca-home> what transfer rate are you getting from sourceforge, ynaats?
+20:18:55 <eca-home> yay!
+20:19:04 <ynaats> 29 - 30 K/sec
+20:19:15 <stevereed> took me 40 min
+20:19:18 <ynaats> Creeps down gradually, however.
+20:19:51 <eca-home> could we get better rates if we hosted it directly on opencyc.org?
+20:20:22 <stevereed> yes, but we would likely throttle if simultaneous users got high
+20:20:27 <ynaats> Depends if you're paying for bandwidht or not.  Money is generally a limited factor
+20:20:49 <ynaats> In the previous announcement e-mail it was mentioned that this release is Linux only.  Does it mean it's binary only? 
+20:20:56 <stevereed> We are looking for mirrors, as the tarball is 40 MB
+20:21:14 <stevereed> No there is a lot of java interface code in source
+20:21:39 <eca-home> we should probably wait and see how many downloads we get, then see if it's worth hosting/mirroring ourselves..
+20:21:41 <stevereed> the KB is the big open source part - 100K assertions
+20:21:55 <ynaats> So it's just not tested on other platforms, I take it? 
+20:21:57 <eca-home> it ended up being almost exactly 100K
+20:22:10 <eca-home> Right, if you test it on another platform, let us know and we'll add it to the list
+20:22:24 <stevereed> Another linux distribution
+20:22:24 <ynaats> *nod*
+20:22:31 <eca-home> yeah, that's what I meant
+20:22:49 <stevereed> By july we will add Windows 32
+20:23:08 <stevereed> but it runs best on linux
+20:23:16 <eca-home> By july, we'll all be using 64-bit machines, so it will all be irrelevant (;
+20:23:26 <stevereed> In simulation
+20:23:41 <stevereed> AMD clawhammer is due maybe October
+20:23:44 <ynaats> I am more interested in SPARC/64 bit big endian hardware, really.
+20:23:58 <eca-home> we have a solaris port for full Cyc, don't we steve?
+20:24:04 <stevereed> Correct
+20:24:18 <ynaats> OpenBSD/sparc? 
+20:24:26 <stevereed> Solaris
+20:24:40 <stevereed> Not active in our darpa projects
+20:25:05 <eca-home> If we have Solaris, it probably wouldn't be that hard to port to OpenBSD/sparc, but I don't know what I'm talking about.  I know who to ask though (:
+20:25:18 <stevereed> We use the gcc tool chain
+20:25:27 <ynaats> hrm, I guess I'll be able to ask coherent questions once I finish grabbing the tarball. 
+20:25:44 <eca-home> I've still got 33mins left
+20:25:59 <stevereed> I'm leaving for home and will check in the am
+20:26:07 <eca-home> ok!  goodnight steve!
+20:26:11 <ynaats> 25K/sec here.  Regardless, congratulations, guys.
+20:26:15 <stevereed> congrats
+20:26:21 * stevereed is away: I'm busy
+20:26:25 <ynaats> You actually managed to do a release.
+20:26:28 <eca-home> thanks (:
+20:26:47 <eca-home> Now the real work really begins, as soon as the bug reports start rolling in (:
+20:27:15 <eca-home> So what are you interested in using OpenCyc for?
+20:29:27 <ynaats> Looking for a pet expert system that will be able to cross-reference and learn from about 20 gigabytes of various data (mostly science related stuff) 
+20:30:05 <ynaats> Basically a tool :-)
+20:30:20 <eca-home> hmm, in order to get 20GB into OpenCyc, I don't know if you'll be able to do that in 0.6b
+20:31:00 <eca-home> Sounds like you will need to write an HL module, which is high on our list of additions.  Do you know what an HL module is?
+20:31:47 <ynaats> I don't know if I'll be able to do that on Solaris either with 0.6b (And no, I am not interested in OS advocacy :-)  But playing with 0.6b should let me at least get a hang on things and understand what it is that I can or can not do with it.
+20:32:10 <ynaats> No, I don't know what HL module is.
+20:32:48 <eca-home> It's a module that hooks into OpenCyc's inference engine to dynamically solve certain kinds of problems.  They can also be used for accessing certain kinds of data, for instance it could hook OpenCyc into your big 20GB of data.
+20:33:32 <eca-home> Right now, they can only be written in SubL, but it would be a fairly easy extension to allow them to be linked in, or written in Java, or something
+20:34:12 <eca-home> I think there are plans for that.
+20:34:13 <ynaats> Basically my problem is that every time one or another database out there becomes open (Nature occasionally offers some papers for free, some comp sci papaers can be found, some organizations/conferences put out CDs with papers/proceedings), I end up trying to amass as much data as possible, because some of it I am interested in, some of it friends/coworkers are.  Sadly when you have alot of data, finding similarities in a coherent fashion is kind of hard
+20:34:26 <eca-home> Aha!  you want SKSI!
+20:34:33 <eca-home> SKSI = Semantic Knowledge Source Integration
+20:34:35 <ynaats> Some tools, like OpenASP, Citeseer, etc can assist with searching/crossreferencing, however it's kind of crude at the moment.
+20:35:04 <eca-home> Yes, we are trying to solve this problem at Cycorp as well, but our solution (SKSI) is still under development
+20:35:41 <eca-home> The idea is that you map any knowledge source (e.g. a web page, a database) into Cyc via a detailed semantic schema mapping.
+20:36:07 <eca-home> Then you can ask Cyc queries and it can answer them based on information in any of the knowledge sources it has access to.
+20:36:11 <eca-home> sounds like something up your alley?
+20:36:20 <ynaats> Yes
+20:36:47 <eca-home> If you can write HL modules, you can roll your own SKSI functionality, so you're not dependent on waiting for Cycorp to release anything except the HL module hooks.
+20:37:04 <eca-home> But at Cycorp we're trying to make it easier and more automatic to hook in new knowledge sources.
+20:38:22 <eca-home> Right now with v0.6b, you can write your own "slurper", which is a tool to slurp knowledge from some data source into Cyc, and store it as assertions in the KB.
+20:38:28 <ynaats> That requires decent programming skills, and sadly while I can handle Cisco configurations and various flavors of unix, programming is not something I am great at.  However I am fairely good at converting various formats to a format that can be parsed by existing software
+20:39:01 <eca-home> You could probably handle writing a slurper.  It's only slightly more complex than conversion between data formats.
+20:39:14 <eca-home> It's like converting between, say, SQL and CycL.
+20:39:31 <ynaats> Hrm.  
+20:39:36 <eca-home> Let me give you an example.
+20:40:28 <ynaats> Actually, that's a good question.... Can I import genetic information into Cyc?  
+20:40:33 <eca-home> Say you have a database with just two fields, Paper and References, which are both strings.  Then for each row in the database, you use the Cyc API to make an assertion of the form (paperReferences <arg1> <arg2>) where arg1 and arg2 are the two strings.
+20:40:47 <ynaats> Ok, with you so far
+20:40:58 <ynaats> Just finished downloading, BTW
+20:41:06 <eca-home> Sure, you can import ANY kind of information into Cyc, you just have to have the underlying vocabulary to represent it, and if it isn't there, you can create it yourself.
+20:41:15 <ynaats> Ok.
+20:41:21 <eca-home> cool, try and untar and boot it and I'll try to help if you have trouble
+20:43:07 <eca-home> In the full KB we have lots of knowledge about biology and genetics, but I don't think we released that in OpenCyc.
+20:43:20 <ynaats> That shall take a few minutes, I need to transfer it to an x86 system
+20:43:35 <eca-home> ok
+20:51:38 <eca-home> I'm getting sleepy, so if you want free tech support, you will have to push those bits along the wire a little faster (;
+20:53:45 <ynaats> Done
+20:53:47 <ynaats> Started
+20:53:50 <eca-home> excellent
+20:53:51 <ynaats> Ready for services.
+20:53:52 <ynaats> System 1.2277 KB 534.
+20:53:52 <ynaats> CYC(1): 
+20:53:55 <eca-home> whee!
+20:54:25 <eca-home> The best way to explore the KB is via an HTML browser
+20:54:37 <ynaats> locally, right?
+20:54:42 <eca-home> it started up an HTML server that you can connect to locally on port 3602
+20:54:46 <eca-home> yes
+20:54:55 <eca-home> I think this is in the release notes
+20:54:58 <ynaats> (i've skimmed through the README :-)
+20:55:37 <eca-home> I haven't even looked at the README *blush*
+20:55:53 <ynaats> Ok, connected to http://localhost:3602/cgi-bin/cyccgi/cg?cb-start
+20:56:07 <eca-home> cool, did it pull up the login window?
+20:56:31 <ynaats>  [Help] Update Comm: Storing Only Agenda: Sleep KB: 534 System: 1.2277
+20:56:35 <ynaats> Plus two windows
+20:56:44 <eca-home> windows?  or frames?
+20:56:55 <ynaats> Frames
+20:56:59 <eca-home> phew (:
+20:57:05 <eca-home> had me worried there (:
+20:57:14 <ynaats> (My Linux system is headless and 5 km away from physical me, so it's 'links' as the web browser
+20:57:15 <eca-home> Log in as CycAdministrator
+20:57:44 <eca-home> ok, so you're all in text mode?
+20:58:03 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+20:58:13 <eca-home> that's cool, we haven't tested it in a text browser.  I think it needs JavaScript to work, though...
+20:58:15 <ynaats> Yes
+20:58:15 <eca-home> hi steve
+20:58:25 <stevereed_home> back home
+20:58:27 <eca-home> ynaats just finished the d/l and booted up OpenCyc
+20:58:33 <stevereed_home> great
+20:58:39 <stevereed_home> I have the idea...
+20:58:47 <ynaats> Hrm. seems that way, as it insists that I am logged in as guest.  Never fear, remove netscape through ssh tunnel coming right up :-)
+20:59:01 <eca-home> yay graphics!
+20:59:31 <stevereed_home> I can run two opencyc images on my linux computers
+20:59:44 <stevereed_home> and use the java webserver to let
+20:59:56 <stevereed_home> windows users see opencyc as guests
+21:00:25 <eca-home> ah, sounds like a great idea!  Are you worried about security?  If you open up a port, can someone hack you?
+21:03:03 <ynaats> Ok, it came up, and I've connected to the localhost:3602
+21:03:10 <eca-home> excellent!
+21:03:16 <stevereed_home> cool
+21:03:39 <stevereed_home> re security, I can put a linux firewall on them but the key..
+21:03:52 <stevereed_home> is that the webserver doesnt really do scripts
+21:04:04 <stevereed_home> it just hands off messages to the cyc server
+21:04:04 <ynaats> Successful Login
+21:04:04 <ynaats> Welcome CycAdministrator!
+21:04:05 <ynaats> Your project is currently not set.
+21:04:18 <eca-home> congrats, you're in!
+21:04:25 <stevereed_home> yep
+21:04:44 <eca-home> now just type any old thing into the Complete box in the top frame, and it'll show you what it knows about that thing.  Like, "animal" or something
+21:05:02 <stevereed_home> one of say 5,000 things
+21:05:22 <ynaats> I've just selected OpenCycProject as the project.  Was that correct?
+21:05:32 <eca-home> OH MY GOD NO!
+21:05:34 <eca-home> j/k (:
+21:06:04 <stevereed_home> glad this is logged
+21:06:12 <eca-home> all that means is that new constants/assertions you create will be not only timestamped and creatorstamped, but also projectstamped with OpenCycProject.
+21:06:13 <ynaats> Ok, it doesn't know much about "zebra" :-)
+21:06:42 <eca-home> Yeah, OpenCyc doesn't have a lot of particular knowledge, it contains mostly general knowledge.
+21:07:03 <eca-home> Like, it knows about countries and governments, but not about (many) particular countries and particular governments.
+21:07:15 <ynaats> What would be a good question to ask? 
+21:07:41 <eca-home> Try asking (#$genls #$Dog ?X) in the EverythingPSC
+21:07:53 <eca-home> In English, that's "What types of things are dogs?"
+21:08:05 <stevereed_home> in the ask window
+21:08:12 <eca-home> yeah, go to Tools, Ask
+21:08:25 <eca-home> then put in (#$genls #$Dog ?X) in the formula pane, and EverythingPSC in the Mt: box
+21:09:10 <stevereed_home> going to bed now... will put those servers up in the am
+21:09:18 <eca-home> ok, goodnight steve!
+21:09:26 * stevereed_home is away: I'm busy
+21:09:58 <ynaats> Interesting
+21:10:11 <eca-home> did you get the genls query to work?
+21:10:49 <ynaats> Yes.  Dogs, amongst other things are Solid Tangible Things, Spatial Thing - Localized and EukaryoticOrganism
+21:10:55 <eca-home> My favourite one is #$HexalateralObject.  If you click on the [Explain] next to HexalateralObject, then click on GENLS, it will tell you why it knows that dogs have six sides.
+21:11:57 <ynaats> Hrm.
+21:11:59 <ynaats> Interesting.
+21:12:31 <ynaats> Being able to trail the line of thought is really really neat.  
+21:12:47 <eca-home> That's one of the key things that differentiates Cyc from, say, a neural net or expert system.
+21:13:04 <eca-home> Also, since you don't know (much) CycL, you can go to Opt and turn on the "Show Assertions in English" option, and it will attempt to paraphrase the CycL into English.
+21:14:01 <eca-home> Yeah, Cyc has a justification for everything it believes, and it always bottoms out into either "X told me so" or "some piece of code says so"
+21:14:33 <eca-home> A cool consequence of that is if the reason for Cyc believing something goes away, the consequences of that will also go away.
+21:14:34 <ynaats> *nod*  Vertebrae has 6 sides, so eventually it reasons out that dog is a vertebrae
+21:14:40 <eca-home> right
+21:15:21 <eca-home> In english, it would probably say something like "Every dog is a vertebrate, and every vertebrate has 6 sides" or something like that
+21:16:08 <ynaats> Ooops.  Remote netscape detonated.
+21:16:13 <eca-home> d'oh ):
+21:16:25 <ynaats> Too much clicking :-)
+21:16:45 <eca-home> it'll getcha every time (:
+21:16:50 <eca-home> Well, have fun exploring Cyc and learning a little more CycL... I'll probably be around sometime tomorrow if you have any more questions, ok?
+21:16:57 <ynaats> Thank you. 
+21:17:15 <ynaats> I'll finish reading README + docs on opencyc
+21:17:25 <eca-home> no problem!  Cyc is way cool and I love helping people to get enjoyment & usefulness out of it (:
+21:17:35 <ynaats> Have a good night. 
+21:17:38 <eca-home> you too!
+21:17:43 --- quit: eca-home ("Rabbit, don't wash me. You are no longer a paw in the asshole.")
+21:43:10 --- join: bubba37 (bubba37@sdn-ap-013caburbP1708.dialsprint.net) joined #opencyc
+21:43:33 --- part: bubba37 left #opencyc
+21:59:11 --- quit: Seth (Read error: 104 (Connection reset by peer))
+23:36:14 --- join: pqr (~pqr@80-126-31-189.adsl.xs4all.nl) joined #opencyc
+23:59:59 --- log: ended opencyc/02.04.03

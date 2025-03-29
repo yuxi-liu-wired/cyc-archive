@@ -1,0 +1,236 @@
+00:00:00 --- log: started opencyc/02.04.18
+02:48:52 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+06:27:26 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+08:58:59 --- join: theos (~torsten@port-213-20-227-3.reverse.qdsl-home.de) joined #opencyc
+09:30:03 * theos is away: futuraming
+12:15:38 <dmiles> hi theos
+12:16:15 <dmiles> steve, the HL module you were talking about rthe CycML importer, is that out before 1.0?
+12:18:07 <dmiles> wow Though treasure is cool
+12:19:54 <dmiles> 342 mappings to 
+12:23:08 <dmiles> 72k asertions 
+12:28:11 <theos> dmiles: hi
+12:29:19 <theos> I am currently busy sorting my cds after I moved and dump the old stuff i never ever surely listen again :)
+12:31:56 <dmiles> its nice trimming things down and organiuzing
+13:22:44 <stevereed> Working on CycML now for export and import, will be done along with DAML before rel 1.0
+13:23:15 <stevereed> We want rel 1.0 to be a bug fix for the prior release, in that we do not want to risk lots of new features
+13:23:22 <stevereed> in a milestone release.
+13:24:05 <stevereed> Yes thought treasure has a lot of content that even full cyc doesnt have -complementary and
+13:24:52 <stevereed> very quickly integrated.
+13:27:33 <dmiles> yes.. did a great job
+13:27:37 <dmiles> good about cycML
+13:27:45 <dmiles> yeah thats good planning as well
+13:28:47 <dmiles> i amd thinking aobut loading TT* as part of my cyc boot.. since its in it's own Mt its innert if i am not ussing it
+13:32:14 <dmiles> the java import from jamud was very low level below how i'd want to inference on it (as expected), now am creating import method class that loads it into closer to how a person cares to see mud data
+13:32:33 <dmiles> but it is helping me learn how to use the API
+13:35:08 <dmiles> http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-c-total&8274
+13:35:31 <dmiles> is an example
+13:36:34 <dmiles> berrtter example: http://12.225.207.235:88/cgi-bin/cyccgi/cg?cb-c-all-asserted-knowledge&8467
+14:11:48 <stevereed> I'll take a look after this crunch is over...
+14:18:57 * theos is back (gone 04:48:53)
+14:50:05 <stevereed> I like JavaMt.. I'm going to pass the url along to a coworker who is preparing our planner demo 
+14:50:31 <stevereed> we have the ambition of showing how cyc can apply commonsense planning with programming language
+14:51:00 <stevereed> primitives to create programs meeting a user's high level requirements (goal state)
+14:51:29 <stevereed> .. to be ready by release 1.0.  The planner is solid.  And I want to compare your
+14:51:48 <stevereed> approach to Java language representation with what we have underway (if any).
+14:52:36 <dmiles> cool, i would like suggestions if they have any.. i am no master of java or cyc
+14:52:51 <dmiles> i am just playing/learning right now
+14:53:22 <dmiles> but see that there is definately a planning+programminglangue = generated code pln
+14:53:31 <dmiles> err code plan possiblity
+14:54:12 <dmiles> java seems like the easiest language compared to may
+14:54:15 <dmiles> err many
+14:55:32 <dmiles> i first saw this with Windows OLE and Prolog.. you could represent the object model and attach information about what the component is *supposed* to do and waht could be used for interface fitting together
+14:55:35 <stevereed> Will know more in a while... I passed along your published URL.  I believe that demo will involve more than one
+14:55:39 <stevereed> programming lang.
+14:55:59 <dmiles> very neat
+14:56:46 <stevereed> crunch over for the afternoon - so maybe back to CycML - I'll go check with my boss.
+14:56:46 --- quit: Seth (Read error: 104 (Connection reset by peer))
+15:08:08 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+15:09:39 --- quit: Seth (Read error: 104 (Connection reset by peer))
+15:13:23 * theos is away: brain is loadshedding
+15:13:25 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+15:13:32 --- part: theos left #opencyc
+15:13:53 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+16:08:15 <dmiles> is there a concept in Cyc of having a Subjective vs Objective ontolgy?
+16:08:32 <dmiles> one abnout what things are.. and another of how we see or use them?
+16:08:50 <stevereed> OK I understand.
+16:09:05 <stevereed> I would say immediately yes to objective.
+16:09:11 <Seth> all ontologies are subjective.
+16:09:21 <stevereed> by author?
+16:10:05 <stevereed> I defer to our philosophers on this one, but our intention is to repreprent the objective world,
+16:10:23 <stevereed> and allow the representation of agent's beliefs
+16:10:37 <stevereed> so I think we try to do both.
+16:10:56 <stevereed> So Cyc knows that Paris is in France
+16:11:16 <stevereed> but it can represent the notion that someone thinks it is under water.
+16:11:20 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+16:12:00 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:12:18 <dmiles> so then if it is under water it may be an UnwaterItem
+16:12:31 <stevereed> i can look up the vocab for that
+16:12:56 <dmiles> err underwater.. yet to some else the fact it is a Fish is more important
+16:13:14 <stevereed> *nod*
+16:13:46 <stevereed> I just saw that auto programming demo,
+16:13:59 <dmiles> so when defining the Mud ontology i have Objects veiwed by what they instance/subclass from in java
+16:14:06 <dmiles> ah neat
+16:14:33 <dmiles> and then isa/genls of how they are used by agents.. drinkable,eatable,weapontry
+16:14:38 <stevereed> yes viewpoints are important
+16:14:56 <stevereed> we dont have abstract modelling worked out yet..
+16:15:05 <stevereed> but the framework is mostly there..
+16:15:07 <dmiles> i am wondering if i should genls the java instances to the useable onogy colloctions
+16:15:23 <dmiles> err their by-use opntolgy
+16:15:28 <stevereed> yes, and you can 
+16:15:28 <dmiles> or the other way arround
+16:15:36 <stevereed> try both 
+16:15:53 <stevereed> you can tell if an ontology arrangement works,
+16:15:57 <dmiles> yeah i havefirst order collections .. the useable ontolgy is all first order
+16:16:00 <stevereed> by asking questions
+16:16:18 <stevereed> if you get wrong answers, then refactor
+16:16:31 <dmiles> where the what it is only leaf instances are first order
+16:16:56 <stevereed> leaf collections should be first order,
+16:16:59 <dmiles> yes best approach your giving
+16:17:32 <stevereed> the auto programming demo ...
+16:17:38 <dmiles> yes do tell 
+16:17:45 <stevereed> will be simple high level functions ...
+16:17:50 <dmiles> i am very interested in what it was like
+16:17:58 <stevereed> such as absolute value of an integer
+16:18:12 <stevereed> i saw planned out as a series of C language tokens.
+16:18:26 <stevereed> the planning into other language tokens is coming...
+16:18:31 <dmiles> its alot like NL generation ;P
+16:18:45 <stevereed> yes but with planning
+16:18:52 <stevereed> so you get depth
+16:19:12 <stevereed> nl generation uses ad hoc methods for each natural language
+16:19:20 <stevereed> but as I think about it
+16:19:35 <stevereed> you have put together two things I kept apart
+16:19:49 <dmiles> thats why i find the code generqtion planning problems more doable and interesting.. you usually know there is a set reified depth.. in NL.. it's listener based
+16:20:05 <stevereed> *nod*
+16:20:16 <stevereed> so for release 1.0,
+16:20:27 <stevereed> we should have a small library of functions,
+16:20:45 <stevereed> that can get planned out into several different languages,
+16:20:55 <stevereed> maybe get far enough,
+16:21:08 <stevereed> to include programming statements,
+16:21:19 <dmiles> each language couyld have a planArgFormat ?
+16:21:28 <stevereed> not exactly,
+16:21:45 <stevereed> the released vocab,
+16:21:53 <stevereed> contains methodForAction
+16:22:07 <stevereed> whose consequent is the plan at that step (depth)
+16:22:30 <stevereed> the current release is not populated yet with any example axioms.
+16:22:40 <stevereed> thats what we are working on now.
+16:23:13 <dmiles> rtight so you have methodForAction actionForStateToState
+16:23:38 <dmiles> or something simular
+16:24:01 <dmiles> like stateEnablesAction stateDisablesAction
+16:24:18 <stevereed> hold on,
+16:24:22 <dmiles> but in the code sense it is intreging
+16:24:24 <stevereed> I'll get the vocab
+16:25:10 <dmiles> thank you, interesting
+16:25:17 <stevereed> preconditionFor-Props
+16:25:45 <stevereed> So preconditionFor-Props gives the action preconditions,
+16:26:01 <stevereed> and methodForAction gives the effects and decomposition (if any)
+16:28:44 <dmiles> so preconditionFor-Props is tirnary?
+16:29:12 <dmiles> oh i mean ?State ?Method ?NewState 
+16:29:27 <stevereed> binary - take a look at the doc in your cyc
+16:29:51 <stevereed> the preconditions in cyc are assertions
+16:29:57 <stevereed> effects are assertions
+16:30:14 <stevereed> so you have full cyc inference when testing them
+16:30:24 <dmiles> i see
+16:30:40 <stevereed> most planners are propositional,
+16:30:51 <stevereed> does the monkey hold the stick?
+16:30:59 <stevereed> cyc can be asked,
+16:31:09 <stevereed> prove that the monkey holds the stick,
+16:31:15 <stevereed> or not.
+16:31:46 <stevereed> of course cyc is not complete, and is slower that a purely propositional planner
+16:31:59 <stevereed> by complete, i mean that backchaining
+16:32:28 <stevereed> rules will not terminate when there are many rules or many values to instantiate.
+16:32:40 <stevereed> so when you run out of time, there is no answer.
+16:32:41 <dmiles> well slowness is never really a concern of mine.. and allowing alot of backchain is ok if it will ber productive (my philosophy)
+16:32:56 <stevereed> for real world apps,
+16:33:04 <stevereed> you tune the queries, with 
+16:33:10 <dmiles> as long as there is a detection of termination (at least at some time possibnle)
+16:33:23 <stevereed> yes, by time, or depth
+16:33:48 <stevereed> tune queries with predicates such as
+16:34:15 <dmiles> yes.. one problem i had with my planner is that i had to check time and depth every backchain which was as expensive as the backchain itself ;P
+16:34:32 <stevereed> highlyRelevantAssertion
+16:34:48 <stevereed> we use a derivative of the open source SHOP planner from UMBC.
+16:34:49 <dmiles> yes i saw that heuristic and it really is tyhe best way to solve it 
+16:35:12 <dmiles>  highlyRelevantAssertion could be  a rule consequernt as well
+16:35:20 <stevereed> yes
+16:35:28 <stevereed> you can use cyc to make cyc smarter
+16:35:49 <stevereed> we also have proof checker mode on asks,
+16:36:00 <stevereed> where the relevant rules can be specified,
+16:36:20 <stevereed> when you know the general form of repeated queries.
+16:36:33 <stevereed> there are many many ways to make problem inferences faster.
+16:36:34 <dmiles> hrrm i wonder if there is a connection betweeen highlyRelevantAssertion  and makedForShowingInProof
+16:36:43 <stevereed> let me look
+16:37:33 <stevereed> I dont have the vocab for the latter at a glance.
+16:37:59 <dmiles> no problem
+16:38:26 <dmiles> so i am happy that the optimal planner is becomming part of cyc
+16:38:29 <dmiles> and its getting used
+16:38:52 <dmiles> was it used in the code generation demo.. or was basic cyc used?
+16:39:04 <stevereed> it was used!
+16:39:17 <stevereed> not deep at all, only a level or two
+16:39:38 <stevereed> but when you have planning methods for a sufficient,
+16:39:46 <stevereed> number of programming statements,
+16:40:00 <stevereed> then you can plan an entire program.
+16:40:21 <stevereed> I am eager to experiment with it when it gets further along.
+16:40:46 <dmiles> me as well,, i want to leverafge it for how Mud mobs decide what rooms to roam into
+16:40:53 <dmiles> and what players they taunt
+16:41:09 <stevereed> *nod*
+16:41:44 <stevereed> an automaton with planning capability,
+16:42:04 <stevereed> would present a more interesting challenge to human players.
+16:42:21 <dmiles> well the mobs at each of their 'time to do something' just will query cyc and then commit their action
+16:42:33 <stevereed> yes
+16:42:54 <stevereed> and cyc would know, via situational assertions,
+16:43:00 <stevereed> in a situational mt,
+16:43:05 <stevereed> what is happening,
+16:43:16 <dmiles> yes right now i am thinking the World lives in one Mt..
+16:43:30 <stevereed> version it by time?,
+16:43:37 <dmiles> then other Mts can subdivite based on anticeedants into the on world Mt
+16:43:52 <stevereed> yes we call that a spindle
+16:44:02 <stevereed> many mts genl up to one
+16:44:10 <stevereed> then below them all,
+16:44:18 <stevereed> you can have a query mt,
+16:44:26 <stevereed> the bottom of the spindle.
+16:44:43 <stevereed> I'll try to get an example spindle in rel 1.0
+16:44:46 <dmiles> wondering if each mobs Mt is also going to be it's query mt
+16:45:03 <dmiles> so the Query MT can hoild its 'goals'
+16:45:04 <stevereed> depends,
+16:45:16 <stevereed> no, the query mt is empty
+16:45:27 <stevereed> the goals are either in the query
+16:45:37 <dmiles> the query mt justs genls to access p9oints?
+16:45:47 <stevereed> yes
+16:45:58 <stevereed> convenience for your app
+16:46:10 <dmiles> go it.. that is convientent
+16:46:29 <dmiles> can deductions gets dumped into a sigle mt (durring query) ?
+16:46:50 <stevereed> you can save the results of a query,
+16:47:05 <dmiles> yeah the proof steps my be usefull later as assertions
+16:47:18 <stevereed> right,
+16:48:18 <dmiles> i am glad spindling is a concept in cyc that is part of expected use
+16:48:28 <stevereed> *nod*
+16:48:36 <dmiles> so i am not sure if the spindle will be time dependant or not
+16:48:49 <stevereed> depends on how you app works,
+16:51:38 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+16:51:46 --- join: DouglasMiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+16:51:52 <DouglasMiles> its more trial and error.. basicly there is no way to roll back time.. the only time perversion would be durring planning
+16:51:59 <DouglasMiles> i expect to create manifest type mt that is a record of time based history
+16:52:07 <DouglasMiles> i expect to create manifest type mt that is a record of time based history
+16:52:35 <DouglasMiles> mabye one can make rules that discover things about how the world ticks based on queries that look at the cause effect manifiest
+16:52:52 <stevereed> organize by what is best for your app
+16:53:13 <stevereed> got to go
+16:53:26 <DouglasMiles> so just reflected as what the state is will hopefully hadle the spindle
+16:53:29 <DouglasMiles> take care
+16:53:44 <DouglasMiles> i'll be arround tommorw.. i am 24/7 ;P
+18:14:11 --- part: Don left #opencyc
+19:39:59 --- join: mark (~mark@APX1-03-135.PDX.DU.TELEPORT.COM) joined #opencyc
+19:41:36 <mark> I am looking at the Opencyc API doc, and it appears to end with section 2.3
+19:42:08 <mark> I do not see the things I am looking for, like ASK, ASSERT, CREATE, etc. 
+19:42:46 <mark> I would like to be able to write scripts to feed to the CYC(n): prompt.
+19:43:03 <mark> Is there anything further available on this?
+19:47:41 <mark> Well, I guess I picked a bad time. I will look at the logs tomorrow to look for an answer
+19:48:05 <mark> And thanks everybody for a very educational experience so far.
+19:48:12 --- part: mark left #opencyc
+19:55:54 <stevereed> Mark, take a look at http://www.opencyc.org/doc/cycapi#Section-27
+19:56:35 <stevereed> and the java class org.opencyc.api.CycAccess, and org.opencyc.api.UnitTest have many examples of
+19:57:08 <stevereed> using commands to accomplish this.  
+19:57:19 <stevereed> cyc-create, cyc-kill, cyc-assert ...
+19:57:48 <stevereed> Glad you left a message, and as you know we log everything on this support channel
+20:18:48 --- quit: grove (carter.openprojects.net irc.openprojects.net)
+20:43:11 --- join: grove (~grove@193.69.113.28) joined #opencyc
+22:47:33 --- quit: DouglasMiles (Read error: 104 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/02.04.18

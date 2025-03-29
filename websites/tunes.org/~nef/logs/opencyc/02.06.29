@@ -1,0 +1,88 @@
+00:00:00 --- log: started opencyc/02.06.29
+02:32:58 --- quit: DavidP (Read error: 110 (Connection timed out))
+02:52:47 --- quit: dmiles (Read error: 110 (Connection timed out))
+02:57:36 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:55:49 --- join: people (Snak@62.53.34.123) joined #opencyc
+04:26:13 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+04:26:52 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+04:44:54 --- join: person (Snak@62.53.34.91) joined #opencyc
+05:08:19 --- quit: people (Read error: 110 (Connection timed out))
+05:09:35 --- join: dmiles (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+05:17:32 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+05:23:34 <DavidP> subl: (+ 3 2)
+05:24:08 <dmiles> ah the poor bot is down
+05:24:36 <dmiles> it's getting the maching upgrade RH7.1->RH7.3
+05:24:36 <DavidP> What exactly is CyclBot?
+05:24:55 <dmiles> its a command line shell to opencyc
+05:25:13 <person> what's RH..?
+05:25:18 <dmiles> witjh miscillanus widgets i am testing out
+05:25:24 <dmiles> RedHat Linux
+05:26:02 <person> i thought it was the version of cyc for a minute
+05:26:04 <dmiles> the machine has been hacked like 2 times and root kitted.. finally bothering to upgrade ;P
+05:26:34 <DavidP> It reads the channel. If it sees "subl:" it passes the rest of the line to the subl interpreter?
+05:27:01 <dmiles> yes exaclty.. other commands like as: and assert: call subl with appropriate wrappings
+05:27:20 <dmiles> err ask: assert: unassert:
+05:27:35 <dmiles> it keeps a profile to each eusers default Mt
+05:27:54 <DavidP> Are the CyclBot capabilities documented anywhere?
+05:28:20 <dmiles> allows people to experment with OpenCyc in a forum we can ask questions of each other
+05:28:46 <dmiles> well eactually i am looking to do something for the next 1 while the machine upgrades.. i should do that
+05:29:13 <dmiles> hadn't yet.. since i just kept adding commands
+05:29:22 <person> how long does it take to upgrade linux?
+05:29:34 <dmiles> says 2.5 hours left
+05:29:35 <person> not *that* long surely?
+05:29:47 <dmiles> i am dioing an FTP install
+05:29:51 <person> oh right. crikey
+05:29:59 <dmiles> well its a 4 gig install
+05:30:21 <dmiles> i always install EVERYTHING except foiregn languages man pages
+05:30:30 <person> oh i see - over the net - that includes download time. that's quick then seeing as i'm used to a 56k
+05:30:41 <dmiles> yeah over the net
+05:30:41 <person> very quick
+05:30:48 <dmiles> Cable modem
+05:31:02 <DavidP> So the CyclBot creates an Mt for each user? Based on nickname?
+05:31:14 <dmiles> yes fist a DavidPChatMt
+05:31:23 <dmiles> err first
+05:31:47 <dmiles> then the suer can type mt: <NewMtName>
+05:31:59 <dmiles> if its not a known Mt it will create it
+05:32:31 <dmiles> i need to hok that assertions like genlMt go always into BaseKB
+05:32:36 <dmiles> err hook
+05:33:11 <DavidP> Neat. I saw yottzumm working through an unassert issue yesteday and getting input from others. Thats a great capability.
+05:34:07 <dmiles> yeah there is so much to learn in Cyc the irc forum makes it much easier
+05:35:09 <dmiles> also the bot has two other command interpretors
+05:35:25 <dmiles> one is Java BeanShell for accessing the opencyc java api
+05:35:40 <dmiles> and one called SubP
+05:36:12 <dmiles> a prolog dirreivitive that hooks into the opencyc api over the port 3601 api
+05:36:24 <DavidP> How do you get the text from irc to the bot?
+05:36:42 <dmiles> its just a plain text acsii comunication with an irc server
+05:37:15 <dmiles> hostmask@ip Command location: text
+05:38:09 <dmiles> you send messages back the same way
+05:38:55 <DavidP> I'm new to irc but as I understand it, my client is connected to a server in Wisconson.
+05:39:20 <DavidP> Wouldn't CyclBot also be using a client?
+05:39:26 <dmiles> yes .. if you whatched the packets you'd see it a simple protocol
+05:39:37 <dmiles> it is a java program that talks to the server..
+05:40:20 <DavidP> So the java client detects CyclBot strings and calls the appropritate api?
+05:40:44 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/opencyc/org/opencyc/chat/  <- look at IrcChat.java
+05:41:19 <dmiles> correct
+05:41:36 <dmiles> yes it grabs the first token of the string and uses that as a command
+05:42:03 <dmiles> see serviceIRCTransaction
+05:42:34 <DavidP> Thanks. I'll take a look. Gotta go, now.
+05:43:05 <dmiles> ok.. i'll documetn the features of CycLBot 
+05:44:53 * dmiles is away
+06:38:39 --- quit: DavidP (carter.openprojects.net irc.openprojects.net)
+06:39:37 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+06:47:24 --- quit: DavidP (carter.openprojects.net irc.openprojects.net)
+06:48:23 --- join: DavidP (~david193@crtntx1-ar1-139-048.crtntx1.dsl-verizon.net) joined #opencyc
+08:04:25 --- quit: Cobra ("[x]chat")
+08:04:37 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+10:23:46 --- quit: person ()
+13:43:41 --- join: urgen (urgen@65-113-147-42.slo-stc.charterpipeline.com) joined #opencyc
+15:47:42 <DavidP> subl: (+ 3 2)
+15:55:25 <Cobra> no bot...
+16:22:34 --- join: people (Snak@62.53.34.101) joined #opencyc
+17:48:34 --- join: person (Snak@62.53.34.98) joined #opencyc
+18:12:02 --- quit: people (Read error: 110 (Connection timed out))
+19:10:20 --- quit: person ()
+21:13:20 * dmiles returns
+21:13:36 * dmiles install of rh7.3 had failled.. starting onver
+23:21:50 <urgen> garbled CD?
+23:22:23 * urgen looks at his stack of bad checksums
+23:59:59 --- log: ended opencyc/02.06.29

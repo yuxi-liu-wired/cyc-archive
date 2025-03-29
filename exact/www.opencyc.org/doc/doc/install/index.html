@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<base href="http://www.opencyc.org/doc/doc/install/" />
+
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="description" content="OpenCyc is the open source version of the Cyc technology, the worlds largest and most complete general knowledge base and commonsense reasonging engine.  Cycorp, the builders of Cyc, have set up an independent organization, OpenCyc.org, to disseminate and administer OpenCyc, and have committed to a pipeline through which all current and future Cyc technology will flow into ResearchCyc (available for R&amp;D in academia and industry) and then OpenCyc.">
+<meta name="keywords" content="opencyc,open source,free software,intelligent software,bots,Cycorp,
+cyc,artificial intelligence,expert system,ontology,ai,software,natural language,common sense,intelligent computing,knowledge management,semantic integration,knowledge,doug lenat,logic,symbolic,software tool,predicate calculus,enterprise computing,cio,decision support,data warehouse,hal 9000,knowledge base,knowledge server">
+<title>OpenCyc</title>
+   <style type="text/css">
+  A {text-decoration: none; }
+a.title {font-weight:bold; color:#0000ff}
+a.simple {text-decoration: underline}
+
+ul.nomargin {margin-top: 0px}
+
+
+.bldoc { 
+  border-left: solid 1px #6699CC;
+ }
+
+.blldoc {
+  border-left: solid 1px #6699CC;
+}
+
+.blrdoc {
+  border-right: solid 1px #6699CC;
+  border-left: solid 1px #6699CC;
+}
+.doc table td { 
+  border-bottom: solid 1px #ccd9ff;
+}
+.blkl {
+  border-bottom: solid 1px #ccd9ff;
+}
+
+.bborder {
+  border:  solid #6699CC 1px;
+}
+
+.blth {
+    border-left: solid 1px #6699CC;
+  border-bottom:  solid 1px #6699CC;
+}
+
+.bllth {
+border-bottom:  solid 1px #6699CC;
+}
+
+.doctitle {
+font-weight: bold;
+line-height:100%;
+font-size: 90%;
+margin-bottom: 0;
+padding-bottom: 0;
+}
+
+.docstatus{
+font-size: 80%;
+}
+  </style>
+</head>
+
+<body bgcolor="#FFFFFF">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td><img
+        src="images/opencyc3-logo-1.gif"
+        width="268" height="70"></td>
+        <td width="50">&nbsp;</td>
+        <td align="right" valign="bottom" width="350"><p
+        align="right"><font color="#3399FF" size="3"
+        face="Arial"><strong>Formalized Common Knowledge</strong></font></p>
+        </td>
+    </tr>
+</table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"
+bordercolor="#FFFFFF" bordercolordark="#FFFFFF"
+bordercolorlight="#FFFFFF">
+    <tr>
+        <td width="75" height="10">&nbsp;</td>
+        <td height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#3399FF" bordercolor="#000080"
+        height="10"><img
+        src="images/menubar9.gif"
+        width="354" height="13"></td>
+        <td valign="top" width="10" bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#3399FF" height="10">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"><br>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="http://www.opencyc.org/"><font
+        size="2">Home</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/projects/opencyc/"><font
+        size="2">Projects</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="/OpenCyc_org/faq/opencyc_faq"><font size="2">FAQ</font></a></p>
+        <p><nobr><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="doc"><font
+        size="2">Documentation</font></a></nobr></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a class="none" 
+        href="http://www.opencyc.org/releases/"><font
+        size="2">Releases</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/project/showfiles.php?group_id=27274"><font
+        size="2">Downloads</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/forum/?group_id=27274"><font
+        size="2">Discussion</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/news/?group_id=27274"><font
+        size="2">News</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://www.opencyc.org/license"><font
+        size="2">License</font></a></p>
+        </td>
+        <td width="20"><!--webbot bot="HTMLMarkup" startspan -->&nbsp;<!--webbot
+        bot="HTMLMarkup" endspan --></td>
+<td valign="top">
+<b>Below are the same instructions as in the README file in the distribution:</b>
+<PRE>
+Installation instructions for OpenCyc release 0.9.0
+
+OpenCyc requires a version of linux x86 that is compatible with Suse 9.1 or
+Windows NT/2000/XP, about 400MB of disk space and performs best with over 
+500 MB RAM.  The java api requires Java 2 and the download of freely available
+third-party jar files.
+
+
+For our extensive documentation: http://www.opencyc.org
+
+1. Create a directory to contain opencyc (call it something like 'opencyc-0.9'), copy 
+the archive into that directory, then untar or unzip the compressed archive.
+
+For Linux:
+tar -xvfz opencyc-0.9.0-Suse91.tgz
+
+For Windows:
+unzip the zipped folder
+
+2. move to the cyc/run directory and launch the Cyc server.
+
+For Linux:
+./run-cyc.sh
+
+For Windows:
+double-click the file run-cyc.bat
+
+When the world file is loaded into memory you will see 
+
+CYC(1):
+
+which is the SubL command prompt. Don't close the window containing this prompt.
+
+3. (optional) 
+You can enter SubL expressions such as (+ 1 2) or (genls #$Person)
+or (all-genls #$Person) at the command line to verify Cyc's operation.
+ 
+4. At this point the cyc http server is running and you can access
+Cyc directly via the local web browser.
+
+http://localhost:3602/cgi-bin/cyccgi/cg?cb-start
+
+To access from a remote machine, change 'localhost' to the IP name of the
+machine running Cyc, e.g.
+
+http://hamlet.mydomain.com:3602/cgi-bin/cyccgi/cg?cb-start
+
+You can browse Cyc via the Guest account or perform updates by
+logging on as CycAdministrator.
+
+5. You can cleanly shut down the OpenCyc server by entering (exit) at
+the command line.
+
+6.  You can save the state of the OpenCyc world by entering the expression
+
+(write-image "<your world path/filename>")
+
+before shutting down using (exit).  Edit run-cyc.sh, replacing world/latest.load 
+with the path to your saved world. Or just type the single command in run-cyc.sh 
+at a shell prompt, substituting the name you used to save your world. 
+YOU CANNOT SAVE TO THE SAME WORLD NAME AS THE ONE CURRENTLY BEING USED.
+
+</PRE>
+<p>
+<TABLE width=100% cellpadding=0 cellspacing=0 border=0>
+<TR>
+<TD bgcolor="#3399FF"><img src="images/spacer.gif" width="1" height="4"></TD>
+</TR>
+<TR>
+<TD bgcolor="#FFFFFF"><img src="images/spacer.gif" width="1" height="2"></TD>
+</TR>
+<TR>
+<TD bgcolor="#3399FF"><img src="images/spacer.gif" width="1" height="1"></TD>
+</TR>
+</TABLE>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="87%">
+    <tr>
+        <td align="right" width="35%"><!--webbot
+        bot="HTMLMarkup" startspan --><a href="http://www.cyc.com"><img src="images/cyc-logo-small.gif" align="middle" border=0></a><!--webbot
+        bot="HTMLMarkup" endspan --></td>
+        <td width="5%"><!--webbot bot="HTMLMarkup" startspan -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--webbot
+        bot="HTMLMarkup" endspan --></td>
+        <td align="center" width="35%"><!--webbot bot="HTMLMarkup" startspan --><a href="http://www.daml.org"> 
+  <img src="images/HotDAML_Small.jpg" alt="HotDAML" border=0 /> 
+</a><!--webbot
+        bot="HTMLMarkup" endspan --></td>
+<td width="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>
+<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=27274&type=4" width="125" height="37" border="0" alt="SourceForge.net Logo"></a>
+    </td></tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

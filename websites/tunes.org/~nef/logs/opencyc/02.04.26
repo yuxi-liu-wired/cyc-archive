@@ -1,0 +1,162 @@
+00:00:00 --- log: started opencyc/02.04.26
+00:00:20 <SethR> interesting .. its not an explicit property, its burned into the system
+00:01:26 <stevereed_home> well an essential property, reflected up into CycL - when I do my task
+00:02:24 <stevereed_home> a read-only property
+00:04:03 <SethR> hmmm ... ive been wavering whether to make it an implicit property or just anothe unique property in my memory ... i pretty much decided to make it explicit
+00:04:42 <stevereed_home> i think i understand
+00:05:14 <stevereed_home> for cyc the identity of a term is its guid
+00:05:26 <stevereed_home> the name is simply a handle for humans
+00:05:38 <stevereed_home> we have a test called the gensym test...
+00:05:48 <SethR> in other words there will be an arrow from the node that represents Thing to the literal "Thing"
+00:06:00 <stevereed_home> yes
+00:06:22 <stevereed_home> when Germans use Cyc they'll be in German
+00:06:30 <stevereed_home> and that will be the name for us too.
+00:06:48 <stevereed_home> we will use NL generation to make it readable for English readers.
+00:07:07 <stevereed_home> we have lexical assertions for terms
+00:07:15 <stevereed_home> that default to the constant name.
+00:07:24 <stevereed_home> but you can override them.
+00:07:35 <stevereed_home> for any natural language.
+00:08:43 <SethR> yep
+00:09:27 <stevereed_home> I hope the WebOnt group addresses this issue.
+00:09:27 * SethR goes to bed
+00:09:33 <stevereed_home> sleepy too.
+00:10:05 <SethR> personally i dont see the need for WebOnt ...now that we got OpenCy
+00:10:30 <SethR> just more languages to translate amoung
+00:11:12 <stevereed_home> you would have enjoyed Pat Hayes comment in the last DAML PI meeting...
+00:11:25 <stevereed_home> he used to work at Cycorp years ago.
+00:11:57 <stevereed_home> he knows that we solved many of the issues facing the rdf/daml ..
+00:12:03 <SethR> well im a big Pat Hayes fan .. cant wait till they give us Common Logic
+00:12:13 <stevereed_home> right
+00:12:49 <stevereed_home> anyway I gave feedback to web ont for lexification and use of label
+00:13:04 <stevereed_home> i want the uri to be meaningless, just identity
+00:13:29 <SethR> cool
+00:13:47 <stevereed_home> hope it works out.
+00:14:14 <stevereed_home> we have published a lot of DAML for other darpa projects.
+00:14:17 <SethR> in my system it's just an internal serial number ... never really seen from the outside ...
+00:14:31 <stevereed_home> we had an internal number too
+00:14:45 <stevereed_home> but guids are better because no collisions if independent authors.
+00:15:13 <stevereed_home> our internal id is just a pointer good for that world build.
+00:15:29 <SethR> i understand .. my system is designed for a single author .. not trying to be the exteranl consensual language
+00:15:37 <stevereed_home> ok
+00:15:45 <stevereed_home> easy to extend
+00:16:08 <SethR> solves a whole lot of problems that way
+00:16:37 <stevereed_home> Cyc at our office is one big system, via replication
+00:16:46 <SethR> every system starts with a tablua rosa and educates by reading good stuff like open Cyc etc
+00:17:07 <stevereed_home> have you seen our docs
+00:17:37 <stevereed_home> we are going to publish the "Ontological Engineering Handbook"..
+00:17:39 <SethR> pretty much .. waiting for the windows version before i really start playing
+00:18:03 <stevereed_home> working on it.  Got a compile of the executable just this afternoon on NT.
+00:18:18 <stevereed_home> You can use the public servers that I put up..
+00:18:24 <stevereed_home> in the meantime.
+00:20:23 <SethR> i havent totally worked out how my api is gonna interface with cyc ... one thing i want cyc to do for me is the logical entailments .. dont want to write an inference engine .. not at all
+00:20:54 <stevereed_home> do you want subsumption inference or the whole thing.
+00:21:33 <SethR> well dont know enought about it to know the diffeence
+00:21:52 <stevereed_home> subsumption is what can be done with DAML 
+00:22:08 <SethR> in which case id want the wohole thing
+00:22:15 <stevereed_home> right.
+00:22:39 <stevereed_home> when you get the
+00:22:59 <stevereed_home> system on windows then you can try some asks
+00:23:11 <stevereed_home> and check out the inference paths you need
+00:23:48 <stevereed_home> we almost always work back from the asks to the facts and rules that need to be input.
+00:23:58 <SethR> one thing is im pretty committed to python ..so i'd want a python interface module .. any talk of that?
+00:24:25 <stevereed_home> lots
+00:24:45 <SethR> eta?
+00:24:45 <stevereed_home> talk now , but there is talent lining up.
+00:24:56 <stevereed_home> within months.
+00:25:03 <stevereed_home> that is as close as I can get.
+00:25:28 <stevereed_home> because this is the first big effort by non-cycorp contributers.
+00:25:50 <SethR> to make the python interface module?
+00:25:57 <stevereed_home> right
+00:26:02 <stevereed_home> I recommended,
+00:26:24 <stevereed_home> a translation of org.opencyc.api and org.opencyc.cycobject classes
+00:26:26 <stevereed_home> to python
+00:26:37 <stevereed_home> but one python developer,
+00:26:58 <stevereed_home> wants to write it from scatch using extensions of python built in classes.
+00:26:58 <dmiles> pythion to java is super doable
+00:27:10 <stevereed_home> so i understand.
+00:27:46 <stevereed_home> I wrote the guts of the java api over a couple of weeks. with several months of 
+00:27:51 <SethR> it =?= the whole inference engine ?
+00:27:52 <stevereed_home> extending.
+00:28:11 <stevereed_home> no, it simply exposes the server infernce engine via ask.
+00:28:27 <stevereed_home> Cyc is about 1.6 million lines of translated C code.
+00:28:37 <dmiles> well you could eigther make a API access sytem in python..
+00:28:49 <stevereed_home> or.
+00:29:10 <dmiles> or have it replicate all the objects
+00:29:26 <stevereed_home> the object replication is better, that is what i did
+00:29:29 <stevereed_home> with the java api
+00:29:40 <stevereed_home> with cached proxies.
+00:30:05 <stevereed_home> you can send strings to cyc "(...") and get answrs.
+00:30:07 <dmiles> yeah python is robust enough to do that
+00:30:11 <stevereed_home> like with CycLBot
+00:30:23 <stevereed_home> but much better to create the objects, in the form
+00:30:32 <stevereed_home> most convenient for programming.
+00:31:36 <stevereed_home> anyway wife caught me at computer...
+00:31:45 <stevereed_home> must return for domestic peace.
+00:31:52 <stevereed_home> bye
+00:32:23 <dmiles> :) g'night
+00:32:30 <SethR> me too
+00:34:01 <dmiles> goodnight as well
+03:32:15 --- quit: CycLBot (Remote closed the connection)
+03:32:52 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:32:53 <CycLBot> I am initializing
+03:32:53 <CycLBot> I am ready to chat
+03:34:11 <dmiles> bsh: jamudWorldAccess.getClass().getMethods()[0]
+03:34:12 <CycLBot> public static boolean logicmoo.JamudWorldAccess.setProperty(java.lang.Object,java.lang.String,java.lang.Object) throws 
+03:34:12 <CycLBot> jamud.JamudException
+03:35:06 <dmiles> bsh: jamudWorldAccess.getClass().getMethods()[3]
+03:35:07 <CycLBot> public void logicmoo.JamudWorldAccess.set(java.lang.String,java.lang.Object) throws bsh.EvalError
+03:35:14 <dmiles> bsh: jamudWorldAccess.getClass().getMethods()[10]
+03:35:15 <CycLBot> public static java.lang.Object logicmoo.JamudWorldAccess.createObjectFromType(jamud.object.MudObjectContainer,java.lang.String,java.lang.String
+03:35:15 <CycLBot> ) throws jamud.JamudException
+06:20:00 --- quit: CycLBot (Remote closed the connection)
+06:21:02 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+06:21:02 <CycLBot> I am initializing
+06:21:03 <CycLBot> I am ready to chat
+09:17:13 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+09:23:40 --- quit: SethR ()
+11:17:15 --- quit: Method_ (Read error: 110 (Connection timed out))
+12:28:23 --- join: SethR (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+12:38:51 --- quit: Graham (Read error: 104 (Connection reset by peer))
+12:39:36 --- join: plm (~chatzilla@207.207.8.46) joined #opencyc
+13:12:34 --- join: trinlis (~John@ool-18bb3e4f.dyn.optonline.net) joined #opencyc
+13:21:12 --- part: plm left #opencyc
+13:32:12 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+13:39:27 --- part: trinlis left #opencyc
+14:03:23 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+14:49:05 --- quit: SethR ()
+15:13:30 --- quit: Taral ("going home")
+16:04:00 --- quit: CycLBot (Remote closed the connection)
+16:05:22 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+16:05:23 <CycLBot> I am initializing
+16:05:23 <CycLBot> I am ready to chat
+16:24:39 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+16:25:01 --- join: QuantumG (qg@cpu1727.adsl.bellglobal.com) joined #opencyc
+16:32:24 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+16:37:30 --- join: QuantumG (qg@cpu1727.adsl.bellglobal.com) joined #opencyc
+16:47:51 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+16:50:45 --- join: QuantumG (qg@cpu1727.adsl.bellglobal.com) joined #opencyc
+17:04:51 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+17:05:27 --- join: QuantumG (qg@cpu1727.adsl.bellglobal.com) joined #opencyc
+17:10:48 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+17:11:58 --- join: QuantumG (qg@cpu1727.adsl.bellglobal.com) joined #opencyc
+17:11:58 --- quit: QuantumG (carter.openprojects.net irc.openprojects.net)
+17:39:27 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+17:39:27 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+17:39:28 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+17:39:40 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:08:49 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:08:49 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+18:08:55 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+18:08:56 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+18:18:30 <dmiles> bsh: myobj = new jamud.object.MudObject()
+18:18:32 <CycLBot> jamud.object.MudObject@d439fe
+18:18:56 <dmiles> bsh: myobj.getName()
+18:18:57 <CycLBot> New name
+19:10:05 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:10:11 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+19:10:15 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:10:16 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+19:19:28 --- quit: Method (Connection timed out)
+20:28:33 --- join: Method (Method@ip68-12-88-154.ok.ok.cox.net) joined #opencyc
+21:14:22 --- quit: Method (Read error: 110 (Connection timed out))
+23:59:59 --- log: ended opencyc/02.04.26

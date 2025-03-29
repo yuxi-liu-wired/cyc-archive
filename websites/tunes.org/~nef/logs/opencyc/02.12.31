@@ -1,0 +1,177 @@
+00:00:00 --- log: started opencyc/02.12.31
+02:15:58 --- quit: yepster (Read error: 104 (Connection reset by peer))
+02:29:31 --- join: mdupont (mdupont@p5080E730.dip0.t-ipconnect.de) joined #opencyc
+02:29:36 <mdupont> hello?
+02:29:48 <deltab> hi
+02:30:48 <mdupont> hey deltab, how are things?
+02:31:01 * mdupont is trying to extract some interesting classes from opencyc
+02:31:07 <deltab> well, thanks
+02:34:38 <mdupont> i am looking at the cyc data model, can you tell me about the #$Communicating class?
+02:34:58 <deltab> sorry, I know lessa bout it than you do
+02:35:30 <mdupont> :)
+02:48:56 <mdupont> deltab: what is your interest in opencyc?
+02:54:58 <deltab> semantic web, chat bots, and adventure games
+03:05:30 <mdupont> semantic web, yeah you are on rdfig alot
+03:27:42 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+03:44:32 <mdupont> hey yepster, hows things?
+04:16:05 <yepster> hello mdupont
+04:17:30 <yepster> I am programming the 'participant may perform activity' query for a workflow engine
+04:17:34 <yepster> with opencyc
+04:17:37 <mdupont> you know any cyc? 
+04:17:52 <mdupont> i am looking at  the data model and have found a bunch of classes I like
+04:18:02 <mdupont> about 20 of them could be used for my work
+04:18:34 <yepster> yeah, the structure is very useful for ideas
+04:19:09 <mdupont> well, i am thinking about reading in the class structure as input into a code generator
+04:19:22 <mdupont> and was wondering how i can add in new classes
+04:19:40 <yepster> class = collection?
+04:19:42 <mdupont> or what is the optimal way to modify this cyc data structure
+04:19:56 <yepster> or the java api classes?
+04:19:57 <mdupont> <#IBTGeneration-Replication> <&rdfns;#type> <#TemporalObjectType> .
+04:20:22 <mdupont> <#AccessNumber> <&rdfns;#type> <&daml;#Class> .
+04:20:32 <mdupont> like a AccessNumber is a Daml::Class
+04:20:43 <mdupont> this is ntriples syntax
+04:20:54 <mdupont> but i want to have an easy way to edit this file
+04:21:15 <mdupont> it is a ntriples transform of the cyc.daml
+04:21:29 <yepster> hmm..
+04:21:51 <mdupont> but i want to add in new classes and edit some existing ones in cyc
+04:21:58 <mdupont> any ideas as to how to do that?
+04:22:11 <yepster> how much classes?
+04:22:28 <mdupont> well, i am modelling a Telco Billing system
+04:22:39 <mdupont> and there are many similar classes for billing in cyc
+04:22:47 <mdupont> but i need to edit them
+04:23:06 <mdupont> and extend them and add in my own classes, it would say about 10
+04:23:36 <yepster> why not use the opencyc browser interface?
+04:23:49 <mdupont> that is what i wanted to know
+04:23:58 <mdupont> is there a browser/editor?
+04:24:22 <yepster> yeah, on http://localhost:3602/cgi-bin/cyccgi/cg?cb-start
+04:24:33 <yepster> on the machine you started opencyc on
+04:25:06 <mdupont> ok, so 40mb download
+04:25:16 <mdupont> what is the minimum disk space needed?
+04:26:03 <yepster> I'd say about 0.5G to 1 G if you want several copies of the kb image file
+04:26:16 <mdupont> yeah, that is too big
+04:26:24 <mdupont> i think i will just edit the daml
+04:26:35 <mdupont> or is the editor that good?
+04:26:40 <yepster> well it unzips in about 110MB
+04:26:48 <yepster> the editor rocks
+04:27:31 <yepster> I should say: the browser interface. It has a 'KE text' entry form
+04:27:46 <yepster> to add new stuff fast
+04:28:13 <mdupont> ok
+04:28:14 <yepster> but you can also do 'create similar' on constants and select which assertions must be copied
+04:28:19 * mdupont is making space
+04:29:00 * yepster scratches his head
+04:29:22 <mdupont> thanks dude, i will make space and try out opencyc
+04:29:38 <mdupont> if it is easy to edit the classes and add new ones, that is cool
+04:30:10 <mdupont> maybe it is possible to trim down the kb and reduce its size?
+04:30:42 <yepster> it's possible but not doable
+04:31:03 <mdupont> ok, 
+04:31:05 <yepster> but what exactly do you mean with class?
+04:31:16 <mdupont> for example,
+04:31:25 <mdupont> <#AccessNumber> <&rdfns;#type> <&daml;#Class> .
+04:31:28 <yepster> class as in oo programming or an classification type
+04:31:35 <mdupont> like a AccessNumber is a Daml::Class
+04:31:52 <mdupont> both
+04:32:08 <yepster> so that would be a cyc collection? like a set of things of the same type?
+04:32:18 <yepster> both?
+04:32:49 <mdupont> well, i dont know cyc, a collection of things with the same type, sounds good
+04:33:02 <mdupont> i am modelling a domain
+04:33:16 <mdupont> and creating a meta-model from which i generate a c++ program
+04:33:21 <mdupont> and sql database
+04:33:37 <yepster> interesting
+04:33:51 <mdupont> so I want to read in the daml output of the cyc model, an select a set of classes that will be my input
+04:33:59 <yepster> there is actually some stuff in opencyc like 'programstep'
+04:34:07 <mdupont> assuming that i can easily export into daml
+04:34:15 <yepster> but I think it's more for proving correctness of algorithms
+04:34:22 <mdupont> and easily edit the daml classes
+04:34:38 <mdupont> and easily only extract the needed classes and thier dependancies
+04:35:00 <mdupont> that is the reason why I want cyc, to just go in and pull out all the dependant classes
+04:35:18 <mdupont> but something it telling me that it might be easier to do this in perl.
+04:35:24 <yepster> this sounds a bit like a function in 'oracle designer'
+04:35:38 <yepster> it has something called 'create table api'
+04:35:57 <mdupont> sure like that
+04:36:03 <yepster> that creates pl/sql procedures for changing the database, from the table definitions
+04:36:14 <mdupont> but i want to create the c and the tables from the same model
+04:36:37 <mdupont> that way I can manage the differences
+04:37:00 <mdupont> it is hard to map a c++ class onto a sql table, they have different modelling constraints
+04:37:19 <mdupont> therefore you need a higher level,  richer model that can generate both of them
+04:37:24 <yepster> do you know design patterns?
+04:37:29 <mdupont> yes
+04:37:33 <yepster> ejb?
+04:37:41 <mdupont> i dont use java
+04:37:52 <mdupont> but i know about ejb and corba
+04:38:05 <yepster> yeah, but you could use the ejb design pattern as example to create classes to access the db
+04:39:10 <mdupont> yes, assuming that your database model was clean
+04:39:28 <mdupont> so you make a clean database model and generate your java/c++ from that sure
+04:39:55 <mdupont> but you might model your tables in a way that you cannot easily map on to the classes
+04:40:01 <mdupont> look at a hierachy for example
+04:40:19 <mdupont> where you have a - contains - b triples in the db
+04:40:32 <yepster> It sounds a bit like you want to make a 4g development tool
+04:40:33 <mdupont> that might be managed differently in your program
+04:40:37 <mdupont> sure
+04:40:49 <mdupont> introspector.sf.net is the project i am working on
+04:41:21 <mdupont> i want to use different import filters to extract classes out of existing programs,
+04:41:23 <mdupont> model them
+04:41:27 <mdupont> clean them up
+04:41:45 <mdupont> and generate a new and cleaner implementation
+04:42:31 <yepster> do you have experience with 'bad' programmed source
+04:42:32 <yepster> ?
+04:43:05 <mdupont> yes, look at the gcc source code
+04:43:20 <yepster> hehe
+04:43:42 <mdupont> or bash
+04:43:43 <yepster> can the things that make code bad be detected by an automated proces?
+04:43:45 <mdupont> or m4
+04:43:49 <mdupont> yes
+04:44:03 <yepster> hmm
+04:44:07 <mdupont> there are many people looking into pattern recogition on source code
+04:44:42 <mdupont> refactoring, itentional programming, and security analysis
+04:44:52 <yepster> well, I won't believe it until i see it
+04:45:13 <mdupont> well, you can see some of it already
+04:46:08 <mdupont> opencyc-0.7.0/run/world/latest.load
+04:46:13 <mdupont> that is the monster file?
+04:46:19 <yepster> jup
+04:49:19 <mdupont> ok, well we will see
+04:49:35 <mdupont> if you are interested in this stuff, i have some links
+04:49:54 <mdupont> there are some refactoring browsers for finding bad-smelling code
+04:50:12 <yepster> well, i've been programming stuff for over a decade and i learn new stuff every day
+04:50:28 <mdupont> and other programs for finding buffer overflows and security violations in c
+04:51:06 <yepster> and i tend to believe that good programming is more an art then something that can be automaed
+04:51:12 <mdupont> so ./run-cyc.sh is booted
+04:51:20 <mdupont> what do i do now?
+04:51:32 <yepster> go to the localhost link
+04:51:41 <yepster> if you want a browser from a different machaine,
+04:51:45 <mdupont> yepster: i aggree, I dont want to automake, just take away some of the pain and repetition
+04:51:47 <yepster> you need to edit parameters.lisp
+04:52:08 <mdupont> cool!
+04:52:32 <yepster> it's in run/init if i am not mistaken
+04:52:53 <mdupont> ok lemme look
+04:55:12 <mdupont> i like it
+04:55:20 <mdupont> so i have pulled up a phone number
+04:56:31 <mdupont> now, how can I add in a new class that is derived from the phone number?
+04:56:53 <yepster> by pressing create similar
+04:57:28 <mdupont> ok, i need to make a ne user
+04:57:31 <mdupont> new user
+04:57:44 <yepster> user?
+04:58:10 <yepster> Person?
+04:59:14 <yepster> o you mean you have to log in as 'CycAdministrator'
+05:11:10 <mdupont> awsome
+05:11:13 <mdupont> thanks
+05:11:23 <mdupont> i really like this cyc thing
+05:14:27 <mdupont> gotta run and clean up some dishes
+05:16:29 <yepster> cu
+07:31:50 --- join: mdupont_ (mdupont@p5080E888.dip0.t-ipconnect.de) joined #opencyc
+07:34:52 --- quit: mdupont (Read error: 110 (Connection timed out))
+10:12:12 <mdupont_> anyone using the UML in cyc?
+11:05:59 --- nick: mdupont_ -> mdupont|newyear
+11:10:58 --- quit: yepster ()
+15:51:48 <ZivZ> I wasn't even aware that OpenCyc had UML.
+15:52:46 <ZivZ> UML is cool, But I need to finish a few books on it before I can use it to its potential.
+17:07:52 --- nick: mdupont|newyear -> mdupont
+17:08:14 <mdupont> happy new year!
+17:08:35 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:14:18 <KinoC> happy new year 2 u 2
+17:17:02 <mdupont> :)
+17:19:15 <KinoC> enjoy
+17:20:05 <KinoC> getting called away for fun stuff. (and i just got here!)
+17:20:07 <KinoC> C U
+17:20:20 --- quit: KinoC ()
+17:51:06 --- nick: mdupont -> mdupont|ZZZZ
+23:59:59 --- log: ended opencyc/02.12.31

@@ -1,0 +1,294 @@
+00:00:00 --- log: started opencyc/02.06.21
+00:40:02 --- quit: aminorex (Read error: 110 (Connection timed out))
+01:14:43 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+01:15:25 <Yepster> hehe cyc's funny. Yesterday I imported the 'international code for patient care' (1271 constants)
+01:15:46 <Yepster> Now I come back, suddenly the mt contains 5570 assertions.
+01:17:01 <Yepster> (o no it's called international classification of primary care, whatever)
+01:17:03 <dmiles> lots of greens?
+01:17:33 <Yepster> I think about 30%
+01:18:13 <dmiles> right on
+01:18:20 <Yepster> mostly forward chain of isa indicationType implies isa collection
+01:18:25 <Yepster> but still funny
+01:18:25 <dmiles> what import method..  you wrote?
+01:18:44 <Yepster> the code was distributed as msaccess db
+01:19:01 <Yepster> easy -> odbc link to oracle table -> pl/sql loop to assert gafs
+01:19:07 <dmiles> definatly 
+01:19:56 --- join: rkrush (~rkrush@12-224-223-144.client.attbi.com) joined #opencyc
+01:20:04 --- part: rkrush left #opencyc
+01:20:06 <dmiles> Yepster, you get my email?
+01:20:14 --- join: rkrush (~rkrush@12-224-223-144.client.attbi.com) joined #opencyc
+01:20:17 <Yepster> to which address was it sent?
+01:20:24 <dmiles> yepster@users..
+01:20:31 <Yepster> off to sf
+01:20:39 <dmiles> ah you dont forward>?
+01:21:22 <Yepster> didn't know that was possible
+01:21:35 <dmiles> i didnt think i had the other choice :P
+01:21:55 <dmiles> i dont know if you get attachments
+01:22:01 --- join: theos (~torsten@dynamic-206-17.informatik.uni-bremen.de) joined #opencyc
+01:22:07 <dmiles> hi theos!
+01:22:10 <Yepster> ah forwarded to hotmail
+01:22:14 <theos> dmiles: re!
+01:22:30 <dmiles> how goes things?
+01:23:34 * dmiles gets coffee
+01:25:10 * theos too
+01:25:54 <Yepster> btw I was thinking about cyc and triggers
+01:26:23 <dmiles> triggers on INSERT ?
+01:26:24 <Yepster> (implies (ante) (expandsublfn something external)) :forward
+01:26:51 <dmiles> ah propication the COns to Orical
+01:27:04 * dmiles turns up the spell checker
+01:27:35 <dmiles> i made a cutre Sublisp function .. works well
+01:27:38 <dmiles> err cuite
+01:28:02 <dmiles> subl: (cyc-query '(#$randomOf ?X 40 ) #$JamudMt '(:backchain 1))
+01:28:03 <CycLBot> (((?X . 21)))
+01:28:38 <dmiles> performSubL works well
+01:29:13 <dmiles> it was my first ;P
+01:29:32 <dmiles> subl: (cyc-query '(#$randomOf 21 40 ) #$JamudMt '(:backchain 1))
+01:29:32 <CycLBot> no answers found
+01:29:38 <dmiles> subl: (cyc-query '(#$randomOf 21 ?W ) #$JamudMt '(:backchain 1))
+01:29:39 <CycLBot> no answers found
+01:29:48 <dmiles> subl: (cyc-query '(#$randomOf 1 2 ) #$JamudMt '(:backchain 1))
+01:29:49 <CycLBot> no answers found
+01:29:50 <dmiles> subl: (cyc-query '(#$randomOf 1 2 ) #$JamudMt '(:backchain 1))
+01:29:51 <CycLBot> true sentence
+01:30:03 <dmiles> ;P
+01:30:04 <Yepster> don't you get a bit tired of 'operater not known in the api?'
+01:30:12 <dmiles> yes yes
+01:30:37 <dmiles> well Steve said alot of things thought to be exposed in Eval arnt
+01:30:54 <dmiles> and in 0.7 they will be
+01:31:20 <dmiles> so its very possible they are actually there
+01:31:54 <Yepster> Well we've all been trained to be very patient.
+01:32:16 <Yepster> I am thinking of asking a the deadline for my graduation project to be postponed
+01:32:25 <Yepster> it's a bit too big
+01:32:45 <Yepster> and i'd like the english->cycl stuff 
+01:33:19 <dmiles> i would not be shocked if (english-to-cycl was there and not exposed
+01:34:15 <Yepster> perhaps, but the kb should problably also contain some more stuff. dunno
+01:34:38 <Yepster> I already spent too much time on things that turned out to be partially in 0.6
+01:34:51 <Yepster> no offence to the cyc guys though -> they said this in front
+01:35:20 <Yepster> And I'm really happy to be able to get used to cyc with 0.6
+01:35:28 <dmiles> definately
+01:35:50 <dmiles> once they expose more SubL it will make it easier to write ourt own Lisp modules
+01:36:23 <dmiles> did you see my email about the Uber Socket ?
+01:36:34 <dmiles> man that would be nice
+01:36:51 <dmiles> we could have a much better 2-way interface
+01:36:54 <Yepster> nope
+01:37:10 <Yepster> also sent to users@
+01:37:12 <Yepster> ?
+01:37:25 <dmiles> to Open Forum
+01:37:35 <dmiles>  Open Forum must forward to your hotmail to
+01:39:09 <dmiles> http://sourceforge.net/forum/message.php?msg_id=1599815
+01:40:42 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+01:55:00 --- quit: jlatour ()
+01:56:30 <Yepster> I'd like the uber socket!
+01:57:08 <dmiles> it sems like only about 10 lines of SubL to create it
+01:57:42 <dmiles> so it shouldnt be too much to ask
+01:58:21 <dmiles> you could even call to your own cyc server to create subquery space
+01:58:50 <dmiles> i know steve is creating in .7 the abiluity to do that anyways
+02:11:30 --- quit: rkrush ("Hey!  Where'd my controlling terminal go?")
+02:24:34 <Yepster> it would enable many things
+02:36:28 <dmiles> btw Steve: http://www.swi.psy.uva.nl/projects/SWI-Prolog/mailinglist/archive/2066.html
+02:36:55 <dmiles> shows a little on how to access cyc from SWI-Prolog
+02:37:08 <dmiles> i made a socket server so cyc could access prolog as well
+02:37:14 <dmiles> if it had uber socket
+02:38:53 <dmiles> prolog answers to socket reads a lisp term.. converts to prolog and executes
+02:57:54 * theos is away: food
+03:04:15 <dmiles> on windows swi-prolog can automate OLE/COM objects making anything ActiveX avaible ato Cyc
+03:04:33 <dmiles> so people could make VB things Cyc could talk to
+03:35:25 * theos is back (gone 00:37:30)
+04:10:26 --- join: turtle (turtle@c16415.artrmn1.nsw.optusnet.com.au) joined #opencyc
+04:16:18 <turtle> ec3: i see the football
+04:16:53 <turtle> sorry, wots the bot cmd dmiles?
+04:25:34 * theos is away: soccer to prevent boredom
+04:43:46 --- quit: Edison ()
+04:59:15 <Yepster> e2c: english to cycl
+05:01:04 <Yepster> e2c: a fish
+05:01:18 <Yepster> subl: (constant-apropos "fish")
+05:01:20 <CycLBot> (CommercialFishingBoat Fish Fish-TheWord)
+05:18:59 * theos is back (gone 00:53:25)
+05:27:49 <Yepster> what is the official name for the 'real life counterpart' of something that is modeled in a kb or e.g. db?
+05:28:02 <Yepster> i am searching for a better word than 'meaning'
+05:28:23 <Yepster> it's for a 'opencyc tutorial for oraclers'
+05:29:21 <Yepster> hmm perhaps i better ask this in comp.something
+06:13:27 --- quit: humhut-away (Read error: 104 (Connection reset by peer))
+06:13:56 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+06:15:57 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+06:24:05 <turtle> e2c: i see the football
+06:40:10 --- quit: stevereed_home ("Client Exiting")
+06:44:37 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+06:55:05 * theos is away: brain is loadshedding
+06:55:08 * theos is back (gone 00:00:02)
+06:56:11 --- part: theos left #opencyc
+07:19:46 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+08:13:40 --- quit: Yepster ()
+08:34:32 * dmiles begins working on represting making a sandwitch
+08:34:44 * dmiles representing
+08:37:59 <dmiles> turtle, the e2c command is offline right this minute.. updating to not just cache cyc info, but to use the NLU predicates as needed durring it's inner loop
+08:39:46 <dmiles> (but you had the command correct) it takes full sentence, imperative, or just noun phrase
+11:37:06 * dmiles returns
+11:37:06 --- quit: johnd (Read error: 104 (Connection reset by peer))
+12:56:28 --- quit: Graham ("xchat exiting..")
+13:22:52 <dmiles> ask (verbStrings ?X "does")
+13:22:53 <CycLBot> (((?X . Do-TheWord)))
+13:23:02 <dmiles> ask (?P ?X "does")
+13:23:03 <CycLBot> no answers found
+13:23:42 <dmiles> ask (nounStrings ?X "dogs")
+13:23:43 <CycLBot> no answers found
+13:24:25 <dmiles> ask (?P ?X "vigor")
+13:24:26 <CycLBot> no answers found
+13:24:34 <dmiles> ask (nounStrings ?X "vigor")
+13:24:35 <CycLBot> (((?X . Vigor-TheWord)))
+13:25:06 <dmiles> ok cool .. confirming can look up based on strings
+13:25:43 <dmiles> ask (lexicalRef ?P ?X "vigor")
+13:25:44 <CycLBot> no answers found
+13:27:33 <dmiles> subl: (cyc-query '(lexicalRef ?P ?X "vigor") #$InferencePSC '(:backchain 2))
+13:27:35 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+13:27:35 <CycLBot> (LEXICALREF ?P ?X "vigor")
+13:27:36 <CycLBot> was not well formed because:
+13:27:37 <CycLBot> (LEXICALREF ?P ?X "vigor") is not a well-formed formula.
+13:27:37 <CycLBot> Perhaps LEXICALREF is insufficiently defined.")
+13:27:49 <dmiles> subl: (cyc-query '(#$lexicalRef ?P ?X "vigor") #$InferencePSC '(:backchain 2))
+13:27:50 <CycLBot> no answers found
+13:28:21 <dmiles> subl: (cyc-query '(#$lexicalRef ?P ?X "vigor") #$InferencePSC '(:backchain 5 :depth 100))
+13:28:22 <CycLBot> no answers found
+13:28:36 <dmiles> subl: (cyc-query '(#$lexicalRef ?P ?X "be") #$InferencePSC '(:backchain 5 :depth 100))
+13:28:37 <CycLBot> no answers found
+13:29:44 <dmiles> subl: (cyc-query '(#$partOfSpeech ?P ?X "be") #$InferencePSC '(:backchain 5 :depth 100))
+13:29:45 <CycLBot> (((?P . Be-TheWord) (?X . BeAux)))
+13:30:01 <dmiles> subl: (cyc-query '(#$partOfSpeech ?P ?X "vigor") #$InferencePSC '(:backchain 5 :depth 100))
+13:30:01 <CycLBot> no answers found
+13:30:23 <dmiles> subl: (cyc-query '(#$partOfSpeech ?P ?X "don't") #$InferencePSC '(:backchain 5 :depth 100))
+13:30:24 <CycLBot> (((?P . Do-TheWord) (?X . DoAux)) ((?P . Do-TheWord) (?X . Aux-Negated)))
+13:45:02 --- quit: turtle (Read error: 110 (Connection timed out))
+14:33:08 <dmiles> i need to find a single "string" -> *-TheWord mappingpredicate
+14:37:27 --- join: jlk (~The_Man@ool-18bb3dfd.dyn.optonline.net) joined #opencyc
+14:37:58 <dmiles> hi jlk from #lisp
+14:38:10 <jlk> hello yourself.
+14:38:11 <CycLBot> hello jlk
+14:38:17 <jlk> hi bot.
+14:38:42 --- nick: jlk -> jkl
+14:39:08 <dmiles> whats going on?
+14:39:42 <jkl> not alot.
+14:39:47 <jkl> just looking for a job.
+14:40:06 <dmiles> economy differnt
+14:40:16 * jkl wonders if free software has anything to do with it. :)
+14:40:28 <jkl> there isn't any justic in our system you know.
+14:40:50 <jkl> it is how much money you have, not respect.
+14:41:06 <dmiles> hrrm.. well people cant even pay companies to use software sometimes..
+14:41:49 <jkl> I won two court cases against a company (them not paying me). I have yet to see the money. The sheriff has a 50/50 chance of executing the order.
+14:41:53 <dmiles> like if you and i had product X.. we spent 100k on developing.. how can we talk a compnay into even using it 
+14:42:36 <jkl> miles, the company has programmers, they just build away.
+14:42:40 <dmiles> interesting yeah.. i had a sheriff auction on a compnay that was going under about 6 yrs ago
+14:42:56 <dmiles> didnt see anything but free drinks they sold
+14:43:12 <jkl> That is why software must be free.
+14:43:15 <dmiles> i got a free coffee card for 6k
+14:43:53 <jkl> Or injustice will result.
+14:44:10 <dmiles> yes definately.. well most software seems to be free now
+14:44:37 <dmiles> at least there is a free way to do anyhting
+14:44:38 <jkl> yes, the very issue of the hardarch of finding a job.
+14:44:51 <jkl> but it is worth it. :)
+14:45:27 <jkl> Lawyers get way too much pussy and hot cars to need more.
+14:45:47 <jkl> :P
+14:45:51 <dmiles> :)
+14:46:14 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+14:46:48 <dmiles> well it's good you wnet through the tumbles of the suites (i guess you only had time :)
+14:47:11 <jkl> which ones?
+14:47:20 <jkl> oh.
+14:47:25 <dmiles> the two you one
+14:47:26 <jkl> i see.
+14:47:33 <jkl> I was thinking software suite.
+14:47:34 <jkl> :P
+14:47:50 <jkl> It isn't only the suites.
+14:48:08 <jkl> My psychologist office is a complex.
+14:48:20 <jkl> Lot's of models walking around.
+14:48:40 <jkl> I asked who else works there.
+14:48:45 <jkl> guess.
+14:49:08 <jkl> They were (models) were very good at making me feel like a steak.
+14:49:10 <jkl> haha.
+14:50:03 <jkl> The irony in the system is what makes it so interesting.
+14:50:50 <jkl> It'd be quite interesting to trace how many lawyers I got to get model pussy.
+14:51:07 <jkl> Try parsing that sentence with a NLG.
+14:51:09 <jkl> hahaha.
+14:51:30 <dmiles> one sec
+14:52:28 <dmiles> trace2 ({Verb} +Inf +T1 "to trace how many lawyers I got to get model pussy") 
+14:52:28 <dmiles> |_Pcs-----interesting2 ({Adj} +Intens +F3 +Psych "quite interesting to trace how many lawyers I got to get model pussy") 
+14:52:28 <dmiles> |_Tsub----_X2 ({Verb}) 
+14:52:28 <dmiles> |_Tobj----lawyer2 ({Noun} +Plur +Anim +Conc +Humn +Count +Humn_sr "how many lawyers I got to get model pussy") 
+14:52:29 <dmiles>           |_LOps----many2 ({Adj} +Quant +Intens +Predet +Wh +Plur "how many") 
+14:52:31 <dmiles>           |_TindOf--get3 ({Verb} +Past +Blocked +D1 +V3 "It ' d be quite interesting to trace how many lawyers I got to get model pussy") 
+14:52:34 <dmiles>                     |_Tsub----I2 ({Pron} +Pers1 +Sing +Anim +Humn "I") 
+14:52:36 <dmiles>                     |_Tobj----get4 ({Verb} +Blocked +D1 +T1 "It ' d be quite interesting to trace how many lawyers I got to get model pussy") 
+14:52:39 <dmiles>                               |_Tsub----I2 
+14:52:41 <dmiles>                               |_Tobj----lawyer2 
+14:52:43 <dmiles>                               |_Tind----pussy2 ({Noun} +Pers3 +Sing +Anim +Conc +Count +Mass "model pussy") 
+14:52:44 <dmiles>                                         |_Mod-----model2 ({Noun} +Pers3 +Sing +A0 +Conc +Count "model") 
+14:53:38 <dmiles> looklls right ;)
+14:56:36 <dmiles> the Tn & An are variables
+14:57:49 <jkl> how the hell can it know pussy is a person?
+14:58:03 <jkl> It is (cat)?
+14:58:08 <dmiles> thirdPerson
+14:58:27 <dmiles> but related to Animal
+14:58:34 <jkl> oh.
+14:59:02 <jkl> it will always suffer from human faults without history.
+14:59:10 <jkl> :)
+14:59:17 <jkl> model pussy"
+14:59:18 <CycLBot> Your mode is now set to 'pussy"'.
+14:59:20 <dmiles> maybe Cyc can help it out
+14:59:42 <jkl> can be muff, or a woman, or a woman modelling pussy.
+15:00:37 <dmiles> i ased it about muff..
+15:00:37 <dmiles> what1 ({Pron} +Wh +Pers3 +Sing "what") 
+15:00:39 <dmiles> |_Modals--be1 ({Verb} +Pres +WhQ +L1 "what is a muff ?") 
+15:00:39 <dmiles>           |_LTopic--what1 
+15:00:39 <dmiles> |_Equiv---muff1 ({Noun} +Indef +Pers3 +Sing +Conc +Count "a muff") 
+15:01:20 <dmiles> well thats the generic noun placeholder
+15:02:35 <dmiles> actually it figured it out...
+15:02:56 <dmiles> based on "can be muff, or a woman, or a woman modelling pussy."
+15:03:06 <dmiles> be1 ({Verb} +Modal +Pres +DoMod +I0 +Possibl "Can be muff , or a woman , or a woman modelling pussy .") 
+15:03:06 <dmiles> |_Modals--can1 ({Verb} +Inf +I0 "Can") 
+15:03:06 <dmiles> |_Tsub+---muff1 ({-3} {Noun} {or} +Pers3 +Sing +Conc +Count "muff ,") 
+15:03:06 <dmiles>           |_CoCoords+-woman3 ({1} {Noun} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr) 
+15:03:06 <dmiles>                     +-woman4 ({2} {Noun} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr) 
+15:03:06 <dmiles>       +---woman1 ({-1} {Noun} {or} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr "a woman ,") 
+15:03:08 <dmiles>           |_CoCoords+-muff2 ({3} {Noun} +Pers3 +Sing +Conc +Count) 
+15:03:09 <dmiles>                     +-woman5 ({2} {Noun} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr) 
+15:03:12 <dmiles>       +---woman2 ({-2} {Noun} {or} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr "a woman modelling pussy") 
+15:03:15 <dmiles>           |_CoCoords+-muff3 ({3} {Noun} +Pers3 +Sing +Conc +Count) 
+15:03:16 <dmiles>                     +-woman6 ({1} {Noun} +Indef +Fem +Pers3 +Sing +Anim +Conc +Humn +Count +Humn_sr) 
+15:03:19 <dmiles>           |_TsubOf--model1 ({Verb} +Prog +T1 +Loc_sr "modelling pussy") 
+15:03:20 <dmiles>                     |_Tobj----pussy1 ({Noun} +Pers3 +Sing +Anim +Conc +Count +Mass "pussy") 
+15:03:31 <dmiles> or saw at least 2 canidate woman types
+15:03:38 <dmiles> woman1, woman2
+15:05:51 <dmiles> but created as you see three muffs
+15:09:19 <dmiles> one would need to maop bit-labels to isa/hasAttrbutes
+15:09:36 <dmiles> like uses this as the form of inmput to parse form
+15:09:41 <dmiles> err parse from
+15:09:50 --- quit: jlatour ()
+15:09:58 <dmiles> since it is more structured then english
+15:14:59 <dmiles> could discard part of speech tags maybe
+15:15:20 <dmiles> since they mainly help the person-tense agreement
+15:15:54 <jkl> also have it go against the relationship of someone modelling pussy.
+15:16:11 <jkl> very cycish.
+15:16:49 <dmiles> i think cyc could get the i dead of Modeling being like a program that presents something
+15:16:59 <dmiles> err the idea
+15:17:49 * dmiles thinks he is ussing a dragon naturally speaking keyboard sometimes
+15:19:04 <dmiles> woman 2 is the perfoming actor via (TsubOf model1 woman2 )
+15:20:11 <dmiles> err ( TsubOf  woman2 model1)(Tobj pussy1 model1)
+15:21:03 <dmiles> witch is like cycls bodilierDoer (TsubOf)
+15:21:18 <dmiles> ant least in this context of model1
+15:22:40 <dmiles> it has to take place in +Loc_sr
+15:22:53 <dmiles> so it denatoes an Event
+15:23:04 <dmiles> err denotes
+15:23:33 <dmiles> *_sr = situation role
+15:23:33 <CycLBot> You "= situation role"
+15:36:26 <jkl> lawyers modelling pussy wasent that on ally mcbeal?
+15:40:13 --- part: Psion left #opencyc
+15:48:08 <jkl> dmiles, that interpreter kinda sucks.
+15:53:09 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+16:58:12 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+17:46:08 --- join: turtle (turtle@c16415.artrmn1.nsw.optusnet.com.au) joined #opencyc
+17:46:51 --- part: turtle left #opencyc
+18:05:58 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+19:01:08 --- quit: graylensman ("Client Exiting")
+19:31:17 --- join: futhin (thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+19:34:48 --- quit: futhin (Client Quit)
+19:54:06 --- part: jkl left #opencyc
+22:02:28 --- part: aminorex left #opencyc
+23:59:59 --- log: ended opencyc/02.06.21

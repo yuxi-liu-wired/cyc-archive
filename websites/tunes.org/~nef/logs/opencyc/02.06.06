@@ -1,0 +1,839 @@
+00:00:00 --- log: started opencyc/02.06.06
+00:35:37 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+00:37:52 <dmiles> wb :)
+03:13:51 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+03:41:34 <dmiles> hrrm i am having a difficulty with the socket server when it gives me an exception
+03:42:07 <dmiles> when i get a 500 error, it my be multiple lines liong
+03:42:13 <dmiles> the message
+03:42:37 <dmiles> the only way to know when it's done is to get a timeout on reading
+03:46:39 <dmiles> actually i better confirm .. may the string is properly delimited
+03:46:58 <dmiles> err maybe
+03:56:03 <dmiles> ok.. i see, i can carefully make the reader take a Number "String" or a Term Term
+03:56:17 <dmiles> so in all cases is it a Number and Term ?
+04:56:42 --- join: Yepster (~yhavinga@cust-217-117-225-39.utelisys.net) joined #opencyc
+04:56:50 <Yepster> time
+04:56:50 <CycLBot> the time was Wed Jun 05 21:35:52 PDT 2002
+05:02:00 <dmiles> good morning :)
+05:02:20 <Yepster> morning!
+05:02:47 <dmiles> i am excited about trying out the oracle interface.. will be doing so this afternoon
+05:02:57 <Yepster> cool!
+05:03:26 <Yepster> Did you read the doc? If you have any questions, or want a shell on my oracle machine, I could arrange that
+05:03:32 <dmiles> read the docs
+05:03:57 <Yepster> Still a lot to do, especially the cyclist -> oracle converstion needs attention
+05:03:58 <dmiles> i will give it a try on my machine.. the install and things
+05:04:15 <dmiles> but maybe a shell to try it would be nice
+05:04:27 <Yepster> is oracle installed yet?
+05:04:51 <dmiles> i havent installed oracle yet.. thats all thats holding me up
+05:05:08 <dmiles> is there an rpm install?
+05:05:13 <Yepster> nope
+05:05:30 <Yepster> you need to download it (3 cd's) from otn.oracle.com
+05:05:30 <dmiles> still .. wont be hard
+05:05:50 <Yepster> and x access to the machine
+05:06:04 <dmiles> have that.. (eXceed)
+05:06:25 <Yepster> I remember I had two 'issues' with 9i on debian, I'm looking right now if i documented them, a second
+05:06:27 <dmiles> my linux machines are all videocardless .. for less irq use :)
+05:06:53 <Yepster> I'm sure you know export DISPLAY
+05:06:59 <dmiles> ( but 1 gig ram on a 1.4 ghz proc )
+05:07:24 <dmiles> yep its actually part of my /etc/profile 
+05:07:45 <Yepster> Ok, on Debian woody:
+05:07:52 <Yepster> segfault during installation:
+05:07:58 <Yepster> install package locales
+05:08:17 <Yepster> .mk errors (in install interface) at nearly the end of the install:
+05:08:33 <Yepster> downgrade binutils 2.11 naar 2.10 of 2.9
+05:08:37 <Yepster> naar = to
+05:08:47 <Yepster> after install binutils can be upgraded again
+05:09:18 <Yepster> oracle install on <>solaris is always a bit work, but once it's installed, it's simply rock solid
+05:12:21 <Yepster> Let me also cut and past part of my bash profile. It's a mess because it's
+05:12:29 <Yepster> originally from solaris, but hey it works
+05:12:43 <Yepster> # Settings voor Oracle env
+05:12:43 <Yepster> PATH=/usr/ccs/bin:/usr/bin:/bin:/usr/openwin/bin:/usr/local/bin
+05:12:43 <Yepster> ORACLE_BASE=/u01/app/oracle
+05:12:43 <Yepster> ORACLE_HOME=$ORACLE_BASE/product/9.0.1
+05:12:43 <Yepster> ORACLE_SID=devdb
+05:12:44 <Yepster> ORACLE_TERM=xterm
+05:12:46 <Yepster> export ORACLE_SID ORACLE_BASE ORACLE_HOME ORACLE_TERM
+05:12:48 <Yepster> #TNS_ADMIN=/home/oracle/config/8.1.7
+05:12:50 <Yepster> #export TNS_ADMIN
+05:12:52 <Yepster> #NLS_LANG=AMERICAN-AMERICA.UTF8
+05:12:54 <Yepster> #export NLS_LANG
+05:12:56 <Yepster> ORA_NLS33=$ORACLE_HOME/ocommon/nls/admin/data
+05:12:58 <Yepster> export ORA_NLS33
+05:13:00 <Yepster> LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib:/usr/openwin/lib
+05:13:02 <Yepster> LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/td/lib:/usr/ucblib:/usr/local/lib
+05:13:04 <Yepster> export LD_LIBRARY_PATH
+05:13:06 <Yepster> # Set shell search paths:
+05:13:08 <Yepster> PATH=$PATH:$ORACLE_HOME/bin  
+05:13:10 <Yepster> export PATH
+05:13:12 <Yepster> sorry for the spam
+05:13:29 <Yepster> Very important: ORACLE_SID. Maybe it's better to set this at
+05:13:40 <Yepster> orcl
+05:13:52 <Yepster> because I think that's the default and also assumed in docs
+05:14:12 <dmiles> what is in /usr/openwin/lib ?
+05:14:46 <Yepster> Nothing important, it can be omitted
+05:14:59 <Yepster> part of the solaris standard path I think
+05:15:26 <Yepster> also /usr/td/lib / usr/ucb etc. Important is the $ORACLE stuff and the /usr/local stuff
+05:15:50 <Yepster> have to go now, ttyl8r
+05:16:05 <dmiles> cool i started the download
+05:16:17 <dmiles> well looks like they give me 2 at a time :)
+05:16:39 <dmiles> will you be on later?
+05:26:57 * theos_wrk is back (gone 18:18:00)
+05:27:06 <theos_wrk> dmiles
+05:27:08 <dmiles> hi theos
+05:27:18 <theos_wrk> looks good with funding for you
+05:27:34 <theos_wrk> can you enroll in a university somwhere?
+05:27:49 <theos_wrk> or even without it is possible, afaik after a short talk
+05:27:53 <theos_wrk> details come to me later
+05:28:48 <dmiles> yes, cool.. i am uncertain about the abiilty to get grant aid for school (the only way to aford right now)
+05:29:14 <dmiles> (to enroll)
+05:30:01 <theos_wrk> ahh
+05:30:02 <theos_wrk> I ce
+05:30:14 <theos_wrk> i figure the exact details out and get back to you
+05:30:58 <dmiles> good to see you online
+05:31:10 * theos_wrk waves
+06:11:36 --- quit: theos_wrk ("Client Exiting")
+06:13:12 --- join: theos__wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+06:13:36 <dmiles> what is an API to get a list of connected socket clients?
+06:14:18 <dmiles> (the call)
+06:14:51 <dmiles> and is there a call that i can close a zombie?
+06:57:53 <Yepster> back
+07:02:28 * theos__wrk is away: buying laptop
+07:02:46 <Yepster> ask: (#$genls #$Person #$Animal)
+07:02:47 <CycLBot> java.lang.NullPointerException
+07:03:06 <Yepster> prove: (#$genls #$Person #$Animal)
+07:03:06 <CycLBot> java.lang.NullPointerException
+07:03:25 <dmiles> oh cyc server got reset.. have to restart jhava :0
+07:03:41 <Yepster> hmm does anyone know how to get justification from cyc? fi-prove just returns nil
+07:04:30 --- quit: CycLBot (Remote closed the connection)
+07:04:36 <Yepster> where fi-ask returns the answer
+07:05:58 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:07:26 <Yepster> ask: (#$genls #$Person #$Animal)
+07:07:26 <CycLBot> true sentence
+07:07:35 <Yepster> prove: (#$genls #$Person #$Animal)
+07:07:36 <CycLBot> no answers found
+07:07:52 <dmiles> FI-Prove is mysterous
+07:08:34 <Yepster> yeah, but somehow the KB browser has a very neat justification. I searched for it in the cyc api but can't find it
+07:08:55 <dmiles> subl: (FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)
+07:08:55 <CycLBot> no answers found
+07:09:30 <dmiles> bsh: ""+cyc.converse("(FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)")
+07:09:30 <CycLBot> Sourced file: <Inline eval of: ""+cyc.converse("(FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)"); > : Error in method invocation: Method converse( java.lang.String ) not found in class'logicmoo.CycMoo' : at Line: 1 : in file: <Inline eval of: ""+cyc.converse("(FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)"); > : cyc .converse ( "(FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)" )
+07:10:03 <dmiles> oops i'll check that out later
+07:10:48 <dmiles> i am trying to get the Raw fasl result
+07:16:46 <dmiles> we'll need to ask Steve or continue expermentation to find out where and how to jet to the justification cache
+07:17:14 <reed_> here
+07:17:14 <dmiles> i believe it stores it even durring an FI-PROVE
+07:17:25 <dmiles> good morning
+07:17:52 <reed_> i'll investigate the justification functions and ensure they are exposed in the api.
+07:18:37 <dmiles> neat
+07:18:43 <reed_> the subsumption query justifications are already in the api - (why-genl? ...)
+07:19:31 <Yepster> and what about why-myownpredicate
+07:19:59 <dmiles> well there is a way of turning on/off justification (tracing?) of certain predicates
+07:20:04 <Yepster> (was afk for a moment)
+07:21:25 <reed_> i put the question to our two inference programmers by email.
+07:21:44 <Yepster> thanks
+07:21:58 <Yepster> while we're at it, can I ask another question?
+07:22:07 <reed_> of course!
+07:22:35 <Yepster> suppose I have rules p->q and q->r in the db
+07:23:00 <Yepster> Without instances
+07:23:27 <dmiles> no instance of p?
+07:23:29 <Yepster> How can I answer that r could be infered from p?
+07:23:37 <Yepster> possibly.
+07:24:11 <dmiles> if they are backchained then you should be able to if you have a backchain depth greater then 2
+07:24:39 <Yepster> yes, but I don't want to make p(x) true.
+07:24:54 <Yepster> so asking for r will result in 'not proven'
+07:25:10 <dmiles> sao your questing is could you query (p->r) ?
+07:25:31 <reed_> i think that fi-hypothesize will do it.
+07:25:40 <dmiles> err so your question is if you can ask hypothetically
+07:25:58 <Yepster> (off to the manual)
+07:26:41 <dmiles> so if you queries (#$implies (p ?X) (r ?X)) it should answere ?x=?x
+07:27:16 <reed_> here is the comment for fi-prove:
+07:27:20 <reed_> ;; fi-hypothesize-int : formula mt &optional (name-prefix "HYP") term-ids -> [list of bindings]
+07:27:20 <reed_> ;;   bindings are (var . temp-constant) pairs of constants which were created 
+07:27:20 <reed_> ;;     to satisfy FORMULA in MT
+07:27:20 <reed_> ;;   if FORMULA is unsatisfiable, NIL is returned
+07:27:22 <reed_> ;;   if FORMULA has no free variables, ((T . T)) is returned
+07:27:22 <reed_> ;;
+07:27:23 <reed_> ;; fi-prove-int : formula mt &optional backchain number time depth -> [list of bindings]
+07:27:25 <reed_> ;;   like fi-ask-int, except 
+07:27:27 <reed_> ;;     formula must be an #$implies
+07:27:29 <reed_> ;;     hypothesis mt is hypothesized
+07:27:31 <reed_> ;;     free variables in antecedent are hypothesized
+07:27:32 <Yepster> it should answer T if there is a rule
+07:27:33 <reed_> ;;     proof mt is hypothesized
+07:28:01 <reed_> well it can give bindings if any were found, but in your example,
+07:28:08 <dmiles> not just a rule.. but a deducaalbe connection between p and r
+07:28:11 <reed_> ((T . T)) should be returned.
+07:28:39 <Yepster> cool! Now I read it, it indeed reads as just what I need. But I'm sure i 
+07:28:47 <dmiles> so FI-PROVE will give a (T.T) in the case that there are answers?
+07:28:48 <Yepster> read most api stuff before
+07:28:54 <reed_> I dont think that I put an example in CycAccess.java for fi-prove but we could ask
+07:28:59 <reed_> CycLBot
+07:29:10 <reed_> using SubL
+07:29:55 <dmiles> subl: (FI-PROVE '(#$genls #$Person #$Person) #$InferencePSC)
+07:29:56 <CycLBot> (((T . T)))
+07:29:59 <Yepster> I'm going to test a bit with a few forward chain rules, be back l8r
+07:30:06 <reed_> the api functions are fi-prove and fi-hypothesize
+07:30:14 <Yepster> thanks again!
+07:30:42 <dmiles> subl: (FI-PROVE '(#$genls #$Person #$Animal) #$InferencePSC)
+07:30:43 <CycLBot> no answers found
+07:30:56 <reed_> I asked JohnD to get our OpenCyc developers mailing list set up.
+07:31:08 <Yepster> I already subscribed to it
+07:31:18 <dmiles> hrrm maybe Person is not always a homosapian but those you are Human by mental functions :)
+07:31:43 <reed_> good
+07:31:59 <reed_> the formula for fi-prove must be #$implies
+07:32:33 <dmiles> interesting
+07:32:54 <reed_> subl: (fi-hypothesize '(#$genls #$Person #$Animal) #$InferencePSC)
+07:32:56 <CycLBot> ((T . T))
+07:32:59 <reed_> ok?
+07:33:22 <Yepster> hmm that was the other question:
+07:33:31 <Yepster> How can I get justification for an answer
+07:33:31 <dmiles> ah makes sense.. there where two questions interleaved i think
+07:33:47 <Yepster> thought it was with fi-prove
+07:33:48 <dmiles> oh thats the one emailed
+07:33:52 <Yepster> yup
+07:34:18 <Yepster> subl: (fi-ask '(#$genls #$Person #$Animal) #$InferencePSC)
+07:34:19 <CycLBot> (((T . T)))
+07:35:13 <dmiles> subl: (fi-prove '(#$implies (#$isa ?X #$Person)(#$isa ?X  #$Animal)) #$InferencePSC)
+07:35:14 <CycLBot> (((T . T)))
+07:38:44 <Yepster> subl: (why-genl #$Person #$Animal)
+07:38:45 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator WHY-GENL is not defined in the API")
+07:39:01 <Yepster> subl: (why-genl? #$Person #$Animal)
+07:39:02 <CycLBot> no answers found
+07:39:13 <Yepster> whatever
+07:39:25 <reed_> i'll look it up.
+07:40:36 <reed_> subl: (why-genl? #$Person #$Animal #$InferencePSC)
+07:40:37 <CycLBot> (((genls Person Animal) :TRUE))
+07:40:53 <reed_> because there is that assertion in the KB
+07:41:10 <Yepster> that looks like the stuff that's in the KB browser interface
+07:41:18 <reed_> subl: (why-genl? #$Person #$Thing #$InferencePSC)
+07:41:19 <CycLBot> ((genls Person Animal) :TRUE)
+07:41:20 <CycLBot> ((genls Animal PerceptualAgent) :TRUE)
+07:41:20 <CycLBot> ((genls PerceptualAgent Agent) :TRUE)
+07:41:21 <CycLBot> ((genls Agent Agent-Generic) :TRUE)
+07:41:21 <CycLBot> ((genls Agent-Generic (CollectionUnionFn (TheSet Agent-Generic (GroupFn Agent-Generic)))) :TRUE)
+07:41:22 <CycLBot> ((genls (CollectionUnionFn (TheSet Agent-Generic (GroupFn Agent-Generic))) TemporalThing) :TRUE)
+07:41:22 <CycLBot> ((genls TemporalThing Individual) :TRUE)
+07:41:24 <CycLBot> ((genls Individual Thing) :TRUE)
+07:42:08 <reed_> the kb browser interface is giving justifications from all Cyc inference modules,
+07:42:17 <dmiles> genls is specifically a sbhl module that supports why-genl? as well?
+07:42:19 <reed_> not just subsumption which is used here.
+07:42:26 <reed_> yes.
+07:42:29 <dmiles> ah
+07:42:44 <reed_> why-isa? i think works the same way.
+07:42:48 <reed_> i'll try it.
+07:43:03 <dmiles> so the issue if that the wh-* has to be captured from everywhere
+07:43:17 <reed_> subl: (why-isa? #$Brazil #$Thing #$InferencePSC) 
+07:43:18 <CycLBot> ((isa Brazil PublicConstant) :TRUE)
+07:43:18 <CycLBot> ((genls PublicConstant CycLConstant) :TRUE)
+07:43:19 <CycLBot> ((genls CycLConstant HLIndexedTerm) :TRUE)
+07:43:20 <CycLBot> ((genls HLIndexedTerm CycLIndexedTerm) :TRUE)
+07:43:20 <CycLBot> ((genls CycLIndexedTerm CycLClosedExpression) :TRUE)
+07:43:21 <CycLBot> ((genls CycLClosedExpression CycLExpression) :TRUE)
+07:43:21 <CycLBot> ((genls CycLExpression CycLTerm) :TRUE)
+07:43:23 <CycLBot> ((genls CycLTerm SubLExpression) :TRUE)
+07:43:25 <CycLBot> ((genls SubLExpression Thing) :TRUE)
+07:43:54 <reed_> not what I expected, I was looking for Brazil .. IndependentCountry ...
+07:44:06 <reed_> but it gave one of the valid justifications.
+07:44:20 <dmiles> rr. so the issue is that the why-* has to be captured from every module which has been important in the context of the web UI.. but may not have made as much support in the SubL environment
+07:44:39 <reed_> subl: (why-isa? #$Brazil #$Entity #$InferencePSC)
+07:44:40 <CycLBot> no answers found
+07:45:15 <dmiles> subl: (find-constant #$Brazil)
+07:45:16 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A CONSTANT at 0x4391133c is not a stringp.")
+07:45:26 <dmiles> subl: (find-constant "Brazil")
+07:45:26 <CycLBot> Brazil
+07:45:47 <reed_> subl: (why-isa? #$Brazil #$Country #$InferencePSC)
+07:45:47 <CycLBot> no answers found
+07:47:37 <dmiles> ask: (nearestIsa Brazil ?W)
+07:47:37 <CycLBot> (((?W . PublicConstant)) ((?W . IndependentCountry)) ((?W . Entity)))
+07:48:16 <dmiles>  subl: (why-isa? #$Brazil #$IndependentCountry #$InferencePSC)
+07:48:17 <CycLBot> no answers found
+07:48:56 <dmiles>  subl: (why-isa? #$Brazil #$IndependentCountry #$EverythingPSC)
+07:48:56 <CycLBot> no answers found
+07:49:52 <dmiles> CYC(2): (why-isa? #$Brazil #$IndependentCountry #$EverythingPSC)
+07:49:52 <dmiles> NIL
+07:49:52 <dmiles> T
+07:49:59 <dmiles> not bot related :)
+07:50:43 <dmiles> wonder if it does that on Allegro vs C-ified lisp
+07:51:01 <reed_> subl: (with-all-mts (why-isa? #$Brazil #$Country))
+07:51:02 <CycLBot> (((isa Brazil IndependentCountry) :TRUE) ((genls IndependentCountry Country) :TRUE))
+07:51:18 <reed_> so if you put in the mt explicitly,
+07:51:24 <reed_> Cyc only looks there.
+07:51:25 <dmiles> ah maybe isa infernce module is very carefull
+07:51:39 <reed_> wrap with the expression (with-all-mts ...
+07:51:41 <dmiles> ah makes sense now :)
+07:51:53 <reed_> to make all mts relevant for the query.
+07:52:25 <reed_> I tested on the OpenCyc command line.
+07:52:45 <reed_> ... the console interface that we also call the SubL listener.
+07:53:11 <Yepster> About with-all-mts, is it true that with-mt gives an error?
+07:53:55 <dmiles> speaking of such, is there any API differences between 3601 and SubL listener.
+07:54:05 <dmiles> (like amount of exposed api)
+07:54:49 <reed_> no - should be identical.
+07:55:07 <reed_> we make them call the same underlying eval function.
+07:56:26 <dmiles> ok, leads to the next question is there a way of telling 3601 to close the socket (besides just disconnectiong?)
+07:56:35 <reed_> (api-quit)
+07:56:53 <dmiles> ah.. i leared (Cclose) was not good :)
+07:57:05 <dmiles> err just (close)
+07:57:25 <reed_> when the client closes the socket it is treated by cyc as (api-quit)
+07:57:48 <reed_> the cyc thread does not get stopped actually until it trys to
+07:57:53 <dmiles> ok good.. becasue i have a connectionless and persistant mode with the prolog socket
+07:57:57 <reed_> write its answer back to the socket.
+07:58:14 <reed_> same for CycAccess.
+07:58:23 <reed_> you must use persistent socket,
+07:58:39 <reed_> in the case where you have created some server-side variables.
+07:58:42 <Yepster> Hmm with Oracle there isn't really a problem as long as people close
+07:58:49 <reed_> and want to keep state there.
+07:58:49 <Yepster> their oracle connection
+07:59:14 <reed_> right Oracle and Cyc would behave the same way.
+07:59:29 <dmiles> so any server caches will melt away.. that is good
+07:59:37 <reed_> right.
+07:59:52 <reed_> you can make assertions that persist if you want.
+08:00:01 <reed_> same as db updates.
+08:00:13 <dmiles> oh thats the only way i know so far :)
+08:00:46 <reed_> works for Cyc.
+08:09:54 <dmiles> looks like i have my earlier question answered about how to know when cyc is done sending back results froma  socket call
+08:10:35 <dmiles> in all cases its a number<space>Term
+08:11:10 <dmiles> the term if starts with " it will conatain no unescaped "
+08:54:31 --- join: theos (~torsten@port-212-202-183-54.reverse.qdsl-home.de) joined #opencyc
+08:57:01 * theos is away: book keeping :(
+09:00:46 <Yepster> hmm drawback of being able to be very precise in knowledge entry is
+09:01:02 <Yepster> that is gets so large. I should have sticked with db's..
+09:07:43 <dmiles> thats what iu enjoy about monotonic based logic.. its very precise and based on axioms that are contextually true
+09:08:06 <dmiles> did you get your p imples q impiles r question answered?
+09:08:52 <dmiles> that it is logically equivalent to p implies r
+09:12:41 <Yepster> well I went right on with the actual rules I want to use in my app
+09:12:59 <Yepster> but it turns out that's going to be a bit more work then I thought
+09:13:33 <Yepster> rules are interpretation of a very simple healthcare related law
+09:14:29 <Yepster> how's the oracle download coming along?
+09:15:21 <dmiles> 2 CDs
+09:15:30 <dmiles> i need to fire up the other two
+09:15:38 <Yepster> are there 4?
+09:15:41 <dmiles> yes
+09:15:56 <Yepster> ...
+09:16:21 <dmiles> one sec .. maybe to 4th is goodies
+09:16:25 <Yepster> I wonder what they manage to put in there. oracle 8 was 1 cd
+09:18:28 <dmiles> Oracle9iAS Enterprise Edition for Linux 
+09:18:28 <dmiles> - Certified on SuSe SLES7, Kernel 2.4.7, glib 2.2.2-55
+09:18:28 <dmiles> - Certified on Linux RedHat Advanced Server
+09:18:28 <dmiles>  lnx_iasv20_disk1.cpio.gz (539,698,099 Bytes) 
+09:18:28 <dmiles>  lnx_iasv20_disk2.cpio.gz (581,641,219 Bytes) 
+09:18:29 <dmiles>  lnx_iasv20_disk3.cpio.gz (565,243,998 Bytes) 
+09:18:31 <dmiles>  lnx_iasv20_disk4.cpio.gz (72,334,906 Bytes) 
+09:19:36 <dmiles> i am getting 300k from there site
+09:20:19 <dmiles> about 12 more minutes 
+09:20:56 <theos> bloat ware
+09:20:59 * theos is back (gone 00:23:58)
+09:21:00 <dmiles> but i will have to break away before i get time to install it
+09:22:07 <dmiles> the prolog interface i think is done enough.. that i can base the nl parser on it.. i made it so someone could tranparently use cyc predicates in their prolog program
+09:22:30 <dmiles> when they think they are asserting to prolog.. its really going into the cyc db
+09:23:08 <dmiles> and have exception throws working so cyc exceptions can become prolog exceptions
+09:23:59 <dmiles> might be fun to even make it so a prolog program can get converted to Cyc logic assertions
+09:24:31 <Yepster> back
+09:24:36 <dmiles> i have to find what cyc has for a modus ponens only rule (ig no modus tolens)
+09:25:05 <dmiles> Steve any imput on how to make a cyc rule that has no contropositive?
+09:25:42 <dmiles> so that if A implies B.. that is the only true rule.. not  "not B implies not A"
+09:26:43 <dmiles> i wonder if this is supposed to be the differnce between Monotonic and Default
+09:27:08 <Yepster> I thought default meant exceptios possible
+09:27:19 <Yepster> like a one legged person
+09:27:41 <dmiles> ah.. yes that was what i read it as, as well
+09:28:10 <Yepster> is the behaviour that you want not default?
+09:29:01 <dmiles> well i want a rule to only fire one way that is always monotonically true that is KB entailment
+09:29:02 <Yepster> as in: negation as failure default off
+09:29:30 <dmiles> explicit negation from Modus Tolens logic being off
+09:29:46 <dmiles> for exampkle when i say all birds have wings...
+09:30:09 <dmiles> then if something didnt have wings then cyc would know it was not a bird
+09:30:22 <dmiles> this is a legal dedcution in logic
+09:30:36 <Yepster> yes, and that should be ok, or not?
+09:30:40 <dmiles> (well explicitly asserted to not have wings)
+09:30:49 <dmiles> that is Ok in normal logic
+09:31:00 <dmiles> but i have a horn clause
+09:31:26 <dmiles> that i have things that say.. 
+09:32:04 <dmiles> if/then
+09:32:16 <dmiles> like in a program
+09:32:31 <dmiles> that are not really logic
+09:33:10 <dmiles> but what logic gets reduced to
+09:33:29 <dmiles> so when we say (A implies B) ...
+09:33:34 <Yepster> i guess you should use #$implies then
+09:33:44 <Yepster> dunno what the alternative is though
+09:33:54 <Yepster> should -> shouldn't
+09:34:05 <dmiles> cychears:  if A then B,  if not B then not A
+09:34:50 <dmiles> as part of its process of converting to internal structure
+09:35:19 <dmiles> i have rules that are already w/in internal structure
+09:35:34 <Yepster> my solution to stuff cyc didn't do: oracle :)
+09:35:43 <Yepster> I'm going to do actions in oracle
+09:36:02 <dmiles> well cyc does it.. but i cant find the API to put it in there
+09:36:17 <dmiles> one system i used had an operator called 'entails'
+09:36:35 <dmiles> so you could say (#$entauils #$A #$B)
+09:37:13 <dmiles> entails was the what #$implies reduces to
+09:37:55 <dmiles> if you say (#$implies (#$and #$A #$B) #$C) 
+09:38:05 <dmiles> it rduces to 3 entailments
+09:39:42 <dmiles>  (#$entails (#$and #$A #$B) #$C)  (#$entails (#$and #$C (#$not #$B)) (#$not #$A) )(#$entails (#$and #$C (#$not #$A)) (#$not #$B) )
+09:40:03 <dmiles> err that was wrong..
+09:40:42 <dmiles>  (#$entails (#$and #$A #$B) #$C)  (#$entails (#$and (#$not #$C) #$B) (#$not #$A) )(#$entails (#$and (#$not #$C) #$A) (#$not #$B) )
+09:41:00 <dmiles> but entails is not in Cyc
+09:42:02 <dmiles> so on the 2nbd statement .. if C was false and B was true.. A must be false
+09:42:20 <dmiles> becasue if A was true then C would have to B true
+09:42:28 <dmiles> oops
+09:42:32 <dmiles> becasue if A was true then C would have to be true
+09:42:59 <dmiles> because A and B implies C
+09:43:45 <dmiles> so by knowing C is false only A or B could be true at once
+09:44:30 <dmiles> with the statement (#$implies (#$and #$A #$B) #$C) 
+09:44:38 <dmiles> so if i weant to make a weak statment
+09:45:00 <dmiles> that doesnt have all those extra tagles..
+09:45:24 <dmiles> err tangles.. then i need to say that (#$entails (#$and #$A #$B) #$C) 
+09:45:47 <dmiles> that wuld be called a Horne Clause
+09:46:46 <dmiles> about hose being false a above that means negation by failure is not used.. but real cyc known negation
+09:47:54 <dmiles> so what i in effect am doing (by wanting to give cyc horne clauses) is giving it incomplete reasoning
+09:49:27 <dmiles> the benifit to cyc is faster rules that have no extra menanings beyond what is there
+09:52:36 --- quit: CycLBot (Remote closed the connection)
+09:52:57 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+09:53:44 --- quit: CycLBot (Remote closed the connection)
+09:59:14 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+10:01:29 <dmiles> sentenceImplies 
+10:01:33 <dmiles> found it 
+10:05:18 <dmiles> (implies (and (trueSentence ?ANTE) (sentenceImplies ?ANTE ?CONSEQ)) (trueSentence ?CONSEQ))
+10:05:34 <dmiles> thats like a 1/2 of an implies
+10:07:11 <Yepster> Hmm to be used for rules that quantify over cycl formulas
+10:08:11 <dmiles> yes so deeply cyc converts (someone correct me if i am wrong) cyc internally converts implies into multiple sentenceImplies
+10:08:43 <dmiles> it may not explicitly convert them.. but durring infernce this happens
+10:09:45 <dmiles> but people in the logic world prefer to see implies in their KB browser
+10:10:43 <dmiles> and if people asserted sentenceImplies too much Cyc's common sense would not be as robust
+10:11:42 <dmiles> but when someone writes a program in Prolog they always think in sentenceImplies.. since they are in charge of their owbn quantification
+10:12:38 <Yepster> so writing in prolog is easier
+10:13:39 <dmiles> it depends on what kinds of poroblems your solving.. prolog is easier if you are very sure of variables semantics
+10:14:21 <dmiles> meaning you know how they will be used perfectly
+10:15:02 <dmiles> but prolog doesnt have all the features cyc has with argument contraints and modus tolens unless you go crazy overboard writting all that extra in
+10:16:02 <dmiles> you can have the best of both with Cyc
+10:16:22 <Yepster> well I also like the microtheories a lot
+10:16:41 <Yepster> do you know a bit about duration of time stuff in cyc?
+10:16:57 <dmiles> i studied it a little
+10:17:13 <Yepster> didn't use it in logicmoo yet?
+10:17:14 <dmiles> but never used it practically
+10:17:32 <dmiles> thats is the goal.. but i am still trying to make a state :)
+10:17:48 <dmiles> before i really trhread time correctly
+10:18:11 <dmiles> meaning the KB is always reflecting the 'now'
+10:18:26 <Yepster> I need to make a condition like (yearsduration > 1 year)
+10:18:29 <dmiles> if i player moves.. an unassert and assert take place
+10:18:56 <Yepster> You could do that with an oracle transaction ;-)
+10:19:19 <Yepster> or was that why you are working on swi-prolog -> cyc?
+10:19:23 <dmiles> well time as a UnitOfMeasure can be compared
+10:19:59 <dmiles> the reason i started on Swi-prolog to cyc was i wrote a NL parser in prolog and wanted to make it dirrectly cliemnt cyc
+10:20:11 <dmiles> dirrectly client
+10:20:30 <dmiles> so that way as new information comes in.. i dont have to repropogate
+10:21:25 <dmiles> if new information comes to prolog.. if a predicate is bound to 'living in cyc' then that information goes to Cyc first
+10:22:18 <dmiles> so cyc gets the chance to raise a WFF exception
+10:22:30 <Yepster> wff saw that term before..
+10:22:33 <dmiles> but it never actually goes to prolog.. 
+10:22:51 <Yepster> btw that oracle-transaction idea really isn't so bad..
+10:23:13 <Yepster> let me get an url of what you get with oracle as well.. (when it comes to timing)
+10:23:29 <dmiles> WFF is an sentence (well formed formula) that satifies all the constaints of a ELAssertable
+10:24:01 <dmiles> as well as its own internal contraints via the predicate it used
+10:24:32 <Yepster> http://download-west.oracle.com/otndoc/oracle9i//901_doc/appdev.901/a89852/toc.htm
+10:24:41 <Yepster> supplied pl/sql packages
+10:24:50 <Yepster> -> dbms_job -> job ques
+10:24:58 <Yepster> for job scheduling
+10:25:26 <Yepster> handy if you want to say: move that object there in one hour or something
+10:25:52 <Yepster> there are also supplied java packages
+10:26:17 <Yepster> (click book list link on the right top)
+10:26:18 <dmiles> ah yeah it would be nice to que up a plan that is made for an NPC
+10:26:45 <dmiles> there
+10:27:07 <dmiles> ah Advance Quing
+10:27:11 <Yepster> hehe
+10:28:26 <Yepster> the thing of oracle i've become to appreciate over the years (programmed
+10:29:17 <Yepster> on as/400 and postgresql before) is that when you need something
+10:29:30 <dmiles> well the purpose of logicmoo is to enforce practicality into a Logical KB
+10:29:30 <Yepster> exotic, oracle has a solution
+10:30:06 <dmiles> (a world that is built from axioms)
+10:31:05 <dmiles> i took a program "Adventure in Prolog" a couple years ago.. and ent crazy turning it into a full featured playable moo
+10:31:26 <dmiles> and wondered how to put the entire earth into it
+10:31:46 <Yepster> I was imp for a while on a friends merc based mud.
+10:32:12 <dmiles> is that mercury?
+10:32:23 <Yepster> (genls Merc Diku)
+10:32:29 <dmiles> ah yeah i see
+10:33:01 <dmiles> merc is a programming system
+10:33:05 <Yepster> What I wanted then was to put all info in a db, instead of all linked lists.
+10:33:14 <Yepster> merc -> diku based mud in c.
+10:33:46 <dmiles> well if you set that DB up to trigger and forward propogate you could have a complete engine
+10:33:46 <Yepster> Problem is: table for each sort of thing, or a real abstract concept - relation erd.
+10:34:25 <dmiles> well i could see entire tables with only one row
+10:34:31 <Yepster> Since db's have a table catalog themselves, I decided that what I would do was reimplement a
+10:34:44 <Yepster> db in a db, so I figured-> lets spent time on other things
+10:35:49 <dmiles> heh i was involved in writting a DB system in m$SQL once it was wierd becasue we kept shirking between 10 tables to 2 back to 10 back to 2
+10:35:50 <Yepster> But now there is OpenCyc, and there is a Oracle and there is a link between the two.
+10:36:48 <dmiles> we spent 6 months in conferences trying to decide how we'd put a m$sql engine inside m$sql 
+10:37:11 <Yepster> So I want to use Oracle for 'outside system' facts, and transaction control, and Cyc for interpreting
+10:37:13 <Yepster> the data
+10:37:27 <Yepster> and inference new facts
+10:37:52 <dmiles> yeah. there are things they both do better then the other
+10:38:27 <Yepster> Problem with logicmoo as I see it ->
+10:38:47 <Yepster> I read a paper once about a person that implemented a workflow engine in lambdamoo
+10:39:16 <Yepster> well, as soon as people start doing things with muds...
+10:39:51 <Yepster> I don't know how to say it, but most ideas are like
+10:40:08 <Yepster> 'muds are cool, so I want to do something with it, don't care what'
+10:40:25 <Yepster> and that's a predjudice I have, and I think others maybe too.
+10:40:42 <Yepster> I know logicmoo is different
+10:40:56 <dmiles> well the idea of logicmoo is to let the world we build into cyc's KB we want to be able to work with it like a world.. not always like logic
+10:41:02 <Yepster> but my first though when I read about it first was -> here we go again
+10:41:57 <dmiles> so the idea is to give a view of the KB that is conditioned for facrts in the form we percive them in.. not what philosocally could be asserted
+10:42:12 <Yepster> Don't get me wrong, I think the end result of logicmoo == ultimate goal of opencyc project
+10:42:22 <dmiles> hehe.. funny
+10:42:28 <dmiles> but very true
+10:42:54 <dmiles> i just have publicly said that
+10:42:58 <dmiles> er never have
+10:43:01 <Yepster> funny
+10:43:33 <dmiles> yeah a place that all the hard work that you did in the KB can finnaly be yours to use
+10:43:58 <dmiles> to step into and see if it makes sense
+10:44:05 <Yepster> What logic or math is needed to 'represent to world' -> very big ai issue.
+10:45:41 <dmiles> hopefully its possible that representation will be able to make sense from both ends
+10:46:20 <Yepster> I think that cyc + oracle have enough functionality to make a small start.
+10:46:46 <Yepster> also important: to capture one's (kb engineer) view of the world in an mt
+10:47:10 <dmiles> well cyc has definately has the need to be able to work with things that are in large sets
+10:47:12 <Yepster> so the goal should not be: represent the world as it is, but how it is seen
+10:47:38 <dmiles> and have always explained it wants to do so in exteral dbs
+10:48:29 <Yepster> but the difference is who's in control. Does cyc dispatch calls to oracle or vice versa?
+10:48:58 <dmiles> yes.. i can see for example.. the big weakness is that in alot of SQLish things you have to constantly colate information to show it o the world
+10:49:14 <Yepster> everything is a representation
+10:49:28 <dmiles> which is fine.. but then when they want to put it back in the form they say it in is the messy part
+10:49:38 <dmiles> err they saw it in
+10:49:57 <dmiles> so in m$sql peiople would make 'views' for tables
+10:50:13 <dmiles> but they could not INSERT back into a view
+10:50:23 <Yepster> implementation issues
+10:50:44 <Yepster> a view is still a transformation of another representation
+10:51:02 <dmiles> yes.. then they would need an entire proceedure just to find the place to store say a phoine number and go to the correct table
+10:51:29 <Yepster> oracle: updatable materialized views :-)
+10:51:29 <dmiles> or maybe thats all they had was phone number.. and had to set address to null
+10:52:34 <dmiles> so the need to represent the world in name+property+value pairs is inmportant
+10:53:03 <dmiles> and sound slike you can do that in oracle.. better then m$sql
+10:53:19 <Yepster> yeah what's the model needed to present all information? I think the collection of assertions
+10:53:25 <Yepster> model of OpenCyc is good at that
+10:53:26 <CycLBot> Your mode is now set to 'of opencyc is good at that'.
+10:54:05 <dmiles> thats why opencyc is good for that.. and helps oracle duble colate
+10:54:34 <dmiles> err make tables for the demands of the client
+10:54:55 <dmiles> basded on how they think things need to look for their operation
+10:55:08 <Yepster> hmm well the way I see it Oracle can make Cyc 'active'
+10:55:31 <dmiles> yes .. and since they work in the same paradymn its a good marrage
+10:56:29 <dmiles> people are able to think in a DB format when they design input/entry forms
+10:56:46 <dmiles> and when they are creating software that uses facts
+10:58:25 <dmiles> it woukld not be fun to go into a company that uses oracle and try to port them over to only using opencyc
+10:58:44 <dmiles> but when you can bonus their oracle with opencyc .. that is nice
+10:59:43 <dmiles> and when their oracle developers can write tools that help manange opencyc .. even better
+11:00:12 <Yepster> hmm well
+11:00:38 <dmiles> since opencyc is not very active
+11:00:40 <Yepster> oracle has a bit of lock-in
+11:00:58 <Yepster> not like microsoft, but because it just can do so many things easily
+11:01:08 <Yepster> which are not present in other products
+11:01:22 <Yepster> e.g. try to load opencyc.jar in another db :-)
+11:01:39 <dmiles> yeah it does seem the most robust db system
+11:02:15 <dmiles> they have no choice but to add new features all the time
+11:02:55 <dmiles> so oracle making cyc active.. that is good
+11:03:50 <dmiles> to be able to grab data and immpoort to cyc every once in a while from another place
+11:03:52 <Yepster> What I would like is a sort if trigger function in cyc. That when something becomes true,
+11:03:55 <Yepster> it can call oracle.
+11:04:03 <Yepster> Now I have to monitor it from oracle
+11:04:40 <dmiles> yeah 90% of the code i was writting for logicmoo was based on time based syncronization
+11:05:10 <Yepster> I wonder if the logicmoo mt can be used without external programs
+11:05:16 <dmiles> then i just gave up for a while and said' ok i ts all go9ing into cyc' 
+11:05:34 <dmiles> so i dont have to do syncronization
+11:05:54 <Yepster> I thought a bit about doing something more with the scott demo tables.
+11:06:15 <Yepster> E.g. show that when cyc knows scott is an employee, it knows he is a persons etc
+11:06:32 <Yepster> maybe also some knowledge from logicmoo could be used in that demo.
+11:06:36 <dmiles> well as soon as we see working programs in SubL.. we can make code that calls the outside workld
+11:06:56 <dmiles> i cant wait to see how i can call a socket from inside cyc.. send something.. then get a result back
+11:07:16 <Yepster> a predicate (callextproc or so
+11:07:32 <Yepster> that would be  _very_ cool
+11:08:05 <dmiles> yes yes yes yes
+11:09:07 <dmiles> hrmk it would be nice if the fact that scott BEING A PERSON CAN MAKE HIS DATA SHOW UP IN OTHER PARTS OF THE db
+11:09:17 <dmiles> oops InveRted caps lock
+11:09:18 <Yepster> hmmm but when to call it. When it becomes true? And what happens when it has been called?
+11:09:55 <dmiles> callextproc?
+11:10:11 <Yepster> hmm scott is actualle the owner of the example db schema. He is also an employee in that example
+11:10:13 <dmiles> it would have to be activated durring an infernce query
+11:11:05 <dmiles> yes.. then he could have a row in there with the minumal ther collems set
+11:11:20 <Yepster> (trigger (isa ?X Person) (call oracle to insert ?X into persons))
+11:11:50 <dmiles> well you can set that up with a forward chain rule..
+11:11:54 --- join: ziggyzag (ziggy@arty.rsiegler.org) joined #opencyc
+11:12:04 <dmiles> at assert it will query fior all known persons already
+11:12:42 <dmiles> then whenever a new person comes in that forward rule happens for each
+11:14:06 <dmiles> so that rule trigger would maintain the dependant
+11:14:12 <dmiles> (s)
+11:14:35 <dmiles> but when that rule diapears cyc wilol wish to remove the dependants
+11:14:37 <Yepster> (s?)
+11:14:44 <dmiles> so that rule trigger would maintain the dependants
+11:15:10 <dmiles> cyc remembers that some things depended on forward chaining riules
+11:15:23 <Yepster> well for now, the missing cyc trigger problem is solved by handling all assertions via oracle->
+11:15:30 <dmiles> that way when the rule disapears the dependants can be forgotten
+11:15:36 <Yepster> if something extra needs to be done, it can be done then.
+11:15:47 <Yepster> hmm o no,
+11:15:59 <Yepster> when cyc infers some new facts... shit
+11:16:12 <dmiles> so maybe the trigger will need to at leasdt have 2 side efrfectys
+11:16:36 <dmiles> and then one more side effect when the rule disappers
+11:17:11 <dmiles> 2 side effects.. invoke something (your trigger) .. memo it done so so it doesnt do it again
+11:17:49 <Yepster> hmm this is beginning to sound like 'frame problems' and ramification stuff
+11:18:16 <dmiles> in cyc currently creates a new dependant.. then it knows not to do it again becasue the dependant is already there
+11:19:23 <dmiles> if it called to a forieng predicate .. maybe you would want also to do something else as well
+11:19:55 <Yepster> so what we need:
+11:20:16 <Yepster> cyc + triggers + fast computer (i.e. real-time active cyc) + logicmoo kb = ultimate goal
+11:20:50 <dmiles> hehe yes :)
+11:21:15 <dmiles> we need cyc to have call back forieng hooks!
+11:21:29 <dmiles> like callmypred
+11:21:54 <dmiles> yes those triggers
+11:21:58 <Yepster> Steve said something that they made integration stuff with jdbc in cyc
+11:22:12 <Yepster> btw, you might like this link:
+11:22:21 <dmiles> show
+11:22:22 <Yepster> http://pespmc1.vub.ac.be/books/Rep&Change.pdf
+11:22:43 <Yepster> it's a bit much, but is very comprehensive and stuff from it has good ideas
+11:23:05 <dmiles> while its loading.. you did soee onAssert
+11:23:35 <Yepster> ?
+11:23:48 <dmiles> afterAdding 
+11:23:55 <dmiles> afterRemoving 
+11:24:14 <dmiles> a infered fact i think till triggers afterAdding
+11:24:53 <Yepster> that would be it I think
+11:24:53 * theos is away: jetlagging
+11:26:32 <Yepster> The paper becomes interesting at page 70 or so (real page, not the pdf page)
+11:27:17 <dmiles> is 99 real pages or pdf pages?
+11:27:21 <Yepster> pdf pages
+11:29:43 <Yepster> another question, is there a logicmoo in logicmoo?
+11:30:08 <Yepster> (i know, I'm an asshole :-)
+11:30:13 <Yepster> forget it
+11:30:46 <dmiles> each instance of waht is supposed to be an agent is supposed to have their own Mt.. which i am not sure if i can coverup assertions 
+11:30:54 <dmiles> from parent Mts
+11:31:14 <Yepster> it would be funny though if somewhere in logicmoo there would be e.g. a cyclbot
+11:31:31 <dmiles> hes in the moo now
+11:31:31 <Yepster> so you could ask that cyclbot about it's own state or sth
+11:31:36 <dmiles> look
+11:31:37 <CycLBot> Nothing appearent about area 1002 '#$Area1002'
+11:31:37 <CycLBot> (!)
+11:31:45 <dmiles> oops not loead .. one sec
+11:31:52 <Yepster> is he a client or an object in the moo?
+11:32:12 <dmiles> he is a client.. that beleivbes he's an object
+11:32:16 <dmiles> he is in cyc yes
+11:32:30 <dmiles> but not of cource running out of its process
+11:32:40 <dmiles> one sec while i load the moo
+11:32:46 <Yepster> suppose I would log into logicmoo with telnet, could I ask questions to it?
+11:32:52 <dmiles> yes
+11:33:02 <Yepster> logicmoo == cool
+11:33:03 <CycLBot> logging is set false
+11:33:03 <dmiles> i thinkits on port 4444
+11:33:18 <dmiles> but i have that Fw'd off from wan
+11:33:26 <Yepster> hmmm shit no this is my third beer talking
+11:33:46 <Yepster> is cyclbot a reified object in logicmoomt?
+11:34:03 <dmiles> in JamudMt
+11:34:05 <Yepster> i.e. is it's state available from cycl?
+11:34:06 <dmiles> but yeah
+11:34:12 <dmiles> all of it
+11:34:21 <Yepster> hmm!!
+11:35:21 <Yepster> I am very interested in cyclbot's representation in jamudt
+11:35:34 <dmiles> one sec.. while it find the import util
+11:36:31 <dmiles> java logicmoo.converter.CircleMudLoader -cyc ../world/10.*
+11:36:38 <Yepster> reminds me a bit of .. (let me get a link)
+11:36:48 <dmiles> ok its loading a ciclemud file into Cyc the startrek one
+11:36:58 <Yepster> http://nl.ijs.si/~damjan/fs-ai.html
+11:37:15 <Yepster> what am I supposed to do?
+11:37:40 <dmiles> ask (inContGeneric CycLBot ?W)
+11:37:42 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+11:37:43 <CycLBot> (#$inContGeneric #$CycLBot ?W)
+11:37:43 <CycLBot> was not well formed because:
+11:37:44 <CycLBot> (#$inContGeneric #$CycLBot ?W) is not a well-formed formula.
+11:37:45 <CycLBot> Perhaps #$inContGeneric is insufficiently defined.")
+11:37:48 <dmiles> ask (in-ContGeneric CycLBot ?W)
+11:37:49 <CycLBot> (((?W . Area1002)))
+11:38:19 <dmiles> its still loading the fuile though
+11:38:48 <dmiles> tits loading .wld .obj .mod .*(
+11:39:08 <Yepster> afk
+11:39:09 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-start
+11:39:13 <dmiles> thats his K
+11:39:14 <dmiles> B
+11:42:39 <dmiles> look
+11:42:40 <CycLBot> You find yourself in the middle of a well lit corridor on the Enterprise.
+11:42:40 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+11:42:45 <CycLBot> [westerly] [South] [East] [north]
+11:42:54 <dmiles> look CycLbot
+11:43:00 <dmiles> look CycLBot
+11:43:09 <CycLBot> Nothing appearent about cyc l bot '#$CycLBot'
+11:44:51 <dmiles> i just entered his room
+11:44:54 <dmiles> look
+11:44:54 <CycLBot> You find yourself in the middle of a well lit corridor on the Enterprise.
+11:44:55 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+11:44:55 <CycLBot> dmiles [westerly] [South] [East] [north]
+11:46:10 <Yepster> Very cool..
+11:46:31 <Yepster> what host port 4444?
+11:46:42 <dmiles> one sec while i drop ipchains
+11:51:51 <dmiles> ok 12.225.207.235 4444
+11:52:10 <dmiles> hrrm 
+11:52:50 <Yepster> yhavinga@app2:~$ telnet 12.255.207.235 4444
+11:52:50 <Yepster> Trying 12.255.207.235...
+11:53:04 <dmiles> i have intergrating al the new client stuff on the IRC bot...
+11:53:22 <dmiles> then paisting it into the MudClient.java whenever it worksd on the IURC cleint
+11:53:44 <dmiles> ok i think i need to restart it
+11:53:47 --- quit: CycLBot (Remote closed the connection)
+11:54:12 <Yepster> Still very funny, when you talk about the cyclbot and it being reified in cyc, talk becomes
+11:54:16 <Yepster> 'it thinks' etc.
+11:54:35 <Yepster> (yeah, still the third beer talking)
+11:54:45 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+11:54:53 <dmiles> ok try telneting in
+11:55:25 <Yepster> nothing happens
+11:55:53 <Yepster> ah, it's not that important
+11:56:18 <dmiles> well the way i get on is from the client that telnets into the localhost.. i am supposed to be creating that object and conncting ti to the server socket
+11:56:25 <Yepster> o i see. 225 instead of 255
+11:56:34 <Yepster> connected
+11:56:49 <dmiles> yiour name will become your constant
+11:57:05 <Yepster> hehe, isa yepster pc
+11:57:12 <Yepster> not too fast though
+11:57:32 <dmiles> ask (isa yepster ?X)
+11:57:34 <CycLBot> ((?X . Artifact-Generic))
+11:57:34 <CycLBot> ((?X . PartiallyIntangible))
+11:57:35 <CycLBot> ((?X . PartiallyIntangibleIndividual))
+11:57:35 <CycLBot> ((?X . SomethingExisting))
+11:57:35 <Yepster> I now know why it's behing a firewall :-P
+11:57:36 <CycLBot> ((?X . Thing))
+11:57:37 <CycLBot> ((?X . Individual))
+11:57:37 <CycLBot> ((?X . TemporalThing))
+11:57:39 <CycLBot> ((?X . (CollectionUnionFn (TheSet Agent-Generic (GroupFn Agent-Generic)))))
+11:57:41 <CycLBot> ((?X . Agent-Generic))
+11:57:43 <CycLBot> ((?X . AgentiveArtifact))
+11:57:45 <CycLBot> ((?X . PlayerInstance))
+11:58:03 <dmiles> why? :)
+11:58:29 <Yepster> well, I am still waiting for the prompt for the password!
+11:58:55 <Yepster> this is the forward chaining you mentioned earlier?
+11:58:56 <dmiles> hrrm press neter twice
+11:59:09 <dmiles> i thiouyght so but it shoukld have ben resolved by now
+11:59:20 <dmiles> i mean the forward chaing shuld be completed
+11:59:30 <Yepster> well still no response
+11:59:52 <dmiles> well i havent been maintaing that particualr mud cleint that the server launches
+12:00:02 <dmiles> ?(the player connector)
+12:00:17 <Yepster> ok, for a later time then
+12:00:44 <dmiles> i been found my cycle has been code on bot->debug>code n bot>update other stuff
+12:00:58 <dmiles> but not hitting the other stuff as much
+12:01:25 <dmiles> ah it never assinged you a room to be in
+12:01:37 <dmiles> it doesnt do passwd yet
+12:01:59 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8538
+12:02:04 <dmiles> thats me in the mud
+12:02:24 <dmiles> after you hit that page and move if you refresh then i will be alsware
+12:02:28 <Yepster> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8540
+12:02:34 <Yepster> yepster :-)
+12:02:54 <dmiles> yep :)
+12:03:45 <dmiles> mt JamudMt
+12:03:55 <dmiles> assert: (genls PlayerInstance Person)
+12:03:57 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+12:03:57 <CycLBot> (#$genls #$PlayerInstance #$Person)
+12:03:58 <CycLBot> was not well formed because:
+12:03:58 <CycLBot> NIL")
+12:04:16 <dmiles> hrrm
+12:04:29 <Yepster> because: isayso
+12:05:24 <Yepster> still.. I am wondering what logicmoo will look like eventually.
+12:05:45 <Yepster> because you cannot infer all things happening
+12:06:00 <Yepster> so the state of logicmoo is always only 'all things observed'
+12:06:08 <Yepster> not 'all things that are true'
+12:06:42 <dmiles> yes. one would need to use extra 'look' type predicates
+12:07:09 <dmiles> that gave information
+12:07:27 <dmiles> teleport Russia
+12:07:36 <dmiles> look
+12:07:37 <CycLBot> You find yourself in the middle of a well lit corridor on the Enterprise.
+12:07:37 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+12:07:38 <CycLBot> (!)
+12:07:41 <Yepster> It would be funny to model the yale shooting problem in  logicmoo
+12:08:12 <Yepster> I wouldn't know how
+12:08:45 <dmiles> how about in Cyc>?
+12:09:17 <dmiles> i guess a series of Events
+12:09:25 <Yepster> Well it requires actions and effects
+12:09:26 <dmiles> that startsAfter
+12:09:39 <dmiles> err startsAfterEndingOf
+12:10:10 <dmiles> well thats the thing i am seeing in Cyc .. one can describe something...
+12:10:32 <dmiles> but you would need to iterate though queries
+12:12:02 <Yepster> I should reformulate my master's thesis -> there are more interesting problems then the one I am busy with now
+12:12:10 <Yepster> to bad it's a bit too late for that
+12:13:57 <Yepster> Do you remember we talked about Schank earlier?
+12:14:05 <dmiles> that right 
+12:14:41 <Yepster> I am thinking of trying to put his 'explanation patterns' theory in cyc
+12:14:47 <dmiles> (on phone on hold.. so thats why i seem distracted)
+12:15:40 <Yepster> But the problem with that is, that it would be a model 'on top of' cyc, so there would be different
+12:15:55 <Yepster> levels of representation. hmm how to say this correct..
+12:16:36 <Yepster> but I wonder if that's a problem, because xp's could be restricted to a few mt's
+12:17:10 <dmiles> yes it should not have bad effects on anthing
+12:17:11 <Yepster> I would use the XP's to figure out why a (end) user asks a certain question
+12:17:42 <Yepster> match against existing XP's (belief-goal-action stuff) and then give some extra answers
+12:17:59 <dmiles> those realy would fit nice into cyc
+12:18:01 <Yepster> when cyc beliefs that's ok with the user's goals
+12:18:43 <dmiles> then the user (or non-user) could invoke the action
+12:19:12 <dmiles> so it would query for actions basiclly
+12:19:17 <Yepster> the xp's would actually be a sort of 'knowledge pattern' -> a standard way to reason about
+12:19:25 <Yepster> why people do things
+12:19:51 <dmiles> which really could work together with existing cyc knowledge
+12:20:26 <Yepster> yeah you said earlier to enumare humansociallifeevents or something
+12:20:53 <Yepster> but scripts are only one of 11 kinds of explanation sources -> it's a big bigger
+12:20:55 <Yepster> bit
+12:21:58 <Yepster> afk
+12:22:07 <dmiles> go on.. this is interesting.. its rare to talk to someone that has done alot of thought on this subject
+12:22:09 <CycLBot> Go where?
+12:23:04 <dmiles> so cyc could query out xp's .. it would be awesome if you create that into CycL
+12:23:38 <dmiles> i have to go for a short bit ..
+12:23:50 <dmiles> bbiaf
+12:33:36 <Yepster> Ok, I didn't read the whole book, but as far as I know it comes down to:
+12:33:54 <Yepster> find an explanation pattern (for some observed behaviour)
+12:34:12 <Yepster> there's a match with an existing explanation
+12:34:21 <Yepster> (categorised as: 
+12:35:28 <Yepster> alternate beliefs, laws of physics, institutional rules, rules of thumb, new facts, plans and goals,
+12:35:46 <Yepster> thematic, scripts, delta agency, lack of alternative plan, laws of the universe
+12:35:49 <Yepster> )
+12:36:08 <Yepster> if there's no match, try to alter an existing xp to create a new one.
+12:36:42 <Yepster> in a nutshell
+12:37:15 <Yepster> when I read the list again, I can't help to thing in mt's.
+12:37:40 <Yepster> as in: matching with existing cyc mt's
+12:38:12 <Yepster> so I have to find a way to automatically access cyc's knowledge in a format
+12:38:25 <Yepster> that can be used as input for an explanation pattern
+12:38:33 <Yepster> all in cyc ofcourse
+12:39:51 <Yepster> and ofcourse, some of the items on the list grouped by 'observer'
+12:40:04 <Yepster> e.g. my rules of thumb might differ from yours
+12:40:42 <Yepster> Schank's model makes sense, because new xp's are added when new explanations are created
+12:40:53 <Yepster> that's why my rules of thumb naturally differ from yours
+12:41:28 <Yepster> I wonder if something like that could be used in logicmoo. E.g. when yepster is logged in,
+12:41:42 <Yepster> logicmoo knows 'yepster thinks all blondes are stupid'
+12:41:43 <CycLBot> logging is set false
+12:42:09 <Yepster> stupid example
+12:42:17 <Yepster> I'm blonde
+12:43:24 <Yepster> hmm 'yepster beliefs in santa clause'
+12:44:03 <Yepster> etc
+12:50:54 <Yepster> Uhhh dmiles, I just read in the log that you are downloading the application server.
+12:51:45 <Yepster> You need the database, not the application server...
+12:58:55 <Yepster> I'm off now, ttyl8r
+13:01:21 --- part: Yepster left #opencyc
+13:35:32 --- join: theos_ (~torsten@port-213-20-227-93.reverse.qdsl-home.de) joined #opencyc
+13:50:07 --- quit: theos (Read error: 113 (No route to host))
+14:12:32 --- quit: ChanServ (Shutting Down)
+14:14:54 --- join: ChanServ (ChanServ@services.) joined #opencyc
+14:14:54 --- mode: carter.openprojects.net set +o ChanServ
+20:02:13 --- join: yottzumm ([VJamEJ8Yi@12-232-76-192.client.attbi.com) joined #opencyc
+20:05:13 <yottzumm> I'm thinking of doing something like: (#$or
+20:05:13 <yottzumm> 			(#$and (#$SuitOf (#$topCard ?TopCard #$DiscardPile) ?TopSuit)
+20:05:13 <yottzumm> 				(#$SuitOf ?Card ?TopSuit))
+20:05:13 <yottzumm> 			(#$and (#$ValueOf (#$topCard ?TopCard #$DiscardPile) ?TopValue)
+20:05:13 <yottzumm> 				(#$ValueOf ?Card ?TopValue))
+20:05:13 <yottzumm> 			(#$ValueOf ?Card #$Eight)
+20:05:15 <yottzumm> 		)
+20:06:22 <yottzumm> for encoding the rules to crazy eights.  Should I do this, or try to do something with #$isa
+20:07:06 <yottzumm> or #$genls
+20:07:11 <yottzumm> ???
+20:09:25 <yottzumm> oops I already see problems
+20:12:55 <yottzumm> (#$or
+20:12:55 <yottzumm> 			(#$and
+20:12:55 <yottzumm> 				(#$SuitOf ?TopCard ?TopSuit)
+20:12:55 <yottzumm> 				(#$topCard ?TopCard #$DiscardPile)
+20:12:55 <yottzumm> 				(#$SuitOf ?Card ?TopSuit))
+20:12:56 <yottzumm> 			(#$and 
+20:12:58 <yottzumm> 				(#$ValueOf ?TopCard ?TopValue)
+20:13:00 <yottzumm> 				(#$topCard ?TopCard #$DiscardPile)
+20:13:02 <yottzumm> 				(#$ValueOf ?Card ?TopValue))
+20:13:04 <yottzumm> 			(#$ValueOf ?Card #$Eight)
+20:13:06 <yottzumm> 		)
+20:21:22 <yottzumm> so if I were to do it with #$isa, I might try:
+20:21:36 <yottzumm> (#$or
+20:21:36 <yottzumm> 			(#$and
+20:21:36 <yottzumm> 				(#$isa ?TopCard ?CardCollection)
+20:21:36 <yottzumm> 				(#$topCard ?TopCard #$DiscardPile)
+20:21:36 <yottzumm> 				(#$isa ?Card ?CardCollection))
+20:21:37 <yottzumm> 			(#$isa ?Card #$EightCardCollection)
+20:21:39 <yottzumm> 		)
+20:25:23 <yottzumm> seems like usign SuitOf and ValueOf make the code easier to read
+21:19:11 --- quit: yottzumm ("Client Exiting")
+22:26:09 --- quit: theos_ ("Client Exiting")
+22:27:00 --- join: theos (~torsten@port-213-20-227-93.reverse.qdsl-home.de) joined #opencyc
+22:59:07 * theos is away: brain is loadshedding
+23:59:59 --- log: ended opencyc/02.06.06

@@ -1,0 +1,169 @@
+00:00:00 --- log: started opencyc/03.01.05
+05:40:51 --- nick: yepsterzz -> yepster
+06:11:10 <yepster> hmm
+06:11:38 <yepster> sbhl conflict: (genls TimeOfDay-AM Event) :TRUE AmbientConditionsMt
+06:11:39 <yepster>      because: (genls TimeOfDay-AM TimeOfDay) :TRUE
+06:11:39 <yepster>                (genls TimeOfDay TimeInterval) :TRUE
+06:11:39 <yepster>                (disjointWith TimeInterval Situation) :TRUE
+06:11:39 <yepster>                (genls Situation-Temporal Situation) :TRUE
+06:11:39 <yepster>                (genls Event Situation-Temporal) :TRUE
+06:12:06 <yepster> I tried to 'activate' relationAllInstance, since apparantly there is no HL module yet that
+06:12:25 <yepster> implements it.
+06:12:29 <yepster> so I asserted
+06:12:36 <yepster> (FI-ASSERT 
+06:12:36 <yepster> '(implies 
+06:12:36 <yepster>        (and 
+06:12:36 <yepster>            (relationAllInstance ?PRED ?TYPE-COL ?THING) 
+06:12:36 <yepster>            (isa ?INS ?TYPE-COL)) 
+06:12:36 <yepster>        (?PRED ?INS ?THING)) 'BaseKB ':MONOTONIC ':FORWARD)
+06:24:09 <yepster> hehe, just kill 'timeofday-am'
+06:24:22 <yepster> already 900 dependents
+06:24:34 <yepster> there must be over 6000 or so
+06:32:14 <yepster> hmm 7000
+06:32:46 <yepster> maybe I should not assert it forward
+06:40:20 <yepster> 15000
+07:04:57 <mdupont> hey yepster
+07:05:16 <yepster> hello
+07:05:28 <mdupont> whats new?
+07:05:52 <yepster> i'm trying to get relationAllInstance working for typeGenls
+07:06:29 <yepster> i'm getting the impression the binary (latest.bin) is missing some hl modules
+07:06:44 <yepster> since relationAllinstance is a rulemacropredicate
+07:07:11 <yepster> and all these predicate 'should' have some optimized code for them in the binary
+07:07:28 <mdupont> oh, that does not mean too much to me
+07:08:04 <yepster> well it should
+07:08:19 <yepster> because the current kb content is written using rulemacropredicates
+07:08:42 <yepster> ask (#$isa ?PRED #$RuleMacroPredicate) and you'll see a lot of familiar things
+07:09:00 <yepster> and you expect that what's in the kb works, right?
+07:10:44 <yepster> like genlMt
+07:11:05 <yepster> o shit my tosti!
+07:11:39 <mdupont> hmm
+07:11:54 <mdupont> ok i will have to get into the internals of cyc
+07:14:01 <yepster> hmm the release roadmap says the inference engine is complete
+07:16:12 <mdupont> i think is is very interesting
+07:16:32 <mdupont> but i wonder realy how to import large amounts of data in and out
+07:16:38 <mdupont> otherwise it is not interested
+07:16:42 <mdupont> intresting
+07:18:04 <yepster> you could write a java program that connects to cyc and postgres
+07:19:33 <yepster> maybe use apidemo as a start, cut out unwanted stuff and add jdbc support to postgres
+07:22:59 <yepster> ok its working right now
+07:23:30 <yepster> but very strange, when I assert it backwards, the implication somehow isn't used in a proof
+07:23:37 <yepster> so it must be asserted forward
+07:37:12 <yepster> hehe
+07:37:12 <yepster> Argument : Deduction #64780
+07:37:12 <yepster> (implies 
+07:37:12 <yepster>        (and 
+07:37:12 <yepster>            (isa ?INS ?TYPE-COL) 
+07:37:12 <yepster>            (relationAllInstance ?PRED ?TYPE-COL ?THING)) 
+07:37:14 <yepster>        (?PRED ?INS ?THING)) in BaseKB
+07:37:16 <yepster> (isa WF:Role_5 AgentTypeByAuthorization) in UniversalVocabularyMt
+07:37:18 <yepster> (relationAllInstance genls AgentTypeByAuthorization Agent) in BaseKB
+07:37:20 <yepster> --------------------------------------------------------------------------------
+07:37:47 <yepster> is support for genls WF:Role_5 Agent
+07:38:22 <yepster> and the only thing I did was add a row to a database table ;-)
+07:40:35 <yepster> Ok i'll stop bragging, but imho it's cool
+07:41:08 <yepster> he funny
+07:41:13 <mdupont> looks neat
+07:41:34 <yepster> two new greens (forward assertion) on a test participant (isa person):
+07:41:39 <yepster> (temperatureOfObject WF:Pati_2 (DegreeFahrenheit 90 110))
+07:41:39 <yepster> (heightOfObject WF:Pati_2 (Foot-UnitOfMeasure 0.75 8))
+07:41:51 <mdupont> what is a ?INS, instance
+07:42:07 <yepster> yeah just a name of a variable
+07:42:33 <yepster> there is a doc about naming variables somewhere
+07:42:49 <yepster> (but where?)
+07:42:50 <mdupont> PRED is the predicate, 
+07:43:12 <mdupont> so, INS is-a TYPE-COL
+07:43:26 <yepster> yes
+07:43:39 <yepster> type col is a second order collection
+07:43:46 <yepster> so instances of it are collections
+07:43:51 <mdupont> and (PRED TYPE-COL, THING) in the db is also in the KB
+07:43:59 <yepster> yes
+07:44:07 <mdupont> TYPE-COL is a database column?
+07:44:10 <yepster> it's called the consequent
+07:44:21 <yepster> it could be
+07:44:33 <mdupont> so you are asserting facts from the db in the kb?
+07:44:39 <yepster> but currently I only synchronize 2 tables and 1 relation with opencyc
+07:45:44 <yepster> type-col is pff how to say it..
+07:45:59 <yepster> suppose you have partitioned a collection, cars
+07:46:05 <yepster> into colors
+07:46:24 <yepster> then CarTypeByColor is the collection of all car color types
+07:46:35 <yepster> and an instance of it is a collection of cars
+07:47:03 <yepster> so all instances of CarTypeByColor are subset of car (like 'all green cars')
+07:47:09 <yepster> : genls INS Car
+07:48:25 <yepster> but it is only useful if you are lazy and do not want to specifi genls GreenCars Cars for each cartype
+07:48:45 <yepster> you just want to say: (isa GreenCars CarTypeByColor)
+07:48:51 <yepster> and let opencyc figure out the rest
+07:49:03 <mdupont> genls?
+07:49:06 <yepster> because that's what it's supposed to be good in
+07:49:22 <mdupont> what is genls?
+07:49:29 <yepster> genls A B means A is a specialization of B
+07:49:47 <yepster> when A and B are collections
+07:50:04 <yepster> like (genls Person Animal) holds and also (genls Adult Person)
+07:50:20 <yepster> (you could say 'inheritance of attributes')
+07:56:25 <mdupont> so genls means generalisation?
+07:57:19 <yepster> yes
+07:58:09 <mdupont> ok that is easy
+08:00:27 <mdupont> ok so typecol is a typed collection
+08:00:46 <mdupont> a sub collection of the collection by type?
+08:02:00 <mdupont> in frankfurt, someone hijacked a motor-sailplane, and is flying around the city, they are closing down all public buildings, even the autobahn
+08:02:23 <yepster> great
+09:01:02 <mdupont> now the plane has landed
+09:03:24 <yepster> into?
+09:05:12 <mdupont> the airport
+09:08:50 <yepster> cool
+09:10:11 <yepster> about a year ago somebody took hostage some people in the biggest tower in amsterdam (about 300 meters from our office)
+09:10:28 <yepster> it was a protest against the makers of wide screen tv's
+09:10:48 <yepster> but the silly point was that philips had already moved out of that tower a few months
+09:11:03 <yepster> and he didn't know that
+09:11:20 <yepster> at the end he shot himself
+09:47:51 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+09:52:58 <mdupont> rc://openprojects.net#introspector introspector project chatroom, http://introspector.sf.net project to extract rdf from the gcc
+11:57:25 --- quit: mdupont (Connection timed out)
+12:00:00 --- join: mdupont (mdupont@p5080EA6C.dip0.t-ipconnect.de) joined #opencyc
+12:54:51 --- nick: mdupont -> md|away3h
+14:16:46 --- quit: ZivZ (Read error: 104 (Connection reset by peer))
+15:09:40 --- join: dmiles_brb (alife@12-228-241-205.client.attbi.com) joined #opencyc
+15:12:58 <md|away3h> hey dmiles_brb
+15:39:04 --- nick: md|away3h -> fire
+15:43:12 --- nick: fire -> mdupotn
+15:43:13 --- nick: mdupotn -> mdupont
+15:43:51 --- nick: mdupont -> md|away
+16:14:27 --- quit: md|away ("ZZZzzz")
+16:16:38 --- quit: dmiles_brb ("jump")
+16:16:56 --- join: dmiles_brb (alife@12-228-241-205.client.attbi.com) joined #opencyc
+16:17:10 --- quit: dmiles_brb (Remote closed the connection)
+16:17:34 --- join: dmiles (alife@12-228-241-205.client.attbi.com) joined #opencyc
+16:17:41 --- quit: dmiles (Remote closed the connection)
+16:17:57 --- join: dmiles (alife@12-228-241-205.client.attbi.com) joined #opencyc
+16:18:37 --- quit: dmiles (Client Quit)
+16:18:52 --- join: dmiles (alife@12-228-241-205.client.attbi.com) joined #opencyc
+16:21:18 --- nick: dmiles -> dmiles_afk
+16:32:47 --- quit: dmiles_afk (Read error: 54 (Connection reset by peer))
+16:32:48 --- join: NephLab (alife@12-228-241-205.client.attbi.com) joined #opencyc
+16:33:18 --- nick: NephLab -> dmiles
+16:57:25 --- quit: ChanServ (Shutting Down)
+16:57:33 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:57:33 --- mode: calvino.freenode.net set +o ChanServ
+17:16:24 --- quit: deltab (Success)
+17:25:19 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:26:16 <KinoC> ping
+18:12:57 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:19:13 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+18:31:04 --- quit: KinoC (Read error: 110 (Connection timed out))
+18:42:40 <kinoc2> ping
+18:55:07 --- join: deltab (~deltab@espians.com) joined #opencyc
+19:12:04 --- quit: Cobwa ("[x]chat")
+20:15:46 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:16:47 --- join: dmiles_afk (alife@12-228-241-205.client.attbi.com) joined #opencyc
+20:21:49 --- quit: dmiles_afk (Read error: 104 (Connection reset by peer))
+20:24:17 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+20:36:41 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:47:13 --- join: dmiles_afk (alife@12-228-241-205.client.attbi.com) joined #opencyc
+20:53:51 --- quit: dmiles_afk (Read error: 54 (Connection reset by peer))
+20:57:38 --- join: dmiles_afk (alife@12-228-241-205.client.attbi.com) joined #opencyc
+21:58:20 <kinoc2> ping
+22:33:32 --- quit: Graham (calvino.freenode.net irc.freenode.net)
+22:33:32 --- quit: yepster (calvino.freenode.net irc.freenode.net)
+22:41:59 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+22:46:35 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+22:46:35 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+23:59:59 --- log: ended opencyc/03.01.05

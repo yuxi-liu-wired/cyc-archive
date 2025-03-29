@@ -1,0 +1,125 @@
+00:00:00 --- log: started opencyc/03.03.12
+00:13:28 --- join: apluc_aem (~mea_culpa@12-212-75-114.client.attbi.com) joined #opencyc
+00:13:44 --- part: apluc_aem left #opencyc
+00:31:51 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+05:18:18 --- quit: yepster (Read error: 104 (Connection reset by peer))
+07:23:54 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+07:37:08 --- join: kinoc2 (~kino@adsl-64-123-190-10.dsl.rcsntx.swbell.net) joined #opencyc
+08:02:11 <yepster> he kinoc
+08:02:24 <yepster> how's work on lgp?
+08:16:36 <kinoc2> not much new. lots of busy work + pre-teen sitting for a week.
+08:17:39 <kinoc2> nothing new
+08:18:04 <kinoc2> I had 2 things I wanted to do
+08:18:22 <kinoc2> one was an external file format to specify the transformations
+08:18:54 <yepster> is rosetta the name you gave it?
+08:19:16 <kinoc2> the other was to try out a logic specification thing dmiles and I came across. Yeah, its rosetta for now.
+08:20:05 <kinoc2> I guess another idea is to make it easy to bolt on backends
+08:20:25 <kinoc2> but that's what the external rule format is for.
+08:20:39 <yepster> i'm not really into parsers.. (like what are all these different kinds, link, dependency etc), but
+08:20:42 <kinoc2> oh, and have some backup interface to cyc
+08:21:06 <yepster> i want to choose one that is relatively complete to hook into cyc for my masters project
+08:21:15 <kinoc2> yeah, lots. but its the output your really interested in. the semantic output.
+08:21:19 <kinoc2> makes sense
+08:21:24 <yepster> just 'lange halen snel thuis' (pff how to translate it)
+08:21:49 <kinoc2> only problem is cyc's is several months in the future
+08:22:02 <yepster> you mean cyc's own parser
+08:22:04 <kinoc2> unless you can talk to cycorp directly
+08:22:06 <kinoc2> yes
+08:22:39 <yepster> hmm
+08:22:41 <kinoc2> maybe talk to steve or john
+08:23:10 <kinoc2> maybe they can get you access to either the real on or an early open one
+08:23:26 <kinoc2> if all you're interested in is you thesis
+08:23:46 <yepster> it would make it more complete
+08:24:12 <kinoc2> maybe worth looking into. 
+08:24:42 <yepster> i have to answer to what extent a 1-1 representation of a legislation rules formal text can be used to answer questions from people
+08:24:59 <kinoc2> Unless you have a small set of examples, in which case we can probably get the LGP to output the right set
+08:25:18 <kinoc2> hmmm, more open ended
+08:25:26 <yepster> yes, for the parsing part, i want to parse into cd-like cycl sentences
+08:26:27 <kinoc2> the problem with parsers is the multiple interpertations.
+08:26:42 <yepster> also in cd format?
+08:26:59 <kinoc2> yeah, you can get multiple cd's out
+08:27:10 <yepster> for example -> parse into cd format, then try to hypothesize it
+08:27:38 <kinoc2> yeah, you can use cyc as a semantic filter
+08:28:00 <kinoc2> given ten interpertations only one or two make sense
+08:28:21 <kinoc2> I think that is what the cyc parser is supposed to do
+08:29:09 <yepster> is it easy to add words to the worldlist (what's it called, lexicon?)
+08:29:18 <yepster> (in rosetta)
+08:30:26 <kinoc2>  yeah, its still the original lgp format word lists
+08:30:46 <kinoc2> its all text files
+08:31:22 <yepster> ok cool
+08:31:41 <yepster> what was the cycl output command again? (if I am bugging you please tell ;-)
+08:31:50 <yepster> like xml?pos="sentence"
+08:32:34 <yepster> I want to change it to add sentences that fit in the structure of
+08:32:39 <yepster> http://wwwhome.portavita.nl/~yeb/XP/conceptualdependency.ke
+08:33:05 <kinoc2> one sec.
+08:34:19 <kinoc2> http://4.33.94.173:2002/cdml?pos="Bill%20ate%20the%20apple."
+08:34:57 <kinoc2> its cdml?pos="sentence" for cd-ish only output
+08:35:34 <kinoc2> and xml?pos="sentence" for closer to raw output, with all the links between words
+08:35:53 <yepster> thanks (btw, in my browser it's not shown formatted -> just very long lines)
+08:36:53 <kinoc2> oh, sorry.
+08:37:10 <kinoc2> in the word files I think there are two formats
+08:37:30 <kinoc2> one you just drop the word with the right ending in the right file
+08:38:32 <kinoc2> like "Greek.n" is in the "words.n.4" file
+08:38:49 <kinoc2> the other is a dictionary file which specifies links
+08:39:01 <yepster> .n is for noun?
+08:39:26 <kinoc2> yes
+08:39:39 <yepster> and .4?
+08:40:02 <yepster> things added in version 4?
+08:40:26 <kinoc2> maybe but possibly they are broken up based on how they behave
+08:41:08 <kinoc2> one way might be to use something like wordnet to find a close matching word, and add you new word in the same bin
+08:41:27 <kinoc2> the other format is like "where:(QI- & C+) or Q+;
+08:41:29 <kinoc2> "
+08:41:44 <kinoc2> or "<word>:<links>;"
+08:42:46 <kinoc2> agin you could look for a similar matching word, and steal its definition
+08:43:07 <yepster> hehe like adding stuff to opencyc ;_)
+08:43:14 <kinoc2> or you could put them all in a database for easy access then write them back out
+08:43:38 <kinoc2> yeah
+08:43:50 <kinoc2> find and modify
+08:44:14 <kinoc2> it can be easier when you have a large base to work from
+08:45:13 <kinoc2> or like I was saying, somehow get the system to query the cyc-kb for hints on unknown words
+08:45:27 <yepster> hmmm
+08:47:30 <kinoc2> that would be for the future
+08:47:44 <kinoc2> or some idle moment....
+08:50:39 <yepster> or wait for opencyc's parser..
+08:52:44 <kinoc2> that too.
+08:53:12 <kinoc2> http://www.comp.mq.edu.au/~diego/publications/papers.html
+08:53:34 <kinoc2> had some papers of translating LGP format into a prolog-ish format
+08:56:13 <yepster> Hmm "i hava a dog" -> have is recognized as 'ACTION'.. but it's not an action sentence
+08:56:24 <yepster> also afaik there is no primitive act for it
+08:56:31 <yepster> wondering how to put that in CD form
+08:57:16 <yepster> maybe cd is too simple
+08:59:00 <yepster> \exists x : DOG  owns(I,x)
+08:59:04 <yepster> easy in cyc
+08:59:33 <yepster> but not a 'davidsonian action sentence'
+09:04:03 <kinoc2> I think/thought it was something like (poss I dog)
+09:04:09 <kinoc2> yean
+09:04:13 <kinoc2> yeah
+09:04:45 <kinoc2> which is your \exists x: Dog owns(I,x)
+09:04:59 <kinoc2> state vs. transitions
+09:11:03 <kinoc2> I will be giving it more thought, especially on how to extend the link pattern-to-output rule specification
+09:11:45 <kinoc2> going out for a bit. good luck.
+09:12:00 <yepster> cu
+09:19:35 --- quit: kinoc2 ()
+10:57:45 --- quit: yepster ()
+14:29:35 --- join: shorokh (~trumpet@194.149.224.129) joined #opencyc
+14:31:21 --- quit: shorokh (Client Quit)
+16:19:27 --- join: kinoc2 (~kino@adsl-64-123-190-10.dsl.rcsntx.swbell.net) joined #opencyc
+17:02:42 --- quit: kinoc2 ()
+17:04:05 --- quit: Cobra ("[x]chat")
+17:09:52 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+18:06:11 --- join: yazan (yes@CPE00045a2fd7e4-CM014310113528.cpe.net.cable.rogers.com) joined #opencyc
+18:06:22 --- part: yazan left #opencyc
+18:08:45 --- join: Cycbot (~Cycbot@kevb.net) joined #opencyc
+18:08:56 <Cobra> Oohhhh. :)
+18:09:17 <Cobra> hi Cycbot
+18:10:17 <Cobra> Cycbot: hello
+18:10:22 <Cobra> Cycbot: help
+18:10:33 <Cobra> grrrr.
+18:10:35 --- quit: Cycbot (Remote closed the connection)
+18:16:26 --- join: Cycbot (~Cycbot@kevb.net) joined #opencyc
+18:16:33 --- quit: Cycbot (Remote closed the connection)
+19:14:52 --- join: graylensman (~ray@fl-wbu2c6-482.pbc.adelphia.net) joined #opencyc
+19:18:08 <graylensman> Does anyone know of an on-line instance of OpenCyc or Cyc where it contains an actual knowledge base beyond the basic ontology bundled with...
+22:48:33 --- quit: graylensman (Remote closed the connection)
+23:44:18 --- quit: fleeky ("[BX] The Power Rangers use BitchX. Shouldn't you?")
+23:59:59 --- log: ended opencyc/03.03.12

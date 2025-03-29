@@ -1,0 +1,48 @@
+00:00:00 --- log: started opencyc/02.11.20
+01:49:40 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+01:50:32 --- join: mea_culpa (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+06:07:45 --- join: yepster (Yepster@217.117.225.12) joined #opencyc
+07:05:29 <yepster> is it true that relationAllInstance may not work yet?
+07:05:52 <yepster> i meant relationInstanceAll
+07:13:25 <yepster> hmm this is ofcourse much to little information to be of any help
+07:13:31 <yepster> what i meant to ask:
+07:14:09 <yepster> has any of you used relationAllInstance yet? did it work?
+07:14:39 <yepster> * again I ment relationInstanceAll
+07:30:01 <yepster> hmm something else..
+07:30:10 <yepster> suppose I have COL1 and COL2
+07:31:44 <yepster> how to say that each instance of COL1 is related with a predicate pred to an instance of COL2, and the inverse is also true
+07:32:27 <yepster> preferably in one rule
+07:36:06 <yepster> i know that one direction is done by relationAllExists
+07:40:10 <yepster> I think that if i make forall x in COL1 exists y in COL2 : (pred x y) and the inverse
+07:40:16 <yepster> I get two skolem functions
+07:40:32 <yepster> but what I actually want is being unable to add an instance to each of the collections
+07:40:54 <yepster> without adding it's related instance in the other collection
+07:52:34 <yepster> hmm I tried:
+07:52:34 <yepster> (#$not
+07:52:34 <yepster>  (#$and
+07:52:34 <yepster>   (#$isa ?SUBSIDIE #$Subsidie)
+07:52:34 <yepster>   (#$not
+07:52:35 <yepster>     (#$thereExists ?EVENT
+07:52:37 <yepster>      (#$and
+07:52:39 <yepster>       (#$isa ?EVENT #$ToekennenVanSubsidie)
+07:52:41 <yepster>       (#$outputs ?EVENT ?SUBSIDIE))))))
+07:52:43 <yepster> doesnt work
+07:52:49 <yepster> i can add a subsidie
+09:45:25 --- join: dmiles (developer@12.211.42.52) joined #opencyc
+09:46:39 --- quit: dmilezZ (Read error: 104 (Connection reset by peer))
+10:17:41 --- quit: yepster ()
+13:39:33 --- join: graylensman (~ray@fl-wbu2c6-677.pbc.adelphia.net) joined #opencyc
+14:22:50 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:51:15 --- join: Razor123 (C@17-077.121.popsite.net) joined #opencyc
+16:51:19 <Razor123> hi
+16:51:31 <Razor123> anyone have logicmoo cvs?
+16:52:57 --- part: Razor123 left #opencyc
+16:58:53 --- join: Razor123 (C@17-077.121.popsite.net) joined #opencyc
+16:59:23 <Razor123> hi
+16:59:25 <Razor123> can anyone help me out?
+17:00:03 <Razor123> i need to get developer cvs
+17:01:51 --- part: Razor123 left #opencyc
+18:26:48 --- quit: Cobwa ("[x]chat")
+19:46:32 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+21:10:35 --- quit: graylensman ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.11.20

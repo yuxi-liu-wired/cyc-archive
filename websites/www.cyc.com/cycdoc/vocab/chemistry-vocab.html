@@ -1,0 +1,827 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/WD-html-in-xml/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Chemistry</title></head>
+    <body>
+        <h2>
+            <a href="http://www.opencyc.org"><img alt="OpenCyc Homepage"
+                    border="0"
+        src="/cycdoc/img/opencyc-logo.gif" /></a>Chemistry</h2>E-Mail
+        Comments to: <a
+        href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a><br />Last
+        Update: 12/13/02<br />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a><br />
+        <hr />
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+        <br />
+        <hr />
+        <p />At the present time, Cyc's representation of scientific
+        chemistry is limited to certain basic relations between atoms,
+        molecules, and  substances. Most representations of complex
+        substances in Cyc do not include  chemical structures and
+        formulae, or the axioms to reason about them. Rather,
+        substances and their properties are represented at a more
+        "everyday" level:  creation, destruction, changes, and
+        interactions are described and reasoned  about, but the
+        underlying mechanisms are not usually considered.<p />We have
+        resisted the temptation to assert many detailed,  ready-made
+        axioms based on chemical reference material listing atomic
+        weights, electronegativity values, chemical formulae, etc.,
+        because devising  the supporting theoretical axioms to use those
+        facts is neither easy nor of  obvious value. Such is the case
+        with many fundamental theories in science: connecting them to
+        the real world is so hard that most scientific problems  are
+        solved by invoking more specific rules which apply to different
+        kinds of  situations.<p />The following constants and the
+        representational techniques  they embody may serve as a starting
+        point for more complete representations  of chemical substances
+        as well as a more comprehensive chemical theory. For  example,
+        the functional specification of types of atoms and nuclei can be
+        extended to cover isotopes.<p />
+        <hr />
+        <h3>Elements And Atoms</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="ElementStuff">#$ElementStuff<i>&nbsp;&nbsp;&nbsp;chemical elements</i></a></font>
+        <blockquote> An instance of <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>
+            and a specialization of <a
+            href="./material-vocab.html#InanimateThing">#$InanimateThing.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#ElementStuff">#$ElementStuff</a>
+            is a piece of tangible stuff, composed of a quantity of
+            atoms, all of which are of the same chemical element. That
+            is, every atom in a given piece of <a
+            href="./chemistry-vocab.html#ElementStuff">#$ElementStuff</a>
+            has the same number of protons in its atomic nucleus. For
+            example, all pieces of carbon (i.e. all instances of
+            #$Carbon) are instances of <a
+            href="./chemistry-vocab.html#ElementStuff">#$ElementStuff.</a>
+            On the other hand, instances of #$Water, because they are
+            all constituted of both #$Hydrogen and #$Oxygen atoms, do
+            not belong to the collection <a href="./chemistry-vocab.html#ElementStuff">#$ElementStuff.</a><br />
+            <b>guid: </b>bd5908b9-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./material-vocab.html#InanimateThing">#$InanimateThing</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons<i>&nbsp;&nbsp;&nbsp;types
+                    of chemical element classified by number of protons</i></a></font>
+        <blockquote> A collection of collections and a specialization of
+            #$ElementStuffType. Each instance of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons</a>
+            is a specialization of <a
+            href="./chemistry-vocab.html#ElementStuff">#$ElementStuff</a>
+            which is defined _only_ by the atomic composition of its
+            instances -- neither the isotopic composition or physical
+            state of the substances, nor any other additional feature,
+            determines membership in an instance of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons.</a>
+            All that matters is that the instances of that collection
+            are entirely composed of atoms having a particular number of
+            protons in each atomic nucleus. Thus, the collection
+            #$Carbon is an instance of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons,</a>
+            but neither the collection #$Diamond nor the collection
+            #$Graphite is (even though they are subcollections of
+            #$Carbon), because their members have additional qualifications.<br />
+            <b>guid: </b>bd590830-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SecondOrderCollection
+            #$DisjointCollectionType
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of:
+                </b>#$ElementStuffType&nbsp;&nbsp;<a href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./chemistry-vocab.html#NobleGasElement">#$NobleGasElement</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="atomicNumber">#$atomicNumber<i>&nbsp;&nbsp;&nbsp;atomic
+                    number (predicate that is functional in its second
+                    argument) (functional predicate) (binary predicate)</i></a></font>
+        <blockquote> This predicate relates an atomic number to an
+            element. <a
+            href="./chemistry-vocab.html#atomicNumber">(#$atomicNumber</a>
+            ELEMENT INT) means that ELEMENT, an instance of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons,</a>
+            has the <a
+            href="./math-vocab.html#PositiveInteger">#$PositiveInteger</a>
+            INT for its atomic number. This means that any instance of
+                <a href="./chemistry-vocab.html#AtomFn">(#$AtomFn</a>
+            ELEMENT) must have INT many protons (see <a
+            href="./chemistry-vocab.html#Proton">#$Proton)</a> in its
+            atomic nucleus (see <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus).</a>
+            For example, <a
+            href="./chemistry-vocab.html#atomicNumber">(#$atomicNumber</a>
+            #$Carbon 6) means that every instance of <a
+            href="./chemistry-vocab.html#AtomFn">(#$AtomFn</a> #$Carbon)
+            has six protons in its nucleus.<br />
+            <b>guid: </b>bd5890dc-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  </blockquote>
+        <font size="+1">
+            <a name="AtomFn">#$AtomFn<i>&nbsp;&nbsp;&nbsp;atom fn</i></a></font>
+        <blockquote> An instance of both <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+            and <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction.</a>
+            When applied to an instance ELEMENT-TYPE of
+            #$ElementStuffType, <a
+            href="./chemistry-vocab.html#AtomFn">#$AtomFn</a> returns
+            the collection of all atoms (see <a
+            href="./chemistry-vocab.html#Atom">#$Atom)</a> of
+            ELEMENT-TYPE. Each instance of the collection <a
+            href="./chemistry-vocab.html#AtomFn">(#$AtomFn</a>
+            ELEMENT-TYPE) is an atom with N protons in its atomic
+            nucleus, where N is the <a
+            href="./chemistry-vocab.html#atomicNumber">#$atomicNumber</a>
+            (q.v.) of ELEMENT-TYPE. For example, <a
+            href="./chemistry-vocab.html#AtomFn">(#$AtomFn</a> #$Carbon)
+            is the collection of all carbon atoms, each of which has 6
+            protons in its nucleus. Additionally, each atom has a
+            #$massNumberOfAtom (which need not be same for all atoms of
+            the same #$ElementStuffType : see #$IsotopeFn).<br />
+            <b>guid: </b>c0fcf284-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+                <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="Atom">#$Atom<i>&nbsp;&nbsp;&nbsp;atoms (inanimate
+                    objects) (tangible things) (things with a location)</i></a></font>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#Atom">#$Atom</a> is a
+            microscopic-scale object with exactly one atomic nucleus
+            (see <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus)</a>
+            and some number of electrons (see <a
+            href="./chemistry-vocab.html#Electron">#$Electron).</a> A
+            typical instance of <a
+            href="./chemistry-vocab.html#Atom">#$Atom</a> has no net
+            charge, i.e., it has as many instances of <a
+            href="./chemistry-vocab.html#Electron">#$Electron</a> as it
+            does of <a
+            href="./chemistry-vocab.html#Proton">#$Proton.</a> For the
+            collection of atoms that do have non-zero charges, see #$AtomicIon.<br />
+            <b>guid: </b>bd5891ef-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="NucleusFn">#$NucleusFn<i>&nbsp;&nbsp;&nbsp;nucleus fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./chemistry-vocab.html#NucleusFn">#$NucleusFn</a> is a
+            Cyc function, specifically a <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction.</a>
+                <a
+            href="./chemistry-vocab.html#NucleusFn">#$NucleusFn</a>
+            takes an instance of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons</a>
+            (q.v.) as its single argument and returns a collection of
+            all the atomic nucleii belonging to element-stuff of that
+            type. Thus, <a
+            href="./chemistry-vocab.html#NucleusFn">(#$NucleusFn</a> E)
+            denotes a subcollection of <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus</a>
+            whose elements all have the same number of protons. For
+            example, <a
+            href="./chemistry-vocab.html#NucleusFn">(#$NucleusFn</a>
+            #$Carbon) is the collection of #$Carbon nuclei, each of
+            which has six protons.<br />
+            <b>guid: </b>c0fcee23-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+                <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="AtomicNucleus">#$AtomicNucleus<i>&nbsp;&nbsp;&nbsp;atomic nuclei</i></a></font>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus</a>
+            is an object composed of some definite number of instances
+            of <a href="./chemistry-vocab.html#Proton">#$Proton</a> and
+            some definite number of instances of <a
+            href="./chemistry-vocab.html#Neutron">#$Neutron.</a> Each
+            instance of <a href="./chemistry-vocab.html#Atom">#$Atom</a>
+            has exactly one instance of <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus</a>
+            as a part.<br />
+            <b>guid: </b>bd58a3d9-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>&nbsp;&nbsp;</blockquote>
+        <hr />
+        <h3>Sub</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="SubAtomicParticle">#$SubAtomicParticle<i>&nbsp;&nbsp;&nbsp;subatomic particles</i></a></font>
+        <blockquote> A specialization <a
+            href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>
+            and <a
+            href="./merged-ontology-vocab.html#InanimateObject-Natural">#$InanimateObject-Natural.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle</a>
+            is a physical particle smaller than the smallest atom. Major
+            subcollections of <a
+            href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle</a>
+            include <a
+            href="./chemistry-vocab.html#Electron">#$Electron,</a> <a
+            href="./chemistry-vocab.html#Proton">#$Proton,</a> and <a href="./chemistry-vocab.html#Neutron">#$Neutron.</a><br />
+            <b>guid: </b>bd58db74-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+                href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>&nbsp;&nbsp;<a href="./merged-ontology-vocab.html#InanimateObject-Natural">#$InanimateObject-Natural</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./chemistry-vocab.html#Nucleon">#$Nucleon</a>  </blockquote>
+        <font size="+1">
+            <a name="Electron">#$Electron<i>&nbsp;&nbsp;&nbsp;electrons</i></a></font>
+        <blockquote> A specialization of #$Lepton. Each instance of <a
+            href="./chemistry-vocab.html#Electron">#$Electron</a> is a
+            subatomic particle with an <a
+            href="./quantity-vocab.html#ElectricalCharge">#$ElectricalCharge</a>
+            of -1. Each instance of <a
+            href="./chemistry-vocab.html#Atom">#$Atom</a> consists of a
+            nucleus (see <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus)</a>
+            surrounded by a cloud of negatively charged electrons.<br />
+            <b>guid: </b>bd5881d3-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./fundamental-vocab.html#Individual">#$Individual</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="Nucleon">#$Nucleon<i>&nbsp;&nbsp;&nbsp;nucleons</i></a></font>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#Nucleon">#$Nucleon</a> is a
+            subatomic particle found in some atomic nucleus (see the
+            collection <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus).</a>
+                <a href="./chemistry-vocab.html#Nucleon">#$Nucleon</a>
+            has two subcollections, <a
+            href="./chemistry-vocab.html#Proton">#$Proton</a> and <a
+            href="./chemistry-vocab.html#Neutron">#$Neutron.</a> Every
+            instance of <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus</a>
+            is composed of some number of <a href="./chemistry-vocab.html#Nucleon">#$Nucleons.</a><br />
+            <b>guid: </b>bd588191-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./chemistry-vocab.html#Neutron">#$Neutron</a>  <a
+            href="./chemistry-vocab.html#Proton">#$Proton</a>  </blockquote>
+        <font size="+1">
+            <a name="Proton">#$Proton<i>&nbsp;&nbsp;&nbsp;protons</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#Nucleon">#$Nucleon.</a> Each
+            instance of <a
+            href="./chemistry-vocab.html#Proton">#$Proton</a> is a
+            nucleon which has an <a
+            href="./quantity-vocab.html#ElectricalCharge">#$ElectricalCharge</a>
+            of +1.<br />
+            <b>guid: </b>bd58814d-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#Nucleon">#$Nucleon</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="Neutron">#$Neutron<i>&nbsp;&nbsp;&nbsp;neutrons</i></a></font>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#Nucleon">#$Nucleon.</a> Each
+            instance of <a
+            href="./chemistry-vocab.html#Neutron">#$Neutron</a> is a
+            nucleon with an electrical charge of 0.<br />
+            <b>guid: </b>bd588216-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#Nucleon">#$Nucleon</a>&nbsp;&nbsp;</blockquote>
+        <hr />
+        <h3>Chemical Compounds Molecules</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="ChemicalObject">#$ChemicalObject<i>&nbsp;&nbsp;&nbsp;chemical objects</i></a></font>
+        <blockquote> A specialization of <a
+            href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>
+            is an object whose behavior is typically described in terms
+            of its outer cloud of <a
+            href="./chemistry-vocab.html#Electron">#$Electrons.</a>
+            Specializations of <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>
+            include the collections <a
+            href="./chemistry-vocab.html#Atom">#$Atom,</a> <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule,</a> and
+                <a href="./chemistry-vocab.html#Ion">#$Ion.</a><br />
+            <b>guid: </b>bd58916a-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a href="./chemistry-vocab.html#Molecule">#$Molecule</a>  <a
+            href="./chemistry-vocab.html#Atom">#$Atom</a>  </blockquote>
+        <font size="+1">
+            <a name="Molecule">#$Molecule<i>&nbsp;&nbsp;&nbsp;molecules</i></a></font>
+        <blockquote> A subcollection of <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>
+            and #$ComplexPhysicalObject. Each instance of <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule</a> is a
+            microscopic-scale object whose component atoms are all
+            chemically bonded to each other; typically, this means that
+            the atoms are covalently bonded. Examples: some instances of
+                <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule,</a>
+            including molecules of oxygen (O2), ozone (O3), water (H2O),
+            carbon monoxide (CO), carbon dioxide (CO2), etc., contain
+            covalently bonded atoms belonging to the collection
+            #$Oxygen. Some highly complex examples of <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule</a> are
+            those belonging to the collection #$DNAMolecule. See also <a
+            href="./chemistry-vocab.html#MoleculeFn">#$MoleculeFn.</a>
+            Note: #$Diamond and other macroscopic covalent solids are
+            excluded from belonging to <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule</a> by the
+            constraint that instances of <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule</a> are microscopic.<br />
+            <b>guid: </b>bd58f0b2-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of:
+                </b>#$ComplexPhysicalObject&nbsp;&nbsp;<a href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a name="Ion">#$Ion<i>&nbsp;&nbsp;&nbsp;ions</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of microscopic-scale objects; a subset
+            of <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject.</a>
+            Every instance of <a
+            href="./chemistry-vocab.html#Ion">#$Ion</a> is an atom or
+            radical which has either a negative or positive net
+            electrical charge, due to having either more or fewer
+            electrons than there are protons in its nuclei. Note: atomic
+            ions violate Cyc's default assumption that instances of <a
+            href="./chemistry-vocab.html#Atom">#$Atom</a> have a net
+            electrical charge of zero, so <a
+            href="./chemistry-vocab.html#Ion">#$Ion</a> constitutes a
+            class of exceptions to that rule.<br />
+            <b>guid: </b>c0fbae39-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#ExistingObjectType">#$ExistingObjectType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="ChemicalSubstanceType">#$ChemicalSubstanceType<i>&nbsp;&nbsp;&nbsp;chemical substances</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>
+        <blockquote> A collection of collections and a specialization of
+                <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            is a specialization of <a
+            href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible</a>
+            whose instances are defined _only_ by their chemical
+            composition -- not by their physical state or any other
+            property. Instances of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            can be of two varieties: (1) Collections whose instances are
+            completely uniform with each other in terms of chemical
+            composition; this includes (a) the chemical elements -- such
+            as #$Carbon, #$Oxygen, and #$Hydrogen -- which are instances
+            of <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons</a>
+            (thus, the latter is a specialization of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType),</a>
+            and (b) chemical compounds constituted of more than one
+            substance chemically bonded, e.g., #$Water, #$Caffeine, and
+            #$IronOxide, which are instances of
+            #$ChemicalCompoundTypeByChemicalSpecies (2) Substances which
+            have a general chemical specification, that is, whose
+            instances do not have exactly the same chemical composition
+            but fall within certain specifications, e.g., #$DNAStuff.
+            Note that collections that are _not_ instances of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            include collections of substances which have some component
+            which is of overriding significance in some context, so that
+            in everyday language such substances are frequently referred
+            to by the name of their important component (e.g.,
+            penicillin applied to a tablet containing penicillin), but
+            which have significant admixtures of other substances. Thus,
+            #$Penicillin is an instance of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType,</a>
+            but the collection of tablets containing penicillin and
+            including other ingredients is not. Also, specializations of
+                <a
+            href="./composition-vocab.html#Mixture">#$Mixture,</a> such
+            as #$Lemonade, are _not_ instances of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType,</a>
+            because mixtures are determined by their physical state
+            rather than solely by their chemical composition.<br />
+            <b>guid: </b>bd58cd95-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SiblingDisjointCollectionType
+            #$SecondOrderCollection
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of: </b>
+            <a href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="MolecularStuff">#$MolecularStuff<i>&nbsp;&nbsp;&nbsp;molecular stuff</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of tangible stuff. Every instance of
+                <a
+            href="./chemistry-vocab.html#MolecularStuff">#$MolecularStuff</a>
+            is a portion of stuff composed of covalently-bonded
+            molecules. Thus, #$Water and #$DNAStuff are subcollections
+            of <a
+            href="./chemistry-vocab.html#MolecularStuff">#$MolecularStuff;</a>
+            each of their instances consists of covalently bonded
+            molecules. But instances of #$Salt-NaCl are not examples of
+                <a
+            href="./chemistry-vocab.html#MolecularStuff">#$MolecularStuff.</a>
+            Also, #$Oxygen is not a subcollection of <a
+            href="./chemistry-vocab.html#MolecularStuff">#$MolecularStuff,</a>
+            since #$Oxygen denotes anything composed of that element,
+            not just O2 (molecular oxygen) and O3 (ozone).<br />
+            <b>guid: </b>bd59e38c-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="MoleculeFn">#$MoleculeFn<i>&nbsp;&nbsp;&nbsp;molecule fn</i></a></font>
+        <blockquote> A function that takes as an argument an instance
+            CHEM-TYPE of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            and returns the collection of all molecules of CHEM-TYPE.
+            For example, <a
+            href="./chemistry-vocab.html#MoleculeFn">(#$MoleculeFn</a>
+            #$Water) is the collection of all water molecules.<br />
+            <b>guid: </b>c0fcede2-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$MacroRelation  #$UnaryFunction
+                <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction</a>
+                <a
+            href="./fundamental-vocab.html#ReifiableFunction">#$ReifiableFunction</a>
+                <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="MicroscopicScaleObject">#$MicroscopicScaleObject<i>&nbsp;&nbsp;&nbsp;microscopic objects</i></a></font>
+        <blockquote> A specialization of <a
+            href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>
+            is a partially tangible object which is so small that human
+            beings cannot perceive it, except (perhaps) with the use of
+            special devices such as #$Microscopes or
+            #$ElectronMicroscopes. Specializations of <a
+            href="./chemistry-vocab.html#MicroscopicScaleObject">#$MicroscopicScaleObject</a>
+            include <a
+            href="./chemistry-vocab.html#Molecule">#$Molecule,</a> <a
+            href="./chemistry-vocab.html#Atom">#$Atom,</a> <a
+            href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle,</a>
+            #$Chloroplast, and #$Mitochondrion.<br />
+            <b>guid: </b>bd5891ac-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./time-vocab.html#TemporalStuffType">#$TemporalStuffType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./top-vocab.html#PartiallyTangible">#$PartiallyTangible</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./chemistry-vocab.html#SubAtomicParticle">#$SubAtomicParticle</a>
+                <a
+            href="./chemistry-vocab.html#ChemicalObject">#$ChemicalObject</a>
+                <a
+            href="./chemistry-vocab.html#AtomicNucleus">#$AtomicNucleus</a>
+                <a href="./biology-vocab.html#CellPart">#$CellPart</a>
+            #$Microorganism  </blockquote>
+        <hr />
+        <h3>Metal</h3>
+        <br />
+        <font size="+1">
+            <a name="Metal">#$Metal<i>&nbsp;&nbsp;&nbsp;metals</i></a></font>
+        <blockquote> An instance of <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType.</a>
+            Every instance of <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> is a
+            tangible object having certain characteristic physical and
+            chemical properties. Instances of <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> are good
+            conductors of electricity and heat, and most instances of <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> are solids
+            at room temperature (although all instances of #$Mercury,
+            for example, are liquids at room temperature). Solid
+            instances of <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> have a shiny
+            luster, and are highly malleable. Specializations of <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> include
+            #$Mercury, #$Potassium, #$Brass, #$Lead, and #$Iron.<br />
+            <b>guid: </b>bd58ac39-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ProductByGenericType  <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+                href="./material-vocab.html#ElectricalConductor">#$ElectricalConductor</a>&nbsp;&nbsp;<a href="./material-vocab.html#InorganicStuff">#$InorganicStuff</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>
+                <a
+            href="./chemistry-vocab.html#MetalAlloy">#$MetalAlloy</a>  </blockquote>
+        <font size="+1">
+            <a name="MetalAlloy">#$MetalAlloy<i>&nbsp;&nbsp;&nbsp;alloys</i></a></font>
+        <blockquote> A collection of tangible stuffs; a subcollection of
+                <a href="./chemistry-vocab.html#Metal">#$Metal.</a> Each
+            instance of <a
+            href="./chemistry-vocab.html#MetalAlloy">#$MetalAlloy</a> is
+            a metallic stuff which is a homogeneous blend of at least
+            one part of <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>
+            with at least one other substance. <a
+            href="./chemistry-vocab.html#MetalAlloy">#$MetalAlloy</a> is
+            not a subcollection of <a
+            href="./composition-vocab.html#Mixture">#$Mixture,</a>
+            because each instance of <a
+            href="./chemistry-vocab.html#MetalAlloy">#$MetalAlloy</a> is
+            defined not only by the amounts and kinds of its <a
+            href="./composition-vocab.html#constituents">#$constituents,</a>
+            but also (unlike a mixture) by the internal structures
+            formed during its creation. Furthermore, the creation
+            process is typically more complex than <a
+            href="./transform-vocab.html#Mixing">#$Mixing.</a> Common
+            metal alloys include the instances of #$Bronze-Stuff,
+            #$Brass, and #$Steel. Note that #$GalvanizedMetal is _not_ a
+            subcollection of <a
+            href="./chemistry-vocab.html#MetalAlloy">#$MetalAlloy,</a>
+            because every instance of #$GalvanizedMetal has a coating of
+            some #$Zinc on its surface, and thus (unlike an alloy) the
+            components of galvanized metals are not homogenously
+            distributed throughout.<br />
+            <b>guid: </b>bd58cc8b-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+                href="./material-vocab.html#SolidTangibleThing">#$SolidTangibleThing</a>&nbsp;&nbsp;<a
+                href="./composition-vocab.html#Mixture">#$Mixture</a>&nbsp;&nbsp;<a
+                href="./device-vocab.html#ArtificialMaterial">#$ArtificialMaterial</a>&nbsp;&nbsp;<a href="./chemistry-vocab.html#Metal">#$Metal</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="UnalloyedMetal">#$UnalloyedMetal<i>&nbsp;&nbsp;&nbsp;unalloyed metals</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of tangible stuffs; a subcollection of
+                <a href="./chemistry-vocab.html#Metal">#$Metal.</a>
+            Every instance of <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>
+            is a metal which is also an element, i.e., a substance of
+            unmixed chemical type. Thus, each subcollection of <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>
+            is a subcollection of both <a
+            href="./chemistry-vocab.html#Metal">#$Metal</a> and <a
+            href="./chemistry-vocab.html#ElementStuff">#$ElementStuff.</a>
+            Examples of <a
+            href="./chemistry-vocab.html#UnalloyedMetal">#$UnalloyedMetal</a>
+            include #$Gold, #$Iron, #$Uranium, #$Antimony, #$Titanium,
+            and many more.<br />
+            <b>guid: </b>bd5908f8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+                href="./chemistry-vocab.html#Metal">#$Metal</a>&nbsp;&nbsp;<a href="./chemistry-vocab.html#ElementStuff">#$ElementStuff</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="NobleGasElement">#$NobleGasElement<i>&nbsp;&nbsp;&nbsp;noble gases</i></a></font>
+        <blockquote> A specialization of
+            ElementStuffTypeByNumberOfProtons. Each instance of <a
+            href="./chemistry-vocab.html#NobleGasElement">#$NobleGasElement</a>
+            is a type of element that does _not_ readily form compounds
+            with other types of elements. Instances of <a
+            href="./chemistry-vocab.html#NobleGasElement">#$NobleGasElement</a>
+            are highly stable, due to the fact that they have the
+            maximum number of electrons possible in their outer shell.
+            The six instances of <a
+            href="./chemistry-vocab.html#NobleGasElement">#$NobleGasElement</a>
+            are #$Helium, #$Neon, #$Argon, #$Krypton, #$Xenon, and #$Radon.<br />
+            <b>guid: </b>bd58c01f-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SecondOrderCollection  <br />
+            <b>direct specialization of: </b>
+            <a href="./chemistry-vocab.html#ElementStuffTypeByNumberOfProtons">#$ElementStuffTypeByNumberOfProtons</a>&nbsp;&nbsp;</blockquote>
+        <hr />
+        <h3>Chemical Reactions</h3>
+        <br />
+        <font size="+1">
+            <a
+                    name="ChemicalReaction">#$ChemicalReaction<i>&nbsp;&nbsp;&nbsp;chemical reactions</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of events; a subcollection of <a
+            href="./transform-vocab.html#PhysicalTransformationEvent">#$PhysicalTransformationEvent.</a>
+            Each instance of <a
+            href="./chemistry-vocab.html#ChemicalReaction">#$ChemicalReaction</a>
+            is an event in which two or more substances undergo a
+            chemical change, i.e., some portions of the substances
+            involved are transformed into different
+            #$ChemicalCompoundTypes. The transformations are brought
+            about by purely chemical (including biochemical) means which
+            affect chemical bonds between atoms in the molecules of
+            stuff, rather than by physical means, biological means, or
+            purposeful planning, etc. Examples of <a
+            href="./chemistry-vocab.html#ChemicalReaction">#$ChemicalReaction</a>
+            : instances of <a
+            href="./transform-vocab.html#CombustionProcess">#$CombustionProcess;</a>
+            instances of #$Photosynthesis-Generic.<br />
+            <b>guid: </b>bd589bc8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./top-vocab.html#DefaultDisjointScriptType">#$DefaultDisjointScriptType</a>
+                <a
+            href="./time-vocab.html#TemporalObjectType">#$TemporalObjectType</a>  <br />
+            <b>direct specialization of:
+                </b>#$ChemicalInteraction&nbsp;&nbsp;<a href="./transform-vocab.html#PhysicalTransformationEvent">#$PhysicalTransformationEvent</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of: </b>
+            <a
+            href="./biology-vocab.html#BiologicalMetabolismEvent">#$BiologicalMetabolismEvent</a>  </blockquote>
+        <font size="+1">
+            <a name="catalyst">#$catalyst<i>&nbsp;&nbsp;&nbsp;catalyst
+                    (actor slot) (role) (extensional representation predicate)</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The predicate <a
+            href="./chemistry-vocab.html#catalyst">#$catalyst</a>
+            identifies the particular thing that acts as a catalyst in a
+            particular chemical reaction. <a
+            href="./chemistry-vocab.html#catalyst">(#$catalyst</a> R X)
+            means that the <a
+            href="./chemistry-vocab.html#ChemicalReaction">#$ChemicalReaction</a>
+            R has the particular quantity of substance X as a catalyst.
+            For example, every instance of #$Photosynthesis-Generic has
+            some portion of #$Chlorophyll as a catalyst; an amount of
+            #$Water may be a <a
+            href="./chemistry-vocab.html#catalyst">#$catalyst</a> in
+            some <a
+            href="./transform-vocab.html#OxidationProcess">#$OxidationProcess</a>
+            of a <a href="./chemistry-vocab.html#Metal">#$Metal.</a><br />
+            <b>guid: </b>be011804-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$IndividualLevelPredicate  <a
+            href="./actor-vocab.html#ActorSlot">#$ActorSlot</a>  <br />
+            <b>direct specialization of: </b>#$unchangedActors  </blockquote>
+        <hr />
+        <h3>Purity</h3>
+        <br />
+        <font size="+1">
+            <a name="PureFn">#$PureFn<i>&nbsp;&nbsp;&nbsp;pure fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> An instance of <a
+            href="./fundamental-vocab.html#CollectionDenotingFunction">#$CollectionDenotingFunction.</a>
+                <a href="./chemistry-vocab.html#PureFn">(#$PureFn</a> X)
+            denotes the subcollection of the <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            X whose instances are chemically pure. Note that <a
+            href="./chemistry-vocab.html#PureFn">#$PureFn</a> can be
+            applied only to instances of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            (such as #$Fructose or #$Water), but not to mixtures (such
+            as #$Air). See also <a href="./chemistry-vocab.html#PureSubstance">#$PureSubstance.</a><br />
+            <b>guid: </b>c0fbb1ad-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryIntersectionFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="PureSubstance">#$PureSubstance<i>&nbsp;&nbsp;&nbsp;pure substances</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A collection of tangible stuffs. Each instance of
+                <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            is a chemically pure portion of stuff belonging to some
+            particular <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            (e.g. #$Water or #$Cellulose). `Chemically pure' applies to
+            a piece of stuff which has no sub-portions that fail to
+            conform to the chemical composition of its (single) <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType.</a>
+            In typical contexts, most common portions of a <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            will not be instances of <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            . For example, a piece of pencil lead, though mostly carbon,
+            will not be an instance since it is not pure carbon and any
+            portion of ordinary tap water will contain too many
+            impurities. Many sub-portions of either a piece of pencil
+            lead or portion of tap water will fail to conform to the
+            chemical composition of either carbon or water. Some
+            instances of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            are subcollections of <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            in most contexts but not in all. In typical domestic
+            contexts, for example, a piece of ordinary distilled water
+            would be an instance of <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            . However, in a clean room or microchip manufacturing
+            context, ordinary distilled water would probably be
+            considerd impure (see #$ImpureCompound). In general, to
+            refer to a pure instance of a substance one can use the
+            function <a
+            href="./chemistry-vocab.html#PureFn">#$PureFn,</a> e.g. <a
+            href="./chemistry-vocab.html#PureFn">(#$PureFn</a>
+            #$Carbon). Note that <a
+            href="./chemistry-vocab.html#PureFn">#$PureFn</a> has <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            as a <a
+            href="./fundamental-vocab.html#resultGenl">#$resultGenl</a>
+            . Since this kind of purity is relative to specified
+            chemical composition only, <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            (and <a href="./chemistry-vocab.html#PureFn">#$PureFn)</a>
+            does not pertain to mixtures in Cyc (such as #$Air). Cf. <a
+            href="./composition-vocab.html#Mixture">#$Mixture,</a> <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType.</a>
+            See also <a
+            href="./chemistry-vocab.html#PureSubstanceType">#$PureSubstanceType</a>
+            and #$ImpureCompound.<br />
+            <b>guid: </b>c0fbb161-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./material-vocab.html#InanimateThing">#$InanimateThing</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="PureSubstanceType">#$PureSubstanceType<i>&nbsp;&nbsp;&nbsp;types
+                    of pure substance</i></a></font>
+        <blockquote> An instance of #$SecondOrderCollection. Each
+            instance of <a
+            href="./chemistry-vocab.html#PureSubstanceType">#$PureSubstanceType</a>
+            is both a specialization of <a
+            href="./chemistry-vocab.html#PureSubstance">#$PureSubstance</a>
+            (q.v.) and a specialization of some instance of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            (q.v.). Each instance of <a
+            href="./chemistry-vocab.html#PureSubstanceType">#$PureSubstanceType</a>
+            is characterized by the properties of the instance of <a
+            href="./chemistry-vocab.html#ChemicalSubstanceType">#$ChemicalSubstanceType</a>
+            of which it is a specialization, and by the fact that each
+            of its instances is chemically pure.<br />
+            <b>guid: </b>c0fbb120-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SecondOrderCollection  <br />
+            <b>direct specialization of: </b>
+            <a href="./composition-vocab.html#TangibleStuffCompositionType">#$TangibleStuffCompositionType</a>&nbsp;&nbsp;</blockquote>
+        <p />
+        <hr />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a></body></html>

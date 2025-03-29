@@ -1,0 +1,597 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 10. 
+Notable Quoted Collections
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 10. 
+Notable Quoted Collections
+</h2>
+    <p></p>
+    <b>10.1.  <a HREF='#137147400'>KB Release Constants</a></b>
+    <br>
+    <font size='-1'>10.1.1.  <a HREF='#137149904'>
+Background</a>
+      <br>
+    </font>
+    <font size='-1'>10.1.2.  <a HREF='#136574312'>
+CycKBSubsetCollection</a>
+      <br>
+    </font>
+    <font size='-1'>10.1.3.  <a HREF='#137181168'>
+Important Release Constants
+</a>
+      <br>
+    </font>
+    <font size='-1'>10.1.4.  <a HREF='#137222640'>
+Authoring Release Constants and Tagging Constants for Release</a>
+      <br>
+    </font>
+    <font size='-1'>10.1.5.  <a HREF='#137231648'>
+A Word on IKB Troubleshooting
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>10.2.  <a HREF='#137242944'>
+Public Constants</a></b>
+    <br>
+    <p></p>
+    <b>10.3.  <a HREF='#137258976'>
+Implementation Constants</a></b>
+    <br>
+    <p></p>
+    <b>10.4.  <a HREF='#137262008'>
+#$quotedCollection and #$quotedArgument</a></b>
+    <br>
+    <font size='-1'>10.4.1.  <a HREF='#137263448'>
+The Meaning and Use of These Predicates</a>
+      <br>
+    </font>
+    <font size='-1'>10.4.2.  <a HREF='#137291160'>
+Some Consequences and Complications
+</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 10. 
+    
+Notable Quoted Collections
+</h1>
+    <h2>10.1.  <a NAME='137147400'>KB Release Constants</a>
+    </h2>
+    <h3>10.1.1.  <a NAME='137149904'>
+Background</a>
+    </h3>
+    <p>
+As the reader is probably aware, the Cyc Knowledge Base (KB) has been
+sectioned according to whether its various components are considered
+suitable for released.  A large section of the knowledge
+base, constituting much of the Cyc upper-ontology as well as some middle-
+and lower-ontology, is presently in the
+public domain.  This part of the Knowledge Base, often referred to
+in-house as the "public release", is available to anyone.</p>
+    <p>
+An even larger section of the Knowledge Base, subsuming the public
+release and containing a good deal more, has been sanctioned for
+release to corporations and individuals who are co-participants with
+Cyc in various DARPA contracts, and covered by the relevant
+non-disclosure agreements associated with those contracts.  This
+portion of the Knowledge Base is generally referred to as the
+Integrated Knowledge Base or IKB.  Like the full KB, it is subject to
+scheduled updates and rebuilds.</p>
+    <p>
+Finally, a small portion of the Knowledge Base, disjoint with the IKB,
+is considered Cycorp-proprietary information that should not be
+released to anyone outside the company.  Sometimes, this is because
+the information is pertinent to commercial contracts that are subject
+to non-disclosure; sometimes, it is because the terms in question are
+considered experimental in one way or another, and therefore not
+suitable for immediate release.</p>
+    <p>
+Historically, the aforementioned sectioning of the Knowledge Base has
+been enforced with what amounts to a data-tagging system using
+#$isa.  These data tags effectively determine what constants are
+included (or not included) in which release.  The relevant collection
+type is #$CycKBSubsetCollection.
+</p>
+    <h3>10.1.2.  <a NAME='136574312'>
+CycKBSubsetCollection</a>
+    </h3>
+    <p>
+#$CycKBSubsetCollection is the collection of all collections that are
+used for tagging constants w.r.t. client related roles, e.g., whether
+or not they should appear in a certain release.  Some key things to
+notice about this constant are that it is itself an instance of
+ProprietaryConstant (a #$CycKBSubsetCollection) because we don't want
+our scheme for organizing constants relative to release to be in the
+public domain.  It's also the case (supported by forward rules) that
+every collection that is an instance of #$CycKBSubsetCollection has the
+wrappers quotedCollection and completeCollectionExtent.  I.e.,
+instances of #$CycKBSubsetCollection are assumed to be 'de re' collections of
+denoting CycL terms and not collections of the things CycL terms
+denote, and Cyc at any given time will assume that the extent of any
+#$CycKBSubsetCollection is circumscribed; i.e., if a term is not known
+to be a member of the collection, this will be taken as justification
+for concluding that the term is not a member of the
+collection.</p>
+    <p>
+The most salient feature of #$CycKBSubsetCollection, however, is
+the expressed by the assertion:</p>
+    <font color='#339900'>
+      <tt><pre>
+    (interArgIsa2-1 genls CycKBSubsetCollection CycKBSubsetCollection)
+</pre></tt>
+    </font>
+<p>
+What this says, effectively, is that any specialization of an instance
+of #$CycKBSubsetCollection must itself be known to be an instance of
+#$CycKBSubsetCollection.  The reason for this is simple:  we don't want
+Cyc collections that somebody might easily be using for another
+purpose, completely orthogonal to the issue of whether a constant should
+be released or not, to be made a specialization of a collection that determines
+whether or not a constant is released.  For example, suppose this
+constraint were not enforced, and a well-intentioned individual
+decided to make the collection #$MilitaryUnitSpecialtyType a spec of 
+#$IKBConstant.  This would mean that every newly-minted instance of
+#$MilitaryUnitSpecialtyType would automatically be included in the IKB,
+without anybody ever having to assert it explicitly.  This might seem
+like a good idea, but there are two things wrong with it.  First, and
+most fundamentally, we can't foresee all of the future circumstances in
+which it might be necessary to create instances of
+#$MilitaryUnitSpecialtyType.  If, at some future date, a Cyclist working
+on a company-proprietary project needed to create an instance, and the
+collection were a spec of #$IKBConstant, this person would be presented
+with a conflict of interest.  Worse still, it's conceivable that
+someone, especially a novice, could overlook the link to #$IKBConstant,
+or fail to realize its significance.  Thus, allowing non-KB subset
+collections to be specs of KB subset collections could lead to
+constants inadvertantly getting released.  The interArgIsa2-1
+stricture is designed to foreclose on that by insuring that a
+constant can only be designated for release by an explicit act of
+tagging with a release-oriented #$CycKBSubsetCollection.
+</p>
+    <h3>10.1.3.  <a NAME='137181168'>
+Important Release Constants
+</a>
+    </h3>
+    <p>
+Here are some of the more important instances of
+#$CycKBSubsetCollection.</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+#$CoreConstant</em>
+        </dt>
+        <dd>
+This is the collection of all constants that are
+required to be defined in order for implementations of Cyc to run.
+Instances must, therefore, be included in every Cyc release.  It is a
+specialization of #$PublicConstant.</dd>
+        <dt>
+          <em>
+#$PublicConstant</em>
+        </dt>
+        <dd>
+This is the collection of all constants included
+in the current public release of Cyc:  i.e., all Cyc constants that
+are presently in the public domain.  Special procedures attach to
+killing and renaming these constants, since they may be being used in
+the public sector without our direct knowledge.</dd>
+        <dt>
+          <em>
+#$CycorpProprietaryConstant</em>
+        </dt>
+        <dd>
+The collection of all Cyc constants that
+are considered to be Cycorp-proprietary for whatever reason.  They
+should not be included in any public Cyc release.  It is a spec of the
+non-KB subset collection #$ProprietaryConstant, which is disjoint with #$IKBConstant.</dd>
+        <dt>
+          <em>
+#$ExperimentalConstant</em>
+        </dt>
+        <dd>
+The collection of all Cyc constants that
+are considered 'experimental' and therefore not-ready-for-release.</dd>
+        <dt>
+          <em>
+#$IKBConstant </em>
+        </dt>
+        <dd>
+The collection of all Cyc constants that are
+regularly included in IKB updates and builds.</dd>
+      </dl>
+    </blockquote>
+    <p>
+A quick perusal of the #$CycKBSubsetCollections will reveal that
+#$IKBConstant has itself been subdivided according to government
+project, and that several of these subdivisions have in turn been 
+subdivided according to project phase (one of the main reasons we 
+consider this tagging system proprietary:  someone with access to it 
+and to the creation dates of the constants involved could readily 
+reconstruct the company's project history).</p>Some important active specs of #$IKBConstant are
+
+
+<blockquote>
+      <dl>
+        <dt>
+          <em>
+#$IAConstant</em>
+        </dt>
+        <dd>
+Constants created in the course of work on the
+Information Assurance Project.</dd>
+        <dt>
+          <em>
+#$IAAConstant</em>
+        </dt>
+        <dd>
+Constants created for the Intelligence Analyst
+Assistant project.</dd>
+        <dt>
+          <em>
+#$RKFConstant</em>
+        </dt>
+        <dd>
+Constants created for the Rapid Knowledge Formation
+Project.</dd>
+      </dl>
+    </blockquote>
+    <h3>10.1.4.  <a NAME='137222640'>
+Authoring Release Constants and Tagging Constants for Release</a>
+    </h3>
+    <p>
+It is the responsibility of project leaders to make sure that all of
+the necessary #$CycKBSubsetCollections relevant to the project are
+created.  They can either do this themselves, or delegate
+responsibility to the project OE lead.  If you are not a project
+manager, and you think that a project-related #$CycKBSubsetCollection
+should be created, the project manager is the first person that you
+should consult. </p>
+    <p>
+As a rule, the question of which constants are tagged for release is
+determined by the needs and requirements of a specific project.  E.g.,
+if you are working on any of the Cycorp's extant DARPA contracts, it
+is very likely that any constants you create should be tagged as
+IKBConstants, if not as specializations thereof.  Again, it is
+primarily the responsibility of the project manager, and secondarily
+that of the OE lead, to make sure that all project members know what
+needs to be tagged, and how.  If there are any questions about whether
+or not a constant should be released, these concerns should be taken
+to the OE lead and project manager ASAP:  often, though not always,
+such questions prove to be an issue for upper management.
+</p>
+    <h3>10.1.5.  <a NAME='137231648'>
+A Word on IKB Troubleshooting
+</a>
+    </h3>
+    <p>
+The IKB build is probably the most complex KB update-and-rebuild
+operation currently undertaken at Cycorp.  Essentially it involves
+taking a slice of a continuously-revised Knowledge Base, and running a
+series of cleanup operations to insure that there are no seams showing
+from the numerous editings that occur when the IKB is extracted.  It
+cannot be emphasized enough to those working on IKB related
+projects:</p>
+    <font color='red' size='-1'>
+      <em>
+The (isa ?X IKBConstant) tag determines, and is the only
+thing that determines, what does or doesn't get included in the IKB.
+If you want a constant you are creating to be included in the IKB, it
+must be tagged in this way, using either IKBConstant itself, or
+a #$CycKBSubsetCollection that is a known spec of
+IKBConstant.</em>
+    </font>
+    <p>
+The implications of this should be borne in mind:  in particular,
+there are two that are critical.  First, if a constant is an
+IKBConstant, but some term that is referenced in a key piece of its
+definitional info (isa or genls, say, in the case of a collection)
+isn't, then it will go into the IKB missing that piece of definitional
+info.  Therefore, you need to make sure that all of the terms needed
+to define your constant are also IKBConstants.  I emphasize this
+particularly because it is the single biggest source of questions
+concerning whether or not a constant should be released.  If questions
+of this nature arise, consult your project manager.</p>
+    <p>
+The other key point to bear in mind is that the microtheory in which
+an IKBConstant is defined must also be an IKBConstant; otherwise the
+term itself will go in, but with most of its assertions lost because
+they don't have an mt-of-assertion in the IKB.  Again, if this fact
+gives rise to questions about what should or shouldn't be released,
+you should consult your project manager.</p>
+    <h2>10.2.  <a NAME='137242944'>
+Public Constants</a>
+    </h2>
+    <p>
+#$PublicConstant is the collection of CycL constants that 
+are included in the part of the Cyc ontology that is 
+released to the public.  Many of constants in the so-called 
+upper-ontology -- which comprises the most general concepts
+represented in Cyc -- are public constants.  middle- and 
+lower-ontology constants can be public as well, if deemed
+appropriate for public consumption.  While all constants in 
+the Cyc Knowledge Base should in principle be well-defined,
+nicely-commented, and adequately axiomatized, these virtues
+are particularly important in the case of public constants.
+Let's briefly consider each of these three virtues in turn.</p>
+    <p>
+A constant CONST is well-defined, in the present sense, 
+when the "definitional" assertions on it are accurate 
+(given the intended meaning CONST) and complete.  The 
+definitional assertions on CONST include (but are not 
+limited to) most of those displayed when one brings up CONST
+in the KB Browser and selects the "Definitional Info" option 
+in the Index.  Thus included are atomic assertions in which 
+CONST is the first argument (arg1) to a #$DefinitionalPredicate 
+(or, in some cases, a #$SometimesDefinitionalPredicate or a 
+strictly #$PossibleDefinitionalPredicate), such as #$isa, #$genls, 
+#$arg1Isa, #$arg2Genl, #$arg3Format, #$genlPreds, #$genlInverse, 
+#$negationPreds,#$negationInverse, #$interArgIsa1-2, 
+#$disjointWith, #$collectionIntersection, or #$salientAssertions.</p>
+    <p>
+A good comment on a constant is clear, accurate, and as precise 
+as it reasonably can be.  It should include -- as appropriate -- 
+examples, qualifications, borderline cases, exceptions, and so 
+on.  It should be grammatically perfect, and free of undefined 
+acronyms with which the average non-Cyclist user cannot safely be 
+assumed to be familiar.</p>
+    <p>
+A constant is adequately axiomatized for present purposes when, 
+at a minimum, the content of its comment is completely represented
+in rules or other assertions.  Ideally, all of these comment-explicating
+assertions should consist entirely of public constants, as assertions that
+contain any non-public constants will not be part of the public
+release.  Also, ideally it should not contain any instances of #$ProprietaryConstant, 
+as no #$ProprietyaryConstant can be a release constant of any kind. 
+Axioms that are of central importance to the meaning of a constant and would not
+otherwise appear in the Arg1 index for the constant in the KB Browser, should be made 
+its #$salientAssertions.</p>
+    <h2>10.3.  <a NAME='137258976'>
+Implementation Constants</a>
+    </h2>
+    <h2>10.4.  <a NAME='137262008'>
+#$quotedCollection and #$quotedArgument</a>
+    </h2>
+    <h3>10.4.1.  <a NAME='137263448'>
+The Meaning and Use of These Predicates</a>
+    </h3>
+    <p>
+The predicates #$quotedCollection and #$quotedArgument are used 
+in certain situations where one wants to use CycL to assert 
+something about a CycL expression itself, or about a class of CycL 
+expressions.  Cyclists have found it useful to reify various 
+collections whose instances are CycL expressions, and various 
+predicates that relate CycL expressions to things of one sort or 
+another.  Such collections and predicates enable us to represent 
+(and make inferences with) many key facts about the CycL language 
+and the Cyc system as assertions in the Knowledge Base, rather 
+than consigning them strictly to separate company documentation 
+(which tends to become stale) and the minds of Cyclists (who can 
+forget, misremember, or fail to understand things).  For example, 
+we have the quoted-collection #$PublicConstant, which is the 
+collection of all the CycL constants included in the part of the 
+Knowledge Base released to the public; and we have the predicate 
+#$myCreator, which has a quoted-argument-place, and relates 
+a given CycL constant to the Cyclist who created it.
+</p>
+    <p>
+A potential stumbling-block to the effective use of these kinds of
+collections and predicates it that there is currently no general 
+mechanism in place for denoting particular CycL expressions within 
+the CycL language itself.  As with any language, to use a given
+CycL term is, usually, to refer to the term's (usual) denotation.
+But what if one wants to refer to <em>the term itself</em>?  In natural 
+languages like ordinary written English, of course, one can employ 
+quotation marks (or italics) for this purpose: by enclosing an
+English word or phrase within a pair of quotes (or italicizing it) 
+we indicate our intention to refer to that word or phrase itself
+(as opposed to whatever the word/phrase might normally denote or 
+represent).  There is nothing in CycL, however, analogous to direct
+quotation.  (This is the case with most formal languages.)  Hence, 
+there is no direct way to say, in CycL, that a particular CycL 
+expression is an instance of a given collection, or that a given 
+predicate holds of the expression.  #$quotedCollection and 
+#$quotedArgument, however, enable us to make such assertions, 
+albeit in an <em>indirect</em> way.</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+#$quotedCollection</em>
+        </dt>
+        <dd>
+A unary predicate that can take any instance
+of #$Collection as argument.  (#$quotedCollection COLLECTION) means<blockquote>
+            <ol>
+              <li>
+the instances of COLLECTION are CycL expressions and</li>
+              <li>
+an
+#$isa statement in which COLLECTION appears as the second argument 
+(or "arg2") -- i.e. a CycL sentence of the form (#$isa TERM COLLECTION)
+-- means that the CycL term TERM itself (as opposed to what TERM
+denotes) is an instance of COLLECTION.</li>
+            </ol>
+          </blockquote>  Thus, 
+(#$isa #$IndianOcean #$PublicConstant) means that the CycL constant 
+'#$IndianOcean' is an instance of the collection #$PublicConstant;
+it does not mean the Indian Ocean (which is an ocean and not a constant)
+is a public constant.
+</dd>
+        <dt>
+          <em>
+#$quotedArgument</em>
+        </dt>
+        <dd>
+A binary predicate that takes a #$Relation (such as 
+a #$Predicate or #$Function-Denotational) and a #$PositiveInteger as 
+arguments.  (#$quotedArgument RELATION N) means that RELATION's Nth 
+argument-place is quoted.  That is, a ground atomic formula (or GAF) 
+built from RELATION and having a CycL term TERM in its Nth argument-place 
+means that TERM itself (as opposed to what TERM denotes) stands in 
+RELATION with the rest of the GAF's arguments.  Thus, 
+(#$myCreator #$Thing #$Lenat) means that the CycL constant '#$Thing'
+was reified by Doug Lenat; it does not mean that Lenat created the
+collection of all things.</dd>
+      </dl>
+    </blockquote>
+    <h3>10.4.2.  <a NAME='137291160'>
+Some Consequences and Complications
+</a>
+    </h3>
+    <p>
+A notable consequence of the meaning of #$quotedCollection as described 
+above is that a GAF based on #$isa that has a quoted-collection as its 
+second argument is interpreted somewhat differently than a similar GAF 
+having a non-quoted-collection in that position.  Further, since #$genls 
+derives its meaning (via its rule macro expansion) from #$isa, #$genls 
+statements involving quoted-collections also mean something slightly 
+different than they otherwise do.  This is especially true when one of 
+the collections is quoted and the other is not.  Suppose QUOTED-COL is a 
+quoted-collection and NON-QUOTED-COL is a collection that is not quoted.  
+Then (#$genls QUOTED-COL NON-QUOTED-COL) means that if a CycL term TERM 
+is an instance of QUOTED-COL, then (not TERM itself, but) the thing 
+denoted by TERM is an instance of NON-QUOTED-COL.  
+(#$genls #$CycLExpression #$Thing) is an example such an assertion 
+in the Knowledge Base.  (A sentence of the form 
+(#$genls NON-QUOTED-COL QUOTED-COL), though rarely asserted in the
+Knowledge Base, means that if a thing THING is an instance of 
+NON-QUOTED-COL then any CycL term that denotes THING is an instance 
+of QUOTED-COL.)</p>
+    <p>
+Similarly, certain #$genlPreds statements involving predicates with 
+quoted argument-places have somewhat skewed meanings.  Suppose QUOTED-PRED 
+is a predicate whose Nth argument-place (only) is quoted and
+NON-QUOTED-PRED 
+is a predicate with no quoted argument-places.  Then 
+(#$genlPreds QUOTED-PRED NON-QUOTED-PRED) means that if QUOTED-PRED holds
+of a 
+given sequence SEQ of argument-values, then NON-QUOTED-PRED holds (not of 
+SEQ itself, but) of the sequence obtained by replacing the Nth item in SEQ 
+(which will be some CycL term) with what it denotes.  If QUOTED-PRED has 
+multiple quoted argument-places a completely analogous, though more 
+complicated, replacement is required.  (#$genlPreds #$equalSymbols
+#$equals) 
+is an example of such an assertion in the Knowledge Base. </p>
+    <p>
+It should be noted that the sorts of meaning-shifts associated with
+#$quotedCollection and #$quotedArgument described above raise certain 
+difficulties for the interpretation of CycL, only some of which can be
+explained here.  Consider the facts, described above, that the meaning 
+of a sentence of the form (#$isa X COLLECTION) varies depending on 
+whether or not COLLECTION is quoted, and that of (PRED ARG1...ARGN) 
+varies depending on whether any of PRED's argument-places are quoted.  
+The question arises as to how to reconcile these shifts in
+sentence-meaning
+with the intended meanings of such sentences' constituent expressions.  
+Let us define a <em>quoted-occurrence</em> of a CycL term TERM as any occurrence 
+of TERM as either (i) the arg1 of an #$isa sentence whose arg2 is a 
+quoted-collection or (ii) the argN of a sentence built with a predicate
+whose Nth argument-place is quoted.  A simple and initially attractive 
+account would be to say that quoted-occurrences of TERM denote TERM itself 
+(as opposed to whatever TERM normally denotes).  Thus, 
+(#$isa #$IndianOcean #$PublicConstant) means what it does (see above) 
+precisely because '#$IndianOcean' denotes itself (the term
+'#$IndianOcean') 
+in that context, while the other constituents of the sentence -- in 
+particular '#$isa' -- mean exactly the same thing they do in any other 
+context.  And the same account serves equally well in explaining the 
+meanings of sentences built from predicates with quoted argument-places.
+On this approach, the source of such sentences' skewed meaning is traced 
+soley to a meaning-shift associated with quoted-occurrences of terms.</p>
+    <p>
+But this approach, while providing a reasonable account of GAFs containing 
+quoted-occurrences of terms, falters in the case of rules.  In a rule, 
+a single bound variable can occupy both "quoted" and "non-quoted"
+positions 
+simultaneously.  Take the above #$genls example and consider its
+rule-macro 
+expansion:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$isa ?VAR QUOTED-COL)
+    (#$isa ?VAR NON-QUOTED-COL).</pre></tt>
+    </font>
+
+<p>
+The second, non-quoted occurrence of '?VAR' in this rule is ordinary 
+and unproblematic.  But what about the first, "quoted" occurrence?  
+If we extend the present approach to include variables, and say that 
+as a quoted-occurrence it <em>denotes itself</em>, it follows that this 
+occurrence of '?VAR' is functioning as a <em>constant</em> (that denotes a 
+certain CycL variable) instead of as a genuine variable, and that, 
+consequently, the rule says something very different from what it is 
+intended to.  Conversely, if we refuse to extend our approach to 
+variables, and view both occurrences of '?VAR' as genuine occurrences 
+of the same variable, the rule still would not say what it was intended 
+to, but rather the (quite possibly false) claim that any instance of 
+the quoted-collection QUOTED-COL (i.e. some CycL term) is an instance 
+of the non-quoted collection NON-QUOTED-COL.</p>
+    <p>
+An alternate approach, which traced the meaning-shifts associated
+with #$isa sentences to a systematic ambiguity in the meaning of
+the predicate '#$isa' itself (instead of to the term occupying its
+first argument-place) might avoid this difficulty with rules and 
+variables.  But that approach would raise new difficulties of its 
+own, one being that it seems incapable of being extended to a 
+plausible account of the meaning-shifts involving #$genlPreds
+sentences.  (Space limitations prevent a more thorough pursual of 
+this alternate approach here.)</p>
+    <p>
+A more radical alternative -- which would obviate the need for 
+predicates like #$quotedCollection and #$quotedArgument and the 
+meaning-shifts they entail -- would be to introduce a general method 
+into the CycL language such that, given any CycL term TERM, another 
+term can be found or constructed that unambiguously denotes TERM.
+Such an alternative would amount to having something like direct
+quotation in CycL.  It has been suggested that this could be done via 
+the introduction of a "quotation function" on CycL expressions, but 
+that is a dubious proposal.  For there is not and cannot be a 
+general <em>function</em> from things to their names, even if the named 
+things are restricted to being linguistic expressions themselves, 
+due to the simple fact that a single thing can have multiple names 
+(Cyc's so-called unique name assumption notwithstanding).  A more 
+promising approach along the same lines would be to introduce a new
+class of special CycL terms expressly intended to denote other CycL
+terms, and then assign the former terms their denotations by some
+rules or principles stated in the meta-language of CycL instead of
+trying to do this via a function defined in CycL itself.  Perhaps 
+these special terms should (or must) <em>themselves</em> be precluded from 
+being denoted by CycL terms, but that would seem to be a minor
+limitation.  Implementing this latter approach, however, would 
+require giving a considerably more explicit description of the 
+meta-language of CycL than has hitherto been done.</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

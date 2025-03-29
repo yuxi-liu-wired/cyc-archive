@@ -1,0 +1,300 @@
+00:00:00 --- log: started opencyc/02.05.18
+03:43:37 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+03:43:37 --- quit: DemiGod (carter.openprojects.net irc.openprojects.net)
+03:43:37 --- quit: dmiles-- (carter.openprojects.net irc.openprojects.net)
+03:43:38 --- quit: reed_ (carter.openprojects.net irc.openprojects.net)
+03:43:38 --- quit: phj_w (carter.openprojects.net irc.openprojects.net)
+03:43:39 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+03:43:39 --- quit: grove (carter.openprojects.net irc.openprojects.net)
+03:43:51 --- join: ChanServ (ChanServ@services.) joined #opencyc
+03:43:51 --- join: DemiGod (ggelling@207.207.8.145) joined #opencyc
+03:43:51 --- join: dmiles-- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+03:43:51 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+03:43:51 --- join: reed_ (reed@207.207.8.185) joined #opencyc
+03:43:51 --- join: phj_w (~phj@61.187.56.10) joined #opencyc
+03:43:51 --- join: grove (~grove@193.69.113.28) joined #opencyc
+03:43:51 --- mode: carter.openprojects.net set +o ChanServ
+05:10:52 --- join: Don (Don@ip-216-23-48-58.adsl.one.net) joined #opencyc
+07:18:32 --- join: theos (~torsten@port-213-20-227-58.reverse.qdsl-home.de) joined #opencyc
+07:19:43 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+07:28:36 --- quit: Don ()
+10:09:40 --- quit: theos (Read error: 104 (Connection reset by peer))
+10:10:05 --- join: theos (~torsten@port-213-20-227-126.reverse.qdsl-home.de) joined #opencyc
+10:15:54 --- quit: Seth ()
+11:38:01 --- quit: bruce ("BitchX-1.0c19 -- just do it.")
+13:10:58 --- join: stevereed_home1 (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+13:10:58 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+13:11:31 <theos> eww
+13:12:13 <theos> heading for the beach
+13:12:20 <theos> l8rs
+13:12:41 <theos> stevereed_home1: things are taking of after visiting dmiles
+13:12:46 <theos> tnx much
+13:12:56 * theos is impressed by the quick and positive response
+13:13:19 <theos> just what they promised free software is good for :)
+13:13:24 <theos> bye
+13:13:28 --- part: theos left #opencyc
+15:07:56 --- quit: ChanServ (Shutting Down)
+15:16:46 --- join: ChanServ (ChanServ@services.) joined #opencyc
+15:16:46 --- mode: carter.openprojects.net set +o ChanServ
+21:23:08 <dmiles--> anyone arround for cyc question?
+21:52:43 --- join: bruce (~bruce@dnvrdslgw17poola40.dnvr.uswest.net) joined #opencyc
+22:07:51 <dmiles--> hi bruce, still working on it :)
+22:08:22 <dmiles--> hrrm i am having a heck of a time making hypothetical parts of things
+22:08:31 <bruce> heya
+22:08:32 <dmiles--> such that they exists in a query
+22:08:40 <bruce> I'm writing up a list of errors in the docs.
+22:08:49 <dmiles--> for rulkes such as every room has one clieing]
+22:08:54 <bruce> but i don't understand what you said :)
+22:09:09 <dmiles--> well if you say that each indoor room has a floor
+22:09:25 <dmiles--> then that floor should be examopinable
+22:09:32 <dmiles--> or say breakable
+22:09:44 <dmiles--> err examinablwe
+22:09:48 * bruce nods.
+22:10:09 <dmiles--> i am trying to get cyc to contruct a new coinstant for each floor in each room
+22:10:36 <dmiles--> meaning 10 rooms i should be ablew to query for floors and find 10
+22:10:49 <bruce> we handle that in our (non-Cyc) system by having 'virtual items' and 'items' ... and use virtual items for things like walls, floors, ceilings, plants, etc .. and only instantiating actual items when we have to do so.
+22:11:26 <bruce> and when you have 60k 'rooms' in your wilderness, each with 4-8 plant-collections in them ... that ends up being a nice savings.
+22:11:28 <dmiles--> yeah well this works with virtual items but actually more applicable to non virtual peices
+22:11:53 <dmiles--> this is more for like you have 200 forest locationsd
+22:12:08 <bruce> yeah, that's what we use it for.
+22:12:10 <dmiles--> that you dont have to describe each
+22:12:32 <dmiles--> but yeah.. you do have the correct anonalogy
+22:12:52 <bruce> i wish i had a public write-up of what we do for outdoors stuff.
+22:13:43 <bruce> we can autogenerate everything on the fly based off of polygonally defined 'regions' (which carry data and terrain types and plant/animal population data)
+22:13:53 <dmiles--> what i am trying to do is create an templated of what a minimum city would have in it..
+22:14:07 <dmiles--> then say i have 3 cityies.. and have the three templates fill in
+22:14:30 <dmiles--> i have succesfully done this.. but they dont stick arround the KB
+22:15:12 <dmiles--> very much the same issue
+22:15:20 <dmiles--> so after you create them..
+22:15:32 <dmiles--> you have to say they exists and save them ouit i guess
+22:16:20 <dmiles--> (making the analoguy between the two systems)
+22:16:39 <bruce> hmmmm
+22:16:53 <dmiles--> http://12.225.207.235:8036/cycdoc/img/cb/green.gif
+22:16:55 <dmiles--> oops
+22:17:15 <dmiles--> here is a deduced city setup http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&99794
+22:17:16 <bruce> what is the problem that you're having in Cyc then? just not saving out the updated KB?
+22:17:54 <dmiles--> this was decuded as a dependant of washingtomn DC
+22:18:23 <dmiles--> thgat ground existential things do not appear
+22:18:36 <dmiles--> ground == things w/o variables
+22:19:30 <dmiles--> actually: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-arguments&99794
+22:19:49 <dmiles--> means i am hoping to createa gate to washington DC
+22:21:49 <bruce> so you wanted the existential quantification to pop out a gate ?
+22:22:01 <dmiles--> yes.. i know it can be done
+22:22:11 <dmiles--> you have it exactly
+22:22:56 <dmiles--> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&3515
+22:23:05 <dmiles--> is an example.. of pooping things out
+22:23:16 <bruce> hey, I said pop .. not poop :)
+22:23:23 <dmiles--> oh oops :)
+22:24:16 <dmiles--> it created a govenrment organization for each country at the bottem of that page
+22:24:27 <bruce> the function extent ?
+22:24:31 <dmiles--> coorect
+22:24:37 <bruce> I'm still highly Cyc-ignorant.
+22:24:54 <dmiles--> so if we queried (isa ?Who  GovernmentOfCountry)
+22:25:08 <dmiles--> we would get 7 countable entities
+22:25:31 <dmiles--> if we created a new country
+22:25:39 <dmiles--> we would instanlt have a new one
+22:25:57 <dmiles--> err instantly
+22:25:58 <bruce> where's the GovernmentOfCountry coming from?
+22:26:37 <bruce> oops, I see.
+22:26:48 <dmiles--> the fact aht GernmentFn is isa :  MacroRelation UnaryFunction IndividualDenotingFunction ReifiableFunction  
+22:27:21 <bruce> (interArgResultIsa GovernmentFn 1 Country GovernmentOfCountry)
+22:27:38 <dmiles--> yes pretty much
+22:28:03 <dmiles--> hrrm i should see if thats what has dependants
+22:28:50 <dmiles--> ahah
+22:28:55 <dmiles--> 14 dependants
+22:29:01 <dmiles--> Strength : Default   Direction : Forward   Arguments : 1   Dependents : 14
+22:29:01 <dmiles--> Asserted locally on Oct 29, 2001 at 10:02:09
+22:29:01 <dmiles--> Mt : PoliticalGeographyMt
+22:29:01 <dmiles--> HL Formula : 
+22:29:01 <dmiles--> (interArgResultIsa GovernmentFn 1 Country GovernmentOfCountry)
+22:29:33 <bruce> I'm still trying to figure out what an interArgResultIsa is.
+22:29:34 <bruce> :)
+22:30:46 <dmiles--> means forall Country there exists GovernmentOfCountry
+22:31:06 <dmiles--> that is denoted by  GovernmentFn ?counnty
+22:31:17 <bruce> okay. so is that what you were looking for to answer your problem?
+22:31:28 <dmiles--> hehe i think you really helped
+22:31:41 <dmiles--> that may be the magical assertion
+22:32:29 <dmiles--> now i have to see how to take that result and make it part of some rukles like mudPathway
+22:32:54 <dmiles--> so in the original thereExists
+22:33:15 <dmiles--> i meay need to relate thoise created entities
+22:40:20 <bruce> so, not to be dumb ..
+22:41:00 <bruce> but did you mean for the relations to be: (mudPathwayToArea ?AREA ?GATE "enter") and (mudPathwayToArea ?GATE ?TOWNHALL "enter") ?
+22:41:12 <bruce> (the 2nd differs from what you have)
+22:41:37 <dmiles--> oops thats typographical
+22:41:54 <bruce> same for the leave ones too
+22:41:55 <dmiles--> should be (mudPathwayToArea ?GATE ?AREA "enter")
+22:42:10 <dmiles--> so its TOWNHALL<->AREA<->GATE
+22:42:23 <dmiles--> err should have been
+22:42:34 <bruce> the townhall one is relating area/townhall not gate/townhall
+22:43:20 <dmiles--> yes.. lets see. i wonder.. if i update that..
+22:44:22 <dmiles--> it looks correct
+22:44:23 <dmiles--> ]           (mudPathwayToArea ?AREA ?GATE "enter") 
+22:44:23 <dmiles-->            (mudPathwayToArea ?AREA ?TOWNHALL "enter") 
+22:44:23 <dmiles-->            (mudPathwayToArea ?GATE ?AREA "leave") 
+22:44:23 <dmiles-->            (mudPathwayToArea ?TOWNHALL ?AREA "leave")))
+22:44:41 <bruce> oh, I was thinking incorrectly, sorry.
+22:44:44 <dmiles--> oh i meant Gates to the City
+22:44:58 <bruce> I was thinking ?AREA was the area outside the city for some dumb reason and not reading the nameString.
+22:45:05 <dmiles--> but yes the townhall could have gates as well
+22:45:44 <dmiles--> or yard.. that was just a small test (that assertrin0
+22:46:02 * bruce nods.
+22:46:56 <dmiles--> what gets me is this.. http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&99817
+22:47:35 <dmiles--> it creates a special term of unit for each outdoor location's Air
+22:47:50 <dmiles--> termofunit is a special way of making a entity
+22:47:58 <dmiles--> that comae form this asserion..
+22:48:07 <dmiles--> (implies 
+22:48:07 <dmiles-->    (isa ?AREA MudAreaOutdoor) 
+22:48:07 <dmiles-->    (thereExists ?Air
+22:48:07 <dmiles--> 	(and
+22:48:07 <dmiles--> 		(mudObjectFoundInLocation ?Air ?AREA)
+22:48:08 <dmiles--> 		(isa ?Air Air))))
+22:48:10 <dmiles--> 		
+22:50:01 <dmiles--> have you heard of puremagic.com ?
+22:50:14 <dmiles--> just noticing they are looking with us :0
+22:50:37 <bruce> yeah, he's someone i know.
+22:51:03 <dmiles--> very cool
+22:51:43 <bruce> dmiles--: section 2 of http://www.cyc.com/cycdoc/ref/inferencing.html
+22:53:31 <dmiles--> i see the skolemizinbg there yeah
+22:54:35 <bruce> btw, what happened to the cyc people? is there less traffic here now than a month ago ?
+22:55:14 <dmiles--> i think its alot of work having the respionsibilty of codebase and irc chat
+22:55:23 <dmiles--> DemiGod and Steve Reed are here
+22:55:41 <bruce> ahh, didn't know DemiGod was a Cyc person.
+22:55:50 <dmiles--> but JohndCyc may have found it distracting
+22:56:13 <dmiles--> there are lots of rthings to philophise about :0
+22:56:22 * bruce nods.
+22:56:36 <bruce> but basic representational issues would be nice to get feedback on sometimes.
+22:57:10 <dmiles--> yes Steve pulls it off by letting us knopw his response may be delayed by many hours
+22:57:27 <dmiles--> but will get to it
+22:58:10 <dmiles--> Eca would be helpfull to have in here as well someimes
+22:58:25 <dmiles--> he seems to be the one that writes inference modules
+22:59:05 <dmiles--> hrrm Cyc-10 seems tio have the behavour i was antifpating
+23:02:14 <bruce> dumb question: is the OpenCyc release Cyc-10 still?
+23:02:22 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:02:33 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+23:02:36 <bruce> dumb question: is the OpenCyc release Cyc-10 still?
+23:02:50 <dmiles> hrrm oops
+23:02:56 <dmiles> my connection reset i guess
+23:03:20 <dmiles> i dont think so.. it may have been way too inconsisrtant maybe
+23:04:00 <dmiles> well too slow maybe
+23:04:07 <dmiles> not sure
+23:04:15 <dmiles> i used cyc for a while at my last job
+23:04:27 <dmiles> and we used a version like opencyc
+23:04:43 <dmiles> for the best i can tell
+23:05:23 <dmiles> but people that have used cyc longterm have said that it used to do odd things
+23:05:43 <dmiles> they described a process of 'creating a skolem'
+23:06:06 <dmiles> like you say (thereExists ?X (isa ?X Bird))
+23:06:19 <dmiles> then cyc would return SKF-Bird234342
+23:06:42 <dmiles> then you could say (can SKF-Bird234342 performFlight)
+23:07:04 <dmiles> well behavourCapableOf
+23:07:36 <dmiles> that way you could deal with hypotheticatls
+23:08:13 <dmiles> then at a certain time you could kill the SKF-Bird234342 constant whne yoiur done inferncing about it
+23:10:16 <bruce> hmmm, does that still work?
+23:10:36 <dmiles> well thats kinda what i am searching on
+23:10:56 <dmiles> since that abilty to make existentiuals exists is what i need 
+23:11:30 <bruce> happen to know if SubL has a pretty-print like thing?
+23:11:45 <dmiles> (gen-phrase
+23:12:02 <dmiles> oh as in display assertion
+23:12:29 <dmiles> in the java APi there is something.. i'll look
+23:12:48 * bruce is just poking at the SubL prompt that you get from ./run-cyc.sh
+23:13:11 <dmiles> i see Java does it by tracking an indetn
+23:13:16 <dmiles> err indent
+23:14:00 <dmiles> but from the subl priompt you can type.. (gen-phrase #$MediterraneanSea)
+23:14:26 <dmiles> or (gen-phrase '(#$isa ?X Dog)) 
+23:14:32 <dmiles> oops
+23:14:40 <dmiles> (gen-phrase '(#$isa ?X #$Dog)) 
+23:14:48 <bruce> hmm, maybe the thing you get from ./run-cyc.sh isn't the same.
+23:14:58 <bruce> Error: Operator GEN-PHRASE is not defined in the API
+23:15:31 <dmiles> oh generate-phrase 
+23:16:18 <dmiles> works?
+23:16:38 <bruce> yep, thanks
+23:16:42 <bruce> where's that in docs though? :)
+23:17:23 <dmiles> oh .. i have seen this asked a couple times.. i think its easier to support the things that never change in the docs
+23:17:58 <dmiles> that is a function that is possible not lonterm supported.. someone in chat mentioned it to me
+23:18:19 <dmiles> (but not the lifeexpectancy)
+23:21:18 <dmiles> so hrrm there must be a way to make http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-gaf-arg&8244&2&1  populate with non atomic terms repreenting entities
+23:22:00 <bruce> hmm, the SubL reference talks about things that don't seem to work at the SubL prompt.
+23:22:11 <dmiles> give me an example
+23:22:17 <bruce> (zerop 1)
+23:22:31 <bruce> (max 1 2 3)
+23:22:55 <dmiles> yes hose are isemi standard lisp functions
+23:24:14 <bruce> well, either they should work .. or the SubL doc shouldn't list them as being supported. :)
+23:24:33 <dmiles> yes true
+23:24:33 <bruce> (floor 3.2) works
+23:25:03 <dmiles> i think there are certain subl functions shioelded from the subl prompt
+23:25:12 <dmiles> err shielded
+23:25:26 <dmiles> as in the have been perposely undefined
+23:25:36 <bruce> but the file i/o ones haven't been
+23:25:37 <dmiles> mayber the SUBL interpretor on port 3601
+23:25:40 <dmiles> has them
+23:25:45 * bruce tries.
+23:26:08 <bruce> (zerop 1)
+23:26:08 <bruce> 500 "Operator ZEROP is not defined in the API"
+23:26:29 <dmiles> Trying 127.0.0.1...
+23:26:30 <dmiles> Connected to mccarthy (127.0.0.1).
+23:26:30 <dmiles> Escape character is '^]'.
+23:26:30 <dmiles> (zerop 1)
+23:26:30 <dmiles> 500 "Operator ZEROP is not defined in the API"
+23:26:35 <dmiles> ogh yeah ;P
+23:27:12 <dmiles> hrrm  
+23:27:18 <bruce> i'm making a list of bugs to report.
+23:27:23 <bruce> so i'll just add this.
+23:27:39 <dmiles> thats a good idea
+23:35:38 <bruce> hmm. I just made it unhappy.
+23:35:46 <bruce> i guess (char-code 'a') isn't something I should run.
+23:36:32 <dmiles> or maybe its in escape sequnce
+23:36:41 <dmiles> so its waiting for more input
+23:37:04 <dmiles> even those 'a' should be start/end
+23:37:22 <dmiles> err not escape but string seququnce
+23:37:28 <bruce> oh, right. how do you do a char in SubL?
+23:37:49 <dmiles> that i am not sure of
+23:38:06 <dmiles> perhaps a sigle backquote in front of a char
+23:38:29 <bruce> perhaps, char-code isn't in the API though :)
+23:38:37 <bruce> (char-code 'a)
+23:38:38 <bruce> 500 "Operator CHAR-CODE is not defined in the API"
+23:38:53 <dmiles> you could have found a bug
+23:39:02 <dmiles> see opencyc uses a Lisp to C omp[iler
+23:39:19 <bruce> nor is characterp
+23:39:25 <dmiles> and things that work on Alegro Lisp dont always make it into the final binary
+23:39:52 <bruce> ahh, 'a is a symbol: (symbolp 'a) -> T (which is right according to usual Lisp/Scheme)
+23:40:29 <dmiles> ah 
+23:45:24 <dmiles> i am now trying to mnake sure that assertion about tiownhall and gates uses the univrsal varible in it
+23:45:39 <bruce> how're you coming with the representational problem?
+23:45:40 <dmiles> that my be the problem i had
+23:45:46 <bruce> oops
+23:46:49 <dmiles> so now its..
+23:46:50 <dmiles> (implies 
+23:46:50 <dmiles>        (isa ?AREA MudAreaCity) 
+23:46:50 <dmiles>        (thereExists 
+23:46:50 <dmiles>            (?AREA ?GATE ?TOWNHALL) 
+23:46:50 <dmiles>            (and 
+23:46:52 <dmiles>                (isa ?AREA MudAreaOutdoor) 
+23:46:54 <dmiles>                (isa ?GATE MudAreaOutdoor) 
+23:46:56 <dmiles>                (isa ?TOWNHALL MudAreaBuilding) 
+23:46:58 <dmiles>                (nameString ?AREA "Center of town") 
+23:47:00 <dmiles>                (nameString ?GATE "Gate into town") 
+23:47:02 <dmiles>                (nameString ?TOWNHALL "Townhall") 
+23:47:04 <dmiles>                (mudPathwayToArea ?AREA ?GATE "enter") 
+23:47:06 <dmiles>                (mudPathwayToArea ?AREA ?TOWNHALL "enter") 
+23:47:08 <dmiles>                (mudPathwayToArea ?GATE ?AREA "leave") 
+23:47:10 <dmiles>                (mudPathwayToArea ?TOWNHALL ?AREA "leave"))))
+23:47:14 <dmiles> ussing ?Area instead of City
+23:47:16 <dmiles> err instead of ?City
+23:47:36 * bruce nods.
+23:52:07 <bruce> although, I guess I don't really get the (?AREA ?GATE ?TOWNHALL) line.
+23:52:27 <dmiles> yep i just fixed that.. good eye
+23:52:54 <dmiles> look at the depenadnts from here: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&99815
+23:54:28 <dmiles> hrrm though
+23:54:29 <dmiles> [dmiles@midga_0001 mud]$  query (isa ?w MudAreaBuilding)
+23:54:29 <dmiles> no answers found
+23:54:29 <bruce> I meant that I'm not sure what that is saying .. there's no 'isa' or other (what's the right term?) thing there.
+23:55:18 <dmiles> well it can be a mudareacity and a mudoutdoorlocation
+23:55:38 <dmiles> the ?area can be talked about
+23:55:57 <dmiles> but should not appere in teh thereExists
+23:56:23 <dmiles> so the 'isa' is alreaight
+23:57:29 <bruce> oh, I was reading it wrongly because the indentation differed from the documentation examples :/
+23:58:15 <dmiles> i see now what you meant about inverting 'enter' 'leave'
+23:58:32 <dmiles>            (mudPathwayToArea CityOfWashingtonDC ?GATE "enter") 
+23:58:32 <dmiles>            (mudPathwayToArea CityOfWashingtonDC ?TOWNHALL "enter") 
+23:58:32 <dmiles>            (mudPathwayToArea ?GATE CityOfWashingtonDC "leave") 
+23:58:52 <dmiles> the Gate portion is backwards
+23:59:59 --- log: ended opencyc/02.05.18

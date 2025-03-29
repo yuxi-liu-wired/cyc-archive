@@ -1,0 +1,730 @@
+00:00:00 --- log: started opencyc/03.02.25
+00:45:44 --- nick: yepsterzzz -> yepster
+02:32:42 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+04:19:58 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+07:09:21 --- quit: Cobra (calvino.freenode.net irc.freenode.net)
+07:09:21 --- quit: fleeky (calvino.freenode.net irc.freenode.net)
+07:22:17 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+08:16:08 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+11:40:19 --- quit: dmiles ()
+11:40:27 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+11:40:51 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+11:49:42 <Yepster_home> i am still wondering, is 'a script' like 'a prototype event' or is it an event type..
+12:00:42 --- join: kinoc (~kino@dialup-67.29.249.69.Dial1.Dallas1.Level3.net) joined #opencyc
+12:01:05 <Yepster_home> hey kinoc, maybe you can help me out
+12:01:09 <Yepster_home> i am still wondering, is 'a script' like 'a prototype event' or is it an event type..
+12:01:39 <kinoc> hmmm
+12:02:01 <Yepster_home> e.g. going to a restaurant, an event 'e1' (first order object)
+12:02:12 <kinoc> usually I would think of it like the breakdown of an event
+12:02:14 <Yepster_home> (isa e1 Event)
+12:02:26 <kinoc> exactly
+12:02:38 <Yepster_home> (isa e1 EatingAtRestaurant) ?
+12:03:01 <kinoc> at one level its an event, but it details the subevents
+12:03:15 <Yepster_home> and (isa EatingAtRestaurant Script) ?
+12:03:27 <kinoc> i.e. ordering food is an event
+12:03:44 <Yepster_home> 'an ordering food' is an event
+12:03:48 <kinoc> schank would have had us believe so :)
+12:03:49 <Yepster_home> ?
+12:04:12 <kinoc> an action?
+12:04:25 <kinoc> (mtrans bill waiter order) ?
+12:04:34 <Yepster_home> i meant #$OrderingFood would be the collection of events (objects) that are 'an ordering food' event
+12:04:48 <kinoc> ok
+12:05:33 <kinoc> the cyc event and CD event may not be equiv...
+12:05:37 <Yepster_home> there is #$EatingEvent in the cyc kb
+12:05:50 <Yepster_home> which isa DefaultDisjointScriptType
+12:06:06 <kinoc> CD has a well defined bottom it doesn't go much beyond
+12:06:14 <Yepster_home> (default disjoint means as much as, that if #$WashingACar is alss
+12:06:27 <Yepster_home> defaultdisjointscxripttype, it is disjoint with #$EatingEvent
+12:06:38 <kinoc> ok
+12:07:04 <Yepster_home> so i thought: aha! EatingEvent is like a script (isa EatingEvent Script)
+12:07:16 <dmiles> i think maybe ActionScript vs EventScript share Common side effects and both use preconditions
+12:07:35 <dmiles> and post conditions
+12:07:37 <kinoc> i guess in cyc each 'event' can have an associated script that details its subevents each of which can have scripts
+12:07:50 <Yepster_home> yeah
+12:07:56 <Yepster_home> 'associated' script
+12:07:58 <dmiles> oh oops actually i should say.. one does not contrain Event on preconditions
+12:08:23 <Yepster_home> the relation between 'e1' and a script is not a special form of #$isa
+12:08:26 <dmiles> ig differnces between Plan vs Action
+12:08:34 <dmiles> but they are both Sript
+12:08:36 <kinoc> eventually in cyc you could say 'two atoms met each other and ...."
+12:08:38 <dmiles> script
+12:08:55 <Yepster_home> you mean, a script is like a 'stored' plan?
+12:09:05 <kinoc> yeah
+12:09:13 <dmiles> yes.. so you look at the post conditions and the goals
+12:09:22 <dmiles> (not so much ever preconditions)
+12:09:31 <kinoc> to determine which script to use
+12:09:39 <dmiles> becasue preconditonos can be maniputated per action
+12:09:53 <Yepster_home> kinoc: i was afraid of that too (atoms) but i think to prevent that that's why schank called primitiva acts primitive -> basic script build blocks
+12:10:09 <dmiles> yeah there is in fact 3 levels of script
+12:10:27 * Yepster_home listening
+12:10:32 <dmiles> primitive actions, complexactions, script
+12:10:32 <kinoc> yeah, most people dont go below the cd level, or so schank would have argued
+12:10:49 <dmiles> like CookingAMeal
+12:11:05 <Yepster_home> but what if Jill bakes a cake in her kitchen
+12:11:13 <Yepster_home> now in cyc's kb it would be 
+12:11:35 <dmiles> you could represent it in primive's or you could make a single Event
+12:11:43 <Yepster_home> exists e (isa e CookingAMeal)(performedBy etc)
+12:11:56 <dmiles> the whole concept of primitives is at some point plans will be able to be compared
+12:12:11 <Yepster_home> but then if CookingAMeal would be regarded as 'script' then there is that
+12:12:23 <Yepster_home> isa link between the event object and script again
+12:12:44 <dmiles> yeah.. temporalParts 
+12:12:56 <dmiles> the script itself might be a temproal part
+12:12:57 <kinoc> yeah... like dmiles said
+12:13:21 <kinoc> an event and a script have temporal extent
+12:13:38 <dmiles> it might even be good to disingish event CookingAMeal and HowoCookAMEal
+12:13:45 <kinoc> each sub event of a script breaks up that time
+12:13:52 <Yepster_home> does a script? (have temporal extent?)
+12:14:07 <dmiles> HowtoCookAMeal :) ? 
+12:14:16 <dmiles> maybe not
+12:14:21 <kinoc> in cyc it think it would once instantiated
+12:14:23 <dmiles> (not having a temproal extent)
+12:14:40 <kinoc> i.e. I went to a resturant between 7pm anad 9pm last night
+12:14:41 <dmiles> maybe scripts are in fact not events
+12:15:08 <Yepster_home> (isa EatingEvent) and (references RestaurantScript)
+12:15:12 <kinoc> ah.... a script describes the plan for an event
+12:16:01 <kinoc> or the frozen prototypical plan for an event
+12:16:05 <Yepster_home> but then there really is no need for making the parsed sentence EatingEvent
+12:16:06 <dmiles> makes sense that they are in fact differnt
+12:16:24 <Yepster_home> just Event would be enough
+12:16:32 <Yepster_home> ?
+12:17:09 <Yepster_home> but it's still strange, because things like relationAllExists with
+12:17:15 <dmiles> hrrm you mean combine any Script to make event..(isa RestaurantScript) (isa Event) ?
+12:17:21 <kinoc> you could, but by doing so you can link to the other data that EatingEvent can bring
+12:17:28 <Yepster_home> subEvents Ordering, Ingesting etc -> EatingEvent really *sounds* like a script
+12:17:46 <kinoc> a psuedoscript ???
+12:17:46 <dmiles> it really does
+12:18:21 <Yepster_home> dmiles: no: (references Event123 RestaurantScript) and (isa Event123 Event)
+12:18:44 <Yepster_home> what if i told the story
+12:19:10 <Yepster_home> "I went to a restaurant. got robbed before I entered. went home"
+12:19:10 <dmiles> yeah.. that works.. we just *almost* fell into the trap 
+12:19:19 <dmiles> (that Script was Event)
+12:19:21 <Yepster_home> not isa EatingEvent
+12:19:41 <Yepster_home> but references RestaurantScript (+ anomaly ;) and GettingRobbed
+12:20:10 <Yepster_home> ah, glad you agree!
+12:20:14 <Yepster_home> (about trap)
+12:20:21 <kinoc> I think I saw that trick story before .... :)
+12:20:40 <Yepster_home> i think in spgu
+12:20:56 <Yepster_home> too bad i lost the book (was in my backpack, and later it wasn'y anymore..)
+12:21:06 <dmiles> well the Event was rearely discussed
+12:21:30 <kinoc> I though the cyc guys were still working on it
+12:21:37 <kinoc> or was that releasing it ??
+12:21:44 <kinoc> scripts that is.
+12:21:49 <Yepster_home> so, using #$EatingEvent would only be useful when someone wants to add
+12:22:04 <Yepster_home> 'quick' stuff like -> add standard EatingEvent with consequences
+12:22:15 <dmiles> i hope they are.. becvasue really i often feel the whole of CYC was to just give TAELSPIN a valid platform
+12:22:23 <Yepster_home> not to possible connect an (observerd/parsed) event with a script type
+12:22:35 <dmiles> that the only AI programs that need common sense are Story planners
+12:22:48 <dmiles> :P
+12:23:14 <dmiles> (then later the Cyc finds itself in a story)
+12:23:17 <kinoc> or is that moo planners too :P
+12:23:32 <Yepster_home> well I also aligned the latest db design i did for a project against opencyc kb terminology
+12:23:38 <kinoc> maybe it can find our universal reset button
+12:23:46 <Yepster_home> (and workflow management consortium vocabulary)
+12:23:52 <Yepster_home> (www.wfmc.org)
+12:24:15 <Yepster_home> so the whole kb structure is handy for more than story understanding
+12:24:24 <Yepster_home> (i hope?)
+12:24:34 <kinoc> oh yeah
+12:25:01 <dmiles> i think the rest of the KB is maybe for making agents to make it better at story understanding
+12:25:10 <kinoc> its very useful... just requires a different way of thinking 
+12:25:12 <Yepster_home> lol
+12:26:20 <Yepster_home> ok I think i have enough input to think a bit further about what a script is
+12:26:29 <Yepster_home> thanks both!
+12:27:01 <kinoc> sure
+12:27:15 <Yepster_home> btw, there is also a similarity between script and workflow process
+12:27:24 <Yepster_home> but i won't bore you with that ;-)
+12:27:29 <dmiles> not just ==?
+12:27:54 <dmiles> workflow management == story script managemtn
+12:27:57 <Yepster_home> well script is like a prototype for doing things
+12:28:03 <kinoc> you could probably merge the two into a superset-set
+12:28:05 <Yepster_home> process is very much mandatory stuff
+12:28:27 <Yepster_home> so a workflow process is a special kind of script (thinking aloud)
+12:28:30 <Yepster_home> ?
+12:28:47 <Yepster_home> 'MandatoryScript'
+12:28:53 <dmiles> i agree
+12:29:22 <kinoc> the auditor comes when you dont perform a step :-)
+12:29:27 <Yepster_home> a causal relation is called 'transition'
+12:29:45 <Yepster_home> for api, see:
+12:30:18 <Yepster_home> (500kb) http://www.wfmc.org/standards/docs/if2v20.pdf
+12:31:38 <Yepster_home> i think maybe workflow processes are to (what's the opposite of fine?)
+12:31:40 <Yepster_home> grained
+12:31:43 * kinoc snowed in at home on dial up
+12:31:54 <Yepster_home> cool
+12:32:24 <kinoc> dallas has 0 prep for real winter weather
+12:32:48 <kinoc> so every two years we just shut down for a day or two
+12:32:57 <dmiles> that PDF is neat .. it defines a good minimuim of the info one could add
+12:33:40 <Yepster_home> yeah
+12:34:16 <Yepster_home> I've implemented the most important parts of it in pl/sql
+12:34:32 <Yepster_home> and the authorization part is already synched with opencyc
+12:34:47 <Yepster_home> so why not just the whole process (as a 'MandatoryScript' ?)
+12:35:18 <dmiles> yeah.. once the workings are totally validated
+12:35:32 <kinoc> sometimes things are like that. its only a little bit more to do the whole thing
+12:36:16 <dmiles> to be sure the thing can actually run itself
+12:37:06 <Yepster_home> it would be a different use though
+12:37:25 <Yepster_home> because scripts are used to fill in knowledge gaps
+12:37:56 <Yepster_home> but info from a synched process -> script could be used as alternative planner
+12:38:00 <Yepster_home> like 'what next?'
+12:38:06 <Yepster_home> very simple planner though
+12:38:15 <dmiles> i am very interested in seeing a story box.. you put in knowledge and turn the crank and have story come out
+12:38:35 <Yepster_home> why story generation?
+12:38:43 <Yepster_home> why not complete analysis?
+12:38:58 <Yepster_home> I would like answers like:
+12:38:59 <dmiles> that fills in the GAFs that you can tell are missing
+12:39:18 <dmiles> so that infernce ends up more complete
+12:39:30 <Yepster_home> 'a story' (that would be a set of event objects with subevent relations and actor and such)
+12:39:40 <Yepster_home> -> references scripts (list)
+12:39:49 <Yepster_home> -> anomalies -> list of anomalies
+12:39:59 <Yepster_home> -> explanation questions
+12:40:08 <Yepster_home> -> answers via explanation patterns
+12:40:50 <dmiles> yeah in a dialog system that's how it could be done
+12:40:58 <Yepster_home> ah: generate events from script (used as prototype)
+12:41:10 <Yepster_home> but what if you would feed it:
+12:41:25 <Yepster_home> "I left home to eat in a restaurant. I got robbed. ... (fill in the rest)"
+12:41:38 <dmiles> (thats what i am after)
+12:42:10 <Yepster_home> robbed script would have higher priority (or sth) than restaurant script
+12:42:26 <Yepster_home> would be something like exceptional case -> overrule other script
+12:42:46 <kinoc> hmmm....primed then verify ?
+12:42:48 <Yepster_home> how to represent that..
+12:43:03 <Yepster_home> would that always be the case?
+12:43:05 <kinoc> the resturant script is never verified
+12:43:16 <dmiles> yeah.. thats the thing you can represent the preconditions.. but the event by event there is no correct answer to represent
+12:43:32 <Yepster_home> "I was about to get robbed. A cop prevented .. etc"
+12:43:43 <dmiles> so it would have to happen durring the use of infernce harness
+12:43:46 <kinoc> yeah
+12:43:57 <Yepster_home> 'CopRescue script overrides rob script
+12:44:18 <dmiles> its possible that you could figure out the manditory happenings
+12:44:21 <Yepster_home> hmm in both cases it's like a new actived script 'overlays' the current script
+12:44:46 <kinoc> a primed script is verified when its subevents are mentioned or its postconditions are mentioned
+12:44:48 <dmiles> at least get you possiblie enmertions pre figured out 
+12:44:59 <Yepster_home> so maybe in the 'feeded' event object tree, if a subevent references a script, and a later subevent references another script, that other script takes precedence
+12:45:28 <Yepster_home> with optionally stopping the other script
+12:46:03 <kinoc> "I went to a resturant. I got a speeding ticket on the way back."
+12:46:16 <Yepster_home> "i got robbed but my friend had enough money so we continued"
+12:47:05 <Yepster_home> i like this
+12:47:58 <Yepster_home> hehe the sarcasm just drips of the latest opencyc sf form post..
+12:49:56 <kinoc> oh did you get my ramblings about the parser from last night ?
+12:50:25 <Yepster_home> yes
+12:50:48 <kinoc> did dmiles get a copy?
+12:51:02 <Yepster_home> I tried
+12:51:13 <Yepster_home> "John gave Bill an orange for his cold"
+12:51:29 <Yepster_home> but that didn't give a result
+12:52:46 <kinoc> doesnt have 'for a cold' coded yet
+12:52:57 <kinoc> http://4.33.94.173:2002/cdml?pos="John%20gave%20Bill%20an%20orange%20for%20his%20cold%20."
+12:52:59 <Yepster_home> ah
+12:53:17 <Yepster_home> i don't think external links work
+12:53:21 * Yepster_home tries
+12:53:48 <Yepster_home> 0 0 0
+12:53:53 <kinoc> oh I see, need to code the bill link. I had coded the "to Bill" link.
+12:54:23 <kinoc> hmmm
+12:55:58 <kinoc> I think that means 0 wordcounts 0 parses 0 totalparses
+12:56:16 <kinoc> but you're not seeing the xml-ish
+12:56:50 <kinoc> try a refresh. I know on IE its funny like that...
+12:57:50 <Yepster_home> I think it maybe has something to do with connection from localhost or not
+12:58:59 <kinoc> I have also use the local ip if you're doing it local 127.0.0.1
+12:59:07 <kinoc> or your real ip
+12:59:52 <kinoc> or just use the non-uri encoded form
+13:00:41 <kinoc> http://4.33.94.173:2002/cdml?pos="John gave an orange to Bill for his cold ."
+13:01:11 <kinoc> ah, I got 0 0 0 now
+13:01:25 <kinoc> but the sentence was trunkacted a "John 
+13:02:09 <kinoc> but if I finish it all it works
+13:02:36 <Yepster_home> http://4.33.94.173:2002/cdml?pos="John%20ate%20the%20red%20apple"
+13:02:43 <Yepster_home> that actually works from home
+13:03:25 <Yepster_home> have you heared about 'quasy logic form'?
+13:03:47 <Yepster_home> it's mentioned in norvig's book
+13:03:53 <kinoc> hmmm, when I click on it from mIrc sometimes it gets the whole URL and sometimes not.
+13:03:59 <kinoc> no, do tell.
+13:04:20 <Yepster_home> i wondered why you named it exists ?SENT instead of just ?EVENT
+13:04:31 <Yepster_home> and #$LGP-SENT
+13:05:18 <Yepster_home> instead of #$Event
+13:05:26 <kinoc> orignially, (i.e. with a xml return instead of a cdml) it would dump the Link grammar ouput links
+13:06:05 <kinoc> try changing the cdml in the url into xml
+13:06:38 <kinoc> I was originally thinking about defining the translation rules in cyc
+13:06:51 <Yepster_home> <cyc-hypolinks>
+13:06:51 <Yepster_home> (#$thereExists ?SENT 
+13:06:51 <Yepster_home>   (#$isa ?SENT #$LGP-SENT)
+13:07:11 <kinoc> I think there is a LG-Soar
+13:08:03 <kinoc> I need to look into it
+13:08:29 <kinoc> but its just legacy from originally thinking about it
+13:08:44 <Yepster_home> hehe i know what you mean
+13:08:48 <kinoc> I could adjust it 
+13:09:11 <Yepster_home> it'd be nice to sync you parser against the cd.ke file i made
+13:09:22 <kinoc> yeah
+13:09:46 <kinoc> you see how given the set of LGP links you could define rule that imple the CD forms
+13:10:00 <kinoc> which is what its doing now, only in pattern matching C
+13:10:20 <Yepster_home> uuhhhh
+13:10:24 <kinoc> but you could just as easily(?) dump the links into an MT
+13:10:40 <kinoc> and have implication rules match against them
+13:10:43 <Yepster_home> it's very tempting, but i _must_ focus on my project assignment
+13:10:46 <kinoc> may not be that efficient
+13:10:51 <kinoc> oh I know
+13:11:09 <kinoc> just thinking on-line
+13:11:13 <kinoc> :)
+13:11:24 <Yepster_home> and even spending time on xp's and script is a bit well not considered important by all supervisors
+13:12:18 <Yepster_home> most because i think it's dangerous (for time) stuff -> to get lost in
+13:12:33 <kinoc> I know
+13:12:49 <kinoc> I probably will keep both outputs options for now
+13:13:14 <kinoc> and expand the basic LGP-to-CD format
+13:13:33 <Yepster_home> to you have to possibility to create multiple events?
+13:13:34 <Yepster_home> like
+13:14:19 <Yepster_home> (thereExists ?ATRANS
+13:14:19 <Yepster_home> (thereExists ?ORANGE
+13:14:19 <Yepster_home> (thereExists ?BILLHASORANGE
+13:14:19 <Yepster_home> (thereExists ?INGEST
+13:14:19 <Yepster_home> (thereExists ?BILLBETTER
+13:14:20 <Yepster_home>   (and
+13:14:22 <Yepster_home>     
+13:14:33 <kinoc> yeah
+13:14:38 <Yepster_home> cool
+13:14:49 <kinoc> well I would like to do that
+13:14:55 <Yepster_home> and the cd-rE relation?
+13:15:14 <kinoc> LGP does link multiple clauses
+13:15:57 <kinoc> so will have to recoginze which clause link maps to cd-rE
+13:17:35 <kinoc> I did some link following before for the "ResourceIN (RIN)" and "ResourceOut(ROUT)" notes
+13:18:46 * Yepster_home is totally new to lgp
+13:20:06 <kinoc> Its interesting. I think it is related (several times removed) to CD, since it is a dependency grammar.
+13:20:42 <kinoc> I think like ELI but I may be mistaken
+13:21:08 <kinoc> I do think you can redo the input grammar list to be more CD-ish
+13:22:03 <kinoc> since another way of looking at it is as slot filler relations with directionality
+13:22:33 <kinoc> i.e the actor of give tends to come before it. John can fill actor slots......
+13:22:55 <kinoc> that's also where a tie in with the cyc kb would be nice.
+13:23:19 <kinoc> since you can define classes and say 'people can fill actor slots'
+13:23:54 <kinoc> or get a dump out of cyc of the words that can fill actor slots 
+13:24:25 <kinoc> linking the LGP to cyc would be worth a masters to someone .....
+13:25:06 <kinoc> or managing the LGP information in Cyc....
+13:25:19 <kinoc> lots of possibilities
+13:25:39 <Yepster_home> yeah
+13:25:58 <kinoc> of mine the LGP kb to fluff out opencyc
+13:26:20 <kinoc> like using wordnet
+13:26:28 <Yepster_home> or framenet
+13:26:34 <kinoc> exactly
+13:27:21 <dmiles> bck
+13:27:33 <Yepster_home> imho now the only thing what is needed is time to connect the pieces of software +
+13:27:41 <Yepster_home> add meat (facts) to the cyc kb
+13:27:50 <dmiles> yes.. all the peices there
+13:28:08 <dmiles> well i am not sure yet about a partial order planner
+13:28:25 <dmiles> SHOP works for 1 by 1 by 1
+13:28:54 <dmiles> but gettihng the event calculas together
+13:29:00 <Yepster_home> it could as well be outside cyc
+13:29:45 <dmiles> i have http://12.212.75.114/root/opt/sourceforge/logicmoo/openmodality/iso-prolog/logicmoo_tap_plan.pl
+13:29:47 <Yepster_home> (the planner)
+13:30:07 <Yepster_home> shanahan, that sounds familiar
+13:30:09 <dmiles> it actualy created a graph between Event123
+13:30:20 <dmiles> so that they overlap and things
+13:30:33 <dmiles> it does emensly cool stuff
+13:30:48 <dmiles> actualyl thinking even a Java implimentation might not be hard
+13:30:58 <dmiles> well i rather find one
+13:31:04 <dmiles> (prewritten)
+13:31:20 <dmiles> but i cant tell..maybe a Lisp->SubL version is better
+13:31:45 <Yepster_home> you mentioned abduction earlier (few months ago)
+13:31:52 <Yepster_home> were you working on this then?
+13:31:58 <dmiles> a little
+13:32:20 <dmiles> but didnt understand how serious of a need 
+13:32:22 <Yepster_home> it's big
+13:32:39 <dmiles> so i never really debugged
+13:33:17 <dmiles> well it's hard not getting too inferncy
+13:33:26 <dmiles> err putting too much infernce into it
+13:33:44 <dmiles> like State casues State 
+13:34:10 <dmiles> right now there is explicit negation bugs
+13:34:36 <dmiles> so if it has a precondition that cant be satisfied.. yet not proven is false.. it partially assumes
+13:34:59 <dmiles> yeah its actualy 4 planners
+13:35:09 <dmiles> for NgeGafs
+13:35:16 <Yepster_home> what are they used for?
+13:35:25 <dmiles> er ~GAFs,GAFs,~NAFs,NAFs
+13:35:53 <dmiles> and it's no fun adding in identity
+13:36:01 <Yepster_home> i see things for planes (taxing etc)
+13:36:18 <dmiles> yeah.. thats a test case
+13:36:28 <dmiles> its goal is to deleiver passender to autsin
+13:36:33 <dmiles> err passenger
+13:36:55 <dmiles> right now so far it can get the pane to the runway ;P
+13:37:04 <dmiles> plane
+13:37:33 <dmiles> i just added the pilot must also have the key in the cockpit
+13:37:52 <dmiles> but dealling with neg(_)
+13:37:54 <Yepster_home> it would be nice to figure out 'scripts' (or actions with preconds adds en negs etc) from stories
+13:38:08 <dmiles> oh yeah.. it's not really adbuctive yet
+13:38:29 <dmiles> well it only imagines things.. then tests
+13:38:38 <dmiles> the testing part is abductive
+13:38:43 <Yepster_home> then feed it the EWD trip reports
+13:39:12 <dmiles> so it goes fastforward to try a new goal .. then seeing if the plan it got there is helpfull to the real plan
+13:39:25 * kinoc sees a hidden markov graph thingy thingy....
+13:39:41 <dmiles> thats why its abductive
+13:39:53 <Yepster_home> hmm google returns 0 responses to "abducting scripts from stories"
+13:40:33 <Yepster_home> isn't it called markov chain?
+13:40:43 * Yepster_home doesn't really know
+13:40:44 <kinoc> yeah
+13:41:29 <dmiles> in the end it really seems good candidate to markov chain things together for abduscing
+13:41:30 <Yepster_home> some kind of statistical proces with output of last run as new input for new thing
+13:41:35 <kinoc> try "abductive script"
+13:42:10 <Yepster_home> i can't read chinese
+13:42:43 <kinoc> :)
+13:44:24 <dmiles> tp1   :- ts1g(in(airplaneKey,seating1)).
+13:44:24 <dmiles> tp2 :-  ts1g(in(airplaneKey,cockpit1)).
+13:44:36 <dmiles> it cant do tp2 right now ;(
+13:44:54 <dmiles> in = objectFoundInLocation
+13:44:57 <Yepster_home> o, now i understand ;-)
+13:45:26 <dmiles> ramifications( onGround(Obj) , [in(Obj,'GateFn'(_))] ).
+13:45:26 <dmiles> ramifications( onGround(Obj) , [in(Obj,'RunwayFn'(_))] ).
+13:45:26 <dmiles> ramifications( onGround(Obj) , [in(Obj,'OnGroundsNearFn'(_))] ).
+13:45:26 <dmiles> ramifications( inAir(Obj) , [in(Obj,'AirspaceFn'(_))] ).
+13:45:45 <dmiles> is the implies portions
+13:46:00 <Yepster_home> tsg1?
+13:46:16 <dmiles> test 1 goal
+13:46:57 <dmiles> with a simplier planner i have had really good results
+13:47:03 <Yepster_home> i don't see difference between tp1 and 2
+13:47:25 <dmiles> yeah except it had to do something twice
+13:47:31 <dmiles> ptrans twice
+13:48:24 <Yepster_home> which could not be done because of ramification of first?
+13:48:29 <dmiles> actually though i got the source to the PWEAK planner that i am starting to use
+13:48:46 <dmiles> right this is why partiaol order planning needs done
+13:48:58 <dmiles> since there can be overlap
+13:49:20 <dmiles> meaning lets say in the end of the story something had to be put inot the table
+13:49:32 <dmiles> but in order to get ther eit had to be taken off
+13:49:37 <dmiles> (for a short time)
+13:50:01 <dmiles> the problem is that clipping has to be allowed
+13:50:12 <Yepster_home> clipping?
+13:50:18 <dmiles> you cant realy tell if you clipped without infernce
+13:50:57 <dmiles> clippuing is where you take a fact away for a moment
+13:51:18 <Yepster_home> fact - like a precondition for action?
+13:51:31 <dmiles> there is ~clipped, decliped,~declipped and clipped
+13:51:42 <dmiles> yes
+13:51:55 <Yepster_home> hmm
+13:52:11 <dmiles> so you have to track the things that break your plan as you plan
+13:52:23 <kinoc> or a goal condition...(hey I was almost done.) ??
+13:52:26 <dmiles> (of course) ussing clipping is just an escape
+13:52:59 <Yepster_home> yeah i am new to it but i would solve the problem (thing on table)
+13:53:05 <Yepster_home> just the opposite, i think
+13:53:30 <Yepster_home> if a new action was necessary, just invent new action that gives required result
+13:53:32 <Yepster_home> s
+13:53:35 <dmiles> well the main goal of how this works is to fit create all the possible states and actions
+13:53:41 <dmiles> err first
+13:53:53 <dmiles> generate->test
+13:54:21 <dmiles> while geenrating you leave themin the list
+13:54:31 <dmiles> while testing you clip them and declip them
+13:54:41 <Yepster_home> and the plan with the least clips is most likely to be the best candidate?
+13:55:16 <dmiles> nope.. just the noisiest
+13:55:20 <Yepster_home> this sounds like 'optimal brain surgery'
+13:55:22 <dmiles> err least noisiest
+13:55:28 <dmiles> but that could be a good heuristics
+13:55:33 <Yepster_home> it's an algorithm to prune a neural network
+13:56:08 <dmiles> when proving subplans .. there needs to be better heuristic then what iuse.. i just try full depth first search
+13:56:27 <dmiles> (oh and iteratively deepen)
+13:56:38 <dmiles> so i supposed the easiest answers come first
+13:57:10 <dmiles> but still i dont reuse prevous iterations
+13:57:15 <dmiles> thats bad
+13:57:38 <dmiles> thats almost why Hashes might be better
+13:57:43 <dmiles> (instead of lists)
+13:57:59 <dmiles> so that each try step can be cached
+13:58:00 <kinoc> well get it to work then optomize, unless you can't get it to work without optomizations
+13:58:09 <dmiles> hehe yup
+13:58:37 <dmiles> i may throw it out and start back with STRIPS again
+13:59:06 <dmiles> well maybe not.. just have to get state to state to work better
+13:59:47 <dmiles> the problem is that onGround(Obj),in(Obj,'OnGroundsNearFn'(_)) are treated like two diffenrnt important states
+14:00:02 <dmiles> like that they are not really the same thing
+14:00:22 <Yepster_home> which is true
+14:00:32 <dmiles> so for every implication it doubles the search
+14:00:33 <Yepster_home> :-)
+14:00:36 <dmiles> true yeah
+14:00:50 <dmiles> but state wise they can be the same thing
+14:00:57 <dmiles> they just arnt
+14:01:06 <dmiles> (while being a precondtion)
+14:01:17 <Yepster_home> OnGroundsNearFn -> OnGrounds?
+14:01:29 <Yepster_home> with the cons as precond?
+14:01:47 <dmiles> yeah
+14:01:52 <dmiles> its one way 
+14:02:03 <dmiles> "entailment" :P
+14:02:24 <dmiles> so really it only true when literals are grounded
+14:02:54 <dmiles> erm thats a second thought
+14:03:00 <dmiles> i mean side topic
+14:03:44 <dmiles> but yeah the on grounds near something means it's on the ground
+14:04:16 <dmiles> landing gear can only be raised and lowered while in the air
+14:04:24 <Yepster_home> is there not something for genlFunc?
+14:05:08 <Yepster_home> o no it is a predicate
+14:05:15 <Yepster_home> (onground)
+14:05:22 <dmiles> hehe why i wishing i was coding this inside Cyc
+14:05:31 <Yepster_home> ah
+14:05:33 <dmiles> oh yeah onGround(Obj) is predicate
+14:06:03 <dmiles> 'OnGroundsNearFn'(_) is the identity stuff 
+14:06:21 <Yepster_home> you need a prolog -> cyc interface
+14:06:25 <dmiles> i have
+14:06:45 <Yepster_home> ?
+14:07:40 <dmiles> yes .. http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/opencyc/swi_interface/opencyc.pl
+14:08:05 <dmiles> i just decalre preduicaytes that are in Cyc to be as if they are prolog
+14:08:19 <dmiles> so they can be asserted/retracted even as if prolog
+14:08:52 <Yepster_home> cfasl
+14:08:53 <Yepster_home> ?
+14:09:41 <dmiles> just normal telnet to SubL
+14:10:12 <dmiles> cfasl would not be hard to switch to
+14:10:54 <Yepster_home> how long did it take to write?
+14:11:24 <dmiles> well code i had written in a week
+14:11:43 <dmiles> then spent two days fixing
+14:12:20 <dmiles> i am a nut when it comes to prolog.. it spews from fingers
+14:13:12 <dmiles> but the httpd stuff came from other project
+14:13:26 <dmiles> where i made a xml server 
+14:14:25 <Yepster_home> it's big
+14:14:53 <dmiles> hehe
+14:15:07 <dmiles> i just just functions long names
+14:15:37 * Yepster_home is preparing a link
+14:16:42 <dmiles> it when it gets into cyc make a PrologDataMt to keep things.. thats it's spindle
+14:17:58 <Yepster_home> http://217.117.225.187/~yeb/plflowpkb.txt
+14:18:00 <Yepster_home> hehe
+14:18:30 <kinoc> hey dmiles .... remind me about cfasl and cycocx
+14:18:41 <kinoc> don't want to forget
+14:25:46 <dmiles> now that is a long file
+14:26:46 <Yepster_home> it didn't look that long in ultraedit
+14:26:53 <Yepster_home> 1769 lines
+14:27:08 <dmiles> :) i use VisualSlickEdit (just like ultraEdit)
+14:27:35 <dmiles> it has lexers for PL/SQL LISP everyting
+14:59:22 --- quit: Yepster_home ()
+15:11:21 --- join: Guest62588 (~Bob@wkstn3-71.reiss.georgetown.edu) joined #opencyc
+15:11:50 <Guest62588> hi
+15:13:06 <Guest62588> I'm wondering if there're any corpora in existence that have been annotated with any cyc information
+16:20:39 <kinoc> maybe but not that I know of
+16:26:39 <Guest62588> hey
+16:27:25 <Guest62588> all I'm really looking for, upon further reflection, is a corpus in which nouns have been tagged as types or instances
+16:27:51 <dmiles> in RDF or just in Cyc browser?
+16:28:08 <Guest62588> sorry I don't know what rdf is
+16:28:38 <dmiles> ok yes there are #$Noun s that have pointers to their #$COllection types
+16:28:58 <dmiles> like #$Dog and Dog-TheWord
+16:29:13 <dmiles> or puppy and (YounfAnimalFn Dog)
+16:29:20 <Guest62588> okay, you mean in the cyc database each noun tells you what collection it's a part of, right?
+16:29:33 <dmiles> not each.. but some
+16:29:40 <dmiles> at least gives a good example
+16:29:51 <dmiles> do you have th CycKBbroswer installed?
+16:30:05 * dmiles looks for one of the urls to stevereed's machines
+16:30:23 <Guest62588> what I need is some big piece of text where somebody (or some machine) has looked at all the nouns in that text and said whether it's an instance or a type
+16:31:01 <Guest62588> so that way I can look at the sentence and see whether, in that sentence, the noun is being used to refer to an instance or a type in that context
+16:31:03 <Guest62588> for example
+16:31:12 <Guest62588> like, my dog is green
+16:31:14 <Guest62588> versus
+16:31:20 <Guest62588> dogs have 4 legs
+16:31:25 <Guest62588> or something like that
+16:31:44 <dmiles> i see.. i dont know if there are anotated documents
+16:31:58 <dmiles> but at least the KB would show you how to annotate
+16:32:06 <Guest62588> right
+16:34:49 <dmiles> (multiWordString ("juvenile") Animal-TheWord CountNoun JuvenileAnimal)
+16:34:49 <dmiles> (multiWordString ("baby") Animal-TheWord CountNoun JuvenileAnimal)
+16:34:49 <dmiles> (multiWordString ("young") Animal-TheWord CountNoun JuvenileAnimal)
+16:35:03 <dmiles> http://opencyc251.homelinux.org:3603/cg?cb-cf&3207
+16:35:22 <dmiles> JuvenileAnimal is the Collection
+16:37:30 <kinoc> in cyc isa is the link between an instance and a collection, and genls is the link between collections and their supersets
+16:38:26 <kinoc> so you could find out which things are instances
+16:39:07 <dmiles> generally in english people are talking about instances of GroupFns
+16:39:28 <dmiles> err instantces or GroupFns
+16:39:33 <dmiles> otr MobFns ;P
+16:40:17 <dmiles> #$Galaxy is a specialization of (MobFn #$Star)
+16:42:21 <kinoc> i think lots of instance data at http://tap.stanford.edu/
+16:42:39 <kinoc> like pepsi and coke are soda's
+16:42:52 <Guest62588> hm...
+16:43:05 <kinoc> cyc has info about soda's, while tap has info about brands
+16:43:08 <kinoc> and such
+16:44:04 <kinoc> http://tap.stanford.edu/tap/tapkb.html for an overview
+16:45:22 <Guest62588> okay, I'm not totally sure yet what it is that I'm trying to disambiguate between yet
+16:45:36 <Guest62588> I got two subtly different possibilities
+16:46:10 <Guest62588> 1) disambiguate between types and instances like in "dogs eat meat" and "my dog eats meat"
+16:46:11 <dmiles> give an example
+16:46:13 <Guest62588> or
+16:46:34 <Guest62588> 2) disambiguate between "muffy is a dog" and "dachshunds are dogs"
+16:46:51 <Guest62588> obviously, #2 is the isa/genls distinction in Cyc
+16:47:08 <Guest62588> muffy is always an instance
+16:47:15 <kinoc> yeah
+16:47:19 <Guest62588> dachshund is always a group of dogs, a type
+16:47:28 <Guest62588> that's the sort of thing you can stick in a KB
+16:47:42 <Guest62588> useful to know if you're cycorp
+16:48:03 <Guest62588> #1 is a different kind of distinction
+16:48:13 <Guest62588> but I'm pretty sure that's also useful to know if you're cycorp
+16:48:29 <kinoc> well the first part of #1 is
+16:48:59 <Guest62588> well see, being able to distinguish whether something is referring to a general thing or just a certain one is useful
+16:49:09 <kinoc> they may not care if your dog likes "canned carnavore" or "killer kibbles"
+16:49:25 <Guest62588> b/c you could put down "dogs have 4 legs" in the KB and have it be right
+16:49:34 <dmiles> (forAll ?X (implies (isa ?X Dog)(isa ?X Carivour)))
+16:49:46 <dmiles> (genls Dog Carnivour) ?
+16:50:53 <kinoc> i could see it mattering a lot with information extraction
+16:51:11 <kinoc> i.e. the system is scowering the web for factoids 
+16:51:32 <Guest62588> but if they decided to get a really big bunch of text and automatically input it into cyc in some way it would be good for them to be able to decide that "my dog tripod has 3 legs" is referring to an instance, not a whole type of thing, so if you're putting the idea that something has 3 legs into the KB it had better be in the entry for tripod and not in the entry for dogs
+16:51:33 <kinoc> you want to know if its about dogs in general or john smiths dog in particular
+16:51:41 <Guest62588> right
+16:51:46 <Guest62588> so I'm doing this thesis thing
+16:52:00 <dmiles> i think text to CycL could be done and a human could side by side fix it
+16:52:18 <dmiles> possesive + noun = instance
+16:52:29 <dmiles> (possessive pronoun)
+16:52:41 <Guest62588> and I want to write myself a program that will automagically pick whether it thinks something is a type or an instance.
+16:52:41 <kinoc> hmmmm, maybe webclopedia http://www.isi.edu/natural-language/projects/webclopedia/
+16:52:45 <Guest62588> I think.
+16:53:00 <Guest62588> right that's true about the possessives but there are many other contexts
+16:53:06 <Guest62588> for example:
+16:53:09 <Guest62588> things that are types:
+16:53:15 <Guest62588> "dogs eat meat"
+16:53:21 <Guest62588> "a dog can run"
+16:53:26 <Guest62588> things that are instances:
+16:53:31 <Guest62588> "the dog can run"
+16:53:39 <Guest62588> "a dog just peed on the tree"
+16:53:52 <Guest62588> oh but see, there's the interesting part
+16:54:15 <dmiles> a = thereExists
+16:54:15 <Guest62588> "the dog can run" could be just referring to that particular dog or it could be talking about dogkind in general
+16:54:38 <dmiles> the = thereExists and weAreTalkingAbout
+16:54:57 <kinoc> yeah, "you gotta like greyhounds. the dog can run."
+16:55:52 <dmiles> the ConverstationMt  (context should have pronouns and default instances prepared)
+16:56:30 <Guest62588> so, do you know if cyc just decides that a = thereExists and the = thereExists and weAreTalkingAbout when looking through a big bunch of text, or is that just a general thing that you know as a human being?
+16:56:33 <dmiles> parsing cant be stateless
+16:57:00 <dmiles> i am not sure how cyc does it
+16:57:04 <Guest62588> sorry, I don't know what you mean by your comment about conversationMt.
+16:57:08 <Guest62588> What is conversationMt
+16:57:12 <dmiles> but there arnt many ways to do it ;P
+16:57:33 <dmiles> one would need to construct5 a context arround the dialog and paragraphs
+16:57:58 <dmiles> so that things lik e"it is good" .. what is it?
+16:58:15 <kinoc> that is a mystery that only cycorp can answer ;-) 
+16:58:21 <dmiles> may was well use (DefaultInstanceFn Dog)
+16:58:34 <dmiles> (ConversationalInstanceFn Dog)
+16:58:52 <dmiles> so you store the result into a context 
+16:59:10 <dmiles> so that you can assertain identity 
+16:59:44 <Guest62588> right...
+16:59:48 <dmiles> Conversational*Mt  = all things from conversation
+17:00:00 <dmiles> Mt = Microtheory
+17:00:06 <dmiles> (Data space)
+17:01:25 <dmiles> most of the time you can get away with a context free parse if you set up the right overly ambiguous operators
+17:02:07 <dmiles> those operators have to be diambiguated in the total context 
+17:02:45 <dmiles> like (ReferedToByNPFN "my dog")
+17:02:59 <Guest62588> okay
+17:03:54 <dmiles> (isa (ReferedToByNPFN "my dog") Dog) might even be a valid asserion
+17:05:22 <Guest62588> hm
+17:05:24 <Guest62588> I dont' know.
+17:06:15 <dmiles> query out (isa ?What Dog) and get -> (ReferedToByNPFN "my dog")
+17:06:44 <Guest62588> I'm trying to decide whether my idea #1 is useful to be able to do.
+17:07:04 <dmiles> very usefull
+17:07:10 <Guest62588> you think?
+17:07:12 <dmiles> very needed
+17:07:14 <kinoc> what is your theis idea ?
+17:07:21 <kinoc> err thesis
+17:07:39 <Guest62588> well, see, my friend who works at cycorp suggested that I try to do #2.
+17:07:51 <Guest62588> I sort of misunderstood and decided that I'd try to write a system to do #1
+17:07:57 <Guest62588> the idea is:
+17:08:15 <dmiles> i cant see the diff very well of #1 and #2 
+17:08:41 <Guest62588> okay
+17:08:43 <Guest62588> you get a text
+17:08:48 <Guest62588> for #1:
+17:08:56 <Guest62588> you pull out all the nouns
+17:09:18 <Guest62588> you look at their determiners, etc, the obvious contexts that would let yo uknow if ti's a type or an instance
+17:09:53 <Guest62588> then you get a big corpus where you already know whether all the nouns are types or instances
+17:10:33 <Guest62588> then you get your program to check what percentage of the time type nouns don't have determiners and what percentage of the time instance nouns do have determiners
+17:10:51 <Guest62588> that way you can check if you categorized the nouns correctly in the first place
+17:11:08 <Guest62588> then you can start looking for more complex contexts
+17:11:15 <Guest62588> looking at the determiner is obvious
+17:11:33 <dmiles> good idea.. using the entire document to figure out the key instancves and collections
+17:11:35 <Guest62588> but there might be something that a machine learning algorithm could catch that a human might not think of
+17:12:13 <Guest62588> like, 78% of the time type nouns occur ina  context of beginning of sentence, type noun, verb, determiner, type noun
+17:12:15 <Guest62588> or something
+17:12:59 <Guest62588> and then you could look at your nouns that you didn't know anything about and make an educated statistical guess as to whether it's a type noun or an instance noun b/c it occurs in some context you've seen before
+17:13:16 <Guest62588> however, all this hinges on having something where I already know whether each noun is a type or an instance
+17:13:16 <dmiles> ok.. so for creating new collections
+17:13:22 <Guest62588> exactly!
+17:13:43 <kinoc> hmmm, maybe in the framenet corpus
+17:13:48 <Guest62588> what's that?
+17:14:02 <kinoc> one of their researchers was taking a baysian approach
+17:14:05 <dmiles> well we have a list of part of speech .. so we can tell all that are nouns to start
+17:14:24 <dmiles> so your saying we see how that persons speech patterns use types vs instances
+17:15:14 <Guest62588> well, no, not just a certain person, but the english language in general will have characteristics like that
+17:15:34 <Guest62588> interesting about framenet
+17:15:36 <Guest62588> looking it up
+17:15:41 <dmiles> generally in english we can ussualy use no statistical approaches
+17:15:59 <kinoc> dmiles: one LGP and RDF http://citeseer.nj.nec.com/462226.html
+17:16:09 <dmiles> but nothing wrong with doing stastical approach 
+17:17:14 <dmiles> would love to read in entire senetnces pre RDFed (as LGP)
+17:17:19 <kinoc> http://citeseer.nj.nec.com/gildea02automatic.html  "Automatic Labeling of Semantic Roles "
+17:17:48 <dmiles> <lgp:left-wall><></lgp:left-wall>
+17:17:49 <kinoc> they were working on sentence->LGP->RDF
+17:18:14 <dmiles> ah yeah what you have been working on is pretty much the same thing ;P
+17:18:32 <dmiles> but you could do more then one sentence and present the entire page
+17:18:42 <kinoc> similar. Everone wants the same thing.
+17:18:50 <kinoc> err everyone.
+17:19:09 <dmiles> i see.. they are doing a tiny bit of samantic stuff
+17:19:15 * kinoc snowed in on dial up, with vodka and pepsi.....
+17:19:31 <kinoc> yeah
+17:19:38 <dmiles> i could see it would be smart to pick out the rules for english ing to logic
+17:19:45 <dmiles> and put that in the RDF header
+17:19:54 <kinoc> where every possible
+17:20:09 <dmiles> for example: if your talking about medical terminolgy
+17:20:36 <dmiles> you could <xmlns="medterminaology_context_parsing">
+17:20:48 <dmiles> on the top of your text
+17:21:04 <dmiles> so that a web page understander can zero in on the correct disambigations
+17:21:27 <dmiles> instead of statisically try to classify the document 
+17:21:33 <kinoc> yeah, save a lot of mips and help get it right
+17:22:10 <kinoc> or at least narrow the choices down or prioritize the interpertaitons
+17:22:27 <dmiles> yes.. that would not be too hard for humans to do
+17:22:41 <kinoc> i.e. if its a medical text you know how to order the interpertations of 'tone'
+17:23:06 <dmiles> and if they wanted to type in vanilla controlled english.. they could point to xmlns- controlled english version 2.0
+17:23:54 <dmiles> yes.. thats not too much to ask public
+17:24:31 <kinoc> yeah, but not all desired data sources are cooperative
+17:25:24 <kinoc> dmiles: another todo to remind me of. Convert TAP into KE text sometime.
+17:25:32 <dmiles> ok .. next week: make a webpage that lets people enter a webpage that this thingy will look at .. do some NLU over it and ask human for help
+17:25:41 <kinoc> would make a nice opencyc addition :)
+17:26:03 <Guest62588> that's the idea
+17:26:04 <dmiles> yeah the TAP to KE text.. that would be neat
+17:26:11 <Guest62588> idea #1 graduate
+17:26:20 <Guest62588> idea #2 impress cycorp
+17:26:36 <Guest62588> ;-)
+17:26:42 <dmiles> how long until you graduate?
+17:26:53 <kinoc> welcome to the impress people with tools and money club ;-P
+17:26:58 <Guest62588> end of the semester
+17:27:31 <kinoc> gona come out and work on parsers for cycorp ?
+17:27:41 <Guest62588> if they want me
+17:27:47 <Guest62588> will work for fud
+17:27:49 <Guest62588> ;-)
+17:28:39 <dmiles> fun? i would work there for free if they'd have me
+17:28:48 <kinoc> arrrgh, if we were only a few more turns of the money crank along
+17:28:59 <dmiles> well enough to support family
+17:29:04 <Guest62588> money crank?
+17:29:05 <kinoc> we're working on it
+17:29:25 <dmiles> kino and i been writting for grants
+17:29:43 <kinoc> special project FOOP. Fund our own projects.
+17:30:05 <kinoc> any grants would be ++good
+17:30:53 <kinoc> a lot of stuff can be done if you can feed the right people and give them MIPS and the right environment
+17:31:10 <kinoc> work on cyc is of that nature
+17:31:50 <kinoc> you need a place free of distractions, a net hookup, food on the table, and a rack of computers
+17:32:37 <kinoc> work for a few months and wonderful things can come out
+17:32:42 <kinoc> or so I think
+17:33:47 <kinoc> so we (me & susan at daxtron labs) have been working on setting up a thinkers retreat
+17:34:11 <kinoc> got the land and enough funds to keep ourselves going
+17:34:29 <kinoc> need grants and funding to get more people on board
+17:34:51 <kinoc> dmiles is #1 non locked down cyc asset
+17:35:32 <kinoc> (i.e. no burried in some black project under the pentagon or langley)
+17:36:41 <kinoc> so anyway the money crank is getting funding from darpa, and some GA applied more directly to finding funds from the market place
+17:38:29 <dmiles> Come join us on IRC!
+17:38:29 <dmiles> irc.dynastynet.net
+17:38:29 <dmiles>  
+17:38:32 <dmiles> oops
+17:38:35 <dmiles> :)
+17:39:39 <dmiles> hrrm 100% RPG irc server
+17:40:56 --- join: KinoC2 (~kino@dialup-209.246.130.55.Dial1.Dallas1.Level3.net) joined #opencyc
+17:41:49 --- quit: kinoc (Read error: 54 (Connection reset by peer))
+17:42:05 <dmiles> yeah no projects like that yet
+17:42:35 <dmiles> brb/... changing baby daipers
+17:43:33 * KinoC2 dial up dies, and is reborn
+17:44:29 <fleeky> are you pretty close to getting that retreat together actually?
+17:45:00 <KinoC2> the land is ours !
+17:45:17 <KinoC2> of course its covered in snow right now....
+17:45:28 <KinoC2> and can only visit on the weekends
+17:45:53 <KinoC2> but a 150 acres next to the national forest :)
+17:45:57 <fleeky> heh now all you have to do is build and develop everything ack
+17:46:00 <fleeky> omg
+17:46:04 <fleeky> 150 acres
+17:46:40 <KinoC2> yeah
+17:47:05 <KinoC2> its still in ranch mode
+17:47:40 <KinoC2> since we're not their, and the neighbor who watches the place raises cattle on the front section
+17:48:38 <fleeky> ahh
+17:48:57 <fleeky> that will be very interesting when you get it all together 
+17:49:56 <KinoC2> yeah, lots of work still left to do, but have a big part
+17:52:53 <KinoC2> it may not be cycorp yet, but may turn into a good 'will work for fun' sorta place
+17:53:19 <KinoC2> or 'will think for food' :)
+17:54:29 <fleeky> hehe
+17:54:55 --- quit: Guest62588 ()
+18:08:54 <KinoC2> how has it been ?
+18:54:32 --- quit: Cobra ("[x]chat")
+19:01:28 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+22:34:18 --- quit: Cobra (calvino.freenode.net irc.freenode.net)
+22:34:18 --- quit: dmiles (calvino.freenode.net irc.freenode.net)
+22:34:18 --- quit: fleeky (calvino.freenode.net irc.freenode.net)
+22:34:19 --- quit: ChanServ (calvino.freenode.net irc.freenode.net)
+22:36:16 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+22:36:16 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+22:36:16 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+23:32:32 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:32:32 --- mode: calvino.freenode.net set +o ChanServ
+23:59:59 --- log: ended opencyc/03.02.25

@@ -1,0 +1,842 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">
+<html lang="en" dir="ltr" version="HTML+RDFa 1.1"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="Documenting the KB" about="/documentation/documenting-kb" property="dc:title" />
+<meta about="/documentation/documenting-kb" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<link rel="shortcut icon" href="http://www.cyc.com/sites/default/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link rel="next" href="/documentation/writing-efficient-cycl" />
+<link rel="up" href="/documentation/cyc-basics" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="/documentation/documenting-kb" />
+<link rel="shortlink" href="/node/207" />
+<link rel="prev" href="/documentation/finding-right-level-generality" />
+  <title>Documenting the KB | Cycorp</title>  
+  <style type="text/css" media="all">@import url("http://www.cyc.com/modules/system/system.base.css?moigvq");
+@import url("http://www.cyc.com/modules/system/system.menus.css?moigvq");
+@import url("http://www.cyc.com/modules/system/system.messages.css?moigvq");
+@import url("http://www.cyc.com/modules/system/system.theme.css?moigvq");</style>
+<style type="text/css" media="all">@import url("http://www.cyc.com/modules/book/book.css?moigvq");
+@import url("http://www.cyc.com/modules/comment/comment.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/date/date_api/date.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?moigvq");
+@import url("http://www.cyc.com/modules/field/theme/field.css?moigvq");</style>
+<style type="text/css" media="screen">@import url("http://www.cyc.com/sites/all/modules/flexslider/assets/css/flexslider_img.css?moigvq");</style>
+<style type="text/css" media="all">@import url("http://www.cyc.com/modules/node/node.css?moigvq");
+@import url("http://www.cyc.com/modules/search/search.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ubercart/uc_attribute/uc_attribute.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ubercart/uc_order/uc_order.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ubercart/uc_product/uc_product.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ubercart/uc_roles/uc_roles.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ubercart/uc_store/uc_store.css?moigvq");
+@import url("http://www.cyc.com/modules/user/user.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/video_filter/video_filter.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/views/css/views.css?moigvq");</style>
+<style type="text/css" media="all">@import url("http://www.cyc.com/sites/all/modules/amazon_s3/amazon_s3.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ckeditor/ckeditor.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/ctools/css/ctools.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/lexicon/css/lexicon.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/panels/css/panels.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/views_slideshow/views_slideshow.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/dlike/dlike.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/biblio/biblio.css?moigvq");
+@import url("http://www.cyc.com/sites/all/modules/BookMadeSimple/book_made_simple.css?moigvq");</style>
+<style type="text/css" media="all">@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/menu.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/superfish.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/superfish-navbar.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/superfish-vertical.css?moigvq");</style>
+<style type="text/css" media="all">@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/alpha-reset.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/alpha-mobile.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/alpha-alpha.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/omega/css/formalize.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/omega/css/omega-branding.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/global.css?moigvq");</style>
+
+<!--[if (lt IE 9)&(!IEMobile)]>
+<style type="text/css" media="all">@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default-normal.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?moigvq");</style>
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)">@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default-narrow.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/grid/alpha_default/narrow/alpha-default-narrow-12.css?moigvq");</style>
+<!--<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)">@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default-normal.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-12.css?moigvq");</style>
+<!--<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<style type="text/css" media="all and (min-width: 1220px)">@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega_cycorp/css/omega-cycorp-alpha-default-wide.css?moigvq");
+@import url("http://www.cyc.com/sites/all/themes/omega/alpha/css/grid/alpha_default/wide/alpha-default-wide-12.css?moigvq");</style>
+<!--<![endif]-->
+  <script type="text/javascript" src="http://www.cyc.com/sites/all/modules/jquery_update/replace/jquery/1.5/jquery.min.js?v=1.5.2"></script>
+<script type="text/javascript" src="http://www.cyc.com/misc/jquery.once.js?v=1.2"></script>
+<script type="text/javascript" src="http://www.cyc.com/misc/drupal.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/jquery_update/replace/ui/external/jquery.cookie.js?v=67fb34f6a866c40d0570"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/jquery_update/replace/misc/jquery.form.min.js?v=2.69"></script>
+<script type="text/javascript" src="http://www.cyc.com/misc/ajax.js?v=7.22"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/cookiecontrol/js/cookieControl-5.1.min.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/custom/jquery.cookie.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/image_caption/image_caption.min.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/panels/js/panels.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/views_slideshow/js/views_slideshow.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/dlike/dlike.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/views/js/base.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/misc/progress.js?v=7.22"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/views/js/ajax_view.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/modules/google_analytics/googleanalytics.js?moigvq"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-35496122-1"]);_gaq.push(["_setDomainName", ".cyc.com"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function ccAddHtmlClass() {
+jQuery('html').addClass('cookies');
+}
+//--><!]]>
+</script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/jquery.easing-1.3.pack.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/jquery.qtip-1.0.0-rc3.min.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/jquery.hoverIntent.minified.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/jquery.cycle.all.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/superfish.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/cookie.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega_cycorp/js/cycorp.js?moigvq"></script>
+<script type="text/javascript" src="http://www.cyc.com/sites/all/themes/omega/omega/js/jquery.formalize.js?moigvq"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"omega_cycorp","theme_token":"ElmV2Q11lEsoHW_MxtM_d2hjL5YZwEYQilpniZ3AxzI","js":{"0":1,"1":1,"2":1,"3":1,"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.5\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/jquery_update\/replace\/misc\/jquery.form.min.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/cookiecontrol\/js\/cookieControl-5.1.min.js":1,"sites\/all\/modules\/custom\/jquery.cookie.js":1,"sites\/all\/modules\/image_caption\/image_caption.min.js":1,"sites\/all\/modules\/panels\/js\/panels.js":1,"sites\/all\/modules\/views_slideshow\/js\/views_slideshow.js":1,"sites\/all\/modules\/dlike\/dlike.js":1,"sites\/all\/modules\/views\/js\/base.js":1,"misc\/progress.js":1,"sites\/all\/modules\/views\/js\/ajax_view.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"4":1,"5":1,"sites\/all\/themes\/omega_cycorp\/js\/jquery.easing-1.3.pack.js":1,"sites\/all\/themes\/omega_cycorp\/js\/jquery.qtip-1.0.0-rc3.min.js":1,"sites\/all\/themes\/omega_cycorp\/js\/jquery.hoverIntent.minified.js":1,"sites\/all\/themes\/omega_cycorp\/js\/jquery.cycle.all.js":1,"sites\/all\/themes\/omega_cycorp\/js\/superfish.js":1,"sites\/all\/themes\/omega_cycorp\/js\/cookie.js":1,"sites\/all\/themes\/omega_cycorp\/js\/cycorp.js":1,"sites\/all\/themes\/omega\/omega\/js\/jquery.formalize.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/book\/book.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/flexslider\/assets\/css\/flexslider_img.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"sites\/all\/modules\/ubercart\/uc_attribute\/uc_attribute.css":1,"sites\/all\/modules\/ubercart\/uc_order\/uc_order.css":1,"sites\/all\/modules\/ubercart\/uc_product\/uc_product.css":1,"sites\/all\/modules\/ubercart\/uc_roles\/uc_roles.css":1,"sites\/all\/modules\/ubercart\/uc_store\/uc_store.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/video_filter\/video_filter.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/amazon_s3\/amazon_s3.css":1,"sites\/all\/modules\/ckeditor\/ckeditor.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/lexicon\/css\/lexicon.css":1,"sites\/all\/modules\/panels\/css\/panels.css":1,"sites\/all\/modules\/views_slideshow\/views_slideshow.css":1,"sites\/all\/modules\/dlike\/dlike.css":1,"sites\/all\/modules\/biblio\/biblio.css":1,"sites\/all\/modules\/BookMadeSimple\/book_made_simple.css":1,"sites\/all\/themes\/omega_cycorp\/css\/menu.css":1,"sites\/all\/themes\/omega_cycorp\/css\/superfish.css":1,"sites\/all\/themes\/omega_cycorp\/css\/superfish-navbar.css":1,"sites\/all\/themes\/omega_cycorp\/css\/superfish-vertical.css":1,"public:\/\/google_fonts.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-mobile.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/omega_cycorp\/css\/global.css":1,"ie::normal::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default.css":1,"ie::normal::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default-normal.css":1,"ie::normal::sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"narrow::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default.css":1,"narrow::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default-narrow.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/narrow\/alpha-default-narrow-12.css":1,"normal::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default.css":1,"normal::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default-normal.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"wide::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default.css":1,"wide::sites\/all\/themes\/omega_cycorp\/css\/omega-cycorp-alpha-default-wide.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/wide\/alpha-default-wide-12.css":1}},"jcarousel":{"ajaxPath":"\/jcarousel\/ajax\/views"},"video_filter":{"url":{"ckeditor":"\/video_filter\/dashboard\/ckeditor"},"modulepath":"sites\/all\/modules\/video_filter"},"views":{"ajax_path":"\/views\/ajax","ajaxViews":{"views_dom_id:d515e0735d545653d1245408dc784f02":{"view_name":"user_meta","view_display_id":"block_2","view_args":"","view_path":"node\/207","view_base_path":null,"view_dom_id":"d515e0735d545653d1245408dc784f02","pager_element":0}}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip","trackDomainMode":"1"}});
+//--><!]]>
+</script>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body class="html not-front not-logged-in page-node page-node- page-node-207 node-type-book context-documentation">
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div class="page clearfix" id="page">
+      <header id="section-header" class="section section-header">
+  <div id="zone-branding-wrapper" class="zone-wrapper zone-branding-wrapper clearfix">  
+  <div id="zone-branding" class="zone zone-branding clearfix container-12">
+    <div class="grid-8 region region-branding" id="region-branding">
+  <div class="region-inner region-branding-inner">
+        <div class="branding-data clearfix">
+            <div class="logo-img">
+        <a href="/" rel="home" title=""><img src="http://www.cyc.com/sites/all/themes/omega_cycorp/logo.png" alt="" id="logo" /></a>      </div>
+                </div>
+          </div>
+</div><div class="grid-4 region region-user-first" id="region-user-first">
+  <div class="region-inner region-user-first-inner">
+    <div class="block block-search block-form block-search-form odd block-without-title" id="block-search-form">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <form action="/documentation/documenting-kb" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input title="Enter the terms you wish to search for." type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-EgBgha75fS1EtW1khBawSTFcTkmlt6BVemxQHZbMGwc" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-menu-wrapper" class="zone-wrapper zone-menu-wrapper clearfix">  
+  <div id="zone-menu" class="zone zone-menu clearfix container-12">
+    <div class="grid-12 region region-menu" id="region-menu">
+  <div class="region-inner region-menu-inner">
+        <nav class="navigation">
+      <ul class="menu"><li class="first leaf home"><a href="/" title="">Home</a></li>
+<li class="expanded enterprise-solutions"><a href="/enterprise">Enterprise Solutions</a><ul class="menu"><li class="first leaf why-cyc-"><a href="/why-cyc" title="Why Cyc came about and how it can help you">Why Cyc?</a></li>
+<li class="leaf semantic-solutions"><a href="/enterprise-solutions/solutions" title="Some Cyc application areas">Semantic Solutions</a></li>
+<li class="leaf services"><a href="/enterprise-solutions/services" title="Cycorp can help you get started">Services</a></li>
+<li class="last leaf success-stories"><a href="/enterprise-solutions/success-stories" title="Examples of Cyc customer applications">Success Stories</a></li>
+</ul></li>
+<li class="expanded development-platforms"><a href="/platform/overview">Development Platforms</a><ul class="menu"><li class="first leaf opencyc"><a href="/platform/opencyc">OpenCyc</a></li>
+<li class="leaf enterprisecyc"><a href="/platform/enterprisecyc" title="Commercial-grade Cyc for development and deployment of enterprise solutions.">EnterpriseCyc</a></li>
+<li class="last leaf researchcyc"><a href="/platform/researchcyc" title="ResearchCyc">ResearchCyc</a></li>
+</ul></li>
+<li class="expanded research"><a href="/research">Research</a><ul class="menu"><li class="first leaf collaborations"><a href="/research/collaborations" title="Collaborations">Collaborations</a></li>
+<li class="leaf contracts"><a href="/research/research-contracts" title="Contracts">Contracts</a></li>
+<li class="last leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+</ul></li>
+<li class="expanded resources"><a href="/resource">Resources</a><ul class="menu"><li class="first leaf documentation"><a href="/documentation" title="Documentation">Documentation</a></li>
+<li class="leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+<li class="leaf presentations"><a href="/presentations" title="Presentations">Presentations</a></li>
+<li class="leaf training-"><a href="/training-courses" title="Instructor-led Cyc courses">Training </a></li>
+<li class="leaf vocabulary"><a href="/resource/vocabulary" title="Important Cyc concepts">Vocabulary</a></li>
+<li class="leaf kb-exports"><a href="/resource/exported-cyc-content" title="Downloadable content exported from the Cyc KB">KB Exports</a></li>
+<li class="last leaf faqs"><a href="/faq-page" title="Cyc FAQs">FAQs</a></li>
+</ul></li>
+<li class="last expanded company"><a href="/about-cyc" title="About Cycorp">Company</a><ul class="menu"><li class="first leaf company-profile"><a href="/company-profile" title="About Cycorp">Company Profile</a></li>
+<li class="leaf leadership-team"><a href="/about/team" title="Meet the Cycorp team">Leadership Team</a></li>
+<li class="leaf careers"><a href="/careers" title="Career opportunities at Cycorp">Careers</a></li>
+<li class="leaf company-news"><a href="/media-coverage" title="Current Cycorp and Cyc-related events">Company News</a></li>
+<li class="last leaf contact-us"><a href="/contact-us" title="We want to hear from you!">Contact Us</a></li>
+</ul></li>
+</ul>    </nav>
+    <section class="menu_mobile">
+      <ul class="menu"><li class="first leaf home"><a href="/" title="">Home</a></li>
+<li class="expanded enterprise-solutions"><a href="/enterprise">Enterprise Solutions</a><ul class="menu"><li class="first leaf why-cyc-"><a href="/why-cyc" title="Why Cyc came about and how it can help you">Why Cyc?</a></li>
+<li class="leaf semantic-solutions"><a href="/enterprise-solutions/solutions" title="Some Cyc application areas">Semantic Solutions</a></li>
+<li class="leaf services"><a href="/enterprise-solutions/services" title="Cycorp can help you get started">Services</a></li>
+<li class="last leaf success-stories"><a href="/enterprise-solutions/success-stories" title="Examples of Cyc customer applications">Success Stories</a></li>
+</ul></li>
+<li class="expanded development-platforms"><a href="/platform/overview">Development Platforms</a><ul class="menu"><li class="first leaf opencyc"><a href="/platform/opencyc">OpenCyc</a></li>
+<li class="leaf enterprisecyc"><a href="/platform/enterprisecyc" title="Commercial-grade Cyc for development and deployment of enterprise solutions.">EnterpriseCyc</a></li>
+<li class="last leaf researchcyc"><a href="/platform/researchcyc" title="ResearchCyc">ResearchCyc</a></li>
+</ul></li>
+<li class="expanded research"><a href="/research">Research</a><ul class="menu"><li class="first leaf collaborations"><a href="/research/collaborations" title="Collaborations">Collaborations</a></li>
+<li class="leaf contracts"><a href="/research/research-contracts" title="Contracts">Contracts</a></li>
+<li class="last leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+</ul></li>
+<li class="expanded resources"><a href="/resource">Resources</a><ul class="menu"><li class="first leaf documentation"><a href="/documentation" title="Documentation">Documentation</a></li>
+<li class="leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+<li class="leaf presentations"><a href="/presentations" title="Presentations">Presentations</a></li>
+<li class="leaf training-"><a href="/training-courses" title="Instructor-led Cyc courses">Training </a></li>
+<li class="leaf vocabulary"><a href="/resource/vocabulary" title="Important Cyc concepts">Vocabulary</a></li>
+<li class="leaf kb-exports"><a href="/resource/exported-cyc-content" title="Downloadable content exported from the Cyc KB">KB Exports</a></li>
+<li class="last leaf faqs"><a href="/faq-page" title="Cyc FAQs">FAQs</a></li>
+</ul></li>
+<li class="last expanded company"><a href="/about-cyc" title="About Cycorp">Company</a><ul class="menu"><li class="first leaf company-profile"><a href="/company-profile" title="About Cycorp">Company Profile</a></li>
+<li class="leaf leadership-team"><a href="/about/team" title="Meet the Cycorp team">Leadership Team</a></li>
+<li class="leaf careers"><a href="/careers" title="Career opportunities at Cycorp">Careers</a></li>
+<li class="leaf company-news"><a href="/media-coverage" title="Current Cycorp and Cyc-related events">Company News</a></li>
+<li class="last leaf contact-us"><a href="/contact-us" title="We want to hear from you!">Contact Us</a></li>
+</ul></li>
+</ul>    </section>
+        <section class="block block-system block-menu block-main-menu block-system-main-menu odd" id="block-system-main-menu">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Main menu</h2>
+            
+    <div class="content clearfix">
+      <ul class="menu"><li class="first leaf home"><a href="/" title="">Home</a></li>
+<li class="expanded enterprise-solutions"><a href="/enterprise">Enterprise Solutions</a><ul class="menu"><li class="first leaf why-cyc-"><a href="/why-cyc" title="Why Cyc came about and how it can help you">Why Cyc?</a></li>
+<li class="leaf semantic-solutions"><a href="/enterprise-solutions/solutions" title="Some Cyc application areas">Semantic Solutions</a></li>
+<li class="leaf services"><a href="/enterprise-solutions/services" title="Cycorp can help you get started">Services</a></li>
+<li class="last leaf success-stories"><a href="/enterprise-solutions/success-stories" title="Examples of Cyc customer applications">Success Stories</a></li>
+</ul></li>
+<li class="expanded development-platforms"><a href="/platform/overview">Development Platforms</a><ul class="menu"><li class="first leaf opencyc"><a href="/platform/opencyc">OpenCyc</a></li>
+<li class="leaf enterprisecyc"><a href="/platform/enterprisecyc" title="Commercial-grade Cyc for development and deployment of enterprise solutions.">EnterpriseCyc</a></li>
+<li class="last leaf researchcyc"><a href="/platform/researchcyc" title="ResearchCyc">ResearchCyc</a></li>
+</ul></li>
+<li class="expanded research"><a href="/research">Research</a><ul class="menu"><li class="first leaf collaborations"><a href="/research/collaborations" title="Collaborations">Collaborations</a></li>
+<li class="leaf contracts"><a href="/research/research-contracts" title="Contracts">Contracts</a></li>
+<li class="last leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+</ul></li>
+<li class="expanded resources"><a href="/resource">Resources</a><ul class="menu"><li class="first leaf documentation"><a href="/documentation" title="Documentation">Documentation</a></li>
+<li class="leaf publications"><a href="/publications" title="Publications">Publications</a></li>
+<li class="leaf presentations"><a href="/presentations" title="Presentations">Presentations</a></li>
+<li class="leaf training-"><a href="/training-courses" title="Instructor-led Cyc courses">Training </a></li>
+<li class="leaf vocabulary"><a href="/resource/vocabulary" title="Important Cyc concepts">Vocabulary</a></li>
+<li class="leaf kb-exports"><a href="/resource/exported-cyc-content" title="Downloadable content exported from the Cyc KB">KB Exports</a></li>
+<li class="last leaf faqs"><a href="/faq-page" title="Cyc FAQs">FAQs</a></li>
+</ul></li>
+<li class="last expanded company"><a href="/about-cyc" title="About Cycorp">Company</a><ul class="menu"><li class="first leaf company-profile"><a href="/company-profile" title="About Cycorp">Company Profile</a></li>
+<li class="leaf leadership-team"><a href="/about/team" title="Meet the Cycorp team">Leadership Team</a></li>
+<li class="leaf careers"><a href="/careers" title="Career opportunities at Cycorp">Careers</a></li>
+<li class="leaf company-news"><a href="/media-coverage" title="Current Cycorp and Cyc-related events">Company News</a></li>
+<li class="last leaf contact-us"><a href="/contact-us" title="We want to hear from you!">Contact Us</a></li>
+</ul></li>
+</ul>    </div>
+  </div>
+</section>  </div>
+</div>
+   </div>
+</div></header>    
+      <section id="section-content" class="section section-content">
+  <div id="zone-preface-wrapper" class="zone-wrapper zone-preface-wrapper clearfix">  
+  <div id="zone-preface" class="zone zone-preface clearfix container-12">
+    <div class="grid-4 region region-preface-first" id="region-preface-first">
+  <div class="region-inner region-preface-first-inner">
+    <div class="block block-delta-blocks block-breadcrumb block-delta-blocks-breadcrumb odd block-without-title" id="block-delta-blocks-breadcrumb">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="breadcrumb" class="clearfix"><ul class="breadcrumb"><li class="depth-1 odd first"><a href="/">Home</a></li><li class="depth-2 even"><a href="/documentation/ontological-engineering-handbook">Ontological Engineering Handbook</a></li><li class="depth-3 odd"><a href="/documentation/cyc-basics">Cyc Basics</a></li><li class="depth-4 even last"><a href="/documentation/documenting-kb" class="active">Documenting the KB</a></li></ul></div>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div><div id="zone-content-wrapper" class="zone-wrapper zone-content-wrapper clearfix">  
+  <div id="zone-content" class="zone zone-content clearfix container-12">    
+        <aside class="grid-3 region region-sidebar-first" id="region-sidebar-first">
+  <div class="region-inner region-sidebar-first-inner">
+    <section class="block block-menu-block block-2 block-menu-block-2 odd" id="block-menu-block-2">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Main menu</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-2 menu-name-main-menu parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-2108 home"><a href="/" title="">Home</a></li>
+<li class="expanded menu-mlid-612 enterprise-solutions"><a href="/enterprise">Enterprise Solutions</a><ul class="menu"><li class="first leaf menu-mlid-568 why-cyc-"><a href="/why-cyc" title="Why Cyc came about and how it can help you">Why Cyc?</a></li>
+<li class="leaf menu-mlid-3156 semantic-solutions"><a href="/enterprise-solutions/solutions" title="Some Cyc application areas">Semantic Solutions</a></li>
+<li class="leaf menu-mlid-3148 services"><a href="/enterprise-solutions/services" title="Cycorp can help you get started">Services</a></li>
+<li class="last leaf menu-mlid-3150 success-stories"><a href="/enterprise-solutions/success-stories" title="Examples of Cyc customer applications">Success Stories</a></li>
+</ul></li>
+<li class="expanded menu-mlid-603 development-platforms"><a href="/platform/overview">Development Platforms</a><ul class="menu"><li class="first leaf menu-mlid-613 opencyc"><a href="/platform/opencyc">OpenCyc</a></li>
+<li class="leaf menu-mlid-614 enterprisecyc"><a href="/platform/enterprisecyc" title="Commercial-grade Cyc for development and deployment of enterprise solutions.">EnterpriseCyc</a></li>
+<li class="last leaf menu-mlid-615 researchcyc"><a href="/platform/researchcyc" title="ResearchCyc">ResearchCyc</a></li>
+</ul></li>
+<li class="expanded menu-mlid-342 research"><a href="/research">Research</a><ul class="menu"><li class="first leaf menu-mlid-3441 collaborations"><a href="/research/collaborations" title="Collaborations">Collaborations</a></li>
+<li class="leaf menu-mlid-3442 contracts"><a href="/research/research-contracts" title="Contracts">Contracts</a></li>
+<li class="last leaf menu-mlid-2374 publications"><a href="/publications" title="Publications">Publications</a></li>
+</ul></li>
+<li class="expanded menu-mlid-355 resources"><a href="/resource">Resources</a><ul class="menu"><li class="first leaf menu-mlid-2385 documentation"><a href="/documentation" title="Documentation">Documentation</a></li>
+<li class="leaf menu-mlid-3445 publications"><a href="/publications" title="Publications">Publications</a></li>
+<li class="leaf menu-mlid-2393 presentations"><a href="/presentations" title="Presentations">Presentations</a></li>
+<li class="leaf menu-mlid-3009 training-"><a href="/training-courses" title="Instructor-led Cyc courses">Training </a></li>
+<li class="leaf menu-mlid-3443 vocabulary"><a href="/resource/vocabulary" title="Important Cyc concepts">Vocabulary</a></li>
+<li class="leaf menu-mlid-1191 kb-exports"><a href="/resource/exported-cyc-content" title="Downloadable content exported from the Cyc KB">KB Exports</a></li>
+<li class="last leaf menu-mlid-544 faqs"><a href="/faq-page" title="Cyc FAQs">FAQs</a></li>
+</ul></li>
+<li class="last expanded menu-mlid-569 company"><a href="/about-cyc" title="About Cycorp">Company</a><ul class="menu"><li class="first leaf menu-mlid-600 company-profile"><a href="/company-profile" title="About Cycorp">Company Profile</a></li>
+<li class="leaf menu-mlid-395 leadership-team"><a href="/about/team" title="Meet the Cycorp team">Leadership Team</a></li>
+<li class="leaf menu-mlid-2107 careers"><a href="/careers" title="Career opportunities at Cycorp">Careers</a></li>
+<li class="leaf menu-mlid-2344 company-news"><a href="/media-coverage" title="Current Cycorp and Cyc-related events">Company News</a></li>
+<li class="last leaf menu-mlid-545 contact-us"><a href="/contact-us" title="We want to hear from you!">Contact Us</a></li>
+</ul></li>
+</ul></div>
+    </div>
+  </div>
+</section>  </div>
+</aside><div class="grid-9 region region-content" id="region-content">
+  <div class="region-inner region-content-inner">
+    <a id="main-content"></a>
+                <h1 class="title" id="page-title">Documenting the KB</h1>
+                        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <article about="/documentation/documenting-kb" typeof="sioc:Item foaf:Document" class="node node-book node-published node-not-promoted node-not-sticky author-micon odd clearfix" id="node-book-207">
+            
+  
+  <div class="content clearfix">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"> <h2>4.1. <a name="137143568" id="137143568"></a> Comments</h2>
+<p>Every constant in Cyc should be well-documented. While the term "documentation" refers to any English text in the Knowledge Base used to explain the intended meaning of a CycL constant, ontological engineers are only required to give every constant a comment, which is the the most common form of documentation in the KB. Whenever a constant is created, it is important to attach a clear and illuminating #$comment to it. While it may appear to the Cyclist creating the constant that the name of the constant gives all the significant information, future Cyclists may not agree. By reading the comment, Cyclists should be able to understand both the meaning of a CycL assertion containing the constant (assuming she understands the meaning of all of the other constants in the assertion), as well as how to construct future assertions using this new constant.</p>
+<p>More detailed guidelines on writing comments are available in the next section, "A Style Guide for Writing #$comments." It may also be useful to look at the comment on #$comment.</p>
+<p>When writing a comment, be sure to mention what type of thing is denoted by the constant (i.e. individual, collection, function, or predicate). Then use clear and grammatically correct prose to attempt to explain what counts as a proper use of the constant.</p>
+<p>Let's look at some examples of well-written comments:</p>
+<h3>4.1.1. <a name="137156600" id="137156600"></a> Collection: StuffType</h3>
+<pre>comment: "The collection of all collections that are stuff-like in at least one respect. 
+          A collection COL is stuff-like just in case there is some sense of 'part' 
+          according to which every part of an instance of COL is itself an instance of COL. 
+          More precisely, for a collection to be a StuffType it is sufficient that there 
+          be some spec-pred of #$parts, PARTPRED, such that if (isa OBJECT1 COL) 
+          and (PARTPRED OBJECT1 OBJECT2), then (isa OBJECT2 COL). 
+          (See CyclistNotes for more detail). Here are two examples. Consider #$Breathing. 
+          Take an instance of that, say, a ten minute long period in which I am breathing. 
+          Imagine some two minute snippet of that, one of its #$timeSlices 
+          (a spec-pred of #$parts). That, too, is an instance of #$Breathing. So
+          #$Breathing is a #$StuffType, since all #$timeSlices of an instance of 
+          #$Breathing are also instances of #$Breathing. Consider #$Water. Take 
+          any instance of #$Water -- say the water in the Pacific Ocean. Now take 
+          any portion of that water -- say a handful that I scoop up near 
+          Honolulu, one of its #$physicalPortions (a spec-pred of #$parts). 
+          That handful is itself an instance of #$Water. Hence #$Water is a 
+          #$StuffType, in virtue of the fact that all #$physicalPortions of all instances 
+          of #$Water are themselves instances of #$Water. Other examples
+          are: #$AbstractInformationalThing, which is stuff-like with respect 
+          to #$subInformation; #$CharacterString, which is stuff-like with respect 
+          to #$subCharacterStrings; and #$List, which stuff-like with respect to 
+          #$sublists. These examples are somewhat exceptional -- most #$StuffTypes 
+          are like the examples of #$Breathing and #$Water. Before using #$StuffType read
+          the cyclistNotes. See #$ObjectType, for the contrasting notion of being 
+          object-like."
+</pre><p>StuffType is a particularly technical and complicated concept in the Cyc KB, one not easily understood by new Cyclists; it is likewise a very important concept in the knowledge base, hence requiring a particularly perspicuous comment. It is a virtue, then, that this comment is so very clear, accurately defining the concept in a manner that even someone unfamiliar with CycL will understand.</p>
+<p>There are several desirable features of this comment:</p>
+<blockquote><ol><li>
+<p>The author of the comment told us that, for collections to be StuffTypes, they must be stuff-like in at least one respect. Often, comment writers take for granted that other Cyclists know whether, in order for something to meet a criterion outlined in a comment, some part must fulfill the criterion in some respect, the whole must fulfill the criterion in every respect, or some gradation in between will suffice.</p>
+</li>
+<li>
+<p>The author clearly defined "stuff-like" in both Cyc-terms ("there is some spec-pred of #$parts, PARTPRED, such that if (isa OBJECT1 COL) and (PARTPRED OBJECT1 OBJECT2), then (isa OBJECT2 COL"), and in English.</p>
+</li>
+<li>
+<p>The author gives us two positive examples and carefully explains how they meet the criteria for being instances of #$StuffType (again both in English and in Cyc-terms).</p>
+</li>
+<li>
+<p>The author gives additional examples and briefly explains them. These examples are particularly useful because, while they do not meet the criteria in the paradigmatic way in which #$Water and #$Breathing do, they are in fact examples. Their differences from the prototypical cases demonstrate how broad the usage of the constant is permitted to be.</p>
+</li>
+<li>
+<p>The author points to two additional sources of information anyone intending to use this constant might want to examine: the cyclistNote and the "contrasting notion", #$ObjectType.</p>
+</li>
+</ol></blockquote>
+<p>Also examine:</p>
+<h3>4.1.2. <a name="137190744" id="137190744"></a> Predicate: inputsCommitted.</h3>
+<pre>comment : "The predicate #$inputsCommitted is used when some input to a particular event 
+           is incorporated into some output of that event, but remains recognizable 
+           rather than being destroyed. (#$inputsCommitted EVENT OBJECT) means that 
+           OBJECT exists before EVENT and continues to exist afterwards, and as 
+           a result of EVENT, OBJECT becomes incorporated into something created 
+           during EVENT. Once incorporated into the output of EVENT, OBJECT can't 
+           be independently incorporated in any other creation event. For example, 
+           bricks that are used to build a wall continue to exist as bricks once the 
+           wall has been built. While a part of the wall, a brick cannot be used 
+           as an independent input in another creation event. (See also #$outputsCreated.) 
+           Note: there is a grey area between #$inputsCommitted and #$inputsDestroyed (q.v.);
+           the less possible it is to take apart the relevant outputs of EVENT and 
+           get OBJECT back as an independent thing, the more likely it is that the 
+           relationship between EVENT and OBJECT should be #$inputsDestroyed, 
+           rather than #$inputsCommitted." </pre><p>Again, the author gives a clear explanation of the proper use of the predicate, both in English, and in giving a translation from CycL to English. Furthermore, she identifies a problem in using this constant: it is sometimes very difficult to tell whether it is more proper to use #$inputsCommited or #$inputsDestroyed. Here she gives us a rough guideline to follow should we be in the "grey area" between two constants.</p>
+<p>Neither of these constants use negative examples, but these can be very useful as well because they can assist Cyclists in determining just how closely the criteria have to be met in order to determine whether a constant should be used.</p>
+<p>Poorly written comments lead to a great deal of confusion. If a comment does not constrain a constant's use effectively, that constant might become something of a junkyard of unrelated uses. #$MentalObject had to be killed, for instance, because just such a morass of assertions and spec-collections made this a useless and ill-defined constant. Alternatively, should a comment be too confusing, Cyclists, rather than trying to guess at its appropriate use, will ignore the constant entirely. Worse, some Cyclist might create a constant which performs an identical function without realizing it. Thus some critical assertions would be made on one constant and other assertions on another, while both sets of assertions should be on the same constant.</p>
+<p>The following comments from the Cyc KB are unilluminating or bad for various reasons. These comments will be changed in the knowledge base, making the constants themselves more usable.</p>
+<p>Avoid making similar mistakes when writing comments:</p>
+<h3>4.1.3. <a name="137207760" id="137207760"></a> Example Set 1: coworkers, competitors, and hasAssistants</h3>
+<h4>4.1.3.a. Predicate: coworkers.</h4>
+<p>comment: "Entries are the persons who work with ARG1 as members of a TaskGroup."</p>
+<h4>4.1.3.b. Predicate: competitors</h4>
+<p>comment: "(competitors AGENT1 AGENT2) means that AGENT1 and AGENT2 are competitors."</p>
+<h4>4.1.3.c. Predicate: hasAssistants.</h4>
+<p>comment: "Entries are the persons who are U's assistants".</p>
+<p>These examples are instances where it seems as if the authors of the comments believed the use to be so obvious that no further explanation is necessary. While it may even be the case that the usage is obvious to most people, even in these cases clearer comments should be written.</p>
+<h3>4.1.4. <a name="137226232" id="137226232"></a> Example 2: Connection-Configuration</h3>
+<h4>4.1.4.a. Collection: Connection-Configuration.</h4>
+<pre>comment: "This is the parent unit for all the connection units. A connection is used
+        to describe a relation that one cannot (or does not wish to) represent as a binary 
+        predicate or if you want to say something very specific about that specific relation. 
+        In general, if a binary predicate is available then the connection unit is not 
+        required. eg. The time relations are expressed in terms of binary relations and 
+        hence don't come under this. (Though in some abstract sense they are also connections.)" </pre><p>This is a case where the use of the constant is so obscured in the prose in the comment (and lack of examples), that the collection has become fairly useless.</p>
+<h3>4.1.5. <a name="137234544" id="137234544"></a> Example 3: ConstructionArtifact and FixedStructure</h3>
+<h4>4.1.5.a. Collection: ConstructionArtifact.</h4>
+<pre>comment: "A collection of artificial tangible objects. Each element of 
+        #$ConstructionArtifact is a structure designed and built by humans. This 
+        collection includes buildings and parts of buildings, as well as things like dams, 
+        railroad lines, and roads. Examples: the #$RomanColiseum, the #$ArcDeTriomphe, 
+        #$HooverDam, the #$WorldTradeCenter, #$HollywoodBowl. For further information, 
+        see #$FixedStructure, an important subset.</pre><h4>4.1.5.b. Collection: FixedStructure.</h4>
+<pre>comment: "A collection of artifacts. Each element of #$FixedStructure is a 
+         humanly-constructed, freestanding object that exists in a fixed location; 
+         e.g., buildings, pyramids, the Great Wall of China, dams, elevated roadways, 
+         canals, etc. Such structures may have parts which are also elements of 
+         #$FixedStructure (e.g. bridge pilings) and parts which are not
+         freestanding (e.g., the span of a bridge, or a room in a building)."</pre><p>It is unclear what the distinction between these two constants might be. The comment on #$ConstructionArtifact states that #$FixedStructure is "an important subset" of #$ConstructionArtifact, but neither comment explains what additional criteria elements of #$FixedStructure must meet. At first it appears that parts of structures can count as construction artifacts and perhaps only full-structures can count as fixed structures. But this assumption is falsified by the observation that bridge pilings can be fixed structures. It may be the case the elements of #$ConstructionArtifact needn't be freestanding the way that elements of #$FixedStructure do. Or, alternatively, perhaps elements of #$ConstructionArtifact need not be fixed locations, so that a space station or a camping trailer might be elements of #$ConstuctionArtifact, but not of #$FixedStructure. But these are merely guesses, and not explicitly stated in the comment. Furthermore, all of the examples appear to be equally plausible as instances of both collections. If creating a constant which may easily be confused with another, be sure to state explicitly the distinguishing characteristics.</p>
+<h3>4.1.6. <a name="137247000" id="137247000"></a> Example 4: FriedrichNietzsche</h3>
+<h4>4.1.6.a. Constant: FriedrichNietzsche.</h4>
+<pre>comment: "The German rhetorical stylist, philosopher of ethics and essayist 
+         who is famous for his development of #$Nietzschean-Superman, or 
+         UberMensch, a person who sets his/her own moral standards and is not 
+         dependent on the approval or approbation of his social group. Despite 
+         his remarkable misanthropy and misogyny, Nietzsche never directed his bile
+         against any ethnic grouping in fact, it was a distaste for racism in 
+         general that caused him to end his friendship with the German composer Richard 
+         Wagner. Nonetheless, his moral standpoint was open to misinterpretation, 
+         and his philosophies on the superman mentality were later adopted 
+         and perverted by the #$GermanNaziParty.".</pre><p>In addition to its grammatical errors, this comment contains quite a bit of editorializing on the part of the author. It is considered inappropriate to make controversial claims in a constant's comment without expressly stating the position is a disputed one. Inside jokes and cheeky remarks are also to be avoided when writing comments. While a particular constant may not be part of the public ontology currently, it may be made public eventually, and the comments on public constants must be acceptable to people other than Cyclists. Any notes that are only of use to fellow Cyclists should be included in #$cyclistNotes.</p>
+<h2>4.2. <a name="137257904" id="137257904"></a> A Style Guide for Writing #$comments</h2>
+<p>The predicate #$comment is used to attach a string of explanatory text to a CYC constant. Whenever a CYC constant is created, a #$comment assertion should be written for it. This page gives some guidelines for the content and style of text in comments. Clarity is the most important stylistic criterion, because we want readers to understand the intended meaning and proper usage of our constants.</p>
+<h3>4.2.1. <a name="137269584" id="137269584"></a> GENERAL GUIDELINES for Composing Comments</h3>
+<blockquote><ol><li>
+<p>Mention at the outset the type of constant you're describing (e.g., collection, predicate, function). Guidelines for explaining specific types of constant are given below.</p>
+</li>
+<li>
+<p>Explain the meaning of the constant in clear and economical prose, correctly punctuated and spelled. Use complete sentences, except perhaps for the very first one, which can be a dictionary-like phrase such as "A collection of events."</p>
+</li>
+<li>
+<p>Be precise in your use of CYC constant names within #$comment text:</p>
+<blockquote><ol><li>
+<p>In #$comment text, CYC constant names should be preceded by the "#$" prefix, so that links from your comment to those constants can be generated in the html browser. Misspelled names will not link. Note that CYC's code can handle a leading or ending parenthesis, and a trailing comma, period, semicolon, colon, question mark, exclamation point, hyphen, or plurals formed with "s" and "es." It cannot, however, handle plurals formed by removing "y" and adding "ies"; for example, '#$Microtheories' (from #$Microtheory) would not be recognized.</p>
+</li>
+<li>
+<p>Don't confuse the names of CYC constants (e.g., #$Animal) with their English homonyms (e.g., 'animal'). The name of a CYC collection (e.g., #$Person, #$Speaking) is not the same thing as an English noun. Don't say, for example, "#$Person is the collection of those #$Animals which...." Instead, say "#$Person is the collection of those animals which...;" or, alternatively, "#$Person is a specialization of #$Animal." Although an experienced Cyclist could recognize that 'Flipper is a #$Dolphin' "means" that Flipper is an element of the CYC collection #$Dolphin, rather than that he is the same type of thing as that collection, the sentence is potentially confusing. Such casual "insider" usages exist in the KB, but we try to avoid adding similar violations in new work.</p>
+</li>
+</ol></blockquote>
+</li>
+<li>
+<p>To help explain the meaning of a constant, give some example instances of collections and some typical uses of a predicate or a function. It is permissible to use made-up constant names for examples, with the following proviso: If a made-up constant represents a concept that CYC should eventually know about, write its name preceded by "#$" (e.g., #$SpaceStation). If it is only a random example, such as Dog001 or KarensLeftEar, omit the '#$' prefix.</p>
+</li>
+<li>
+<p>Mention and perhaps illustrate any special restrictions on the meaning or use of the constant.</p>
+</li>
+<li>
+<p>Use a Note at the end of the #$comment text for any extra clarifications or details relevant for a general user. A Note may be used to present exceptions, borderline examples, one or more "footnotes," or pointers to related constants that a reader might want to examine (especially if those are not displayed already in the #$isa, #$genls, #$genlPreds, or other prominent assertions about the constant being commented). Formally separate the Note from the main body of the text with a single carriage return, to begin a new paragraph, or by typing two carriage returns in a row, to insert a blank line.</p>
+</li>
+<li>
+<p>Use a #$cyclistNotes assertion for technical matters of concern only to knowledge enterers.</p>
+</li>
+<li>
+<p>ALWAYS PROOFREAD your comments in the html browser after entering them, as well as in your text file beforehand.</p>
+</li>
+</ol></blockquote>
+<h3>4.2.2. <a name="137313224" id="137313224"></a> Specialized Style Suggestions</h3>
+<h4>4.2.2.a. Comments on CYC COLLECTIONS:</h4>
+<blockquote><ol><li>Refer to a collection as a collection, rather than as a 'group' or 'class' or 'category'. Refer to the elements of a collection -- the values on its #$isa relation -- as elements or instances, rather than as 'members' or 'parts'. The #$genls relation may be described by talking about subsets and supersets, although it should be noted that CYC collections are more restrictive than mathematical sets (cf. #$Collection, #$Set-Mathematical). In general, avoid words that are open to misinterpretation, such as "member," "sample," "illustration," "class," "category," "type," "assemblage," "grouping," "process," "activity," "circumstance"; prefer words which permit less ambiguity, such as "element" and "set" and "event."</li>
+<li>
+<p>Begin by stating, for a collection #$COL, "#$COL is a [or 'the'] collection of ...", or "#$COL is a subset of ...." A dictionary-like introductory fragment, such as "A [or 'The'] collection of ...." is also acceptable. For example:</p>
+<pre>"#$Movement-Rotation is a subset of #$MovementEvent. Elements of 
+#$Movement-Rotation are those moving events in which the #$objectMoving 
+rotates about an internal or external axis. For example, the daily 
+rotation of the Earth on its axis, or the rotation of a clock hand about 
+its fastened end."</pre></li>
+<li>
+<p>Give one or more examples of your collection. As examples, mention some elements or some subsets. It is best if those examples are actual instances in the KB (e.g., #$JohnsHopkinsUniversity as an example of #$University), but examples may also be identified using ordinary English. For example, "The collection #$Movement-Rotation includes rotations of the Earth on its axis." It is permissible to make up constant names for non-existent constants, if they are entities which should eventually be known to CYC, e.g., #$YulBrynner; but avoid those that name an obviously poor constant, e.g., #$YulBrynnersScalp. (The latter implies that CYC might need to have trillions of constants such as 'MarySimpsonsLeftIndexFinger'!)</p>
+</li>
+</ol></blockquote>
+<p>Here is a sample of a long comment on an important, broad collection of events:</p>
+<pre>#$MovementEvent is the most general collection for events that are physical 
+movements. Each instance of #$MovementEvent is a rotation or translation of 
+some instance of #$PartiallyTangible, where movement occurs relative to a 
+frame of reference which is not part of the #$objectMoving. Thus, Neil 
+Armstrong's stepping onto the Moon's surface from the lunar landing module 
+is an element of #$MovementEvent. Such movements may be periodic (e.g., the 
+turning of the Earth on its axis 31 times during the month of August 1996) 
+or complex (e.g., Li Xiaoshuang's compulsory floor exercise in the 1996 
+Olympics Men's Gymnastics Team Competition).
+
+Note: #$MovementEvent is the most generic collection for physical movements. 
+For representing specific events, one or more of the following subsets of 
+#$MovementEvent may be more precise: #$Movement-TranslationEvent, 
+#$Movement-Rotation, #$Movement-Periodic, #$Movement-NonPeriodic, 
+#$Translation-Flow, #$Translation-Complete, #$Translation-SingleTrajectory, 
+#$Translation-MultiTrajectory. Some questions to consider in selecting the 
+best collection to represent a physical movement include: (1) is the movement 
+translational or rotational motion? (2) is it periodic or nonperiodic? 
+(3) does it involve a discrete motion (i.e., an object's moving completely 
+from one place to another) or a continuous flow? (4) does it involve a change 
+of location or no location change? (5) does it involve a single pathway or 
+more than one? 
+
+Note on what is NOT included in #$MovementEvent: Consider a person's raising 
+her hand and waving, or a tree's bending as its branches sway in a strong wind, 
+while the person and the tree remain in the same place. The movements of the 
+person and the tree do NOT qualify as instances of #$MovementEvent, because 
+the 'doer' in any element of #$MovementEvent must rotate or translate as a whole. 
+The hand movement and the movement of the branches do, however, qualify as 
+objects moving in the proper sense. So, for example, an instance of #$WavingAHand 
+(done by a person) would have #$subEvents which ARE elements of #$MovementEvent, 
+in which the person's hand is the #$objectMoving. Note also that instances of 
+#$TransformationEvent (such as a caterpillar turning into a butterfly), or of 
+#$ShapingSomething (such as molding a piece of clay into the bust of Napoleon), 
+are also not elements of #$MovementEvent, because they do not involve motion of 
+the whole object with respect to some frame of reference. 
+(See also #$FrameOfReference.)</pre><h4>4.2.2.b. Comments on CYC INDIVIDUALS [optional]:</h4>
+<blockquote><ol><li>
+<p>This is the only general class of exceptions to the 'always write a comment' rule. Information about individuals represented in the CYC KB (e.g., #$JohnKennedy, #$UnitedStatesOfAmerica, #$MississippiRiver) may be captured exhaustively in the CycL assertions on the constant itself. Add an English comment only if there is an unusual need for further characterization of the individual.</p>
+</li>
+<li>
+<p>The names of CYC constants that represent individuals may be used in #$comment text like English proper nouns. Examples: "#$JohnKennedy was the 35th President of the #$UnitedStatesOfAmerica." Another example: "#$Cycorp is headed by Doug #$Lenat."</p>
+</li>
+</ol></blockquote>
+<h4>4.2.2.c. Comments on CYC PREDICATES:</h4>
+<blockquote><ol><li>
+<p>Begin the comment with a general description about what the predicate relates or what it is used for. For example, "The CYC predicate #$employees relates a particular employer to one of its paid employees...."</p>
+</li>
+<li>
+<p>In every case, the comment should contain a sentence of the following form: "(#$&lt;;predicate-name= ARG1-METAVAR [ARG2-METAVAR ... ARGN-METAVAR]) means that ...." That sentence should be either the first sentence in the comment or should follow a first sentence of the type mentioned in (1) above. In general, it is helpful to use mnemonic meta-variables rather than simply X, Y, Z, etc. See also (4) below.</p>
+</li>
+<li>
+<p>To describe the constraints on arguments to a predicate:</p>
+<blockquote><ol><li>
+<p>One approach, which violates the guideline about not using CYC constant names as English words, is to use the name of the argument-constraining constant as a modifier in the following way: "(#$geographicalSubRegions SUPER SUB) means that the #$GeographicalRegion SUPER contains all of the #$GeographicalRegion SUB." That was widely done in the past.</p>
+</li>
+<li>
+<p>A clearer style yields this version: "The binary predicate #$geographicalSubRegions relates a geographical region to the geographical regions it spatially contains. Both arguments to #$geographicalSubRegions must be elements of #$GeographicalRegion. (#$geographicalSubRegions SUPER SUB) means that the region SUPER contains all of the region SUB."</p>
+</li>
+</ol></blockquote>
+</li>
+<li>
+<p>Use meta-variables in comments on predicates. In an explanatory sentence such as:</p>
+<pre>(#$geographicalSubRegions SUPER SUB) means that the region SUPER contains 
+all of the region SUB</pre><p>SUPER and SUB are meta-variables, because in the comment text they are placeholders that could be replaced by the names of individuals as well as by variables (with appropriate quantification and/or restriction). Write meta-variables by omitting the prefix '?' used with actual variables in the CYC system.</p>
+<p>Also see (5) below regarding quoting rules in comment text.</p>
+</li>
+<li>
+<p>If you quote a rule from the CYC KB, then variables in the rule should be quoted as actual variables, just as they are in the KB; e.g., (#$implies (#$and (#$isa ?E1 #$Action) (#$subEvents ?E ?E1) (#$doneBy ?E ?P) (#$isa ?E #$SingleDoerAction)) (#$doneBy ?E1?P)).</p>
+<p>In general, quote a rule in order to illustrate the use of a predicate in CycL. If you are using the rule to explain the meaning of a particular predicate, it's probably better to state the rule in English rather than to quote the formal rule. For example, paraphrase the above rule as follows, for clarity: "If a particular action is of the kind that can be done only by a single agent, then all of its sub-actions have the same agent as does the overall action."</p>
+</li>
+<li>
+<p>Here is the full comment from #$employees, as an example:</p>
+<p>The predicate #$employees relates a particular employer to one of its paid employees. (#$employees EMPLOYER WORKER) means WORKER regularly performs work for EMPLOYER, and EMPLOYER pays WORKER for that activity (often by paycheck). EMPLOYER directs the manner in which WORKER performs the work and may provide the workplace, tools, capital, and other assistance for the work. EMPLOYER is commonly an organization but may be a person. E.g., (#$employees PerryMason PaulDrake); (#$employees #$Cycorp #$Lenat). Uses of this predicate require proper temporal qualification; e.g., (#$holdsIn #$TheYear1995 (#$employees #$CarnegieMellonUniversity #$Derthick)). Notice that meta-variables in the above are upper-case and lack the preceding '?' used with actual variables in CycL. Also note that names of individuals who are used as examples but who are not in fact in the CYC KB lack a preceding '#$'.</p>
+<p>Another example: the #$comment text for #$likesObject:</p>
+<p>(#$likesObject AGT OBJ) means that when the sentient agent AGT is interacting in some way with OBJ, that agent feels some measure of #$Enjoyment --- that is, (#$feelsEmotion AGT #$Enjoyment). The kinds of interactions that produce #$Enjoyment depend largely on what kind of thing OBJ is. Thus, 'Joe likes the Mona Lisa' implies that Joe feels #$Enjoyment when viewing the Mona Lisa. But 'Joe likes pizza' implies that Joe feels #$Enjoyment when eating that kind of food. Note: There are some specialized predicates of #$likesObject that give more information about the kind of interaction between AGT and OBJ that results in #$Enjoyment; see, e.g., #$likesSensorially and #$likesAsFriend.</p>
+</li>
+</ol></blockquote>
+<h4>4.2.2.d. Comments on CYC FUNCTIONS:</h4>
+<blockquote><ol><li>
+<p>Mention the type of function being described. Usually it is either #$CollectionDenotingFunction or #$IndividualDenotingFunction, but you may want to mention a more specific group of functions to which the target function belongs, e.g., #$UnitOfMeasure.</p>
+</li>
+<li>
+<p>Mention the argument type(s) of the function, as well as its result type (i.e., #$resultIsa and/or #$resultGenls).</p>
+</li>
+<li>
+<p>Describe generally, or make clear by example(s), how the function is used.</p>
+</li>
+</ol></blockquote>
+<p>Here is an example, the #$comment text for #$GroupFn:</p>
+<pre>#$GroupFn, an instance of #$CollectionDenotingFunction, is used for 
+representing specialized subsets of #$Group. (#$GroupFn OBJ-TYPE) 
+denotes the collection of all groups whose members are instances of 
+OBJ-TYPE. Note that an application of #$GroupFn refers to a COLLECTION 
+which has groups as elements, rather than to an individual group. 
+#$GroupFn takes any element of #$ObjectType as its argument, returning 
+the subset of #$Group that contains groups having instances of that 
+#$ObjectType as its #$groupMembers. For example, 
+(#$GroupFn #$BallisticMissile) represents the collection of all groups 
+of ballistic missiles, which includes Russia's ballistic missiles, 
+China's ballistic missiles, the U.S.'s ballistic missiles, etc. Another 
+example: A group of 101 particular Dalmatians is an instance of 
+(#$GroupFn #$Dog). Collections of groups of events may also be denoted; 
+e.g., Columbus's voyages to North America may be considered as a group 
+(of events) which would be an element of (#$GroupFn #$Travel-TripEvent).</pre><h4>4.2.2.e. Comments on Ground Atomic Formulas (GAFs) and Rules:</h4>
+<p>Use the predicate #$salientAssertions if you want to indicate that a particular assertion is essential to the meaning of some CYC constant. Example: (#$salientAssertions #$SingleDoerAction (#$implies (#$and (#$isa ?E1 #$Action)(#$subEvents ?E ?E1)(#$doneBy ?E ?P)(#$isa ?E #$SingleDoerAction))(#$doneBy ?E1 ?P))).</p>
+<p>Note that, although it is possible and sometimes useful to write a #$comment text for a particular CYC rule or GAF, that is not a common practice (nor should it be). To place a comment on a rule or GAF, make the formula itself the first argument to #$comment. Example: (#$comment (#$genls #$Person #$Animal) "This GAF really doesn't need a comment.").</p>
+<p>Finally, here are some special requirements for html-based interfaces such as CYC presently uses:</p>
+<p>Some characters require special handling:</p>
+<blockquote><ul><li>
+<p>Double-quotation marks must be preceded in your text by a backslash (or simulated with two single quotes)</p>
+</li>
+<li>
+<p>Left- and right-angle brackets must be written in your text as "&amp;lt" for left-angle bracket and "&amp;gt" for right-angle bracket</p>
+</li>
+<li>
+<p>Avoid using ampersands or other non-printing ascii characters (except for spaces)</p>
+</li>
+</ul></blockquote>
+<h2>4.3. <a name="137446440" id="137446440"></a> cyclistNotes</h2>
+<p>Any documentation in the Knowledge Base that is only of use to other Cyclists should be contained in #$cyclistNotes. Like #$comment, #$cyclistNotes is a binary predicate which takes a #$CycLIndexedTerm as its first argument and a #$SubLString as its second. #$cyclistNotes are found most often on constants, but are sometimes found on assertions as well. The SubLString should contain any information that is not contained in the constant's comment that might be useful to anyone doing OE or KE. Also, while every constant should have a comment, cyclist notes are used as deemed appropriate.</p>
+<p>Here are some examples of how and when to write #$cyclistNotes:</p>
+<ul><li>To note the source of information for a particular constant. If the constant needs a "bibliography" of sorts, #$cyclistNotes is a good place to record all the relevant information.</li>
+<li>If the constant is still being developed, or is part of a larger, experimental set of constants. This lets other Cyclists know that the current constant is not fully defined and that there's still more work to be done. Also, this might dissuade others from using a constant that is still experimental.</li>
+<li>For observing changes or future work. If the constants will undergo some massive cleanup, especially if it will result in killing a constant, it is important to let others know before they make assertions on a constant. This is also important in case that some work on a constant or an assertion is part of an OE work-around that should be eliminated when proper OE or support has been done. This is also a good place to note that a constant or suite of constants are replacing more problematic ones.</li>
+<li>For explaining techincal details or issues re the meaning or use of the constant that are relevant only in special circumstances and might not be appropriate for the comment.</li>
+</ul><p>When writing a #$cyclistNote containing current information about the KB, please be sure to date the note.</p>
+<p>For example,</p>
+<pre>cyclistNote: Currently (February 2001), this predicate 
+still lacks code support.</pre><p>Also, if the #$cyclistNotes contain suggestions, objections, or promises for future OE, be sure to "sign" the note by including the names of the Cyclists making the suggestions. This can be added conveniently with the date at the end of the note. This is unnecessary if the suggestion is made exclusively by the Cyclist making the assertion.</p>
+<h2>4.4. <a name="137471256" id="137471256"></a> sharedNotes</h2>
+<p>If it is appropriate to make the same comment on several constants, it may be advisable to write a #$SharedNote. #$sharedNotes assertions are created differently than #$comments or #$cyclistNotes. First, it is necessary to create the #$SharedNote. The note has its own constant, which is an instance of #$SharedNote. Where TOPIC is the topic of the note, the constant should be named 'SharedNoteOnTOPIC' or 'NoteOnTOPIC' unless the note compares the use of two topics. The #$comment on this constant will apply to all the constants that share the note. Once the #$SharedNote has been created, it is then linked using the predicate #$sharedNote to the constants for which it contains information.</p>
+<p>This #$SharedNote is currently in the KB:</p>
+<pre>   Constant : ThereExistsVsThereExistAtLeast1
+   Mt: BaseKB
+   isa: SharedNote
+
+   comment:"There is no difference in meaning between (#$thereExists X PROP) 
+   and (#$thereExistAtLeast 1 X PROP). It is better style to use #$thereExists 
+   in these cases."
+
+   Mt : BaseKB
+
+   (sharedNotes thereExistAtLeast ThereExistsVsThereExistAtLeast1)
+   (sharedNotes thereExists ThereExistsVsThereExistAtLeast1)</pre><p>This note is part of the documentation for the constants #$thereExists and #$thereExistsAtLeast.</p>
+<p>Note that #$sharedNotes formulae are also useful as a consequent to a forward rule. Before writing a rule of this sort, please remember to read and follow the guidelines for creating any forward rule.</p>
+<p>Examine this #$SharedNote:</p>
+<pre>   Constant : NoteAboutRedo
+   Mt : BaseKB
+   isa : SharedNote 
+
+   comment : "Don't use me. I'm a constant that has been flagged with the 
+   predicate redo, which means that I should be killed once a good replacement 
+   for me has been fashioned and any useful information hung on me has been 
+   moved over. If you need to use me, why not do that cleanup yourself now?" 
+
+   (implies 
+     (and 
+       (isa ?CONSTANT CycLReifiableDenotationalTerm) 
+       (redo ?CONSTANT ?STRING)) 
+     (sharedNotes ?CONSTANT NoteAboutRedo)) in BaseKB
+
+
+   (implies 
+     (and 
+      (redo ?CONSTANT) 
+      (isa ?CONSTANT CycLReifiableDenotationalTerm)) 
+     (sharedNotes ?CONSTANT NoteAboutRedo)) in BaseKB
+</pre><p>Both of the above rules are propagated forward in the knowledge base, so whenever anyone makes an assertion flagging a constant or an assertion for "redo", the above comment automatically becomes part of the documentation for that constant. Because the following denotatonal term is found on #$ReligiousPerson:</p>
+<pre>   (redo ReligiousPerson "The rules seem to consider that ReligiousPerson 
+   means a person who is observant in a religion. The comment and some of 
+   the specs indicate that the meaning is a member of some religion. For some 
+   reason, JewishPerson is not a spec of this, evidently because the meaning 
+   implicit in the rules is being considered.")</pre><p>the comment on the #$NoteAboutRedo will appear on the "Documentation" page for that constant.</p>
+<p>Note that #$redo is a powerful documentation constant as well. Be sure to read the comment and cyclistNotes about it in the Knowledge Base.</p>
+<h2>4.5. <a name="137496976" id="137496976"></a> exampleSentences</h2>
+<p>It is sometimes very helpful to other Cyclists and guests to Cyc alike to see what a well-formed and semantically useful assertion using a Cyc term might look like. This is especially true for predicates. In those cases, it is a good idea to create an #$exampleSentences assertion. In the case of predicates, use its spec-pred, #$examplePredSentences. (There is also #$exampleNATs for non-atomic terms.)</p>
+<pre>  (examplePredSentences differentInAttribute 
+    (differentInAttribute MarieAntoinette RembrandtVanRijn GenderOfLivingThing))</pre> </div></div></div>  <div id="book-navigation-196" class="book-navigation">
+    
+        <div class="page-links clearfix">
+              <a href="/documentation/finding-right-level-generality" class="page-previous" title="Go to previous page">‹ Finding the Right Level Of Generality</a>
+                    <a href="/documentation/cyc-basics" class="page-up" title="Go to parent page">up</a>
+                    <a href="/documentation/writing-efficient-cycl" class="page-next" title="Go to next page">Writing Efficient CycL ›</a>
+          </div>
+    
+  </div>
+  </div>
+  
+  <div class="clearfix">
+          <nav class="links node-links clearfix"></nav>
+    
+      </div>
+</article>    </div>
+  </div>
+</div>   
+  </div>
+</div>  </div>
+</div></section>    
+  
+      <footer id="section-footer" class="section section-footer">
+  <div id="zone-footer-wrapper" class="zone-wrapper zone-footer-wrapper clearfix">  
+  <div id="zone-footer" class="zone zone-footer clearfix container-12">
+    <div class="grid-12 region region-footer-first" id="region-footer-first">
+  <div class="region-inner region-footer-first-inner">
+    <section class="block block-menu-block block-3 block-menu-block-3 odd" id="block-menu-block-3">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Enterprise Solutions</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-3 menu-name-main-menu parent-mlid-612 menu-level-1">
+  <ul class="menu"><li class="first expanded menu-mlid-568 why-cyc-"><a href="/why-cyc" title="Why Cyc came about and how it can help you">Why Cyc?</a></li>
+<li class="leaf menu-mlid-3156 semantic-solutions"><a href="/enterprise-solutions/solutions" title="Some Cyc application areas">Semantic Solutions</a></li>
+<li class="leaf menu-mlid-3148 services"><a href="/enterprise-solutions/services" title="Cycorp can help you get started">Services</a></li>
+<li class="last leaf menu-mlid-3150 success-stories"><a href="/enterprise-solutions/success-stories" title="Examples of Cyc customer applications">Success Stories</a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-menu-block block-4 block-menu-block-4 even" id="block-menu-block-4">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Development Platforms</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-4 menu-name-main-menu parent-mlid-603 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-613 opencyc"><a href="/platform/opencyc">OpenCyc</a></li>
+<li class="leaf menu-mlid-614 enterprisecyc"><a href="/platform/enterprisecyc" title="Commercial-grade Cyc for development and deployment of enterprise solutions.">EnterpriseCyc</a></li>
+<li class="last leaf menu-mlid-615 researchcyc"><a href="/platform/researchcyc" title="ResearchCyc">ResearchCyc</a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-menu-block block-5 block-menu-block-5 odd" id="block-menu-block-5">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Resources</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-5 menu-name-main-menu parent-mlid-355 menu-level-1">
+  <ul class="menu"><li class="first expanded menu-mlid-2385 documentation"><a href="/documentation" title="Documentation">Documentation</a></li>
+<li class="leaf menu-mlid-3445 publications"><a href="/publications" title="Publications">Publications</a></li>
+<li class="leaf menu-mlid-2393 presentations"><a href="/presentations" title="Presentations">Presentations</a></li>
+<li class="expanded menu-mlid-3009 training-"><a href="/training-courses" title="Instructor-led Cyc courses">Training </a></li>
+<li class="leaf menu-mlid-3443 vocabulary"><a href="/resource/vocabulary" title="Important Cyc concepts">Vocabulary</a></li>
+<li class="expanded menu-mlid-1191 kb-exports"><a href="/resource/exported-cyc-content" title="Downloadable content exported from the Cyc KB">KB Exports</a></li>
+<li class="last leaf menu-mlid-544 faqs"><a href="/faq-page" title="Cyc FAQs">FAQs</a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-menu-block block-6 block-menu-block-6 even" id="block-menu-block-6">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Careers</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-6 menu-name-menu-careers parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-2294 current-opportunities"><a href="/careers/current-opportunities">Current Opportunities</a></li>
+<li class="last leaf menu-mlid-2295 career-application-form"><a href="/career-application-form" title="Career Application Form">Career Application Form</a></li>
+</ul></div>
+    </div>
+  </div>
+</section><section class="block block-menu-block block-7 block-menu-block-7 odd" id="block-menu-block-7">
+  <div class="block-inner clearfix">
+              <h2 class="block-title">Company</h2>
+            
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-7 menu-name-main-menu parent-mlid-569 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-600 company-profile"><a href="/company-profile" title="About Cycorp">Company Profile</a></li>
+<li class="leaf menu-mlid-395 leadership-team"><a href="/about/team" title="Meet the Cycorp team">Leadership Team</a></li>
+<li class="expanded menu-mlid-2107 careers"><a href="/careers" title="Career opportunities at Cycorp">Careers</a></li>
+<li class="leaf menu-mlid-2344 company-news"><a href="/media-coverage" title="Current Cycorp and Cyc-related events">Company News</a></li>
+<li class="last leaf menu-mlid-545 contact-us"><a href="/contact-us" title="We want to hear from you!">Contact Us</a></li>
+</ul></div>
+    </div>
+  </div>
+</section>  </div>
+</div><div class="grid-12 region region-footer-second" id="region-footer-second">
+  <div class="region-inner region-footer-second-inner">
+    <div class="block block-menu block-menu-footer-menu block-menu-menu-footer-menu odd block-without-title" id="block-menu-menu-footer-menu">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <ul class="menu"><li class="first leaf faqs"><a href="/support/faqs">FAQs</a></li>
+<li class="leaf privacy-policy"><a href="/privacy-policy" title="Cycorp&#039;s privacy policy.">Privacy Policy</a></li>
+<li class="last leaf login"><a href="/user/login" title="">Login</a></li>
+</ul>    </div>
+  </div>
+</div><div class="block block-block block-19 block-block-19 even block-without-title" id="block-block-19">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+       <div style=" float: left; font-size: 13px; line-height: 20px; clear: both;">
+	<span style="color:#cccccc;">© 2013. Cycorp Inc. All Rights Reserved.</span></div>
+<div class="social" style=" float: right;">
+	<a href="http://www.facebook.com/pages/Cycorp/103118953086834" target="_blank" title="Follow Cycorp on Facebook"><img alt="" height="24" src="/sites/all/themes/omega_cycorp/images/facebook.png" width="24" /></a>  <a href="https://twitter.com/Cycorp" target="_blank"><img alt="" height="24" src="/sites/all/themes/omega_cycorp/images/twitter.png" width="24" /></a> <a href="http://us.linkedin.com/company/cycorp" target="_blank" title="Cycorp on LinkedIn"><img alt="" height="24" src="/sites/all/themes/omega_cycorp/images/linkedin.png" width="24" /></a></div>
+     </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div></footer>  </div>  <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+    jQuery(document).ready(function($) {
+    cookieControl({
+        introText: '<p>This site uses cookies to store information on your computer.</p>',
+        fullText: '<p>Some cookies on this site are essential, and the site won\'t work as expected without them. These cookies are set when you submit a form, login or interact with the site by doing something that goes beyond clicking on simple links.</p><p>We also use some non-essential cookies to anonymously track visitors or enhance your experience of the site. If you\'re not happy with this, we won\'t set these cookies but some nice features of the site may be unavailable.</p>',
+        theme: 'dark',
+        html: '<div id="cccwr"><div id="ccc-state" class="ccc-pause"><div id="ccc-icon"><button><span>Cookie Control</span></button></div><div class="ccc-widget"><div class="ccc-outer"><div class="ccc-inner"><h2>Cookie Control</h2><div class="ccc-content"><p class="ccc-intro"></p><div class="ccc-expanded"></div><div id="ccc-cookies-switch" style="background-position-x: 0;"><a id="cctoggle" href="#" style="background-position-x: 0;" name="cctoggle"><span id="cctoggle-text">Cookies test</span></a></div><div id="ccc-implicit-warning">(One cookie will be set to store your preference)</div><div id="ccc-explicit-checkbox"><label><input id="cchide-popup" type="checkbox" name="ccc-hide-popup" value="Y" /> Do not ask me again<br /></label> (Ticking this sets a cookie to hide this popup if you then hit close. This will not store any personal information)</div><p class="ccc-about"><small><a href="http://www.civicuk.com/cookie-law" target="_blank">About this tool</a></small></p><a class="ccc-icon" href="http://www.civicuk.com/cookie-law" target="_blank"title="About Cookie Control">About Cookie Control</a><button class="ccc-close">Close</button></div></div></div><button class="ccc-expand">read more</button></div></div></div>',
+        position: 'left',
+        shape: 'triangle',
+        startOpen: true,
+        autoHide: 60000,
+        onAccept: function(cc){cookiecontrol_accepted(cc)},
+        onReady: function(){},
+        onCookiesAllowed: function(cc){cookiecontrol_cookiesallowed(cc)},
+        onCookiesNotAllowed: function(cc){cookiecontrol_cookiesnotallowed(cc)},
+        countries: '',
+        subdomains: true,
+        cookieName: 'cycorp_cookiecontrol',
+        iconStatusCookieName: 'ccShowCookieIcon',
+        consentModel: 'information_only'
+        });
+      });
+    
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_accepted(cc) {
+cc.setCookie('ccShowCookieIcon', 'no');jQuery('#ccc-icon').hide();
+ccAddHtmlClass();
+}
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_cookiesallowed(cc) {
+ccAddHtmlClass();
+}
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_cookiesnotallowed(cc) {
+
+}
+//--><!]]>
+</script>
+</body>
+</html>

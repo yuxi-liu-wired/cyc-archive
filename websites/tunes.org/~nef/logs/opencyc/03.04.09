@@ -1,0 +1,440 @@
+00:00:00 --- log: started opencyc/03.04.09
+02:30:40 --- join: yepster (~yepster@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+02:56:55 <yepster> heh
+02:57:28 <yepster> to get rid of a lot of hypothesized mess...
+02:57:48 <yepster> (mapcar #'cyc-kill (constant-complete "HYP-Story"))
+05:37:44 --- quit: yepster (Read error: 104 (Connection reset by peer))
+05:39:20 --- join: yepster (~yepster@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+07:16:07 <yepster> ping
+07:39:14 --- quit: kinoc (Read error: 110 (Connection timed out))
+08:03:53 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:04:08 <kinoc> ping
+08:12:31 <yepster> pong
+08:20:23 <kinoc> pang
+08:20:48 <kinoc> still hacking at the LGP2CycL
+08:20:54 <yepster> :-)
+08:21:03 <kinoc> talked to cycorp
+08:21:07 * yepster still working on scriptbot
+08:21:15 <kinoc> or emailed them actually
+08:21:25 <kinoc> seems they tried LGP before
+08:21:38 <yepster> hmm
+08:21:41 <yepster> and?
+08:21:57 <kinoc> they say they have no notes left
+08:22:08 <yepster> oo
+08:22:20 <yepster> too bad..
+08:22:39 <kinoc> but they thought the output I was getting was on the right track
+08:22:51 <yepster> that's always good to hear!
+08:23:28 <kinoc> one problem I guess even they are dealing with is reference and referent classification
+08:23:56 <yepster> example?
+08:24:15 <kinoc> You get this new word "Yepster". Is it animal, vegitable, mineral, person, scientist, scientest computer, computer scientest
+08:24:34 <yepster> cyclexpression
+08:24:57 <kinoc> he did point out (nameString ?ITEM1 "Yepster")
+08:25:13 <kinoc> so I can safely say something about it
+08:25:33 <kinoc> or say the N possible meanings and classifications of "John"
+08:26:12 <yepster> do you need to figure that out from the word "John" alone?
+08:26:16 <kinoc> I think its situation/ metaknowledge. Like a microtheory of the domain of discourse. In stories most agents are people or at least agentive actors
+08:26:26 <yepster> why not try to hypothesize something like
+08:26:48 <yepster> (and (isa ?ITEM1 Thing)(nameString ?ITEM1 "John")(performedBy ?EVENT ?ITEM1))
+08:27:02 <yepster> if it fails, then the parse apparently was wrong
+08:27:20 <kinoc> Yeah, and add additional knowledge about ?ITEM1 as you read
+08:27:29 <yepster> if it succeeds, cyc will make ?ITEM1 at least something that is constrained by the argisa's of performedBy
+08:27:40 <kinoc> right
+08:28:13 <kinoc> the Mt rules in use will fill in the blanks
+08:29:01 <yepster> want a demo of current scriptbot?
+08:29:08 <kinoc> You might be able to make some default assumptions, basically treating the translation rules of the LGP as its own Mt
+08:29:10 <kinoc> sure
+08:29:14 <yepster> :-)
+08:29:20 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+08:29:26 <yepster> story
+08:29:26 <ScriptBot> yepster tells a story. What's the first primitive act?
+08:29:37 <yepster> (still the same story..)
+08:29:38 <ScriptBot> ((still is not a known primitive act in yepsterChatMt)
+08:29:44 <yepster> CD-PTrans
+08:29:44 <ScriptBot> ok, now tell me some actorslots and actors, e.g. "performedBy Object123" (or *me for yepster)
+08:29:48 <yepster> toLocation Macys
+08:29:50 <ScriptBot> ok, tell me more actor sentences or say 'done' when finished.
+08:30:03 <yepster> performedBy Yeb
+08:30:04 <ScriptBot> ok, tell me more actor sentences or say 'done' when finished.
+08:30:06 <yepster> done
+08:30:07 <ScriptBot> (and (isa ?STORY Story) (isa ?EVENT1 CD-PTrans) (subEvents ?STORY ?EVENT1) (toLocation ?EVENT1 Macys) (performedBy ?EVENT1 Yeb))
+08:30:07 <ScriptBot> ok, say next for more acts, or finish if that was the whole story.
+08:30:09 <yepster> finish
+08:30:10 <ScriptBot> Trying to make sense of the story.
+08:30:12 <ScriptBot> results : ((?EVENT1 . HYP-Translocation-9514) (?STORY . HYP-Story-9515))
+08:30:16 <ScriptBot> T
+08:30:18 <ScriptBot> T
+08:30:23 <ScriptBot> T
+08:30:23 <ScriptBot> jaja
+08:30:24 <ScriptBot> act and statescript HYP-Story-9512 RSState1
+08:30:25 <ScriptBot> act and statescript HYP-Translocation-9511 RSState1
+08:30:25 <ScriptBot> yepster finished the story, ready to answer questions about it.
+08:30:45 <yepster> the last 3 lines before 'yepster finished' are debug kind of things
+08:30:51 <yepster> (please ignore those)
+08:30:59 <kinoc> ok
+08:31:11 <yepster> automatically done = story references script restaurantscript
+08:31:20 <yepster> they are asserted as beliefs of ScriptBot
+08:31:38 <yepster> beliefs (customer HYP-Story-9512 ?X)
+08:31:41 <ScriptBot> (((?X . Yeb)))
+08:31:52 <yepster> :-)
+08:32:06 <yepster> but it's not known if it is really true
+08:32:16 <yepster> ask (customer HYP-Story-9512 ?X)
+08:32:17 <ScriptBot> (((?X . Yeb)))
+08:32:20 <yepster> bugger
+08:32:22 <kinoc> cool. but it believes....
+08:32:31 <yepster> query (customer HYP-Story-9512 ?X)
+08:32:32 <ScriptBot> no answers found
+08:32:52 <yepster> query (beliefs ScriptBot ?PROP)
+08:32:54 <ScriptBot> no answers found
+08:32:57 <yepster> hmm
+08:33:04 <yepster> ask (beliefs ScriptBot ?PROP)
+08:33:06 <ScriptBot> NIL
+08:33:15 <yepster> well it's there somewhere
+08:34:07 --- part: ScriptBot left #opencyc
+08:34:21 <yepster> (i'm working in #test_123)
+08:34:48 <yepster> o i see i got the wrong story..
+08:34:51 <kinoc> hmmm. triggers a thought. Maybe I should say (believes system (isa ?ITEM1 Person)).....
+08:34:52 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+08:35:03 <yepster> beliefs (customer HYP-Story-9515 ?X)
+08:35:04 <ScriptBot> (((?X . Yeb)))
+08:35:09 <yepster> :-)
+08:35:35 <kinoc> little typos....
+08:36:16 <yepster> beliefs (eventOccursAt HYP-Story-9515 ?X)
+08:36:17 <ScriptBot> (((?X . Macys)))
+08:36:45 <yepster> beliefs (?PRED ?THING1 ?THING2)
+08:36:46 <ScriptBot> no answers found
+08:36:51 <yepster> ah well
+08:36:57 --- part: ScriptBot left #opencyc
+08:37:19 <kinoc> good stuff
+08:37:23 <yepster> what I actually did was make a new mt with
+08:37:49 <yepster> (implies (beliefs ScriptBot ?PROP) (ist ScriptBotBeliefsMt ?PROP)) 
+08:37:50 <yepster> and
+08:37:58 <yepster> implies (ist ScriptBotBeliefsMt ?PROP) (beliefs ScriptBot ?PROP)) 
+08:38:28 <yepster> the 'beliefs' command is actually just an 'ask' in mt scriptbotbeliefsmt
+08:39:49 <kinoc> ok, so the predicate 'wrappers' the specific MT
+08:40:16 <yepster> well it's just a different way to represent the same
+08:40:48 <kinoc> yeah, but a nice one
+08:41:34 <yepster> (beliefs ?AGT ?PROP) doesn't really work nice if ?PROP is like
+08:41:42 <yepster> (and (thing1)(thing2))
+08:41:51 <kinoc> might come in handy when we get to the explicit self-awarness project (if dm returns)
+08:42:10 <yepster> it will not reault in (beliefs ?AGT thing1) and (beliefs ?AGT thing2)
+08:42:20 <kinoc> ah
+08:42:39 <kinoc> hmmm, ruleMacroPRedicates ????
+08:42:46 <yepster> nah
+08:43:14 <yepster> what about (and (sent1)(sent2)(sent3)) and (implies (sent2)(sent4)) etc etc
+08:43:46 <yepster> just assert a belief in a mt to hold only beliefs of an agent, works perfect!
+08:44:07 <kinoc> makes sense
+08:44:16 <yepster> what is the 'self awareness' project?
+08:44:50 <kinoc> something me and dmiles sent in. Using narritive processing for 'self-awarness'.
+08:45:11 <kinoc> system tells a narrative to itself, and asks "what's next?"
+08:45:11 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+08:45:20 <yepster> desc ScriptBot
+08:45:21 <ScriptBot> isas: IntelligentAgent
+08:45:21 <ScriptBot> comment: #$ScriptBot is an #$IntelligentAgent (required for use of #$beliefs).
+08:45:31 <kinoc> :)
+08:45:44 <kinoc> you understand :)
+08:45:51 <yepster> it was just required to represent facts
+08:46:20 <kinoc> I was looking to use all the actor/agent rules
+08:47:01 <kinoc> unfortunately 'android' isn't full represented in Opencyc. So I declared it a 'EthnicType' :)
+08:47:31 <yepster> self-awareness = self-reference?
+08:48:07 <kinoc> I said "Anna wanted everone to like her", and got back that "Anna wanted to like Anna"
+08:48:38 <kinoc> opps "every person"
+08:49:39 <kinoc> so letting the system utilize people knowledge, and provide a focal point for system-people interaction assertions
+08:50:32 <kinoc> since its all in logic form its explicit, and it sees itself like it would any other actor, so its not too deep
+08:51:12 <kinoc> and its 'awareness' is as good as its narrative of itself, but that may also apply to humans
+08:51:21 <yepster> yeah, just substitute "I" and "me" by the object representing 'self'
+08:51:35 <yepster> or the one saying a sentence
+08:51:44 <kinoc> basically
+08:52:13 <kinoc> had the idea a long timee ago, but only now have an engine to go with it
+08:52:51 <yepster> yeah, (hasProperty OpenCyc coolstuff)
+08:53:28 <kinoc> yeah, so basically try to find all the predicates that can apply to a person, then fill as many of them in for self
+08:53:45 <kinoc> so it can tie into as much KB as possible
+08:53:50 <yepster> (isa ?X ActorSlot) ?
+08:53:58 <yepster> or RolePredicate?
+08:54:34 <kinoc> ???
+08:54:45 --- quit: ScriptBot (Excess Flood)
+08:54:55 <yepster> all the predicates that can apply to a person?
+08:55:15 <kinoc> oh, ah give me a sec
+08:56:03 <kinoc> I think i asked for "applicable relations" in the left frame of the browser
+08:57:12 <kinoc> Not all of them are relevant for 'person-hood'
+08:57:31 <yepster> (and (isa Object ?TYPE)(arg1Isa ?PRED ?TYPE))   ?
+08:58:50 <kinoc> maybe
+08:59:19 * yepster working on act / state generating from script
+08:59:52 <kinoc> have you seen any verb to CD lists?
+09:00:08 <yepster> hmm
+09:00:22 <kinoc> I may have to use the frame net kb somehow
+09:00:42 <yepster> yeah, i think we're beyond cd anyway
+09:01:10 <yepster> I wonder why the framenet kb cannot be downloaded
+09:20:02 <kinoc> http://4.33.94.173:2002/cdml?pos="John%20rented%20a%20truck%20to%20move%20his%20house."
+09:20:23 <kinoc> has some framenet data mixed into the parse
+09:20:41 <yepster> 0 0 0
+09:21:02 <kinoc> hmmm, refresh ?
+09:21:13 <yepster> ah
+09:21:19 <yepster> <!-- linkanalysis -->
+09:21:19 <yepster> <linkgram>
+09:21:19 <yepster> <origsent></origsent>
+09:21:19 <yepster> <wordcount>0</wordcount>
+09:21:19 <yepster> <parsecount>0</parsecount>
+09:21:20 <yepster> <totalparses>0</totalparses>
+09:21:22 <yepster> <rawwords></rawwords>
+09:21:24 <yepster> </linkgram>
+09:21:51 <kinoc> you may have to type it in. I dont see any input
+09:22:18 <kinoc> or I could just past the output
+09:22:20 <yepster> have you seen how long the url is?? ;-)
+09:22:40 <kinoc> :)
+09:22:53 <kinoc> <cyc-hypolinks>
+09:22:54 <kinoc>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 rented-v)
+09:22:54 <kinoc>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 John)
+09:22:54 <kinoc>  (#$ThereExists ?EVENT6 (is-verb ?EVENT6 move-v)
+09:22:54 <kinoc>  (#$ThereExists ?ITEM4 (is-node ?ITEM4 truck-n)
+09:22:54 <kinoc>  (#$ThereExists ?ITEM8 (is-node ?ITEM8 house-n)
+09:22:56 <kinoc>  (and  (AGENT ?EVENT2 ?ITEM1)
+09:22:58 <kinoc>  (singular ?ITEM1)
+09:23:00 <kinoc>  (buyer ?EVENT2 ?ITEM1)
+09:23:02 <kinoc>  (past ?EVENT2)
+09:23:04 <kinoc>  (performedBy ?EVENT2 ?ITEM1)
+09:23:06 <kinoc>  (seller ?EVENT2 ?ITEM1)
+09:23:08 <kinoc>  (objectOfPossessionTransfer ?EVENT2 ?ITEM1)
+09:23:09 <deltab> should be able to use + in place of %20 there
+09:23:10 <kinoc>  (fn-domain ?EVENT2 transaction)
+09:23:12 <kinoc>  (fn-frame ?EVENT2 commerce)
+09:23:14 <kinoc>  (isa ?EVENT2 Renting)
+09:23:16 <kinoc>  (cyc-word ?EVENT2 Rent-TheWord)
+09:23:18 <kinoc>  (linkedv ?EVENT2 ?EVENT6)
+09:23:20 <kinoc>  (OBJECT ?EVENT2 ?ITEM4)
+09:23:22 <kinoc>  (singular ?ITEM4)
+09:23:24 <kinoc>  (objectPaidFor ?EVENT2 ?ITEM4)
+09:23:26 <kinoc>  (transferredThing ?EVENT2 ?ITEM4)
+09:23:28 <kinoc>  (objectActedOn ?EVENT2 ?ITEM4)
+09:23:30 <kinoc>  (transportees ?EVENT2 ?ITEM4)
+09:23:32 <kinoc>  (isa ?ITEM4 Truck)
+09:23:34 <kinoc>  (cyc-word ?ITEM4 Truck-TheWord)
+09:23:36 <kinoc>  (DET ?ITEM4 a)
+09:23:38 <kinoc>  (fn-domain ?EVENT6 NA)
+09:23:40 <kinoc>  (fn-frame ?EVENT6 motion)
+09:23:42 <kinoc>  (isa ?EVENT6 MovementEvent)
+09:23:44 <kinoc>  (cyc-word ?EVENT6 Move-TheWord)
+09:23:46 <kinoc>  (isa ?EVENT6 GeneralizedTransfer)
+09:23:48 <kinoc>  (OBJECT ?EVENT6 ?ITEM8)
+09:23:50 <kinoc>  (singular ?ITEM8)
+09:23:52 <kinoc>  (objectActedOn ?EVENT6 ?ITEM8)
+09:23:54 <kinoc>  (isa ?EVENT6 CausingAnotherObjectsTranslationalMotion)
+09:23:56 <kinoc>  (DET ?ITEM8 his)
+09:23:58 <kinoc>  )  ) ) ) ) ) 
+09:24:00 <kinoc> </cyc-hypolinks>
+09:24:14 <kinoc> you should be able to type the "John rented a truck to move his house" in and have the browser do as it pleases
+09:24:22 <yepster> cool!
+09:24:48 <yepster> can this be hypothesized in cyc?
+09:25:33 <kinoc> not quite yet, but you can try and trim it
+09:25:51 <yepster> is not (AGENT ?EVENT2 ?EVENT1) caught by (performedBy ?
+09:25:51 <kinoc> the capital predicates are undefined
+09:25:57 <kinoc> yeah
+09:26:19 <kinoc> back when I was focused on generating a more traditional CD output
+09:26:49 <kinoc> but its easy to take out, since its in external definition files
+09:27:18 <yepster> well it's still impressive
+09:27:29 <yepster> what happens if it would be fed
+09:27:46 <yepster> "I went to Macys"
+09:28:18 <kinoc> <cyc-hypolinks>
+09:28:18 <kinoc>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 went-v)
+09:28:18 <kinoc>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 I-p)
+09:28:18 <kinoc>  (#$ThereExists ?ITEM4 (is-node ?ITEM4 Macys)
+09:28:18 <kinoc>  (and  (primaryObjectMoving ?EVENT2 ?ITEM1)
+09:28:18 <kinoc>  (past ?EVENT2)
+09:28:20 <kinoc>  (isa ?EVENT2 IntrinsicStateChangeEvent)
+09:28:22 <kinoc>  (cyc-word ?EVENT2 Go-TheWord)
+09:28:24 <kinoc>  (isa ?EVENT2 Movement-TranslationEvent)
+09:28:26 <kinoc>  (PROP ?EVENT2 to ?ITEM4)
+09:28:28 <kinoc>  (XDESTINATION ?EVENT2 ?ITEM4)
+09:28:30 <kinoc>  (DEST ?EVENT2 ?ITEM4)
+09:28:32 <kinoc>  (toLocation ?EVENT2 ?ITEM4)
+09:28:34 <kinoc>  )  ) ) ) 
+09:28:36 <kinoc> </cyc-hypolinks>
+09:28:52 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+09:29:09 <yepster> desc RestaurantScript
+09:29:11 <ScriptBot> isas: Script
+09:29:11 <kinoc> oh, that in cyc-word
+09:29:12 <ScriptBot> comment: This first order object is the restaurant script.
+09:29:12 <ScriptBot> subScripts:
+09:29:13 <ScriptBot> Script: RestaurantScriptScene1
+09:29:14 <ScriptBot> Script: RSAtomicScene1 act:CD-PTrans
+09:29:14 <ScriptBot> - (performedBy Person)(primaryObjectMoving Person)(toLocation Restaurant-Organization)
+09:29:16 <ScriptBot> Script: RSAtomicScene2 act:CD-Attend act:LookingForSomething
+09:29:16 <ScriptBot> - (objectSought Table)(performedBy Person)(eventOccursAt Restaurant-Organization)
+09:29:18 <ScriptBot> Script: RSAtomicScene3 act:SelectingSomething act:CD-MBuild
+09:29:20 <ScriptBot> - (objectSelected Table)(performedBy Person)
+09:29:22 <ScriptBot> Script: RSAtomicScene4 act:CD-PTrans
+09:29:24 <ScriptBot> - (toLocation Table)(primaryObjectMoving Person)(eventOccursAt Restaurant-Organization)
+09:29:26 <ScriptBot> Script: RSState1
+09:29:52 <yepster> ask (coExtensional CD-PTrans ?X)
+09:29:53 <ScriptBot> (((?X . CD-PTrans)) ((?X . MovementEvent)))
+09:30:50 <yepster> Hmm, cool -> the lgp parsed output can be used as start for the scriptbot (only minor tweaking necessary)
+09:31:28 <kinoc> ok, so you do use multiple acts for a given action. one CD and one CycL
+09:31:32 <yepster> the scriptbot does stuff like trying to make sense of the story etc
+09:31:38 <kinoc> or can
+09:32:22 <yepster> (coExtensional ?COL1 ?COL2) just means forall x : x in Col1 <=> x in Col2 
+09:32:48 <yepster> and also coext => (genls ?COL1 ?COL2) and (genls ?COL2 ?COL1)
+09:33:12 <yepster> so I could just as well put in the script scene 1 : act = #$MovementEvent
+09:33:36 <yepster> ask (coExtensional CD-Attend ?X)
+09:33:38 <ScriptBot> (((?X . CD-Attend)) ((?X . Perceiving-Voluntary)))
+09:33:45 <yepster> :-)
+09:33:49 <kinoc> yeah
+09:34:09 <yepster> now only needed is a java version of rosetta ;-)
+09:34:32 <kinoc> if you can define the CD-to-Cycl then you can find all the verbs in cyc
+09:35:10 <kinoc> hmmm. I think someone is working on an LGP in Perl. Or was it Python
+09:36:25 <yepster> strange, replaced the %20 by space
+09:36:32 <yepster> now i got results
+09:37:27 <yepster> maybe the scriptbot can get a cycl string from rosetta with http..
+09:37:44 <kinoc> It does have a plain socket interface
+09:37:52 <yepster> cool
+09:37:56 <kinoc> but I haven't tried it in some time
+09:38:21 <kinoc> may have to update it so it can pipe the CycL out, but I think it should
+09:38:41 <yepster> but first i'm going to finish the script stuff
+09:38:43 <yepster> :-)
+09:38:49 <kinoc> definitely
+09:39:16 <kinoc> having a script engine would be very important
+09:39:48 <kinoc> besides Cycorp will get around to releasing the parser eventually
+09:40:05 <yepster> yeah, as java class
+09:40:10 <kinoc> doing one now will help me understand/grok theirs later
+09:40:21 <yepster> right now all the script stuff is actually programmed a bit ugly
+09:40:32 <yepster> if it works, needs to be redone proper
+09:43:02 <kinoc> right. well that's the state of the parser.
+09:43:58 --- quit: ScriptBot (Remote closed the connection)
+09:50:16 <yepster> oooo cool!
+09:50:52 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+09:51:02 <yepster> beliefs (holdsIn HYP-CD-STATE-9521 ?PROP)
+09:51:03 <ScriptBot> (((?PROP objectFoundInLocation Yeb Macys)))
+09:52:33 --- part: ScriptBot left #opencyc
+09:54:38 <kinoc> that's nice
+10:37:37 --- quit: yepster (Read error: 104 (Connection reset by peer))
+10:56:10 --- quit: kinoc (Read error: 110 (Connection timed out))
+11:05:04 --- join: yepster (~yepster@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+11:17:19 --- join: ScriptBot (~ScriptBot@a80-127-229-157.dial.xs4all.nl) joined #opencyc
+11:17:43 <yepster> I'm going to spam a little more.
+11:17:51 <yepster> "I went to Macys"
+11:17:53 <yepster> story
+11:17:54 <ScriptBot> yepster tells a story. What's the first primitive act?
+11:17:57 <yepster> CD-PTrans
+11:17:58 <ScriptBot> ok, now tell me some actorslots and actors, e.g. "performedBy Object123" (or *me for yepster)
+11:18:01 <yepster> performedBy Yeb
+11:18:02 <ScriptBot> ok, tell me more actor sentences or say 'done' when finished.
+11:18:07 <yepster> toLocation Macys
+11:18:08 <ScriptBot> ok, tell me more actor sentences or say 'done' when finished.
+11:18:10 <yepster> done
+11:18:11 <ScriptBot> (and (isa ?STORY Story) (isa ?EVENT1 CD-PTrans) (subEvents ?STORY ?EVENT1) (performedBy ?EVENT1 Yeb) (toLocation ?EVENT1 Macys))
+11:18:12 <ScriptBot> ok, say next for more acts, or finish if that was the whole story.
+11:18:13 <yepster> finish
+11:18:14 <ScriptBot> Trying to make sense of the story.
+11:18:17 <ScriptBot> results : ((?EVENT1 . HYP-Translocation-9536) (?STORY . HYP-Story-9537))
+11:18:21 <ScriptBot> T
+11:18:24 <ScriptBot> T
+11:18:28 <ScriptBot> T
+11:18:33 <ScriptBot> ..results in (new) state ((?STATE . HYP-CD-STATE-9538))
+11:18:39 <ScriptBot> ..enables (new) act ((?ACT . HYP-LookingForSomething-9539))
+11:18:41 <ScriptBot> yepster finished the story, ready to answer questions about it.
+11:19:00 <yepster> beliefs (subEvents HYP-Story-9537 ?X)
+11:19:02 <ScriptBot> ((?X . HYP-Story-9537))
+11:19:02 <ScriptBot> ((?X . HYP-LookingForSomething-9539))
+11:19:03 <ScriptBot> ((?X . HYP-Translocation-9536))
+11:19:03 <ScriptBot> ((?X RelationAllExistsFn HYP-Story-9537 subEvents Event Event))
+11:19:25 <yepster> beliefs (subSituations HYP-Story-9537 ?X)
+11:19:27 <ScriptBot> ((?X . HYP-CD-STATE-9538))
+11:19:28 <ScriptBot> ((?X . HYP-Story-9537))
+11:19:28 <ScriptBot> ((?X . HYP-LookingForSomething-9539))
+11:19:29 <ScriptBot> ((?X . HYP-Translocation-9536))
+11:19:41 <yepster> beliefs (holdsIn HYP-CD-STATE ?PROP)
+11:19:42 <ScriptBot> no answers found
+11:19:51 <yepster> beliefs (holdsIn HYP-CD-STATE-9538 ?PROP)
+11:19:52 <ScriptBot> no answers found
+11:20:08 <yepster> hmm :-(
+11:20:36 <yepster> well it worked for another one..
+11:21:12 --- part: ScriptBot left #opencyc
+11:23:38 --- quit: yepster ()
+11:54:00 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+11:54:15 <kinoc> ...
+11:56:42 <kinoc> can do some CD recognition 
+11:57:50 <kinoc> basically asked (and (gens ?WHAT IntentialMentalEvent)(denotation ?WORD ?Type ?Count ?WHAT))
+11:58:28 <kinoc> or what things are under a root cyc event collection that matches a CD, then give me the words for them
+11:58:45 <kinoc> "Jane got one of the books from John."
+11:58:56 <kinoc> <cyc-hypolinks>
+11:58:56 <kinoc>  (#$ThereExists ?EVENT2 (is-verb ?EVENT2 got-v)
+11:58:56 <kinoc>  (#$ThereExists ?ITEM1 (is-node ?ITEM1 Jane)
+11:58:56 <kinoc>  (#$ThereExists ?ITEM3 (is-node ?ITEM3 one)
+11:58:56 <kinoc>  (#$ThereExists ?ITEM6 (is-node ?ITEM6 books-n)
+11:58:57 <kinoc>  (and  (AGENT ?EVENT2 ?ITEM1)
+11:58:59 <kinoc>  (singular ?ITEM1)
+11:59:01 <kinoc>  (primaryObjectMoving ?EVENT2 ?ITEM1)
+11:59:03 <kinoc>  (isa ?EVENT2 CD-PTrans)
+11:59:05 <kinoc>  (isa ?EVENT2 IntrinsicStateChangeEvent)
+11:59:07 <kinoc>  (cyc-word ?EVENT2 Get-TheWord)
+11:59:09 <kinoc>  (past ?EVENT2)
+11:59:11 <kinoc>  (isa ?EVENT2 GainingUserRights)
+11:59:13 <kinoc>  (isa ?EVENT2 CD-ATrans)
+11:59:15 <kinoc>  (isa ?EVENT2 Movement-TranslationEvent)
+11:59:17 <kinoc>  (OBJECT ?EVENT2 ?ITEM3)
+11:59:19 <kinoc>  (singular ?ITEM3)
+11:59:21 <kinoc>  (AFFL ?ITEM3 ?ITEM6)
+11:59:23 <kinoc>  (DET ?ITEM6 the)
+11:59:25 <kinoc>  (mass-noun ?ITEM6)
+11:59:27 <kinoc>  (countable-noun ?ITEM6)
+11:59:29 <kinoc>  )  ) ) ) ) 
+11:59:31 <kinoc> </cyc-hypolinks>
+12:00:01 <kinoc> So it nites that the event is past tense, and both a PTRANS and an ATRANS
+12:00:43 <kinoc> also saw hits from berkley, so maybe framenet access will be possible one day....
+12:02:57 <kinoc> oops, pasted last interpertation instead of the first, but it still shows the gist
+12:07:42 <kinoc> ++Good! FrameNet approved access!
+12:08:03 <kinoc> which might interest yepster (if he was around)
+12:27:27 --- join: yepster (yepster_@vetteaap.xs4all.nl) joined #opencyc
+12:27:36 <yepster> kinoc: good news
+12:36:00 --- quit: kinoc (Read error: 60 (Operation timed out))
+12:59:23 --- join: deego (~user@63.126.179.162) joined #opencyc
+13:27:40 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:27:49 <kinoc> ...
+13:27:59 <kinoc> yeah, on both counts
+13:29:24 <yepster> so, what next? ;-)
+13:31:08 <yepster> for me:
+13:31:12 --- part: deego left #opencyc
+13:31:24 <kinoc> well I get to go to the ranch this weekend. Guess I have something to do a night :)
+13:31:36 <yepster> hehe
+13:31:59 <yepster> i'm going to ski this weekend :-)
+13:32:17 <yepster> but 'to the ranch', what's that, cathing cows etc?
+13:32:18 <kinoc> The FN dataset is 68meg but should explore to close to 1 Gig
+13:32:36 <kinoc> naw, 
+13:32:46 <yepster> horses?
+13:32:58 <kinoc> the neighbor takes care of the cows and horses
+13:33:30 <kinoc> there are about 3 horses, 30 cattle, 9 cats, 1 duck, 2 opossums...
+13:33:51 <kinoc> we just pay the bills and garden some weekends :)
+13:34:17 <kinoc> oh and a little light hiking
+13:34:39 <yepster> no internet ther?
+13:34:44 <kinoc> 150 acres (about 1 sq km) next to a national forest
+13:35:03 <kinoc> just dial up :(  but got some planned :)
+13:35:44 <kinoc> current best bet is a sattelite link, high bandwidth but high latency (250 ms)
+13:35:57 <yepster> ieck
+13:36:05 <kinoc> ok for surfing, but bad for gaming
+13:36:43 <kinoc> Well if we get some cash flow then we can dig a t1/t3 line or fiber and be done with it :)
+13:37:28 <yepster> maybe some places are not for net kind of stuff
+13:37:35 <yepster> more like holidays
+13:38:12 <yepster> but 68M, that's pretty big
+13:38:21 <kinoc> yeah, but I still like it. I can go into the national forest next door for complete disconnect.
+13:38:52 <yepster> i'm five minutes away from the "vondelpark" in amsterdam (netherlands) :-)
+13:39:09 <kinoc> Going from advanced AI to babling brook in a 3 minutes walk is nice
+13:39:20 <kinoc> ++good
+13:40:01 <kinoc> I once worked next to the botanical gardens, which made a great lunch break
+13:41:44 <kinoc> well for me I have to suck every lexeme out of both opencyc and framenet
+13:43:09 <yepster> I wonder if definitions in framenet are arguments for new event collections and actorslots in opencyc
+13:44:59 <yepster> or should i say event types
+13:45:42 <yepster> and in the case of a new event type, how to determine it's generalizations, etc
+13:51:03 <yepster> wait a minute... 1 duck??
+13:52:41 <kinoc> yeah, a semi-tame one. Pecks the cats to eat cat food...
+14:32:58 <kinoc> according to the previous owner the duck just showed up one day, liked it, and stayed
+15:08:46 --- part: yepster left #opencyc
+15:51:06 --- quit: kinoc (Read error: 110 (Connection timed out))
+16:23:14 --- quit: ZivZ (sterling.freenode.net irc.freenode.net)
+16:23:14 --- quit: Graham (sterling.freenode.net irc.freenode.net)
+16:24:49 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+16:24:49 --- join: ZivZ (ZivZ@6532215hfc252.tampabay.rr.com) joined #opencyc
+16:24:49 --- mode: sterling.freenode.net set +o Graham
+16:41:10 --- quit: ZivZ (Read error: 110 (Connection timed out))
+17:28:40 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:02:21 --- quit: kinoc (Read error: 60 (Operation timed out))
+19:44:20 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:52:54 --- quit: kinoc (Read error: 60 (Operation timed out))
+23:59:59 --- log: ended opencyc/03.04.09

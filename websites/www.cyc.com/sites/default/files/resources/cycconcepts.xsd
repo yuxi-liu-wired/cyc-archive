@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   CycConcepts.xsd
+
+   To generate code internally at Cyorp, use something like:
+     
+     cd ~/src/head/cycorp/cyc/java/library/xml/cycConcept
+     xjc -d generated -p com.cyc.xml.cycconcepts resource/xml/CycConcepts.xsd -extension -b resource/xml/customization.xjb
+     
+     
+-->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
+            targetNamespace="http://cure.cyc.com:8080/xsd/CycConcepts"
+            xmlns:tns="http://cure.cyc.com:8080/xsd/CycConcepts"
+            xmlns:xml="http://www.w3.org/XML/1998/namespace"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+            jaxb:version="2.0"
+            elementFormDefault="qualified">
+            
+ 	<xsd:import schemaLocation="http://www.w3.org/2001/03/xml.xsd" namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.cyc.xml.cycconcepts"/>
+      </jaxb:schemaBindings>
+    </xsd:appinfo>
+  </xsd:annotation>
+    <xsd:complexType name="ConceptsList">
+        <xsd:sequence>
+            <xsd:element name="concepts" maxOccurs="unbounded" minOccurs="0" type="tns:Concepts"/>
+        </xsd:sequence>
+        <xsd:attribute name="hasMore" type="xsd:boolean" default="false" use="optional"/>
+    </xsd:complexType>
+    <xsd:complexType name="Concepts">
+        <xsd:choice>
+            <xsd:element name="error" type="tns:Error"/>
+            <xsd:element name="concept" maxOccurs="unbounded" minOccurs="0" type="tns:Concept"/>
+        </xsd:choice>
+        <xsd:attribute name="hasMore" type="xsd:boolean" default="false" use="optional"/>
+    </xsd:complexType>
+    <xsd:complexType name="Concept">
+        <xsd:choice>
+            <xsd:element name="error" type="tns:Error"/>
+            <xsd:sequence>
+              <xsd:element name="externalId" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string"/>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="preferredNl" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute ref="xml:lang"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="cycl" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute ref="xml:lang"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="owlNlId" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute ref="xml:lang"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="conceptType" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:attribute name="type" type="tns:ConceptType"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="currentUri" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:attribute name="uri" type="xsd:anyURI"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="versionedUri" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:attribute name="uri" type="xsd:anyURI"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="readableUri" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:attribute name="uri" type="xsd:anyURI"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="comment" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute ref="xml:lang"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="nlAlias" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute ref="xml:lang"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <!-- @hack matchedText doesn't really belong here and may be removed from
+                       this schema in the future. -->
+              <xsd:element name="matchedText" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="matchType" type="tns:MatchType" use="required"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:choice>
+          <xsd:attribute name="uri" type="xsd:anyURI" use="required"/>
+        </xsd:complexType>
+        <xsd:complexType name="Error">
+          <xsd:sequence>
+            <xsd:element name="message" minOccurs="1" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute ref="xml:lang"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="details" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute ref="xml:lang"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="ConceptType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Collection"/>
+            <xsd:enumeration value="Predicate"/>
+            <xsd:enumeration value="Individual"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- @hack MatchType doesn't really belong here and may be removed from
+         this schema in the future. -->
+    <xsd:simpleType name="MatchType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="External ID"/>
+            <xsd:enumeration value="CycL"/>
+            <xsd:enumeration value="Pretty String"/>
+            <xsd:enumeration value="Preferred NL"/>
+            <xsd:enumeration value="OWL ID"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="conceptsList" type="tns:ConceptsList"></xsd:element>
+    <xsd:element name="concepts" type="tns:Concepts"></xsd:element>
+    <xsd:element name="concept" type="tns:Concept"></xsd:element>
+</xsd:schema>

@@ -1,0 +1,217 @@
+00:00:00 --- log: started opencyc/02.08.10
+01:51:06 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+01:51:08 --- join: YtKracker (mea_culpa@12-225-234-29.client.attbi.com) joined #opencyc
+01:53:54 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+01:53:56 --- join: ChanServ (ChanServ@services.) joined #opencyc
+01:53:56 --- mode: bear.openprojects.net set +o ChanServ
+01:55:07 --- join: mea_culpa (mea_culpa@12-225-234-29.client.attbi.com) joined #opencyc
+01:55:10 --- quit: YtKracker (Read error: 104 (Connection reset by peer))
+02:09:56 --- quit: huthut (Read error: 110 (Connection timed out))
+02:09:57 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+02:11:52 <huthut> <dmiles> where is that from?,  http://ftrain.com/google_takes_all.html
+02:12:31 <huthut> stupud writing though
+02:12:49 <dmiles> so it's not real?
+02:13:24 <huthut> the only thing i liked in that article is the font :))
+02:13:34 <huthut> not real.
+02:14:33 <dmiles> ah well fun stuff
+02:15:39 * dmiles is trying to hack a prolog VM to allow #$termOfUnit like inification tonight
+02:15:42 <huthut> i just was in a bus, there was a girl with a guy in Microsoft tshort :)
+02:15:57 <dmiles> ;)
+02:16:36 <huthut> also heard that we have a building full of guys in java tshorts...
+02:16:42 <huthut> silicon taiga, etc.
+02:20:17 <huthut> i also got some good idea not borrowed from anywhere... won't reveal its details tho, dont want to interrupt the early pregnancy.
+02:20:57 <dmiles> hrrm this http GET is bad i think..
+02:20:59 <dmiles> http://12.225.207.235:3677/browse.jsp?find='#$denotesArgInReln'/4
+02:21:38 <dmiles> the webservers off.. but maybe i have www encode it
+02:21:44 <huthut> of course
+02:21:48 <dmiles> the #$ is doing bad things
+02:21:53 <huthut> its not a valid url
+02:22:05 <huthut> you can do a form, it will encode all automatically
+02:22:09 <dmiles> well i have gotten away with brrowsers auto www encoding links
+02:22:23 <dmiles> right thats probly why its not working now
+02:22:36 <dmiles> is i started just making links
+02:22:54 <dmiles> and not a onClick file in this blank and submit
+02:23:04 <dmiles> err fill in this bank
+02:23:17 <huthut> there is a javascript.encode()
+02:23:35 <huthut> javascript:encode()
+02:23:37 <dmiles> yeah.. i think i'll just make the webserver pre encode the links
+02:46:34 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+02:46:35 --- quit: kinoc (bear.openprojects.net irc.openprojects.net)
+02:46:35 --- quit: Cobra (bear.openprojects.net irc.openprojects.net)
+02:46:35 --- quit: dmiles (bear.openprojects.net irc.openprojects.net)
+02:46:35 --- quit: Demi-God (bear.openprojects.net irc.openprojects.net)
+02:46:35 --- quit: siege (bear.openprojects.net irc.openprojects.net)
+02:46:57 --- join: ChanServ (ChanServ@services.) joined #opencyc
+02:46:57 --- join: siege (~siege@dsl254-102-094.nyc1.dsl.speakeasy.net) joined #opencyc
+02:46:57 --- join: Demi-God (~Demi@207.207.8.145) joined #opencyc
+02:46:57 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+02:46:57 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+02:46:57 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+02:46:57 --- mode: bear.openprojects.net set +o ChanServ
+03:14:57 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+03:33:33 --- quit: huthut (Read error: 110 (Connection timed out))
+05:02:40 --- join: yottzumm ([2JIX58rS2@12-232-124-73.client.attbi.com) joined #opencyc
+05:03:01 <yottzumm> I've got query which is hanging
+05:03:06 <huthut_> haha, ImportUmlModel.java doesnt even have any call to the cycapi...
+05:03:18 <huthut_> so it will not import anything.
+05:03:59 <yottzumm> Is it OK if I paste?
+05:04:08 <huthut_> prolly
+05:04:43 <huthut_> this channel doesnt have flood control i believe
+05:05:58 <yottzumm> 	    cycAccess.converseVoid("(cyc-assert
+05:05:58 <yottzumm> 			 '(#$implies
+05:05:58 <yottzumm> 				(#$or
+05:05:58 <yottzumm> 					(#$and
+05:05:58 <yottzumm> 						 (#$suitOf ?TopCard ?TopSuit)
+05:05:59 <yottzumm> 						 (#$suitOf ?Card ?TopSuit)
+05:06:01 <yottzumm> 						 (#$topCard ?TopCard #$DiscardPile)
+05:06:03 <yottzumm> 						 (#$possesses ?Hand ?Card)
+05:06:05 <yottzumm> 						 (#$playerTurn ?Hand)
+05:06:07 <yottzumm> 						 (#$not (#$valueOf ?TopCard #$EightCard)))
+05:06:09 <yottzumm> 					(#$and
+05:06:11 <yottzumm> 						(#$valueOf ?TopCard ?TopValue)
+05:06:13 <yottzumm> 						(#$valueOf ?Card ?TopValue)
+05:06:15 <yottzumm> 						(#$topCard ?TopCard #$DiscardPile)
+05:06:17 <yottzumm> 						(#$possesses ?Hand ?Card)
+05:06:19 <yottzumm> 						(#$playerTurn ?Hand)
+05:06:23 <yottzumm> 						(#$not (#$valueOf ?TopCard #$EightCard)))
+05:06:25 <yottzumm> 					(#$and
+05:06:27 <yottzumm> 						(#$valueOf ?Card #$EightCard)
+05:06:29 <yottzumm> 						(#$possesses ?Hand ?Card)
+05:06:31 <yottzumm> 						(#$playerTurn ?Hand)))
+05:06:33 <yottzumm> 				(#$okToDiscard ?Hand ?Card)) #$SBJMt)");
+05:06:35 <yottzumm> 	    cycAccess.converseVoid("(cyc-assert
+05:06:37 <yottzumm> 			'(#$implies
+05:06:39 <yottzumm> 				(#$and
+05:06:41 <yottzumm> 					(#$topCard ?TopCard #$DiscardPile)
+05:06:43 <yottzumm> 					(#$valueOf ?TopCard #$EightCard)
+05:06:45 <yottzumm> 					(#$possesses #$SuitsPile ?Card)
+05:06:47 <yottzumm> 					(#$playerTurn ?Hand))
+05:06:49 <yottzumm> 			 (#$okToDiscard #$SuitsPile ?Card)) #$SBJMt)"); 
+05:07:59 <dmiles> so far so good
+05:08:20 <dmiles> its not a forward rule so cyc's agenda should not be holding it up
+05:08:20 <yottzumm> using CycList cl = cycAccess.converseList("(cyc-query '(#$okToDiscard #$"+pr.getName()+"Hand #$"+ci.getId()+") #$InferencePSC '(:backchain T :number 1))");
+05:08:23 <yottzumm> to query
+05:08:43 <yottzumm> I guess I should paste the query into the query tool
+05:08:44 <dmiles> waht to use nil for backchian
+05:08:56 <dmiles> err nil means forever backchain
+05:09:08 <dmiles> (at least i thought)
+05:09:19 <yottzumm> but it's hanging my system
+05:10:07 <dmiles> hrrm i am noty sure how it would interpret :backchain T
+05:10:21 <yottzumm> okay, I'll try nil
+05:10:29 <dmiles> nil= infinate
+05:10:43 <dmiles> the default normally is three
+05:11:13 <dmiles> well i am not sure for cyc-query if its 3 i bet it's 0 if unspecified
+05:12:00 <yottzumm> so I shouldn't use nil?
+05:12:08 <dmiles> give it a try .. yes
+05:17:55 <yottzumm> now nothing discards, but the system doesn't hang
+05:18:10 <yottzumm> I would like okToDiscard to be true at some point
+05:18:11 <dmiles> ok i would bump it up to 5 or something
+05:18:21 <dmiles> i guess nil= 0
+05:18:32 <dmiles> T = forever
+05:18:48 <dmiles> which is pretty combinatoric
+05:19:30 <yottzumm> I'll combine the two rules into one I guess
+05:27:26 <yottzumm> this is taking way too long.  Should I move to 3?
+05:27:40 <dmiles> yes
+05:29:51 <yottzumm> what about something besides #$inferencePSC?
+05:30:49 <dmiles> EvertythingPSC is quicker since it use4s less huaeristics
+05:30:59 <dmiles> (possibly)
+05:31:02 <huthut_> absurd
+05:31:17 <dmiles> there is no genlMt dag to follow
+05:31:19 <huthut_> `quicker since it uses less huaeristics'
+05:31:41 <dmiles> it has its own.. but sort of removes the passage to 
+05:32:15 <yottzumm> well, I guess I'll try 4...
+05:39:34 --- quit: kinoc (bear.openprojects.net irc.openprojects.net)
+05:39:34 --- quit: dmiles (bear.openprojects.net irc.openprojects.net)
+05:39:34 --- quit: Cobra (bear.openprojects.net irc.openprojects.net)
+05:39:34 --- quit: huthut_ (bear.openprojects.net irc.openprojects.net)
+05:39:35 --- quit: Demi-God (bear.openprojects.net irc.openprojects.net)
+05:39:35 --- quit: siege (bear.openprojects.net irc.openprojects.net)
+05:39:43 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+05:39:43 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+05:39:43 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+05:39:44 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+05:48:51 --- join: Demi-God (~Demi@207.207.8.145) joined #opencyc
+05:50:36 --- join: siege (~siege@216.254.102.94) joined #opencyc
+05:54:15 <huthut> in my worldview, the word `heuristic' means a feature for planning some search process, and making it faster.
+05:54:50 <dmiles> generly but i apply it to any control of search tree
+05:55:01 <dmiles> so i may have used the term worng
+06:01:41 <yottzumm> maybe if I try restarting opencyc, it will work faster?
+06:05:02 <dmiles> you may have a running query going?
+06:06:01 <yottzumm> one of the infinite ones, maybe
+06:08:00 --- quit: yottzumm ("Client Exiting")
+06:11:43 --- join: yottzumm ([iESaKrF0T@12-232-124-73.client.attbi.com) joined #opencyc
+06:12:11 --- quit: yottzumm (Client Quit)
+07:08:34 --- join: acmow (~chatzilla@ms90.vtex.lt) joined #opencyc
+07:10:22 --- quit: acmow (bear.openprojects.net irc.openprojects.net)
+07:46:02 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+08:26:51 --- join: Vutral (~ss@pD904305C.dip.t-dialin.net) joined #opencyc
+08:50:20 --- quit: Cobra_ ("[x]chat")
+08:50:42 --- join: olmy (olmy@159.134.207.140) joined #opencyc
+08:51:16 --- part: olmy left #opencyc
+08:57:44 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+09:00:36 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+10:15:45 --- quit: Vutral (Read error: 110 (Connection timed out))
+12:49:05 <Seth> hey bruce, how is the python interface comming?
+12:52:20 --- quit: huthut (bear.openprojects.net irc.openprojects.net)
+12:52:20 --- quit: siege (bear.openprojects.net irc.openprojects.net)
+12:52:20 --- quit: Cobra (bear.openprojects.net irc.openprojects.net)
+12:52:20 --- quit: kinoc (bear.openprojects.net irc.openprojects.net)
+12:52:21 --- quit: dmiles (bear.openprojects.net irc.openprojects.net)
+12:52:21 --- quit: Seth (bear.openprojects.net irc.openprojects.net)
+12:52:21 --- quit: Cobra_ (bear.openprojects.net irc.openprojects.net)
+12:52:21 --- quit: devEiant (bear.openprojects.net irc.openprojects.net)
+12:52:21 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+12:52:38 --- join: ChanServ (ChanServ@services.) joined #opencyc
+12:52:38 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:52:38 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+12:52:38 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+12:52:38 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+12:52:38 --- join: siege (~siege@216.254.102.94) joined #opencyc
+12:52:38 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+12:52:38 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+12:52:38 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+12:52:38 --- mode: bear.openprojects.net set +o ChanServ
+13:35:19 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+13:35:34 --- join: mea_culpa (mea_culpa@12-225-234-29.client.attbi.com) joined #opencyc
+14:56:28 --- join: Vutral (~ss@brln-d9b81c0e.pool.mediaWays.net) joined #opencyc
+15:19:00 --- quit: devEiant ("My God, it's full of stars")
+15:19:25 --- join: devEiant (~user@w102.z064220058.den-co.dsl.cnc.net) joined #opencyc
+17:38:04 * dmiles returns
+17:46:16 --- quit: Cobra_ ("[x]chat")
+20:28:38 --- quit: devEiant ("ERC v2.93 $Revision: 1.293 $ (IRC client for Emacs)")
+20:56:05 --- join: liarParadox (~ralph22@65.161.73.250) joined #opencyc
+22:07:33 --- quit: liarParadox ()
+23:00:00 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:01:16 --- join: kailing (~Candy@mcns158.docsis22.scvmaxonline.com.sg) joined #opencyc
+23:09:47 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+23:18:08 --- quit: huthut (Read error: 110 (Connection timed out))
+23:18:33 --- nick: kailing -> dook
+23:20:36 --- quit: Cobra_ (bear.openprojects.net irc.openprojects.net)
+23:20:36 --- quit: Seth (bear.openprojects.net irc.openprojects.net)
+23:20:36 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:20:49 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:20:49 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+23:20:49 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+23:20:49 --- mode: bear.openprojects.net set +o ChanServ
+23:22:22 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:22:30 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:22:30 --- mode: bear.openprojects.net set +o ChanServ
+23:25:54 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:25:59 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:25:59 --- mode: bear.openprojects.net set +o ChanServ
+23:27:16 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:27:50 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:27:50 --- mode: bear.openprojects.net set +o ChanServ
+23:27:51 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:27:58 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:27:58 --- mode: bear.openprojects.net set +o ChanServ
+23:29:07 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:31:49 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:31:49 --- mode: bear.openprojects.net set +o ChanServ
+23:32:34 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:33:03 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:33:03 --- mode: bear.openprojects.net set +o ChanServ
+23:33:56 --- quit: ChanServ (bear.openprojects.net irc.openprojects.net)
+23:33:59 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:33:59 --- mode: bear.openprojects.net set +o ChanServ
+23:59:59 --- log: ended opencyc/02.08.10

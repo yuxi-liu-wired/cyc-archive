@@ -1,0 +1,51 @@
+00:00:00 --- log: started opencyc/03.03.18
+01:42:56 --- join: phj (~user@202.103.95.147) joined #opencyc
+02:15:22 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+02:17:03 --- nick: phj -> phj_
+05:53:52 --- quit: shea (Remote closed the connection)
+07:17:22 <yepster> scripted static situation:
+07:17:29 <yepster> "the" client is in "the" restaurant
+08:31:57 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:33:14 <kinoc2> yepster: working on external file format for translating LGP into CD (or anything else)
+08:33:36 <kinoc2> currently handles 1 and 2 link chains
+08:35:10 <kinoc2> '@' inserts the left linked word, '%' inserts the right linked word
+08:35:49 <kinoc2> example rules for your example sentence of "john gave the orange to bill."
+08:35:57 <kinoc2> * ss *.v:(#$isa ?@ #$CD-ACTOR)
+08:35:57 <kinoc2> *.v os *.n:(#$isa ?% #$%-TheWord)
+08:35:57 <kinoc2> * ss gave.v:(#$isa ?ATRANS #$CD-ATRANS)
+08:35:57 <kinoc2> * ss gave.v:(#$performedBy ?ATRANS ?@)
+08:35:57 <kinoc2> gave.v os *:(#$objectOfPossessionTransfer ?ATRANS ?%) 
+08:36:05 <kinoc2> for one steps
+08:36:18 <kinoc2> gave.v mvp to j* *:(#$isa ?% #$CD-ACTOR)
+08:36:19 <kinoc2> gave.v mvp to j* *:(#$holdSometimesDuring ?AFTER-ATRANS (owns ?% ?Transferobject))
+08:36:23 <kinoc2> for two steps
+08:37:21 <kinoc2> generates output of
+08:37:22 <kinoc2> <cyc-hypolinks>
+08:37:22 <kinoc2> (#$thereExists ?SENT 
+08:37:22 <kinoc2>   (#$isa ?SENT #$LGP-SENT)
+08:37:22 <kinoc2>     (and 
+08:37:22 <kinoc2> (#$PerformedBy ?ATRANS ?John)
+08:37:24 <kinoc2> (#$isa ?ATRANS #$CD-ATRANS)
+08:37:26 <kinoc2> (#$isa ?John #$CD-ACTOR)
+08:37:28 <kinoc2> (#$HoldSometimesDuring ?AFTER-ATRANS (owns ?Bill ?Transferobject))
+08:37:30 <kinoc2> (#$isa ?Bill #$CD-ACTOR)
+08:37:32 <kinoc2> (#$ObjectOfPossessionTransfer ?ATRANS ?oranage[?]-n) 
+08:37:34 <kinoc2> (#$isa ?oranage[?]-n #$Oranage[?]-n-TheWord)
+08:37:36 <kinoc2>      (#$LGP-RIN ?SENT #$Bill-TheWord #$Oranage[?]-n-TheWord )
+08:37:38 <kinoc2>   ))
+08:37:40 <kinoc2> </cyc-hypolinks>
+08:38:04 <kinoc2> still needs work on collecting the variables so it can generate the nested #$thereExists
+08:38:20 <kinoc2> and linking the ?Transferobject back to the ?Orange
+08:39:14 <kinoc2> the #$LGP-RIN means bill received the orange as a resource, part of something else I was working on
+08:41:41 <kinoc2> also have to handle multi-clause
+08:43:40 <kinoc2> handling items other items in your example "... for his cold." requires more knowledge to generate the given form, since its not information just derivable from a grammatical parse
+08:45:05 <kinoc2> that its it may be able to say the reason for the transfer has something to do with an illness, but not that bill ingests it and gets better because of it
+08:45:41 <kinoc2> that is something the IE/KB has to infer (or so I guess)
+11:05:21 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+11:05:54 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:24:59 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+13:25:28 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:44:30 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+16:39:39 --- join: GreyLensmen (~ray@fl-wbu2c6-482.pbc.adelphia.net) joined #opencyc
+18:59:18 --- quit: GreyLensmen ("Client Exiting")
+23:59:59 --- log: ended opencyc/03.03.18

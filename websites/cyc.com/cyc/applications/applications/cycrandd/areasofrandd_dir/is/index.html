@@ -1,0 +1,283 @@
+<html>
+<head>
+ <link rel="icon" href="/favicon.ico">
+ <link rel="shortcut icon" href="/favicon.ico"> 
+ <meta HTTP-EQUIV="imagetoolbar" CONTENT="no">
+ <title>Cycorp, Inc.</title>
+
+ <style type='text/css'>
+
+                body { font-family: Arial, Verdana, sans-serif; font-size:10pt;  background-color: #FFFFFF }
+                table { font-family: Arial, Verdana, sans-serif; font-size:10pt }
+
+		a:link {color: #5D478B; text-decoration: none}
+		a:visited {color: #5D478B; text-decoration: none}
+		a:hover {color: #458383; text-decoration: underline}
+
+
+
+#backgroundtop         { position: absolute; z-index: 10; top: 11px; left: 15px; width: 520px; height: 40px; visibility: visible }
+
+#breadcrumbs         { position: absolute; z-index: 10; top: 11px; left: 15px; width: 540px; height: 40px; visibility: visible }
+
+   #title        { position: absolute; z-index: 10; top: 90px; left: 18px; width: 500px; height: 20px; visibility: visible }
+
+#cYcorp       { position: absolute; z-index: 80; top: 132px; left: 591px; width: 159px; height: 45px; visibility: visible }
+
+#logo         { position: absolute; z-index: 80; top: 59px; left: 594px; width: 80px; height: 80px; visibility: visible }
+
+#submenu     { position: absolute; z-index: 90; top: 180px; left: 594px; width: 250px; height: 400px; visibility: visible }
+
+#linux_menu  { position: absolute; z-index: 100; top: 142px; left: 14px; width: 500px; height: 16px; visibility: visible; background: #DCDCDC }
+
+#text     { position: absolute; z-index: 60; top: 160px; left: 14px; width: 500px; height: 575px; visibility: visible; background: white}
+
+.bibliography P {
+  text-align: justify;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 2cm;
+  margin-right: 1cm;
+  text-indent: -1cm;
+}
+
+</style>
+
+
+<script type='text/javascript'>
+  function Go(){return}
+</script>
+<script type='text/javascript' src='/cyc/menu/nav/menu_defns.js'></script>
+
+</head>
+<body marginwidth='0' marginheight='0'>
+
+  <script type='text/javascript' src='/cyc/menu/nav/menu_com.js'></script>
+  <noscript>
+    <a href="company">company</a> | <a href="technology">technology</a> | <a href="cycrandd">Cyc R&amp;D</a> |
+    <a href="applications">applications</a> | <a href="opencyc">editions</a> | <a href="contact">contact us</a>
+  </noscript>
+
+
+
+
+
+
+
+
+		<div id="backgroundtop">
+			<a name="top"><img src="images/4lightlogo.gif" alt="background logo" width="480" border="0"></a></div>
+
+		<div id="cYcorp">
+                        <a href="/cyc">
+			<img src="images/logo_word.gif" width="156" height="40" border="0" alt="Home"></div>
+                        </a>
+
+		<div id="logo">
+                        <a href="/cyc">
+			<img src="images/logo_knot.gif" width="75" height="71" border="0" alt="Home"></div>
+                        </a>
+
+		<div id="text">
+			<table border="0" cellpadding="10" cellspacing="0" align="left" width="550">
+				<tr><td><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+
+
+<br>
+
+<a name="is"></a>
+<font color="#458B74" size="+2"><b>knowledge-enhanced searching of captioned information</b></font>
+<br><br>
+
+Big organizations frequently possess large libraries of "opaque" information sources; that is, 
+data which do not lend themselves to traditional text-based searching methods.  A news agency 
+may possess a library of thousands of news photos; a movie studio thousands of film clips; a 
+software help desk thousands of text articles too unwieldy to index directly.  When such 
+libraries must be searched, a common solution is to attach to each item a short text caption 
+describing its contents.  Thus a news photo of a soldier holding a gun to a woman's head might 
+be captioned "a soldier holding a gun to a woman's head", plus a few tags for time and place, 
+and then could be retrieved by querying for "soldier" or "gun".<p>
+
+This solution, while certainly adequate, is far from ideal.  It would be nice if the photo could
+ also be retrieved by queries for "someone in danger", or "a frightened person", or "a man 
+threatening a woman".  Such an achievement, however, lies far beyond the abilities of even the
+ most sophisticated of traditional text-searching tools, all of which are fundamentally based 
+on simple string matching and synonyms.  Most search tools lack the ability to handle 
+natural-language queries, and even those that do have some NL capability lack the background 
+of commonsense knowledge required to make a connection between having a gun to one's head and 
+feeling frightened.<p>
+
+Cyc is not crippled by such a liability.  Cyc knows that guns shoot bullets and are designed to
+ kill people; that having a gun to one's head therefore threatens one's life; that those whose 
+lives are threatened feel fear; and that the vast majority of soldiers are men.  Cyc can 
+therefore conclude that the image in question is, in all likelihood, a good match for each of 
+the queries above.<p>
+
+A major focus of the Cyc team's efforts in 1994 was the creation of an image-retrieval 
+application for a major corporate partner which possessed a library of hundreds of thousands 
+of captioned images, but no fully satisfactory way to search them.  Building on the Cyc 
+inference engine and Cyc's <a href="cycrandd/nlu">NL</a> capabilities, we developed a system along 
+the lines described above.<p>
+
+First, the content of each image in the library is described to Cyc by converting the english 
+captions to <a href="technology/whatiscyc_dir/howdoescycreason#cycl">CycL</a> and adding the resulting formulas to the 
+<a href="technology/whatiscyc_dir/whatsincyc">knowledge base</a>.  Cyc's NL tools permit the english-to-CycL 
+translation to be mostly automatic; human intervention is required only in unusual cases.<p>
+
+Once the target images have been described to Cyc, the system is ready to accept queries, which
+ can be issued in plain english.  Cyc begins by converting the english queries to 
+<a href="technology/whatiscyc_dir/howdoescycreason#cycl">CycL</a>, again using Cyc's NL tools.  For example, the english 
+query "a frightened person" might be parsed as:<p>
+
+<p>
+(#$and<br>
+&nbsp;&nbsp;&nbsp;(#$isa ?x #$Person)<br>
+&nbsp;&nbsp;&nbsp;(#$feelsEmotion ?x #$Fear #$High))<p>
+
+After asking the user to confirm its parse (or, occasionally, to choose one of two or more 
+equally valid parses), Cyc begins to backchain from the query expression, using the image 
+descriptions and other knowledge in the <a href="technology/whatiscyc_dir/whatsincyc">KB</a>.  When it is able to 
+unify all the free variables with the elements of a picture (in our example, <tt>?x</tt> would 
+unify with the woman in the picture), Cyc knows it has found a match.<p>
+
+Cycorp has generalized this approach to image retrieval to extend it to other 
+opaque-information-source retrieval applications.  For example, document retrieval from 
+large libraries of text documents described by short abstracts (analogous to image captions), 
+is a task nearly identical in structure to that of retrieving captioned images.  In fact, 
+any database of captions, summaries, or abstracts could be handled similarly, whether the 
+corresponding library contained images, sounds, video, text, or anything else.
+<p>
+
+<font color="#458B74" size="+2"><b><a name="www"></a>www information retrieval</b></font><br><br>
+
+The explosion of the World Wide Web during the last two years has created a tremendous 
+opportunity.  The WWW is home to a vast quantity of information, much of which could, in 
+principle, be used to make Cyc more intelligent, while shortcutting the laborious process 
+of manual knowledge entry.<p>
+
+This could happen in one of two ways: either online information could be extracted, converted 
+to <a href="technology/whatiscyc_dir/howdoescycreason#cycl">CycL</a>, and incorporated directly into the 
+<a href="technology/whatiscyc_dir/whatsincyc">knowledge base</a>, or Cyc could be taught to treat external 
+information sources as extensions of the KB, without directly incorporating their contents.<p>
+
+Cycorp explored the first approach during 1996.  Currently Cyc is
+nearing the critical mass required for the reading and assimilation of
+online texts (new stories, encyclopedia articles, etc.) In this scenario, 
+Cyc's <a href="cycrandd/nlu">natural language</a> tools are used to process online texts, 
+converting them to <a href="technology/whatiscyc_dir/howdoescycreason#cycl">CycL</a> for inclusion in the 
+<a href="technology/whatiscyc_dir/whatsincyc">knowledge base</a>.<p>
+
+Cycorp is also pursuing the second approach.  In this scenario, we write gateways which 
+disguise WWW information sources as Cyc agents (with a very limited domain of expertise), 
+available to operate in a <a href="cycrandd/distributedai">distributed Cyc architecture</a>.  There is a large 
+and ever-growing number of information sources on the WWW which might fill this role.  All, 
+however, share the following characteristics:<p>
+
+<ol>
+<li>They embody a large corpus of knowledge,
+<li>they can respond to HTTP queries for specific knowledge, and
+<li>they present their knowledge in an HTML format which, while generally not as regularly 
+structured as a database, is sufficiently structured that it can be parsed by a relatively 
+simple algorithm.
+</ol>
+
+An example is the <a href="http://www.imdb.com/" target="x">Internet Movie Database</a>, a truly 
+stupendous compendium of movie knowledge.  A quick browse of the IMD demonstrates that it 
+embodies virtually everything there is to know about movies; that it can respond to queries 
+for particular actors, movies, etc.; and that it displays the results in a format, which, 
+while it varies somewhat from one actor, movie, etc. to another, depending on what information 
+is available, is nevertheless fairly regular.<p>
+
+We can effectively annex the contents of the IMD to the Cyc <a href="technology/whatiscyc_dir/whatsincyc">KB</a> 
+by creating a gateway which, on the one hand, interacts with Cyc agents exactly as a Cyc agent 
+operating in a <a href="cycrandd/distributedai">distributed Cyc architecture</a> would, and, on the other hand, 
+simulates the interaction of a WWW browser with the IMD HTTP server.<p>
+
+This gateway is advertised to Cyc as an expert in the movie domain, so that whenever Cyc 
+receives a query in that domain, it turns to the gateway for assistance.  For example, let's 
+say a user asks Cyc, "What movies did Ronald Reagan act in?".  This might be represented in 
+CycL as:<p>
+
+<p>
+(#$actedInMovie #$RonaldReagan ?x)
+<p>
+
+Cyc hands this CycL query to the gateway, which understands enough about movie-related CycL 
+vocabulary to translate this query into an HTTP request to the IMD server for a 
+<a href="http://us.imdb.com/M/person-exact?+Reagan,%20Ronald" target="x">page on Ronald Reagan</a>.  
+When the IMD server returns the page, the gateway parses the HTML, extracts a list of the 
+movies in which Reagan appeared, converts the result to CycL, and then constructs a suitable 
+reply to the Cyc agent making the request.  (For reasons not worth explaining, the reply 
+contains more than just the answer.)<p>
+
+To the user interacting with Cyc, this transaction is entirely transparent.  It appears to 
+the user as if Cyc now knows everything there is to know about movies, and yet the KB still 
+fits on the hard disk!<p>
+
+Enhancing Cyc's cinematic erudition may be a fairly frivolous application of the techniques 
+described above, but the WWW contains plenty of large sources of semi-structured information 
+on weightier topics (stock quotes, company profiles, WWW indexes, resumes, the CIA World 
+Factbook, etc.).  The ability to effectively incorporate vast portions of the WWW into a 
+"virtual" knowledge base is a compelling possibility.  Not only would it greatly expand the 
+effective scope of Cyc's knowledge, but it would do so at little cost to the Cyc development 
+team.<p>
+
+			</td></tr>
+                               <tr>
+                                   <td><br>
+                                   <br><center>
+               <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">
+               Copyright &copy;&nbsp;2002-2007               Cycorp, Inc. All Rights Reserved. | <a href="/cyc/site/privacy">privacy statement</a> 
+               | <a href="/cyc/contact/">contact us</a> | <a href="/cyc">home</a>
+                              </font>
+
+                                       </center></td>
+                               </tr>
+			</table>
+	</div>
+
+
+		<div id="submenu">
+                    <font size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+<table width="200">
+<tr><td valign="bottom"> 
+<a class="submenu" href="/cyc/cycrandd/overview">
+<img src="images/lavender_ball.gif" border="0"> overview</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/distributedai">
+<img src="images/lavender_ball.gif" border="0"> distributed AI</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/is">
+<img src="images/lavender_ball.gif" border="0"> intelligent search</a><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/kfd">
+<img src="images/lavender_ball.gif" border="0"> knowledge formation &amp; dialog</a><br>
+<nobr>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/nlu">
+<img src="images/lavender_ball.gif" border="0"> natural language understanding</a>
+</nobr><br>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/sw">
+<img src="images/lavender_ball.gif" border="0"> the Semantic Web</a><br>
+<nobr>
+<a class="submenu" href="/cyc/cycrandd/areasofrandd_dir/sksi">
+<img src="images/lavender_ball.gif" border="0"> semantic knowledge source integration</a>
+</nobr></br>
+
+</td></tr>
+</table>
+		</div>
+
+		<div id="breadcrumbs">
+                   <table><tr><td><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3">
+                       <a href="/cyc">home</a> > 
+<a href="/cyc/cycrandd">Cyc R&D</a> > 
+<a href="is">intelligent search</a>
+                   </font></b></td></tr></table>
+                </div>
+
+		<div id="title">
+			<h3>
+                               intelligent search
+                        </h3>
+                </div>
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+00:00:00 --- log: started opencyc/02.10.10
+05:08:20 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+05:08:28 --- join: dmilezZ (logicmoo@12.211.42.52) joined #opencyc
+05:08:54 --- nick: dmilezZ -> dmiles
+08:21:54 --- quit: dmiles (Read error: 113 (No route to host))
+10:29:45 <fleeky> hello
+10:30:55 <fleeky> anyone here know about using opencyc in video games?
+10:42:47 <Kinoc> check with dmiles at #logicmoo
+10:43:24 <fleeky> ahh cool thanks
+10:43:46 <Kinoc> he's out at the moment
+10:43:53 <fleeky> ahh 
+10:44:07 <fleeky> do you know at all the feasability of using opencyc for game levels?
+10:44:25 <fleeky> i remember talking with people about it several months ago and it really sounded interesting what they were doing
+10:44:30 <Kinoc> but he is working on an opencyc ish worldforge server
+10:44:36 <fleeky> nice
+10:44:51 <fleeky> do you know what he is doing with opencyc and worldforge?
+10:44:57 <fleeky> like what opencyc adds to it ?
+10:45:37 <Kinoc> just my guess, but i think he wants to define the world logic in it
+10:46:13 <fleeky> im  a lowly 3d modeller what exactly does that mean?
+10:46:22 <fleeky> just how things run in the level?
+10:46:28 <fleeky> if there are birds flying to the west or east?
+10:46:37 <Kinoc> so making changes would be easier, and the game would follow common sense better
+10:46:44 <Kinoc> like object interactions
+10:47:00 <Kinoc> should x really break y
+10:47:13 <fleeky> ahh so if two objects bumped into eachother it would make sense for them to bounce off eachother .. or if one was brittle and one was very sharp it might crack it ?
+10:47:34 * deltab nods 
+10:47:40 <Kinoc> yeah, but based on the 'common sense rules'
+10:47:43 <fleeky> very fucking cool
+10:47:47 <fleeky> *repeats*
+10:47:50 <fleeky> very very cool
+10:48:00 <fleeky> atleast from the lowly 3d moddeller prespective
+10:48:28 <fleeky> ugh i have to convince the programmers of the game im working on to implement this
+10:49:01 <deltab> are you talking about a graphical game?
+10:49:06 <fleeky> yes
+10:49:17 <deltab> logicmoo is text-based, at least for now
+10:49:33 <fleeky> ahh so its incredibly complicated to  implement it in a graphical engine?
+10:50:10 <fleeky> thats what i thougth but then kinoc said dmiles was trying to get it running with worldforge too? isnt worldforge graphical?
+10:50:28 <Kinoc> can be
+10:50:36 <Kinoc> it can also be text-based
+10:50:38 <fleeky> oh
+10:50:50 <Kinoc> it provides data for the client to render
+10:51:19 <fleeky> hehe nice and elegant linux ethic
+10:51:27 <Kinoc> so if you say "i move to the kitchen", it can be text, or graphical
+10:52:10 <fleeky> seems like opencyc should blend well with other graphical engines though? its all just data thats being rendered by the engine?
+10:52:22 <fleeky> wow im so talking out of my ass
+10:52:31 <fleeky> hehe
+10:52:41 <deltab> there was some work being done at the Cambridge Research Labs on automatically rendering scenes from simple descriptions like "the robot is sitting on the pink cow"
+10:52:44 <Kinoc> you need to translate a logical description into a picture
+10:52:54 <Kinoc> yeag
+10:52:57 <Kinoc> yeah
+10:53:12 <fleeky> hrm
+10:53:32 <fleeky> cant the graphical engine deal with that and opencyc deal with ai behavior movement interaction?
+10:53:38 <Kinoc> opencyc can manipulate descriptions
+10:54:13 <deltab> it'd be interesting to combine the two
+10:54:17 <Kinoc> probably, but you still have to translate between the two
+10:54:21 <fleeky> yeah
+10:54:40 <fleeky> hmmmm
+10:54:43 <Kinoc> an analog world representation versus a logical one
+10:54:58 <Kinoc> "the kitchen" vs. bounding box 1,2,3 - 4,6,8
+10:55:12 <fleeky> ah
+10:55:34 <fleeky> that seems somewhat dooable .. you just have to define everything twice ?
+10:55:43 <Kinoc> yes
+10:55:56 <Kinoc> two representations, or languages
+10:55:59 <fleeky> but then again how do you send the info between the two programs
+10:56:18 <Kinoc> left to the sutibly motivated
+10:56:23 <fleeky> hehe
+10:56:28 <Kinoc> :)
+10:56:29 <fleeky> yes very true
+10:56:34 <fleeky> hmmm
+10:56:45 <fleeky> i have to sutibly motivate the programmers on this team im with
+10:56:55 <Kinoc> opencyc has a tcp socket
+10:57:08 <Kinoc> and a api language to use over it
+10:57:25 <fleeky> and you can alter the knowledge base right?
+10:57:37 <Kinoc> so an external application can pust facts, rules, queries
+10:57:39 <Kinoc> yes
+10:57:44 <fleeky> omg thats so cool
+10:57:52 <fleeky> there will be all sorts of different opencyc personalities 
+10:57:59 <fleeky> there could be . i mean
+10:58:17 <Kinoc> so for an ai, you could say "given this situation, what can i do, what should i do?"
+10:58:18 <fleeky> nice .. this is sounding somewhat reasonable
+10:58:33 <Kinoc> or at least worth learning about ?
+10:58:38 <fleeky> yeah
+10:58:47 <fleeky> how usable is opencyc when you first install it ?
+10:59:00 <fleeky> is there a lot of coding involved at first?
+10:59:15 <Kinoc> not if you want to see what's in there.
+10:59:30 <Kinoc> and we are waiting for the 0.7 release
+10:59:40 <fleeky> whats coming with that ?
+10:59:47 <Kinoc> which would allow it to be accessed from other servers
+10:59:50 <Kinoc> or clients
+11:00:01 <Kinoc> also has a planning process
+11:00:15 <Kinoc> http://www.opencyc.org
+11:00:24 <Kinoc> check the release list
+11:00:25 <fleeky> nice
+11:00:33 <fleeky> global  opencyc brain!
+11:02:47 --- join: dmiles (logicmoo@12.211.42.52) joined #opencyc
+14:03:38 --- quit: devEiant (Remote closed the connection)
+14:33:47 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:02:14 --- quit: Cobwa ("[x]chat")
+18:22:37 --- join: devEiant (~deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+18:23:12 --- join: devEiant_ (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+18:25:56 --- quit: devEiant (Killed (NickServ (Ghost: devEiant_!deveiant@dsl081-108-067.den1.dsl.speakeasy.net)))
+18:26:02 --- nick: devEiant_ -> devEiant
+18:26:19 --- join: devEiant_ (~deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+18:38:25 --- quit: devEiant_ ("ENOSLEEP")
+22:43:15 --- join: yetanotherone (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:59:59 --- log: ended opencyc/02.10.10

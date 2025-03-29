@@ -1,0 +1,532 @@
+00:00:00 --- log: started opencyc/02.06.03
+00:00:23 <dmiles> you Mts (the 2) should be sufficient i just checked
+00:00:33 <dmiles> but for fun you can include ArtifactGMt
+00:00:50 <dmiles> and SpatialGMt
+00:01:47 <yottzumm> (CYC-ASSERT '(thereExists ?EVENT (and (isa ?EVENT GivingSomething) (?EVENT fromPossessor JohnHand) (?EVENT toPossessor DiscardPile) (?EVENT objectOfPossessionTransfer TenOfHeartsCard))) SBJMt) is not a well-formed formula in SBJMt.
+00:01:47 <yottzumm> Perhaps CYC-ASSERT is insufficiently defined in mt SBJMt.
+00:02:11 <dmiles> ?!?!?
+00:02:58 <dmiles> hrrm.. ?EVENT should be second arg to some of those predicates
+00:03:20 <yottzumm> okay, I'll look it up
+00:03:21 <dmiles> (fromPossessor ?EVENT  JohnHand)
+00:04:00 <yottzumm> It's all GAF: 1
+00:04:01 <dmiles> (fromPossessor JohnHand ?EVENT) actually
+00:04:37 <yottzumm> okay, I still don
+00:04:43 <yottzumm> 't understand the browser
+00:05:30 <dmiles> we really need an example of GivingSomething
+00:05:54 <dmiles>       (and 
+00:05:54 <dmiles>            (isa :ACTION AppropriatingSomething) 
+00:05:54 <dmiles>            (performedBy :ACTION :SUBJECT) 
+00:05:54 <dmiles>            (objectActedOn :ACTION :OBJECT))) in 
+00:06:21 <dmiles> : == ?
+00:06:35 <dmiles> is kind how it works
+00:06:47 <dmiles> ACTION is EVENT
+00:07:36 <dmiles> (fromPossessor :ACTION :OBLIQUE-OBJECT)
+00:08:20 <dmiles> so (fromPossessor ?EVENT  JohnHand) i think would be right
+00:08:41 <dmiles> e2c: a man killed the car
+00:08:42 <CycLBot> "(#$thereExists ?man115   (#$and    (#$isa ?man115 #$AdultMalePerson)    (#$thereExists ?car1054     (#$and     (#$isa ?car1054 #$Automobile)     (#$and      (#$isa ??0 #$Killing-Biological)      (#$inputsDestroyed ??0 ?car1054)      (#$doneBy ??0 ?man115))))))"
+00:08:56 <yottzumm> well, it didn't return anything, and I used the wrong hand
+00:09:08 <dmiles> the ??0 is the ?Evwent
+00:10:08 <dmiles> so in most cases you can assume (therExists >?Event ( isa ?Evnet Blajh) (somepred1 ?event ?SomePartipant)..(somepred2 ?event ?SomeOtjherPartipant)..
+00:11:35 <yottzumm> (CYC-ASSERT '(thereExists ?EVENT (and (isa ?EVENT GivingSomething) (fromPossessor ?EVENT BrettHand) (toPossessor ?EVENT DiscardPile) (objectOfPossessionTransfer ?EVENT TenOfHeartsCard))) SBJMt) is not a well-formed formula in SBJMt.
+00:11:35 <yottzumm> Perhaps CYC-ASSERT is insufficiently defined in mt SBJMt.
+00:11:58 <dmiles> thats a bug that your getting that specific message
+00:12:06 <yottzumm> returnt T NIL
+00:12:21 <yottzumm> from the Asrt tool
+00:12:42 <dmiles> it looks right what you have
+00:12:50 <dmiles> can you see it in the browser now?
+00:13:03 <dmiles> oh did you click Cyclify before assering?
+00:13:27 <dmiles> (you must)
+00:13:40 <yottzumm> nope, didn't click cyclify
+00:13:48 <dmiles> thats where it sorta makes sure its really assetable
+00:13:55 <dmiles> err assertable
+00:14:08 <dmiles> maybe later versions will auto-do that
+00:15:12 <yottzumm> says formula not well-formed
+00:15:13 <CycLBot> You say, "formula not well-formed'
+00:15:13 <CycLBot> CycLBot says, "formula not well-formed'
+00:15:31 <dmiles> after cyclify?
+00:15:37 <yottzumm> hang on, wrong mt
+00:15:49 <dmiles> cyclify takes a sec and pops up a little dialog
+00:16:08 <dmiles> that says all valid refs
+00:16:15 <dmiles> err found all valid refs
+00:16:25 <yottzumm> says "No references added"
+00:16:25 <CycLBot> You say, ""No references added"'
+00:16:26 <CycLBot> CycLBot says, ""No references added"'
+00:16:51 <dmiles> oh.. you dont need to put (Cyc-ASSERT in it :0
+00:17:03 <dmiles> just the formula
+00:17:08 <dmiles> or the Mt
+00:17:22 <dmiles> the Mt is in the text box at the top
+00:17:28 <dmiles> w/o the #$
+00:18:06 <yottzumm> still has no references added
+00:18:32 <yottzumm> formula diagnosis says ok
+00:18:34 <dmiles> ok what dio you have in the assert window?
+00:18:44 <dmiles> hey then your set!
+00:18:51 <yottzumm> (#$thereExists ?Event
+00:18:51 <yottzumm> 	(#$and (#$isa ?Event #$GivingSomething)
+00:18:51 <yottzumm> 		(#$fromPossessor ?Event #$BrettHand)
+00:18:51 <yottzumm> 		(#$toPossessor ?Event #$DiscardPile)
+00:18:51 <yottzumm> 		(#$objectOfPossessionTransfer ?Event #$TenOfHeartsCard)
+00:18:52 <yottzumm> 	))
+00:19:00 <dmiles> that look good
+00:19:15 <dmiles> what happens when you assert?
+00:20:13 <dmiles> seem like you have it now :0
+00:21:03 <yottzumm> I'm not sure.  The possesses predicates didn't change.  I assume that I have to put the unasserts and asserts in there somehow
+00:22:09 <dmiles> right you are only realy writting down the event
+00:22:20 <dmiles> now you still have to 'do' it ;P
+00:22:54 <dmiles> this is why i am going on the Mud idea.. this is to help cyc becvome a more ussable tool
+00:23:34 <dmiles> (i am not just a benoveolent person) i need cyc to do stuff like this!
+00:23:54 <yottzumm> okay, diagnose is puttting out formula not well-formed
+00:24:05 <dmiles> why is it not?
+00:24:30 <yottzumm> there's this huge diagnosis report
+00:24:52 <dmiles> you can paist it or email
+00:25:26 <dmiles> hrr joe give jane peach
+00:25:39 <dmiles> nopt always a preposition
+00:25:52 <dmiles> i guess thats legal
+00:26:11 <dmiles> joe gives jane a peach
+00:26:44 <dmiles> i think i can handle phrases like that
+00:26:57 <yottzumm> Term (objectOfPossessionTransfer ?EVENT TenOfHeartsCard)
+00:26:57 <yottzumm> violates defnIff EL-SENTENCE-ASSERTIBLE?
+00:26:57 <yottzumm> of collection ELSentence-Assertible
+00:26:57 <yottzumm> applicable to arg 4 of and
+00:26:57 <yottzumm> in mt BaseKB.
+00:26:58 <yottzumm> Term (toPossessor ?EVENT DiscardPile)
+00:27:02 <yottzumm> violates defnIff EL-SENTENCE-ASSERTIBLE?
+00:27:04 <yottzumm> of collection ELSentence-Assertible
+00:27:06 <yottzumm> applicable to arg 3 of and
+00:27:08 <yottzumm> in mt BaseKB.
+00:27:10 <yottzumm> (objectOfPossessionTransfer ?EVENT TenOfHeartsCard) is not a well-formed formula in BaseKB.
+00:27:12 <yottzumm> Perhaps objectOfPossessionTransfer is insufficiently defined in mt BaseKB.
+00:27:14 <yottzumm> DiscardPile is not a well-formed formula in BaseKB.
+00:27:16 <yottzumm> Term (fromPossessor ?EVENT BrettHand)
+00:27:18 <yottzumm> violates defnIff EL-SENTENCE-ASSERTIBLE?
+00:27:20 <yottzumm> of collection ELSentence-Assertible
+00:27:22 <yottzumm> applicable to arg 2 of and
+00:27:24 <yottzumm> in mt BaseKB.
+00:27:26 <yottzumm> Term DiscardPile violates arg-isa Agent
+00:27:28 <yottzumm> applicable to argument 2 of relation toPossessor
+00:27:32 <dmiles> You need to change your Mt scope
+00:27:32 <yottzumm> in mt BaseKB.
+00:27:34 <yottzumm> Term DiscardPile
+00:27:36 <yottzumm> violates defnSufficient "CycLOpenSentence, SubLString, CycLReformulatorRule, EvenNumber, HLAssertion, HumanGivenNameString, CycLAssertedAssertion, CycLDeducedAssertion, CycLNLSemanticAssertion, OddNumber, ELSentenceTemplate, StreetAddress, Real1-Infinity, CycLRuleAssertion, NegativeInteger, CycLGAFAssertion, HumanFamilyNameString, ELAssertion, CycLSimplifierDirective, CycUniversalDate, CycUniversalSecond, Abbreviation, NonPositiveIntege
+00:27:41 <yottzumm> iveNumber, ELSentence-Assertible, Address-LocationDesignator, CycLClosedAtomicSentence, PhoneNumber, SubLInteger, CycLReformulatorDirective, HumanNameString, ELSentence-Askable, SubLRealNumber, NonPositiveNumber, ProperNameString, ELSentence, PositiveInteger, PositiveNumber, NonNegativeInteger, CycLAtomicAssertion, IDString, PositiveScalarInterval, CycLAtomicSentence, NonNegativeNumber, CharacterString, CycLAssertion, CycLPropositionalS
+00:27:46 <yottzumm>  Integer, RationalNumber, CycLClosedSentence, NonNegativeScalarInterval, CycLSentence-Assertible, CycLSentence-Askable, RealNumber, ScalarPointValue, CycLSentence, and ScalarInterval"
+00:27:49 <yottzumm> of collection Individual
+00:27:51 <yottzumm> applicable to arg 2 of toPossessor
+00:27:53 <yottzumm> (via to-Generic)
+00:27:55 <yottzumm> in mt BaseKB.
+00:27:57 <dmiles> Right now you 'only' have BaseKB
+00:27:57 <yottzumm> Term DiscardPile violates arg-isa Individual
+00:28:01 <yottzumm> appli
+00:28:03 <yottzumm> again, darn
+00:29:03 <dmiles> objectOfPossessionTransfer
+00:29:04 <yottzumm> cool, it was added to the quque
+00:29:07 <yottzumm> queue
+00:29:24 <dmiles> yay!
+00:29:59 <dmiles>  was it your Mt not being SBTMt?
+00:30:10 <yottzumm> it was basekb I think
+00:30:19 <yottzumm> lots of stuff to remember to do
+00:31:28 <yottzumm> I bet
+00:32:49 <yottzumm> do I still need to do the move between agents myself.  Or is the GivingSomething supposed to handle that?
+00:33:05 <dmiles> nope.. you have to move it manually
+00:33:18 <yottzumm> not too hard, I guess
+00:36:33 <dmiles> yeah that part is easy.. you have to decide if you want to record the event or not
+00:36:43 <dmiles> in your scope maybe the movemnt is more iomp[ortant
+00:36:50 <dmiles> then writting down the even
+00:36:51 <dmiles> t
+00:38:17 <dmiles> but what you gain for writting down the event is some traceiblty and anylisys later
+00:38:36 <dmiles> if your doing that you may want to write down an event time
+00:39:06 <dmiles> you could actually set up a trigger
+00:39:17 <dmiles> that would unassert /assert
+00:39:34 <dmiles> we need an example of how to do this
+00:39:46 <dmiles> there is is a performSubL]
+00:40:15 <dmiles> performSubL
+00:40:31 <dmiles> that SubL would be the (cyc-assert
+00:40:48 <dmiles> that may be the key to waht you want
+00:41:17 <dmiles> i am super happy that support is in CycL
+00:41:56 <dmiles> have you ever had Prolog experince?
+00:42:27 <dmiles> its differnt but gets you used to ussing side-effects in logicv
+00:43:02 <dmiles> the difficulty is dedciding how may worm cans you want to open
+00:44:16 <yottzumm> Yeah, I've had prolog in college.
+00:44:20 <dmiles> but the main thing is that you have a something that you want 'to do' maybe turning it into a performSubL is the right way
+00:44:47 <yottzumm> My most recent experience was to write a program to figure out which tools to use to translate between various graphic formats
+00:44:47 <dmiles> but the deal with performCycL is that it happens normally once.. but 'when'
+00:45:12 <dmiles> err but the 'but when' is a question
+00:46:14 <dmiles> ah prolog coding gives you chops towards side-effecting in logic.. i think your transfer of possiection is like a macro you invoke
+00:46:27 <yottzumm> oh duh, I got the assert/unassert backwards
+00:46:32 <dmiles> that records the event and performs it at the same time
+00:46:52 <dmiles> the concept of putting it in CycL is that you can make rules that will restruict when it can happen
+00:47:00 <dmiles> err restricvt
+00:47:27 <dmiles> otherwise you would just puppet it in java
+00:47:59 <dmiles> in the mud right now i just make java do the bussiness logic
+00:48:10 <dmiles> but want to make Cyc do it soon
+00:48:29 <dmiles> (the bussiness of unassert/assert)
+00:50:47 <yottzumm> (cyc-assert '(#$thereExists ?Event
+00:50:47 <yottzumm> 	(#$and (#$isa ?Event #$GivingSomething)
+00:50:47 <yottzumm> 		(#$fromPossessor ?Event #$BrettHand)
+00:50:47 <yottzumm> 		(#$toPossessor ?Event #$DiscardPile)
+00:50:47 <yottzumm> 		(#$objectOfPossessionTransfer ?Event #$TenOfHeartsCard)
+00:50:48 <yottzumm> 	)) #$SBJMt)
+00:50:50 <yottzumm> (cyc-unassert '(#$possesses #$BrettHand #$TenOfHeartsCard) #$SBJMt)
+00:50:52 <yottzumm> (cyc-assert '(#$possesses #$DiscardPile #$TenOfHeartsCard) #$SBJMt)
+00:51:10 <dmiles> perfect
+00:52:00 <yottzumm> so the idea of creating an event is so that you can call a trigger to do the real work if the predicate succeeds?
+00:52:26 <dmiles> yes but also later AI can abduce the where/why things happened
+00:53:00 <yottzumm> like profiling?
+00:53:06 <dmiles> part of ussing events is a side commitment that you will order them temporally
+00:53:09 <dmiles> yes
+00:53:34 <dmiles> like startsAfter ?Event1 ?Event2
+00:54:12 <dmiles> rrr startsAfterEndingOf
+00:54:40 <dmiles> that way when you write the rules of engage ment...
+00:54:59 <dmiles> you can see if they are consitent before assert/unassert
+00:55:18 <dmiles> is a query of (#$consistent ?ProposedEvent)
+00:55:51 <dmiles> this will let you 'decide' if you wish to carry out the sideeffect
+00:56:17 <dmiles> "(consistent SENTENCE) means that the ELSentence-Assertible SENTENCE is consistent with the outer context in which SENTENCE is made." 
+00:57:55 <dmiles> here is an example context of how this is done: http://www-ksl-svc.stanford.edu:5915/doc/hpkb/query-results-2/TQD/TQD51.html
+00:59:31 <dmiles> but there query would be (#$not (#$behavourCapableOf (...))
+00:59:51 <dmiles> maybe i can find those tests in dirrect CycL
+01:01:12 <dmiles> lok like they borrowed the Cyc TQs for testing on their clone of Cyc
+01:02:53 <dmiles> i am trying to find you an example of event testing for side effect propogation
+01:03:04 <dmiles> sort of a use-case 
+01:03:23 <yottzumm> okay
+01:07:16 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+01:46:17 <dmiles>  (#$ExpandSubLFn (?Giver ?Reciptiant ?Object) (cyc-assert (.. ?Giver)))
+01:47:16 <dmiles> i think
+01:47:32 <dmiles> so that could be the consequent of an implies
+01:48:02 <dmiles> (#$implies (..some evetn stuff..) #$ExpandSubLFn (?Giver ?Reciptiant ?Object) (cyc-assert (.. ?Giver))))
+01:48:22 <dmiles> as a forward channing rule
+01:48:55 <dmiles> with a ( in front of #$ExpandSubLFn 
+01:50:48 <dmiles> or you could even do (#$performSubL (#$ExpandSubLFn  (?Giver ?Reciptiant ?Object) (cyc-assert (.. ?Giver))))
+01:51:20 <dmiles> #$ExpandSubLFn is like a 'quoting' a SubL collection
+01:51:30 <dmiles> err senetence
+01:51:33 <yottzumm> do I need a cyc-assert in from of the implies
+01:51:51 <dmiles> you mean consequent?
+01:52:01 <yottzumm> at the very beginning
+01:52:19 <dmiles> if you are at a SubL prompt yes, in an assert window no
+01:52:56 <dmiles> i figure your writting like a mini SubL trigger
+01:53:15 <dmiles> thats why i was refering to Forward Chaining rule
+01:53:47 <dmiles> i my be giving dangerous advice though
+01:53:51 <dmiles> err maybe
+01:54:18 <dmiles> since Cyc has this AFTER-ASSERT thing
+01:54:34 <dmiles> err afterAdding Predicate
+01:55:31 <dmiles> you see where i am going?
+01:55:56 <dmiles> that you may be able to assert the event and have cyc auto do your assert/unasserts
+01:56:31 <yottzumm> not yet.  I am just getting to afterAdding
+01:57:20 <dmiles> afterAdding looks like it binds to one Sybolic constant
+01:57:31 <dmiles> i am not sure how yet to add code to that
+01:57:59 <dmiles> so thats why i started thinking about adding the forward chaing performSubL
+01:58:30 <dmiles> this is when we now need a cyccorp expert to help us
+01:59:32 <yottzumm> I'm fiddling with it
+02:09:02 --- quit: jlatour ()
+02:16:46 <yottzumm> here's what I've got right now.  I think that ExpandSubLFn is in a Mt that I haven't genlMTed
+02:16:54 <dmiles> ah good thinking
+02:17:09 <dmiles> (about the genlMt)
+02:18:27 <dmiles> whenever i am not sure about what iu am trying to assert a 'Cyclify' buytton in the assert window really helps
+02:18:50 <dmiles> but do give me what you got
+02:21:14 <yottzumm> okay, I sent it in email
+02:22:11 <dmiles> thats what you put in SubL window?
+02:22:45 <yottzumm> got an unmatches paren hang on
+02:23:31 <dmiles> try putting this alos w/o the (cyc-assert ' in fiornt and the Mt at the end into the webbrowser assert window
+02:24:10 <dmiles> oh .. and check Forward rule
+02:24:20 <dmiles> Monotonic Forward
+02:25:05 <dmiles> FYI you have adorned everything correctly
+02:25:27 <yottzumm> says bad formula, probably due to a misspelling
+02:25:27 <CycLBot> You say, "bad formula, probably due to a misspelling'
+02:25:28 <CycLBot> CycLBot says, "bad formula, probably due to a misspelling'
+02:27:32 <yottzumm> fixed the misspelling
+02:28:14 <dmiles> also emailed you a correction
+02:28:24 <dmiles> added in #$preformCycL
+02:28:33 <dmiles> err performSubL :0
+02:28:47 <dmiles> so it knows what to do
+02:29:29 <yottzumm> I'm getting performCycL as an invalid reference
+02:29:45 <dmiles> er SubL ;\
+02:30:06 <dmiles> i probly typesd it wrong
+02:31:05 <yottzumm> I'm getting formula not well-formed
+02:31:51 <dmiles> explain
+02:32:51 <yottzumm> when I hit diagnose formula, I get this diagnosis: (CYC-ASSERT '(implies (thereExists ?EVENT (and (isa ?EVENT GivingSomething) (fromPossessor ?EVENT BrettHand) (toPossessor ?EVENT DiscardPile) (objectOfPossessionTransfer ?EVENT ?CARD))) (and (performSubL (ExpandSubLFn (?CARD) (CYC-UNASSERT '(possesses BrettHand ?CARD) SBJMt))) (performSubL (ExpandSubLFn (?CARD) (CYC-ASSERT '(possesses DiscardPile ?CARD) SBJMt))) (performSubL (ExpandSubL
+02:32:51 <yottzumm> (CYC-UNASSERT '(topCard ?X DiscardPile) SBJMt))) (performSubL (ExpandSubLFn (?CARD) (CYC-ASSERT '(topCard ?CARD DiscardPile) SBJMt))))) SBJMt) is not a well-formed formula in SBJMt.
+02:32:51 <yottzumm> Perhaps CYC-ASSERT is insufficiently defined in mt SBJMt.
+02:33:28 <dmiles> CYC-ASSERT  rremember is not nessiasry in assert window
+02:33:37 <dmiles> it prepends that info
+02:33:51 <dmiles> also the trailing Mt info
+02:34:04 <dmiles> gets it from the textbox above (the Mt)
+02:34:07 <yottzumm> oh, yeah, sorry
+02:35:00 <yottzumm> diagnosis ok
+02:35:08 <dmiles> very cool
+02:35:17 <dmiles> remember to assert Forward and Monotonic
+02:35:23 <yottzumm> added to queue
+02:36:20 <dmiles> i am getting pretty far wiht the prepositional phrases in xcyc
+02:45:39 --- quit: yottzumm (Remote closed the connection)
+02:47:33 <dmiles> e2c: here and now dine I
+02:47:34 <CycLBot> "(#$and   (#$and    (#$isa ?ImparitiveEvent #$EatingEvent)    (#$performedBy ?ImparitiveEvent ?TargetAgent)    (#$inputsDestroyed ?ImparitiveEvent ?Speaker))   (#$hasAttributeOrCollection ?ImparitiveEvent #$Now))"
+02:48:35 <dmiles> e2c: here and now
+02:48:56 <dmiles> e2c: take food to i
+02:49:11 <dmiles> e2c: take a food to i
+02:49:17 <dmiles> e2c: take a food to USA
+04:29:17 --- nick: damski -> turtle
+04:53:10 --- quit: CycLBot (Remote closed the connection)
+04:54:36 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+04:56:16 --- join: Yepster (~yhavinga@cust-217-117-225-39.utelisys.net) joined #opencyc
+04:56:52 <Yepster> e2c: a fish called wanda
+04:57:29 <Yepster> e2c: a fish
+04:57:31 <CycLBot> "(#$thereExists ?Var   (#$and    (#$isa ?Var #$Fish) ?SomeRelation))"
+05:21:02 <turtle> e2c: two goals for italy
+05:21:15 <turtle> e2c: two goal for italy
+05:21:53 <turtle> e2c: a goal
+05:21:55 <CycLBot> "(#$thereExists ?Var   (#$and    (#$isa ?Var     (meaningOfWord #$Goal-TheWord)) ?SomeRelation))"
+05:23:28 <turtle> e2c: i score a goal
+05:23:41 <turtle> e2c: score a goal i
+05:23:58 <turtle> e2c: score a goal
+05:24:13 <turtle> e2c: a score
+05:24:34 <turtle> e2c: i jump
+05:44:43 <dmiles>  e2c: i ate the food
+05:44:45 <CycLBot> "(#$thereExists ?food1114   (#$and    (#$isa ?food1114 #$FoodAndDrink)    (#$and     (#$isa ?ACTION #$EatingEvent)     (#$performedBy ?ACTION ?Speaker)     (#$inputsDestroyed ?ACTION ?food1114))))"
+05:46:36 <dmiles> e2c: i drank the pure water
+05:46:39 <CycLBot> "(#$thereExists ?water136   (#$and    (#$isa ?water136 #$Water)    (#$thereExists ?pure133     (#$and     (#$isa ?pure133 #$PureFn)     (#$and      (#$isa ?ACTION #$DrinkingEvent)      (#$doneBy ?ACTION ?Speaker)      (#$eventOccursAt ?ACTION ?pure133)      (#$constituentInSituation ?ACTION ?water136))))))"
+05:47:09 <dmiles> (i am pointing out some probklems still :)
+05:48:20 <dmiles> e2c: i want something blue
+05:48:22 <CycLBot> "(#$thereExists ?something121   (#$and    (#$and     (#$isa ?something121 #$TemporalThing)     (#$hasAttributeOrCollection ?something121     (meaningOfWord #$Blue-TheWord)))    (#$desires ?Speaker ?something121)))"
+05:50:15 <dmiles> e2c: the man owns a car
+05:50:17 <CycLBot> "(#$thereExists ?man115   (#$and    (#$isa ?man115 #$AdultMalePerson)    (#$thereExists ?car364     (#$and     (#$isa ?car364 #$Automobile)     (#$owns ?man115 ?car364)))))"
+05:52:00 <dmiles> heh look at this one:
+05:52:02 <dmiles> e2c: walk the dog
+05:52:04 <CycLBot> "(#$thereExists ?dog120   (#$and    (#$isa ?dog120 #$Dog)    (#$and     (#$isa ?ImparitiveEvent #$AnimalWalkingProcess)     (#$doneBy ?ImparitiveEvent ?TargetAgent)     (#$eventOccursAt ?ImparitiveEvent ?dog120))))"
+05:53:57 <dmiles> e2c: who walked the dog?
+05:53:59 <CycLBot> "(#$thereExists ?Who   (#$thereExists ?dog150    (#$and     (#$isa ?dog150 #$Dog)     (#$and     (#$isa ?QuestionEvent #$AnimalWalkingProcess)     (#$doneBy ?QuestionEvent ?Who)     (#$eventOccursAt ?QuestionEvent ?dog150)))))"
+06:01:58 <Yepster> dmiles you talked about making a sort of sql interface to cyc earlier
+06:02:21 <Yepster> I'm working on an oracle->cyc interface right now
+06:02:26 <dmiles> yes, i started working on it be shelling out hsql in java
+06:02:40 <Yepster> hsql?
+06:02:42 <dmiles> removing the 'table' logic
+06:03:04 <dmiles> http://hsql.sourceforge.net/
+06:03:04 <Yepster> why did you want sql?
+06:03:24 <Yepster> ah.
+06:03:34 <dmiles> so that Cy ccould be used instead on database type applications that would benifiet from deduction
+06:04:07 <Yepster> Do you know oracle a bit?
+06:04:31 <dmiles> i just have worked with MsSQL and mySQL
+06:04:39 <Yepster> cool, hsql has java stored procedures
+06:05:08 <dmiles> yes, what kind of stored proceedures does Oracle have?
+06:05:17 <dmiles> is the PL/SQL ?
+06:05:29 <Yepster> I imported the java api in oracle and am currently writing mappings for pl/sql procs and functions to the api
+06:05:59 <Yepster> Right now I can do e.g.
+06:06:13 <Yepster> select cyc.assertgaf( 'OracleDemoMt', '(#$isa #$' || ename || ' #$Manager)' )
+06:06:13 <Yepster> from scott.emp
+06:06:13 <Yepster> where empno in (select mgr from scott.emp);
+06:06:15 <dmiles> cool so it may be possible to use Oracle to emulate a normal SQL engine in effect ussing Cyc?
+06:06:51 <dmiles> ah
+06:07:32 <dmiles> what is the cyc.assertgaf( 'OracleDemoMt', '(#$isa #$' || ename || ' #$Manager)' ) resolve to ? * ?
+06:07:35 <Yepster> Well there are only mappings for the methods in cycaccess
+06:08:02 <Yepster> let me cut and past from sqlplus, a sec
+06:08:03 <dmiles> (maybe assertGaf() confused me)
+06:08:28 <dmiles> since its a void fuinction
+06:10:16 <Yepster> yeah I make two pl/sql variants: a proc and a function, so I could use it from sql
+06:10:23 <Yepster> In stead of only from plsql
+06:10:28 <Yepster> CYC.ASSERTGAF('HUMANSOCIALLIFEMT','(#$ISA#$'||ENAME||'#$MANAGER)')
+06:10:28 <Yepster> --------------------------------------------------------------------------
+06:10:28 <Yepster> (#$isa #$JONES #$Manager)
+06:10:28 <Yepster> (#$isa #$BLAKE #$Manager)
+06:10:28 <Yepster> (#$isa #$CLARK #$Manager)
+06:10:29 <Yepster> (#$isa #$SCOTT #$Manager)
+06:10:31 <Yepster> (#$isa #$KING #$Manager)
+06:10:33 <Yepster> (#$isa #$FORD #$Manager)
+06:10:35 <Yepster> 6 rijen zijn geselecteerd.
+06:12:03 <dmiles> one sec, brb
+06:15:06 <dmiles> ok had to catch the phone
+06:15:22 <dmiles> so whereuis the data persisted exactly ? in Cyc?
+06:16:02 <dmiles> (sorry to be think)
+06:16:09 <dmiles> err thick
+06:17:20 <Yepster> On both sides
+06:17:23 <dmiles> awseome
+06:17:54 <dmiles> so then the SELECT pulled it aout and then asserted it
+06:18:01 <Yepster> Jup
+06:18:02 <dmiles> i see
+06:18:30 <dmiles> can tables be vertualized to outside oracle?
+06:18:40 <Yepster> The assert could also be put in e.g. an insert trigger, etc
+06:18:54 <Yepster> vertu what?
+06:19:02 <dmiles> meaning if i wanted to deflect INSETS to Orcle instead to Cyc could that be done?
+06:19:23 <Yepster> what is INSETS?
+06:19:29 <dmiles> INSERT  
+06:19:58 <Yepster> You mean that if you do e.g. insert into emp values (ename 'Yep') that it would also be asserted in cyc?
+06:20:16 <dmiles> INSERT {a, b} INTO SomeMt 
+06:20:39 <dmiles> yes
+06:20:59 <Yepster> inserts always have to be done on tables
+06:20:59 <dmiles> i see n/m that was why you meant trigger
+06:21:16 <Yepster> so that data would always have to be in oracle as well in some format
+06:21:29 <dmiles> so Oracle could be triggered to update cyc
+06:21:32 <Yepster> yes
+06:22:03 <dmiles> that may be the solutuion that would work with MSSQL as well
+06:22:23 <Yepster> you mean mysql or m$?
+06:22:53 <dmiles> mySQL is pretty dead when it comes to abilties like that.. but MSSQL can call anything in most languages
+06:22:56 <dmiles> m$
+06:23:02 <dmiles> :)
+06:23:26 <Yepster> yeah like visual basic
+06:23:56 <Yepster> i assume, wouldn't know it to be honest
+06:23:59 <dmiles> well right now could take VB on one end.. and a Java proxy on the other to make it look like its comming from localhost
+06:24:23 --- nick: turtle -> damski
+06:24:33 <dmiles> but yes M$SQL can called VB code
+06:24:51 <Yepster> I still have to think a bit on the 'cyc redo log' -> what if a transaction has to be rolled back
+06:24:54 <dmiles> any OLE/COM like object
+06:25:27 <dmiles> yeaH you may need to have a complete refresh that deletes gafs
+06:25:56 <Yepster> but what if the gaf was already known to cyc etc.
+06:26:05 <Yepster> well, that's gonna be for version 2
+06:26:41 <dmiles> well what i do to delete gafs.. is i query with variables.. then repopulate (build new CycList s) that i unassert each
+06:27:01 <dmiles> there is probly a cleaner way
+06:27:46 <dmiles> if the gaf was deduced and not really a Gaf.. it just ignore it
+06:27:58 <dmiles> (ignores the unassert)
+06:28:28 <Yepster> hmm 'redo log' should be 'undo log' still a bit intoxicated after the weekend :(
+06:28:29 <dmiles> do you have a cyc.query() -> Table ?
+06:29:04 <Yepster> You mean insert into table (select cyc.query (somequery) from xx?)
+06:29:09 <dmiles> yes
+06:29:17 <Yepster> no
+06:29:20 <Yepster> not yet
+06:29:27 <dmiles> ah .. still pretty cool
+06:29:51 <Yepster> Will be a bit more difficult because of the from xxx thing
+06:30:08 <Yepster> has to be oracle result set, not a cyclist
+06:30:23 <dmiles> i understand the parameters your trying to keep is what makes sense to Oracle
+06:30:34 <Yepster> yes
+06:31:11 <Yepster> just read that hsql also has java stored procs, so this approach should work for that db as well
+06:31:54 <dmiles> yes, actually it would .. might be better then me trying to humnk out bussiness logic to replace with Cyc things
+06:32:35 <dmiles> i started doing that.. but saw it might actually take a week and didn't want to deduicate to something i might not get full beneifits from
+06:32:51 <dmiles> but doing what your talking abnout makes more sense
+06:33:10 <dmiles> it could preserve the intergrety of the current hsql
+06:33:27 <Yepster> It will be especially handy for people familiar with oracle/sql and tools to access oracle
+06:33:52 <dmiles> yes.. i think that is a way to really bring cyc out there to get people ussing it
+06:34:12 <dmiles> since most people think like DBAs over Knowledge engineers
+06:34:54 <dmiles> if they knew the benefits of ussing deductive based KBs over DBs they would use them
+06:35:19 <dmiles> one has to make the tool more familiar
+06:35:45 <dmiles> and accessable from current APIs people have spent time learning
+06:36:05 <Yepster> hmm well everybody has to go through the few days of #$ nightmare one time
+06:36:30 <dmiles> hehe true
+06:36:37 <Yepster> Yeah I hope I end up with 10 or 15 or so stored procs
+06:37:02 <dmiles> yes.. include those in, and you can start leveraging Cyc
+06:37:12 <Yepster> And make a 'howto' which uses oracle's scott demo user tables, every oracler knows them
+06:37:56 <dmiles> so Oracle has good supprt for calling into java code?
+06:38:04 <Yepster> hehehe
+06:38:11 <Yepster> let me get a url
+06:38:21 <dmiles> ah cool
+06:38:48 <Yepster> http://download-west.oracle.com/otndoc/oracle9i/901_doc/java.901/a90210/toc.htm
+06:39:13 <Yepster> the cycaccess object is actually running in a jvm in the database server
+06:39:30 <Yepster> so on the network, it's oracle that calls cyc
+06:41:06 <dmiles> i see, thats nice that oracle can hold a JVM
+06:41:28 <dmiles> and cool that really you have two-way interface
+06:41:53 <Yepster> well cyc cannot call oracle
+06:42:10 <dmiles> so you could write the cyc->table in java and have orical call that whenever it wants
+06:42:22 <Yepster> yes
+06:42:30 <Yepster> actually, yes!
+06:42:43 <Yepster> the java stored procedure can also put stuff in oracle
+06:42:51 <dmiles> yes
+06:43:06 <Yepster> instead of sql or plsql insert constructs
+06:43:26 <Yepster> (as in, solution to the resultset problem mentioned earlier)
+06:43:34 <dmiles> yes.. you could do tranformations in java
+06:43:59 <Yepster> but the resultset option would still be more .. handier
+06:44:13 <Yepster> could be used whenever sql can be used: everywhere in the db
+06:44:35 <dmiles> well you have the abilty to push things in a resultset form that you created on the java side
+06:45:13 <dmiles> you mean that you cvan make a comp[letely result seted table?
+06:45:41 <Yepster> that's what i'd like
+06:45:51 <dmiles> you can have a table that only ever exists in java?
+06:46:18 <Yepster> hmm no the from part has to be a table
+06:46:24 <dmiles> (except for when its going into a temp space)
+06:46:28 <Yepster> but there's a funny table in oracle called dual
+06:46:47 <Yepster> which is used when the data you want doesn't come from a table
+06:47:00 <Yepster> but e.g. select sysdate from dual or select sequence from dual
+06:47:26 <dmiles> i see. that would be how you would normally proxy for another system?
+06:48:06 <Yepster> uhh
+06:48:11 <dmiles> so where does daul expect to normally client from?
+06:48:32 <Yepster> afaik the other option to call external stuff is from a c-library.
+06:48:40 <Yepster> daul?
+06:48:43 <Yepster> o dual
+06:48:53 <dmiles> sorry i have terrible spelling
+06:49:19 <Yepster> from wherever your oracle client is
+06:50:06 <dmiles> oh i said 'clinet' but meant what kind of datasources it could be a client to, you said to external C procs
+06:51:01 <Yepster> well it's only used as plug for the from part of the sql select statement
+06:51:15 <dmiles> not meant for INSERT ?
+06:51:21 <Yepster> select cyc.query( isa ?X person) from dual
+06:51:29 <Yepster> -> return list, etc
+06:51:48 <Yepster> but the list is then a toString cyclist
+06:51:53 <Yepster> so one record
+06:52:00 <Yepster> I have to make it multiple records
+06:52:24 <dmiles> in java you can manipulate the CycList how you want
+06:52:32 <dmiles> .iterator() etc
+06:53:13 <dmiles> so maybe you can construct jdbc structures that pl/sql likes
+06:53:39 <Yepster> yeah I have to find the correct resultset type mapping in this list:
+06:54:23 <Yepster> shit cut/paste into exceed doesn't work anymore
+06:54:53 <dmiles> heh i had to restart exceed a couple hours ago after i had a 160 meg file in my copy buffer from another windows app
+06:55:14 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+06:55:27 <dmiles> i coulnt figure out who (it was exceed) that had jammed the buffer
+06:56:22 <dmiles> so you were about to paist the datatypes the pl/sql tavbles havbe?
+06:56:40 <dmiles> (i wouild like to see them)
+06:56:42 --- quit: stevereed_home (Connection reset by peer)
+06:56:53 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+06:57:24 <Yepster> no the url. actually you can find it in chapter 3, (publishing java classes) section mapping datatypes
+06:57:58 <dmiles> -got it: http://download-west.oracle.com/otndoc/oracle9i/901_doc/java.901/a90210/03_pub.htm#36085
+06:58:12 <Yepster> yes
+06:58:50 <dmiles> you could just pick out three basic types :)
+06:59:02 <Yepster> I'm betting on the ref type, but I have to read into it
+06:59:07 <dmiles> numbers, strings and keys
+06:59:20 <dmiles> yeah ref for constants
+06:59:45 <dmiles> does it have a guid type?
+07:00:08 <dmiles> well its probbly wiorks out in strings anyways
+07:00:08 <Yepster> nope. But sequences are numbers(38)
+07:00:36 <dmiles> ah. .. might be hard to maintain a dictionary between constants and names
+07:00:41 <Yepster> yes, so far everything I did was mapping into varchar2 - java.lang.String
+07:00:47 <dmiles> but maybe worth the savings
+07:01:06 <dmiles> i would stick to chars since thats how people thimnk
+07:01:16 <Yepster> What's the difference (why do I think this is a stupid question?)
+07:01:16 <dmiles> (varchars i meant)
+07:01:29 <Yepster> varchar2 is pretty standard in oracle land
+07:01:35 <dmiles> yeah 
+07:02:09 <Yepster> but what about the difference between constants and names?
+07:02:12 <dmiles> and when your writting applications on the web or elsewhere the varchar2 is better
+07:02:27 <dmiles> well constants are the real calue of constants
+07:02:34 <dmiles> err real value
+07:02:43 <dmiles> they have attached meaning guid numbers
+07:03:19 <dmiles> so space is saved internally in cyc and alos keeps my #$Rover differnt then your #$Rover if needed
+07:03:35 <Yepster> I saw some guid stuff in cycaccess but hoped not to be needing it
+07:04:16 <dmiles> i havent found i needed it eigther 
+07:04:49 <dmiles> it just usefull of you are merging two cyc kb's that may have differnt guids for the same name
+07:05:29 <Yepster> I think that this oracle stuff is handy for people that want to align their existing db to cyc
+07:06:02 <dmiles> yes definately
+07:06:45 <Yepster> And maybe once stuff is in cyc, a cycml export or something can be done, and with other integration tools the name conflicts can be resolved
+07:07:22 <dmiles> yes those name conflics are not really important yet except to things like cycML
+07:07:55 <dmiles> which resolution can happen there
+07:08:13 <Yepster> you know php a bit?
+07:08:30 <dmiles> i wrote a few PHP pages when it was 3.x
+07:08:46 <dmiles> havent used it since.. but very easy to pick back up
+07:09:01 <Yepster> It can fetch stuff from oracle in 3 or 4 statements -> now it can also fetch stuff from cyc in 3 or 4 statements :-)
+07:09:41 <dmiles> thats what i like.. i want to use phpRPG or at least ry it out with cyc.. its a 'stateless' mud that lives 100% in a db
+07:10:17 <Yepster> stateless mud?
+07:10:22 <Yepster> as in: static
+07:10:29 <dmiles> well stateless as far as clients go
+07:10:49 <dmiles> there is zero caching of user varables in pages
+07:10:56 <Yepster> ah
+07:11:08 <dmiles> the DB is even used to track each players IP and gives them sessions
+07:11:42 <Yepster> well the one cool thing about a mud is that it gives a natural 'how to model the world' start.
+07:12:24 <dmiles> thats my exact interst in muds.. i like games.. but i am more interested in grounding my knowledge engineering
+07:12:52 <dmiles> into something that makes sense to me as a user and to robots
+07:12:53 <Yepster> me too. I like the engine more than playing it.
+07:13:40 <dmiles> it also begats and leverages better tools
+07:14:02 <dmiles> people understand the idea of creating an exemplar class
+07:14:09 <dmiles> (rr collection)
+07:14:22 <Yepster> yeah
+07:14:37 <Yepster> like a sort of 'knowledge pattern'
+07:15:04 <dmiles> yes .. once they understand the patterns of how to build things.. they increase what they can do
+07:16:09 <Yepster> I think the most difficult thing in knowledge entry is not the tool of lack of a right tool,
+07:16:11 <dmiles> mud gives more familiarity.. not always having to manifest into a 'game'
+07:16:19 <Yepster> but to create the right construct
+07:16:41 <Yepster> it should then be renamed to mukb
+07:17:15 <dmiles> :) rifght now i am calling it somethig like logicmoo 
+07:17:40 <dmiles> but yep
+07:18:12 <Yepster> i'm going to do some more programming on the interface, ttyl8r
+07:18:27 <dmiles> cool.. i am going to work with some more NL stuff
+07:52:19 <dmiles> e2c: the father of the woman is the man
+07:52:21 <CycLBot> "(#$thereExists ?man340   (#$and    (#$isa ?man340 #$AdultMalePerson)    (#$thereExists ?woman1138     (#$and     (#$isa ?woman1138 #$AdultFemalePerson)     (#$and      (#$isa ?ACTION #$SexualReproductionEvent)      (#$maleParentActor ?ACTION ?man340)      (#$offspringActors ?ACTION ?woman1138))))))"
+07:52:36 <dmiles> e2c the man fathers the woman
+07:52:39 <CycLBot> "(#$thereExists ?man115   (#$and    (#$isa ?man115 #$AdultMalePerson)    (#$thereExists ?woman1153     (#$and     (#$isa ?woman1153 #$AdultFemalePerson)     (#$and      (#$isa ?ACTION #$SexualReproductionEvent)      (#$maleParentActor ?ACTION ?man115)      (#$offspringActors ?ACTION ?woman1153))))))"
+07:54:57 <dmiles> e2c: the man asked the woman
+07:54:59 <CycLBot> "(#$thereExists ?man115   (#$and    (#$isa ?man115 #$AdultMalePerson)    (#$thereExists ?woman165     (#$and     (#$isa ?woman165 #$AdultFemalePerson)     (#$and      (#$isa ?ACTION #$Requesting-CommunicationAct)      (#$doneBy ?ACTION ?man115)      (#$eventOccursAt ?ACTION ?woman165))))))"
+08:56:02 --- quit: grove (Remote closed the connection)
+08:57:26 --- join: grove (~grove@193.69.113.28) joined #opencyc
+16:21:23 --- quit: jlatour ()
+17:52:58 --- join: theos (~tb@64.122.1.18) joined #opencyc
+18:31:30 --- quit: theos ()
+20:34:11 --- join: yottzumm ([8oGj46MYv@12-232-76-192.client.attbi.com) joined #opencyc
+20:35:21 --- quit: yottzumm (Client Quit)
+23:59:59 --- log: ended opencyc/02.06.03

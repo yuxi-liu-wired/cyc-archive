@@ -1,0 +1,85 @@
+00:00:00 --- log: started opencyc/03.02.20
+01:21:25 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+01:40:59 <yepster> Busy with scripts now
+01:41:56 <yepster> A script (e.g. restaurant script) isa #$DefaultDisjointScriptType
+01:42:00 <yepster> and genls Event
+01:42:07 <yepster> instances of it are stories
+01:42:36 <yepster> related with #$subEvents and some other causal links
+01:43:17 <yepster> in the script: subEventTypes relates a script to its sub events types
+01:43:55 <yepster> but I cannot find a predicate for representing causal links between sub event types
+01:44:18 <yepster> like causes-EventTypeEventType
+01:47:00 <yepster> any ideas
+01:47:02 <yepster> ?
+02:28:21 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+03:58:53 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+06:02:13 <yepster> dmiles?
+06:30:29 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+07:12:38 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+07:13:10 <dmiles> i have a meeting for 2 hours
+07:13:16 <dmiles> i have to leave right oh i am here for 15 more minutes
+07:13:18 <dmiles> oops.. concated lines
+07:22:54 <yepster> he
+07:23:01 <yepster> hm how long was this ago..
+07:23:46 <yepster> http://217.117.225.187/~yeb/XP/
+07:26:05 <deltab> uh oh, *another* meaning for 'XP'
+07:26:47 <yepster> this one is from 1986
+07:27:35 <deltab> interesting layout on that page :-)
+07:27:55 <deltab> probably not intentional though
+07:28:55 <deltab> there are some tags missing from the table markup
+07:29:05 <yepster> o?
+07:30:24 <deltab> <tr>
+07:31:25 <deltab> lines 19, 35, and 51
+07:32:25 <yepster> o?
+07:32:27 <yepster> oops
+07:32:31 <yepster> that was history
+07:32:35 <yepster> I meant: thanks
+07:33:11 <deltab> without the <tr> tags my browser puts everything in one row
+07:33:15 <yepster> and now?
+07:33:23 <yepster> I checked only mozilla and ie
+07:33:30 <deltab> much better :-)
+07:51:50 --- join: DanC (~connolly@151-30-252.cmts03.ksle.everestkc.net) joined #opencyc
+07:52:27 * DanC waves, taking a look at http://sourceforge.net/forum/forum.php?forum_id=236798 and http://www.cyc.com/2002/04/08/cyc.daml
+07:54:38 * DanC browses http://tunes.org/~nef/logs/opencyc/
+12:03:18 * dmiles returbs
+12:03:33 <dmiles> great looking URL yepster
+12:04:05 <dmiles> ( http://217.117.225.187/~yeb/XP/ )
+14:17:18 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+14:17:42 <Yepster_home> about parsing into cd, have you seen the programs at
+14:17:42 <Yepster_home> http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/areas/nlp/nlu/
+14:17:44 <Yepster_home> ?
+14:33:02 <Yepster_home> anyway, today I was wondering to what extent a #$Script might be 
+14:33:29 <Yepster_home> the same thing as a 'process' in workflow (wfmc.org) terminolohy
+14:33:55 <Yepster_home> funny thing is; I have an implementation (as in: active thing) of such a
+14:34:03 <Yepster_home> thing in oracle.
+14:34:27 <Yepster_home> solves the problem of absence of causes-EventTypeEventType -> is a 
+14:34:41 <Yepster_home> transition (from activity to activity)
+14:35:58 <Yepster_home> part of that workflow engine (the authorization part) is already delegated
+14:36:10 <Yepster_home> to opencyc, so why not the whole process model in script vocabulary
+14:36:13 <Yepster_home> :-)
+14:37:12 * Yepster_home yepzterzzz
+14:39:12 --- quit: Yepster_home ()
+15:12:04 --- part: DanC left #opencyc
+16:21:42 --- quit: Cobra ("[x]chat")
+16:25:08 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+16:33:16 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:44:19 <kinoc> Yepster: maybe something like
+16:44:22 <kinoc> http://4.33.94.173:2002/xml?pos="John%20gave%20Bill%20an%20Orange%20for%20his%20cold%20."
+16:45:19 <kinoc> oops, already URL encoded. anyway returns link grammar parser output for "John gave Bill and Oranage for his cold."
+16:45:39 <kinoc> Hmmm. maybe if I dont capitalize 'orange'....
+16:47:08 <kinoc> maybe build an interface layer to translate into CD format
+16:47:43 <kinoc> http://4.33.94.173:2002/html?pos="John%20gave%20Bill%20an%20orange%20for%20his%20cold%20."
+16:47:59 <kinoc> give an html-ish output (sorta)
+16:48:52 <kinoc> still needs work but was wondering about what it would take to translate into CD format
+16:50:09 <kinoc> official/original parser at http://www.link.cs.cmu.edu/link/
+16:50:43 <kinoc> The way it makes links reminds me of the CD-parser and ELI (sort of)
+16:53:58 <kinoc> an official link parser tester page http://www.link.cs.cmu.edu/link/submit-sentence-4.html
+17:04:16 <kinoc> they work a little better with "John gave to Bill an orange for his cold" since it can figure out the destination and the syntax to semantic chunking translation is a little better
+17:24:56 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+17:33:27 --- quit: kinoc (Read error: 60 (Operation timed out))
+18:39:24 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:04:31 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+19:13:02 --- quit: kinoc (Read error: 60 (Operation timed out))
+19:29:41 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+21:19:34 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+22:40:08 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/03.02.20

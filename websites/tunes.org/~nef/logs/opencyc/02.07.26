@@ -1,0 +1,164 @@
+00:00:00 --- log: started opencyc/02.07.26
+01:01:37 --- quit: Vutral (Read error: 110 (Connection timed out))
+01:10:03 --- join: Vutral (~ss@217.4.45.77) joined #opencyc
+02:22:59 --- quit: Vutral (Read error: 110 (Connection timed out))
+05:02:36 --- quit: huthut (Read error: 104 (Connection reset by peer))
+05:03:26 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+05:56:20 --- join: Vutral (~ss@pD9042DEA.dip.t-dialin.net) joined #opencyc
+06:26:59 --- quit: Vutral (Read error: 110 (Connection timed out))
+07:32:18 --- join: Vutral (~ss@pD9042F74.dip.t-dialin.net) joined #opencyc
+07:50:56 --- quit: stevereed_home (bear.openprojects.net irc.openprojects.net)
+07:52:10 --- join: stevereed_home (reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+08:55:06 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+09:33:17 <huthut> "Cyc enhances [...] by providing a powerful universal semantics"   Plain wrong; its semantics are not universal.
+09:35:34 <dmiles> "by providing a powerful universal semantics" :) ? i would say attempts to provide knowledge formed in the most universal context.. each Mt is supposed to be consitent with the BaseKB
+09:36:09 <huthut> Since e.g. human, as an inference engine, can frequently accept the sentence `I am both dead and alive.', and Cyc is not able to accept it, without additional tools.
+09:36:45 <huthut> dmile, "Cyc enhances... by providing..." was a quote from opencyc faq.
+09:36:51 <huthut> http://www.opencyc.org/OpenCyc_org/faq/faq1_html
+09:36:55 <dmiles> right that takes an infernce to invalidate that statement.. it cannont invaluidate that unless it really knows better
+09:37:06 --- quit: Vutral (Read error: 110 (Connection timed out))
+09:38:08 <dmiles> i kinda looked at that it seems more a 'vission and scope document'
+09:38:21 <dmiles> (then a FAQ :P)
+09:39:21 <dmiles> What can one use OpenCyc to do?  <dones nne of those yet>
+09:39:30 <dmiles> err none
+09:39:52 <huthut> well the above quote means that this document contains gross (though, maybe, intentional) mistakes.
+09:40:33 <huthut> (i mean a quote about universal semantics)
+09:40:52 <dmiles> i would definately not deny that :P
+09:41:21 <huthut> well, BaseKB does not represent any universal context
+09:41:39 <dmiles> yeah its kinda of condition of use of 'names'
+09:41:40 <huthut> alternatively, this `universe'  is very limited
+09:42:13 <dmiles> BaseKB is supposed to enforce how common cyc terms could be under the same context of use 
+09:42:33 <dmiles> like Collection/isa
+09:43:11 <dmiles> and actually any extra hacks you think should propogate to the rest of the KB
+09:43:48 <huthut> hacks you think?
+09:43:54 <huthut> `hacks you think' ?
+09:44:04 <dmiles> well an example is...
+09:45:10 <dmiles> for example.. lets say the client is talking about the cooking alot 
+09:45:30 <dmiles> in fact all the Mts they gave you invoved baking and cooking
+09:46:10 <dmiles> you know that their is a certain undertnding of transformation process of food
+09:46:34 <dmiles> well there is a transformational thing in BaseKB
+09:46:49 <dmiles> but its not always appied to food in a quick enopugh dedcuction
+09:47:10 <dmiles> imagine it take 4 backchains to reach a conclusion you like
+09:47:33 <dmiles> you dont mind backcahining that far if you know what your after
+09:47:52 <dmiles> but all the other conclussions that come will be explossive to your search space
+09:47:57 <huthut> well, the ordinary language word `transformation' is synonymous to the cyc constant you speak about, if i understand right.
+09:48:14 <huthut> constant of transf.. thing
+09:48:15 <dmiles> yeah TranformationEvent or something like that
+09:48:28 <huthut> uhh event
+09:48:31 <huthut> not just event
+09:48:42 <huthut> it can be a set of events
+09:48:43 <dmiles> where uncooked browies can become cooked brownies
+09:48:48 <dmiles> right 
+09:49:08 <dmiles> maybe the set of events are too much detail
+09:49:14 <huthut> set of events is sometimes not event
+09:49:32 <huthut> ok
+09:49:45 <dmiles> yeah ... in this might contain many subcases that work each way
+09:50:14 <dmiles> and just deemed to exensive deduction to say that cooking will transform food
+09:50:39 <dmiles> err to only guess... so BaseKB gets told something overly specifically
+09:51:01 <dmiles> that works for like 8 microtheories at once
+09:51:14 <dmiles> but rather pointless to the other 300 Mts
+09:51:20 <huthut> overly specifically == gets in too many details?
+09:51:43 <dmiles> and when 301 gets written that food thing may actually be a confliction
+09:52:06 <huthut> so, where's the hack you were talking about?
+09:52:18 <dmiles> well over specific is from using  terms defined to ber used generally in a usecase manner
+09:53:00 <dmiles> the hack is oputting information in BaseKB that belongsed in its own package
+09:53:12 <dmiles> out  ofthe way of the rest  ofthe system
+09:53:38 <dmiles> and was put their to make some customer funder at the time app work
+09:54:12 <dmiles> the customer supplied their 8 Mts
+09:54:39 <dmiles> and there was no way of really doing it correct.. cuz the customers 8 could/should have been 100 Mts
+09:55:14 <dmiles> so BaseKB gets hacked to make everything fit together
+09:55:35 <dmiles> but really it only worked consistently for those 8 mts
+09:55:58 <huthut> ok....  
+09:56:10 <dmiles> what the proper proceedure would have been...
+09:56:25 <dmiles> make one CustomerVOcabularyMt
+09:56:36 <dmiles> and genlMt that to BaseKB
+09:56:58 <dmiles> then only mess with CustomerVocabularyMt
+09:57:35 <dmiles> most cases that is done...  the customer will supply a set of test questions..
+09:57:53 <dmiles> exqmple quires they expect cyc to answer
+09:58:31 <dmiles> when cyc fails one.. it is possible to trace down why.. and relaize some part or step was deemed to expensive to take
+09:58:42 <dmiles> err too expensive
+09:59:00 <huthut> may i ask you one question -- did you see any references to the reading about contraditory theories in mathematical formal logic, and in related areas ?
+09:59:07 <dmiles> so i call this a 'hack' asserting the missing fact
+10:00:07 <dmiles> i know it's important for cyccorp to provide limnkages buit maybe havent
+10:00:37 <dmiles> thats a problem with cyc docs i think
+10:01:09 <dmiles> we kinda need refernces to the types of logic they use
+10:01:28 <huthut> i dont think they use contradictory theories :)
+10:01:46 <dmiles> they say they do.. in exampkles of pegasis the unicorn
+10:01:59 <dmiles> and exceptThen
+10:02:08 <dmiles> err let me find the claim in the KB
+10:02:45 <huthut> ahh if they speak about pegasus, then they do that i think.
+10:03:43 <dmiles> under or bnear FictionalContext
+10:04:01 <dmiles> comment :  "The collection of CounterfactualContexts which are (1) created intentionally, not by error or chance or gradual evolution and accretion in a culture, and (2) typically are the information content of some InformationBearingThing, and (3) are not expected (by their creator) to be believed as factual, nor do their creators believe them to be factual. In addition to asserting fictional propositions about existing things, a Fictional
+10:05:39 <huthut> heheheh Counterfactual :)
+10:06:46 <dmiles> disjointWith :  NonfictionalContext  
+10:06:46 <dmiles> comment :  "The collection of microtheories that are each assumed to include at least one counterfactual assertion: an assertion which is believed to be untrue in the real world. It may be, however, that there is no explicit counterfactual assertion in a given CounterfactualContext.  
+10:07:38 <huthut> (i mostly interested about such "counterfactual" stuff, which is in fact factual :) )
+10:13:03 <dmiles> yeah Cyc knowledge can contain it
+10:13:13 <dmiles> i mean handle such cases
+10:13:24 <dmiles> i dont know if infernce has been implem,n ted yet to use it
+10:15:04 <huthut> well - "Cyc knowledge can contain it"  --- i had similar thoughts several months ago... i didn't think about cyc, was just thinking about formal math logic, and tried to formalize `clap of single hand' etc
+10:15:07 <huthut> was trying
+10:15:53 <huthut> and tried to put these formalization into the same context as physics, math, reallife knowledge and so on.
+10:16:03 <huthut> was trying
+10:16:08 <dmiles> ah yeah.. it comes done to how consistantly can we formalize anything
+10:16:08 <huthut> +s
+10:38:29 <dmiles> i would say their are many things formal mathmatical logic has not specifally covered in a representation/implimentation things maybe it takes a KB like Cyc to say or annotate
+10:45:04 --- part: huthut left #opencyc
+10:45:13 --- join: huthut (~trumpet@fw224.novosoft.ru) joined #opencyc
+10:59:10 --- join: Vutral (~ss@pD90431C2.dip.t-dialin.net) joined #opencyc
+11:36:26 --- quit: Vutral (Read error: 110 (Connection timed out))
+11:41:09 <huthut> how can i see all or some elements for a given collection?
+11:41:27 <huthut> i a kb browser
+11:41:29 <huthut> in
+11:43:31 <dmiles> you can do a...
+11:44:28 <dmiles> for exammple.. to see instances  of Microthery
+11:44:57 <dmiles> first get that page with Collection : Microtheory
+11:45:07 <dmiles> into the right frame
+11:45:22 <dmiles> now in the left frame..
+11:45:43 <dmiles> got Arg2 isa and click the green plus sign
+11:45:53 <dmiles> s/got/go to
+11:46:17 <dmiles> you will get a page that says "Literal Query"
+11:46:48 <dmiles> Last query in BaseKB :
+11:46:48 <dmiles> (isa ?ARG1 Microtheory)
+11:46:48 <dmiles> Query halted because : Query halted because : Search space was exhausted up to the depth cutoff.
+11:46:48 <dmiles> 238 answers for ?ARG1 :
+11:47:34 <huthut> thank yout
+11:47:36 <huthut> -t
+11:47:45 <dmiles> it worked?
+11:48:30 <dmiles> you can also just click the 'isa' link but you wont get all of them
+11:48:52 <dmiles> the green Plus makes it try to get all based off infernce
+11:49:14 <huthut> no i didnt try yet
+11:49:45 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+11:50:05 <huthut> im traveling around root constants
+12:29:21 --- join: Vutral (~ss@pD9043020.dip.t-dialin.net) joined #opencyc
+13:15:51 <huthut> genius base
+13:16:07 <huthut> it might be stupider
+13:19:48 <huthut> its better than it could be
+13:20:01 <dmiles> definately
+13:26:27 --- quit: Vutral (Read error: 110 (Connection timed out))
+13:50:34 --- join: Vutral (~ss@pD9042CA7.dip.t-dialin.net) joined #opencyc
+14:18:46 --- quit: devEiant ("switching servers.")
+14:36:16 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+15:15:09 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+15:35:34 --- join: Cobra_ (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:41:47 --- quit: Vutral (Connection timed out)
+17:14:03 --- join: Vutral (~ss@pD9042D49.dip.t-dialin.net) joined #opencyc
+17:39:22 --- quit: dmiles (bear.openprojects.net irc.openprojects.net)
+17:39:34 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+18:32:15 --- quit: Vutral (Connection timed out)
+20:15:34 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+21:05:40 --- quit: huthut (Read error: 104 (Connection reset by peer))
+21:05:48 --- join: funkyMonk (~trumpet@fw224.novosoft.ru) joined #opencyc
+21:10:36 --- nick: funkyMonk -> huthut_
+21:50:26 --- quit: Cobra_ ("[x]chat")
+22:41:39 --- quit: CycLBot (Remote closed the connection)
+22:42:31 --- join: CycLBot ([TiVRJdxqg@12-225-207-235.client.attbi.com) joined #opencyc
+22:45:53 --- quit: CycLBot (Remote closed the connection)
+22:46:27 --- join: CycLBot ([nLagIS5Ol@12-225-207-235.client.attbi.com) joined #opencyc
+23:04:23 --- quit: CycLBot (Remote closed the connection)
+23:04:41 --- join: CycLBot ([eN+77k4vM@12-225-207-235.client.attbi.com) joined #opencyc
+23:07:05 --- quit: CycLBot (Remote closed the connection)
+23:07:20 --- join: CycLBot ([CSd52WZ1B@12-225-207-235.client.attbi.com) joined #opencyc
+23:21:39 --- quit: CycLBot (Excess Flood)
+23:23:18 --- join: CycLBot ([F6a6URrFu@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.07.26

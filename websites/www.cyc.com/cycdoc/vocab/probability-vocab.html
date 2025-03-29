@@ -1,0 +1,1024 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/WD-html-in-xml/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Probabilistic Reasoning Vocabulary</title></head>
+    <body>
+        <h2>
+            <a href="http://www.opencyc.org"><img alt="OpenCyc Homepage"
+                    border="0"
+            src="/cycdoc/img/opencyc-logo.gif" /></a>Probabilistic
+            Reasoning Vocabulary</h2>E-Mail Comments to: <a
+        href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a><br />Last
+        Update: 12/13/02<br />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a><br />
+        <hr />
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+        <br />
+        <hr />
+        <p /><hr> This file contains some documentation of the initial
+        Cyc vocabulary designed to support probabilistic reasoning.  Cyc
+        does not perform probabilistic reasoning itself at present; this
+        vocabulary is designed to support integration of Cyc with other
+        HPKB participants who are working on probabilistic reasoners.
+        <p>  This is supposed to support not only Bayesian Network
+        reasoning, but also other probabilistic reasoning systems.  No
+        assumption is made about how the probabilities will be
+        processed.  In particular, <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#derivedProbability>#$derivedProbability</a>
+        and <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#derivedProbability-Range>#$derivedProbability-Range</a>
+        do not commit to the method of derivation.  Some Cyc constants
+        should be useful for several approaches, see: <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#conditionalProbability>#$conditionalProbability</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#conditionallyIndependent>#$conditionallyIndependent</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#conditionallyIndependent-Given>#$conditionallyIndependent-Given</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#priorProbability>#$priorProbability</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#priorProbability-Range>#$priorProbability-Range</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#lessLikelyThan-Prior>#$lessLikelyThan-Prior</a>,
+        and <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#lessLikelyThan-Derived>#$lessLikelyThan-Derived</a>.
+        <p>  [Note: Cyc's regular #$lessLikelyThan predicate, and its
+        causal and risk predicates, are not now tied in to this
+        vocabulary in any way.]  <p>  Some constants are tailored for
+        Bayesian Network reasoning: <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#BayesNet>#$BayesNet</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#bayesNetOfMicrotheory>#$bayesNetOfMicrotheory</a>,
+        <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#bayesParent>#$bayesParent</a>
+        and <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#bayesParentSet>#$bayesParentSet</a>.
+        An explict <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#BayesNet>#$BayesNet</a>
+        needs to be created and associated with a particular <a
+        href=/cycdoc/vocab/mt-expansion-vocab.html#Microtheory>#$Microtheory</a>
+        before Baysian Network reasoning can be done in that <a
+        href=/cycdoc/vocab/mt-expansion-vocab.html#Microtheory>#$Microtheory</a>.
+        The nodes in the <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#BayesNet>#$BayesNet</a>
+        are random variables for Cyc formulae asserted in the
+        Microtheory, and the links are <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#bayesParent>#$bayesParent</a>
+        links.  At present the definitions allow multiple <a
+        href=/cycdoc/vocab/non-public-ikb-vocab.html#BayesNet>#$BayesNet</a>s
+        to be created for one <a
+        href=/cycdoc/vocab/mt-expansion-vocab.html#Microtheory>#$Microtheory</a>.
+        <p> For the time being, at least, probabilities are represented
+        by a #$Real0-1 number, where 0 means certainly false and 1 means
+        certainly true.<br />
+        <font size="+1">
+            <a
+                    name="ProbabilisticCycLConstant">#$ProbabilisticCycLConstant<i>&nbsp;&nbsp;&nbsp;probabilistic constants</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The collection of those Cyc constants (individuals,
+            collections, predicates, functions, and non-atomic terms)
+            created to enable probabilistic reasoning (of various kinds).<br />
+            <b>guid: </b>bffc7042-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#Collection">#$Collection</a>  <br />
+            <b>direct specialization of: </b>
+            <a href="./fundamental-vocab.html#Thing">#$Thing</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="NoteOnProbability">#$NoteOnProbability<i>&nbsp;&nbsp;&nbsp;note
+                    on probability</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The system of <a
+            href="./probability-vocab.html#ProbabilisticCycLConstant">#$ProbabilisticCycLConstants</a>
+            is intended to support several different probabilistic
+            reasoning theories. <a
+            href="./probability-vocab.html#Probability">#$Probability</a>
+            (a specialization of #$Real0-1) is the probability measure.
+            In all contemplated theories of probability, zero means
+            certainly false and one means certainly true. The theories
+            differ on how to combine different values between these
+            extremes. (We may later want to represent probabilities in
+            other, or multiple, ways: logarithms, etc.) If you want to
+            ensure a precise value for a probability (as most Bayesians
+            do), use <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability</a>
+            and <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            (or <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn</a>
+            and <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn).</a>
+            If you want to allow for ranges (intervals) of
+            probabilities, as some other probabilistic theories need, or
+            to say something is 'more than 80% likely', use <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range</a>
+            and <a
+            href="./probability-vocab.html#derivedProbability-Range">#$derivedProbability-Range</a>
+            (or <a
+            href="./probability-vocab.html#PriorProbability-RangeFn">#$PriorProbability-RangeFn</a>
+            and <a href="./probability-vocab.html#DerivedProbability-RangeFn">#$DerivedProbability-RangeFn).</a><br />
+            <b>guid: </b>bf9c13ad-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a href="./doc-vocab.html#SharedNote">#$SharedNote</a>  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a name="Probability">#$Probability<i>&nbsp;&nbsp;&nbsp;probabilities</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The collection of all possible probabilities. A <a
+            href="./probability-vocab.html#Probability">#$Probability</a>
+            is the probability value that an assertion is true,
+            expressed as a real number between zero (for 'certainly
+            false') and one (for 'certainly true'). <a
+            href="./probability-vocab.html#Probability">#$Probability</a>
+            is available for probabilistic reasoning; see <a href="./probability-vocab.html#ProbabilisticCycLConstant">#$ProbabilisticCycLConstant.</a><br />
+            <b>guid: </b>bd58df60-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#MeasurableScalarIntervalType">#$MeasurableScalarIntervalType</a>
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of: </b>
+            <a href="./math-vocab.html#NonNegativeNumber">#$NonNegativeNumber</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="priorProbability">#$priorProbability<i>&nbsp;&nbsp;&nbsp;prior probability</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#priorProbability">(#$priorProbability</a>
+            PROPOSITION PROBNO) means that the a priori probability of
+            the truth of the formula PROPOSITION, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            is PROBNO (a real number between zero and one, where zero
+            means certainly false and one means certainly true). In most
+            microtheories, generally, this refers to the probability
+            that PROPOSITION, by itself, would be true if there were no
+            further evidence in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            for or against it, nor knowledge of the truth of anything
+            else other than the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            and with <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range.</a>
+            See also the function version of this predicate: <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn.</a>
+            A <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability</a>
+            may represent an absolute objective probability, a
+            subjective assigned probability, a quantum probability, or
+            an assigned probability based on some internal
+            characteristic of PROPOSITION (including possibly a
+            statement in it of the occurrence of a number of outcomes
+            within a large number of trials). This definition makes no
+            presumption as to determinism versus nondeterminism, nor as
+            to whether probability is only in the mind of some beholder.<br />
+            <b>guid: </b>bf50f4ee-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  <a
+            href="./quantity-vocab.html#QuantitySlot">#$QuantitySlot</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="priorProbability-Range">#$priorProbability-Range<i>&nbsp;&nbsp;&nbsp;prior
+                    probability - range</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#priorProbability-Range">(#$priorProbability-Range</a>
+            PROPOSITION PROBRANGE) means that the a priori probability
+            of the truth of the formula PROPOSITION, in the applicable
+                <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            is somewhere in range PROBRANGE (either a real number
+            between zero and one, where zero means certainly false and
+            one means certainly true, or an interval between two such
+            numbers). In most microtheories, generally, this refers to
+            the range of probability that PROPOSITION, by itself, would
+            be true if there were no further evidence in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            for or against it, nor knowledge of the truth of anything
+            else other than the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            and <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability.</a>
+            A <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range</a>
+            may represent an absolute objective probability range, a
+            subjective assigned probability range, a quantum probability
+            range, or an assigned probability range based on some
+            internal characteristic of PROPOSITION (including possibly a
+            statement in it of the occurrence of a number of outcomes
+            within a large number of trials). This definition makes no
+            presumption as to determinism versus nondeterminism, nor as
+            to whether probability is only in the mind of some beholder.<br />
+            <b>guid: </b>be0dd6f8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./quantity-vocab.html#IntervalBasedQuantitySlot">#$IntervalBasedQuantitySlot</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="derivedProbability">#$derivedProbability<i>&nbsp;&nbsp;&nbsp;derived probability</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#derivedProbability">(#$derivedProbability</a>
+            PROPOSITION PROBNO) means that, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the a posteriori probability of the truth of the formula
+            PROPOSITION, given (and depending on) the current state of
+            knowledge of all other assertions, is PROBNO (a real number
+            between zero and one, where zero means certainly false and
+            one means certainly true). In most microtheories, generally,
+            this refers to the derived probability that PROPOSITION is
+            true given the probabilities of the other #$CycLAssertions
+            and <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability</a>
+            and <a
+            href="./probability-vocab.html#derivedProbability-Range">#$derivedProbability-Range.</a>
+            See also the function version of this: <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn.</a>
+            A <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            depends at least partially on, and is in some manner derived
+            from or affected by, the probabilities of some or all of the
+            other #$CycLAssertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            (whether prior, derived or conditional) along with the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions.</a>
+            See also <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>be2edcf4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot  <a
+            href="./quantity-vocab.html#QuantitySlot">#$QuantitySlot</a>  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./probability-vocab.html#derivedProbability-Range">#$derivedProbability-Range</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="derivedProbability-Range">#$derivedProbability-Range<i>&nbsp;&nbsp;&nbsp;derived
+                    probability - range</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#derivedProbability-Range">(#$derivedProbability-Range</a>
+            PROPOSITION PROBRANGE) means that, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the a posteriori probability of the truth of the formula
+            PROPOSITION, given (and depending on) the current state of
+            knowledge of all other assertions, is somewhere in the range
+            PROBRANGE (either a real number between zero and one, where
+            zero means certainly false and one means certainly true, or
+            an interval between two such numbers). In most
+            microtheories, generally, this refers to the derived range
+            of derived probability that PROPOSITION is true given the
+            probabilities (or probability ranges) of the other
+            #$CycLAssertions and <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range</a>
+            and with <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability.</a>
+            A <a
+            href="./probability-vocab.html#derivedProbability-Range">#$derivedProbability-Range</a>
+            depends at least partially on, and is in some manner derived
+            from or affected by, the probabilities of some or all of the
+            other #$CycLAssertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            (whether prior, derived or conditional) along with the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>be40e1c8-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./quantity-vocab.html#IntervalBasedQuantitySlot">#$IntervalBasedQuantitySlot</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="conditionalProbability">#$conditionalProbability<i>&nbsp;&nbsp;&nbsp;conditional probability</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#conditionalProbability">(#$conditionalProbability</a>
+            PROPOSITION1 PROPOSITION2 PROBNO) means that the probability
+            of PROPOSITION1 being true, given that PROPOSITION2 is known
+            to be true, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            is PROBNO (a real number between zero and one, where zero
+            means certainly false and one means certainly true). Most
+            typically, PROPOSITION2 is actually a conjunction of
+            multiple propositions. In most microtheories, generally,
+            this <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability</a>
+            refers to the conditional probability that PROPOSITION1 is
+            true given only that PROPOSITION2, and the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            are true, without regard to any further evidence or the
+            truth of any other assertions. See also <a
+            href="./probability-vocab.html#conditionalProbabilitySet">#$conditionalProbabilitySet,</a>
+                <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability,</a>
+                <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability,</a>
+                <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent,</a>
+            and the function version of this predicate: <a
+            href="./probability-vocab.html#ConditionalProbabilityFn">#$ConditionalProbabilityFn.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>be7f058d-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>
+            <a
+            href="./fundamental-vocab.html#FunctionalPredicate">#$FunctionalPredicate</a>
+            #$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="conditionalProbabilitySet">#$conditionalProbabilitySet<i>&nbsp;&nbsp;&nbsp;conditional
+                    probability set</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#conditionalProbabilitySet">(#$conditionalProbabilitySet</a>
+            PROPOSITION SETOFPROPOSITIONS PROBNO) means that the
+            probability of PROPOSITION being true, given that all the
+            propositions in SETOFPROPOSITIONS are known to be true, in
+            the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            is PROBNO (a real number between zero and one, where zero
+            means certainly false and one means certainly true). In most
+            microtheories, generally, this <a
+            href="./probability-vocab.html#conditionalProbabilitySet">#$conditionalProbabilitySet</a>
+            refers to the conditional probability that PROPOSITION is
+            true given only that the propositions in SETOFPROPOSITIONS,
+            and the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            are true, without regard to any further evidence or the
+            truth of any other assertions. See also <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability,</a>
+                <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability,</a>
+                <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability,</a>
+                <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent,</a>
+            and the function version of this predicate: <a
+            href="./probability-vocab.html#ConditionalProbabilitySetFn">#$ConditionalProbabilitySetFn.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bfcef6cd-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="conditionallyIndependent">#$conditionallyIndependent<i>&nbsp;&nbsp;&nbsp;conditionally independent</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#conditionallyIndependent">(#$conditionallyIndependent</a>
+            PROPOSITION1 PROPOSITION2) means that, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            PROPOSITION1 and PROPOSITION2 are conditionally independent
+            of each other, that is, truth or falsehood of one does not
+            increase or decrease the <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            that the other is true. They are, in a sense, irrelevant to
+            each other. In most microtheories, generally, the <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent</a>
+            statement means that when all we know in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            are its accessible <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions,</a>
+            then the truths of the two formulae are probabilistically
+            independent. See also <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability</a>
+            and <a
+            href="./probability-vocab.html#conditionallyIndependent-Given">#$conditionallyIndependent-Given.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bfb43bd4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$SymmetricBinaryPredicate
+            #$IrreflexiveBinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="conditionallyIndependent-Given">#$conditionallyIndependent-Given<i>&nbsp;&nbsp;&nbsp;conditionally
+                    independent - given</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#conditionallyIndependent-Given">(#$conditionallyIndependent-Given</a>
+            PROPOSITION1 PROPOSITION2 PROPOSITION3) means that, in the
+            applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            PROPOSITION1 and PROPOSITION2 are conditionally independent
+            of each other given the truth of PROPOSITION3. That is,
+            given the truth of the third, the truth or falsehood of
+            either of the first two does not increase or decrease the <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            that the other is true. They are, in a sense, irrelevant to
+            each other when PROPOSITION3 is known to be true. Most
+            typically, PROPOSITION3 is a conjunction of multiple
+            propositions (but see also <a
+            href="./probability-vocab.html#conditionallyIndependent-GivenSet">#$conditionallyIndependent-GivenSet).</a>
+            In most microtheories, generally, the <a
+            href="./probability-vocab.html#conditionallyIndependent-Given">#$conditionallyIndependent-Given</a>
+            statement means that when all we know in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            are its accessible <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions,</a>
+            and PROPOSITION3, then the truths of the two formulae are
+            probabilistically independent. See also <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability</a>
+            and <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent.</a>
+            To declare two propositions independent given a set of
+            propositions, use <a
+            href="./probability-vocab.html#conditionallyIndependent-GivenSet">#$conditionallyIndependent-GivenSet.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bd7d8244-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="conditionallyIndependent-GivenSet">#$conditionallyIndependent-GivenSet<i>&nbsp;&nbsp;&nbsp;conditionally
+                    independent - given set</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#conditionallyIndependent-GivenSet">(#$conditionallyIndependent-GivenSet</a>
+            PROPOSITION1 PROPOSITION2 SETOFPROPOSITIONS) means that, in
+            the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            PROPOSITION1 and PROPOSITION2 are conditionally independent
+            of each other given the truth of all the propositions in the
+            set SETOFPROPOSITIONS. That is, given the truth of the
+            propositions in the set, the truth or falsehood of either of
+            the two propostion arguments does not increase or decrease
+            the <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            that the other is true. They are, in a sense, irrelevant to
+            each other when the propositions in SETOFPROPOSITIONS is
+            known to be true. In most microtheories, generally, the <a
+            href="./probability-vocab.html#conditionallyIndependent-GivenSet">#$conditionallyIndependent-GivenSet</a>
+            statement means that when all we know in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            are its accessible <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions,</a>
+            and the assertions in SETOFPROPOSITIONS, then the truths of
+            the two formulae are probabilistically independent. See also
+                <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability</a>
+            and <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent.</a>
+            To declare two propositions independent given a single
+            proposition (which could be a conjunction), use <a
+            href="./probability-vocab.html#conditionallyIndependent-Given">#$conditionallyIndependent-Given.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>be2eeba6-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="PriorProbabilityFn">#$PriorProbabilityFn<i>&nbsp;&nbsp;&nbsp;prior
+                    probability fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#PriorProbabilityFn">(#$PriorProbabilityFn</a>
+            PROPOSITION), applied to the #$CycLAssertion PROPOSITION,
+            yields its a priori probability of being true, in the
+            applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            The result is a real number between zero and one, where zero
+            means certainly false and one means certainly true. In most
+            microtheories, generally, this refers to the probability
+            that PROPOSITION, by itself, would be true if there were no
+            further evidence in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            for or against it, nor knowledge of the truth of anything
+            else other than the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with the predicate form <a
+            href="./probability-vocab.html#priorProbability">#$priorProbability</a>
+            and with the functions <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn</a>
+            and <a
+            href="./probability-vocab.html#PriorProbability-RangeFn">#$PriorProbability-RangeFn.</a>
+            A <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn</a>
+            may represent an absolute objective probability, a
+            subjective assigned probability, a quantum probability, or
+            an assigned probability based on some internal
+            characteristic of PROPOSITION (including possibly a
+            statement in it of the occurrence of a number of outcomes
+            within a large number of trials). This definition makes no
+            presumption as to determinism versus nondeterminism, nor as
+            to whether probability is only in the mind of some beholder.<br />
+            <b>guid: </b>c022e43a-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="PriorProbability-RangeFn">#$PriorProbability-RangeFn<i>&nbsp;&nbsp;&nbsp;prior
+                    probability - range fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#PriorProbability-RangeFn">(#$PriorProbability-RangeFn</a>
+            PROPOSITION), applied to the #$CycLAssertion PROPOSITION,
+            yields a range of two real numbers between zero and one that
+            includes the a priori probability that PROPOSITION is true,
+            in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            In most microtheories, generally, this refers to the range
+            of probability that PROPOSITION, by itself, would be true if
+            there were no further evidence in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            for or against it, nor knowledge of the truth of anything
+            else other than the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with the predicate form <a
+            href="./probability-vocab.html#priorProbability-Range">#$priorProbability-Range</a>
+            and with the functions <a
+            href="./probability-vocab.html#DerivedProbability-RangeFn">#$DerivedProbability-RangeFn</a>
+                <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn.</a>
+            A <a
+            href="./probability-vocab.html#PriorProbability-RangeFn">#$PriorProbability-RangeFn</a>
+            may represent an absolute objective probability range, a
+            subjective assigned probability range, a quantum probability
+            range, or an assigned probability range based on some
+            internal characteristic of PROPOSITION (including possibly a
+            statement in it of the occurrence of a number of outcomes
+            within a large number of trials). This definition makes no
+            presumption as to determinism versus nondeterminism, nor as
+            to whether probability is only in the mind of some beholder.<br />
+            <b>guid: </b>bfe36d97-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="DerivedProbabilityFn">#$DerivedProbabilityFn<i>&nbsp;&nbsp;&nbsp;derived
+                    probability fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#DerivedProbabilityFn">(#$DerivedProbabilityFn</a>
+            PROPOSITION), applied to the #$CycLAssertion PROPOSITION,
+            yields, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the a posteriori probability of the truth of the formula
+            PROPOSITION, given (and depending on) the current state of
+            knowledge of other assertions. The result is a real number
+            between zero and one, where zero means certainly false and
+            one means certainly true. In most microtheories, generally,
+            this refers to the derived probability that PROPOSITION is
+            true given the probabilities or truth values of the other
+            #$Assertions and <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with the predicate form <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            and with the functions <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn</a>
+            and <a
+            href="./probability-vocab.html#DerivedProbability-RangeFn">#$DerivedProbability-RangeFn.</a>
+            The result of <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn</a>
+            depends at least partially on, and is in some manner derived
+            from or affected by, the probabilities of some or all of the
+            other #$Assertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            (whether prior, derived or conditional) along with the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions.</a>
+            See also <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bf613f81-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="DerivedProbability-RangeFn">#$DerivedProbability-RangeFn<i>&nbsp;&nbsp;&nbsp;derived
+                    probability - range fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#DerivedProbability-RangeFn">(#$DerivedProbability-RangeFn</a>
+            PROPOSITION), applied to the #$CycLAssertion PROPOSITION,
+            yields, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the range of a posteriori probability of the truth of the
+            formula PROPOSITION, given (and depending on) the current
+            state of knowledge of other assertions. This result is a
+            number or range of numbers somewhere within the range 0-1
+            (either a real number between zero and one, where zero means
+            certainly false and one means certainly true, or an interval
+            between two such numbers). In most microtheories, generally,
+            this refers to the derived range of derived probability that
+            PROPOSITION is true given the probabilities (or probability
+            ranges) of the other #$Assertions and <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            of the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with the predicate form <a
+            href="./probability-vocab.html#derivedProbability-Range">#$derivedProbability-Range</a>
+            and with the functions <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn</a>
+            and <a
+            href="./probability-vocab.html#PriorProbability-RangeFn">#$PriorProbability-RangeFn.</a>
+            The result of a use of <a
+            href="./probability-vocab.html#DerivedProbability-RangeFn">#$DerivedProbability-RangeFn</a>
+            on a proposition depends at least partially on, and is in
+            some manner derived from or affected by, the probabilities
+            of some or all of the other #$Assertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            (whether prior, derived or conditional) along with the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bfd242aa-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$UnaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="ConditionalProbabilityFn">#$ConditionalProbabilityFn<i>&nbsp;&nbsp;&nbsp;conditional
+                    probability fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#ConditionalProbabilityFn">(#$ConditionalProbabilityFn</a>
+            PROPOSITION1 PROPOSITION2) applied to two #$Assertions,
+            results in the probability of PROPOSITION1 being true given
+            that PROPOSITION2 is known to be true, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            It yields a real number between zero and one, where zero
+            means certainly false and one means certainly true. Most
+            typically, PROPOSITION2 is actually a conjunction of
+            multiple propositions. In most microtheories, generally,
+            this <a
+            href="./probability-vocab.html#ConditionalProbabilityFn">#$ConditionalProbabilityFn</a>
+            refers to the conditional probability that PROPOSITION1 is
+            true given only that PROPOSITION2, and the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            are true, without regard to any further evidence or the
+            truth of any other assertions. See also <a
+            href="./probability-vocab.html#ConditionalProbabilitySetFn">#$ConditionalProbabilitySetFn,</a>
+                <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn,</a>
+                <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn,</a>
+                <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent,</a>
+            and the predicate version of this function: <a
+            href="./probability-vocab.html#conditionalProbability">#$conditionalProbability.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bf8557a4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="ConditionalProbabilitySetFn">#$ConditionalProbabilitySetFn<i>&nbsp;&nbsp;&nbsp;conditional
+                    probability set fn</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A function used for probability statements. <a
+            href="./probability-vocab.html#ConditionalProbabilitySetFn">(#$ConditionalProbabilitySetFn</a>
+            PROPOSITION SETOFPROPOSITIONS) applied to an #$CycLAssertion
+            and a set of #$Assertions, results in the probability of
+            PROPOSITION being true given that all the propositions in
+            SETOFPROPOSITIONS are known to be true, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            It yields a real number between zero and one, where zero
+            means certainly false and one means certainly true. In most
+            microtheories, generally, this <a
+            href="./probability-vocab.html#ConditionalProbabilitySetFn">#$ConditionalProbabilitySetFn</a>
+            refers to the conditional probability that PROPOSITION is
+            true given only that the propositions that are elements of
+            SETOFPROPOSITIONS, and the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            are true, without regard to any further evidence or the
+            truth of any other assertions. See also <a
+            href="./probability-vocab.html#ConditionalProbabilityFn">#$ConditionalProbabilityFn,</a>
+                <a
+            href="./probability-vocab.html#PriorProbabilityFn">#$PriorProbabilityFn,</a>
+                <a
+            href="./probability-vocab.html#DerivedProbabilityFn">#$DerivedProbabilityFn,</a>
+                <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent,</a>
+            and the predicate version of this function: <a
+            href="./probability-vocab.html#conditionalProbabilitySet">#$conditionalProbabilitySet.</a>
+            This definition makes no presumption as to determinism
+            versus nondeterminism, nor as to whether probability is only
+            in the mind of some beholder. The definition allows for any
+            of several different systems of deriving the probability of
+            one assertion from the probabilities of, or conditional
+            probabilities relating, other assertions.<br />
+            <b>guid: </b>bdc7c640-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$BinaryFunction  <a href="./fundamental-vocab.html#Individual">#$Individual</a></blockquote>
+        <font size="+1">
+            <a
+                    name="lessLikelyThan-Prior">#$lessLikelyThan-Prior<i>&nbsp;&nbsp;&nbsp;less
+                    likely than - prior</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#lessLikelyThan-Prior">(#$lessLikelyThan-Prior</a>
+            PROPOSITION1 PROPOSITION2) means that, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the <em> a priori</em> probability that PROPOSITION1 is true
+            is less than the <em> a priori</em> probability that
+            PROPOSITION2 is true. This predicate does not say what the
+            probabilities actually are numerically; it is just an
+            ordering (or rather partial ordering) relation between the
+            two propositions. In most microtheories, generally, this <a
+            href="./probability-vocab.html#lessLikelyThan-Prior">#$lessLikelyThan-Prior</a>
+            means that the 'prior' probability that PROPOSITION1 is true
+            is less than the 'prior' probability that PROPOSITION2 is
+            true, given only the truth of the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            without regard to any further evidence or the truth of any
+            other assertions. Contrast this with #$lessLikelyThan (which
+            makes no claim of dependence on or independence from other
+            assertions) and with <a
+            href="./probability-vocab.html#lessLikelyThan-Derived">#$lessLikelyThan-Derived</a>
+            (which assumes dependence on other assertions). This
+            definition makes no presumption as to determinism
+            <em>versus</em> nondeterminism, nor as to whether
+            probability is only in the mind of some beholder.<br />
+            <b>guid: </b>bfce3d30-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ComparisonPredicate
+            #$AsymmetricBinaryPredicate  #$TransitiveBinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="lessLikelyThan-Derived">#$lessLikelyThan-Derived<i>&nbsp;&nbsp;&nbsp;less
+                    likely than - derived</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#lessLikelyThan-Derived">(#$lessLikelyThan-Derived</a>
+            PROPOSITION1 PROPOSITION2) means that, in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory,</a>
+            the <em>a posteriori</em> <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            that PROPOSITION1 is true is less than the <em>a
+            posteriori</em> <a
+            href="./probability-vocab.html#derivedProbability">#$derivedProbability</a>
+            that PROPOSITION2 is true, taking into account other
+            evidence and the truth or falsehood of other assertions.
+            This predicate does not say what the probabilities actually
+            are numerically; it is just an ordering (or rather partial
+            ordering) relation between the two propositions. In most
+            microtheories, generally, this <a
+            href="./probability-vocab.html#lessLikelyThan-Derived">#$lessLikelyThan-Derived</a>
+            means that the probability that PROPOSITION1 is true is less
+            than the probability that PROPOSITION2 is true, given the
+            probabilities of other #$Assertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            and the <a
+            href="./context-vocab.html#domainAssumptions">#$domainAssumptions</a>
+            accessible in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            Contrast this with #$lessLikelyThan (which makes no claim of
+            dependence on or independence from other assertions) and
+            with <a
+            href="./probability-vocab.html#lessLikelyThan-Prior">#$lessLikelyThan-Prior</a>
+            (which does not take into account any dependence on other
+            assertions). This definition makes no presumption as to
+            determinism versus nondeterminism, nor as to whether
+            probability is only in the mind of some beholder. The
+            definition allows for any of several different systems of
+            deriving the probability of one assertion from the
+            probabilities of, or conditional probabilities relating,
+            other assertions.<br />
+            <b>guid: </b>bf1c9453-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$ComparisonPredicate
+            #$AsymmetricBinaryPredicate  #$TransitiveBinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="BayesDiscreteOutcome">#$BayesDiscreteOutcome<i>&nbsp;&nbsp;&nbsp;bayes
+                    discrete outcome</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> The type collection of all Bayesian Network
+            variable Outcomes intended for probability reasoning.
+            Instances of <a
+            href="./probability-vocab.html#BayesDiscreteOutcome">#$BayesDiscreteOutcomes</a>
+            are collections that characterize a possible outcome state
+            of a #$BayesVariable.<br />
+            <b>guid: </b>3f4e6306-e21c-41d6-85f6-849e3e83eeda<br />
+            <b>direct instance of: </b>#$CollectionType  <br />
+            <b>direct specialization of: </b>
+            <a href="./fundamental-vocab.html#Collection">#$Collection</a>&nbsp;&nbsp;</blockquote>
+        <font size="+1">
+            <a
+                    name="bayesNetOfMicrotheory">#$bayesNetOfMicrotheory<i>&nbsp;&nbsp;&nbsp;bayes
+                    net of microtheory</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability reasoning using
+            'Bayesian Networks'. <a
+            href="./probability-vocab.html#bayesNetOfMicrotheory">(#$bayesNetOfMicrotheory</a>
+            BNET MT) means that the #$BayesNet BNET has been created for
+            the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            MT. This means that all of the nodes in BNET are
+            propositions (Cyc formulae) that are asserted in MT, and are
+            linked to one another by <a
+            href="./probability-vocab.html#bayesParent">#$bayesParent</a>
+            assertions in the same MT. This predicate associates the
+            network, a <a
+            href="./path-traversal-vocab.html#DirectedAcyclicGraph">#$DirectedAcyclicGraph,</a>
+            with the microtheory. For every #$BayesNet there is exactly
+            one <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            with which it is associated, but (at present) one <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            may have multiple #$BayesNets associated with it. Some, but
+            possibly not all, of the #$CycLAssertions in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            will be nodes in the #$BayesNet.<br />
+            <b>guid: </b>bed4998a-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$StrictlyFunctionalSlot
+            #$AntiTransitiveBinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="bayesParent">#$bayesParent<i>&nbsp;&nbsp;&nbsp;bayes parent</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#bayesParent">(#$bayesParent</a>
+            BAYES-VARIABLE1 BAYES-VARIABLE2 BAYESNET) means that the <a
+            href="./probability-vocab.html#BayesDiscreteOutcome">#$BayesDiscreteOutcome</a>
+            associated with BAYES-VARIABLE2 influences the <a
+            href="./probability-vocab.html#BayesDiscreteOutcome">#$BayesDiscreteOutcome</a>
+            associated with BAYES-VARIABLE1, and that BAYES-VARIABLE2 is
+            an immediate 'parent node' of the BAYES-VARIABLE1 node in
+            the Bayesian Network BAYESNET representing probabilistic
+            influence in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            That is, the second bayes variable is a direct parent of the
+            first in the #$BayesNet. Note that BAYES-VARIABLE1/outcome
+            and BAYES-VARIABLE2/outcome cannot be <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent</a>
+            in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a> if
+            one is a <a
+            href="./probability-vocab.html#bayesParent">#$bayesParent</a>
+            of the other. Given the outcomes of all of a node's <a
+            href="./probability-vocab.html#bayesParent">#$bayesParent</a>
+            nodes, then all of its further ancestor nodes and other
+            non-descendant nodes are <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent</a>
+            of it in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            To relate a node to the set of all of its parent nodes, use
+                <a
+            href="./probability-vocab.html#bayesParentSet">#$bayesParentSet.</a>
+            The direction is obtained from the conditional dependence
+            --- given the outcome of a node --- among its <a
+            href="./probability-vocab.html#bayesParent">#$bayesParents</a>
+            (the 'explaining away' effect), which does not seem to apply
+            among its Bayesian 'child' nodes. Many Bayesian network
+            theorists consider that the directions on the links
+            correspond to the direction of causal influence, and hence
+            to the direction of time.<br />
+            <b>guid: </b>bdbbd144-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./path-traversal-vocab.html#connectedInSystem">#$connectedInSystem</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="bayesParentSet">#$bayesParentSet<i>&nbsp;&nbsp;&nbsp;bayes
+                    parent set</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> A predicate used for probability statements. <a
+            href="./probability-vocab.html#bayesParentSet">(#$bayesParentSet</a>
+            BAYESVARIABLE SETOFBAYESVARIABLES BAYESNET) means that the
+                <a
+            href="./probability-vocab.html#BayesDiscreteOutcome">#$BayesDiscreteOutcome</a>
+            associated with each bayes variable in the set
+            SETOFBAYESVARIABLES influences the <a
+            href="./probability-vocab.html#BayesDiscreteOutcome">#$BayesDiscreteOutcome</a>
+            associated with BAYESVARIABLE, and that each member of
+            SETOFBAYESVARIABLES is an immediate 'parent node' of the
+            BAYESVARIABLE node in the Bayesian Network BAYESNET
+            representing probabilistic influence in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            That is, each #$BayesVariable in SETOFBAYESVARIABLES is a
+            direct parent of BAYESVARIABLE in the #$BayesNet. Note that
+            BAYESVARIABLE and any #$BayesVariable in SETOFBAYESVARIABLES
+            cannot be <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent</a>
+            in the <a
+            href="./context-vocab.html#Microtheory">#$Microtheory</a>
+            since one is a <a
+            href="./probability-vocab.html#bayesParent">#$bayesParent</a>
+            of the other. Given the outcome associations of all the
+            members of SETOFBAYESVARIABLES <a
+            href="./probability-vocab.html#bayesParent">(#$bayesParent</a>
+            nodes), then all of BAYESVARIABLE's further ancestor nodes
+            and other non-descendant nodes are <a
+            href="./probability-vocab.html#conditionallyIndependent">#$conditionallyIndependent</a>
+            of it in the applicable <a
+            href="./context-vocab.html#Microtheory">#$Microtheory.</a>
+            To relate a node to a single one of its parent nodes, rather
+            than the whole set, use <a href="./probability-vocab.html#bayesParent">#$bayesParent.</a><br />
+            <b>guid: </b>c128c2c7-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a name="portionOf">#$portionOf<i>&nbsp;&nbsp;&nbsp;percentage</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./probability-vocab.html#portionOf">(#$portionOf</a>
+            SET1 SET2 NUM) means that the portion of members of SET1
+            that are also members of SET2 is NUM. In other words, the
+            fraction of the cardinality of SET1 and the cardinality of
+            the intersection of SET1 and SET2. For example, <a
+            href="./probability-vocab.html#portionOf">(#$portionOf</a>
+            (#$ResidentsFn #$Netherlands) <a
+            href="./professional-vocab.html#UnemployedPerson">#$UnemployedPerson</a>
+            X) means that unemployment in the Netherlands is X.<br />
+            <b>guid: </b>beccb3d3-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$TernaryPredicate  </blockquote>
+        <p />
+        <hr />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a></body></html>

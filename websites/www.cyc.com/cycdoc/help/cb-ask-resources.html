@@ -1,0 +1,56 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON cb-ask-resources.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Inference Resource Constraints Help</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>Inference Resource Constraints Help</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+<i>Copyright&copy; 1997-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+
+<hr>
+
+<p>
+<h3><a name="constraints">Inference Resource Constraints</a></h3>
+<p>
+Asks in CYC&reg; can be customized via (at least) four different inference resource constraints: Number Cutoff, Time Cutoff, Backchaining Control, and Depth Cutoff.
+<ul>
+<li><b>Number Cutoff:</b> (integer, "Get Everything") This sets the maximum number of binding sets to return - the number of solutions to the query.  For queries in which a truth value should be returned, this number is irrelevant.  Even for queries for which bindings will be returned, often only one answer will be necessary or desired.  To get all possible binding sets (subject to the other resource limits), leave the input box blank and select the "Get Everything" option.  "Get Everything" is the default value for this constraint.
+
+<li><b>Time Cutoff:</b> (integer, "Run Forever") This specifies that
+inference will quit as soon as it can after that amount of wall clock
+time (in seconds) has elapsed.  The default is 30 seconds.  Setting
+time cutoff to "Run Forever" will let inference run indefinitely
+(subject to the other resource constraints), which is usually not a
+good idea.  Note: (A) The time required for a given inference can vary
+depending on the machine running the CYC&reg; Server application, so
+different CYC&reg Servers may have different behavior given the same
+time constraints.  (B) Because wall clock time is used, the amount of
+inference performed in a given amount of time can also vary with CPU
+load.  (C) Inferences may take slightly longer than the specified time
+cutoff -- In certain cases, the inference engine will be in the midst
+of a discrete inference step and time cutoff will be exceeded by some
+number of seconds before it is able to be terminated.
+
+<li><b>Backchain Control:</b> ("No Backchaining", integer, "Backchain Forever") This specifies whether backchaining is to be used during inference, and if so, how deep this backchaining should go.  Selecting "Backchain Forever" will allow unlimited backchaining (which can be very time-consuming, and should almost never be used), while an integer value sets the maximum axiom depth which can be considered by the inference engine when it is backchaining.  The default setting is "No Backchaining", which means that backchaining is turned off.  Backward queries can be advantageous because they consider assertions in the KB which have the Assertion Direction: Backward.  Without backchaining, only forward inference can take place, which generally yields a faster but shallower answer.
+<li><b>Depth Cutoff:</b> (integer, "Infinite Depth") This sets the maximum number of proof steps to be used during inference.  The default is 20 steps.  Setting depth cutoff to "Infinite Depth" means there is no depth limit to the search, and will let inference run indefinitely (subject to the other resource constraints), which is usually not a good idea. 
+</ul>
+<p>
+For more details about asks, reasons for halting queries, and troubleshooting with resource constraints, consult the <a href="../course/asking-module.html">Quering CYC&reg; with the Web Interface </a> module in the CYC&reg Course Materials.
+<p>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

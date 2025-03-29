@@ -1,0 +1,187 @@
+<html>
+
+<title>A note on #$ActorSlots and their use</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0></a>A note on #$ActorSlots and their use</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 3/28/2002<br>
+
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+<br>
+
+<hr>
+
+<p>
+<H2>What is an <a href=/cycdoc/vocab/actor-vocab.html#ActorSlot>#$ActorSlot</a>?</H2>
+
+<p>
+
+Actor slots are the predicates that Cyc uses to express relationships
+between an event and the participants in it (in other systems similar
+things are called participant roles, (deep) case roles or thematic
+relations).  Because an actor slot is a binary relation, the
+collection <a href=/cycdoc/vocab/actor-vocab.html#ActorSlot>#$ActorSlot</a> (the collection of all actor slots) is a
+subcollection of <a href=/cycdoc/vocab/fundamental-vocab.html#BinaryPredicate>#$BinaryPredicate</a>.  The first argument of an actor
+slot is an instance of <a href=/cycdoc/vocab/time-vocab.html#Event>#$Event</a>; the second is an instance of
+<a href=/cycdoc/vocab/time-vocab.html#SomethingExisting>#$SomethingExisting</a>.  For example, the assertion (<a href=/cycdoc/vocab/financial-vocab.html#buyer>#$buyer</a>
+#$BikeBuying001 #$Kim) means that in the <a href=/cycdoc/vocab/financial-vocab.html#Buying>#$Buying</a> event
+#$BikeBuying001, the buyer is #$Kim.  The assertion (<a href=/cycdoc/vocab/actor-vocab-complete.html#objectPaidFor>#$objectPaidFor</a>
+#$BikeBuying001 #$Vitus002) means that #$Vitus002 is the bike that is
+purchased in #$BikeBuying001, and so on.
+
+<p>
+
+Currently (July, 1997), there are about a hundred actor slots used
+in Cyc (you can view the <A HREF="actor-vocab-complete.html">complete
+list</A>).  Because there are so many, their use is at times
+bewildering.  This note discusses the hierarchy of actor slots and
+what criteria are used to define an actor slot's meaning.
+
+<p>
+
+Some slots are very specific (like <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a>); others quite broad
+(like <a href=/cycdoc/vocab/actor-vocab-complete.html#objectMoving>#$objectMoving</a>).  It is useful to have actor slots of varying
+degrees of specificity, because we need to express genralizations
+about broad and narrow classes of participants in events.  There are
+many events in which it makes sense to talk about an <a href=/cycdoc/vocab/actor-vocab-complete.html#objectMoving>#$objectMoving</a>,
+and in some subset of those events we can additionally characterize
+that participant as a <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> (a device that moves under its own
+power and transports people or goods).  Thus, although it may seem
+that there are an excessive number of actor slots, each one is
+motivated by the need to express certain statements in the knowledge
+base, and they are organized in a hierarchical way, with more specific
+actor slots inheriting information from more general ones.
+
+<p>
+
+<H2>The organization of the <a href=/cycdoc/vocab/actor-vocab.html#ActorSlot>#$ActorSlot</a> hierarchy</H2>
+
+<p>
+
+Actor slots are arranged in a hierarchy.  Since they are predicates,
+not collections, the relation that holds between a more general and a
+more specific actor slot is <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a>.  For example, (<a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a>
+<a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> <a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a>) means that the actor slot <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> is a
+specialization of <a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a>.  By arranging actor slots in a
+hierarchy, we can economically represent knowledge about a large and
+diverse set of participant roles.  Everything we know to be true of
+<a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a>s, for example, will also be true of <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a>s, and
+every participant in an event that is deemed a <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> is also a
+<a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a>.  One type of information that <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> inherits from
+<a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a> is its argument types.  The first argument of
+<a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a> must be an instance of <a href=/cycdoc/vocab/transportation-vocab.html#TransportationEvent>#$TransportationEvent</a>, so the
+first argument of <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> must be a specialization of
+<a href=/cycdoc/vocab/transportation-vocab.html#TransportationEvent>#$TransportationEvent</a>.  As we can see, the first argument of <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a>
+is an instance of #$TransportationUsingADevice.  The second argument
+of <a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a> must be an instance of <a href=/cycdoc/vocab/material-vocab.html#SolidTangibleThing>#$SolidTangibleThing</a>, and the
+second argument of <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> must be an instance of
+<a href=/cycdoc/vocab/transportation-vocab.html#TransportationDevice-Vehicle>#$TransportationDevice-Vehicle</a>, a subset of <a href=/cycdoc/vocab/material-vocab.html#SolidTangibleThing>#$SolidTangibleThing</a>.
+
+<p>
+
+The most general actor slot is called <a href=/cycdoc/vocab/actor-vocab-complete.html#actors>#$actors</a>.  In other words, for
+any participant ?X in an event ?E we can assert, at a minimum,
+(<a href=/cycdoc/vocab/actor-vocab-complete.html#actors>#$actors</a> ?E ?X).  Hopefully, we can say something more specific than
+that about a participant's role in an event, but <a href=/cycdoc/vocab/actor-vocab-complete.html#actors>#$actors</a> does impose
+some restrictions.  Most importantly, the participant and the event
+must "temporally intersect"; i.e., the participant has to exist while
+the event is happening.
+
+<p> 
+
+As we look at more specialized actor slots the restrictions increase.
+Most commonly, the restrictions involve more specialized argument type
+constraints on both the kind of event that a slot makes sense for, and
+the kind of object that can participate in a given fashion.  Thus the
+actor slot <a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a> can be sensibly used only with reference to
+participants in <a href=/cycdoc/vocab/transportation-vocab.html#TransportationEvent>#$TransportationEvent</a>s that are capable of motion.
+
+<p>
+
+Other kinds of assertions differentiate actor slots from one
+another as well.  <a href=/cycdoc/vocab/actor-vocab-complete.html#preActors>#$preActors</a> is a specialization of <a href=/cycdoc/vocab/actor-vocab-complete.html#actors>#$actors</a> for
+participants that pre-exist the event.  So things that are changed by
+an event, like a house being painted in a #$Painting event, are
+<a href=/cycdoc/vocab/actor-vocab-complete.html#preActors>#$preActors</a> in that event, while things that are created in the course
+of an event, like a house being built in a #$BuildingConstructing
+event, are not <a href=/cycdoc/vocab/actor-vocab-complete.html#preActors>#$preActors</a> in that event.  There is also the actor
+slot <a href=/cycdoc/vocab/actor-vocab-complete.html#postActors>#$postActors</a>, for participants that exist after an event; a house
+that gets painted or otherwise modified is one of the <a href=/cycdoc/vocab/actor-vocab-complete.html#postActors>#$postActors</a>,
+but a house that gets dismantled or demolished in an event is not.
+You will often see pairs of actor slots in the hierarchy like
+<a href=/cycdoc/vocab/actor-vocab-complete.html#preActors>#$preActors</a> and <a href=/cycdoc/vocab/actor-vocab-complete.html#postActors>#$postActors</a>, <a href=/cycdoc/vocab/actor-vocab-complete.html#deliberateActors>#$deliberateActors</a> and
+<a href=/cycdoc/vocab/actor-vocab-complete.html#nonDeliberateActors>#$nonDeliberateActors</a>, <a href=/cycdoc/vocab/actor-vocab-complete.html#inputs>#$inputs</a> and <a href=/cycdoc/vocab/actor-vocab-complete.html#outputs>#$outputs</a>, and so on.
+
+<p>
+
+If you're interested in seeing actor slots hierarchically arranged by
+their <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a> relations to one another, you can view this
+<A HREF="actor-vocab-tree.html">Actor Slot Hierarchy</A>.
+
+<p>
+
+<H2>Is the current set of <a href=/cycdoc/vocab/actor-vocab.html#ActorSlot>#$ActorSlot</a>s final and unchangeable?</H2>
+
+<p>
+
+The existing set of actor slots should not be regarded as complete or
+definitive.  However, a considerable amount of organized effort has been
+put into the current inventory and arrangement of actor slots, so
+modifying the use of old ones or adding new ones without some thought is
+discouraged.
+
+<p>
+
+As a rough generalization, we want to have different actor slots
+available for each of the different kinds of participants in an event.
+Sometimes we can get around this without creating new actor slots
+because there are other ways besides actor slots of telling one
+participant from another.  For example, given the assumption that
+there is one bride and one groom in a #$Wedding, we can use the actor
+slot <a href=/cycdoc/vocab/social-vocab.html#eventHonors>#$eventHonors</a> to refer to either one, and distinguish the bride
+as a member of <a href=/cycdoc/vocab/social-vocab.html#AdultFemalePerson>#$AdultFemalePerson</a>.  So we don't necessarily need
+actor slots for bride and groom.
+
+<p>
+
+New actor slots will be created for a couple of reasons.  Particularly
+at the more specific level, we may find, as more knowledge is entered
+into the system, that there is a need to distinguish two participants
+that current actor slots don't serve to distinguish.  Also, a new
+actor slot may be created for the sake of convenience and efficiency
+in inference, if we find the same combination of literals used in rule
+after rule to designate a particular participant in a type of event.
+As one example, the actor slot <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> refers to a
+<a href=/cycdoc/vocab/transportation-vocab.html#TransportationDevice-Vehicle>#$TransportationDevice-Vehicle</a> which is both the
+<a href=/cycdoc/vocab/actor-vocab-complete.html#providerOfMotiveForce>#$providerOfMotiveForce</a> and the <a href=/cycdoc/vocab/transportation-vocab.html#transporter>#$transporter</a> in a
+<a href=/cycdoc/vocab/transportation-vocab.html#TransportationEvent>#$TransportationEvent</a>.  <a href=/cycdoc/vocab/transportation-vocab.html#vehicle>#$vehicle</a> is a useful actor slot to have
+because this combination occurs quite frequently in rules.  Rather
+than repeating these formulas every time we wish to refer to the
+vehicle involved in an event, we have created this actor slot.
+
+<hr>
+<p>
+<h3>Return to <A HREF="actor-vocab.html">Actor Vocabulary</A></h3>
+<p>
+<hr>
+<a href=/cycdoc/find-constant.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Search for Constants by Name</a> (In all files, not just this one.)<br>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+
+</body>
+</html>

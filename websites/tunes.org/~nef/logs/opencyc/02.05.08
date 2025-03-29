@@ -1,0 +1,700 @@
+00:00:00 --- log: started opencyc/02.05.08
+00:09:36 --- quit: ChanServ (ACK! SIGSEGV!)
+00:24:57 --- join: ChanServ (ChanServ@services.) joined #opencyc
+00:24:57 --- mode: carter.openprojects.net set +o ChanServ
+00:35:02 --- quit: ChanServ (Shutting Down)
+00:35:10 --- join: ChanServ (ChanServ@services.) joined #opencyc
+00:35:10 --- mode: carter.openprojects.net set +o ChanServ
+01:19:52 --- quit: ChanServ (ACK! SIGSEGV!)
+01:20:05 --- join: ChanServ (ChanServ@services.) joined #opencyc
+01:20:05 --- mode: carter.openprojects.net set +o ChanServ
+01:51:55 <dmiles--> good morning aLL
+01:53:35 <dash> dmiles--: hey
+01:54:50 <dash> looks like you're making interesting things happen :)
+01:57:37 <dmiles--> with logicmoo?
+01:57:56 <dash> yes
+01:58:30 <dmiles--> i am starting to target some specificc predicates tonight to make things easier on the java side
+01:59:26 <dmiles--> i have written syncrozation to be really tricky an usefull then toplevel looping over the import/export to mud/cyc
+01:59:51 <dmiles--> but i am going to try a simpler approach to see if that works even better
+02:00:12 <dmiles--> instead of serializing all objects into CycL expresions.. just specific mud objects
+02:00:40 <dmiles--> buty am going to leave all the 2 way java support
+02:00:49 <dmiles--> just not use it muyself
+02:01:15 <dash> yeah
+02:02:36 <dmiles-->     ;; (mudObjectFoundInArea ?MudArtifactOrMudBeing  ?MudArea)
+02:02:36 <dmiles-->     ;; (mudPathwayToArea ?Area1  ?Area1 ?MudEntrance)
+02:02:36 <dmiles-->     ;; (mudInstance ?MT ?Obj ?MudThingType)
+02:02:36 <dmiles-->     ;; (mudDescription ?Obj ?TextString)
+02:02:36 <dmiles-->     ;; (mudFlag ?Obj ?Flag)  ;; Attribt
+02:02:36 <dmiles-->     ;; (mudAttribute ?Obj ?Attrib ?Value)
+02:02:38 <dmiles-->     ;; (mudKeyword ?Obj  ?TextString ) ;; isa's
+02:02:40 <dmiles-->     ;; (mudChild ?Obj  ?Obj )
+02:03:49 <dmiles--> so what i am doing now is just 2 way synicing those
+02:04:32 <dmiles-->     ;;  isa MudThingType
+02:04:32 <dmiles-->     ;;  isa MudArea, MudEntrance, MudArtifact, MudBeing 
+02:05:10 <dmiles--> are all the specs i need
+02:06:17 <dmiles--> so now java thread gets a diff of cyc and jamud 
+02:06:28 <dmiles--> and try's to set both of them right
+02:06:51 <dmiles--> but durreing a conflict favors jamud to be correct (since it is updating)
+02:07:25 <dmiles--> in a couple hours should have this tested and usable again
+02:07:58 <dmiles--> then i just need to refine some knowedge engineering .. hten release tommorw maybe
+02:08:54 <dmiles--> dash, so you browsed the cyc server and saw how it had mined the java stuuff?
+02:09:23 <dash> some
+02:09:28 <dmiles--> its pretty neato
+02:09:29 <dash> i mainly was reading the channel logs :)
+02:10:35 <dmiles--> well maybe in the next 36 hours i will through a mud party and announce to opencyc list
+02:10:45 <dash> spiffy
+02:10:52 <dmiles--> and then find it worhtwile to set up a perminaten server
+02:32:59 --- quit: dash (Killed (NickServ (Ghost: dash_!washort@d122.narrowgate.net)))
+02:35:21 --- quit: CycLBot (Remote closed the connection)
+03:52:21 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:52:21 <CycLBot> I am initializing
+03:52:22 <CycLBot> I am ready to chat
+04:09:40 --- quit: CycLBot (Remote closed the connection)
+04:11:17 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+04:18:05 --- quit: CycLBot (Remote closed the connection)
+04:20:39 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+04:22:29 --- quit: CycLBot (Remote closed the connection)
+06:08:28 --- quit: ChanServ (ACK! SIGSEGV!)
+06:08:38 --- join: ChanServ (ChanServ@services.) joined #opencyc
+06:08:38 --- mode: carter.openprojects.net set +o ChanServ
+06:57:29 --- nick: DeSharq -> deSharq
+07:20:04 --- quit: ChanServ (Shutting Down)
+07:22:24 --- join: ChanServ (ChanServ@services.) joined #opencyc
+07:22:24 --- mode: carter.openprojects.net set +o ChanServ
+07:29:24 --- quit: ChanServ (ACK! SIGSEGV!)
+07:29:35 --- join: ChanServ (ChanServ@services.) joined #opencyc
+07:29:35 --- mode: carter.openprojects.net set +o ChanServ
+07:57:02 --- quit: ChanServ (ACK! SIGSEGV!)
+07:57:10 --- join: ChanServ (ChanServ@services.) joined #opencyc
+07:57:10 --- mode: carter.openprojects.net set +o ChanServ
+07:59:56 <dmiles--> i need to understand spomething
+07:59:58 <dmiles--> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&8299
+08:00:08 <dmiles--> in the KB browser..
+08:00:24 <dmiles--> i see (mudExits midg_001 (ExitToFn North midg_002)) in JamudMt
+08:00:31 <dmiles--> then.
+08:00:38 <dmiles--> (isa '(ExitToFn South midg_001) Entrance_SouthInstance) in JamudMt
+08:00:50 <dmiles--> the '(ExitToFn South midg_001) is Quoted
+08:00:59 <dmiles--> did i do something wrong?
+08:01:28 <dmiles--> It was created as a Nart
+08:01:49 <dmiles--> then i asserted the Nart in the Isa expression
+08:02:19 <dmiles--> do Narts Become Quoted?
+11:06:49 <dmiles--> ok looks like CycNart.stringApiValue does (quote 
+11:07:17 <dmiles--> which does seem proper
+11:07:33 <dmiles--> i may be misusing Narts
+11:12:51 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+11:29:13 --- quit: ChanServ (ACK! SIGSEGV!)
+11:29:26 --- join: ChanServ (ChanServ@services.) joined #opencyc
+11:29:26 --- mode: carter.openprojects.net set +o ChanServ
+11:30:53 --- quit: ChanServ (ACK! SIGSEGV!)
+11:31:08 --- join: ChanServ (ChanServ@services.) joined #opencyc
+11:31:08 --- mode: carter.openprojects.net set +o ChanServ
+11:31:34 <Taral> why did ChanServ join?
+11:42:23 <dmiles--> yes just now
+11:42:53 <Taral> why
+11:43:05 <Taral> ah, nevermind.
+11:43:05 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+11:43:15 <dmiles--> its is constantly set to join its just been up/down all night
+12:29:09 <dmiles--> whitten, are you around?
+12:40:07 <whitten> hello dmiles.
+12:40:59 <dmiles--> hello sir
+12:41:02 <whitten> Narts, to my knowledge, are Non-atomic reified terms
+12:41:21 <whitten> I'm not sure why they are quoted by the API.
+12:41:25 <dmiles--> i fixed the way i used them (i think)
+12:41:41 <dmiles--> i am curcumventing the quoting
+12:42:18 <dmiles--> the API has a java object that unrolls as quoted
+12:42:30 <whitten> I'm glad to see your Jamud-to-Cyc stuff is progressing.
+12:42:44 <dmiles--> so what i am really creating is a function-denotainal exprestion
+12:43:13 <dmiles--> yes.. i made the stuff more lightwieght on cyc
+12:43:24 <dmiles--> creating specific predicates that map one-to-one
+12:43:48 <dmiles--> and hardcoding how they are both viewed in java and cyc
+12:43:49 <whitten> good idea, as long as you don't increase the weight on Jamud.
+12:44:30 <whitten> Don't forget the power of genlPreds.  You can do too much hardcoding.
+12:44:31 <dmiles--> well durring the syncroization l;oop i collect all Artifiacts,Rooms, and attriburtes
+12:44:46 <dmiles--> make sure both Cyc and Jamud see them the same giving the Mud priiority
+12:45:12 <whitten> I want to get a copy of your .jar file that allows your Cyc web browser to be accessed from a separate machine.
+12:45:28 <dmiles--> i have tried to be sure those MudPRedicates genlPred something in Cyc
+12:45:46 <whitten> I don't know if you want to give info for the logfile tho.
+12:46:19 <dmiles--> well the webserver was part of opencyc javaapi
+12:46:46 <dmiles--> but its hard to use so i moduified the paths and ports
+12:47:12 <dmiles--> well not hard if you are familar with Java setting properties on a command line
+12:47:15 <whitten> Right. the MudPredicates need to have proper genlPreds, but there is power in testing something 'higher' in the hierarchy 
+12:47:48 <dmiles--> here are some MudPreds http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&8286
+12:48:03 <dmiles--> ok lets see if ui can build the jar class
+12:48:20 <dmiles--> might be able to get away with just a class
+12:48:30 <whitten> my Java experience is mostly learned from a book, at idle times, I don't use it very often. Hence I figured learning how to do this from you would make the most sense. (Directed, Focused learning <grin>)
+12:48:51 <dmiles--> yes dirrected learniong (target goals) is the only way!
+12:49:29 <dmiles--> do you mind runnig the webservber as root?
+12:50:12 <dmiles--> its hardcoded for port 80 is way
+12:50:17 <dmiles--> err why
+12:50:21 <whitten> I'd prefer not to. Is that the only way to do it?
+12:50:40 <dmiles--> i'll make sure its at a higher prot then
+12:50:46 <dmiles--> err port
+12:51:01 <dmiles--> i run mine on 8036
+12:51:16 <dmiles--> the starnard jar is compiled to use 80
+12:51:38 <dmiles--> i am first seeing if you are candidate to use the jar already compiled
+12:52:00 <whitten> Ah. why don't you walk me thru the process some more.
+12:52:24 <dmiles--> ok first you'll want to checkout the cycapi off sourceforge
+12:52:34 <whitten> I am already running a web server on the candidate machine. Won't apache conflict unless I use a different port.
+12:52:43 <dmiles--> yes
+12:53:10 <whitten> So my world-view model is at least close to accurate.
+12:53:44 <dmiles--> :) 
+12:53:49 <whitten> to checkout the cycapi, I need to use a cvs check out command.
+12:54:05 <dmiles--> i am looking to see how to preset the properties of the webserver on the command line at launch time
+12:54:31 <whitten> that sounds most flexible.
+12:54:46 <dmiles--> well actually, before you do a CVS checkout we might be able to get away with the jar file you arlready have
+12:55:33 <dmiles--> in the cyc lib/ dir
+12:56:03 <whitten> That sounds interesting. Clearly, the jar file has .class files in it, and if the code is hardcoded to a particular port, how will we change the variables?
+12:56:39 <whitten> perhaps make a subclass, and change them in the subclass? Are the variables we want to change final ?
+12:56:40 <dmiles--> they are set to be changed by pushing properties on the command line.. which is something i hant tried before
+12:57:26 <dmiles--> so normally..
+12:57:27 <dmiles--> [cyc@titan lib]$ java -cp OpenCyc.jar   org.opencyc.webserver.WebServer
+12:57:30 <whitten> Steve is a good programmer. He thinks ahead for how to reuse things.
+12:57:34 <dmiles--> is the com,mand to launch it
+12:57:44 <dmiles--> yes he had done so
+12:58:03 <dmiles--> steve used the properties system to change these
+12:58:14 <dmiles--> but i have never set properties in launch before
+12:58:32 <dmiles--> i am now learning how as we speak :0
+12:59:02 <dmiles--> found it
+13:00:34 --- quit: dmiles-- (Read error: 104 (Connection reset by peer))
+13:00:40 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+13:01:07 <dmiles>  java -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs="/"  org.opencyc.webserver.WebServer
+13:01:28 <dmiles> now we have to set the Host machine
+13:01:37 <dmiles> that cant be set in properties it seems
+13:01:51 <dmiles> so we need to add someihtng in /etc/host
+13:02:38 <dmiles> hrrm every other propery can be changed but cycHost
+13:03:43 <dmiles> in code its set to 'McCarthy
+13:04:25 <whitten> heh. its just a simple matter of programming <grin>
+13:04:48 <whitten> is cycHost final ? could we use the subclassing trick to change its value?
+13:04:58 <dmiles> yes this could be done
+13:05:13 <whitten> java -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Do
+13:05:13 <dmiles> but all the other properties are settiable form a executuion command line
+13:05:14 <whitten> rg.opencyc.webserver.dirs="/"  org.opencyc.webserver.WebServer
+13:05:14 <whitten> java.lang.NoClassDefFoundError: OpenCyc/jar
+13:05:14 <whitten>         at java.lang.Throwable.<init>(Throwable.java:38)
+13:05:14 <whitten>         at java.lang.Error.<init>(Error.java:21)
+13:05:14 <whitten>         at java.lang.LinkageError.<init>(LinkageError.java:21)
+13:05:18 <whitten>         at java.lang.NoClassDefFoundError.<init>(NoClassDefFoundError.java:21)
+13:05:36 <dmiles> cd into the lib dir
+13:06:22 <dmiles> the use this..
+13:06:24 <dmiles> ava -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs=../run/httpd/htdocs/  org.opencyc.webserver.WebServer
+13:06:27 <whitten> so maybe we would be better to use the /etc/host trick? but won't that change the hostname to mccarthy?
+13:07:04 <dmiles> you obnly need to add that mccarthy can be found at 127.0.0.1
+13:07:25 <dmiles> you wuill not need to change your host name itself
+13:07:45 <dmiles> so adding in
+13:07:58 <dmiles> 127.0.0.1 mccarthy 
+13:07:59 <whitten> java -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dor
+13:07:59 <whitten> g.opencyc.webserver.dirs=../run/httpd/htdocs/ org.opencyc.webserver.WebServer
+13:07:59 <whitten> java.lang.NoClassDefFoundError: OpenCyc/jar
+13:07:59 <whitten>         at java.lang.Throwable.<init>(Throwable.java:38)
+13:07:59 <whitten>         at java.lang.Error.<init>(Error.java:21)
+13:08:00 <whitten>         at java.lang.LinkageError.<init>(LinkageError.java:21)
+13:08:02 <whitten>         at java.lang.NoClassDefFoundError.<init>(NoClassDefFoundError.java:21)
+13:08:03 <dmiles> should do the truick
+13:08:12 <dmiles> oh right now its a path issue
+13:08:25 <dmiles> what is in your current dirrectory?
+13:08:54 <whitten>  /foo/opencyc/opencyc-0.6.0/lib
+13:09:06 <dmiles> hhrm it may be the version of java 
+13:09:34 <dmiles> cyc@titan lib]$ java -version
+13:09:35 <dmiles> java version "1.4.0"
+13:09:35 <dmiles> Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.0-b92)
+13:09:35 <dmiles> Java HotSpot(TM) Client VM (build 1.4.0-b92, mixed mode)
+13:09:35 <dmiles> [cyc@titan lib]$
+13:09:46 <whitten> java -version
+13:09:46 <whitten> Kaffe Virtual Machine
+13:09:46 <whitten> Copyright (c) 1996-1999
+13:09:46 <whitten> Transvirtual Technologies, Inc.  All rights reserved
+13:09:48 <whitten> Engine: Just-in-time v3   Version: 1.0.5   Java Version: 1.1
+13:10:03 <dmiles> ah this may be it
+13:10:41 <dmiles> i do not know if Kaffee can use all of the Sun Java classes
+13:10:47 <whitten> heh. what's a few years off between friends?
+13:11:15 <dmiles> :)  however it seems to know what you want..
+13:11:37 <dmiles> its just not seeing the .jar file in your local dirrectory
+13:11:42 <dmiles> is it there?
+13:12:06 <whitten> maybe the message : java.lang.NoClassDefFoundError: OpenCyc/jar
+13:12:24 <whitten> is relevant. It is changing OpenCyc.jar to OpenCyc/jar
+13:12:26 <dmiles> chnage the -cp to -classpath 
+13:12:39 <whitten> do I need the .jar ?
+13:12:49 <dmiles> thats the only command line differnce i see 
+13:12:53 <dmiles> it is there?
+13:12:58 <dmiles> in lib?
+13:13:13 <dmiles> yes you need it
+13:13:47 <dmiles> mine was in lib/ by defualt 
+13:13:53 <whitten> java -classpath OpenCyc.jar -Dorg.opencyc.webserver.port=60
+13:13:54 <whitten> 60 -Dorg.opencyc.webserver.dirs=../run/httpd/htdocs/ org.opencyc.webserver.WebSe
+13:13:54 <whitten> rver
+13:13:54 <whitten> Couldn't find or load essential class `java/lang/Object' java.lang.NoClassDefFou
+13:13:55 <whitten> ndError java/lang/Object
+13:14:18 <dmiles> ok that is the differnce between Kaffe and Sun
+13:14:34 <dmiles> much much closer
+13:14:58 <dmiles> i suspect now that Sun has those things built into its runtime
+13:15:16 <dmiles> but kaffee doent expect java.* packages
+13:15:35 <whitten> so, what is the best way to address the issue?
+13:16:05 <dmiles> installing sun java since that will be something you'll want for a greate many things for cyc
+13:16:26 <dmiles> the latest version is 1.4
+13:16:39 <dmiles> i have never seen kaffee work
+13:16:52 <dmiles> for any java applications (not in the last 3 years)
+13:17:21 <dmiles> which is too bad, its default distrivbuted with most linux distributions
+13:17:55 <whitten> ah, the recursion level problem solving technique. I want to fix OpenCyc, so now I have to fix Java, recurse as necessary.
+13:18:14 <dmiles> yes even if we fixed opencyc.jar
+13:18:33 <dmiles> we will still need JDK
+13:18:48 <dmiles> let me get you a very close link to it
+13:19:28 <whitten> I have browsed opencyc on this machine. I just want to use the windows box behind the same firewall instead of teh linux browser.
+13:20:03 <dmiles> thats what motivated me at first as well
+13:20:31 <whitten> I was trying to avoid the upgrade-linux-browser oops update-Xwindows-client oops upgrade *fill-in-the-blank* recursion cycle.
+13:21:34 <dmiles> http://java.sun.com/j2se/1.4/download.html
+13:21:41 <whitten> I know the cyc folks are actively working on the security model, so I don't want to distract them.
+13:21:54 <dmiles> yes.. even with the latest-gratest Netscape
+13:22:01 <dmiles> opencyc is still hard to use
+13:22:28 <dmiles> (from netscape)
+13:22:36 <dmiles> when one is very used to IE
+13:23:30 <whitten> Well, the Cyc tools are focused for the Knowledge Engineering task within Cycorp. I expect they are able to control which browser is used within their four walls.
+13:24:37 <dmiles> i think there was motivation for the webserver proxy Steve wrote
+13:26:12 <dmiles> so here if i was very set on using opencyc from my lan i would do (and did)
+13:26:24 <dmiles> install the JDK1.4
+13:26:51 <dmiles> then you would only need to add mcarthy to your /etc/hosts
+13:26:58 <dmiles> and then run the command line
+13:27:15 <dmiles> [cyc@titan lib]$ java -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs=../run/httpd/htdocs/  org.opencyc.webserver.WebServer
+13:27:35 <dmiles> there should be no recursive supri8ses
+13:27:55 <whitten> that seems simple enough. How do I avoid breaking something that depends on Kaffe?
+13:28:19 <dmiles> i have never heard of kaffee being used 
+13:28:23 <whitten> I don't need the SDK, just the JRE, right?
+13:28:38 <dmiles> i think linux distributions favor it becasue its been a long standing part
+13:28:55 <dmiles> but no one uses it that i know of
+13:29:16 <dmiles> let me be sure i am suggesting the correct java kit
+13:29:40 <whitten> heh. We get used to certain actions and even when they don't make sense any more, we keep doing them.
+13:30:48 <dmiles> i think the JRE is capable
+13:30:54 <whitten> Almost like the actions are monotonically asserted, rather than default asserted.
+13:31:07 <dmiles> i install both by default becasue of other non-related things
+13:32:05 <dmiles> :)
+13:33:21 <dmiles> i default assert that JRE will be enough
+13:33:51 <dmiles> once you install it (rpm install) i dio not know if it gets put into your path
+13:33:57 <whitten> heh. could I examine the supports for that assertion?
+13:34:16 <dmiles> my support was the -version output above
+13:34:35 <dmiles> Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.0-b92)
+13:35:08 <dmiles> but i know on my machine my PATH uses the version in the JDK
+13:35:20 <dmiles> not the JRE
+13:35:43 <dmiles> so its possible i have a dupplicate binary
+13:35:58 <whitten> but the .jar file created by Cycorp doesn't need the runtime environment, so in theory, JRE shouldn't be necessary, right?
+13:36:29 <dmiles> correct
+13:36:51 <dmiles> i only use the JRE version for staticly linking the java vm to SWI prolog :)
+13:37:11 <dmiles> otherwsie i believe it would be redundant
+13:37:29 <whitten> maybe the problem is that -classpath needs a full path instead of a single jar file.
+13:37:49 <dmiles> well kaffee seems to not be finding its built in runtimes
+13:37:57 <dmiles> of java.lang.Object
+13:38:30 <whitten> java -help says -classpath <path>       Set classpath
+13:39:01 <dmiles> yes and nomrally the java VM default has its java.* packages visable even when you change the classpath
+13:39:29 <dmiles> a .jar file is vieiwed to Java as a dirrectory
+13:39:43 <whitten> hm. I recall something about a basepath as well as a classpath. Or am I thinking of Jikes?
+13:39:53 <dmiles> so for example you could include a few jars separated by ":"
+13:40:21 <dmiles> you can also use real dirrectories.. but not dirrecories conatianing only .jars
+13:41:08 <dmiles> so legal classpath would be:   .:../clases/:MyJar.jar
+13:41:29 <whitten> there are several .jar files over in /usr/share/kaffe/
+13:41:43 <whitten> could I move the OpenCyc.jar over there?
+13:41:55 <dmiles> then this may be possible with Kaffee.. if you point it to itsd basic .jar files as well
+13:42:15 <dmiles> you will still need to be explicit about what jar files it uses
+13:42:42 <dmiles> meaning it will not automaticly use .jar files unless their names appear in classpathj
+13:43:11 <dmiles> so if in the kaffee dirrectory you see a rt.jar
+13:43:17 <whitten> the other issue, that I am assuming the OpenCyc system uses kaffe or JRE. 
+13:43:38 <dmiles> i do not know for sure it works with kaffee
+13:43:57 <dmiles> i never seen anything work with kaffeee and i have tried about 4 differnt java apps
+13:44:16 <dmiles> maybe i have never fully configured kaffeee
+13:44:36 <whitten> It is possible that the Cyc image is not using either run time, but is interpreting the byte codes itself.
+13:45:21 <dmiles> the cyc image is separte from jhava
+13:45:35 <whitten> This sounds plausible to me, because there was no mention of making sure of a particular java install in the instructions for getting OpenCyc to work.
+13:46:09 <dmiles> correct, the use of Java API is on top and separte from opencyc
+13:47:24 <dmiles> ok i confirmed the JRE will run it
+13:47:51 <dmiles> /opt/j2re1.4.0/bin/java -cp OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs=../run/httpd/htdocs/ org.opencyc.webserver.WebServer
+13:47:59 <dmiles> Listening on port 6060
+13:47:59 <dmiles> Cyc connections directed to port 3600
+13:47:59 <dmiles> Serving from ../run/httpd/htdocs/
+13:48:19 <dmiles> i'll give Kaffee a shot here as well
+13:48:21 <whitten> I'm not doubting the JRE could use the .jar file. I'm doubting that OpenCyc is using JRE.
+13:48:58 <dmiles> Couldn't find or load essential class `java/lang/Object' java.lang.NoClassDefFoundError java/lang/Object
+13:48:58 <dmiles> Aborted (core dumped)
+13:50:48 <dmiles> where did you find the kaffe jar files?
+13:50:52 <whitten> useful to know, but not conclusive. I don't have the JRE installed, but I can browse on the same machine. 
+13:51:29 <whitten>   /usr/share/kaffe
+13:51:47 <whitten> so how is that .jar file getting executed?
+13:52:12 <dmiles> got it working :_)
+13:52:20 <dmiles>  kaffe -classpath /usr/share/kaffe/Klasses.jar:OpenCyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs=../run/httpd/htdocs/  org.opencyc.webserver.WebServer
+13:53:16 <dmiles> http://12.225.207.235:6060/cgi-bin/cyccgi/cg?cb-start
+13:53:19 <dmiles> oops
+13:53:24 <dmiles> well with your IP
+13:53:45 <dmiles> and with mccarthy in the /etc/hosts
+13:54:11 <whitten> I typed your command, with an & on the end...
+13:54:14 <whitten> Error creating log file agent.log
+13:54:14 <whitten> java.io.IOException: Permission denied
+13:54:14 <whitten> OpenCyc Web Server
+13:54:14 <whitten> Listening on port 6060
+13:54:14 <whitten> Internal error: caught an unexpected exception.
+13:54:15 <whitten> Please check your CLASSPATH and your installation.
+13:54:17 <whitten> java/lang/NullPointerException
+13:54:19 <whitten>         at org.opencyc.util.Log.println(Log.java:228)
+13:54:21 <whitten>         at org.opencyc.webserver.WebServer.getProperties(WebServer.java:476)
+13:54:23 <whitten>         at org.opencyc.webserver.WebServer.<init>(WebServer.java:136)
+13:54:25 <whitten>         at org.opencyc.webserver.WebServer.main(WebServer.java:674)
+13:54:27 <whitten>  
+13:54:29 <whitten> [1]+  Aborted                 kaffe -classpath /usr/share/kaffe/Klasses.jar:Open
+13:54:31 <whitten> Cyc.jar -Dorg.opencyc.webserver.port=6060 -Dorg.opencyc.webserver.dirs=../run/ht
+13:54:33 <whitten> tpd/htdocs/ org.opencyc.webserver.WebServer
+13:54:56 <dmiles> i woukld try w/o the & next
+13:55:13 <dmiles> also quoting the properies
+13:55:38 <dmiles> your /etc/hosts file is edited as well correct?
+13:57:06 <dmiles> tyhat tells me that Log.output is bound to a real console
+13:57:29 <dmiles> Log.println -> needs a live stdout
+13:57:46 <whitten> oh. no the /etc/hosts file needs to be fixed. one sec.
+13:58:44 <dmiles> also it seems that Properties need to have an attached argV
+13:59:26 <dmiles> which means it stuff those properies into the command environment in $1 $2 $3 type places
+13:59:47 <dmiles> but the real error is the log file
+14:00:11 <whitten> well, it didn't crash. I"ll try browsing to it.
+14:00:28 <dmiles> cgi-bin/cyccgi/cg?cb-start
+14:00:37 <dmiles> otherwise you get a 404
+14:01:33 <whitten> actually, I got a 504 : timeout
+14:01:59 <dmiles> your cyc server is running in a separate window coorect?
+14:02:11 <dmiles> you need two attached consoles
+14:02:30 <dmiles> but you can use 'screen'
+14:02:34 <dmiles> to emulate
+14:02:36 <whitten> I was using screen.
+14:02:51 <whitten> Let me make sure the cyc image is actually running.
+14:03:11 <dmiles> i would restart cyc one then start the webserver over again
+14:03:22 <dmiles> yes it sound like the Cyc image is not replying
+14:03:42 <dmiles> it will only do so over the local loopback
+14:04:09 <whitten> it wasn't running.
+14:04:32 <dmiles> ah, good.. i rather have problems easily solved
+14:05:14 <dmiles> i am glad i leard about kaffe
+14:05:26 <dmiles> i thought it was this scary monster
+14:06:17 <dmiles> i am going to start testing my java things with it, pottentually logicmoo can use it
+14:07:14 <dmiles> so how is it going?
+14:08:08 <whitten> well, Cyc is started, and the java command line is running, but I'm not able to browse there.
+14:08:39 <dmiles> and it is set for 127.0.0.1 ?
+14:08:45 <dmiles> (not your public ip)
+14:09:01 <dmiles> do a nslookup on mccarthy
+14:09:33 <dmiles> well ping mccarthy i mean
+14:09:46 <dmiles> [cyc@titan lib]$ ping mccarthy
+14:09:46 <dmiles> PING mccarthy (127.0.0.1) from 127.0.0.1 : 56(84) bytes of data.
+14:09:46 <dmiles> Warning: time of day goes back, taking countermeasures.
+14:09:46 <dmiles> 64 bytes from mccarthy (127.0.0.1): icmp_seq=0 ttl=255 time=104 usec
+14:09:50 <whitten> Java screen says:
+14:09:53 <whitten> OpenCyc Web Server
+14:09:53 <whitten> Listening on port 6060
+14:09:53 <whitten> Cyc connections directed to port 3600
+14:09:53 <whitten> Serving from ../run/httpd/htdocs/
+14:10:29 <dmiles> and you've browsed to the cgi-bin ?
+14:10:41 <whitten>  ping finds mccarthy
+14:10:49 <dmiles> as 127.0.0.1 ?
+14:11:28 <whitten> (127.0.0.1): 56 data bytes
+14:11:31 <whitten> 64 bytes from 127.0.0.1: icmp_seq=0 ttl=255 time=0.3 ms
+14:11:33 <dmiles> ok good
+14:11:53 <dmiles> next thing
+14:11:54 <whitten> it says mccarthy.xxx.xxx not just mccarthy.
+14:12:10 <dmiles> hrrm
+14:12:16 <dmiles> that should be ok
+14:12:40 <dmiles> tyhat is your ping just being more friendly and not part of any networking i hope
+14:13:36 <dmiles> cvant you telnet localhost to port 6060?
+14:13:50 <dmiles> then do a GET*/*<enter><enter>
+14:13:57 <whitten> I took the mccarthy.xxx.xxx out of /etc/hosts and now ping doesn't include teh extra bit.
+14:14:04 <dmiles> good
+14:15:01 <whitten> telnet localhost 6060
+14:15:01 <whitten> Trying 127.0.0.1...
+14:15:01 <whitten> Connected to localhost.localdomain.
+14:15:01 <whitten> Escape character is '^]'.
+14:15:01 <whitten> GET*/*
+14:15:02 <whitten>  
+14:15:04 <whitten> HTTP/1.1 404 Not Found
+14:15:06 <whitten> Server: Cyc WebServer
+14:15:08 <whitten> Connection: close
+14:15:08 <dmiles> excelent
+14:15:10 <whitten> Content-Type: text/html
+14:15:12 <whitten>  
+14:15:14 <whitten> <HTML><HEAD>
+14:15:16 <whitten> <TITLE>404 Not Found</TITLE>
+14:15:18 <whitten> </HEAD><BODY>
+14:15:20 <whitten> <H1>404 - Not Found</H1>
+14:15:22 <whitten> </BODY></HTML>Connection closed by foreign host.
+14:15:28 <dmiles> ver good
+14:15:41 <whitten> tell me again the url to try to browse to.
+14:15:54 <dmiles> ok now lets broes to http://localhost:6060/cgi-bin/cyccgi/cg?cb-start
+14:16:22 <dmiles> then should try your public lan ip
+14:16:57 <whitten>  lynx -dump  http://localhost:6060/cgi-bin/cyccgi/cg?cb-star
+14:16:58 <whitten> t
+14:16:58 <whitten>  
+14:16:58 <whitten>    FRAME: [1]toolbar
+14:16:58 <whitten>    FRAME: [2]main
+14:16:58 <whitten>    FRAME: [3]status
+14:17:00 <whitten>  
+14:17:02 <whitten>                            Recent KB Browser History
+14:17:04 <whitten>  
+14:17:06 <whitten>    [4][Help]    [5][Clear History]
+14:17:08 <whitten>    Recent Constants :
+14:17:10 <whitten>    None
+14:17:12 <whitten>    Recent NATs :
+14:17:14 <whitten>    None
+14:17:16 <whitten>    Recent Assertions :
+14:17:18 <whitten>    None
+14:17:20 <whitten>      _________________________________________________________________
+14:17:23 <whitten>  
+14:17:24 <whitten>    Copyright ) 1995 - 2002 [6]Cycorp. All rights reserved.
+14:17:26 <whitten>  
+14:17:36 <dmiles> :) very good
+14:17:50 <dmiles> now need a frames compatible browser on your lan
+14:18:25 <dmiles> well actually did it fully dump or timeout?
+14:18:48 <whitten> I must have typed something wrong. because now the browser is happy.
+14:19:12 <dmiles> i thought eariler it was becasue the process was stopped with &
+14:19:16 <whitten> I bet it was the mccarthy.xxx.xxx in /etc/hosts instead of mccarthy
+14:19:21 <dmiles> since java expects a stdin and stdout
+14:19:38 <dmiles> must have been
+14:20:19 <dmiles> wow it should be posted to list how we did this
+14:20:26 <whitten> The browser window knows teh real machine's name, instead of using mccarthy in the title box
+14:20:35 <dmiles> yes
+14:20:50 <dmiles> since its Cyc actually looking it up
+14:21:26 <whitten>            
+14:21:27 <dmiles> the proxy passes in the client it is proxing for as well
+14:21:46 <dmiles> so it can keep the cyclists straight
+14:23:10 <whitten>  
+14:24:55 <dmiles> its very nice to see cyc from IE
+14:25:51 --- quit: ChanServ (ACK! SIGSEGV!)
+14:26:03 --- join: ChanServ (ChanServ@services.) joined #opencyc
+14:26:03 --- mode: carter.openprojects.net set +o ChanServ
+14:26:45 <dmiles> already have a fewe of us on your machine :)
+14:27:52 <dmiles> works good and is fast from here
+14:32:58 <dmiles> looks like it needs localfiles system access
+14:33:15 <dmiles> since you are running it non-root
+14:33:40 <dmiles> that is why your agenda is halted think
+14:33:50 <dmiles> (i think)
+14:35:54 <dmiles> transcripts/0534/oziac-20020508161231-16445-local-0.ts
+14:36:27 <dmiles> your webserver process i think cannot read files written by cyc
+14:37:17 <dmiles> i have to run for a 1/2 hour
+14:37:32 <dmiles> i wanted to ask your advice on some things
+14:37:39 <dmiles> (to David)
+14:39:11 <dmiles> since you understand the connection between a mud/moo and knowledge engineering 
+14:39:25 --- join: whitten2 (whitten@adsl-65-68-87-147.dsl.hstntx.swbell.net) joined #opencyc
+14:39:33 <dmiles> re
+14:40:38 <whitten2> heh. I think just you and I are on the machine. Maybe my machine is more obvious than I thought <grin>
+14:41:07 <dmiles> ah :)
+14:41:31 <dmiles> http://tunes.org/~nef/logs/opencyc/02.05.08
+14:41:36 <whitten2> sirc got confused so I came back on a different screen.
+14:41:40 <dmiles> or maybe that what you were reading
+14:42:22 <whitten2> yeah. but this should be a reminder that the channel is logged, and everything printed here is available to one and all.
+14:43:03 <dmiles> i tend to be less known then you.. but supprissing what google picks up on
+14:43:30 <whitten2> I wonder what steve did to stop the local directory browsing 'feature' ...
+14:44:12 <dmiles> well it can be done with dirrectory permissions locally
+14:44:18 <stevereed> We dropped the tool from the web gui.
+14:44:29 <dmiles> it understand it was there so you could find transcript files to load
+14:44:52 <stevereed> right about the use of the directory browsing tool.
+14:44:54 <whitten2> I won't be able to run the browser when I am not sitting watching the machine.
+14:45:29 <dmiles> well you could run cyc itself as un untrusted user
+14:45:38 <whitten2> but at least we have worked out most of the issues, in case someone else wants to run an open-to-the-world browser.
+14:46:35 <whitten2> hm. maybe a cycbrowser user that is in the same unix group as cyc? that might work.
+14:47:27 <dmiles> i am happy to learn from David the webproxy runs under kaffe java
+14:47:44 <stevereed> good
+14:47:58 <stevereed> I have only used Sun JVMs up to now
+14:48:06 <whitten2> steve, does Cyc have a Java Virtual Machine built in?
+14:48:17 <stevereed> No but we thought about it.
+14:48:37 <stevereed> the main problem is we would need a static linkage to the JVM
+14:48:39 <dmiles> it should! :)
+14:49:00 <stevereed> We have a problem on Linux with loadable modules.
+14:49:20 <dmiles> i created a static linkage to a JVM from SWI-Prolog once.. it was hard when the Prolog was multithreaded
+14:49:32 <stevereed> we represent memory mapping with a file (the image)
+14:49:42 <stevereed> So maybe we could do it.
+14:49:45 <dmiles> because each Cyc thread would want to share that loaded module
+14:49:58 <stevereed> No,
+14:50:10 <stevereed> the problem with loadable modules is that linux puts them
+14:50:19 <stevereed> into space that we otherwise want for Cyc.
+14:50:34 <stevereed> the world is just a big memory mapped file.
+14:51:12 <whitten2> I tried to find that agent.log
+14:51:20 <whitten2>  but had no success.
+14:51:33 <stevereed> any one in particular?
+14:52:07 <dmiles> David i believe your webproxy does not have access to read/write on some dirs of your machine
+14:52:16 <dmiles> which would include an agent.log
+14:52:40 <dmiles> see http://adsl-65-68-87-147.dsl.hstntx.swbell.net:6060/cgi-bin/cyccgi/cg?cb-mode
+14:53:14 <dmiles> well:
+14:53:15 <dmiles> HTML Transfer halted due to script error:
+14:53:15 <dmiles> Error opening "transcripts/0534/oziac-20020508161231-16445-local-0.ts": Permission denied.
+14:53:34 <whitten2> I got it working by running the kaffe command line as root. now I daren't do so. (since my machine name and IP are in the log)
+14:54:00 <dmiles> sorry ;P
+14:54:30 <dmiles> well i whoised you 
+14:54:37 <whitten2> Like you said, you figured it out, so someone else probably could too.
+14:55:02 <whitten2> whois ?
+14:55:22 <dmiles> so as long as you chown or 777 some of your dirrectories it should run as this new groupo/user you mentioned as easily as it ran as root
+14:55:53 <dmiles> /whois whitten
+14:56:48 <dmiles> when a person joins the channel their ip is given out as well
+14:56:56 <whitten2> sigh. Most security is over-run by trying to make things simpler. Which I did to myself.
+14:57:47 <whitten2> I'll try the cyc browser user approach.
+14:58:11 <dmiles> so Steve if you have time about the the Java VM, i dont understand the shared memory problem
+14:58:55 <dmiles> is it that you cant control what has swapple memory priority? So your competing fro real memory time?
+14:59:18 <dmiles> or is it that Cyc actually has no ther memory map except itself?
+15:00:21 <whitten2> just so you know the agent.log is created in the ../lib directory
+15:00:22 <dmiles> meaning Cyc image runs in very implementation specific memory model that lionux could mangle?
+15:00:38 <dmiles> it would be in lib/ if that where you are
+15:01:06 <dmiles> in the cwd of your kaffe spawn 
+15:01:39 <dmiles> so it would like to have write permission there
+15:01:56 <whitten2> right.
+15:02:16 <dmiles> so you may want to run it with ../lib/OpenCyc.jar
+15:02:40 <dmiles> and create a ../writablecyc
+15:02:47 <dmiles> to run from
+15:02:51 <whitten2> six of one, one half-dozen of the other...
+15:02:53 <dmiles> (things you know)
+15:05:21 <dmiles> since cyc will not like loading .so.. how would one create a foriegn C command?
+15:05:57 <dmiles> if i could C from Cyc i could create JVM proxy in some way
+15:08:30 <dmiles> i am satified with making Cyc always the recieving end of a java call
+15:08:44 <dmiles> so i am happy
+15:09:08 <dmiles> but will be nice to be able to eventually call externally in the middle of inference
+15:11:10 <whitten> actually I expect that being able to get Cyc to call externally when doing inferencing will be necessary for a lot of applications.
+15:11:46 <whitten> If the Cyc developers use a system() call, I wonder how much overhead would be involved?
+15:11:48 <dmiles> especially towards accessing external databases
+15:12:57 <whitten> Any application that has a large external database will need CYC to call it when Cyc is doing some inferencing.
+15:13:45 <dmiles> yes and when or what to cache is best dictated with some application specific module between Cyc and that database 
+15:14:03 <dmiles> (if caches at all)
+15:14:48 <whitten> Another aspect of that is making the mapping of database fields to Cyc predicates simple and transparent.
+15:16:18 <dmiles> yes.. that transformation definately would be a specialized tool
+15:16:23 <whitten> Cyc is one of my usual examples of software that actually can use the huge RAM and disks we currently have available, instead of using them for fancy screen savers and busy-wait loops.
+15:16:51 <dmiles> hehe, exactly ;P
+15:17:09 <dmiles> it would open up a huge volume of what people would do with cyc.. me for instance i would never assert Moo values.. i would just have cyc look them up
+15:17:40 <dmiles> instead e3ach cycle (every five seconds) i interate over all the moo objects and assert them into Cyc
+15:18:08 <dmiles> then i query Cyc for all the mooo object it sees and create them in Jamud if they where missing
+15:20:25 <dmiles> definately new hardware increases cycs capabilities
+15:21:34 <dmiles> i really like the background crawling Cyc the Cyclist does
+15:22:22 <whitten> yes. beyond increasing Cyc's capabilities, it means that an embedded Cyc is imaginable as well.
+15:23:04 <whitten> Can you elaborate on Cyc the Cyclist's crawling?
+15:23:36 <whitten> I imagine Cyc bicycling but not crawling <grin>
+15:23:50 <dmiles> it sems to look for possible forward chaining assertions 
+15:24:24 <dmiles> seems to do that.. perhaps its the Agenda I am refering to
+15:25:14 <dmiles> one my machine: KB: 534 Local: (0 4 228522) 
+15:25:35 <whitten> I seem to recall some discussion of Cyc incorporating some Eurisko ideas to do knowledge base analysis using analogy.
+15:25:39 <dmiles> means it has 4 operations that it has left to do and has completed 228522 ops
+15:26:50 <whitten> Or it says "Sleep" when it isn't doing anything.
+15:27:14 <dmiles> would that analogy in a private area of Cyc that latter it can assert?
+15:28:07 <whitten> possibly. Have you read the Building Large Knowledgebases book?
+15:28:35 <dmiles> i have read a couple nearly titled that :) but which Author in particualr?>
+15:29:11 <whitten> It has some example analogies in it. Guha and Lenat <grin> It is the description of Cyc from several years ago.
+15:29:17 <dmiles> Oh, i know which you refer to
+15:29:31 <dmiles> i have browsed it a bit
+15:29:37 <dmiles> yes
+15:30:24 <dmiles> wasn't there some though even then of using rule usefullness reinforcement?
+15:31:02 <dmiles> err thought given to the idea of rule usefullness in the light of probability
+15:31:30 <dmiles> so Cyc could get the information it needed quicker
+15:31:52 <dmiles> based on well traveled and successfull rule paths
+15:32:52 <dmiles> but i think i should read Building Large Knowledgebases
+15:33:18 <dmiles> my knowledge of cyc comes from skimming the 101 course and ussing it at my last employer
+15:34:45 <whitten> well there was some mention of preferred rules when inferencing. But the idea of confidence factors (ie: numbers) was mentioned and not well received. (they had tried it and it had some non-intuitive failure behaviour)
+15:35:42 <dmiles> i can partially understand why it did not work out
+15:36:30 <whitten> Oh, as I recall, it didn't work because all numbers can be compared to each other.
+15:36:52 <dmiles> it really can only give you a differnce between a :DEFAULT or :MONOTONIC
+15:37:10 <dmiles> like as a suggestion.. but nothing towards logic
+15:37:59 <whitten> so if you say it is 95% true that a teacher is taller than her kindergarten children, and a 97% chance that people like ice cream, it might try to compare the two numbers in an inference even though liking ice cream is not really comparable to height.
+15:38:07 <dmiles> but one knows :MONOTONIC rules will liokely be more productive then :Defualt
+15:38:56 <dmiles> oh .. i would not put probilbities on both sides of the rules.. just a problity that the rule will be higher priorty in the search
+15:39:48 <dmiles> 95% of the time it is usefull to know that a teacher is taller than her kindergarten children
+15:40:28 <dmiles> 97% of the time it is usefull to know people like ice cream
+15:40:35 <dmiles> err
+15:40:43 <dmiles> 97% of the time it is usefull to know  Somepeople like ice cream
+15:41:58 <dmiles> and apply some baysian feedback for how the rules do
+15:42:49 <dmiles> that was my interpretation.. but you never would want to bring anything too low ever
+15:43:01 <whitten> right. but that is the essence of a probability approach instead of a confidence factor approach.
+15:43:50 <dmiles> yes confidence factors are one of those overly subjective views
+15:44:28 <dmiles> it still would be nice to use them.
+15:44:58 <dmiles> but ppeople feel safer when they are black and white in KE
+15:45:31 <dmiles> if you have to use a confidence factor the problem could be rethinked
+15:46:32 <dmiles> but i dont know if what i was saying with rule usefullness probibility is any better
+15:46:42 <dmiles> other then a heuristic
+15:46:56 <dmiles> err based on search order
+15:49:17 <whitten> well <grin> HL stand for Heuristic Level, doesn't it?
+15:51:25 --- quit: whitten2 ("using sirc version 2.211+ssfe")
+15:51:47 <dmiles> yes
+15:52:25 <whitten> I'm going need to go. It was fun talking. And I'm glad we have resolved what steps need to be done to use kaffe.
+15:52:35 <dmiles> excelent as well
+15:52:36 <dmiles> thank yiou
+15:52:44 <dmiles> i am hoping tommorow to get some of your time
+15:52:55 <dmiles> towards some KE questions i have
+15:53:18 <dmiles> since you already have a picture in your mind how a mud with cyc would operate
+15:53:53 * dmiles is away: Logging
+15:54:19 --- quit: whitten ("using sirc version 2.211+ssfe")
+16:02:00 --- quit: ChanServ (ACK! SIGSEGV!)
+16:23:36 --- quit: deSharq (Remote closed the connection)
+16:41:34 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:41:34 --- mode: carter.openprojects.net set +o ChanServ
+16:45:09 --- quit: ChanServ (ACK! SIGSEGV!)
+16:45:18 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:45:18 --- mode: carter.openprojects.net set +o ChanServ
+17:40:18 --- quit: ChanServ (ACK! SIGSEGV!)
+17:40:32 --- join: ChanServ (ChanServ@services.) joined #opencyc
+17:40:32 --- mode: carter.openprojects.net set +o ChanServ
+18:18:05 --- quit: ChanServ (ACK! SIGSEGV!)
+18:18:20 --- join: ChanServ (ChanServ@services.) joined #opencyc
+18:18:20 --- mode: carter.openprojects.net set +o ChanServ
+18:44:42 --- quit: ChanServ (Shutting Down)
+18:44:53 --- join: ChanServ (ChanServ@services.) joined #opencyc
+18:44:53 --- mode: carter.openprojects.net set +o ChanServ
+19:13:32 --- quit: mea_culpa (Read error: 110 (Connection timed out))
+19:14:39 --- quit: dmiles (Connection timed out)
+20:34:30 --- join: dash (washort@d157.narrowgate.net) joined #opencyc
+20:46:04 --- quit: ChanServ (ACK! SIGSEGV!)
+20:46:14 --- join: ChanServ (ChanServ@services.) joined #opencyc
+20:46:14 --- mode: carter.openprojects.net set +o ChanServ
+20:46:45 --- quit: ChanServ (ACK! SIGSEGV!)
+20:46:58 --- join: ChanServ (ChanServ@services.) joined #opencyc
+20:46:58 --- mode: carter.openprojects.net set +o ChanServ
+20:47:11 --- quit: ChanServ (ACK! SIGSEGV!)
+20:47:21 --- join: ChanServ (ChanServ@services.) joined #opencyc
+20:47:21 --- mode: carter.openprojects.net set +o ChanServ
+21:07:11 --- quit: ChanServ (ACK! SIGSEGV!)
+21:08:21 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:08:21 --- mode: carter.openprojects.net set +o ChanServ
+21:10:44 --- quit: ChanServ (ACK! SIGSEGV!)
+21:10:55 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:10:55 --- mode: carter.openprojects.net set +o ChanServ
+21:12:40 --- quit: ChanServ (ACK! SIGSEGV!)
+21:12:48 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:12:48 --- mode: carter.openprojects.net set +o ChanServ
+21:13:43 --- quit: ChanServ (ACK! SIGSEGV!)
+21:15:42 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:15:42 --- mode: carter.openprojects.net set +o ChanServ
+21:33:21 --- quit: ChanServ (ACK! SIGSEGV!)
+21:33:31 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:33:31 --- mode: carter.openprojects.net set +o ChanServ
+21:37:26 --- quit: ChanServ (ACK! SIGSEGV!)
+21:37:35 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:37:35 --- mode: carter.openprojects.net set +o ChanServ
+21:38:03 --- quit: ChanServ (ACK! SIGSEGV!)
+21:38:10 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:38:10 --- mode: carter.openprojects.net set +o ChanServ
+21:38:18 --- quit: ChanServ (ACK! SIGSEGV!)
+21:38:43 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:38:43 --- mode: carter.openprojects.net set +o ChanServ
+21:38:49 --- quit: ChanServ (ACK! SIGSEGV!)
+21:38:55 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:38:55 --- mode: carter.openprojects.net set +o ChanServ
+21:40:04 --- quit: ChanServ (Shutting Down)
+21:40:19 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:40:19 --- mode: carter.openprojects.net set +o ChanServ
+21:45:41 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+21:50:56 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:50:56 --- mode: carter.openprojects.net set +o ChanServ
+21:55:11 --- quit: ChanServ (ACK! SIGSEGV!)
+21:55:21 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:55:21 --- mode: carter.openprojects.net set +o ChanServ
+21:55:38 --- quit: ChanServ (ACK! SIGSEGV!)
+21:55:55 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:55:55 --- mode: carter.openprojects.net set +o ChanServ
+21:56:27 --- quit: ChanServ (ACK! SIGSEGV!)
+21:56:37 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:56:37 --- mode: carter.openprojects.net set +o ChanServ
+21:57:58 --- quit: ChanServ (ACK! SIGSEGV!)
+21:58:11 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:58:11 --- mode: carter.openprojects.net set +o ChanServ
+21:58:39 --- quit: ChanServ (Shutting Down)
+23:18:15 --- join: nephrael (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:18:53 --- nick: nephrael -> dmiles
+23:20:27 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+23:20:35 --- join: nephrael- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:21:48 --- join: dmiles (~alife@12-225-207-17.client.attbi.com) joined #opencyc
+23:34:35 --- join: dmiles- (nephrael@12-225-207-17.client.attbi.com) joined #opencyc
+23:35:06 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+23:37:36 --- nick: dmiles- -> dmiles
+23:39:25 --- quit: nephrael- (Read error: 110 (Connection timed out))
+23:46:50 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:48:25 --- join: ChanServ (ChanServ@services.) joined #opencyc
+23:48:25 --- mode: carter.openprojects.net set +o ChanServ
+23:53:06 --- quit: CycLBot (Remote closed the connection)
+23:53:18 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.05.08

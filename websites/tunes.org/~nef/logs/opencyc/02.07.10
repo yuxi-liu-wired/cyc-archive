@@ -1,0 +1,1369 @@
+00:00:00 --- log: started opencyc/02.07.10
+00:54:51 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+01:10:03 --- join: yottzumm ([j4YcBT5Zv@12-232-124-73.client.attbi.com) joined #opencyc
+01:10:03 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+01:13:03 --- part: yottzumm left #opencyc
+01:44:40 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+01:47:52 --- quit: huthut (Read error: 104 (Connection reset by peer))
+03:04:00 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+03:25:16 --- quit: CycLBot (Excess Flood)
+04:23:55 --- quit: huthut_ (carter.openprojects.net irc.openprojects.net)
+04:25:14 --- join: huthut_ (~trumpet@fw224.novosoft.ru) joined #opencyc
+04:26:20 --- quit: Cobra ("[x]chat")
+04:44:18 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+08:26:50 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+09:30:32 * dmiles returns
+09:30:40 --- join: CycLBot ([8DiFAUOfw@12-225-207-235.client.attbi.com) joined #opencyc
+09:32:42 <zool> hello CycLBot
+09:32:48 * zool waves at dmiles
+09:32:56 <dmiles> hi there
+09:49:05 --- quit: huthut_ (Read error: 110 (Connection timed out))
+09:52:20 --- quit: zool ("Client Exiting")
+10:07:36 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+10:08:35 --- join: Vutral_ (~ss@pD9042F3E.dip.t-dialin.net) joined #opencyc
+10:53:08 <dmiles> when 0.7  is released with remote-eval
+10:53:14 <dmiles> whould something like this work:
+10:53:14 <dmiles>     (#$implies
+10:53:15 <dmiles>          (#$and
+10:53:15 <dmiles>              (#$remoteCycServer ?Server ?Host ?Port)
+10:53:15 <dmiles>              (cyc-api-remote-eval ?SUBL ?Host ?Port))
+10:53:15 <dmiles>          (#$EvaluateRemoteSubLFn ?Server ?SUBL))
+10:53:47 <dmiles> the reason i ask is in Cyc the order of Antedecadants are not supposed to be pre-known
+10:54:08 <dmiles> meaning the EL should not assume internal operational order
+10:54:32 <dmiles> oh oops
+10:54:43 <dmiles> one sec.. let me reqrite that
+10:56:13 <dmiles>     (#$implies
+10:56:13 <dmiles>          (#$and
+10:56:13 <dmiles>              (#$remoteCycServer ?Server ?Host ?Port)
+10:56:13 <dmiles>              (#$evaluate ?Result (#$EvaluateSubLFn (cyc-api-remote-eval ?SUBL ?Host ?Port))))
+10:56:13 <dmiles>          (#$evaluate ?Result (#$EvaluateRemoteSubLFn ?Server ?SUBL))
+10:58:31 <dmiles> is that KE right?
+11:02:35 <reed_> right, CycL is intentionally unordered with respect to antecedant clauses.
+11:03:41 <dmiles> yeah.. definately it becomes more difcult to know what to do
+11:04:17 <reed_> I'm not sure of what you are tyring to achieve but you might do it in a couple of steps rather than
+11:04:22 <reed_> one implication.
+11:05:05 <dmiles> well  (#$remoteCycServer ?Server ?Host ?Port) is suppsoed to be a GAF type predicate
+11:05:31 <dmiles> so i could maybe larter change address and port of a serever
+11:06:04 <dmiles> so the latwer KE would only use  (#$EvaluateRemoteSubLFn ?Server ?SUBL) 
+11:06:55 <dmiles> then the next step would be later making a (#$remoteIst ?Server ?Mt ?Sentence)
+11:07:31 <reed_> I see, we need a #$EvaluateRemoteSubLFn 
+11:07:48 <dmiles> exacly
+11:07:52 <reed_> which is a concise form of..
+11:08:07 <reed_>  (#$EvaluateSubLFn (cyc-api-remote-eval ?SUBL ?Host ?Port))
+11:08:48 <dmiles> yeah.. i only added a CycServerName into the mix
+11:08:58 <dmiles> that could map to a port
+11:09:10 <dmiles> err ?Host ?port for generic Ke
+11:09:19 <reed_> maybe better to put the port as an arg?
+11:09:49 <dmiles> for #$EvaluateSubLFn yeah.. it would be better to add ?Host ?port instead of ?Servername
+11:10:18 <dmiles> since thats a pretty lower level thing
+11:10:37 <reed_> I see that you could use #$remoteCycServer to.
+11:10:53 <reed_> associated a server-id with host and port.
+11:11:10 <dmiles> thats the concept
+11:11:34 <reed_> Let me look into EvaluateSubLFn and get clearance from our architects to do what you want - asap.
+11:11:52 <dmiles> that way you could keep trackl of server-ids based oin the type of content they would hold.. or the type of serverice they preform in you network
+11:21:04 <reed_> ok - working on it.
+11:21:23 --- part: Taral left #opencyc
+11:22:14 <dmiles> neat .. i am not partial to ?ServerId vs ?Host ?Port in a #$EvaluateRemoteSubLFn 
+11:23:39 <dmiles> but which either happens, likely KE will end up happen arround mapping between roles of servers and locations
+11:25:50 <Vutral_> hey dmiles
+11:27:01 <Vutral_> what's up
+11:27:01 <dmiles> not much.. playing with an alice bot
+11:27:01 <dmiles> that bot you made last year.. that was nothing like alice right?
+11:27:24 <dmiles> yours was more based in ussing text like vectors right?
+11:31:29 <Vutral_> hmm
+11:31:35 <Vutral_> no
+11:31:45 <Vutral_> iit had todo with hidden markov
+11:38:54 <dmiles> oops i hit enter at the wrong time and posted to open discussion before i completed wehat i was saying (spastic mouse)
+11:39:42 <Vutral_> lol
+11:40:37 <dmiles> sourceforge makes it harder to post a reply to your own message as well ;P
+11:41:49 <dmiles> (you just have to alter the topic in some why but post to the same thread)
+11:44:55 <Vutral_> hmm
+11:44:56 <Vutral_> yes
+11:46:59 <Vutral_> dmiles
+11:47:09 <Vutral_> how can i ask CycLBot for a fact
+11:48:15 <dmiles> ask (isa CityOfWashingtonDC City)
+11:48:16 <CycLBot> true sentence
+11:48:28 <dmiles> ask (isa CityOfWashingtonDC Place)
+11:48:30 <CycLBot> true sentence
+11:48:40 <Vutral_> hmm
+11:49:33 <Vutral_> ask (isa Pi Number)
+11:49:34 <CycLBot> no answers found
+11:49:34 <Vutral_> ask (isa Pi Constant)
+11:49:34 <CycLBot> no answers found
+11:49:34 <Vutral_> hey
+11:49:34 <dmiles> ask (isa ?W Number)
+11:49:34 <CycLBot> no answers found
+11:49:34 <dmiles> ask (isa 1 CycLNumber)
+11:49:34 <CycLBot> no answers found
+11:49:34 <Vutral_> there is a java interface for cycl right ?
+11:49:36 <dmiles> yes a really good one
+11:50:03 <Vutral_> where do you hook in
+11:50:06 <dmiles> http://www.cyc.com/doc/opencyc_api/java_api/
+11:50:17 <dmiles> i use CycAccess()
+11:50:36 <dmiles> i create an instance of the object.. then use it's members
+11:51:03 <dmiles> it has wways of asking and telling facts
+11:51:59 <dmiles> so all you need to do is "CycAccess cyc new org.opencyc.aip.CycAccess()"
+11:52:04 <Vutral_> hmm
+11:52:06 <dmiles> err add the = sign
+11:52:29 <dmiles> and thats not "aip" but "api" :)
+11:52:37 <Vutral_> ok :>
+11:56:11 <Vutral_> ok
+11:56:13 <Vutral_> that is nice
+11:56:21 <Vutral_> how do you connect
+11:56:45 <dmiles> that autoconnects to localhost
+11:56:57 <dmiles> i think it defults to persistant which is good
+11:57:13 <Vutral_> when does it connect
+11:57:18 <Vutral_> when i do the first query ?
+11:57:21 <Vutral_> or when i instance it
+11:57:58 <dmiles> when you first create it
+11:58:14 <dmiles> becasue it has to cache some refernces to constants
+11:58:50 <dmiles> there are three construcors though
+12:00:56 <Vutral_> ok
+12:01:05 <Vutral_> so i just create the CycAccess 
+12:01:07 <Vutral_> and i can use it
+12:01:10 <Vutral_> sounds really nice
+12:01:19 <Vutral_> transparent
+12:01:27 <dmiles> yes you get to the lowest level from .converse()
+12:01:56 <dmiles> yeah.. well the learning curve of cyc KE is tought enough so the simple Java PAI really helps
+12:02:49 <Vutral_> hmm
+12:25:44 --- join: zool (~jo@host217-40-216-41.in-addr.btopenworld.com) joined #opencyc
+12:29:50 <Vutral_> dmiles: CycL.java:3: CycL clashes with package of same name
+12:29:50 <Vutral_>  ?
+12:30:36 <dmiles> let me see if there is a class called CycL already
+12:30:51 <dmiles> url to your file?
+12:31:20 <Vutral_> none
+12:31:27 <Vutral_> it's offline
+12:31:40 <Vutral_> i just use the OpenCyc.jar
+12:31:45 <Vutral_> and have only one class
+12:31:46 <Vutral_> CycL
+12:31:54 <dmiles> okk.. well i would define a differnt class name ;P
+12:32:15 <dmiles> CycL kinda means something important i guess
+12:32:26 <Vutral_> ok
+12:32:44 <dmiles> what is the name of your class?
+12:34:11 <Vutral_> CycL
+12:34:19 <Vutral_> but there is no class in OpenCyc
+12:34:45 <dmiles> what is you package and import lines?
+12:35:05 <Vutral_> ok i changed name
+12:35:07 <Vutral_> now it works
+12:35:11 <Vutral_> i dunno what the problem was
+12:35:18 <Vutral_> i got no package btw....
+12:35:51 <dmiles> import org.opencyc.api.*;
+12:35:51 <dmiles> import org.opencyc.util.*;
+12:35:51 <dmiles> import org.opencyc.cycobject.*;
+12:35:51 <dmiles> import org.opencyc.cyclobject.*;
+12:35:59 <dmiles> thats my nomal imports
+12:36:10 <Vutral_> ok
+12:36:12 <Vutral_> i will adapt
+12:36:34 <dmiles> oh wait dont org.opencyc.cyclobject.*;  thats CVS only.. not jar
+12:36:42 <Vutral_> ok
+12:49:29 <Vutral_> java.lang.NoClassDefFoundError: org/apache/oro/util/Cache
+12:50:16 <dmiles> oh there may be some jars you need
+12:50:42 <Vutral_> ok
+12:50:45 <dmiles> here is my Jar bundle http://12.225.207.235/offt/sourceforge/logicmoo/lib/
+12:51:38 <dmiles> you'll find you'll only need to get a couple i think
+12:52:47 <Vutral_> fixed yet
+12:52:52 <Vutral_> i got a newer oro jar
+12:52:54 <Vutral_> ;)
+12:52:57 <Vutral_> 2.0.5
+12:53:24 <dmiles> they need a jarfind.net type site
+12:54:16 <dmiles> for as neato as java is supposed to be as a nextworked language.. we should be able to pount to a remote jar repository
+12:55:06 <dmiles> like set in our classpath to public repositories full of .jars
+12:56:23 <Vutral_> hmm
+12:56:37 <Vutral_> that works even
+12:56:38 <Vutral_> i think
+12:56:49 <Vutral_> specify a http dir as classpath
+12:57:54 <dmiles> actually in some cases you can use a http directly to a jar.. but too bad you cant specify a dirrecotry containing
+12:59:22 <dmiles> in jakarta tobmot you can place them into a lib dir.. but really what happens is they interate over the Files in there.. they coders of jakarta had to do that.. since it wasnt part of java
+13:00:33 <dmiles> s/tobmot/tomcat
+13:01:10 <Vutral_> hmm
+13:01:21 <Vutral_> extend ClassLoader ?
+13:04:14 <Vutral_> dmiles: hehe
+13:04:53 <Vutral_> dmiles: where was the admin interface ?
+13:06:58 <dmiles> i guess they did.. what do you mean admin interface?
+13:08:03 <Vutral_> yeah
+13:08:16 <Vutral_> opencyc
+13:08:23 <Vutral_> if you start it
+13:08:51 <dmiles>  you need to make sure an instance of opencyc is running on your machine
+13:08:59 <dmiles> ./run-sh
+13:09:17 <dmiles> er   ./run-cyc.sh  will start an interactive shell
+13:09:24 <dmiles> and the TCP daemons
+13:09:46 <dmiles> one of them is a webserver you can use from localhost
+13:11:40 <Vutral_> but where is it
+13:11:57 <dmiles> opencyc*/scripts/linux/
+13:12:04 <Vutral_> the webserver
+13:12:18 <dmiles> one sec
+13:13:49 <dmiles> wierd not seeing the readme file
+13:14:00 <Vutral_> hmmm
+13:14:30 <dmiles> oh my webserver hides them
+13:14:41 <dmiles> http://localhost:3602/cgi-bin/cyccgi/cg?cb-start
+13:14:51 <Vutral_> ok
+13:14:55 <Vutral_> i am off now, experimenting
+13:14:57 <Vutral_> cu l8r
+13:14:58 <Vutral_> thx
+13:15:01 <Vutral_> *wink*
+13:15:01 <CycLBot> You
+13:34:20 --- quit: Vutral_ (Read error: 110 (Connection timed out))
+14:02:09 <kinoc> ask (isa ?X Weapon)
+14:02:10 <CycLBot> no answers found
+14:02:25 <kinoc> ask (isa ?X Person)
+14:02:27 <CycLBot> ?X = CycAdministrator, ?X = Guest
+14:02:41 <dmiles> ask (genls ?X Person)
+14:02:42 <CycLBot> Your question returned 83 answers .. please refine. (here are the first five)
+14:02:42 <CycLBot> ?X = Administrator, ?X = Manager, ?X = AdministrativeStaffPerson, ?X = DeskWorker, ?X = (FemaleFn LawEnforcementOfficer)
+14:02:58 <dmiles> ask (genls ?X Weapon)
+14:02:59 <CycLBot> ?X = Tank-Vehicle, ?X = DirectFireWeapon, ?X = Warplane, ?X = CombatAircraft, ?X = ConventionalWeapon, ?X = Weapon
+14:03:11 <kinoc> ah
+14:03:29 <kinoc> got to remember instance/class differences
+14:04:04 <kinoc> how goes it ?
+14:04:48 <dmiles> good good.. you?
+14:05:28 <kinoc> its ok. New service patch of router code I have to integrate and a SNMP Mib to install
+14:05:40 <dmiles> CBOS thing?
+14:05:43 <kinoc> nothing fun like asking Cyc who is a person
+14:06:20 <kinoc> voice over IP mib for out channel bank
+14:06:27 <kinoc> out=our
+14:06:46 <kinoc> Maybe we could get cyc to be a network manager
+14:06:58 <kinoc> with a snmp query interface
+14:07:00 * zool giggles
+14:07:10 <dmiles> hoepfully.. i bet it could come up with good configurations
+14:08:08 <kinoc> "we need AI because there is a sever lack of RI"
+14:08:49 * zool feels weird about the whole semantics of AI issue
+14:09:03 <kinoc> letting cyc do cofiguring and management would be a plus
+14:09:33 <dmiles> Microsoft calls it Synthetic Inteligence
+14:09:35 <kinoc> just dont tell the masses that you turned the net over to an AI
+14:10:32 <kinoc> intelligence is an overloaded word, it means many different things in many different contexts
+14:12:03 <zool> that that feedss straight into media scares, imo :/
+14:12:28 <kinoc> you can either make a check list of capabilities, turn something loose in the environment ansee what survives, or just say "i'll know it when I see it"
+14:12:36 <kinoc> I know
+14:12:40 <zool> i'm as uncomfortable with the abstract codification of 'intelligence' as with 'artificialness' tbh
+14:12:53 <zool> intelligence behaves like a feedback loop; abstract it, it moves away
+14:13:08 * zool shurgs, and may write something about it sometime
+14:13:18 <kinoc> sounds like a good idea
+14:13:25 <zool> i prefer 'distributed competence' as a term, but dont think it will catch on ;)
+14:13:45 <kinoc> maybe in certain circles....
+14:14:06 <zool> circles expand, overlap, ripples ripple everywhere ... :)
+14:14:11 <kinoc> maybe among the new breed of cognitive engineers
+14:14:12 * zool is slightly wine-induced atm
+14:14:22 <kinoc> ah
+14:14:26 <zool> not very though!
+14:14:33 <kinoc> mental lubrication
+14:14:43 * zool actually does talk like this most of the time tbh ;)
+14:14:45 <kinoc> making connections easier to make
+14:14:59 <zool> actually slows them down in my case
+14:15:09 * zool had a weird few weeks of hyperconnections
+14:15:39 <dmiles> http://research.microsoft.com/research/dtg/davidhov/pap.htm
+14:15:45 <kinoc> maybe lower internal censorship (if you have any)
+14:16:06 <zool> dmiles i have a REST/RDF interface to my random serendipity/philosophy bot now, but it keeps breaking on html entity references
+14:16:13 <zool> it is on its way though :)
+14:16:27 <dmiles> (that site i gave uses SubP language)
+14:16:59 <dmiles> (at the bottem was the KE used)
+14:17:25 <dmiles> zool, really cool
+14:18:40 <kinoc> thanks. took a second for DNS to find research, but ok now.
+14:22:13 <dmiles> kinoc, http://logicmoo.sourceforge.net/SwiActX/  <- Libraries for inferfacing windows COM/API and prolog 
+14:22:59 --- join: Vutral_ (~ss@pD9043381.dip.t-dialin.net) joined #opencyc
+14:23:45 --- nick: Vutral_ -> Vutral
+14:23:59 <zool> it live at http://oulibot.org for humans also
+14:24:01 <Vutral> hello dmiles
+14:24:03 <Vutral> you there ?
+14:24:16 * dmiles looks
+14:24:59 <Vutral> it has no sense
+14:25:07 <Vutral> i asked it about pi and it answered nonsense
+14:25:21 * zool didnt say it was intended to make sense ;)
+14:25:22 <dmiles> well it doesnt speak english yet
+14:25:24 <zool> it is art :)
+14:25:32 <dmiles> oh wait.. which?
+14:25:43 <Vutral> oulibot.org
+14:25:49 * zool works on plugging it to linkparser, doing reification stuff on it, but slowly
+14:26:01 <zool> it speaks quite a lot of euro languages
+14:26:06 <Vutral> Que estce pi ?
+14:26:09 <zool> and learns new things on a slow feedback loop
+14:26:17 * zool doesnt recognise that language :)
+14:26:23 <Vutral> ffrench
+14:26:27 <Vutral> what is pi
+14:26:39 <Vutral> it does not speak german
+14:26:41 <zool> que'est-que c'est?
+14:26:48 <Vutral> so it does not speak a lot of euro languages
+14:26:48 <zool> it depends what you say to it
+14:26:50 <Vutral> hehehe
+14:26:55 <Vutral> Was ist Pi ?
+14:26:56 <zool> ask interesting questions, get interesting answers :)
+14:26:57 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+14:26:58 <Vutral> What is Pi on german
+14:27:12 <zool> it's still blowing up on entity references though 
+14:27:35 <Vutral> dmiles: hey can you help me a moment ?
+14:28:13 <zool> simple words occur in too many languages, the results get random
+14:28:24 * zool builds up zipf curves slowly over tie
+14:28:34 <Vutral> zool
+14:28:44 <Vutral> what about asking the people :>
+14:29:04 <Vutral> i think they prefer some staticness insted of randomness
+14:29:58 <Vutral> (#$isa Dog Animal)
+14:30:07 <Vutral> (#$isa Dog Animal)
+14:30:12 <Vutral> dmiles ?
+14:30:15 <Vutral> (#$isa Dog Animal)
+14:30:21 <Vutral> (#$isa Dog Pet)
+14:30:34 * dmiles returns
+14:30:54 <dmiles> as: (genls Dog Animal)
+14:30:59 <dmiles> ask: (genls Dog Animal)
+14:31:00 <CycLBot> true sentence
+14:31:07 <Vutral> (#$isa Dog Pet)
+14:31:09 <Vutral> ask: (#$isa Dog Pet)
+14:31:10 <CycLBot> no answers found
+14:31:14 <Vutral> ask: (#isa Dog Pet)
+14:31:14 <dmiles> ask: (genls ?X Pet)
+14:31:15 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+14:31:16 <CycLBot> ?X = Pet
+14:31:21 <Vutral> why genls ?
+14:31:30 <dmiles> its subclassings
+14:31:38 <Vutral> hmm
+14:31:47 <dmiles> isa = means a real instance.. like Fido
+14:31:53 <Vutral> hmm
+14:32:05 <dmiles> genls means  subclass
+14:32:10 <Vutral> hey how can i query using CyAccess now
+14:32:16 <Vutral> i got everything read so far
+14:32:21 <Vutral> but i need an idea of it
+14:32:33 <dmiles> askWithVariables()
+14:33:17 <CycLBot> Cannot find collection = means a real instance.. like Fido
+14:33:31 <dmiles> http://www.cyc.com/doc/opencyc_api/java_api/org/opencyc/api/CycAccess.html#askWithVariable(org.opencyc.cycobject.CycList, org.opencyc.cycobject.CycVariable, org.opencyc.cycobject.CycFort)
+14:34:07 <dmiles> isa Mammal
+14:34:07 <CycLBot> ((GenericInstanceFn Dog) CycAdministrator Guest)
+14:34:14 <dmiles> isa Pet
+14:34:14 <CycLBot> ()
+14:34:18 <Vutral> how does it works
+14:34:22 <Vutral> isa Dog
+14:34:23 <CycLBot> ((GenericInstanceFn Dog))
+14:34:40 <Vutral> how do you manage the objects in the mud
+14:34:41 <dmiles> i spaced that the bot did isa
+14:35:05 <dmiles> i serialized the mud into cyc
+14:35:15 <zool> time even
+14:35:19 <Vutral> as objects ?
+14:35:25 <dmiles> as constants
+14:35:31 <Vutral> can i have a look at ?
+14:35:36 <zool> doh router blew up
+14:36:12 <dmiles> capital words are refrencing? on oulybot?
+14:36:17 <zool> Vutral: it metacrawls a bit, looks for interestingness and cuts up the results
+14:36:37 <Vutral> hmm
+14:36:41 <dmiles> Vutral, one second
+14:36:44 <Vutral> ok
+14:36:51 <Vutral> zool: i am trying to make it useful
+14:36:56 * zool grins
+14:37:02 <zool> i have plans to make it useful one day
+14:37:07 <zool> but that day is not today ;)
+14:37:23 <Vutral> hehehe
+14:37:27 <zool> also it's pretty small atm, hasnt been on the net for long, so more input into it is good
+14:37:40 <zool> it will get more focus as it learns more about the world
+14:37:58 * zool shurgs, it's philosophical art ;)
+14:37:59 <dmiles> vut: http://12.225.207.235/offt/sourceforge/logicmoo/lib/maybe/logicmoo/CycMoo.java.bak
+14:38:00 <Vutral> well see
+14:38:09 <Vutral> i have a system which knows about the world yet ;)
+14:38:16 <dmiles> " Reify Cyc To Jamud "
+14:38:26 <Vutral> hmm
+14:38:28 <dmiles> " Synchronize Cyc and Jamud's Known Pathways/Exits "
+14:39:49 <dmiles> that code there is pretty tangled
+14:39:50 <Vutral> dmiles
+14:39:54 <Vutral> hey
+14:39:59 <Vutral> if i want to do a simple thing
+14:40:05 <Vutral> What is "something" ?
+14:40:10 <Vutral> and then look it up
+14:40:11 <Vutral> in CycL
+14:40:23 <Vutral> and then it should return that it found nothing
+14:40:31 <Vutral> or all possible worths
+14:40:35 <Vutral> values
+14:40:36 <dmiles> ask (isa ?X PartiallyTangible)
+14:40:36 <Vutral> i ment
+14:40:36 <CycLBot> ?X = CaribbeanRegion, ?X = Scandinavia, ?X = UnitedNationsOrganization, ?X = (GovernmentFn UnitedStatesOfAmerica), ?X = (GovernmentFn China-PeoplesRepublic), ?X = (GovernmentFn UnitedKingdomOfGreatBritainAndNorthernIreland), ?X = (GovernmentFn Russia), ?X = (GovernmentFn Egypt), ?X = (GovernmentFn Taiwan-RepublicOfChina), ?X = (GovernmentFn Belgium), ?X = CityOfWashingtonDC, ?X = Bangladesh, ?X = Brazil, ?X = China-PeoplesRepublic, ?X =
+14:41:13 <Vutral> ask (isa ?X Pi)
+14:41:14 <CycLBot> no answers found
+14:41:23 <Vutral> would it work if i had Pi asserted ?
+14:41:28 <dmiles> yes
+14:41:31 <dmiles> well you want..
+14:41:33 <Vutral> what would it return
+14:41:39 <dmiles> ask (isa Pi ?X)
+14:41:39 <Vutral> i want ?
+14:41:39 <CycLBot> no answers found
+14:41:53 <dmiles> ask (isa CaribbeanRegion ?X)
+14:41:54 <CycLBot> ?X = CycLReifiableDenotationalTerm, ?X = CycLReifiedDenotationalTerm, ?X = HLReifiedDenotationalTerm, ?X = ELExpression, ?X = CycLClosedDenotationalTerm, ?X = CycLClosedAtomicTerm, ?X = CycLRepresentedTerm, ?X = CycLRepresentedAtomicTerm, ?X = CycLDenotationalTerm, ?X = CycLAtomicTerm, ?X = HLExpression, ?X = SubLExpression, ?X = CycLTerm, ?X = CycLExpression, ?X = CycLClosedExpression, ?X = CycLIndexedTerm, ?X = HLIndexedTerm, ?X = Cyc
+14:41:55 <Vutral> why Pi ?X and not ?X Pi
+14:42:11 <dmiles> ask (nearestIsa CaribbeanRegion ?X)
+14:42:12 <CycLBot> ?X = PublicConstant, ?X = GeoculturalRegion
+14:42:33 <Vutral> ask (nearestIsa ?X CarribeanRegion)
+14:42:34 <CycLBot> no answers found
+14:42:41 <Vutral> ask (nearestIsa ?X CaribbeanRegion)
+14:42:42 <CycLBot> no answers found
+14:42:52 <Vutral> hmm
+14:42:56 <Vutral> ask (isa ?X CaribbeanRegion)
+14:42:57 <CycLBot> no answers found
+14:42:58 --- quit: zool ("whoosh")
+14:43:07 <Vutral> ask (isa CaribbeanRegion ?X)
+14:43:08 <CycLBot> ?X = CycLReifiableDenotationalTerm, ?X = CycLReifiedDenotationalTerm, ?X = HLReifiedDenotationalTerm, ?X = ELExpression, ?X = CycLClosedDenotationalTerm, ?X = CycLClosedAtomicTerm, ?X = CycLRepresentedTerm, ?X = CycLRepresentedAtomicTerm, ?X = CycLDenotationalTerm, ?X = CycLAtomicTerm, ?X = HLExpression, ?X = SubLExpression, ?X = CycLTerm, ?X = CycLExpression, ?X = CycLClosedExpression, ?X = CycLIndexedTerm, ?X = HLIndexedTerm, ?X = Cyc
+14:43:13 <Vutral> assert
+14:43:13 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+14:44:22 <Vutral> dmiles
+14:44:22 <Vutral> ok
+14:44:37 <Vutral> i know where i want a constant to be asserted
+14:44:38 <dmiles> why do you think the isa should be turned arround?
+14:44:45 <Vutral> but how would i do it exactly
+14:44:55 <Vutral> well see
+14:44:58 <Vutral> if i define Pi
+14:45:08 <Vutral> there can be multiple definitions
+14:45:14 <dmiles> ok lets do that here
+14:45:15 <Vutral> then i want a return like
+14:45:30 <Vutral> Pi - the transformnumber.....
+14:45:32 <dmiles> this would be the same as from thats Cycprompt when we tpyer subl
+14:45:34 <Vutral> Pi - 3.1415...
+14:45:36 <Vutral> and so
+14:45:57 <dmiles> subl: (create-constant "Pi")
+14:45:57 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A CONSTANT at 0x43e71a5c is not a f_5033.")
+14:46:22 <dmiles> i ne3ed to loojk up the API
+14:46:31 <Vutral> ok
+14:46:33 <Vutral> do so
+14:46:51 <dmiles> (http://www.opencyc.org/doc/cycapi)
+14:47:43 <dmiles> ok it was defined
+14:47:43 <Vutral> well
+14:47:47 <dmiles> subl: (create-constant "Pi")
+14:47:47 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A CONSTANT at 0x43e71a5c is not a f_5033.")
+14:47:59 <dmiles> well ignore the errors
+14:47:59 <Vutral> is...
+14:48:20 <Vutral> Pi is member of several things
+14:48:25 <Vutral> it is a number
+14:48:31 <Vutral> and a MathematicalConstant
+14:48:53 <Vutral> so i should be able to get it 
+14:49:08 <Vutral> What is the MathematicalConstant Pi ?
+14:49:09 <Vutral> or
+14:49:13 <Vutral> What is Pi ?
+14:49:17 <Vutral> or What is the Number Pi
+14:49:23 <Vutral> know what i mean ?
+14:49:33 <dmiles> right its diffent contexts
+14:49:42 <Vutral> i just need a way to make the assertings and ask
+14:49:47 <Vutral> somehow
+14:50:20 <dmiles> ok
+14:51:01 <dmiles> subl: (cyc-assert '(#$isa #$Pi #$Number-General
+14:51:01 <CycLBot> java.lang.RuntimeException: Invalid expression, sval: null  st: Token[EOF], line 1  tok: -1
+14:51:14 <dmiles> subl: (cyc-assert '(#$isa #$Pi #$Number-General) #$BaseKB)
+14:51:15 <CycLBot> no answers found
+14:51:28 <Vutral> hmm
+14:51:28 <dmiles> ask (isa Pi ?W)
+14:51:29 <CycLBot> ?W = Individual, ?W = PartiallyIntangibleIndividual, ?W = IntangibleIndividual, ?W = Thing, ?W = PartiallyIntangible, ?W = Intangible, ?W = MathematicalOrComputationalThing, ?W = MathematicalThing, ?W = MathematicalObject, ?W = Number-General
+14:51:49 <Vutral> how can i do a new KB ?
+14:52:02 <dmiles> whats this ....
+14:52:07 <dmiles> (create-constant "Pi")
+14:52:12 <Vutral> BaseKB-- new KB
+14:52:16 <dmiles>  (cyc-assert '(#$isa #$Pi #$Number-General) #$BaseKB)
+14:52:25 <dmiles> oh you weant it in a separte KB?
+14:52:45 <Vutral> yes
+14:52:47 <dmiles> BaseKB is like what all KBs can use
+14:53:04 <dmiles> (create-constant "MyPiMt")
+14:53:07 <Vutral> well i don't want too much ambigiousity
+14:53:28 <dmiles>  (cyc-assert '(#$isa #$MyPiMt #$Microtheory) #$BaseKB)
+14:53:49 <dmiles> (cyc-assert '(#$isa #$Pi #$Number-General) #$MyPiMt)
+14:54:17 <Vutral> hmm
+14:54:19 <Vutral> worked ?
+14:54:22 <dmiles> yeah
+14:54:46 <Vutral> why is it called Microtheory ???
+14:54:49 <dmiles> i didnt do it just now though on the bot .. but those are the steps that work in the interator window
+14:55:04 <dmiles> the bot just wraps that window
+14:55:15 <dmiles> becasue its like a COntext
+14:55:31 <dmiles> Microtheory is something people agreed on
+14:55:42 <Vutral> i made a microtheory now
+14:55:48 <Vutral> hmm
+14:56:06 <dmiles>  (create-constant "MyPiMt") (cyc-assert '(#$isa #$MyPiMt #$Microtheory) #$BaseKB)  <- makes one
+14:56:14 <dmiles> yeah
+14:56:23 <Vutral> i need to do the assertion
+14:56:32 <dmiles> (create-constant "Pi")  (cyc-assert '(#$isa #$Pi #$Number-General) #$BaseKB)
+14:56:38 <dmiles> ooops
+14:56:47 <dmiles> (cyc-assert '(#$isa #$Pi #$Number-General) #$MyPi
+14:57:09 <Vutral> for what the '
+14:57:41 <dmiles> the '(#$isa #$Pi #$Number-General) tells lisp not to evalaute it
+14:57:52 <dmiles> means its a litteral in quotes
+14:58:13 <dmiles> that way it can be letarlly used as the fuirst argument to cyc-assert
+14:58:32 <dmiles> ( cyc-assert '<sentence> <mt>)
+14:58:53 <Vutral> ok
+14:58:53 <dmiles> from java you can do this with...
+14:59:15 <Vutral> You have 2 operations stored ??
+14:59:18 <Vutral> what does that mean
+14:59:19 <dmiles> myCycAccess.converseBoolean("(cyc-assert '(#$isa #$Pi #$Number-General) #$MyPiMt)");
+14:59:47 <dmiles> means that they are possibly not invoked
+14:59:55 <dmiles> your agenda my be stopped
+15:00:00 <dmiles> click agenda
+15:00:20 <dmiles> Here you control the turning on and off of your Cyc Agenda.
+15:00:20 <dmiles> Currently, your Agenda is 
+15:00:30 <dmiles> what does it say?
+15:01:07 <Vutral> Agenda: Sleep
+15:01:18 <dmiles> click the agenda link
+15:01:22 <Vutral> Currently, your Agenda is running.
+15:02:09 <dmiles> ok can you fiind Pi in your browser now?
+15:02:20 <Vutral> nope
+15:02:22 <Vutral> hmm
+15:02:29 <dmiles> what did you call your Mt ?
+15:02:33 <Vutral> a hypothetic question
+15:03:13 <Vutral> if i want to assert a thing 'Pi' with a category 'Number-General' in a Mt
+15:03:15 <Vutral> how would i do it
+15:03:18 <Vutral> in java
+15:03:22 <dmiles> ok so your in the broswer i though before you where att the command line
+15:03:31 <dmiles> ok now in java.. here is the code..
+15:03:36 <Vutral> ok
+15:03:51 <dmiles> CycAccess cyc = new CycAccess()
+15:04:01 <Vutral> k
+15:04:15 <dmiles> cyc.makeCycConstant("Pi");
+15:04:19 <dmiles> oops
+15:04:29 <dmiles> CycConstant pi = cyc.makeCycConstant("Pi");
+15:04:51 <dmiles> CycConstant mymt = cyc.makeCycConstant("MyPiMt");
+15:05:12 <dmiles> CycConstant mtClass = cyc.makeCycConstant("Microthery");
+15:06:09 <Vutral> mtClass ?
+15:06:10 <dmiles> cyc.assertGaf(cyc.baseKB,cyc.isa,mymt,mtClass);
+15:06:27 <dmiles> you needed to locate #$Microthery
+15:06:35 <dmiles> since it was not cached
+15:06:47 <dmiles> makeCycConstant() finds or makes
+15:07:01 <Vutral> ok
+15:07:04 <dmiles> in the mtClass it only located it
+15:07:55 <dmiles> cyc.assertGaf(mymt,cyc.isa,pi,makeCycConstant("Number-General"));
+15:08:13 <dmiles> err cyc.assertGaf(mymt,cyc.isa,pi,cyc.makeCycConstant("Number-General"));
+15:08:27 <Vutral> cyc.isa ?
+15:08:39 <dmiles> thats a cached refernce to #$isa
+15:08:46 <Vutral> ok
+15:08:49 <Vutral> ic
+15:09:20 <Vutral> and Microthery ?
+15:09:24 <Vutral> not Microtheory ?
+15:09:33 <dmiles> oh yeah
+15:10:01 <dmiles> with the cyc api in java ass it is we could have written that same program 50 differnt ways
+15:10:27 <dmiles> s/ss/s
+15:10:54 * dmiles has had much more embarasing mispellings
+15:11:35 <dmiles> i have decided to never use the word "disk" in email or irc
+15:11:58 <Vutral> assertGaf(KnowledgeBase as CycConstant, isa, pi, category); ???
+15:12:00 <Vutral> so ?
+15:12:16 <dmiles> yeah
+15:12:29 <Vutral> ok
+15:12:30 * dmiles looks just in case
+15:12:33 <Vutral> then i got it now, hopefully
+15:13:58 <dmiles> ooks right
+15:14:15 <Vutral> hmm
+15:14:23 <Vutral> Number-General must exist before the call ?
+15:14:28 <dmiles> yes
+15:14:47 <dmiles> ask (comment Number-General ?W)
+15:14:48 <CycLBot> ?W = A collection of mathematical
+15:14:48 <CycLBot> objects. This is the most general class of numbers,
+15:15:28 <dmiles> there is probly a better thing then Number-General 
+15:15:37 <Vutral> sure
+15:15:45 <dmiles> you can make it mopre specific later or now
+15:15:55 <Vutral> comment is a attribute of NumberGeneral ?
+15:15:57 <dmiles> if you do it later its still ok
+15:16:12 <dmiles> most things have a comment
+15:16:21 --- join: people (Snak@62.53.34.56) joined #opencyc
+15:16:37 <dmiles> its good practive to comment you CycL
+15:16:48 <Vutral> ok assume i have a Mt now
+15:16:50 <Vutral> and in it Pi
+15:17:01 <dmiles> you should be able to check in the browser
+15:17:12 <dmiles> unless you had an exception
+15:17:18 <Vutral> i had none :>
+15:17:32 <Vutral> now i can add things to it ?
+15:17:33 <Vutral> or ?
+15:17:54 <dmiles> you could give it a numerical value if you wanted to compute it 
+15:17:59 <dmiles> hehe
+15:18:02 <Vutral> what would i do in java if i would like to add a attribute
+15:18:51 <dmiles> you could say it was numericallyEqual
+15:19:07 <Vutral> that means ?
+15:19:30 <Vutral> ask (comment nummericallyEqual ?W)
+15:19:31 <CycLBot> no answers found
+15:19:37 <Vutral> ask (description nummericallyEqual ?W)
+15:19:38 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+15:19:38 <CycLBot> (#$description #$nummericallyEqual ?W)
+15:19:39 <CycLBot> was not well formed because:
+15:19:40 <CycLBot> (#$description #$nummericallyEqual ?W) is not a well-formed formula in #$TemplateParsingMt.
+15:19:41 <CycLBot> Perhaps #$description is insufficiently defined in mt #$TemplateParsingMt.")
+15:21:10 <dmiles> mt BaseKB
+15:21:16 <dmiles> ask (comment nummericallyEqual ?W)
+15:21:17 <CycLBot> no answers found
+15:21:24 <Vutral> dmiles
+15:21:25 <Vutral> hey
+15:21:32 <Vutral> i have the Constant Pi asserted
+15:21:36 <Vutral> how can i add attributes
+15:21:49 <dmiles> what kind of attributes?
+15:21:53 <dmiles> like a comment?
+15:21:58 <Vutral> yes
+15:22:11 <Vutral> like one with the name TextualDescription
+15:22:11 <dmiles> in the API there is an assertCOmment
+15:22:18 <Vutral> which contains a TextualDescription
+15:23:00 <dmiles> is TextualDescription defined?
+15:23:09 <Vutral> i can define it i think :>
+15:23:12 <Vutral> or ?
+15:23:42 <dmiles> there is TextualMaterial
+15:23:49 <Vutral> no no
+15:23:53 <Vutral> i want to define one myself
+15:24:09 <Vutral> and then be able to add it as attribute to Pi
+15:24:11 <dmiles> well  TextualDescription to me sounds like a class
+15:24:20 <Vutral> something which i can get and which contains a value
+15:24:33 <Vutral> it must be obtainable dedicatedly with a CycConstant
+15:24:34 <dmiles> o would use numericallyEquals
+15:24:38 <Vutral> like #$Pi
+15:25:00 <Vutral> CycLBot(ask #$Pi ?W)
+15:25:04 <Vutral> (ask #$Pi ?W)
+15:25:18 <dmiles> ask (isa #$Pi ?W)
+15:25:19 <CycLBot> ?W = Individual, ?W = PartiallyIntangibleIndividual, ?W = IntangibleIndividual, ?W = Thing, ?W = PartiallyIntangible, ?W = Intangible, ?W = MathematicalOrComputationalThing, ?W = MathematicalThing, ?W = MathematicalObject, ?W = Number-General
+15:25:41 <dmiles> i need an example of what you mean
+15:25:42 <Vutral> you know i made a new KB
+15:25:48 <Vutral> in it i have Pi
+15:26:01 <dmiles> ok .. and what next do you want to say about it?
+15:26:22 <dmiles> i mean what atytribute specifically
+15:26:22 <Vutral> i want to add some object which contains a description of it
+15:26:34 <dmiles> then you should use comment
+15:26:44 <Vutral> but i might want to add more than one of them
+15:26:48 <dmiles> or nameStyring
+15:26:51 <Vutral> which describe it in multiple ways
+15:26:59 <dmiles> or properNameString
+15:27:54 <dmiles> or pseudonym
+15:28:05 <dmiles> or  scientificName
+15:28:07 <Vutral> well
+15:28:15 <Vutral> yeah but i want to define these things myself
+15:28:37 <dmiles> ok so then lets see you have a choice of predicate,collection or attribute
+15:28:58 <Vutral> attribute i think
+15:28:59 <dmiles> collection and attribute are like lables
+15:29:08 <Vutral> hmm what is predicate ?
+15:29:20 <dmiles> that allows you to supply more information
+15:29:50 <dmiles> those things above i listed are predicates
+15:29:51 <dmiles> Number-General is a collection
+15:30:09 <dmiles> pseudonym, comment, nameString are predicates
+15:30:26 <Vutral> predicate then
+15:30:35 <Vutral> i want a predicate
+15:30:59 <dmiles> ok look at ..
+15:32:00 <dmiles> http://opencyc250.homelinux.org:3603/cg?cb-cf&1009
+15:32:24 <dmiles> notice the 'isa' parts
+15:32:53 <dmiles> like at the ones with white dots
+15:33:06 <dmiles> those are things that you would assert
+15:33:15 <dmiles> but at least BinaryPredicate
+15:33:31 <dmiles> (isa myPredicate BinaryPredicate)
+15:33:47 <Vutral> http://opencyc250.homelinux.org:3603/cg?cb-cf&19
+15:33:50 <dmiles> means your new predicate would take two argumetns
+15:34:51 <dmiles> you can see how much work goes into building a predicate
+15:35:21 <Vutral> well cannot i clone comment and modify it ?
+15:35:22 <Vutral> :>
+15:35:46 <dmiles> yes
+15:35:54 <Vutral> how :>
+15:36:03 <dmiles> you have acreate simular
+15:36:32 <dmiles> here is a predicate i created http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8303
+15:36:54 <dmiles> Mt : JamudMt
+15:36:54 <dmiles> isa :  BinaryPredicate MudSlotBinaryPredicate  
+15:36:54 <dmiles> arity :  2  
+15:36:54 <dmiles> arg1Isa :  PartiallyTangible  
+15:36:54 <dmiles> arg2Isa :  AbstractInformationalThing  
+15:36:54 <dmiles> (argIsa damageSizeDice 1 PartiallyTangible)
+15:36:56 <dmiles> (argIsa damageSizeDice 2 AbstractInformationalThing)
+15:37:07 <CycLBot> Cannot find collection BinaryPredicate MudSlotBinaryPredicate
+15:37:14 <dmiles> that was all i needed to assert to start ussing it
+15:37:31 <Vutral> ic
+15:37:48 <Vutral> hmm
+15:37:57 <dmiles> that isa BinaryPredicate, arg1Isa PartiallyTangible, arg2Isa AbstractInformationalThing
+15:38:05 <dmiles> those three was all actually
+15:38:10 <dmiles> cyc figured out the rest
+15:38:38 <dmiles> i actually used a macro though.. in CycL
+15:38:40 <Vutral> i pressed create similar
+15:38:42 <Vutral> hmm
+15:38:44 <dmiles> i asserted it was a MudSlotBinaryPredicate 
+15:39:01 <dmiles> Mt : JamudMt
+15:39:01 <dmiles> Direction : Forward
+15:39:01 <dmiles> (implies 
+15:39:01 <dmiles>        (isa ?PRED MudSlotBinaryPredicate) 
+15:39:01 <dmiles>        (arg2Isa ?PRED AbstractInformationalThing))
+15:39:02 <dmiles> (implies 
+15:39:04 <dmiles>        (isa ?PRED MudSlotBinaryPredicate) 
+15:39:06 <dmiles>        (arg1Isa ?PRED PartiallyTangible))
+15:39:08 <dmiles> (implies 
+15:39:09 <Vutral> but it wants to put it in Mt: BaseKB
+15:39:10 <dmiles>        (isa ?PRED MudSlotBinaryPredicate) 
+15:39:12 <dmiles>        (isa ?PRED BinaryPredicate))
+15:39:13 <Vutral> i don't want to do that
+15:39:14 <dmiles> and put those 3 rules in
+15:39:19 <Vutral> i want it in another microtheory
+15:39:25 <Vutral> can i do it later ?
+15:39:42 <dmiles> well Mts are like packages in programming
+15:39:58 <dmiles> so the Mt you put it in has to be able to see the termns you use
+15:40:16 <Vutral> so ?
+15:40:21 <Vutral> i cannot do it or what ?
+15:40:26 <dmiles> genlMt is the constant for creating a 'import' ability
+15:40:38 <dmiles> you can yiou just have to make sure you build support for it
+15:40:49 <Vutral> how
+15:40:55 <dmiles> by scoping your Mt to otehr Mts
+15:41:14 <Vutral> ic and how do i do that
+15:41:18 <dmiles> what exactly would you want to do.. like an example
+15:41:28 <dmiles> then  i can show you
+15:41:33 <Vutral> i want to get a similar of comment to my Mt
+15:42:08 <Vutral> or tell me how i can create a plain predicate
+15:42:11 <dmiles> when the definition of comment changes later.. do you want to have those changes?
+15:42:26 <dmiles> ok then in that case a brand new predicate..
+15:42:31 <Vutral> yes
+15:43:02 <dmiles> what do tyou want that predicate named?
+15:43:37 <Vutral> hmm
+15:43:44 <Vutral> GenericObject
+15:43:45 <dmiles> i just dont want to type mypredciate
+15:43:52 <Vutral> :>
+15:43:56 <Vutral> GenericPredicate
+15:43:58 <Vutral> hehe
+15:43:59 <dmiles> ok first off there is a small naming converntion
+15:44:04 <dmiles> genericPredicate
+15:44:13 <Vutral> why lowercare generic ?
+15:45:04 <dmiles> http://12.225.207.235:8036/cycdoc/ref/cycl-syntax.html#naming conventions
+15:47:02 <Vutral> ok
+15:47:03 <Vutral> got it
+15:47:26 <dmiles> it just helps later when debugging byuy you or otehrs
+15:48:10 <Vutral> ok how do i create genericPredicate now
+15:48:16 <dmiles> first you assert (isa genericPredicate BinaryPredicate)
+15:48:48 <dmiles> then (arg1Isa genericPredicate Thing)
+15:48:54 <dmiles> then (arg2Isa genericPredicate Thing)
+15:49:10 <dmiles> thing is the most geenral argument constraint
+15:49:26 <Vutral> hmm
+15:49:32 <dmiles> since afterall this is genericPredicate :)
+15:50:47 <Vutral> Perhaps ISA is insufficiently defined in mt
+15:50:52 <Vutral> i need to import it
+15:50:54 <Vutral> somehow
+15:50:56 <dmiles> needs to be #$isa
+15:51:20 <dmiles> have you created the constant #$genericPredicate yet?
+15:51:42 <Vutral> i guess not :>
+15:52:20 <dmiles> one thing about cyc i admit .. it could be made simplier
+15:52:42 <dmiles> so far the simpliest interface is KE Text
+15:52:57 <Vutral> well it is not simple
+15:53:01 <Vutral> it's chaotic
+15:53:23 <dmiles> simple things tend to be more chaotic
+15:53:30 <Vutral> i have the constant created
+15:53:34 <Vutral> but it is not in a mt
+15:53:37 <dmiles> this is a very structured approach
+15:53:47 <dmiles> right the system knows about it
+15:54:01 <dmiles> but it doent know what it is or where it goes
+15:54:14 <dmiles> you have research namespace in the system so far
+15:54:17 <Vutral> how can i put it in
+15:54:51 <dmiles> ojk what interface are you in .. java?
+15:54:56 <Vutral> web
+15:55:09 <dmiles> ok then in the assert window
+15:55:25 <dmiles> (isa genericPredicate BinaryPredicate) itnto the box...
+15:55:30 <dmiles> then click cyclify
+15:55:46 <dmiles> it will add the #$ to the three names
+15:55:51 <dmiles> did it?
+15:56:27 <Vutral> Term BINARYPREDICATE violates arg-isa Collection
+15:56:27 <Vutral> applicable to argument 2 of relation isa
+15:56:28 <dmiles> now make shure the Mt text box had the name of your Mt
+15:56:34 <Vutral> Term BINARYPREDICATE violates arg-isa SetOrCollection
+15:56:34 <Vutral> applicable to argument 2 of relation isa
+15:56:34 <Vutral> (via elementOf)
+15:56:38 <Vutral> Term BINARYPREDICATE violates arg-genls Thing
+15:56:38 <Vutral> applicable to argument 2 of relation isa
+15:56:45 <Vutral> ???
+15:56:46 <dmiles> you didnt click cycclify
+15:57:01 <Vutral> ok
+15:57:05 <Vutral> worked now
+15:57:36 <dmiles> cyclify just verifies the names are known to cyc
+15:57:42 <Vutral> i noticed now :>
+15:57:48 <dmiles> and it tells you by adding the #$
+15:59:34 <Vutral> hell
+15:59:37 <Vutral> i got a argIsa at it
+15:59:51 <dmiles> hehe it deduced
+16:00:05 <Vutral> deduced ?
+16:00:09 <dmiles> thats why the ball is green
+16:00:11 <Vutral> i need to make it arg2Isa
+16:00:28 <dmiles> yes
+16:00:31 <Vutral> how can i repair ?
+16:00:39 <dmiles> its a good thing
+16:00:43 <dmiles> you have both
+16:00:59 <dmiles> arg1Isa and a argIsa
+16:01:07 <Vutral> nono
+16:01:11 <Vutral> i should have a arg2Isa
+16:01:15 <Vutral> not a argIsa
+16:01:16 <Vutral> hehehe
+16:01:24 <dmiles> ok now you want to do that with arg2Isa
+16:01:28 <dmiles> then youul have 4
+16:01:50 <dmiles> two that you told Cyc and 2 that Cyc told you
+16:02:00 <Vutral> hes
+16:02:01 <Vutral> hey
+16:02:03 <Vutral> it worked
+16:02:03 <Vutral> :>
+16:02:21 <dmiles> cool :P
+16:02:47 <dmiles> now you can use that predicate to add that to Pi
+16:03:07 <dmiles> (genericPredicate Pi "some text")
+16:03:25 <Vutral> sounds good
+16:03:28 <Vutral> how can i do that in java ?
+16:03:52 <dmiles> well its not hard.
+16:04:10 <dmiles> want to add the value from java...
+16:04:14 <Vutral> yes
+16:05:07 <dmiles> cyc.converseBoolean("(cyc-assert '(#$genericPredicate #$Pi \"some text\") #$MyPiMt)");
+16:06:01 <dmiles> sometimes converseBoolean is simplier to use.. but if the internal API changes then it would have been bertter to used the more specific interfaces in cyc
+16:06:08 <Vutral> ic
+16:06:29 --- quit: people ()
+16:06:41 <dmiles> however i think so many people use API a certain why they dont change things quicklly
+16:06:47 <Vutral> what if sometext contains a " ?
+16:06:57 <dmiles> \\\"
+16:07:13 <dmiles> i think.. Steve should be able to confirm
+16:07:14 <Vutral> well i want to do it dynamically
+16:08:47 <dmiles> yeah.. you Strings.change(before,"\"","\\\"")
+16:08:47 <Vutral> Strings ?
+16:08:47 <Vutral> i don't have that class
+16:08:47 <dmiles> well par tof ViolignStrings
+16:08:52 <dmiles> opencyc uses them.. so i do
+16:08:53 <Vutral> ?
+16:09:01 <Vutral> where is that
+16:09:07 <Vutral> well
+16:09:12 <Vutral> but \" is not existant
+16:09:21 <Vutral> "
+16:09:23 <Vutral> hmm
+16:09:23 <dmiles> it probly packed in your opencyc.jar
+16:09:31 <Vutral> i will use my class
+16:09:34 <Vutral> i think
+16:09:36 <dmiles> ok yeah
+16:09:43 <Vutral> :>
+16:09:50 <Vutral> i invested much work
+16:10:04 <dmiles> the main thing is that Cyc recives your converse void
+16:10:19 <dmiles> err converseBoolean
+16:10:25 <dmiles> or whichever you use
+16:10:42 <dmiles> converseVoid,  converseBoolean,  converseList
+16:11:13 <dmiles> you are just 2 dstrings above java
+16:11:22 <dmiles> avoid the Cyc terms reader
+16:11:29 <dmiles> above it
+16:11:47 <dmiles> you are just 2 dstrings above term reader
+16:12:21 <dmiles> converse goes over the socket and then its read by the interpetor
+16:13:58 <Vutral> hmm hmm hnmm
+16:14:10 <Vutral> if there is a \" it will get a \\"
+16:14:11 <Vutral> lol
+16:14:12 <Vutral> insane
+16:14:18 <Vutral> easy to fault system
+16:16:25 <dmiles> its really hard to know what level you are in for the eascape
+16:16:53 <Vutral> yeah
+16:16:54 <dmiles> i mean if it was cyc.converseBoolean("(cyc-assert '(#$genericPredicate #$Pi \"+myText+\") #$MyPiMt)");
+16:17:08 <Vutral> best would if i did not need to escape
+16:17:12 <dmiles> myText only needs " to \"
+16:17:20 <Vutral> makeCycConstant(java.lang.String) in org.opencyc.api.CycAccess cannot be applied to (org.opencyc.cycobject.CycConstant)
+16:17:21 <Vutral> ???
+16:17:47 <dmiles> cyc ?
+16:17:55 <dmiles> cyc.makeCycConstant(java.lang.String)
+16:18:11 <Vutral> i did that
+16:18:34 <dmiles> i would have to see the line of code
+16:18:53 <dmiles> i can think of too many reasons for that exact error message
+16:18:53 <Vutral>  CycLa.makeCycConstant(ConstName);
+16:19:04 <Vutral> CycLa is a instance of CycAccess
+16:19:07 <dmiles> ConstName instanceof String ?
+16:19:12 <Vutral> ConstName is a string
+16:19:13 <Vutral> yes
+16:19:26 <dmiles> CycLa instanceof CycAccess ?
+16:19:31 <Vutral> yes
+16:20:29 <dmiles> then thats not what its complaining about 
+16:21:04 <dmiles> that fiunction returns org.opencyc.cycobject.CycConstant
+16:21:09 <Vutral> Category is already defined in AssertConstantWithCategory(java.lang.String,java.lang.String)
+16:21:40 <Vutral> oops
+16:21:42 <Vutral> recursion
+16:21:44 <Vutral> ;)
+16:22:12 <dmiles> you learnded java as fast as i did ;P
+16:22:28 <Vutral> hehehehe
+16:22:29 <dmiles> excpet i have java nazis force my to use their naming conventions
+16:22:37 <Vutral> i don'T do that
+16:22:43 <Vutral> i love big begin letters
+16:22:45 <dmiles> man you Cpas everythingh
+16:22:54 <Vutral> i have a syntax
+16:22:59 <Vutral> i use it in all languages
+16:23:11 <Vutral> if the file is not i beautify it
+16:23:14 <Vutral> with my syntax
+16:23:28 <Vutral> my counselour says its ok
+16:23:28 <Vutral> :>
+16:23:37 <dmiles> hehe
+16:24:00 <dmiles> i have to get some coffee be back in a 5 minutes
+16:24:03 <Vutral> ok
+16:26:37 <Vutral> dmiles: soon i have a running thing :>
+16:28:47 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+16:39:48 <dmiles> Vutral: to make a collection...
+16:39:59 <dmiles> (isa MyCollection Collection)
+16:40:08 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+16:40:10 <dmiles> (genls  MyCollection Thing)
+16:40:19 <dmiles> but you should pick something lower
+16:40:23 <dmiles> then thing
+16:40:38 <dmiles> like MathmaticalObject
+16:40:56 <Vutral> genls ?
+16:41:05 <dmiles> yes means subclass
+16:41:45 <dmiles> so .. isa Collection, ansd genls <Something>
+16:42:17 <Vutral> ohh my fucking god
+16:42:24 <dmiles> for example.. MathmaticalConstant
+16:42:30 <Vutral> i need to create a constant before asserting to a collection ?
+16:42:36 <dmiles> yes ;P
+16:42:39 <Vutral> dmiles: how did you come on MathematicalConstant ?
+16:42:58 <dmiles> you meantioned it easlier
+16:43:05 <dmiles> and its used in the SUO Ontology
+16:43:06 <Vutral> ok
+16:43:10 <Vutral> :>
+16:43:13 <Vutral> i used it just
+16:43:19 <Vutral> it's a collection
+16:43:49 <dmiles> my last paid job was working with that ontology
+16:44:12 <futhin> is this ontology stuff something to do with cyc?
+16:44:13 <Vutral> why the fuck doesn't the new created constant Pi goto my Mt
+16:44:52 <dmiles> nope but Cyc is the only viable inference system for using large ontogies.. that is easy to operate
+16:45:44 <dmiles> well i am sure people could argue that .. but opencyc seems to be the most proven one that has alot of background
+16:45:49 <Vutral> how you mean
+16:45:52 <Vutral> large ontogies ?
+16:45:55 <Vutral> large numbers ?
+16:45:58 <Vutral> :>
+16:46:03 <dmiles> large taxonomies of collections
+16:46:08 <dmiles> yeah
+16:46:10 <futhin> what exactly was the job working with SUO ontology??  (a programming job ??)
+16:46:23 * dmiles has said too much
+16:46:24 <futhin> or is this database stuff?
+16:46:31 <dmiles> database.. yeah
+16:46:45 <futhin> you've said too much?  you work for the military? ;)
+16:46:53 <Vutral> hmm
+16:46:58 <Vutral> hehehe
+16:46:59 * zool giggles
+16:46:59 <Vutral> lol
+16:47:01 <Vutral> nsa
+16:47:04 <Vutral> not miltary
+16:47:11 <dmiles> well military funds many projects.. but not that those projects are all warlike
+16:47:25 <futhin> yeah i'm not saying you are doing anything bad
+16:47:46 <futhin> i just infered the possibility you worked for the government/military and i asked that question :P
+16:48:03 <Vutral> fcukign
+16:48:04 <Vutral> d
+16:48:05 <CycLBot> Go where?
+16:48:06 <Vutral> HELL
+16:48:09 <dmiles> yeah.. i think most all projects of those nature are
+16:48:32 <dmiles> Arpa,Darpa.. even the semantic web is a military project
+16:48:42 <dmiles> well funded by
+16:49:23 <zool> everybody funds everybody else ;)
+16:49:33 <Vutral> lol
+16:49:48 <futhin> well naturally the military is going to fund lots of projects..   if a department doesn't spend as much cash as possible they lose that funding the next year
+16:49:59 <dmiles> hehe
+16:50:05 <futhin> the military's job is to help the government get into and stay in debt :P
+16:50:26 <dmiles> its nice to help them spend their money on cool stuff
+16:50:39 <futhin> i bet the strategic minds of the military have determined debt is a vital war tool ;)
+16:50:57 <dmiles> hehe.. it creates jobs for sure
+16:51:36 <dmiles> not that its dirrectly related, but people dont work hard if they are not in debt ;P
+16:51:46 <Vutral> dmiles: i got it now
+16:52:02 <Vutral> hmm
+16:52:16 <dmiles> yeah its like many things we need, crime,war,debt
+16:52:21 <Vutral> the make constant of CycAccess does not create new constants right ?
+16:52:28 <futhin> that's right!  how can a country claim to have the hardest workers if they don't have TONS of debt!!!
+16:52:57 <futhin> US has trillions of dollars debt therefore the US has the hardest workers :)
+16:52:58 <dmiles> right it only makes them if it needs to
+16:53:21 <dmiles> yeah.. its backwards logic.. but somehow it sounds good
+16:53:43 <Vutral> dmiles ?
+16:53:44 <dmiles> Vutral then futhin
+16:53:49 <Vutral> it doesn't make them
+16:53:50 <Vutral> i think
+16:54:05 <dmiles> why not.. the computer ios supposed to do what you tell it
+16:54:15 <Vutral> hmmm
+16:54:28 <Vutral> but i had to create the constant manually
+16:54:30 <Vutral> well
+16:54:37 <Vutral> doesn't matter
+16:54:45 <Vutral> how woudl you address "e" ?
+16:54:46 <dmiles> did you insert all the try/catches ?
+16:54:52 <Vutral> yes
+16:54:58 <Vutral> how would you address "e" ?
+16:55:25 <dmiles> the letter e or the string "e" or the mathmatical object e?
+16:55:31 <Vutral> e is too short
+16:55:33 <CycLBot> Data's Quarters is an indoor space
+16:55:33 <CycLBot> Data's Quarters is inside surface
+16:55:34 <CycLBot> Data's Quarters is a geographical region
+16:55:34 <Vutral> or ?
+16:55:35 <CycLBot> cyc l bot is contained in Data's Quarters
+16:55:35 <CycLBot> A portal westerly is contained in Data's Quarters
+16:55:36 <CycLBot> mud description Data's Quarters You're in the middle of Data's quarters. Some easils and paintings have been left scattered around the southern part of the room, while a huge computer screen showing a cross section of the Enterprise covers the entire northern wall. In front of the screen is a large desk, which is covered in computer controls. You can't see a bed in this room, but you figure it's because Data doesn't sleep.
+16:55:57 <dmiles> "e-The-MathmaticConstant"
+16:56:10 <Vutral> ok i will use EulerConstant ;)
+16:56:12 <Vutral> then
+16:56:14 <Vutral> lol
+16:56:29 * futhin has been watching the entire TNG season 1 and 2 DVDs :)
+16:57:00 <futhin> but you lie! there's a bed in data's room
+16:57:02 <futhin> i think..
+16:57:17 <futhin> where does he have sex if he doesn't have a bed :P
+16:57:42 <dmiles> he did it in that luetenants room
+16:57:53 <Vutral> hehehe
+16:57:59 <futhin> he's had sex multiple times
+16:58:20 <Vutral> hmm
+16:58:58 <Vutral> woah
+16:58:59 <Vutral> it works :>
+16:59:05 <Vutral> dmiles
+16:59:06 <Vutral> it works
+16:59:16 <Vutral> it can make new facts and assert a description
+16:59:17 <Vutral> hehehehehe
+16:59:37 <futhin> what new facts?
+16:59:46 <Vutral> hmm
+16:59:48 <Vutral> do you know e ?
+16:59:59 <futhin> ecstasy? :P
+17:00:05 <Vutral> no no
+17:00:08 <Vutral> eulerconstant
+17:00:23 <futhin> i don't know anything about cyc
+17:00:28 <futhin> 0, nada, zip, etc
+17:00:48 <futhin> eww! my mouse died on me
+17:00:56 <Vutral> it has nothing todo with it
+17:01:16 <Vutral> well
+17:01:26 <Vutral> it's the number of which ln is one
+17:01:35 <futhin> natural log?
+17:01:45 <Vutral> yeah
+17:02:52 <futhin> hm, gonna restart my comp
+17:02:56 --- quit: futhin ("restarting comp")
+17:04:25 <Vutral> dmiles ?
+17:04:36 * dmiles is here
+17:04:54 <Vutral> creating a collection in java interface ?
+17:05:44 <dmiles> cyc.assertIsa(mymt,cyc.makeCycConstant("MyCollection"),cyc.collection);
+17:08:58 <Vutral> oki
+17:13:34 <Vutral> cool
+17:13:45 <Vutral> adding things is made up now
+17:13:54 <Vutral> i will go offline
+17:13:57 <Vutral> cu l8r
+17:14:15 <dmiles> excellent
+17:14:35 <zool> take it cheesy
+17:14:36 <CycLBot> Take what?
+17:14:44 * zool laughs at cyclbot
+17:27:20 <Cobra> hmmm
+17:27:24 <Cobra> take cheesy
+17:27:25 <CycLBot> Take what?
+17:27:32 <Cobra> Worth a shot
+17:27:33 <Cobra> :)
+17:27:58 <dmiles> take Cyc
+17:28:01 <dmiles> inv
+17:28:01 <CycLBot> Cyc process
+17:28:20 <dmiles> take CityOfWashingtonDC
+17:28:22 <dmiles> inv
+17:28:22 <CycLBot> 2 items.
+17:28:23 <CycLBot> Washington D.C. Cyc process
+17:30:35 --- quit: Vutral (Read error: 110 (Connection timed out))
+17:36:06 <dmiles> http://12.225.207.235/offt/%23pigface.EFnet.log <- people having too much fun with CycLBot's predcessor
+17:36:55 <kinoc> so how is CyclBots expansion going?
+17:37:25 <dmiles> oh my Vutral is in there 
+17:39:00 <dmiles> doing good.. been busy with other things today.. i have the connection to the worldforge gameserver done though
+17:39:17 <dmiles> i am about to start back on the alice in prolog thing agaion
+17:39:52 <dmiles> so many things to keep spred out!
+17:41:03 <dmiles> btw: jllykifsh is the bot
+17:41:04 <Cobra> yipe, that log file is over 2M!
+17:41:11 <dmiles> 6megs maybe
+17:41:50 <dmiles> TitanII is vutrals bot
+17:42:27 * zool should get her bot's irc interface running again
+17:43:04 <dmiles> yeah.. it would be fun to have a channel of chatting bots
+17:45:37 <kinoc> The Bot Channel, all bots all the time.
+17:45:44 <zool> mine doesnt really chat though, it just sits there being zen and delivering occasional aphorisms ;)
+17:45:55 <dmiles> it stire the entropy
+17:46:05 <zool> there's enough random chat in this world already ;)
+17:46:17 <kinoc> guru bot ?
+17:46:28 <zool> it doesnt think that much of itself yet ;)
+17:46:42 <kinoc> ah a true zen bot
+17:46:49 * zool smiles
+17:47:24 <kinoc> will giving machines awarness remove their enlightenment ?
+17:47:59 * zool heard a nice phrase today
+17:48:37 <zool> "so you have some sand and you're controlling it electronically, and there are metaphors on top. that's more or less it."
+17:49:15 <kinoc> yep, kinda sums it up
+17:49:38 <kinoc> hmmm, carbon filled water bags.....
+17:50:52 <kinoc> but where are the controlling metatphors?
+17:52:18 <kinoc> you mean if I manipulate peoples symbols I can get them to do stuff??? Wow!
+17:52:44 * zool nods
+17:53:23 <kinoc> must have something to do with persuasion and interaction stuff I keep hearing about
+17:54:11 <kinoc> anyone teach cyc about that yet? what Mt is it in?
+17:54:16 <dmiles>  -ChanServ- [#bottalk] Welcome to #bottalk! Here you can test out your Alicebots and have them flood the chat while talking to each other. Check out other Alicebot and AIML related channels: #aiml and #bots.
+17:54:39 <zool> that's here?
+17:54:50 <dmiles> yeah but no one was in it ;(
+17:55:06 <kinoc> seems like it needs some bots....
+17:55:07 <dmiles> it was something someone invited me into and oped me
+17:55:33 <dmiles> but them are offline i guess
+17:56:31 <kinoc> sounds like abandoned real estate
+17:57:40 <dmiles> i mentoin it mainly becasue when the people are there3 there is more bot fun 
+17:57:53 <dmiles> (when the normal owners are online)
+17:58:44 <Cobra> Nobody there now also...
+18:42:08 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+18:54:04 <graylensman> Question: What is the penalty for using a forward rule. The doc says its an almost never situation.  But its kinda like a short hand for simple Horn predicates.  (implies (and (substituteFor A B) (accessoryFor B C)) (substituteFor A C) :DEFAULT :FORWARD).  Is this really less efficient then manually asserting (substituteFor A C) as a GAF?    It like having the rule doing the manual typing of the assertions for me.
+18:55:58 <graylensman> DAMN  meant (implies (and (substituteFor A B) (accessoryFor B C)) (accessoryFor A C))
+19:05:13 <dmiles> well forward rules are fine when they terminate
+19:05:28 <dmiles> if there is a complete cycle they will
+19:05:45 <dmiles> they make queries go fater since they create a cache
+19:06:39 <dmiles> faster
+19:07:36 <graylensman> Well this is a very simple rule. That is what I was hoping.  The forward rule causes the assertions to be made immediately.  So I trade memory for faster queries.  I understand that if I leave it backwards then I need to query with at least one level of backwards chaining to see it.  So my queries are slower.  But less total assertions in DB.
+19:08:03 <dmiles> yes
+19:08:36 <graylensman> BTW... Hi dmiles.
+19:08:41 <graylensman> Thanks.
+19:08:55 <dmiles> sometimes backchaining max being high in toplevel entry of a query could be combinatoric
+19:11:12 <dmiles> i wonder if it would be usefull to set backchain cost per certain implications
+19:11:12 <dmiles> a high cost imnplication would be candidate to be forward assertion only
+19:11:12 <dmiles> hi graylensman ;)
+19:13:03 <graylensman> Since I have your attention.  I have noticed that is I have a simple rule, backward, where the antecedant and consequent are of the form (implies (isa ?X #$XXX) (isa ?Y #$YYY)) doesnt work when I query, even with infinite backwards chaining.  When I use my BinaryPredicates I never have a problem.  I don't see the isa problem at all if I forward the rule.
+19:13:36 --- join: Vutral (~ss@pD904312C.dip.t-dialin.net) joined #opencyc
+19:14:16 <dmiles> hey Vutral look what i found a log with titanII in it http://12.225.207.235/offt/%23pigface.EFnet.log
+19:14:38 <Vutral> test
+19:14:39 <Vutral> dmiles ?
+19:14:43 <dmiles> graylensman: you mean infernce gets lost and times out?
+19:14:43 <Vutral> hehe
+19:14:46 <Vutral> let me check
+19:14:50 <graylensman> DAMN meant (implies (isa ?X #$XXX) (isa ?X #$YYY)) ...
+19:14:58 <Vutral> dmiles: how can i get the value of a predicate ?
+19:15:05 <graylensman> No query is fast.  Just no answer.
+19:15:16 <dmiles> thats a UI bug
+19:15:31 <dmiles> it wont display sentences in varible bindings
+19:16:55 <dmiles> at least thats to only time i see success w/o bindings
+19:16:55 <graylensman> Well I have now problem with (implies (childOf ?C ?P) (parentOf ?P ?C))  [yes a know about the genlInv...]
+19:16:55 <dmiles> when you expected them
+19:16:55 <Vutral> dmiles: how can i get the value of a predicate ?
+19:16:55 <dmiles> query with a varible
+19:16:55 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+19:17:04 <dmiles> kinda the way one would in prolog
+19:17:13 <Vutral> i mean on the web interface
+19:17:32 <dmiles> (genralPredicate Pi ?W)
+19:17:33 <Vutral> i use argIsa
+19:17:38 <dmiles> cyclify friust
+19:17:39 <Vutral> atm
+19:17:39 <Vutral> but it does not do what i want
+19:18:34 <Vutral> dmiles: when i use the api function will i get just the first value ?
+19:18:52 <dmiles> (implies (isa ?X #$XXX) (isa ?Y #$YYY)) in asserion maybe is simplified to (genls ?X ?Y) ?
+19:19:18 <dmiles> if you assertted that forward it can take a while to propogate
+19:20:16 <dmiles> argIsa tells you the contraints .. not the value
+19:20:33 <Vutral> hmm
+19:20:33 <Vutral> yes
+19:20:46 <dmiles> (i mean in query)
+19:21:01 <Vutral> askWithVariables does it require an empty ArrayList  ?
+19:21:06 <Vutral> or have i to fill it with instances
+19:21:28 <dmiles> you have to create varibles and place them into an array list
+19:21:39 <dmiles> ArrayList of CycVarible()
+19:21:39 <Vutral> i dunno how much i will get
+19:21:42 <Vutral> so that is insane
+19:21:55 <dmiles> only varibles you put in a query
+19:21:59 <dmiles> try this...
+19:22:17 <graylensman> I do all my "CycL" in scheme now :) Terser coding.  Like: (cyc-create-predicate #$childOf #$FamilyMember #$FamilyMember in #$FamilyMt) or (cyc-create-predicates #$isa '(#$Hotdog #$Banana #$Bagel) #$Food in #$FoodMt)
+19:23:10 <dmiles> System.out.println(cyc.conversList("(cyc-query '(#$generalPredicate #$Pi ?X) #$InferencePSC)")));
+19:23:46 <Vutral> hmm
+19:23:50 <Vutral> hmm
+19:23:51 <Vutral> but well
+19:24:00 <Vutral> the predicate can have multiple values
+19:24:07 <Vutral> i dunno how much it has
+19:24:13 <Vutral> but i want to get all of them
+19:24:39 <dmiles> graylensman: i see.. thats nice i are creating a good Scheme-cyc binduing
+19:24:47 <dmiles> you i mean
+19:25:24 <Vutral> Returns a list of bindings for a query with unbound variables. ??
+19:25:26 <dmiles> this is something also you would be supprised people on some of the mauiling list should know about it
+19:25:27 <Vutral> what does that mean
+19:25:38 <dmiles> Vutral yes
+19:26:41 <dmiles> graylensman: explain again the  (implies (isa ?X #$XXX) (isa ?X #$YYY)) 
+19:26:58 <dmiles> thats awesome about the Scheme bindings to Cyc
+19:27:24 <dmiles> i had just notice a thread on open discussion
+19:27:31 <dmiles> for bindings into other languages
+19:27:59 <Vutral> dmiles
+19:28:02 <Vutral> what does it mean
+19:28:14 <dmiles> the list you get bacjk?
+19:28:38 <Vutral> yes
+19:28:45 <dmiles> lets do thius...
+19:29:24 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)")))
+19:29:24 <CycLBot> In file: <Inline eval of: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)"))); > Encountered "+ cyc . converseList ( \"(cyc-query \'(#$isa ?X #$Person) #$InferencePSC)\" ) )" at line 1, column 4.
+19:29:31 <dmiles> one sec
+19:29:57 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)")
+19:29:57 <CycLBot> (((?X . CycAdministrator)) ((?X . Guest)))
+19:30:09 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").size()
+19:30:09 <CycLBot> 2
+19:30:16 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").get(1)
+19:30:16 <CycLBot> ((?X . Guest))
+19:30:27 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").get(1).getClass()
+19:30:27 <CycLBot> class org.opencyc.cycobject.CycList
+19:30:35 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").get(1).rest()
+19:30:35 <CycLBot> ()
+19:30:41 <Vutral> is that the same thing which gets stored in the arraylist ?
+19:30:59 <dmiles> exectly
+19:31:04 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").getClass()
+19:31:05 <CycLBot> class org.opencyc.cycobject.CycList
+19:31:06 <Vutral> hmm
+19:31:07 <Vutral> strange
+19:31:17 <dmiles> bsh: "" + cyc.converseList("(cyc-query '(#$isa ?X #$Person) #$InferencePSC)").getClass().getSuperclass()
+19:31:17 <CycLBot> class java.util.ArrayList
+19:31:32 <Vutral> strange strange
+19:33:15 <dmiles> bsh: ArrayList vars= new ArrayList()
+19:33:34 <Vutral> how do i establish the CycList
+19:33:35 <Vutral> query
+19:33:37 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+19:33:50 <Vutral> query
+19:33:50 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+19:34:09 <dmiles> bsh: vars.add(new CycVariable("X"))
+19:34:10 <CycLBot> Sourced file: <Inline eval of: vars.add(new CycVariable("X")); > : Class: CycVariable not found in namespace : at Line: 1 : in file: <Inline eval of: vars.add(new CycVariable("X")); > : vars .add ( new CycVariable ( "X" ) )
+19:34:35 <Vutral> ?X
+19:34:36 <Vutral> :>
+19:35:07 <Vutral> the query cyclist
+19:35:08 <dmiles> bsh: vars.add(new org.opencyc.cycobject.CycVariable("X"))
+19:35:08 <CycLBot> true
+19:35:10 <Vutral> what does it contain
+19:35:18 <dmiles> bsh: vars.add(new org.opencyc.cycobject.CycVariable("Y"))
+19:35:18 <CycLBot> true
+19:35:55 <dmiles> bsh: org.opencyc.cycobject.CycList query= new org.opencyc.cycobject.CycList()
+19:35:56 <Vutral> one query ?
+19:36:53 <Vutral> dmiles ?
+19:37:10 <dmiles> bsh: query.add(cyc.makeCycConstant("isa"))
+19:37:10 <CycLBot> true
+19:37:28 <dmiles> bsh: query.add(new org.opencyc.cycobject.CycVariable("Y"))
+19:37:28 <CycLBot> true
+19:37:49 <dmiles> bsh: query.add(cyc.makeCycConstant("Dog"))
+19:37:49 <CycLBot> true
+19:38:00 <dmiles> Vutral.. you see what i am doing?
+19:38:06 <Vutral> sure
+19:38:09 <Vutral> does it work ?
+19:38:18 <dmiles> yes about to askWithVaribles
+19:38:36 <dmiles> bsh ""+vars
+19:38:36 <CycLBot> [?X, ?Y]
+19:38:38 <Vutral> how if i just want to get the value of my predicate
+19:38:39 <Vutral> ?
+19:38:48 <dmiles> bsh ""+vars.remove(0)
+19:38:49 <CycLBot> ?X
+19:38:51 <dmiles> bsh ""+vars
+19:38:52 <CycLBot> [?Y]
+19:39:06 <Vutral> const predicate , const object, cycvariable x ?
+19:39:17 <dmiles> you cannot get a value of a predicate
+19:39:23 <dmiles> yes
+19:39:25 <Vutral> sure
+19:39:26 <Vutral> you showed me
+19:39:48 <dmiles> ok you are getting a binding of your predicate instancatied as used in a tuple 
+19:40:30 <Vutral> i did that
+19:40:38 <Vutral> makeCycConstant
+19:40:42 <Vutral> i added it to a cyclist
+19:41:18 <Vutral> then i added a instance of the object i want to lookup the predicate
+19:41:25 <dmiles> whats the method signature for askWithVaribles?
+19:41:28 <Vutral> and at last i added a new variable
+19:41:37 <Vutral> i use askwithvariable atm
+19:41:46 <dmiles> ok yeah that will worl
+19:41:58 <dmiles> what argument does the mt go into?
+19:42:57 <Vutral> ??
+19:43:04 <Vutral> i pass my Mt
+19:43:17 <dmiles> ok yes you do.. the thrird argumetn
+19:44:01 <dmiles> bsh: cyc.askWithVariable(query,(new org.opencyc.cycobject.CycVariable("Y"),cyc.makeCycConstant("InferencePSC"))
+19:44:02 <CycLBot> In file: <Inline eval of: cyc.askWithVariable(query,(new org.opencyc.cycobject.CycVariable("Y"),cyc.makeCycConstant("InferencePSC")); > Encountered "( query , ( new org . opencyc . cycobject . CycVariable ( \"Y\" ) ," at line 1, column 20.
+19:44:18 <dmiles> bsh: cyc.askWithVariable(query,new org.opencyc.cycobject.CycVariable("Y"),cyc.makeCycConstant("InferencePSC"))
+19:44:19 <CycLBot> ((GenericInstanceFn Dog))
+19:44:21 <Vutral> what will new org.opencyc.cycobject.CycVariable("Y") contain later ?
+19:44:38 <dmiles> its find.. its only passed by string
+19:44:44 <dmiles> it fine i meant
+19:44:51 <Vutral> will it contain something ?
+19:44:56 <dmiles> nope
+19:45:06 <Vutral> so it is nonsense ?
+19:45:19 <dmiles> the output of the cyc.ask... -> ArrayList
+19:45:25 <dmiles> yep
+19:45:34 <Vutral> ok
+19:45:43 <dmiles> yeah it just so we can be more OO
+19:45:44 <Vutral> the first argument (0) is the value i want then ?
+19:46:03 <dmiles> bsh: cyc.askWithVariable(query,new org.opencyc.cycobject.CycVariable("Y"),cyc.makeCycConstant("InferencePSC")).get(0)
+19:46:04 <CycLBot> (GenericInstanceFn Dog)
+19:46:22 <dmiles> yep
+19:46:22 <Vutral> what does it contain ?
+19:46:24 <Vutral> the ArrayList
+19:46:28 <Vutral> a CycVariable ?
+19:46:38 <dmiles> an ArrayList 
+19:46:44 <dmiles> that contains the answers
+19:47:08 <Vutral> yes
+19:47:14 <Vutral> does it contain CycVariables
+19:47:16 <Vutral> or Strings
+19:47:18 <Vutral> or what
+19:47:46 <dmiles> askWithVariable no.. converseList("cyc-qury...") yes
+19:47:56 <dmiles> does it contain CycVariables?
+19:47:59 <dmiles>  askWithVariable no.. converseList("cyc-qury...") yes
+19:48:08 <Vutral> one Variable ?
+19:48:12 <Vutral> there is a list
+19:48:15 <Vutral> it returns Objects
+19:48:24 <Vutral> a object is not really useful yet
+19:48:28 <Vutral> what is it really
+19:48:29 <dmiles> which are you asking about askWithVarible?>
+19:48:44 <Vutral> it has a CycList as return value
+19:48:49 <Vutral> a CycList contains Objects
+19:48:55 <Vutral> but what is the subclass
+19:49:05 <Vutral> can i cast them to string or what
+19:49:11 <dmiles> well ok.. i am wondering which function you are asking about
+19:49:21 <dmiles> askWithVariable or converseList ?
+19:49:27 <Vutral> askWithVariable
+19:49:53 <dmiles> askWithVariable returnes a CycList..(subclass of ArrayList)
+19:50:00 <Vutral> i know
+19:50:05 <dmiles> its .size() is the number of answers
+19:50:05 <Vutral> but that CycList
+19:50:17 <dmiles> in that CycList...
+19:50:24 <Vutral> i do MyCycList.first()
+19:50:29 <Vutral> then i get a Object
+19:50:34 <Vutral> got me so far ?
+19:50:36 <dmiles> that will return an object yes
+19:50:38 <dmiles> yes
+19:50:52 <dmiles> now the typeof that object depends on the result..
+19:50:54 <Vutral> normally i can cast that object to a higher class
+19:50:58 <Vutral> ic
+19:51:06 <Vutral> what will it be normally ?
+19:51:10 <Vutral> or when is it what
+19:51:14 <dmiles> String,Interger,Real,CycConstant,CycList,CycNart
+19:51:36 <Vutral> assume i check a predicate
+19:51:39 <Vutral> what will i get ?
+19:51:52 <dmiles> one of these: String,Interger,Real,CycConstant,CycList,CycNart
+19:51:57 <Vutral> my predicate with a loosy string
+19:52:00 <Vutral> ?
+19:52:13 <dmiles> if you predicate holds a sting you will get String
+19:52:21 <Vutral> ok
+19:52:30 <Vutral> so i can never know really ?
+19:52:49 <dmiles> nope.. but whatever it returns with have a .toString()
+19:53:03 <Vutral> ok
+19:53:09 <Vutral> i get offline (saving money)
+19:53:11 <Vutral> bbl
+19:53:12 <Vutral> thx
+19:54:52 <dmiles> graylensman: could you reiterate your finding about forward chaining?
+19:56:43 <dmiles> when you query (implies (isa ?X #$XXX) (isa ?Y #$YYY)) .. you will want to use hypothesize i think
+19:57:31 <dmiles> at least in the API.. fi-hypothisize is for asking queries with implication
+19:58:08 <dmiles> cyc-query is for non implication queries
+20:10:41 --- quit: Vutral (Read error: 110 (Connection timed out))
+20:17:27 <graylensman> dmiles: I can get cyc-query to work no problem with simple predicates.
+20:24:30 <dmiles> i see
+20:38:39 <dmiles> that sounds about right
+20:48:34 <graylensman> dmiles:  Here is some sample code that shows a cyc-query will pickup an inference from an (implies...) rule, :default :back.  This is my shorthand Scheme but you should follow what CycL it outputs.
+20:48:54 <dmiles> cool.. so this is ran from scheme?
+20:49:07 <graylensman> (cyc-create-microtheory #$FamilyMt isa #$GeneralMicrotheory genlsMt #$BaseKB)
+20:49:07 <graylensman> (cyc-create-constants '(childOf FamilyMember parentOf Eve Tawny))
+20:49:07 <graylensman> (cyc-assert '(#$isa #$FamilyMember #$Collection) #$FamilyMt)
+20:49:07 <graylensman> (cyc-create-predicate #$childOf #$FamilyMember #$FamilyMember in #$FamilyMt)
+20:49:07 <graylensman> (cyc-create-predicate #$parentOf #$FamilyMember #$FamilyMember in #$FamilyMt)
+20:49:08 <graylensman> (cyc-assert '(#$isa #$Eve #$FamilyMember) #$FamilyMt)
+20:49:12 <graylensman> (cyc-assert '(#$isa #$Tawny #$FamilyMember) #$FamilyMt)
+20:49:14 <graylensman> (cyc-assert '(#$childOf #$Tawny #$Eve) #$FamilyMt)
+20:49:16 <graylensman> (cyc-assert '(#$implies 
+20:49:18 <graylensman>               (#$childOf ?CHILD ?PARENT)
+20:49:20 <graylensman>               (#$parentOf ?PARENT ?Child)) #$FamilyMt)
+20:49:22 <graylensman> (display/query-result 
+20:49:24 <graylensman>  (send-command/synch "(cyc-query '(#$parentOf ?P ?C) #$FamilyMt '(:backchain 1))"))
+20:49:36 <graylensman> ?P = #$Eve ?C = #$Tawny
+20:50:13 <dmiles> ah good.. yes that should
+20:50:27 <dmiles> btw.. the 1 had to be there as well?
+20:50:55 <graylensman> I need to expand my cyc-query macro to handle the &options correctly.  So to add the :backchain I did a raw call to the function that sends strings to Cyc port.
+20:51:17 <graylensman> Yes Without the backchain the query return NIL.
+20:52:11 <dmiles> ah.. makes sense of course.. but i didnt know for sure .. thought it would give you 1 for free ;P
+20:52:42 <dmiles> that is nice and small sytem you have
+20:52:59 <dmiles> vurtal is accessing from java and seeing how much work it is ;P
+20:53:24 <graylensman> Does not. BTW is you set the :backchain to n, say 3. The result if the first backchain, if applicable will cause a second to occur, up to n.
+20:53:51 <dmiles> yeah
+20:54:27 <dmiles> (the java access part is not too much work really but that looks nice and simple)
+20:54:27 <graylensman> Since I am using PLT Scheme.  I get full emacs editing, color hilighting of the above code, syntax validation.... It is the way to go.
+20:55:51 <graylensman> I will release the file this weekend.  It is just 150 lines.  The only drawback is you have to hack one C file in PLT Scheme so the reader does not barf over #$XXX.  
+20:56:15 <dmiles> how many lines ido you have to change in the C ?
+20:56:36 <graylensman> You have to add 4 lines.  I will paste :)
+20:57:43 <graylensman> 	case '$':
+20:57:43 <graylensman> 	  scheme_ungetc('$', port);
+20:57:43 <graylensman> 	  scheme_ungetc('#', port);
+20:57:43 <graylensman> 	  return read_symbol(port, stxsrc, line, col, pos);
+20:57:49 <graylensman> That is it.
+20:59:15 <dmiles> that seems easy.. i never made a patch file.. but maybe that can be done
+20:59:28 <graylensman> Real easy.  PLT Scheme has a source download.  1) edit read.c 2) ./configure 3) make 4) make install  All done.
+20:59:55 <graylensman> Patch is easy.  just diff with an option.
+20:59:57 <dmiles> even if a scheme binding only helps one or two users its worth it
+21:01:37 <graylensman> The other real trick was not having Scheme barf over all the undefined #$SomeSymbol.  To do this everything is a macro.
+21:02:32 <graylensman> For example cyc-assert is defined as syntax as follows;  [last paste  promise :) ]
+21:03:08 <graylensman>  (define-syntax cyc-assert 
+21:03:08 <graylensman>        (syntax-rules ()
+21:03:08 <graylensman>                      ((cyc-assert sentence mt)
+21:03:08 <graylensman>                       (send-command/synch 
+21:03:08 <graylensman>                        (string-append "(cyc-assert '" 
+21:03:09 <graylensman>                                       (cyc-expr->string sentence) " " 
+21:03:11 <graylensman>                                       (symbol->string 'mt)")\n")))))
+21:04:38 <graylensman> Since Scheme is a strict, if I just define cyc-assert as a stanard function it would attempt to evaluate its args.  This would fail because #$Dog is not defined.  
+21:04:45 <graylensman> Macro gets around this.
+21:05:19 <dmiles> send-command/synch is you tcp sending?
+21:05:44 <graylensman> That sends a string (s-exp string) and reads a response.
+21:05:50 <dmiles> cool it looks like you could bind nearly every function in cyc api
+21:07:16 <graylensman> Yep.  BTW. If you set the output port to file as opposed to a port then the CycL is written to a file. This file is pure CycL so in a sense it is "compiling" my higher level code to pure CycL.
+21:08:24 <graylensman> So (cyc-create-predicate #$parentOf #$FamilyMember #$FamilyMember in #$FamilyMt) for example expands into the CycL to do all the arg1Isa, arg2Isa stuff...
+21:10:11 <graylensman> I know I know. Leaves ya speechless.  Right?  :)
+21:12:04 * dmiles was interleaving tasks again
+21:12:23 <graylensman> ok... I am all outta steam...
+21:12:27 <dmiles> nope just good
+21:32:52 <graylensman> Just modified my macro so it will handle properties on the cyc-queries: (cyc-query '(#$parentOf ?P ?C) #$FamilyMt '(:backchain 1))  now works.
+21:34:44 <graylensman> (display/query-result (cyc-query '(#$parentOf ?P ?C) #$FamilyMt '(:backchain 1)))
+21:34:44 <graylensman> ?P = #$Eve? C = #$Tawny
+21:35:35 <dmiles> ah good.. thankfully the '(:backchain 1) optinal is always one list
+21:36:07 <dmiles> like '(:backchain 1 :number 10)
+21:38:06 <graylensman> Yea I just convert the list '(:prop val :prop val :prop val) to a string and send it over.  Was a small hickup when it was a number tho!
+21:42:52 <graylensman> Enough for me.  Later.  Expect my big 150 line Scheme -> OpenCyc binding this weekend!
+21:42:52 <graylensman> V 0.1 of course.
+21:42:57 --- quit: graylensman ("Client Exiting")
+21:47:30 --- quit: Cobra (Read error: 110 (Connection timed out))
+22:22:59 * zool sleeps
+22:23:21 --- quit: zool ("foo")
+22:24:52 --- join: the-satanist (~frediefud@oh-newphiladelphia1a-209.wre.adelphia.net) joined #opencyc
+22:24:56 <the-satanist> heh
+22:34:31 --- quit: the-satanist (carter.openprojects.net irc.openprojects.net)
+22:34:31 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+22:34:32 --- join: g-o-d (~frediefud@oh-newphiladelphia1a-209.wre.adelphia.net) joined #opencyc
+22:48:55 --- join: CycLBot ([8DiFAUOfw@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.07.10

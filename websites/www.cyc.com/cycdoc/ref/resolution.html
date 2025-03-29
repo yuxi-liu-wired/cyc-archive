@@ -1,0 +1,475 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON resolution.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Resolution in CycL</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>Resolution in CycL</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  See <a href=/cycdoc/legal-terms.html>Terms of Usage.</a><br>
+
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+
+<hr>
+<p>
+
+<h3>Canonicalization, resolution, and inference search in CycL</h3>
+
+The core CycL inference engine algorithm is based on treating the
+inference problem as a search through proof-space for a proof which
+will provide satisfying bindings to a particular query.
+
+<p>
+Each step in the search represents a single inference step -- a single
+supporting formula in the eventual proof.  The root nodes of the
+search indicate the starting points, or initial queries, which are to
+be proved.  A particular goal leaf node in the search occurs when we
+have nothing left to prove down that path from root to leaf.  At this
+point, the path upward from the goal node to its root node constitutes
+a proof that a particular set of formulas together prove that a
+particular set of terms satisfy the requested bindings of the query.
+
+<p>
+Each node in the search stores "the query so far" as its state, along
+with the formula used to infer this state from its parent's state.
+The mechanisms used to transform the parent state to the child node
+state are modus ponens and modus tollens via the resolution principle.
+
+<p>
+This document describes in more detail how the resolution principle is
+used in inference in CycL and how this is related to the
+canonicalization of assertions and queries.
+
+<h3>Conjunctive Normal Form Assertions</h3>
+
+Rules and gafs in the system get canonicalized into conjunctive normal
+form (CNF) clauses.  
+
+<p>
+Example 1:
+<pre>
+(implies
+  (and 
+    (p ?x)
+    (q ?x)
+    (not (r ?x)))
+  (s ?x))
+</pre>
+is canonicalized into CNF as follows:
+<pre>
+(and
+  (or
+    (not (p ?x))
+    (not (q ?x))
+         (r ?x)
+         (s ?x)))
+</pre>
+
+Each disjunct in the outer conjunct is called a 'clause'.  Note that
+in this case, there is a single clause.  Since the set of all the
+assertions in the entire knowledge base are considered implicitly
+conjoined, we typically treat the resulting CNF as a set of clauses to
+add to this already very large knowledge base.  Moreover, since each
+clause is a single disjunct of a set of literals, we can very tersely
+represent a clause as a list of two items: a set of negated literals
+and a set of the non-negated (positive) literals.  Finally, since
+variable names are arbitrary, we canonically rename them to simplify
+the detection of identical clauses.  Thus, the final terse
+representation of the single CNF clause given above is :
+
+<pre>
+(((p ?var0)(q ?var0))
+ ((r ?var0)(s ?var0)))
+</pre>
+Example 2:
+<pre>
+(and (p a)(q a)(not (r a))(t a a))
+</pre>
+is canonicalized into the four CNF clauses:
+<pre>
+(()
+ ((p a)))
+
+(()
+ ((q a)))
+
+(((r a))
+ ())
+
+(()
+ ((t a a)))
+</pre>
+Here's a BNF-style grammar for CNF clauses in CycL:
+<pre>
+&lt;CNF-clause&gt; ::= ( &lt;neg-lits&gt; &lt;pos-lits&gt; )
+&lt;neg-lits&gt; ::= list of &lt;atomic-formula&gt;
+&lt;pos-lits&gt; ::= list of &lt;atomic-formula&gt;
+&lt;atomic-formula&gt;  ::= ( &lt;predicate&gt; . &lt;args&gt; )
+&lt;args&gt; ::= list of &lt;term&gt;
+</pre>
+At this point, &lt;predicate&gt; and &lt;term&gt; are defined as in the "<a href="cycl-syntax.html">Syntax of
+CycL</a>" documentation page.
+
+<h3>Disjunctive Normal Form Queries</h3>
+
+Queries to the system get canonicalized into disjunctive normal form
+(DNF), which is the logical dual of conjunctive normal form.
+
+<p>
+Example 1:
+<pre>
+(and
+  (s ?z)
+  (t ?z ?z))
+</pre>
+is canonicalized into DNF as follows:
+<pre>
+(or
+  (and
+    (s ?z)
+    (t ?z ?z)))
+</pre>
+By analogy with the CNF case, each conjunct in the outer disjunct is
+also called a 'clause'.  Note that in this case, there is a single
+clause.  We typically treat queries as a set of DNF clauses to try to
+satisfy.  Moreover, since each clause is a single conjunct of a set of
+literals, we can again very tersely represent a clause as a list of
+two items: a set of negated literals and a set of the non-negated
+(positive) literals.  Finally, variables are canonically renamed as in
+the CNF case.  Thus, the final terse representation of the single DNF
+clause given above is :
+<pre>
+(()
+ ((s ?var0)(t ?var0 ?var0)))
+</pre>
+Example 2:
+<pre>
+(or
+  (not (r ?foo))
+  (s ?foo))
+</pre>
+is canonicalized into the two DNF clauses:
+<pre>
+(((r ?var0))
+ ())
+
+(()
+ ((s ?var0)))
+</pre>
+Here's a BNF-style grammar for DNF clauses in CycL:
+<pre>
+&lt;DNF-clause&gt; ::= ( &lt;neg-lits&gt; &lt;pos-lits&gt; )
+&lt;neg-lits&gt; ::= list of &lt;atomic-formula&gt;
+&lt;pos-lits&gt; ::= list of &lt;atomic-formula&gt;
+&lt;atomic-formula&gt;  ::= ( &lt;predicate&gt; . &lt;args&gt; )
+&lt;args&gt; ::= list of &lt;term&gt;
+</pre>
+Again, &lt;predicate&gt; and &lt;term&gt; are defined as in the "<a href="cycl-syntax.html">Syntax of
+CycL</a>" documentation page.
+
+<h3>Resolution Inference in CycL</h3>
+
+For now, let's consider queries which result in a single DNF clause.
+When a user asks a query, CycL performs a heuristic search through
+proof-space for a sequence of inference steps which will resolve the
+DNF query into "Box", which is the null DNF clause:
+
+<pre>
+  (()())
+</pre>
+
+The root of the search is the DNF resulting from the user's query.
+Each step in the proof search maintains the DNF which is the current
+proof state of the search down that path.  The DNF in each of these
+intermediate states in the search path results from resolving a single
+literal from its parent's DNF clause with a single literal from the
+CNF clause which was used to transform its parent state into this
+state.
+
+<p>
+The CNF clause used in one step of inference, from a parent node to
+one of its children in the search, comes from one of two places:
+<blockquote>
+ (a) the CNF clause of an assertion in the KB<br>
+ (b) the equivalent CNF clause provided by an HL inference module.
+</blockquote>
+There are two possible cases:
+<p>
+(1) Resolving a pos-lit in the DNF
+<p>
+For simplicity, A-F and X-Z represent ground literals here:
+<pre>
+parent DNF: ((A B C) (D E F))
+resolvent literal: E
+inference CNF: ((X Y)(E Z))
+</pre>
+== Resolves into ==>
+<pre>
+child DNF: ((A B C Z) (D X Y F))
+</pre>
+
+(2) Resolving a neg-lit in the DNF
+<pre>
+parent DNF: ((A B C) (D E F))
+resolvent literal: B
+inference CNF: ((X B)(Y Z))
+</pre>
+== Resolves into ==>
+<pre>
+child DNF: ((A Y Z C) (D E F X))
+</pre>
+
+In both cases, the actual resolution step proceeds as follows:
+
+<p>
+(1) Assuming that the parent DNF and inference CNF clauses are
+variable disjoint, identify a most general unifier of the resolvent
+literal in the parent DNF and the resolvent literal in the inference
+CNF.
+
+<p>
+(2) Remove the resolvent literals from both the parent DNF and the
+inference CNF to produce parent-DNF' and inference-CNF'.
+
+<p>
+(3) Apply the most general unifier to the parent-DNF' and
+inference-CNF' to produce parent-DNF'' and inference-CNF''.
+(Any duplicate resulting literals are removed.)
+
+<p>
+(4) Produce the child-DNF as follows:
+
+<pre>
+child-DNF-neg-lits = neg-lits(parent-DNF'') Union pos-lits(inference-CNF'')
+child-DNF-pos-lits = pos-lits(parent-DNF'') Union neg-lits(inference-CNF'')
+child-DNF = make-DNF(child-DNF-neg-lits, child-DNF-pos-lits)
+</pre>
+
+This algorithm is typically referred to as the "resolution principle".
+
+<h3>One complete inference</h3>
+
+Here's a complete inference involving the above examples:
+<p>
+Query:
+<pre>
+(and
+  (s ?z)
+  (t ?z ?z))
+</pre>
+is canonicalized into the single DNF clause
+<pre>
+(()
+ ((s ?var0)(t ?var0 ?var0)))
+</pre>
+This is the root node (level 0) of our search.
+
+<h4<Inference Step 1:</h4>
+<pre>
+parent (level 0) DNF:
+(()
+ ((s ?var0)(t ?var0 ?var0)))
+resolvent literal:
+ (t ?var0 ?var0)
+inference CNF:
+(()
+ ((t a a)))
+Most general unifier: ((?var0 . a))
+
+child (level 1) DNF:
+(()
+ ((s a)))
+</pre>
+
+<h4>Inference Step 2:</h4>
+<pre>
+parent (level 1) DNF:
+(()
+ ((s a)))
+resolvent literal:
+ (s a)
+inference CNF:
+(((p ?var0)(q ?var0))
+ ((r ?var0)(s ?var0)))
+Most general unifier: ((?var0 . a))
+
+child (level 2) DNF:
+(((r a))
+ ((p a)(q a)))
+</pre>
+
+<h4>Inference Step 3:</h4>
+<pre>
+parent (level 2) DNF:
+(((r a))
+ ((p a)(q a)))
+resolvent literal:
+ (p a)
+inference CNF:
+(()
+ ((p a)))
+Most general unifier: NO-OP
+
+child (level 3) DNF:
+(((r a))
+ ((q a)))
+</pre>
+
+<h4>Inference Step 4:</h4>
+<pre>
+parent (level 3) DNF:
+(((r a))
+ ((q a)))
+resolvent literal:
+ (r a)
+inference CNF:
+(((r a))
+ ())
+Most general unifier: NO-OP
+
+child (level 4) DNF:
+(()
+ ((q a)))
+</pre>
+
+<h4>Inference Step 5:</h4>
+<pre>
+parent (level 4) DNF:
+(()
+ ((q a)))
+resolvent literal:
+ (q a)
+inference CNF:
+(()
+ ((q a)))
+Most general unifier: NO-OP
+
+child (level 5) DNF:
+(()
+ ()) = Box!
+</pre>
+
+The level 5 child node has bottomed-out in a successful proof.  The
+top-level binding set of ((?var0 . a)) can be computed as a trivial
+composition of the most general unifiers along the path to the
+successful goal node.  The 5 inference CNFs used in the path enable a
+5-step proof of
+
+<pre>
+(and
+  (s a)
+  (t a a))
+</pre>
+
+In general, each choice of resolvent literal and inference CNF was
+merely one of many possible options for transforming a search state
+from level N to level N+1.  This is where heuristic search kicks in.
+CycL keeps track of all the non-goal (non-box) leaf nodes which it has
+yet to expand, and heuristically determines which node looks most
+promising to expand next, and which inference method looks like the
+most promising way to expand that node.
+
+<p>
+Search proceeds until either:
+
+<p>
+(a) a resource contraint is met, like<br>
+-time cutoff has been met<br>
+-number of successful answers cutoff has been met<br>
+
+<p>
+(b) there are no more non-goal leaf nodes to expand.
+
+<p>
+Two other effects of resource constraints involve determining which
+non-goal leaf nodes to not expand:
+
+<p>
+(a) leaf nodes deeper than the depth cutoff are not further expanded.
+
+<p>
+(b) leaf nodes which have more than the backchain depth number of
+non-gaf inference CNFs along their inference path are not further
+expanded.
+
+
+<h3>Generalization to multi-clause DNF queries</h3>
+
+Let's now consider multi-clause DNF queries such as:
+
+<pre>
+(or
+  (not (r ?bar))
+  (s ?bar))
+</pre>
+
+This is canonicalized into two DNF clauses:
+
+<pre>
+(((r ?var0))
+ ())
+
+(()
+ ((s ?var0)))
+</pre>
+
+There are two ways to pursue a search for bindings for such disjuncts:
+
+<p>
+(1) Independent Disjunct Satisfaction
+
+<p>
+Bindings for any single one of the DNF clauses will of course satisfy
+the entire query.  Therefore, each clause can in effect be pursued as
+independent queries.  CycL currently supports this kind of simple,
+independent disjunctive search.
+
+<p>
+(2) Dependent Disjunct Satisfaction (proof by cases)
+
+<p>
+The other possible search strategy for disjunctive DNFs is to perform
+a proof-by cases approach.  This is needed when no particular disjunct
+can be independently proven, but the disjunction as a whole can be
+proven from the knowledge base.
+
+<p>
+First note that a set of DNF clauses D1 ... Dn can be rewritten as:
+
+<pre>
+(implies
+  (and (not D1) ... (not Dn-1))
+  Dn)
+</pre>
+.. where each DNF clause D is a conjunction of m literals, (and LIT1 ... LITm).
+
+<p>
+We are asking for proofs of bindings that will satisfy this
+implication.
+
+<p> 
+CycL does not currently have support for this kind of query
+implemented in FI-ASK.  However, CycL does already provide support for
+this kind of query using FI-PROVE.  Ultimately, FI-ASK will be
+extended to support this kind of query by dispatching to FI-PROVE to
+handle this kind of proof-by-cases reasoning.
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,307 @@
+00:00:00 --- log: started opencyc/02.10.06
+00:07:55 --- quit: devEiant ("Client Exiting")
+06:07:37 <yepster> hmm.. interesting.. avoiding existential quantification
+06:08:22 <yepster> Of oe handbook.. section not yet available.
+06:25:40 <yepster> must have something to do with skolems
+07:33:08 --- join: CycLBot (~CycLBot@12-225-240-66.client.attbi.com) joined #opencyc
+07:44:52 * dmiles is resuming work on the e2c
+07:50:45 * yepster is working on pgb
+08:05:45 <yepster> hmm bummer I though using relationExistsAllCount would force unification
+08:06:15 <yepster> apparently it doesn't. I remember somebody saying that thereExistsExactly doesn't work
+08:06:44 <yepster> yet.. or i think I remember.. can't find it in the forums
+08:06:50 <dmiles> correct
+08:07:19 <dmiles> i think it was over general discussion
+08:07:28 <yepster> ah, good knowing i'm not talking to a void
+08:08:12 <yepster> do you know of a workaround?
+08:08:43 <dmiles> hrrm yeah .. they used one in SUO kif
+08:08:52 <dmiles> let me find it
+08:09:11 <yepster> hmm found it
+08:09:23 <dmiles> (we argued that existExactly could be rewruitten using only exists)
+08:09:25 <yepster> at least, the reference to thereExistsExatly
+08:09:33 <yepster> interesting!
+08:10:37 <yepster> http://sourceforge.net/forum/message.php?msg_id=1676289
+08:11:11 <dmiles> hrrm sopmewhere near http://suo.ieee.org/email/mail178.html
+08:11:26 <yepster> looking
+08:11:28 * dmiles is still looking though
+08:13:15 <dmiles> when your looking click prev_page
+08:13:26 <dmiles> i used to have a mailbox with this content i could searchg
+08:14:48 <dmiles> at least you will have fun finding lots of stuff ther :P
+08:15:21 <yepster> interesting mailing list btw. the 10th mail i saw mentions barcan formula, s5 etc
+08:16:17 <dmiles> this mail was sometime in the last 2 years is th ebbest i can remember
+08:17:25 <yepster> hmm I am wondering if I can think of an expansion for thereExistsExactlyOne myself.
+08:17:56 <dmiles> well yeah interesting start just trhere
+08:18:13 <dmiles> i am having a hard time even axiomitizing that
+08:18:21 <dmiles> well actually ...
+08:19:06 <yepster> something like x in X, y in Y, pred(x) and pred(y) -> x=y
+08:19:40 <yepster> hmm
+08:20:03 <dmiles> thereExists ?X ?Form... and ( (forAll ?Y (not ?Form )) and (diffent ?X ?Y)
+08:20:43 <dmiles> errm yeah we can do it
+08:20:43 <dmiles> i had it still wrong
+08:20:59 <dmiles> existentialism has to poick a closed class
+08:21:46 <dmiles> so you can do it over first order collections
+08:22:15 <dmiles> where all instances of it are existants of that collection at least
+08:23:06 <dmiles> i think first order collections contain existants
+08:23:16 <yepster> ?individuals
+08:23:41 <dmiles> yeah that you can validly know .. equals/diffenrt
+08:23:57 <dmiles> you can GroupFn them i guess
+08:24:13 <dmiles> but yeah individuals
+08:24:13 <dmiles> [08:31] <dmiles> yeah that you can 
+08:24:30 <dmiles> individuals in cyc is so loose
+08:24:54 <yepster> for existsexactlyone, maybe:
+08:25:23 <yepster> forall x in COL1, y,z in COL2: pred(x,y) and pred(x,z) -> y=z
+08:25:55 <dmiles> http://odysseus.ieee.org/query.html?col=stds&ht=0&qp=&qt=thereExistsExactly&qs=&qc=stds+allieee&pw=100%25&ws=0&qm=0&st=1&nh=25&lk=1&rf=0&rq=0&si=1
+08:26:37 <dmiles> Chris provided a very helpful tutorial on modal semantics 
+08:26:38 <dmiles> but do we allow S4 or S5?  To take another example, in Casati and Varzi 
+08:26:38 <dmiles> ontology of holes, they use an operator that corresponds to Cyc's notion of 
+08:26:38 <dmiles> #$thereExistsExactly.  We have to formulate an axiomatization that is 
+08:26:38 <dmiles> stateable in KIF or some similar language and that's hard.
+08:28:15 <dmiles> oh oh
+08:28:17 <dmiles> http://odysseus.ieee.org/query.html?col=stds&ht=0&qp=&qt=thereExistsAtLeast&qs=&qc=stds+allieee&pw=100%25&ws=0&qm=0&st=1&nh=25&lk=1&rf=0&rq=0&si=1
+08:28:17 <dmiles> there it is
+08:28:35 <dmiles> Re: SUO: Re: Axiomization of Granularity
+08:28:53 <dmiles> forall x in COL1, y,z in COL2: pred(x,y) and pred(x,z) -> y=z
+08:29:10 <dmiles> neat... brain flexer
+08:29:46 <yepster> for relationAllExistsOne
+08:29:51 <dmiles> i see
+08:30:14 <dmiles> for all that holds they are equal to the one you found ;P
+08:31:07 <dmiles> basicly the trick to doing 2 is that there are four differnences
+08:31:27 <dmiles> but yeah you can see that you can cascade it to two
+08:31:43 <dmiles> infernce wise it rquires a query with an answer count
+08:32:15 <dmiles> i think thats how they implimented it
+08:32:17 <yepster> to be honest, I think that the case : "there is only one" is more important than > 1
+08:32:49 <yepster> because the case > 1 doesn't say much more than how many there are. The case count=1 means
+08:33:05 <yepster> useful for unificatio
+08:33:11 <dmiles> count \= 1 ?
+08:33:32 <yepster> ?
+08:33:36 <dmiles> er != 1 .. +  !=0
+08:33:58 * yepster is getting a bit confused..
+08:34:46 <dmiles> but yeah looks all doable at some context we can have C=1,C!=1,C!=0,C=0 
+08:35:16 <dmiles> we have those 4 tests
+08:35:22 <yepster> c=1 ->
+08:35:31 <dmiles> C=1,C!=1,C!=0,C=0 
+08:35:31 <dmiles> forall x in COL1, y,z in COL2: pred(x,y) and pred(x,z) -> y=z
+08:35:51 <dmiles> c!=1 ->
+08:35:53 <dmiles> not(forall x in COL1, y,z in COL2: pred(x,y) and pred(x,z) -> y=z)
+08:36:25 <yepster> impossible
+08:36:35 <yepster> asserting something new will imply y=z
+08:36:37 <dmiles> ? :)
+08:36:39 <yepster> so c=1
+08:37:28 <dmiles> so i guess we also have to test for =0 and !=0
+08:37:36 <dmiles> this will tell us if we are even alowed to count
+08:38:14 <dmiles> =0 and c=1  -> C!=1
+08:38:24 <yepster> hmm... this sounds much like cardinatlity of a relation in rdbms stuff
+08:39:05 <yepster> cardinality of relation = 1:
+08:39:21 <yepster> -> thereExists x so that pred x col holds
+08:39:41 <dmiles> ah.. yeah.. darn i agreee
+08:39:54 <yepster> + the rule stating that y=z if they both exists
+08:40:16 <dmiles> befor ei can even infernce i must be able to prove (thereExists x so that pred x col holds) AND (thereExists x so that pred x col not holds)
+08:40:40 <yepster> ?
+08:40:40 <dmiles> meaning i have to know that i can say YES or NO for real.. not YES vs Failure
+08:41:02 <yepster> should AND not be OR?
+08:41:51 <dmiles> err (thereExists x so that pred x col holds) AND (not forall x (not  pred x col holds))
+08:42:22 <dmiles> the x's are completely disconeted
+08:42:35 <dmiles> (thereExists x so that pred x col holds) AND (not forall y (not  pred y col holds))
+08:42:49 <yepster> I am not sure why the second part is needed
+08:42:52 <dmiles> therre ;P
+08:43:27 <dmiles> right becasue tey are supposed to be equivant
+08:43:45 <dmiles> hrrm i see yeah maybe the first is enough
+08:44:07 <yepster> i am going to try the forall xyz thing now.
+08:44:18 <dmiles> cool cool
+08:52:28 * dmiles afk a bit
+08:54:39 <yepster> (#$implies 
+08:54:39 <yepster>   (#$and 
+08:54:39 <yepster>     (#$isa ?Y #$Agent) 
+08:54:39 <yepster>     (#$isa ?Z #$Agent) 
+08:54:39 <yepster>     (#$agreeingSubsidieOntvanger ?X ?Y) 
+08:54:40 <yepster>     (#$agreeingSubsidieOntvanger ?X ?Z) 
+08:54:42 <yepster>     (#$isa ?X #$Subsidie)) 
+08:54:44 <yepster>   (#$equals ?Y ?Z))
+08:54:49 <yepster> dependants:
+08:54:54 <yepster> 1 : Deduction #47444 supporting :
+08:54:54 <yepster> [Inf](equals CycAdministrator CycAdministrator) in HYP-SubsidieArt25211-8705
+08:54:54 <yepster> 2 : Deduction #47443 supporting :
+08:54:54 <yepster> [Inf](equals Guest Guest) in HYP-SubsidieArt25211-8705
+08:54:58 <yepster> bummer
+08:56:11 <yepster> in the mt are:
+08:56:12 <yepster> [Mon](agreeingSubsidieOntvanger HYP-SubsidieArt25211-8705 CycAdministrator)
+08:56:12 <yepster> [Mon](agreeingSubsidieOntvanger HYP-SubsidieArt25211-8705 Guest)
+08:57:48 <yepster> i'm gonne check the antecedent, maybe there are more and equals Guest CycAdministrator just gives a conflict
+08:58:21 <yepster> cool:
+08:58:28 <yepster> 4 answers
+08:59:09 --- quit: deltab (card.freenode.net irc.freenode.net)
+08:59:09 --- quit: dmiles (card.freenode.net irc.freenode.net)
+08:59:12 --- quit: mea_culpa (card.freenode.net irc.freenode.net)
+08:59:13 --- quit: Cobra (card.freenode.net irc.freenode.net)
+08:59:13 --- quit: siege (card.freenode.net irc.freenode.net)
+08:59:46 --- join: deltab (~deltab@espians.com) joined #opencyc
+08:59:46 --- join: dmiles (logicmoo@12-225-195-245.client.attbi.com) joined #opencyc
+08:59:46 --- join: mea_culpa (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+08:59:46 --- join: siege (~siege@dsl093-240-123.ral1.dsl.speakeasy.net) joined #opencyc
+08:59:46 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+09:08:14 <yepster> hmm the rule doesn't stop me from adding the conflicting second assertion.
+09:19:58 <yepster> have you ever encountered something with logicaltruthmt and singleEntryFormatInArgs?
+09:46:38 <yepster> ok, after blasting (equals Guest Guest), I can assert (equals Guest OtherGuest)
+09:47:06 <yepster> so I need to prevent getting ?Y=Guest and ?Z=Guest in the antecedent
+09:47:22 <dmiles> differnet? 
+09:49:02 <yepster> the problem with the logical implication; different X Y -> equals X Y?
+09:49:10 <yepster> false
+09:49:18 <dmiles> ah:)
+09:49:18 <yepster> but heck I'll try it anyway
+09:49:43 <dmiles> it might have something to do with 'Identity'
+09:49:56 <dmiles> (why it could work)
+09:52:00 <yepster> nope doesn't work
+09:52:15 <yepster> some results as without different
+09:53:00 <yepster> bummer, I did differnt X Y where it should be different Y Z
+09:53:44 <yepster> (the OE handbook is alwaysright, name variables good)
+09:54:13 <yepster> it works!
+09:54:32 <yepster> so #$implies <> logical ->
+09:54:38 <dmiles> so what does it look like now?
+09:55:48 <yepster> 1 : Deduction #47501 supporting :
+09:55:48 <yepster> [Inf](equals Guest3 Guest) in HYP-SubsidieArt25211-8705
+09:55:48 <yepster> 2 : Deduction #47500 supporting :
+09:55:48 <yepster> [Inf](equals Guest3 Guest) in RegelingPGBMt
+09:55:59 <yepster> I created Guest3 similar to guest
+09:56:43 <yepster> (#$implies 
+09:56:43 <yepster>   (#$and 
+09:56:43 <yepster>     (#$isa ?Y #$Agent) 
+09:56:43 <yepster>     (#$isa ?Z #$Agent) 
+09:56:43 <yepster>     (#$different ?Y ?Z) 
+09:56:44 <yepster>     (#$agreeingSubsidieOntvanger ?X ?Y) 
+09:56:46 <yepster>     (#$agreeingSubsidieOntvanger ?X ?Z) 
+09:56:48 <yepster>     (#$isa ?X #$Subsidie)) 
+09:56:50 <yepster>   (#$equals ?Y ?Z))
+10:00:25 <yepster> Still, it doesn't prevent me from adding a new predicate with a different agent (e.g.) opencyc to which equals y z cannot be asserted
+10:11:19 <yepster> too bad.
+10:27:13 <yepster> time to call in the cavalry
+10:28:07 <yepster> Unification is actually handled pretty good in km (written in lisp)
+10:31:05 <yepster> I would like it SOO much if e.g. there is a thereExists rule somewhere, that
+10:31:15 <yepster> asserts some knowledge to a skolem
+10:32:03 <yepster> and later, if a constant is defined which is related trough a 'max 1' predicate
+10:32:17 <yepster> opencyc will unify the skolem with the new constant
+11:04:49 --- quit: yepster ()
+12:16:18 --- join: devEiant (~deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+12:36:14 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+12:36:54 <yepster> heh
+12:38:12 <yepster> wondering if I could ever write a rule that would prevent something to be added (not)
+12:38:24 <yepster> I looked a bit into arg* stuff: argFormat
+12:39:32 <yepster> it turns out that arg2Format agreeingSubsidieOntvanger SingleEntry does the trick!
+12:40:12 <yepster> I'm so happy that I don't even care writing to a void now!
+12:52:35 <yepster> well, it least I'm glad the sunday isn't completely wasted
+13:05:32 --- quit: yepster ()
+17:39:30 --- quit: devEiant ("ENOSLEEP")
+17:58:28 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+22:07:14 --- quit: graylensman ("Client Exiting")
+22:20:36 --- join: yottzumm ([EchYPTE1d@12-240-146-224.client.attbi.com) joined #opencyc
+22:20:42 <yottzumm> anybody here?
+22:21:06 <dmiles> hi there!
+22:21:10 <dmiles> ltns
+22:21:12 <yottzumm> hi dmiles
+22:21:14 <dmiles> hi Kinoc as well
+22:22:41 <yottzumm> I was just thinking about rules to games.  It would be interesting to generate english instructions from a computer representation of the game.  For example, the AisleRiot games are written in a scheme variant.  How easy would it be to convert those rules to english?
+22:23:12 <yottzumm> are you doing anything like that for logicmoo?
+22:24:25 <dmiles> exacly as you described
+22:24:35 <dmiles> i have 2 types of AI being attempoted
+22:24:49 <dmiles> one recives decalrative neglish to form world
+22:24:56 <dmiles> err english
+22:25:02 <dmiles> (or KIF/CtycL)
+22:25:17 <dmiles> then others.. are planning domnain creatures with goals of imitation
+22:25:35 <dmiles> but yeah.. what you described about rules in english
+22:26:12 <dmiles> about 3 weeks ago someone offered to fund a search engine DB that was based on declarations
+22:26:28 <dmiles> what happens is this... (you'll see the anology)
+22:26:39 <dmiles> that a question is asked....
+22:26:49 <dmiles> the standard googlish search begins
+22:27:04 <dmiles> the pages it finds are lloaded ito a text system
+22:27:24 <dmiles> this text system is used as descripters to an adhoc game
+22:27:42 <dmiles> then the query is performed over the game
+22:28:01 <dmiles> a game or state whatever iit should be called
+22:28:30 <dmiles> i am very interested in just leeting that microtheory get more and more advanced (the state)
+22:29:07 <dmiles> and seeing if the combinatorics can be fixed with heuristics
+22:30:09 <dmiles> at present ussing only the NLG of Cyc.. maybe the AisleRiot can be converted to english
+22:30:35 <dmiles> that would be an interesting enoguh task as it is
+22:30:44 <dmiles> but definately finite ;P
+22:31:25 <dmiles> (last three lines actually response to your question)
+22:32:01 <dmiles> i see though possiblity of a two way system as well
+22:32:11 <yottzumm> yes, that would be cool
+22:32:18 <dmiles> i am still working on the engliish -> kif/cycl tool
+22:32:57 <yottzumm> do you know anything about the next rev of opencyc
+22:33:04 <dmiles> basicly my method has be goinbg over ever single NLishg predicate in Cyc and finding exactly the right coded implimentation of Engish to CycL or CycL to English
+22:33:26 <dmiles> err has been.. this is slow and tedious but still yeild the best results
+22:33:57 <dmiles> i am starting to wonder if this method was or will be choosen by cyccorp
+22:34:08 <dmiles> so far i have put in 60+ hours on it
+22:34:29 <dmiles> probly 20 more
+22:34:39 <yottzumm> my impression was that as more english was obtained, the meaning would narrow, but maybe i got that from you
+22:35:03 <dmiles> yes.. i am a beliver that the tighter the deep structure is the more exact it can be
+22:35:39 <dmiles> well i have this underlying theory (i dont know if cyccorp shares it)
+22:35:51 <dmiles> if it can say it, it cant understand it
+22:36:14 <dmiles> it cant say what it cant deduce
+22:36:48 <yottzumm> so it can't ask clarifying questions? RKF?
+22:36:53 <dmiles> so all english that goes in *must* be a well formed forumla
+22:37:25 <dmiles> i am hopping to figure out how to degenralize
+22:37:35 <dmiles> which means it asking questions
+22:38:15 <dmiles> part of this process though requires an opbstration of the proccess of converting the english inot logical form
+22:38:25 <dmiles> err 
+22:38:34 <dmiles> part of this process though requires an abstration of the proccess of converting the english into logical form
+22:39:01 <dmiles> the 'proccess' (or infernece rules it uses)
+22:39:19 <dmiles> which is slightly more complex
+22:39:48 <dmiles> as far as learning about new objects and events not a problem
+22:40:24 <dmiles> but learning new predicates (or cycl meta-logical WFF rules) is complex
+22:40:38 <yottzumm> Yes, I imagine so
+22:40:56 <dmiles> on failure to translate there *could* be a routine that goes through a set q & a
+22:41:05 <yottzumm> how do you build a predicate without knowing in advance what you are building
+22:41:50 <dmiles> yeah.. this is why the Cyc KB is so vital.. to have a wide structure to pigeon interpretations into
+22:42:53 <dmiles> in what i am doing.. once i feel confident (20 hours later) that NLU is sufficient...
+22:43:22 <dmiles> then i am going to build some structural defination templates
+22:43:47 <dmiles> then set up questions that will inpire users to say definetional info ;P
+22:44:01 <dmiles> which is like that dialog
+22:44:26 <dmiles> i feel so far i am convering about 60% of language now
+22:44:37 <dmiles> and about 80% accurate
+22:45:03 <dmiles> i have maybe by the time i am done a 20% increase (thats my scedule)
+22:45:27 <dmiles> (without accuracy degradation)
+22:45:59 <dmiles> however the translation overhead.. (how long it takes to figure out it cant understand sometihng) can take up to a minute and a 1/2
+22:46:19 <dmiles> sometyhing it can understand can still take 30 seconds per sentence
+22:46:36 <yottzumm> that's long.  You need ASCI
+22:46:48 <dmiles> ASCI ?
+22:47:11 <yottzumm> ASCI white is a 8192 processor supercomputer
+22:47:43 <dmiles> ah yeah well right now its being tested on a 1.5 ghz computer with gig of ram.. its current memory is 100meg - 150 megs
+22:48:01 <dmiles> 83 megs at resting state
+22:48:10 <dmiles> the trees produced add those extras
+22:48:23 <dmiles> but yeah definately
+22:48:42 <dmiles> right now i am ussing a free com,piler that is said to be the slowest in the industry
+22:49:04 <yottzumm> a prolog compiler?
+22:49:09 <dmiles> yes
+22:49:16 <dmiles> in a normal comercial compiler it will be about 6 times faster
+22:49:23 <yottzumm> that's not bad
+22:49:41 <dmiles> but i am expecting to make a search failure that is 1.5 minutes take 4 minutes when i am done
+22:50:05 <dmiles> so really its still goimng to take 30 seconds by the time i am done even on the better compi;lers
+22:50:29 <yottzumm> any opportunites for parallelism?
+22:50:55 <dmiles> i trying a precaching approach howerver.. and this means it build one tree table.. in this context its virtually instant
+22:51:06 <dmiles> err tried a pre-cache before
+22:51:09 <dmiles> it was insane fast
+22:51:26 <dmiles> but a hugh huge huge pain in the butt when a new assertion came in
+22:52:19 <dmiles> and every step in imporving code was very hard to do each step of the  way.. (coding cache system update) PLUS makeing the improvemnt
+22:52:56 <dmiles> it was making me nuts.. so now the access to the Cyc KB is 100% EL based
+22:53:04 <dmiles> thats why its soooo slow
+22:53:32 <dmiles> so if we had a completely stable universe.. we could have mad fast translation
+22:54:08 <dmiles> but the things like adding meta-rules.. would mean to regen the entire cache
+22:54:30 <yottzumm> can you split the cache into pieces?
+22:54:33 <dmiles> so i rather yeah just put it on a super computer ;P
+22:55:00 <dmiles> well yeah.. for example.. the Cyc words to CycL for noun collections are pretty stable
+22:55:48 <dmiles> i could forward cahin all #$denotation results
+22:56:10 <dmiles> since alot of the over head is using rules that consequent in that
+22:56:42 <yottzumm> well, I'm nodding off.  good night
+22:56:43 <dmiles> i expermented with creating the most opimal spindels like a chache
+22:56:48 --- quit: yottzumm ("Client Exiting")
+22:56:53 <dmiles> (from Cyc)
+22:57:17 <dmiles> Cyc sat there for 3 hours forward chaining and deducing the spindel
+22:57:53 <dmiles> when it was done i have many nany many assertions in perfect form for my needs
+22:58:30 <dmiles> eglish text -> cycword -> pos -> form -> CycL
+22:59:13 <dmiles> but much info in cycs NL only supplies 2-3 of those five things
+22:59:42 <dmiles> like english text -> cycword -> form 
+22:59:59 <dmiles> form  -> pos
+23:00:15 <dmiles> cycword -> pos -> cycl
+23:00:18 <dmiles> etc
+23:00:27 <dmiles> hard to get a good flat union of everything
+23:00:47 <dmiles> and when you do there is many reducandcies
+23:01:29 <dmiles> so thats why so far i have had to use backchaining more
+23:02:07 <dmiles> so  text -> cycword -> form  AND cycword -> pos -> cycl  IMPLIE what i need
+23:59:59 --- log: ended opencyc/02.10.06

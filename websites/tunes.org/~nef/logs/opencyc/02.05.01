@@ -1,0 +1,213 @@
+00:00:00 --- log: started opencyc/02.05.01
+00:00:06 --- quit: dash ("it's the IDEA that's lasted. the SYSTEM.")
+02:39:54 --- quit: CycLBot (Remote closed the connection)
+02:40:12 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+02:40:13 <CycLBot> I am initializing
+02:40:13 <CycLBot> I am ready to chat
+02:43:16 --- quit: CycLBot (Remote closed the connection)
+02:43:29 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+02:43:29 <CycLBot> I am initializing
+02:43:30 <CycLBot> I am ready to chat
+03:11:01 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+03:11:23 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:11:23 <CycLBot> I am initializing
+03:11:24 <CycLBot> I am ready to chat
+03:28:04 --- quit: CycLBot (Remote closed the connection)
+03:28:42 <dmiles> sorry the bot is up down each time i recomplie it
+03:28:56 <dmiles> am keeping off server for a few hours
+05:56:54 <dmiles> is there a predicate like 'entails' to signify a backchain only 'implies' ?
+06:56:13 <dmiles> nevermind the 'forward' is entailment
+07:40:42 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+07:40:42 <CycLBot> I am initializing
+07:40:43 <CycLBot> I am ready to chat
+08:09:57 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+08:13:21 --- quit: Taral (Client Quit)
+08:13:45 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+08:23:29 <dmiles> have had good luck with forward chaining
+08:24:39 <dmiles> stevereed, FI-PROVE returns (T.T) for a true sentence
+08:24:46 <dmiles> (as it sould)
+09:37:17 <stevereed> cool
+09:43:50 <dmiles> small question, if i change the dirrection of an assertion from backward to forward, will that asserttion begin growing dependants or do i need to repropigate.. next how could i do this from the API ?
+09:55:59 --- quit: Method (Read error: 110 (Connection timed out))
+10:01:38 <dmiles> meaning do i have to (FI-REASSERT 
+10:01:57 <dmiles> +?
+10:11:02 --- join: dash (washort@d136.narrowgate.net) joined #opencyc
+10:11:54 <stevereed> I believe that all you need to do is change the direction of the assertion to fowards and it will begin to propagate.
+10:12:22 <stevereed> One way in the api is unassert followed by assert.
+10:12:25 <dmiles> in teh KB browser when i change it.. am i effectviley reaswering.. which repropogatews it?
+10:12:38 <dmiles> oops
+10:12:49 <dmiles> in the KB browser i an unassert/reassert?
+10:13:25 <dmiles> ok that makes sense in the API
+10:13:40 <dmiles> since backwards never have dependants
+10:14:27 <dmiles> and there is no legal way to 'just change the dirrection' on cyc 
+10:16:56 <dash> hello
+10:16:57 <CycLBot> hello dash
+10:17:30 <dash> would you guys happen to know how to get at the equivalent for the "show english" button in the kb browser, from the api?
+10:18:40 <dmiles> subl: (generate-phrase '(#$isa #$Fido #$Dog))
+10:18:45 <CycLBot> fido is a dog
+10:19:15 <dmiles> subl: (generate-phrase #$UnitedStatesOfAmerica)
+10:19:16 <CycLBot> the United States
+10:19:23 <dash> ah, generate-phrase
+10:20:32 <dash> now. which docs did i miss, to not find that :)
+10:22:05 <dmiles> did you ever see this page yet? http://www.cyc.com/cycdoc/ref/nl.html (i do not know if its there)
+10:24:21 <dmiles> that page will help assure your asserting to the correct predicate so generation can happen i think
+10:42:29 <dmiles> are there single gaf specilaizations of ? 
+10:42:29 <dmiles> (implies 
+10:42:30 <dmiles>        (and 
+10:42:30 <dmiles>            (subOrganizations ?BG ?G) 
+10:42:30 <dmiles>            (groupMembers ?G ?M)) 
+10:42:30 <dmiles>        (groupMembers ?BG ?M))
+10:42:39 <dmiles> type rule shapes
+10:43:31 <dmiles> like is this transitiveViaArg?
+10:46:36 <dmiles> and should they get squahed into it?>
+10:47:07 <dmiles> should they get squashed into a HL implemetned predicate>?
+10:53:01 <stevereed> good question,
+10:53:42 <stevereed> I'll look up the predicates now.
+10:54:37 <dmiles> it would be nice to see it in formula form (expansion axiom) for KE .. since the predicated form is meanless to a non HL thinker
+10:55:12 <dmiles> not griping, just seeeing the difficulty
+10:56:36 <stevereed> I looked up groupMembers and found over 400 simlar rules.
+10:57:13 <dmiles> so it would seem the HL could repeat itself somnehow?
+10:57:36 <stevereed> not identical rules
+10:57:50 <stevereed> i'll give an example,
+10:58:07 <stevereed> (implies 
+10:58:07 <stevereed>        (and 
+10:58:07 <stevereed>            (groupMembers ?GRUP1 ?MEM1) 
+10:58:07 <stevereed>            (undergroundOf ?GRUP1 ?OBJECT)) 
+10:58:07 <stevereed>        (undergroundOf ?MEM1 ?OBJECT))
+10:58:43 <Taral> any of you every played with ACL2?
+10:59:08 <stevereed> I may have read of it, what is it?
+10:59:14 <dmiles> Alegro?
+10:59:31 <stevereed> Allegro Common Lisp = ACL
+11:00:04 <Taral> no
+11:00:26 <stevereed> http://www.cs.utexas.edu/users/moore/acl2/
+11:01:09 <Taral> http://www.cs.utexas.edu/users/moore/acl2/
+11:01:15 <Taral> yeah, that.
+11:01:26 <Taral> brilliant theorem prover.
+11:02:35 <stevereed> looks cool
+11:04:05 <dmiles> a c-ificaion of common tasks of resolution?
+11:04:47 * dmiles grins
+11:08:06 <dmiles> so with groupMembers having that expansion reoccuring is there is a predicate that makes that i think right?
+11:08:54 <stevereed> not sure i understand
+11:08:59 <dmiles> or could express that
+11:09:28 <dmiles> like (somepredicate undergroundOf groupMembers ....
+11:10:57 <dmiles> i think i see it.. as (trasitiveViaArg undergroundOf groupMembers 2) but not sure if there should be a forward rule to treanform it.. and if so which dirrection?
+11:11:01 <stevereed> ok now i understand
+11:11:35 <dmiles> meaning i am wondering if a forward rule from one to the other is usefull ?
+11:11:55 <stevereed> we have a reformulation tool for similar rewrites
+11:12:21 <dmiles> does that happen in the canonicalizer as well?
+11:12:44 <dmiles> ah i tool i can use to prune it out
+11:13:26 <dmiles> (err to transform all from one to another assertion)
+11:13:53 <dmiles> i am looking to clean up my mangled cyc is all :P
+11:14:39 <dmiles> i found some knowledge engineering i imported into cyc.. and want to tranform things to a more usefull form for it
+11:15:28 <dmiles> such as a common form like (implies (?P1 ?X ?Y) (?P2 ?X ?Y)).. would give genlPreds 
+11:16:07 <dmiles> since cyc would get more out of genlPreds most likely
+11:26:17 <stevereed> hmm..
+11:28:58 <stevereed> I'll put the question to eca.
+11:29:07 <stevereed> wrote an email.
+11:29:41 <dmiles> thank you much for that.. i can type enlessly on IRC but i have a heck of a time writting english into an email
+11:54:19 --- quit: dash (Read error: 113 (No route to host))
+12:31:49 <stevereed> eca says: Definitely reformulator.  Its purpose in life is to do stuff exactly
+12:31:49 <stevereed> like that.
+12:32:37 <stevereed> if you will provide a use case then I'll ask eca to propose the appropriate reformulator kb rules to make it happen.
+13:07:57 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+13:07:59 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+13:08:00 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+13:08:10 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+14:41:08 --- join: dash (washort@d126.narrowgate.net) joined #opencyc
+15:11:19 --- quit: Taral ("going home")
+15:14:42 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+16:31:18 --- quit: Don ()
+17:42:04 --- join: markwattier (~mark@APX1-01-192.PDX.DU.TELEPORT.COM) joined #opencyc
+17:42:58 --- part: markwattier left #opencyc
+17:48:29 --- join: markwattier (~mark@APX1-01-192.PDX.DU.TELEPORT.COM) joined #opencyc
+17:49:06 <markwattier> I admit I am new to java, so this is more of a java question than
+17:49:12 <markwattier> an opencyc question, but since opencyc is the only chance
+17:49:19 <markwattier> I have had to actually use java for anything, well here I am.
+17:49:26 <markwattier> I downloaded the java 2 sdk v1.4, and I can do tutorials
+17:49:33 <markwattier> and mess around a little, and get my things to compile.
+17:49:40 <markwattier> However, I have not been able to compile the Apidemo.
+17:49:46 <markwattier> From the directory ~/opencyc-0.6.0/src/org/opencyc/api
+17:49:52 <markwattier> I run javac  ApiDemo.java and I get:
+17:49:58 <markwattier> ApiDemo.java:148: error:Cannot find class "CycApiException" [JLS 8]
+17:50:03 <markwattier> I have tried playing with CLASSPATH to no avail.
+17:50:08 <markwattier> Any suggestions?
+18:13:07 <markwattier> Is this chat system working?
+18:13:58 --- part: markwattier left #opencyc
+18:14:28 --- join: markwattier (~mark@APX1-01-192.PDX.DU.TELEPORT.COM) joined #opencyc
+18:17:17 <markwattier> Hello
+18:17:18 <CycLBot> hello markwattier
+18:17:34 <markwattier> Any humans around?
+18:20:46 --- part: markwattier left #opencyc
+18:35:31 --- join: markwattier (~mark@APX1-01-192.PDX.DU.TELEPORT.COM) joined #opencyc
+18:35:39 --- quit: markwattier (Client Quit)
+18:35:51 <dash> markwattier: hi.
+18:35:52 --- join: markwattier (~mark@APX1-01-192.PDX.DU.TELEPORT.COM) joined #opencyc
+18:36:19 <dash> hi.
+18:36:47 <markwattier> Hello. I need some help with the java API
+18:37:38 <markwattier> Just trying to get anything using the opencyc API to compile
+18:37:52 <dash> hmm, i haven't used it yet
+18:37:55 <markwattier> Are there any instructions?
+18:38:28 <markwattier> I don't even see anything about what versions of java it has been tested with
+18:38:35 <dash> heh, not that i've seen
+18:39:33 <markwattier> Is dmiles on line? It appears he has used it
+19:30:12 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+19:30:16 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:30:18 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+19:30:21 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+19:32:23 <markwattier> Hello, dmiles?
+19:49:31 <markwattier> Is anybody on line who uses the Java API?
+20:04:14 --- quit: dash (Read error: 113 (No route to host))
+20:20:22 --- join: dash (washort@d150.narrowgate.net) joined #opencyc
+20:21:36 --- join: Method (Method@lotus.snu.edu) joined #opencyc
+20:23:38 --- quit: Method (Client Quit)
+20:25:49 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+20:25:49 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+20:26:35 <markwattier> Is anybody on line who uses the Java API?
+20:36:11 <markwattier> OK, my guesswork is starting to pay off...
+20:47:01 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+20:47:13 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+20:47:46 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+20:49:51 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+20:56:31 --- part: markwattier left #opencyc
+21:20:56 --- join: mea_away (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+21:21:07 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:21:11 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+21:21:25 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+22:22:33 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+22:22:42 --- join: dmiles- (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+22:27:14 --- quit: dmiles- (Read error: 104 (Connection reset by peer))
+22:27:22 --- quit: mea_away (Read error: 104 (Connection reset by peer))
+22:27:23 --- join: mea_culpa (~mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+22:27:26 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+23:08:16 <dmiles> back
+23:08:54 <dmiles> <stevereed> if you will provide a use case then I'll ask eca to propose the appropriate reformulator kb rules to make it happen.
+23:09:11 <dmiles> yes hrrm,
+23:10:15 <dmiles> it would be like a query.. that could consequent in side effect API commnands i think
+23:10:39 <dmiles> or however the details go 
+23:11:35 <dmiles> so it would be leveraging exiting expansion axioms 
+23:12:05 <dmiles> so lets see, when would i use it...
+23:12:59 <dmiles> i have loaded a new Mt from some Daml pages
+23:13:37 <dmiles> or from any other tool that has imported large amount of Axioms
+23:14:09 <dmiles> for one i did not yet mark the rules forward or backwards
+23:15:31 <dmiles> i see that all the rules are in the form of (implies ?EL1 ?EL2)
+23:15:47 <dmiles> well more like..
+23:16:04 <dmiles>  (implies ?EL1 (isa ?E ?C))
+23:16:20 <dmiles> i would like to mark all of these :FORWARD
+23:18:27 <dmiles> well before i do that..
+23:18:55 <dmiles> there are several: (implies (isa ?E ?C1) (isa ?E ?C1))
+23:19:04 <dmiles> err
+23:19:08 <dmiles>  (implies (isa ?E ?C1) (isa ?E ?C2))
+23:19:39 <dmiles> i would want to transform to (genls ?C1 ?@)
+23:19:50 <dmiles> (genls ?C1 ?C2)
+23:20:32 <dmiles> you wiould think the loading tool could perform this..
+23:21:07 <dmiles> but Cyc understands propostions at a much higher detail then a loading tool
+23:22:06 <dmiles> so it would be usefull to have cyc tool that would:
+23:22:18 <dmiles> allow you to make a query for axioms
+23:22:53 <dmiles> and perform one or more operations on the query relsuts
+23:24:13 <dmiles> so a usecase would be more for a knowledge engineer doinmg general administration of his new microtherory
+23:28:37 <dmiles> performaing operations on the assertions form ( as retrived in query varaibles) not actually manipulation the assertion Ids themselves
+23:57:31 <dmiles> so the use case ...
+23:58:59 <dmiles> is for KB manangemnt for someone you is loading Mts from another source (even Cyc)
+23:59:10 <dmiles> rr
+23:59:16 <dmiles> is for KB manangemnt for someone who is loading Mts from another source (even Cyc)
+23:59:59 --- log: ended opencyc/02.05.01

@@ -1,0 +1,72 @@
+00:00:00 --- log: started opencyc/03.02.22
+00:02:05 --- join: flux (~trumpet@194.149.224.129) joined #opencyc
+00:02:12 --- quit: flux (Client Quit)
+00:20:49 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+02:03:07 --- quit: dmiles (Killed (carroll.freenode.net (zelazny.freenode.net <- zheng.freenode.net)))
+02:03:17 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+02:03:51 --- quit: Cobra (Killed (carroll.freenode.net (zelazny.freenode.net <- zheng.freenode.net)))
+02:03:53 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+02:24:38 --- join: mdupont (mdupont@p5080E6AC.dip0.t-ipconnect.de) joined #opencyc
+02:24:39 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+03:40:26 --- join: yhavinga (~yhavinga@cust-217-117-225-39.portavita.nl) joined #opencyc
+04:11:36 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+04:22:07 <yhavinga> yo
+04:24:13 <yhavinga> i'm wondering a bit how to represent states
+04:24:18 <yhavinga> like HEALTH(-10)
+04:32:29 <yhavinga> ;; (genls CD-Health CD-STATE) 
+04:32:29 <yhavinga> ;; (relationAllExists constituentInSituation CD-Health Animal)
+04:32:29 <yhavinga> ;; (implies
+04:32:29 <yhavinga> ;;   (and
+04:32:29 <yhavinga> ;;     (isa ?SIT CD-Health)
+04:32:30 <yhavinga> ;;     (constituentInSituation ?SIT ?PP))
+04:32:32 <yhavinga> ;;   (thereExists ?VALUE
+04:32:34 <yhavinga> ;;     (and
+04:32:36 <yhavinga> ;;       (isa ?VALUE HealthValue)
+04:32:38 <yhavinga> ;;       (holdsIn ?SIT (hasHealthValue ?PP ?VALUE)))))
+04:45:24 <yhavinga> ;; ACT <==> 
+04:45:24 <yhavinga> ;;      |  .---> HEALTH(a+2)
+04:45:24 <yhavinga> ;; PP <----|
+04:45:25 <yhavinga> ;;         .---< HEALTH(a)
+04:45:25 <yhavinga> ;;
+04:45:25 <yhavinga> ;; (thereExists ?CD-ACT
+04:45:27 <yhavinga> ;; (thereExists ?CD-PP
+04:45:29 <yhavinga> ;; (thereExists ?CD-HEALTHOLD
+04:45:31 <yhavinga> ;; (thereExists ?CD-HEALTHNEW
+04:45:33 <yhavinga> ;; (and
+04:45:35 <yhavinga> ;; (constituentInSituation ?CD-PP ?CD-HEALTHOLD)
+04:45:37 <yhavinga> ;; (constituentInSituation ?CD-PP ?CD-HEALTHNEW)
+04:45:39 <yhavinga> ;; (preSituation ?CD-ACT ?CD-HEALTHOLD)
+04:45:41 <yhavinga> ;; (postSituation ?CD-ACT ?CD-HEALTHNEW)
+04:45:43 <yhavinga> ;; (holdIn ?CD-HEALTHOLD (hasHealthValue ?PP (HealthFn ?OLDVAL)))
+04:45:45 <yhavinga> ;; (holdIn ?CD-HEALTHNEW (hasHealthValue ?PP (HealthFn ?NEWVAL)))
+04:45:47 <yhavinga> ;; (equals ?NEWVAL ?OLDVAL+2)
+04:45:49 <yhavinga> ;; )))))
+04:45:52 <yhavinga> or something..
+04:50:36 --- quit: yhavinga ("Leaving")
+06:57:22 <mdupont> Please come and visit our new wiki http://gnufans.net/cgi-bin/fsedu.pl?FreeSoftwareInEducation
+07:31:16 --- nick: mdupont -> mdupont-away3h
+07:59:53 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+09:24:56 --- nick: mdupont-away3h -> mdupont
+09:56:25 --- quit: Cobra ("[x]chat")
+09:59:07 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+11:06:31 --- quit: yepster ()
+11:15:36 --- nick: mdupont -> mdupont-away
+12:19:26 --- quit: mdupont-away ("check out introspector.sf.net")
+14:31:26 --- quit: Cobra ("[x]chat")
+14:33:59 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+15:10:09 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:02:20 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:10:52 --- quit: kinoc (Read error: 60 (Operation timed out))
+16:18:15 --- quit: dmiles ()
+16:18:22 --- join: dmiles (mea_culpa@12-212-75-114.client.attbi.com) joined #opencyc
+16:19:09 --- quit: dmiles (Client Quit)
+16:19:17 --- join: dmiles (titan@12-212-75-114.client.attbi.com) joined #opencyc
+17:05:59 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+18:08:56 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:17:52 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:33:46 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+20:53:10 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:01:42 --- quit: kinoc (Read error: 60 (Operation timed out))
+23:34:47 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:43:19 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+23:59:59 --- log: ended opencyc/03.02.22

@@ -1,0 +1,97 @@
+00:00:00 --- log: started opencyc/03.03.09
+01:52:44 --- join: dmiles (~dmiles@AC9627F4.ipt.aol.com) joined #opencyc
+02:35:58 --- join: yepster (~yepster@vetteaap.xs4all.nl) joined #opencyc
+03:15:44 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+03:34:05 --- quit: yepster (Read error: 110 (Connection timed out))
+04:51:49 --- join: yepster (~yepster@vetteaap.xs4all.nl) joined #opencyc
+06:41:16 --- quit: yepster ()
+07:51:16 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+09:23:24 --- quit: Cobra ("[x]chat")
+09:27:14 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+10:00:54 --- quit: Cobra ("[x]chat")
+10:03:20 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+11:55:08 --- quit: yepster ()
+13:07:36 --- join: dmiles (~dmiles@ACA6E3F4.ipt.aol.com) joined #opencyc
+14:02:20 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:51:31 --- join: graylensman (~ray@fl-wbu2c6-482.pbc.adelphia.net) joined #opencyc
+16:02:23 --- join: dmiles (~dmiles@AC9BA5F9.ipt.aol.com) joined #opencyc
+16:12:37 <graylensman> dmiles!!
+16:15:57 <dmiles> hi there
+16:16:08 <dmiles> we missed each other often
+16:16:17 <dmiles> what's new?
+16:22:24 <graylensman> I am back with my Scheme/Cyc stuff.
+16:23:12 <graylensman> I am reworking the code.  My Scheme chops are stronger.  My Cyc knowledge is still poor :(
+16:23:31 <dmiles> well good
+16:24:45 <dmiles> subl api has imporved a bit
+16:24:51 <dmiles> with 0.7
+16:25:40 <graylensman> I haven't really explored 0.7 too much.  Much of what I do is the cyc-assert stuff.  Not much subl at this time.
+16:25:48 <dmiles> simple subl (subLisp) programs can interface to the inference harness
+16:26:35 <dmiles> yerah you are doing some of the work in scheme thaty maybe subl imnst completely ready to do yet
+16:26:46 <dmiles> like the LIT (CLET) is not yet working
+16:26:52 <dmiles> err LET
+16:27:07 <dmiles> (local varible assignments inside functions)
+16:28:28 <dmiles> yepster and i have been talking abnout doing a TALESPIN inside opencyc
+16:28:59 <dmiles> using CycKB to write scripts.plans.goals for agents
+16:29:19 <dmiles> alot of the good work in this began in scheme
+16:30:04 <dmiles> probly we'd be best off starting from scheme andinterfacing
+16:30:53 <dmiles> but we'll see there is a ways to go in the knowledge engineering
+16:31:15 <dmiles> (the KR to drive it)
+16:31:24 <graylensman> What is a TALESPIN
+16:31:46 <dmiles> it writes little stories about actors
+16:31:58 <dmiles> based off common sense view of the world
+16:32:28 <dmiles> some intro to AI books use it as a demo system to show what slot based reasoning vcan do
+16:32:57 <dmiles> like you tell it the scenerio.. and the actors with goals
+16:33:14 <dmiles> then it uses their understanding of goals and sccripots to make a potential story
+16:33:56 <dmiles> in was used by SAM/PAM systems to read between the lines
+16:34:12 <dmiles> by matchig a story it came up with to a situation a person described
+16:34:32 <dmiles> so if i said "i got hungry and robbed the bank"
+16:34:52 <dmiles> it could see that it's very likely i went out to eat afterwards
+16:35:35 <dmiles> it also could make a little play by play of the events between my hunger goal and bank robbery
+16:36:08 <dmiles> it might even write the story that i went to my bank to just get money from my acct.. when i found out i was overdrafted i decided to rob the bank instead
+16:36:18 <graylensman> I am back to trying to figure out how to leverage CYC to interface a blue-chip customer to a knowledge base of the product catalog.  Something value added up and above our data-warehouse and data in a RDB.
+16:36:34 <dmiles> it requires the understanding of tory writting to understand
+16:36:41 <dmiles> er story writting
+16:37:03 <graylensman> I think I have heard the hungrey - bank robbery thing before.  Maybe I ran across a reference in reading somewhere.
+16:37:43 <dmiles> yes.. it is a tenant of conceptual dependancy theory
+16:38:19 <dmiles> and TALESPIN is just an example of a app that used it
+16:39:36 <graylensman> <sigh> I just want to sell a guy who ownes a printer a toner cartrige.  Not near as interesting.
+16:40:15 <dmiles> it think Cyc infernce can deduce product relationships and track them
+16:41:03 <dmiles> and of course when you give it some common sense between durrable goods and consumables the more factual info the better
+16:41:09 <graylensman> I have some simple A is a subtitute for B and C is a sub for A, transitive then C is an acceptable sub for A.  
+16:42:05 <graylensman> But we have this in a RDB.  I am looking for something up and above. Where CYC will shine.
+16:42:09 <dmiles> when i think about that in SQL vs CycL.. cycl is much better
+16:43:03 <dmiles> yes
+16:43:12 <graylensman> I have 3,000+ simultaneous users?  30% of all clicks are search and production related.  thats a lot of parallel processing for CYC.
+16:44:18 <dmiles> well cyc pobly doesnt do anything wronger to require more processing power then any other implimentation serving
+16:44:51 <dmiles> well lets say thu for a minute it needed 2ce the processor to do the same
+16:45:39 <dmiles> just because of the extra smarts.. you are probly thinking what facility would cyc use to load balance all that
+16:45:59 <dmiles> i have seen times when 3 infernces are too much ;P
+16:46:11 <dmiles> but thats becasue the infernces are pretty wild
+16:46:36 <dmiles> relatinships like that probly are best forward rules
+16:47:02 <dmiles> for one you can see the expected results from your rowser (as of coure the only one ussin gthat service of cyc)
+16:47:54 <dmiles> so your application clicks to yield reselts may already pre forwrard chained
+16:48:14 <dmiles> (you probly know about this from talking before)
+16:48:44 <dmiles> but yeah the whole thing of 3000 uses even if they are after something veryu simple
+16:49:20 <dmiles> i think you could say "it can be done"
+17:02:13 <graylensman> Yea we forward cach the RDB a whole bunch. http://preview.officedepot.com
+17:04:36 <graylensman> s/cach/cache
+17:04:42 <dmiles> *nod*
+17:05:55 <dmiles> id imagine it would be good to come up with a front end (i am guessing you did) to make relationships and catagory entry easy
+17:07:25 <graylensman> Sure.  Scheme scripts.  Once I got things the way I want them.  A Java Swing GUI most likely.  I am still looking for the killer function that CYC will allow me to do.  
+17:07:51 <dmiles> alot of it can be genls/isa
+17:08:17 <dmiles> where the actual product code itself is isa to the procuct
+17:08:40 <dmiles> like "Cannon Digitial Camera Model foo"
+17:08:54 <dmiles> is genls to DigitalCamera
+17:09:00 <dmiles> gels that to Cammera
+17:09:06 <dmiles> etc
+17:09:27 <graylensman> Sure for the basic Ontology/Taxonomy of Product Catagories.  See out drill down on the site.  I am thinking the big impact for CYC will be in dynamic associations, grouping and classifiction of product via rules.
+17:09:48 <dmiles> yah that drill down is what i saw first
+17:10:22 <dmiles> then actual instances of cammeratype35345 uses bayttery type batter45645654
+17:10:49 <dmiles> and printer models to toner cartrerages
+17:11:53 <graylensman> Yep.  I am have already captured in CYC.  (xxx A B) where xxx is substituteFor alternateFor, accessoryFor, othersAlsoBought,....
+17:13:19 <graylensman> But this is already in our RDB.  So I am still looking for the "magic bullet" CYC will give me.  I need the next level above these simple associations. These are all first level assocations.  I am trying to figure higher level relationships.
+17:17:37 <graylensman> I really need to spend some quality time with one of our Merchandisers to get some traction on the problem.  If I understood "what" I was trying to do, I doubt I would be too stumped on how I would architect it.
+17:23:54 <dmiles> *nod*
+17:48:14 --- quit: graylensman ("Gonna think ...")
+18:39:07 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+23:59:59 --- log: ended opencyc/03.03.09

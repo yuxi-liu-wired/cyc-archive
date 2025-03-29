@@ -1,0 +1,121 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  xmlns:cycml='http://www.opencyc.org/xml/cycML/'
+  targetNamespace='http://www.opencyc.org/xml/cyclQuery/'
+  xmlns:cyclquery='http://www.opencyc.org/xml/cyclQuery/'
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0">
+
+  <import
+    namespace="http://www.opencyc.org/xml/cycML/"
+    schemaLocation='http://www.cyc.com/resource/xsd/cycml.xsd'    
+    />
+
+    
+  <annotation>
+    <appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="org.opencyc.xml.cyclquery"/>
+      </jaxb:schemaBindings>
+    </appinfo>
+  </annotation>
+  
+  <element name='propertySymbol'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='propertyValue'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:number'/>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:symbol'/>
+        <element ref='cycml:sentence'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='cyclQuery'>
+    <complexType>
+      <sequence>
+        <element ref='cyclquery:queryID'/>
+        <element ref='cyclquery:queryFormula'/>
+        <element ref='cyclquery:queryMt'/>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='cyclquery:queryComment'/>
+          <element ref='cyclquery:queryInferenceProperties'/>
+          <element ref='cyclquery:queryIndexicals'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryIndexicals'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cyclquery:queryIndexical'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryIndexical'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='queryComment'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:string'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryFormula'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryID'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='queryInferenceProperties'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cyclquery:queryInferenceProperty'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryInferenceProperty'>
+    <complexType>
+      <sequence>
+        <element ref='cyclquery:propertySymbol'/>
+        <element ref='cyclquery:propertyValue'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='queryMt'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+</schema>

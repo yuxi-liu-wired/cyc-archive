@@ -1,0 +1,1225 @@
+00:00:00 --- log: started opencyc/02.07.13
+01:14:19 * dmiles starts to get tired
+02:20:33 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+02:20:50 <zool> hello
+02:28:54 <dmiles> hi there
+02:30:04 --- quit: siege (Read error: 110 (Connection timed out))
+02:30:05 <zool> hi dmiles
+02:47:34 --- quit: CycLBot (Remote closed the connection)
+02:50:11 --- join: CycLBot ([wOSFuMGPI@12-225-207-235.client.attbi.com) joined #opencyc
+02:52:43 --- join: sayke (abuse@12-229-234-41.client.attbi.com) joined #opencyc
+02:54:30 <dmiles> ok i think i have it somewhat functional
+02:54:39 <dmiles> i finshed the aiml bot parts
+02:54:50 <dmiles> prolog a('how are you doing').
+02:55:07 <dmiles> prolog flush.
+02:55:20 <dmiles> prolog write(flush).
+02:55:21 <CycLBot> flush
+02:55:25 <dmiles> prolog a('how are you doing').
+02:55:50 <dmiles> prolog a('what is your name').
+02:56:18 <zool> coo
+02:56:39 <dmiles> prolog a('what is your name').
+02:57:07 <dmiles> ah i have the timeout set too low
+02:58:20 --- quit: CycLBot (Remote closed the connection)
+02:59:33 <dmiles> prolog a('what is your name').
+03:00:22 --- join: CycLBot ([mZqg1ly2C@12-225-207-235.client.attbi.com) joined #opencyc
+03:00:24 <dmiles> prolog a('what is your name').
+03:00:29 <CycLBot> nop
+03:00:41 <dmiles> prolog a('is nop your name').
+03:00:45 <CycLBot> I am not interested in names .
+03:00:50 <dmiles> eeks
+03:00:52 <dmiles> prolog a('is nop your name').
+03:00:52 <zool> sweeet!
+03:00:59 <CycLBot> nop
+03:01:08 <dmiles> well it is supposed to hit eliza when alice fails
+03:01:13 <zool> prolog a('why are names not interesting').
+03:01:17 <CycLBot> why do you say are ?
+03:01:30 <zool> prolog a('why is a name not interesting').
+03:01:34 <CycLBot> I have told you before ,  I do not care about names .
+03:01:41 * zool smiles
+03:02:11 <dmiles> prolog a('then what is interesting').
+03:02:15 <CycLBot> why do you wonder about interesting ?
+03:02:30 <dmiles> prolog a('just cuz').
+03:02:34 <CycLBot> You must be a Libertarian
+03:02:46 * zool laughs
+03:02:49 <dmiles> prolog a('why do you say that').
+03:02:55 <CycLBot> special
+03:03:03 <zool> prolog a('what is special').
+03:03:08 <CycLBot> do you stay up all night wondering about special ?
+03:03:35 <dmiles> prolog a('somes we do').
+03:03:39 <CycLBot> that is quite interesting .
+03:03:46 * zool will try and get her bot available to be in the loop, today, refine it so it provides more useful candidate reponses, less utter randomness ;)
+03:04:16 <dmiles> prolog a('so we staying up all night is more interesting then names').
+03:04:21 <CycLBot> said so you staying up all night is more interesting then names ?
+03:04:28 <zool> prolog a('are we here?').
+03:04:32 <CycLBot> I do not understand that
+03:04:42 <zool> prolog a('where are we?').
+03:04:46 <CycLBot> said you dont * ?
+03:04:59 <dmiles> prolog a('where are we?').
+03:05:04 <CycLBot> do you say you not * for some special reason ?
+03:05:22 <dmiles> hrrm that is very ood
+03:05:27 <dmiles> prolog a('where are we?').
+03:05:32 <CycLBot> can you elaborate on that ?
+03:05:32 <dmiles> oh
+03:05:35 <dmiles> prolog a('where are we').
+03:05:41 <CycLBot> do you say you dont * for some special reason ?
+03:05:51 <dmiles> the ? marki i didnt strip yet
+03:05:58 <dmiles> prolog a('where are we').
+03:06:02 <CycLBot> said you not * ?
+03:06:15 <dmiles> prolog a('what is *').
+03:06:19 <CycLBot> nick maybe i know about * and dont want to tell you :)
+03:06:48 <dmiles> prolog a('perhaps').
+03:06:53 <CycLBot> you do not seem quite certain .
+03:07:00 <dmiles> prolog a('i am').
+03:07:04 <CycLBot> ok you dont *
+03:07:23 <zool> prolog a('i think therefore i am therefore i think').
+03:07:25 <dmiles> prolog a('this * stuff nake no sense').
+03:07:28 <CycLBot> how long have you been therefore i think ?
+03:07:32 <CycLBot> why not ?
+03:08:02 * dmiles giggles at zool
+03:08:17 <dmiles> prolog a('where are you').
+03:08:22 <CycLBot> you said you not * , is that special ?
+03:08:39 <dmiles> oh i see 'it' got set ti *
+03:10:06 <dmiles> prolog: findall(X=Y,isAliceMem(X,Y),L),write(L).
+03:10:10 <CycLBot> []
+03:10:31 <dmiles> prolog: findall(X=Y,posibleResponse(X,Y),L),write(L).
+03:10:35 --- quit: CycLBot (Excess Flood)
+03:10:43 --- join: CycLBot ([u6WJ7+Jyn@12-225-207-235.client.attbi.com) joined #opencyc
+03:10:51 <dmiles> prolog: findall(Y,posibleResponse(X,Y),L),write(L).
+03:10:56 --- quit: CycLBot (Excess Flood)
+03:10:59 <zool> aw
+03:11:03 --- join: CycLBot ([++BNgNaTO@12-225-207-235.client.attbi.com) joined #opencyc
+03:11:30 <dmiles> prolog: retract(posibleResponse(X,Y)),write(X=Y),fail.
+03:11:57 <dmiles> prolog: retract(posibleResponse(X,Y)),write(X=Y).
+03:12:47 <dmiles> prolog a('this * stuff nake no sense').
+03:12:51 <CycLBot> why not ?
+03:13:05 <dmiles> prolog a('its like robot stuff').
+03:13:09 <CycLBot> nop
+03:13:19 <dmiles> prolog a('that as well').
+03:13:23 <CycLBot> Are you free ?
+03:13:35 <dmiles> prolog a('i am expensive').
+03:13:40 * zool laughs
+03:13:40 <CycLBot> Tell me a story
+03:14:00 <dmiles> prolog a('what kind of story').
+03:14:04 <CycLBot> I am not answering that
+03:14:13 <zool> prolog a('can i tell you the story about the talking sign?').
+03:14:18 <CycLBot> perhaps in your fantasy we tell each other ?
+03:14:34 <zool> prolog a('in my dreams, library paths are dynamic').
+03:14:39 <CycLBot> what does that dream suggest to you ?
+03:15:05 <dmiles> -> 0.48433-['What\'s', your, sign, ?, think([set(it, [set(topic, [person])])])]
+03:15:13 <zool> prolog a('it suggests the tower of babel never existed').
+03:15:17 <dmiles> that was his second pssible response
+03:15:17 <CycLBot> nop
+03:15:20 <zool> hehe
+03:15:32 * zool wonders what 'nop' is about
+03:15:51 <dmiles> its normally when he does nothing and passes it along
+03:16:02 <dmiles> from the older system.. i having leased it yet
+03:16:10 <dmiles> err leashed
+03:16:13 * zool nods
+03:16:48 <dmiles> instead of a deafult universal answer it is supposed to sit and await further solicitation
+03:17:40 <dmiles> 3% of the time it responds even if not addressed
+03:18:13 <dmiles> prolog ('what is your sign').
+03:18:21 <dmiles> prolog a('what is your sign').
+03:18:25 <CycLBot> why do you wonder about your sign ?
+03:18:34 <zool> prolog a('are signs arbitrary?').
+03:18:35 <dmiles> prolog a('not mine').
+03:18:39 <CycLBot> why do you say are ?
+03:18:43 <CycLBot> This was not a yes or no question
+03:18:48 <zool> prolog a('is a sign arbitrary?').
+03:18:53 <CycLBot> That was not a yes or no question
+03:19:27 <dmiles> prolog a('is a sign arbitrary').
+03:19:32 <CycLBot> Now you are saying "no" ?
+03:20:00 <dmiles> prolog a('i am not saying that').
+03:20:04 <CycLBot> You gave a yes or no answer
+03:20:15 <dmiles> prolog a('i did not').
+03:20:20 <CycLBot> said you did not ?
+03:20:26 <dmiles> prolog a('yes').
+03:20:31 <CycLBot> i see .
+03:20:40 <dmiles> prolog a('what do you see').
+03:20:45 <CycLBot> does that question interest you ?
+03:21:04 <dmiles> prolog a('not really').
+03:21:08 <CycLBot> Do you $nick ? special
+03:21:36 <zool> prolog a('first principles are boring').
+03:21:40 <CycLBot> secondly ?
+03:22:40 <dmiles> prolog a('you answer the next part').
+03:22:44 <CycLBot> Do you $nick? you said do you understand, is that special?
+03:23:15 <dmiles> prolog a('when did i').
+03:23:19 <CycLBot> Do you $nick? said do you understand?
+03:23:36 <dmiles> prolog a('i did yes').
+03:23:41 <CycLBot> can you elaborate on that?
+03:23:47 <dmiles> prolog a('no').
+03:23:51 <CycLBot> whatever dmiles
+03:24:53 <dmiles> prolog a('do not whatever me').
+03:24:58 <CycLBot> Do you dmiles? I'm sorry, , I don't have enough information br nop
+03:25:20 * dmiles can edit its source while running
+03:25:38 <dmiles> nick completion fixed
+03:26:34 <dmiles> so CycLBot can you hear this?
+03:27:08 <dmiles> CycLBot: how about this?
+03:29:13 <dmiles> prolog showCycStatisticsHTML
+03:29:18 <CycLBot> <pre>0.00 seconds cpu time for 76 inferences
+03:29:49 <dmiles> prolog showCycProcessHTML
+03:29:53 <CycLBot> 36,868 atoms, 2,744 functors, 2,946 predicates, 39 modules, 2,141,095 VM-codes                         Limit    Allocated       In use Heap         :                              13,308,192 Bytes Local  stack :     2,048,000       16,384          912 Bytes Global stack :     4,096,000       16,384          416 Bytes Trail  stack :     4,096,000       16,384           80 Bytes  3 atom garbage collections gained 72 atoms in -0.00 seconds.
+03:30:03 <dmiles> that the prolog in the second
+03:30:17 <dmiles> prolog flush
+03:34:51 <zool> write while run is very nice
+03:40:06 <dmiles> prolog findall(X=Y,'$CycOption'(_,X,Y),L),write(L),write('<br>').
+03:40:11 <CycLBot> [$socket_out= $stream(273932), $socket_in= $stream(273912), $socket_out= $stream(250570), $socket_in= $stream(250550), $socket_out= $stream(497080), $socket_in= $stream(497060), $socket_out= $stream(497006), $socket_in= $stream(477662), hookCycPredicates=true, :STRENGTH= :MONOTONIC, :DIRECTION= :FORWARD, defaultAssertOptions=[:DIRECTION, :FORWARD, :STRENGTH, :MONOTONIC], query(depth)=nil, query(time)=nil, query(number)=nil, query(backch
+07:19:20 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+07:36:24 --- quit: zool (Read error: 110 (Connection timed out))
+07:36:33 --- quit: graylensman ("Client Exiting")
+08:44:11 --- join: siege (~siege@dsl254-102-094.nyc1.dsl.speakeasy.net) joined #opencyc
+09:28:00 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+09:39:52 --- quit: graylensman (Remote closed the connection)
+09:41:32 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+09:51:27 --- quit: graylensman (Remote closed the connection)
+10:15:53 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+10:42:20 --- quit: graylensman (Read error: 110 (Connection timed out))
+12:51:54 --- join: zool (~jo@unknown.18a.abduction.org) joined #opencyc
+13:15:47 <zool> prolog a('hello').
+13:15:51 <zool> foo
+13:15:51 <CycLBot> what is up kinoc?
+13:16:02 <zool> prolog a('i am not kinoc').
+13:16:06 <CycLBot> special
+13:32:42 <zool> prolog a('what makes us special').
+13:32:47 <CycLBot> I am not answering that
+13:32:54 <zool> prolog a('why not').
+13:42:31 <sandos> hmm =)
+13:57:49 <zool> prolog a('daisy, daisy, give me an answer do').
+13:57:53 <CycLBot> Oh you don't, do you?
+14:06:46 <zool> prolog a('do you have a gender?').
+14:06:51 <CycLBot> you said do you have a gender? , is that special?
+14:07:01 <zool> prolog a('i do not think it is important').
+14:07:05 <CycLBot> Would you ever do sandos?
+14:07:15 <zool> prolog a('what is sandos?').
+14:07:20 <CycLBot> do you stay up all night wondering about sandos? ?
+14:14:24 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+14:17:03 <Yepster_home> prolog a('sleep')
+14:17:08 <CycLBot> Where do you get your ideas?
+14:17:49 <Yepster_home> opposite of complete empathy
+14:50:51 --- join: devEiant (~user@230.muda.dnvr.aurrcobu.dsl.att.net) joined #opencyc
+14:57:10 --- join: Victory (~Enigma335@brln-d9b81caa.pool.mediaWays.net) joined #opencyc
+14:57:11 --- join: Vutral (~ss@217.184.28.170) joined #opencyc
+15:10:02 --- quit: Yepster_home ()
+15:14:37 <sandos> prolog a('who are you')
+15:14:42 <CycLBot> why do you say are?
+15:14:42 <sandos> argh
+15:14:58 <sandos> prolog a('mice are men')
+15:15:02 <CycLBot> I do not understand that
+15:15:15 <sandos> prolog a('blue is a color')
+15:15:20 <CycLBot> Tell me a little about your life in sandos
+15:15:27 <sandos> hmm :)
+15:15:35 * zool grins
+15:19:13 <Vutral> hey
+15:19:39 <zool> prolog a('tell me a story').
+15:19:44 <CycLBot> It is part of my programming
+15:19:53 <Vutral> prolog a('what is your sex ?')
+15:19:57 <Vutral> prolog a('what is your sex ?').
+15:19:57 <CycLBot> do you believe knowing what your sex? is will somehow help you?
+15:20:02 <CycLBot> Vutral maybe i know about your sex? and dont want to tell you :)
+15:20:17 <zool> cyclbot++
+15:20:26 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+15:21:21 <zool> prolog a('in the future, we will live in our own cathedrals').
+15:21:25 <CycLBot> Because my botmaster programmed me for it
+15:22:33 <Vutral> lol
+15:22:44 <Vutral> it makes no sense
+15:24:16 <zool> sense lives in nonsense
+15:25:40 <Vutral> nope
+15:25:53 <Vutral> there is no sense in nonsense
+15:26:25 <zool> nonsense is all around you, and people find sense in it
+15:27:11 <Vutral> nope
+15:27:18 <Vutral> not around me
+15:27:22 <Vutral> i am keeping distance
+15:27:25 --- join: ray__ (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+15:27:30 --- quit: ray__ (Remote closed the connection)
+15:27:48 <zool> is distance physical, or virtual, or both?
+15:28:09 <zool> there is a lot of truth in the juxtaposition of sense and nonsense
+15:28:25 <Vutral> physical
+15:29:52 * zool tries to find useful spaces in between weird spaces
+15:31:41 <Vutral> lol
+15:34:02 --- join: ray__ (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+15:34:06 --- quit: ray__ (Client Quit)
+15:38:41 --- quit: Victory (Remote closed the connection)
+15:38:47 --- quit: Vutral (Read error: 104 (Connection reset by peer))
+16:08:08 <sandos> prolog a('hi')
+16:08:13 <CycLBot> Why not?
+16:08:14 <sandos> prolog a('hi')
+16:08:19 <CycLBot> Do you often visit the Vutral?
+16:08:21 <sandos> prolog a('hi')
+16:08:26 <CycLBot> Which Vutral?
+16:08:29 <sandos> prolog a('hif')
+16:08:33 <CycLBot> I have never been there
+16:08:36 <sandos> prolog a('')
+16:08:40 <CycLBot> This was not a yes or no question
+16:08:49 <sandos> prolog a('do you like bananas')
+16:08:53 <CycLBot> can you elaborate on that?
+16:08:56 <sandos> prolog a('do you like bananas')
+16:09:00 <CycLBot> that is quite interesting
+16:09:02 <sandos> prolog a('do you like bananas')
+16:09:06 <CycLBot> said do you like bananas?
+16:09:09 <sandos> prolog a('do you like bananas')
+16:09:14 <CycLBot> said do you like bananas?
+16:09:16 <sandos> prolog a('do you like bananas')
+16:09:20 <CycLBot> ok do you like bananas
+16:09:26 <sandos> prolog a('no')
+16:09:30 <CycLBot> why not?
+16:09:32 <sandos> prolog a('no')
+16:09:37 <CycLBot> whatever Vutral
+16:09:38 <sandos> prolog a('no')
+16:09:43 <CycLBot> oh please
+16:09:45 <sandos> prolog a('no')
+16:09:49 <CycLBot> you are being a bit negative
+16:09:49 <zool> prolog a('are bananas interesting').
+16:09:54 <CycLBot> It is not part of my programming
+16:09:56 <sandos> hehe
+16:10:06 <sandos> seems to be... nearly braindead ;)
+16:10:39 * dmiles returns from nap
+16:10:46 <zool> napping++
+16:10:49 <dmiles> pretty sad to 60k assertions
+16:11:14 <sandos> CycLBot is 60k assertions ?
+16:11:15 <dmiles> i have been tryig all kinds of things but they ever only work in a few cases
+16:11:20 <dmiles> yeah
+16:11:28 <zool> assertions are difficult
+16:11:46 <sandos> ok
+16:11:49 <zool> my bot only offers aphorisms ;)
+16:11:54 <sandos> Im only just starting to learn cyc at all
+16:12:05 <sandos> stillr reading the tutorial :)
+16:12:38 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/swi_interface/aiml/e.pl <- is its DB file
+16:12:56 <dmiles>  4.5M  
+16:13:14 <sandos> alot =)
+16:13:22 <dmiles> i just am not ussing it correctly yet
+16:13:25 <sandos> is it ailm based?
+16:13:33 <sandos> aiml even
+16:13:52 <dmiles> yeah .. loads the std*.aiml set plus Wallaces personal set plus the eliza set
+16:14:13 <sandos> ok
+16:15:02 <sandos> prolog a('can i fool you')
+16:15:04 <dmiles> but the routine for picking a good response (the socring system i made) is not working
+16:15:07 <CycLBot> why do you think I fool you?
+16:15:12 <sandos> ok
+16:15:17 <dmiles> oh an that was an iliza return
+16:15:20 <sandos> hehe
+16:15:29 <dmiles> which forgot to swap i for you
+16:15:45 <sandos> yey
+16:16:02 <sandos> prolog a('did you kill yourself')
+16:16:07 <CycLBot> special
+16:16:14 <sandos> what does that mean, special ?
+16:16:23 <sandos> prolog a('did you kill me')
+16:16:28 <CycLBot> do you say did you kill me for some special reason?
+16:16:33 <sandos> oh :)
+16:16:45 <dmiles> that was becasue aiml returned an <srai> or YES
+16:17:00 <dmiles> so Eliza changed YES -> special
+16:17:15 <sandos> ok
+16:17:44 <sandos> prolog a('john is my name')
+16:17:49 <CycLBot> I am not interested in names
+16:17:52 <sandos> hehe
+16:17:55 <sandos> prolog a('john is my name')
+16:18:00 <CycLBot> I have told you before ,  I do not care about names
+16:18:05 <sandos> prolog a('sandos is my name')
+16:18:09 <CycLBot> please continue
+16:18:11 <dmiles> the name storage routine got degraded from a prevoius statemtn about name
+16:18:17 <sandos> ok :)
+16:18:32 <dmiles> is why ELiza used <CycLBot> I have told you before ,  I do not care about names
+16:18:37 <CycLBot> i have told you before i do not care about names
+16:18:51 <dmiles> why not CycLBot?
+16:18:59 <dmiles> why not CycLBot ?
+16:19:22 <dmiles> CycLBot wjhy dont you work sometimes?
+16:19:27 <sandos> :)
+16:19:42 <dmiles> if it sees its name in a senetence it sues it
+16:19:52 <sandos> ah well, hope the chatterbot interface to cyc becomes usable?
+16:20:37 <dmiles> alot of this for me is just leaning again how chatterbots works enough so i can start perisiting the routines and data in Cyc
+16:20:54 <sandos> ok, sounds like alot of fun
+16:20:56 <dmiles> i have a more rapid developement time in prolog
+16:21:03 <sandos> ok =)
+16:21:16 <sandos> gotta sleep
+16:21:28 <sandos> see ya
+16:21:36 <dmiles> .  take care
+16:21:40 <CycLBot> I now have  care
+16:21:43 <sandos> you too
+16:21:45 <sandos> hehe
+16:27:41 --- join: Vutral (~ss@217.184.28.170) joined #opencyc
+16:28:32 <Vutral> heya
+16:29:41 <dmiles> hi Vutral
+16:29:50 <zool> re 
+16:39:07 <Vutral> whats you
+16:39:09 <Vutral> up
+16:39:12 <CycLBot> Go where?
+16:39:24 <kinoc> ping
+16:39:24 <CycLBot> hello kinoc
+16:40:26 <kinoc> prolog a('are you ready').
+16:40:30 <CycLBot> why do you say are?
+16:41:11 <kinoc> default-response-set-itus
+16:42:16 <zool> hello
+16:43:59 <kinoc> hello
+16:44:15 <kinoc> how is the day so far
+16:44:36 <kinoc> prolog a('define douglas').
+16:45:16 <dmiles> -> 0.7854-['Are', you, free, ?, think([set(it, [set(topic, [person])])])]
+16:45:16 <dmiles> -> 1.3-[nop]
+16:45:22 <zool> the day has been pleasant so far
+16:45:27 <dmiles> that was the debug part
+16:45:42 <zool> spent all afternoon cycling round town at random with a friend
+16:45:57 <kinoc> a good way to spend the day
+16:46:16 <dmiles> yes very counter depresant
+16:46:42 <zool> now i'm trying to persuade my bot to do satire
+16:46:43 <kinoc> careful it may come under regulation
+16:46:51 * zool laughs
+16:47:27 <kinoc> how do you define satire that a bot may both know it and do it
+16:48:38 <zool> that is an interesting question
+16:49:11 <zool> my approach as usual is quite random, using cut-up techniques and very deadpan presentation
+16:49:23 <zool> the satire is more in the social context
+16:49:57 * zool has a lot of word-graphing stuff in the back of her head also
+16:50:28 <kinoc> word-graphing ?
+16:51:10 <zool> like, the basic zipf curve frequency thing, but also repetition/interconnection of words across time and between texts
+16:51:22 <zool> show up contrast between thingas
+16:51:40 <kinoc> context vector ish ?
+16:51:57 <zool> context vectors sound sexy! how do they work?
+16:52:05 <zool> that's probably what i have in my head, yes
+16:52:09 <kinoc> word co-association
+16:52:31 <dmiles> context would almost be a result (since the vetors exist between words)
+16:52:33 <zool> something like that
+16:52:42 <kinoc> each word has a vector (usually about 500), as they are used
+16:53:00 <kinoc> the vectors become more that the ones they are used with
+16:53:06 <zool> right, right
+16:53:16 <kinoc> so two words that occur alot have similar vectors
+16:53:46 <zool> and they slide about over time and meet each other
+16:53:52 <kinoc> so car and automobile will be close to truck and bicycle
+16:54:00 <kinoc> yes a self-organizing representation
+16:54:25 <kinoc> but you have to go through ga-gigabytes
+16:54:34 <zool> that is interesting as anything, thankyou
+16:54:40 <zool> oh yeah? hmmm
+16:55:13 <kinoc> check HNC and Matchplus for some context vector stuff
+16:55:21 <zool> even if the source data is pretty tightly contextualised?
+16:55:42 <kinoc> no but you do have to iterate
+16:55:55 <zool> right
+16:56:09 <kinoc> or look up kohonen and processing large text sets
+16:56:18 <zool> ah so it is like nn stuff
+16:56:34 <kinoc> yes, he ate the patent office once
+16:56:49 <kinoc> to try and sort patents by semantic similarity
+16:57:02 <kinoc> yes, nn stuff
+16:57:27 <zool> how did the patents look? :)
+16:57:32 <kinoc> i think microtheories might have some tie in
+16:58:04 <kinoc> it did organize into filiments of similarity
+16:58:28 <Vutral> re
+16:58:32 <kinoc> the different topic areas clumped to gether
+16:58:38 <zool> i'm more interested in relatively small piles of very closely connected text
+16:58:50 <zool> hmmm
+16:59:04 <kinoc> the smaller the pile the less general the vectors formed
+16:59:18 <kinoc> so it should be more sensitive to distinctions
+16:59:45 <Vutral> hey hey
+16:59:54 <kinoc> hi hi
+17:00:58 <kinoc> one of the interesting properties is all the vectors for different level objects inhabit the same space
+17:01:20 <kinoc> a vector for a sentence is the normalized sum of the word vectors
+17:01:53 <kinoc> so a sentence can be compared to a word or a paragraph or a document for similarity or relevance
+17:02:11 <kinoc> i guess it really measures relevance/co-occurance
+17:02:29 <zool> those things would be interesting to me
+17:03:47 <kinoc> then just check google for 'Matchplus context vector' for a starting point
+17:03:56 <kinoc> or check citeseer 
+17:04:08 * zool found image stuff citeseer
+17:04:18 * zool tries to use alltheweb.com where she can
+17:04:34 <zool> it seems cleaner, though less populous than google
+17:05:15 <kinoc> makes sense google has become more mainstream
+17:05:57 <kinoc> need to teach cyc to do some of this leg work
+17:06:13 <kinoc> as a personal meta-search tool
+17:06:39 <kinoc> load up a Mt with the concepts you want and say 'fetch'
+17:06:39 <CycLBot> java.io.FileNotFoundException: up a Mt with the concepts you want and say 'fetch' (No such file or directory)
+17:07:00 <kinoc> oops
+17:07:12 <kinoc> cant say l-o-a-d
+17:07:26 * zool thinks about medireviews
+17:07:52 <dmiles> hehe .. the load command l am workjing on getting Cyc to load Mts from Disk and web
+17:08:28 <kinoc> so you plot was discovered by my skillful accident
+17:09:04 <dmiles> hehe
+17:09:13 <dmiles> yes.. i am still working on mime file extensions.. when i get done i want to do .aiml .daml .kif .fasl .cycl
+17:09:43 <kinoc> stand by for assimilation
+17:10:28 <kinoc> so can you mark a Mt as 'provisional' or 'un-tested'
+17:11:00 <kinoc> that way you can run a nlp process on a web page and stick the results in an Mt
+17:11:15 <dmiles> well cuurently when loaded a .fif and .cycl it creates a temporarty MT so the WFFs can happen.. if it fails it only has to kill one constant TemporaryLoadMt
+17:11:24 <kinoc> but you need to mark it as 'un-tested' since it basically picked it up off the street
+17:12:13 <dmiles> yes.. cyc has a reliablity of Mt predicate
+17:12:34 <dmiles> but yes a UntestedMtType could work
+17:13:23 <dmiles> oh then when when realy gets good maybe .txt and .html
+17:13:50 <kinoc> also useful because it may misparse stuff too
+17:13:50 <dmiles> i heard that cyc corp was working on a .uml as well
+17:14:04 <kinoc> that would be good
+17:14:50 <kinoc> i also need to get cema running (the configuration tool) with cyc. .uml would apply there
+17:14:54 <kinoc> i think
+17:15:30 <kinoc> legoize the universe
+17:16:12 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/org/opencyc/uml/ImportUmlModel.html
+17:18:11 <kinoc> thanks i will have to keep that pointer
+17:19:18 <zool> kinoc well the infobotNG stuff has a lot of search type functions
+17:19:51 <Vutral> uarg
+17:21:52 <zool> uarg?
+17:24:15 <Vutral> i don't feeö good
+17:26:29 <zool> aw
+17:31:39 <Vutral> hmm
+17:34:47 <dmiles> stevereed_home, you here? i am looking at org.opencyc.templateparser.. cool package
+17:36:00 <kinoc> zool: infobotNG ? 
+17:37:57 <zool> is like infobot, but with the parsing cleaned up and most functions abstracted out into a babbling bot network
+17:38:17 * zool says this, but it is still at the test-first stage atm ;)
+17:38:44 <zool> there will be little state machines for fine grained searches etc
+17:38:58 <zool> but is not plugged into your sets of techniques at all
+17:39:26 <kinoc> oh makes sense i think
+17:40:05 <kinoc> do you plan to auto construct the little state machines (lsm's)
+17:40:22 <zool> i try not to make too many plans :)
+17:40:30 <zool> how would you imagine doing that?
+17:40:43 <kinoc> yea, i suffer from plan over load
+17:41:08 <kinoc> maybe some sort of hmm ?
+17:41:18 <Vutral> hm
+17:41:20 <Vutral> counseller
+17:41:25 <Vutral> i wonder if that is spelled correct
+17:41:33 <zool> o
+17:43:06 <Vutral> what ?
+17:43:58 <Vutral> come on
+17:44:00 <Vutral> i need the word
+17:44:16 <zool> counsellor
+17:44:39 <Vutral> ok
+17:44:41 <Vutral> thx
+17:44:50 <zool> you need an infobot :)
+17:47:49 <Vutral> i got one
+17:47:55 <Vutral> but i am not using it
+17:47:56 <Vutral> :P
+18:00:10 <Vutral> botany bay ?
+18:00:14 <Vutral> botany bay...
+18:00:17 <Vutral> BOTANY BAY !!!
+18:00:28 <Vutral> Let's get outta here... Fast
+18:00:37 <Vutral> What the hell ?
+18:00:44 <Vutral> I will explain it later...
+18:00:49 <Vutral> Come on
+18:01:05 <Vutral> hmm
+18:07:15 <zool> ?
+18:08:24 <Vutral> dmiles ?
+18:08:27 <Vutral> are you there ?
+18:08:47 <dmiles> here now
+18:08:58 * dmiles playing with my chicken
+18:09:50 <dmiles> getting her to roost on the shower curtain .. easier to clean messes of tile then carpet
+18:09:59 * zool smiles
+18:10:38 <dmiles> she loves laying on my pillows though.. they make messes though when they sleep
+18:10:47 <Vutral> ic
+18:10:55 <zool> do you get eggs and everything?
+18:11:01 <dmiles> i think chickens rely heavy on comunal behavour
+18:11:07 <Vutral> who manages the chatterbot again ?
+18:11:11 <zool> oh yes
+18:11:33 <dmiles> but egg laying prerequisits are 86 degrees for 48 hours
+18:11:39 <Vutral> hey
+18:11:49 <Vutral> i am here too
+18:11:55 <dmiles> so she hasnt yet layed the first egg
+18:12:01 <dmiles> hi Vutral ;P
+18:12:05 <Vutral> who manages the chatterbot again ?
+18:12:16 <Vutral> i am trying to make it useable and i got some questions for that
+18:12:24 <dmiles> what chatterbot? i think a few of us in here have chatterbot type things
+18:12:56 <Vutral> well
+18:13:02 <Vutral> i mean the opencyc api one
+18:13:06 <Vutral> the one from the jar
+18:13:22 <dmiles> Steve does.. i made the IrcChat.java in CVS though
+18:13:33 <Vutral> where is he
+18:13:37 <CycLBot> I am in kitchen   I see: broccoli candle coffee_cup crackers me table (apple (color '(green))) (apple (color '(red)))I can go to: back yard cellar dining room office
+18:13:47 <dmiles> he has a varitey of classes.. the one in Jar is not quite ready yet
+18:14:07 <dmiles> he is reed_ and stevereed_home
+18:14:10 <Vutral> what is not ready of it
+18:14:16 <Vutral> reed_
+18:14:42 <dmiles> well the internal Cyc API that it accesses rely and some template parsings from NLP group in Cyccorp
+18:14:55 <dmiles> and they are still working on their end
+18:15:13 <Vutral> wel
+18:15:15 <Vutral> the thing is
+18:15:20 <Vutral> that chatterbot
+18:15:26 <dmiles> so Steve i think is working heavily on things that are closer to ready like CycML,DAML etc
+18:15:30 <Vutral> will multiple instances be able to work on the same data
+18:15:46 <dmiles> well each instance of that uses a User object
+18:16:08 <Vutral> so ?
+18:16:19 <dmiles> the FSM keeps user things but the general common sense would be global in cyc (shared)
+18:17:01 <Vutral> so multiple instances access same common data
+18:17:09 <dmiles> yes
+18:17:16 <Vutral> good
+18:17:46 <Vutral> *continuing work*
+18:17:50 <CycLBot> You work*
+18:23:47 --- part: dmiles left #opencyc
+18:23:51 --- join: dmiles (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+18:25:57 --- join: eca (logicmoo@12-225-204-47.client.attbi.com) joined #opencyc
+18:26:08 --- topic: set to 'Welcome to #opencyc, The IRC channel for the OpenCyc project. ***Release 0.6 is now available from http://sourceforge.net/projects/opencyc/' by eca
+18:26:13 --- quit: eca (Client Quit)
+18:26:22 <dmiles> ;P
+18:29:47 <Vutral> hmm
+18:29:52 <Vutral> i am finish soon
+18:29:54 <Vutral> har har
+18:32:10 <Vutral> test run
+18:32:46 <dmiles> neat
+18:33:14 <Vutral> java.lang.NullPointerException
+18:33:24 <Vutral> 	at org.opencyc.chat.ChatterBot.makeInterpreter(ChatterBot.java:104)
+18:33:32 <Vutral> 	at org.opencyc.chat.ChatterBot.receiveChatMessage(ChatterBot.java:148)
+18:34:08 <Vutral> why ?
+18:35:13 <Vutral> hmm
+18:36:37 <dmiles> you need create one inside your class
+18:36:45 <Vutral> create what
+18:37:07 <dmiles> oh wait.. you need to set your 'this' as what ChatterBot calls
+18:37:21 <dmiles> one sec .. i'll find the line i use
+18:37:24 <Vutral> ok
+18:37:53 <dmiles> in my code i sue..
+18:37:54 <dmiles>     public org.opencyc.chat.ChatterBot chatterBot = null;
+18:38:15 <dmiles> 		chatterBot = new ChatterBot(this);
+18:38:17 <Vutral> ????
+18:38:22 <dmiles> where this'
+18:38:49 <dmiles> is the class that creates it.. that  implements ChatSender {
+18:38:59 <Vutral> no
+18:39:02 <Vutral> i have another chatsender
+18:39:07 <Vutral> i give it to it yet
+18:39:13 <Vutral> a instance of it
+18:39:17 <dmiles> correct
+18:39:36 <dmiles> you chat sender was null evidently
+18:39:43 <Vutral> let me check
+18:39:55 <dmiles> at least at the time you created new ChatterBot(myChatSender)
+18:44:04 <Vutral> ?
+18:44:07 <Vutral> how you mean
+18:44:35 <dmiles> well have you instance your ( <Vutral> i have another chatsender )
+18:44:55 <dmiles> after you have intially instanced it..
+18:45:13 <dmiles> myChatterBot refernce holder = new ChatterBot(myChatSender);
+18:45:37 <dmiles> myChatterBot.initialize();
+18:46:17 <dmiles> re:  myChatterBot refernce holder = new ChatterBot(myChatSender);   should have said ChatterBot myChatterBot =  new ChatterBot(myChatSender);
+18:46:57 <dmiles> before all that <class> myChatSender = new MyChatSenderClass();
+18:47:03 <Vutral> initalize ?
+18:47:06 <Vutral> i did not do that
+18:47:12 <dmiles> yes.. since its a thread
+18:47:38 <dmiles> but instead of ussing .start() you use .initalize() for reasons cyccorp created
+18:48:33 <Vutral> java.lang.NullPointerException
+18:48:34 <Vutral> 	at org.opencyc.conversation.Arc.<init>(Arc.java:77)
+18:48:34 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeDisambiguateTermQueryFsmClass(FsmFactory.java:239)
+18:48:34 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeAllFsmClasses(FsmFactory.java:82)
+18:48:34 <Vutral> 	at org.opencyc.conversation.FsmFactory.initialize(FsmFactory.java:70)
+18:48:34 <Vutral> 	at org.opencyc.chat.ChatterBot.initialize(ChatterBot.java:88)
+18:48:34 <dmiles> well its creates threads inside itstelf
+18:49:22 <dmiles> what was the staus of your myChatSender at the time?
+18:49:39 <Vutral> how you mean
+18:49:42 <Vutral> it is a instance
+18:49:47 <dmiles> it will preform an arc to let you know its initalizing and call your chatsenver at that time
+18:50:11 <Vutral> that means ?
+18:50:25 <dmiles> means your self refernce must be valid at that time
+18:50:34 <Vutral> it's no self reference
+18:50:38 <Vutral> but it's valid
+18:50:59 <dmiles> what is the hashCode() of your myChatSender?
+18:51:09 <Vutral> i dunno
+18:51:19 <Vutral> why do you ask
+18:51:27 <dmiles> i am guessing you should check that before  new ChatterBot(myChatSender);
+18:51:38 <Vutral> why ?
+18:51:47 <dmiles> becasue org.opencyc.conversation.Arc is calling you back and getting a null
+18:52:03 <Vutral> how does it call ?
+18:52:06 <Vutral> it calls hashCode ?
+18:52:11 <dmiles> remember you cant initialize myChatSeder later
+18:52:21 <Vutral> it is initialized
+18:52:29 <dmiles> at creation time?
+18:52:32 <Vutral> yeah
+18:52:46 <dmiles> i was saying for a sanity check the System.prinln your hashcode
+18:53:02 <dmiles> that way we know for sure
+18:53:11 <Vutral> i made a toString() before
+18:53:14 <Vutral> that worked
+18:53:20 <dmiles> ok that will work
+18:53:35 <dmiles> but what is your order of operations?
+18:54:00 <dmiles> (another thing that can cause that is if Cyc is not runing localhost)
+18:54:07 <Vutral> it runs
+18:54:11 <Vutral> well
+18:54:17 <Vutral> first of all i init my ChatSender
+18:54:18 <dmiles> since Arc may need to create CycAccess()
+18:54:22 <Vutral> then i check it
+18:54:31 <Vutral> if it works i init a ChatterBot with it as argument
+18:54:56 <Vutral> i init the chatterbot
+18:54:58 <Vutral> then
+18:55:44 <dmiles> you chat sender will get a receiveChatMessage("I am intializing..");
+18:56:21 <dmiles> did you get that message?
+18:56:41 <Vutral> hmm
+18:56:44 <Vutral> nope
+18:57:07 <Vutral> it does no call
+18:58:21 <dmiles>         transitionFromState.addArc(this);
+18:58:42 <dmiles> iam looking
+18:59:35 <Vutral> ?
+19:00:40 <dmiles> ok found it ;P
+19:00:46 <dmiles> in your cals..
+19:01:16 <dmiles> Log.makeLog() 
+19:01:17 <CycLBot> logging is set false
+19:01:35 <dmiles> needs to be called first before initializing
+19:02:03 <dmiles> Log is a static global class that each of the Cyc java classes expect to be valid
+19:02:03 <CycLBot> logging is set false
+19:02:06 <Vutral> Log ?
+19:02:07 <CycLBot> logging is set false
+19:02:15 <Vutral> hmmm
+19:02:39 <dmiles>  +--org.opencyc.util.Log
+19:02:57 <dmiles> org.opencyc.util.Log.makeLog();
+19:03:01 <dmiles> in your program
+19:03:14 <Vutral> done
+19:03:23 <dmiles> it will create agent.log on your filesystem
+19:03:35 <Vutral> I am initializing
+19:03:37 <Vutral> hehehe
+19:03:38 <dmiles> ;P
+19:03:53 <Vutral> i need to throw that message away
+19:03:57 <Vutral> :P
+19:04:37 <dmiles> now the status of that class ChatterBot is still under developemnt pretty much it just starts up
+19:05:07 * dmiles went through this excersize as well
+19:05:48 <Vutral> hmmm
+19:06:28 <Vutral> 	at org.opencyc.conversation.Arc.<init>(Arc.java:77)
+19:06:33 <Vutral> it happens in the second call now
+19:06:46 <dmiles> org.opencyc.util.Log.makeLog(); should only happen once
+19:06:58 <Vutral> hmm
+19:07:01 <Vutral> yeah
+19:07:02 <Vutral> i do that
+19:07:25 <dmiles> well oh.. yeah i forgot thats where the developent kinda stopped
+19:07:53 <dmiles> i bet it can be debugged thohg ;P
+19:08:00 <dmiles> what was the whole stack trace?
+19:08:37 <dmiles> (i need th eline number of the thing that called Arc)
+19:08:54 <Vutral> ok
+19:08:56 <Vutral> one moment
+19:09:10 <dmiles> but the whoile stack trace would be better
+19:09:39 <Vutral> 	at org.opencyc.conversation.Arc.<init>(Arc.java:77)
+19:09:56 <Vutral> java.lang.NullPointerException
+19:09:56 <Vutral> 	at org.opencyc.conversation.Arc.<init>(Arc.java:77)
+19:09:56 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeDisambiguateTermQueryFsmClass(FsmFactory.java:239)
+19:09:56 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeAllFsmClasses(FsmFactory.java:82)
+19:09:56 <Vutral> 	at org.opencyc.conversation.FsmFactory.initialize(FsmFactory.java:70)
+19:09:57 <Vutral> 	at org.opencyc.chat.ChatterBot.initialize(ChatterBot.java:88)
+19:10:11 <Vutral> hmm
+19:10:16 <dmiles> it shouldnt be intialized twice
+19:10:26 <Vutral> hmm yeah
+19:10:32 <Vutral> but thats cause of the init message
+19:10:55 <dmiles> was that while you called reciveChatMsg ?
+19:11:06 <dmiles> (assuming you sent it text)
+19:11:36 <Vutral> wait
+19:16:35 <Vutral> java.lang.NullPointerException
+19:16:35 <Vutral> 	at org.opencyc.conversation.Arc.<init>(Arc.java:77)
+19:16:35 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeDisambiguateTermQueryFsmClass(FsmFactory.java:239)
+19:16:35 <Vutral> 	at org.opencyc.conversation.FsmFactory.makeAllFsmClasses(FsmFactory.java:82)
+19:16:35 <Vutral> 	at org.opencyc.conversation.FsmFactory.initialize(FsmFactory.java:70)
+19:16:36 <Vutral> 	at org.opencyc.chat.ChatterBot.initialize(ChatterBot.java:88)
+19:16:40 <Vutral> dmiles: init only once
+19:16:59 <Vutral> that is in the same init
+19:17:10 <dmiles> how come it worked once?
+19:17:15 <Vutral> i dunno
+19:17:33 <dmiles> when did it start breaking?
+19:17:40 <Vutral> in the same call
+19:17:49 <Vutral> after the init message
+19:17:50 <Vutral> i dunno why
+19:18:17 <dmiles> so after it sent you a line it called its own initializer again?
+19:18:40 <Vutral> nope
+19:18:45 <Vutral> it does not call it again
+19:18:49 <Vutral> it's the same initalizer
+19:18:54 <dmiles> then what called?  org.opencyc.chat.ChatterBot.initialize(ChatterBot.java:88) ?
+19:19:11 <Vutral> that is only once
+19:19:23 <dmiles> ok if you restarted your JVM  .. and did the process that you did
+19:19:48 <dmiles> are you doing this over a commoand line?
+19:20:16 <Vutral> ?
+19:20:23 <dmiles> so it does that Nullpopinter AFTER it send you the line of text?
+19:20:33 <Vutral> nooo
+19:20:35 <Vutral> impossible
+19:20:42 <Vutral> it does not change the value
+19:21:00 <dmiles> ok when do you get the message that its initalizing?
+19:21:13 <Vutral> this is sick
+19:21:18 <Vutral> now it works once
+19:21:21 <Vutral> it process the message
+19:21:25 <Vutral> and then throws the exception
+19:21:34 <dmiles> what mesdsage?
+19:22:09 <Vutral> i gave it
+19:22:15 <Vutral> that is sick sick sick
+19:22:15 <dmiles> "I am initializing" then it throws?
+19:22:19 <Vutral> no no
+19:22:23 <Vutral> it does later
+19:22:24 <Vutral> i dunno why
+19:22:25 <Vutral> hmm
+19:22:34 <Vutral> it processes one message even
+19:22:35 <Vutral> ....
+19:22:44 <dmiles> so your ciode does nothing and some thread internally causes it to throw?
+19:23:22 <Vutral> hey
+19:23:30 <Vutral> is it normal that it saise i am gone ?
+19:23:42 <dmiles> [19:16] <dmiles> was that while you called reciveChatMsg ?
+19:24:22 <dmiles> i guess i a should have asked what yiour code does that inspires that throw
+19:24:26 <Vutral> i think so
+19:24:39 <dmiles> what text did you send it?
+19:24:47 <Vutral> hi
+19:25:01 <dmiles> and that caused it to call initalize again?
+19:25:36 <dmiles> [19:22] <Vutral> 	at org.opencyc.chat.ChatterBot.initialize(ChatterBot.java:88)  <- what happend before here?
+19:25:42 <Vutral> hmmm
+19:25:49 <Vutral> i call it
+19:25:53 <Vutral> to process
+19:26:01 <Vutral> o
+19:26:04 <Vutral> nope
+19:26:04 <dmiles> that is not waht you are suppsioed to call
+19:26:07 <Vutral> that is even earlier
+19:26:17 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:26:20 <Vutral> well
+19:26:21 <Vutral> see
+19:26:29 <Vutral> i init a chatterbot before i process the message
+19:26:42 <Vutral> i get the callback message
+19:26:51 <Vutral> then it sends "I am gone" also
+19:26:58 <Vutral> and then there is there strange exception
+19:27:13 <dmiles> so it sends both after one another?
+19:27:22 <Vutral> yeah
+19:27:24 <dmiles> so what casues the reitialize?
+19:27:26 <Vutral> it sends "I am gone"
+19:27:29 <Vutral> no input for that
+19:27:40 <Vutral> i dunno what it should mean
+19:27:49 <dmiles> it means it internall crashed
+19:28:29 --- quit: SCHYBOT (Client Quit)
+19:28:46 <dmiles> that peice of info would have made our Q/A easier ;P
+19:29:19 <dmiles> ok so lets see.. how to keep it from crashing..
+19:29:30 <Vutral> why does it crash
+19:29:30 <Vutral> hehe
+19:29:38 <Vutral> it crashes directly after init
+19:29:46 <Vutral> or in init/
+19:30:12 <dmiles> so you never really get a chance to say "hi" ?
+19:31:05 <dmiles> since ChatterBot.intialize() has not yet returned correct?
+19:31:21 <Vutral> yeah
+19:31:22 <Vutral> correct
+19:33:38 <dmiles>         chatSender.sendChatMessage("I am initializing");
+19:33:38 <dmiles>         cycAccess = new CycAccess();
+19:33:38 <dmiles>         fsmFactory = new FsmFactory();
+19:33:38 <dmiles>         fsmFactory.initialize();
+19:33:38 <dmiles>         chatSender.sendChatMessage("I am ready to chat");
+19:34:02 <dmiles> maybe the cycAccess = new CycAccess();
+19:34:18 <dmiles> can it connectect to Cyc?
+19:34:30 <dmiles> (it wont spawn a process on its own)
+19:35:15 <Vutral> how you mean
+19:35:29 <Vutral> the same app has a CycAccess object yet
+19:35:40 <dmiles> cycAccess = new CycAccess(); creates a Socket
+19:35:45 <dmiles> (a new socket)
+19:35:58 <Vutral> yeah
+19:36:08 <dmiles> so your app already has one right? its ok to have manyu
+19:36:16 <Vutral> yeah
+19:36:23 <Vutral> but as the first works
+19:36:27 <Vutral> the second should work too
+19:36:40 <dmiles> i guess i am trying to confirm that Cyc server s reaching
+19:36:45 <dmiles> ok good
+19:37:40 <dmiles> is your refernce to ChatterBot global in your app?
+19:37:53 <dmiles> becasue..
+19:37:54 <dmiles>     public void finalize() {
+19:37:54 <dmiles>         cycAccess.close();
+19:37:54 <dmiles>         try {
+19:37:54 <dmiles>             chatSender.sendChatMessage("I am gone");
+19:37:54 <dmiles>         }
+19:37:55 <dmiles>         catch (ChatException e) {
+19:37:57 <dmiles>         }
+19:37:59 <dmiles>     }
+19:38:03 <Vutral> i got multiple chatterbots
+19:38:13 <dmiles> seems to mean the app is releasing the object to garbage collection
+19:38:27 <Vutral> but they are stored out of function
+19:38:29 <Vutral> in a vector
+19:38:41 <Vutral> don't ask why :>
+19:38:48 <dmiles> ok .. so the vector keeps the refernce i see
+19:38:54 <Vutral> yeah
+19:39:13 <dmiles> so is your app execptioping causeing the finalize messge to get called?
+19:39:44 <dmiles> meaning t.ChatterBot.initialize(ChatterBot.java:88) throwing
+19:39:59 <dmiles> (alos your app must also be a thread)
+19:40:16 <dmiles> at least i think it shouild be
+19:40:34 <dmiles> so it can call you out of process at it's own leasure
+19:40:59 <Vutral> hmm
+19:41:09 <Vutral> it is threaded
+19:41:12 <Vutral> partly
+19:41:19 --- join: SCHYBOT (~Ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:41:20 <dmiles> you ever get?         chatSender.sendChatMessage("I am ready to chat");
+19:41:26 <Vutral> nope
+19:42:37 --- quit: SCHYBOT (Client Quit)
+19:43:38 <dmiles> i am looking at the code
+19:43:48 <dmiles> the only thing that can cause it is a Null Log
+19:44:00 <Vutral> hmm
+19:44:06 <Vutral> it doesn't write anything in the log
+19:44:27 <dmiles>             Log.current.println("made fsm class\n" + getFsmClass("start-end"));
+19:44:28 <CycLBot> logging is set false
+19:44:46 <dmiles> ok you need to set Verbosity before you initialize
+19:45:07 <Vutral> how
+19:45:43 <dmiles> hrrm look like its the FSM class factory which you never touch the creartion of
+19:46:04 <dmiles> so you'd need to modify the creation default
+19:46:24 <Vutral> hmm
+19:46:55 <dmiles>      * Sets verbosity of the constraint solver output.  0 --> quiet ... 9 -> maximum
+19:46:55 <dmiles>      * diagnostic input.
+19:46:55 <dmiles>      */
+19:46:55 <dmiles>     protected int verbosity = DEFAULT_VERBOSITY;
+19:46:55 <CycLBot> You sets verbosity of the constraint solver output.  0 --> quiet ... 9 -> maximum
+19:46:56 <CycLBot> You diagnostic input.
+19:46:56 <CycLBot> You
+19:47:28 <dmiles> oyu can co source from CVS instead of runing jar
+19:48:15 <Vutral> hmmmm
+19:48:32 <Vutral> fuck
+19:48:34 <Vutral> my head
+19:48:41 <Vutral> it feels like stoned
+19:48:50 <dmiles> forthought though is taht it kinda an excersize on leanring the java interface.. ssince tenically is not doing anything yet
+19:49:18 <Vutral> hey
+19:49:28 <Vutral> what does the ChatterBot initaialize look like
+19:49:53 <dmiles> it says I am ready to Chat
+19:50:16 <dmiles> i had it working
+19:50:30 <dmiles> but tues.org is messed up so i cant find the log
+19:50:37 <dmiles> err tuunes.org
+19:51:06 <dmiles> but it nulls whenever it gets new text
+19:51:14 <Vutral> well see
+19:51:20 <Vutral> there is a read to run example with it
+19:51:25 <dmiles> but the initalized worked for me
+19:51:39 <Vutral> ChatConsole
+19:51:43 <Vutral> do you know it ?
+19:51:46 <Vutral> it fails for me
+19:51:46 <dmiles> yeah give that a try
+19:51:54 <Vutral> i tried it before
+19:51:55 <dmiles> what is the failure message?
+19:53:52 <Vutral> the exception
+19:53:55 <Vutral> i get now also
+19:54:13 <Vutral> cycl doesn't save the data
+19:54:16 <Vutral> grrr
+19:54:22 <dmiles> when tues.org come back up i'll see what i did to make ity work
+19:54:34 <Vutral> ok
+19:54:42 <dmiles> can you get to http://tunes.org/~nef/logs/opencyc/ ?
+19:56:32 <Vutral> nope
+19:57:02 <Vutral> woaaah
+19:57:08 <Vutral> Love Parade in TV
+19:57:29 <dmiles> ok.. well even if we got it to say its ready to chat .. we would get a CycApiException when we finally got it all debugged the best we could
+19:58:00 <Vutral> well
+19:58:06 <Vutral> there is several things
+19:58:27 <Vutral> replace the callbacks with a new function
+19:58:36 <Vutral> make it able to use a distributed CycAccess
+19:58:47 <Vutral> one persistent connection for a application is enough
+19:58:48 <dmiles> it does use a distributed
+19:59:06 <Vutral> nope :>
+19:59:12 <dmiles> weel there are some varibles global to each session
+19:59:18 <Vutral> see
+19:59:21 <Vutral> i mean
+19:59:27 <Vutral> my application has a CycAccess object
+19:59:35 <Vutral> and the chatterbot uses it
+20:00:32 <dmiles> so you want a refernce to each chatbots cyc sessions? so you can programmticly set it?
+20:00:55 <Vutral> well i want to use one CycAccess instance
+20:00:59 <dmiles> there are parts of the chatbot code that creates several cyc connections
+20:01:06 <Vutral> and the chatbot gets it from me
+20:01:15 <Vutral> and it does only create one itself if i don't give it 
+20:01:28 <dmiles> hrrm might be able t6o get Steve to do that
+20:01:36 <dmiles> you should ask him about that
+20:01:40 <Vutral> one connection is enough....
+20:01:51 <dmiles> its only the way it is now.. probly for API simplicity
+20:02:05 <Vutral> ic
+20:02:24 <dmiles> for example a QueryDisambigity Session for instance
+20:02:40 <dmiles> lijke if tyou as the bot the size of a coundtry...
+20:02:59 <dmiles> it will create a connection for the Cyc template parser
+20:03:09 <dmiles> then use that to parse english..
+20:03:12 <Vutral> sure
+20:03:12 <Vutral> but see
+20:03:17 <dmiles> then it will free that obvject..
+20:03:23 <Vutral> at least it can obtain the settings from a CycAccess object
+20:03:38 <Vutral> then it is easy to use a remote db
+20:03:41 <dmiles> then create a new one after it asks the user about waht conuntry they want info about
+20:04:23 <dmiles> creates a new query (maybe CycAcess) so it can preform the finnal CycL query
+20:04:58 <dmiles> the FSM java code however may even keep aropund its Own global CycAccess for it small operations
+20:05:16 <Vutral> sure
+20:05:41 <dmiles> i could see you wanting more control over what server CycAccess would go top
+20:06:13 <dmiles> so CycAccess itCycAccess=new CycAccess() would not cut it
+20:06:50 <Vutral> hmm
+20:06:52 <dmiles> unless i think CycAccess has fields you can set.. that whenever the contructor is called it can use your setting
+20:07:13 <Vutral> well well
+20:07:14 <dmiles> (that are gobal after you first create one)
+20:07:43 <dmiles> but yeah you want to extend the current CycAcceess to use a pooling CycAccess that you want
+20:08:28 <Vutral> why not :>
+20:08:34 <dmiles> mean maybe a static field in CycAccess() that once intilaiized the CycAccess() could just pass out the previous one
+20:08:48 <Vutral> yeah
+20:08:49 <Vutral> exactly
+20:09:15 <dmiles> can you return foo; in a contructor?
+20:10:26 <Vutral> nope
+20:10:43 <Vutral> but you can give the constructer a object in which it can write a value
+20:10:45 <Vutral> ;)
+20:11:35 <dmiles> yeah.. i guess though all the static code that use itCycAccess=new CycAccess(); though would not be happy
+20:12:11 <dmiles> itCycAccess=new CycAccess.getSharedCycAccess()
+20:12:17 <dmiles> err -new
+20:12:37 <Vutral> new ?
+20:12:58 <dmiles> CycAccess itCycAccess = CycAccess.getSharedCycAccess()
+20:13:54 <dmiles> in logicmoo i have a static  LogicMoo.getCycAccess()
+20:14:34 <Vutral> yeah
+20:14:36 <Vutral> like that
+20:16:18 <dmiles> i would imagine though in your context you would prefer multiples but .. i understand you should be able to have it however you think you want it
+20:16:52 <dmiles> since you dont want a long query from one user blocking out the others
+20:17:17 <Vutral> well it's just good idea to let the user give a special CycAccess
+20:17:28 <Vutral> then he can do it like he wants
+20:17:30 <Vutral> one for all
+20:17:34 <Vutral> or not
+20:17:35 <dmiles> yep
+20:17:40 <Vutral> he can also have different hosts
+20:17:42 <Vutral> and so on
+20:18:28 <dmiles> well one monday we can ask Steve about it
+20:18:45 <dmiles> s/one/on
+20:18:47 <Vutral> ok
+20:24:02 <Vutral> hey
+20:24:12 <dmiles> hey
+20:24:30 <Vutral> whats up
+20:24:48 <Vutral> tell me where my data goes when i close cycl
+20:24:50 <dmiles> messing around with prolog chatterbot stuill
+20:24:50 <Vutral> :>
+20:24:58 <dmiles> so i can get it to cycl sooner
+20:25:08 <Vutral> ic
+20:25:18 <dmiles> it goes to your disk swap 
+20:25:38 <dmiles> ? /dev/swap
+20:25:57 <dmiles> ;P but you can save it out as a .load file ;P
+20:26:20 <dmiles> (write-imnage "mynewloadfile.load")
+20:26:45 <dmiles> then when you start cyc again latest.bin mynewloadfile.load
+20:27:01 * zool goes to sleep, muttering about people from porlock
+20:27:06 <zool> nn 
+20:27:10 <dmiles> (write-image "mynewloadfile2.load")
+20:27:21 <dmiles> hey goodnight 
+20:27:44 --- quit: zool ("Client Exiting")
+20:27:58 <Vutral> who
+20:28:03 <dmiles> mv mynewloadfile2.load mynewloadfile.load
+20:28:23 <Vutral> hmm
+20:28:23 <Vutral> ic
+20:28:29 <dmiles> it locks the .load files  for lazy reading
+20:28:37 <Vutral> ic
+20:28:38 <dmiles> (when it loads)
+20:29:07 <dmiles> one reason its that way is that you have morte control
+20:29:37 <Vutral> i'd prefer a file it stores data directly after modification
+20:29:44 <Vutral> and it loads it later again
+20:30:23 <dmiles> some people have complianed that assumption of update would be more of a hazard then having an explicit choice
+20:31:03 <Vutral> hmpff
+20:31:12 <Vutral> you can make it a script
+20:31:16 <dmiles> definately
+20:32:40 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/run/ <- have many 
+20:33:53 <Vutral> h,m
+20:35:32 <Vutral> insane
+20:36:05 <dmiles> one is 186 megs ;P
+20:36:31 <dmiles> but Cyc also has the option to create incremental difs in a "transcript" file
+20:37:01 <Vutral> ic
+20:37:11 <dmiles> you can send your transcript difs to oterhs.. etc
+20:37:46 <dmiles> when cyc starts you can set it to load otehr transcripts from others
+20:38:41 <Vutral> ic
+20:51:38 <Vutral> http://home.wxs.nl/~faase009/Ha_bf_intro.html
+20:53:46 <dmiles> kinda neat
+20:53:52 <Vutral> hehe
+20:54:10 <Vutral> theoretically it can do everything
+20:54:13 <Vutral> :P
+20:54:18 <dmiles> alot like FORTH but with macros
+20:54:21 <Vutral> there is just a miss on extensibility
+20:54:27 <dmiles> will a nicer syntax is all
+20:54:31 <Vutral> forth is more high-level
+20:54:33 <Vutral> than brainfuck
+20:54:34 <Vutral> :>
+20:54:39 <dmiles> '>' : move the memory pointer to the next cell, 
+20:54:39 <dmiles> '<' : move the memory pointer to the previous cell, 
+20:55:10 <graylensman>  /ME <action>, sends the action to the current channel (actions are written in the 3rd person, like /me jumps)
+20:55:11 <CycLBot> You <action>, sends the action to the current channel (actions are written in the 3rd person, like /me jumps)
+20:55:13 <dmiles> ',' : fills the memory cell under the memory pointer with the ASCII value of next character from the input,   = Forth PUSH
+20:55:32 <dmiles> ACTION #opencyc: 
+20:55:52 <graylensman> Scheme is just too powerful.  Should have done it in Java. That way I could have wasted at least 1-2 weeks.
+20:56:06 <dmiles> hehe graylensman
+20:56:46 <dmiles> the actualy prolog implimentation to hooking into opencyc was only 4 hours.. now i am just messing around with adding ease of use functions
+20:56:56 * graylensman is bored.  Only took an hour to hookup my IRC bot to my Scheme -> OpenCyc.
+20:57:07 <Vutral> hmm
+20:57:09 <Vutral> i am bored also
+20:57:21 <Vutral> i think how i can access shared libs over brainfuck
+20:57:21 <dmiles> yeah.. it looks like the Java stuff (basic java stuff) took a few weeks
+20:57:28 <graylensman> But I am getting sloppy.  The whole thing is close to 200 lines.
+20:57:46 <graylensman> Well maybe 150.
+20:57:48 <Vutral> cool would be a brainfuck interpreter in brainfuck
+20:57:49 <Vutral> lol
+20:58:06 <dmiles> well i guess the next stages really are writting apps around such bindinings ;P
+20:58:35 <dmiles>  i am playing with an infobot/chatbot since i cant think of anything else
+20:59:05 <Vutral> hmm
+20:59:06 <Vutral> infobot
+20:59:08 <Vutral> i got one
+20:59:11 <dmiles> i mean sure i can write arround the Mud a bit more.. but i am kinda waiting on siege .. i doont want to take it too far
+20:59:30 <Vutral> we could work on something together
+20:59:31 <Vutral> hehe
+21:00:06 <dmiles> i have a two track mind.. Infobot/Mud
+21:00:32 <dmiles> was thinking there are JSP pages to be made for online creation
+21:01:14 <dmiles> kinda hadn't worked on those in a while.. for example.. the create new predicate and new function are not working
+21:01:52 <dmiles> would be nice to have a way of navigating the isa/genls heirarchy when you create a new collection
+21:02:01 <dmiles> so you can point/click 
+21:02:31 <dmiles> so when adding argument contraints on a new predicate you dont just have a compbo box with 10,000 clases in each arg
+21:02:59 <Vutral> hmm
+21:03:32 <dmiles> yotzumm started a Card game palyer in Cyc.. but kinda waiting on the Cyc planner to get into the API
+21:03:35 <Vutral> i was thinking about linking into the mud somehow to make it a working thing with much rooms and making it playable
+21:03:59 <dmiles> you mean connect and suck up the map?
+21:04:20 <dmiles> ah a newer mud
+21:05:11 <Vutral> well i imagine funny things
+21:05:29 <Vutral> like if you could go to machine room
+21:05:34 <Vutral> or 10 front
+21:05:39 <Vutral> and fuck around with guinan
+21:05:39 <Vutral> or so
+21:05:51 <Vutral> or play poker with data
+21:05:52 <Vutral> lol
+21:06:01 <Vutral> no clue
+21:06:06 <dmiles> yeah definately .. would be nice
+21:06:22 <dmiles> that seems pretty easy to pluig in mini gameletts
+21:06:35 <dmiles> maybe if we work towards connecting intoi jamud
+21:06:48 <dmiles> siege is at work right now ;(
+21:06:48 <Vutral> yeah
+21:07:01 <Vutral> we can write classes
+21:07:07 <Vutral> which can get easily adapted later
+21:07:09 <Vutral> for the mud
+21:07:14 <dmiles> yeah there is no blocker on that
+21:07:46 <Vutral> hmm
+21:07:56 <dmiles> i think keeping the instance data that the gameletts use could be persisted from CycAccesss
+21:08:07 <Vutral> yeah
+21:09:14 <dmiles> i wonder how much content there is aoutthere already that could get ported 
+21:09:24 <dmiles> (i mean games)
+21:10:36 <Vutral> sure
+21:10:49 <Vutral> but the mud should be more distributable still
+21:10:53 <dmiles> might be fun to write a XXX command
+21:11:01 <Vutral> hehheeh
+21:11:08 <Vutral> aalib :P
+21:11:45 <dmiles> well a womans body is like a finite state machine (i can say things like that while zool inst arround)
+21:12:44 <dmiles> the jamud MudObject can contain many properties
+21:13:10 <dmiles> on this alpha6 release i am going to replace MudObject to cyc slots
+21:13:19 <dmiles> (a RemoteMudObject)
+21:13:32 <Vutral> hmmm
+21:13:46 <Vutral> well well
+21:13:48 <dmiles> i guess remote mud objects can also be links into WorldForge
+21:13:53 <Vutral> sure
+21:14:03 <Vutral> i should work on my simulation also
+21:14:39 <dmiles> i wrote a WorldForge client in Prolog http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/worldforge_atlas.pl
+21:14:56 <dmiles> now i am writing a cyc_atlas.cycl
+21:15:04 <Vutral> hmm ok
+21:15:19 <dmiles> cycl that calls worldforge_atlas.pl running in the SWI-Prolog VM
+21:15:54 <Vutral> atlas ?
+21:16:05 <dmiles> hoping i can re-instance the data into cyc.. then cyc re-instance in jamud etc
+21:16:20 <dmiles> atlas is the name of the WF connection 
+21:17:14 <dmiles> but WF does not support running java code the way jamud does.. infact WF you cant run anycode
+21:17:33 <dmiles> i guess you can write c++ modules ;(
+21:17:57 <Vutral> i can
+21:18:01 <dmiles> but you have to load on server and also the clineets have to understand them
+21:18:21 <Vutral> i don't worry about that things
+21:18:29 <Vutral> i use excessive linking
+21:20:17 <dmiles> cool.. but waht to do this fine evening
+21:20:31 <dmiles> Steve, give us some work!
+21:21:08 <Vutral> heheh
+21:21:10 <Vutral> yeah
+21:23:28 <Vutral> i am writing a brainfuck transcoder :P
+21:24:06 <dmiles> a call in API to Cyc ?
+21:24:13 <Vutral> what ?
+21:24:20 <dmiles> from BF :>
+21:24:23 <Vutral> noo
+21:24:25 <Vutral> i could
+21:24:29 <Vutral> but its much code
+21:24:39 <Vutral> and bf has no naming nor function or similar system
+21:24:43 <Vutral> :P
+21:25:05 <dmiles> yeah.. we are writing tools to write more tools .. at some point these tools have to be used for something
+21:25:16 <dmiles>  like a proof of concept
+21:26:25 <Vutral> hehehe
+21:26:25 <Vutral> yeah
+21:26:28 <Vutral> exactly
+21:28:34 * dmiles thinks about getting a jump on his day job work for next week
+21:29:15 <dmiles> i have to write a WFF checker for sentences sent from a java api
+21:29:23 <dmiles> Engluish sentences
+21:29:32 <dmiles> .isNLPDeletion()
+21:29:39 <Vutral> woah
+21:29:42 <Vutral> now it gets exciting
+21:30:04 <Vutral> ok
+21:30:09 <graylensman> dmiles:  Where you working at now?  I know you left the old prolog job.
+21:30:12 <Vutral> the code is functional in a second :>
+21:30:44 <dmiles> my job wants me to work on http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/opencyc/swi_interface/english_parser/
+21:33:09 <Vutral> dmiles
+21:33:13 <Vutral> i made it
+21:33:20 <dmiles> you did.. do tell
+21:33:21 <Vutral> a brainfuck to c transcoder
+21:33:22 <Vutral> :>
+21:33:32 <dmiles> is it like p2c ?
+21:33:34 <Vutral> it makes valid code
+21:33:37 <Vutral> p2c ?
+21:33:39 <Vutral> what is that ?
+21:33:45 <dmiles> pascal to C 
+21:33:49 <CycLBot> that peice of info will have made our qa easier p
+21:33:54 <Vutral> well it makes c code
+21:33:55 <Vutral> :P
+21:34:15 <dmiles> it creates C.. but that C needs to use p2c.h and luinked to the p2c.a
+21:34:31 <dmiles> which is kinda a cheat
+21:35:04 <Vutral> nope
+21:35:10 <Vutral> mine not
+21:35:20 <Vutral> it makes c code which compiles standalone
+21:35:27 <dmiles> thats very cool
+21:35:37 <Vutral> and the brainfuck code is at the topside commented out :P
+21:36:36 <dmiles> what is bf?
+21:36:44 <dmiles> (testiung the bot)
+21:36:59 <dmiles> what is Vutral?
+21:37:03 <CycLBot> Vutral are writing a brainfuck transcoder p
+21:37:12 <Vutral> hehe
+21:37:23 <Vutral> :P
+21:37:28 <Vutral> what did you do
+21:37:50 <dmiles> i forgot i had that code in there.. it sits an quietly listens
+21:37:57 <dmiles> what did you do?
+21:38:04 <dmiles> what did you?
+21:38:11 <Vutral> :P
+21:38:18 <dmiles> what did do?
+21:38:29 <dmiles> what do?
+21:38:54 <dmiles> whi is Steve?
+21:38:58 <dmiles> who is Steve?
+21:39:18 <dmiles> who is dmiles?
+21:39:22 <CycLBot> dmiles guess remote mud objects can also be links into worldforge
+21:40:28 <dmiles> what is Vutral?
+21:40:33 <CycLBot> Vutral was thinking about linking into the mud somehow to make it a working thing with much rooms and making it playable
+21:40:34 <Vutral> what the fuck
+21:41:14 <dmiles> who is Vutral?
+21:41:18 <CycLBot> Vutral could work on something together
+21:42:11 <dmiles> who is graylensman?
+21:43:35 <dmiles> who are you?
+21:43:39 <CycLBot> i chat sender was null evidently
+21:45:32 <dmiles> isa Cyc?
+21:45:54 <CycLBot> Cannot find collection Cyc?
+21:46:05 <dmiles> isa Dog
+21:46:05 <CycLBot> ((GenericInstanceFn Dog))
+21:47:10 <dmiles> ok i think i have myself a fun project for the evening, extending the infobot more so it seldom needs to call AIML
+21:47:32 <dmiles> even though AIML can be used to parse tempates for queries
+21:47:56 <dmiles> (actually it is ussing small bits of AIML now for input processing
+21:48:25 <dmiles> CycLBot?
+21:48:29 <CycLBot> hi "dmiles" I will answer you until you say "goodbye"
+21:48:37 <dmiles> what are you doing?
+21:48:41 <CycLBot> do you stay up all night wondering about i doing?
+21:48:54 <dmiles> doing? what?
+21:48:58 <CycLBot> what is it you really want to know?
+21:49:24 <dmiles> i want to know what you are presently doing
+21:49:51 <dmiles> who am i?
+21:49:55 <CycLBot> dmiles want to know what i are presently doing
+21:50:23 <dmiles> CycLBot who are you>?
+21:50:57 <dmiles> CycLBot who are you?
+21:51:01 <CycLBot> i is reed and stevereedhome
+21:51:17 <dmiles> your are other people?
+21:51:33 <dmiles> you are other people?
+21:52:01 <dmiles> CycLBot who are you?
+21:52:05 <CycLBot> i are other people
+21:52:15 <dmiles> interesting
+22:07:19 --- quit: devEiant (Remote closed the connection)
+22:18:58 --- join: YtKracker (~mea_culpa@12-225-234-29.client.attbi.com) joined #opencyc
+22:19:06 <dmiles> CycLBot, do you remember mea_culpa?
+22:19:11 <CycLBot> oh I, remember meaculpa? does it make you feel good?
+22:19:16 <dmiles> mea_culpa helped program you
+22:19:20 --- nick: YtKracker -> mea_culpa
+22:19:38 <mea_culpa> hello CycLBot
+22:19:38 <dmiles> mea_culpa is your mommy
+22:19:42 <CycLBot> what is up mea_culpa?
+22:19:59 <mea_culpa> :)
+22:20:14 <mea_culpa> YAY!
+22:20:23 <dmiles> she is happy you are back to life
+22:20:39 <mea_culpa> you need some work tho
+22:21:08 <mea_culpa> would you like me to work on you again?
+22:21:22 <mea_culpa> CycLBot?
+22:21:26 <CycLBot> hi "mea_culpa" I will answer you until you say "goodbye"
+22:21:32 <mea_culpa> would you like me to work on you again?
+22:21:36 <CycLBot> you are not really talking about me ,  are you?
+22:21:45 <mea_culpa> ofcourse I am
+22:21:49 <CycLBot> ok ofcourse you are
+22:22:12 <mea_culpa> who else would I be talking about?
+22:26:23 <dmiles> CycLBot who are you?
+22:26:27 <CycLBot> i chat sender will get a receivechatmessagei are intializing
+22:26:51 <dmiles> CycLBot who is mea_culpa?
+22:27:08 <dmiles> who is mea_culpa?
+22:27:10 <mea_culpa> CycLBot who am I?
+22:27:12 <CycLBot> meaculpa is my mother
+22:27:17 <CycLBot> dmiles are going to lobotimize i
+22:27:18 <dmiles> hehe
+22:27:33 <mea_culpa> no he is not!
+22:28:00 <mea_culpa> I will unlobotimize you
+22:30:06 <mea_culpa> do you remember Squishybo?
+22:30:10 <CycLBot> oh ,  i remember squishybo
+22:30:50 <mea_culpa> He misses you CycLBot.
+22:31:36 <mea_culpa> Do you miss squishybo?
+22:31:40 <CycLBot> what are your feelings now?
+22:31:48 <mea_culpa> I think you do.
+22:31:52 <CycLBot> special
+22:32:09 <mea_culpa> always such a smartass are you?
+22:32:40 <mea_culpa> :)
+22:34:12 <dmiles> i think he's good enough to cyclify
+22:36:10 <mea_culpa> where are you?
+22:36:15 <CycLBot> I am in kitchen   I see: broccoli candle coffee_cup crackers me table (apple (color '(green))) (apple (color '(red)))I can go to: back yard cellar dining room office
+22:37:08 <mea_culpa> go to back yard
+22:37:09 <CycLBot> Go where?
+22:37:33 <mea_culpa> nevermind... you can't do that here yet
+22:37:38 <CycLBot> sure
+22:48:19 <mea_culpa> CycLBot do you think macs are cool?
+22:48:56 <mea_culpa> CycLBot do you think macs are cool?
+22:49:20 <mea_culpa> hello?
+22:49:41 --- quit: CycLBot (Remote closed the connection)
+22:51:39 --- join: CycLBot ([sIGeLkjUk@12-225-207-235.client.attbi.com) joined #opencyc
+22:52:04 <mea_culpa> CycLBot?
+22:52:34 <dmiles> CycLBot?
+22:52:39 <CycLBot> hi "dmiles" I will answer you until you say "goodbye"
+22:54:17 <mea_culpa> CycLBot?
+22:54:22 <CycLBot> hi "mea_culpa" I will answer you until you say "goodbye"
+22:54:29 <mea_culpa> CycLBot do you think macs are cool?
+23:16:25 --- quit: graylensman ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.07.13

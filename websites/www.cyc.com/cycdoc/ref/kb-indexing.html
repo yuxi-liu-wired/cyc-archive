@@ -1,0 +1,528 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON kb-indexing.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>KB Term Indexing in Cyc&reg;</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>KB Term Indexing in Cyc&reg;</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  See <a href=/cycdoc/legal-terms.html>Terms of Usage.</a><br>
+
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+<hr>
+
+<p>
+
+All assertions in the KB point to Cyc terms via the CNF
+representation of their formulas.  The purpose of all the indexing
+hanging off of terms in the KB is to provide pointers in the other
+direction, from a term to all the assertions mentioning it.  To assist
+in inference, the indexing is arranged to provide efficient access to
+groups of assertions which use a term in a similar fashion.
+
+<p>
+There are two classes of indexed terms: constants and assertions.  
+
+<p>
+If an indexed term has assertions stated about it, then that term has a pointer
+to an index-structure which has a set of slots for holding the
+different classes of indexing structres.
+
+<p>
+Each index-structure has the following slots:
+
+<p>
+(a) arg1, arg2, arg3, arg4, arg5, arg0<br>
+These slots are used in indexing ground atomic formulas involving the
+term.
+
+<p>
+(b) neg, pos<br>
+These slots are used in indexing non-gafs (rules) involving the term.
+
+<p>
+(c) ist<br>
+If the term is a microtheory, this slot is used to index rules stated in
+that microtheory.
+
+<p>
+(d) other<br>
+This slot is used to index all the "none of the above" uses of the
+constant.
+
+<p>
+The format of the indexing for these slots are now discussed in detail.
+
+<p>
+<h3>Argument Positions 1-5 (arg1, arg2, arg3, arg4, arg5)</h3>
+
+<p>
+Consider an index for the constant #$Foo. These slots on the index are
+used to index all the ground atomic formulas involving exactly #$Foo
+in position 1 - 5, respectively, of each formula.  The indexing occurs
+in three layers:
+
+<p>
+layer 1 : ( &lt;count&gt; . &lt;pred-tree&gt; ) or NIL
+
+<p>
+&lt;count&gt; is total number of assertions indexed within &lt;pred-tree&gt;<br>
+&lt;pred-tree&gt; is a binary tree where for each node:<br>
+-tag is the predicate used in all gafs in the layer 2 indexing<br>
+-state is layer 2 indexing
+
+<p>
+layer 2 : ( &lt;count&gt; . &lt;mt-tree&gt; ) 
+
+<p>
+&lt;count&gt; is total number of assertions indexed within &lt;mt-tree&gt;<br>
+&lt;mt-tree&gt; is a binary tree where for each node:<br>
+-tag is the local microtheory for all gafs in the layer 3 indexing<br>
+-state is layer 3 of indexing
+
+<p>
+layer 3 : ( &lt;count&gt; . &lt;assertions&gt; )
+
+<p>
+&lt;count&gt; is total number of assertions in &lt;assertions&gt;<br>
+&lt;assertions&gt; is a list of assertions
+
+<p>
+Example:  a gaf assertion such as 
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a> <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>) in #$AnimalTaxonomyMt
+</pre>
+
+would be indexed using these slots as follows:
+
+<pre>
+<a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a>
+ index-struc
+  arg1 slot (layer 1)
+   <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> node (layer 2)
+     #$AnimalTaxonomyMt node (layer 3)
+       list of assertions, including above
+
+On <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>
+ index-struc
+  arg2 slot (layer 1)
+   <a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> node (layer 2)
+     #$AnimalTaxonomyMt node (layer 3)
+       list of assertions, including above
+</pre>   
+
+<h3>Argument Position 0 (arg0)</h3>
+
+<p>
+Consider an index for the predicate #$foo.  The slot arg0 on the index
+is used to index all the ground atomic formulas where #$foo is used as
+the predicate (i.e. arg 0).  The indexing occurs in two layers:
+
+<p>
+layer 1 : ( &lt;count&gt; . &lt;mt-tree&gt; ) or NIL
+
+<p>
+&lt;count&gt; is total number of assertions indexed within &lt;mt-tree&gt;<br>
+&lt;mt-tree&gt; is a binary tree where for each node:<br>
+-tag is the local microtheory for all gafs in the layer 2 indexing<br>
+-state is layer 2 of indexing
+
+<p>
+layer 2 : ( &lt;count&gt; . &lt;assertions&gt; )
+
+<p>
+&lt;count&gt; is total number of assertions in &lt;assertions&gt;
+&lt;assertions&gt; is a list of assertions
+
+<p>
+Example:  a gaf assertion such as 
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a> <a href=/cycdoc/vocab/biology-vocab.html#Dog>#$Dog</a> <a href=/cycdoc/vocab/biology-vocab.html#Animal>#$Animal</a>) in #$AnimalTaxonomyMt
+</pre>
+
+would be indexed using this slot as follows:
+
+<pre>
+<a href=/cycdoc/vocab/fundamental-vocab.html#genls>#$genls</a>
+ index-struc
+  arg0 slot (layer 1)
+   #$AnimalTaxonomyMt node (layer 2)
+     list of assertions, including above
+</pre>
+
+<h3>Negative and Positive (neg and pos)</h3>
+
+<p>
+Consider an index for the constant #$Foo.  These slots on the index
+are used to index all formulas involving #$Foo which are not ground
+atomic formulas.  The NEG slot is used to index those formulas in
+which the term appears in a negative literal.  The POS slot is used to
+index those formulas in which the term appears in a positive literal.
+
+<p>
+There are additional restrictions involving the use of NEG and POS:
+
+<p>
+(a) If #$foo is a predicate, then #$foo is used in the predicate
+position of a literal in all the assertions indexed via these slots.
+Also, the form of the literal involved is NOT one of those described
+in either (b) or (c) or (d) below.
+
+<p>
+(b) If #$Foo is a non-predicate function, then #$Foo is used in a
+literal of the form (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> ?varN (#$Foo ... )) in all the
+assertions indexed via these slots.
+
+<p>	
+(c) If #$Foo is a collection, then #$Foo is used in a literal of the
+form (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?varN #$Foo) in all the formulas indexed via these
+slots.
+
+<p>
+(d) If &lt;Foo&gt; is an assertion, then &lt;Foo&gt; is used in a literal of the
+form (<a href=/cycdoc/vocab/fundamental-vocab.html#abnormal>#$abnormal</a> &lt;whatever&gt; &lt;Foo&gt;) in all the formulas indexed via
+these slots.
+
+<p>
+To summarize, these slots are used to index the terms in the predicate
+position of literals of non-gafs except for the three special cases
+outlined above, in which a different term is indexed rather than the
+predicate.  
+
+<p>
+The indexing occurs in three layers:
+
+<p>
+layer 1 : ( &lt;count&gt; . &lt;mt-tree&gt; ) or NIL
+
+<p>
+&lt;count&gt; is total number of assertions indexed within &lt;mt-tree&gt;<br>
+&lt;mt-tree&gt; is a binary tree where for each node:<br>
+-tag is the local microtheory for all rules in the layer 2 indexing<br>
+-state is layer 2 of indexing
+
+<p>
+layer 2 : ( &lt;forward&gt; &lt;backward&gt; )
+
+<p>
+&lt;forward&gt;  is layer 3 indexing of forward assertions<br>
+&lt;backward&gt; is layer 3 indexing of backward assertions
+
+<p>
+layer 3 : ( &lt;count&gt; . &lt;assertions&gt; )
+
+<p>
+&lt;count&gt; is total number of assertions in &lt;assertions&gt;<br>
+&lt;assertions&gt; is a list of assertions
+
+<p>
+Example:  a backward rule such as 
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+ (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?PER <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>)
+  (<a href=/cycdoc/vocab/biology-vocab.html#mother>#$mother</a> ?PER ?MOM))
+ (<a href=/cycdoc/vocab/social-vocab.html#loves>#$loves</a> ?MOM ?PER)) in #$HumanSocialLifeMt
+</pre>
+
+would be indexed using these slots as follows:
+
+<pre>
+<a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>
+ index-struc
+  neg slot (layer 1)
+   #$HumanSocialLifeMt (layer 2)
+     backward (layer 3)
+      list of assertions, including above
+
+<a href=/cycdoc/vocab/biology-vocab.html#mother>#$mother</a>
+ index-struc
+  neg slot (layer 1)
+   #$HumanSocialLifeMt (layer 2)
+     backward (layer 3)
+      list of assertions, including above
+
+<a href=/cycdoc/vocab/social-vocab.html#loves>#$loves</a>
+ index-struc
+  pos slot (layer 1)
+   #$HumanSocialLifeMt (layer 2)
+     backward (layer 3)
+      list of assertions, including above
+</pre>
+
+<h3>ist</h3>
+
+<p>
+Consider an index for the microtheory #$FooMt.  This slot on the index
+is used to index all assertions which are locally asserted in mt
+#$FooMt.  However, if #$FooMt is a broad microtheory, i.e.
+
+<pre>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$FooMt <a href=/cycdoc/vocab/mt-vocab.html#BroadMicrotheory>#$BroadMicrotheory</a>)
+</pre>
+
+then it is not generally worth the overhead of maintaining this
+indexing.  Therefore, for broad microtheories, this index is not
+maintained and this slot is NIL.  The <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a> is the canonical
+example of a broad microtheory.  The index consists of a single layer:
+
+<p>
+layer 1 : ( &lt;count&gt; . &lt;assertions&gt; ) or NIL
+
+<p>
+&lt;count&gt; is total number of assertions in &lt;assertions&gt;<br>
+&lt;assertions&gt; is a list of assertions
+
+<p>
+Example: the gaf example used above would be indexed using this slot
+as follows:
+
+<pre>
+#$AnimalTaxonomyMt
+  index-struc
+   ist slot (layer 1)
+    list of assertions, including gaf
+</pre>
+
+<h3>Other</h3>
+
+<p>
+Consider an index for the constant #$Foo.  This slot (other) is used
+to index all remaining assertions, including both ground atomic
+formulas and rules, which involve #$Foo but are not covered by any of
+the indexing listed above.  Its primary purpose is to ensure that when
+a term is killed, all assertions referring to it are removed from the
+KB.  This "miscellaneous" indexing is currently not used in inference,
+so it merely has a single layer:
+
+<p>
+layer 1 : ( &lt;count&gt; . &lt;assertions&gt; )
+
+<p>
+&lt;count&gt; is total number of assertions in &lt;assertions&gt;<br>
+&lt;assertions&gt; is a list of assertions
+
+<p>
+Example:  a gaf assertion such as 
+
+<pre>
+(#$nounPrep #$Product-TheWord #$Of-TheWord (<a href=/cycdoc/vocab/actor-vocab-complete.html#products>#$products</a> :OBLIQUE-OBJECT :NOUN))
+in #$EnglishMt
+</pre>
+
+would be indexed using this slot as follows:
+
+<pre>
+<a href=/cycdoc/vocab/actor-vocab-complete.html#products>#$products</a>
+ index-struc
+  other slot (layer 1)
+   list of assertions, including gaf
+</pre>
+
+<h3>More Examples</h3>
+
+<p>
+
+<h4>Example #1 -- use of slots arg1-arg5, and arg0</h4>
+
+Assertion:
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Goolsbey <a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a>) in <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+</pre>
+
+This assertion is indexed as follows:
+
+<pre>
+#$Goolsbey 
+ index-struc
+   arg1 slot
+    <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>
+     <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+       list of assertions, including above
+
+<a href=/cycdoc/vocab/biology-vocab.html#Person>#$Person</a> 
+ index-struc
+  arg2 slot
+    <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>
+     <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+       list of assertions, including above
+
+<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a>
+ index-struc
+  arg0 slot
+   <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+     list of assertions, including above
+</pre>
+
+Note that the assertion is not indexed under the ist slot of the
+index-struc for <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a> since <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a> is a broad microtheory.
+
+<p>
+
+<h4>Example #2 -- use of slots neg, pos and ist</h4>
+
+Assertion (backward):
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+  (<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> ?AGT ?OBJ)
+  (<a href=/cycdoc/vocab/poss-transfer-vocab.html#possesses>#$possesses</a> ?AGT ?OBJ)) in #$PropertyMt
+</pre>
+
+This is canonicalized as follows in CNF form:
+
+<pre>
+neg-lits : ((<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a> ?var0 ?var1))
+pos-lits : ((<a href=/cycdoc/vocab/poss-transfer-vocab.html#possesses>#$possesses</a> ?var0 ?var1))
+</pre>
+
+The assertion is indexed as follows:
+
+<pre>
+<a href=/cycdoc/vocab/social-vocab.html#owns>#$owns</a>
+ index-struc
+  neg slot
+   #$PropertyMt
+     backward
+      list of assertions, including above
+
+<a href=/cycdoc/vocab/poss-transfer-vocab.html#possesses>#$possesses</a>
+ index-struc
+  pos slot
+   #$PropertyMt
+     backward
+      list of assertions, including above
+
+#$PropertyMt
+ index-struc
+  ist slot
+   list of assertions, including above
+</pre>
+
+<h4>Example #3 -- special cases of slots neg and pos</h4>
+
+Assertion (forward):
+
+<pre>
+(#$imples
+ (<a href=/cycdoc/vocab/fundamental-vocab.html#and>#$and</a>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> ?U (#$CaptialOf ?REGION))
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?REGION <a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>))
+ (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?U #$City-UnitedStates))  in #$USGeographyMt
+</pre>
+
+This is canonicalized as follows in  CNF form:
+
+<pre>
+neg-lits : ((<a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> ?var0 (#$CaptialOf ?var1))
+	    (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?var1 <a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>))
+pos-lits : ((<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?var0 #$City-UnitedStates))
+</pre>
+
+The assertion is indexed as follows:
+
+<pre>
+#$CaptialOf
+ index-struc
+  neg slot
+   #$USGeographyMt
+     forward
+      list of assertions, including above
+
+<a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>
+ index-struc
+  neg slot
+   #$USGeographyMt
+     forward
+      list of assertions, including above
+
+#$City-UnitedStates
+ index-struc
+  pos slot
+   #$USGeographyMt
+     forward
+      list of assertions, including above
+
+#$USGeographyMt
+ index-struc
+  ist slot
+   list of assertions, including above
+</pre>
+
+Note that it is not indexed under <a href=/cycdoc/vocab/fundamental-vocab.html#termOfUnit>#$termOfUnit</a> or <a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> because the
+form of these literals are the special cases which allow the indexing
+off of #$CaptialOf, <a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>, and #$City-UnitedStates.
+
+<h4>Example #4 -- use of other</h4>
+
+Assertion (backward):
+
+<pre>
+(<a href=/cycdoc/vocab/fundamental-vocab.html#implies>#$implies</a>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?MT <a href=/cycdoc/vocab/mt-vocab.html#Microtheory>#$Microtheory</a>)
+  (<a href=/cycdoc/vocab/mt-vocab.html#genlMt>#$genlMt</a> ?MT <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>)) in <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+</pre>
+
+The assertion is canonicalized as follows in CNF form:
+
+<pre>
+neg-lits : ((<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?var0 <a href=/cycdoc/vocab/mt-vocab.html#Microtheory>#$Microtheory</a>))
+pos-lits : ((<a href=/cycdoc/vocab/mt-vocab.html#genlMt>#$genlMt</a> ?var0 <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>))
+</pre>
+
+The assertion is indexed as follows:
+
+<pre>
+<a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+ index-struc
+  other slot
+   list of assertions, including above
+
+<a href=/cycdoc/vocab/mt-vocab.html#Microtheory>#$Microtheory</a>
+ index-struc
+  neg slot
+   <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+     backward
+      list of assertions, including above
+
+<a href=/cycdoc/vocab/mt-vocab.html#genlMt>#$genlMt</a>
+ index-struc
+  pos slot
+   <a href=/cycdoc/vocab/mt-vocab.html#BaseKB>#$BaseKB</a>
+     backward
+      list of assertions, including above
+</pre>
+
+<h3>Simple Indexing</h3>
+
+<p> 
+For terms which have relatively few assertions stated about them, the
+indexing-structure is in fact just a simple list of all assertions
+mentioning the term.  In this case, all the slots and indexing
+organization described above still exist but only in a virtual sense
+-- the indexing code is abstracted out in such a way as to be able to
+handle both the simple and complex cases.
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

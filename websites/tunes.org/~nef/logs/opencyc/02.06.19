@@ -1,0 +1,234 @@
+00:00:00 --- log: started opencyc/02.06.19
+00:25:21 --- join: Edison (~tweber@pD9E5A12D.dip.t-dialin.net) joined #opencyc
+01:37:12 --- nick: Edison -> Edison|away
+02:43:50 --- nick: Edison|away -> Edison
+05:53:41 --- join: damski (damski@CPE-144-132-178-3.nsw.bigpond.net.au) joined #opencyc
+06:10:16 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+06:14:28 <Yepster> will 0.7 support mt import/export in daml?
+06:28:46 <stevereed_home> We have DAML export via the java api running now.  I expect to get the DAML import code working by rel 0.7.
+06:30:43 <Yepster> :) getting a bit tired of copying all assertions to an import script.
+06:34:31 --- quit: johnd (Read error: 113 (No route to host))
+07:15:24 <stevereed_home> You will need CycML import/export for handling the full range of CycL grammar, and that will be included in rel. 0.7
+07:16:11 <Yepster> hmm uhh I meant cycml actually.
+07:17:17 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+07:31:40 --- quit: Yepster ()
+07:57:27 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+08:10:13 --- quit: Edison (Read error: 104 (Connection reset by peer))
+08:32:59 --- join: johnd_ (johnd@207.207.8.65) joined #opencyc
+08:32:59 --- quit: johnd (Read error: 104 (Connection reset by peer))
+08:42:08 --- join: mbrown (~mbrown@207.207.8.172) joined #opencyc
+08:42:15 <stevereed> hello mike
+08:42:16 <CycLBot> hello stevereed
+08:42:29 <mbrown> howdy
+08:42:40 <stevereed> hello-CycLBot
+08:43:31 --- part: mbrown left #opencyc
+09:51:28 --- join: johnd__ (johnd@207.207.8.65) joined #opencyc
+09:54:52 --- quit: johnd_ (Read error: 104 (Connection reset by peer))
+11:28:20 --- quit: aminorex (Read error: 110 (Connection timed out))
+12:20:12 * dmiles returns
+12:21:51 * dmiles fires back up the work he was doing and cant remmber all the questions he had but knows there are a couple API questions
+12:22:58 <dmiles> oh an intial *-TheWord sentence breaker
+12:23:42 <dmiles> i was guessing that some smaller parts of cyc NL understanding work.. maybe not all in concert but enough to leverage smaller parts
+12:24:37 <dmiles> any idea if there are any functions from cyc NLU that have made it into cycL or Subl function?
+12:26:46 <dmiles> i noticed things like  (BestNLPhraseOfStringFn "a biological parent of")  are dentational in structure (non evaluatable)
+12:27:55 <dmiles> i am looking to find what generation based predicates can be reused in some effort towards understanding as well
+12:29:08 <dmiles> hrrm nothing resultIsa EnglishWord
+12:30:52 <dmiles> what i am asking is help finding infernce modules that use things like (compoundString Eat-TheWord 
+12:30:53 <dmiles>        ("a" "meal") Verb HavingAMeal)
+12:32:31 <dmiles> so i dont have to do as much work in prolog.. i know how relations like that works and how to use them.. but i figure there must be some subl call that will unify "eat a meal" with #$HavingAMeal
+12:39:33 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+12:43:03 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+12:43:07 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+14:48:54 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:13:56 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+15:35:38 <dmiles> Ballot Question:   "Should the IEEE SUO WG commence work on OpenCyc, CycML, and CycL, with the intent of developing them into one or more candidate standards."
+15:36:11 <jlatour> What would a standard about OpenCyc define?
+15:36:35 <dmiles> hrrm .. i haven't seen any mail about what this could mean to the basic KE in cyc already if the group will want to make changes
+15:36:58 <jlatour> I can understand CycML and CycL, but OpenCyc is just the software, isn't it?
+15:37:00 <dmiles> it allows us to write Cyc aware applications easier 
+15:37:26 <dmiles> so we can see we wrote it to the IEEE spec.. and therefore Cyc will run our software
+15:37:45 <jlatour> What are you talking about?
+15:38:12 <dmiles> yes your correct opencyc is software :)
+15:38:30 <dmiles> i am not sure what "OpenCyc" means in that question
+15:38:48 <dmiles> perhaps the .6 ontology
+15:39:00 <dmiles> if so will the .7 ontogy be ok?
+15:39:42 <dmiles> right now the question is between SUMO's Entity vs. OpenCyc's Thing
+15:40:09 <jlatour> And what would you standardize? Make standard names for everything?
+15:40:26 <dmiles> i am talking about that the IEEE standards commitee needs to spec out an ontology to be used internationally
+15:40:44 <dmiles> so they are considering OpenCyc
+15:40:57 <jlatour> And how do you define 'ontology' in this case?
+15:41:01 <dmiles> standardizing Names basicly.. 
+15:41:24 <dmiles> and possibly getting everyone to agree what the names mean
+15:41:46 <jlatour> So you want to take things like #$#LivingThing or whatever it's called, and standardise those names?
+15:41:53 <dmiles> ontology would be the 'genls' hierachy and genlPreds
+15:42:10 <dmiles> and argIsas
+15:42:23 <jlatour> OK, but where does it end?
+15:43:01 <dmiles> #$#LivingThing <- yes to that question 
+15:43:13 <dmiles> hehe. yeah .. where does it end?
+15:43:34 <dmiles> since these hairachies need rules to explain how they work
+15:43:36 <jlatour> Because I think how you defined it, they'd have to take everything in the world
+15:44:34 <dmiles> yes.. well be able to draw the top 15 levels maybe of the entire world
+15:44:41 <jlatour> I don't think you should standardise the ontology through W3C/IEEE, but CycL and CycML might be good candidates
+15:45:30 <dmiles> yes some on the voting commitee agree that there should not be any names.. just structure
+15:45:57 <jlatour> The voting committee?
+15:46:07 <dmiles> like we should all decide there is a concept of heirarchy and context
+15:46:19 <dmiles> i am not a voting member
+15:46:27 <dmiles> i just am a subscriber
+15:46:36 <dmiles> http://suo.ieee.org
+15:46:37 <jlatour> Which committee?
+15:46:39 <jlatour> Ah
+15:46:41 --- quit: johnd__ ("Client Exiting")
+15:46:53 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+15:47:11 <jlatour> Hrm, that could be done
+15:47:17 <dmiles> opencyc moves forward SUO in my opiniopn
+15:47:31 <jlatour> Seems like it, at first glance
+15:47:52 <dmiles> well part of the commitee process could entail combing through everty rule and assertion in Cyc
+15:48:32 <dmiles> that would be fun.. especially when you watch teh commitee go though files and rule of less then 1% of opencyc
+15:48:56 <jlatour> Slowly?
+15:49:07 <dmiles> and how the meaning of one axiom can strectch for weeks
+15:49:16 <dmiles> yes its very slow and labourous
+15:49:55 <jlatour> The first 10 concepts are planned to be released in 2026?
+15:50:15 <dmiles> some people who vote think that whatever they decide one.. there is no reason opencyc _cant_ be included
+15:50:35 <dmiles> its at least a concrete working model
+15:51:04 <dmiles> yeahh heh.. but i think they only ahve until 20003
+15:51:10 <dmiles> err 2003
+15:51:38 <jlatour> 20003 is plenty of time :)
+15:51:59 <dmiles> one cyc axiom or gaf * 1 week.. not sure 
+15:57:47 <dmiles> :)
+15:58:24 <dmiles> interesting though.. i really hope they adopt opencyc.. otherwise seems there would be a continued floundering
+15:58:50 <jlatour> That proposal looks interesting
+15:59:03 <jlatour> http://ontology.teknowledge.com/
+16:00:13 <dmiles> definately.. i think someone could do a SUMO<->Cyc map
+16:01:01 <dmiles> i mean really do it.. see what each could gain from each other
+16:01:10 --- quit: johnd ("Client Exiting")
+16:01:42 * jlatour nods. "Sounds good, but also a lot of work"
+16:03:14 <dmiles> i tried to do a bit .. just genlsPreding things.. there where a cpouple name clashes
+16:03:42 <jlatour> Just name clashes?
+16:03:43 <dmiles> both have a Class .. but in sumo it means Collection 
+16:04:02 <jlatour> Ouch, that's a bad clash :)
+16:04:27 <dmiles> so if each constance was suffixed with _Sumo.. it makes things workable
+16:05:08 <jlatour> Namespaces.
+16:07:41 <dmiles> yeah.. when i loaded SUMO into cyc i found that it was able to gain things mainly from the bottem 25% of the file
+16:08:09 <dmiles> the upper half is structural into the descritions of CODE based rules in opencyc
+16:10:42 <dmiles> (not intentionally)
+16:10:50 <dmiles> but basic to logic
+16:12:16 <jlatour> Well I think it would indeed be useful to compare them. But now, now I'm going to bed.
+16:12:30 <dmiles> take care.. goodnight
+16:12:35 <jlatour> Goodnight
+16:12:44 <CycLBot> Take what?
+16:13:10 <dmiles> take care
+16:13:10 <jlatour> Take Care :)
+16:13:23 <CycLBot> Take what?
+16:13:37 <jlatour> take CycLBot
+16:13:39 <CycLBot> Take what?
+16:13:42 <dmiles> inv
+16:13:45 <CycLBot> cyc l bot
+16:13:51 <jlatour> inv?
+16:13:53 <dmiles> he now has himslef
+16:13:56 <CycLBot> cyc l bot
+16:14:01 <dmiles> inventory
+16:14:04 <jlatour> Ah
+16:14:08 <CycLBot> cyc l bot
+16:14:16 <dmiles> take Cyc
+16:14:21 <jlatour> Strange world, where people can take themselves
+16:14:23 <dmiles> inv
+16:14:23 <CycLBot> 2 items.
+16:14:24 <CycLBot> Cyc process
+16:14:24 <jlatour> drop bot
+16:14:25 <CycLBot> cyc l bot
+16:14:35 <jlatour> inv
+16:14:51 <CycLBot> Cyc process
+16:14:55 <dmiles> its seaching for 'bot'
+16:15:03 <dmiles> cool it found it
+16:15:09 <jlatour> inv
+16:15:12 <CycLBot> Cyc process
+16:15:17 <jlatour> Too quick? :)
+16:15:52 <dmiles> look 
+16:15:57 <dmiles> its now in the room
+16:15:58 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+16:15:59 <CycLBot> It isn't very wide, and the light beige walls have been rounded, making the  corridor an oval shape.  You notice a tiny computer panel embedded into the wall.
+16:15:59 <CycLBot> in - cont generic cyc l bot A Corridor
+16:16:01 <CycLBot> in - cont generic A portal westerly A Corridor
+16:16:01 <CycLBot> in - cont generic A portal South A Corridor
+16:16:02 <CycLBot> in - cont generic A portal East A Corridor
+16:16:03 <CycLBot> in - cont generic A portal north A Corridor
+16:16:04 <CycLBot> isa A Corridor indoor space
+16:16:06 <CycLBot> isa A Corridor inside surface
+16:16:07 <CycLBot> isa A Corridor geographical region
+16:16:17 <jlatour> Ehm, right. Thank you.
+16:17:15 <jlatour> Bed :)
+16:17:51 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+16:28:58 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+18:27:55 --- quit: Cobra ("[x]chat")
+19:59:10 --- quit: Psion ("sleep")
+20:03:59 --- join: V0|D (~void@CPE-203-51-30-182.nsw.bigpond.net.au) joined #opencyc
+20:04:21 <V0|D> hello
+20:04:22 <CycLBot> hello V0|D
+20:35:47 --- quit: V0|D ("BitchX: now with 42 percent more random quit messages!")
+21:30:31 * dmiles returns
+23:02:16 --- join: Edison (~tweber@pD9E5A12D.dip.t-dialin.net) joined #opencyc
+23:02:32 <dmiles> hi Edison
+23:03:18 <Edison> hi dmiles
+23:04:00 <Edison> Have you already started your new job ?
+23:04:08 <dmiles> start monday
+23:04:32 <dmiles> they are sending me my projects (2 of them)
+23:04:37 <Edison> oh! I hope we meet sometimes in irc, anyway :-)
+23:05:08 <dmiles> and then i propose hours and people needed.. then they authorize the bid
+23:05:34 <Edison> woha... be careful
+23:06:02 <dmiles> well not quite the number of people.. ussualy just me ;P
+23:06:24 <dmiles> but they have a couple other developers that can help me so i have to describe when they are needed
+23:06:24 <Edison> :-P
+23:06:50 <Edison> How do you coordinate work? Is there any web repository like Sourceforge?
+23:06:57 <dmiles> its intereting one project is an email router and the other a sentence breaker
+23:07:22 <dmiles> well they use VSS ;P
+23:08:00 <dmiles> which is fine its only a CVS.. not better or worse
+23:08:30 * Edison doesnt like VSS much
+23:08:55 <Edison> it has no branches or at least tags
+23:09:00 <Edison> imho
+23:09:28 <dmiles> we plan on using opencyc to keep our statistics for keyword frequency in order to comne up with probibilties of final destination of  email
+23:10:11 <dmiles> and then later get elabourate to ussing cyc to help us with content descisions 
+23:10:41 <dmiles> well yeah.. there are things to make VSS more useful
+23:10:49 <Edison> reasonable
+23:11:14 <dmiles> i guess there is a large demand for "email routing" out there
+23:11:36 <Edison> errm. not sure about that.
+23:11:51 <Edison> how do you call it? semantic routing?
+23:11:59 <dmiles> meaning companies have one mail box for issues .. and they want the right person to get the email
+23:12:26 <dmiles> so you find certain sentences like.. 
+23:12:50 <dmiles> i cant ?X 
+23:13:08 <dmiles> or you guys realy ?Profanity
+23:13:39 <dmiles> all types of measurements 
+23:13:55 <dmiles> no system works all the time
+23:14:19 <dmiles> but yes getting the semantic content is probly the most reliable way
+23:16:39 <dmiles> the hardest part about a project like this is giving a reasonable timeline (as in hours) building a java system talking with Cyc to do this should take
+23:17:40 <dmiles> i would think 1 week start before being able to really quote
+23:19:54 <dmiles> i am guessing right now a full month would not be out of line to have a system that checks a pop3 account and smtps the mail to the correct person
+23:20:02 --- join: _Edison_ (~tweber@pD9E5ABFD.dip.t-dialin.net) joined #opencyc
+23:20:13 <_Edison_> doh... disconnected
+23:20:28 <_Edison_> dmiles: How about your logicMoo work?
+23:20:47 <dmiles> http://tunes.org/~nef/logs/opencyc/02.06.19
+23:21:18 <dmiles> well it shouldnt interfere too much
+23:22:07 <dmiles> i am hoping that where i go with nl understanding and cyc .. it will be usefuill
+23:22:35 <dmiles> the other thing.. that that company wants is a parse tree maker
+23:22:51 <dmiles> nothing beyond that at this point
+23:23:31 <dmiles> just simple.. Subject Object Verb grabber so people can write response templates i am assuming
+23:25:01 <dmiles> so eliza like rules can be formed arround the results initially
+23:27:37 * _Edison_ is no pro on this
+23:27:39 <dmiles> i am hoping that even that rule side could be maintained in cyc.. would make good sense
+23:28:30 <dmiles> espancly if response was genTemplates
+23:30:29 <dmiles> well it's one of those more simlpe ideas you can read about in AI books but rearly see implemetnations that try to use the idea beyond non toy exampoles
+23:31:58 <dmiles> sometimes the simplicity in solutions (response templates) can make things go much further
+23:32:03 --- quit: Edison (Read error: 110 (Connection timed out))
+23:32:31 --- nick: _Edison_ -> Edison
+23:32:51 <dmiles> tonight though.. what are you up to?
+23:33:02 <dmiles> err your day
+23:33:18 <Edison> its. 8:30 AM. After a first coffe break i'll start working
+23:33:44 <Edison> and i have to dig through miles of SQL querys from someone else
+23:34:57 <Edison> But hey! i'll go to vacation tomorrow evening... so its ok
+23:36:34 * dmiles smiles
+23:37:18 <Edison> hehe
+23:37:33 <Edison> i have a lot of database stuff currently to do. 
+23:38:07 <Edison> Well. I like it. 
+23:38:41 <dmiles> making stored proceedures and things?
+23:39:25 <Edison> sure
+23:39:47 * Edison works with oracle (linux) and postgreSQL (SysV4.3)
+23:59:59 --- log: ended opencyc/02.06.19

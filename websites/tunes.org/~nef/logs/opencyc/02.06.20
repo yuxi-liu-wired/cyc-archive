@@ -1,0 +1,715 @@
+00:00:00 --- log: started opencyc/02.06.20
+00:51:54 --- quit: CycLBot (Remote closed the connection)
+00:52:35 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+00:53:34 --- quit: CycLBot (Remote closed the connection)
+00:56:12 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+01:19:47 --- quit: CycLBot (Remote closed the connection)
+02:59:44 --- join: Yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+03:00:09 <dmiles> good morning Yepster
+03:00:17 <dmiles> sorry i dropped offline the other day
+03:00:37 <dmiles> my internet service was interupted for quite a few dasy
+03:03:25 <Yepster> morning
+03:04:06 <Yepster> I still have to scan a pack of copies
+03:04:23 <dmiles> well i read the first 5 pages
+03:05:05 <Yepster> do you know fi-justify a bit?
+03:05:32 <dmiles> i havent used it yet.. but i asume it uses prevous query results?
+03:05:43 <dmiles> or is ait a query that saves a trace?
+03:05:49 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:07:03 <Yepster> subl: (fi-ask '(#$isa #$France #$GeopoliticalEntity) #$InferencePSC)
+03:07:04 <CycLBot> (((T . T)))
+03:07:28 <Yepster> subl: (fi-justify '(#$isa #$France #$GeopoliticalEntity) #$InferencePSC)
+03:07:29 <CycLBot> no answers found
+03:07:56 <dmiles> that is a NIL paraphrase
+03:08:03 <Yepster> it's not described in the api documentation. When using it from the subl interactor
+03:08:20 <Yepster> the answer is :queued. So I assume somewhere the justification must be given.
+03:08:36 <Yepster> but don't know how to get anything from that d*mn queue
+03:08:51 <dmiles> i thionk you use a :queued accessor Subl functs
+03:09:03 <dmiles> yeah eaxcacly.. it there somehow :)
+03:09:36 <dmiles> looking at some things in the java code i can see some small amounts of global accessing type merthods
+03:10:05 <dmiles> for example ask-template stores things into some structures
+03:10:14 <dmiles> the wrapper gets from it
+03:11:06 <dmiles> wait n/m there is no wrapper
+03:12:00 <Yepster> you mean in the cycaccess.askwithvariables method e.g.?
+03:12:29 <dmiles> thats what i was thinking that it puts it into a :TEMPLATE
+03:13:04 <dmiles> but looking there i dont see anything arround it other then setting options
+03:13:47 <dmiles> but Steve mentioned is was put into a special template
+03:14:18 <dmiles> >   "Ask SENTENCE in MT.  Return results of substituting bindings into TEMPLATE."
+03:14:28 <dmiles> ok the variabnle present the "template"
+03:14:39 <dmiles> its not a specialcl cache 
+03:15:25 <dmiles> maybe we'll find something in UnitTest code
+03:15:36 <Yepster> yes, but ask template has the variable to put the result into as parameter. fi-justify doesn't
+03:16:29 <dmiles> subl: (fi-eval '(+ 1 1))
+03:16:30 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator FI-EVAL is not defined in the API")
+03:20:08 <Yepster> I hope Steve's answer won't be: 0.7 or 1.0
+03:20:46 <dmiles> well i thought it was you and i that asked Steve initally about FI-PROIVE
+03:21:05 <dmiles> which had been spawned by our interest in getting a proof tree
+03:21:55 <dmiles> he said there currently wasnt any good way to get from the API
+03:22:09 <dmiles> buty i have this feeling 0.7 is comming out at end of this month
+03:22:49 <Yepster> yeah I encountered the need for justification before.
+03:22:55 <dmiles> only gleaning that from the email talking about the windows port would be ready for release end of this month
+03:23:25 <dmiles> and that the things hoilding up 0.7 is just making the CycML work exactly the way wanted
+03:24:16 <dmiles> ery good work
+03:24:17 <dmiles> [16:21] <stevereed> we are waiting for the cycml-parser before the next release.
+03:24:17 <dmiles> [16:21] <stevereed> I have the cycml generator working.
+03:24:46 <dmiles> so it seems like the 'loader' portion is the current work
+03:25:20 <dmiles> .7 i am hoping has:
+03:25:28 <dmiles> - more SubL exposed
+03:25:33 <Yepster> hmm if that's the only thing. To me it doesn't sound that difficult + xml parser + some cycl generation
+03:26:09 <dmiles>  - ability to work a sigle task in a sub environemnt
+03:26:14 <Yepster> yes, next to me sitting right now is a lisp guy, and he wasn't that happy with the lisp functionality in subl
+03:26:35 <dmiles> well i think it was just security based exportation
+03:26:37 <Yepster> I am waiting for the planner
+03:26:49 <Yepster> or at least kb contents for the planner
+03:26:59 <dmiles> i tried to make a planning system in CycL..
+03:27:14 <dmiles> let me show you the data
+03:29:04 <dmiles> follow the links relared to desires: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-all-asserted-knowledge&-623
+03:29:49 <dmiles> wait this is better: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&2973
+03:30:12 <dmiles> (the misslainous references)
+03:31:27 <dmiles> meaning they follow causes-PropProp rules they make from (ist theirMentalMt (implies ....)
+03:31:33 <dmiles> anyways its flops ;P
+03:31:55 <dmiles> was just a one hour experment
+03:32:33 <dmiles> but the idea was they want certain arbitrary propostions to be true
+03:33:03 <dmiles> and they have a scoped viewpoint of casues prop prop
+03:33:04 <Yepster> I am not sure I understand
+03:33:32 <dmiles> and then typing in the state changes based on Event that is Transformational
+03:34:19 <dmiles> so they could query which events could help them transition or circumvernt conventional implications
+03:34:32 <dmiles> denoted by #$implies
+03:34:35 <Yepster> btw do you know (constant-apropos "substring") ? very handy
+03:35:06 --- quit: CycLBot (Remote closed the connection)
+03:35:13 <dmiles> ooops
+03:35:32 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:36:22 <dmiles> YC(7): (constant-apropos "Dog")
+03:36:22 <dmiles> (#$AttackingDogs-NCR #$Dog #$Dog-TheWord #$Doggie-TheWord #$DogsAttacking-NCR)
+03:36:31 <dmiles> nice
+03:36:44 <dmiles> i have been lookig for a search!
+03:37:39 <Yepster> I think I would put al the things an agent believes in an mt, instead of thinksprobable
+03:37:53 <Yepster> I think
+03:38:09 <dmiles> well that thinks proable is 'ist'ed to only one Mt
+03:38:20 <Yepster> But I'm very curious how the planner ontology models the plan-state-action stuff
+03:38:46 <dmiles> (implies 
+03:38:46 <dmiles>        (and 
+03:38:46 <dmiles>            (authorityForMt ?WHO ?MT) 
+03:38:46 <dmiles>            (ist ?MT 
+03:38:46 <dmiles>                (implies ?THIS ?THAT))) 
+03:38:47 <dmiles>        (thinksProbable ?WHO 
+03:38:49 <dmiles>            (causes-PropProp ?THIS ?THAT))) in JamudMt
+03:39:11 <dmiles> the ?WHO variable help Scope the (authorityForMt ?WHO ?MT) 
+03:40:04 <dmiles> but definately
+03:40:12 <Yepster> So this says, if the authoriy in jamudmt thinks something, it's true in jamudt
+03:40:29 <dmiles> only for him
+03:40:46 <Yepster> ah ok yes, the thinksProbable
+03:41:19 <Yepster> no..
+03:41:21 <dmiles> yeah thats kinda like a spindle
+03:41:44 <dmiles> so eveykne shows up in one place
+03:41:46 <Yepster> if something is true in the mt, the authority thinks it's true
+03:42:05 <dmiles> the ist is the Mt constaint
+03:42:23 <dmiles> ?WHO still cant see JamudMt
+03:42:57 <dmiles> Jamud is just a single place to ask about ?Who and stor eauthorityFors
+03:43:01 <Yepster> lunch, ttyl8r
+03:43:23 <dmiles> i'll be here
+03:43:35 <Yepster> btw, what time is it over there?
+03:43:42 <dmiles> 3:49 Am
+03:43:58 <dmiles> your time?
+03:44:05 <dmiles> time
+03:44:06 <CycLBot> the time was Wed Jun 19 20:22:51 PDT 2002
+03:44:21 <Yepster> 12:44
+03:44:21 <dmiles> oh heck that darn server ;P
+03:44:28 <dmiles> ah 
+03:44:40 <Yepster> insomnia?
+03:45:00 <dmiles> rotated sleep scedule.. every time i have it right it moves forward 8 hours
+03:45:18 <dmiles> so my mind is one a 32 hour schedule
+03:45:35 <Yepster> i had something similar the 2nd year of study, when I stopped following classes
+03:46:07 <Yepster> but the skew stopped at 3 am
+03:46:23 <dmiles> yeah eveytime you get a good 6 am wakeup time it becomes your bedtime the next day :P
+03:47:02 <humhut-away> some research has shown that some people have a natural cycle of 48 hrs
+03:47:18 <humhut-away> but my attempts to live so failed
+03:48:03 <humhut-away> ~Michael Siffre is a caver/researcher who made these experiments
+03:48:04 <dmiles> i think todfays society of lack of physical stress allows ur inconsitancies like this to manefest better
+03:48:16 <dmiles> err our 
+03:48:47 <humhut-away> (if I spell his name right)
+03:49:03 <dmiles> some of us end up replicating those below ground experments :)
+03:49:17 * humhut-away nods.
+03:49:49 <dmiles> lack of normal sunlight maybe.. thats what he used i think?
+03:49:51 <humhut-away> I know several men/women who often work during 35...50 hours, at the pc.
+03:49:56 <humhut-away> uninterrupted
+03:50:14 <humhut-away> i am included (tried 4 times or so).
+03:50:29 <dmiles> well i can go about 24 max.. it gets tio the point you are ballancing so many uinterfaces you are afraid to sleep or break concintration
+03:50:39 <humhut-away> Siffre et co. excluded any clock devices...
+03:51:17 <humhut-away> (that's funny, one work week at once.)
+03:51:39 <dmiles> hrrm maybe that wouild be nice to bill the hourly and get it all done
+03:52:26 <humhut-away> I'm billed hourly, some other people i mentioned are self-employed
+03:52:58 <dmiles> works well :)
+03:53:19 * humhut-away smiles and gets back away.
+03:53:54 <dmiles> well i am going to nap for an hour or two.. hopefully will be up when everyone else in this channel is
+07:31:07 --- quit: bruce (Read error: 104 (Connection reset by peer))
+07:35:46 <Yepster> steve?
+07:42:39 --- quit: Edison ()
+08:31:06 <Yepster> two questions:
+08:31:23 <Yepster> 1 - how do i get result from stuff that is queued?
+08:31:38 <Yepster> 2 - what character set(s) does cyc support?
+08:39:27 <Graham> you mea, asserttions that are added to the local queue?
+08:58:15 <Yepster> no, if I use fi-justify in the subl interacter, it says :queued as result
+09:30:14 --- quit: Graham ("xchat exiting..")
+09:41:02 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+09:42:33 <stevereed> Yepster: you cannot get results directly from queued interactions - they are 
+09:42:44 <stevereed> performed by a background process - the agenda.
+09:43:15 <stevereed> However I can add to the api an underlying function that is not queued for any function such as
+09:43:31 <stevereed> fi-justify.  Just let me know which ones you need.
+09:43:52 <Yepster> well I think i need fi-justify
+09:43:52 <stevereed> Cyc should support Unicode. But I have not tested it.
+09:44:14 <Yepster> but don't know, because I haven't seen results if it yet
+09:44:40 <Yepster> I need the list that's in the browser interface after 'justification 1 of xx' etc
+09:46:15 <stevereed> When you submit fi-justify through the api port it should return immediately. Try a telnet connection.
+09:46:45 <stevereed> we have a behavior wrapper on api calls to make them not use the background processing.
+09:48:12 <Yepster> trying..
+09:48:59 <Yepster> hmm just returns NIL
+09:49:48 <stevereed> what form are you submitting?  what is the code so I can investigate?
+09:51:13 <Yepster> copied from exceed (so crappy linebreaks):
+09:51:20 <Yepster> (fi-ask '(#$and (#$mogelijkAanspraakOp #$HYP-Person-9479 ?HULP) (#$genls ?HULP #$GPHHulpmiddel) (#$nearestGenls #$ICPCN8700 ?IND) (#$nearestGenls #$HYP-IndicatieType-9478 ?IND)) #$InferencePSC 1)
+09:51:20 <Yepster> 200 (((?HULP . #$GPH120316000000) (?IND . #$Art162bIndicatie)) ((?HULP . #$GPH120603000000) (?IND . #$Art162bIndicatie)) ((?HULP . #$GPH120606030000) (?IND . #$Art162bIndicatie)) ((?HULP . #$GPH120606060000) (?IND . #$Art162bIndicatie)) ((?HULP . #$GPH120606090000) (?IND . #$Art162bIndicatie)))
+09:51:20 <Yepster> (fi-justify '(#$and (#$mogelijkAanspraakOp #$HYP-Person-9479 ?HULP) (#$genls ?HULP #$GPHHulpmiddel) (#$nearestGenls #$ICPCN8700 ?IND) (#$nearestGenls #$HYP-IndicatieType-9478 ?IND)) #$InferencePSC 1)
+09:51:21 <Yepster> 200 NIL
+09:52:05 <Yepster> not sure if the 1 in fi-justify is also for backchain depth 1
+09:52:27 <Yepster> (fi-ask '(#$isa #$HYP-Person-9479 #$Person) #$InferencePSC)
+09:52:27 <Yepster> 200 (((T . T)))
+09:52:27 <Yepster> (fi-justify '(#$isa #$HYP-Person-9479 #$Person) #$InferencePSC)
+09:52:27 <Yepster> 200 NIL
+10:20:06 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+10:20:14 --- mode: ChanServ set +o Graham
+10:29:09 --- quit: Yepster ()
+15:22:38 --- join: Psion (Psion@VOID.RES.cmu.edu) joined #opencyc
+15:50:38 <dmiles> .CycApiException: "Operator GENL-PRED? is not defined in the API"
+16:00:46 <dmiles> humhut-away: have you seen http://www.kg.ru/eng/Why.stm  ?
+16:01:14 <humhut-away> no
+16:02:13 <dmiles> its a neat system that produces training videos (i guess) based of autonomous agents
+16:10:10 <humhut-away> located in Samara
+16:25:43 <dmiles> i talked to them about 2 years ago and we found we where on the same page that a mudish/vr entry system would be a good way to do knowledge entry and retrival
+16:26:19 <dmiles> and agents geared to that representation level might be easier for people to program
+16:26:45 <dmiles> as in geared to retrieve
+16:27:45 --- quit: jlatour ()
+16:43:16 <dmiles> i was just bringing that site up as an example that justifies using a moo as a UI system that could benifit opencyc
+16:43:41 <dmiles> if the information it held was kept in the Cyc kb
+17:10:14 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+17:12:23 <dmiles> good evening sir
+17:27:09 <johnd> hello
+17:27:10 <CycLBot> hello johnd
+17:27:20 <johnd> hello dmiles
+17:27:21 <CycLBot> hello johnd
+17:27:32 <johnd> you said that already, CycLBot.
+17:27:45 <dmiles> :)
+17:27:54 <johnd> Doug, did you get my email?
+17:28:04 <dmiles> just replied
+17:28:08 <johnd> ok
+17:28:48 <dmiles> sometimes my mail server gets rejected becasue my address doesnt get matched to the smtp domainname
+17:29:08 <johnd> in response to your email...
+17:29:19 <johnd> Why don't you try out the doc.
+17:29:37 <dmiles> definately will :_) even tonioght!
+17:29:37 <johnd> If it seems useful, you don't have to hold back from sharing it.
+17:30:17 <dmiles> that subl call is presently in .6 ?
+17:30:24 <johnd> Send me any revisions or comments, though.
+17:30:38 <johnd> I've heard it is, but I haven't tried it.
+17:31:53 <johnd> We may put out 0.7 without CycML import. Depends on timing. Hard to get good help these days. Hell, it's hard to get ANY programming help.
+17:32:39 <dmiles> hehe.. its scarey how few programmers out there have a strong background in propostiional logic concepts at all
+17:32:55 <johnd> That reminds me...
+17:33:32 <johnd> We should include some links to general educational resources (web sites, books?) that deal with propositional logic.
+17:34:02 <johnd> We should a link to a page of links on the Documentation page.
+17:34:17 <johnd> should a link --> should put a link
+17:34:40 <dmiles> Yes, you and I (at least me :)) take for granted that people have knowledge in basic principles like quantifiers and and skolems
+17:35:39 <dmiles> but the nice thing about the planner is there are excelent reseaources decribing the concepts of how a state->action->statye planner works
+17:36:03 <johnd> Give me links! I'll include them in the doc.
+17:36:31 <johnd> Email them to me, would be best.
+17:37:13 <dmiles> ok definately
+17:37:34 <johnd> I'm working on an intro screen to send new users to when they first open the KB Browser.
+17:37:47 <johnd> It will have links to walkthroughs.
+17:38:05 <johnd> We're adding the Compose tool to OpenCyc.
+17:38:24 <johnd> It is a tool that was removed as part of the 'don't use KE-Text' policy.
+17:38:37 <dmiles> :)
+17:38:51 <johnd> So now you will be able to type (or paste) KE-Text into a text field and then submit.
+17:39:06 <dmiles> will you have pages that help guide the creation of a predicate and collections?
+17:39:09 <johnd> There will still be no import/export of KE Text.
+17:39:11 --- quit: dash ("starcraft time!")
+17:39:30 <johnd> Yes, in the walkthroughs, yes.
+17:40:42 <dmiles> you saw: http://12.225.207.235:8080/logicmoo/createpredicate.jsp ?
+17:40:48 <dmiles> (its updated)
+17:41:01 <johnd> With the compose screen and the walkthroughs, there can be an example that requires creation of 10 constants and 5 assertions (for example), and you can copy them from the walkthrough "article", paste them in, and submit them all at once.
+17:41:32 <dmiles> ah good.. becasue you can assert multple definatines with (#$and ... ... ... )
+17:42:16 <dmiles> err or one at a time
+17:43:01 <johnd> Yes, but the CREATEs are hard to do that way, right?
+17:43:13 <dmiles> thats my opion
+17:43:21 <dmiles> opinion
+17:43:48 <johnd> I think it's a fact, right or wrong (but I think right).
+17:44:02 <johnd> Without Compose, you have to create each constant individually.
+17:44:14 <dmiles> becasue it requires human persistantly rembering the proceedure when that could all be put into a page
+17:44:44 <johnd> That makes it tough when you're trying to demonstrate something with a bunch of quickly added instances.
+17:45:03 <johnd> Even in a page, you've got to fill it out.
+17:45:04 <dmiles> ah i see so Compose very simular to KE-Text 
+17:45:15 <johnd> Here's a way to paste and go.
+17:45:31 <johnd> Compose IS KE Text. Just not import of a KE Text file.
+17:45:39 <dmiles> ah i see :)
+17:46:10 <johnd> Back to the walkthroughs...
+17:46:15 <johnd> What all should be included
+17:46:28 <johnd> One has been craeted for us by an OEer here.
+17:46:40 <johnd> It's long. About an hour to go through.
+17:47:08 <johnd> It includes creation of some constants (I think instances, collections and predicates).
+17:47:19 <johnd> Then it includes some very simple GAFs.
+17:47:44 <johnd> We should (probably could) break up the long one into pieces.
+17:48:04 <johnd> But they'll have to be gone about in order.
+17:48:31 <dmiles> i see
+17:48:53 <johnd> My main criticism of it so far is it isn't about anything useful. It's just about two cats.
+17:49:06 <dmiles> an hour is not that long
+17:49:08 <johnd> I'd like to have one to follow it that sort of does something useful.
+17:49:41 <johnd> I was thinking about something where you ontologize several events that represent chores.
+17:50:00 <johnd> You say it's not that long, but you're very patient.
+17:50:03 <dmiles> well yes, its interesting becasue we want people to come out of the examples with something they can apply
+17:50:22 <johnd> This is for people who skipped the docs and went straight to running the program.
+17:50:27 <johnd> About the chores...
+17:50:32 <dmiles> even making a sandwitch within a planning domain would be usefull
+17:50:42 <johnd> Yes.
+17:50:58 <johnd> You could add some rules to characterize the chores.
+17:51:26 <johnd> So, the KB would identify chores that have to be done at home, chores that can't be done in the morning, etc.
+17:51:34 <johnd> Then it helps you prioritize.
+17:51:42 <johnd> I wanted to show this without the planner
+17:51:57 <johnd> so that we can see the usefulness of inference first.
+17:52:07 <johnd> regular inference
+17:52:13 <johnd> deduction
+17:52:25 <dmiles> yes looks like defining the chores could lead to infernce without planning
+17:52:48 <johnd> it would get them into entering rules
+17:52:56 <johnd> probably
+17:53:11 <johnd> I haven't figured out how we'd handle sorting
+17:53:26 <johnd> Maybe classifying is enough.
+17:53:35 <dmiles> you mean ordering output of chore list?
+17:53:53 <johnd> "Cyc, I'm going out, what chores might I be able to do."
+17:54:13 <johnd> ASK for just ChoresDoableOnTheRoad
+17:54:13 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+17:54:18 <johnd> sorry for horrible name
+17:54:30 <dmiles> yes.. that works
+17:55:22 <dmiles> that certainly is more inspiring then defining furry cats
+17:55:42 <johnd> Well, one would be to learn the nuts and bolts
+17:55:52 <johnd> The next would be to get more down to business
+17:57:21 <dmiles> yotzum was wor4king on definining the rules of a card game and thinking up ways to write an application arround it
+17:57:49 <johnd> Anything like that, I want to see.
+17:58:09 <johnd> If you talk to him, let him know, please.
+17:58:46 <dmiles> yes.. i know he has alot of java code he wrote arround uirt
+17:58:52 <dmiles> err it
+17:59:07 <johnd> If the planner works in 0.6, you can do the sandwich example.
+17:59:19 <dmiles> definetly.. would love to
+17:59:32 <johnd> I'll include it (with a credit, if you like) in the walkthroughs.
+18:00:20 <dmiles> yes .. i'll check real quicjk something to see
+18:01:14 <dmiles> looks like the API command is not defined
+18:01:36 <dmiles> i think it could just be a SubL visiablity issue
+18:02:25 <dmiles> alot of commands that even Steve thought would be defined that are basic to SubL was not exported into the Cified pe3nCyc
+18:03:20 <dmiles> alot of cross-compliers do things like that (leave things out not explicitly defined)
+18:07:27 --- quit: johnd ("Client Exiting")
+19:09:33 --- join: futhin (~thin@h24-64-175-61.cg.shawcable.net) joined #opencyc
+19:14:15 <dmiles> hi futhin
+19:15:25 <dmiles> Psion: i enjoyed our conversation the other day
+19:15:54 <Psion> I enjoy your enjoyment.
+19:21:18 <futhin> sexy
+19:21:45 <dmiles> hrrm? 
+19:22:02 <futhin> :P
+19:22:05 * dmiles right clicks on futhin
+19:22:20 <dmiles> ----<@
+19:23:10 <dmiles> ah wrong client for lubbin
+19:27:52 <dmiles> neat: http://groups.yahoo.com/group/moolist/message/225
+19:28:15 <dmiles> not logicmoo.. but maybe i will see if there is simularities
+19:43:15 --- quit: futhin ()
+19:51:40 <humhut-away> this must be a conventional moo
+19:52:36 <humhut-away> logMoo maintainer is online there
+19:52:36 <CycLBot> logging is set false
+19:53:23 <dmiles> say i am guest Dogwood :)
+19:53:23 <CycLBot> You "said, "i am guest dogwood )""
+19:53:26 <dmiles> oops
+19:53:46 <dmiles> are you guest_oak?
+19:54:51 <humhut-away> yup
+20:15:18 --- quit: Psion ("sleep")
+20:24:42 <humhut-away> hmm
+20:25:15 <humhut-away> if the moo is active, then propagating changes would cause traffic too big for the internet
+20:26:16 <humhut-away> so cycdb instance must be local.
+20:26:55 <humhut-away> local to moo.
+20:31:30 --- join: aldon (~aldon@ool-182d7327.dyn.optonline.net) joined #opencyc
+20:32:19 --- quit: aldon (Client Quit)
+20:38:07 --- quit: damski (Read error: 104 (Connection reset by peer))
+20:55:20 <dmiles> say i think its most usefull that way
+20:55:20 <CycLBot> You "said, "i think its most usefull that way""
+20:56:06 <dmiles> but my interaction with Cyc is over the CycAccess java which does not have to be local
+20:56:36 <dmiles> but local as in the data is local
+20:57:02 <dmiles> the application believes the data is local (even though really in Cyc))
+20:57:47 <humhut-away> i mean, the situation is not possible, when cyc is here and moo is on the other side of planet
+20:58:34 <humhut-away> also, in the actively changin environment, there will be many conflicts...
+20:59:11 <humhut-away> which will interfere with inference
+20:59:12 <humhut-away> etc
+20:59:32 <dmiles> well thats the tjhing i first ran into with Jamud.. that there was a propogation every few minutes
+20:59:55 <humhut-away> and?
+21:00:09 * dmiles is multitasking
+21:00:15 <humhut-away> ok.
+21:00:24 <humhut-away> you're at work, and i am not.
+21:00:25 <dmiles> say well you see me in two wiindows :)
+21:00:25 <CycLBot> You "said, "well you see me in two wiindows )""
+21:00:37 <humhut-away> ahh
+21:02:21 <dmiles> ok the propogation issue
+21:03:19 <dmiles> say it became easier to replace the moo's get/set methods
+21:03:19 <CycLBot> You "said, "it became easier to replace the moo's get/set methods""
+21:04:14 <dmiles> say just a few more minurtes ;P
+21:04:15 <CycLBot> You "said, "just a few more minurtes ;P""
+21:04:17 <dmiles> oopps
+21:04:27 <dmiles> see i dont multitask well 
+21:06:56 <dmiles> well then after working with te get/sets.. then started replacing the getArrayCollectiohnsOfItems
+21:07:27 <dmiles> but then java expected to maniputate these objects that represtne d colections
+21:07:35 <dmiles> so i have to make a CycFort map
+21:07:46 <dmiles> err had to
+21:08:13 <dmiles> so when cyc deduced the fact there where more in the collection.. it wouldn't show up
+21:08:35 <dmiles> so i started completely ussing cyc as the only broker of data
+21:09:02 <dmiles> say so things like 'look' and 'move nortth' only have side effects in Cyc
+21:09:02 <CycLBot> You "said, "so things like 'look' and 'move nortth' only have side effects in Cyc""
+21:09:19 <dmiles> so it sort of replaced the whole moo
+21:09:45 <dmiles> say players life in a the moo was just a client that used cyc and persisted nothing on their own
+21:09:45 <CycLBot> You "said, "players life in a the moo was just a client that used cyc and persisted nothing on their own""
+21:10:42 <dmiles> but if their is a moo kernel thats really awesome its worth the effort to replacing all of its methods with cyc proxiy assert/rretract
+21:11:13 <dmiles> humhut-away, you following?
+21:11:25 <humhut-away> yes
+21:11:45 <dmiles> so i stoped trying to sychronize
+21:11:55 <dmiles> and only client Cyc as the authority of data
+21:12:05 <humhut-away> ok
+21:12:16 <dmiles> which doesnt have to really be local
+21:12:45 <humhut-away> So, the moo is actually a lightweight client of the cyc db.
+21:13:00 <dmiles> exactly
+21:13:13 <humhut-away> and can contain no db at all.
+21:13:13 <dmiles> make the DB look more like a world
+21:13:18 <humhut-away> or must.
+21:13:32 <dmiles> right in a way it must not
+21:13:40 <humhut-away> moo cannot contain any db at all.
+21:13:50 <dmiles> right 
+21:14:22 <dmiles> at least to work well
+21:14:46 <humhut-away> i would guess, to work at all
+21:14:47 <dmiles> sycronization is still to a moo that holds it own db
+21:14:56 <humhut-away> oops
+21:14:56 <dmiles> err is still possible
+21:15:09 <dmiles> only possible but hard 
+21:15:39 <dmiles> so  <humhut-away> moo cannot contain any db at all.
+21:15:41 <humhut-away> i.e. cyc data can be converted into a moo db.   But moo cannot use this moodb.
+21:15:42 <dmiles> works best
+21:16:02 <dmiles> actualyl it can work both ways
+21:16:06 <humhut-away> how!
+21:16:13 <humhut-away> there will be conflicts!
+21:16:18 <dmiles> that syncronization can puch to cyc.. i did that in on off the files in CVS
+21:16:23 <humhut-away> moo cannot rely on obsolete moodb!
+21:16:37 <dmiles> yeah thats why it was ugly and hard to maintian
+21:16:50 <dmiles> every few seconds you basicly had to rebuild the whole moo db
+21:17:05 <humhut-away> in active enviroment, one'll end up with lots of false assertions...
+21:17:08 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+21:17:23 <humhut-away> ok.,
+21:17:25 <humhut-away> ok.
+21:17:50 <dmiles> yes actually yes.. i never got it so far that i was running into staleness
+21:18:02 <dmiles> but definately would have
+21:18:32 <dmiles> on top of that was a messaging system to say "joe entered the room"
+21:18:42 <dmiles> that messaging was only client to client
+21:19:17 <dmiles> so roomSend(myRoom,"joe entered the room")
+21:19:24 <dmiles> thats how it still works
+21:19:55 <dmiles> actully now its eventSend(CycList event)
+21:20:17 <dmiles> each client gets and displays the CycList
+21:20:48 <dmiles> telnet://12.225.207.235:4444/
+21:20:57 <dmiles> but do it with a non NT telnet
+21:21:04 <humhut-away> sure
+21:22:30 <dmiles> when you get in: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8590 from webroswer
+21:22:50 <dmiles> oh actully tel me what room your in
+21:22:59 <humhut-away> well
+21:23:07 <humhut-away> hold 30 sec
+21:23:24 <dmiles> (i forgot what the spawn romm was :(
+21:23:52 <dmiles> only say works
+21:24:07 <dmiles> type like look
+21:24:23 <dmiles> thats a cyc query
+21:25:02 <dmiles> also did you get my says?
+21:25:10 <humhut-away> yes
+21:25:24 <humhut-away> i was trying to launch gmud
+21:25:29 <dmiles> cool i hadnt known if it wasnt broken
+21:26:04 <dmiles> oops the format of the events are not good
+21:26:24 <dmiles> this is you: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8596
+21:28:24 <dmiles> well since each client is their own connection.. they let cyc manage the staleness
+21:28:44 <dmiles> the think query blocks update until query is done
+21:29:49 <dmiles> look humhut
+21:29:50 <CycLBot> in - cont generic humhut A Corridor
+21:29:51 <CycLBot> isa humhut player instance
+21:30:11 <dmiles> take dmiles
+21:30:16 <dmiles> look dmiles
+21:30:17 <CycLBot> in - cont generic dmiles cyc l bot
+21:30:18 <CycLBot> isa dmiles player instance
+21:30:26 <dmiles> drop dmiles
+21:30:33 <dmiles> look dmiles
+21:30:34 <CycLBot> in - cont generic dmiles A Corridor
+21:30:34 <CycLBot> isa dmiles player instance
+21:30:58 <dmiles> tele Area1002
+21:30:59 <CycLBot> you are now in Area1002
+21:31:14 <dmiles> north
+21:31:16 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+21:31:17 <CycLBot> It isn't very wide, and the light beige walls have been rounded, making the  corridor an oval shape.  You notice a tiny computer panel embedded into the wall.
+21:31:17 <CycLBot> in - cont generic cyc l bot A Corridor
+21:31:18 <CycLBot> in - cont generic A portal westerly A Corridor
+21:31:19 <CycLBot> in - cont generic A portal South A Corridor
+21:31:19 <CycLBot> in - cont generic A portal East A Corridor
+21:31:20 <CycLBot> in - cont generic A portal north A Corridor
+21:31:23 <CycLBot> isa A Corridor indoor space
+21:31:24 <CycLBot> isa A Corridor inside surface
+21:31:27 <CycLBot> isa A Corridor geographical region
+21:31:45 <humhut-away> uh ok
+21:31:47 <humhut-away> uh oh
+21:31:59 <dmiles> did you get his message he left nortth?
+21:32:16 <humhut-away> no
+21:32:24 <dmiles> his output is not as good as the telnet output
+21:32:31 <dmiles> dmiles@Area1002 mud]$
+21:32:31 <dmiles> ("CycLBot leaves to the North-Generally
+21:32:31 <dmiles> ")
+21:32:59 <dmiles> s
+21:33:01 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+21:33:02 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+21:33:02 <CycLBot> in - cont generic cyc l bot A Corridor
+21:33:03 <CycLBot> in - cont generic dmiles A Corridor
+21:33:03 <CycLBot> in - cont generic humhut A Corridor
+21:33:04 <CycLBot> in - cont generic joe user A Corridor
+21:33:05 <CycLBot> in - cont generic A portal westerly A Corridor
+21:33:06 <CycLBot> in - cont generic A portal South A Corridor
+21:33:09 <CycLBot> in - cont generic A portal East A Corridor
+21:33:11 <CycLBot> in - cont generic A portal north A Corridor
+21:33:13 <CycLBot> isa A Corridor indoor space
+21:33:14 <CycLBot> isa A Corridor inside surface
+21:33:17 <CycLBot> isa A Corridor geographical region
+21:33:31 <humhut-away> ("CycLBot enters.
+21:33:33 <dmiles> did you get "CycLBot enters. ?
+21:33:38 <humhut-away> yup
+21:33:41 <dmiles> ok cool
+21:33:46 <humhut-away> n
+21:33:49 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+21:33:49 <CycLBot> It isn't very wide, and the light beige walls have been rounded, making the  corridor an oval shape.  You notice a tiny computer panel embedded into the wall.
+21:33:50 <CycLBot> in - cont generic cyc l bot A Corridor
+21:33:50 <CycLBot> in - cont generic A portal westerly A Corridor
+21:33:50 <CycLBot> in - cont generic A portal South A Corridor
+21:33:52 <CycLBot> in - cont generic A portal East A Corridor
+21:33:52 <CycLBot> in - cont generic A portal north A Corridor
+21:33:54 <CycLBot> isa A Corridor indoor space
+21:33:54 <dmiles> thats a sencondary messaging layer on top
+21:33:56 <CycLBot> isa A Corridor inside surface
+21:33:56 <humhut-away> ("CycLBot leaves to the North-Generally
+21:33:58 <CycLBot> isa A Corridor geographical region
+21:35:25 <dmiles> but seeing it can be done in this form methinks it would be better with a more mature moo
+21:36:44 <dmiles> the main site to maintain moo is: http://12.225.207.235:8080/logicmoo/index.jsp
+21:37:40 <humhut-away> well
+21:38:16 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+21:38:22 <dmiles> trying to decide how much time to devote to this i am
+21:38:31 * humhut-away should go do some mundane work
+21:38:43 <humhut-away> is this your mainjob or what?
+21:38:57 <dmiles> no this is just a very important hobbie to me ;P
+21:39:44 <dmiles> i see that it will make alot of things more possible
+21:39:57 <humhut-away> like what?
+21:40:12 <dmiles> for example if we ever did want to pass a turning test one would need some kind of instanciated life
+21:40:23 <dmiles> err turring test chatbot
+21:40:40 <dmiles> they would need to have a frame of refernce
+21:41:12 <dmiles> that was in ways simular .. i know that this is not the fastest way thoigh
+21:41:36 <dmiles> also if someone created input devices to monitor an office..
+21:41:53 <dmiles> they would rather put their data into something that looked/felt like an office
+21:42:28 <dmiles> so by creating virtual human spaces, it improves how we can infernce 
+21:42:57 <dmiles> because we have a secondary way to represent things
+21:43:43 * humhut-away feels lost in AI. No prob.
+21:43:49 <dmiles> also if we awanted to get cyc to play chess it might be easier to set up a chessboard in a moo
+21:44:39 <dmiles> then you leverage all the presentation programs written for moos]
+21:44:53 <humhut-away> huhu
+21:45:22 <humhut-away> how it can play chess
+21:45:25 <dmiles> thats why i think its somewhat important to have some system for doing it
+21:45:53 <dmiles> well cyc can play chess from its rules and interfacing to a planning context
+21:45:53 <humhut-away> does cyc have a way to access outside solvers?
+21:46:29 <humhut-away> i guess cyc will lose a battle with deep blue
+21:46:32 <dmiles> there is i think a solver that cyc has access to already.. its a matter of making things more interfacable
+21:47:18 <dmiles> i could see at least a socket interface for calling on another sovler would be nice
+21:47:33 <dmiles> lossing a battle with deepblue why?
+21:47:42 <humhut-away> at least, i guess, such interfaces are possible to implement.
+21:47:46 <humhut-away> are they?
+21:47:59 <humhut-away> so that cyc will be able to access them
+21:48:02 <dmiles> i believe they are very possible to implement
+21:48:06 <humhut-away> e.g. on demand
+21:48:08 <humhut-away> ok
+21:48:27 <dmiles> cyc can call them with EvaluateSubLFn inside an antecedddant rule
+21:49:33 <dmiles> so you can make a rule  (imples (EvaluateSubLFn my code with vars) (someCycPred ?X ?Y)
+21:49:48 <humhut-away> e.g. i think cyc will not be able to answer "estimate the speed of newton's apple."
+21:50:00 <humhut-away> external solver will be necessary
+21:50:09 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8415  <- a code rule i wrote
+21:50:32 <dmiles> that durring infernce creates a random number
+21:51:18 <dmiles> that calls a outside function RANDOM
+21:51:33 <humhut-away> ok
+21:52:39 <dmiles> query (randomOf ?X 4 )
+21:52:40 <CycLBot> Using microtheory#$dmilesChatMt for assertions until dmiles types "mt <something>"
+21:52:41 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+21:52:42 <CycLBot> (#$randomOf ?X 4)
+21:52:42 <CycLBot> was not well formed because:
+21:52:43 <CycLBot> (#$randomOf ?X 4) is not a well-formed formula in #$dmilesChatMt.
+21:52:44 <CycLBot> Perhaps #$randomOf is insufficiently defined in mt #$dmilesChatMt.")
+21:52:49 <dmiles> ask (randomOf ?X 4 )
+21:52:50 <CycLBot> no answers found
+21:53:24 <dmiles> subl: (cyc-ask (randomOf ?X 4 ) #$JamudMt '(:backchain 2))
+21:53:25 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator CYC-ASK is not defined in the API")
+21:53:48 <dmiles> subl: (cyc-query (#$randomOf ?X 4 ) #$JamudMt '(:backchain 2))
+21:53:49 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator #$randomOf was not a symbol")
+21:54:01 <dmiles> subl: (cyc-query '(#$randomOf ?X 4 ) #$JamudMt '(:backchain 2))
+21:54:02 <CycLBot> (((?X . 2)))
+21:54:04 <dmiles> subl: (cyc-query '(#$randomOf ?X 4 ) #$JamudMt '(:backchain 2))
+21:54:05 <CycLBot> (((?X . 2)))
+21:54:07 <dmiles> subl: (cyc-query '(#$randomOf ?X 4 ) #$JamudMt '(:backchain 2))
+21:54:08 <CycLBot> (((?X . 3)))
+21:54:47 <dmiles> subl: (cyc-query '(#$randomOf ?X 1000 ) #$JamudMt '(:backchain 2))
+21:54:48 <CycLBot> (((?X . 533)))
+21:55:21 <humhut-away> subl: (cyc-query '(#$randomOf ?X -1 ) #$JamudMt '(:backchain 2))
+21:55:21 <CycLBot> (((?X . -1)))
+21:55:34 <dmiles> subl: (cyc-query '(#$randomOf ?X -1000 ) #$JamudMt '(:backchain 2))
+21:55:35 <CycLBot> (((?X . -184)))
+21:55:40 <humhut-away> subl: (cyc-query '(#$randomOf ?X 0 ) #$JamudMt '(:backchain 2))
+21:55:41 <CycLBot> (((?X . 0)))
+21:55:48 <dmiles> subl: (cyc-query '(#$randomOf ?X -100.12 ) #$JamudMt '(:backchain 2))
+21:55:48 <CycLBot> no answers found
+21:55:54 <humhut-away> heh
+21:56:11 <humhut-away> subl: (cyc-query '(#$randomOf ?X "110" ) #$JamudMt '(:backchain 2))
+21:56:12 <CycLBot> no answers found
+21:57:07 <dmiles> in opencyc0.6 there is not a way to really interface a fully external call
+21:57:19 <dmiles> this just calls a non CycL RANDOM
+21:57:30 <dmiles> subl: (RANDOM 3033)
+21:57:31 <CycLBot> 788
+21:57:37 <humhut-away> is opencyc's engine opensource?
+21:57:46 <dmiles> i think it will be soon
+21:57:50 <humhut-away> ok.
+21:58:17 <dmiles> there may be people that have already paid for cyc before it was opencyc
+21:58:37 <dmiles> so it might kinda hold back a little
+21:58:44 * humhut-away needs to depart from here
+21:58:52 <dmiles> take care
+21:58:54 <CycLBot> Take what?
+21:58:58 <humhut-away> cu.
+21:59:04 * humhut-away is away.
+21:59:29 <humhut-away> take CycLBot
+21:59:42 <dmiles> look CycLBot
+21:59:42 <humhut-away> take care
+21:59:44 <CycLBot> in - cont generic cyc l bot cyc l bot
+21:59:44 <CycLBot> in - cont generic Cyc process cyc l bot
+21:59:44 <CycLBot> isa cyc l bot player instance
+21:59:45 <CycLBot> isa cyc l bot geographical region
+21:59:46 <CycLBot> Take what?
+21:59:59 <humhut-away> drop CycLBot
+22:00:02 <humhut-away> look CycLBot
+22:00:03 <CycLBot> in - cont generic Cyc process cyc l bot
+22:00:03 <CycLBot> in - cont generic cyc l bot A Corridor
+22:00:04 <CycLBot> isa cyc l bot player instance
+22:00:04 <CycLBot> isa cyc l bot geographical region
+22:00:15 <humhut-away> take a corridor
+22:00:24 <humhut-away> look CycLBot
+22:00:25 <CycLBot> in - cont generic cyc l bot A Corridor
+22:00:25 <CycLBot> in - cont generic A Corridor cyc l bot
+22:00:26 <CycLBot> in - cont generic Cyc process cyc l bot
+22:00:26 <CycLBot> isa cyc l bot player instance
+22:00:27 <CycLBot> isa cyc l bot geographical region
+22:00:46 <dmiles> look A Corridor
+22:00:48 <humhut-away> should it take a `isa'?
+22:00:49 <CycLBot> mud description A Corridor You find yourself in the middle of a well lit corridor on the Enterprise.
+22:00:50 <CycLBot> It isn't very wide, and the light beige walls have been  rounded, making the  corridor an oval shape.
+22:00:50 <CycLBot> in - cont generic A Corridor cyc l bot
+22:00:50 <CycLBot> in - cont generic humhut A Corridor
+22:00:51 <CycLBot> in - cont generic dmiles A Corridor
+22:00:51 <CycLBot> in - cont generic joe user A Corridor
+22:00:52 <CycLBot> in - cont generic A portal westerly A Corridor
+22:00:54 <CycLBot> in - cont generic A portal South A Corridor
+22:00:56 <CycLBot> in - cont generic A portal East A Corridor
+22:00:56 <humhut-away> an rather
+22:00:57 <CycLBot> in - cont generic A portal north A Corridor
+22:00:58 <humhut-away> take isa
+22:01:00 <CycLBot> isa A Corridor indoor space
+22:01:02 <CycLBot> isa A Corridor inside surface
+22:01:04 <CycLBot> isa A Corridor geographical region
+22:01:07 <humhut-away> look CycLBot
+22:01:08 <CycLBot> in - cont generic cyc l bot A Corridor
+22:01:09 <CycLBot> in - cont generic isa cyc l bot
+22:01:12 <CycLBot> in - cont generic A Corridor cyc l bot
+22:01:14 <CycLBot> in - cont generic Cyc process cyc l bot
+22:01:15 <dmiles> cant take predicates.. just PartlyTangalbes
+22:01:16 <CycLBot> isa cyc l bot player instance
+22:01:18 <CycLBot> isa cyc l bot geographical region
+22:01:31 <humhut-away> ok.  i guessed :)
+22:05:12 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+22:05:12 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+22:05:12 --- quit: aminorex (carter.openprojects.net irc.openprojects.net)
+22:05:12 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+22:05:12 --- quit: humhut-away (carter.openprojects.net irc.openprojects.net)
+22:05:16 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+22:05:35 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+22:05:35 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+22:05:44 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+22:05:44 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+22:05:44 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+22:05:49 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+22:15:19 <humhut-away> ask: (in-ContGeneric ?X CycLBot )
+22:15:20 <CycLBot> (((?X . isa)) ((?X . Area1002)) ((?X . Cyc)))
+22:15:54 <humhut-away> ask: (in-ContGeneric ?X isa)
+22:15:55 <CycLBot> no answers found
+22:16:03 <dmiles> look Cyc
+22:16:04 <CycLBot> in - cont generic Cyc process cyc l bot
+22:16:05 <CycLBot> isa Cyc process player instance
+22:16:05 <CycLBot> isa Cyc process the term
+22:16:06 <CycLBot> isa Cyc process cyclist
+22:16:06 <CycLBot> isa Cyc process entity
+22:16:07 <CycLBot> isa Cyc process indexical
+22:16:07 <CycLBot> isa Cyc process proposed public constant
+22:16:47 <dmiles> two Cyc's the Cyc process and the Cyc Bot
+22:18:16 <humhut-away> ask: (in-ContGeneric ?X Cyc)
+22:18:17 <CycLBot> no answers found
+22:18:23 <humhut-away> ask: (in-ContGeneric ?X Cyc bot)
+22:18:24 <CycLBot> no answers found
+22:18:28 <humhut-away> oops
+22:18:37 <humhut-away> oh  ok.
+22:18:57 <dmiles> (in-ContGeneric Cyc CycLBot)
+22:19:01 <dmiles> ask: (in-ContGeneric Cyc CycLBot)
+22:19:02 <CycLBot> true sentence
+22:25:15 <humhut-away> ask: (in-ContGeneric isa CycLBot)
+22:25:15 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+22:25:15 <CycLBot> true sentence
+22:25:29 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+22:25:37 <humhut-away> ask: (in-ContGeneric ?Z CycLBot)
+22:25:37 <CycLBot> (((?Z . isa)) ((?Z . Area1002)) ((?Z . Cyc)))
+22:26:10 * humhut-away has left the room.
+23:04:12 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+23:04:12 --- quit: aminorex (carter.openprojects.net irc.openprojects.net)
+23:04:12 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+23:04:12 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+23:04:12 --- quit: humhut-away (carter.openprojects.net irc.openprojects.net)
+23:04:14 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+23:04:33 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:04:33 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:04:33 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+23:04:39 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:04:39 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+23:04:39 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+23:31:27 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+23:31:27 --- quit: aminorex (carter.openprojects.net irc.openprojects.net)
+23:31:27 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+23:31:29 --- quit: humhut-away (carter.openprojects.net irc.openprojects.net)
+23:31:29 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+23:31:29 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+23:31:51 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+23:31:51 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+23:31:51 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:31:51 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:31:51 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:31:51 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+23:43:02 --- quit: aminorex (carter.openprojects.net irc.openprojects.net)
+23:43:02 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+23:43:03 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+23:43:03 --- quit: humhut-away (carter.openprojects.net irc.openprojects.net)
+23:43:03 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+23:43:04 --- quit: dmiles (carter.openprojects.net irc.openprojects.net)
+23:43:11 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+23:43:11 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+23:43:11 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:43:11 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+23:43:11 --- join: humhut-away (~trumpet@fw224.novosoft.ru) joined #opencyc
+23:43:11 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+23:43:37 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+23:43:37 --- quit: aminorex (carter.openprojects.net irc.openprojects.net)
+23:43:37 --- quit: CycLBot (carter.openprojects.net irc.openprojects.net)
+23:43:48 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:43:48 --- join: aminorex (~alk@199.199.248.61) joined #opencyc
+23:43:48 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+23:47:05 --- join: Edison (~tweber@pD9EB4A23.dip.t-dialin.net) joined #opencyc
+23:49:21 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+23:50:16 --- quit: jlatour (Client Quit)
+23:59:59 --- log: ended opencyc/02.06.20

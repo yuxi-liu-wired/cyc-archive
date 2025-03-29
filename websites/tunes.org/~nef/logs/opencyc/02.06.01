@@ -1,0 +1,193 @@
+00:00:00 --- log: started opencyc/02.06.01
+00:00:32 <dmiles> there is anohter java file that adds methods to objects created in that
+00:19:21 <yottzumm> e2c: why is there air?
+00:20:13 <yottzumm> e2c: there is air to blow up basketballs
+00:23:46 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+00:26:18 <dmiles> e2c: there is air 
+00:26:19 <CycLBot> '#$thereExists'('?Var', '#$and'('#$isa'('?Var', '#$Air'), '?SomeRelation'))
+00:26:28 <jlatour> Mornin' dmiles
+00:26:33 <jlatour> What's e2c?
+00:26:41 <dmiles> english to cycl
+00:26:47 <jlatour> I see you've made quite some progress.
+00:27:06 <jlatour> e2c: there is life
+00:27:13 <jlatour> Hrm.
+00:27:26 <dmiles> e2c: there is lives
+00:27:32 <jlatour> are? :)
+00:27:44 <dmiles> e2c: there are lives
+00:28:02 <dmiles> hrrm .. i am going to reload it.. with TT and WN.. should help
+00:28:12 <dmiles> takes about 54 minutes
+00:28:14 <dmiles> err 5
+00:28:36 <jlatour> k
+00:29:32 <dmiles> subl: (load "tt0.00022.cycl")
+00:30:00 <jlatour> Which prefixes work atm?
+00:30:45 <dmiles> there are about 50 now.. i need to do a context sensitive help
+00:31:47 <jlatour> ack, 50?
+00:32:02 <dmiles> like look,say,join,part,event,registerplugin.. etc
+00:32:10 <dmiles> and plugins add more
+00:32:54 <dmiles> i started adding in mud client verbs
+00:33:17 <dmiles> i think the load command has him very busy
+00:33:20 <dmiles> look
+00:33:25 <dmiles> yep
+00:33:43 <jlatour> Ah, those.
+00:34:31 <dmiles> as well as some things that just test interfaces (like e2c)
+00:34:47 * jlatour nods.
+00:47:49 <CycLBot> java.lang.RuntimeException: Unknown cfasl opcode: -1
+00:47:51 <CycLBot> Nothing appearent about Area1002 '#$Area1002'
+00:47:51 <CycLBot> []
+00:50:47 <jlatour> I guess it's done
+00:50:59 <dmiles> oops done and dies
+00:51:05 <dmiles> died
+00:51:18 <dmiles> subl: (+ 1 1)
+00:51:18 <CycLBot> java.net.SocketException: Socket closed
+00:51:25 --- quit: CycLBot (Remote closed the connection)
+00:51:34 <dmiles> reloading
+00:51:47 <dmiles> i tried to load TT and WN at the same time
+00:52:02 <jlatour> Ah
+00:52:22 <dmiles> restating now
+00:52:59 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+00:53:13 <dmiles> ok WN is loaded
+00:53:18 <dmiles> now for TT
+01:10:54 --- quit: CycLBot (Remote closed the connection)
+01:11:42 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+01:12:22 <dmiles> once its done loading TT.. i doe the NL push
+01:12:30 * jlatour nods.
+01:13:01 <dmiles> TT puts TT-Wrd in front of each thing.. have to parse that out
+01:21:06 --- quit: yottzumm ("Client Exiting")
+03:14:22 --- quit: dash (Read error: 113 (No route to host))
+08:08:04 --- join: dash (washort@d154.narrowgate.net) joined #opencyc
+10:19:09 --- quit: dash ("reboot macht frei")
+12:03:21 --- join: bbz (~chatzilla@cs24243226-150.austin.rr.com) joined #opencyc
+12:03:39 <dmiles> ah wow with TT and WN loaded its a 190meg .load file :)
+12:03:53 <jlatour> Eeps
+12:03:59 <dmiles> i am of the opinion big is better
+12:04:00 <jlatour> e2l: there is air
+12:04:05 <jlatour> Ehm, c
+12:04:08 <jlatour> e2c: there is air
+12:04:09 <CycLBot> '#$thereExists'('?Var', '#$and'('#$isa'('?Var', '#$Air'), '?SomeRelation'))
+12:04:13 <dmiles> i fell asleep waiting for TT :>
+12:04:19 <jlatour> e2c: There is life
+12:04:29 <jlatour> e2c: There are lifes
+12:04:33 <dmiles>  e2c: there is life
+12:04:39 <jlatour> e2c: there are lives
+12:04:53 <jlatour> e2c: hello?
+12:04:55 <dmiles>  e2c: there are living things
+12:04:56 <CycLBot> '#$thereExists'('?Var', '#$and'('#$isa'('?Var', '#$BiologicalLivingObject'), '?SomeRelation'))
+12:05:00 <jlatour> Hrm.
+12:05:44 <dmiles> well even though its load the NL Server hasnt queried Cyc yet
+12:05:58 <dmiles> about to make it do that...
+12:07:10 <dmiles> bsh: cyc.sendCycNlWords()
+12:07:32 <dmiles> it will come back with an eror when its done
+12:07:44 <dmiles> i just forgot to close the file output stream
+12:07:52 <jlatour> tsk tsk
+12:09:58 <dmiles> hrrm there are some CycObjects i cant get serialized
+12:09:58 --- quit: bbz (Remote closed the connection)
+12:10:25 <dmiles> i think these are !isProper() lists
+12:10:41 <dmiles> Conses.. etcv
+12:13:16 <dmiles> looks like TT loads 50,364 words
+12:13:57 <jlatour> What's TT again?
+12:14:16 <dmiles> Thought treasuer
+12:14:29 <jlatour> Oh that. Thanks.
+12:15:03 <dmiles> it contains the support to get to a deep structure parse (deep enough) for language to language translation
+12:16:29 <dmiles> it has 334 entry points into Cyc that i have seen so far
+12:17:10 <dmiles> so sometimes you have to take a worrd like 'toy' and run it up through physycal-object untill you get PartillyTnagible
+12:17:16 <jlatour> I should continue reading up on OpenCyc and LISP
+12:18:06 <jlatour> And Zope! And, and, and...
+12:18:15 <dmiles> so ontologically a TT word will at least have a place in Cyc.. i am trying to use it very last though in searches sincce i have to resolve the TT-Word up sometimes 5 levels to get a CycObject
+12:18:36 * jlatour nods.
+12:18:50 <dmiles> having a place in cyc as in in the current search path over predicates
+12:19:40 <dmiles> explain Zope
+12:19:59 <dmiles> its very related to Soap right?
+12:20:17 <jlatour> I hardly know anything about it. All I know is that Cycorp uses it in its webdevelopment.
+12:22:48 <dmiles> i think Zope is an orientated remote procedure system that works over the web
+12:23:21 <jlatour> It appears to be more of a content management system and application framework
+12:24:29 <dmiles> yeah.. looks good.. built off transactioning content between systems
+12:25:16 <dmiles> as long as i dont have to get good with python i am happy :) i dont mind learning, i just need one thing at a time :)
+12:25:54 <jlatour> Maybe I should work on my Java project, before I get too busy with other things
+12:26:12 <dmiles> what is your java based project?
+12:26:39 <jlatour> Argh, some stupid Network Pong game that I have to make for a university course.
+12:27:15 <dmiles> sounds good you'll get some java chops if you dont already have them
+12:27:21 <jlatour> java chops?
+12:27:54 <dmiles> auto-kenetic mussle training to code java 
+12:28:36 <dmiles> so when you need to do something ion java.. the code auto-appears in front of your and ready for fingers
+12:28:46 <jlatour> The problem is I seem to have taken it on myself to follow all the principles of the assignment: OO-design, seperation of MFC, usage of the Java standard classes
+12:29:20 <jlatour> Which is of course what people are supposed to do. But noone does it (everyone just trying to get it look pretty), and the teachers don't really expect you to do it, so they don't schedule the time for it.
+12:29:24 <dmiles> that is better.. otherwise your java classes would be become morwe difficult to manange
+12:29:30 <jlatour> In addition to that, my partner is terrible with Java programming :)
+12:29:45 <jlatour> Of course it's better, that's why I'm doing it. All this generic programming does however take time.
+12:29:59 <dmiles> i look at some prolog code i did thats over a 1000 lines in one file that has no comments
+12:30:14 <jlatour> Another thing, lots of documenting. Even installed doccheck :)
+12:31:05 <jlatour> But at the end of last trimester, when the project was due, everyone had thrown together things that often looked kind of nice, and I had a thorougly designed system, with documentation and everything... which wasn't finished
+12:31:13 <dmiles> i like java becasue the OO ness tends to document itself.. the only time docs are absolutely nessisary is when you have things that do the same things as others but with a 'twist'
+12:31:14 <jlatour> Sorry. Frustration running back :)
+12:31:41 <dmiles> i mean methods that seem to do simular things
+12:32:17 * jlatour nods.
+12:32:45 <jlatour> Well at least I got to learn Java
+12:32:50 <dmiles> well i see that every project has a certain amount of manna...  you can invest it in planning/design/coding/documenting each use up total manna
+12:33:27 <dmiles> if i do to much planning i get wipped out..
+12:33:28 <jlatour> Doing the work of 1.8 person and doing it the hard way kind of uses up your 'manna'.
+12:34:10 <dmiles> yeah.. well thats how the real world works unfortunately
+12:34:33 <jlatour> Well I can try again this trimester. I have one month to finish it.
+12:34:43 <dmiles> its just harder when that other person hould be wanting to work as hard
+12:34:51 <dmiles> (but isnt)
+12:36:10 <dmiles> too bad you couldnt incorperte  some use of Cyc in your java class :)
+12:36:41 * jlatour grins.
+12:36:53 <jlatour> It's complicated enough as it is
+12:37:07 <dmiles> what i'd love to see.. i started trying and gave up was a SQL front end to cyc so language like INSERT/SELECT/DELETE could be used to manipulate Gafs
+12:38:18 <dmiles> i mean i could work on it more... i have a project setup by manipulating existing SQL server code to instead use Cyc.. but its a ton of work shoveling out the interds of SQL to replace 'table' with cyc
+12:39:10 <jlatour> What is your connection with OpenCyc? Just interest?
+12:39:26 <dmiles> but i see it as valiable.. if speed/scalling wanst an issue it would be fun to take existing SQL apps and replacinging them with Cyc somehow instead of 'caching' it as an external microtheory
+12:40:00 <dmiles> i have a variaety of apps i have been working opn over the years that has needed cyc
+12:40:44 <dmiles> so am interested in ussing it in all of them (in some order)
+12:41:16 <dmiles> just interest.. but hoping that some of the tools i make became usfull to others (like CycLBot)
+12:41:39 * jlatour nods.
+12:41:58 <dmiles> my end goals is to make AI reality .. and opencyc is the best and shortest path
+12:43:02 <jlatour> Perhaps. But still a long enough path
+12:43:10 <dmiles> once opencyc has a 2-way CLOS that is visible to the outside world that will be much easier
+12:43:25 <jlatour> CLOS?
+12:43:30 <dmiles> (common lisp object system)
+12:44:05 <dmiles> meaning objects that dont fit into the expert system paradymn will still be availalbe with 3rd party tools
+12:44:36 <dmiles> like a lisp WebPageFether
+12:44:43 <dmiles> err fetcher
+12:45:14 <dmiles> then one could run anyalisis over text.. retreived by the fetcher object
+12:45:39 <dmiles> and what and how often pages are accessed controled by rules..
+12:45:50 <jlatour> Hrm. Zope looks like Ariadne.
+12:46:09 <dmiles> means that every pramaitc task one would wnat their computer to do could be planned and mananged by cyc
+12:46:31 <dmiles> and a human could use cyc as their ultimate mental librarian
+12:47:37 <dmiles> and cyc can help us solve problems with solutions that satifify the big picture goals .. and give us the joy of short term complketeion
+12:47:54 <jlatour> Maybe I should have studied Artificial Intelligence instead :)
+12:48:00 <dmiles> since it's scope of undertsnading is larger then humans
+12:49:12 <dmiles> well AI work should be based off knowing how to code 
+12:50:19 <dmiles> AI science studies equip you with knowing what is needed.. but then shows you there are very few tools and you have to go out and write them yourselves
+12:50:55 <dmiles> cyc luckily is not one of those things that is not written but very nescisary
+12:52:36 <dmiles> the serilaxztion of the NL parts of the cyc kb with all those things loaded in is 800 meg;)
+12:53:21 <jlatour> I wonder. If we put all concepts known to man (m/f) in the cyc kb... how large would that be
+12:53:21 <dmiles> i have a process that will compress that now into a dictionary of pointers.. so it will probly only be about 20 megs
+12:54:14 <dmiles> well you have to take napster+teraserver+ all the very big KBs out there at least
+12:54:50 <dmiles> well may not be able to manufacture storage fast engough to hold what is create4d dially from reality
+12:57:39 <dmiles> i thiunk we could enumerate a single human in todays machines
+13:00:55 <jlatour> Back.
+13:02:26 <dmiles> the complete export to cyc to the nl parser process takes it looks like 2 hours per syncronizatin :)
+13:03:40 <dmiles> its not a big enough deal to work too hard on this process since it is only a proxy system to help the waiting for cycNL
+13:04:16 <dmiles> i speed it up by having the CycL get written to a fule the NL server recives
+13:04:37 <dmiles> then the NL server chewls it up and does some forward chaining
+13:04:51 <dmiles> caches the results.. then becaomes lightning fast
+13:05:03 <jlatour> What's a fule?
+13:05:12 <dmiles> er file
+13:05:21 <jlatour> Ah :)
+13:05:42 <dmiles> so instead of creating a transaction for each NL based predicate in Cyc .. it makes  afile of all NL type content
+13:06:12 <dmiles> then the NL server reads all of that and starts completely forward chaining the rules
+13:06:41 <dmiles> then it constucts all the possible pasrts of speech
+13:07:29 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/foo <- example cache
+13:07:59 <jlatour> Yes, saw that :)
+13:08:41 <dmiles> that file is about to grown 10 times at least once the sync finishes
+13:09:04 <jlatour> Probably, yes.
+13:09:06 <dmiles> there are arround 200,000 TT type infos
+13:09:35 <dmiles> hopefully that will fall into the catagory of whats cahched
+13:12:45 <dmiles>  cycdumppl compiled 11.67 sec, 28,372,516 bytes
+13:13:24 <dmiles> now its forwards chaing the rules file
+18:19:18 --- quit: jlatour (Read error: 104 (Connection reset by peer))
+18:35:37 --- quit: CycLBot (Remote closed the connection)
+19:00:19 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+22:27:05 --- quit: dmiles ("JediKnight2 for MacOS X (2.0 (11/11/01))")
+22:28:27 --- join: dmiles (~OULWC@12-225-207-235.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.06.01

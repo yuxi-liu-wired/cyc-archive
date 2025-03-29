@@ -1,0 +1,64 @@
+00:00:00 --- log: started opencyc/02.11.17
+00:30:34 --- quit: devEiant (Remote closed the connection)
+06:46:45 <yepster> question: how to get the sum of ?x in (forall ?some-thing (cost ?some-thing ?x))
+06:47:15 <yepster> plusfn wants a list of arguments
+06:54:48 <yepster> to be more precise: the sum of x in this query:
+06:54:48 <yepster> (#$and 
+06:54:49 <yepster>   (#$isa ?AC #$VerlenenVanSubsidieArt25211a) 
+06:54:49 <yepster>   (#$cost ?AC ?X))
+06:55:25 <yepster> which now returns
+06:55:25 <yepster> [Explain #1] HYP-VerlenenVanSubsidieArt25211a-8736 (Euro 2000)
+06:55:25 <yepster> [Explain #2] HYP-VerlenenVanSubsidieArt25211a-8740 (Euro 3000)
+07:01:11 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+07:10:31 --- join: graylensman (~ray@fl-wbu2c6-273.pbc.adelphia.net) joined #opencyc
+07:11:51 --- join: ray__ (~ray@fl-wbu2c6-273.pbc.adelphia.net) joined #opencyc
+07:13:45 <yepster> hmm plusall
+07:15:43 --- quit: ray__ (Client Quit)
+07:24:10 <yepster> hmm no answers from this:
+07:24:10 <yepster> (#$equals 
+07:24:10 <yepster>   (#$PlusAll 
+07:24:10 <yepster>     (#$TheSetOf ?X 
+07:24:10 <yepster>       (#$and 
+07:24:11 <yepster>         (#$isa ??AC #$VerlenenVanSubsidieArt25211a) 
+07:24:13 <yepster>         (#$cost ??AC ?X)))) ?Y)
+07:24:26 <yepster> pff
+07:31:24 <yepster> (#$evaluate ?SUM 
+07:31:24 <yepster>   (#$PlusAll 
+07:31:24 <yepster>     (#$TheSetOf ?X 
+07:31:24 <yepster>       (#$and 
+07:31:24 <yepster>         (#$isa ??AC #$VerlenenVanSubsidieArt25211a) 
+07:31:25 <yepster>         (#$cost ??AC ?X)))))
+07:31:44 <yepster> no answers. Maybe PlusAll cannot sum monetaryvalues
+07:32:35 <yepster> hmm plusfn can..
+08:00:11 <yepster> now this _should_ work ?
+08:00:20 <yepster> (#$evaluate ?SUM 
+08:00:20 <yepster>   (#$PlusAll #$Testset #$IdentityFn))
+08:00:24 <yepster> where testset =
+08:00:41 <yepster> Mt : UniversalVocabularyMt
+08:00:41 <yepster> isa : [Def]Set-Mathematical
+08:00:55 <yepster> Mt : BaseKB
+08:00:55 <yepster> [Def](elementOf (Dollar-UnitedStates 2000) Testset)
+08:00:55 <yepster> [Def](elementOf (Dollar-UnitedStates 1000) Testset)
+08:02:18 <yepster> ah!
+08:02:18 <yepster> (CYC-PLUS-ALL)
+08:02:19 <yepster> 500 "Operator CYC-PLUS-ALL is not defined in the API"
+10:03:34 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+10:04:49 --- part: devEiant left #opencyc
+10:06:35 --- join: deltab_ (~deltab@espians.com) joined #opencyc
+10:06:44 --- quit: deltab (benford.freenode.net irc.freenode.net)
+10:06:44 --- quit: Kinoc (benford.freenode.net irc.freenode.net)
+10:06:44 --- quit: Cobra (benford.freenode.net irc.freenode.net)
+10:08:57 --- nick: deltab_ -> deltab
+10:12:42 --- join: Kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:12:42 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+10:28:12 --- quit: graylensman ("Client Exiting")
+10:37:04 --- quit: yepster ()
+11:08:03 --- join: graylensman (~ray@fl-wbu2c6-273.pbc.adelphia.net) joined #opencyc
+12:32:21 --- quit: graylensman ("Client Exiting")
+14:44:33 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:23:01 --- quit: Cobwa ("[x]chat")
+17:00:57 <ZivZ> hernanc
+17:01:20 <ZivZ> oops worng keyboard.
+17:58:19 --- join: graylensman (~ray@fl-wbu2c6-49.pbc.adelphia.net) joined #opencyc
+22:07:16 --- quit: graylensman ("Client Exiting")
+23:59:59 --- log: ended opencyc/02.11.17

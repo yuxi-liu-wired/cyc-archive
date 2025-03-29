@@ -1,0 +1,604 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON inferencing.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Introduction to Cyc Inferencing</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href="http://www.cyc.com"><img src="/cycdoc/img/opencyc-logo-small.gif" border=0 alt="OpenCyc.org Homepage"></a>Introduction to Cyc&reg; Inferencing</h2>
+
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 3/29/02<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+
+<hr>
+
+This document is an introduction to inferencing in Cyc-10, which is the current version of the Cyc&reg; Knowledge Server. It assumes some familiarity with the general Cyc system.
+
+<hr>
+<h2>Contents:</h2>
+
+<UL>
+<LI><A HREF="#1">Overview of Cyc Inferencing</A>
+<LI><A HREF="#2">The Internal Representation of Assertions</A>
+<LI><A HREF="#3">Inferencing: An Introduction</A>
+<LI><A HREF="#4">Inferencing in Cyc</A>
+<UL>
+<LI><A HREF="#4.1">Heuristics for Deciding Which Node to Expand</A>
+<LI><A HREF="#4.2">Weighing Heuristics</A>
+<LI><A HREF="#4.3">Heuristics for Deciding Which Literal in a Node to Expand</A>
+<LI><A HREF="#4.4">Parameters of search in Cyc-10</A>
+<LI><A HREF="#4.5">Search Nodes</A>
+</UL>
+<LI><A HREF="#5">ASKs and Direction</A>
+<UL>
+<LI><A HREF="#5.1">Backward GAFs</A>
+</UL>
+<LI><A HREF="#6">Equality</A>
+</UL>
+
+
+
+<H2><A NAME="1">1.  Overview of Cyc Inferencing</A></H2>
+
+The Cyc inference engine handles 
+<A HREF="glossary.html#modus-ponens">modus ponens</A> 
+and 
+<A HREF="glossary.html#modus-tollens">modus tollens</A> 
+(contrapositive) inferencing, 
+<A HREF="glossary.html#universal quantification">universal</A> 
+and 
+<A HREF="glossary.html#existential quantification">existential</A> 
+quantification, and mathematical inferencing.  It uses contexts called 
+<A HREF="glossary.html#mt">microtheories</A> 
+to optimize inferencing by restricting search domains.<p>
+
+The Cyc 
+<A HREF="glossary.html#KB">knowledge base</A> 
+contains over 1 million assertions.  Many approaches
+commonly taken by other inference engines (such as frames, RETE match,
+Prolog, etc.) just don't scale well to KBs of this size.  As a result,
+the Cyc team has been forced to develop other techniques.<p>
+
+Cyc also includes several special-purpose inferencing modules for
+handling a few specific classes of inference.  One set of modules
+handles reasoning concerning collection membership, subsethood, and
+disjointness.  Another handles equality reasoning.  Others implement
+fast reasoning with <a href=/cycdoc/vocab/fundamental-vocab.html#genlPreds>#$genlPreds</a> and <a href=/cycdoc/vocab/fundamental-vocab.html#genlAttributes>#$genlAttributes</a>.  Still others
+implement symmetry, transitivity and reflexivity reasoning.
+
+
+<H2><A NAME="2">2.  The Internal Representation of Assertions</A></H2>
+
+In previous versions of Cyc, formulas are stored and reasoned
+with in the same form in which they appear in the KB browser, e.g.
+
+<pre>
+   (implies
+      (and
+         (isa ?afp AdultFemalePerson)
+         (residesInRegion ?afp Guam))
+      (and
+         (acquaintedWith Zippy ?afp)
+         (likesAsFriend Zippy ?afp)))
+</pre>
+
+In Cyc-10, formulas asserted to the KB are stored internally, and
+reasoned with, in 
+<A HREF="glossary.html#CNF">conjunctive normal form</A> (CNF).
+When converted to CNF, a formula gets rewritten as a conjunction of
+disjunctions of negated and non-negated 
+<A HREF="glossary.html#literal">literals</A>.
+So, for example, the formula above would be written in CNF as:
+
+<pre>
+   (and
+      (or
+         (not (isa ?afp AdultFemalePerson))
+         (not (residesInRegion ?afp Guam))
+         (acquaintedWith Zippy ?afp))
+      (or
+         (not (isa ?afp AdultFemalePerson))
+         (not (residesInRegion ?afp Guam))
+         (likesAsFriend Zippy ?afp)))
+</pre>
+
+Each of the conjuncts would become a separate assertion.
+
+<p>
+Converting to CNF is part of the job of the Cyc-10 canonicalizer. The canonicalizer
+turns CycL formulas into canonical form, so that that they can be
+added to the KB as assertions, looked up in the KB, etc.  Some of the
+other things the canonicalizer does are outlined below.
+
+<p>
+In Cyc-10, as well as in earlier versions of Cyc, 
+<A HREF="glossary.html#universal quantification">universal quantification</A> 
+is handled trivially by leaving universally quantified variables unbound, while 
+<A HREF="glossary.html#existential quantification">existential quantification</A> 
+is handled through the use of 
+<A HREF="glossary.html#Skolem function">Skolem functions</A>.  
+Thus an assertion which is originally entered as:
+
+<pre>
+   (forAll ?A
+      (implies
+         (isa ?A Animal)
+         (thereExists ?M
+            (and
+               (mother ?A ?M)
+               (isa ?M FemaleAnimal)))))
+</pre>
+
+will be converted to something like:
+
+<pre>
+   (implies  
+      (isa ?A Animal) 
+      (and  
+         (mother ?A (SkolemFunctionFn (?A) ?M)) 
+         (isa (SkolemFunctionFn (?A) ?M) FemaleAnimal)))
+</pre>
+
+and then further converted to CNF:
+
+<pre>
+   (and
+      (or
+         (not (isa ?A Animal))
+         (mother ?A (SkolemFunctionFn (?A) ?M)))
+      (or
+         (not (isa ?A Animal))
+         (isa (SkolemFunctionFn (?A) ?M) FemaleAnimal)))
+</pre>
+
+Skolem functions are handled exactly like all other functions (except that Cyc
+creates and names the function term for you).  You are free to rename
+the function term, or do anything else with it that you might do with
+a function such as <tt>MotherOf</tt>.  In fact, in Cyc-10 the Skolem
+function itself is
+<A HREF="glossary.html#reification">reified</A>, 
+so that the formula above becomes the following, and would be added to
+the KB as 6 separate assertions:
+
+<pre>
+   (and
+      (or
+         (isa SKF-8675309 SkolemFunction))
+      (or
+         (arity SKF-8675309 1))
+      (or
+         (arg1Isa SKF-8675309 Animal))
+      (or
+         (resultIsa SKF-8675309 FemaleAnimal))
+      (or
+         (not (isa ?U Animal))
+         (mother ?U (SKF-8675309 ?U)))
+      (or
+         (not (isa ?U Animal))
+         (isa (SKF-8675309 ?U) FemaleAnimal)))
+</pre>
+
+Another task the Cyc-10 canonicalizer takes care of is the ordering of
+literals in assertions.  The advantage of a canonical literal order is
+that it simplifies KB lookup; only a test for structural equality is
+required to determine that 2 formulas are the same.
+
+<p>
+The major advantage to using CNF as an internal representation is that
+it greatly simplifies the conceptual scheme used in inferencing,
+because all axioms have a uniform structure.  For example, using CNF
+as a canonical form means that you get 
+<A HREF="glossary.html#modus-tollens">modus tollens</A> 
+inferencing "for free".  When you add
+
+<pre>
+   P and Q => R
+</pre>
+
+to the system, it gets canonicalized to the CNF form
+
+<pre>
+   not(P) or not(Q) or R
+</pre>
+
+Note that both of the following would be canonicalized to the same CNF form:
+
+<pre>
+   P and not(R) => not(Q)
+   Q and not(R) => not(P)
+</pre>
+
+Since the internal CNF can be used to attempt to prove any of three 
+<A HREF="glossary.html#literal">literals</A> 
+of which it is constituted, it's as if all three forms of the rule
+were virtually present in the KB.
+
+<p>
+There is only one potential downside to using CNF, which is that
+certain types of assertions which can be expressed quite compactly in
+conditional form become somewhat unwieldy when converted to CNF.
+Specifically, an assertion of the form:
+
+<pre>
+   (implies
+      (or  P1 P2 P3 ... Pm)
+      (and Q1 Q2 Q3 ... Qn))
+</pre>
+
+will result in a CNF with m times n conjuncts.  However, we do not
+regard this as a significant problem, since asserting formulas of this
+form constitutes bad KE style, and thus is unlikely to occur very
+often.  In particular, a knowledge enterer who writes such a formula
+is probably attempting to use the P1 ... Pm literals as an exhaustive
+list of cases in which the consequent should hold, when he or she
+should have been shooting for a single meaningful generalization.
+
+<H2><A NAME="3">3.  Inferencing: An Introduction</A></H2>
+
+Backward inferencing--the type of inferencing initiated by an 
+<A HREF="glossary.html#ASK">ASK</A> 
+operation--can be regarded as a search through a tree of nodes, where
+each node represents a
+<A HREF="glossary.html#CycL">CycL</A> 
+formula for which bindings are sought, and each link represents a
+transformation achieved by employing an assertion in the knowledge
+base. 
+
+<p>
+For example, let's say I ask for bindings for the formula
+<tt>(likesObject ?x ?y)</tt>.  That formula will constitute the root
+node of an inference search tree.  What I am looking for is any assertion
+which will help provide bindings for <tt>?x</tt> and <tt>?y</tt>.  The
+KB may contain some ground assertions involving <tt>likesObject</tt>,
+such as
+
+<pre>
+   (likesObject Keith BillM)
+</pre>
+
+and also some if-then rules, such as
+
+<pre>
+   (implies
+      (possesses ?x ?y)
+      (likesObject ?x ?y))
+</pre>
+
+Each of these provides a way to expand the root node.  That is, each
+constitutes a link to a new node with a different formula to satisfy;
+these new nodes will be the leaf nodes of the search.  In the first
+case, the formula to satisfy in the new node is simply
+
+<pre>
+   <a href=/cycdoc/vocab/math-vocab.html#True>#$True</a>
+</pre>
+
+In the second case, using the if-then rule takes us to a new node that
+now needs to satisfy the formula
+
+<pre>
+   (possesses ?x ?y)
+</pre>
+
+The search procedure may now recurse on this new node, because if we
+can find bindings for this formula, the if-then rule will give us
+bindings for our original formula.  Perhaps the KB also contains a
+rule which says,
+
+<pre>
+   (implies
+      (objectFoundInLocation ?x KeithsHouse)
+      (possesses Keith ?x))
+</pre>
+
+This assertion can take us to yet another node with the goal formula
+
+<pre>
+   (objectFoundInLocation ?x KeithsHouse)
+</pre>
+
+That is, we are now looking for things found in Keith's house, because
+if something is found in Keith's house, then Keith possesses it, and
+if someone possesses something, then he or she likes it.  Note that
+this new node has one less free variable than its parent, which is
+probably desirable.
+
+<p>
+Alternatively, there may be another rule which states
+
+<pre>
+   (implies
+      (and
+         (isa ?x Agent)
+         (owns ?x ?y))
+      (possesses ?x ?y))
+</pre>
+
+This rule could take us to a new node whose formula to satisfy is
+
+<pre>
+   (and
+      (isa ?x Agent)
+      (owns ?x ?y))
+</pre>
+
+But this is probably not a happy development: we are now three nodes
+down, and the problem is getting more complex, rather than simpler.
+
+<p>
+Thus, the primary issue to be addressed in designing an inference
+procedure is the algorithm to be used for searching the tree.  How do
+we decide which leaf nodes to expand next?  Another important issue is
+to determine how a node is expanded.  That is, how do we find the
+axioms in the knowledge base which are likely to provide links to new
+leaf nodes?
+
+<H2><A NAME="4">4. Inferencing in Cyc</A></H2>
+
+Three important strengths of Cyc inferencing are:
+
+<OL>
+<LI>
+The inferencing code is modular and stable.
+<LI>
+The state of the search is maintained, so that a search which
+suspends due to resouce constraints can resume where it left off.
+<LI>
+Search is completely parameterized, so that various kinds of
+search may be performed.
+</OL>
+
+The first and second items should be self-explanatory, but the third
+demands elaboration.  Cyc-10 does heuristic search by default, but
+depth-first search is also implemented (and is used for forward
+inference, since forward inference requires traversal of the whole
+search tree anyway).  Certain applications also take advantage of
+parameterized search, doing mostly heuristic search but substituting
+in a special method for expanding nodes, or identifying goal nodes,
+etc.  Below we discuss the heuristics Cyc-10 search uses and then we
+cover the various search parameters.
+
+<H3><A NAME="4.1">4.1  Heuristics for Deciding Which Node to Expand</A></H3>
+
+Cyc-10 uses a number of heuristic rules to decide which leaf node to
+expand next.  Some of these are purely syntactic heuristics:
+
+<UL>
+<LI>
+<B>
+Favor nodes with fewer literals to satisfy
+</B> 
+(as compared with all other unexpanded nodes).  This heuristic helps
+to steer the search toward branches that are likely to bottom out
+soon.
+
+<LI>
+<B>
+Favor nodes that have fewer free variables
+</B> 
+(as compared with all other unexpanded nodes).  Like the preceding
+heuristic, this heuristic helps to steer the search toward branches
+that are likely to bottom out soon.
+
+<LI>
+<B>
+Very weakly favor nodes that are higher up in the search tree
+</B>.  
+This heuristic helps to avoid going too far down into the search
+without ever following up on other branches.
+
+<LI>
+<B>
+Strongly favor nodes with no free variables left at all
+</B>.
+If there are no free variables left, there's a good chance we'll be
+able to determine the truth value of the formula just by doing a KB
+lookup.
+
+<LI>
+<B>
+Weakly disfavor nodes which include negative literals
+</B> 
+(that is, anything of the form <tt>(not <I>P</I>)</tt>).  Because the
+KB consists primarily of positive assertions, it is easier to find
+bindings for positive literals than for negative literals.
+</UL>
+
+Other heuristics are semantic: 
+
+<UL>
+<LI>
+<B>
+Disfavor nodes which might be part of a unification cycle
+</B>.
+Basically, try to avoid going in circles.
+
+<LI>
+<B>
+Disfavor nodes which are less likely to be satisfied by KB lookup
+</B>.  
+This is done by adding a measure of disfavor to a node for each of its
+goal literals that mention a predicate and a constant, but the
+constant has no index for the predicate in the KB.
+</UL>
+
+<H3><A NAME="4.2">4.2  Weighing Heuristics</A></H3>
+
+These heuristic rules act in concert, according to a linear summation
+rule.  One way to think of this is as a chorus of agents, each of
+which corresponds to one heuristic and who are each looking to see if
+their heuristic applies.  As each candidate node is presented to the
+chorus, the agents shriek more or less loudly, according to how
+strongly they disfavor the node.  The sum of the volumes of the
+shrieks is compared with the sums of other nodes, and the open node
+with the lowest sum is expanded next.
+
+
+<H3><A NAME="4.3">4.3  Heuristics for Deciding Which Literal in a Node to Expand</A></H3>
+
+In many cases, the formula at a node will contain more than one
+literal.  In the example developed above, for instance, we saw a node
+whose formula to satisfy was
+
+<pre>
+   (and
+      (isa ?x Agent)
+      (owns ?x ?y))
+</pre>
+
+If we choose to expand this node, which of these two literals should
+we expand first?  Should we look for elements of <tt>Agent</tt>, or
+should we look for <tt>owns</tt> pairs? 
+
+<p>
+The solution used in Cyc-10 is to require that each 
+<A HREF="glossary.html#HL">HL module</A> 
+which applies to a literal must be able to provide a heuristic
+estimate for how expensive it would be to apply that module to the
+literal.  These heuristics are linearly summed, and the literal which
+has the lowest heuristic cost is favored most strongly.
+
+<H3><A NAME="4.4">4.4  Parameters of search in Cyc-10</A></H3>
+
+The state of an inference search is provided via a generic search
+structure whose slots maintain the methods used to implement the
+specific search method.  These slots are filled by functions with the
+given arguments and results:
+
+<ul>
+<li>
+too-deep-func    : node depth-cut -> [boolean]
+<br>
+The function in this slot is used to test if the search node is beyond
+the depth cutoff.
+
+<li>
+add-node-func    : node leaves -> leaves
+<br>
+This slot contains the function used to add a new search node to the
+leaves of the search.
+
+<li>
+no-leaves-p-func : leaves -> [boolean]
+<br>
+The function in this slot checks to see if the current search has no
+leaves (in which case the search has been exhaustively completed).
+
+<li>
+next-node-func   : leaves -> node, leaves
+<br>
+This slot contains the function which chooses, from among the search
+leaves, the next search node to expand.
+
+<li>
+goal-p-func      : node -> [boolean]
+<br>
+This function in this slot is used to determine if the search node
+satisfies the search goal.
+
+<li>
+add-goal-func    : node goals -> goals
+<br>
+If the search node is a goal node, the function in this slot adds it
+to the list of goals.
+
+<li>
+options-func     : node -> [list of options]
+<br>
+This slot contains the function used to determine which options to use
+in expanding the search node.
+
+<li>
+expand-func      : node option -> [list of nodes]
+<br>
+This is the function used to expand a search node into a list of new
+'child' search nodes to add to the search.
+</ul>
+
+Depth-first and heuristic search are done by the same basic function.
+This is possible because when the search is initialized, the slots
+above get filled with the correct functions to implement the kind of
+search desired.<p>
+
+<H3><A NAME="4.5">4.5  Search Nodes</A></H3>
+
+Under Cyc-10, each search node is a structure with the following slots: 
+<UL>
+<LI> 
+search : the search this node is part of
+<LI> 
+parent : this node's parent node
+<LI> 
+children : A list of pointers to this node's children
+<LI> 
+depth : the depth of this node in the search tree
+<LI> 
+options : current ways left to expand the node
+<LI> 
+state : a datastructure that contains the semantics of the node
+</UL>
+
+The search node semantic state includes the following information:
+
+<UL>
+<LI> 
+formula : the CycL formula to satisfy, which represents the
+intermediate state of the inference search at this node.
+<LI> 
+inference supports : the assertions and 
+<A HREF="glossary.html#HL">HL modules</A> 
+used to transform our parent's formula into our formula.  The
+inference supports of this node and all its ancestors together
+constitute the complete inference path down to this search node.
+<LI> 
+variable bindings : a mapping between variables in the parent node and
+what they are bound to in this node.
+</UL>
+
+<H2><A NAME="5">5.  ASKs and Direction</A></H2>
+
+ASKs and ASSERTs use 
+<A HREF="glossary.html#direction">direction</A> to control 
+which assertions will be accessed during inference.  
+Direction comes in two flavors: 
+<A HREF="glossary.html#forward">forward</A> 
+and
+<A HREF="glossary.html#backward">backward</A>.
+
+An ASSERT with direction :forward will cause inference to be performed
+at assert time; an ASSERT with direction :backward will cause
+inference to be deferred until ask time.
+
+<H3><A NAME="5.1">5.1  Backward GAFs</A></H3>
+ 
+A backward <A HREF="glossary.html#GAF">GAF</A> is a GAF that will
+not be involved in forward inference.  Forward inference only takes
+place among rules and GAFs that have a :forward direction.  Most
+interfaces that assert formulas into the KB adhere to the default that
+implication statements (rules) are backward and GAFs are forward.
+
+<H2><A NAME="6">6.  Equality</A></H2>
+
+Equality is handled at unification time.  It's as if the KB had a
+unique names assumption: objects with different names are assumed to
+be not equal, unless you specifically override the assumption by
+asserting that two objects are equal, e.g. <tt>(equals Fred Joe)</tt>.
+No inference concerning equality is done at unification time.
+
+<p>
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+</body>
+</html>

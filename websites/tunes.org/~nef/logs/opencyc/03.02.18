@@ -1,0 +1,215 @@
+00:00:00 --- log: started opencyc/03.02.18
+00:14:21 --- quit: yepster ("Leaving")
+00:43:19 --- nick: yepsterzz -> yepster
+00:43:45 <yepster> something missing is calling back from opencyc
+00:48:03 <dmiles> API-REMOTE-EVAL is working
+00:48:32 <dmiles> :) make a CycListParser to listing on the socket
+00:49:03 <dmiles> when it gets a CycSymbol("API-QUIT") diconnect the client
+00:50:28 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/opencyc/org/opencyc/javashell/CycJavaServer.java?rev=1.5&content-type=text/vnd.viewcvs-markup
+00:50:40 <dmiles> that was an example of a callback interface
+00:51:08 <dmiles> oh btw in the Same JVM i shared the same CycAccess
+00:51:27 <dmiles> so really you could add the callback interface right on top of your callto interface
+00:51:50 --- quit: kinoc (Read error: 60 (Operation timed out))
+00:53:44 <dmiles> so oracle would impliment a listener socket (a java thread)
+00:54:10 <dmiles> or something that let cyc eval api expressions against it
+01:55:16 <yepster> thanks
+01:56:13 <yepster> i don't know if i can keep a single thread running inside the jvm of the rdbms, independent of sessions
+02:45:54 --- quit: yepster (leguin.freenode.net irc.freenode.net)
+02:45:54 --- quit: deltab (leguin.freenode.net irc.freenode.net)
+02:45:56 --- quit: Graham (leguin.freenode.net irc.freenode.net)
+02:45:56 --- quit: reed__ (leguin.freenode.net irc.freenode.net)
+02:45:56 --- quit: fleeky (leguin.freenode.net irc.freenode.net)
+02:45:56 --- quit: ChanServ (leguin.freenode.net irc.freenode.net)
+02:46:19 --- join: ChanServ (ChanServ@services.) joined #opencyc
+02:46:19 --- join: deltab (~deltab@espians.com) joined #opencyc
+02:46:19 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+02:46:19 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+02:46:19 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+02:46:19 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+02:46:19 --- mode: leguin.freenode.net set +oo ChanServ Graham
+04:46:46 <yepster> it's a small world.. just reading through some notes on
+04:46:47 <yepster> http://www.ee.cooper.edu/courses/course_pages/past_courses/EE459/SCHANK/
+04:47:01 <yepster> oops wrong link
+04:47:09 <yepster> i meant
+04:47:09 <yepster> http://www.cc.gatech.edu/computing/classes/cs3361_96_spring/Fall95/Notes/
+04:47:19 <yepster> of which cd is a part
+04:47:51 <yepster> at the end of the list.. there is a note about it being copyright 'Ashwin Ram'
+04:49:05 <dmiles> heh
+04:49:19 <dmiles> ;P
+04:49:25 <dmiles> [[i heard that, isa(airplane1, Airplane)], [i heard that, isa(passenger, Person)], [The , passenger,  boarded the , airplane1], [i heard that, isa(pilot, Person)], [The , pilot,  boarded the , airplane1], [i heard that, flight_path(chicago, austin)], [i heard that, flight_path(seattle, chicago)], [airplane1,  taxiied to the runway of , seattle], [airplane1, took off from, seattle], [airplane1,  cruised from, seattle,  towards , chicago], [airpl
+04:49:46 <dmiles> the planner output is in controled english now ussinga genPhrase like thing
+04:50:32 <yepster> is that a story or script?
+04:50:32 <dmiles> the "i heard that" is when it makes a trip to the KB
+04:50:43 <dmiles> yeah all from CD
+04:51:25 <dmiles> what i did was made i cute little CD script called STATE
+04:51:49 <dmiles> STATE has no preconditions existed (considering ?MT)
+04:52:00 <dmiles> except (considering ?MT)
+04:52:04 <yepster> http://acl.ldc.upenn.edu/C/C69/C69-0201.pdf
+04:52:09 <yepster> english to cd parser
+04:52:19 <dmiles> awesome
+04:52:38 <dmiles> one it is considering an ?Mt then it can adhoc Add STATES as needed
+04:53:00 <dmiles> so the resinlting action is ist(Mt,Fact)
+04:53:01 <yepster> state is staticsituation?
+04:53:05 <dmiles> yup
+04:53:18 <yepster> cool
+04:53:24 <dmiles> becasue i didnt want to carry an entire KB as intial state!
+04:53:44 <dmiles> i made a thingy that would "go and get"
+04:53:46 <yepster> i though ist was not assertible
+04:54:00 <dmiles> event_english(true(Truth),
+04:54:00 <dmiles>         /*txt*/ ['i heard that',Truth]).
+04:54:00 <dmiles> script(true(Truth), 
+04:54:00 <dmiles>        /*pcs*/ [considered(Mt)],
+04:54:00 <dmiles>        /*del*/ [],
+04:54:01 <dmiles>        /*add*/ [Truth]):-ist(Mt,Truth).
+04:54:27 <dmiles> yeah ist always clients
+04:54:41 <dmiles> and actually i shouldnt use ist .. i was just cheating
+04:54:55 <dmiles> it need to only get immutable states
+04:55:16 <yepster> i especially liked MTRANS into LTM similarity to knows AGT PROP
+04:55:26 <dmiles> oh yeah
+04:55:35 <dmiles> thatys somewhat heuristical
+04:55:52 <dmiles> (even)
+04:56:23 <dmiles> have you defined mtrans in Cyc ?
+04:56:29 <dmiles> (i didnt see yesterday)
+04:56:50 <dmiles> oh yeah
+04:56:52 <yepster> did a post in forum about cd
+04:57:05 <dmiles> what do you think for this?
+04:57:06 <dmiles> % MTRANS
+04:57:06 <dmiles> event_english(mtrans(Agent,Data,Receiver),
+04:57:06 <dmiles>       /*txt*/ [Agent,'Tell-TheWord',Data,'To-TheWord',Receiver]).
+04:57:06 <dmiles> script(mtrans(Agent,Data,Receiver),
+04:57:06 <dmiles>       /*pcs*/ [knows(Agent,Data),near(Agent,Receiver),canExist(E,'TransferOfInformation')],
+04:57:08 <dmiles>       /*del*/ [],
+04:57:10 <dmiles>       /*add*/ [isa(E,'TransferOfInformation'),knows(Receiver,Data),doneBy(E,Agent)]).
+04:57:10 <yepster> in the current version all constants are renamed to CD-thing
+04:57:34 <dmiles> i need to fix TransferOfInformation
+04:58:06 <yepster> so you assume data is a ELSentence-Assertible?
+04:58:09 <yepster> how about
+04:58:12 <dmiles> yeah
+04:58:16 <dmiles> well PITs
+04:58:24 <dmiles> but yeah you tell me
+04:58:28 <yepster> (implies
+04:58:28 <yepster>   (and
+04:58:28 <yepster>     (isa ?EVENT MTrans)
+04:58:28 <yepster>     (informationUsed ?EVENT ?AIT)    (or infoTransferred?)
+04:58:28 <yepster>     (informationDestination ?EVENT ?LTM)
+04:58:29 <yepster>     (memoryOfAgent ?LTM ?AGENT))
+04:58:31 <yepster>     (containsInfoPropositional ?AIT ?PROP)
+04:58:33 <yepster>   (knows ?AGENT ?PROP)
+04:59:10 <dmiles> ok . yeah the most constrictive type is "knows"
+04:59:25 <dmiles> (methinks)
+04:59:30 <yepster> PIT \subset AIT
+05:00:02 <yepster> maybe just put (informationUsed ?EVENT ?INFO) and (isa ?INFO PropositionalInformationThing) in the antecedent
+05:00:13 <yepster> because containsInfoPropositional doesn't exist
+05:00:22 <dmiles> not unless you are more generl in your preds
+05:00:49 <yepster> and there is really no reason to put an abstract thing in the kb when using this representation
+05:00:53 <dmiles> meaning cycorp advised not trying to "just in case" use isa in antecedants
+05:01:38 <yepster> well argIsa 2 if informati ish actorslots is ait
+05:01:46 <yepster> of
+05:01:58 <dmiles> ah good
+05:02:13 <dmiles> is that lower or too high?
+05:02:39 <dmiles> n/m
+05:02:42 <yepster> ?
+05:02:46 <dmiles> it just works:)
+05:03:15 <dmiles> well constainInfoProp is good constranit
+05:03:22 <yepster> have you loaded the KE text yet?
+05:03:33 <yepster> any suggestions?
+05:03:33 <dmiles> its the minimal grou from all argIsas
+05:04:19 <dmiles> reloading
+05:05:34 <dmiles> (resarting cyc first)
+05:08:39 <dmiles> loaded. very nice
+05:09:23 <dmiles> where to hook in PrimitiveAct
+05:09:29 <dmiles> but maybe it dont need to be
+05:09:30 <yepster> you're more familiar with the things than i, i am very much interested in every remark
+05:09:44 <yepster> PrimitiveAct ConceptualCategory
+05:10:30 <dmiles> Mt : UniversalVocabularyMt
+05:10:30 <dmiles> isa :  CollectionType DisjointCollectionType  
+05:10:30 <dmiles> genls :  Collection  
+05:10:44 <dmiles> hrrm looking
+05:11:31 <dmiles> i like how you hooked like Talking under CD-Speak
+05:12:24 <yepster> yeah so a more detailed opencyc representation would automatically imple CD-Speak
+05:12:54 <yepster> -> useful in figuring out where a script would apply to a given sequence of events
+05:13:03 <dmiles> CD-ACT ?
+05:13:06 <yepster> ACT
+05:13:11 <dmiles> hrrmr
+05:13:32 <yepster> ?
+05:14:31 <dmiles> ok i see its like a collection for all ACTs that have happened
+05:14:47 <dmiles> for like action enbles state rules
+05:15:02 <yepster> exactly
+05:15:34 <dmiles> odd that a CD-SKEAP never finds it's way up genls to there
+05:15:48 <dmiles> err an instance CD-Speak
+05:16:11 <yepster> why?
+05:16:17 <dmiles> but i am seeing you want actions like Talking to be where the instance resides
+05:16:32 <dmiles> (not actually in CD-Speak) ?
+05:16:57 <yepster> ?
+05:16:59 <dmiles> heh i am just trying to pick out anything ;P
+05:17:11 <yepster> i don't even understand the question
+05:17:13 <dmiles> well ok lets say we are planing something that needs CD-Speak
+05:17:32 <dmiles> so we creat an instance of it while doing the plan
+05:17:44 <dmiles> we dont have enoung info to really call it a Talking
+05:17:58 <dmiles> (like our plan just needed us to make noise to get attention)
+05:18:26 <dmiles> so we (thereExists ?E (isa ?E CD-Speak) ...)
+05:18:55 * yepster looks up doc
+05:19:03 <dmiles> if we queried.. (isa ?W CD-ACT)
+05:19:08 <yepster> The ACTs SPEAK and ATTEND have no inferences other than the fact that an MTRANS has taken place whenever they were used
+05:19:12 <dmiles> we'd not find out CD-Speak
+05:19:22 <yepster> so that would be if e.g. john says 'hi there' to mary
+05:19:30 <dmiles> (thereExists ?E (isa ?E Talking) ...) we would
+05:19:56 <yepster> john, 'the speak', 'the mtrans', 'hi there' and mary would be the individuals
+05:19:59 <dmiles> so i am saying no instances used in CD theory would be found under (isa ?W CD-ACT)
+05:20:17 * yepster looks up doc
+05:20:54 <yepster> isn't every primitive act an act?
+05:20:55 <dmiles> nod.. yeah.. the Action itself is also an indidguval
+05:21:13 <dmiles> i belive so
+05:21:30 <dmiles> so i am sugesting genlsing PrimniteAct to CD-ACT
+05:22:03 <yepster> :-)
+05:22:04 <dmiles> (genls PrimitiveAct CD-ACT) and going to ask you what you thoght
+05:23:44 <dmiles> errm sorry PriomitveActis a colection type
+05:24:05 <yepster> a damn
+05:24:10 <yepster> just changed it
+05:24:16 <dmiles> i mean (genls CD-Speak CD-ACT)
+05:24:27 <dmiles> ?
+05:24:40 * yepster will change it to typeGenls
+05:24:47 <dmiles> *nod*
+05:26:49 <yepster> he that's strange
+05:27:03 <yepster> On CD-ACT
+05:27:27 <yepster> press arg1 - genls green cross
+05:27:30 <yepster> empty?
+05:27:50 <dmiles> Last query in ConceptualDependencyVocabularyMt :
+05:27:50 <dmiles> (genls CD-ACT ?ARG2)
+05:27:50 <dmiles> No answers were proven
+05:28:03 <dmiles> *nod*
+05:29:10 <yepster> isa and genls are not in universalvocab
+05:30:01 <dmiles> imho: really any vocab should be :)
+05:31:18 <yepster> strange that some definitions are automatically put in universal and others arent
+05:31:32 <dmiles> well universalvocab should eventually genlMt to  LogicalTruthImplementationMt
+05:32:20 <dmiles> well at least the Impimentation Vocab
+05:42:39 <yepster> well I'm going to let it rest for today. It doesn't make sense
+05:42:51 <yepster> it shows now answers in the mt itself
+05:42:59 <yepster> but does in inferencepsc
+05:54:37 <yepster> found it
+05:54:42 <yepster> a bit stupid
+05:55:07 <yepster> only when asserting (isa CD-ACT Collection), opencyc automatically asserts isa and genls in univervocabmt
+05:55:29 <yepster> and only then it answers true when asking (genls CD-ACT Action) in CDVocabMt
+05:56:00 <yepster> very strange, because:
+05:56:09 <yepster> 1 being collectiontype entails being collection
+05:57:07 <yepster> 2 cdvocabmt was genlMt basekb, logicaltruthmt etc, so why "(genls CD-ACT Action)" \in CDVOcabt not entails (genls CD-ACT Action)
+06:09:13 <yepster> fixed!
+08:43:07 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:51:58 --- quit: kinoc (Read error: 60 (Operation timed out))
+10:59:03 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:27:54 --- quit: kinoc (Read error: 60 (Operation timed out))
+13:29:45 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:34:31 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:43:02 --- quit: kinoc (Read error: 60 (Operation timed out))
+15:52:46 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+16:59:06 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:32:38 --- quit: kinoc (Read error: 60 (Operation timed out))
+19:14:54 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:02:51 --- quit: kinoc (Read error: 60 (Operation timed out))
+21:13:58 --- quit: dmiles (No route to host)
+21:30:44 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+22:08:26 --- quit: kinoc (Read error: 60 (Operation timed out))
+22:45:54 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+23:02:32 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+23:03:11 --- quit: yottzumm (Client Quit)
+23:59:59 --- log: ended opencyc/03.02.18

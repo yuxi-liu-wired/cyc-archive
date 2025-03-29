@@ -1,0 +1,234 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON negation.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Negation in CycL</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>Negation in CycL</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+Last Update: 03/28/2002<br>
+
+<i>Copyright&copy 1996-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  See <a href=/cycdoc/legal-terms.html>Terms of Usage.</a><br>
+
+<hr>
+<a href=/cycdoc/toc.html><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Return to Table of Contents</a><br>
+
+
+<hr>
+
+<p>
+In any sufficiently rich human-crafted knowledge base, there will be
+many propositions P for which
+
+<blockquote>
+  you cannot prove P <br>
+  you cannot prove (not P).
+</blockquote>
+
+In general, the failure to prove P is not a sound basis for concluding
+(not P), i.e., that P is false.  Nevertheless, it is sometimes useful
+to permit this conclusion to be tentatively drawn.
+Negation-by-failure is the inference rule that allows this.  (Note
+that 'not' in CycL is the operator for classical negation; it is not a
+symbol for negation-by-failure.)
+
+<p>
+In CycL there are currently only two instances where
+negation-by-failure is always used, and each is a specific
+well-defined instance of the Closed World Assumption:
+
+<p>
+(1) if P is a literal of the form
+<pre>
+  (equals &lt;constant1&gt; &lt;constant2&gt;)
+</pre>
+then the lack of a proof of P is sufficient to prove (not P).  This is
+the CycL implementation of the Unique Names Assumption.
+
+<p>
+(2) if P is a literal of the form<br>
+<pre>
+  (abnormal &lt;bindings&gt; &lt;rule&gt;)<br>
+</pre>
+then the lack of a proof of P is sufficient to prove (not P).  This is
+the CycL implementation of the policy of minimizing abnormalities.
+
+<p> 
+CycL does provide other mechanisms for using negation-by-failure to
+establish negations which are under the user's control.  
+
+<p> 
+<b>The first mechanism</b> is the use of meta-statements about known limits
+of our knowledge to conclude that certain assertions are not true.
+For example, if we list the 12 men who have walked on the moon, it's
+useful to be able to state that we know that our knowledge on this
+subject is complete.  We can then conclude in one fell swoop via this
+meta-knowledge that all the other billions of humans have not walked
+on the moon.
+
+<p> 
+Thus, in situations where we know that a particular collection has its
+full extent realized, or a particular relation has its full extent
+realized, we can use the lack of an argument for an assertion being
+true as a relatively strong argument for it not being true.
+
+<p> 
+The two supported predicates used for stating complete extent
+knowledge are:
+
+<pre>
+  #$completeCollectionExtent
+  #$completeExtentKnown
+</pre>
+
+HL modules supporting these two predicates are always enabled.  As a
+result, they are typically used in relatively specific microtheories
+which are known to contain certain complete representations of
+knowledge.
+
+<p>
+For example by asserting :
+
+<pre>
+  In UnitedStatesGeographyMt :
+  (#$completeCollectionExtent <a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>)
+
+  In RandMcNallyAtlasMt :
+  (#$completeExtentKnown <a href=/cycdoc/vocab/geography-vocab.html#bordersOn>#$bordersOn</a>)
+</pre>
+
+we now have relatively strong arguments for negations such as :
+
+<pre>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Manitoba <a href=/cycdoc/vocab/geography-vocab.html#State-UnitedStates>#$State-UnitedStates</a>))
+  in the UnitedStatesGeographyMt 
+</pre>
+
+and
+
+<pre>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/geography-vocab.html#bordersOn>#$bordersOn</a> <a href=/cycdoc/vocab/geography-vocab.html#France>#$France</a> #$Taiwan))
+  in the RandMcNallyAtlasMt.
+</pre>
+<p>
+You can contrast the usage of #$completeExtentKnown with that of 
+#$unknownSentence, which itself does not indicate negation. Circumscription 
+(through the use of #$completeExtentKnown) effectively turns an #$unknownSentence 
+into a #$not.
+<p> 
+<b>The second mechanism</b> allows the user to enable the broader use of
+negation-by-failure as an inference method.  The inference parameter
+
+<pre>
+  *NEGATION-BY-FAILURE*
+</pre>
+
+defaults to NIL and controls whether or not negation-by-failure is
+used more broadly.  When this parameter is enabled, support for
+#$minimizeExtent is turned on.  For example, asserting
+
+<pre>
+  (#$minimizeExtent <a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a>)
+</pre>
+
+would indicate that we will use the failure to prove P as a weak
+argument for P whenever the predicate is <a href=/cycdoc/vocab/spatial-vocab.html#geographicalSubRegions>#$geographicalSubRegions</a>.  In
+addition, when this parameter enabled, all collections are minimized,
+providing weak arguments for
+
+<pre>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#not>#$not</a> (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Foo #$Bar))
+</pre>
+
+whenever
+
+<pre>
+  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Foo #$Bar) 
+</pre>
+
+is not already known to be true.
+
+<p> 
+Whenever (not P) is concluded by negation-by-failure, this fact is
+explicitly noted.  During argumentation negation-by-failure is taken
+to be an extremely weak argument for (not P) -- so weak, in fact, that
+any other argument should outweigh it when they are adjudicated.
+Thus, there is an important difference between the assertion (not P)
+and the conclusion that (not P) is true by negation-by-failure.  The
+latter behaves as an assumption.
+
+<p>
+If assuming not(P) leads to a contradiction, then the set of
+assertions involved in the contradiction form a reductio ad absurdum
+proof of P.  In fact, if P can ever be established, then the
+assumption that (not P) must be retracted, and via truth maintenance
+all conclusions derived from it must also be retracted.
+
+<p>
+Using a general minimization inference method tied with assumptions
+and argumentation, Cyc's behavior when asked whether something is not
+true will mirror the kind of belief revision behavior that a human
+typically exhibits.  Consider the following example:
+
+<p>
+(Fact1) My god-daughter's mother used to pat some bald guy named Ed on
+the head during church when she was little.
+
+<p>
+(Q) Did Ed ever walk on the moon?
+
+<p>
+There are two rational answers:
+
+<p>
+(A) Huh?  I have no idea.  (the fact has nothing to do with the question)<br>
+(A) No, probably not.  (a safe assumption: almost nobody has, anyway)
+
+<p>
+Which answer is better depends on the situation (i.e. is application-specific).
+It's nice to have user control over which to say, just like a person does.
+
+<p>
+(Fact2) That occurred in 1968, and Ed was none other than Edwin "Buzz"
+Aldrin, the lunar module pilot of Apollo 11.
+
+<p>
+(Q) Did Ed ever walk on the moon?
+
+<p>
+(A) Yes!  (I didn't realize until now that you were referring to THAT Ed).
+
+<p>
+All we had to do to gracefully handle the above apparent contradiction
+was to use assumptions and belief revision in a straightforward, natural
+manner.  CycL will do the same.
+
+<p>
+Finally, each such inference implementation "decision" like 
+<blockquote>
+    "Are we using the Unique Names Assumption?" <br>
+    "Are we minimizing abnormalities?" <br>
+    "Are we allowing assumption-based negation minimization?"<br>
+    "Do we allow positive assumptions?"<br>
+    ...
+</blockquote>
+
+is independently under the user's control via inference
+parameters which the user can choose to turn on or off.
+
+<p>
+
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

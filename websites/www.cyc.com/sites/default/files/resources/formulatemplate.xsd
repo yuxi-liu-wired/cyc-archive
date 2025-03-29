@@ -1,0 +1,291 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  xmlns:cycml='http://www.opencyc.org/xml/cycML/'
+  targetNamespace='http://www.opencyc.org/xml/formulaTemplate/'
+  xmlns:ft='http://www.opencyc.org/xml/formulaTemplate/'
+  xmlns:cyclquery='http://www.opencyc.org/xml/cyclQuery/'
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0">
+
+  <import
+    namespace="http://www.opencyc.org/xml/cycML/"
+    schemaLocation='http://www.cyc.com/resource/xsd/cycml.xsd'/>
+
+  <import
+    namespace="http://www.opencyc.org/xml/cyclQuery/"
+    schemaLocation='http://cyc.cyc.com/resource/xsd/cyclquery.xsd'/>
+    
+  <element name='formulaTemplate'>
+    <complexType>
+      <sequence>
+        <element ref='ft:id'/>
+        <choice minOccurs='0' maxOccurs='2'>
+          <element ref='cyclquery:cyclQuery'/>
+          <element ref='ft:formula'/>
+        </choice>
+        <element ref='ft:elmt'/>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='ft:focalTerm'/>
+          <element ref='ft:argPosition'/>
+          <element ref='ft:argPositions'/>
+        </choice>
+        <choice>
+          <element ref='ft:singleEntry'/>
+          <element ref='ft:multipleEntry'/>
+        </choice>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='ft:usageExamples'/>
+          <element ref='ft:excludeReplacementOptions'/>
+          <element ref='ft:followUps'/>
+          <element ref='ft:glossForTemplate'/>
+          <element ref='ft:reformulationSpecification'/>
+          <element ref='ft:argumentPositionDetails'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='reformulationSpecification'>
+    <complexType>
+      <choice minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='usageExamples'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:example'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='singleEntry'/>
+
+  <element name='multipleEntry'/>
+
+  <element name='example'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='glossForTemplate'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='followUps'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:followUp'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='followUp'>
+    <complexType>
+      <sequence>
+        <element ref='ft:templateId'/>
+        <element ref='ft:connective'/>
+        <element ref='ft:loadMt'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='templateId'>
+    <complexType>
+      <choice>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='connective'>
+    <complexType>
+      <choice minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='loadMt'>
+    <complexType>
+      <choice minOccurs='0' maxOccurs='1'>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='excludeReplacementOptions'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:excludeReplacementOption'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='excludeReplacementOption'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='argumentPositionDetails'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:argumentPositionDetail'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='argumentPositionDetail'>
+    <complexType>
+      <sequence>
+        <element ref='ft:argPosition'/>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='ft:explanation'/>
+          <element ref='ft:glossText'/>
+          <element ref='ft:ordering'/>
+          <element ref='ft:templateReplacementsInvisibleForPosition'/>
+          <element ref='ft:constraintsOnReplacement'/>
+          <element ref='ft:candidateReplacementsForPosition'/>
+          <element ref='ft:isEditable'/>
+          <element ref='ft:validationRequired'/>
+          <element ref='ft:unknownTermForTemplatePosition'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='isEditable'/>
+
+  <element name='unknownTermForTemplatePosition'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:number'/>
+        <element ref='cycml:string'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='validationRequired'/>
+
+  <element name='explanation'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='glossText'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='ordering'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='templateReplacementsInvisibleForPosition'/>
+
+  <element name='constraintsOnReplacement'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:constraintOnReplacement'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='constraintOnReplacement'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cycml:function'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='candidateReplacementsForPosition'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='candidateReplacementForPosition'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='argPosition'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:position'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='position'>
+    <complexType mixed='true'>
+    </complexType>
+  </element>
+
+  <element name='elmt'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='formula'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='focalTerm'>
+    <complexType>
+      <choice>
+        <element ref='ft:argPosition'/>
+        <element ref='ft:argPositions'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='argPositions'>
+    <complexType>
+      <sequence minOccurs='0' maxOccurs='unbounded'>
+        <element ref='ft:argPosition'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='id'>
+    <complexType>
+      <choice>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+      </choice>
+    </complexType>
+  </element>
+</schema>

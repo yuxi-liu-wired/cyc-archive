@@ -1,0 +1,115 @@
+00:00:00 --- log: started opencyc/03.02.21
+00:27:25 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+00:50:23 <yepster> cool link kinoc!
+02:17:29 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+04:02:58 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+04:12:22 --- quit: Graham (leguin.freenode.net irc.freenode.net)
+04:12:22 --- quit: stevereed (leguin.freenode.net irc.freenode.net)
+04:12:22 --- quit: yepster (leguin.freenode.net irc.freenode.net)
+04:12:22 --- quit: deltab (leguin.freenode.net irc.freenode.net)
+04:12:38 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+04:12:38 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+04:12:38 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+04:12:38 --- join: deltab (~deltab@espians.com) joined #opencyc
+04:12:38 --- mode: leguin.freenode.net set +o Graham
+05:10:19 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+07:00:12 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+07:12:03 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+07:14:14 <kinoc> yepster: the 4.33.94.173:2002 is a modification of the link grammar parser for net use
+07:15:16 <kinoc> If you read the link parser docs I think you can make a CD-ish output by redefining the linkage rules for the words
+07:16:52 <kinoc> or you can translate the existing linkage output into a CD-ish format by doing a comparison between the parser output and the corresponding desired CD form
+07:18:20 <kinoc> you may find FrameNet interesting http://www.icsi.berkeley.edu/~framenet/
+07:29:08 <yepster> hmm framenet looks like a much bigger knowledge structure than cd
+07:29:41 <kinoc> yes, between CD's and the cyckb
+07:30:24 <yepster> i regarded the CD implementation more as easy enough to experiment with the theories
+07:30:29 <kinoc> but you should be able to define a framenet frame as a set of implied CD's in a near fixed format
+07:31:21 <yepster> however, before i go into parsing of sentences, i first want to finish the representation of scripts and then xp's
+07:31:28 <kinoc> ah, ok. I do know that framenet has a marked up (taged) corpus with all the the slots fillers marked out.
+07:31:43 <kinoc> makes sense
+07:31:58 <yepster> and then try to make a subl (or oracle) program that tries to connect xp's to an action
+07:32:13 <yepster> that would about mark the end of my graduation project ;-)
+07:32:33 <kinoc> a nice conclusion :)
+07:33:10 <yepster> still i think the approach like figure out which terms are coextensional
+07:33:31 <yepster> define coextensional collections (like #$StaticSituation and CD's STATE)
+07:33:50 <yepster> and then just add stuff to the KB in the theories own terms
+07:34:17 <yepster> is a way to quickly add stuff to cyc
+07:34:38 <yepster> (see #$coExtensional)
+07:34:44 <kinoc> I could see the merit in that approach
+07:35:10 <kinoc> you leverage the cyckb in the CD MT's
+07:35:23 <kinoc> and vice versa
+07:35:36 <yepster> coExt(A,B) => \forall x : isa(x,A) <=> isa(x,B)
+07:37:01 <kinoc> well I liked CD form from way back (i.e. high school 82)
+07:37:26 <yepster> I only read about it last weekend, when i started with implementing swale
+07:37:51 <yepster> now i am at about page 80 from SPGU
+07:38:27 <kinoc> I read it but I neeed to get a personal copy
+07:39:02 <yepster> yeah, me too
+07:39:19 <kinoc> I will look into creating a CD set of links for 'rosetta', the link parser thingy.
+07:39:41 <yepster> i only did one sentence in cd yet
+07:40:09 <kinoc> I will have to go collect a corpus of some kind
+07:40:13 <yepster> i think there are some terms not defined yet, which are mentioned in the 'cd pocket reference' that is linked on the xp page i made
+07:40:53 <yepster> so if you tell me any problems, we could make the cd implementation better :-)
+07:40:53 <kinoc> and a nice XP page it is :)
+07:41:04 <yepster> thanks
+07:41:06 <yepster> :-)
+07:41:19 <kinoc> ok. I will make it my one stop shop for CD in opencyc :)
+07:57:06 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+07:57:48 <KinoC2> don't know if you have this http://elib.cs.berkeley.edu/cgi/pl_dochome?collection=NLP&id=5
+08:02:04 <yepster> !
+08:04:06 <KinoC2> or http://elib.cs.berkeley.edu/cgi-bin/pl_dochome?collection=NLP&id=32
+08:05:38 --- quit: kinoc (Read error: 60 (Operation timed out))
+08:44:39 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+09:03:40 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+10:21:16 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+10:28:49 --- join: mdupont (~chatzilla@nat-571.wcom.co.uk) joined #opencyc
+10:34:38 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+10:34:45 <mdupont> hey dmiles
+11:12:47 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+11:15:15 --- quit: mdupont ("Later!")
+11:31:42 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+11:33:03 --- quit: kinoc (Read error: 110 (Connection timed out))
+11:35:52 --- quit: yepster ()
+12:14:37 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:31:29 <kinoc> ping
+12:54:35 --- quit: ChanServ (leguin.freenode.net irc.freenode.net)
+12:55:24 --- join: ChanServ (ChanServ@services.) joined #opencyc
+12:55:24 --- mode: leguin.freenode.net set +o ChanServ
+13:13:39 --- quit: kinoc (Read error: 110 (Connection timed out))
+14:20:15 --- quit: dmiles (Read error: 54 (Connection reset by peer))
+14:20:19 --- join: NephLab (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+14:43:35 --- quit: NephLab (Read error: 110 (Connection timed out))
+14:48:13 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:10:12 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+15:18:44 --- quit: kinoc (Read error: 60 (Operation timed out))
+15:20:42 --- quit: dmiles (Read error: 60 (Operation timed out))
+15:36:23 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+15:47:25 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:55:31 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:28:06 --- quit: kinoc (Read error: 60 (Operation timed out))
+16:41:28 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+17:15:18 --- join: NephLab (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+17:15:38 --- quit: NephLab (Remote closed the connection)
+17:15:49 --- join: NephLab (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+17:17:36 --- quit: dmiles (Read error: 60 (Operation timed out))
+17:19:16 --- quit: NephLab (Client Quit)
+17:19:25 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+17:23:49 --- quit: fleeky (Read error: 60 (Operation timed out))
+17:23:51 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+18:11:23 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:17:17 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:23:08 --- quit: Cobra ("[x]chat")
+18:32:24 --- join: dmiles (~dmiles@12-212-75-114.client.attbi.com) joined #opencyc
+18:33:42 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+18:47:22 --- quit: Cobra ("[x]chat")
+18:52:27 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+19:27:16 --- quit: Cobra ("[x]chat")
+19:31:17 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+19:45:39 --- quit: kinoc (Read error: 110 (Connection timed out))
+20:20:08 --- quit: ChanServ (ACK! SIGSEGV!)
+20:21:53 --- join: ChanServ (ChanServ@services.) joined #opencyc
+20:21:53 --- mode: leguin.freenode.net set +o ChanServ
+21:00:56 --- quit: Cobra ("[x]chat")
+21:03:26 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+21:08:15 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:22:03 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:26:52 --- quit: kinoc (Read error: 110 (Connection timed out))
+23:59:59 --- log: ended opencyc/03.02.21

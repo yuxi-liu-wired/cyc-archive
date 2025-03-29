@@ -1,0 +1,451 @@
+00:00:00 --- log: started opencyc/03.02.17
+01:25:35 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+01:27:27 <yepster> hmm, representation of an xp will be a bit different than in the swale-mem.lisp example
+01:27:51 <yepster> with incorporating an XP being an explanation for an 'explanation question'
+01:29:25 <dmiles> yeah i was looking at the mem .. it's shallow on contnet
+01:29:43 <dmiles> (just a side note)
+01:29:57 <dmiles> there must be a broader range of XPs
+01:30:01 <dmiles> (to be found)
+01:30:12 <dmiles> but i am sure you can deduce them from existing cyc contnet
+01:30:33 <dmiles> (to augment)
+01:31:04 <dmiles> oh yeah the represantation i am excited to find out what you conclude
+01:31:35 <dmiles> like if you get davidsonian per SKF34545-XP
+01:32:36 <dmiles> have you found anything in Cyc thats almost an XP structure?
+01:33:14 <dmiles> (thinking somewhere between Actions/Events representations)
+01:34:31 <dmiles> like..
+01:34:31 <dmiles> :-lispEval([defmop, 'm-young-animal', ['m-animal'], ':age', 'm-young']).
+01:34:31 <dmiles> :-lispEval([defmop, 'm-old-animal', ['m-animal'], ':age', 'm-old']).
+01:34:51 <dmiles> i wonder if you defined DEFMOP into the API
+01:35:11 <dmiles> so it could then make the right asseritons
+01:36:34 <dmiles> oh wierd.. someone in here wrote a scheme implinentation that uses a ketext like from a definion list
+01:37:40 <dmiles> (defmop ?instance '(?typelists) ...pairs of pred value)
+01:38:48 <dmiles> actualyl the instance is a Collection itsefl that genls the typelists it looks like
+01:39:08 <dmiles> yet the pred/value lists appkly to the instance
+01:39:15 <dmiles> like relationAllExists
+01:39:51 <dmiles> :-lispEval([defmop, 'm-fixx-xp', ['m-xp'], ':observed', 'm-healthy-animal', ':expected', 'm-unhealthy-animal', ':events', [[':jog', 'm-jog-event'], [':exert', 'm-exert-event'], [':defect', 'm-heart-defect-state'], [':outcome', 'm-dead-state']], ':causals', [[':jog', =>, ':exert'], [':defect', ':exert', =>, ':outcome']], ':constraints', [[[':events', ':jog', ':actor'], [':events', ':exert', ':actor'], [':events', ':defect', ':owner'], [':events'
+01:39:57 <dmiles> would be like..
+01:40:12 <dmiles> (genls m-fixx-xp m-xp)
+01:40:43 <dmiles> (relationAllExists observed m-fixx-xp m-healthy-animal)
+01:40:48 <dmiles> maybe?
+01:42:38 <dmiles> i could imagine if you wrote a subl module to run the XPs that live in this format.. it would start doing awesome things with otner KE that fit this 
+01:43:42 * dmiles wonders often if full Cyc has KE towards goal based/XP AI
+01:44:22 <dmiles> that somewhere in 25 years ;P
+02:12:43 <yepster> back
+02:13:20 <yepster> "<dmiles> there must be a broader range of XPs"
+02:13:31 <yepster> yes
+02:13:45 <yepster> that's the crux
+02:14:14 <yepster> "the book" also talks about how to 'invent' them
+02:14:47 <yepster> like that Schank once asked his students to write down an explanation when they were aware they just explained something
+02:15:02 <yepster> also the book contains a lot of examples
+02:15:32 <yepster> but most interesting will be automatically constructing a new XP from old ones
+02:18:30 <dmiles> yes the way predicates cascade done to children
+02:18:36 <dmiles> the same way events do
+02:18:53 <dmiles> i mean like :events :owner etc
+02:19:06 <dmiles> :actor
+02:19:30 <dmiles> i do belive the existing event heirachy in Cyc will be usefull
+02:19:56 <yepster> yes, a more general XP would be activated because of transitivity via the 'agent' hierachy that's related to the xp with :actor
+02:20:03 <dmiles> you would just need to mark events as XPable
+02:20:15 <dmiles> *nod*
+02:21:04 <dmiles> and neat what you'll have is an existing implentation that leverages them
+02:21:18 <yepster> i wonder though.. the first part of swale-mem is a very 'natural' representation of things;
+02:21:30 <yepster> the corresponding opencyc variant is also very normal
+02:21:45 <dmiles> well its definately ontological
+02:21:56 <yepster> but representing things in an xp is a bit different, i wonder if it's contents can be in 'natural' terms
+02:21:59 <yepster> hope so
+02:22:13 <dmiles> :)
+02:22:44 <yepster> like that all kinds of events can be part of e.g. the xp scenario or anomaly
+02:22:59 <yepster> instead of only a subcollection 'XPEvents'
+02:23:35 <dmiles> yeah
+02:23:51 <yepster> have you looked at the latest swale-mem.ketext?
+02:24:01 <dmiles> i loaded the one you gave last night
+02:24:06 <dmiles> i will refesh
+02:24:09 <yepster> it's updated a bit
+02:24:41 <dmiles> i see excellent
+02:24:59 <yepster> was slowed down a bit, because i do need things from the book: I want a good definition of 'scenario' 'eventsequence' 'story' 'eq' and 'xp'
+02:25:05 <yepster> and 'explanation'
+02:25:25 <dmiles> there was a prolog version of XPs i found last night that boke it into just those
+02:25:37 <yepster> (which is (i think now) a relation between an instance of xp and instance of 'eq' (explanation question)
+02:25:45 <yepster> cool
+02:25:50 <dmiles> i'll grab it
+02:27:28 <dmiles> http://12.228.247.146/root/opt/sourceforge/logicmoo/openmodality/iso-prolog/logicmoo_tap_tailspin.pl
+02:27:43 <dmiles> if that dont come as plain text .. i'll fix the mime types
+02:28:11 <deltab> not found
+02:28:15 <deltab> oops
+02:28:31 <deltab> it works
+02:28:39 <dmiles> as txt ?
+02:28:44 <deltab> yes
+02:29:02 <dmiles> good.. my darn install of swi prolog probly way i try to download it
+02:29:03 <deltab> Content-Type: text/plain; charset=ISO-8859-1
+02:29:55 <dmiles> so the bottem 1/2 ed/5 is sorta like XPs
+02:30:14 <dmiles> more of a pddl but make a slight try towards XPs
+02:30:15 <yepster> works
+02:32:07 <dmiles> i am writting a new lisp interpretor http://12.228.247.146/root/opt/sourceforge/logicmoo/openmodality/iso-prolog/t
+02:32:35 <dmiles> oops well.. becasue one day Cyc can run in it ;P
+02:33:44 <dmiles> its optimized like SubL (unification b/a eval) 
+02:35:05 <dmiles> anyways slow project.. but i really want to run prolog code and cyc in the same mem space
+02:35:51 <yepster> ask cycorp for source
+02:35:53 <dmiles> when i symbol dumped 0.7 i saw that there is .so loading
+02:36:12 <dmiles> just have to figure out how to call it
+02:36:22 <dmiles> and how the .so can callback cyc
+02:38:01 <dmiles> i'd like the source for that, but would settle for completely unrestricted EVAL and all functions no mater how trivial to be exported from each subpacked
+02:38:01 <yepster> pff have to work on a different project today :-(
+02:38:49 <dmiles> if that was done there'd be no risk of source leakage and all we'd do is give new code very usefull specific to cycorp
+02:41:08 <dmiles> i feel maybe cycorp feels it already has access to programmers that will make cyc do anything they could want more then recognising the extra leverage they'd gain by making it very easy to improve cyc
+02:41:56 <dmiles> well they defineatly feel correctly
+02:42:09 <dmiles> (they do) but.. they could have a bit 10% more 
+02:42:24 <dmiles> by adding full access to package calls
+02:44:36 <dmiles> anyways we can still do the stuff we're doing
+02:47:09 <yepster> nod
+06:52:31 --- join: ChanServ (ChanServ@services.) joined #opencyc
+06:52:31 --- mode: leguin.freenode.net set +o ChanServ
+09:58:25 --- join: flux (~trumpet@194.149.224.129) joined #opencyc
+10:03:29 --- join: SethR (~chatzilla@12-211-114-7.client.attbi.com) joined #opencyc
+10:38:47 <yepster> dmiles: "like if you get davidsonian per SKF34545-XP"
+10:39:07 <yepster> there's a paper from mccarthy called
+10:39:20 <yepster> 'first order theories of individial concepts and propositions'
+10:40:33 <yepster> about how to represent things as objects rather than operaters or predicates
+10:50:41 <dmiles> (go on)
+10:51:27 <dmiles> Event KE is in this format? 
+10:52:16 <dmiles> (represented as objects)
+10:53:36 <dmiles> (as in McCarthy's paper)
+11:05:01 <yepster> o i was just going through an map with papers i gathered a while ago
+11:05:14 <yepster> in search for a copy of ashwin ram's aqua
+11:05:30 <yepster> (looking for a diagram that shows another implementation of xp)
+11:05:52 <dmiles> TALESPIN
+11:05:53 <yepster> but currently I'm kind of writing a ke text for conceptual dependency theory
+11:06:04 <dmiles> TAILSPIN (just barely)
+11:06:05 <yepster> or at least it's definitions
+11:07:36 <yepster> because schank scripts are written down with cd
+11:09:15 <dmiles> [create,Toy],
+11:09:16 <dmiles>       /*pcs*/ [existIsa(E,'#$CreationEvent'),'#$location'('$nick',Loc),near(Loc,StuffUsed),precondParts(StuffUsed,Toy)]
+11:09:16 <dmiles>       /*del*/ [near(Loc,StuffUsed)]
+11:09:16 <dmiles>       /*add*/ [inputsDestroyed(Loc,StuffUsed),'#$outputsCreated'(E,Toy),'#$doneBy'(E,$nick)]
+11:09:52 <dmiles> the del space there hrrm
+11:10:03 <yepster> he pcs del and add.. i've seen that before
+11:10:16 <yepster> looks like how km stores actions
+11:10:22 <dmiles> thene there is a Lexical /*txt*/
+11:10:39 <dmiles> so it can bwe "said" or "asked"
+11:11:02 <dmiles> thats from TALESPIN
+11:11:11 <yepster> from clark or porter?
+11:11:17 * dmiles looks
+11:11:49 <yepster> yes, the same
+11:12:19 <dmiles> ;  MICRO-TALESPIN: A STORY GENERATOR
+11:12:19 <dmiles> ;
+11:12:19 <dmiles> ;  A reconstruction, in Common Lisp, of James Meehan's program in
+11:12:19 <dmiles> ;  _Inside_Computer_Understanding:_Five_Programs_Plus_Miniatures_
+11:12:19 <dmiles> ;  Roger Schank and Christopher Riesbeck (eds.)
+11:12:49 <dmiles> http://www.sims.berkeley.edu/courses/is290-1/s02/MicroProgs/
+11:13:34 <yepster> http://www.cs.utexas.edu/users/pclark/working_notes/014.pdf
+11:14:13 <dmiles> ah yeah thats exactly where i got it.. his version of TALESPIN
+11:15:29 <yepster> hmm if I have a new collection in ke
+11:15:46 <dmiles> in that MicroProgs dir take a look at some of the larger micro-tailspin(N).lisps
+11:15:50 <yepster> with genls: AGeneralCol i can specify it's generalizations
+11:16:14 <dmiles> yeah these XPs genrally are all about collections
+11:16:16 <yepster> but how can i specify collections it's a generalization from?
+11:16:33 <dmiles> (until they are applied)
+11:16:39 <yepster> specs: ColA ColB
+11:16:41 <dmiles> hrrm?
+11:16:47 <dmiles> genls
+11:16:49 <dmiles> ?
+11:17:00 <yepster> but then the inverse
+11:17:08 <dmiles> (genls ColA ColB)
+11:17:11 <dmiles> explain
+11:17:13 <yepster> in KE?
+11:17:14 <yepster> Ok
+11:17:24 <dmiles> is this a 1/2 genls?
+11:17:32 <yepster> Default Mt: ConceptualDependencyVocabularyMt.Constant: ATrans.isa: PrimitiveAct.genls: Individual.comment: "The transfer of an abstract relationship such as possession, ownership or control. Thus, one sense of 'give' is: #$ATrans something to someone else; a sense of 'take' is: ATrans something to oneself.".
+11:17:46 <yepster> hmm
+11:18:10 <dmiles> that looks good
+11:18:13 <yepster> Default Mt: ConceptualDependencyVocabularyMt.
+11:18:13 <yepster> Constant: ATrans.
+11:18:13 <yepster> isa: PrimitiveAct.
+11:18:13 <yepster> genls: Individual.
+11:18:18 <dmiles> thanks ;P
+11:18:28 <yepster> I want for example:
+11:18:51 <yepster> (genls ChangeInUserRights ATrans)
+11:19:12 <dmiles> oh in KE text
+11:19:16 <yepster> (genls MoneyExchangeOfUserRights ATrans)
+11:19:20 <dmiles> f: (genls ChangeInUserRights ATrans)
+11:19:30 <dmiles> errm F
+11:19:34 <yepster> is there no short way
+11:19:36 <yepster> like:
+11:19:38 <dmiles> F: 
+11:19:41 <dmiles> F: (genls ChangeInUserRights ATrans)
+11:19:46 <dmiles> nope
+11:19:51 <yepster> specs: ChangeInUserRights MoneyExchangeOfUserRights.
+11:20:08 <dmiles> oh is specs the inverse pred of genls?>
+11:20:24 * yepster is asking (genlInverse genls ?X)
+11:20:34 <dmiles> *nod*
+11:20:43 <dmiles> damn i wish CycLBot was in here ;(
+11:20:52 <yepster> no answers
+11:21:12 <dmiles> Mt : UniversalVocabularyMt
+11:21:12 <dmiles> EL Query :
+11:21:12 <dmiles> (genlInverse genls ?X)
+11:21:12 <dmiles> No answers
+11:21:16 <yepster> I wonder what would happen if I just define #$specs and put it in the ke
+11:21:47 <dmiles> ;P you'd need to make aforward rule to propigate it to genls
+11:22:01 <dmiles> (so it got all the cool afterAdding Stuff
+11:22:34 <dmiles> but yeah.. looks like as-is no shorthand
+11:22:40 <yepster> ok I'll use F:
+11:22:43 <dmiles> but you could add #$specs
+11:22:49 <dmiles> *nod*
+11:31:13 <yepster> KE is cool
+11:31:34 <fleeky> hi, whats everyone working on?
+11:32:51 <yepster> \exists thing \forall p \in person : workOn(p, thing)
+11:33:00 <yepster> ?
+11:48:03 <fleeky> what is that?
+11:48:14 * fleeky stares at #opencyc like a caveman
+11:48:51 <yepster> it's your question 'formalized'
+11:49:46 <yepster> ah forget it
+11:49:49 <yepster> stupid
+11:49:56 <dmiles> fleeky understands ;P
+11:50:26 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+11:50:28 <dmiles> we are working on the same things in paralell
+11:50:32 <dmiles> kinoc!
+11:50:37 <dmiles> good to see you back
+11:50:50 <dmiles> ah you seem to be in Fort Worth
+11:51:03 <kinoc> yeah
+11:51:28 <kinoc> got all the heavy furnature moved in
+11:51:42 <dmiles> how long is the in-beetween drive?
+11:51:52 <yepster> kinoc PTRANS heavy furnature
+11:51:54 <kinoc> saw my life flash before me with the couch :)
+11:52:06 <kinoc> several times
+11:52:24 <kinoc> drive time is about 5 hr's
+11:53:00 <kinoc> mostly for 3 day weekends
+11:53:37 <kinoc> So ya'll finishe the general purpose AI while I was gone :)
+11:53:58 <dmiles> yepster: something cute: http://12.228.247.146/root/opt/sourceforge/logicmoo/openmodality/iso-prolog/logicmoo_pvw_espg.pl
+11:54:42 <yepster> heh that looks familiar
+11:54:57 <dmiles> 5 hours not bad
+11:55:37 <dmiles> yeah towoards the botten larger scripts
+11:55:37 <yepster> what takes time is finding the right place in the hierarchy
+11:56:20 <dmiles> (i had tried to figure out enough to do the restraunt script since schank seems to nver show the full one)
+11:58:13 <dmiles> kinoc: actually getting started ;P
+11:58:52 <kinoc> ++good
+11:59:19 <dmiles> XPs are a main way to do that
+11:59:40 <dmiles> yepster is dioing it in KE text (XPs) and i am cheering him on
+11:59:48 <yepster> hehe
+11:59:53 <dmiles> but also been working parallel in prolog
+12:00:18 <yepster> but for now first things of another book: scripts plans goals and understanding
+12:00:19 <dmiles> working more on the NLU side
+12:01:20 <dmiles> SPGU is the cooler of the books
+12:01:34 <yepster> doh
+12:01:41 * yepster disagrees
+12:02:09 <dmiles> wait what wass the other book?
+12:02:38 <kinoc> Inside computer understanding ???
+12:02:41 <yepster> 'Explanation Patters, understanding mechanically and creatively'
+12:03:01 <yepster> bit more obscure perhaps
+12:03:21 <dmiles> *nod*
+12:03:29 <kinoc> the margie one ?
+12:03:41 <yepster> margie?
+12:04:00 <kinoc> the system before SAM
+12:04:18 <kinoc> it did single sentences and exponded CD theory
+12:04:22 <yepster> hmm they implemented only swale
+12:05:53 <yepster> http://217.117.225.187/~yeb/boeken/xp*.png
+12:06:12 * kinoc reading the opencyc logs....
+12:06:51 <yepster> xp types
+12:06:55 <yepster> .png
+12:09:23 <kinoc> So you have a XP KE ?
+12:09:39 <yepster> soon
+12:09:51 <yepster> at least a representation of it 
+12:09:58 <dmiles> yeah .. and the cool thing is it looks to fit in under #$Action
+12:10:00 <yepster> not 'active'
+12:10:15 <dmiles> well there probly will be some SubL code needed underneath
+12:10:37 <yepster> parts of XP under action
+12:11:00 <dmiles> like so the current state can progress
+12:11:10 <yepster> XP will be microtheorytype so instances (an xp e.g. early death by drug use) will be an mt
+12:11:12 <dmiles> then requeried.. updated and so on
+12:11:21 <yepster> (this is example from the book, btw)
+12:11:47 <yepster> or actually, a PropositionalInformationThing
+12:12:03 <yepster> It can be used to connect observed actions to new actions
+12:14:02 <kinoc> nice
+12:15:23 <kinoc> been thinking about MT's as objects recently so that's nice
+12:19:10 <dmiles> something i dont understand about SubL yet (maybe becasue of my prolog background) is using a Lisp object as a member of an object.. but seens that Cyc does a little of that for connecting up indexes smarter
+12:19:45 <dmiles> (but i guess this is differnt from your talking of objects)
+12:20:30 <kinoc> yeah, just thinking about MT's as 'things themselves' for manipulation
+12:37:22 <kinoc> http://www.cyc.com/strads.pdf
+12:39:53 <yepster> yeah nice article
+12:40:09 <kinoc> needs Xp's :)
+12:40:13 <yepster> especially the note on what an event should describe
+12:40:22 <yepster> I quote it in my master's thesis ;-)
+12:40:40 <yepster> or how to say it: the doc that describes the project
+13:06:47 <yepster> pff this is old stufff..
+13:06:56 <yepster> http://acl.ldc.upenn.edu/T/T75/T75-2008.pdf
+13:08:52 <yepster> first very initial version
+13:09:43 <yepster> http://217.117.225.187/~yeb/schank-conceptualdependencytheory.ketext
+13:10:40 <yepster> no relationAllExists etc
+13:10:46 <dmiles> *nod*
+13:10:54 <dmiles> looks good
+13:10:56 <yepster> (hint hint ;-)
+13:14:14 <yepster> http://acl.ldc.upenn.edu/T/T75/T75-2023.pdf
+13:14:25 <yepster> restaurant script
+13:15:18 <yepster> is that typed with a typewriter? the text is justified
+13:15:57 <dmiles> justified?
+13:16:25 <dmiles> oh
+13:16:28 <yepster> isn't that the name of aligning left and right margins?
+13:16:30 <dmiles> hehe 
+13:16:33 <dmiles> yeah it it
+13:16:45 <dmiles> i think there is an "option" to do that
+13:17:16 <dmiles> oh yeah your right .. they are images
+13:17:24 <dmiles> (not text)
+13:18:02 <dmiles> looks like it was done in "AppleWorks"
+13:18:09 <dmiles> on the Apple 2 E
+13:18:32 <yepster> to bad there is not a date on it
+13:18:34 <dmiles> Apple][e
+13:19:14 <dmiles> lloks like 86
+13:20:25 <dmiles> thats was a dot matrix printter (AppleWriter 1)
+13:20:48 <yepster> do you know of causation types are part of CD or of SPGU?
+13:20:56 <yepster> wonder in which mt they should go
+13:20:58 <dmiles> stateEnableAction
+13:21:08 <dmiles> actionDisablesState?
+13:21:11 <dmiles> (those?)
+13:21:16 <yepster> jup
+13:21:18 <kinoc> is there an inventory of necessary macro rules that need to be added ?
+13:21:36 <dmiles> causes-SitProp
+13:22:08 <yepster> "r means an ACT results in a STATE"
+13:22:18 <dmiles> there is a matrix of Sit/Prop/Event in Cyc i thought
+13:22:24 <yepster> causes-EventSit?
+13:22:32 <dmiles> yup
+13:22:42 <yepster> not in opencyc :-(
+13:22:48 <yepster> i want researchcyc!
+13:22:55 <dmiles> they are missing it llooks form opencyc (only part ar there)
+13:23:07 <dmiles> but i found a KE Text i think that adds them back
+13:23:07 * yepster is looking up cuo pages
+13:23:47 <yepster> hmm what you said about ke text?
+13:23:55 <dmiles> one sec
+13:23:57 <yepster> sounds interesting
+13:24:01 <dmiles> (finding it)
+13:25:10 * kinoc wonders about a 'hot KE text Network'....whatever that would mean
+13:25:39 <dmiles> hehe
+13:27:50 <dmiles> http://12.228.247.146/root/opt/sourceforge/logicmoo/openmodality/subl/
+14:01:42 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:10:13 --- quit: kinoc (Read error: 60 (Operation timed out))
+14:19:28 --- nick: yepster -> yepsterzz
+14:43:05 <dmiles> nn
+15:16:01 --- quit: KinoC2 (leguin.freenode.net irc.freenode.net)
+15:16:01 --- quit: yepsterzz (leguin.freenode.net irc.freenode.net)
+15:16:01 --- quit: deltab (leguin.freenode.net irc.freenode.net)
+15:16:28 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+15:16:28 --- join: yepsterzz (~yepster@217.117.225.12) joined #opencyc
+15:16:28 --- join: deltab (~deltab@espians.com) joined #opencyc
+15:32:07 <dmiles> xp(action,createsFrom(Agent,Toy,StuffUsed),
+15:32:07 <dmiles>       /*pcs*/ [existIsa(E,'CreationEvent'),'location'(Agent,Loc),near(Loc,StuffUsed),precondParts(StuffUsed,Toy)],
+15:32:07 <dmiles>       /*del*/ [near(Loc,StuffUsed)],
+15:32:07 <dmiles>       /*add*/ [inputsDestroyed(Loc,StuffUsed),outputsCreated(E,Toy),doneBy(E,Agent)],
+15:32:07 <dmiles>       /*txt*/ ['Create-TheWord',Toy]).
+15:33:01 <dmiles> erm
+15:33:09 <dmiles> .  /*txt*/ [User,'Create-TheWord',Toy,'From-TheWord',StuffUsed])
+15:47:22 --- quit: flux ("Leaving")
+15:50:53 --- join: yepster (~root@cust-217-117-225-39.portavita.nl) joined #opencyc
+15:52:31 <yepster> he dmiles, funny, i just read some pages on logicmoo.net
+15:53:06 <yepster> were you mentioned just the things that i figured out i had to do today
+15:53:22 <dmiles> :) ?
+15:53:31 <yepster> where is it..
+15:55:10 <yepster> http://logicmoo.sourceforge.net/loebner/howto.html
+15:55:44 <yepster> mentiones cd
+15:56:16 <dmiles> ah :)
+15:56:25 <dmiles> i wrote that in 1998
+15:56:42 <yepster> hehe
+15:56:56 <dmiles> oh actually it have to be 1999 
+15:57:15 <dmiles> but yeah .. goals havent changed a bit!
+15:57:20 <yepster> the telnet link to logicmoo is not active though
+15:58:27 <dmiles> yeah.. its wierd evenif it was the correct IP.. still the JDK and versions of things need installed ;(
+15:58:53 <dmiles> and even with perfect env it's still about 10 minutes to get going
+15:59:18 <dmiles> i have to run this import funtion that puts the mud files into cyc
+15:59:35 <dmiles> then the telnet prompt actually just runs queries into opencyc
+15:59:48 <dmiles> like 'look'
+16:00:06 <dmiles> weired your constant for location and lists other things located there
+16:00:16 <dmiles> err qeries your constant
+16:00:37 <yepster> hmm
+16:00:45 <dmiles> then uses gen-paraphrase parts to say the related data
+16:00:50 <dmiles> its pretty darn cool
+16:01:00 <yepster> and slow?
+16:01:04 <dmiles> however at times it will really lag on what should be a simple query
+16:01:34 <dmiles> but thats becasue i had like mob bots (30some of them) querying for there next action
+16:01:44 <dmiles> each was there own java thread
+16:01:57 <dmiles> but was weird even with that turned off it could get slow
+16:02:23 <dmiles> some of the slowness was a subquery that happened to keep a string table that mapped what a user tpyes in to the constant
+16:03:04 <dmiles> like "Commander Data" -> #$SKFCommnanderData45
+16:03:31 <dmiles> so if you typed look at Commander Data
+16:04:16 <dmiles> i think what was happeing is i was expecting new things to get deduced and that subquery was always stale
+16:04:48 <dmiles> so any line you typed had a _large_ overhead of getting termStrings and genFormat
+16:05:03 <dmiles> err genPhrase
+16:05:43 <yepster> too large?
+16:06:00 <dmiles> i only had one sideeffect that was fully implimnented.. that was character movemnt
+16:06:17 <dmiles> well it had like 1000s of mappings ;P
+16:06:52 <dmiles> i would retract object-Located and assert the new one based of MudExit
+16:07:02 <dmiles> erm objectFoundInLocation
+16:07:29 <dmiles> it was cool.. but i saw that i didnt have clear things like:
+16:07:44 <dmiles> ed(action,ptrans(Agent,Toy,Loc),
+16:07:44 <dmiles>       /*pcs*/ [locationOf(Agent,LocBefore),locationOf(Toy,LocBeforeT),near(LocBefore,LocBeforeT),exists(E,'TransferOfLocation')],
+16:07:44 <dmiles>       /*del*/ [locationOf(Toy,LocBeforeT)],
+16:07:44 <dmiles>       /*add*/ [isa(E,'TransferOfLocation'),locationOf(Toy,Loc),doneBy(E,Agent)],
+16:07:44 <dmiles>       /*txt*/ [User,'Move-TheWord',Toy,'To-TheWord',StuffUsed]).
+16:08:03 <yepster> what is ed?
+16:08:14 <dmiles> like everything was hardcoded.. not meta-coded
+16:08:26 <dmiles> event escription
+16:08:31 <dmiles> description
+16:08:57 <dmiles> aslo doing a:
+16:08:58 <dmiles> revise_goal(Situation, Collect, Goal) :- % If the Why is in Situation, then Collect (call to collect vars)
+16:08:59 <dmiles>         sitSitGoal(Why,Collect,Goal)
+16:08:59 <dmiles>         memberchk(Why, Situation), !.        % Goal!
+16:09:33 <dmiles> sitSitGoal(Why,Collect,Goal) is the new goal generator
+16:09:46 <dmiles> like
+16:09:47 <dmiles> revise_goal(Situation, plocation(Passengers,_), medical_help(Passengers)) :- % If a passenger's ill, 
+16:09:47 <dmiles>         memberchk(ill_passenger, Situation), !.          
+16:10:19 <dmiles> and a causesSitSit
+16:10:30 <dmiles> anyways i am getting it workjing in prolog first
+16:10:41 <dmiles> so then i really understand the database
+16:10:51 <dmiles> the minimums
+16:11:18 <yepster> interesting to hear
+16:11:47 <yepster> (or should i say, to 'mtrans')
+16:11:53 <dmiles> :P
+16:12:10 <dmiles> one thing i am womdering about is the search space
+16:12:25 <yepster> because i intend to make active things with oracle
+16:12:27 <dmiles> if something is goign to be combinatoricv.. you see it unavoidable in prolog "trace"
+16:12:46 <dmiles> where ina cyc query it's more obscured
+16:12:57 <yepster> the slowest thing currently that comes from opencyc typically takes about 0.98 seconds
+16:13:11 <dmiles> thing being?
+16:13:43 <dmiles> well the retract location + add location thing i did sometimes took a long time
+16:13:47 <yepster> it's the other project, about insurance rules for tools
+16:14:02 <dmiles> mainitly becasue i didnt ude assert-no-wff
+16:14:33 <yepster> very cool implementation though (if i might say it); rule like p ^ q -> r is represented as
+16:14:50 <yepster> mt where p, q and r are related to it
+16:15:08 <yepster> and given only p, I can ask for the mt, or q, or r
+16:15:37 <yepster> and the antecendents (things necessary for application of a rule) are classification hierarchies
+16:16:02 <yepster> like icf (functioning and disability) and icpc (primary care)
+16:16:37 <dmiles> ah
+16:16:40 <yepster> so when a doctor says: patient has p, cyc answere which rules might applie
+16:16:45 <yepster> apply
+16:17:38 <dmiles> ah slight heuristic to start
+16:18:15 <dmiles> rules apply?
+16:18:37 <yepster> ?
+16:18:47 <dmiles> i see then you could hypotheically build a state machine to test
+16:19:00 <dmiles> (instead of doctor doing it in his head)
+16:19:10 <dmiles> (with teh applicable rules)
+16:19:21 <yepster> o the doctor should just classify
+16:19:39 <yepster> but not be a library of insurance rules
+16:20:13 <yepster> o i just said: rule like p^q -> r
+16:20:20 <yepster> but that's wrong
+16:20:39 <yepster> a rule is like p   p->q   |-  q
+16:20:53 <yepster> and p->q is an implication
+16:25:15 <dmiles> heh consistancy checking
+16:25:21 <dmiles> |- q
+16:25:53 <dmiles> brb
+16:27:56 <dmiles> bk
+16:28:52 <dmiles> thats pretty awesome, so your going to from orcale go back and forth
+16:29:32 <dmiles> latency though is only to be discovered.. it was assert that could take a long time
+16:29:42 <dmiles> query is pretty fast
+16:30:17 <dmiles> (excpt quering out 1000s of strings and storing in a HashMap) 
+16:30:56 <dmiles> the mud pretty much was see how quickly i could write.. and see if it worked
+16:31:18 <dmiles> it would .. just ended up not fun w/o a noun phrase parser
+16:49:41 --- quit: SethR ("ChatZilla 0.8.11 [Mozilla rv:1.2.1/20021130]")
+17:42:50 <fleeky> -
+17:48:35 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+17:51:01 <fleeky> -
+18:00:27 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:04:26 <fleeky> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20:22:59 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:26:03 --- quit: kinoc (Read error: 110 (Connection timed out))
+22:31:39 --- quit: KinoC2 (Read error: 60 (Operation timed out))
+23:48:08 --- join: kinoc (~kino@dialup-209.245.236.42.Dial1.Dallas1.Level3.net) joined #opencyc
+23:59:59 --- log: ended opencyc/03.02.17

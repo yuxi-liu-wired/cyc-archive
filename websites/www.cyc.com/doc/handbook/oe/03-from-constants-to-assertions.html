@@ -1,0 +1,669 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 3. 
+From Constants to Assertions
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 3. 
+From Constants to Assertions
+</h2>
+    <p></p>
+    <b>3.1.  <a HREF='#136466232'>
+Creating Constants and Making Assertions
+</a></b>
+    <br>
+    <font size='-1'>3.1.1.  <a HREF='#137159064'>
+Creating A Constant
+</a>
+      <br>
+    </font>
+    <font size='-1'>3.1.2.  <a HREF='#137167128'>
+Making Assertions</a>
+      <br>
+    </font>
+    <font size='-1'>3.1.3.  <a HREF='#137210832'>
+The Agenda Status Bar and the Agenda Page
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>3.2.  <a HREF='#137218272'>
+SBHL Predicates and Hierarchies</a></b>
+    <br>
+    <p></p>
+    <b>3.3.  <a HREF='#137252392'>
+Naming Conventions for CycL Constants
+</a></b>
+    <br>
+    <p></p>
+    <b>3.4.  <a HREF='#137311704'>
+Anatomy of A Constant</a></b>
+    <br>
+    <font size='-1'>3.4.1.  <a HREF='#137321424'>
+All Constants</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.2.  <a HREF='#137339328'>
+Collections</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.3.  <a HREF='#137349024'>
+Predicates</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.4.  <a HREF='#137379848'>
+Functions</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.5.  <a HREF='#137391536'>
+Specializations for Events</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.6.  <a HREF='#137396976'>
+A Few Words About KE Facilitation Predicates</a>
+      <br>
+    </font>
+    <font size='-1'>3.4.7.  <a HREF='#137404096'>
+A Few Words About Lexification</a>
+      <br>
+    </font>
+    <p></p>
+    <b>3.5.  <a HREF='#137408488'>
+Finding the Right Level Of Generality</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <hr>
+    <h1>
+    Chapter 3. 
+    
+From Constants to Assertions
+</h1>
+    <h2>3.1.  <a NAME='136466232'>
+Creating Constants and Making Assertions
+</a>
+    </h2>
+    <p>
+When a Cyclist is ready to add assertions to the knowledge base, there are 
+several means by which she can add them. </p>
+    <p>
+There are a couple of methods of adding assertions directly to the knowledge base.
+In these cases, all of the constants used in the assertions must be in the KB already. </p>
+    <p>
+The assertion </p>
+    <font color='#339900'>
+      <tt><pre>
+     (isa LouiseBrooks Actress)</pre></tt>
+    </font>
+
+<p>
+would be rejected unless #$LouiseBrooks is already a constant. Therefore, before a 
+Cyclist can assert anything using a constant, the constant must be created. There 
+are several ways a Cyclist can do this in the Cyc Browser.</p>
+    <h3>3.1.1.  <a NAME='137159064'>
+Creating A Constant
+</a>
+    </h3>
+    <p>
+In the first column on the "Browser Tools" there are two tools: 
+"Create", and "Create Term", both of which are labled "Create Cyc Constant". 
+Using the first, a Cyclist will simply enter the name of the Cyc term and 
+will be responsible for adding any defining assertions later 
+(see the section called "Anatomy of a Constant" near the end of this chapter). If I am creating
+#$LouiseBrooks, I would simply add the constant's name to the dialogue box and 
+the constant would be created.</p>
+    <p>
+The second could prove to be useful for creating individuals or collections. Using 
+the second, a Cyclist is prompted for #$termstrings (rough English translations of 
+the CycL term), a comment, appropriate microtheory placement, and #$isa and #$genls 
+information. Since this information must be entered anyway, this seems like an easy and
+convenient way to do it. In order to create #$LouiseBrooks, I would fill that in for 
+the "name" dialogue box. In the "termstrings" box, I would type "Louise Brooks" 
+and "Lulu", each on a separate line. In the "comment box", I might briefly describe 
+the actress. Note that quotation marks in the "termstrings" box or in the "comment" box
+are not required. Once this is finished, clicking on "Create Constant" will take me 
+to the next screen. I am asked for the appropriate Mt (I would use #$PeopleDataMt), 
+a similar term (if there is one), and #$isa and #$genls information. The "Complete" 
+clickbox to the left of the dialogue boxes will complete a Cyc constant based on the 
+first few letters in the dialogue box. I do not believe there is a term terribly 
+similar to my new "#$LouiseBrooks", so I would skip the "Similar to" box, although 
+if I had used it, Cyc would prompt me with a list of assertions
+I may or may not wish to copy from the old constant to the new one. I would add 
+"ActorActress" to the "Instance of" dialogue box and leave the specialization box empty,
+since #$LouiseBrooks denotes an individual, not a collection, and click "Categorize". 
+Since I have not offered Cyc a similar term, the next page is titled 
+"Conceptually Related". This was useful at one time, but we no longer do OE with the 
+#$conceptuallyRelated predicate, so I have completed creating
+this constant and I can move on to making assertions on it.</p>
+    <p>
+On the other hand, in the event that the playwright Gao Xingjian were not in the KB, 
+and I wanted to create a constant for him, I might just find another Nobel Prize winning
+playwright to use as a template for creating the constant #$GaoXingjian. Finding such a 
+constant, I would select "Create Similar" on the top of the index page of a similar
+constant. In the new window I would enter the new constant name and select all the 
+assertions I would like to be cloned, replacing the old constant with the new one. Once
+finished, I select "Create Similar", and the new constant is created with whichever 
+assertions I choose to copy.</p>
+    <h3>3.1.2.  <a NAME='137167128'>
+Making Assertions</a>
+    </h3>
+    <p>
+Once a constant is created, it is easy to add assertions in the Cyc Browser. 
+Once again, there are several ways that this can be done. For instance, perhaps a 
+Cyclist wishes to assert that Louise Brooks has a bob haircut, and I find the 
+following assertion in the KB:</p>
+    <font color='#339900'>
+      <tt><pre>
+   Mt : PeopleDataMt
+   (personsHairstyle BillyRayCyrus MulletHairstyle)</pre></tt>
+    </font>
+
+<p>
+which looks quite like the assertion I would like to make. I would then click on the 
+assertion ball by the assertion, which would give me more information about the
+assertion. Furthermore, I am given several options regarding what to do with this 
+assertion. I would select "Assert Similar" and I would be taken to a screen 
+titled "Assert Similar Formula". This screen has two dialogue boxes, one for a \
+microtheory, and one for the assertion itself. All the boxes are filled in, 
+but it is possible to make any changes. While #$PeopleDataMt seems like a good place 
+for my new assertion, I have to change this one:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (#$personsHairstyle #$BillyRayCyrus #$MulletHairstyle).</pre></tt>
+    </font>
+
+<p>
+I would replace #$BillyRayCyrus with #$LouiseBrooks, and MulletHairstyle with 
+BobHairstyle and click "Cyclify". To make certain that the assertion is well formed, 
+I could then select "Diagnose", which would then wff-check my new assertion for me. 
+Finally, I would "Assert Formula", and be finished.</p>
+    <p>
+Of course, I've changed quite a bit of that assertion, and it would perhaps be easiest 
+to start from scratch. If I use the "Assert Formula" tool, then I am given a screen with
+two blank dialogue boxes that looks almost identical to the screen which permits me to 
+make a similar assertion. In the first, I will need to specify the microtheory for my
+new assertion (I'll add #$PeopleDataMt). In the second I should enter</p>
+    <font color='#339900'>
+      <tt><pre>
+   (personHairstyle LouiseBrooks BobHairstyle)</pre></tt>
+    </font>
+
+<p>
+being sure to remember the parenthesis. Clicking "Cyclify" will add '#$' to all the 
+CycL constants. If a term remains without a #$, it is not a CycL constant. 
+Once again, "Diagnose" permits Cyclists to wff-check an assertion without 
+actually asserting it. If the wff-checker says it's ok, then I can 
+"Assert Formula" and add it to my agenda.</p>
+    <p> Entering knowledge with the Browser Tool "Compose KE Text" is much quicker than with the "Assert Formula" tool and still encourages users to interact with Cyc as they enter larger chunks of knowledge. Opening the "Compose KE Text" page
+will reveal a large dialogue box. 
+Enter a manageable portion of KE text into the dialogue box. If Cyc does not recognize a term or syntax in the file, there will be an alert on the next page enumerating the 
+errors and on which lines those errors can be found. If all is well,
+all the new constants and assertions will be listed on the next page. 
+Once they have been looked over, select "Add Forms to the Agenda".</p>
+    <h3>3.1.3.  <a NAME='137210832'>
+The Agenda Status Bar and the Agenda Page
+</a>
+    </h3>
+    <p>
+Once assertions have been added to the agenda, they are then checked for 
+well-formedness. It is important to keep an eye on the Agenda Status Bar 
+(the bottom frame of the Cyc Browser). The first option in the Agenda Status Bar 
+is "Update". Selecting this will reload the Agenda Satus Bar. This should be done 
+several times while loading operations. "Agenda" opens the Agenda page, 
+which will reveal which operation Cyc is currently processing. The Agenda status 
+follows the Agenda link. If this reads "Sleep", Cyc is not processing any operations. 
+If this reads "Run", Cyc is currently processing operations. 
+If it reads "None", then Cyc has had a problem processing an operation and
+the agenda is currently halted.  Most likely it is trying to process an operation 
+that is non-wff. The Agenda page will identify the problematic assertion and 
+state what the problem is with the assertion. Clicking "Start Agenda" will skip 
+the problematic operation and continue working through the assertions. If skipping 
+that assertion will cause problems in the file, it may be best to delete the rest 
+of the assertions waiting to be processed (this can be done by selecting 
+"Delete Local Queue" at the bottom of the Agenda Page) and start the agenda again. I
+t is important to continue to update the status bar until the Agenda is sleeping 
+and all the loaded operations have been processed. For more information about the 
+Status Bar, read "The Cyc Browser Layout", in chapter 1.</p>
+    <h2>3.2.  <a NAME='137218272'>
+SBHL Predicates and Hierarchies</a>
+    </h2>
+    <p>
+One of the main advantages of a structured ontology like that used in Cyc is
+the fact that knowledge can be inherited, allowing for much more efficient
+representation. For instance:</p>
+    <center>
+      <img src='http://www.cyc.com/cycdoc/handbook/images/sv3023022.gif'></center>
+    <p>
+The above diagram illustrates this principal. Given an arbitrary instance of
+#$Truck, Cyc immediately knows many things about it: that it leaves tracks,
+that it cannot control its altitude and that it is driven by a trained, adult
+human. This follows, because it is known that the members of the collections
+above #$Truck have these properties, and all members of #$Truck are also
+members of each of the collections above #$Truck in the #$genls hierarchy.</p>
+    <p>
+The predicate #$genls is just one of a class of predicates with special code support 
+which are used for this kind of transitive reasoning. These predicates are calle
+"SBHL" predicates and form the basis of most hierarchical reasoning that takes
+place in Cyc. "SBHL" stands for "subsumption-based heuristic layer". It can be
+thought of as one of the largest and most important of our HL modules. The
+implementation of SBHL is built around a set of graphs which act as a cache for
+the information stored in these predicates.</p>
+    <p>
+E.g., inheritance through #$genlMt will be triggered 'automatically'
+for a given Query Mt (the query will look in all genlMts of the query
+mt), and in attempting to satisfy an #$ist literal.  Inheritance
+through #$genls will be triggered 'automatically' when querying
+#$genls, #$isa, and certain more complex relations built from these --
+such as #$disjointWith.  It will also be triggered by the
+canonicalizer (during asserting and querying) to enforce certain
+constraints on relations state which involve an 'isa' or 'genls'
+constraint.  E.g.:</p>
+    <font color='#339900'>
+      <tt><pre>
+  #$arg1Isa, etc.
+  #$arg1Genls, etc.
+  #$resultIsa
+  #$resultGenl
+  #$interArgIsa1-2, etc.
+  #$ist (for genlMt)</pre></tt>
+    </font>
+
+<p>
+Other SBHL predicates include #$genlPreds, #$genlAttributes, and #$genlMt, as
+well as predicates for denoting instance relations like #$isa.</p>
+    <p>
+In all other cases such reasoning is not triggered 'automatically',
+but occurs only if the appropriate #$transitiveViaArg or
+#$transitiveViaArgInverse assertion is made on the predicate.  For
+example, given the assertion:</p>
+    <font color='#339900'>
+      <tt><pre>
+    (sellsProductType Adidas-CommercialOrganization AthleticShoe)</pre></tt>
+    </font>
+
+<p>
+Querying for</p>
+    <font color='#339900'>
+      <tt><pre>
+    (sellsProductType Adidas-CommercialOrganization Shoe)</pre></tt>
+    </font>
+
+<p>
+returns</p>
+    <font color='#339900'>
+      <tt><pre>
+    Query was not proven</pre></tt>
+    </font>
+
+<p>
+because the following is not asserted:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (transitiveViaArg sellsProductType genls 2)</pre></tt>
+    </font>
+
+<p>
+and there is no rule expressing this relationship.</p>
+    <h2>3.3.  <a NAME='137252392'>
+Naming Conventions for CycL Constants
+</a>
+    </h2>
+    <p>
+When reading CycL or sorting through CycL constants, it is useful to be able to 
+to garner as much information as possible about the kind of thing a given constant
+denotes just by looking at that constant itself.  To facilitate this, Cyclists have
+adopted various conventions for giving names to constants.  By the "name" of a CycL
+constant, what we really mean is the string of characters that make up the constant,
+minus the initial '#$'.</p>
+    <p>
+The name of a CycL constant must follow these rules.  Some of these rules that
+are strictly enforced and inviolable, and thus Cyc will not even permit a Cyclist
+to introduce a constant that violates it.  Other such rules are simply strong 
+suggestions, and, while Cyclists are encouraged to follow them, they are 
+tehcnically violable.  First, we'll examine the conventions that the Cyc system
+enforces.</p>
+    <p>
+All CycL constant names must be at least 2 characters long, not including the prefix.  
+While all CycL constants begin with '#$', but this prefix is supplied automatically 
+by the Cyc sytem in most cases, making it unnecessary to include when entering a 
+constant into the 'Create Constant' window of the 'Search' window, for example.</p>
+    <p>
+Constant names can include any uppercase or lowercase letter, any digit, and the
+symbols '-' (hypen), '_' (underscore), and '?' (question mark).  No other characters,
+such as '!', '&amp;', or '@' are permitted.  </p>
+    <p>
+While the names of constants is case-sensitive, creating multiple constants that 
+differ only in character case is not allowed. </p>
+    <p>
+The rest of the conventions, while not enforced by the Cyc system, are important
+to follow.  </p>
+    <p>
+All Cyc constant names should be composed of one or more meaningful "words" in sequence, 
+with no breaks except for dashes or underlines (e.g. #$isa and #$SportsCar). A
+sequence of numeric characters may count as a "word" (e.g., #$FrontOfficeOf123Corp). 
+With the exception noted above for predicate names, each (non-numeric) "word" in a
+sequence must begin with a capital letter.  Abbreviations for common English words,
+such as 'Reln' for 'Relation' are also acceptable. Am acronym or non-acronymic
+initials of multi-word names (such as IBT for "information bearing thing) may count as 
+a "word", but all its characters will be the same case (e.g., lower case 
+if the acronym begins the name of a predicate constant; otherwise uppercase).</p>
+    <p>
+When creating constants with more than one word in the name, each new word begins 
+with a capital, letter except the first word in the name of a predicate or if
+it's a numeric string. </p>
+    <p>
+Hyphens are used to to set off parts of names which restrict or refined the 
+meaning of the name, as in #$Fruit-TheWord or #$Horse-Domesticated.</p>
+    <p>
+All things being equal, it is best to give similar constants names which are similar, thus
+making them easier to find and identify in the Knowedge Base. </p>
+    <p>
+As Cyc's natural language capability improves, and new lexical lookup 
+utilities are added, it becomes easier to look up constants by any of the
+strings known to refer to them, rather than by their constant name.  For example,
+if you type "FBI" into the "Search" window of the browser, it offers
+#$FederalBureauOfInvestigation as a disambiguation.  Hence, naming constants is
+only one piece of the work; doing thorough lexification is also very important.</p>
+    <p>
+When naming a constant, it's important to assign a name that distinguishes the 
+denoted concept or object from other concepts or objects it might get confused with. 
+So "Bow" would be a terrible name for a constant. Instead, names like "Bow-BoatPart", 
+"BowTheWeapon",  "Bowing-BodyMovement" should be used, depending on the underlying 
+concept or object denoted.</p>
+    <p>
+Sometimes it is possible to take this principle of specificity in names to an extreme,
+ and attempt to embody the whole meaning of the constant in its name. This is
+discouraged. For example, one might be tempted to give the constant #$physicalParts 
+the name "distinctIdentifiablePhysicalParts", but it is better to leave the name a bit
+terser since it isn't easily confused with some other concept, and put the additional
+information in the constant documentation. When names of constants become overly
+long, they become cumbersome to include in assertions and the risk for making undetected 
+typos is much greater.</p>
+    <p>
+It's important to remember that the names we assign to constants mean nothing to Cyc. 
+It doesn't matter whether the color green is represented by #$Green,#$GreenColor, 
+#$Verde, #$Gruen, or #$EMRG.  It's also very important to note that, while it's 
+likely that one can determine the denotation of a CycL constant by looking at its
+name, one cannot always make such a determinination.  It is best to read the comment
+and the axioms on a constant to determine its denotation.  For instance, does 
+#$Turkey refer to the country or the bird? The naming convention on countries 
+currently does not require a hypen followed by a disambiguation, so it is likely that 
+this is the country and the bird would be represented by #$Turkey-TheBird. 
+It is important to read the documentation before making any assumptions, just in case. </p>
+    <p>
+A person can ascertain a constant's meaning by looking at the assertions in the 
+Knowledge Base that use that constant. For example, from the following CycL
+sentences, (assuming we know what is denoted by Color, Okra, Grass37, etc) it is easy 
+to tell what the denotatum for the hypothetical CycL constant #$MRG:</p>
+    <font color='#339900'>
+      <tt><pre>
+   (isa EMRG Color)
+   (uniformColorOfObject Grass37 EMRG)
+   (relationAllInstance uniformColorOfObject Okra EMRG)</pre></tt>
+    </font>
+
+<p>
+For convenience, we choose names for CycL constanst that will indicate to
+human users what the constant is intended to mean, for example #$RedColor. But 
+evocative names such as #$LittleRedHairedGirlLikedByCharlieBrown does not 
+have any meaning in CycL without being related to the terms #$FemaleChild, 
+#$hairColor, #$RedHairColor, #$CharlieBrown, and #$likesAsFriend, for example.]</p>
+    <p>
+The names of constants denoting collections, functions, individual objects all begin 
+with a capital letter, while all predicates begin with a lower case letter. Thus,
+a the CycL constant #$pyhsicalAttractiveness names a predicate, while 
+#$PhysicalAttractiveness would denote a collection. </p>
+    <p>
+The names of constants representing people are usually named with both the first 
+and last name in that order. '#$AudreyHepburn' is conventional, while '#$Hepburn' and
+'#$HepburnAudrey' are not. There are a few exceptions: the constant names for
+Cyclists frequently violate this convention. Likewise, if a person is most commonly 
+known by only one name (Colette), or has a pseudonym more common than the person's real 
+name (Captain Kangaroo), then it is likely easier on Cyclists and users alike to name the
+constant with the more common name ('#$Colette' or '#$CaptainKangaroo' instead of 
+'#$Sidonie-GabrielleColette' or '#$BobKeeshan'). </p>
+    <p>
+Because the way information works are represented, it is possible to represent both the 
+work itself as well as particular copies or performances of that work. Therefore, it
+is preferable to distinguish between "Hair-TheMusical" and "Hair-MusicalPerformance" 
+and "Hair-MusicalPerformance006". Whole types of information works are usually
+designated with the suffix "-CW", as in "#$Novel-CW". The CW stands for 
+"conceptual work". Computer programs should have the suffix "-TheProgram". Please see
+the Handbook section on Conceptual Works for more information.</p>
+    <p>
+If two people have the same name, it is useful to distinguish between the two constants 
+by following the actual names with a hyphen and some very notable distinguishing
+characteristic, such as #$HenryMiller-Author. As "Henry Miller" is acommon name,
+distinguishing here is probably a good idea.</p>
+    <p>
+There are also conventions regarding how CycL terms are referred to in the Knowledge
+Base. Whenever the word "formula" is used when we talk about CycL, we mean a
+relation applied to some arguments, enclosed in parenthesis.  Thus</p>
+    <font color='#339900'>
+      <tt><pre>
+        (isa Lassie Dog)
+        (JuvenileFn Dog)</pre></tt>
+    </font>
+
+<p>
+are formulae, but #$True and #$Lassie are not.</p>
+    <p>
+The word "sentence" is the more specific term used to denote a relation (either
+a predicate or a truth function) applied to some arguments. Sentences are 
+syntactically well-formed and have a truth-value when they are semantically
+well-formed as well.</p>
+    <p>
+The entire CycL grammar ontology has been recently revised to be a more
+accurate reflection of the grammar.  Each CycL grammar collection has been
+given more appropriate code support for membership (in the form of 
+defnIff hooks). </p>
+    <p>
+All CycL grammar collections should begin with either CycL, EL, HL, or SubL
+in their names. For example, '#$CycLAssertion' and '#$ELSentence-Assertable'
+are correct, whereas '#$Assertion' and '#$Formula' are not.</p>
+    <h2>3.4.  <a NAME='137311704'>
+Anatomy of A Constant</a>
+    </h2>
+    <p>
+Although the knowledge base is currently littered with undefined constants, populating 
+the KB with undefined and underdefined constants is inadvisable and considered poor
+OE. A good constant is well-defined in the #$isa and #$genls hierarchy, well-documented,
+and ideally well-axiomatized. Without the relevant definitional and axiomatic
+information, a constant is basically worthless in inference. While it is possible to 
+use the constant in CycL, it is inappropriate to say that Cyc has any worthwhile 
+knowledge about the constant. Suppose, for instance, that I use the word "nictitating" 
+while speaking with someone. He asks me what "nictitating" means, and I tell him 
+"Nictitating is different than meal worms." I have told him nothing about how to use 
+"nictitating", despite the fact that I have related it to something in his vocabulary. 
+All CycL constants should be meaningfully defined. Thus, fleshing out a constant 
+properly is a must. </p>
+    <p>
+There are a few requirements for defining a new constant, regardless of type. The 
+following is the bare minimum for inclusion on every constant:</p>
+    <h3>3.4.1.  <a NAME='137321424'>
+All Constants</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+(#$isa TERM COLLECTION) </pre></tt>
+    </font>
+<p>
+        Unless a constant is, at minimum, a member of some collection, 
+        it is completely inert.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$comment TERM "String") </pre></tt>
+    </font>
+<p>
+        Every constant should have documentation. The only rare exception is of an 
+        instance level constant where all the information that would be in the
+        comment is in the CycL about the constant. Please refer to the section on 
+        documentation.</p>
+    <p>
+Every constant should be axiomatizable. That is, if it's difficult to relate it to other
+constants in the KB via rules and GAFs in such a way that distinguishes it from other
+constants, perhaps it isn't properly an independent concept.  Further, a constant is 
+considered well-defined in CycL if all of the information contained in the comment is
+represented in assertions in which the constant appears.</p>
+    <p>
+In addition, different types of constants have different sorts of requirements.</p>
+    <h3>3.4.2.  <a NAME='137339328'>
+Collections</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+(#$genls TERM COLLECTION) </pre></tt>
+    </font>
+<p>
+       Be sure that you have identified the nearest collections.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$termStrings TERM "string") </pre></tt>
+    </font>
+<p>
+       Make this assertion in the #$TemporaryLexicalAssertionsMt. Without an 
+       assertion of this type, the members of the NL department will be
+       unable to find the term in order to lexify your new constant.</p>
+    <h3>3.4.3.  <a NAME='137349024'>
+Predicates</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+(#$genlPreds TERM PRED)</pre></tt>
+    </font> <p>
+It is tempting to leave a predicate out of the #$genlPreds 
+       hierarchy. Finding the nearest generalization of the relation is much more 
+       difficult than finding the nearest generalization of a collection. But 
+       mindful construction of the #$genlPreds hierarchy is necessary for producing 
+       good, but not necessarily obvious, inferences.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$argIsa TERM N COLLECTION)</pre></tt>
+    </font> <p>
+Try to do as much semantic pruning as possible. 
+       Wallets, for instance,  can never be mathematical proofs, and most 
+       predicates about  mathematical theories will not also be useful for 
+       tangible things.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$argFormat TERM N FORMAT)</pre></tt>
+    </font> <p>
+It is important to constrain the legal number of values 
+        for an argument once the rest of the argument places are filled. If there 
+        should be no such constraint, then the format should be #$SetTheFormat. Note 
+        that there are very useful instances of #$Format other tahn #$SingleEntry
+        or #$SetTheFormat.  If all fillers for the argument position must be 
+        part of the same object, for instance, use #$PartsFormat.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$interArgIsa&lt;N1>-&lt;N2> TERM COLLECTION1 COLLECTION2)</pre></tt>
+    </font> <p>
+If the collection in some argument 
+        position of the predicate semantically constrains the possible values for
+        another argument, this should be noted with an inter-arg constraint. 
+        For instance, 
+</p>
+    <font color='#339900'>
+      <tt><pre>(interArgIsa2-1 issuesCredential Visa-Permit GovernmentOfCountry)</pre></tt>
+    </font>
+ 
+
+
+<p>
+       means that the second argument is constrained by the first argument: if the 
+       credential which is issued is an instance of a Visa, then some instance of a 
+       national government must be the second argument. In addition to #$interArgIsa, 
+       also examine #$interArgGenls.</p>
+    <h3>3.4.4.  <a NAME='137379848'>
+Functions</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+(#$argIsa TERM N COLLECTION)</pre></tt>
+    </font> <p>
+As in the case with predicates, you'll want to 
+       constrain the domain of every function.</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$resultIsa/ resultGenls TERM RESULT)</pre></tt>
+    </font> <p>
+Once you have created a function, you must 
+       identify what the resulting NAT will be: if you have created a collection-denoting
+       function, for instance, the resulting NAT will be a spec of what larger 
+       collection? If the result is an individual, the individual is an instance of 
+       what collection? An assertion beginning with #$resultGenls is mandatory is 
+       the #$resultIsa is a spec of  #$Collection and prohibitied if it is not.</p>
+    <h3>3.4.5.  <a NAME='137391536'>
+Specializations for Events</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+(#$rolesForEventType TERM ROLE)</pre></tt>
+    </font>
+
+<p>
+ This predicate relates #$Events with its most natural 
+       actor slots. One expects that every translocation event has an origin and a
+       destination, as well as some object moving, and perhaps even a path that object 
+       traverses in the translocation event. When creating an event, it is helpful for 
+       non-Cyclists doing KE to know what sorts of actor slots need to be filled by some 
+       object.</p>
+    <h3>3.4.6.  <a NAME='137396976'>
+A Few Words About KE Facilitation Predicates</a>
+    </h3>
+    <p>
+KE facilitation predicates assist the Cyclist and the naive user decide how to craft
+knowledge entry based on the particular concepts he or she is representing.  Since
+they are currently in development, many terms that should have KE Facilitation rules
+on them do not.  Please refer to the handbook section on KE Faciliation Predicates.</p>
+    <h3>3.4.7.  <a NAME='137404096'>
+A Few Words About Lexification</a>
+    </h3>
+    <p>
+The Natural Language department attempts to create tools that translate smoothly
+between CycL and English (although in principle, we can represent any 
+natural language using the same tools, something we can look forward to later down the
+road).  This involves providing lexical information for every CycL constant. While
+they are best qualified for this and do not expect much lexical work from ontologists,
+they have created a tool that will help OEers create elementary lexical assertions
+on constants.  Having created a new constant, an ontologist should view the constant
+in the Cyc browser. In the upper section of the "Index Frame", there are various 
+browser tools.  Clicking on [Lexify] will take the ontologist to the Lexification 
+Wizard.  Following the instructions provided, ontologists will easily create a
+small number of useful lexical assertions.</p>
+    <h2>3.5.  <a NAME='137408488'>
+Finding the Right Level Of Generality</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

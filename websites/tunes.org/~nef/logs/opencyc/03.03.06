@@ -1,0 +1,211 @@
+00:00:00 --- log: started opencyc/03.03.06
+00:07:57 --- join: NephLab (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+00:08:26 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+00:08:39 --- nick: NephLab -> dmiles
+00:08:39 --- quit: dmiles (Remote closed the connection)
+00:08:49 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+00:42:14 --- quit: yepster (adams.freenode.net irc.freenode.net)
+00:42:50 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+00:55:06 --- quit: yepster (adams.freenode.net irc.freenode.net)
+00:55:44 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+02:40:10 --- quit: dmiles ()
+02:40:19 --- join: dmiles (subhuman@12-212-75-114.client.attbi.com) joined #opencyc
+02:40:37 <yepster> do you know what a protista kingdom is?
+02:41:13 <yepster> (isa HYP-PersonTypeOpIndicatieFnIndicatie-B-9336 Person) in RegelingPGBDataMt
+02:41:13 <yepster> (genls Person Primate) in BiologyVocabularyMt
+02:41:13 <yepster> (genls Primate Eutheria) in BiologyVocabularyMt
+02:41:13 <yepster> (genls Eutheria Mammal) in BiologyVocabularyMt
+02:41:13 <yepster> (genls Mammal AirBreathingVertebrate) in BiologyVocabularyMt
+02:41:13 <yepster> (genls AirBreathingVertebrate Vertebrate) in BiologyVocabularyMt
+02:41:15 <yepster> (genls Vertebrate ChordataPhylum) in BiologyVocabularyMt
+02:41:17 <yepster> (genls ChordataPhylum ProtistaKingdom) in BiologyMt
+02:41:36 <yepster> the last genls is not in the public 0.7 kb, it is in mine however
+02:41:39 <yepster> because
+02:41:46 <yepster> (its green)
+02:42:04 <yepster> (implies 
+02:42:04 <yepster>        (and 
+02:42:04 <yepster>            (isa ?COL ?TYPE-COL) 
+02:42:04 <yepster>            (typeGenls ?TYPE-COL ?GENL)) 
+02:42:04 <yepster>        (genls ?COL ?GENL)) in BaseKB
+02:42:04 <yepster> (facets-Strict ProtistaKingdom BiologicalPhylum) in BiologyMt
+02:42:06 <yepster> Argument : Deduction #63993
+02:42:08 <yepster> (implies 
+02:42:10 <yepster>        (and 
+02:42:12 <yepster>            (isa ?INS ?TYPE-COL) 
+02:42:14 <yepster>            (relationAllInstance ?PRED ?TYPE-COL ?THING)) 
+02:42:16 <yepster>        (?PRED ?INS ?THING)) in BaseKB
+02:42:18 <yepster> (relationAllInstance facets-Strict BiologicalKingdom BiologicalPhylum) in BiologyMt
+02:42:20 <yepster> :ISA   (isa ProtistaKingdom BiologicalKingdom) in BiologyVocabularyMt 
+02:42:22 <yepster> :GENLPREDS   (genlInverse facets-Strict typeGenls) in BaseKB 
+02:42:24 <yepster> :ISA   (isa ChordataPhylum BiologicalPhylum) in BiologyVocabularyMt 
+02:42:46 <yepster> I only added forward rules for relationAllInstance and typeGenls
+02:46:17 <dmiles> hehe and it's fullign then out?
+02:46:46 <dmiles> its forward cacehing them into the browser?
+02:46:48 <dmiles> cool
+02:51:41 <yepster> yes
+02:52:03 <yepster> so I was curious, whet the h*l is a protistakingdom?
+02:52:22 <yepster> it's stuff like algae
+02:52:40 <dmiles> *nod*
+02:53:21 <yepster> you should try that forward rule for relationAllInstance
+02:53:39 <dmiles> i did actually
+02:53:43 <yepster> heh
+02:53:56 <dmiles> it made cyc work very hard
+02:54:01 <yepster> and also typeGenls?
+02:54:25 <dmiles> nope just 
+02:54:25 <dmiles> [02:43] <yepster> (implies 
+02:54:26 <dmiles> [02:43] <yepster>        (and 
+02:54:26 <dmiles> [02:43] <yepster>            (isa ?INS ?TYPE-COL) 
+02:54:26 <dmiles> [02:43] <yepster>            (relationAllInstance ?PRED ?TYPE-COL ?THING)) 
+02:54:26 <dmiles> [02:43] <yepster>        (?PRED ?INS ?THING)) in BaseKB
+02:54:43 <dmiles> aslso tried to do relationAllExists
+02:55:08 <yepster> euw skolem functions :-(
+02:55:18 <dmiles> yeah
+02:55:29 <yepster> btw what about in cons of forward for relationallexists just a hypothesize?
+02:55:31 <dmiles> but it never did a second forward
+02:55:46 <dmiles> thats what started the thread about forward chaining on skelms
+02:55:49 <yepster> that would make almost a 'real' foo
+02:56:13 <yepster> like performSubl( hypothesize
+02:56:30 <dmiles> yeah
+02:56:54 <dmiles> thatr would be nice
+02:57:10 <yepster> Strength : Default   Direction : Forward   Arguments : 1   Dependents : 13451
+02:57:10 <yepster> Asserted locally by Cyc administrator on Jan 13, 2003 at 19:22:05
+02:57:10 <yepster> Mt : BaseKB
+02:57:10 <yepster> HL Formula : 
+02:57:10 <yepster> (implies 
+02:57:10 <yepster>        (and 
+02:57:12 <yepster>            (isa ?COL ?TYPE-COL) 
+02:57:14 <yepster>            (typeGenls ?TYPE-COL ?GENL)) 
+02:57:16 <yepster>        (genls ?COL ?GENL))
+02:57:20 <yepster> look at # dependents
+02:57:28 <dmiles> 13451 and still growing?
+02:57:37 <yepster> i think it's don
+02:57:39 <yepster> done
+02:58:15 <yepster> but I think it got fed a few times because of the other relationAllInstance thing
+02:58:15 <dmiles> i like that ;P
+02:58:40 <dmiles> ah they compete over dependants youmean?
+02:58:54 <dmiles> i think soemtiems they will share deps
+02:59:02 <yepster> a yes
+02:59:03 <dmiles> oh fed more food
+02:59:42 <dmiles> now the big question.. will the infernece harness realize it wont have to work as hard
+03:00:25 <dmiles> i defeinately think it helps 
+03:00:34 <yepster> are you going to try that relationAllExists with hypothesize?
+03:00:49 <dmiles> my cyc image isnt running rigth this sec ;(
+03:01:20 <dmiles> i will thoug.. that sounds nice
+03:01:21 <yepster> ok i'm gonna play with it this evening then, i'll let you know what happens
+03:01:49 <dmiles> roight this momoent i am hard coding fluents into prolog kernel
+03:02:13 <yepster> like fluents from situation calcules?
+03:02:17 <dmiles> yes
+03:02:39 <dmiles> ah and the nice thing.. is this proog kernel is 100% written in java
+03:02:42 <yepster> you might want to check (lisp) code from km -> also has fluent implementation + good doc
+03:03:05 <dmiles> and its still at 100000+ lips
+03:03:05 <yepster> oh that would mean i could load it into oracle!
+03:03:35 <dmiles> yeah actually i am making this thing live side by sidfe with opencyc
+03:03:38 <yepster> what's the name of the prolog java thing?
+03:03:50 <dmiles> and hoping hne after prolog is done.. to add lisp to the it
+03:03:53 <dmiles> kprolog
+03:04:05 <dmiles> is the one i started with
+03:04:05 * yepster google
+03:04:55 <dmiles> http://www.binnetcorp.com/kprolog/Main.html
+03:05:15 <dmiles> http://www.binnetcorp.com/kprolog/KernelPrologUserGuide.html
+03:05:22 <dmiles> it has some stuff in it
+03:05:42 <dmiles> just filling it out with interators on collections
+03:06:24 <dmiles> the nice thimng is that it interfaces dirrectly to Opencyc Java API
+03:06:38 <yepster> yes
+03:06:44 <dmiles> and the next nice thing is Lisp proceedure space can share with prolog
+03:06:44 <yepster> hmmmm
+03:06:59 <dmiles> so its like POPLOG (LISPO+PROLOG) in one kernel
+03:07:17 <dmiles> all the isa/genls work can be given to Cyc
+03:07:27 <dmiles> and anything Cy cdoes very well naturally
+03:07:30 <dmiles> cyc
+03:07:58 <yepster> oracle(kprolog+java api(opencyc))
+03:08:02 <yepster> :-)
+03:08:22 <dmiles> yeah.. actualyl i amost have kernel prolgo setup to use the CycObjects
+03:08:37 <dmiles> so Const is CycConstant
+03:09:23 <yepster> this is bad for time ;-)
+03:09:33 <dmiles> since i dont want to mess up eigther code.. i just keep a toCycObject() method on each kprolog type
+03:10:08 <dmiles> well yeah it slows down my work a bit.. (another whelel to reinvent)
+03:10:11 <yepster> and a toKprologObject?
+03:10:18 <dmiles> but i dont see any option for really implimenting XPs
+03:10:19 <yepster> on CycObject?
+03:10:37 <yepster> i was thinking pl/sql (i think in pl/sql)
+03:10:43 <yepster> :-)
+03:10:54 <dmiles> well i have in the Init() class a toSomeToSomething()
+03:11:00 <dmiles> )(static method)
+03:11:02 <yepster> its very natural in set theory kind of things
+03:11:23 <yepster> like for record in cursor loop stuff
+03:11:43 <dmiles> yeah.. actually this is why fluents became an issue
+03:11:44 <yepster> ok that's not really set theory
+03:11:54 <dmiles> i wanted to move table results as an entire object
+03:11:56 <yepster> like (TheSetOf ?X (isa ?X Person))
+03:12:23 <dmiles> so that (isa ?X Person) returns and X that is preloaded to interate
+03:12:32 <dmiles> to iterate the results
+03:12:57 <yepster> select * from table(select cyc.askWithVariable( '(#$isa ?X #$Person)', '?X' ) from dual)
+03:12:59 <dmiles> so that the next peice of code that dont care much about X can just pass it finaially to the code that does
+03:13:17 <yepster> :-)
+03:13:44 <dmiles> so it's adding a CycVariable that hold multiple results all in one var
+03:14:01 <dmiles> class MultiVar extends Fluent {
+03:14:57 <dmiles> the table retunred would be a multiVar
+03:14:57 <dmiles> well a Vector of MultiVars
+03:15:03 <dmiles> pl/sql probly really thought them out 
+03:15:37 <dmiles> so that further processing of the {select * from table(select cyc.askWithVariable( '(#$isa ?X #$Person)', '?X' ) from dual)}
+03:15:54 <dmiles> comes out as #<table464566>
+03:16:36 <dmiles> then that #<table464566> can be passed to another select * from #<table464566>
+03:16:59 <dmiles> the fact that that object could hold a cursor is cool
+03:17:19 <dmiles> i am ussing a stack of rows
+03:18:01 <yepster> are the class files in kprolog/tauri/jinni enough?
+03:18:11 <dmiles> yes
+03:18:59 <yepster> which class to resolve?
+03:19:38 <dmiles> Prog()
+03:20:17 <dmiles> well Folder/Unfolder()
+03:22:45 <dmiles> so you see how little it takes to add prolog support
+03:23:12 <dmiles> this impleinetation does basicly everything i would ever need ;P
+03:23:38 <dmiles> almost once i write the termreader to let me use special types
+03:23:41 <yepster> currently running:
+03:23:43 <yepster> for i in tarau/jinni/*.java ; do loadjava -f -verbose -oci8 -u kprolog/kprolog $i ; done
+03:24:36 <dmiles> thas all you needed to do in oracle?
+03:24:43 <dmiles> amazing ;P
+03:27:15 <yepster> hmm soms problems getting it to compile
+03:27:26 <yepster> maybe l8r
+03:27:41 <dmiles> i used the cool build.xml file used in opencyc
+03:27:55 <dmiles> i just drop it in kprolog
+03:28:01 <dmiles> and run 'ant'
+03:28:03 <yepster> loading class files now instead of source
+03:28:18 <yepster> will try to resolve class then if that fails -> must return to work :(
+03:28:40 <dmiles> oh vbefor ei complied it though.. actually loaded them into text editor and ran beautify that stipped ou tthe srange characters
+03:30:18 <dmiles> there isnt exacly a place you can acall into proog with a string
+03:31:00 <dmiles> oh Init.run_query("member(X,[a,b,c]).").
+03:37:27 <yepster> this would be _so_ cool!
+03:41:10 <dmiles> i think that a POP planner will be ready to be used from Cyc Java API like within a week
+03:41:24 <dmiles> Partial Order Planner
+03:41:55 <dmiles> much of cyc was designed for it
+03:42:12 <dmiles> event sit calc
+03:44:18 <dmiles> the prolog implimetnatipon of the sit calc planner was bottelnecked due to the lack of constarints . and unexpresvieness of Functions
+03:44:56 <dmiles> even when Cyc was just a socket away, it just wasnt close enough
+03:45:29 <dmiles>  kprolog in java is indeed slower the the prolgo i use in C
+03:45:46 <dmiles> but it saves itself by not restricting to the prolog paradymns
+03:45:57 <dmiles> so i think it will really be as fastr
+03:46:31 <dmiles> also i ordered a java->c# CD
+03:46:39 <dmiles> visual studio . net
+03:46:53 <dmiles> so i am hoping to see all the javacode get c#'d
+03:47:04 <dmiles> and supposedly .. who knows it could be as fast as c++
+05:50:13 --- quit: ChanServ (Shutting Down)
+07:44:00 <dmiles> poking arround for a javalisp .. i found jli
+07:44:33 <dmiles> This is one approach to implementing the ideas discussed as the Public Domain Knowledge Base. Originally coded by Stephen Reed before joining Cycorp and currently maintained by Vic Bancroft. The next release with contributions made here will be versio
+07:46:24 <dmiles> i cant decide if i want to plung into PDKB
+07:46:54 <dmiles> but at least it's there and could potentually work with Cyc
+08:07:10 --- quit: yepster (Read error: 104 (Connection reset by peer))
+12:19:42 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:24:48 --- join: kinoc (~kino@4.33.94.170) joined #opencyc
+13:33:20 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+13:59:22 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:18:18 --- quit: kinoc (Read error: 110 (Connection timed out))
+14:37:27 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+16:15:08 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:46:32 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:07:35 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+17:29:28 --- quit: kinoc (Read error: 110 (Connection timed out))
+19:02:34 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:26:20 --- join: Jimzy (gandhi@12-238-198-171.client.attbi.com) joined #opencyc
+20:46:32 --- quit: kinoc2 (Read error: 110 (Connection timed out))
+21:02:13 --- quit: Jimzy ("-=SysReset 2.53=-")
+23:59:59 --- log: ended opencyc/03.03.06

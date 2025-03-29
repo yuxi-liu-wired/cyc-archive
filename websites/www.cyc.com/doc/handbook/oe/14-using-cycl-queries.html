@@ -1,0 +1,1846 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 14. Using CycL Queries</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 14. Using CycL Queries</h2>
+    <p></p>
+    <b>14.1.  <a HREF='#137147104'>
+The Advanced Inference Parameters
+</a></b>
+    <br>
+    <font size='-1'>14.1.1.  <a HREF='#137157880'>
+'Enable HL predicate backchaining'</a>
+      <br>
+    </font>
+    <font size='-1'>14.1.2.  <a HREF='#137178992'>
+'Enable unbound predicate rule backchaining'</a>
+      <br>
+    </font>
+    <font size='-1'>14.1.3.  <a HREF='#137193104'>
+'Cache backward query results'</a>
+      <br>
+    </font>
+    <font size='-1'>14.1.4.  <a HREF='#137245784'>
+'Enable negation by failure'</a>
+      <br>
+    </font>
+    <font size='-1'>14.1.5.  <a HREF='#137294864'>
+'Consider disjunctive temporal relations'</a>
+      <br>
+    </font>
+    <font size='-1'>14.1.6.  <a HREF='#137367736'>
+'Semantic pruning of results of backchaining'
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>14.2.  <a HREF='#137389008'>
+Proof Checker Mode</a></b>
+    <br>
+    <p></p>
+    <b>14.3.  <a HREF='#137411208'>
+Inference Sensitive Predicates</a></b>
+    <br>
+    <p></p>
+    <b>14.4.  <a HREF='#137508032'>
+Theorem Proving vs. HL Modules</a></b>
+    <br>
+    <font size='-1'>14.4.1.  <a HREF='#137517808'>
+Overview</a>
+      <br>
+    </font>
+    <font size='-1'>14.4.2.  <a HREF='#137522920'>
+Defining New Predicates
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.4.3.  <a HREF='#137545936'>
+Taking Advantage of Existing HL-supported Predicates
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>14.5.  <a HREF='#137575576'>
+Inference Tree Examiner</a></b>
+    <br>
+    <font size='-1'>14.5.1.  <a HREF='#137578600'>
+Purpose</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.2.  <a HREF='#137600232'>
+Inference Trees
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.3.  <a HREF='#137635152'>
+Access</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.4.  <a HREF='#137650816'>
+General Layout
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.5.  <a HREF='#137685896'>
+Specific Features
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.6.  <a HREF='#137799200'>
+Additional Tools
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.7.  <a HREF='#137816336'>
+Suggested Uses
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.8.  <a HREF='#137824072'>
+Proof Checker
+</a>
+      <br>
+    </font>
+    <font size='-1'>14.5.9.  <a HREF='#137848456'>
+Past &amp; Future</a>
+      <br>
+    </font>
+    <p></p>
+    <b>14.6.  <a HREF='#137858464'>
+Negation by Failure</a></b>
+		&nbsp;&nbsp; <em>  not yet available</em>
+    <br>
+    <hr>
+    <h1>
+    Chapter 14. 
+    Using CycL Queries</h1>
+    <h2>14.1.  <a NAME='137147104'>
+The Advanced Inference Parameters
+</a>
+    </h2>
+    <p>
+  This section of the Handbook is devoted to the advanced inference
+parameters, a set of options that can be manipulated by users to
+change some of the behavior of the Cyc inference engine.</p>
+    <p>
+This section of the Handbook is devoted to the advanced inference
+parameters, a set of options that can be manipulated by users to
+change some of the behavior of the Cyc inference engine during
+backward inference (inference performed at ask time).</p>
+    <p>
+  In order to see the advanced inference parameters, simply click on the
+[Show] button next to 'Advanced Inference Parameters' on the 'Ask a
+Query' page. After clicking on the button, you should see six
+inference parameters, each with a 'Yes' and 'No' option below it. You
+enable each of the inference parameters by choosing 'Yes', and disable
+each by choosing 'No'. Each of the inference parameters is set to a
+default value: the default value for 'Cache backward query results' is
+'Yes', while the default value for the other five parameters is
+'No'. I will now describe what happens when these parameters are
+enabled, and indicate why a user might want to enable them.</p>
+    <p>
+All parameters are set "no" by default.
+</p>
+    <h3>14.1.1.  <a NAME='137157880'>
+'Enable HL predicate backchaining'</a>
+    </h3>
+    <p>
+  Enabling HL predicate backchaining allows the inference engine to
+backchain on rules in which a positive literal (that is, a clause in
+the consequent of a rule) has an HL predicate (that is, a predicate with
+its own dedicated HL module -  #$isa, #$genls, #$elementOf, and
+#$subsetOf are notable examples) in its 0th argument place. An example of
+such a rule is the following:</p>
+    <font color='#339900'>
+      <tt><pre>
+BaseKB
+
+(implies 
+       (and 
+           (isa ?STYPE ExistingStuffType) 
+           (isa ?OBJ ?STYPE) 
+           (physicalDecompositions ?OBJ ?PORTION)) 
+       (isa ?PORTION ?STYPE))</pre></tt>
+    </font>
+
+<p>
+When HL predicate backchaining is enabled, the inference engine will
+backchain on the above rule when a query of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(isa A B)
+</pre></tt>
+    </font>
+<p>
+is asked (where 'A' and 'B' can be either closed terms or
+variables). On the other hand, when  HL predicate backchaining is
+disabled, the inference engine will not backchain on the rule 
+when given a query of the same form. Consequently, it is useful to
+enable HL predicate backchaining whenever one asks a query of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)</pre></tt>
+    </font>
+
+<p>
+where 'PRED' is an HL predicate, and 'ARG1', ..., 'ARGN' are either
+closed terms or variables, and one anticipates proving the query (or
+finding bindings for the variables in the query) by backchaining on a
+rule containing a positive literal with 'PRED' in the 0th argument
+place. </p>
+    <p>
+One drawback to enabling HL predicate backchaining is that it
+increases the number of rules in the search space for a query, since
+rules with an HL predicate PRED in the 0th argument place of a
+positive literal would normally not appear in the search space when a
+query of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)</pre></tt>
+    </font>
+
+<p>
+is asked. So if you don't anticipate that proving a query will require
+proving something of the above form (either as the final conclusion or as
+an intermediate conclusion in a series of backchaining steps) via
+backchaining on a rule with 'PRED' in the 0th argument place of a
+positive literal, it would probably be best to disable HL predicate
+backchaining, at least for that query.</p>
+    <h3>14.1.2.  <a NAME='137178992'>
+'Enable unbound predicate rule backchaining'</a>
+    </h3>
+    <p>
+  This inference parameter is similar to 'Enable HL predicate rule
+backchaining' in that it also allows the user access to rules not usually
+used by the inference engine. Enabling unbound predicate rule backchaining
+allows the inference engine to backchain on rules in which a variable
+appears in the 0th argument place of a positive literal, rules like
+the following:</p>
+    <font color='#339900'>
+      <tt><pre>
+BaseKB
+
+(implies 
+       (and 
+           (hasRelationalAttributes ?DEP-THING ?BEINGINRELATION2WITH-ATTRIBUTEFN) 
+           (termOfUnit ?BEINGINRELATION2WITH-ATTRIBUTEFN 
+               (BeingInRelation2With-AttributeFn ?PRED ?INDEP-THING))) 
+       (?PRED ?INDEP-THING ?DEP-THING))</pre></tt>
+    </font>
+
+<p>
+  So when unbound predicate rule backchaining is enabled, the
+inference engine will be able to backchain on a rule like the
+one above in trying to prove (or find bindings for) a query of 
+the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(BINARYPREDICATE A B)
+</pre></tt>
+    </font>
+<p>
+where 'BINARYPREDICATE' is a predicate, and 'A' and 'B' are either
+variables or closed terms. The advantages and drawbacks to enabling
+unbound predicate rule backchaining are similar to those associated
+with enabling HL predicate backchaining. Enabling unbound predicate rule
+backchaining will almost certainly increase the size of the search
+space for a given inference.  On the one hand, enabling 
+unbound rule predicate backchaining may be the only way one can prove
+a closed query, or get bindings for a query with one or more
+variables.</p>
+    <h3>14.1.3.  <a NAME='137193104'>
+'Cache backward query results'</a>
+    </h3>
+    <p>
+  When the inference parameter 'Cache backward query results' is
+enabled, the results of successful inferences involving backchaining
+will be cached in the KB. So if a closed query (no free variables) of
+the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+is asked, and the query returns 'True', the ground atomic formula
+(GAF)</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+will be cached in the KB, in the microtheory in which the query was
+asked. Note that the cached assertion will have the direction</p>
+    <p>
+'Backward', so it won't trigger any forward rules. If an open query
+(one with at least one free variable) of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)</pre></tt>
+    </font>
+
+<p>
+is asked (where at least one of the ARG1, ..., ARGN is a free
+variable), and at least one set of bindings is returned as the result
+of the query, then each of the GAF's obtained by substituting a set of
+bindings for the appropriate variables in the query will be cached in
+the KB. For instance, if one asks the query</p>
+    <font color='#339900'>
+      <tt><pre>
+(intends Iran (doneBy ?ACTION Iran))
+</pre></tt>
+    </font>
+<p>
+in the AbuMusaIncidentMt, with 'Cache backward query results' enabled,
+30 second time cutoff, and 1 backchain step, one should get several
+bindings for <nobr>
+?ACTION,</nobr> including</p>
+    <blockquote>
+      <ul>
+        <li>
+          <em><tt>
+WarOfTheCities-IranianOffensive</tt></em>
+        </li>
+        <li>
+          <em><tt>
+IranOccupiesTumbIslands-1971</tt></em>
+        </li>
+        <li>
+          <em><tt>
+IranReassertsSovereignty</tt></em>
+        </li>
+      </ul>
+    </blockquote>
+    <p>
+Each of the GAF's obtained by substituting one of these constants for <nobr>
+?ACTION</nobr>
+in the query formula will be cached in the KB, in the query mt, with
+direction 'Backward':</p>
+    <p>
+AbuMusaIncidentMt</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+(intends Iran (doneBy IranReassertsSovereignty Iran))</pre></tt>
+          </font>
+        </li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(intends Iran (doneBy IranOccupiesTumbIslands-1971 Iran))</pre></tt>
+          </font>
+        </li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+(intends Iran (doneBy WarOfTheCities-IranianOffensive Iran))</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+
+<p>
+  Enabling 'Cache backward query results' can be very useful when one is
+testing out inferences involving backchaining on several rules: this
+one can do a separate query using one of the rules in the
+inference path, to cache a GAF or GAF's that will be needed in one of
+the other backchaining steps. By caching these GAF's, one reduces the
+number of backchaining steps needed for the query one is ultimately
+interested in testing out, and thus speeds up the process of seeing 
+whether or not the query is provable via the chosen inference path.</p>
+    <p>
+It is often a good idea to disable 'Cache backward query results' when
+one is seeking to improve the speed of an inference involving
+backchaining.  Trying to improve the speed of an inference often
+involves testing the same inference over and over again, to see if
+changes made in the KB have significantly cut the amount of time needed to
+get the correct answer to the query. If caching is enabled, then
+the results of the query one is running will be cached in the KB;
+consequently, these results can be found rapidly by the inference
+engine (via simple look-up modules) in subsequent runnings of the
+query. Consequently, one might be misled into thinking that the KB
+changes one made were significantly cutting the amount of time needed
+for an inference, when it was really the cached results of previous
+queries that were allowing the query to return significantly
+faster. For this reason, it is a good idea to disable caching when
+running the same query over and over again.</p>
+    <h3>14.1.4.  <a NAME='137245784'>
+'Enable negation by failure'</a>
+    </h3>
+    <p>
+  Enabling negation by failure allows the inference engine to prove the
+negation of certain assertions when it fails to prove those assertions
+themselves.</p>
+    <p>
+By default, when negation by failure is off, Cyc does not employ the
+closed-world assumption in backward inference unless forced to do so
+via use of #$completeExtentKnown, #$completeExtentKnownForArg, or
+
+#$completeCollectionExtent.  That is to say, in the default case,
+Cyc does not assume that it knows everything about every domain.
+Hence when one asks the negation of a closed formula FORM with
+negation by failure disabled, the inference engine will return 'NIL'
+if it cannot prove FORM.  Because the closed world assumption is not
+enforced, the inference engine does not construe its own inability
+to prove FORM to be an argument for the truth of the negation of
+FORM.
+</p>
+    <p>
+When negation by failure is enabled, and one asks the
+negation of a closed formula FORM in which the arg0 is a predicate PRED
+such that (#$minimizeExtent PRED) is true in a microtheory accessible to
+the microtheory in which the query is made, then the inference engine
+will return 'True' if it cannot prove FORM. For example, if one 
+enables negation by failure, and then asks</p>
+    <font color='#339900'>
+      <tt><pre>
+(not (hasMembers INTERPOL Watson))</pre></tt>
+    </font>
+
+<p>
+in the CyclistsMt, the query will return 'True', since (hasMembers
+INTERPOL Watson) cannot be proven, and since</p>
+    <font color='#339900'>
+      <tt><pre>
+(minimizeExtent hasMembers)</pre></tt>
+    </font>
+
+<p>
+is asserted in the InternationalOrganizationDataMt, a microtheory
+visible to the CyclistsMt. Note that the same query will return 'Query
+was not proven' when negation by failure is disabled. Note also that
+even when negation by failure is enabled, the query</p>
+    <font color='#339900'>
+      <tt><pre>
+ (not 
+   (hasMembers INTERPOL UnitedStatesOfAmerica))</pre></tt>
+    </font>
+
+<p>
+returns 'Query was not proven' when asked in the
+CIAWorldFactbook1995Mt, since the inference engine can prove </p>
+    <font color='#339900'>
+      <tt><pre>
+(hasMembers INTERPOL UnitedStatesOfAmerica)</pre></tt>
+    </font>
+
+<p>
+in that microtheory, since</p>
+    <font color='#339900'>
+      <tt><pre>
+(internationalOrg-MemberCountry INTERPOL UnitedStatesOfAmerica)
+</pre></tt>
+    </font>
+<p>
+is asserted there. Finally, it should be pointed out that enabling
+negation by failure can also affect inferences involving
+backchaining. For example, if one enables negation by failure, and
+then asks</p>
+    <font color='#339900'>
+      <tt><pre>
+(not 
+  (sponsorsAgentInAction Iran UnitedStatesOfAmerica
+  RafsanjaniWarnsUAE))</pre></tt>
+    </font>
+
+<p>
+in the AbuMusaIncidentMt, with 1 backchaining step, the query will
+return 'True'. This is because the inference engine performs a kind of
+contrapositive reasoning on the rule</p>
+    <font color='#339900'>
+      <tt><pre>
+BaseKB
+
+(implies 
+ (sponsorsAgentInAction ?SPONSOR ?DOER ?ACT) 
+ (performedBy ?ACT ?DOER))</pre></tt>
+    </font>
+
+<p>
+reducing the problem of proving 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(not 
+ (sponsorsAgentInAction Iran UnitedStatesOfAmerica RafsanjaniWarnsUAE))</pre></tt>
+    </font>
+
+<p>
+to that of proving
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(not 
+  (performedBy RafsanjaniWarnsUAE UnitedStatesOfAmerica))</pre></tt>
+    </font>
+
+<p>
+Since negation by failure is enabled, and since the assertion
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(minimizeExtent performedBy)
+</pre></tt>
+    </font>
+<p>
+is asserted in the BaseKB, the negated performedBy literal can be
+proven.</p>
+    <p>
+Since negation by failure allows us to assume that the negation of an
+assertion is true when the assertion itself cannot be proven, it is
+best used in those situations in which such an assumption is
+plausible, or, alternatively, in situations in which one wishes to
+test the plausibility of such an assumption.</p>
+    <h3>14.1.5.  <a NAME='137294864'>
+'Consider disjunctive temporal relations'</a>
+    </h3>
+    <p>
+ Enabling 'Consider disjunctive temporal relations' allows the
+SBHL-TIME module to use certain assertions in the KB that it would
+normally not use. The assertions in question are either ground atomic
+formulas (GAFs) in which temporallyDisjoint is the arg0, or negated</p>
+    <p>
+GAFs in which the arg0 of the negated GAF is one of the following
+predicates:</p>
+    <blockquote>
+      <ul>
+        <li>
+          <em><tt>
+temporallySubsumes</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporalBoundsContain</tt></em>
+        </li>
+        <li>
+          <em><tt>
+startingDate</tt></em>
+        </li>
+        <li>
+          <em><tt>
+endingDate</tt></em>
+        </li>
+        <li>
+          <em><tt>
+dateOfEvent</tt></em>
+        </li>
+        <li>
+          <em><tt>
+contiguousAfter</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporallyFinishedBy</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporalBoundsIntersect</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporallyIntersects</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporallyCoterminal</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporallyCooriginating</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporalBoundsIdentical</tt></em>
+        </li>
+        <li>
+          <em><tt>
+temporallyStartedBy</tt></em>
+        </li>
+        <li>
+          <em><tt>
+cotemporal</tt></em>
+        </li>
+        <li>
+          <em><tt>
+overlapsStart</tt></em>
+        </li>
+        <li>
+          <em><tt>
+endsDuring</tt></em>
+        </li>
+        <li>
+          <em><tt>
+startsDuring</tt></em>
+        </li>
+        <li>
+          <em><tt>
+dateOfDeath</tt></em>
+        </li>
+        <li>
+          <em><tt>
+birthDate</tt></em>
+        </li>
+      </ul>
+    </blockquote>
+    <p>
+Assertions of the form mentioned above are disjunctive in the sense
+that each of them encodes information that is equivalent to a disjunction of
+two or more temporal relations holding between the arguments of the
+assertion. For example, the assertion</p>
+    <font color='#339900'>
+      <tt><pre>
+(temporallyDisjoint BritneySpears Trotsky)
+</pre></tt>
+    </font>
+<p>
+is equivalent to the disjunction
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(or
+ (startsAfterEndingOf BritneySpears Trotsky)
+ (startsAfterEndingOf Trotsky BritneySpears))</pre></tt>
+    </font>
+
+<p>
+  Enabling 'Consider disjunctive temporal relations' adds some time to
+queries involving temporal relations, and that is why the default
+value of 'Consider disjunctive temporal relations' is 'No'. However,
+the amount of time that is added to queries is often negligible, so
+OE'ers should feel free to enable this option, if they think that
+their queries will involve the use of assertions of the form mentioned
+above.</p>
+    <h3>14.1.6.  <a NAME='137367736'>
+'Semantic pruning of results of backchaining'
+</a>
+    </h3>
+    <p>
+ If you enable 'Semantic pruning of results of backchaining', then
+during inferences involving backchaining, certain nodes in the search
+tree will be subjected to a semantic well-formedness test. If the
+nodes fail that test, then they will be immediately pruned from the
+search tree. The test is applied whenever backchaining introduces
+#$isa or #$genls literals; when such literals are introduced, they are
+tested to see if they are provably unsatisfiable. If they are provably
+unsatisfiable, then the node at which the backchaining step was
+introduced is immediately removed from the search tree. 
+</p>
+    <p>
+ In order to get an idea of what happens when this inference parameter
+is enabled, ask the following query in the
+CurrentWorldDataCollectorMt, with a 40 second Time Cutoff and 1
+backchaining step:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(performedBy ?ACTION Iran)
+</pre></tt>
+    </font>
+<p>
+ When asked with 'Semantic pruning of results of backchaining'
+disabled, the query should return three bindings for '?ACTION', with the
+message 'Search space exhausted'. If you go to the 'Inference Tree
+Examiner' page, you should see that there are 535 nodes in the search
+tree. Moreover, the top search node has 167 children. </p>
+    <p>
+ When the same query is asked with 'Semantic pruning of results of
+backchaining' enabled, the query should return the same three bindings
+with the same message. However, when you go to the 'Inference Tree
+Examiner' page, you will find that there are only 492 nodes in the
+search tree, and that the top search node has only 124 children. The
+difference in the total number of nodes (and the difference in the
+total number of children for the top search node) is due to the
+results of semantic pruning. For instance, rules like the following
+are children of the top search node in the inference done with
+semantic pruning disabled:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+UnitedStatesSocialLifeMt
+
+(implies
+ (and
+   (isa ?PERSON
+   (GraduateFn LawSchool))
+   (termOfUnit ?ATTENDING
+   (SKF-57340835 ?PERSON)))
+ (performedBy ?ATTENDING ?PERSON))
+</pre></tt>
+    </font>
+<font color='#339900'>
+      <tt><pre>
+HumanSocialLifeMt
+
+(implies 
+
+  (and 
+   (isa ?S Survivalist) 
+   (termOfUnit ?STORING 
+   (SKF-3782658 ?S))) 
+  (performedBy ?STORING ?S))
+</pre></tt>
+    </font>
+<p>
+These rules do not appear in the search tree for the inference in
+which semantic pruning was enabled. They were pruned from that search
+tree because (isa Iran (GraduateFn LawSchool)) and (isa Iran
+Survivalist) are provably unsatisfiable.
+</p>
+    <p>
+ The preceding example illustrates how enabling semantic pruning can
+appreciably reduce the number of nodes searched, even in a rather
+simple one backchain inference. Note that applying the semantic
+well-formedness test to #$isa and #$genls literals does take time; in
+fact, the gain in time that one gets from having a truncated search
+tree may very well be offset by the amount of time lost doing the
+test. Nevertheless, it's often worthwhile to at least try out semantic
+pruning, particularly on inferences involving a number of backchaining
+steps.
+</p>
+    <h2>14.2.  <a NAME='137389008'>
+Proof Checker Mode</a>
+    </h2>
+    <p>
+ In this section of the OE Handbook we describe the use of the proof
+checker, a tool that allows users to choose the rules they will
+use in querying the Knowledge Base.
+</p>
+    <p>
+In order to choose a rule for use by the proof checker, first click
+on the colored ball next to that rule in the browser interface. This
+will take you to a page that gives you a list of operations (such as
+Edit, Unassert, and Blast) that can be performed on the
+assertion. Here is an example of such a page: </p>
+    <font color='#339900'>
+      <tt><pre>
+   Public Cyc Assertion 128400
+
+   [Show English] [EL Formula] [Diagnose] [HL Data] 
+   [Change Mt] [Change Strength] [Change Direction] 
+   [Assert Similar] [Edit] [Unassert] [Blast] [Use in Proof] 
+
+   Strength : Default   Direction : Backward   Arguments : 1   No Dependents
+   Asserted locally by William Jarrold on Apr 24, 1996
+
+   Mt : BaseKB
+   HL Formula : 
+       M(implies 
+          (and 
+             (isa ?ANIM Animal) 
+             (providerOfMotiveForce ?ACT ?ANIM)) 
+           (doneBy ?ACT ?ANIM))</pre></tt>
+    </font>
+
+<p>
+One of the options at the top of the page is [Use in Proof]. Selecting
+this option adds the rule to the set of rules in the proof checker.
+After adding all the rules you wish to add to the proof checker, you
+can enable proof checking by first clicking on the [Show] button next to
+'Advanced Inference Parameters' on the 'Ask a Query' page. After
+clicking on the [Show] button and scrolling down the page, you should
+see a 'Proof Checker Setup' link. Clicking on this link takes you to a
+page with 'Proof Checker Control' at the top. All the rules you have
+chosen for the proof checker should be listed on this page, and there
+should be three buttons, one saying 'Enable Proof Checking', another
+saying 'Clear Entire Rule Set', and a third saying 'Update Rule
+Set'. To enable proof checking, simply press the 'Enable Proof
+Checking' button. After proof checking has been enabled, a link 'Proof
+Checking mode Enabled' should appear just below the 'Ask Query' button
+on the 'Ask a Query' page.</p>
+    <p>
+As long as proof checking mode is enabled, the only rules that will be
+used in backchaining are those rules that the user has chosen for the
+proof checker. So suppose that the rule mentioned above is the only
+rule chosen for the proof checker, and that proof checking has been
+enabled. Under these circumstances, the only rule that would appear in
+the search tree for the query</p>
+    <font color='#339900'>
+      <tt><pre>
+    (doneBy ?X ?Y)</pre></tt>
+    </font>
+
+<p>
+in the #$HumanSocialLifeMt, with 1 backchain step, would be the rule mentioned
+above. If the same query were asked with proof checking disabled, a
+far greater number of rules (48, when I asked) would appear in the search
+tree. Consequently, enabling proof checking mode allows one to shrink
+the search space to a small number of rules (namely, all those rules
+placed in the proof checker). Shrinking the search space to just the
+rules placed in the proof checker allows one to determine quickly
+whether or not an inference involving those rules (even one that
+requires several backchaining steps) will be successful. Consequently,
+the proof checker is a useful tool for debugging potential inference
+paths.</p>
+    <p>
+Once you are through using the proof checker, you can disable proof
+checking simply by clicking on the 'Disable Proof Checking' button on
+the 'Proof Checker Control Page' (which can be reached by clicking on
+the 'Proof Checker Setup' link on the 'Ask a Query' page).</p>
+    <h2>14.3.  <a NAME='137411208'>
+Inference Sensitive Predicates</a>
+    </h2>
+    <p>
+This section of the OE Handbook will focus on the collection of
+CycInferenceHeuristicPredicates, and how they can be used by OE'ers to
+modify how the inference engine behaves during a query. </p>
+    <p>
+The collection of #$CycInferenceHeuristicPredicates includes predicates
+like #$highlyRelevantAssertion, #$highlyRelevantMt, and
+#$backchainForbidden. Through the use of these predicates, an OE'er can
+modify the heuristic search mechanisms of the inference engine for
+certain types of queries. We will now illustrate the advantages and
+drawbacks of these predicates with a few examples.</p>
+    <p>
+ By asserting 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (backchainForbidden PRED)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT, one places restrictions on backchaining on rules
+containing a positive literal with PRED as the arg0, whenever a query
+is done in a microtheory having access to MT. For instance, </p>
+    <font color='#339900'>
+      <tt><pre>
+   (backchainForbidden inRegion)
+</pre></tt>
+    </font>
+<p>
+is asserted in the #$TourAndVacationPackageItinerariesMt. Consequently,
+whenever a query is asked in a microtheory having access to the
+#$TourAndVacationPackageItinerariesMt, backchaining on rules containing
+a positive literal with inRegion as the arg0, like</p>
+    <font color='#339900'>
+      <tt><pre>
+  BaseKB
+
+   (implies 
+     (and 
+       (inRegion ?OBJ ?SUB) 
+       (geographicalSubRegions ?REGION ?SUB)) 
+     (inRegion ?OBJ ?REGION))</pre></tt>
+    </font>
+
+<p>
+will be restricted. To be more specific, whenever a query of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (inRegion A B)
+</pre></tt>
+    </font>
+<p>
+is asked in a microtheory having access to the
+#$TourAndVacationPackageItinerariesMt (where 'A' and 'B' could be either
+closed terms or variables), backchaining on the rules like the one
+above (that is, rules containing a positive literal with inRegion as
+the arg0) cannot be used to prove the query. More generally, if</p>
+    <font color='#339900'>
+      <tt><pre>
+     (backchainForbidden PRED)
+</pre></tt>
+    </font>
+<p>
+is asserted in a microtheory MT, then queries of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+(where 'ARG1', ..., 'ARGN' could be either closed terms or variables),
+when asked in a microtheory having access to MT, cannot be proven by
+backchaining on rules containing a positive literal with PRED as the
+arg0. </p>
+    <p>
+ At first glance, it may be difficult to see the utility of asserting
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (backchainForbidden PRED)
+</pre></tt>
+    </font>
+<p>
+since all that making such an assertion seems to do is to take away
+some resources (namely, certain backward rules) that might be useful
+in proving queries of the form</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+However, asserting
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (backchainForbidden PRED)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT can in fact be of great utility, if two
+conditions are met. First, microtheories that have access to MT
+(including MT itself) should be contexts in which we would not expect
+to prove many (if any) queries of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+via backchaining. Second, the microtheory MT should be one with access
+to a fairly large number of rules containing a positive literal with PRED
+as the arg0. The first condition ensures that nothing will be lost by
+restricting backchaining, while the second condition ensures that
+something will be gained. What will be gained is a speed-up in
+inference, since the inference engine will not have to consider rules
+containing a positive literal with PRED as the arg0 when trying to
+prove a literal of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+Note that finding microtheories that meet the two conditions above can
+often be a delicate matter, and so assertions of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (backchainForbidden PRED)
+</pre></tt>
+    </font>
+<p>
+should be made with caution. Testing the consequences of such
+assertions by asking several queries is thus highly encouraged.
+</p>
+    <p>
+  By asserting
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (backchainRequired PRED)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT, one places restrictions on the use of removal
+modules to prove literals of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(PRED ARG1 ... ARGN)
+</pre></tt>
+    </font>
+<p>
+To be more specific, if one asserts 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (backchainRequired PRED)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT, then the inference engine will only attempt to
+use transformation HL modules (roughly, backchaining modules) on
+literals involving PRED, when a query is made in a microtheory
+having access to MT. The inference engine will prune any inference
+path in which a removal module would need to be attempted on such a
+literal. 
+</p>
+    <p>
+So backchainRequired is a kind of dual to #$backchainForbidden; the
+former rules out the use of removal modules to prove literals of a
+certain kind, but allows the use of transformation modules to prove
+those literals, while the latter rules out the use of transformation
+modules to prove certain literals, but allows the use of removal
+modules.  
+</p>
+    <p>
+ Note that the use of #$backchainRequired should be limited to those
+contexts in which it makes sense to think that literals involving a
+predicate should only be proved via backchaining.
+</p>
+    <p>
+The predicates #$highlyRelevantAssertion and #$highlyRelevantMt can be
+used to modify the heuristic weight given to an assertion or
+assertions in certain inferences. When one asserts
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (highlyRelevantAssertion ASSERT)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT, the #$CycLAssertion ASSERT will be given greater
+heuristic weight than it normally would in inferences done in MT. As a
+consequence, ASSERT will most likely be used at a much earlier stage in
+queries done in MT than in queries done in microtheories where ASSERT
+is not declared to be a #$highlyRelevantAssertion. Since ASSERT will
+most likely be used at a much earlier stage in such queries, queries that
+successfully use ASSERT can usually be run in a much shorter time in
+MT.
+</p>
+    <p>
+ Asserting
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (highlyRelevantMt MT)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT-1 (where MT-1 need not be the same as MT) has the
+effect of making each of the assertions in MT a
+#$highlyRelevantAssertion for inferences done in MT-1.
+</p>
+    <p>
+ Note that in some cases, asserting
+</p>
+    <font color='#339900'>
+      <tt><pre>
+    (highlyRelevantAssertion ASSERT)
+</pre></tt>
+    </font>
+<p>
+or
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   (highlyRelevantMt MT)
+</pre></tt>
+    </font>
+<p>
+in a microtheory MT-1 may not have the effect of speeding up an
+inference asked in MT-1, even if ASSERT (respectively, the assertions in
+MT) are successfully used in that inference. Most notably, if the
+query involved is an exhaustive ask (one where the 'Number Cutoff'
+option chosen is 'Get Everything', and one in which the query contains
+some open variables), there will be no speed-up in inference, since
+the inference engine will continue to search for variable bindings until
+the search space is exhausted.  Even if well-placed
+#$highlyRelevantAssertion or #$highlyRelevantMt GAF's allow the inference
+engine to find all the bindings it will find in a search within the
+first ten seconds of that search, the search will continue until the
+search space is exhausted. So in order to get the most out of the
+predicates #$highlyRelevantAssertion and #$highlyRelevantMt, one should
+avoid exhaustive asks; the best way to do this is by imposing
+a number cutoff other than 'Get Everything'.
+</p>
+    <p>
+ The other instances of #$CycInferenceHeuristicPredicate - #$irrelevantMt,
+#$irrelevantAssertion, #$irrelevantPredAssertion, #$backchainDiscouraged,
+and #$backchainEncouraged - are not currently supported in
+code, and thus won't be discussed here.
+</p>
+    <h2>14.4.  <a NAME='137508032'>
+Theorem Proving vs. HL Modules</a>
+    </h2>
+    <h3>14.4.1.  <a NAME='137517808'>
+Overview</a>
+    </h3>
+    <p>
+It's important for OEers to understand how the inference engine works,
+so that they can write CycL axioms that can be used most efficiently
+in inference.  An important distinction in the inference engine is
+the one between theorem proving and HL modules.</p>
+    <p>
+The two main steps of inference are transformation and removal.
+"Removal" is an inference step which strictly simplifies the problem.  It
+removes (i.e. solves, generates bindings for) one of the literals in the
+subquery it's considering.  "Transformation" is an inference step which
+does not strictly simplify the problem; instead it transforms the problem
+into a new problem.  The typical example of transformation is
+backchaining. Removal strictly simplifies the problem; transformation 
+may complicate it.  Hence, the number of transformation steps allowed plays a large
+part in the size of the proof space that will be explored.  Since the
+most common type of transformation is backchaining (see "Current HL
+Modules"), the terms "transformation" and "backchaining" are often
+used interchangeably, which is technically incorrect.</p>
+    <h3>14.4.2.  <a NAME='137522920'>
+Defining New Predicates
+</a>
+    </h3>
+    <p>
+Backchaining is what makes rules work.  Say that you've just created a
+new predicate, #$pointWithinRectangle, which takes a 2-D point as an
+arg1, and a 2-D rectangle as an arg2.  Just to make the example
+simpler, let's assume that rectangles cannot be tilted with respect to
+the Cartesian plane.  There are two approaches to making #$pointWithinRectangle
+literals provable in inference.
+</p>
+    <h4>14.4.2.a.  
+You could define the meaning of #$pointWithinRectangle by rules.
+</h4>
+    <p>
+For example, (making up some predicates on the fly here for
+pedagogical purposes, and assuming that coordinates are represented by
+real numbers):
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$and
+      (#$minXCoordOfRectangle ?RECT ?MIN-X)
+      (#$maxXCoordOfRectangle ?RECT ?MAX-X)
+      (#$xCoordOfPoint ?POINT ?POINT-X)
+      (#$lessThan ?MIN-X ?POINT-X)
+      (#$lessThan ?POINT-X ?MAX-X)
+      (#$minYCoordOfRectangle ?RECT ?MIN-Y)
+      (#$maxYCoordOfRectangle ?RECT ?MAX-Y)
+      (#$yCoordOfPoint ?POINT ?POINT-Y)
+      (#$lessThan ?MIN-Y ?POINT-Y)
+      (#$lessThan ?POINT-Y ?MAX-Y))
+    (#$pointWithinRectangle ?POINT ?RECT))
+</pre></tt>
+    </font>
+<p>
+The above rule could be usefully used in inference, with one backchain
+on #$pointWithinRectangle.  Any time that the inference engine tries
+to prove a #$pointWithinRectangle literal and it is not already
+immediately known, then it could use the above rule to transform the
+#$pointWithinRectangle literal into the ten conjuncts in the
+antecedent of the above rule, and if all ten conjuncts can be proven,
+then the #$pointWithinRectangle literal can be proven.
+</p>
+    <p>
+However, what if you wanted to extend this to handle rectangles which
+were tilted with respect to the Cartesian plane?  It would be quite
+challenging to come up with rules that defined such a predicate
+accurately, and it would probably be impossible to do it both
+accurately and efficiently.
+</p>
+    <p>
+The advantages of the rule-based approach are that it is modular,
+explanatory, and you don't have to be a programmer to implement it.
+The rule-based approach will work for most problems in ontological
+engineering.  However, when you're working with anything math-heavy or
+anything which could be solved with a computational algorithm simpler
+than arbitrary theorem proving, then you might want to consider an HL
+module.
+</p>
+    <h4>14.4.2.b.  
+You could define the meaning of #$pointWithinRectangle via EL methods, and
+   use an HL-module to give this definition utility in inference.</h4>
+    <p>
+By writing code to specially handle proving #$pointWithinRectangle
+literals, you can obviate the need for rules at all, and use whatever
+mathematical or computational tools you wish to prove the literal in
+code.
+</p>
+    <p>
+A disadvantage of this approach is that it is more opaque to
+ontological engineers; it is not always obvious how the system
+concluded the truth or falsity of a particular literal.  Often it
+bottoms out in "Because this particular piece of code was evaluated,
+and it said so."  Writers of HL modules can mitigate this problem by
+including useful and explanatory supports, often in the form of "code
+rules" (rules with direction :code), in the results returned by their
+HL modules.
+</p>
+    <h3>14.4.3.  <a NAME='137545936'>
+Taking Advantage of Existing HL-supported Predicates
+</a>
+    </h3>
+    <p>
+Even more important than knowing the advantages and disadvantages of
+theorem proving vs. HL modules when defining new predicates is taking
+advantage of the existing HL support when making new assertions in
+Cyc.
+</p>
+    <p>
+For instance, an OEer might write a rule like the following:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$implies
+    (#$and
+      (#$relationAllExists ?PRED ?ALL-COL ?EXIST-COL)
+      (#$genls ?ALL-SPEC-COL ?ALL-COL))
+    (#$relationAllExists ?PRED ?ALL-SPEC-COL ?EXIST-COL))
+</pre></tt>
+    </font>
+<p>
+So that if Cyc knew, for example, that all dogs have tails, then
+all poodles must also have tails.  However, the above rule
+can be replaced by the following gaf:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (transitiveViaArgInverse relationAllExists genls 2)
+</pre></tt>
+    </font>  
+<p>
+which has the same meaning.  Without the HL-support for #$transitiveViaArg
+(or something similar), in order to derive 
+</p>
+    <font color='#339900'>
+      <tt><pre>
+       (relationAllExists anatomicalParts Poodle Tail-BodyPart)
+</pre></tt>
+    </font> 
+<p>
+ from
+</p>
+    <font color='#339900'>
+      <tt><pre>
+       (relationAllExists anatomicalParts Dog Tail-BodyPart)
+</pre></tt>
+    </font>
+<p>
+you would need to backchain one step on the above rule.  With the HL-support
+for #$transitiveViaArg (and the GAF listed above), you can ask
+</p>
+    <font color='#339900'>
+      <tt><pre>
+       (relationAllExists anatomicalParts Poodle Tail-BodyPart) 
+</pre></tt>
+    </font>
+<p>
+with 0 backchain steps and get "True" as a result.
+</p>
+    <p>
+It is a good idea for ontological engineers to become familar with what predicates
+have HL-support in order to best be able to anticipate the behavior of the 
+inference engine, thus writing the most efficient axioms on constants in order to 
+take advantage of such predicates.
+
+</p>
+    <h2>14.5.  <a NAME='137575576'>
+Inference Tree Examiner</a>
+    </h2>
+    <h3>14.5.1.  <a NAME='137578600'>
+Purpose</a>
+    </h3>
+    <p>
+The Inference Tree Examiner is a debugging tool which allows one to
+browse the internal datastructures of an inference for a particular
+query.  The tool shows things like:
+</p>
+    <blockquote>
+      <ol>
+        <li>
+all proofs pursued in the inference</li>
+        <li>
+the proofs which have succeeded so far</li>
+        <li>
+dead-end proofs, and the reason they were pruned</li>
+        <li>
+the sequence of deductions used in each proof</li>
+        <li>
+the intermediate steps of each proof</li>
+        <li>
+the inference methods used at each step</li>
+        <li>
+the bookkeeping maintained during the proof</li>
+      </ol>
+    </blockquote>
+    <p>
+Consequently, this is the primary tool for debugging both the OE used
+in inferences, and the inference mechanism itself.
+</p>
+    <h3>14.5.2.  <a NAME='137600232'>
+Inference Trees
+</a>
+    </h3>
+    <p>
+Since the Inference Tree Examiner is simply a browser for surfing
+around the datastructures used in an inference, it is worth providing
+a brief overview of these datastructures and the inference process
+that manipulates them.</p>
+    <p>
+Inference in Cyc is modelled as a search through proof-space for
+unique deductive proofs that justify answers for a given query.  A
+large number of special-case inference methods called HL modules
+provide the means for making each of the steps in a proof.</p>
+    <p>
+The main datastructure involved is an inference search tree, which
+stores the current state of the search in progress.  It is a set of
+search nodes arranged as a tree.  Each search node represents a
+sub-query to prove.  Consequently, each node is an intermediate state
+of the inference search being pursued down a particular proof path.
+Since the nodes are arranged as a tree :</p>
+    <blockquote>
+      <ol>
+        <li>
+every search node has exactly one parent node</li>
+        <li>
+except for the root(s) of the tree, which has no parent</li>
+      </ol>
+    </blockquote>
+    <h4>14.5.2.a.  
+Root nodes &amp; Leaf nodes</h4>
+    <p>
+The root of the tree represents the query which was actually asked,
+and thus is the starting point for pursuing proofs.  Most searches
+have a single root; disjunctive searches typically have one root for
+each disjunct.
+</p>
+    <p>
+Leaf nodes (nodes with no children) are the duals of root nodes (nodes
+with no parent), and represent the ending point for a potential proof.
+</p>
+    <h4>14.5.2.b.  
+Child nodes of a node
+</h4>
+    <p>
+The child nodes of each search node represent unique sub-problems
+introduced by a deductive inference step by an application of an HL
+module.  In other words, if the child node's sub-problem generates an
+answer, then that answer, combined with the inference step used to go
+from the search node to the child node, together constitute an answer
+for the search node.
+</p>
+    <h4>14.5.2.c.  
+Goal nodes
+</h4>
+    <p>
+A goal node is a leaf node of the inference tree in which the
+sub-problem to prove is #$True.  The path from a goal node all the way
+up to a root constitutes one unique proof of one unique answer for a
+query.
+</p>
+    <p>
+Thus, the objective of inference is essentially to construct as many
+goal nodes as efficiently as possible.
+</p>
+    <p>
+Not all leaf nodes are goal nodes.  Some represent dead-ends, where
+we've identified something in the intermediate sub-problem for which
+we know we can't generate any answers.  The remaining leaf nodes
+represent sub-problems which are still being worked on, and may yet
+result in more child nodes.
+</p>
+    <p>
+The Inference Tree Examiner focuses on the search nodes of the
+inference, and allows browsing up and down the parent/child hierarchy
+of the search tree they constitute.
+</p>
+    <h3>14.5.3.  <a NAME='137635152'>
+Access</a>
+    </h3>
+    <p>
+The HTML interface remembers the inference datastructures for the last
+query you performed via the ASK page, and allows you to invoke the
+Inference Tree Examiner on it via links on the ASK page.
+</p>
+    <p>
+The link
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   Examine previous inference ...
+</pre></tt>
+    </font>
+<p>
+allows you to browse the inference for the most recent query performed
+in the interface.
+</p>
+    <p>
+Also, if the ASK page has the results of a query displayed, the reason
+shown for why that query halted is also a link to browse the
+inference.  For example :
+</p>
+    <font color='#339900'>
+      <tt><pre>
+   Query halted because : Number cutoff was reached.
+</pre></tt>
+    </font>
+<p>
+In both these cases, the link takes you to the root node of the search
+tree.
+</p>
+    <h3>14.5.4.  <a NAME='137650816'>
+General Layout
+</a>
+    </h3>
+    <p>
+The page for a search node has 4 main sections, some of which only
+appear for certain nodes or in certain cases, and are shown in the
+following order :
+</p>
+    <blockquote>
+      <dl>
+        <blockquote>
+          <ol>
+            <li>
+              <dt>
+                <em><p>
+Search Roots (optional)
+</p></em>
+              </dt>
+              <dd>
+                <p>
+This section only appears if there is more than one search root, and
+it simply shows a list of each of the roots.</p>
+              </dd>
+            </li>
+            <li>
+              <dt>
+                <em><p>
+Node Section
+</p></em>
+              </dt>
+              <dd>
+                <p>
+This section shows all the information about the node itself,
+including the Current Query State.  If it is not a top node, it shows
+the method and supports used to transform its parent into itself, and
+the bookkeeping information associated with it.</p>
+              </dd>
+            </li>
+            <li>
+              <dt>
+                <em><p>
+Ancestors Section (optional)
+</p></em>
+              </dt>
+              <dd>
+                <p>
+This section only appears if the node is not a root node, and simply
+shows the complete sequence of ancestor search nodes upwards from its
+parent to its root node.</p>
+              </dd>
+            </li>
+            <li>
+              <dt>
+                <em><p>
+Children Section (optional)
+</p></em>
+              </dt>
+              <dd>
+                <p>
+This section only appears if the node has at least one child node.  It
+shows the immediate children of the search node.  The child nodes are
+sorted by node id, with all nodes that have some goal descendant show
+before all those without.</p>
+              </dd>
+            </li>
+          </ol>
+        </blockquote>
+      </dl>
+    </blockquote>
+    <h3>14.5.5.  <a NAME='137685896'>
+Specific Features
+</a>
+    </h3>
+    <p>
+Some of the more specific features of the interface will now be
+described in more detail.
+</p>
+    <p>
+Links to search nodes are displayed in one of these two formats  :
+</p>
+    <blockquote>
+      <ul>
+        <li>
+  T(D,ID(Q))</li>
+        <li>
+  R(D,ID)</li>
+      </ul>
+    </blockquote>
+    <p>
+Key :</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+T</em>
+        </dt>
+        <dd>
+a node for which transformations are still possible</dd>
+        <dt>
+          <em>
+R</em>
+        </dt>
+        <dd>
+a node for which only removals are still possible</dd>
+        <dt>
+          <em>
+D</em>
+        </dt>
+        <dd>
+the depth of the search node
+</dd>
+        <dt>
+          <em>
+ID</em>
+        </dt>
+        <dd>
+the id of the search node
+</dd>
+        <dt>
+          <em>
+Q</em>
+        </dt>
+        <dd>
+the heuristic transformation quality of the search node</dd>
+      </dl>
+    </blockquote>
+    <p>
+If the link has no remaining options, it is surrounded by square
+brackets.</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+Node</em>
+        </dt>
+        <dd>
+This is the current node being displayed, so it is basically a refresh
+link.</dd>
+        <dt>
+          <em>
+Parent
+</em>
+        </dt>
+        <dd>
+This is the parent node of this node.
+</dd>
+        <dt>
+          <em>
+Node N out of M in search number K
+</em>
+        </dt>
+        <dd>
+          <blockquote>
+            <dl>
+              <dt>
+                <em>
+K </em>
+              </dt>
+              <dd>
+the search number of this search, which is the K'th search that
+this image has performed.</dd>
+              <dt>
+                <em>
+M </em>
+              </dt>
+              <dd>
+the current number of search nodes in the search.
+</dd>
+              <dt>
+                <em>
+N </em>
+              </dt>
+              <dd>
+the node number of this node, which is the N'th search node
+introduced so far in this search.</dd>
+            </dl>
+          </blockquote>
+        </dd>
+        <dt>
+          <em>
+Depth
+</em>
+        </dt>
+        <dd>
+This is the total depth of the current node in the tree.  It
+represents the number of inference steps used so far to get down to
+this node from a root node.
+</dd>
+        <dt>
+          <em>
+Transformation Depth
+</em>
+        </dt>
+        <dd>
+This is the transformation depth of the current node in the tree.  It
+represents the number of transformation (backchain) steps used so far
+to get down to this node from a root node.
+</dd>
+        <dt>
+          <em>
+Remaining Options
+</em>
+        </dt>
+        <dd>
+          <p>
+This represents the inference options still available at this search
+node.</p>
+          <p>
+"Options are Undetermined" indicates that the search node has not yet
+even been examined to compute what its inference expansion options
+are.</p>
+          <p>
+"No Remaining Options" indicates that the search node has had all its
+options determined and completely expanded.  There is no possibility
+for any further direct children of this node.</p>
+        </dd>
+        <dt>
+          <em>
+Quality</em>
+        </dt>
+        <dd>
+This is number representing the heuristic transformation quality of
+this node.  Larger values indicate a node which is deemed more
+promising for further transformation.
+</dd>
+        <dt>
+          <em>
+HL Module Used
+</em>
+        </dt>
+        <dd>
+This shows the HL module which was used to produce this search node
+from its parent node.
+</dd>
+        <dt>
+          <em>
+Parent Literal Removed
+</em>
+        </dt>
+        <dd>
+This shows the literal in the parent query state which was removed by
+the HL module in order to produce this search node.  In other words,
+this is what in the parent was conditionally proven by the HL module,
+resulting in this node's current state.
+</dd>
+        <dt>
+          <em>
+Support Used
+</em>
+        </dt>
+        <dd>
+This shows the inference support used by the HL module to justify
+producing this search node from the parent node.
+</dd>
+        <dt>
+          <em>
+Additional Supports
+</em>
+        </dt>
+        <dd>
+If present, this shows the list of any additional inference supports
+used by the HL module to justify producing this search node from the
+parent node.
+</dd>
+        <dt>
+          <em>
+Free Variables
+</em>
+        </dt>
+        <dd>
+Shown only for a root node, this indicates the EL variables in the
+query which are free variables.
+</dd>
+        <dt>
+          <em>
+Bindings Established
+</em>
+        </dt>
+        <dd>
+          <p>
+This shows the mapping between the HL variables in the parent node,
+and what they got bound to in the current node's state.
+</p>
+          <p>
+For a root node, a list of the EL variables used for the HL variables
+in the node's state are shown.
+</p>
+        </dd>
+        <dt>
+          <em>
+Current Query State
+</em>
+        </dt>
+        <dd>
+          <p>
+This shows the CycL query for the sub-problem represented by this
+search node.  It represents what still needs to be proven down this
+particular proof path.
+</p>
+          <p>
+"Goal!" indicates that the CycL query is #$True
+</p>
+          <p>
+If a literal is listed in BOLD, it means that transformation
+(backchaining) is still potentially an option for that literal.
+</p>
+        </dd>
+        <dt>
+          <em>
+Unsatisfiable Literal
+</em>
+        </dt>
+        <dd>
+For a dead-end leaf node, this shows the literal in the query state
+which resulted in there being no child nodes.  In other words, this
+was the literal which allowed the inference engine to prune this
+search, because no way to prove it (and thus the entire sub-problem)
+is available.</dd>
+      </dl>
+    </blockquote>
+    <h3>14.5.6.  <a NAME='137799200'>
+Additional Tools
+</a>
+    </h3>
+    <p>
+In addition to browsing the search nodes of the inference tree, there
+are some additional tools available
+</p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+[Continue Ask]  
+</em>
+        </dt>
+        <dd>
+This allows for continuing the current query with additional resources.
+</dd>
+        <dt>
+          <em>
+[Socratic Ask]  
+</em>
+        </dt>
+        <dd>
+This allows for invoking a new query where the formula is the current
+state of this node.
+</dd>
+        <dt>
+          <em>
+[Goal Descendants] 
+</em>
+        </dt>
+        <dd>
+This shows a page which lists all of the currently identified goal
+nodes that are descendants of the current node.
+</dd>
+      </dl>
+    </blockquote>
+    <h3>14.5.7.  <a NAME='137816336'>
+Suggested Uses
+</a>
+    </h3>
+    <p>
+The most common use of the Inference Tree Examiner is to just browse
+the tree and see what supports got used in the proof process.  You can
+follow the paths you think look promising and see where they dead-end,
+and the unsatisfiable literals which led to the dead-ends.
+</p>
+    <p>
+The [Goal Descendants] tool is very useful for going straight to all
+the successful goal nodes that lie underneath some ancestor node.
+</p>
+    <p>
+When attempting to debug an inference that seems to dead-end,
+[Socratic Ask] is very helpful to identify a sub-problem which should
+be solvable, and starting a new query from that exact point.
+</p>
+    <h3>14.5.8.  <a NAME='137824072'>
+Proof Checker
+</a>
+    </h3>
+    <p>
+One of the most powerful uses of the Inference Tree Examiner is to
+perform inferences in Proof Checker mode.  In this mode, the only
+rules which are available for backchaining are specific rules that the
+user identifies.  This is extremely useful for efficiently debugging
+inference paths that use rules by focusing inference only on a set of
+rules that you want considered.
+</p>
+    <p>
+To use Proof Checker mode, you must first identify a set of rules for
+the proof checker to use.
+</p>
+    <p>
+To identify a rule you want to use in the Proof Checker, you should
+click on
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  [Use in Proof]
+</pre></tt>
+    </font>
+<p>
+from the assertion display page.  
+</p>
+    <p>
+To enable or disable Proof Checker mode, click on
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  Proof Checker Setup
+</pre></tt>
+    </font>
+<p>
+under the Advanced Inference Parameters section on the Ask page.  This
+takes you to the Proof Checker Control page, where you you can also
+remove some or all rules from the rule set, as well as toggle proof
+checking on and off.
+</p>
+    <p>
+When the Proof Checker is enabled, the Ask page will display
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  Proof Checking mode Enabled
+</pre></tt>
+    </font>
+<p>
+and, while enabled, all proofs that use any rule not in the proof
+checker set are immediately pruned from the search.
+</p>
+    <p>
+Please see the section on "Proof Checker Mode" for more information.
+</p>
+    <h3>14.5.9.  <a NAME='137848456'>
+Past &amp; Future</a>
+    </h3>
+    <p>
+The Inference Tree Examiner originated as a tool for the inference
+developers to debug the inference code.  Relatively little time or
+effort has been devoted to its development since its initial
+motivation.  As such, it currently shows lots of bookkeeping arcana
+which may or may not be relevant to its other uses.
+</p>
+    <p>
+Our goal is to extend it to be more useful for OE debugging, so any
+ideas for improvement are welcome.</p>
+    <h2>14.6.  <a NAME='137858464'>
+Negation by Failure</a>
+    </h2>
+    <font color='red'>
+      <em>
+			This section is not yet available.
+		</em>
+    </font>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

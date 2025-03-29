@@ -1,0 +1,1692 @@
+00:00:00 --- log: started opencyc/02.07.02
+00:20:11 <dmiles> subp (findall ?X (#$or (#$isa ?X #$Dog)(#$isa ?X #$Person)) ?L)
+00:20:12 <CycLBot> ?X = ?X, ?L = '(#$CycAdministrator #$Guest (#$GenericInstanceFn #$Dog))
+00:21:04 <dmiles> subp (findall ?X (#$or (#$isa ?X #$Dog)(#$isa ?X Person)) ?L)
+00:21:05 <CycLBot> ?X = ?X, ?L = '(#$CycAdministrator #$Guest (#$GenericInstanceFn #$Dog))
+00:22:17 <dmiles> join #ai
+00:22:58 <aigan> why?
+00:23:51 <dmiles> oh that was a bot command.. i was in the wrong window!
+00:24:14 <dmiles> it does that for anyone
+00:24:33 <dmiles> normally i give it commands like that in a #logicmoo
+00:24:48 <dmiles> so its not advertised it does things like that 
+00:25:03 <aigan> ;)
+00:25:10 <aigan> join the army
+00:25:37 <dmiles> hehe
+00:25:59 <dmiles> i am working on the SubP interface so i can write chatbot code
+00:26:11 <dmiles> until the subL interface is more complete 
+00:26:32 <aigan> the CycLBot answer to your statements above seems strange to me
+00:27:33 <dmiles> 'findall' is a SubP predicate that collects first argument in executuion to make a Quotesd Cons inot last arguemnt
+00:28:12 <aigan> I think I understand your questiion. But not the answer
+00:28:25 <dmiles> you mean the ?X = ?X 
+00:28:38 <aigan> But I doesn't understand " a Quotesd Cons inot last arguemnt"
+00:28:48 <dmiles> that is becasue upon completeing ?X held a memory pointer back to ?X
+00:29:11 <dmiles> oh a quoted list
+00:29:25 <dmiles> quoted becasue non quoted can get evalled
+00:30:22 <aigan> Shouldn't it just answer with the constants whats either person or dog?
+00:30:36 <dmiles> it would in the case of..
+00:30:57 <dmiles> subp: (#$or (#$isa ?X #$Dog)(#$isa ?X #$Person))
+00:30:57 <CycLBot> ?X = #$CycAdministrator
+00:31:20 <dmiles> but i havent created full iteration yet
+00:32:30 <dmiles> ok i just did
+00:32:40 <dmiles> subp: (#$or (#$isa ?X #$Dog)(#$isa ?X #$Person))
+00:32:41 <CycLBot> ?X = #$CycAdministrator
+00:33:26 <dmiles> oops will debug in #logicmoo
+00:36:54 <dmiles> subp: (#$or (#$isa ?X #$Dog)(#$isa ?X #$Person))
+00:36:55 <CycLBot> ?X = #$Guest  ?X = (#$GenericInstanceFn #$Dog)  ?X = #$CycAdministrator
+00:37:03 <dmiles> ok there we go
+00:37:18 <dmiles> so SubP always expoects to be in Query Mode
+00:37:47 <dmiles> if an evalled preduicate starts with #$ then it calls into Cyc-Query
+00:38:17 <dmiles> the SubP manual is http://www.swi.psy.uva.nl/projects/SWI-Prolog/Manual/predsummary.html
+00:38:40 <dmiles> ;P its a interpretor that balances prolog and SubL and CycL interactively between each
+00:40:31 <dmiles> actually acess to subL can happen from CycL with #$performSubL
+00:40:53 * aigan adds more geo data to KB
+00:41:47 <dmiles> cool, what language did you write the import utillity in?
+00:42:15 <aigan> ... Still just experimenting
+00:42:24 <aigan> But anything I write will be Perl ;)
+00:42:24 <dmiles> i am working on a SubP version of DAML import
+00:42:45 <dmiles> ah cool.. perl code is readable to alot of people
+00:42:46 <aigan> Actually...
+00:43:04 <aigan> ... have you read my posts to admin list?
+00:43:24 <dmiles> whats the list name?
+00:43:30 <aigan> I'm still a little unseartain about if this will work like I hope it will
+00:43:36 <aigan> "Jonas Liljegren"
+00:43:52 <dmiles> oh i mean i am so many lists i am loojking for list name ;P
+00:44:01 <aigan> oh
+00:44:15 <aigan> Opencyc-admin@sourcforge ...
+00:44:43 <dmiles> oh .. thats right my subscriptions never wnet through
+00:44:51 <dmiles> i should try again
+00:45:14 <dmiles> it was rejecting my pop becoause its a forward
+00:45:16 <aigan> Just... I got an answer that OpenCyc has a limit of 2.4 million assertions
+00:45:27 <aigan> or what it's called
+00:48:14 <aigan> I wanted to use OpenCyc for enabling diffrent ways of searching...  
+00:48:33 <dmiles> ok i am subscribed now i think.. but cvan read on GeoCrawler
+00:49:15 <aigan> Well... anyway. He suggested the relational datbase interface for larger amounts of data. And that would apply to geo data if I will add every street in the country
+00:51:07 <dmiles> yes definately
+00:51:22 <aigan> The thing I wonder now is that if I use such a interface, will searches still be effective...  Or will it have to loop through a lot of data or repeat stuff.  I don't know how it will infere things form the DB and cache that if it's from relational database
+00:51:22 <dmiles> well for something that you dont know if when it will e4xceed
+00:51:59 <dmiles> well that is a good question.. becasue in this case it is at each node in inferncee
+00:52:22 <dmiles> that it might have to solicit a call for connection and make a subquery
+00:52:39 <dmiles> thousands of times ;P
+00:53:18 <dmiles> so in this case.. maybe there can be support for caching
+00:53:28 <dmiles> like you could make a priming query first
+00:53:43 <aigan> It doesn't bother me if it makes a lot of queries.  As long as the number of queries isn't exponentialy larger than for OpenCyc internally
+00:54:29 <dmiles> a priming query would be like (#$isa ?X #$Country)
+00:54:39 <aigan> Let's take an example...
+00:54:58 <aigan> Would Cyc cache all countries then?
+00:55:14 <dmiles> thats would be the idea
+00:55:33 <aigan> Example:  We have 5000 hotels spread over a couple of hundred cities
+00:55:58 <aigan> And I would as for hotels in a specific region.  And the DB holds info of the city for the hotel
+00:56:20 <aigan> It would have to infere the cities in the region and then fetch the hotels for those cities
+00:57:39 <aigan> That would be in combination wit criterions about the type of hotel, and those data would possibly also be in an external DB.
+00:57:44 <dmiles> so would that happen with a JOIN inside and #$and rule ?
+00:57:52 <dmiles> yeah.. following
+00:58:45 <dmiles> you could create JOINs for ceraibn types of infernce
+00:58:57 <dmiles> but going on without that first
+00:59:16 <aigan> join?
+00:59:23 <dmiles> your saying the (#$and q1 q2 q3) 
+00:59:29 <aigan> yes
+00:59:40 <dmiles> the qX each would be an external call
+00:59:54 <dmiles> that cyc may chose to evaluate left to right
+01:00:16 <dmiles> with the first binding of the first presented to the second
+01:00:26 <dmiles> then so on
+01:00:36 <aigan> so if you start witn "is a hotel" the result of the first part would be a long list
+01:00:55 <dmiles> well at lerast that list would prove productive and cheap
+01:01:23 <aigan> how?
+01:01:27 <aigan> It's much to long
+01:01:36 <aigan> The number of hotels is much to large
+01:01:43 <dmiles> so lets say the second was Hotel in City
+01:01:48 <aigan> it should start with the group with the least number of members in it
+01:01:58 <dmiles> so maybe the Sencond might be more effiecint?
+01:02:10 <aigan> like "part of City Klabusk"
+01:02:14 <dmiles> or at least we cant predict the best order right?
+01:02:50 <dmiles> yeah for the second
+01:02:59 <aigan> Relational databases keeps statistics of these things
+01:03:14 <aigan> and the optimizer choses the best order for executing the query
+01:03:22 <aigan> i would hope that Cyc would do the same
+01:03:33 <dmiles> so if we could combine q1 and q2 in the DB as a query we would be better off?
+01:03:44 <dmiles> yes Cyc does a best effor
+01:04:06 <dmiles> ti think it actually would ignore (#$isa ?X #$Hotel)
+01:04:21 <dmiles> since the arg1Isa of q2 would allready enforce it
+01:04:33 <aigan> Now it's start sounding that I can't excpe the complexity.  I could do my own DB. :-/
+01:04:50 <aigan> ... no
+01:05:03 <aigan> We will have a lot of things in the city apart of lodgings
+01:05:14 <dmiles> ok i like that case your presenting better
+01:05:26 <dmiles> (the case you have been all along :)
+01:05:26 <aigan> There would be trains stations, airports, tourist attractions
+01:05:42 <dmiles> ok so lets say we did enumerate hotels first
+01:06:05 <dmiles> then maybe cyc would iteratively test each hotel
+01:06:29 <dmiles> for the part of city.. and call that next
+01:06:56 <dmiles> so maybe the DB could have a View of hotels_to_city
+01:07:15 <dmiles> and you could bind that to a predicate such as hotelsInCity
+01:07:43 <dmiles> but i see thats extra work that you shoulnt have had to do
+01:08:15 <dmiles> maining it sounds like you looking for a solution that makes more sense
+01:08:43 <dmiles> perhaps a forward chain rule that caches the (#$isa ?X #$Hoitel)
+01:08:57 <aigan> ....
+01:09:15 <aigan> I had read that Cyc has a lot of internal links in both directions
+01:09:26 <aigan> And that's how I myself implemented similar systems
+01:09:46 <aigan> I would certainly want indexes
+01:09:48 <dmiles> (implies (#$inDb #$HotelTable ?X "Hotel") (#$isa ?X #$Hotel))
+01:09:58 <aigan> It shouldnt have to iterate through the hotels
+01:10:24 <dmiles> rigth definattly
+01:11:11 <dmiles> so picking the most optimnal representation.. to ballance Cyc work vs DB work .. thats the goal right?
+01:11:23 <aigan> If I have objects (lodgins, geo data) in external DB. The calls to it would be for the combinations of things... Oh
+01:11:55 <dmiles> right so the goal is to get the best most complete way to get ahold of things
+01:12:03 <dmiles> anything of course
+01:12:20 <aigan> Oh... We don't realy know what properties of the wuery that's primary and what are infered.  It would have to go through each hotel. But after that,the result should be cached
+01:12:50 <dmiles> yes.. so you would want to impleiment a cache with a subsumption check
+01:13:28 <dmiles> i implemetned that in SubP where some resulkts from Cyc are cached
+01:13:35 <aigan> There can I read documentation on the caching?
+01:13:52 <dmiles> well there is no docs for any system yet :P
+01:14:22 <dmiles> in subP i just keep a cache of what i've caches and test a query to see if it was more specific then any cache
+01:14:46 <dmiles> if so i use that more general cache with a unification over varaibles
+01:15:05 <dmiles> to do this in Cyc.. i only know how from forward chaining
+01:15:06 <aigan> You implement your own cache?
+01:15:11 <dmiles> i did yes
+01:15:46 <dmiles> from forward chaining in cyc you can create a query cache
+01:15:58 <aigan> That was also a thing I would hope Cyc would do.  I'm starting to loose my reasons for switching system
+01:16:17 <dmiles> well you can manullay set up a cache in opencyc
+01:16:38 <dmiles> but there is no documentation on it
+01:16:42 <dmiles> so i use...
+01:17:02 <aigan> I was hoping I could do everything in cyc.  I want the system that knows about the world.  That can grow and grow and grow
+01:17:14 <aigan> 2.4 million feels like a big limitation
+01:17:16 <dmiles> (fi-assert '(#$implies (#$inDb #$HotelTable ?X "Hotel") (#$isa ?X #$Hotel)) #$MySpindel '(:DIRECTION :forward))
+01:17:37 <aigan> But I will probably not use more than 500.000 to start with
+01:18:01 <dmiles> that would mainting a cahced version of (#$isa ?X #$Hotel)
+01:18:19 <dmiles> #$inDb would be some SubL function defined
+01:18:28 <dmiles> that would call into the actual database
+01:18:50 <dmiles> and since its forward the consquent becomes cached
+01:19:07 <aigan> And then you could have inte in the DB all along
+01:19:14 <aigan> Not using an external DB
+01:19:16 <dmiles> correct
+01:19:49 <aigan> I would use external DB only for things not searchable.
+01:20:02 <dmiles> correct
+01:20:20 <dmiles> when rthe db cache needs rereading you use fi-reassert
+01:20:25 <aigan> Maby condense info to metadata and put that in Cyc. 
+01:21:18 <dmiles> yes
+01:21:44 <aigan> Now I spent a lot of agonizing over limitations.  Now back to testing.  
+01:21:46 <dmiles> if you wanted to make it more controled from Cyc thats when you could use a forward chaining rule
+01:22:08 <dmiles> so cyc would automatically cache metadata
+01:22:10 <aigan> I would like to do test with larger amount of data but would like the Perl module for that,
+01:22:45 <dmiles> to call an external DB from cyc should be easy to write for 0.7
+01:32:48 --- join: yepster (~yepster@cust-217-117-225-12.utelisys.net) joined #opencyc
+01:35:01 <yepster> hello
+01:35:01 <CycLBot> hello CycLBot
+01:41:27 <aigan> whoo!
+01:41:57 <aigan> The online help in the html interface said:
+01:42:22 <aigan> Errors appear in the emacs window where the CYC® image was started; in that window, the CYC® process will be in the debugger, and the user will be given a range of options to choose from (the two most commonly used are "continue" and "abort"). 
+01:42:41 <aigan> ... I can run Cyc in my emacs? =)
+01:43:17 <dmiles> it would seem to work
+01:43:50 <dmiles> i am not sure how emacs commuinicates to a stdin/out app
+01:55:37 --- quit: CycLBot (Remote closed the connection)
+01:57:21 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+01:58:32 <dmiles> hello
+01:58:36 <dmiles> ping
+01:58:36 <CycLBot> hello dmiles
+01:58:47 <dmiles> ok no more hello to itself
+01:59:01 <dmiles> ping is the way to see if its working
+01:59:02 <CycLBot> hello dmiles
+02:17:47 <aigan> say ping
+02:17:48 <CycLBot> You said: ping
+02:17:55 <aigan> bah
+02:39:05 <aigan> Geography is complex.
+02:42:12 <aigan> We have Political Geography
+02:42:17 <aigan> Natural Geography
+02:42:25 <aigan> and Geogrpahy Dualist
+02:42:36 <aigan> But... What about the postal geography?
+02:42:41 <aigan> it's not political
+02:42:47 <aigan> neither natural
+02:43:07 <aigan> It reflects the postal organisation
+02:43:19 <aigan> So in a sence, geography dualist
+02:43:23 <aigan> sense
+02:46:20 <aigan> I guess I could define the notion of City-postal in DualistGeopoliticalVocabularyMt
+02:49:10 <aigan> it's not political but the definition says more about agents.
+02:56:07 <aigan> Do'h!
+02:56:30 <aigan> City is defined as geopolitical entity
+02:56:33 <aigan> AND urban area
+02:56:41 <aigan> neither is true for Sweden
+02:57:44 <aigan> I'll have to define my own properties City and municipality
+02:59:58 <aigan> I'm starting to think I should create my own properties and worry about their connection to the ontology later
+03:04:07 --- quit: CycLBot (Remote closed the connection)
+03:04:33 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+03:05:16 <dmiles> SweedishCity :)
+03:10:54 --- quit: CycLBot (Remote closed the connection)
+03:14:29 --- join: CycLBot (~CycLBot@12-225-207-235.client.attbi.com) joined #opencyc
+03:25:12 <dmiles> what is a City?
+03:25:13 <CycLBot> "A collection of geopolitical entities . An instance of #$City is a local human settlement which has its own government . This includes cities , towns , suburbs , villages , hamlets , and townships , as long as they have their own governments . A city government is usually mostly autonomous from the governments of its surrounding regions , rather than being a sub-organization of them ."
+03:25:33 <dmiles> i am workig on the Q/A system now
+03:27:16 <dmiles> if it cant find a commont on a collection, then it uses it searches for super class
+03:42:07 <aigan> wow
+03:42:35 <dmiles> it case sensitive though
+03:42:53 <dmiles> i am workibng on a BestConstantForNLPhrase
+03:43:25 <dmiles> well first of all BestEnityForNLPhrase
+03:43:52 <dmiles> i did it in java kida hackinh.. but no i am dfoing it in SubP
+03:44:01 <aigan> But... yes. What about diffrent words for the same thing?
+03:44:06 <dmiles> err now working on SubP version
+03:44:08 <aigan> or the same word for diffrent things?
+03:44:19 <dmiles> each user has a ChatMt
+03:44:20 <aigan> or diffrent words in diffrent languages for the same thing?
+03:44:43 <aigan> Wow!
+03:44:45 <aigan> ChatMt!
+03:44:47 <aigan> Like that!
+03:44:59 <dmiles> Question[]  question = myParse.getClarifyingQuestions();
+03:45:00 <aigan> That's like a discussion context
+03:45:19 <dmiles> assert foo
+03:45:20 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+03:45:23 <dmiles> oops
+03:45:25 <aigan> But thats also something that Cyc will provide with?
+03:45:39 <dmiles> assert (isa DougMiles Peson)
+03:45:40 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+03:45:40 <CycLBot> (#$isa #$DougMiles #$Peson)
+03:45:41 <CycLBot> was not well formed because:
+03:45:42 <CycLBot> Term #$Peson violates arg-isa #$Collection
+03:45:42 <CycLBot> applicable to argument 2 of relation #$isa
+03:45:44 <CycLBot> in mt #$JamudMt.
+03:45:46 <CycLBot> Term #$Peson
+03:45:48 <CycLBot> violates #$defnSufficient "#<(#$SetOfTypeFn #$SpacePoint)>"
+03:45:50 <CycLBot> of collection #$SetOrCollection
+03:45:52 <CycLBot> applicable to arg 2 of #$isa
+03:45:52 <dmiles> oops
+03:45:54 <CycLBot> (via #$elementOf)
+03:45:54 <aigan> flood
+03:45:56 <CycLBot> in mt #$JamudMt.
+03:45:58 <CycLBot> Term #$Peson violates arg-isa #$SetOrCollection
+03:46:00 <CycLBot> applicable to argument 2 of relation #$isa
+03:46:02 <dmiles> i was going to show you the chat Mt
+03:46:02 <CycLBot> (via #$elementOf)
+03:46:04 <CycLBot> in mt #$JamudMt.
+03:46:06 <CycLBot> Term #$Peson violates arg-genls #$Thing
+03:46:08 <CycLBot> applicable to argument 2 of relation #$isa
+03:46:10 <CycLBot> in mt #$JamudMt.")
+03:46:13 <dmiles> its using jamud for me though
+03:46:17 <aigan> These error msgs can be pretty long
+03:46:31 <dmiles> but uit uses the <nick>ChatMt
+03:46:50 <dmiles> so each user has there own
+03:47:00 <dmiles> yeah i am going to make it msg those instead
+03:47:15 <dmiles> and an in channel message that they need to check their message window
+03:47:43 <dmiles> that way the channel isnt so spammed ;P
+03:48:35 <dmiles> but a user can change out of mt with "mt: <MtNaem>"
+03:48:40 <aigan> Maby "join #opencyc-bots" ;)
+03:48:44 <dmiles> so there assertions can go to where they need
+03:48:55 <dmiles> yeah
+03:49:10 <dmiles> otherwise the user will pput the bot on ignore in BitchX
+03:49:22 <aigan> Anyway.  An error should promptt clarification
+03:49:25 <dmiles> when it messages that much
+03:49:34 <aigan> The bot should answer "Huh?!". 
+03:49:58 <aigan> Not that long thing. :)
+03:50:41 <aigan> Most of the time you can refrase the question without explanation
+03:50:49 <aigan> rephrase (?)
+03:50:57 <dmiles> yeah.. well i think cyccorp is working on maybe some kind of engish explainion maye of errors
+03:51:20 <dmiles> yes
+03:51:55 <aigan> Can I make a sub-Mt and redefine classes?
+03:52:10 <aigan> Or how should I present the Swedish notion of city?
+03:52:53 <dmiles> you can use a differnt constant.. or CreateSImpular first
+03:53:00 <dmiles> err create simular
+03:53:07 <dmiles> then remove the things you want
+03:53:42 <dmiles> what is it about City you do not want?
+03:53:52 <aigan> ah. Yes. So I should use two Mts?  One under WorldGeography and one under WorldGeographyDualist
+03:54:14 <dmiles> you can also exclude Mts from your Mt that say things about City you dont want
+03:54:51 <aigan> I can't exclude it if I inherit WorldGeography...
+03:55:16 <dmiles> WorldGeographyDualistMt lifts assertions from WorldGeographyMt
+03:55:46 <dmiles> so if you genlMt WorldGeographyMt you wont get WorldGeographyDualistMt
+03:55:52 <aigan> I know.  You sean my diagram?
+03:56:16 <aigan> That's why I asked if I should have one for each
+03:56:16 <dmiles> on the list?
+03:56:33 <aigan> Or could I just inherit the dualist, even for things not dualistic
+03:56:37 <aigan> dmiles: yes
+03:56:45 <dmiles> looking now
+03:57:17 <aigan> I tried to understand the system and draw all geo stuff
+03:57:37 <dmiles> the web interface does not include the image
+03:57:45 <dmiles> can you sendf to dmiles@users.so
+03:58:17 <aigan> done
+03:59:23 <dmiles> odd normally i would have it by now
+03:59:44 <dmiles> dmiles@users.sourceforge.net
+03:59:53 <dmiles> sorry
+04:00:25 <aigan> done - 2
+04:00:31 <aigan> brb
+04:01:44 <dmiles> when you return let me know ehre you want you Mt to lift from
+04:02:51 <dmiles> normally whenever i do something i create one Mt to query from and set up a genlMt to places i want
+04:03:52 <dmiles> so in this case yoiu asked about two Mts.. i always do that
+04:04:40 <dmiles> that allows the other Mts to evlove over time
+04:04:59 <dmiles> another thing is you can genlMt those Mts to yours and work from InferncePSC
+04:10:02 <aigan> .
+04:11:04 <dmiles> you can assert your Mt (or Mts) into mulitple places in that tree
+04:11:35 <dmiles> since you would want to inherit more then one vocabulary
+04:11:51 <dmiles> at least maybe
+04:11:52 <aigan> Ok... The placement in Mts is mainly about visability in reasoning
+04:12:01 <dmiles> yes
+04:12:17 <aigan> So I could in this case just genls the most general geographic Mt and put all geo stuff there
+04:12:45 <aigan> But that would not be consistent with the structure
+04:13:09 <aigan> Te comments specify where each thing should go
+04:13:19 <dmiles> you need to inherit maybe to mutilple Vocabs
+04:13:20 <aigan> and I would be placing them in the wrong places
+04:13:49 <dmiles> well you may need three Mts .. for each type
+04:14:01 <dmiles> then link those three appropriately
+04:14:06 <aigan> ah
+04:14:09 <aigan> why?
+04:14:20 <aigan> is the type of Mt used in any way in reasoning?
+04:14:34 <aigan> it seams that some MTs have the wrong type of data in them
+04:14:38 <dmiles> becasue you have both a major vocabulary change i thought you where saying
+04:14:41 <aigan> the dualist Mt seems more lika a theory mt
+04:14:49 <aigan> but it's typed as a data mt
+04:15:00 <dmiles> yeah Dulist is Theory
+04:15:10 <dmiles> oh right
+04:15:16 <aigan> no
+04:15:20 <dmiles> yellows are theory
+04:15:23 <dmiles> ?
+04:15:24 <aigan> the dualist heiarcy goes all the way
+04:15:30 <aigan> from vocab to data
+04:15:38 <aigan> yellow theory yes
+04:16:06 <dmiles> ok make sense so when one makes a query.. they do it in the Data
+04:16:07 <aigan> I think I have a better understanging of the structure from the image
+04:16:14 <aigan> yes
+04:16:27 <aigan> But the US Mt is misplaced it seems
+04:16:36 <dmiles> so you would want the normal Data to inherit yours
+04:16:55 <aigan> It's inconsistent to have specific US things anyway. But if it's only one, it should be under dualist
+04:16:58 <dmiles> (your DataMt
+04:17:21 <aigan> ... For one thing:
+04:17:38 <aigan> The discription of Scandinavia says that it includes Sweden, Norway and Denmark
+04:17:48 <aigan> But those countries has been removed from OpenCyc
+04:17:51 <dmiles> well the assertions in opencyc are not consitant on where they are places yet
+04:17:51 <aigan> I replaced them
+04:18:05 <aigan> and I added the statement about them being part of Scandinavia
+04:18:15 <dmiles> since there are vocabulary in Data right now
+04:18:15 <aigan> That info does belon in the main Cyc
+04:18:44 <dmiles> yeah alot of things were shreded out
+04:18:49 <aigan> It seems to me that the conversion is incomplete
+04:18:58 <aigan> But I think I see the general design here
+04:19:13 <dmiles> yes.. becasue normal cyc never had these three type iin their organization
+04:19:25 <aigan> I can't udnerstand why a handful of countres were left in
+04:19:38 <dmiles> they used GeneralMicrothery for Theory+Data
+04:19:40 <aigan> Then those contries are insanely inconsistently categorised
+04:19:50 <aigan> All over the place...
+04:20:00 <dmiles> yeah its a mess ;P
+04:20:24 <dmiles> and lots of commetns reveal missing constants
+04:20:37 <aigan> I haven't got an answer about how fixes of the KB is handled
+04:20:58 <dmiles> well what i have been doing to work arround it...
+04:21:07 <dmiles> is i create 3 Mts for myself
+04:21:09 <aigan> It doesn't make sense to add countries if they already exist in main Cyc and will come next year
+04:21:32 <dmiles> then i use #$ist anteceedant rules and forward cahin
+04:21:33 <aigan> Yes. I like the comments
+04:21:46 <aigan> They makes it easier to recreate the data
+04:21:51 <dmiles> so into one Mt i gather only what i wanted
+04:22:00 <aigan> ... It should be rather simple to import most of the things from CIA World Factbook
+04:22:12 <aigan> Then you would at least have the countries back
+04:22:15 <dmiles> yes since its mostly a DataMt
+04:22:44 <aigan> how large is Cyc?  They say OpenCyc is about 100.000 relations
+04:23:10 <aigan> I wan't the semantic Web
+04:23:23 <aigan> I want to integrate all sorts of data in diffrent categories
+04:23:28 <aigan> maby not in the samd DB
+04:23:33 <aigan> But connected
+04:23:35 <aigan> as services
+04:23:52 <aigan> and it should do reasoning using all availible services
+04:24:41 <aigan> Well... Another thing is that the definitions of things seems to be US centric.  
+04:24:47 <dmiles> you saw? http://www-ksl-svc.stanford.edu:5915/doc/hpkb/index.html
+04:24:58 <aigan> Why is it that Scotland is a nonfree country and Alabama is just a state? ;)
+04:25:25 <dmiles> Cyc2 dirrectory contains alot of missing info
+04:26:44 <dmiles> it looks lik ein opencyc that customer paid knowl;edge was tried to be taken out
+04:26:48 <aigan> oh.. Ok.  I have a deadline ... Must finish today.  So for experimentation, I will just create my own Mt and put things there
+04:27:03 <dmiles> however it would have torn up too much to take some of it out
+04:27:28 <dmiles> so what they *had* to leave there for opencyc is all thats left
+04:27:46 <aigan> We should just set up a way to organize knowledge entry
+04:28:00 <aigan> and a way to check its quality
+04:28:06 <dmiles> then things went through a reorganiztion into the three Mts system.. but very inc0omplete
+04:28:45 <dmiles> so i try to import ddata but not try to leverage whats there
+04:28:59 <dmiles> unless its a Collection or Rule
+04:29:06 <dmiles> (or a predicate)
+04:29:18 <aigan> What is it in there that you doesn't import?
+04:29:20 <aigan> brbr
+04:29:22 <aigan> brb
+04:29:48 <dmiles> things for me that would send inference on a search that wont lead to the answers i want
+04:30:06 <dmiles> basicly istances of first order collections
+04:31:22 <dmiles> PartiallyTangable instances
+04:32:25 <dmiles> yeah for getting done quickly i would do that.. and only use or genl to existing VocabMts
+04:32:50 <dmiles> so you dont have to create your own Collections or Predicates
+04:33:31 <dmiles> and genlMt towards theoryMtas you like
+04:34:14 <dmiles> since you are noticing a high inconstancy with DataMts
+04:35:24 <dmiles> its just gets rough when a predicate or collection you really wanted was in something like WorldGeographyMt
+04:35:51 <dmiles> so you are stuck Taking it's parent
+04:36:11 <dmiles> then have to replcate the same assertions
+04:36:21 <dmiles> of the child
+04:37:29 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+04:37:39 --- join: irc (OULWC@12-225-204-47.client.attbi.com) joined #opencyc
+04:38:09 <irc> into your Mt.. so what i guess i am saying is your basicly replacing Mts that dont work for you
+04:38:11 <irc> and its rough when they are high up
+04:38:13 --- nick: irc -> dmiles
+04:38:28 <dmiles> i have to run for 2 hours
+04:38:36 <dmiles> youy'll have time to experment
+04:41:13 <aigan> yezz!!!
+05:05:31 <aigan> i found a strange effect in the browser
+05:07:57 <dmiles> explian and you had good news before?
+05:11:01 <aigan> the good news was that you went away ;)
+05:11:12 <aigan> Now i can.. yezz yezz yess, youre back!
+05:11:40 <aigan> Ok... I use the KB browser to add info
+05:11:49 <aigan> And i just added an assertion
+05:12:00 <aigan> and went back too look att the constant
+05:12:08 <aigan> And it didn't have the assertion
+05:12:21 <aigan> But then I refreshed the page it came up
+05:12:47 <aigan> ... meaning: I run in and got another page before the assertion got comitted
+05:12:48 <dmiles> excellent
+05:13:05 <aigan> That's sort of a bug
+05:13:24 <dmiles> that the asseertions slowing go in?
+05:13:41 <dmiles> they have to get indexed
+05:13:45 <aigan> Things should wue up within the session. At least if its anything doing with previous actions
+05:14:07 <aigan> queu up
+05:14:25 <aigan> ... another thing came up just now:
+05:15:22 <aigan> I used the "create similar".  And then "copy assertions" to copy assertions. But they got created within their existing Mt.
+05:15:54 <aigan> ... I wanted them to be placed in my new Mt.  Now I have to move them by hand.
+05:18:47 <aigan> Do'h!  They are impossible
+05:19:15 <aigan> I created a new  GeographicalEntityByHierarchy instance
+05:19:34 <aigan> But they insisted it should be a governing heiacy
+05:19:53 <aigan> And now I have to create my own GeographicalEntityByHierarchy that's not political
+05:20:38 <aigan> I have previously studied the top ontology nad liked it
+05:21:11 <aigan> But will I find that everything in Opencyc is wrong? :-/
+05:29:25 <aigan> I'll go with SpatiallyDisjointRegionType and forget about the hiearchy
+06:37:16 <aigan> question...:  I have defined Municipality as isa : [Mon]SpatiallyDisjointRegionType [Mon]GeographicalEntityByHierarchy
+06:37:40 <aigan> Why do I have to define it as genls : [Def]GeographicalRegion also?  Shouldn't it infere that?
+06:39:17 <aigan> or for that case geopolitical entity...
+06:56:40 <aigan> I misinterpretated inRegion
+06:58:28 <aigan> thought it would be transitive
+07:00:59 <aigan> ah. :) subRegions
+08:20:49 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+08:24:01 <kinoc> Hello. Opencyc fan and IRC newbie on the channel. Beware my driving. 
+08:26:15 <kinoc> CycLBot?
+08:30:13 <yepster> does this sound plausible?:
+08:30:40 <yepster> not knows (a1 and a2) <-> not knows a1 or not knows a2
+08:31:36 <yepster> I'm having troubles with variable bindings..
+08:34:38 <yepster> better: (not knows (and a1 a2))) <-> ((not knows a1) or (not knows a2))
+08:42:00 <aigan> I read "Use this predicate to record the preferred way of referring to a Fort."  What is the meaning of Fort here?
+08:42:29 <yepster> first order reified term
+08:42:32 <aigan> ah got it
+08:43:24 <yepster> (knows (not knows (and a1 a2)))) <-> (knows ((not knows a1) or (not knows a2))
+08:44:36 <yepster> (knows ((not knows a1) or (not knows a2)))   +  (knows a2)
+08:44:53 <yepster> could cyc infer: (knows (not knows a1)) ?
+08:46:04 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+08:46:20 --- mode: ChanServ set +o Graham
+08:52:40 <yepster> (sentenceImplies (and (knows (not knows ?arg1 or not knows ?arg2)) (knows ?arg2))
+08:52:50 <yepster> (knows (not knows ?arg1)))
+08:53:41 <yepster> would this kind of hack work?
+08:57:17 <aigan> Hasn't this type of problem been solved in a previous Cyc project?
+08:58:05 <yepster> which kind?
+08:58:28 <yepster> I am in desperate need of more information!
+08:59:10 <aigan> Iäm novice.  Don't depend on me
+08:59:31 <aigan> Are you trying to tell Cyc what things it doesn't know?
+08:59:38 <yepster> yes
+09:00:04 <yepster> to answer questions like 'why is x not proven?'
+09:00:15 <aigan> You are separating between truth, falsity and insufficient information?
+09:00:32 <aigan> oh
+09:00:36 <yepster> yes, because if things are false, they are know (to be false)
+09:01:35 <aigan> Hm.. If it can't find an answer. How will it know what bit of information is missing?  The answer could come through a multitude of ways
+09:01:50 <yepster> yes, combinatoric explosion
+09:02:21 <yepster> but this 'explosion' is bound by the parameters of 'x' in 'why is x not proven'
+09:02:33 <aigan> You would have to provide some kind of template telling what information is expected to be availible?
+09:02:41 <yepster> it's impossible to ask for e.g. (not knows Cyc ?x)
+09:03:36 <yepster> well I am using implies rules for that
+09:03:40 <aigan> I don't think asking about a part of the problem solves the question. Each part is the same as the whole
+09:04:07 <yepster> (implies antecedent consequent) : if consequent not proven that means knows (not knows antecedent)
+09:04:38 <yepster> and the (knows (not knows antecedent) is in the form of a1 and a2 and so on
+09:05:17 <yepster> I think it comes down to whether cyc can solve 
+09:05:48 <yepster> something I can't cut and past from a few lines ago..
+09:09:34 * aigan pans out ... to lazy to think
+09:11:46 <aigan> I don't know if I'm in a minority here.
+09:12:15 <aigan> Maby not...  Just reflecting that the problem I want to solve are rather easy
+09:12:34 <aigan> The hard part is to model the world correctly
+09:21:05 <yepster> to model the world exact enough to be able to answer questions you want answered
+09:32:54 <aigan> I'm not sure what types of question I could want to have answerd later
+09:33:39 <aigan> But just to place the model in the existing ontology is a big help
+09:35:28 <aigan> I just now defined #$ServiceProvidor
+09:37:37 <aigan> And have to think about localized availible services and nonlocal stuff.  I got a little help from the existing examples of ServiceEstablishment and related terms
+10:05:24 <yepster> cool it works!
+10:05:50 <aigan> :)
+10:05:52 <yepster> query:
+10:05:53 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+10:05:58 <yepster> (knows CycAgent
+10:05:58 <yepster>    (not
+10:05:58 <yepster>        (knows CycAgent ?X)))
+10:06:04 <yepster> 3 answers:
+10:06:10 <yepster> [Explain #1](mogelijkAanspraakOp HYP-Person-8279 GPH123903000000) [Explain #2](or
+10:06:10 <yepster>    (isa HYP-Person-8279 Person)
+10:06:10 <yepster>    (genls GPH123903000000 Art161a-eHulpmiddel)) [Explain #3](genls GPH123903000000 Art161a-eHulpmiddel)
+10:06:45 <yepster> the third is the reason why the first is not proven
+10:07:49 <yepster> I'd love to have a generalized version of this beast though:
+10:07:56 <yepster> (#$implies 
+10:07:56 <yepster>   (#$and 
+10:07:56 <yepster>     (#$knows #$CycAgent ?ARG1) 
+10:07:56 <yepster>     (#$knows #$CycAgent 
+10:07:56 <yepster>       (#$not 
+10:07:57 <yepster>         (#$knows #$CycAgent 
+10:07:59 <yepster>           (#$or ?ARG1 ?ARG2))))) 
+10:08:01 <yepster>   (#$knows #$CycAgent 
+10:08:03 <yepster>     (#$not 
+10:08:05 <yepster>       (#$knows #$CycAgent ?ARG2))))
+10:08:22 <aigan> :)
+10:08:29 <yepster> with arity n
+10:27:42 --- quit: yepster ()
+10:41:56 * aigan tries to find out how to define SleepingAccomodation
+10:42:32 <aigan> - Should be a single place
+10:42:54 <aigan> - Offerd as a service
+10:47:17 <aigan> could you say that the accomodation IS the provider?
+10:58:48 <aigan> I'm thinking yes...  Seems to mimic the organization hiearchy.
+10:59:15 <aigan> (Problem is that I want to cover individuals and organizations offering services)
+11:00:10 * aigan defines LocalService
+12:05:14 <aigan> I have finally come to some actual queries now.
+12:15:02 <aigan> Seems it was a mistake to use inRegion
+12:16:09 --- join: people (Snak@62.53.34.65) joined #opencyc
+12:19:55 <aigan> spatiallyRelatedTo works, but I only want what is included in a region
+12:26:52 <aigan> ... is there a missing rule somewhere?
+12:32:38 <dmiles> does spatiallyRelatedTo include subRegions?
+12:32:58 <aigan> Let me show what I have.
+12:33:11 <dmiles> subRegions seems a good way to say one place is inside anohter
+12:34:04 <dmiles> yes do that
+12:34:15 <dmiles> oh, internalSubRegions is actually better
+12:34:17 <aigan> subRegions works for the heiarcy of regions
+12:35:01 * aigan looks
+12:35:05 <dmiles> since internalSubRegions impoies the surfice is open area
+12:35:31 <aigan> internalSubRegions doesn't work at all
+12:35:37 <dmiles> why?
+12:35:51 <aigan> i don't know
+12:36:00 <dmiles> oh for query?
+12:36:04 <aigan> Here is what i have:
+12:36:05 <dmiles> i meant for assertion
+12:36:13 <aigan> (#$subRegions #$Sweden ?X)
+12:36:20 <aigan> That gives:
+12:36:24 <aigan> [Explain #1] Sweden
+12:36:25 <aigan> [Explain #2] VastraGotalandsregionen
+12:36:25 <aigan> [Explain #3] Goteborg-Municipality
+12:36:25 <aigan> [Explain #4] Goteborg
+12:36:40 <aigan> That is the heiarcy I specified
+12:36:54 <dmiles> those are gafs in the explaination?
+12:37:14 <aigan> gafs was..?
+12:37:25 <dmiles> ground facts
+12:37:33 <aigan> Here is the facts:
+12:38:00 <aigan> ...
+12:38:07 <aigan> (geopoliticalSubdivision Sweden VastraGotalandsregionen)
+12:38:36 <aigan> (geographicalSubRegions VastraGotalandsregionen Goteborg-Municipality)
+12:38:37 <dmiles> ok that works
+12:38:53 <dmiles> actually yeah keep giong based on predicate
+12:38:58 <aigan> (geographicalSubRegions Goteborg-Municipality Goteborg)
+12:39:23 <aigan> And this is the last part:
+12:39:25 <aigan> (permanentLocationOfObject Lodging-H424 Goteborg)
+12:39:43 <aigan> The thing I want is to find  Lodging-H424
+12:39:50 <dmiles> oh its missing arule ;(
+12:39:58 <dmiles> you may need to add it
+12:40:10 <aigan> Yes. There seems to be missing something
+12:40:12 <aigan> but what?
+12:40:12 <dmiles> let me see what the vbest rule will be
+12:41:23 <dmiles> (genlPreds permanentLocationOfObject internalSubRegions)
+12:41:33 <dmiles> is my best gueess
+12:41:34 <aigan> I made a search for spatial transitive predicates 
+12:42:05 <dmiles> if a parent is transitive.. hrm is it's child?
+12:42:06 <aigan> .. or maby something more basic than permanentLocationOfObject. Let me look
+12:43:30 <dmiles> oh actually (genlInvers in this case)
+12:43:44 <aigan> explain
+12:44:08 --- join: person (Snak@62.53.34.100) joined #opencyc
+12:44:15 <dmiles> permanentLocationOfObject uses revrse args of subRegios right?
+12:44:34 <dmiles> well if subRegions is Transitive then all pred children will be treated that way
+12:45:06 <dmiles> what is permanentLocationOfObject?
+12:45:06 <CycLBot> "This predicate relates some instance of #$SpatialThing-Localized with where that object is most commonly or permanently found . ( #$permanentLocationOfObject OBJ PLACE ) , unlike ( #$objectFoundInLocation OBJ PLACE ) does not entail that OBJ is physically in PLACE at any particular time , as OBJ may be taken from its location for use . Attempt to use other predicates , however , for people or organizations . Try its spec-preds #$physical
+12:45:45 <dmiles> what is subRegions?
+12:45:45 <CycLBot> "( #$subRegions SUPER SUB ) means that SUPER and SUB are both ( effectively ) two-dimensional regions ( see #$Surface-Generic ) , and the area SUB lies wholly within the region SUPER ( see #$inRegion ) . SUPER might or might not completely surround SUB . To relate two instances of #$GeopoliticalEntity , use the predicate , #$geopoliticalSubdivision , if it applies , and for other instances of #$GeographicalRegion use #$geographicalSubRegi
+12:46:04 <dmiles> perminate is Switched arguments
+12:46:18 <dmiles> what is genlInverse?
+12:47:08 <dmiles> you could assert (genlInverse permanentLocationOfObject ...)
+12:47:27 <dmiles> the ... would be the best childd of subRegions you see
+12:47:47 <dmiles> that way you will find it
+12:48:28 <dmiles> you understand what i am saying?
+12:49:03 <aigan> not yet.  Looking at subRegions.  But I think i know what genlInverse is.
+12:50:32 <aigan> hmm. Maby not know what genlInverse is. ... thinking
+12:50:56 <dmiles> it means that the two predicates are companible when you switch the argument order arround
+12:51:26 <aigan> yes. that was it. Read about it.  The arg1Isa : [R]BinaryPredicate gave a clue
+12:52:04 <aigan> so I should find the reverse pred for permanentLocationOfObject
+12:52:13 <dmiles> exacly
+12:52:26 <dmiles> somewhere belows holdsIn
+12:52:29 <dmiles> oops
+12:52:38 <dmiles> somewhere bellow subRegions ;P
+12:52:51 <aigan> [R]SpatialThing-Localized
+12:53:11 <aigan> That is more generic than surface
+12:53:15 <dmiles> yes 
+12:53:25 <dmiles> becasue it more part of spactial vocabulary
+12:53:45 <dmiles> but the contraints on subRegions will keep your domains straght
+12:54:30 <dmiles> so subRegions will slurp up only permanentLocationOfObject that make sense to it
+12:55:30 <aigan> I came to inRegion now. Following SpatialThing
+12:57:06 <aigan> inRegion is inverse... 
+12:57:26 <aigan> But it defines negationPreds
+12:57:34 <aigan> But that's somthing else?
+13:00:43 <aigan> Hmm... Now I wonder
+13:00:58 <aigan> maby inRegion means that the object IS there
+13:01:19 <aigan> but permanentLocationOfObject doesn't say that
+13:01:50 <aigan> soo (genlInverse permanentLocationOfObject inRegion) would not be right?
+13:03:47 <aigan> a subclas. for example physicalQuarters, genls parts
+13:03:57 <aigan> That parts is what is neded, I think
+13:06:00 <aigan> Instead, what i need is to find (#$permanentLocationOfObject ?X #$Sweden)
+13:06:01 --- quit: people (Read error: 110 (Connection timed out))
+13:06:15 <aigan> I should construct a rule that fives the right answer to that question
+13:06:23 <aigan> that gives...
+13:08:48 <aigan> dmiles: I think this could be it:
+13:09:11 <aigan> permanentLocationOfObject genls spatiallyRelatedTo
+13:09:45 <aigan> and something spatially related to Goteborg should also be spatially related to Sweden
+13:09:48 <aigan> doesn't it?
+13:12:08 <aigan> Just for things including other things. Not in the other direction
+13:13:17 <aigan> ... or it could be safer to use  hasBeenIn. since that mentions inRegion
+13:20:24 <dmiles>  spatiallyRelatedTo  is too geral for subregions
+13:20:44 <dmiles> at least in my opionion becasue is a ReflexiveBinaryPredicate
+13:20:53 <aigan> yes...
+13:21:25 <aigan> I'm thinking that.. looking ar hasBeenIn
+13:21:48 <dmiles> what is hasBeenIn?
+13:21:49 <CycLBot> "A predicate linking a thing to its prior history ; ( #$hasBeenIn OBJECT PLACE ) means that the thing OBJECT has at one time during its lifetime been in ( in the general sense of #$inRegion ) the thing PLACE ."
+13:22:09 <aigan> genls permanentLocationOfObject hasBeenIn
+13:22:18 <dmiles> look like a specialization that adds time base infernce
+13:22:24 <aigan> The important part is that it doesn't say that the ting actually is in the region
+13:22:29 <dmiles> oh right much better
+13:22:43 <aigan> but it does relate to the region
+13:23:38 <aigan> (#$and 
+13:23:39 <aigan>   (#$permanentLocationOfObject ?X ?Y) 
+13:23:39 <aigan>   (#$subRegions #$Sweden ?Y))
+13:23:42 <aigan> This work!!!
+13:23:50 <dmiles> (genlInverse hasBeenIn internalSubRegions)
+13:24:11 <aigan> dmiles: I don't think that is right
+13:24:32 <aigan> internalSubRegions talks about the actual spatial relation
+13:24:45 <dmiles> well its not right for time modality.. but for a constant state it is
+13:25:24 <dmiles> right it means that it is completely subsummed by region
+13:25:29 <aigan> It feels a little bit wrong. Is thera any way to do this right?
+13:25:44 <dmiles> subRegion is too general
+13:26:05 <dmiles> unless you want to say that something can be in two regions not inside each other
+13:26:34 <dmiles> (++(**)--)
+13:26:51 <dmiles> those are both subRegions of each other
+13:26:54 <aigan> the thing can be at one place
+13:26:58 <aigan> but hasBeen at another
+13:27:28 <aigan> Think of it as a rental car
+13:27:41 <dmiles> the insideSubReggions means (---(****)---)
+13:28:23 <dmiles> oh soory i was wrong
+13:28:45 <dmiles> lies wholly within the region SUPER (see inRegion). SUPER might or might not completely surround SUB
+13:29:08 <aigan> In some way we should expand the notion of hasBeenIn so that it mimic #$subRegions
+13:29:11 <dmiles> well i just dont see how insideSubRegions is wrong
+13:29:31 <dmiles> (genlInverse hasBeenIn subRegions)
+13:29:37 <dmiles> thats would do it
+13:30:41 <dmiles> that would collect permanentLocationOfObject into subRegions
+13:30:56 <aigan> I'll try.
+13:31:30 <dmiles> if it doesnt work then its a bug or the backchaining needs to be incremebnted 1 higher
+13:33:44 <aigan> not workning
+13:33:55 <dmiles> what mt did you place it in?
+13:34:12 <aigan> Mt : NaiveSpatialVocabularyMt
+13:34:29 <dmiles> hrrm but they can see each other i dont think
+13:34:34 <dmiles> err cant see
+13:35:49 <dmiles> it needs to be a place that has subRegions
+13:36:00 <dmiles> (as well)
+13:36:31 <aigan> explain
+13:36:58 <dmiles> your query is for subRegions Sweden ?X right?
+13:37:20 <aigan> (#$permanentLocationOfObject ?X #$Sweden)
+13:37:27 <aigan> not subregions
+13:37:42 <dmiles> well it wont find it that way
+13:37:45 <aigan> a permanentlocation can not be a subregion
+13:37:59 <aigan> how can I get (#$permanentLocationOfObject ?X #$Sweden) to work?
+13:38:12 <dmiles> hasBeen at another doesnt mean it is permanentLocationOfObject
+13:38:23 <dmiles> ok what assertions do you expect tio find?
+13:38:45 <aigan> Lodging-H424
+13:38:49 <dmiles> permanentLocationOfObject implies hasBeenIn,, but the opposite is not ture
+13:39:19 <dmiles> what was the gaf you used?
+13:39:25 <aigan> [Def](permanentLocationOfObject Lodging-H424 Goteborg)
+13:39:42 <dmiles> ok then thaat is what you want right?
+13:39:42 <aigan> Goteborg should mean Sweden
+13:39:48 <aigan> since Goteborg part of Sweden
+13:39:54 <dmiles> then it has to be done diffently
+13:40:15 <dmiles> i thought you where trying to get (subRegions Sweden ?X)
+13:40:24 <dmiles> and find Lodging-H424
+13:40:33 <aigan> That would be logically wrong
+13:40:46 <dmiles> the Logding is a suiface space
+13:40:56 <dmiles> for example it can have the GrandSwimmingPool
+13:40:58 <aigan> lodgings yes
+13:41:11 <dmiles> and you want that ppol to start showing up in Sweden for it
+13:41:24 <aigan> But the general case would include rented houseboats
+13:41:52 <dmiles> yes.. so then why is (subRegions Sweden Lodging-H424) bad?
+13:42:19 <dmiles> (or illogical)
+13:42:27 <aigan> Well.. If the object is moving... And its permanent location is USA
+13:42:33 <aigan> it should not turn up
+13:43:07 <dmiles> ok
+13:43:08 <aigan> Hmm...
+13:43:24 <aigan> hasBeen is the wrong way to go also... :/
+13:43:30 <dmiles> so you want to only query perminantLocation for travel plalnning right?
+13:43:51 <aigan> Mostly permanent locations
+13:44:02 <aigan> I could go for an easier solution for now
+13:44:19 <dmiles> then you will want to (genlInverse perminantLocationOfObject subRegions) since regions do not move much
+13:44:43 <aigan> create a subclass of permanentLocationOfObject that genls parts
+13:45:09 <dmiles> well (parts ?X Sweden) would make a good query maybe
+13:45:42 <dmiles> but  perminantLocationOfObject makes more sense for traveling
+13:46:15 <dmiles> well i would say create someththing that ...
+13:46:43 <dmiles> (genlPreds permanentLocationOfObject myPermanentLocationOfObject)
+13:46:56 <dmiles> query from  myPermanentLocationOfObject
+13:46:57 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+13:47:11 <aigan> objectFoundInLocation
+13:47:12 <aigan> maby
+13:47:20 <dmiles> only parent collects child.. child never gets anything from parent l;P
+13:48:15 <dmiles> you understand what i just meant with genlPreds?
+13:48:50 <dmiles> <aigan> create a subclass of permanentLocationOfObject that genls parts
+13:48:52 <dmiles> should be..
+13:49:09 <aigan> ... whay would that be better?
+13:49:09 <dmiles>  <aigan> create a subclass of permanentLocationOfObject that parts can be the genlPreds of
+13:49:17 <dmiles> oops
+13:49:28 <dmiles>  <aigan> create a superclass of permanentLocationOfObject that parts can be the genlPreds of
+13:50:05 <dmiles> so youurr superclass can lift from its child class  permanentLocationOfObject
+13:50:46 <dmiles> youurr superclass can also left from subRegions if you needed it to
+13:50:48 <aigan> I could directly change permanentLocationOfObject
+13:50:58 <dmiles> ok what would you add?>
+13:51:03 <aigan> Why would creating a superclass be any better than directly changing permanentLocationOfObject
+13:51:13 <aigan> genls parts
+13:51:15 <dmiles> not any better in this case.
+13:51:17 <aigan> But that would be wrong
+13:51:33 <aigan> how would creating a superclass be better?
+13:51:52 <aigan> Gee... Time is up.
+13:52:16 <dmiles> right so. then why would (genlInverse perminantLocationOfObject subRegions) not be good or would it?
+13:52:38 <dmiles>  (genlInverse perminantLocationOfObject subRegions) is actually true logically
+13:52:54 <dmiles> and would make things work for you i beeieve
+13:54:17 <aigan> permanentLocation isn't the same as actual location
+13:54:34 <aigan> doesn't subRegions talk about actual location?
+13:54:37 <dmiles> why cant it use it?
+13:54:54 <dmiles> perminantLocation will enforce its argument contraints?
+13:55:06 <dmiles> it should
+13:55:09 <aigan> Let's say that we know that the actual location is France
+13:55:29 <aigan> then we have that the object is located in both Sweden and France
+13:55:48 <dmiles> how is that possible?
+13:56:19 <aigan> I don't know if that realy would be the effect. But its a contradicion
+13:56:40 <dmiles> subRegions your saying would veto or stop such a thing?
+13:56:46 <aigan> permanentLocationOfObject doesn't say there the object is
+13:57:39 <dmiles> Thing is the contraint
+13:57:41 <aigan> i don't know how it works. But if it concludes that the object is located in Sweden it would be an error
+13:57:53 <dmiles> but you just said its in Sweden
+13:57:56 <aigan> no
+13:58:06 <aigan> I said that permanentLocationOfObject is Sweden
+13:58:11 <dmiles> ok 
+13:58:22 <dmiles> then how could it get to france?
+13:58:52 <dmiles> so your saying the object might move?
+13:58:53 <aigan> what is permanentLocationOfObject?
+13:58:54 <CycLBot> "This predicate relates some instance of #$SpatialThing-Localized with where that object is most commonly or permanently found . ( #$permanentLocationOfObject OBJ PLACE ) , unlike ( #$objectFoundInLocation OBJ PLACE ) does not entail that OBJ is physically in PLACE at any particular time , as OBJ may be taken from its location for use . Attempt to use other predicates , however , for people or organizations . Try its spec-preds #$physical
+13:59:05 <aigan> "does not entail that OBJ is physically in PLACE at any particular time"
+13:59:23 <aigan> it might move yes
+14:00:05 <dmiles> ok then i see
+14:00:19 <aigan> thats why I said that maby i should give up and go for objectFoundInLocation instead
+14:00:23 <dmiles> permanentLocationOfObject is not applicable to things then or is it?
+14:00:42 <dmiles> objectFoundInLocation is better
+14:01:01 <aigan>  permanentLocationOfObject is the base class for locations of organizations, hotels, etc
+14:01:06 <dmiles> (genlInverse objectFoundInLocation inRegion) is good then?
+14:01:28 <aigan> But objectFoundInLocation would not include absolutely all SleepingAccomodations
+14:01:59 <dmiles> where would SleepingAccomodations be used with?
+14:02:30 <aigan> it would include hotels, camping grounds and maby also boats and houscars
+14:02:52 <aigan> ... what is the right word for house-cars?
+14:03:02 <dmiles> i would only want to sleep where i knew my bed was objectFoundInLocation to where i was going
+14:03:27 <aigan> you would rent the bed and then travel and then sleep
+14:03:38 <aigan> thats not the point
+14:04:02 <aigan> the point is that a correct model would include this.
+14:04:16 <aigan> But I could go with objectFoundInLocation to start with
+14:04:24 <aigan> I'll try that
+14:04:26 <dmiles> i would yes.. becasue thats a guerntee
+14:05:40 <dmiles> (genlInverse objectFoundInLocation inRegion) then still is good ;P
+14:08:37 <aigan> (#$objectFoundInLocation ?X #$Sweden) didn't work :-/
+14:09:13 <dmiles> and thats with the genlInverse set up ?
+14:09:23 <aigan> no
+14:09:29 <dmiles> it needs to be
+14:09:33 <aigan> (#$subRegions #$Sweden ?Y) doesn't work either
+14:09:41 <aigan> I'll try with your inverse
+14:10:03 <aigan> in BaseKB?
+14:10:11 <dmiles> (#$subRegions #$Sweden ?Y) must work though before the inverse will work
+14:10:17 <dmiles> yes good place
+14:10:45 <aigan>  (#$subRegions #$Sweden ?Y) doesn't give the object
+14:10:50 <aigan> only down to Goteborg
+14:10:51 <dmiles> why did (#$subRegions #$Sweden ?Y) stop working?
+14:11:06 <aigan> It has never worked all the way
+14:11:13 <dmiles> it has to have the genlInverse to give the Hotel
+14:11:15 <aigan> that was the initial question
+14:11:42 <dmiles> ok with your data set way before
+14:12:05 <dmiles> it sitll wont work if you used permanentLocationOfObject
+14:12:16 <dmiles> i would have to know the gafs you used
+14:12:26 <aigan> (objectFoundInLocation Lodging-H424 Goteborg)
+14:12:49 <aigan> And (#$subRegions #$Sweden ?Y) gives:
+14:12:53 <aigan> [Explain #1] Sweden
+14:12:53 <aigan> [Explain #2] VastraGotalandsregionen
+14:12:53 <aigan> [Explain #3] Goteborg-Municipality
+14:12:53 <aigan> [Explain #4] Goteborg
+14:12:55 <dmiles> but the genlInverse didn't work?
+14:13:05 <aigan> that's right
+14:13:19 <aigan> not for this query anyway
+14:13:35 <dmiles> i wonder why.. it should have if you put ion BaseKB
+14:13:55 <dmiles> try query in EverthingPSC
+14:14:09 <dmiles> err EverythingPSC
+14:14:20 <aigan> [Def](genlInverse objectFoundInLocation inRegion)
+14:14:29 <dmiles> ok in BaseKB
+14:14:43 <aigan> InferencePSC was used
+14:14:47 <dmiles> now when you ask use EverythingPSC for your Mt
+14:14:49 <aigan> yes. BaseKB
+14:15:09 <aigan> no diffrence
+14:15:28 <dmiles> increase your Backchains to iunlimited
+14:15:40 <aigan> Query halted because : Search space was exhausted.
+14:15:40 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+14:15:43 <dmiles> Depths to unlimited
+14:16:04 <aigan> same with infinite Depth
+14:16:28 <dmiles> (genlInverse objectFoundInLocation subRegions)
+14:16:37 <dmiles> you can always unassert it
+14:16:44 <dmiles> in BaseKB
+14:17:02 <aigan> Should I add that or edit the previous?
+14:17:16 <dmiles> you can edit the previopus
+14:17:33 <dmiles> i actually mean subRegions becasue that was transitive.. but typed wrong
+14:17:44 <dmiles> err meant
+14:18:12 <aigan> must assert in NaiveSpatialVocabularyMt.
+14:18:31 <dmiles> ok we'll try that
+14:18:43 <aigan> that worked
+14:18:51 <aigan> [Explain #1]Sweden [Explain #2]VastraGotalandsregionen [Explain #3]Goteborg-Municipality [Explain #4]Goteborg [Explain #5]Lodging-H424
+14:18:53 <dmiles> as long as we are in EverythingPSC should work
+14:19:13 <dmiles> yay/1
+14:19:17 <aigan> InferencePSC worked
+14:19:26 <dmiles> very cool then it's mainly consistant
+14:19:39 <aigan> and limited steps
+14:20:11 <aigan> let me now try it the other way around
+14:20:42 <aigan> (#$objectFoundInLocation ?X #$Sweden) doesn't work
+14:21:13 <aigan> that means something is still wrong
+14:21:25 <dmiles> (#$objectFoundInLocation ?X #$Sweden) reduces transitivty
+14:21:51 <dmiles> since its supposed to be nearest Locatio
+14:21:52 <aigan> ?
+14:22:06 <dmiles> butyou can add it to allow
+14:22:16 <dmiles> aransitveVia Arg2
+14:22:17 <aigan> but Goteborg IS Sweden
+14:22:21 <aigan> so it should work
+14:23:07 <dmiles> (#$objectFoundInLocation ?X #$Sweden) in EverythingPSC ?
+14:23:14 <dmiles> does that work?
+14:23:22 <aigan> tried that
+14:23:42 <dmiles> maybe (genlInverse  subRegions objectFoundInLocation) :)
+14:23:46 <dmiles> as well
+14:24:07 <dmiles> ask (isa genlInverse ?X)
+14:24:08 <CycLBot> ?X = DefaultMonotonicPredicate, ?X = MacroRelation, ?X = RuleMacroPredicate, ?X = PublicConstant, ?X = CoreConstant, ?X = PublicConstant-CommentOK, ?X = CycLReifiableDenotationalTerm, ?X = CycLReifiedDenotationalTerm, ?X = HLReifiedDenotationalTerm, ?X = ELExpression, ?X = CycLClosedDenotationalTerm, ?X = CycLClosedAtomicTerm, ?X = CycLRepresentedTerm, ?X = CycLRepresentedAtomicTerm, ?X = CycLDenotationalTerm, ?X = CycLAtomicTerm, ?X = HL
+14:24:45 <dmiles> ask (isa genlInverse SymetricBinaryRelation)
+14:24:46 <CycLBot> no answers found
+14:24:51 <dmiles> ask (isa genlInverse SymmetricBinaryRelation)
+14:24:51 <CycLBot> no answers found
+14:25:13 <dmiles> ask (isa genlInverse SymmetricBinaryPredicate)
+14:25:14 <CycLBot> no answers found
+14:25:18 <dmiles> ok thats why
+14:25:32 <dmiles> you need two genlInverse
+14:25:44 <aigan> (genlInverse  subRegions objectFoundInLocation) ?
+14:25:50 <dmiles> i guess why they call it genInverse instead of predInverse
+14:25:53 <dmiles> yes
+14:26:33 <dmiles> if genlInverse SymmetricBinaryPredicate then it would not need both
+14:26:56 <aigan> maby it shouldn't be. IU don't know
+14:27:08 <aigan> But we should submit the changes for inclusion in OpenCyc
+14:27:37 <dmiles> the genls* in the nmme im,plies that its a one way transitive on argument 2 in genlsInversere
+14:28:00 <aigan> (#$objectFoundInLocation ?X #$Sweden) gives:
+14:28:06 <aigan> VastraGotalandsregionen
+14:28:15 <aigan> ... Hm....
+14:28:38 <dmiles> it may be 'nearst' object 
+14:28:41 <aigan> that is correct, right?
+14:28:46 <dmiles> like not trasnitive
+14:28:50 <dmiles> yes
+14:28:54 <dmiles> looks right
+14:29:01 <dmiles> but thats all it returns?
+14:29:43 <aigan> no
+14:29:47 <aigan> its wrong
+14:29:50 <aigan> wrong wrong wrong
+14:29:54 <dmiles> why ?
+14:30:03 <aigan>  OBJ is not a part of LOC. 
+14:30:13 <dmiles> becasue it doesnt meet the contraints of Object?
+14:30:15 <aigan> the obj in location should not be part of locarion
+14:30:21 <dmiles> why not?
+14:30:37 <aigan> because thats the definition of  objectFoundInLocation
+14:30:47 <dmiles> in text.. but not KB content
+14:31:01 <aigan> also in content
+14:31:30 <dmiles> ?OBJ is anything that can take up matter
+14:31:43 <aigan> yes
+14:31:43 <dmiles> anything that can be said to be in a location
+14:31:52 <aigan> but it should not be part of LOC
+14:31:59 <aigan> it should be placed in LOOC
+14:32:02 <aigan> not be a part of it
+14:32:17 <dmiles> a location can be found in a location
+14:32:28 <dmiles> but mayber for what your doing we dont want that
+14:32:56 <dmiles> (and (#$objectFoundInLocation ?X #$Sweden) (not (isa ?X Region)
+14:32:59 <dmiles> (and (#$objectFoundInLocation ?X #$Sweden) (not (isa ?X Region))
+14:33:13 <aigan> it specificly descibes objectFoundInLocation as diffrent from geographicalSubRegions.
+14:34:31 <dmiles> so then..(genlInverse  subRegions objectFoundInLocation)
+14:34:34 <dmiles> is wrong 
+14:34:41 <dmiles> we instead need a rule
+14:34:50 <aigan> right
+14:35:38 <aigan> But I should not do this ... I'm still evaluating OpenCyc
+14:35:56 <dmiles> (implies (and (subRegions ?X ?Y)(not (isa ?Y Region))) (objectFoundInLocation ?Y ?X))
+14:36:18 <dmiles> well cyc is a can of worms ;P
+14:36:25 <aigan> And in a few hours it's time to demonstrate how I can do searches with it. :)
+14:37:10 <dmiles> its harse we have to always load supplimental assertion on Cyc boot
+14:37:38 <dmiles> just so it contains enough to do what we want
+14:38:21 <aigan> I'll remove the two previos assertions?
+14:38:25 <dmiles> understand its not good for contrained time projects.. but it *is* good that what we create is more easily use3d in the futer of our later projects
+14:38:31 <dmiles> more so then any onterh system
+14:38:44 <dmiles> you want the first genlInverse
+14:38:52 <dmiles> then the second remove
+14:39:06 <dmiles> and instyead make a rule... like  (implies (and (subRegions ?X ?Y)(not (isa ?Y Region))) (objectFoundInLocation ?Y ?X))
+14:39:06 <aigan> i do..
+14:39:09 <aigan> ok..
+14:39:15 <dmiles> so you can tie them together correctly
+14:39:44 <aigan> and te second was that from subRegions to objectFoundInLocation ?
+14:39:52 <dmiles> (not (isa ?Y Region)) is probly something differnt in your case
+14:40:21 <aigan> my case? This should be in Cyc core! ;)
+14:40:22 <dmiles> or (isa ?X PlaceOfInterest)
+14:40:40 <dmiles> i believ eit should go into Cyc's core yes
+14:41:09 <aigan> remove [Def](genlInverse subRegions objectFoundInLocation) ?
+14:41:12 <dmiles> i think part of 'openCyc' is to benifit from everyones knowledge engineering
+14:41:33 <dmiles> coorect
+14:42:03 <aigan> and add (implies (and (subRegions ?X ?Y)(not (isa ?Y Region))) (objectFoundInLocation ?Y ?X)) ?
+14:42:17 <dmiles> let me look at Region
+14:42:22 <aigan> me to
+14:42:29 <aigan> GeographicalRegion
+14:42:46 <aigan> maby not that
+14:42:56 <aigan> negation of what was said
+14:43:28 <dmiles> GeographicalRegion?
+14:43:36 <dmiles> what is GeographicalRegion?
+14:43:47 <dmiles> what is a GeographicalRegion?
+14:43:51 <aigan> could we use inRegion?
+14:43:56 <aigan> maby not
+14:44:04 <dmiles> in Region is not transitive enough
+14:44:15 <dmiles> at least i think was why it didnt work
+14:44:18 <aigan> mean inRegion for the negation
+14:44:47 <dmiles> what is an explew rule your giving?
+14:44:50 <aigan> can't go on type
+14:45:09 <dmiles> inRegion is not constained to places
+14:45:19 <aigan> must go on the negation of the definition of objectFoundInLocation
+14:45:42 <aigan> it should not exclude places
+14:46:04 <aigan> only exclude things that are parts of ?Y
+14:46:13 <aigan> Bof ?X
+14:46:16 <aigan> of ?X
+14:46:32 <dmiles> parts by the way is very gernel 
+14:46:44 <aigan> thats ok
+14:47:08 <aigan> because objectFoundInLocation should not imply that its part of location
+14:47:22 <aigan> so your first assertion may also be wrong
+14:47:27 <dmiles> it does implie #$parts though
+14:47:55 <aigan> oups :-/
+14:47:59 <aigan> ok
+14:48:18 <dmiles> #$parts is the most genral of all things and includes any predicates that have any connectuion to spatiality
+14:49:01 <aigan> "spatial part of"
+14:49:51 <dmiles> err parts is not just spatuial i guess. but even time
+14:50:03 <dmiles> its more the general english term parts 
+14:50:39 <dmiles> ok so what do we need to do you think?
+14:51:15 <aigan> spatiallyIncludes works not...
+14:51:31 <dmiles> i dont think you will find any predicate though
+14:51:56 <dmiles> i really think its contraint based
+14:52:11 <aigan> what does that mean?
+14:52:14 <dmiles> err type contraint ;P
+14:52:35 <dmiles> that woyu would want...
+14:52:53 <dmiles> (#$objectFoundInLocation Lodge-345 ?X)
+14:53:11 <dmiles> ?X=Swenede , ?X= Gotensbuerg
+14:53:12 <aigan> (#$objectFoundInLocation ?X #$Sweden)
+14:53:29 <dmiles> Lodge-2N2323
+14:53:35 <aigan> yes
+14:53:36 <dmiles> and that only right?
+14:53:56 <dmiles> then you want it to filter out Places that are GeographiclRegions ?
+14:53:57 <aigan> yes.  More so than finding the obj in subregions
+14:54:46 <aigan> i want to filter out everything that isn't specifically (#$objectFoundInLocation
+14:54:53 <dmiles> since you are looking for things that are mostly things only found in GeographicalRegions
+14:55:00 <aigan> and...
+14:55:57 <dmiles> ok so you want objectFoundInLocation to only be faCTS that are asserted?
+14:56:26 <aigan> w8
+14:57:37 <aigan> (implies (and (objectFoundInLocation ?X ?Y)(subRegions ?Z ?Y))(objectFoundInLocation ?X ?Z))
+14:57:43 <aigan> is that right?
+14:58:13 <dmiles> i guess it could be correct .. that works
+14:58:36 <dmiles> and is more generic.. good idea
+14:58:36 <aigan> I remove the other inverse
+14:59:50 <dmiles> was (subRegions Sweden Hotel-N234) not correct?
+15:00:48 <dmiles> it may be coorect .. but maybe too tangled for later?
+15:01:05 <aigan> I would not call it a subregion...
+15:01:08 <dmiles> Hotel-N234 is a Place ;P
+15:01:27 <aigan> something is wrong with the implies...
+15:01:30 <dmiles> that may contain other places
+15:01:51 <aigan> oh
+15:01:55 <aigan> just the Mr
+15:01:57 <aigan> just the Mt
+15:03:10 <dmiles> on the evaluatuion of Cyc.. i was thinking imagine we knew exactly what to do right friom the start... i wonder if then it would be better then other solutions
+15:03:11 <aigan> well.. ok.
+15:03:54 <dmiles> but its funny .. i have used cyc a while.. and it;''s always trial error for me
+15:03:55 <aigan> I try (#$objectFoundInLocation ?X #$Sweden) and get:  Search space was exhausted up to the depth cutoff.
+15:04:16 <dmiles> you need at least 1 or two backchains
+15:04:25 <aigan> backchains?
+15:04:30 <dmiles> becasue it must call that rule
+15:04:32 <aigan> what, where, why?
+15:04:39 <dmiles> in the Ask window
+15:05:01 <aigan> why?!?  That's not logical :-(
+15:05:13 <dmiles>  two backchains
+15:05:13 <dmiles> [15:10] <aigan> backchains?
+15:05:15 <aigan> What is the point if I have to think?
+15:05:42 <dmiles> thats why i want to affix backcahin dpeths on predicates a couple days ago
+15:05:44 <aigan> I mean... I shouldn't change the query
+15:05:50 <aigan> but maby change the assertions
+15:05:59 <dmiles> change it to forward and it will work
+15:06:14 <dmiles> since it will precahce to not have to backchain
+15:06:14 <aigan> change what?
+15:06:29 <dmiles> the dirrection of the implies Rule 
+15:06:42 <dmiles> right now its a Backwards rule right?
+15:06:58 <dmiles> that means it needs a BackChain depth + 1
+15:07:11 <dmiles> forward rules do not need a +1 backchain
+15:07:24 <aigan> how do I find the rule?
+15:07:34 <dmiles> search objectFoundInLocation
+15:07:43 <dmiles> then look for rules it appears in
+15:07:51 <dmiles> the click the yellow dot
+15:08:01 <dmiles> that will let you edit the rule
+15:08:17 <dmiles> [Change Dirrection]
+15:08:41 <aigan> the dot is purple
+15:08:48 <aigan> and there is two identical rules
+15:08:50 <dmiles> ok peulpel is right
+15:08:55 <dmiles> click that
+15:08:59 <aigan> Antecedent Rules and Consequent Rules
+15:09:10 <aigan> whats that?
+15:09:24 <dmiles> means its use as Antecedant and Consequent
+15:09:36 <dmiles> both arg1 and arg2 of implies
+15:09:42 <aigan> ah
+15:09:52 <aigan> i'll change to forward?
+15:09:54 <dmiles> (or #$equiv rules .. as well)
+15:09:57 <dmiles> yes
+15:10:09 <dmiles> this will also create a cache
+15:10:26 <aigan> hmm
+15:10:32 <dmiles> but dont worry about that
+15:10:38 <dmiles> it self maintains
+15:10:48 <aigan> Ok. I don't try to think about it :)
+15:11:07 <kinoc> hello
+15:11:09 <aigan> But I don't know why I should be forward
+15:11:22 <aigan> kinoc: hi
+15:11:28 <dmiles> only cuz you want to not have to use backcahining in your query ;P
+15:11:56 <aigan> didn't work
+15:11:58 <dmiles> they needa more Cycquery-Cognitive
+15:12:03 <aigan> even with infinite deapth
+15:12:15 <aigan> so I changed to backchain forever
+15:12:15 <dmiles> infinate backchains as well?
+15:12:22 <dmiles> hrrm
+15:12:28 <aigan> and now I wait
+15:12:29 <dmiles> ask just the anteceedant part
+15:12:30 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+15:12:30 <aigan> and wait
+15:12:55 <dmiles> (and (subRegions ?X ?Y)(not (isa ?Y Region))
+15:12:56 <aigan> I'm waiting
+15:13:11 <dmiles> ah well i think backchain of 3 is generally the best
+15:13:22 <dmiles> i hope it was contrained to 30 seconds
+15:13:29 <kinoc> is there a time limit on backaining ?
+15:13:43 <aigan> I'll stop it.. Because it has no 30 seconds limit either
+15:13:51 <dmiles> nope there as a Time/BackCahin/MaxAnswers/MaxProofSteps
+15:14:12 <dmiles> as far as infernce limits
+15:14:44 <kinoc> that is what I mean. The limits are setable ?
+15:14:54 <aigan> yes
+15:15:09 <aigan> 3 backchain steps. 30 secs limit now
+15:15:19 <dmiles> thats pretty safe 
+15:15:26 <aigan> ... dmiles: what was it you said before about other things to try?
+15:15:43 <dmiles> to query just on  (and (subRegions ?X ?Y)(not (isa ?Y Region)) 
+15:15:53 <dmiles> to see if it preoduces the ?X ?Z you really want
+15:16:08 <dmiles> oops
+15:16:12 <dmiles> not that wrong paiste
+15:16:23 <dmiles> (and (objectFoundInLocation ?X ?Y)(subRegions ?Z ?Y))
+15:16:41 <aigan> oups
+15:16:48 <aigan> no time cutof again
+15:17:17 <dmiles> i tried once to create a system for deucing the best 4 contraints
+15:17:58 <dmiles> succeswsfully but it needs to have certain predicates and things markings in the KB
+15:18:26 <dmiles> it also implimented edge/color/search cache 
+15:18:33 <aigan> wow!!
+15:18:39 <dmiles> it worked?
+15:18:40 <aigan> (#$and 
+15:18:40 <aigan>   (#$objectFoundInLocation ?X ?Y) 
+15:18:40 <aigan>   (#$subRegions ?Z ?Y))
+15:18:46 <aigan> [Explain #1]Lodging-H424GoteborgGoteborg [Explain #2]Lodging-H424GoteborgGoteborg-Municipality [Explain #3]Lodging-H424GoteborgGoteborg-Region [Explain #4]Lodging-H424GoteborgVastraGotalandsregionen [Explain #5]Lodging-H424GoteborgSweden [Explain #6]Lodging-H424GoteborgScandinavia
+15:19:15 <dmiles> ok then thats definately the Antedidant you want?
+15:19:29 <aigan> Antedidant?
+15:19:32 --- join: Yepster_home (yepster@a213-84-17-242.adsl.xs4all.nl) joined #opencyc
+15:19:51 <dmiles> the precondition for the consequent
+15:20:12 <dmiles> hehe
+15:20:24 <dmiles> the consumer to producer 
+15:20:38 <dmiles> the 'if' part of a rule
+15:20:43 <aigan> ah
+15:20:49 <aigan> :)
+15:20:55 <dmiles> Ante = Before part
+15:21:09 <aigan> how do I stop the forever running query?
+15:21:26 <aigan> still forward?
+15:21:30 <Yepster_home> bash$ killall latest.bin
+15:21:30 <dmiles> well hrrm the broswer should be able to break the socket
+15:21:43 <aigan> it has
+15:21:45 <aigan> I can work
+15:21:48 <dmiles> but Cyc may be too busy to see you are not there
+15:21:50 <aigan> but some part is still running
+15:22:41 <aigan> but...
+15:23:05 <dmiles> that is apain.. i have done that before got cyc so busy it slows my next query down
+15:23:07 <aigan> I already have that thing I tried as the if part
+15:23:31 <dmiles> ok yes.. so i am think what you needed was 30 seconds at 3 backchians
+15:23:36 <dmiles> and that didnt work?
+15:23:53 <dmiles> or did you acedently miss the 30 mark?
+15:24:01 <aigan> haven't tried with limits. But wihout limits it took longer.
+15:24:05 <aigan> Will try with again
+15:24:44 <dmiles> well what i would really realy suject is making the rule backwards .. with a depth of 2 at 30 seconds ;P
+15:25:03 <dmiles> but you wanted a non bbackchaining solution
+15:25:42 <dmiles> "with a depth of 2" with a depth of 2 backchains
+15:25:47 <Yepster_home> yes, what's wrong with forward chaining the rules? forward chaining rules!
+15:25:58 <dmiles> but i dont know if that would only go 2 deep in the geography 
+15:26:24 <aigan> Query halted because : Time cutoff was exceeded.
+15:26:24 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "A SYMBOL at 0x40010150 is not a f_6469.")
+15:26:28 <dmiles> i love forward cahining .. but i think aigan might feel the cahce could grow too large
+15:27:09 <dmiles> find that rule of yours again.. then see how many dependants it has
+15:27:15 <aigan> the rule already is forward
+15:27:29 <dmiles> it should have at least 1.. if not chainge its strength to MonoTonic
+15:27:35 <Yepster_home> hmm well I think aigan has no choice: waiting 300 seconds for a query in a demonstration is not good
+15:27:59 <dmiles> yes forward is good. especially for speed
+15:28:04 <Yepster_home> hmm I had something similar today with a forward rule
+15:28:31 <Yepster_home> no results.. turned out to be a small error in the rule
+15:28:32 <dmiles> i by rule make all my forward rules strenghh monotonic becasue default may be too timid
+15:28:57 <aigan> ... I may not demonstrate on computer.
+15:29:03 <dmiles> we asked his antededdant to just be sure
+15:29:06 <aigan> Maby just show how a Cyc query looks like
+15:29:12 <aigan> In contrast to a SQL query
+15:30:22 <dmiles> yes Cyc queries are pretty powerfull.. now i just cant wiat till we have a stored priocedure equivalent in SubL
+15:30:35 <Yepster_home> it would be nice to have an example that would be easy in cyc and impossible in the db solution
+15:30:38 <dmiles> with will be there in 0.7 
+15:31:01 <Yepster_home> like performsubl? or expansion?
+15:31:26 <dmiles> yeah .. its there its just the 0.6 doesnt have the whole SubL interface
+15:31:52 <dmiles> just most of it
+15:32:05 <dmiles> err parts of it ;P
+15:32:36 <aigan> will the query take forever
+15:32:38 <Yepster_home> I actually violated the opencyc license to find out some more subl stuff
+15:32:42 <aigan> or eventually give up?
+15:32:54 <dmiles> the first one is still running up cpu time?
+15:33:13 <aigan> I think i have two now
+15:33:14 <Yepster_home> maybe you can write-image, kill it and restart it?
+15:33:16 <aigan> still running
+15:33:37 <dmiles> yeah you can save your work that way
+15:33:44 <aigan> I have the transcript or wht it's named
+15:33:53 <dmiles> with ( write-image "mywork.load")
+15:33:53 <aigan> Can import from it..  But would rather not
+15:34:18 <dmiles> it will load it very fast that way
+15:34:23 <aigan> More important now... The time is 00.34 in the night and I mus go home and sleep in 15 minutes
+15:34:43 <Yepster_home> good night
+15:34:54 <aigan> I hoped to have at least the most simple search workning... :-/
+15:35:09 <dmiles> well you have some stuff working
+15:35:14 <aigan> dmiles: I have it that way already
+15:35:23 <dmiles> and once you have the rule and query right you will be set
+15:35:53 <aigan> The hard way is how to explain this...
+15:36:45 <aigan> And I still wonder if this is the right time to switch..  Maby continue devolop my own logic DB another year...
+15:36:51 <dmiles> btw: you create and imported image.. that might be usefull to post to list.. or url
+15:37:30 <aigan> dmiles: but that image is the full KB. Including the OpenCyc stuff
+15:37:34 <aigan> It's a large file...
+15:37:56 <dmiles> what the .imgage or the geo-database?
+15:38:15 <aigan> the "mywork.load"
+15:38:41 <aigan> what image was you talking about?
+15:38:42 <dmiles> well i meant the text file system you imported (i assumed you created it with perl script)
+15:39:09 <aigan> I haven't done anything with that yet
+15:39:12 <dmiles> the "mywork.load" is an entire image
+15:39:13 <aigan> waiting for 0.7
+15:39:23 <dmiles> ah all good.. so you did alot by hand?
+15:39:42 <aigan> I have only one city
+15:39:48 <dmiles> ah .. ok
+15:39:56 <aigan> one accomodation in that city
+15:40:02 <dmiles> n/m i thought you translated the geo-content
+15:40:02 <aigan> not much for intresting searches
+15:40:07 <aigan> not yet
+15:40:21 <aigan> I have spent all the time figuring out how to set up everything
+15:40:33 <aigan> learning...
+15:40:38 <dmiles> :) all good.. so then are you able to load you .load file now?
+15:40:45 <aigan> It's not much. I can post it here...
+15:41:32 <aigan> I have some things in other Mts.. But this is the main part:
+15:41:46 <aigan> RitTouristGuideGeographyMt:
+15:41:52 <aigan> [Def](geographicalSubRegions Goteborg-Region Goteborg-Municipality)
+15:41:53 <aigan> [Def](isa Goteborg-Region OutdoorLocation)
+15:41:53 <aigan> [Def](geographicalSubRegions Goteborg-Municipality Goteborg)
+15:41:53 <aigan> [Def](genls City-Postal OutdoorLocation)
+15:41:53 <aigan> [Def](genls Municipality GeopoliticalEntity)
+15:41:53 <aigan> [Def](geographicalSubRegions VastraGotalandsregionen Goteborg-Municipality)
+15:41:55 <aigan> [Def](isa Goteborg-Municipality Municipality)
+15:41:57 <aigan> [Def](isa Goteborg City-Postal)
+15:42:01 <aigan> [Mon](isa Municipality SpatiallyDisjointRegionType)
+15:42:03 <aigan> [Mon](isa Municipality GeographicalEntityByHierarchy)
+15:42:07 <aigan> [Mon](isa City-Postal SpatiallyDisjointRegionType)
+15:42:09 <aigan> [Def](isa VastraGotalandsregionen County)
+15:42:11 <aigan> [Def](geopoliticalSubdivision Sweden VastraGotalandsregionen)
+15:42:42 <aigan> And RitTouristGuideLodgingMt:
+15:42:54 <aigan> [Def](objectFoundInLocation Lodging-H424 Goteborg)
+15:42:55 <aigan> [Def](isa Lodging-H424 SleepingAccomodation)
+15:42:55 <aigan> [Def](genls SleepingAccomodation LocalService)
+15:42:55 <aigan> [Def](isa SleepingAccomodation ExistingObjectType)
+15:42:55 <aigan> [Def](interArgFormat1-2 permanentLocationOfObject LocalService SingleEntry)
+15:42:55 <aigan> [Def](genls LocalService SpatialThing-Localized)
+15:42:57 <aigan> [Def](genls LocalService ServiceProvider)
+15:43:01 <aigan> [Def](isa LocalService ExistingObjectType)
+15:43:03 <aigan> [Def](preferredTermStrings Lodging-H424 "Hotel Vasa")
+15:43:07 <aigan> [Def](genls SleepingAccomodationProvider ServiceProvider)
+15:43:09 <aigan> [Def](isa SleepingAccomodationProvider ExistingObjectType)
+15:43:11 <aigan> [Def](genls ServiceOrganization ServiceProvider)
+15:43:13 <aigan> [Def](genls ServiceProvider LegalAgent)
+15:43:15 <aigan> [Def](isa ServiceProvider ExistingObjectType)
+15:44:02 <Yepster_home> we really need cycml export
+15:44:27 <Yepster_home> so it will be easier to play around with each others mt's
+15:44:48 <aigan> ... Just to figure out how to add ServiceProvider took a lot of looking and thinking...
+15:45:04 <dmiles> yes.. it would be nice to (cyc-get-mt "ipdresss" RitTouristGuideGeographyMt)
+15:45:42 <aigan> dmiles: But for the real Mt I would of course separate vocabulary and data
+15:45:52 <dmiles> aigan: yeah
+15:46:09 <Yepster_home> I could write cycml import in oracle if necessary, but the export is what we need
+15:46:18 <aigan> And as we have discussed. Maby have the data in a relational DB and have an interface for it
+15:46:23 <dmiles> aigan: it least should keep up to data with that Mt organization structure
+15:46:38 <dmiles> err up to date
+15:46:39 <aigan> But with all the truble today I wonder if that maby is just too hard to try
+15:46:49 <Yepster_home> aigan: does rit have an oracle license?
+15:46:54 <dmiles> its hard.. and requires many sleepless hours
+15:47:25 <aigan> Yepster_home: I'll use PostgreSQL and I find it extremly good
+15:47:27 <dmiles> but i thinbk it makes it worth it beacease thik of all the ways for the future you can reuse your current stuff in a later operation
+15:47:36 <dmiles> thats what cyc has over conventual DBs 
+15:48:16 <aigan> Providing this is done right
+15:48:29 <dmiles> Yepster_home: you think oracal can have a listener daemon (like in java) for cyc-remotre-api-call ?
+15:48:33 <Yepster_home> aigan: well oracle has an interface to opencyc, postgresql doesn't :-P
+15:48:51 <aigan> I should let the experts fix the omission in objectFoundInLocation.  Thats just a bug
+15:49:20 <Yepster_home> dmiles: nope. oracle has a listener, but only corba IIOP and sqlnet (and some very old protocols)
+15:49:27 <dmiles> so that oracal could take a remote evalation from Cyc and turn it into a table query?
+15:49:40 <dmiles> oh so we'd need a proixy interface.. i see
+15:50:00 <dmiles> one that could convert the Cyc query to a SQL query
+15:50:01 <aigan> Hmm... I could experiment with the free version...  But there will be an interface for other DBs.  So I can wait for that
+15:50:10 <aigan> But the main question is if it will be effective
+15:50:22 <Yepster_home> yeah, writing a simple server that connects to oracle and listens to a cyc sort of interface isn't difficult
+15:50:26 <aigan> And it may be complicated to define the rules in the right way...
+15:50:31 <aigan> time to go!
+15:50:42 <dmiles> it would be effective if you wrote a couple stored procs that made your access not so combinatoric
+15:50:44 * aigan is away: sleeping
+15:51:31 <dmiles> hrrm my work wants a visio diagram on how we will use opencyc
+15:51:31 <aigan> dmiles: that would take work I would hope an intelligent system would save me from :-(
+15:51:48 <Yepster_home> One of my todo lists items after release of 0.7 is to use the 'cyc-remote-eval' thing to call into oracle
+15:51:54 <dmiles> aigan: you can write rules that would make it program the stored_procs for you though ;P
+15:52:17 <dmiles> and then use them.. appropriately
+15:52:56 <dmiles> Yepster_home: definately will speed up situations where we want DB access
+15:53:18 <dmiles> probly the first of the access we'll have
+15:53:28 <dmiles> thats very cool
+15:53:46 <dmiles> i wrote a API clone in prolog that lets us call prolog code
+15:54:10 <dmiles> from 'cyc-remote-eval'
+15:54:29 <dmiles> also priolog is calling cyc
+15:55:07 <Yepster_home> you mean that cyc-remote-eval already works?
+15:55:15 <dmiles> nope.. but will in 0.7
+15:55:21 <dmiles> so i cant really test it ;(
+15:55:34 <Yepster_home> btw, want to do a little thought experiment?
+15:55:38 <dmiles> but here is ademo of it
+15:55:51 <dmiles> subp: (#$isa ?X Human)
+15:56:04 <dmiles> subp: (#$isa ?X #$Person)
+15:56:05 <CycLBot> ?X = #$CycAdministrator
+15:56:19 <dmiles> subp: (finda ?X (#$isa ?X #$Person) ?L)
+15:56:20 <CycLBot> ?X = #$Guest  ?X = ?X , ?L = ?L
+15:56:30 <dmiles> oos
+15:56:34 <dmiles> subp: (findall ?X (#$isa ?X #$Person) ?L)
+15:56:35 <CycLBot> ?X = ?X , ?L = '(#$CycAdministrator #$Guest)
+15:56:48 <dmiles> that calls the subp interface
+15:56:59 <dmiles> but will call that over 'cyc-remote-eval'
+15:57:20 <dmiles> the prolog server accully calls back on Cyc for the (#$ part
+15:57:27 <dmiles> the findall is in priolog memory
+15:57:32 <Yepster_home> but what does prolog add to opencyc?
+15:57:50 <Yepster_home> subl: (#$isa ?X #$Person)
+15:57:50 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator #$isa was not a symbol")
+15:58:01 <dmiles> it adds the abilty to maniputate java/ActiveX/reuse 100s of knowledfge tools
+15:58:09 <Yepster_home> ask: (#$isa ?X #$Person)
+15:58:10 <CycLBot> no answers found
+15:58:14 <Yepster_home> doh
+15:58:34 <dmiles> also prolog has access to many types of disparate DB system
+15:58:36 <Yepster_home> ah, interface to other things
+15:58:45 <Yepster_home> I like that
+15:58:51 <dmiles> its just geneically a well round Foriegn interface
+15:59:08 <dmiles> it also lets you embed arbitrary C code
+15:59:30 <dmiles> so for prolog i cvan instance a web unit and download a page
+15:59:41 <dmiles> also call shell commands.. and so on
+15:59:54 <dmiles> prolog can parse the results back into something Cyc likes
+16:00:22 <dmiles> its all socket to socket with Cyc.. so any languyage can do that
+16:00:33 <dmiles> but prolog is the one i know best ;P{
+16:01:02 <Yepster_home> for me it's oracle i guess
+16:01:21 <Yepster_home> though I know I know maybe 20% of it
+16:01:23 <dmiles> also the NL parser you saw me struggling wiht priolog on a few weeks ago.. was written in 2 hours in prolog
+16:01:44 <Yepster_home> using existing stuff?
+16:01:58 <dmiles> i was able to paist some DCG rules found on the web
+16:02:12 <dmiles> and make it enumerate its datyastore from Cyc
+16:02:31 <dmiles> then i just hooked it up
+16:02:38 <Yepster_home> dynamic cultivated grammer?
+16:02:42 <dmiles> yes
+16:02:49 <dmiles> well from what cyc kknew
+16:03:31 <Yepster_home> i've programmed maybe 10 prolog statements in my entire life.
+16:03:47 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/opencyc/swi_interface/english_parser/
+16:04:18 <kinoc> dmiles: any word on Eliza in Cyc
+16:04:54 <dmiles> i have been working on it.. not much in the last two days though ;P
+16:04:57 <Yepster_home> you made that in 2 hours??
+16:05:13 <dmiles> i 'think' in prolog.. it's scarey
+16:05:33 <kinoc> I used to think in prolog.... back in the 5th gen days
+16:05:53 <dmiles> well actually i just had minor workings in 2 hours.. i stull had to work on population
+16:06:28 <dmiles> adding things instarted with soundness... work in progress on completenesss
+16:06:53 <dmiles> kinoc: prolog is great isn't it?
+16:07:15 <kinoc> yes. I made sense when I understood the interperter.
+16:07:37 <dmiles> prolog is like ASM with any names you want to use
+16:07:45 <kinoc> Do you have a sample eliza pattern in cyc ??
+16:08:01 <dmiles> i can make one reall quick.. here is what i am starting from..
+16:08:12 <kinoc> I did a prolog interperter once for a mailbot project
+16:08:52 <kinoc> I like cyc for being able to go beyond the horn
+16:08:54 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/
+16:09:08 <dmiles>  opencyc_chatterbot.pl 
+16:09:18 <dmiles> oops one sec
+16:09:24 <dmiles> i need to reset my Mime type
+16:09:42 * dmiles goes and copies the mime file
+16:11:31 <kinoc> I am on the alicebot list, which is a 30,000 pattern eliza like bot
+16:12:13 <kinoc> All the patterns are in an XML format so you could probably translate some of it into your bot
+16:12:27 <Yepster_home> what kind of patterns?
+16:12:45 <kinoc> Language response patterns
+16:12:46 <dmiles> i'd love to
+16:12:54 <Yepster_home> like asking 'you find it hot here' -> 'open window?
+16:13:09 <kinoc> yes, stuff like that
+16:13:24 <Yepster_home> sounds like schanks explanation patterns
+16:13:59 <kinoc> yes, but closer to eliza with a rodney brooks reactive influence
+16:14:11 <Yepster_home> dmiles: i solved the 'knows (not knows ?x)' problem btw
+16:14:33 <kinoc> It's a quantity attack
+16:15:38 <kinoc> the base site is http://www.alicebot.org
+16:15:49 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/eliza.txt
+16:15:53 <dmiles> ok there is is
+16:16:17 <Yepster_home> well to be honest, I don't spend much time on turing tests/chat bot stuff
+16:16:28 <dmiles> dictionary will need to become a cyc predicate
+16:16:38 <dmiles> err dictionary/3
+16:16:49 <Yepster_home> every time i look into it, I am disappointed because of the approach
+16:16:53 <dmiles> and e_rules/N
+16:17:15 <Yepster_home> 'look for dialog fragments' 'find response'
+16:17:27 <kinoc> I think you do need both shallow and deep processing
+16:17:33 <dmiles> yes.. chatbots are just a funtime thing to do
+16:17:37 <kinoc> Sometimes "hello" is just "hello"
+16:18:13 <kinoc> but I do want cyc like logic in the mix
+16:18:22 <dmiles> ok.. todo.. add import from AIML .. and from the prolog rules i have now into ElizaMt
+16:19:00 <dmiles> the ElizaMt stuff becomes usefull only over a diomain we dont understandf
+16:19:22 <Yepster_home> useful for 'presentations'
+16:19:27 <dmiles> but yes eliza type scripts can at least help write triggers that start a dialog thats more cognitive
+16:19:35 <kinoc> I can also see it useful for NPC's
+16:19:48 <kinoc> exactly
+16:20:03 <dmiles> i have tunred on CycLBot's chatter interface in #logicmoo
+16:20:04 <CycLBot> said you have tunred on cyclbot's chatter interface in #logicmoo?
+16:20:11 <kinoc> let me see if I can find where they connected an AIML bot to prolog
+16:20:21 <dmiles> aewsome
+16:20:55 <Yepster_home> hmm well there nothing more annoying than smalltalk
+16:21:01 <dmiles> i can probly just import the dirrived source.. my prolog ker5nel can hold 4 gigs of data :)
+16:21:04 <Yepster_home> especially with a stupid bot
+16:21:57 <dmiles> well i really want to go for Schank style .. but i think Eliza is a fun bailout
+16:22:14 <dmiles> when there is not a script to be identified
+16:22:30 <dmiles> or start a Eliza level chat to get things important defined
+16:23:01 <dmiles> eliza (AIML) scripts can be used and altered as prolog goes
+16:23:11 <Yepster_home> I disagree. It's disappointing when confronted with a simple algorithm. It would be very cool to get a response because of some activated patterns, or a new created one
+16:23:14 <dmiles> and if kept in opencyc can be better
+16:23:30 <dmiles> It would be very cool to get a response because of some activated patterns, or a new created one
+16:23:44 <dmiles> i agree.. and thats what i am after
+16:23:47 <Yepster_home> patterns: explanation patterns
+16:23:54 <Yepster_home> me too.
+16:24:22 <dmiles> elizxa though can serve as a coaching bootstrap though
+16:24:38 <dmiles> as in getting the speaker motivated
+16:25:19 <Yepster_home> well to me eliza == noise, i want to concentrate on the real problem
+16:25:46 <kinoc> AIML + Prolog http://alice.sunlitsurf.com/pipermail/alicebot-style/2001-November/000043.html
+16:25:56 <Yepster_home> the first problem is solved: my cyc image currently knows what it doesn't know :)
+16:26:11 <dmiles> hey .. very very cool
+16:26:24 <dmiles> (too Yepster_home and kinoc)
+16:26:32 <Yepster_home> next: make a cycl representation of a explanation pattern
+16:26:33 <kinoc> AIML native logic http://alice.sunlitsurf.com/mailman/pipermail/alicebot-style/2001-December/000015.html
+16:26:48 <Yepster_home> + some subl and cycl stuff to reason with it
+16:27:58 <kinoc> knowing what it does not know is the first step to finding out
+16:29:29 <Yepster_home> it can only be answered after a question that was not proven
+16:29:53 <Yepster_home> like you also cannot answer what you don't know: the list is infinite
+16:30:11 <kinoc> Could it place the offending query on a long term research agenda ?
+16:31:00 <Yepster_home> but when I ask you: who are the parents of (some person)
+16:31:02 <dmiles> that would be a good idea.. that creates motivation.. /off even life itself
+16:31:07 <kinoc> Sort of a low leve idle process
+16:31:20 <Yepster_home> then you know that you don't know who the parents of that person are
+16:31:53 <Yepster_home> long term agenda: sounds like ashwin ram's 'a theory of questions and questions aksing'
+16:32:13 <Yepster_home> (based on explanation patterns :)
+16:32:32 <dmiles> absolotuety 
+16:32:33 <Yepster_home> really fun to read, it should be available in citeseer
+16:33:09 <Yepster_home> http://citeseer.nj.nec.com/ram91theory.html
+16:33:55 <kinoc> Sounds about right
+16:34:35 <Yepster_home> there is a picture somewhere in which becomes clear that some unsatisfiable questions are stored in memory for later activation
+16:34:47 <Yepster_home> 'long term goals'
+16:34:54 <kinoc> I have to go back to the shanck model now that we have a script  engine in cyc
+16:35:41 <Yepster_home> do you know about swale?
+16:36:18 <kinoc> yes, I have 'explanation patterns' but I need a refresh
+16:37:08 <Yepster_home> swale is the 'reference implementation' (in lisp) which implements ideas in the first 5 or 6 chapters
+16:37:45 <Yepster_home> of which the 6 chapter is the most interesting: combining existing xp's into new ones, to find a new explanation to observed 'stuff'
+16:38:18 <Yepster_home> 'stuff' might be behaviour, a story (ashwin ram), or perhaps a query
+16:39:39 <kinoc> Could you use cyc to help verify a new explination ?
+16:40:21 <Yepster_home> hmm better perhaps: use cyc to formule questions to verify the new explanation
+16:40:41 <Yepster_home> like: I don't know a,b or c yet
+16:40:47 <kinoc> By finding both positive and negative instances to consider
+16:41:17 <kinoc> yes, I could see that
+16:43:22 <Yepster_home> in the next few months I have to implement it for my masters project
+16:44:05 <kinoc> good luck, seems like a worthy challenge
+16:44:16 <dmiles> i am working on the translator now of eliza rules to CycL that i have
+16:44:29 <Yepster_home> I am somewhat convinced that for a robot to 'understand' what's happening, a mechanism like xp's is needed
+16:44:35 <dmiles> some things use numeric proioiry  though
+16:45:00 <Yepster_home> but i find it strange that it isn't implemented earlier
+16:45:31 <kinoc> It may be a critical mass thing
+16:45:55 <dmiles> thats the part of AI that makes the least sense to me.. my hypothesis is all the good time spent on AI was spent on GAs :(
+16:46:09 <Yepster_home> gas?
+16:46:12 <kinoc> you need to know a lot to have enough raw materials for your XP's
+16:46:21 <dmiles> but should have been spent on implementing these theories that happened before
+16:46:56 <Yepster_home> kinoc: yes, but the mechanism can be validated with 10 or 20 xp's
+16:47:13 <dmiles> genetic alogrythems and probibilistic bayse networks distracted the good programmers
+16:47:56 <Yepster_home> well they are useful for sensors
+16:48:09 <kinoc> with GA's you let the computer do the sweating, great for problems you only kinda understand
+16:48:19 <dmiles> so over the last 10 years..(good time since our machines could now handle large problems)  were spent on NNs,GAs.. too bad
+16:48:39 <kinoc> Eurisko was a rational genetic programmer of sorts
+16:48:56 <Yepster_home> well, i did a course in nn's and i liked it, but NN's have it's place
+16:49:01 <dmiles> yeah now its time to solve problems we can understand ;P
+16:49:31 <kinoc> In the interest of full disclosure check out http://www.daxtron.com
+16:50:09 <kinoc> I done both logic programming, GA's, GP's, NN's, vision ......
+16:50:44 <kinoc> I have always liked cyc, and am glad I can now get a copy to play with
+16:51:02 <kinoc> anyone know about when 0.7 will be out ?
+16:51:13 <Yepster_home> a few days ago
+16:51:35 <Yepster_home> possible worlds = empty set
+16:51:58 <Yepster_home> hmm it's getting late, gotta go
+16:52:07 <kinoc> ah, I thought I missed something
+16:52:09 <Yepster_home> cya
+16:52:16 <dmiles> good seeing you yeb
+16:52:22 <kinoc> enjoy, cu
+16:53:10 <Yepster_home> (and (released opencyc0.7) (indexicalReferent Today < June 2002)) -> NIL
+16:53:16 <Yepster_home> or sth
+16:53:50 <kinoc> I guess "real soon now"
+16:53:51 --- quit: Yepster_home ()
+16:54:31 <kinoc> I guess my view is every method has its place or range of usefulness
+16:54:39 --- join: Yepster_home (yepster@a213-84-17-242.adsl.xs4all.nl) joined #opencyc
+16:54:59 <Yepster_home> dmiles, you remember we talked about observers?
+16:55:08 <dmiles> yes
+16:55:33 <Yepster_home> like that cyc can never know what's universally true
+16:55:55 <Yepster_home> it only knows what's been observed
+16:56:15 <Yepster_home> it's much te same as in section 3.2 of that aswhin ram paper I mentioned earlier
+16:56:21 <dmiles> yes.. and Mts are based on obsevation scale or method
+16:56:30 <Yepster_home> somehow, all the pieces are there, we just have to put them together
+16:57:01 <dmiles> yes.. "we have the technology"
+16:57:23 <Yepster_home> ram: 'the understanders memory will always be incomplete'
+16:57:29 <dmiles> i think Cyc's kinowledge scale and brokering was a missing peice
+16:58:44 <dmiles> but yes the observer/understander is a big problem
+16:58:56 <dmiles> and takes allot to solve
+16:59:07 <Yepster_home> hmm well i don't see it as a problem
+16:59:26 <Yepster_home> in fact, the whole frame problem is an understatement
+16:59:28 <dmiles> well i barely see a real problem there.. since rthats all we have solved over time ;P
+16:59:35 <dmiles> ok so i retract it's a problem
+17:00:00 <Yepster_home> like the yale shooting scenario: is fred (or what is the thing that is shot called?)
+17:00:07 <Yepster_home> dead or not after the events?
+17:00:48 <Yepster_home> when it is modeled with the observer in mind, the only thing that matters is what is observed
+17:01:01 <Yepster_home> hmm this sounds really vague
+17:01:56 <Yepster_home> cyc can infer what the observer might infer after the events
+17:02:48 <Yepster_home> so the frame problem doesn't exist when the observer is included in the world model
+17:02:56 <dmiles> yes.. the knowing/not knowing system is most vital to be able to do on cyc kb.. tio detect incompleteness
+17:03:21 <dmiles> to have a general framework for incompleteness
+17:04:07 <dmiles> McCarthy one day said that a big problem he saw with cyc is that it could never really think
+17:04:28 <Yepster_home> true
+17:04:41 <dmiles> i asked him if that was just a lack of KE towards it.. 
+17:04:51 <Yepster_home> of think is different than FOL
+17:04:52 <dmiles> towards Cyc as an agent thinking
+17:05:13 <dmiles> and if someone ever did a Mt based on that.. if it could
+17:05:33 <dmiles> he said nothing would really stop that .. hehe
+17:05:46 <dmiles> at least trying and getting some results
+17:06:08 <dmiles> but in general it could be done.. nothing stops it
+17:06:21 <dmiles> you can define a type of thinking in FOL
+17:06:37 <Yepster_home> yes
+17:06:46 <dmiles> or more of an acting script with infernce over the concept that it has limited knowledge
+17:07:07 <Yepster_home> And I think that if you can define common sense rules (as in, write them in NL) it's possible to write them in fol
+17:07:30 <Yepster_home> and when you can't define them, it's random thoughts, not thinking
+17:07:43 <Yepster_home> hmm that sounds like a contradiction
+17:07:51 <Yepster_home> i'm gone now, cya!
+17:07:53 <dmiles> yes beacasue thinking is done in language
+17:07:58 --- quit: Yepster_home ()
+17:08:19 <dmiles>  in this conversation,.. i am proud i have written over 30 lines of usable Prolog code	 
+17:08:27 <kinoc> A mental event/image/feeling does not have to be in language
+17:08:35 <kinoc> good for you
+17:08:36 <dmiles> i almost have the ELiza prolog to CycL done
+17:09:12 <dmiles> ok its done
+17:09:30 <kinoc> did you check out the AIML pattern format ?
+17:10:00 <dmiles> about to add that after this import.. to code that up will be easy
+17:10:07 <dmiles> since i have the prolog XML parser
+17:10:18 <dmiles> and it will also do web retraival
+17:10:31 <kinoc> ah, double pluss good
+17:11:01 <dmiles> ok looaded
+17:11:13 <dmiles> prolog: sendERulesToCyc
+17:11:25 <kinoc> on a cyc/aiml intersection I was wondering about using cyc to manage aiml sets
+17:11:37 <kinoc> so the aiml in use would be context sensitive
+17:12:15 <kinoc> basically cyc could switch in and out or rewrite the aiml script in use
+17:13:14 <kinoc> so a character could change their responses based on the situation
+17:13:44 <kinoc> oh, I like your logicmoo stuff
+17:14:21 <kinoc> one of those 'long term agneda' projects is a physical robot
+17:14:25 <dmiles> yes.. definately modfying runtime is good
+17:14:51 <kinoc> you know/remember shakey the sri robot ?
+17:15:14 --- quit: person ()
+17:15:44 <kinoc> It was one of the first logic driven physical mobile robots
+17:16:05 <kinoc> built in the early 70's
+17:16:30 <kinoc> We now play games on systems better than the entire university had then
+17:16:49 <dmiles> yes.. yet we dont have a modern shakey? :(
+17:17:12 <kinoc> it would be nice to build one don't you thin ? :)
+17:17:40 <dmiles> absolutely!
+17:18:27 <kinoc> so if you have a logicmoo character that can plan, then could we get the plan of action
+17:18:39 <kinoc> to go to a task execution system
+17:19:05 <kinoc> provided of course you can get proper assertions into cyc
+17:20:08 <kinoc> And the taske execution system would have to be real-time reactive
+17:20:54 <kinoc> but if you view it as able to accept linguistic commands for immediate execution then it does not matter if the command came from you or cyc
+17:21:33 <kinoc> Of course it would have to come up with a cyc understandable enviroment description
+17:21:40 <dmiles> yeah the speed  issues i figure will have to live witrh
+17:21:57 <dmiles> well currently.. in the Moo the 'look' command is like
+17:22:04 <dmiles> look
+17:22:16 <dmiles> oops lagged i guess
+17:22:24 <dmiles> look here
+17:22:47 <dmiles> right a command is just a request for a Cyc #$EVent
+17:23:28 <kinoc> If you can trap that event request then you can send it to a remote robot
+17:24:11 <kinoc> the only problem is training the robot what to look for (i.e. how to recognize a book)
+17:24:45 <kinoc> well not the only problem, but those problems are getting better solutions as time passes
+17:25:16 <kinoc> We let cyc do the logic and the robot do the real time stuff
+17:26:37 <dmiles> yers by pretty much keeping everthything in Cyc as far as logic we stand a chance
+17:26:49 <dmiles> since we can maintain and fix it
+17:27:04 <kinoc> exactly
+17:27:41 <dmiles> i have a moo.. now that queries cyc every few seconds for the robots next command
+17:27:49 <dmiles> but there is no KE to support a result
+17:28:13 <dmiles> but the java infrastructurre for the Cammand exiscution and processes exist
+17:28:38 <kinoc> ideally, you could swap physical robots and sims
+17:28:44 <dmiles> also the bots can execute arbtrary java code
+17:28:51 <dmiles> absoloutely
+17:28:55 <kinoc> Then cyc can 'dream' before trying something out
+17:29:24 <dmiles> yes.. and if that dream requires even a moo physical it has that
+17:29:39 <dmiles> the idea of the moo evently will become a dream space for the real robot
+17:29:51 <dmiles> right now it has to be both
+17:30:02 <kinoc> yes
+17:30:18 <dmiles> but it will be nice to step into the robots imagination over telnet
+17:30:37 <dmiles> it may exectue at high speeds though :)
+17:30:47 <kinoc> now I just need to make a cyc compatible robot/droid
+17:31:05 <kinoc> yes, people can dream at up to 50X real-time
+17:31:18 <kinoc> when the real-world coupling is gone
+17:31:33 <dmiles> i am goiugn thru the prolog system for right now.. and making as much prolog persistance as possible in opencyc
+17:31:57 <dmiles> then hopefully these hornish rules can become cycl rul;es
+17:32:30 <dmiles> i just need a horn structure in opencyc.. and so far there isn't quite a ussable one
+17:32:48 <dmiles> (implies A B) is two horn clauses
+17:33:26 <dmiles> A:-B. and ~B:-~A
+17:33:37 <kinoc> I havent worked much with full FOL engines, I read about them but cyc is my real first
+17:34:21 <dmiles> oops i had it backwards: B:-A. and ~A:-~B
+17:34:36 <dmiles> i need something in Cyc that will let me B:-A
+17:35:11 <kinoc> sort of a (hornimplies B A) ?
+17:35:11 <dmiles> but i know its only a mater of a bug fix or two before i can do that
+17:35:17 <dmiles> yeah
+17:35:25 <dmiles> they have #$sentenceImplies
+17:35:36 <dmiles> which is a horn structure
+17:35:45 <dmiles> but its not yet working
+17:36:03 <kinoc> maybe in 0.7/1.0 ?
+17:36:04 <dmiles> so thats why i am still 1/2 cyc and 1/2 prolog
+17:36:11 <dmiles> i beleive by 0.8
+17:36:28 <dmiles> 0.7 i think is really too close to release
+17:36:45 <kinoc> It will be good to have the fully functional if only empty version
+17:36:52 <dmiles> but i heard it will have a planner (WARPLAN) so that can be done in the planner as a hack ;P
+17:37:13 <dmiles> but its called SHOP planner not WARPLAN nowadays ;P
+17:37:33 <kinoc> mips to burn ?
+17:37:58 <dmiles> well i think you haver better scoping with a planner controlled system
+17:38:15 <dmiles> its might or might not be worth the mips to use it for that
+17:38:50 <dmiles> but still.. i am going to experment with the planner as basic infernce
+17:39:27 <kinoc> having the planner would be nice
+17:40:00 <kinoc> standard STRIPS model ?
+17:40:05 <dmiles> exaclty
+17:40:20 <kinoc> good
+17:40:32 <dmiles> state-causes-action / state-disables-action / state-implies-state
+17:40:52 <dmiles> action-casues-state / action-disables-state
+17:41:05 <dmiles> action  = act1 + act2
+17:41:20 <dmiles> state = state1 + state2 
+17:41:44 <dmiles> rr state-enable-action
+17:42:21 <dmiles> rthen the planner invokes quiers to enumerate those possiblities
+17:42:26 <dmiles> then makes a plan
+17:42:33 <dmiles> of action/action/action
+17:42:46 <dmiles> and can probly present a proof tree
+17:43:08 <dmiles> i think thats identiacl to strips
+17:43:23 <kinoc> very close I have some design and other system projects I wanted to try cyc out on
+17:43:55 <kinoc> So you could limit the planner to an Mt that you populate ?
+17:44:12 <dmiles> yes.. cyclificaion of past/present/future projects is wionderfull
+17:44:16 <dmiles> yes
+17:44:43 <dmiles> you can have one plan sspindle Mt and genlMt to whatever
+17:45:19 <dmiles> isa PlanningContextMt
+17:45:54 <kinoc> So you could load an Mt with raw materials, give it a goal and say 'go'
+17:46:20 <dmiles> absolutely how it works.. it will return your list of actions
+17:46:33 <dmiles> but the go part you have to do each one
+17:46:47 <CycLBot> Cannot find collection PlanningContextMt
+17:47:37 <kinoc> Could you also say load an Mt, give it a list of actions, have it simulate the results and look for certain results
+17:47:40 <kinoc> ?
+17:48:01 <dmiles> yes you can limit its avaible set of actions
+17:48:15 <dmiles> and grow that as you go
+17:48:45 <dmiles> of i see what your saying
+17:48:50 <dmiles> that would be simple to write
+17:49:01 <kinoc> Ah, so you could say 'only using actions A,B,C and resources X,Y,Z' achieve goal G
+17:49:02 <dmiles> it would require you invoke the plan list
+17:49:20 <dmiles> invoke A, invoke B
+17:49:20 <CycLBot> You do not have any items
+17:49:46 <dmiles> yes that is what you could do in that case
+17:50:27 <kinoc> So given a potential external plan you could use Cyc as a simulator/evaluator
+17:51:04 <dmiles> absoloutly
+17:51:25 <dmiles> but that part requires minor API additions in SubL
+17:51:44 <kinoc> which is handy if the system has a complete common sense model
+17:53:55 <kinoc> break for 3 min
+17:58:19 <kinoc> ok back
+17:58:44 <dmiles> still working on cyc_error('"Formula \n  (#$eRule \\', "(CYC-ASSERT '(#$eRule \"sorry\" 75 1 '(?HYP-G5308) 0 \"please do not apologize .\") #$Eli
+17:58:58 <dmiles> getting very close tho
+17:59:18 <kinoc> cool
+17:59:29 <dmiles> have toi create functions to hold BestNLParseFN
+17:59:44 <dmiles> but almost there
+17:59:56 <dmiles> look at sendERulesToCyc
+18:00:01 <kinoc> I had been playing with editing and merging AIML sets
+18:00:20 <dmiles> on file: http://12.225.207.235/offt/sourceforge/logicmoo/opencyc/src/swi_interface/eliza.txt
+18:00:29 <dmiles> thats the import function
+18:01:40 <dmiles> incoding Phrase  now
+18:01:58 <dmiles> tyiou see how simple the Prolog to Cyc API is
+18:02:11 <dmiles> :-ensureMt('#$ElizaMt').
+18:02:17 <dmiles> creates a new Microthery
+18:02:51 <kinoc> ah yes
+18:03:34 <dmiles> cycAssert/2 cyclifies arbitry prolog terms
+18:03:41 <dmiles> if its not an Atom
+18:04:08 <dmiles> to call cyc i hook into the undefined function interface
+18:04:22 <dmiles> if a prolog term is undefined.. it will call Cyc for help
+18:05:03 <dmiles> that sis why:
+18:05:24 <dmiles> subp: (findall ?X (#$isa ?X Human) ?L)
+18:05:25 <CycLBot> ?X = ?X , ?L = []
+18:05:33 <dmiles> subp: (findall ?X (#$isa ?X #$Person) ?L)
+18:05:33 <CycLBot> ?X = ?X , ?L = '(#$CycAdministrator #$Guest)
+18:05:40 <dmiles> is why that works
+18:06:32 <dmiles> subp: (setof ?X (#$isa ?X #$Person) ?L)
+18:06:33 <CycLBot> ?X = ?X , ?L = '(#$CycAdministrator #$Guest)
+18:06:56 <kinoc> well if ICOT had a cyc like unit to back-end to they would still be in the running
+18:07:14 <kinoc> as it is cyc is 'last bot standing' and wins by default
+18:08:19 <dmiles> yes exacly :)
+18:08:47 <kinoc> do you plan on keeping the prolog system or moving all into cyc, or keeping a hybrid
+18:09:12 <dmiles> it handles prioblems like transitive closure,. unification checks, cycly checks
+18:09:32 <dmiles> rrr sound unification
+18:09:50 <dmiles> i would like to move all Cyc ASP
+18:09:57 <kinoc> maybe cyc is the intelligent blackboard all other processes post to
+18:10:04 <dmiles> but just releases that hold it back
+18:10:26 <dmiles> it definately is
+18:10:38 <dmiles> even for each agenbts private varibles
+18:10:49 <dmiles> err their runtime instance data
+18:11:09 <dmiles> (f thats not too excessive!
+18:11:59 <kinoc> depends on the bandwidth/latency etc... my day job is writting routers
+18:13:02 <dmiles> well hopping platformish issues can be resolved after all theory is implimented
+18:13:33 <dmiles> so bandwidth/latency .. ehem can be fixed by knowledge like yours ;P
+18:14:30 <kinoc> I will be glad when the server ports are open
+18:27:51 <dmiles> so now i am looking at eliza preds pre AIML
+18:28:10 <dmiles> i think i have some etra info..
+18:28:58 <dmiles> 	 cycAssert(eRule(string([KeyWord]),KeyWordPrioriy,PrasePriority,PhraseToMatch,Index,string(H)),'#$ElizaMt').
+18:29:04 <kinoc> one of the ideas in AIML is that small talk conversation follows a zipf curve
+18:29:21 <dmiles> (Index can be removed )
+18:29:39 <kinoc> yes, you have extra variables
+18:29:57 <dmiles> cycAssert(eRule("Keyword",KeyWordPrioriy,PrasePriority,PhraseToMatch,Response),'#$ElizaMt').
+18:30:08 <kinoc> AIML does not have priority, so you could use a default
+18:30:34 <dmiles> default now is 50 .. should work
+18:30:38 <kinoc> Or set the priority to the number of non "*", and "_" words
+18:30:53 <dmiles> PrhrasePriority is if something matches how how to score
+18:31:03 <kinoc> In general the more words specified the more specific the pattern
+18:31:14 <dmiles> yess.. too much * degrades
+18:31:25 <dmiles> more words imporve
+18:31:27 <kinoc> Like "what is *" versus "what is the weather in dallas"
+18:32:05 <dmiles> socre 10*words - 9* "*"s
+18:32:22 <kinoc> seemes a good start
+18:33:02 <dmiles> does AIML use keywords?
+18:33:11 <dmiles> or is it all phrases?
+18:33:23 <kinoc> yes/no
+18:33:43 <kinoc> All <category> patterns are phrases
+18:34:12 <kinoc> but the interperter builds up a tree to make pattern matching faster
+18:34:29 <dmiles> that tree kinda implimetns Keywords
+18:34:40 <dmiles> in a odd way huh?
+18:34:47 <kinoc> but you can just view the data as sets of patters for now
+18:35:03 <kinoc> yes the tree has the effect of keywords
+18:35:19 <dmiles> yeah.. i think as long as i can rotate thngs out.
+18:35:39 <dmiles> look at this..
+18:35:41 <dmiles> CycLBot?
+18:35:56 <dmiles> CycLBot?
+18:36:06 <dmiles> hrrm join #logicmoo
+18:36:13 <dmiles> if you dont mind
+22:18:52 --- join: yottzumm ([TkZMFrT7A@12-232-124-73.client.attbi.com) joined #opencyc
+22:22:22 <yottzumm> I just read the latest thread on the discussion forum
+22:22:47 <yottzumm> I wanted to respond:  "Yes, my robot is reading the screen and typing a response to your message on the keyboard!"
+22:23:09 <yottzumm> hehe
+22:23:55 --- quit: yottzumm ("Client Exiting")
+23:08:47 <dmiles> whois DavidP
+23:08:58 <dmiles> oops .. seeing how long Idle
+23:09:06 <dmiles> 29 hrs
+23:23:56 <dmiles> subp (#$elizaRule "perhaps" ?X 1 ?Z ?A)
+23:23:56 <CycLBot> ?X = 0 , ?Z = ?Z , ?A = (#$performUtterEnglish (#$BestNLPhraseOfStringFn "can you not be more positive ?"))  ?X = 0 , ?Z = ?Z , ?A = (#$performUtterEnglish (#$BestNLPhraseOfStringFn "you are not sure ?"))  ?X = 0 , ?Z = ?Z , ?A = (#$performUtterEnglish (#$BestNLPhraseOfStringFn "do you not know ?"))  ?X = 0 , ?Z = ?Z , ?A = (#$performUtterEnglish (#$BestNLPhraseOfStringFn "you do not seem quite certain ."))  ?X = 0 , ?Z = ?Z , ?A = (#$per
+23:27:01 <dmiles> ok kinoc, ready for import of AIML now
+23:59:59 --- log: ended opencyc/02.07.02

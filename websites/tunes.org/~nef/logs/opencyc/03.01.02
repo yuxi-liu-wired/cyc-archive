@@ -1,0 +1,235 @@
+00:00:00 --- log: started opencyc/03.01.02
+00:27:09 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+03:53:19 <bediako_> hello
+03:53:26 <bediako_> is anybody home?
+04:31:38 <ZivZ> They probably are home :)
+04:53:39 --- join: Samandahl_Rey (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+04:53:39 --- quit: ZivZ (Read error: 104 (Connection reset by peer))
+05:35:45 --- quit: apluc_aem (Read error: 60 (Operation timed out))
+09:14:49 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+10:20:14 --- join: reed_ (~reed@207.207.8.185) joined #opencyc
+10:25:42 * yepster is thinking about adding cycaccess.askwithvariable( query, variable, mt, backchainnumber)
+10:26:07 <yepster> but i could as well copy the querystring and do a converselist.
+10:37:52 <yepster> hmm
+10:37:54 --- quit: reed__ (Read error: 110 (Connection timed out))
+10:43:12 --- join: mikeb1 (~mikeb1@nat04.IITRI.ORG) joined #opencyc
+11:23:30 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:05:24 --- quit: yepster ()
+12:24:22 --- quit: KinoC (Read error: 110 (Connection timed out))
+12:40:35 --- quit: mikeb1 ("User disconnected")
+13:22:59 --- join: mdupont (mdupont@p5080E5BA.dip0.t-ipconnect.de) joined #opencyc
+13:23:39 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+13:23:49 --- mode: ChanServ set +o Graham
+13:24:00 <mdupont> Hi all!
+13:32:59 <Graham> hello mdu
+13:39:07 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:39:35 <KinoC> ping
+13:39:37 <mdupont> hey Graham
+13:39:39 <mdupont> pong
+13:39:52 <KinoC> pang
+13:41:22 <KinoC> anything new?
+13:42:16 <mdupont> yes, i got opencyc running
+13:42:27 <mdupont> and the ant files have dos paths in them
+13:42:38 <mdupont> and i cnanot get the ting to export daml
+13:42:48 <mdupont> and the export is missing the predicates
+13:43:09 <KinoC> 1 out of 4 aint..... no wait.
+13:43:12 <mdupont> and belgium and japan are enitities, but germany is a geographic region
+13:43:21 <mdupont> err agents
+13:44:42 <KinoC> <commercial voice> you need Reasearch Cyc. Provides all the maximum strength KB with ALL the assertions and consistancy you have grown to expect in a commonsense KB </commercial voice off>
+13:45:33 <KinoC> Opencyc has the 'crown' of the ontology with some of the lower assertions to show how they are done
+13:46:03 <KinoC> so it shows how to make a country an agent or geographic region but doesn't do it for all
+13:46:15 <KinoC> that is left as an execise for the sutibly motivated
+13:46:32 <mdupont> well, i think the export is missing predicates
+13:46:35 <KinoC> may just have to hover google into it
+13:46:45 <KinoC> much more problemmatic
+13:47:12 <KinoC> I have been trying to get the cyc-api telnet api to work
+13:47:21 <mdupont> for example "pointOfContact" is not in the daml
+13:47:53 <KinoC> hmmm, doesn't export it to daml but is in the KB
+13:47:57 <KinoC> ?
+13:49:03 <KinoC> is the export take a microtheory as a parameter ? maybe it can't see pointOfContact from its starting point
+13:49:06 <KinoC> ?
+13:53:57 <mdupont> hmm
+13:54:05 <mdupont> i cannot get the export to work at all
+13:54:18 <mdupont> i know it is in the kb
+13:54:32 <mdupont> i am thinking how to dump the *entire* kb into daml
+13:54:39 <mdupont> this thing has too much junk in it
+13:58:01 <KinoC> I think yepster had a KB liposuction tool for Oracle
+13:58:23 <KinoC> maybe you can adapt his methods, though its through the TCP/IP API
+14:00:50 <mdupont> oh
+14:00:57 <mdupont> that sounds good
+14:01:33 <mdupont> did you look a the java interface into cyc
+14:01:35 <mdupont> ?
+14:02:04 <mdupont> i think that links in directly? 
+14:02:11 <KinoC> some, mostly trying to create a win activeX interface and using java for notes
+14:02:56 <KinoC> but i did find that some functions are not yet avialable on the cyc side (like inference explainition)
+14:03:10 <mdupont> well, i think the java interface hould be the best to re-export into a soap or other api
+14:03:15 <mdupont> across the net
+14:03:31 <KinoC> oh, yes
+14:04:27 <mdupont> well, i have to get it compiled first
+14:04:50 <mdupont> i will wait untill reed_ publishes a patch
+14:05:05 <mdupont> no sense in duplication  of effort
+14:05:17 <KinoC> I guess i have it easier since I am starting from scratch anyway, and thus have no expectations
+14:05:20 <KinoC> :)
+14:05:38 <KinoC> but looking at the java helps
+14:06:03 <KinoC> and you're right about avoiding duplication if possible
+14:08:43 <mdupont> you are the one on the list? using perl?
+14:12:41 <KinoC> no perl. zool does over on logicmoo
+14:12:57 <mdupont> oh, that sounds funky!
+14:20:41 <KinoC> logic moo is a multi-user-dungeon object oriented using logic programming / opencyc
+14:21:05 <KinoC> dmiles focuses on that, and zool does bots
+14:21:39 <mdupont> oh yeah
+14:21:44 <mdupont> cool
+14:22:09 <mdupont> water from tunes uses squeak to make the sims
+14:23:35 <KinoC> cool. interesting idea about the smart objects in the sims. turn things around. but who's to say it isn't kind that way anyway.
+14:24:41 <KinoC> that is that object recognition prompts activation of similar neural software that does similar stuff like ask "use me if you're hungry"
+14:26:10 <mdupont> ?but who's to say it isn't kind that way anyway?
+14:28:29 <KinoC> yeah, exactly. Might be interesting connect some object recognizers up to a full Cyc and see if you could implmenent that model
+14:30:28 <mdupont> hmmm
+14:30:47 <mdupont> full cyc? you mean expensive
+14:31:38 <KinoC> there are three versions: OpenCyc (free), Research Cyc (TBD) and Full Cyc (with DOD bits)
+14:32:27 <KinoC> they are trying to get full cyc free of DOD bits and make Regular Cyc and Defense Cyc
+14:32:41 <KinoC> or at least it seems to me. 
+14:33:06 <KinoC> Research Cyc has most of the stuff we currently find missing in OpenCyc
+14:33:38 <KinoC> There is susposed to be a version chain, where Research Cyc becomes the released OpenCyc after a year
+14:33:56 <KinoC> and the Regular Cyc becomes Research Cyc
+14:34:43 <mdupont> ok, 
+14:34:43 <KinoC> so CycCorp and the DOD always have the Max-out version, their friends/partners get the one off version, and they give the world the two-off version
+14:34:59 <mdupont> well, in terms of data : cyc has lots of FUD and Garbage in it
+14:35:11 <KinoC> So OpenCyc should become two-years behind the best one
+14:36:11 <mdupont> well, 
+14:36:33 <mdupont> it will need alot more editors to be better
+14:36:45 <mdupont> i would even fix it up a bit
+14:36:55 <mdupont> but i cannot see why we need such a huge db
+14:37:02 <mdupont> it needs to be smaller 
+14:37:06 <KinoC> alots of stuff not everyone is interested in, but that the problem of trying to be everything
+14:37:09 <mdupont> more like the daml ontologies you see
+14:37:17 <mdupont> domain specific
+14:37:39 <mdupont> the billing domain that they have : it does not fit the billing model i have for billing phone customers
+14:37:53 <mdupont> it is based from the viewpoint of a client of a phone company
+14:37:58 <KinoC> probably not because its very generic
+14:38:02 <mdupont> where you access number is what you use
+14:38:07 <mdupont> not what you provide
+14:38:23 <mdupont> for me, i need a much more finer grained phone number model
+14:38:57 <mdupont> but, until this export works, i am not able to edit the cyc directly
+14:39:07 <KinoC> once you get it you can sell it back on the exchange
+14:39:32 <mdupont> and get the edits out, so i am just collecting the statements into a smaller file
+14:39:52 <mdupont> sell it? the opencyc is lgpl
+14:40:11 <mdupont> i dont know if you can edit it and then really effectivly sell it
+14:40:16 <KinoC> what is cyc :)
+14:40:18 <KinoC> no
+14:40:30 <KinoC> but you can offer your new ontology
+14:40:41 <mdupont> but i dont belive that the lgpl is a good choice for the opencyc kb anyway
+14:41:20 <KinoC> what do you think would be a better model ?
+14:41:53 <mdupont> well, the problem is that they say that all inferenced data is also copylefted
+14:42:10 <mdupont> a better model is my proposed rgpl
+14:42:16 <mdupont> the recursive gpl
+14:42:39 <mdupont> it explictly handles selfgenerating systems
+14:42:46 <mdupont> that produce new copies of themselve
+14:42:48 <mdupont> s
+14:43:13 <mdupont> each time you generate a new system, the next one is a higher level of rgpl
+14:43:21 <KinoC> geneticists would be interested :)
+14:43:25 <mdupont> :)
+14:43:56 <mdupont> well the problem is that gpl cannot cover really people taking your facts and creating new ideas from them
+14:44:10 <mdupont> it is hard to draw the line where you work begins and thier dont
+14:44:32 <mdupont> with a ontology, how do you define a derived work, what is usage and what is modification
+14:44:47 <KinoC> right, your data ENABLES their work, but is not the work itself
+14:45:33 <KinoC> without their application, use and other stuff, their end product would not exist even with your ontology
+14:47:07 <mdupont> i dont get your last statement
+14:47:23 <mdupont> a derived work cannot exist without the first one
+14:47:28 <mdupont> a user can exisit
+14:47:29 <mdupont> ?
+14:47:45 <KinoC> Ontology + user app = user results
+14:48:07 <KinoC> the ontology by itself does not = user results
+14:48:11 <mdupont> in any case, i doubt that the lgpl will hold up for the kb, if put to test
+14:48:24 <mdupont> well the ont itself is under lgpl
+14:48:29 <mdupont> the app is not free at all
+14:48:41 <KinoC> right
+14:48:44 <mdupont> at least not the cyc app
+14:48:50 <mdupont> just the java code
+14:48:56 <KinoC> the infrence engine
+14:49:33 <KinoC> inference engine is "free to use" but not open-free
+14:49:47 <mdupont> sure, i know, but the data files as lgpl is very risky i think
+14:50:00 <mdupont> i really dont belive it holds water
+14:51:02 <mdupont> anyway, i gotta get some hacking done before i get some sleep
+14:51:03 <KinoC> i could see your viewpoint. the problem is the data is interpertable at some level, and directs proof formation.
+14:51:16 <KinoC> classic lisp "program is data" model
+14:51:26 <mdupont> yes, and the intepretation is not dependant on the data
+14:51:34 <KinoC> yes
+14:51:56 <mdupont> so only non-creative deriviation of the data can be copyrighted
+14:52:15 <mdupont> as soon as you turn the data into art, i think you can copyright that yourself
+14:52:35 <mdupont> like making a poster of the cyc, a la the internet map
+14:52:55 <KinoC> ah, so if I made a personality snapshow of a art character bot, then that could be copyrighted
+14:53:03 <KinoC> ?
+14:53:08 <mdupont> i dont think that would be a copyright violation, and they would be hard pressed to say that it is derived
+14:53:32 <mdupont> snapshow? snapshot?
+14:53:43 <KinoC> yeah
+14:53:43 <mdupont> personality snapshot?
+14:54:00 <mdupont> you can write it into a file and put your copyright on it
+14:54:05 <KinoC> yeah, if I implemented a character using the ontology
+14:54:12 <KinoC> ah, I could see that
+14:54:27 <mdupont> or you write a poem using the words of the ont.
+14:54:37 <mdupont> or write a program that writes poems
+14:54:55 <mdupont> i think that if you generated a thousand poems, and selected one
+14:55:17 <mdupont> that that could be copyrighted and sold even if it is derived from the opencyc and should be lgpled
+14:55:29 <mdupont> so you see, lgpl is not really good for data  files
+14:55:49 <mdupont> that is why there is a gfdl, gnu free documentation license
+14:57:02 <KinoC> ok. I guess I should check up on licenseing option logic :)
+14:57:15 <KinoC> need to write an ontology on it :)
+14:57:56 <mdupont> :)
+14:58:05 <KinoC> anyway good luck. I work at a telcom company (makes channel banks/ routers) so I can appreciate you need for a finer grained comm model
+14:58:07 <mdupont> well please do, because i think there is a case of it.
+14:58:18 <mdupont> i work for MCI-Worldcom
+14:58:25 <mdupont> you?
+14:58:44 <KinoC> Telsource-Pleiades communications
+14:58:55 <KinoC> Telsource does service
+14:58:58 * mdupont googles
+14:59:17 <KinoC> PCI does customer prem hardware
+14:59:22 <mdupont> http://www.faegre.com/downloads/CorporateFinanceTransactions.pdf
+14:59:43 <mdupont> Ple. bought telsource ?
+15:00:09 <KinoC> naw the other way around
+15:00:18 <mdupont> ok. 
+15:00:21 <KinoC> PCI is a subsid of Telsource
+15:00:30 <KinoC> We
+15:00:33 <KinoC> we
+15:00:34 <mdupont> well, i would like to beef up the linux rating system
+15:00:41 <KinoC> we're in dallas
+15:00:46 <mdupont> it has some good code and data sets
+15:01:00 <mdupont> i am in Frankfurt Germany, but from NJ
+15:01:32 <KinoC> ah, Telsource is headquarted in  NJ
+15:03:36 <mdupont> hehe
+15:03:38 <KinoC> happy code hunting/hacking.
+15:03:44 <mdupont> yes, see you around
+15:04:05 <mdupont> good luck with the moo
+15:04:23 <KinoC> sometimes I just leave the irc up. but recently the firewall has been a problem.
+15:05:07 <KinoC> probably in a few months I will be interested in phoning models
+15:05:38 <KinoC> enjoy
+15:06:32 <mdupont> ok, well we can talk then, maybe you need a consultant :)
+15:07:12 <mdupont> but i am sure to publish something under good license, if there is one, i think the creative commons might be ok
+15:08:30 <mdupont> http://www.creativecommons.org/license/
+15:11:33 <mdupont> http://creativecommons.org/licenses/by-nc-sa/1.0-legalcode
+15:13:55 --- nick: mdupont -> mdupont|ZZZ
+15:37:14 --- nick: mdupont|ZZZ -> mdupont|AWAKE
+15:55:30 --- quit: KinoC (Read error: 110 (Connection timed out))
+15:59:29 --- nick: mdupont|AWAKE -> mdupont-ZZZ
+16:24:52 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+17:14:55 --- quit: Cobra (Read error: 104 (Connection reset by peer))
+17:33:10 --- quit: KinoC (Read error: 110 (Connection timed out))
+17:43:45 --- join: apluc_aem (~mea_culpa@12-213-238-134.client.attbi.com) joined #opencyc
+18:05:25 <Samandahl_Rey> You up mdupont?
+18:06:57 <Samandahl_Rey> I was wondering if the exportelddaml was what you were looking for yesterdidy?
+18:07:29 <Samandahl_Rey> Did I hep ye atoll?
+18:33:34 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:40:28 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+19:02:45 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+19:20:15 --- quit: KinoC (Read error: 110 (Connection timed out))
+19:28:42 --- quit: Cobwa ("[x]chat")
+20:56:03 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:10:29 --- quit: ChanServ (calvino.freenode.net irc.freenode.net)
+21:10:33 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:10:33 --- mode: calvino.freenode.net set +o ChanServ
+21:51:00 --- quit: apluc_aem ("Oh shit not again!")
+21:56:49 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+22:09:08 --- quit: KinoC (Read error: 110 (Connection timed out))
+23:26:41 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+23:45:55 <mdupont-ZZZ> Samandahl_Rey: You did help, but the export just crashed with no error number!
+23:59:59 --- log: ended opencyc/03.01.02

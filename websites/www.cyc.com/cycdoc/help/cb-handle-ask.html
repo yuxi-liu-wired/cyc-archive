@@ -1,0 +1,161 @@
+<html>
+<!--
+ THIS HTML FILE IS GENERATED BASED ON cb-handle-ask.text.
+All modifications should be made to that file, not this one! 
+-->
+
+<title>Ask a Query Help</title>
+<body bgcolor="#FFFFFF">
+<a name="top"></a>
+<h2><a href=http://www.opencyc.org><img src=/cycdoc/img/opencyc-logo-small.gif border=0 alt="OpenCyc.org Homepage"></a>Ask a Query Help</h2>
+
+E-Mail Comments to: <a href=mailto:opencyc-doc@cyc.com>opencyc-doc@cyc.com</a><br>
+
+
+<i>Copyright&copy; 1997-2002 <a href="http://www.cyc.com">Cycorp</a>.  All rights reserved.</i>  <br>
+
+
+<hr>
+<p>
+Ask a Query is a versatile tool that enables users to ask questions of CYC&reg;in standard CycL syntax.  Anyone who needs to know more about CycL syntax should read <a href="../ref/cycl-syntax.html">The Syntax of CycL</a>.  
+<p>
+<h3>Asking a Query</h3>
+<p>
+Every CycL query is asked in some microtheory (Mt).  The Mt window on the Ask a Query page has a default entry of "Base KB", which may be edited.  It doesn't matter whether the Mt name is typed with or without "#$&quot; before it.
+<p>
+The CycL query is entered into the Formula input window.  In the Formula window, constant names require their "#$&quot; prefixes.  The [<i>Cyclify</i>} button tells the interface to automatically add "#$&quot; before each constant.  Pressing the [<i>Complete</i>] button next to either the Mt or Formula window finishes a partially typed constant name in the respective window.  (In the Formula window, Complete works only on the last term in the window.)  If the typed string has multiple completions, Complete displays a list of possible choices in a separate Completions window.
+<p>
+Clicking on the [<i>Ask Query</i>] button queries Cyc&reg; about the formula in the microtheory specified.
+<p>
+<h3>Query Results</h3>
+<p>
+When the query is finished, Query Results appear on a fresh Ask page.  Together with the Query results, Cyc&reg; displays the query just asked, the microtheory in which it was asked, and the reason for halting the query.  The arrangement looks like this:
+
+<pre>
+        <b>Last query in BaseKB:</b>
+        (genls ?X Animal)
+
+        <b>Query halted because:</b>  Search space was exhausted.
+
+</pre>
+<p>
+Query results come in several forms, depending upon the form of the original query.  Also, the contents of Query results may vary depending upon changes in the Inference Resource Constraints (see below); for now, assume the default settings.
+<p>
+(1)GAFs:  If the query formula contains no variables, CYC&reg; will return the truth value of the formula (in the specified microtheory).  For example,
+<pre>
+	Mt: HumanActivitiesMt
+	Formula: (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> #$Foo #$Bar)
+</pre>will return &quot;Query was proven True&quot; if #$Foo is an instance of #$Bar in the #$HumanActivitiesMt. Otherwise, it will return &quot;Query was not proven&quot;. Here's an actual result:<pre>
+        <b>Last query in BaseKB:</b>
+	(genls Dog NonPersonAnimal)
+
+	<b>Query halted because:</b>  Search space was exhausted.
+
+	<b>Query was proven True</b>
+</pre>
+<p>
+(2)  Query formulas having free variables:  If the formula contains one or more free variables, then CYC&reg; will return any bindings it can find for the variable(s) (within the specified microtheory).  For example,
+<pre>
+	Mt:  HumanActivitiesMt
+	Formula:  (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?X #$Bar)
+
+</pre>will return all elements of #$Bar found in the #$HumanActivitiesMt. If there are none, it will return &quot;Query was not proven&quot;. Here's an actual result:<pre>
+	<b>Last query in InferencePSC:</b>
+	(genls ?COL Dog)
+
+	<b>Query halted because: </b> Search space was exhausted.
+</pre>
+<br>
+<table><tr><td width=55></td><td>
+
+		<table border=0>
+			<tr>
+				<td nowrap align=left valign=top><strong><tt> 20 Answers</tt></strong></td>
+				<td>&nbsp;&nbsp; </td>
+				<td nowrap align=left valign=top><strong>?COL</strong></td>
+			</tr>
+			<tr>
+				<td colspan=3>
+					<hr>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap align=left valign=top>[Explain #1]</td>
+				<td></td>
+				<td nowrap align=left valign=top>NonPersonAnimal</td>
+			</tr>
+			<tr>
+				<td nowrap align=left valign=top>[Explain #2]</td>
+				<td></td>
+				<td nowrap align=left valign=top>Vermin</td>
+			</tr>
+			<tr>
+					<td nowrap align=left valign=top>[Explain #3]</td>
+					<td></td>
+				<td nowrap align=left valign=top>TameAnimal</td>
+			</tr>
+			<tr>
+					<td nowrap align=left valign=top>[Explain #4]</td>
+					<td></td>
+				<td nowrap align=left valign=top>DomesticatedAnimal</td>
+			</tr>
+				<tr>
+					<td nowrap align=left valign=top>[Explain #5]</td>
+					<td></td>
+				<td nowrap align=left valign=top>DomesticPet</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #6]</td><td></td><td nowrap align=left valign=top>Dog</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #7]</td><td></td><td nowrap align=left valign=top>(FemaleFn Dog)</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #8]</td><td></td><td nowrap align=left valign=top>(JuvenileFn Dog)</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #9]</td><td></td><td nowrap align=left valign=top>WildAnimal</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #10]</td><td></td><td nowrap align=left valign=top>Invertebrate</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #11]</td><td></td><td nowrap align=left valign=top>Arthropod</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #12]</td><td></td><td nowrap align=left valign=top>Insect</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #13]</td><td></td><td nowrap align=left valign=top>OviparousAnimal</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #14]</td><td></td><td nowrap align=left valign=top>Bird</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #15]</td><td></td><td nowrap align=left valign=top>(FemaleFn Bird)</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #16]</td><td></td><td nowrap align=left valign=top>CanineAnimal</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #17]</td><td></td><td nowrap align=left valign=top>Amphibian</td></tr>
+<tr><td nowrap align=left valign=top>[Explain #18]</td><td></td><td nowrap align=left valign=top>Reptile</td></tr>
+				<tr>
+					<td nowrap align=left valign=top>[Explain #19]</td>
+					<td></td>
+				<td nowrap align=left valign=top>HerdAnimal</td>
+			</tr>
+				<tr>
+					<td nowrap align=left valign=top>[Explain #20]</td>
+					<td></td>
+				<td nowrap align=left valign=top>Fish</td>
+			</tr>
+			
+		</table>
+</td></tr></table>
+<br>
+<br>(3) Existentially bound query formulas: If the formula is within the scope of an existential quantifier, and there are no free variables, then CYC&reg; will return &quot;Query was proven True&quot; if the formula is true in the specified Mt. For example,<pre>
+	Mt:  HumanActivitiesMt
+	Formula:  (<a href=/cycdoc/vocab/fundamental-vocab.html#thereExists>#$thereExists</a> ?X (<a href=/cycdoc/vocab/fundamental-vocab.html#isa>#$isa</a> ?X #$Bar))
+
+</pre>will return &quot;Query was proven True&quot; if CYC&reg; finds any instance(s) of #$Bar in the specified microtheory. Otherwise, it will return &quot;Query was not proven&quot;. Here's an actual result:<pre>
+	<b>Last query in BaseKB:</b>
+	(thereExists ?X 
+	   (genls ?X NonPersonAnimal))
+
+	<b>Query halted because:</b>  Search space was exhausted.
+
+	<b>Query was proven True</b>
+
+</pre>The details of CYC&reg;'s search path for a particular query may be obtained by clicking on the link that follows &quot;Query halted because&quot;.  In this case, you'd click on the link that says &quot;Search space was exhausted.&quot; (On a plain Ask page (without results), the link for &quot;Examine the previous inference...&quot; goes to the inference tree for the previous query.)<p>Below the Query results is an Ask setup containing the query just asked. To continue that query (e.g., to give it a longer total time), click on [Continue Last Query]. This will start the second query where the first left off.<p>
+The [<i>Reset Values</i>] button is used to restore the text in the Mt and Formula windows to whatever it was when the windows first appeared.
+<p>
+<h3>Inference Resource Constraints</h3>
+<p>The size of the search space, the time allotted for the query, the number of bindings sought, and whether or not backchaining may occur can all be manipulated in the Inference Parameters section of the Ask a Query page. For more information on resource constraints, see <a href="cb-ask-resources.html">Help for Inference Resource Constraints</a>.
+<p>To reach a set of inference/ask settings for advanced users, click on the [Show] button to the left of &quot;Advanced Inference Parameters&quot;.<p>
+For more details about asks, reasons for halting queries, and troubleshooting with resource constraints, consult the module entitled <a href="../course/asking-module.html">Querying CYC&reg; with the Web Interface</a> in the CYC&reg Course Materials.
+<p>
+<hr>
+<a href=#top><img src="/cycdoc/img/cyc-ball-sm.gif" border=0>Go to Top</a><br>
+
+
+</body>
+
+
+</html>

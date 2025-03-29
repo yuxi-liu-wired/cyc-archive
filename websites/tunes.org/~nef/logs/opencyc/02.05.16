@@ -1,0 +1,133 @@
+00:00:00 --- log: started opencyc/02.05.16
+00:28:36 --- join: DemiGod (ggelling@207.207.8.145) joined #opencyc
+00:29:07 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+00:29:49 --- quit: Graham (Read error: 104 (Connection reset by peer))
+08:04:29 --- quit: dmiles (Success)
+09:08:54 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+10:45:01 --- join: msbaltz (~msbaltz@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+11:07:39 --- quit: msbaltz ()
+11:51:28 --- join: op8 (~ryan@H27.C220.tor.velocet.net) joined #opencyc
+11:51:32 <op8> hello
+13:05:17 --- quit: op8 (Remote closed the connection)
+13:19:11 --- join: reed_ (reed@207.207.8.185) joined #opencyc
+13:19:12 --- quit: stevereed (Read error: 104 (Connection reset by peer))
+20:05:28 --- nick: phj_away -> phj
+20:16:03 --- join: bruce (~bruce@dnvrdslgw17poola40.dnvr.uswest.net) joined #opencyc
+20:21:08 <dmiles> evening all
+20:21:35 <bruce> heya
+20:21:47 <bruce> any idea how non-Java access to OpenCyc is coming along? :)
+20:22:48 <bruce> and how's logicmoo going?
+20:22:58 <dmiles> not sure.. but i can see via socket comubnications is not that bad
+20:23:19 <dmiles> since one would need to 'copymem' data anyways
+20:23:34 <dmiles> may as well use a socket
+20:23:55 <bruce> hmmmm, that'd work too .. is it nice and easily parseable?
+20:24:07 <dmiles> so it would seem getting a language module written for say perl / tcl/ or python 
+20:24:26 <dmiles> yes in my opinion its easially parasble
+20:24:49 <dmiles> there are 2 differnt socket servers
+20:25:08 <dmiles> one is FASL and the other is like the Cyc API SUBL interactor
+20:25:21 <bruce> FASL?
+20:25:49 <dmiles> yes, if i am correct its a little lighter weitgh then the subl interactor
+20:25:57 * bruce nods.
+20:26:02 <dmiles> i am not sure what the diffrences are
+20:26:11 <dmiles> let me check my telnet prompt
+20:28:22 <dmiles> ok it is much differnt
+20:29:07 <dmiles> 3600 fasl and 3601 API
+20:29:32 <dmiles> logicmoo is going good.. it runs
+20:29:40 <dmiles> it doent 'play' yet
+20:29:45 <bruce> does it infer?
+20:29:48 <dmiles> yes
+20:29:52 <dmiles> and self builds
+20:30:12 <dmiles> no i am working on making it pretier
+20:30:19 <dmiles> err no/now
+20:30:31 <dmiles> look at this
+20:31:35 <dmiles> [cyc@titan src]$ java logicmoo.CycMoo
+20:31:36 <dmiles> Starting LogicMOO (CycMoo)
+20:31:36 <dmiles> Starting Cyc Webserver
+20:31:36 <dmiles> Listening on port 8036
+20:31:36 <dmiles> Cyc connections directed to port 3600
+20:31:36 <dmiles> Serving from /opt/sourceforge/logicmoo/opencyc/run/httpd/htdocs/
+20:31:38 <dmiles> Starting Cyc MooServer
+20:31:40 <dmiles> Welcome to LogicMoo!
+20:31:42 <dmiles> username: dmiles
+20:31:44 <dmiles> Authenticated!
+20:31:46 <dmiles> [dmiles@midga_0001 mud]$
+20:32:07 <dmiles> opps i am loading the Moo Mt
+20:32:14 <dmiles> [dmiles@midga_0001 mud]$ reload
+20:32:14 <dmiles> constructMtFromFile /opt/sourceforge/logicmoo/src/../ontologies/kif/JamudMt.kif #$JamudMt
+20:32:32 <dmiles> [dmiles@midga_0001 mud]$ look
+20:32:32 <dmiles> #$midga_0001
+20:32:32 <dmiles> (" The Gates to the City of Midgaard tower here. As far as the  eye can see there
+20:32:32 <dmiles>  is nothing but walls and shadows. This place  alone stands apart from the void from
+20:32:32 <dmiles>  which the Realm was spun.")
+20:32:33 <dmiles> ((ExitToFn "north" midga_0002))
+20:32:35 <dmiles> (magicWand1)
+20:32:49 <dmiles> [dmiles@midga_0001 mud]$ n
+20:32:49 <dmiles> #$midga_0002
+20:32:49 <dmiles> ("The lonely center of Midgaard. Were it not the only city in  existence it would
+20:32:49 <dmiles>  no doubt be booming with trade. Yet it sits  now quietly... waiting for the time
+20:32:49 <dmiles>  when the spinning of the  Realms shall again begin.")
+20:32:50 <dmiles> ((ExitToFn "rift" void_0001) (ExitToFn "south" midga_0001))
+20:32:51 <dmiles> (dmiles)
+20:33:47 <dmiles> [dmiles@midga_0002 mud]$ teleport Russia
+20:33:47 <dmiles> You have been teleported to Russia
+20:34:04 <dmiles> [dmiles@Russia mud]$ look
+20:34:05 <dmiles> #$Russia
+20:34:05 <dmiles> ("Russia, the world's largest, sometimes independent #$Country, occupying most of
+20:34:05 <dmiles>  the North, Center, and East of the #$ContinentOfAsia.  This constant includes Russia
+20:34:05 <dmiles>  throughout time, both political and (in "dualist" microtheories) physical aspe
+20:34:05 <dmiles> cts.")
+20:34:19 <bruce> heh
+20:34:38 <dmiles> hehe :)
+20:35:11 <dmiles> i went from 40 java files and much code down to 3 files
+20:35:29 <bruce> how is the midga_0001 stored and how are the ExitToFn things associated with it?
+20:35:53 <dmiles> it is assert as a (isa midga_0001 MudArea)
+20:35:59 <dmiles> also an assertion of...
+20:36:21 <dmiles> (implies (isa ?X GeographicalReguion) (isa ?X MudArwea)
+20:36:50 <dmiles> exit to Fn is a dirivitive of pathNodeFn
+20:37:27 <dmiles> actually another constant
+20:37:59 <bruce> have you run into any of the sorts of MT contamination problems that we'd discussed a while back?
+20:38:02 <dmiles> it truned out to actually be 100s of time si9mplier to do this then i anticipated
+20:38:34 <dmiles> and once i understood my real fgoals the entire mud was onbly 3 days of work
+20:39:01 <dmiles> now i am playing ti adding and fixibng featu8res
+20:39:08 <dmiles> thats the development cycle
+20:39:15 <dmiles> oh combiniatoric issues?
+20:39:25 <dmiles> based on Mt?
+20:39:38 <dmiles> well there are some operations that go pretty slow
+20:40:01 <dmiles> but thats becasue i didnt rtefine them 
+20:40:11 <bruce> mmm, no .. the "I don't want this bit of knowledge in my game because it violates the rules of the game, but it is firmly embedded into a core MT
+20:40:12 <dmiles> just added them in.. like fianAll items in Mud
+20:40:37 <dmiles> nope the game starts in one Mt
+20:40:43 <dmiles> that Mt genals some others
+20:40:53 <dmiles> so it gets from the BaseKB
+20:41:03 <dmiles> and none others by default
+20:41:08 <dmiles> except i added:
+20:41:34 <dmiles> 	    cyc.assertGenlMt(logicMooMt,"HumanActivitiesMt");
+20:41:34 <dmiles> 	    cyc.assertGenlMt(logicMooMt,"BuildingMt");
+20:42:07 <dmiles> those two Mts kinda grab the rest of Cyc inadvertantly anyways :)
+20:42:25 <bruce> right, but the concern was with adding something from OpenCyc (since that's an advantage of using OpenCyc...) and it having something bad in it.
+20:42:40 <dmiles> as long as the game queries in logicMooMt we are sert
+20:43:09 <dmiles> yes.. thats why every predicate logicmoomt uses are not actually in Cyc at the begining
+20:43:39 <dmiles> that way a smnarter lifting stradgy is used
+20:43:43 <dmiles> like..
+20:44:23 <dmiles> (isa MudArtifact-Player FirstOrderCollection) 
+20:44:23 <dmiles> (genls MudArtifact-Player BiologicalLivingObject)
+20:44:40 <dmiles> the Moo only refrences MudArtifact-Player
+20:45:01 <bruce> okay, so building bridges
+20:45:04 <dmiles> sio if at any popint BiologicalLivingObject correpts t5hings
+20:45:19 <dmiles> that part of the bridge can have set tolls and limits
+20:46:08 <dmiles> but its really noty decided if everythiung is ok yet 
+20:46:25 <dmiles> those limits are still to be discovered
+20:46:34 <dmiles> as far as what they need tio ber
+20:46:46 * bruce nods.
+20:47:29 <dmiles> but maybe tonight i wiull have the release in CVs
+20:47:38 <dmiles> i want to add some color and cool thiungs
+20:47:49 <dmiles> oh also...
+20:47:50 <dmiles> cyc
+20:48:06 <dmiles> err cyclbot is going to be a mud clint with the same feartures
+20:48:44 <dmiles> meaning the clients are merged
+20:49:19 <dmiles> but there will be a standard non mud version of cyc bot in opencyc cvs
+20:49:27 <dmiles> (like the one now)
+20:52:46 <bruce> so you're not based on jamud any longer?
+22:07:35 <dmiles> still ussing jamud.. but this version is not exactly jamud
+22:07:56 <dmiles> or ussing it
+23:59:59 --- log: ended opencyc/02.05.16

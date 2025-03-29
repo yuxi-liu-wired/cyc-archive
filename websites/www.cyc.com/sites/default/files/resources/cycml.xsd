@@ -1,0 +1,286 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  targetNamespace='http://www.opencyc.org/xml/cycML/'
+  xmlns:cycml='http://www.opencyc.org/xml/cycML/'
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0">
+
+  <annotation>
+    <appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="org.opencyc.xml.cycml"/>
+      </jaxb:schemaBindings>
+    </appinfo>
+  </annotation>
+
+  <element name='and'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='cycml:sentence'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='implies'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:sentence'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='constant'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:guid'/>
+        <element ref='cycml:name'/>
+        <choice minOccurs='0' maxOccurs='1'>
+          <element ref='cycml:comment'/>
+        </choice>
+        <choice minOccurs='0' maxOccurs='1'>
+          <element ref='cycml:url'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='equiv'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:sentence'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='forAll'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+  
+  <element name='function'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='unbounded'>
+        <element ref='cycml:number'/>
+        <element ref='cycml:function'/>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:string'/>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:symbol'/>
+        <element ref='cycml:sentence'/>
+      </choice>
+      <attribute name='reified' type='boolean' use='required'/>
+    </complexType>
+  </element>
+
+  <element name='guid'>
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="name">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="comment">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="namespace">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="number">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="package">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="string">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="url">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="date">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name="time">
+    <simpleType>
+      <restriction base="string"/>
+    </simpleType>
+  </element>
+
+  <element name='not'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+
+  <element name='or'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <choice minOccurs='0' maxOccurs='unbounded'>
+          <element ref='cycml:sentence'/>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='predicate'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='1'>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:function'/>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:symbol'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='sentence'>
+    <complexType>
+      <choice minOccurs='1' maxOccurs='unbounded'>
+        <element ref='cycml:sentence'/>
+        <element ref='cycml:and'/>
+        <element ref='cycml:or'/>
+        <element ref='cycml:xor'/>
+        <element ref='cycml:equiv'/>
+        <element ref='cycml:implies'/>
+        <element ref='cycml:not'/>
+        <element ref='cycml:thereExistAtLeast'/>
+        <element ref='cycml:thereExistAtMost'/>
+        <element ref='cycml:thereExistExactly'/>
+        <element ref='cycml:thereExists'/>
+        <element ref='cycml:forAll'/>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:function'/>
+        <element ref='cycml:predicate'/>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:number'/>
+        <element ref='cycml:string'/>
+        <element ref='cycml:symbol'/>
+      </choice>
+    </complexType>
+  </element>
+
+  <element name='symbol'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:package'/>
+        <element ref='cycml:name'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="variable">
+    <complexType mixed="true"/>
+  </element>
+
+  <element name='thereExistAtLeast'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <choice minOccurs='1' maxOccurs='1'>
+          <element ref='cycml:variable'/>
+          <element ref='cycml:number'/>
+        </choice>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='thereExistAtMost'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <choice minOccurs='1' maxOccurs='1'>
+          <element ref='cycml:variable'/>
+          <element ref='cycml:number'/>
+        </choice>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='thereExistExactly'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <choice minOccurs='1' maxOccurs='1'>
+          <element ref='cycml:variable'/>
+          <element ref='cycml:number'/>
+        </choice>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='thereExists'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:variable'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name='xor'>
+    <complexType>
+      <sequence>
+        <element ref='cycml:constant'/>
+        <element ref='cycml:sentence'/>
+        <element ref='cycml:sentence'/>
+      </sequence>
+    </complexType>
+  </element>
+  
+  <element name="paraphrase">
+    <complexType mixed='true'>
+      <choice>
+        <element ref='cycml:symbol' minOccurs='0'/>
+      </choice>
+    </complexType>
+  </element>
+</schema>

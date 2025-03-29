@@ -1,0 +1,588 @@
+00:00:00 --- log: started opencyc/02.04.05
+00:03:35 <bbz> try http://localhost:3602/cgi-bin/cyccgi/cg?cb-start
+00:03:56 <dmiles> did .. but no listener
+00:04:50 <dmiles> hrrm something on that port
+00:05:04 <dmiles> [root@titan logicmoo]# telnet localhost 3602
+00:05:04 <dmiles> Trying 127.0.0.1...
+00:05:04 <dmiles> Connected to localhost.localdomain (127.0.0.1).
+00:05:04 <dmiles> Escape character is '^]'.
+00:05:04 <dmiles> GET*/*
+00:05:05 <dmiles> Connection closed by foreign host.
+00:06:34 <dmiles> ah bbz, your in austin .. cyccorp?
+00:06:43 <bbz> yes
+00:07:45 <dmiles> not sure why its not working.. i never have issues with softwaware installation
+00:07:56 <dmiles> well i didnt create ~cyc
+00:08:26 <dmiles> i mean my ~ does not contain opencyc
+00:08:57 <bbz> ./run-cyc.sh should work.  it looks ok.  do you have a really strict firewall?
+00:09:23 <dmiles> well i do have two ips.. but no firewall now
+00:09:35 <dmiles> i just shut it off
+00:10:00 <dmiles> but i have two IPs.. one static 10.0.0.1 and the other Dynamic 
+00:10:16 <dmiles> (one that linux machine inside my firewall)
+00:10:21 <dmiles> err on
+00:10:39 <dmiles> here is what  ./run-cyc.sh  does..
+00:11:33 <dmiles> [root@titan linux]# ./run-cyc.sh
+00:11:33 <dmiles> Loading statics.
+00:11:33 <dmiles> Mapping in the memory image.
+00:11:33 <dmiles> Running initializers ... PROCESS (7), PROCESS (29), done.
+00:11:33 <dmiles> Copyright (C) 1995 - 2002 Cycorp, Inc.  All rights reserved.
+00:11:34 <dmiles> RTL initialized.
+00:11:36 <dmiles> CycL Initialized.
+00:11:38 <dmiles> Enabling base TCP services to port 3600.
+00:11:40 <dmiles> Ready for services.
+00:11:42 <dmiles> System 1.2277 KB 534.
+00:11:44 <dmiles> CYC(1):
+00:11:48 <dmiles> [root@titan linux]# pwd
+00:11:50 <dmiles> .   /opt/sourceforge/logicmoo/opencyc/scripts/linux
+00:12:02 <dmiles> (i had to add . to make irc paiste happy)
+00:12:30 <bbz> yeah, that looks fine to me..  i think you need to be coming from localhost, so that may be it.
+00:12:49 <dmiles> ah makes sense.. i'll fuire up netscape on the machine
+00:14:10 <dmiles> exccelent it does :0
+00:14:52 <bbz> you good then?
+00:15:17 <dmiles> all good :)
+00:15:33 <bbz> excellent.  goodnight then..
+00:15:35 <dmiles> i am going to config appache to redir loaclly to localhost
+00:17:00 <dmiles> thank you
+01:02:11 --- quit: Nolan (Read error: 110 (Connection timed out))
+01:09:44 --- quit: ChanServ (carter.openprojects.net irc.openprojects.net)
+01:09:45 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+01:09:46 --- quit: msbaltz (carter.openprojects.net irc.openprojects.net)
+01:09:47 --- quit: catskul (carter.openprojects.net irc.openprojects.net)
+01:09:47 --- quit: stevereed (carter.openprojects.net irc.openprojects.net)
+01:09:56 --- quit: sandro (carter.openprojects.net irc.openprojects.net)
+01:09:56 --- quit: eca (carter.openprojects.net irc.openprojects.net)
+01:09:59 --- join: ChanServ (ChanServ@services.) joined #opencyc
+01:09:59 --- mode: carter.openprojects.net set +o ChanServ
+01:10:05 --- join: sandro (~sandro@tux.w3.org) joined #opencyc
+01:10:29 --- join: catskul (~djmama@AJS372.rh.psu.edu) joined #opencyc
+01:10:29 --- join: msbaltz (~msbaltz@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+01:10:29 --- join: stevereed (reed@207.207.8.185) joined #opencyc
+01:10:54 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+01:12:53 --- join: eca (~roland@207.207.8.149) joined #opencyc
+01:39:53 --- quit: eca (carter.openprojects.net irc.openprojects.net)
+01:46:34 --- join: eca (~roland@207.207.8.149) joined #opencyc
+02:14:25 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+03:06:48 <dmiles> anyone here for some tech support?
+03:06:55 <dmiles> err to give me some?
+03:07:18 <dmiles> i am trying tio create a "Project" then a "Microtheory"
+03:23:42 --- quit: Nolan (Read error: 110 (Connection timed out))
+03:28:15 <dmiles> i skipped over the "Project part but create the Mt" I thinmk its working
+04:14:58 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+04:45:21 --- quit: Nolan (Read error: 110 (Connection timed out))
+06:03:58 --- join: nefph (ZQWER@dialup-65.58.159.54.Dial1.Portland1.Level3.net) joined #opencyc
+06:13:45 --- quit: dmiles (No route to host)
+06:16:12 --- nick: nefph -> dmiles
+06:16:49 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+06:38:21 --- join: NeonSquare (~jsc@enterprice.st-peter.stw.uni-erlangen.de) joined #opencyc
+06:38:26 <stevereed_home> just restarted both of the public cyc browsers at ..
+06:38:26 <NeonSquare> hi
+06:38:38 <stevereed_home> http://opencyc250.homelinux.org:3603/cg?cb-start
+06:38:48 <stevereed_home> http://opencyc251.homelinux.org:3603/cg?cb-start
+06:38:52 <stevereed_home> hi
+06:38:59 <NeonSquare> I'm actually downloading the release...
+06:39:06 <stevereed_home> great
+06:39:31 <NeonSquare> In what way is it possible to use OpenCyc together with a lisp-environment like Xanalys LispWorks
+06:41:40 <stevereed_home> we have a socket interface that handles lists
+06:41:53 <stevereed_home> the entire api is lispy
+06:42:07 * stevereed_home is back (gone 14:14:39)
+06:42:44 <NeonSquare> So it would be opening a socket and writing/reading SExprs
+06:43:11 <stevereed_home> exactly
+06:44:35 <NeonSquare> And what is with SubL?
+06:44:56 <NeonSquare> I thought you could use Common Lisp to write SubL?
+06:50:40 <stevereed_home> SubL is very much like common lisp and it translates simply to c
+06:51:18 <stevereed_home> big difference is that SubL has explicit return function (ret answer)
+06:51:34 <stevereed_home> no anonymous lambda funs
+06:51:56 <stevereed_home> but has defstruct defmacro ...
+06:52:45 <stevereed_home> got to leave now for the office, chat again 20 min
+06:52:52 * stevereed_home is away: I'm busy
+07:14:17 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+07:21:24 --- quit: Nolan (Read error: 110 (Connection timed out))
+07:32:04 * Graham is back
+07:32:05 --- quit: msbaltz (Read error: 104 (Connection reset by peer))
+07:34:06 --- join: ircleuser (~newbie@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+07:34:12 --- part: ircleuser left #opencyc
+07:34:37 --- join: ircleuser (~newbie@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+07:42:16 <Graham> ircle.. it's good program
+07:53:31 * stevereed is back
+08:17:20 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+09:09:20 --- quit: Nolan (Read error: 110 (Connection timed out))
+09:37:26 * eca is back
+10:06:55 --- join: lispm (~lispm@b080065.adsl.hansenet.de) joined #opencyc
+10:14:55 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+10:17:21 * stevereed is away: I'm busy
+10:40:07 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+11:59:11 --- quit: catskul (Read error: 110 (Connection timed out))
+12:37:46 --- join: ratmice (bosshog@nightfall.forlorn.net) joined #opencyc
+12:37:47 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+12:38:08 <ratmice> 'lo
+12:41:07 <johnd> hi
+12:41:28 <johnd> were you okay with my CycML answer
+12:41:44 <ratmice> could anyone give me a pointer where to look for opening the webserver up to connections outside of localhost?
+12:42:33 <johnd> steve is going to create a doc that explains how he did it with Java
+12:42:52 <johnd> a java-based web server, I think
+12:43:03 <johnd> can't do it in OpenCyc 'til 0.7
+12:43:09 <johnd> By then, we
+12:43:12 <johnd> opps
+12:43:19 <johnd> double oops
+12:43:34 <johnd> By then, we'll have some security holes plugged
+12:49:29 <ratmice> i'm pretty clueless about java, i have a good grasp on lisp derivatives though, that is what i figured (security), being behind a firewall i dont mind being a guinea pig.
+13:02:01 <johnd> I don't think the method involves doing any Java, so it might be okay
+13:12:19 --- join: deltab (deltab@mewtwo.espnow.com) joined #opencyc
+13:12:52 --- join: IRCMonkey (~chatzilla@CPE0090263d08f3.cpe.net.cable.rogers.com) joined #opencyc
+13:13:29 --- quit: IRCMonkey (Client Quit)
+13:17:47 <stevereed> the webserver comes with the download but the first release hardcoded my office desktop as the host,
+13:18:17 <stevereed> so I'll post the fixed jar file to sourceforge with the script that runs it.  No install you just
+13:18:26 <stevereed> copy the jar file and run the script.
+13:18:39 <stevereed> by this weekend i'll get it done.
+13:19:43 <stevereed> Looking at sourceforge site stats just updated and I see our project at 96% and at rank 325 for activity
+13:20:02 <stevereed> this is the highest in some time
+13:21:07 <ratmice> i've often wondered what constitutes activity, cvs commits?
+13:21:20 <stevereed> its a combination
+13:21:50 <stevereed> page views , downloads, cvs commits, and metrics for the other developer tools
+13:22:41 --- quit: dmiles (Read error: 110 (Connection timed out))
+13:22:50 <stevereed> its a good rule of thumb to find popular alternatives for the software category that interests you
+13:23:32 <stevereed> i am going to try the Dev-C++ tool suite for the windows port of opencyc
+13:23:39 <stevereed> its high on the sf list
+13:23:55 <stevereed> and includes good stuff we already use like,
+13:24:07 <stevereed> gcc, gdb and MingW
+13:24:12 <ratmice> i have used it, but i'd have to say i still prefer vi/make on cygwin
+13:24:33 <stevereed> we dont need the editor much,
+13:24:44 <stevereed> because the c code is all generated
+13:24:52 <stevereed> from SubL
+13:25:01 <stevereed> i am interested in the 
+13:25:10 <stevereed> gdb debugger 
+13:25:14 <stevereed> in an ide
+13:25:35 <ratmice> insight is what i use under cygwin, i havent gotten ddd working.
+13:25:53 <stevereed> I have a bookmark for insight
+13:26:09 <Graham> Steve, what are the mirrors consisting of? actual mirors of the source forge site, or just alternate places to download just the file from?
+13:26:22 <stevereed> sf has mirrors
+13:26:29 <stevereed> that are 
+13:26:29 <Graham> when I say the source forge site, I mean just our pages
+13:26:48 <stevereed> transparent to downloaders
+13:27:21 <stevereed> Well the opencyc.org pages come from our office
+13:27:36 <stevereed> the rest of sf pages come from sf servers somewhere
+13:28:58 <Graham> well you mentioned you were looking for more mirrors to speed up downloads
+13:31:51 <Graham> I can host an alternate download off auspex.org
+13:35:23 <ratmice> what i didnt like about dev-c++, was it's compiler it seemed to install, i didnt want to reconfigure the app everytime i wanted to swtich compilers...
+14:11:31 <johnd> Graham, does auspex have a nice size pipe?
+14:11:38 <stevereed> graham, you should check out bandwidth limits
+14:11:55 <Graham> there are no limits to bandwitch, it's dynamic piping
+14:12:06 <stevereed> cool
+14:12:13 <stevereed> go for it
+14:12:23 <Graham> as long as you don;t host porn or just full on file servers, there is no limit
+14:12:41 <Graham> do we have a local copy of the release, my download failed
+14:13:04 <stevereed> sure /home/reed/opencyc-0.6.0.tgz
+14:13:29 <stevereed> let me know if you get up uploaded because i need to test the install
+14:52:18 --- join: dmiles (ZQWER@dialup-65.58.6.151.Dial1.Portland1.Level3.net) joined #opencyc
+14:52:34 <johnd> hey, dmiles
+14:53:17 <dmiles> hello there
+14:53:36 <johnd> I forget. Have you downloaded yet?
+14:54:08 <dmiles> yes, even started a miucrotheory.
+14:54:16 <johnd> what's it called?
+14:54:25 <dmiles> JamudMt 
+14:54:34 <dmiles> It is a Role Playing MOO
+14:54:53 <dmiles> see http://logicmoo.sourceforge.net (if you hadnt seen it)
+14:55:32 <johnd> Yes, I had heard of this.
+14:56:12 <dmiles> so i was working on a map that transitioned game data into things we can common sense over
+14:56:46 <johnd> give me an example
+14:57:16 <dmiles> (isa JavaObjectMemberTypeFn BinaryFunction)
+14:57:17 <dmiles> (arity JavaObjectMemberTypeFn 2)
+14:57:17 <dmiles> (isa JavaObjectMemberTypeFn Function-Denotational)
+14:57:17 <dmiles> (arg1Isa JavaObjectMemberTypeFn JavaInstance)
+14:57:17 <dmiles> (arg2Isa JavaObjectMemberTypeFn JavaMemberOrFieldAccess)
+14:57:17 <dmiles> (resultIsa JavaObjectMemberTypeFn JavaValueType)
+14:58:08 <dmiles> well thats one step below the more usefull things..
+14:58:25 <dmiles> something better...
+14:59:01 <dmiles> (implies
+14:59:02 <dmiles>   (and
+14:59:02 <dmiles> 	(isa ?X JavaPrimitiveValue)
+14:59:02 <dmiles> 	(isa ?Y JavaPrimitiveValue)
+14:59:02 <dmiles> 	(= ?X ?Y))
+14:59:02 <dmiles>   (JavaEqualEnough ?X ?Y))
+14:59:51 <dmiles> well that is still deep into inference
+15:00:05 <johnd> okay, you're mapping that other stuff in. what about the common sense part? what does that look like in English?
+15:00:19 <johnd> Or what do you expect it will look like?
+15:00:48 <dmiles> > new Thing as Tool Hammer.
+15:00:49 <dmiles> ; Asserted
+15:00:49 <dmiles> ; (thereExists (?X)
+15:00:49 <dmiles> ;      (and 
+15:00:49 <dmiles> ;         (isa ?X Hammer)
+15:00:49 <dmiles> ;         (isa ?X Tool)
+15:00:51 <dmiles> ;         (located ?X TwistyPassage45SKFn)))
+15:00:53 <dmiles> ; Warning
+15:00:55 <dmiles> ; (genls Hammer Tool) is previously entailed
+15:00:57 <dmiles> ;  Your new default object is 'ToolHammer53455345SKFn'
+15:01:08 <dmiles> > set ColorProperty  Blue
+15:01:09 <dmiles> ; Asserted 
+15:01:09 <dmiles> ; (hasAttribute ToolHammer53455345SKFn ColorProperty)
+15:01:09 <dmiles> ; (attribute ToolHammer53455345SKFn Blue)
+15:01:31 <dmiles> > look
+15:01:32 <dmiles> You are in a maze of Twisty passages with exits leading in all directions.
+15:01:32 <dmiles> Someone or something has discarded a Blue Hammer here.
+15:01:32 <dmiles> > take hammer
+15:01:32 <dmiles> ; Retracted
+15:01:32 <dmiles> ;  (located  ToolHammer53455345SKFn TwistyPassage45SKFn)
+15:01:34 <dmiles> ; Asserted
+15:01:37 <dmiles> ;  (located  ToolHammer53455345SKFn Player8)
+15:02:22 <johnd> cool
+15:03:23 <dmiles> so the JamudMt would have a What?IsThereMt and SomeRulesAboutItMt
+15:04:12 <johnd> (genlMt SomeRulesAboutItMt WhatIsThereMt) ??
+15:04:22 <dmiles> yes
+15:04:37 <johnd> I think you'll be able to gradually incorporate moreand more from Cyc in this
+15:04:43 <johnd> I like it
+15:04:55 <dmiles> (ngenlMt WhatIsThereMt JamudMt)
+15:05:13 <dmiles> (if i dont have it in reverse)
+15:06:42 <dmiles> yes the idea is to start out very pragmaticly data holding and not very smart.. then spend some time aximatizing (generalizing) what the Jamud is doing in terms of things like HumanActivities
+15:09:03 <dmiles> i have some KEText files (well kif files i have been working on)
+15:09:24 <dmiles> is there a mechanism to import then into Cyc
+15:09:37 <dmiles> well for example creasting new constants on the fly
+15:09:58 <dmiles> first i was doing all the work in the httpd interface
+15:10:04 <dmiles> tyhen when into a text file
+15:10:40 <dmiles> now i have things for cyc in text
+15:10:53 <dmiles> i could make a transript file maybe
+15:11:01 <dmiles> but if i did i am not sure how to load it
+15:12:29 <dmiles> let me see also if i can set up IIS to proxy to the cyc server in my LAN
+15:12:56 <dmiles> so you can see how the jamud struff looks in cyc
+15:13:39 <dmiles> oh i did get the java WebServer to work l;ocally for me
+15:14:13 <dmiles> it made it so i could access the other webserver from a peer machine
+15:16:42 <dmiles> i have other webservices (a tomcat app) looks like it will be "running" org.opencyc.webserver.WebServer as well as its own interfaces
+15:18:50 <dmiles> so it looks like i'll need to have tomcat with some jsp pages ussing java classes that use the org.opencyc.* and for more abilites (the ones now) run on a differnt port on a diffenrt 
+15:20:28 <dmiles> so for example an assert window that curcumvents the two step processes such as defining the constant then ussing it in an assertion
+15:21:23 <dmiles> here is a tech support questio I have, is there a way now to have Cyc automagicly do the constant creation upon reciveing a new assertion?
+15:23:12 <dmiles> like even if its someting that needs to heppen in the subL window as a Lisp expression
+15:23:27 <stevereed> no you have to define the terms first
+15:23:37 <dmiles> (ASSERT-WITH-CONSTANT-DEFINING (...))
+15:23:54 <stevereed> it could be done..
+15:24:04 <stevereed> by cases ...
+15:24:11 <dmiles> ok cool, wanted to just confirm it wasnt something i was mi9ssing a checkbox or something
+15:24:23 <stevereed> easiest is the predicate is defined
+15:24:37 <stevereed> so you have the types required for the args
+15:24:51 <stevereed> so create instances to fit the types
+15:25:10 <stevereed> for unspecified predicates but having args ...
+15:25:14 <dmiles> right like (myeasyPredicateDefine predicatename arity arg1Isa.. )
+15:25:32 <stevereed> you create a spec pred of the closest more general pred
+15:25:47 <dmiles> oh but yes the discovery process of (located HEre ThartThing)
+15:26:00 <dmiles> so Here gets isa Location
+15:26:20 <stevereed> thatThing is a thing
+15:26:40 <stevereed> located would be a spec of objectFoundInLocation
+15:26:49 <stevereed> by arg constraints
+15:26:58 <stevereed> we do not do this now..
+15:27:04 <stevereed> but the rkf tool set..
+15:27:12 <stevereed> walks a user thru the process
+15:27:14 <dmiles> it seems like something pretty eay to add in
+15:27:19 <stevereed> right
+15:27:39 <stevereed> you could do it on the application side ..
+15:27:48 <stevereed> with the api primitives already there
+15:28:12 <dmiles> i am wondering if i should spend the 3 hours it would take to make Jsp pages to help in this process 
+15:28:25 <stevereed> hmmm
+15:28:28 <dmiles> it seems to be if its not there at the moment
+15:28:36 <stevereed> yes
+15:29:27 <dmiles> such things like having the comment text box and arity text box
+15:29:31 <stevereed> got to go check out grahams new download site - test the install
+15:29:58 <dmiles> ok will do that, i am sure i'll have some API questions
+15:30:09 <johnd> how will we advertise a link to Graham's mirror?
+15:31:16 <dmiles> tyhe actual arg isa discoveries of constants.. that part seems to be doable appliocation side as well
+15:31:37 <dmiles> but only in simple Gafs
+15:32:01 <johnd> you mean looking at the predicate's arg constraints and using that to assert the isa of the args?
+15:32:01 <dmiles> and its likely the arg may get too general of an isa at first
+15:32:08 <dmiles> yes 
+15:32:22 <johnd> yes, it will probably start out too general
+15:32:32 <dmiles> but cyc is used to that correct ?
+15:32:54 <dmiles> as in later it's used to peopel defining it more specifically in the ontolgy
+15:33:21 <dmiles> so the inital assertion probly wont effect anything?
+15:33:36 <dmiles> (the intial generalism)_
+15:34:09 <johnd> right
+15:34:45 <johnd> The arg constraints are basically set at what's remotely possible, not what's most likely.
+15:35:59 <dmiles> as far as ussing a spec predicate... like mentioned above could one start with a (genlPreds located objectFoundInLocation)
+15:36:24 <dmiles> and then make a query to (arg1Isa location ?Col) ?
+15:36:31 <dmiles> err located
+15:37:02 <dmiles> is the arg1Isa of  objectFoundInLocation propgated to locatyed?
+15:37:36 <dmiles> i see Java will make a quick one solution query to Cyc to get its constraint
+15:39:07 <dmiles> so my question is if genlPred is the right assertion to subclass anohter predicvate or if something is more optimal already in Cyc
+15:39:33 <dmiles> or if i should go and lift and copy objectFoundInLocation
+15:40:24 <johnd> yes, arg constraints proppogate through genlPreds
+15:41:16 <johnd> there's been talk about new preds along the lines of argLikelyIsa and argLikelyGenls
+15:41:41 <johnd> those would get you better collections for your new instances right off the bat
+15:42:06 <dmiles> so they would live along side argIsa?
+15:42:32 <dmiles> or would they be inteneded to be in place?
+15:42:34 <johnd> yes, they'd be like spec preds, but maybe not enough like
+15:42:46 <johnd> you could create similar off of argIsa
+15:43:15 <dmiles> yes i could se a argIsa Thing and argLikelyIsa Person
+15:43:40 <johnd> yeah, depending on the pred. Like for what pred, for example?
+15:44:22 <dmiles> (hasMovedIntoNewRoom ) in mny context of the Mud.
+15:44:36 <johnd> right, yeah, good example
+15:44:43 <dmiles> but what in Cyc currently would benifit ?
+15:44:44 <johnd> now, how would you undo a wrong assumption
+15:44:57 <johnd> what do you mean?
+15:45:06 <dmiles> from argLikelyIsa
+15:45:29 <dmiles> to undo a wrong assumption.. hrmm that is no fun ;)
+15:45:34 <johnd> your app would benefit, because you'd be hitting rules about Person rather than about Thing
+15:45:44 <stevereed> grahams alternate download site works
+15:45:49 <johnd> GREAT
+15:45:59 <stevereed> 3x faster than sf
+15:46:11 <stevereed> but dont say that...
+15:46:16 <dmiles> hehe
+15:46:23 <stevereed> wont stay that way
+15:46:52 <stevereed> have great weekend
+15:46:57 <johnd> To undo a wrong assumption, unassert (isa X Person) and assert (isa X Thing), or something like that
+15:47:00 <dmiles> it will as long as everyone doent get him in trounble with the isp/server admin ;P
+15:47:04 --- quit: ratmice ("Zap!  Another victim of idled!")
+15:47:05 <johnd> so long, Steve
+15:47:10 <stevereed> will get some bugs fix ..
+15:47:16 * stevereed is back
+15:47:18 * stevereed is away: I'm busy
+15:48:22 <dmiles> yes it would be ok to correct it.. but now i see the resoning behoing aergLikeIsa
+15:48:31 <dmiles> its for infernce optimisation
+15:48:50 <dmiles> err argLikelyIsa
+15:48:53 <johnd> yes. not optimization in the sense of speed though
+15:49:16 <johnd> optimization in the sense of inference opportunities you wouldn't otherwise have
+15:49:35 <dmiles> yes true 
+15:49:57 <dmiles> i could see it going dirrectly for the good stuff first
+15:50:46 <johnd> it would never even get to the good stuff if it only knew NEWOBJ34523Skf was a thing
+15:51:00 <dmiles> as long as there was clearcut "never even get to the good stuff" otherwise
+15:51:37 <dmiles> yes true.. i see your point
+15:52:26 <dmiles>  NEWOBJ34523Skf would not be low enough to infernce about it bweing a Person
+15:53:45 <dmiles> ok tonight i am going to work on a predicate definer webpage...
+15:54:17 <dmiles> it will take the new name, aritty, a checkboxes about transitiviuty etc..
+15:54:40 <johnd> Cool. I want to see when you've got something to show. If I'm not here on the channel, email me at johnd@cyc.com
+15:54:44 <dmiles> based on arity i am going to have dropdown boxes to inseart arg constraints
+15:55:11 <dmiles> what would be the best cyc query to get the possiblities for the arg constraints?
+15:55:33 <dmiles> (isa ?X Collection0 ?
+15:55:56 <johnd> I've got to go set up a link to the new mirror, and move in a slightly revised version of all of the vocab pages.
+15:56:03 <dmiles> oh and a checkbox if theere are irgIsa vs argGelns
+15:56:27 <johnd> Well, you migt want to start with some small set of likely collections
+15:56:54 <johnd> Then have hierarchical menu to some specs or genls off of each of those
+15:57:03 <dmiles> hrrm so how deep off Thing whould one Go? 
+15:57:33 <dmiles> yeah.. some sort of exportation page
+15:57:48 <dmiles> err explore until you found the right collection i menat
+15:58:04 <johnd> yeah, don't want to have to fill every collection in there right off the bat
+15:58:21 <johnd> a browse button next to a field?
+15:58:52 <dmiles> yes
+15:58:54 <dmiles> i'll warn you i was an IE coder for MS two years ago.. so everything i do ends up breaking in netscape until a netscape master ports the pages :)
+15:59:02 <johnd> the more you can intelligently constrain it up front, the more useful you can probably make it
+15:59:12 <dmiles> yeah i could easily do IFrames
+15:59:16 <johnd> i use ie mostly
+15:59:27 <johnd> gotta go.
+15:59:36 <dmiles> cool will see you soon
+15:59:37 <johnd> nice talking with you
+15:59:43 * johnd is away: I'm busy
+17:09:38 * eca is back
+17:14:16 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+17:15:09 <stevereed_home> the release announcement went up on freshmeat 45 min ago ..
+17:16:09 <stevereed_home> will monitor this channel for questions & comments over the weekend..
+17:16:32 * stevereed_home is away: I'm busy
+17:28:32 --- join: kirk (~kirk@24.103.176.20) joined #opencyc
+17:42:09 <kirk> Is there anyone around that might answer a few questions?
+17:43:32 <stevereed_home> busy - but leave you question for a topic starter
+17:45:12 <kirk> You'll leave me a question or I should propose a question?
+17:49:27 <kirk> .okay, can I do everything from the cyc prompt I can from the web page, if so, where can I read about it?
+17:52:04 --- join: Webmonkey (~chatzilla@CPE0090263d08f3.cpe.net.cable.rogers.com) joined #opencyc
+18:44:04 <stevereed_home> Yes, the Cyc api is documented at http://www.opencyc.org/doc/cycapi
+18:44:32 <stevereed_home> thats how cyc interacts with other software systems and with its agents
+18:44:58 <stevereed_home> the command line is the same interface we expose at tcp port 3601, which you can
+18:45:01 <stevereed_home> telnet to.
+18:45:29 <stevereed_home> port 3614 is the efficient binary port for which java client support classes are provided
+18:45:32 <dmiles> steve you here?
+18:45:39 <dmiles> aha
+18:45:50 <stevereed_home> here but going to bed very soon to fix sleep deprivation
+18:46:03 <dmiles> its fine my girlfirned wants us to go out tonight
+18:46:14 <dmiles> i am more excited about working wuith cyc :)
+18:46:20 <stevereed_home> you dont say
+18:46:33 <dmiles> just wanted to confirm the Java stuff you gave a test over
+18:46:45 <stevereed_home> go on
+18:47:03 <dmiles> i am going to make a little jsp thing that makes adding predicates and constants eaier
+18:47:39 <stevereed_home> you will like the rkf stuff when you see it..
+18:47:53 <stevereed_home> by release 1.0 the mature parts will be there
+18:47:53 <dmiles> it looks like yuou had a constyant discovery thing in the API right?
+18:48:04 <stevereed_home> how so
+18:48:15 <dmiles> let me peek at what i was seeing.. one sec
+18:49:18 <dmiles> its the startic thing.,. hrrm
+18:49:33 <dmiles> that you build Rules from strings
+18:50:01 <stevereed_home> ok i think i get it..
+18:50:18 <dmiles> make a CycList i think
+18:51:08 <dmiles> public org.opencyc.cycobject.CycList read(java.lang.String string)
+18:51:38 <dmiles> was wodering if it makes constants on its way?
+18:51:49 <stevereed_home> and this api call...
+18:51:53 <stevereed_home> EL-TO-HL : (formula &optional mt)
+18:52:15 <kirk> Steve, I am afraid I missed the start of your instructions. They've scrolled off my screen. is there a way to make ircii scroll backwards?
+18:52:38 <dmiles> scroll-lock  then page up i think
+18:52:42 <stevereed_home> dont know but we are logged by clog
+18:53:06 <stevereed_home> should have the link at www.opencyc.org somewhere
+18:53:09 <dmiles> man this channel has grown ;)
+18:53:21 <stevereed_home> i announced on freshmeat
+18:53:27 <stevereed_home> 40 hits per hour
+18:53:38 <dmiles> http://tunes.org/~nef/logs/opencyc/02.04.05
+18:53:42 <stevereed_home> thanks
+18:54:06 <stevereed_home> any way there is a strings to list helper ..
+18:54:18 <stevereed_home> that calls the one you mention
+18:54:40 <stevereed_home> its in CycAccess and there are many examples in org.opencyc.api.UnitTest
+18:54:45 <dmiles> yeah.. i guess it would take me a few secoinds to look at the source myself to make sure it new CycConstant
+18:55:08 <stevereed_home> it doesnt create new constants
+18:55:17 <stevereed_home> it references existing ones
+18:55:22 <dmiles> constants require four assertions right?
+18:55:32 <stevereed_home> well lets see
+18:55:35 <dmiles> int BoookeepinMt
+18:55:38 <stevereed_home> isa something
+18:55:47 <stevereed_home> is the min for an individual
+18:55:55 <dmiles> ah
+18:55:57 <stevereed_home> genls something is the min for a collection
+18:56:14 <stevereed_home> genlPred something is the min for a predicate
+18:56:24 <stevereed_home> of course comment would be good
+18:56:36 <dmiles> :)
+18:56:40 <stevereed_home> for ordinary collections ,,
+18:56:48 <dmiles> go on
+18:56:50 <stevereed_home> think of genus and differntia
+18:57:03 <stevereed_home> what does a term inherit
+18:57:15 <stevereed_home> and what makes it different from its siblings
+18:57:30 <stevereed_home> that is the convention for dictionaries that we mostly adopt
+18:57:46 <stevereed_home> so each collection has several genls..
+18:57:57 <stevereed_home> one main one (salient)
+18:58:09 <stevereed_home> and others which set it apart from siblings
+18:58:11 <dmiles> is there a (somePredicate Collection1 CollectionSub1 CollectionSub2 CollectionSub3) ?
+18:58:29 <stevereed_home> we can ask cyc and find out
+18:58:33 <stevereed_home> (and
+18:58:38 <dmiles> like Color Red Blue Green
+18:58:39 <stevereed_home> (isa ?p Predicate)
+18:58:49 <stevereed_home> (arity ?p 4)
+18:59:02 <stevereed_home> (arg1Isa ?p Collection)
+18:59:12 <stevereed_home> (arg2Isa ?p Collection)
+18:59:23 <stevereed_home> (arg3Isa ?p Collection)
+18:59:33 <stevereed_home> (arg4Isa ?p Collection))
+18:59:47 <stevereed_home> but we dont use many arity four predicates
+19:00:00 <stevereed_home> great majority are binary (like DAML)
+19:00:12 <dmiles> yeah it would Be VariableArityt
+19:00:21 <stevereed_home> like #$and
+19:00:28 <dmiles> the reason i ask is thi...
+19:00:44 <stevereed_home> we dont have such a specialized predicate
+19:00:55 <dmiles> ;; Define accessors to Objects
+19:00:56 <dmiles> (isa JavaMemberOrFieldAccess Collection)
+19:00:56 <dmiles> (genls JavaMemberAccess JavaMemberOrFieldAccess)
+19:00:56 <dmiles> (genls JavaFieldAccess JavaMemberOrFieldAccess)
+19:00:56 <dmiles> (disjointWith JavaMemberAccess JavaFieldAccess)
+19:01:10 <dmiles> (isa JavaFieldAccessFn UnaryFunction)
+19:01:10 <dmiles> (arity JavaFieldAccessFn 1)
+19:01:10 <dmiles> (arg1Isa JavaFieldAccessFn JavaString)
+19:01:10 <dmiles> (resultIsa JavaFieldAccessFn JavaFieldAccess)
+19:01:16 <dmiles> (isa JavaMemberAccessFn VariableArityFunction)
+19:01:16 <dmiles> (arityMin JavaMemberAccessFn 1)
+19:01:16 <dmiles> (arg1Isa JavaMemberAccessFn JavaString)
+19:01:16 <dmiles> (resultIsa JavaMemberAccessFn JavaMemberAccess)
+19:01:26 <stevereed_home> you type fast
+19:01:32 <stevereed_home> lets see
+19:01:54 <dmiles> well i starrted into 2 questions oops
+19:02:05 <dmiles> 2 quiestions i had ;)
+19:02:20 <stevereed_home> accessors to objects would best be functions as you write it
+19:02:30 <stevereed_home> you can also do it prolog style
+19:02:41 <stevereed_home> with a predicate
+19:02:53 <stevereed_home> leaving an arg unbound for the result
+19:03:03 <dmiles> yeah ..
+19:03:17 <stevereed_home> (myJavaAccessPred <ans> Field)
+19:03:31 <stevereed_home> functions are cleaner but we can do both
+19:03:35 <stevereed_home> duals really
+19:03:57 <dmiles> (JavaMemberValue ?Instance ?MemberAccess ?MemeberValue)
+19:04:03 <stevereed_home> should have some tutorial info on the web site re functions
+19:04:21 <dmiles> so one qwould do...
+19:04:23 <stevereed_home> thats right you can bind any of those vars
+19:04:31 <stevereed_home> and get cyc to find the others
+19:04:43 <dmiles> (JavaMemberValue MyObject (MemberAccessFn "Name" ?MV)
+19:04:49 <dmiles> ?MV = "Joe"
+19:04:54 <dmiles> oops
+19:04:56 <dmiles> (JavaMemberValue MyObject (MemberAccessFn "Name") ?MV)
+19:05:18 <stevereed_home> got to go :)
+19:05:33 <stevereed_home> back in the am or earlier if I cant sleep :)
+19:05:37 <dmiles> ok i think i have what i need to start with what ui want
+19:05:40 * stevereed_home is back (gone 01:49:03)
+19:05:42 * stevereed_home is away: I'm busy
+19:08:14 <kirk> Are there mechanisms for merging KBs or a central KB planned?
+19:22:18 <dmiles> from what i see there seems rto be this concept that each peer cyc server can work in holding its part of a KB.. and all the peers would merge together at dession of a KB on a certral server
+19:22:46 <dmiles> thencan get the writes back
+19:23:30 <dmiles> so in that way it seems like a merging
+19:24:04 <dmiles> i am getting this info from some channel talk right before clog started logging
+19:26:43 <dmiles> that there is this concept of a cyc-grid
+19:26:53 <dmiles> of peer cyc servers
+19:27:25 <dmiles> the transaction logs from eachy cyc server is transered up to the central server
+19:29:29 <kirk> Hmmm, interesting.
+19:35:48 <kirk> count-constants
+19:36:04 <kirk> .woops, wrong console.
+19:37:06 --- join: johndcyc (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+19:37:30 <johndcyc> is anyone on?
+19:38:08 <kirk> Yes, but am probably to lost to be helpful! 'grin'
+19:38:27 <johndcyc> well, what are you doing here. what's your interest?
+19:38:57 <kirk> I am trying to figure out the best way to learn the opencyc package.
+19:39:28 <kirk> I'm having trouble with the doc site or at least not understanding it's layout
+19:39:37 <johndcyc> what do you think you might do with it? are you more of a programmer or ontologist-type
+19:39:56 <johndcyc> i set that site up, maybe I need to adjust it
+19:40:13 <kirk> I don't know, I'm mostly interested in the whole concept of the system. I am a programmer though.
+19:40:20 <johndcyc> spent most of the time just trying to clean up and organize existing docs
+19:40:37 <johndcyc> we need to create those intro pages. that would help
+19:41:02 <johndcyc> cyc is a big system that takes a while to get your arms around
+19:41:09 <kirk> .probably, it seems that many of the links just return the same index you are already on.
+19:41:28 <johndcyc> that could be a bug. could you tell me what you were clicking on
+19:42:03 <kirk> I've realized that for at least a year. I started following it when you released the original upper ontolgy.
+19:42:26 <kirk> .So more than a year I guess.
+19:42:37 <johndcyc> we released that about 4 years ago
+19:42:58 <kirk> .Time flies as you get older! 'wink'
+19:44:00 <kirk> I don't know if you folks are interested but I'd be willing to help fix typos.
+19:44:09 <kirk> .in the docs I mean.
+19:44:31 <johndcyc> yes
+19:44:46 <johndcyc> i think i may know what you mean with linking back to the same page
+19:45:04 <johndcyc> it's mostly the items that don't have docs yet, like a lot of the programming items
+19:45:25 <johndcyc> if you see a '>' in front of the item, then it's not avail yet.
+19:45:45 <johndcyc> instead of being no link...
+19:45:48 <kirk> I realize that but they don't seem to have '>'s.
+19:46:12 <johndcyc> it's a <a href=#
+19:46:21 <johndcyc> which ones don't have '>'
+19:46:32 <johndcyc> can you track one of them down?
+19:46:40 <kirk> Hang tight.
+19:47:14 <johndcyc> ok
+19:49:25 <kirk> KB browser interface overview http://www.opencyc.org/doc/tut/index_html?tree-e=eJyLVneEArfgUFt1HQUEvz
+19:49:40 <kirk> Has a plus infront of it.
+19:50:24 <johndcyc> ok let me look
+19:50:59 <johndcyc> oh, that
+19:51:25 <kirk> A lot of those links point to the same index link.
+19:51:32 <johndcyc> the plusses there are a tree, like in the left pane of a Windows Explorer interface
+19:51:44 <johndcyc> you click the plus to open the section
+19:51:54 <johndcyc> there's only one item in that section
+19:52:05 <johndcyc> it's called interface overview
+19:52:42 <kirk> It seems to keep bring me back to the exact same place.
+19:52:55 <kirk> I am using lynx BTW.
+19:53:20 <johndcyc> oh, you're hard core ;)
+19:53:42 <kirk> Well, I'm blind and that's the only web access I have.
+19:54:17 <johndcyc> there are people working on speech interfaces, but I think they're just getting started
+19:54:39 <kirk> I was kind of interested in working on that and nat lang processing.
+19:55:30 <kirk> .docs indicate a nat lang interface but I haven't got that far yet.
+19:55:37 <johndcyc> yeah, no parsing avail yet, but someone should hook up a speech synthesizer to the nat lang generation
+19:55:52 <kirk> Well, I am using a speech synthesizer.
+19:56:10 <johndcyc> wow, it can say the stuff I'm writing?
+19:56:18 <kirk> .yep.
+19:57:12 <kirk> I am the author of a screen review package for linux called speakup.  It's a set of kernel patches.
+19:57:37 <johndcyc> I'm trying to think of the best ways to use Cyc for sight-free applications
+19:57:55 <johndcyc> I talk to my commuting buddy about it sometimes
+19:58:03 <kirk> Just getting a good text interface is all that is necessary.
+19:58:33 <johndcyc> the guy I drive to work every day, an linguist and ontologist, is legally blind
+19:58:51 <johndcyc> he can see enough to read the screen from about an inch away
+19:59:11 <johndcyc> he's interested in apps that can help
+19:59:13 <kirk> .he uses a screen enlargement system?
+19:59:32 <johndcyc> I don't think so. just gets right up against it
+19:59:51 <johndcyc> sorry, gotta get off now
+19:59:54 <kirk> That's gota be painful.
+20:00:03 <kirk> .okay thanx.
+20:00:12 <johndcyc> talk to you soon...
+20:00:19 --- part: johndcyc left #opencyc
+20:00:28 <kirk> If I don't get overwhelmed!
+20:14:07 <kirk> Now I'm getting bloody 403 errors on the files.
+20:31:00 --- quit: kirk (Remote closed the connection)
+20:39:22 --- join: kirk (~kirk@24.103.176.20) joined #opencyc
+21:33:41 --- quit: Seth ()
+21:42:16 --- quit: stevereed_home (Read error: 113 (No route to host))
+21:42:43 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+21:49:22 --- quit: Nolan (Read error: 110 (Connection timed out))
+22:12:32 --- quit: dmiles (Read error: 110 (Connection timed out))
+22:25:34 <kirk> Steve, do you have access to the web pages?
+22:26:07 <kirk> I'm getting 403 errors on the pdf and zip files.
+22:26:53 <kirk> BTW, what are you working on that brings you back after going to bed?
+22:41:01 --- quit: kirk ("Leaving")
+23:00:38 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+23:49:07 --- join: dmiles (ZQWER@dialup-65.58.156.187.Dial1.Portland1.Level3.net) joined #opencyc
+23:49:25 <dmiles> gotta love dialup
+23:59:51 <dmiles> anyone here?  .. i am wondering if my Download of that tar.gz can live with the CVS ?
+23:59:59 --- log: ended opencyc/02.04.05

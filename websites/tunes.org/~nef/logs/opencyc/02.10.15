@@ -1,0 +1,108 @@
+00:00:00 --- log: started opencyc/02.10.15
+01:34:58 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+04:40:47 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+11:00:26 --- quit: devEiant (card.freenode.net irc.freenode.net)
+11:00:26 --- quit: yepster (card.freenode.net irc.freenode.net)
+11:00:27 --- quit: dmilezZ (card.freenode.net irc.freenode.net)
+11:00:36 --- quit: Yepster_home (card.freenode.net irc.freenode.net)
+11:00:36 --- quit: stevereed (card.freenode.net irc.freenode.net)
+11:00:36 --- quit: fleeky (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: kinoc (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: CycLBot (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: deltab (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: Cobra (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: ChanServ (card.freenode.net irc.freenode.net)
+11:00:37 --- quit: ZivZ (card.freenode.net irc.freenode.net)
+11:12:29 --- join: ChanServ (ChanServ@services.) joined #opencyc
+11:12:29 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+11:12:29 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+11:12:29 --- join: dmilezZ (logicmoo@12.211.42.52) joined #opencyc
+11:12:29 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+11:12:29 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+11:12:29 --- join: CycLBot (~CycLBot@12.211.44.132) joined #opencyc
+11:12:29 --- join: kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+11:12:29 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+11:12:29 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+11:12:29 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+11:12:29 --- join: deltab (~deltab@espians.com) joined #opencyc
+11:12:29 --- mode: card.freenode.net set +o ChanServ
+11:15:52 --- quit: yepster (Read error: 110 (Connection timed out))
+11:24:39 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+11:57:52 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+12:02:15 <yepster> heu!
+12:02:15 <yepster> [Inf](beliefs Guest (not (isa Guest Person))) in HYP-SubsidieArt25211-8713
+12:02:16 <yepster> Arguments Supporting Assertion :
+12:02:16 <yepster> Argument : Deduction #47536
+12:02:16 <yepster>     * [F](implies
+12:02:16 <yepster>              (beliefs ?AGENT
+12:02:18 <yepster>                  (isa ?SOMEBODY Zorgkantoor))
+12:02:20 <yepster>              (beliefs ?AGENT
+12:02:22 <yepster>                  (not
+12:02:24 <yepster>                      (isa ?SOMEBODY Person)))) in HYP-SubsidieArt25211-8713
+12:02:26 <yepster>     * [Def](beliefs Guest
+12:02:28 <yepster>              (isa Guest Zorgkantoor)) in HYP-SubsidieArt25211-8713
+12:02:30 <yepster> I like it!
+12:03:05 <yepster> actually i should infer beliefs Cyc beliefs guest etc, since ?AGENTS's implies is not referntially transparant.
+12:03:18 <yepster> but then i think i have all i need
+12:03:21 --- quit: devEiant (Read error: 104 (Connection reset by peer))
+12:06:30 <yepster> Maybe this also works with the problems I had before with #$knows
+12:07:08 <yepster> since I now used something different: Bp->Bq instead of B(p->q) in the antecedent
+12:07:28 <yepster> and using K(p->q) didn't work before in an antecedent
+12:11:52 --- nick: dmilezZ -> dmiles
+12:12:18 <yepster> but doing stuff with knows doesn't matter anymore
+12:12:34 <yepster> since K(sentence)->sentence
+12:13:51 <yepster> and that means that a proposition p (withouth beliefs in front of it) can only be put in if it is always true
+12:14:02 <yepster> and if it is not, only Bp may be asserted
+12:14:25 <yepster> this is too simple, i must be overlooking something
+12:15:03 <yepster> but it is a solution for 'open world' reasoning.
+12:15:14 <yepster> like: am i employee here
+12:15:42 <yepster> cyc: i belief so (implicit but it may be possible that you work somewhere else and i haven't been told yet)
+12:20:07 <yepster> no need to add timestamps to assertions
+12:21:01 <yepster> like observe now -> know holdsat now prop
+12:21:48 <yepster> how long is now? timepoint? what point is there then not to make it believe rightaway?
+12:24:08 <yepster> and the problems of 'logical omniscience' are solved by not implicating Bq
+12:24:20 <yepster> but by implicating B(cyc)B(agent)q
+12:24:40 <yepster> (as in, logical omniscience of agent x)
+12:26:02 <yepster> hmmm... in fact, all knowledge of beliefs should be put in as believe
+12:26:36 <yepster> well whatever.
+12:31:40 --- quit: yepster ()
+12:49:52 <Seth> is the open cyc reasoner nonmonotonic ?
+12:53:45 <Yepster_home> yes
+12:59:20 <Seth> can you specify whether a given micro theory assumes the closed world assumption or not?
+13:00:25 <Yepster_home> hmm afaik 'negation as failure' is something you can set when asking something on the api (not sure, must look up)
+13:00:43 <Yepster_home> but I know there is also something called 'completeextentknown' in the KB
+13:01:39 <Yepster_home> cwa smells a lot like 'necessary true'
+13:07:17 <Yepster_home> http://opencyc250.homelinux.org:3603/cgi-bin/cyccgi/cg?cb-cf&4618
+13:11:53 <Yepster_home> ah:
+13:11:57 <Yepster_home> not the api
+13:11:58 <Yepster_home> http://www.cyc.com/cycdoc/ref/negation.html
+14:21:59 <Seth> thanks, yepster :)
+14:29:03 <Yepster_home> np
+14:32:45 <Yepster_home> may i ask btw on what domain you want cwa?
+14:55:42 <Seth> no, i want it to be a user option like you guys do it ... see http://radio.weblogs.com/0113759/
+15:01:03 --- quit: Seth (Read error: 104 (Connection reset by peer))
+15:01:56 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+15:15:24 <Yepster_home> is that the same pat hayes from 'some philosofical problems from the standpoint of ai?'
+15:16:22 <Yepster_home> ah yes, just clicked the link
+15:20:46 <Yepster_home> hmm from what i know of what the semantic web is supposed to be, i tend to disagree about it being monotonic
+15:21:13 <Yepster_home> but since tim b l is the one defining what it should be i must have misunderstood it
+15:22:39 <Yepster_home> the semantic web is about software agents and stuff being able to buy things for us?
+15:23:16 <Yepster_home> suppose that there is a number that is the cheapest price of cd e.g. 'miraculous mandarin'
+15:23:29 <Yepster_home> is that monotonic?
+15:26:54 --- quit: Yepster_home ()
+15:55:47 --- quit: fleeky ("BitchX-1.0c16 -- just do it.")
+16:39:22 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:06:35 --- join: Loplin (ufchater@ACA73736.ipt.aol.com) joined #opencyc
+18:06:41 <Loplin> Hello
+18:24:45 --- join: fleeky (root@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+18:28:46 <Loplin> Hello fleeky
+18:43:28 --- quit: Seth ()
+18:49:33 --- quit: Cobwa ("[x]chat")
+18:51:40 <fleeky> greetings agent loplin
+18:51:40 <fleeky> ,
+18:56:08 <Loplin> oh hi
+18:56:19 <Loplin> finally say something when i have to leave :P
+18:56:35 <Loplin> see ya later
+18:56:45 --- quit: Loplin ("Leaving")
+22:29:05 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+23:59:59 --- log: ended opencyc/02.10.15

@@ -1,0 +1,471 @@
+00:00:00 --- log: started opencyc/02.06.02
+00:56:26 --- join: jlatour (~jlatour@cc131105-b.ensch1.ov.nl.home.com) joined #opencyc
+01:02:01 <dmiles> good morniung
+01:02:44 <jlatour> Good morning!
+01:04:03 --- quit: CycLBot (Remote closed the connection)
+01:04:13 <dmiles> still working on the NL parts
+01:04:36 <jlatour> So I see. Made any progress?
+01:04:46 <dmiles> thought treasure ended up making things take longer.. but it s a good reseouce
+01:05:14 <dmiles> i have to fix the detection of semantic duplication of work of TT vs basic CycNL
+01:05:36 <dmiles> since both are supposed to have wide coverage
+01:06:28 <dmiles> finding that i need to fully use the cycl nl before going out into TT
+01:06:50 <dmiles> since many parsing helpers exist in the cyc kb
+01:07:02 * jlatour nods.
+01:07:03 <dmiles> as well as parsing heuruistics
+01:07:39 <dmiles> for example it says things like 'when yu see this verb start looking specifically for nouns of this collection'
+01:08:36 * jlatour nods. "That speeds things up"
+01:09:05 <dmiles> right now when i parse i go from left to right
+01:09:26 <dmiles> i am thinking i should first pass do a partsOfSpeech only parse
+01:09:46 <dmiles> to get my sentence tree
+01:09:51 <dmiles> so i can nab the verb
+01:10:37 <jlatour> That helps
+01:10:40 <dmiles> but the current method is i look for a determiner if that fails a propernoun , then a verb then a w/what/when
+01:11:30 <dmiles> to get positive matching of those language parts i have to access the same things as where i find the meaning
+01:11:50 <dmiles> so i have been constructing proposition durring parse
+01:12:36 <dmiles> but grrm.. if i do an intial pos only parse.. then i need to record extra info thats meaning based
+01:13:18 <dmiles> but part of why the first pass is required is for tense and mascilinity and plurality agreement
+01:14:01 <dmiles> generally those types of agreements (singular vs plural) help you know your sentence tree is valid
+03:50:02 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+03:50:27 <dmiles> have somemore progress
+03:50:36 <jlatour> Hrm?
+03:50:53 <dmiles> now ussing #$subcatFrame and #$verbSemTrans
+03:51:20 <dmiles> that parse does Subject/Object parsing
+03:51:38 <dmiles> e2c: take the thing
+03:51:39 <CycLBot> '#$thereExists'(_G1009, '#$and'('#$isa'(_G1009, '#$Thing'), '#$and'('#$isa'('?ACTION', '#$RemovingSomething'), '#$objectOfStateChange'('?ACTION', _G1009), '#$doneBy'('?ACTION', '?listener'))))
+03:54:58 <jlatour> Ack. Complicated.
+04:02:34 <dmiles> fixed the ugly variable problem
+04:02:37 <dmiles> e2c: take the thing
+04:02:37 <CycLBot> '#$thereExists'('?thing1009', '#$and'('#$isa'('?thing1009', '#$Thing'), '#$and'('#$isa'('?ACTION', '#$RemovingSomething'), '#$objectOfStateChange'('?ACTION', '?thing1009'), '#$doneBy'('?ACTION', '?listener'))))
+04:03:29 <jlatour> That's better.
+04:03:40 <jlatour> More readable
+04:03:46 <dmiles> e2c: eat the USA
+04:03:47 <CycLBot> '#$and'('#$isa'('?ACTION', '#$EatingEvent'), '#$performedBy'('?ACTION', '?listener'), '#$inputsDestroyed'('?ACTION', '#$UnitedStatesOfAmerica'))
+04:04:16 <dmiles> e2c: eat a plane
+04:04:16 <CycLBot> '#$thereExists'('?plane1105', '#$and'('#$isa'('?plane1105', '#$FlatSurface'), '#$and'('#$isa'('?ACTION', '#$EatingEvent'), '#$performedBy'('?ACTION', '?listener'), '#$inputsDestroyed'('?ACTION', '?plane1105'))))
+04:05:34 <dmiles> if something is quantified by a determiner it will create a variable
+04:07:11 <dmiles> just added adjectives:
+04:07:13 <dmiles> e2c: get the blue car
+04:07:14 <CycLBot> '#$thereExists'('?car118', '#$and'('#$and'('#$isa'('?car118', '#$Automobile'), '#$hasAttributeOrCollection'('?car118', meaningOfWord('#$Blue-TheWord'))), '#$IntrinsicStateChangeEvent'('?listener', '?car118')))
+04:08:15 <dmiles> have just to finish some adverb and proposition support
+04:12:03 <jlatour> Nice.
+04:21:19 <dmiles> averbs in:
+04:21:26 <dmiles> e2c: i soon like the blue car
+04:21:26 <CycLBot> '#$and'('#$thereExists'('?car343', '#$and'('#$and'('#$isa'('?car343', '#$Automobile'), '#$hasAttributeOrCollection'('?car343', meaningOfWord('#$Blue-TheWord'))), '#$likes-Generic'('?user', '?car343'))), '#$hasAttributeOrCollection'('?ACTION', '#$STIF'))
+04:22:00 <jlatour> #$STIF?
+04:22:23 <dmiles> short time interfval in function
+04:22:31 <jlatour> Ah. Soon :)
+04:23:29 <dmiles> right now i have to keep #$hasAttributeOrCollection defined becasue not always does the belssing of attributes work right
+04:23:56 <dmiles> sometimes an attriubte is that it #$isa sometng
+04:24:38 <dmiles> so #$hasAttributeOrCollection will have to look at argtypes to decide between gelns,isa,hasAttributes
+04:33:40 <dmiles> verb fames are getting better:
+04:33:46 <dmiles> err frames
+04:33:49 <dmiles> e2c: the happy man  makes the car
+04:33:50 <CycLBot> '#$thereExists'('?man124', '#$and'('#$and'('#$isa'('?man124', '#$AdultMalePerson'), '#$hasAttributeOrCollection'('?man124', '#$Happiness')), '#$thereExists'('?car364', '#$and'('#$isa'('?car364', '#$Automobile'), '#$createdBy'('?car364', '?man124')))))
+04:34:25 <dmiles> (its putting existentials in correctly)
+04:34:32 <dmiles> (scoped)
+04:35:15 <jlatour> Lunch time. Looks good, as always :)
+05:26:00 --- quit: CycLBot (Remote closed the connection)
+05:32:57 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+05:33:47 <dmiles> somewhat cleaning:
+05:34:14 <dmiles> e2c: i like the car
+05:34:15 <CycLBot> "(#$thereExists ?car322
+05:34:15 <CycLBot> (#$and              (#$isa ?car322 #$Automobile)              (#$likes-Generic ?Speaker ?car322)))"
+05:34:53 <dmiles> not realy fomrated for 
+05:35:17 <dmiles> e2c: the happy man  makes the car
+05:35:17 <CycLBot> "(#$thereExists ?man124
+05:35:18 <CycLBot> (#$and              (#$and                 (#$isa ?man124 #$AdultMalePerson)                 (#$hasAttributeOrCollection ?man124 #$Happiness))              (#$thereExists ?car364                 (#$and                    (#$isa ?car364 #$Automobile)                    (#$createdBy ?car364 ?man124)))))"
+05:39:11 --- quit: CycLBot (Remote closed the connection)
+05:40:03 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+05:53:45 --- quit: CycLBot (Excess Flood)
+05:54:19 <jlatour> Excess flood :)
+05:54:35 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+05:56:16 <dmiles> debugging him in a message channel
+05:56:32 <dmiles> :) can get pretty verbose
+12:33:44 --- join: theos (~YourMom@209.181.143.237) joined #opencyc
+12:34:19 <theos> dmiles?
+12:34:33 --- part: theos left #opencyc
+13:25:22 --- join: msbaltz (~msbaltz@68.96.146.101) joined #opencyc
+13:25:22 --- quit: msbaltz (Client Quit)
+14:41:54 --- quit: mea_culpa (Remote closed the connection)
+16:31:40 --- quit: jlatour ()
+17:18:16 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+17:24:44 * dmiles waves at Steve
+17:29:45 --- join: yottzumm ([WQ+YMZ7iz@12-232-76-192.client.attbi.com) joined #opencyc
+17:29:58 <yottzumm> is there some way to turn on debugging in Java?
+17:33:41 <yottzumm> ah, traceOn looks promising
+17:35:41 <dmiles> most of the opencyc java api has a setTrace(int level) as well
+17:37:59 <dmiles> also  setVerbosity(int verbosity) 
+17:46:41 <yottzumm> I switched from using SpatialThing-Localized to PartiallyTangible to so I could use above-Touching in addition to objectFoundInLocation, but according to the trace, the objectFoundInLocation asserts are returning (true) T, and the above-Touching asserts are returning (true) NIL
+17:48:22 <dmiles> so even thoug its asseerted above-touching it's not finding it but instead  objectFoundInLocation?
+17:48:47 <dmiles> well is it (NIL) or (NIL) ?
+17:48:50 <dmiles> err
+17:48:55 <dmiles> NIL or (NIL) 
+17:49:07 <yottzumm> looks like NIL to me
+17:49:19 <dmiles> (NIL) in this case can mean True but with no varbles to print
+17:49:43 <yottzumm> cyc --> (true) NIL
+17:50:08 <dmiles> oh that secoonce NIL mean no CycApiException
+17:50:35 <dmiles> its a pair result+exception(if any)
+17:50:36 <yottzumm> what's the difference between that and cyc --> (true) T
+17:51:11 <dmiles> oh.. (true) T means very good
+17:51:24 <dmiles> oh.. (true) T means ok but i knew that ?
+17:51:28 <dmiles> oops
+17:51:43 <dmiles> on assertions?
+17:52:09 <dmiles> when asserting: (true) NIL means "ok, but i knew that"
+17:52:26 <dmiles> when asserting: (true) I means "ok, i didn't know that"
+17:52:35 <dmiles> s/I/T/
+17:53:39 <yottzumm> it's supposed to destroy the Mt everytime my Java program runs, unless I'm mistaken
+17:53:45 <dmiles> so currently in the Cyc java api i ignore the NIL at the second place when asserting
+17:54:15 <dmiles> but if you are making a query the reply semantics change
+17:55:05 <dmiles> are you assserting both objectFoundInLocation and touchs-Above?
+17:55:18 <yottzumm> (CYC-ASSERT (QUOTE (above-Touching NineOfHeartsCard ThreeOfSpadesCard)) SBJMt)
+17:55:44 <dmiles> wqith #$ right?
+17:55:51 <yottzumm> this is from the trace
+17:55:59 <dmiles> ah yeah .toString()
+17:56:27 <dmiles> what is the reply response?
+17:56:41 <dmiles> should be (true) T
+17:56:43 <yottzumm> cyc --> (true) NIL
+17:57:15 <dmiles> hrrm.. did it already know objectFoundInLocation ?
+17:57:57 <dmiles> NIL may mean you need to go an query for the last exception messafge
+17:58:39 <dmiles> it may have failed the constraints needed
+17:58:42 <yottzumm> objectFoundInLocation is first
+17:59:01 <dmiles> well its saying that it can deduce the second
+17:59:09 <dmiles> (possibly)
+17:59:43 <yottzumm> I doubt it.  I'm stacking cards on top of each other with above-Touching
+17:59:54 <dmiles> is what i am guessing is that they have some opverlap in meaning
+18:00:02 <yottzumm> oh
+18:00:03 <yottzumm> wow
+18:00:11 <dmiles> so objectFou8ndInloaction is what?
+18:00:43 <dmiles> (i mean, what is the asserttion order) 
+18:00:52 <dmiles> (with data)
+18:00:59 <yottzumm> I'm putting cards in draw piles, discard piles and hands
+18:01:17 <dmiles> and putting mean 'above-touches' ?
+18:02:05 <yottzumm> no, putting means objectFoundInLocation
+18:02:07 <dmiles> oh .. i see what your saying.. over objectFioundInLaction.. you may want to use in-ContGenric
+18:02:19 <yottzumm> I'm ordering the cards with above-Touching
+18:02:32 <yottzumm> I can try it!
+18:02:48 <dmiles> what happens if only the first card closest to the hand is objectFoundInLocation
+18:03:48 <dmiles> the NIL is just a warning saying it 'knew that' w/o it being dirrectly asserted
+18:04:02 <dmiles> but iots not not good to say its guessing order :)
+18:04:05 <yottzumm> I read up on in-ContGeneric.  Are you sure?
+18:04:27 <dmiles> i used it over objectFoundInLocation in the Mud
+18:04:52 <dmiles> part of the reason its it has wider ability
+18:05:10 <dmiles> not as restricted to spatialthing-localized
+18:05:25 <dmiles> spatialthing-localized seems to exist on its own vocabulary
+18:05:57 <dmiles> like there are less predicates that we are used to that support it
+18:06:53 <dmiles> seems that predicates built from PartiallyTangible are in better abundance
+18:07:02 <dmiles> so i did it for the same reason you did ;)
+18:07:03 <yottzumm> oh, I see, OBJ is not a part of LOC in objectFoundInLocation
+18:07:34 <dmiles> rifght it doesnt have to moveWithObject
+18:08:06 <dmiles> i ersonal would have prefered objectFoundInLocation
+18:08:41 <dmiles> but i was running into the OBJ constraint
+18:08:54 <dmiles> LOC i could satisisfy mostly
+18:09:20 <dmiles> well it worked (like it does in your case)
+18:09:47 <dmiles> but it gave me trouble later when i saw that most vocab was built for in-*
+18:09:56 <dmiles> above-*
+18:09:59 <dmiles> etc
+18:10:40 <dmiles> its almost like havbing to spatial systems
+18:10:51 <dmiles> so i picked the one that was more descripotive
+18:11:01 <dmiles> err 2 spatial systems
+18:11:41 <dmiles> you _could_ used a controlled by :)
+18:11:47 <dmiles> for the hand
+18:12:38 <dmiles> since in container is kinda kinda phyically weird
+18:13:44 <yottzumm> Deck/Stack/Hand is really an abstract container--it doesn't really exist
+18:14:05 <dmiles> you could then turn them into controlling ajents
+18:14:33 <dmiles> since then you can talk more about the rules of engagements
+18:14:46 <dmiles> between Deck and Hand
+18:15:06 <yottzumm> that sounds cool, so if like an agent tries to stick a card in a stack, the stack can reject it?
+18:15:15 <dmiles> exactly
+18:15:44 <dmiles> objectControlled could be your predicate
+18:16:07 <dmiles> err actually that is an Envent thing.. but i know there is a ActorThing
+18:16:19 <dmiles> 'possesses'
+18:16:33 <dmiles> (argIsa possesses 1 Agent)
+18:16:33 <dmiles> (argIsa possesses 2 PartiallyTangible)
+18:16:33 <dmiles> comment :  "(possesses AGENT OBJECT) means that OBJECT is in the physical possession of AGENT. Compare with owns."  
+18:18:47 <dmiles> you also gain that the Agent is has: resourceAvailable and awareOf 
+18:22:24 <dmiles> e2c: a hand possesses a card
+18:22:24 <CycLBot> "(#$thereExists ?hand115   (#$and    (#$isa ?hand115 #$Hand)    (#$thereExists ?card166     (#$and     (#$isa ?card166 #$Card)     (#$possesses ?hand115 ?card166)))))"
+18:23:12 <dmiles> wow hehe
+18:25:02 <yottzumm> now possesses is returning (true) NIL.  probably because I haven't declared a hand or a pile as an agent
+18:25:35 <dmiles> yeah you sort of given me adequate evidence that a NIL means there was some exception dtetail
+18:26:12 <dmiles> are you using converse() ?
+18:26:28 <dmiles> or converseObject() ?
+18:26:34 <yottzumm> no, looking at it
+18:27:01 <dmiles> one will retiurve the CycApiExcetion details
+18:28:35 <yottzumm> so instead of calling cycAccess.assertGaf, I create an object of class ???
+18:29:28 <dmiles> CycList
+18:30:01 <dmiles> well assertGaf( should trhow execptions right?
+18:30:51 <yottzumm> says it thorws CycApiException, but I haven't see one yet.
+18:30:51 <CycLBot> You say, "it thorws CycApiException, but I haven't see one yet.'
+18:30:52 <CycLBot> CycLBot says, "it thorws CycApiException, but I haven't see one yet.'
+18:31:18 <dmiles> yeah its supposed to
+18:32:46 <yottzumm> should I unpack the tar.gz again?
+18:33:13 <dmiles> that shouldnt be the issue 
+18:33:39 <dmiles> just wierd its not throwing if it is returning NIL in the seconcend arg
+18:34:05 <dmiles> look at the code of converseVoid
+18:34:39 <dmiles> oh its an exception only if the first arg if NIL
+18:34:55 <dmiles> the second arg will be a string
+18:35:22 <dmiles> converseVoid is how assertGarf comunicates
+18:35:48 <yottzumm> okay
+18:36:27 <dmiles> so its saying ti did make it in a guess ;)
+18:36:39 <dmiles> err i guess its working
+18:37:04 <dmiles> Cyc #$Hand is actually an Agnetitive thing 
+18:37:13 <dmiles> (must be)
+18:37:53 <dmiles> Mt : AnimalPhysiologyVocabularyMt
+18:37:53 <dmiles> genls :  HolderGripper Appendage-AnimalBodyPart  
+18:37:53 <dmiles> Mt : PerceptionMt
+18:37:53 <dmiles> genls :  BiologicalLivingObject  
+18:38:15 <dmiles> so it is a indirect subclass of Agent
+18:38:19 <yottzumm> we're getting deeper than I want to go...
+18:38:32 <dmiles> :) but at least possesess is legal :)
+18:38:35 <yottzumm> unless it's absolutely necessary
+18:39:10 <dmiles> well when it comes to Deck.. i think you have to make it an Agnet
+18:39:33 <yottzumm> that's fine.  I just don't want to model the whole world just to play crazy eights
+18:39:57 <dmiles> well thankfully you have part of the workld defined (at least for Hand)
+18:40:21 <yottzumm> And a CardHand is in-ContGeneric Hand
+18:41:00 <dmiles> should work
+18:41:29 <dmiles> or genls CardHand Hand
+18:41:35 <yottzumm> how about Agent-Generic
+18:42:02 <dmiles> that shouild make a (genls CardDeck Agent-Generic) >?
+18:45:41 <yottzumm> AgentiveArtifact looks even more promising for CardDeck
+18:46:00 <dmiles> yeah that is very good
+18:49:08 <yottzumm> can I use AgentiveArtifact in place of Artifact?
+18:49:32 <dmiles> for wich?
+18:49:44 <dmiles> you can
+18:50:13 <dmiles> so that way you get bettern multiinhertance
+18:52:00 <dmiles> agnetiive artifaces are generally been assigned tasks by cognitive agents
+19:07:05 <yottzumm> arg!  Agent is the first parameter to possesses, not the second
+19:07:32 <dmiles> yes
+19:31:07 <yottzumm> I'm getting (true) NIL back from (genls CardCollection AgentiveArtifact)
+19:32:17 <yottzumm> previously, (isa CardCollection Collection) returned (true) T
+19:32:26 <dmiles> i wish i understood the deffernce between T NIL and T T.. bewcasue i just found NIL NILL means deducaable
+19:32:44 <dmiles> err NIL NIL 
+19:34:04 <dmiles> pretty much if the first argument is T then there is no content in the second according to converseVoid
+19:34:24 <dmiles> but i do wnant to understand it
+19:39:44 <yottzumm> duh, I'
+19:40:01 <yottzumm> duh, I'm trying to genls from an instance to a class
+19:40:46 <dmiles> ah /)
+19:59:45 <dmiles> e2c: a hand emits a card
+19:59:45 <CycLBot> "(#$thereExists ?hand115   (#$and    (#$isa ?hand115 #$Hand)    (#$thereExists ?card1054     (#$and     (#$isa ?card1054 #$Card)     (#$and      (#$isa ??0 #$EmittingAnObject)      (#$objectEmitted ??0 ?card1054)      (#$emitter ??0 ?hand115))))))"
+20:00:38 <yottzumm> cool
+20:00:42 <dmiles> have to fix the Var names for Actions
+20:02:07 <dmiles> i am trying to build the NL parser to complie idiomatic parse templates for each thing.. so i can use the entire cyc kb at lightning fast speed
+20:02:29 <dmiles> so its like preconstructing if/thens
+20:03:33 <yottzumm> when you say each thing, do you mean each concept?
+20:03:49 <dmiles> yes.. each thing that translates to a noun 
+20:04:07 <dmiles> then also each thing thaty is a verb that makes a template to fill with nouns
+20:04:44 <dmiles> working on small set of data seem to work fine in the interpetive manner i have going
+20:05:18 <yottzumm> maybe Collections can't be generalized into a AgentiveArtifact?
+20:05:30 <dmiles> the parser has the abilty to cobnstuct large compound phrases that would resolve to one PattiallyTanglbe
+20:05:49 <dmiles> they must be collections
+20:06:14 <dmiles> but give me an example of the knowledge you want to assert in
+20:07:43 <dmiles> (or email code)
+20:08:20 <dmiles> also tho we can try it on the bot
+20:08:29 <yottzumm> hang on, want to have a second look at the code.
+20:09:07 <dmiles> oh, you know what it may that you have not genlMts into the Mt containing the predicates or collections you want
+20:09:39 <dmiles> like SpatialMt
+20:10:38 <dmiles> SpatialGMt, ArtifactGMt
+20:10:48 <yottzumm> like ArtifactGVocabularyMt  I see
+20:10:52 <yottzumm> more stuff to learn
+20:11:26 <dmiles> when you see *VocabularyMt you'll want to see what uses it
+20:11:59 <dmiles> and get it's genlMt child possibly
+20:12:32 <dmiles> G = means general, Vocubulary is only parts of it
+20:13:29 <dmiles> the parts that are ontological normally.. but that may be all you want
+20:14:34 <dmiles> it looks like in opencyc there as a movement towards separting Mts into 3 partitions.. Data Theory Vocab 
+20:14:54 <dmiles> then those three are hooked up by a base general Mt
+20:16:28 <dmiles> if you view all contents of ArtifactGMt you may see that there are things you may want like .. (not 
+20:16:28 <dmiles>        (isa PartiallyTangibleProduct ExistingObjectType))
+20:17:48 <dmiles> aS a weak rule i tend to avoid only ussing VocabularyMts because they may only hide TMS errors yet not give full definitionbs
+20:19:53 <dmiles> i am running to the store to buy a snack.. i'll be back in 1/2 hr
+20:20:18 <yottzumm> okay
+21:05:57 <yottzumm> Okay, I think I've fixed most things.  I had to change from AgentiveArtifact to Agent to get possesses to work.  The genls work.
+21:20:29 <dmiles> ah
+21:25:37 <yottzumm> I just sent you a copy of the code...
+21:33:52 <dmiles> ah looks like it cleanly sets up the onology.. is it working?
+21:52:03 <yottzumm> well, it works in the browser.  Still need to do the rules
+22:01:12 <dmiles> the assertions made it in .. good.. you close to the exiting parts ;)
+22:24:21 <yottzumm> looking at GivingSomething right now
+22:32:09 <yottzumm> so conceivable, I could create NL that went like: john may discard a card from his hand, if the card matches the suit or the value of the top card on the discard pile or the card john is discarding is a 8.  If none of the cards in john's hand matches the criteria, john must draw until the card drawn matches the criteria.  The card is placed on the discard pile, and becomes the top card
+22:33:08 <yottzumm> and some NL processor could create a rule in OpenCyc
+22:33:28 <yottzumm> replaceing john with current player of course
+22:35:00 <dmiles> one sec brb
+22:39:05 <dmiles> yes that is the hope and why cyc needs NL
+22:39:24 <dmiles> it makes the creating of riules simpler when leanring CycL]
+22:39:42 <dmiles> even though some people instantly think in cycL better then english
+22:39:54 <dmiles> but it helps us learn CycL
+22:40:10 <dmiles> to see how to express thing
+22:40:47 <dmiles> e2c: i gave the card
+22:40:47 <CycLBot> "(#$thereExists ?card118   (#$and    (#$isa ?card118 #$Card)    (#$outputsCreated ?Speaker ?card118)))"
+22:41:09 <yottzumm> e2c: I gave a speech
+22:41:10 <CycLBot> "(#$thereExists ?speech118   (#$and    (#$isa ?speech118 #$Speaking)    (#$outputsCreated ?Speaker ?speech118)))"
+22:41:10 <dmiles> e2c: all players give the card
+22:42:46 <dmiles> that it gave was not quite right
+22:43:11 <dmiles> Speaker was not a CreationEvent
+22:43:23 <dmiles> but was the instrument of you :)
+22:43:35 <dmiles> and the Actor of the event
+22:44:01 <dmiles> the e2c favors finding anything even if it ends up being incorrect
+22:44:21 <yottzumm> e2c:  john may discard a card from his hand, if the card matches the suit or the value of the top card on the discard pile or the card john is discarding is a 8.  If none of the cards in john's hand matches the criteria, john must draw until the card drawn matches the criteria.  The card is placed on the discard pile, and becomes the top card
+22:44:22 <CycLBot> <prolog:error>Stream $stream(8189130):1: Syntax error: Operator expected</prolog:error>
+22:44:35 <dmiles> e2c:  john may discard a card from his hand
+22:44:50 <dmiles> e2c: if the card matches the suit
+22:45:32 <dmiles> e2c  a man if and only if a man
+22:45:33 <CycLBot> "(#$thereExists ?man133   (#$and    (#$isa ?man133 #$AdultMalePerson)    (#$thereExists ?man214     (#$and     (#$isa ?man214 #$AdultMalePerson)     (#$equiv ?man133 ?man214)))))"
+22:45:46 <dmiles> ok "if and only if" works
+22:46:10 <dmiles> lets see if except when
+22:46:15 <yottzumm>  john may discard a card from his hand if and only if  the card matches the suit or the value of the top card
+22:46:23 <yottzumm> e2c: john may discard a card from his hand if and only if  the card matches the suit or the value of the top card
+22:46:45 * dmiles is reconding this for test data now :)
+22:46:51 <dmiles> rr recording
+22:47:20 <dmiles> should only take a couple hours to make sure it can do this
+22:48:14 <dmiles> i really started with a pretty simple subject verb object suystem
+22:48:25 <yottzumm> have to start somewhere
+22:48:47 <dmiles> yeah.. and it works good to see goals of descriptive text
+22:49:06 <dmiles> that way i make forward progress
+22:54:12 <yottzumm> e2c: a player may discard a card
+22:54:27 <dmiles> e2c: a player
+22:54:35 <dmiles> e2c: a human player
+22:54:38 <dmiles> e2c: a human 
+22:54:39 <CycLBot> "(#$thereExists ?Var   (#$and    (#$isa ?Var #$HomoGenus) ?SomeRelation))"
+22:54:40 <yottzumm> a person may discard a card
+22:54:50 <dmiles> e2c: a person
+22:54:51 <CycLBot> "(#$thereExists ?Var   (#$and    (#$isa ?Var #$Person) ?SomeRelation))"
+22:55:03 <dmiles> e2c: a person discarded a card
+22:55:14 <dmiles> e2c: a person dropped a card
+22:55:22 <dmiles> e2c: a person drops a card
+22:55:36 <yottzumm> a person gives a card to a person
+22:55:55 <dmiles> the 'may' needs to be put into its part of speech templates
+22:56:02 <yottzumm> e2c: a person gives a card to a person
+22:56:11 <dmiles> PP
+22:56:27 <dmiles> actually one sec while i add in a PP 
+22:56:33 <yottzumm> okay
+23:00:52 <dmiles> ok its dioable ..
+23:00:52 <dmiles> object_phrase(Obj,Prop,NPRule) --> noun_phrase(Obj,Prop,NPRule).
+23:00:53 <dmiles> object_phrase(Obj,Prop,Meaning) --> noun_phrase(Obj,Prop,NPRule), prepositional_phrase(Obj,Target,NPRule,Meaning).
+23:01:16 <dmiles> i just have to write the method fpr prepositional_phrase/4+2
+23:01:48 <dmiles> "to a person" == PP
+23:02:26 <yottzumm> would be cool if we could play crazy8s over IRC
+23:02:40 <yottzumm> or in a MUD
+23:03:41 <dmiles> haveing NL really speeds up all the ways to talk with Cyc
+23:08:42 <dmiles> so gives requires three slots
+23:08:53 <yottzumm> yes
+23:08:59 <dmiles> i need to make the PP comunicate the the thrird argument
+23:09:34 <dmiles> should be doable in the next hour
+23:09:42 <dmiles> (not a s3ec as a thought :)
+23:10:06 <dmiles> the thing that throws me off the most is quantifiers
+23:10:21 <dmiles> since they wrap the outhermost parts for the sentence
+23:10:35 <dmiles> so the verb gets moved into the deteminares
+23:11:04 <yottzumm> I've taken a couple of linguistics classes.  It can get very difficult
+23:11:06 <dmiles> i think verb parse needs to be central.. and delay the parse of the quantifiers to last
+23:11:27 <dmiles> yes its tangled but i have written successfull systems in the past
+23:11:34 <yottzumm> I wonder how much sexism is present in cyc
+23:12:05 <dmiles> well gendering in NL is somwewhat there in Cycs NL
+23:12:25 <dmiles> i was planning on doing agreement of tense and gender and 1,2,3 person
+23:12:45 <dmiles> then i saw more produictive 'cheats'
+23:13:00 <dmiles> that got me quicker to formulas even if inconsistent
+23:13:19 <dmiles> ;P
+23:14:39 <yottzumm> does the mud code handle giving between agents yet?
+23:14:58 <dmiles> yes.. it hadles it when its controlled by external process
+23:15:16 <dmiles> meaning that both clients understand that the transaction is happening
+23:15:30 <dmiles> otherwise its just teleporting an object under your control to another person
+23:15:57 <dmiles> for example..
+23:16:20 <dmiles> ask (in-ContGeneric CycLBot ?where)
+23:16:21 <CycLBot> (((?WHERE . Area1002)))
+23:16:46 <dmiles> assert (isa Player1 PlayerInstance)
+23:16:48 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+23:16:48 <CycLBot> (#$isa #$Player1 #$PlayerInstance)
+23:16:49 <CycLBot> was not well formed because:
+23:16:50 <CycLBot> Term #$PlayerInstance violates arg-isa #$Collection
+23:16:50 <CycLBot> applicable to argument 2 of relation #$isa
+23:16:51 <CycLBot> in mt #$PerceptionMt.
+23:16:52 <CycLBot> Term #$PlayerInstance
+23:16:54 <CycLBot> violates #$defnSufficient "#<(#$SetOfTypeFn #$SpacePoint)>"
+23:16:56 <CycLBot> of collection #$SetOrCollection
+23:16:58 <CycLBot> applicable to arg 2 of #$isa
+23:17:00 <CycLBot> (via #$elementOf)
+23:17:02 <CycLBot> in mt #$PerceptionMt.
+23:17:04 <CycLBot> Term #$PlayerInstance violates arg-isa #$SetOrCollection
+23:17:06 <CycLBot> applicable to argument 2 of relation #$isa
+23:17:08 <CycLBot> (via #$elementOf)
+23:17:10 <CycLBot> in mt #$PerceptionMt.
+23:17:12 <CycLBot> Term #$PlayerInstance violates arg-genls #$Thing
+23:17:14 <CycLBot> applicable to argument 2 of relation #$isa
+23:17:15 <dmiles> oops sometimes those can get long
+23:17:16 <CycLBot> in mt #$PerceptionMt.
+23:17:20 <CycLBot> Consider asserting
+23:17:22 <CycLBot> (#$isa #$Player1 #$PlayerInstance)
+23:17:24 <CycLBot> in mt #$JamudMt.")
+23:17:31 <dmiles> mt JamudMt
+23:17:40 <dmiles> assert (isa Player1 PlayerInstance)
+23:17:41 <CycLBot> T
+23:18:05 <dmiles> assert (in-ContGeneric Player1 Area1002)
+23:18:07 <CycLBot> org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Formula
+23:18:08 <CycLBot> (#$in-ContGeneric #$Player1 #$Area1002)
+23:18:08 <CycLBot> was not well formed because:
+23:18:09 <CycLBot> Term #$Player1 violates inter-arg-isa #$SpatialThing-Localized
+23:18:10 <CycLBot> applicable to argument 1 of relation #$in-ContGeneric
+23:18:10 <CycLBot> (via #$spatiallyRelatedTo)
+23:18:12 <CycLBot> when argument 2, #$Area1002, isa #$SpatialThing-Localized
+23:18:14 <CycLBot> in mt #$JamudMt.
+23:18:16 <CycLBot> Term #$Player1 violates inter-arg-isa #$SpatialThing-Localized
+23:18:18 <CycLBot> applicable to argument 1 of relation #$in-ContGeneric
+23:18:20 <CycLBot> (via #$spatiallyDisjoint)
+23:18:22 <CycLBot> when argument 2, #$Area1002, isa #$SpatialThing-Localized
+23:18:24 <CycLBot> in mt #$JamudMt.
+23:18:26 <CycLBot> Term #$Player1 violates inter-arg-isa #$SpatialThing-Localized
+23:18:28 <CycLBot> applicable to argument 1 of relation #$in-ContGeneric
+23:18:29 --- quit: CycLBot (Excess Flood)
+23:18:35 <dmiles> ops :)
+23:18:39 <dmiles> oops
+23:18:55 <dmiles> he'll come back when he's done
+23:19:13 <dmiles> he's blabbing and not aware of disconnectuion yet
+23:19:51 --- join: CycLBot (cyc@12-225-207-235.client.attbi.com) joined #opencyc
+23:20:10 <dmiles> well for doing stuff like this i should do in #cycbot
+23:20:23 <dmiles> so i dont flood channel logs
+23:20:46 <dmiles> but yeah the giving thing being in NL is a good idea.. so it happens in mud better
+23:21:12 <dmiles> if i targert the abilty to say things in english.. it helps the mud out 100%
+23:21:41 <dmiles> my real goal is to be able to descibe things.. then have them happen and show up in the mud
+23:22:06 <dmiles> i want authoring to be in english
+23:22:24 <dmiles> and even with rules
+23:22:46 <dmiles> its ambitious but i have done harder things in the past
+23:24:02 <dmiles> but difficutly in this case implies super cool results (not always been the case)
+23:25:05 * dmiles wonders why his caffeen coinsuption does not knick in until 11:30 at night
+23:27:51 <yottzumm> I just had 18 popsicles
+23:29:51 <dmiles> hehe
+23:37:01 <yottzumm> orange juice and sugar.
+23:40:16 <dmiles> ok have the support almost complete
+23:40:22 <dmiles> i just have to write       trans3_verb(Subj,Event,Obj,Target,VProp),
+23:40:30 <yottzumm> (cyc-assert '(#$and (#$GivingSomething #$fromPossessor #$JohnHand)
+23:40:30 <yottzumm> (#$GivingSomething #$toPossessor #$DiscardPile)
+23:40:30 <yottzumm> (#$GivingSomething #$objectOfPossessionTransfer #TenOfHeartsCard)) #$SBJMt)
+23:40:56 <yottzumm> gets Error: Undefined reader macro #T
+23:41:10 <dmiles>  #$TenOfHeartsCard
+23:41:21 <yottzumm> thanks
+23:42:05 <dmiles> it still does not seem well formed
+23:42:44 <yottzumm> I'm getting NIL back from cyc-assert
+23:43:12 <dmiles> (#$GivingSomething is a connection that describes events
+23:43:18 <dmiles> you want somethig like..
+23:43:50 <dmiles> (thereExists ?Event (and (isa ?Event GivingSomething) ...
+23:43:53 <yottzumm> create an event variable
+23:43:56 <yottzumm> okay thanks
+23:43:57 <dmiles> yep
+23:47:23 <dmiles> when you get it all formed.. let me see it
+23:47:31 <yottzumm> okay, working on it
+23:51:51 <yottzumm> maybe I need more Mts
+23:52:09 <dmiles> i bet that is part of it
+23:52:40 <dmiles> i wonder if you can genlMt InferncePSC :)
+23:53:01 <dmiles> InferncePCS gives you everything but in a consistant order
+23:53:53 <dmiles> but its better for you to figure out what Mts you need
+23:54:36 <yottzumm> I don't see problems with the Mts
+23:54:59 <yottzumm> just BaseKB and AgentGMt
+23:55:06 <dmiles> well you have #$GivingEnvent in in your scope? 
+23:55:10 <yottzumm> do I need to put them in the assert I am using?
+23:55:39 <yottzumm> You mean #$GivingSomething
+23:55:46 <dmiles> yeah
+23:56:08 <dmiles> yep you do
+23:57:03 <yottzumm> is querying different than asserting?
+23:57:08 <dmiles> yes
+23:57:24 <dmiles> Well you can query secific in your Mt
+23:57:46 <dmiles> but they folow the same scoping rules
+23:58:10 <yottzumm> how do I turn on debugging in CycL or SubL (I'm not sure I know the difference)
+23:59:28 <dmiles> well from the browser when you query tyou can look at the trace and places it looked and failed
+23:59:58 <dmiles> (thats how i would troubleshoot it)
+23:59:59 --- log: ended opencyc/02.06.02

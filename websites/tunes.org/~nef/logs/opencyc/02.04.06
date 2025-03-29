@@ -1,0 +1,874 @@
+00:00:00 --- log: started opencyc/02.04.06
+00:00:19 <dmiles> meaning should i keep them in speartate directories?
+00:00:29 <dmiles> or is it in Sync with CVS?
+00:56:30 --- quit: Nolan (Read error: 110 (Connection timed out))
+01:01:13 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+01:45:00 --- quit: Nolan (Read error: 110 (Connection timed out))
+03:01:44 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+03:13:44 <dmiles> where to find a copy of coabsgrid.v3.1.0.jar
+03:13:46 <dmiles> ?
+03:14:27 <dmiles> needed for org/opencyc/cycagent/coabs
+03:23:29 <stevereed_home> http://coabs.globalinfotek.com
+03:24:06 <stevereed_home> but its not needed if you dont include the coabs package
+03:24:45 <stevereed_home> fipa-os is comparable and open source, and the jar file is on source forge
+03:25:33 <stevereed_home> java source in sync with cvs, and the java source will be updated frequently
+03:25:55 <stevereed_home> you can preserve a jar file for production use
+03:26:11 <stevereed_home> back to bed..
+03:26:23 <dmiles> ok good .. i am doing the ant build..
+03:26:30 <dmiles> thank you
+03:27:45 <dmiles> i think i have every depended jar except that last one now.. i am going to temporrly waack some refernces to it
+03:34:19 <dmiles> ok excelebnt only three external refernces to colab
+03:34:21 <dmiles>  [javac] /opt/sourceforge/logicmoo/src/org/opencyc/api/RemoteCycConnection.java:12: package org.opencyc.cycagent.coabs does not exist
+03:34:21 <dmiles>     [javac] import  org.opencyc.cycagent.coabs.*;
+03:34:21 <dmiles>     [javac] ^
+03:34:21 <dmiles>     [javac] /opt/sourceforge/logicmoo/src/org/opencyc/cycagent/GenericAgent.java:14: package org.opencyc.cycagent.coabs does not exist
+03:34:22 <dmiles>     [javac] import org.opencyc.cycagent.coabs.*;
+03:34:24 <dmiles>     [javac] ^
+03:34:26 <dmiles>     [javac] /opt/sourceforge/logicmoo/src/org/opencyc/cycagent/Echo.java:8: package org.opencyc.cycagent.coabs does not exist
+03:34:29 <dmiles>     [javac] import org.opencyc.cycagent.coabs.*;
+03:34:37 <dmiles> but i commented out the import and it works just fine.. i am set
+04:49:19 --- quit: Nolan (Read error: 110 (Connection timed out))
+05:02:20 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+05:19:04 --- quit: bbz (Remote closed the connection)
+05:34:24 --- quit: Nolan (Read error: 110 (Connection timed out))
+05:47:59 --- quit: Webmonkey (Excess Flood)
+05:59:03 --- join: eca-home (~spy@cs2874-71.austin.rr.com) joined #opencyc
+05:59:27 <eca-home> good morning (:
+06:03:29 <eca-home> Steve, have you seen the latest download counts?  It's, like, over 1000!  I wonder why they are all being so quiet...
+06:28:43 --- join: kirk (~kirk@24.103.176.20) joined #opencyc
+06:28:52 <eca-home> mornin'
+06:31:32 <kirk> morning, just using a new client and not used to it yet.
+06:32:00 --- join: johndcyc (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+06:32:04 <eca-home> Yeah, I started using BitchX last week and haven't gotten used to it yet, but now I'm at home on good ol' mirc
+06:32:08 <eca-home> morning john
+06:32:20 <eca-home> John, have you seen the latest download counts?  It's, like, over 1000!  I wonder why they are all being so quiet...
+06:32:21 <johndcyc> hey
+06:32:24 <johndcyc> 798
+06:32:35 <eca-home> yup, that's over 1000 total, including auspex
+06:32:53 <johndcyc> what's happening on auspex. can you get a count?
+06:32:59 <eca-home> ask Graham
+06:33:14 <johndcyc> I haven't posted a link to auspex yet, because I want to make sure we can count
+06:33:21 <johndcyc> i emailed steve and graham
+06:33:26 <eca-home> we almost beat out the RoboCup soccer sim (:
+06:33:59 <johndcyc> but really, do you have a sense of how 1000 in 2 days compares to other intros?
+06:34:14 <johndcyc> gotta be pretty good for a 40meg download, linux only
+06:34:25 <eca-home> also given that we hardly advertised at all...
+06:34:33 <johndcyc> right
+06:34:47 <johndcyc> steve put us on freshmeat
+06:35:13 <eca-home> but any freshmeat hits wouldn't have been counted in the 1000 yet, sf is slow at updating their D/L and stats pages
+06:35:23 <eca-home> unrelated topic: anyone here know anything about ArianneRPG?
+06:35:38 <johndcyc> do you want to hear combined stats for cyc.com and opencyc.org (all I can get right now)
+06:35:46 <johndcyc> true (about fresh meat)
+06:35:48 <eca-home> sure, gimme the stats
+06:36:12 <johndcyc> we've had 10,000 page hits since 2pm yesterday
+06:36:27 <eca-home> wow, cool.  what's the usual average?
+06:36:44 <johndcyc> who knows
+06:36:46 <johndcyc> they have
+06:36:51 <johndcyc> oops
+06:37:09 <johndcyc> they haven't had the software running for months until yesterday
+06:37:20 <eca-home> heh
+06:37:20 <johndcyc> i know its much lower
+06:37:37 <johndcyc> usually about 800-1200 a day
+06:38:27 <johndcyc> already this am, we're up to about 65% percent of yesterday 2pm to midnight
+06:38:46 <johndcyc> we started logging around 2pm yesterday
+06:38:52 <kirk> johndcyc do you know if anyone else is having problems getting pdf files?  I'm getting 403 errors.
+06:39:02 <eca-home> I thought you fixed those...
+06:39:06 <eca-home> I'm going to rephrase my earlier question in the form of a CycL query: (thereExists ?PER (and (isa ?PER Person) (onIRCChannel ?PER (IRCChannelFn "opencyc")) (knowsAbout ?PER ArianneRPG)))
+06:39:13 <eca-home> If anyone does, /msg me please
+06:40:09 <eca-home> I'm interested in seeing if ArianneRPG could be hooked up to OpenCyc (:
+06:40:49 <johndcyc> have you seen dmiles talking about the text adventure he's working on hooking up to Cyc
+06:41:05 <eca-home> oh yeah, the hammer in the twisty passage guy
+06:41:40 <eca-home> that would be cool but wouldn't he need parsing for that?  is he planning on writing his own English -> CycL parser?
+06:41:46 <johndcyc> yeah, that's actually the example from the home page of logicmoo -- or mu
+06:41:58 <eca-home> oh, sounds cool
+06:42:54 <johndcyc> kirk, sorry just saw your message
+06:43:26 <johndcyc> no. on day 1, people were having access problems but we fixed it
+06:43:28 <johndcyc> I
+06:43:34 <johndcyc> I'll test again
+06:44:04 <kirk> I'm on the page now and still getting them.
+06:44:45 <johndcyc> oh, I'm seeing them again (or still) also
+06:45:22 <johndcyc> sorry, thought we fixed that. just a file permissions thing, should have been simple
+06:45:52 <johndcyc> i'll have to get hold of a sysadmin to fix
+06:46:17 <johndcyc> might be monday, unless I can catch one on the weekend.
+06:46:44 <kirk> anywhere else I can snair the files?
+06:48:55 <johndcyc> thinking
+06:50:10 <kirk> BTW, I apologize for last night saying the file index didn't change, it did but it was only a line or two so I didn't notice.
+06:50:18 <johndcyc> since I can't get the zipped powerpoint versions either right now...
+06:50:27 <johndcyc> I can't pdf them at home and mail them to you
+06:50:47 <kirk> .any chance of getting .txt?
+06:51:46 <kirk> I can convert if it's not possible.
+06:52:35 <johndcyc> i'm thinking i should extract the text for you anyway, once i can get my hands on the files (i'm home now)
+06:53:11 <kirk> I appreciate it. I'm at kirk@braille.uwo.ca
+06:53:11 <johndcyc> there are some tutorials that are probably a lot more text friendly and overlap on some of the info presented
+06:53:16 --- join: nefph (ZQWER@dialup-65.58.223.198.Dial1.Portland1.Level3.net) joined #opencyc
+06:55:28 <johndcyc> check out kb browser reference and using the opencyc web interface
+06:56:43 <kirk> where?
+06:57:26 <johndcyc> from main documentation page, kb browser reference is toward end of 'getting started' section
+06:58:33 <johndcyc> other one is under knowledge entry section, under the heading OE reference documents
+07:00:11 <johndcyc> gotta go for now
+07:00:14 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+07:00:17 <eca-home> see ya john
+07:02:56 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+07:03:15 <kirk> That's great John, thank you very much.
+07:07:23 --- quit: dmiles (Read error: 113 (No route to host))
+07:21:23 --- join: johnd___ (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+07:32:50 --- nick: nefph -> dmiles
+07:33:07 <dmiles> good morning
+07:33:11 <johnd___> hi
+07:34:02 <dmiles> you guys are on an awefull lot ;P
+07:34:16 <dmiles> is Cyc a 24/7 job and interest?
+07:34:44 <johnd___> actually, I've gotta go now, to play legos...
+07:34:57 <johnd___> ...with my daughter
+07:35:05 <johnd___> so long
+07:35:19 <dmiles> take care, have the fun
+07:35:26 --- quit: johnd___ ()
+07:37:11 <eca-home> hello dmiles (:
+07:37:27 <dmiles> hello .. good morning
+07:37:28 <eca-home> I'm bored because I woke up early and nobody else here is awake yet
+07:37:34 <eca-home> but yes, I am obsessed with Cyc (:
+07:37:39 <dmiles> ah ;P
+07:37:57 <eca-home> I posted on LogicMOO open discussion this morning
+07:38:44 <dmiles> execellent now that cyc is out there are very little blockers.. to it
+07:38:55 <dmiles> i was trying to clone cyc for a while (in a diffenrt system)
+07:39:14 <eca-home> stevereed did that once (:
+07:39:20 <dmiles> did well but not having the workforce it was very slow process
+07:39:22 <eca-home> it made a strong argument for why we should hire him (:
+07:39:55 <dmiles> where was he at before?'
+07:40:15 <dmiles> was it in the stanford db area?
+07:40:22 <eca-home> no, it was some power company in florida or something
+07:40:27 <eca-home> ask him (:
+07:41:07 <dmiles> will do 
+07:41:25 <eca-home> so, how did your Cyc clone end up?
+07:41:48 <dmiles> very well could outperform in many ways but not having the complete coverage areas cyc does
+07:42:01 --- part: kirk left #opencyc
+07:42:12 <dmiles> for example a forward chaining macro...
+07:42:18 <eca-home> so, it does backchaining and theorem proving etc., but doesn't have many HL modules?
+07:42:21 <dmiles> that propogates green balls
+07:42:37 * eca-home is colour blind -- can never tell between asserted default and deduced
+07:42:52 <dmiles> deduced.. it was too cautous to make deduced
+07:43:22 <dmiles> it was so overly cautous it never had the ability to move aheadf
+07:43:27 <eca-home> so, it just didn't do forward inference at all?
+07:43:56 <dmiles> yes.. when it felt it had come up with something solid durring something backchained
+07:44:02 <dmiles> it cached that asertion as a gaf
+07:44:17 <dmiles> but forward is just backwards turned around
+07:44:22 <eca-home> ah, I see.  So you had only asserted arguments, no deductions, no TMS.
+07:44:42 <dmiles> made TMS.. but never weathered it against real use
+07:44:45 <eca-home> You forgot why you cached it, so you had to be overly cautious in what you cached.
+07:44:53 --- join: graylensman (~ray@fl-wbu2c6-167.pbc.adelphia.net) joined #opencyc
+07:44:58 <dmiles> i wrote down the proof of the cache
+07:45:31 <graylensman> dmiles: Imagine finding you here :0
+07:45:34 <dmiles> so it was retractable or could disappear if a subrule disapeared
+07:45:45 <eca-home> sounds exactly like TMS (:
+07:46:08 <dmiles> but the ammount of time (developer hours) was not very good for a complete system
+07:46:25 <dmiles> so one could see the huge todo list
+07:46:32 <eca-home> sounds like maybe you are a member of the Steve Reed Club, and should submit your resume to Cycorp (;
+07:47:28 <dmiles> i may be .. i am working on getting the foundation of the logicMOO set up this month.. then next month definately i would like to
+07:47:40 <eca-home> your logicMOO sounds really interesting.
+07:48:27 <dmiles> thank you
+07:48:46 <dmiles> you can see how it could be nice to walk into a cyc kb
+07:49:44 --- quit: Nolan (Read error: 110 (Connection timed out))
+07:49:58 <dmiles> the project was started a couple years ago..
+07:50:16 <dmiles> when mixed with the MS Virtual Worlds Server and a Prolog Engine
+07:50:50 <dmiles> but MS VW was decommisioned.. just about the time i went to work for Teknowledge
+07:51:00 <eca-home> oh, you worked for Teknowledge?
+07:51:11 <eca-home> Do you know Jim Just or Adam Pease?
+07:51:18 <dmiles> Adam Pease
+07:51:22 <eca-home> cool
+07:52:05 <dmiles> yes we got along good but my deleviery times were not always that great
+07:52:25 * stevereed_home is back (gone 10:09:43)
+07:52:30 <eca-home> I haven't actually met him, just heard about him
+07:52:44 <stevereed_home> 'morning
+07:52:49 <eca-home> good morning steve!  have you seen the latest download counts?
+07:52:53 <dmiles> very smart guy.. very polite.. and pretty young
+07:52:55 <stevereed_home> yep!
+07:53:14 <stevereed_home> Adam is well respected in DAML
+07:53:20 <stevereed_home> great communicator
+07:53:23 <stevereed_home> likes cyc
+07:53:35 <dmiles> Youndf as in years .. been into AI all his life
+07:53:43 <stevereed_home> i posted to freshmeat last evening
+07:53:55 <stevereed_home> registered our project there
+07:54:18 <stevereed_home> also announced tool availability at www.daml.org
+07:54:24 <stevereed_home> umbc agent web
+07:54:40 <stevereed_home> www.semanticweb.org '
+07:54:54 <eca-home> so the hits will probably go even higher soon (:
+07:55:14 <stevereed_home> i suppose 3k dnloads monthly
+07:55:45 <dmiles> steve: was able to get my java build issue taken care of with just three commenting outs after mv'ing coabs from build path
+07:57:04 <dmiles> so now i am making a File Http Upload + Line By line assertion into a chosen Mt
+07:57:16 <stevereed_home> I saw that, and I don't want the build to depend on coabs (restricted use)
+07:57:35 <stevereed_home> very cool
+07:57:35 --- join: bruce (~bruce@dnvrdslgw17poold45.dnvr.uswest.net) joined #opencyc
+07:57:47 <eca-home> welcome bruce
+07:57:57 <bruce> hello
+07:58:05 <stevereed_home> i am thinking hard about cyc's security model
+07:58:19 <stevereed_home> needs on like java before we can do p2p
+07:58:33 <stevereed_home> the api now supports the sandbox
+07:58:47 <dmiles> I think if the order of assertions in the file is not right, not sure how to signal the user yet, for example an important argIsa may appear too late
+07:58:55 <eca-home> steve: there was a working group who came up with some ideas for Cyc's security model a while ago, I'll /msg you the details
+07:59:12 <stevereed_home> got them already in part
+07:59:24 <stevereed_home> process the file in a batch
+07:59:31 <stevereed_home> several passes if required
+07:59:54 <dmiles> yes i see .. isa first genls second.. and so on
+07:59:54 <eca-home> that might not work if there are unasserts/kills though
+08:00:07 <stevereed_home> eca is right and really knows
+08:00:16 <stevereed_home> constants first, mts second
+08:00:27 <stevereed_home> predicate defs next
+08:00:27 <eca-home> right.
+08:00:36 <stevereed_home> then collections defs
+08:00:53 <stevereed_home> then you can add arg constraints to preds
+08:00:56 <eca-home> for a particular constant, isa first genls second is a good rule of thumb.  in general, proper serialization of a transcript is quite a hard problem
+08:01:25 <stevereed_home> our rkf tools work with dialog on each term to get it right
+08:01:33 <stevereed_home> got to go (cactus show)
+08:01:37 * stevereed_home is away: I'm busy
+08:01:45 <dmiles> see you later
+08:02:14 <dmiles> well first i am pulling the KIF/CycL into a bunch of CycLists
+08:02:41 <dmiles> (java API term not the authors)
+08:02:54 <eca-home> CycLists vs. Cyclists, I got it (:
+08:03:01 <eca-home> I am case-sensitive (:
+08:03:10 <dmiles> :P
+08:03:31 <bruce> dmiles: you are looking to use opencyc in logicmoo?
+08:03:50 <dmiles> so then, i'll loop thrue the collection of lists starting from each kind of first argument
+08:03:54 <eca-home> So then you want to sort the CycLists in the right order to assert them?
+08:04:00 <eca-home> right
+08:04:01 <dmiles> yes now that it is released yes
+08:04:36 <dmiles> yes that seems to be a method that should work
+08:05:10 <dmiles> if there are too many problems with the file semantically i bet it might be good toback rthe whole thing out
+08:05:23 <bruce> dmiles: Will you have time/interest/etc in talking in a couple of hours? I don't want to distract you from your current work.
+08:05:53 <eca-home> you can get the wff errors from the API, right?
+08:06:05 <dmiles> sure, i just finished some UI based things and need a chat break
+08:06:14 <eca-home> here's the sort order i would suggest, which is pretty much what stevereed suggested.
+08:06:21 <eca-home> All constant-creates first.
+08:06:29 <dmiles> go on eca
+08:06:43 <eca-home> All microtheory definitions (isa and other definitional assertions) second.
+08:07:09 <eca-home> All predicate definitions (isa, arity, argIsa, and other definitional assertions) third.
+08:07:49 <eca-home> All collection definitions, in descending order of type, fourth.
+08:08:08 <eca-home> e.g. ThirdOrderCollections, then SecondOrderCollections (CollectionTypes), then Collections which genls Individual.
+08:08:21 <eca-home> All other constant definitions fifth.
+08:08:34 <eca-home> Then all other assertions -- the non-definitional ones.
+08:09:10 <eca-home> That should work for most stuff.
+08:09:24 <johndcyc> eca, we're going to be adding transcript-like performatives to CycML
+08:09:24 <eca-home> Is #$OpenCycDefinitionalPredicate in OpenCyc?
+08:09:25 <dmiles> pasted into text document
+08:09:35 <johndcyc> i think it is, it's supposed to be
+08:09:42 <johndcyc> ? for eca...
+08:09:48 <eca-home> that will give you a better extent of what I mean by "definitional" above
+08:10:02 <eca-home> yes john?
+08:10:04 <johndcyc> is it better to maintain a transcript-like ordering if you can?
+08:10:18 <johndcyc> or is it more robust (but slower) to do what you're describing
+08:10:18 <dmiles> (#$isa ?ToHandleStepThree #$OpenCycDefinitionalPredicate)
+08:10:43 <eca-home> to handle steps 2-5
+08:11:02 <dmiles> yes
+08:11:11 <eca-home> When I say "all foo definitions" I mean all gaf assertions with a predicate which is an instance of OpenCycDefinitionalPredicate
+08:11:26 <dmiles> yup
+08:11:54 <eca-home> (and (isa ?GAF CycLClosedAtomicSentence) (argN ?GAF 0 ?PRED) (isa ?PRED OpenCycDefinitionalPredicate))
+08:12:00 <dmiles> its better to query them out then to write them in code
+08:12:07 <eca-home> right-o
+08:12:15 <eca-home> probably worth caching tho
+08:12:34 <johndcyc> so then we shouldn't have an ordering? or should it be an option?
+08:12:48 <eca-home> john -- all that is necessary is a partial order.
+08:12:59 <eca-home> both my ordering and a transcript-like ordering meet the partial order.
+08:13:25 <eca-home> I think the transcript-like ordering is more intuitive and dialog-ish, and the one I just gave is easier to sort by if you start with an unsorted list.
+08:14:08 <eca-home> (and (isa ?GAF CycLClosedAtomicSentence) (operatorFormulas ?PRED ?GAF) (isa ?PRED OpenCycDefinitionalPredicate))
+08:14:15 <eca-home> I forgot about operatorFormulas for a sec there
+08:15:05 <dmiles> (operatorFormulas ?PRED ?GAF) always pull ?PRED olny if Atomic?
+08:15:40 <eca-home> the arg2 of operatorFormulas ought to be CycLAtomicFormula or something like that
+08:15:52 <eca-home> I don't have a Cyc in front of me right now so I'm just going from memory
+08:16:06 <eca-home> I made operatorFormulas, so I hope I didn't botch the arg constraints (;
+08:17:01 <dmiles> we can always deal with it as it comes
+08:17:14 <dmiles> (isa ?GAF CycLClosedAtomicSentence) <- does that ensure a it is not a rule?
+08:17:32 <eca-home> yes, a rule cannot be closed
+08:17:39 <eca-home> nor atomic (:
+08:17:58 <dmiles> right ;)
+08:18:02 <eca-home> hmm, well I guess (isa ?X Thing) could be considered an atomic rule.
+08:18:11 <eca-home> with the implicit forAll
+08:18:49 <dmiles> the open/closedness is the quantification correct?
+08:19:03 <eca-home> Open = free variables, Closed = no free variables
+08:19:19 <eca-home> an example of a non-free variable would be the ?X in (TheSetOf ?X (isa ?X Dog))
+08:19:24 <eca-home> which is coExtensional with Dog
+08:19:42 <eca-home> that is a CycLClosedNonAtomicTerm
+08:19:50 <eca-home> because the ?X is scoped by TheSetOf
+08:19:54 <eca-home> (scopingArg TheSetOf 1)
+08:20:01 <eca-home> (isa TheSetOf ScopingRelation)
+08:20:36 <dmiles> is forAll a ScopingRelation?
+08:20:46 <dmiles> ;P (strange question)
+08:21:01 <eca-home> hmm, I'd have to say yes
+08:21:12 <eca-home> but it would only come up inside modals, for instance:
+08:21:30 <eca-home> (beliefs DMiles (forAll ?X (isa ?X Thing)))
+08:21:44 <eca-home> (isa (beliefs DMiles (forAll ?X (isa ?X Thing))) CycLClosedAtomicSentence)
+08:22:29 <dmiles> hrrm intersting
+08:22:32 <eca-home> So, if you stuck the implicit universal quantification around every CycL sentence, EVERYTHING would be closed
+08:22:58 <dmiles> right.. assuming that invisable forALL is supposed to be arround everyhting
+08:23:23 <eca-home> it always takes the outermost scope (top-level) around any CycL sentence.
+08:24:04 <dmiles> so if i had a singleton varable.. then it is univerally quantified but only when in a consequent
+08:24:14 <dmiles> or in a Gaf
+08:24:32 <eca-home> it's universally quantified anywhere you use it, at the top-level.
+08:24:41 <eca-home> give me an example and I'll give you a clearer answer (:
+08:24:42 <dmiles> if in the anteceedant i would think it to be a existentually quantified variable
+08:25:49 <eca-home> Yes, because (equiv (implies X Y) (or (not X) Y)), and (equiv (not (forAll ?X ?P)) (thereExists ?X (not ?P)))
+08:26:03 <dmiles> (beliefs DMiles (forAll ?X (and (isa ?X Thing) (isa ?X OtherClass)))
+08:26:08 <dmiles> oops
+08:26:14 <dmiles> (beliefs DMiles (forAll ?X (and (isa ?X Thing) (isa ?X ?OtherClass)))
+08:26:36 <eca-home> did you mean implies instead of and?
+08:27:05 <dmiles> (beliefs DMiles (forAll ?X (implies (isa ?X ?OtherClass) (isa ?X Thing) ))  <- err better
+08:27:11 <dmiles> yeah kinda ;P
+08:27:48 <dmiles> so in that case ?OtherClass i meant as existential
+08:28:18 <dmiles> (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) )
+08:28:28 <dmiles> ?X is implicitly universal
+08:28:45 <eca-home> ah, here is a place where it's important to have the explicit forAll.
+08:28:53 <eca-home> let me explain.
+08:29:01 <eca-home> sentence 1 = (beliefs DMiles (forAll ?X (implies (isa ?X ?OtherClass) (isa ?X Thing) ))
+08:29:08 <eca-home> sentence 2 = (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) )
+08:29:18 <eca-home> sentence 2 = (forAll ?X (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) ))
+08:29:24 <eca-home> by the implicit universal quantification.
+08:29:33 <eca-home> sentence 1 means (hold on)
+08:29:36 <dmiles> 1 and 3 are very differnt?
+08:29:53 <eca-home> 2 = 2, there is no 3 (:
+08:30:06 <dmiles> ah :P
+08:30:18 <eca-home> sentence 1 means that you believe that everything that is something is a thing.
+08:30:39 <Seth> wait, are you saying that 2 means the same thing as 3 ??
+08:30:59 <eca-home> sentence 2 means that you believe many things: that you believe that everything that is a dog is a thing, you believe that everything that is a thing is a thing, you believe that everything that is a collection is a thing, etc, etc.
+08:31:29 <eca-home> sentence 2 = (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) )
+08:31:34 <eca-home> sentence 3 = (forAll ?X (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) ))
+08:31:41 <eca-home> (equiv Sentence2 Sentence3)
+08:31:54 <eca-home> because of CycL's implicit universal quantification
+08:32:10 <eca-home> (not (equiv Sentence1 Sentence2))
+08:32:18 <eca-home> (not (equiv Sentence1 Sentence3))
+08:32:33 <dmiles>  sentence 4 =  (thereExists ?OtherClass (forAll ?X (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) ))) 
+08:33:14 <dmiles> is the quanifier order important between thereExists and forAll ?
+08:33:30 <eca-home> yes!
+08:33:35 <eca-home> sentence 4 stil implies that you have billions of beliefs.  for example:
+08:34:09 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa DMiles ?OtherClass) (isa DMiles Thing))))
+08:34:16 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa Thing ?OtherClass) (isa Thing Thing))))
+08:34:16 <dmiles> Seth, finally a logic chnnel on irc :P
+08:34:22 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa Dog ?OtherClass) (isa Dog Thing))))
+08:34:29 <Seth> :)
+08:34:31 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa Collection ?OtherClass) (isa Collection Thing))))
+08:34:42 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa Individual ?OtherClass) (isa Individual Thing))))
+08:34:50 <eca-home> (thereExists ?OtherClass (beliefs DMiles (implies (isa Germany ?OtherClass) (isa Germany Thing))))
+08:34:52 <eca-home> see my point?
+08:35:23 <dmiles> yes becasue ?X will get the forAll in all cases
+08:35:34 <eca-home> if the forAll is outside the beliefs, it means you have a bunch of beliefs.  If it's inside, it means you believe a universal to be true.
+08:35:51 <dmiles> since the order of evaluation is not supposed to be predicated
+08:36:06 <eca-home> this has nothing to do with evaluation, it's just logical truth.
+08:36:09 <dmiles> (isa ?X Thing) 
+08:36:35 <eca-home> sorry, I'll let you finish (:
+08:37:04 <dmiles> so then, (thereExists ?OtherClass (beliefs DMiles (implies (isa Dog ?OtherClass) (isa Dog Thing))))
+08:37:21 <eca-home> That is logically implied by sentence 4.
+08:37:35 <dmiles> i see .. it truely is.
+08:38:01 <dmiles> so therefore the thereExists is not nessisary
+08:38:16 <dmiles> it could even have been a forAll
+08:38:25 <eca-home> if you leave out the thereExists, it will implicitly become a forAll, which will change the meaning.
+08:38:31 <dmiles> oh oops
+08:38:42 <dmiles> what would be the diffence then?
+08:38:57 <eca-home> I'll paraphrase in english, after restating the CycL
+08:39:12 <eca-home> sentence 4 =  (thereExists ?OtherClass (forAll ?X (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) ))) 
+08:39:29 <eca-home> sentence 5 = (forAll ?OtherClass (forAll ?X (beliefs DMiles  (implies (isa ?X ?OtherClass) (isa ?X Thing) ))) 
+08:40:14 <eca-home> sentence 4 = "There is some collection such that DMiles believes that every thing that is a member of that collection is a thing.
+08:40:31 <eca-home> sentence 5 = DMiles believes that every thing that is a member of all collections is a thing.
+08:40:47 <eca-home> no, wait
+08:40:50 <eca-home> i screwed up
+08:41:01 <eca-home> sentence 5 = DMiles believes that every thing that is a member of some collection is a thing.
+08:41:23 <eca-home> or, more tersely:
+08:41:32 <eca-home> sentence 5 = DMiles believes that every thing that is something is a thing.
+08:41:40 <eca-home> heh (:
+08:42:38 <dmiles> 5 = (implies (beliefs DMiles (isa ?X ?OtherClass) )  (beliefs DMiles (isa ?X Thing))) ?
+08:43:19 <eca-home> that doesn't follow unless DMiles's beliefs are closed under logical implication, which is not true for any finite agent.
+08:44:07 <dmiles> ah interesting.. befilefs would not have an asertion that would result int that
+08:44:13 <eca-home> modals are tricky, because you can't perform logical equivalence substitution inside them without being especially careful.
+08:44:33 <Seth> newbe question:  what does 'closed under logical implication' mean?
+08:44:57 <dmiles> meaning the varible is on both sides of the formula
+08:45:03 <dmiles> right?
+08:45:29 <eca-home> beliefs being closed under logical implication would mean:
+08:46:04 <eca-home> (implies (and (beliefs ?SOMEGUY ?PROP1) (implies ?PROP1 ?PROP2))) (beliefs ?SOMEGUY ?PROP2))
+08:46:49 <Seth> well shucks, i got to mentograph that one :)
+08:46:52 <eca-home> If beliefs were closed under logical implication, then anyone who believed set theory would also believe Fermat's Last Theorem
+08:47:02 <dmiles> becasue ?SOMEGUY may not knows or beliefs the implication
+08:47:13 <eca-home> because Fermat's Last Theorem is a logical consequence of the axioms of set theory
+08:47:33 <eca-home> Right.  A weaker rule would be:
+08:47:47 <eca-home> (implies (and (beliefs ?SOMEGUY ?PROP1) (beliefs ?SOMEGUY (implies ?PROP1 ?PROP2)))) (beliefs ?SOMEGUY ?PROP2))
+08:48:16 <eca-home> which says that if they believe the implication and the consequent, then they also believe the antecedent.
+08:48:26 <eca-home> But even that rule is too strong to be true of humans.
+08:48:34 <eca-home> or rational agents in general.
+08:48:50 <eca-home> Seth: mentograph? (:
+08:49:13 <eca-home> CycL is a pain without indentation ):
+08:49:49 <eca-home> I've got to go for a bit, I'll be back probably ½ an hour to an hour, unless I fall asleep (:
+08:49:51 <Seth> http://robustai.net/mentography/mentography.html
+08:49:57 <eca-home> nice chatting logic with y'all (:
+08:49:58 <eca-home> bbiab
+08:50:07 <dmiles> i am still boning up on my formal logic theory thare are many things that a seasoned logican can spot
+08:50:36 <dmiles> i have to run to the supermarket.. will return in 15 minutes
+08:54:11 --- join: kirk (~kirk@24.103.176.20) joined #opencyc
+09:01:02 <dmiles> back.. hi bruce
+09:01:21 <dmiles> (and graylensman)
+09:01:58 <dmiles> graylensman, i am consitrating more on ussing cyc now then that altranate system for now (FYI)
+09:02:37 <dmiles> since cyc is much more mature and not just one man in the garage
+09:03:26 <dmiles> and that man cant simulatainouly task while i am busy doing other things
+09:03:32 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+09:03:58 <bruce> oh, Nolan.
+09:04:02 <bruce> hey dmiles
+09:05:18 <dmiles> holla
+09:06:26 <bruce> dmiles: I was curious to hear what sort of approach you were taking with logicmoo ... if you're doing a lot of runtime querying, some sort of caching, generating code from the system instead and using that code (so the ontology becomes something of a meta-programming device), or what. :)
+09:07:43 <dmiles> well the real intent was to provide a place to try out modal axioms about agents and collect (abduct) axioms
+09:08:04 <dmiles> but getting there seemed just as easy to be very meta-
+09:08:28 <dmiles> its where you decide to break off what is meta- or not
+09:08:57 <dmiles> so when working toward an infrastructure it seemed good to stay in infernce domains
+09:09:21 <dmiles> for waht would be called low level 
+09:09:46 <dmiles> like doing a member walk on a tree to find the right property
+09:10:20 <dmiles> that is what i would call the meta-saide of it.. 
+09:10:40 <dmiles> yes oh i re-read your question
+09:11:00 <dmiles> yes the idea is that a forward chaining KB would create the world
+09:11:14 <dmiles> so its to curcumvent tons of programming
+09:11:25 <dmiles> but making rules about how the world would work
+09:11:42 <bruce> okay, I'm personally really tired of 'tons of programming' and that's why I'm interested as well.
+09:11:44 <dmiles> then seeing if the world looks that way afterwards
+09:12:30 <bruce> the game that I work on is not using anything like a KB, so all of the complexity is always hand-coded.
+09:12:30 <dmiles> the moo is supposed to be like the SHRDLU playground for an expert system
+09:13:17 <bruce> ahh, okay. how workable do you think it might be for an actual system/usage? (either your specific implementation or the general concept)
+09:13:34 <dmiles> yes you can eifghter write your code to bne very generic.. but then you place the burden on users to make the objects interesting
+09:13:46 <bruce> i have various fears, but I have no idea how valid those fears are.
+09:13:51 <dmiles> or you write it specific and then have to predict everything you ever weant
+09:14:32 <dmiles> this was why Mud vs Moo .. Mud won
+09:14:48 <dmiles> but we need something very in between
+09:15:19 <dmiles> well it depends on Cyc
+09:15:38 <dmiles> (the system usage hit)
+09:16:06 * bruce nods.
+09:16:20 <dmiles> it is really about 3 weeks off between really knowing what it will be like
+09:16:45 <bruce> but another side of system usage is memory consumption and the ability to be disk-based .. the game I work for has a object DB that is about 2.7G
+09:17:18 <dmiles> thats excellently large
+09:17:57 <dmiles> well then you must expect that only your machines will run it for now 
+09:18:27 <dmiles> which is good.. i think most people have a gig of ram nowadays
+09:18:34 <dmiles> or at least 1/2 gig
+09:19:28 <bruce> right, but what happens when your rule system is larger than can fit into memory? (and you don't need all of it loaded all the time .. is OpenCyc capable of operating in a disk-based manner?)
+09:19:29 <dmiles> but it sure would be nice to keep it all in memory
+09:20:05 <dmiles> openCyc has some demands placed on it from all dirrections for improvem,ents if it falls short in any area
+09:20:41 <dmiles> meaning someone may already have a billion axioms waiting to throw at it
+09:20:54 <dmiles> and waiting for cyc to scale up 
+09:20:58 <dmiles> if it cant yet 
+09:21:22 <dmiles> and cyccorp will inevidably be tasked to make it work to the billion axioms guy :)
+09:21:56 <dmiles> its kinda the same true for MS supporting MSSQL
+09:22:24 <dmiles> if it does something very badly.. someone will fix it
+09:22:43 <bruce> right .. I've had to fix various parts of our software to scale better.
+09:23:10 <dmiles> but knowing where it is at right this moment.. or how quickly something could add or deteriorate it.. hard to know
+09:23:28 <bruce> but it wasn't clear to me whether or not a disk-based (or some other) strategy was something that had been done before or was an understood problem .. or more of a research project that may or may not materialize.
+09:24:25 <dmiles> well i think cyc is looking at kb grids that shuffle knowledge about..
+09:25:11 <dmiles> or maybe not .. not sure maybe they plan to distruibute single queries as well
+09:25:43 <eca-home> I think OpenCyc has a limit of somewhere between 0.5GB and 2GB
+09:25:43 <dmiles> but i think Cyc core probly plans on that everythi8ng is in memory
+09:25:45 <eca-home> re (:
+09:26:06 <dmiles> and then hopes the virtual memory manger treats it well
+09:26:59 <dmiles> but what does .5GB mean :) ?
+09:27:19 <eca-home> um, about 500 MB? (:
+09:27:20 <dmiles> if they are all 64bit integergs denoting constants..
+09:27:29 <eca-home> Yeah, currently we rely on VM a lot, but we have plans to reduce that dependency.  A first step towards that was changing the way the bookkeeping assertions are stored.
+09:27:54 <eca-home> Have you noticed how when you create a new term, you get the little bookkeeping assertions with the little cyc logo that says when you created the term, and who created it?
+09:28:16 <eca-home> And they have the cyc logo next to them instead of the green/yellow/white ball?
+09:28:21 <dmiles> that is prolog kernel strategy .. the AtomTable (bookkeeping) 
+09:28:29 <eca-home> That's because they're a different type of assertion that's stored differently.
+09:28:46 <eca-home> Currently they're stored in memory too, but it would easy to put them out on disk or something, and page in only as needed
+09:28:58 <eca-home> this approach is extensible to other types of assertions as well.
+09:29:20 <dmiles> it seems like cyc interanlly could never have to see the text of a constant
+09:29:31 <eca-home> And then there's always dynamic access to data via HL modules, caching what you need in the KB, but dynamically querying a DB as required by inference.
+09:29:42 <eca-home> the text of a constant?  you mean the constantName?
+09:29:45 <dmiles> yes
+09:29:50 <eca-home> that's correct
+09:30:21 <dmiles> that means a gaf (truiple) might be stored in only 64*3 bits?
+09:30:39 <dmiles> (could be anyways)
+09:30:46 <eca-home> in fact, a good game to play to see if you have done a good OE job on a constant is to rename it to XYZZY and see if you can still determine the meaning of the constant from the axioms, without looking at the comments or the name or anything else.
+09:31:28 <dmiles> ;P
+09:31:31 <eca-home> it could actually be 32 * 3, because we could just have 1 word pointing to each constant, and then the constant would contain the info like the guid
+09:32:10 <eca-home> since there are multiple gafs about each constant, that would be more efficient
+09:32:11 <dmiles> so then i bet an emense ammount of info could be stored in Cyc in 500Mb
+09:32:16 <bruce> (assuming a 32bit architecture)
+09:32:21 <eca-home> yes
+09:32:28 <eca-home> yes, in fact the full Cyc is about 500MB
+09:32:32 <eca-home> 1.5M assertions
+09:32:42 <eca-home> a lot of it is indexing, too
+09:33:11 <bruce> so, what you're saying is that I shouldn't worry too much about memory usage in the near future, and that when I might worry, there are known approaches that may help with reducing that?
+09:33:32 <eca-home> for knowledge: yes.  for data: not necessarily.
+09:34:01 <eca-home> If you want to represent the contents of a billion-row database, then you will need to take the HL module dynamic access and caching approach.
+09:34:19 <eca-home> But if you're just representing knowledge, not data, then you shouldn't run into the memory ceiling.
+09:34:44 <bruce> okay, that sounds fine/reasonable.
+09:35:08 <dmiles> right i may already have a 500meg database i should have cyc access and relay.. not put dirrectly in Cyc
+09:37:15 <eca-home> sounds like a good plan
+09:38:00 <eca-home> Is inference-removal-module defined in the API yet?
+09:38:24 <eca-home> You will probably need that to hook your DB into Cyc
+09:38:38 <eca-home> that lets your declare your own HL modules
+09:38:56 <dmiles> it would be nice to bind a Data only predicate to a an HL module
+09:39:13 <eca-home> yes, that's what you probably want to do
+09:40:11 <dmiles> but an API for defining it.. hrrm]
+09:40:20 <dmiles> :) .. i dunno
+09:40:35 <bruce> i have so much to learn.
+09:40:50 <dmiles> would be nice if Cyc could call java back *wink*
+09:41:09 <dmiles> bind a Constant to a JavaMethod
+09:41:18 <dmiles> err Predicate
+09:41:18 <eca-home> Yeah, I think that's in the works, so that one can define HL modules in Java
+09:43:05 <dmiles> HL modules are usually Lisp-calls-lisp.. or Lisp-calls-C i think
+09:43:34 <dmiles> i am sortof asking
+09:43:45 <eca-home> Right now all HL modules are written in SubL
+09:44:31 <dmiles> then a lisp-calls-Java VM that returns a CycList of defined constants would probly be next
+09:45:41 <eca-home> it would be more complicated than just a list, but you've got the basic idea
+09:47:16 <dmiles> i wrote a prolog-calls-java thing .. gave it like 4 API functions.. everything comes from that.. then prolog has to call getNextSolution .. which could be a walk over a SQL cursor
+09:48:13 <dmiles> but by the time its done it flattens to a gaf full of data
+09:48:21 <dmiles> err ground facts
+09:48:38 <eca-home> Well, you want a little more than that to be sent over to the SubL side, because HL modules get called in the innermost loop of inference, and you don't want an open-tcp-stream call in there
+09:50:26 <dmiles> yes . there is no real way to predetrming the right time to get the data.. or in bulk or in increments unless told by the HL module's author
+09:50:34 <eca-home> right
+09:51:02 <bruce> are there docs on writing a HL module?
+09:51:39 <eca-home> I don't know
+09:51:50 <eca-home> ask JohnD or SteveReed, they're the docs guys
+09:51:56 <eca-home> I just writes the codes (:
+09:52:17 <bruce> must be nice :)
+09:52:23 <bruce> I have to write both
+09:52:25 <dmiles> me can relate.. i'd rather even have someone else spec it out sometimes
+09:53:06 <eca-home> I wrote some of the docs that are on the opencyc site, but JohnD organized them all, so I don't know exactly where they all are
+09:55:50 <bruce> a lot of the doc links are broken on opencyc.org. :(
+09:56:02 * eca-home points at JohnD (;
+09:56:50 * bruce lies in wait.
+09:57:15 <dmiles> eca-home: i am very supprised there is not alredy a KIF loader in the RKF tools
+09:57:40 <dmiles> MtName + KIFFileName
+09:58:05 <Seth> for the record: http://robustai.net/mentography/logic_closed_under_implication.gif
+09:59:29 <eca-home> whoa Seth, that is cool
+09:59:56 <eca-home> I think we have some KIF -> CycL code, I forget where it is though... dusty
+10:00:28 <eca-home> CyL -> CycL
+10:01:30 <Seth> ok ill fix that
+10:02:07 <dmiles> well you wrote the transcript file loader right?
+10:02:28 <eca-home> I didn't write it, but I know how it works
+10:02:47 <Seth> incidentally is that kif or cycL ??
+10:02:57 <Seth> or does it make any difference?
+10:03:08 <dmiles> ah i am working on the KIF loader in another window.. trying not to over javatize it
+10:03:29 <eca-home> I'm not too familiar with KIF
+10:03:37 <eca-home> All I know is that CycL is better than it (;
+10:03:57 <Seth> but the axiom you wrote was written in legitimate cycL, right?
+10:04:04 <eca-home> yeah, it oughta work
+10:04:08 <dmiles> and legit KIF
+10:04:13 <eca-home> I was doing it from memory, but it should be legit
+10:04:47 <Seth> thing is you wrote a weaker form of it, but i stared at it and couldnt figure out the difference .. what did i miss?
+10:05:07 <eca-home> in the weaker form, there is a beliefs wrapped around the implication
+10:09:07 <Seth> ok i see
+10:09:56 <Seth> too bad this channel is not logged like #rdfig, then we could have uir for our assertions
+10:10:04 <bruce> if i find a bug in the docs that are linked from opencyc.org, but are hosted on cyc.com, should I still submit a bug in the sourceforge bug tracking system?
+10:10:52 <eca-home> in general: yes.  in specific: just tell me and I'll fix it right now (:
+10:11:02 --- join: theos (~torsten@port-213-20-227-247.reverse.qdsl-home.de) joined #opencyc
+10:11:11 <eca-home> It's logged by clog, ask Graham if you would like some other kind of loggign
+10:12:02 <bruce> eca: http://www.cyc.com/cycdoc/ref/inferencing.html links to some docs for #$genlPreds .. and those docs aren't on the target page.
+10:12:16 <Seth> but where is the url of the log?
+10:13:06 <eca-home> I don't know, I'm not much of an ircie
+10:13:18 <bruce> Seth: http://tunes.og/~nef/logs/ apparently
+10:13:24 <bruce> (according to /wi clog)
+10:13:24 <eca-home> bruce: are all the /cycdoc/vocab links broken, or just the genlPreds one?
+10:13:35 <bruce> eca-home: Just the genlPreds one so far.
+10:14:35 <eca-home> <h4><a name=genlPreds>#$genlPreds</a> : &lt<a href=/cycdoc/vocab/fundamental-vo\
+10:14:35 <eca-home> cab.html#Predicate>#$Predicate</a>&gt &lt<a href=/cycdoc/vocab/fundamental-voca\
+10:14:35 <eca-home> b.html#Predicate>#$Predicate</a>&gt </h4>
+10:14:35 <eca-home> <
+10:14:43 <NeonSquare> Why are all doclinks forbidden?
+10:14:47 <eca-home> it looks like it's there to me, I don't know why it's not picking it up
+10:15:11 <eca-home> NeonSquare: there's a permissions problem, JohnD is going to get the sysadmins to fix it, but it will probably be on Monday
+10:15:21 <NeonSquare> ah ok
+10:16:36 <eca-home> Okay, I gotta head out.  Gonna road trip to San Antonio and teach those folks that they don't know how to play Dance Dance Revolution. (:
+10:17:27 --- part: theos left #opencyc
+10:17:34 * bruce waves.
+10:18:01 --- quit: eca-home ("Rabbit, don't wash me. You are no longer a paw in the asshole.")
+10:38:38 <NeonSquare> I gotta head out too - but what I will face will be more like Gothic/Industrial tonight :-)
+11:29:53 --- join: bbz_ (~chatzilla@cs6668181-59.austin.rr.com) joined #opencyc
+11:29:53 --- quit: bbz_ (Client Quit)
+11:30:28 --- join: bbz_ (~chatzilla@cs6668181-59.austin.rr.com) joined #opencyc
+11:53:51 <dmiles> having a chicken/egg problem When constructing CycList
+11:54:12 <dmiles> anyone can help?
+11:55:19 <dmiles> CycList myNewCycList = cycAccess.makeCycList((String)formula);
+11:55:55 <dmiles> if my formula contains constants to be added to Cyc i need to add them first correct?
+11:56:45 <dmiles> meaning in need to form a CycList consiting of CycLKists and Strings denoting Constants
+11:57:13 <dmiles> then afterwards makeConstant the Strings
+11:57:44 <dmiles> so CycList myNewCycList = cycAccess.makeCycList((String)formula); is too early?
+11:57:53 <dmiles> are there basicly two states of a CycLuist ?
+11:58:18 <dmiles> one that contains real CycTerms and another that contains Strings?
+12:00:21 <dmiles> or should i be ussing the CycListParser() witch looks to discover Constants as it goes
+12:12:13 --- join: threeme3 (~justme@p4157.vwr.wanadoo.nl) joined #opencyc
+12:26:55 <bruce> woops. I took an accidental nap.
+12:27:47 <bruce> dmiles: do you have some examples of how you're using rules within logicmoo? should I download a copy and read through it?
+12:28:05 <dmiles> in about 3 days it would be good
+12:28:16 <dmiles> not yet though ;(
+12:28:23 <bruce> okay
+12:28:35 <dmiles> getting alot done though
+12:29:15 <dmiles> 	public void addFile(String mt, File file) {
+12:29:16 <dmiles> 		InputStream is  = new FileInputStream(file);
+12:29:16 <dmiles> 		StreamTokenizer st = new StreamTokenizer(is);
+12:29:16 <dmiles> 		while ( st.hasMoreTokens() )
+12:29:16 <dmiles> 			addFormula(st);
+12:29:16 <dmiles> 	}
+12:29:35 <dmiles> that should work i am hoping..
+12:30:09 <dmiles> 	public void addFormula(StreamTokenizer formula) throws CycApiException {
+12:30:09 <dmiles> 		CycListParser cycListParser = new CycListParser(cycAccess);
+12:30:09 <dmiles> 		addFormula((CycList) cycListParser.read( formula));
+12:30:09 <dmiles> 	}
+12:30:42 <dmiles> 	public void addFormula(CycList formula) {
+12:30:43 <dmiles> 		cycListCollection.add(formula);
+12:30:43 <dmiles> 	}
+12:31:45 <dmiles> i dont know if i should create a new CycListParser each though
+12:31:52 <bruce> that assumes an ordering of the items within the file similar to what was discussed earlier, right?
+12:32:16 <dmiles> yes.. right now it first loads the cycListCollection
+12:32:27 <dmiles> and assumes unordered
+12:33:07 <dmiles> then it loops through the cycListCollection in  7 passes 
+12:33:48 * bruce nods.
+12:41:17 --- join: Webmonkey (~chatzilla@CPE0090263d08f3.cpe.net.cable.rogers.com) joined #opencyc
+12:58:39 --- quit: dmiles (Read error: 110 (Connection timed out))
+13:11:04 <Webmonkey> Maybe I don't need COABS , but I couldn't download it. I think their form is corrupted.
+14:04:22 --- join: dmiles (ZQWER@dialup-65.58.152.69.Dial1.Portland1.Level3.net) joined #opencyc
+14:06:47 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/AssertionsCollection.java?rev=1.1&content-type=text/vnd.viewcvs-markup  
+14:07:01 <dmiles> i am wondering if this looks right so far
+14:13:45 --- quit: threeme3 (Read error: 113 (No route to host))
+14:17:34 --- join: lesoeufs (pierlu@aus-as2-125.io.com) joined #opencyc
+14:20:29 <lesoeufs> quit
+14:24:40 <dmiles> err revision 1.2
+14:37:35 --- part: lesoeufs left #opencyc
+16:20:49 --- quit: dmiles (Read error: 110 (Connection timed out))
+16:38:23 --- quit: johndcyc (Read error: 110 (Connection timed out))
+16:38:44 --- quit: Webmonkey (Read error: 110 (Connection timed out))
+16:46:16 --- join: johndcyc (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+17:09:55 --- join: Webmonkey (~chatzilla@CPE0090263d08f3.cpe.net.cable.rogers.com) joined #opencyc
+17:42:40 --- join: dmiles (ZQWER@dialup-65.58.5.236.Dial1.Portland1.Level3.net) joined #opencyc
+18:57:58 --- quit: Nolan (Read error: 110 (Connection timed out))
+19:04:37 --- quit: johndcyc (Read error: 110 (Connection timed out))
+19:07:39 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+19:50:42 --- quit: NeonSquare ("If you only have a hammer everything looks like a nail")
+20:31:57 --- join: Hedgehog (Filimon@213.233.73.38) joined #opencyc
+20:34:13 --- quit: Webmonkey ("ChatZilla 0.8.5 [Mozilla rv:0.9.8/20020208]")
+20:42:57 <dmiles> anyone have time to look at  http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/AssertionsCollection.java?rev=1.4&content-type=text/vnd.viewcvs-markup   ?
+20:42:58 --- quit: Hedgehog (Read error: 104 (Connection reset by peer))
+20:45:17 <dmiles> wondering the best way to do the 'switch' in public void addFormula(CycList formula) 
+20:45:48 <dmiles> and wondering if i am ussing ConstraintRule() in a proper way
+20:55:58 <dmiles> well in a workable way (:
+20:57:23 <bruce> sorry, i wouldn't have a clue at this stage.
+20:57:40 <bruce> I'm learning that what I thought was meant by HL isn't what was meant and so on.
+20:58:41 <dmiles> Heuristic Module
+20:58:52 <dmiles> er Heuristic Language Module
+20:59:02 <dmiles> (i am really still learning to)
+20:59:30 <bruce> right ... I'm trying to relate that to the talk of integrating with an outside data source.
+20:59:38 <bruce> unless I was totally misunderstanding :)
+21:01:48 <dmiles> its how the openCyc engine actually gets to the data.. it has to have something it already can interface to natively.. those things are called HL modules
+21:02:25 <dmiles> another way is to have an API to push the data into Cyc
+21:02:38 <dmiles> as an assertion
+21:03:13 <bruce> okay, but are there docs on how to write one?
+21:03:16 <dmiles> while cyc is trying tio understand something.. it is operating in a subset of Lisp called SubL
+21:03:49 <dmiles> i have a feeling that one would need to write it in like Allergro Lisp first.. the interface ...
+21:04:14 <dmiles> then find docs for interfacing their lisp code to an HL
+21:04:27 <dmiles> but i havent seen the dos on the opencyc website 
+21:04:31 <dmiles> err docs
+21:04:55 * bruce nods.
+21:04:58 <dmiles> since right now opencyc is spening more time writting code then documetning i think
+21:05:12 <bruce> I'll keep reading .. I've a lot to learn before I know enough to understand all that I find. :)
+21:05:27 <dmiles> have you made a local installation of Cyc yet?
+21:05:42 <bruce> yeah.
+21:06:16 <bruce> that was easy. :)
+21:06:20 <dmiles> so you can see how anoying the defining the constant then using it can be ;P
+21:06:32 <bruce> I haven't tried to actually define anything yet.
+21:06:42 <bruce> I'm very very very ignorant still.
+21:07:16 <dmiles> well i came from a KIF background so i was just waiting to be able to use an engine like cyc that was ready for the KIF i like to write
+21:07:26 <bruce> lucky. :)
+21:07:38 <dmiles> so that is my only added edge
+21:07:54 <bruce> I'm more used to language runtime implementation and OODB implementation.
+21:08:09 <bruce> which helps me little here.
+21:08:15 <dmiles> well imagine cyc to be a SQL+++ for an OODB
+21:09:00 <bruce> yeah, but I just learned last night the difference between #$isa and #$genls. :)
+21:09:10 <dmiles> the cyc-101 course on the website is pretty good.. it goes fast but if you try the examples you get good 
+21:09:37 <bruce> if that's the PDF stuff, then it crashed my browser earlier.
+21:09:49 * bruce tries it on another browser/OS.
+21:09:51 <dmiles> i thought i saw an all html verion
+21:10:03 <dmiles> i'll look
+21:11:11 <dmiles> oh http://www.opencyc.org/doc/tut/ <- you probly got that
+21:11:48 <bruce> oh, the link to the right is the HTML version.
+21:11:53 <bruce> sometimes, I wonder about myself.
+21:12:04 <dmiles> the links allong the right side
+21:12:58 <bruce> it works in MacIE on OS X. yay.
+21:15:18 <dmiles> i am finailly about to test the KIF file importer to Cyc
+21:15:40 <bruce> i saw you had some ontologies in KIF format in your CVS
+21:15:48 <bruce> are they all interoperable?
+21:16:04 <dmiles> well they all can go into a Micorotheory
+21:16:17 <dmiles> er each
+21:16:37 <dmiles> then another Mt can aline them
+21:17:05 <dmiles> i wonder what the implication of genlPreds instance isa will be 
+21:17:08 <bruce> can a microtheory define/have an assertion that conflicts with one in another microtheory?
+21:17:17 <dmiles> yes
+21:17:26 <bruce> mmm, interesting.
+21:17:38 <dmiles> you can have Mts that are all even false
+21:18:18 <dmiles> perhaps a negative wolrd that you only access when trying to disprove something
+21:19:15 <bruce> or two contradictory views of the world that various agents 'possessed' ?
+21:19:48 <dmiles> i would like personnally (but may be wrong) to see a Mt like a beleif system by some entity 
+21:20:20 <dmiles> that you could think of Mts as agents allowed to argue and discuss things
+21:20:53 <dmiles> as long as you have a system for deciding who you will listen to first.. you can get a results
+21:21:19 <dmiles> the genMt is the chain of command and who sits next to who
+21:21:41 <dmiles> err (genlMt ?Mt1 ?Mt2)
+21:22:23 <dmiles> then you can adorn a Mt with various global things like BroadMicrotheory.. ImaginaryMircotheory
+21:22:49 <dmiles> err maybe MythologicalMi..
+21:23:04 * bruce nods.
+21:23:32 <dmiles> i would think is should be a fearture that we could set the Top Collection ...
+21:23:51 <dmiles> or a default collection in a Mt
+21:24:11 <bruce> well, I'm still totally unsure that I'd be able to use the Cyc Upper Ontology.
+21:24:22 <bruce> it seems big and huge and potentially overcomplex for my app.
+21:24:25 <bruce> but we'll see.
+21:24:42 <bruce> or rather, I'll see. :)
+21:24:43 <dmiles> well the idea of that ontolgy is its something your specific ontolgy can subclass when you want
+21:25:05 <dmiles> so aligning with other ontologies could get easier later
+21:25:29 --- join: J-Speed (spink@ppp-161.1.triton.net) joined #opencyc
+21:25:54 --- quit: J-Speed (Client Quit)
+21:25:56 <bruce> right .. I just worry about some of the 'extra' rules creating unintended side effects in a simulation or game-like system.
+21:26:16 <dmiles> of the upper ontology ?
+21:27:12 <bruce> clarify ?
+21:27:18 <dmiles> well if they don't jibe with the gaming ontology.. then its a good idea to only connect to things like Thing,Indivigual,Collection
+21:27:56 <dmiles> for example you could be conserned that all Persons are hair animals in the upper ontlgy
+21:28:05 <dmiles> err hairy
+21:28:28 <dmiles> yet in the gaming ontolgy that seems rather missleading
+21:28:42 <dmiles> or at least distracting
+21:29:44 <dmiles> have to think about how to 'avoid' irrealivancies to a gaming system
+21:29:57 <dmiles> the way i am going at it is this...
+21:30:16 * bruce nods.
+21:30:19 <dmiles> that i have very specific gafs for the game to deal wityh that cyc doesnt really 'mess with'
+21:30:43 <dmiles> they are almost completely diconncted
+21:31:04 <dmiles> for example ... isa  i might instead use 'instaneOf'
+21:31:19 <dmiles> err instanceOf
+21:31:53 <dmiles> then maybe define a separate Mt that aligns instanceOf and isa
+21:32:07 <dmiles> that Mt is not accessed by the gaming system
+21:32:18 <bruce> hmmmm, okay. I'll have to read up on that.
+21:32:33 <dmiles> instanceOf is a predicate just made up
+21:33:11 <dmiles> meaning it does not ihearit all the commonsense of 'isa'
+21:33:26 <dmiles> but in some context it would be usefull
+21:33:56 <dmiles> just like GamePerson instead of Person
+21:34:46 <dmiles> then later having a context (Mt) that sees them as simular or same COllection
+21:35:02 <bruce> right, but if I branch off, then anything that is written to work with Cyc but uses Person and not GamePerson .. or would a new Mt be able to align that to make it work? but if so, then I mgiht as well just start out that way?
+21:35:44 <dmiles> would a new Mt be able to align that to make it work? <- i thing yes
+21:35:52 <dmiles> err think
+21:36:25 <dmiles>  if so, then I mgiht as well just start out that way? <- hrrmm well can you be entirely sure you hare dealling with Person?
+21:36:48 <dmiles> maybe GamePerson in some context is much differnt
+21:37:08 <dmiles> maybe in some context they have an IP
+21:37:13 <bruce> IP?
+21:37:27 <dmiles> er IP Address ;>
+21:37:59 * bruce would've figured that (genls GamePerson Person)  (unless I switched the order on that)
+21:38:13 <dmiles> yes that is definately a good idea
+21:38:44 <dmiles> or even GamePerson might be a Collection that has instances that contain a Person and a GameingAgent
+21:39:18 <dmiles> but genls will get you to the commonsense the quickest
+21:39:41 <bruce> well, in that case though, I still end up iwth the possible 'pollution' :)
+21:39:53 <bruce> but I should just spend the next 3 weeks learning
+21:39:59 <bruce> and then see what worries are still valid.
+21:40:48 <dmiles> i am glad to see people interested in seeing how cyc could be used in a context of model logic in a gaming eviron
+21:40:57 <dmiles> er modal
+21:41:10 <bruce> i've been off and on for a couple of years in the general sense.
+21:41:19 <bruce> for some months in the Cyc sense
+21:41:39 <dmiles> so you looked a bit at cyc before?
+21:42:51 <bruce> just in passing to know that I should be interested when opencyc was released. :)
+21:43:12 <bruce> i've little enough spare time that i figured i'd start learning with a release rather than in advance.
+21:44:13 <dmiles> yeah its [hide-from-log] a programming language .. the kind you have to use to learn
+21:44:49 <kirk> Has anyone worked through the microtheory exercise page?
+21:44:57 <bruce> not yet.
+21:45:25 <kirk> To bad, I'm getting an error.
+21:46:15 <dmiles> what error?
+21:46:30 <kirk> Hang on...
+21:47:24 <kirk>                             Formula not Well-Formed
+21:47:24 <kirk>    [Help]
+21:47:24 <kirk>    Mt : NorthernHemisphereMt
+21:47:24 <kirk>    Formula :
+21:47:24 <kirk>    (subsumesIntervalType CalendarWinter January)
+21:47:24 <kirk> Diagnosis :
+21:47:26 <kirk> (subsumesIntervalType CalendarWinter January) is not a well-formed formula in N
+21:47:28 <kirk> orthernHemisphereMt.
+21:47:30 <kirk> Perhaps subsumesIntervalType is insufficiently defined in mt NorthernHemisphere
+21:47:32 <kirk> Mt.
+21:49:22 <kirk>  #$CalendarWinter and #$January are both valid constance.
+21:51:07 <dmiles> (argGenl subsumesIntervalType 1 TemporalThing)
+21:51:07 <dmiles> (argGenl subsumesIntervalType 2 TemporalThing)
+21:51:07 <dmiles> (argIsa subsumesIntervalType 2 FirstOrderCollection)
+21:51:07 <dmiles> (argIsa subsumesIntervalType 1 FirstOrderCollection)
+21:51:36 <dmiles> It takes Collections not Indiviguals
+21:52:22 <dmiles> i think CalendarWinter may be a Collection
+21:52:41 <dmiles> January is an instance
+21:52:57 <kirk> Might be, but that's what the instructions telll me to do.
+21:53:47 <dmiles> may be documentation/tutorial bug 
+21:53:55 <kirk> That's the problem with not having a solid grasp of this stuff yet.
+21:54:27 <bruce> kirk: I'd report it then via the sourceforge stuff to make sure they know/can fix it.
+21:54:44 <kirk> Thank you very much.
+21:55:02 <dmiles> oh January is a Collection
+21:55:38 <kirk> Like to know how you tell, I find that page very confusing even after reading the help index on it.
+21:55:49 <dmiles> here was how...
+21:56:13 <dmiles> searched for January...
+21:56:34 <dmiles> then say it isa MonthOfYearType 
+21:56:39 <dmiles> er saw
+21:56:52 <dmiles> clicked MonthOfYearTpe
+21:57:07 <dmiles> saw it isa CollectionType
+21:57:40 <dmiles> meaning it types a Collection (January in this case)
+21:58:13 <kirk> .auh, let me look at it.
+21:58:49 <dmiles> but the hard part is not knowing why in the Mt its not WFF since all of thiose are in the BaseKB
+21:59:44 <dmiles> if you asserted that in the BaseKB it should be legal
+22:00:38 <dmiles> so i would think NorthernHemisphereMt would be as well
+22:01:10 <dmiles> unless (isa NorthernHemisphereMt Microtheory) is missing
+22:07:58 <kirk> Okay, it is not missing I just checked.  I have another question though, on the status page it doesn't show any recent assertions.
+22:08:14 <kirk> Although it took them fine.
+22:08:28 <kirk> Said it was placing them on the queue.
+22:08:39 <dmiles> i thiknk the statis page show assertions still being batched
+22:09:08 <kirk> .interesting. let me show you.
+22:09:13 <dmiles> so it could take anywhere from 5 seconds to 60 seconds
+22:09:55 <kirk>    Recent Constants :
+22:09:55 <kirk>    NorthernHemisphereMt, NewYearsDay, January, IndeterminateTerm,
+22:09:55 <kirk>    CycAdministrator
+22:09:55 <kirk>    Recent NATs :
+22:09:55 <kirk>    None
+22:09:56 <kirk>    Recent Assertions :
+22:09:58 <kirk>    None
+22:10:10 <kirk>  It's been hours.
+22:10:36 <kirk> How do I tell if things are all well in engine land?
+22:11:04 <dmiles> mainly by clicking arround and clicking "all assertions"
+22:11:40 <dmiles> clicking NorthernHemisphereMt should gain you access to the entire theory
+22:12:16 <dmiles> "All Asserted Knowledge"
+22:16:11 <bruce> but all of that is in core engine that doesn't and won't have released source, right?
+22:16:24 <bruce> or is there some chance that the web interface will have public source at some point?
+22:17:04 <dmiles> the entire web interface could be rewritten or acessed from the Java API
+22:17:16 <kirk> Well, doesn't do much, the page looks different as well but no errors that I can see.
+22:18:21 <dmiles> but you found all the assertions youexpected tosee?
+22:19:15 <dmiles> bruce: i have been trying to figure out how to access it from non localhjost.. then foudn tath was what the java webserver proxy was for
+22:19:25 <kirk> Well, there's one assertion stating it's a microtheory
+22:19:28 <bruce> dmiles: thanks for the big clue on the docs .. things are starting to make much more sense now.
+22:19:50 <kirk> The other assertion is the one it give me the error on.
+22:20:37 <kirk> (isa NorthernHemisphereMt GeneralMicrotheory)
+22:20:40 <dmiles> so the Microstheor7y is basicly empty rifgth now?
+22:20:57 <kirk> yes
+22:21:30 <dmiles> sowhen you assert something to it.. it doesnt every let you?
+22:22:05 <kirk> Good question, is the Comment format like this:
+22:22:19 <kirk> (#$Comment this is a comment)
+22:22:57 <dmiles> (#$comment #$NorthernHemisphereMt "i am a comment about NorthernHemisphereMt")
+22:22:59 --- quit: bbz_ (Remote closed the connection)
+22:25:50 <kirk> Nope, same exact error. I must have something wrong in the assertion in the BaseKB.
+22:26:07 <dmiles> i often puch the cyclify botton to make sure all my constants are reconised
+22:26:42 <dmiles> and let it add the #$
+22:27:26 <kirk> Yeah, well I haven't learn about cyclifi yet. 'grin'
+22:27:29 <dmiles> also make sure yuor Mt you are assering into is missing the #$
+22:27:55 <kirk> Pretty sure of that one hang on though.
+22:28:41 <dmiles> cyclify is important i also press it before assertt and ask
+22:29:48 <dmiles> so put (subsumesIntervalType CalendarWinter January) in the assert window
+22:29:53 <dmiles> click cyclify
+22:29:56 <dmiles> then assert
+22:31:00 <dmiles> cyclify should convert it to (#$subsumesIntervalType #$CalendarWinter #$January) first
+22:32:42 <dmiles> cycliufy is basicluy like a spell checker and adds #$ if passed
+22:38:15 --- join: nefph (ZQWER@dialup-65.58.159.190.Dial1.Portland1.Level3.net) joined #opencyc
+22:42:03 <kirk> .I don't see a button for it; is it java/js? my browser won't do those.
+22:42:27 <nefph> in the assert window?
+22:42:34 <nefph> no Cyclify ?
+22:43:25 <kirk> not yet i'll sift deeper
+22:47:38 <kirk> .nothing I can find called cyclifi.
+22:48:14 <kirk> My assertion page has three buttons of use reset, diagnose formuala, assert formula
+22:48:46 <nefph> Cyuc
+22:48:57 <nefph> err CycAdmin >?
+22:49:14 <nefph> weird
+22:56:29 --- quit: dmiles (Read error: 110 (Connection timed out))
+22:56:43 --- quit: graylensman ("Client Exiting")
+22:57:32 <kirk> .no, it let's me assert other places and so forth. and it's so fucking simple.
+22:57:45 <kirk> .the microtheory that is.
+22:58:47 <nefph> and asseriong? (#$subsumesIntervalType #$CalendarWinter #$January) ?
+22:59:23 <nefph> wellyou have buttons missing.. thats vbad enough
+22:59:47 --- nick: nefph -> dmiles
+23:03:07 <kirk> I don't think the problem is with the subsumes... I believe it must be with the NorthernHemisphereMt assertion for the BaseKB
+23:03:31 <kirk> no reason I can think of why the comment should have failed.
+23:03:40 <dmiles> yeah
+23:04:18 <kirk> if I can find that page with the kill button again I think I'll blow it away and try that one again.
+23:12:26 <dmiles> good idea
+23:27:39 <kirk> This time I put in a comment and the subsumesIntervalType andthe comment failed.  It obviously stopped processing before it even got to the second assertion
+23:30:09 <kirk> Think it's time to call it a day.  A very long day.  Good night and thank you very much for your assistance.
+23:30:21 --- quit: kirk ("[BX] Time wasted: 1 millenia 1 centuries 0 decades 7 years 10 months")
+23:35:30 --- join: bbz (~chatzilla@cs6668181-59.austin.rr.com) joined #opencyc
+23:59:59 --- log: ended opencyc/02.04.06

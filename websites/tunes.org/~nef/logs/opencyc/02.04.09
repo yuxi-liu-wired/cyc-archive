@@ -1,0 +1,264 @@
+00:00:00 --- log: started opencyc/02.04.09
+00:12:14 <dmiles> good morning Edison
+00:12:26 <Edison> good morning dmiles!
+00:17:10 --- join: Fraeggl (~a@firewall.stadtwerke-deggendorf.de) joined #opencyc
+00:17:19 <Edison> heya fraeggl
+00:17:23 <Fraeggl> hiho ;)
+01:43:30 <Edison> dmiles?
+02:15:50 --- join: zenalot (~zenalot@c16437.rochd2.qld.optusnet.com.au) joined #opencyc
+02:31:08 --- quit: Nolan (Read error: 110 (Connection timed out))
+02:59:39 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+02:59:54 <dmiles> here
+03:00:27 <dmiles> hrrm i spaced the issue with the KIF
+03:00:28 <dmiles> (=>
+03:00:28 <dmiles>    (inverse ?REL1 ?REL2)
+03:00:28 <dmiles>    (forall (?INST1 ?INST2)
+03:00:28 <dmiles>       (<=>
+03:00:28 <dmiles>          (holds ?REL1 ?INST1 ?INST2)
+03:00:30 <dmiles>          (holds ?REL2 ?INST2 ?INST1))))
+03:00:38 <dmiles> where tow quanifiers are read in
+03:00:41 <dmiles> err two
+03:01:29 <dmiles> have to run it into (forall ?INST1 (forall ?INST2 (...
+03:01:36 <dmiles> well forAll
+03:46:06 --- quit: QuantumG ("Leaving")
+04:02:40 --- quit: Nolan (Read error: 110 (Connection timed out))
+05:00:18 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+05:12:00 --- join: TheBaba (foobar@cs242747-39.austin.rr.com) joined #opencyc
+05:47:42 --- join: nefph (mea_culpa@dialup-65.58.221.221.Dial1.Portland1.Level3.net) joined #opencyc
+06:02:27 --- quit: dmiles (Read error: 110 (Connection timed out))
+06:25:29 --- quit: zenalot ("Client Exiting")
+06:51:03 --- nick: nefph -> dmiles
+07:10:20 --- part: Edison left #opencyc
+07:25:07 --- join: graylensman (~ray@fl-wbu2c6-167.pbc.adelphia.net) joined #opencyc
+07:55:39 * Graham is back
+07:56:16 --- mode: ChanServ set +o Graham
+08:56:20 * stevereed is back
+09:20:00 --- quit: Fraeggl ()
+10:19:54 --- quit: Nolan (Read error: 110 (Connection timed out))
+11:03:05 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+11:20:40 --- join: Hedgehog (Filimon@213.233.100.217) joined #opencyc
+11:27:21 --- quit: Hedgehog ()
+12:25:52 --- quit: dmiles (Read error: 110 (Connection timed out))
+12:30:29 --- quit: graylensman ("Client Exiting")
+12:56:51 --- join: msbaltz (~msbaltz@wsip68-15-169-160.no.no.cox.net) joined #opencyc
+13:18:29 <stevereed> For those of you having the ioctl error when creating a new constant, 
+13:18:53 <stevereed> the error is occuring when cyc creates a new guid for the term,
+13:19:20 <stevereed> Of the several standard methods for creating a guid, on linux we use the one
+13:19:32 <stevereed> which involves the ethernet mac address.
+13:19:55 <stevereed> So you currently must have an ethernet card installed on Linux to create constants with OpenCyc.
+13:20:25 <stevereed> We plan to fix this bug to generate a random guid if an ethernet card cannot be found on the host computer.
+13:20:59 <stevereed> Thanks Mark for reporting this bug, and providing the strace which easily isolated it.
+13:21:34 <stevereed> One of the Cycorp employees has this error on his home linux computer, and confirms that he does not
+13:21:48 <stevereed> have an ethernet card, just a modem for internet connection.
+14:53:58 --- quit: msbaltz ()
+15:26:08 --- join: Don (Don@ip-216-23-49-197.adsl.one.net) joined #opencyc
+15:27:18 <Don> hello all
+17:02:05 --- join: kirk (~kirk@CPE014320108614.cpe.net.cable.rogers.com) joined #opencyc
+17:05:53 <kirk> Does opencyc not save it's updates to disk?
+17:16:53 --- quit: TheBaba (Ping timeout: 14400 seconds)
+17:34:35 --- join: dmiles (mea_culpa@dialup-65.58.154.239.Dial1.Portland1.Level3.net) joined #opencyc
+17:41:04 <Don> anybody home?
+17:43:17 <kirk> .sort of.
+17:43:47 <Don> Did you find the answer to your question on saving?
+17:44:17 <kirk> No. found out the hard way that it doesn't appear to.
+17:45:04 <kirk> I do see something in transcriptions but I'm not sure what they are.
+17:45:17 <Don> I thought I read somewhere in the tutorial that it did - I'm looking now...
+17:53:58 <Don> Having a bit of trouble with links to opencyc.org in the docs - makes it difficult
+17:55:05 <kirk> Is opencyc.org not responding?  Couple of days ago I couldn't get www.cyc.com to respond.
+17:56:35 <Don> www.cyc.com is working for me; the link http://opencyc.org:8080/OpenCyc_org/doc/tut to the tutorial index doesn't work
+17:57:15 <Don> www.opencyc.org itself is working, must be port 8080
+17:58:38 <Don> I'm looking at the tutorial at http://www.opencyc.org/doc/tut/InterfaceOverview/InterfaceOverview/exercises/browse and trying to see how to save the changes
+18:02:45 <Don> Seems like every link to a help index yields a 404 file not found for me
+18:03:04 <kirk> I don't see anything about saving anything on that page.
+18:03:17 <Don> Another 404 is http://www.opencyc.org/doc/tut/InterfaceOverview/InterfaceOverview/HelpIndex
+18:06:58 <kirk> I got that page no problem.
+18:07:07 <Don> Really?
+18:08:37 <Don> Oops that one wasn't 404, it was Site Error requested resource does not exist
+18:10:34 <kirk> Yeah, I got it but there was a error in part of the html but most of it rendered just fine.  Nothing there on saving or anything though.
+18:10:58 <Don> Well, I thought I read it somewhere, but I sure can't find it now
+18:11:41 <kirk> There's a thing about saving an image in the README but that looks like you write a totally new image.
+18:12:06 <Don> Do you know anything about how to get around the localhost restriction on the browser?  I want to access opencyc from several machines on the LAN, but it's blocked.
+18:12:14 <kirk> You're supposed to do that on the cyc(#).
+18:12:34 <kirk> Ummm, not off hand I don't.
+18:13:05 <Don> OK, just thought I'd ask.  I'm waiting for stevereed to drop in to ask.
+18:13:33 <kirk> I'm just thinking about it, you might be able to do it with a redirector.
+18:14:03 <Don> Another thought on saving -are you logged in as Guest?  Maybe it's disabled/doesn't appear.
+18:14:37 <kirk> No, my last attempt was to create my account and then try to quit gracefully.  I did, it didn't.
+18:14:59 <Don> Ah, I see.
+18:15:33 <kirk> I'm not doing everything I did on the weekend again until I know how to save stuff.
+18:17:23 <Don> Absolutely
+18:18:42 <Don> Ah I remember something. Did you try logging in as CycAdministrator?
+18:19:58 <kirk> You have to before you can create accounts that work as in make assertions and so forth.
+18:20:12 <Don> From the Installation Instructions: You can browse cyc via the Guest account or perform updates by
+18:20:12 <Don> logging on as CycAdministrator.
+18:20:50 <Don> HERE IT IS  You can save the state of the OpenCyc world by entering the form
+18:20:50 <Don> (write-image "") before shutting down using
+18:20:50 <Don> (exit).  Edit run-cyc.sh, replacing world/latest.load with the path to
+18:20:50 <Don> your saved world.
+18:21:40 <Don> See Installation Instructions
+18:23:24 <kirk> Did those instructions actually have "" after the write_image predicate?
+18:23:59 <Don> Yes. empty double quotes, see http://www.opencyc.org/doc/install/ item 6
+18:24:42 <kirk> The readme has the same basic instructions but they have a path/name in the instructions.
+18:25:17 <kirk> Unfortunately that won't help much if the system decides to bounce before you have the opertunity to save.
+18:25:30 <Don> seems to make sense - you need to specify the "path to your saved world"
+18:25:39 <kirk> Yes.
+18:26:11 <Don> are you saying it has a mind of its own?
+18:26:42 <kirk> Not normally, some workmen decided they need to turn off the power this morning.
+18:27:25 <Don> ah, I always hate it when they don't coordinate schedules with me :)
+18:27:54 <kirk> I agree.  I particularly agree when I'm caught out! 'grin'
+18:28:05 <Don> absolutely
+18:28:46 <kirk> Thing is, there's this big deal you do to set up an automated update time.
+18:29:12 <Don> well, I hope I helped in a small measure. I'm going to do do some other things and see if I can get my localhost question answered another time
+18:29:22 <kirk> Okay, good luck.
+18:29:28 <Don> thanks you too
+18:29:46 --- quit: Don ()
+18:44:38 --- quit: kirk ("Leaving")
+19:28:02 --- quit: dmiles ("JediKnight2 for MacOS X (2.0 (11/11/01))")
+19:28:12 --- join: dmiles (mea_culpa@dialup-65.58.154.239.Dial1.Portland1.Level3.net) joined #opencyc
+19:28:31 <dmiles> hello
+19:29:14 --- join: Don (Don@ip-216-23-49-197.adsl.one.net) joined #opencyc
+19:29:23 <dmiles> Steve: if your arround i solved my KIF load issue
+19:29:43 <dmiles> but now i am on a diffent issue
+19:30:35 <dmiles> i can load KIF files .. and created a KIfToCycLMap that lets the user edit it
+19:30:52 <dmiles> i think i need to have it of course query ut of Cyc.. but iots a start
+19:31:49 <dmiles> it just removes the CrLfs Cr and LFs from the input stream.. 
+19:32:29 <dmiles> 					line = Strings.change(line," <=> "," #$equiv ");
+19:32:29 <dmiles> 					line = Strings.change(line," => "," #$implies ");
+19:32:29 <dmiles> 					line = Strings.change(line," forall "," #$forAll ");
+19:32:29 <dmiles> 					line = Strings.change(line," exists "," #$thereExists ");
+19:32:29 <dmiles> 					line = Strings.change(line," @ROW "," ?ROWVAR1 ?ROWVAR2 ");
+19:32:57 <dmiles> is always happening no mater what but lets the user specify
+19:33:25 <dmiles> but lets the user..
+19:33:26 <dmiles> 		addKifCycLMap("rangeSubclass","resultGenls");
+19:33:26 <dmiles> 		addKifCycLMap("range","resultIsa");
+19:33:26 <dmiles> 		addKifCycLMap("instance","isa");
+19:33:26 <dmiles> 		addKifCycLMap("subclass","genls");
+19:33:26 <dmiles> 		addKifCycLMap("documentation","comment");
+19:34:50 <dmiles> the are people on the IEEE SUO KIF WG that are excited about trying the ontolgy on Cyc.. if possible
+19:36:29 <dmiles> havign an issue with:
+19:36:30 <dmiles> (#$argIsa #$manner 1 #$Process)
+19:36:30 <dmiles> java.lang.NullPointerException
+19:36:30 <dmiles> 	at org.opencyc.api.CycAccess.assertWithTranscript(Unknown Source)
+19:36:30 <dmiles> 	at logicmoo.AssertionsCollection.commitAssertions(Unknown Source)
+19:37:06 <dmiles> assertWithTranscript() is nearly always failing on me
+19:37:13 <dmiles> well always
+19:37:26 --- quit: Don ()
+20:16:02 --- join: nefph (ZQWER@dialup-65.58.159.237.Dial1.Portland1.Level3.net) joined #opencyc
+20:16:41 --- nick: nefph -> DouglasMiles
+20:28:29 --- quit: dmiles (Read error: 110 (Connection timed out))
+20:47:56 --- join: dmiles (ZQWER@dialup-64.158.121.210.Dial1.Portland1.Level3.net) joined #opencyc
+20:48:16 <dmiles> Steve: you here?
+20:53:10 --- quit: DouglasMiles (Read error: 110 (Connection timed out))
+21:50:21 <dmiles> (#$implies (#$and (#$equal ?MONTH1 (#$MonthFn #$June ?YEAR)) (#$equal ?MONTH2 (#$MonthFn #$July ?YEAR))) (#$meetsTemporally ?MONTH1 ?MONTH2))
+21:50:21 <dmiles> java.lang.NullPointerException
+21:50:21 <dmiles> 	at org.opencyc.api.CycAccess.assertWithTranscript(Unknown Source)
+21:52:02 <dmiles> the3 KIF to CycL read part if mostly complete,
+21:52:23 <dmiles> now i am having troubles asserting the newly created KIF
+21:52:27 <dmiles> err CycL
+21:53:09 <dmiles> i am going to need to put alot of System.out.printl()s to figurte ouyt whats going wrong
+21:54:14 <dmiles> maybe my cycAccess object is messed up
+21:54:35 <dmiles> but if it was i shouldnt be able to make the constants
+23:04:11 --- quit: sandro ("Getting off stoned server - dircproxy 1.0.1")
+23:04:35 --- join: sandro (~sandro@tux.w3.org) joined #opencyc
+23:14:16 --- quit: sandro ("Getting off stoned server - dircproxy 1.0.1")
+23:14:32 --- join: sandro (~sandro@tux.w3.org) joined #opencyc
+23:32:52 * stevereed_home is back (gone 27:37:20)
+23:33:12 <dmiles> hi steve
+23:33:17 <stevereed_home> I'll provide example(s) of assertWithTranscript
+23:33:28 <stevereed_home> ...
+23:33:36 <dmiles> any idea what i might be doing wrong?
+23:33:55 <dmiles> fwi: i solved my loading issues with the reader
+23:34:24 <dmiles> i just load into a string buffer and clean up the eols ..
+23:34:53 <dmiles> i hacked the CycListParser to make a CycListKifParser
+23:35:11 <stevereed_home> cool
+23:35:31 <stevereed_home> what mt are you using for the assert method call
+23:35:40 <dmiles> yeah it adds "#$" thing and tries to arbitratye better constant names and map
+23:36:02 <dmiles> one sec.. i'll show the Mt
+23:36:30 <dmiles>      * Sets the defaultMt for this AssertionsCollection.
+23:36:30 <dmiles>      */
+23:36:30 <dmiles>     public void setDefaultMt(String mt) throws Exception {
+23:36:30 <dmiles> 	defaultMt = cycAccess.makeCycConstant("#$" + mt);
+23:36:30 <dmiles> 	cycAccess.assertIsa(defaultMt,cycAccess.getConstantByName("#$Microtheory"),cycAccess.baseKB);
+23:36:31 <dmiles>     }
+23:36:51 <dmiles> but rright now its call TestKifLoaderMt :P
+23:37:45 <dmiles> so it is a CycFort()
+23:37:50 <stevereed_home> i'll look at assertIsa first
+23:38:34 <dmiles> here is the Soruce of the loader:
+23:38:36 <dmiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/AssertionsCollection.java?rev=1.8&content-type=text/vnd.viewcvs-markup
+23:39:13 <dmiles> the problem starts at...
+23:39:20 <stevereed_home> assertIsa is OK 
+23:39:59 <stevereed_home> constants are subset of CycFort
+23:40:12 <dmiles> 	public void commitAssertions(Writer wr, ArrayList cycListCollection ) throws Exception  {
+23:40:35 <dmiles> 				if (cycList != null) 
+23:40:35 <dmiles> 					cycAccess.assertWithTranscript(cycList,defaultMt);
+23:41:06 <dmiles> the odd thing is it was workling fine for a bit
+23:41:33 <dmiles> then its started complaining.. it was almost the relationship to the CycConnection i felt was getting me
+23:41:33 <stevereed_home> I can look over your source in am
+23:42:00 <dmiles> one quick question..
+23:42:07 <dmiles> when you make a new CycAccess
+23:42:28 <dmiles> does it assume CycAdminstrator.. is is that irrealivant?
+23:42:38 <stevereed_home> not relevant
+23:42:56 <stevereed_home> we have no security model in place for the api,
+23:43:04 <stevereed_home> other than an evaluation framework
+23:43:06 <dmiles> so the converse() will at some point need a user or access level?
+23:43:12 <stevereed_home> yes
+23:44:06 <dmiles> so i added a ..
+23:44:07 <dmiles>     public void assertWithTranscript (CycList sentence, CycFort mt)
+23:44:08 <dmiles>         throws IOException, UnknownHostException, CycApiException {
+23:44:08 <dmiles> 	if (sentence==null) 
+23:44:08 <dmiles> 	    throw new CycApiException("assertWithTranscript: sentence==null");
+23:44:08 <dmiles> 	if (mt==null) 
+23:44:09 <dmiles> 	    throw new CycApiException("assertWithTranscript: mt==null");
+23:44:12 <dmiles> 	
+23:44:13 <stevereed_home> did you see thought treasure file?
+23:44:18 <dmiles> and that seems to not be catching
+23:44:50 <dmiles> i had seen it in the past.
+23:45:10 <dmiles> i remember to guy asking a bit ago for the Cyc ikb
+23:45:20 <stevereed_home> Erik posted a pointer in the source forge forum
+23:45:31 <stevereed_home> file is cyc-api code
+23:45:41 <stevereed_home> that loads 500K assertions 
+23:45:43 <dmiles> cool.. i rememberrr seeing it in .mdb .. probly be nice to make an import utility
+23:46:34 <stevereed_home> your null pointer exeception is likely within the formula to be asserted
+23:46:59 <dmiles> so it was transliterated first in the cyc-api code like a subL file to be evalled?
+23:47:13 <stevereed_home> yes
+23:47:23 <dmiles> i think your liely correct.. i chould make sure i can .cyclify the CycList first right?
+23:47:31 <stevereed_home> yes
+23:47:54 <stevereed_home> also the mt
+23:48:06 <dmiles> good idea.. are there certain terms that dont .cyclify .. or is possible to stuff other things in ber accident?
+23:48:28 <stevereed_home> only cyc forts cyclify
+23:48:33 <dmiles> i guess i could accently have a .third() = null
+23:49:01 <dmiles> and that would do it.. man ;P
+23:49:05 <stevereed_home> cycAccess != null ?
+23:49:16 <dmiles> i do test for that yes
+23:50:14 <dmiles> hrrm that would make my strack trace blame cycAccess.assertWithTranscript ?
+23:50:23 <dmiles> i guess it woulp ;P
+23:50:32 <stevereed_home> yes
+23:50:37 <dmiles> doh :P
+23:50:55 <stevereed_home> or lower in the comm layer
+23:51:14 <stevereed_home> CycAcess -- CycConnection --- CfaslOutputStream
+23:51:34 <dmiles> well i was trying to believe it was  CycConnection --- CfaslOutputStream
+23:51:53 <dmiles> in there but6 the stack trace would tell me that i guess
+23:52:23 <stevereed_home> Do you have an ide for tracing such as JBuilder?
+23:52:36 <stevereed_home> single stepping i mean
+23:52:52 <dmiles> not really, just alot of System.out s
+23:52:57 <stevereed_home> OK
+23:53:07 <dmiles> i think i can use jdb
+23:53:16 <dmiles> havent tried it yet
+23:53:19 <stevereed_home> you will see lots of them in the code -- switched by verbosity
+23:53:53 <dmiles> yeah .. i am going to try to use the Log. and verbosity items in my code ussing your model as an example
+23:54:08 <stevereed_home> If you do cycAccess.traceOn(),
+23:54:21 <stevereed_home> you get all the messaging info
+23:54:25 <stevereed_home> and if you do,
+23:54:36 <stevereed_home> cycAccess.traceOnDetailed(),
+23:54:46 <stevereed_home> you get the object by object messaging
+23:55:44 <dmiles> good thats the best way to trace it down .. i am pretty sure tomnight i can have the kif loader working good 
+23:56:03 <stevereed_home> got to go 
+23:56:11 <dmiles> the SUMO list is getting restless
+23:56:25 <stevereed_home> leave any problem details for me..
+23:56:26 <dmiles> tghank you
+23:56:36 <stevereed_home> everything here is logged
+23:57:01 * stevereed_home is away: I'm busy
+23:57:04 <dmiles> definately will i am irc guy ;P .. soon hope to start the CycL irc bot ;P
+23:57:28 <dmiles> that lets use use subL / assert /query in an irc channel
+23:57:37 <dmiles> err us use
+23:59:59 --- log: ended opencyc/02.04.09

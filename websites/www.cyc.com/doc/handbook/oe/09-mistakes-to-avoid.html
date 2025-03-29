@@ -1,0 +1,559 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 9. 
+Mistakes to Avoid</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 9. 
+Mistakes to Avoid</h2>
+    <p></p>
+    <b>9.1.  <a HREF='#136466040'>
+Skipping the Predicate
+</a></b>
+    <br>
+    <font size='-1'>9.1.1.  <a HREF='#137149672'>
+What is "skipping the predicate" and why is it bad?
+</a>
+      <br>
+    </font>
+    <font size='-1'>9.1.2.  <a HREF='#137214984'>
+How to avoid skipping the predicate</a>
+      <br>
+    </font>
+    <font size='-1'>9.1.3.  <a HREF='#137237776'>
+Examples of skipping the predicate, and how to repair each one
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>9.2.  <a HREF='#137335352'>
+"Don't-Care" Variables</a></b>
+    <br>
+    <font size='-1'>9.2.1.  <a HREF='#137338880'>
+What are don't-care variables?</a>
+      <br>
+    </font>
+    <font size='-1'>9.2.2.  <a HREF='#137347312'>
+Why are don't-care variables useful?</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 9. 
+    
+Mistakes to Avoid</h1>
+    <h2>9.1.  <a NAME='136466040'>
+Skipping the Predicate
+</a>
+    </h2>
+    <h3>9.1.1.  <a NAME='137149672'>
+What is "skipping the predicate" and why is it bad?
+</a>
+    </h3>
+    <p>
+"Skipping the predicate" is using a functional (NAT) representation
+without any underlying semantic predicate representation.  It's bad
+because it (a) restricts inference capability to terms that have a
+particular syntactic form, even if the semantics should allow the
+inference, (b) forces ontologists to overuse forward rules, and (c) causes
+ontologists to write rules that are more complicated than necessary, and thus
+have poor representational modularity as well as suboptimal inference
+efficiency.</p>
+    <p>
+NAT functions should almost always be viewed as constructors for
+underlying predicate vocabulary.  Therefore, the defining rules for
+the NAT should usually be forward, and conclude to the predicate
+representation.  Then, other rules (which may be forward or backward
+as appropriate) define the predicate representation.</p>
+    <p>
+When "skipping the predicate" occurs, ontologists write rules going
+straight from the NAT representation past any intermediate predicate
+representation.  Thus, they almost always have to make their rules
+forward in order to conclude correct behavior from a new #$termOfUnit,
+even if the final result need not be concluded forward.  Also, they
+have to duplicate the NAT quantification in every rule.</p>
+    <p>
+The reason "skipping the predicate" is easy to do is that #$termOfUnit
+can be used as the (very weak) underlying predicate representation.  In
+other words, the relationship between a NAT and its args is implicit
+in the very representation of the NAT, and rules that quantify into
+NATs exploit this syntactic relationship.  </p>
+    <p>
+Most rules should be defining and depending on semantic relationships
+rather than syntactic ones.  Therefore, it is important that the
+underlying relationship hinted at syntactically in a NAT be made
+semantically explicit.</p>
+    <p>
+Here's a perfect example from KB history :</p>
+    <p>
+Originally the NAT function
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  #$SaintFn : #$Person -> #$Saint</pre></tt>
+    </font>
+
+<p>
+was created to denote things like</p>
+    <font color='#339900'>
+      <tt><pre>
+    (SaintFn ThomasAquinas)</pre></tt>
+    </font>
+
+<p>
+However, there was no explicit relationship between </p>
+    <font color='#339900'>
+      <tt><pre>
+    (SaintFn ThomasAquinas)</pre></tt>
+    </font>
+
+<p>
+and  #$ThomasAquinas defined!  There was only the implicit one that the NAT 
+is constructed from two terms, its ARG0 and ARG1.</p>
+    <p>
+There were some rules defining #$SaintFn, and all of them were more
+complicated than necessary because the representation "skipped the
+predicate".  One example:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (termOfUnit ?SAINT (SaintFn ?PERSON))
+    (startsAfterEndingOf ?SAINT ?PERSON))</pre></tt>
+    </font>
+
+<p>
+One drawback of this representation is that if we reified
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  #$SaintThomasAquinas
+</pre></tt>
+    </font>
+<p>
+we would have no way to conclude that he starts after the ending
+of #$ThomasAquinas, because the CycL term #$SaintThomasAquinas
+does not match the syntactic pattern (SaintFn ?PERSON) in the
+faulty rule.</p>
+    <p>
+Clearly, there is a deeper semantic relationship between Thomas
+Aquinas and St. Thomas Aquinas rather than "arg 1 of NAT":</p>
+    <font color='#339900'>
+      <tt><pre>
+  #$saintlyIncarnation : #$Person x #$Saint</pre></tt>
+    </font>
+
+<p>
+With this, the only forward defining rule needed for #$SaintFn is:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (termOfUnit ?SAINT (SaintFn ?PERSON))
+    (saintlyIncarnation ?PERSON ?SAINT))</pre></tt>
+    </font>
+
+<p>
+or, equivalently and more simply:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (saintlyIncarnation ?PERSON (SaintFn ?PERSON))</pre></tt>
+    </font>
+
+<p>
+Now, the rules defining #$SaintFn are used to define #$saintlyIncarnation
+instead, in much simpler and efficient form.  For example, we can now
+unassert</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (termOfUnit ?SAINT (SaintFn ?PERSON))
+    (startsAfterEndingOf ?SAINT ?PERSON))</pre></tt>
+    </font>
+
+<p>
+and replace it with</p>
+    <font color='#339900'>
+      <tt><pre>
+  (genlInverse saintlyIncarnation startsAfterEndingOf).</pre></tt>
+    </font>
+
+<p>
+Reifiable functions should be considered constructors of objects which
+participate in relationships.  In almost every case, there should be
+an underlying predicate for which the function is defining uniform
+uses.  The underlying relationship that #$SaintFn was implicitly
+defining was</p>
+    <font color='#339900'>
+      <tt><pre>
+  "relation between a person and the associated saint of that person"</pre></tt>
+    </font>
+
+<p>
+That relation is at least as important as #$SaintFn, and deserves to be
+semantically explicit rather than syntactic and implicitly hidden
+inside #$termOfUnit.</p>
+    <p>
+The arguments to any NAT should always have some underlying predicate
+relationship to the NAT itself.  In the case of a high-arity NAT,
+there may be many predicates being skipped, not just one.  For
+example, consider the binary function #$BorderBetweenFn.  We could use
+the ternary predicate #$bordersOnRegion to relate the two regions to
+their border, or we could use the binary predicate #$borderOf to
+relate the border to each region it borders.  Sometimes you will need
+a different predicate to relate each argument to the NAT; sometimes
+you can use the same one.  Often you will find the the underlying
+semantic relationship between the NAT and one of its arguments is
+#$resultIsaArg or #$resultGenlArg.</p>
+    <h3>9.1.2.  <a NAME='137214984'>
+How to avoid skipping the predicate</a>
+    </h3>
+    <p>
+CycL is more strongly predicate-based than function-based.  Hence, you
+should always have a predicate-based representation; a function-based
+representation is optional.  The best way to avoid skipping the
+predicate is to think in terms of predicates, and that way you'll only
+create functions if their corresponding predicates are already
+defined.</p>
+    <p>
+However, if you come across an example of where the predicate has been
+skipped, you can usually use the following set of instructions to
+clean it up.</p>
+
+Let's call the instance of #$Function-Denotational FUNC, and you need
+to find or create a corresponding predicate, PRED.
+
+<blockquote>
+      <ol>
+        <li>
+First, make sure that there is no existing predicate which
+can fill the role of PRED.</li>
+        <li>
+If there is not, then create PRED, make it an instance of
+#$FunctionalPredicate, and make the appropriate #$argFormat #$SingleEntry
+assertion on PRED.</li>
+        <li>
+Assert the proper arg constraints on PRED.</li>
+        <li>
+Assert the atomic defining rule for the function,
+with forward direction.  For example, if N is 1, the defining rule would be:
+
+<font color='#339900'>
+            <tt><pre>
+  (PRED (FUNC . ?ARGS) . ?ARGS)</pre></tt>
+          </font>
+        </li>
+
+<li>
+Thereafter, never use a NAT formed with FUNC in a rule.  Use PRED instead.</li>
+        <li>
+Another thing that is useful to assert is a
+functionCorrespondingPredicate-Canonical GAF linking FUNC and PRED.
+See #$functionCorrespondingPredicate-Canonical for more details.</li>
+      </ol>
+    </blockquote>
+    <h3>9.1.3.  <a NAME='137237776'>
+Examples of skipping the predicate, and how to repair each one
+</a>
+    </h3>
+    <p>
+Here are some more real examples from KB history in which Cycorp
+ontological engineers who have skipped the predicate, or have
+identified a case of where the predicate was being skipped.</p>
+    <h4>9.1.3.a.  
+#$VaccineAgainstMicroorganismFn skipping #$vaccineEffectiveMicroorgType</h4>
+    <p>
+Example:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (and
+      (termOfUnit ??VACC (VaccineAgainstMicroorganismFn ?MICTYPE))
+      (isa ?MIC ?MICTYPE))
+    (hasAttributes ?MIC Pathogenic))</pre></tt>
+    </font>
+
+<p>
+Using #$termOfUnit in the above fashion is writing what is in essence
+a semantic rule based instead on a happenstance syntactic form.  This
+is directly the essence of why the predicate shouldn't be "skipped".</p>
+    <p>
+Instead, we should have #$vaccineEffectiveMicroorgType
+which provides a semantic relationship between ?TERM and ?MICTYPE.</p>
+    <p>
+Then we would have the forward rule:</p>
+    <font color='#339900'>
+      <tt><pre>
+  ;; define NAT in terms of predicate
+     (implies
+        (termOfUnit ?VACC (VaccineAgainstMicroorganismFn ?MICTYPE))
+        (vaccineEffectiveMicroorgType ?MICTYPE ?VACC))</pre></tt>
+    </font>
+
+<p>
+Then, the above rule can be reformulated as this semantic rule:</p>
+    <font color='#339900'>
+      <tt><pre>
+   ;; ??VACC naming convention since the variable is a don't care
+      (implies
+         (and
+           (vaccineEffectiveMicroorgType ?MICTYPE ??VACC)
+           (isa ?MIC ?MICTYPE))
+         (hasAttributes ?MIC Pathogenic))</pre></tt>
+    </font>
+
+<p>
+Even better, we should have</p>
+    <font color='#339900'>
+      <tt><pre>
+   ;; this could justifiably be forward
+     (implies
+       (vaccineEffectiveMicroorgType ?MICTYPE ??VACC)
+        (relationAllInstance hasAttributes ?MICTYPE Pathogenic))</pre></tt>
+    </font>
+
+<p>
+and leverage the HL modules for relationAllInstance for backward inference.</p>
+    <h4>9.1.3.b.  
+TravelingByMeansOfFn skipping transportMeansOfType</h4>
+    <p>
+Example:</p>
+    <p>
+The following query</p>
+    <font color='#339900'>
+      <tt><pre>
+  (tourTransportTypes EHbT-Tour 
+    (TravelingByMeansOfFn ?TBT))</pre></tt>
+    </font>
+
+<p>
+relying on the supporting rule in TourAndVacationPackageItinerariesMt
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies 
+    (and 
+      (tourHighlights EHbT-Tour ?EVENT-TYPE) 
+      (genls ?EVENT-TYPE ?TRAVELINGBYMEANSOFFN) 
+      (termOfUnit ?TRAVELINGBYMEANSOFFN 
+        (TravelingByMeansOfFn ?MEANS)))
+    (tourTransportTypes EHbT-Tour ?TRAVELINGBYMEANSOFFN))</pre></tt>
+    </font>
+
+<p>
+is an example of skipping the predicate for #$TravelingByMeansOfFn.</p>
+    <p>
+We should have transportMeansOfType</p>
+    <p>
+1 forward rule :</p>
+    <font color='#339900'>
+      <tt><pre>
+   (implies
+     (termOfUnit ?NAT (TravelingByMeansOfFn ?VEHICLE-TYPE))
+     (transportMeansOfType ?VEHICLE-TYPE ?NAT))</pre></tt>
+    </font>
+
+<p>
+All 6 rules involving</p>
+    <font color='#339900'>
+      <tt><pre>
+  (termOfUnit ?NAT (TravelingByMeansOfFn ?VEHICLE-TYPE))</pre></tt>
+    </font>
+
+<p>
+should be written in terms of #$transportMeansOfType</p>
+    <p>
+The query could then be</p>
+    <font color='#339900'>
+      <tt><pre>
+ (thereExists ?TRANSPORT-TYPE
+  (and
+   (tourTransportTypes EHbT-Tour ?TRANSPORT-TYPE)
+   (transportMeansOfType ?VEHICLE-TYPE ?TRANSPORT-TYPE)))</pre></tt>
+    </font>
+
+
+<h4>9.1.3.c.  
+BodyPartFn skipping anatomicalParts</h4>
+    <p>
+Example:</p>
+    <p>
+The function #$BodyPartFn in the KB is insufficiently defined
+unless it is hooked up to a predicate.  In this case, the
+predicate #$anatomicalParts exists, and we can either use
+that predicate, or create a more precise spec-pred of
+#$anatomicalParts.</p>
+    <b>
+Don't skip the predicate</b>
+    <p>
+A rule like this would be skipping the predicate:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (isa ?GIRAFFE Giraffe)
+    (hasVisibleSurfacePatternType 
+      (BodyPartFn ?GIRAFFE Neck-AnimalBodyPart)
+      SpottedPattern))</pre></tt>
+    </font>
+
+<p>
+Or, after canonicalization,</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (and
+      (isa ?GIRAFFE Giraffe)
+      (termOfUnit ?BODYPARTFN (BodyPartFn ?GIRAFFE Neck-AnimalBodyPart)))
+    (hasVisibleSurfacePatternType ?BODYPARTFN SpottedPattern))</pre></tt>
+    </font>
+
+<p>
+So, the right way to write this rule, instead of linking the giraffe
+with its neck via the syntactic relationship #$termOfUnit, is to create
+a new predicate to use as the underlying semantic relationship.  Let's
+call it #$uniqueBodyParts, and rewrite the rule as follows:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (and
+      (isa ?GIRAFFE Giraffe)
+      (isa ?NECK Neck-AnimalBodyPart)
+      (uniqueBodyParts ?GIRAFFE ?NECK))
+    (hasVisibleSurfacePatternType ?NECK SpottedPattern))</pre></tt>
+    </font>
+
+
+<b>
+Multiple functions can use the same predicate</b>
+    <p>
+The suggested way to fix the "Skipping the Predicate" malady does not
+require that there must be a 1-1 relationship between denotational
+functions and their underlying predicates.</p>
+    <p>
+There just should not be a 1-0 relationship for any of them.  </p>
+    <p>
+So several functions could relate to the same predicate, like
+#$anatomicalParts.  Hence we do not need to create #$uniqueBodyParts
+just for this reason, and in fact our rule would be even better and
+more general if we used #$anatomicalParts instead of
+#$uniqueBodyParts.</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (and
+      (isa ?GIRAFFE Giraffe)
+      (isa ?NECK Neck-AnimalBodyPart)
+      (anatomicalParts ?GIRAFFE ?NECK))
+    (hasVisibleSurfacePatternType ?NECK SpottedPattern))</pre></tt>
+    </font>
+
+<p>
+This would apply to, for example, two-necked giraffes.</p>
+    <b>
+Appendix: An Object-Oriented Programming Analogy</b>
+    <p>
+For those familiar with object-oriented programming, the
+following analogy may help you understand why skipping the predicate
+is undesirable.</p>
+    <p>
+CycL terms are like objects, and NATs are like specialized
+constructors for objects.  When you're designing an object hierarchy,
+it's important to have the methods inherit from the class, not from
+the particular way it was constructed.  Skipping the predicate is like
+putting all the methods inside the constructor.  The methods should
+apply to any instance of a class, regardless of the method by which
+that object was constructed.</p>
+    <h2>9.2.  <a NAME='137335352'>
+"Don't-Care" Variables</a>
+    </h2>
+    <h3>9.2.1.  <a NAME='137338880'>
+What are don't-care variables?</a>
+    </h3>
+    <p>
+A special naming convention for CycL variables is the "??" prefix.
+By prepending two question marks instead of just one, this indicates
+to Cyc that the variable is a "don't-care" variable.  "Don't-care"
+variables are variables in rules for which you don't care about the
+bindings.  Here's an example usage of a don't-care variable.
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (singular ?WORD ??STRING)
+    (posForms ?WORD SimpleNoun))</pre></tt>
+    </font>
+
+<p>
+This rule says that if a word has a singular form, no matter what the
+singular form is, the word is going to be a SimpleNoun.</p>
+    <h3>9.2.2.  <a NAME='137347312'>
+Why are don't-care variables useful?</a>
+    </h3>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (objectHasColor ?OBJECT CrimsonColor)
+    (objectHasColor ?OBJETC RedColor))</pre></tt>
+    </font>
+
+<p>
+Because of the typo in the second variable, this is logically
+equivalent to</p>
+    <font color='#339900'>
+      <tt><pre>
+    (or
+      (forAll ?OBJECT
+        (not
+          (objectHasColor ?OBJECT CrimsonColor)
+      (forAll ?OBJETC
+        (objectHasColor ?OBJETC RedColor))))</pre></tt>
+    </font>
+
+<p>
+So, either every object is non-crimson, or every object is red.
+Although implausible, this is semantically well-formed.  Typos in
+variables can lead to outrageous inferences.  To help ontologists track
+these down, there are diagnostics (accessible via the Diagnose button
+in the Cyc Browser) that can be applied to rules to identify variables
+that only appear once in a rule.  However, occasionally you want to
+use a variable exactly once in a rule, as in the original example:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (singular ?WORD ??STRING)
+    (posForms ?WORD SimpleNoun))</pre></tt>
+    </font>
+
+
+<p>
+where the variable ??STRING is only mentioned once.  If you explicitly
+label such variables as don't-care, as in this example, the
+diagnostics will assume you knew what you were doing, and let it be.</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

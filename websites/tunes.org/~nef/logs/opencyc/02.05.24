@@ -1,0 +1,481 @@
+00:00:00 --- log: started opencyc/02.05.24
+00:00:13 <dmiles> i think so.. that ICyclifiable 
+00:01:02 <dmiles> like IXMLEnabled maybe
+00:01:37 <dmiles> the toXML() for example would be in almost anything
+00:01:52 <dmiles> rendering out CycML
+00:02:23 <dmiles> but give me an example of composit
+00:02:39 <yottzumm> AWT and Swing
+00:02:53 <dmiles> and component>?
+00:03:19 <dmiles> oh yeah i think the answer to your question is yes
+00:03:47 <dmiles> but i dont think stressing coposite items
+00:03:49 <yottzumm> Look at the Compoent and Container classes in java.awt.  Container is a component
+00:04:16 <yottzumm> sorry, genls
+00:04:45 <yottzumm> component is a genls of container
+00:05:12 <yottzumm> a container specialilzes component
+00:05:51 <yottzumm> basically, a container has a list of components that it displays
+00:06:04 <dmiles> so then it seems like what they have is simular to the current except its more java maniacal as far as design 
+00:06:29 <dmiles> so it seems mainly components
+00:06:52 <yottzumm> except that all swing components inherit from container
+00:07:34 <dmiles> is the anolgy useclasses vs dataclasses?
+00:07:58 <yottzumm> I don't understand the reference, sorry
+00:08:19 <dmiles> for example.. Factories that make Components
+00:08:40 <yottzumm> Well, there's the peer stuff in AWT
+00:08:57 <dmiles> or Renders for example i am lumping into non componets
+00:09:05 <yottzumm> I usually use new to create Swing objects
+00:09:35 <yottzumm> each component has a paint method that gets called
+00:11:08 <dmiles> i see 
+00:18:22 <dmiles> (implies 
+00:18:22 <dmiles>        (mudWorn ?TYPEWHO ?AT ?TYPEWHAT) 
+00:18:22 <dmiles>        (thereExists 
+00:18:22 <dmiles>            (?WHAT) 
+00:18:22 <dmiles>            (and 
+00:18:23 <dmiles>                (isa ?WHAT ?TYPEWHAT) 
+00:18:25 <dmiles>                (isa ?WHO ?TYPEWHO) 
+00:18:27 <dmiles>                (wearsClothing ?WHO ?WHAT))))
+00:18:41 <dmiles> hrrm
+00:18:56 <dmiles> not propogating
+00:19:33 <yottzumm> you're trying to get ?AT ????
+00:19:48 <dmiles> ignoring it in this context
+00:20:05 <dmiles> i am tring to dress ?WHOs 
+00:20:23 <dmiles> but all the ?WHO in the KB are SkolemTerms
+00:21:58 <dmiles> here is an example: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8374
+00:22:58 <dmiles> (isa (SKF-8245393305) NpcCol1012) == (isa ?WHo ?TypeWHo)
+00:23:58 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&-634 <- isd part of an instance
+00:24:59 <dmiles> i am dressing to make that BNart person wearItems
+00:26:08 <yottzumm> can you just put them "in" their clothing
+00:26:20 <dmiles> i coukld programmatically yes
+00:26:29 <dmiles> but trying toi make Cyc forward chaining do it
+00:26:47 <dmiles> they where created from forward chaining
+00:27:13 <dmiles> i am trying to make their clothing apear in a forward chain like thy did
+00:27:36 <dmiles> but i think cyc is trying not to forward chahin too deeply
+00:28:08 <yottzumm> is there a configurable parameter you can set?
+00:28:09 <dmiles> SKF-345345 terms are the results of a thereExists ?X type function
+00:28:47 <dmiles> not that i have found.. but i teneded to think that forward cahining was not bound of constrained
+00:29:46 <dmiles> i definately need to learn this stuff better still
+00:30:10 <yottzumm> me too
+00:31:59 <dmiles> hrrm going to restart cyc and start again
+00:33:53 <dmiles> hehe i think i forgot tio define collections like you had earlier
+00:35:10 <dmiles> i am sourcing http://12.225.207.235/offt/sourceforge/logicmoo/src/dump2
+00:35:40 <dmiles> and http://12.225.207.235/offt/sourceforge/logicmoo/ontologies/kif/JamudMt.kif 
+00:50:00 <dmiles> <yottzumm> can you just put them "in" their clothing  <- actually i better do that actually
+00:50:17 <dmiles> since i dont want rules always redressing them
+00:50:59 <yottzumm> depends on how many layers of clothing you want
+00:51:21 <dmiles> i could undress them by asserting that they are not wearing something
+00:51:29 <dmiles> i am guessing
+00:51:43 <dmiles> well for example.. starfleet boots
+00:52:02 <dmiles> if Riker removes them then the rule would spawn a new instance on his feet
+00:53:07 <dmiles> a mud full of only heros would solve this
+00:53:35 <dmiles> my supposed need to use rules to create instances
+00:53:52 <dmiles> but in this system i have 6 genric ensigns
+00:54:13 <dmiles> and they all use the same constant to denote their info
+00:54:58 <dmiles> so i place then in each romm by asserting (thereExists ?Someone (isa Someone SomeSomeoneType)..)
+00:55:10 <yottzumm> I'm trying cycAccess.assertGaf(mt, cycAccess.makeCycConstant("objectFoundInLocation"), card, hand);
+00:55:41 <dmiles> what is hand an instance of?
+00:56:09 <dmiles> need to be at least ontologucally the arg2Isa of objectFoundInLocatio
+00:56:09 <yottzumm> cycAccess.collection
+00:56:32 <dmiles> which isa SpatialTinh-Localized
+00:57:02 <dmiles> you can assert a HandsCOllection... isa Collection
+00:57:17 <dmiles> Player1Hand is HandsCOllection
+00:57:21 <yottzumm> okay, I'll try that
+00:57:42 <dmiles> HandsCOllection genkls SpatialThning=Localized
+00:57:43 <dmiles> or
+00:57:50 <dmiles> HandsCOllection genls Place
+00:58:58 <yottzumm> how do I put things in Player1Hand?
+00:59:11 <yottzumm> with the Gaf?
+00:59:22 <dmiles> objectFoundInLocation ?CardInstance ?HandInstance
+00:59:50 <dmiles> yes
+01:00:20 <dmiles> you just needed more definations
+01:00:59 <dmiles> a Collection for example was not legal for the second argument of objectFoundInLocation
+01:02:28 <dmiles> you will aso want to assert that AllCardsCollection is instance of a Artifact
+01:02:34 <yottzumm> I create a constant for each hand
+01:02:35 <dmiles> err is genls to it
+01:03:16 <dmiles> AllCardsCollection (the one you gels to Thing) can be genls to Artifact
+01:03:29 <dmiles> yes a constant for each hand
+01:07:02 <dmiles> hehe
+01:07:03 <dmiles> [dmiles@Area1035 mud]$ look picard
+01:07:03 <dmiles> (quote (#$SKF-0733325013))
+01:07:03 <dmiles> ()()
+01:07:20 <dmiles> getting better!
+01:07:23 <yottzumm> cool
+01:07:53 <dmiles> if keywards parsing is working.. but i do that in Java
+01:08:21 <dmiles> but based of Cyc prettyName and mudKeyword query
+01:09:56 <yottzumm> so much for copying and pasting code, urg
+01:26:32 <yottzumm> growl.  this is hard
+01:30:34 <dmiles> yes.. learning a new language can be.. i am getting frustrated.. i am trying to see if maybe i should just make the default world one finetune it and not make a generic CircleMud loader
+01:31:09 <dmiles> but omnly use the CircleMudLoader tool somnething i use 
+01:31:33 <yottzumm> would using regular expressions from jdk1.4 help?
+01:31:36 <yottzumm> or oro
+01:31:37 <dmiles> since the .zon file is the only problem i am having
+01:32:03 <dmiles> the .zon file puts the decared world together
+01:32:18 <dmiles> ;; Sourcing /opt/sourceforge/logicmoo/src/../world/10.zon
+01:32:18 <dmiles> (thereExists ?X (and (isa ?X NpcCol1013) (in-ContGeneric ?X Area1025)))
+01:32:18 <dmiles> (thereExists ?X (and (isa ?X NpcCol1001) (in-ContGeneric ?X Area1029)))
+01:32:18 <dmiles> (mudWorn  NpcCol1001  WornAsHeld  ArtifactCol1005 )
+01:32:18 <dmiles> (mudWorn  NpcCol1001  WornAsHeld  ArtifactCol1006 )
+01:33:09 <yottzumm> want to take a break and look at my code again?  I declared both the hand and card genls spatialThing-Localized and Artifact
+01:33:24 <dmiles> cool.. yes
+01:34:21 <yottzumm> sent it
+01:35:10 <dmiles> 	    	    cycAccess.assertGenls(hand, anycardcoll, mt);
+01:35:12 <dmiles> cool
+01:35:17 <dmiles> smart
+01:36:31 <dmiles> 		    CycConstant hand = cycAccess.makeCycConstant(player[p]+"Hand");
+01:36:31 <dmiles> 	            cycAccess.assertIsa(hand, cycAccess.collection, mt);
+01:36:56 <dmiles> thats not a collection.. that is an Artifact
+01:37:04 <dmiles> you need a separate handclass
+01:38:06 <dmiles> err HandCollection
+01:38:31 <dmiles> that player1Hand  isa HandCollection
+01:38:47 <dmiles> HandCollection genls place
+01:39:40 <dmiles> anycardcollection genls atritcat
+01:40:03 <yottzumm> what about cycAccess.assertGenls(hand, anycardcoll, mt); do I need that?
+01:40:33 <yottzumm> now I have
+01:40:51 <dmiles> well hand is not a collection in that sense so it cant genls things
+01:40:59 <yottzumm> cycAccess.assertGenls(handcoll,  anycardcoll, mt);
+01:41:00 <dmiles> a hand in an instance of a place
+01:41:11 <dmiles> that sjhould be legal
+01:41:35 <dmiles> thats the thing i thought i had first seen
+01:41:41 <dmiles> and think is nice
+01:42:21 <dmiles> it gives the hand the abily to Collect cards in an itneresting way
+01:43:06 <dmiles> anologies about a hand and a card singlular
+01:43:26 <dmiles> such as it could have a value
+01:44:56 <yottzumm> HURRAY!!!!!! There are cards in the hand!  I will send you the latest
+01:45:04 <dmiles> cool
+01:46:07 <yottzumm> I'll send you the latest
+01:46:22 <dmiles> ah been clicking send/receive :)
+01:46:52 <yottzumm> email
+01:46:56 <dmiles> have it
+01:48:10 <dmiles> so objectFouindInLocation work?
+01:48:51 <dmiles> ok i see it now
+01:49:00 <dmiles> the Artifact way at the top
+01:49:37 <dmiles> cyc is pretty cool for this
+01:50:53 <dmiles> did you get the java webserver process running before?
+01:51:02 <yottzumm> yeah, I browse to JohnHand or BrettHand
+01:51:03 <dmiles> (the socketing proxy?)
+01:51:31 <yottzumm> I think I just use the localhost service
+01:52:04 <dmiles> ah its all good.. i run the proxy and thats why my machine gives out pages
+01:52:50 <yottzumm> that would be cool to set up.  Right now, we're using VNC
+01:53:44 <dmiles> ah i use my IDEs on windows to mapped samba drives and never look at a unix console except over putty 
+01:54:21 <yottzumm> I only have one machine here, and my coworker is in another state
+01:54:31 <dmiles> ah :)
+01:56:35 <yottzumm> well, I have work tomorrow, but I'll probably be in over the weekend.  Thanks again for your help.  You clued me in to things I never would have guessed on my own
+01:57:20 <dmiles> cool.. i'll be arround i pretty much live at my desk :)
+01:57:44 <yottzumm> do you order your groceries delivered? :)
+01:58:13 <dmiles> i have a GF/Fiance and my Step-mother moved in
+01:58:47 <dmiles> i just have to get them to help remove dish stacks
+02:02:29 <yottzumm> night
+02:02:31 --- quit: yottzumm ("Client Exiting")
+08:03:11 --- join: Graham (ggelling@207.207.8.145) joined #opencyc
+11:03:58 --- quit: stevereed_home (carter.openprojects.net irc.openprojects.net)
+11:05:48 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+12:51:54 <dmiles> i need some live tech support :)
+12:52:27 <dmiles> having trouble with forward chaining not using existentials
+12:53:11 <dmiles> not sure why http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&101875
+12:53:32 <dmiles> does not get a skolem
+12:54:05 <dmiles> (thereExists 
+12:54:05 <dmiles>        (?WHAT) 
+12:54:05 <dmiles>        (and 
+12:54:05 <dmiles>            (isa ?WHAT ArtifactCol1011) 
+12:54:05 <dmiles>            (in-ContGeneric 
+12:54:06 <dmiles>                (SKF-9938792384) ?WHAT)))
+12:54:38 <dmiles> the ?What should get a skolem term
+12:54:56 <dmiles> but (SKF-9938792384) evidently prevents cyc
+12:55:14 <dmiles> so my question is two actually
+12:55:27 <dmiles> how can i set in cyc Forward chaining to be more agreesive
+12:56:14 <dmiles> how can i be sure forward chaining will happen against skolems
+13:00:40 --- join: Taral (taral@cs6625132-47.austin.rr.com) joined #opencyc
+13:20:21 --- quit: Taral ("ircII EPIC4-1.1.2 -- Are we there yet?")
+14:37:06 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+14:39:20 <johnd> dmiles, I've got someone over here looking into your question about forward-chaining skolems.
+14:40:09 <johnd> For one thing, it looks weird to us that you say (thereExists (?WHAT) . . .
+14:40:35 <johnd> We would expect it to be (thereExists ?WHAT . . .
+14:41:50 <dmiles> i did assert it ( ) originally i think
+14:42:17 <dmiles> looking
+14:43:14 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-total&-621
+14:43:32 <dmiles> ok now looking at rule 
+14:43:56 <dmiles> (implies 
+14:43:56 <dmiles>        (and 
+14:43:56 <dmiles>            (isa ?WHO ?TYPEWHO) 
+14:43:56 <dmiles>            (mudWorn ?TYPEWHO ?AT ?TYPEWHAT)) 
+14:43:56 <dmiles>        (thereExists 
+14:43:57 <dmiles>            (?WHAT) 
+14:43:59 <dmiles>            (and 
+14:44:01 <dmiles>                (isa ?WHAT ?TYPEWHAT) 
+14:44:03 <dmiles>                (wearsClothing ?WHO ?WHAT)))) in JamudMt
+14:44:18 <dmiles> now looking at Source 
+14:44:46 <dmiles> ah i did ( )
+14:44:58 <dmiles> hrrm old kif habit
+14:45:27 <dmiles> i did assert it as ..
+14:45:28 <dmiles> (implies 
+14:45:29 <dmiles> 	(and
+14:45:29 <dmiles> 		(mudWorn ?TypeWho ?AT ?TypeWhat)
+14:45:29 <dmiles> 		(isa ?Who ?TypeWho))
+14:45:29 <dmiles> 	(thereExists 
+14:45:30 <dmiles> 	     (?What)
+14:45:32 <dmiles> 		(and
+14:45:34 <dmiles> 		        (isa ?What ?TypeWhat)
+14:45:36 <dmiles> 			(wearsClothing ?Who ?What))))
+14:45:51 <dmiles> ok will remove brackets
+14:46:10 <dmiles> if you think that may be it
+14:47:21 <dmiles> i will remove and reassert
+14:47:40 <dmiles> but maybe i should wait until you both had a chance
+14:48:50 <dmiles> i was guessing this was do to a timidness about creating too many exestentials that could be deduced later
+14:50:03 <dmiles> for example.. relationAllExists expands out say that forAll of some collection there exists some existential that is related via some predicate
+14:50:40 <dmiles> so if we had a (relationAllExists parts Dog Nose)
+14:51:20 <dmiles> then it might be combinatoric to say the (GenericFn Dog) has a Nose skolem
+14:51:37 <dmiles> bercaseu Nose could have 2 notrol skolems.. and so on
+14:51:45 <dmiles> err two nostrals
+14:52:11 <dmiles> so for every Dog we end up with 1 nose skolem and 2 nostral skolems
+14:52:53 <dmiles> so thats why i was making a guess that some invisble fowrawrd chain limit was reached
+14:56:04 --- join: blake_ (blake@207.207.8.109) joined #opencyc
+14:56:06 <dmiles> alot of the EL is not shown in Browser thats what the dump2 should help with
+14:56:22 <dmiles> Hi Blake :)
+14:57:13 <dmiles> hrrm
+14:57:14 <dmiles> Arguments for Assertion #101840
+14:57:14 <dmiles> Assertion : 
+14:57:14 <dmiles> (isa 
+14:57:14 <dmiles>        (SKF-9938792384) NpcCol1006) in JamudMt
+14:57:24 <dmiles> its whiteballed
+14:57:37 <dmiles> iteresting
+14:57:40 <blake_> Hi. I'm looking into the skolem issues.  I'll let you know if I figure out what's going on.
+14:57:48 <dmiles> i am getting Cyc-10 behoavour :)
+14:57:52 <dmiles> which i wanted
+14:58:18 <dmiles> that assertion was created Via:
+14:58:31 <dmiles> oh yoeah you saw it in email
+14:58:41 <dmiles> with a thereExists
+14:59:15 <dmiles> thank you Blake
+15:00:31 <dmiles> by the way the EL that makes the rule supporting the deduction was
+15:00:51 <dmiles> was ussing:
+15:00:52 <dmiles> 	(thereExists 
+15:00:52 <dmiles> 	     (?What)
+15:02:49 <dmiles> a simpler example of like all people have head skolems and all heads have nose skolems also would work (if in a forward chain example)
+15:21:48 <dmiles> if you think it could be related to the use of the varibal in a list...
+15:22:05 <dmiles> i can restart cyc and reload the info
+15:22:24 <dmiles> without (?What)
+15:25:13 <dmiles> which an assertion of thereExists (?X ?Y) cyc would i guess transliterate it to (thereExists ?Y (thereExists ?X ...
+15:25:35 <dmiles> so i assumed a single varaible would be the same..
+15:27:58 <dmiles> i also have a simular things with..
+15:27:59 <dmiles> (implies
+15:28:00 <dmiles>    (and
+15:28:00 <dmiles> 	(hasAttributes ?Col NPCUsesMt)
+15:28:00 <dmiles> 	(hasAttributes ?Inst NPCUsesMt)
+15:28:00 <dmiles> 	(isa ?Inst ?Col))
+15:28:01 <dmiles>    (thereExists ?Mt1 
+15:28:03 <dmiles>         (and 
+15:28:05 <dmiles> 	    (isa ?Mt1 Microtheory)
+15:28:07 <dmiles> 	    (thereExists ?Mt2
+15:28:09 <dmiles> 		   (and 
+15:28:11 <dmiles> 			   (isa ?Mt2 Microtheory)
+15:28:13 <dmiles> 			   (authorityForMt ?Inst ?Mt2)
+15:28:15 <dmiles> 			   (genlMt ?Mt2 ?Mt1))))))
+15:33:09 <dmiles> ok cyc is reloaded.. so guid/ids are probly out of date now in webbrowsers
+15:38:58 <dmiles> hrrm w/o the ( ) its even worse
+15:39:05 <dmiles> ?!?!
+15:39:36 <dmiles> at least the EL/HL looks coorect
+15:39:53 <dmiles> but they dont grow dependants at all
+15:41:08 <dmiles> the http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-c-predicate-rule&8311  <- those sould be growing dependants
+15:43:32 <dmiles> also dump2 is updated at http://12.225.207.235/offt/sourceforge/logicmoo/src/dump2 
+15:43:45 <dmiles> thats basicly like the transaction of what took place
+15:45:34 <dmiles> sloems get created at the very bottem of that file with thereExists statements
+15:45:39 <dmiles> rrr skolems
+15:46:02 <dmiles> ;; Sourcing /opt/sourceforge/logicmoo/src/../world/10.zon
+15:52:11 <blake_> I've created a test case that works exactly as you describe, dmiles.  Only with the parens around the variable does the forward rule accumulate dependents, to my surprise.  It does seem like behavior worth examining further.  We'll continue to look into it and get back to you next week.
+15:53:25 <blake_> I have to go now. Talk to you later.
+15:53:29 * blake_ is away: I'm busy
+15:53:33 <dmiles> yes it is oddd... its like the parens curcumvent that timidness i thought was put there on purmpose
+15:53:39 <dmiles> talkk to you later
+15:54:10 <dmiles> thank you
+16:03:50 --- quit: johnd ("Client Exiting")
+21:35:56 --- join: yottzumm ([m6tSW1AK5@12-232-76-192.client.attbi.com) joined #opencyc
+21:36:23 <yottzumm> hi
+21:37:54 <dmiles> hello there
+21:38:00 <dmiles> happy memorial day weekend
+21:38:06 <yottzumm> we're hardcore on a friday night
+21:38:15 <dmiles> yes.. living it up
+21:38:38 <yottzumm> i'm celebrating with popsicles
+21:38:44 <dmiles> i just got mud descriptive parephase working
+21:38:56 <dmiles> i have a 24 pack of ice-cream sabndwitches
+21:39:21 <yottzumm> I go non-fat.  gotta watch the cholesterol
+21:39:27 <yottzumm> fruit bars
+21:39:40 <yottzumm> tons of sugar
+21:39:51 <dmiles> ah good idea.. my fat tends to go to the area of my body i cant see
+21:41:16 <dmiles> take a peek at this
+21:41:18 <dmiles> Geordi's Quarters   (#$Area1001)
+21:41:18 <dmiles> You're in the middle of Geordi's quarters. The room is sparsely decorated,
+21:41:18 <dmiles> due to the fact that Geordi is blind. A small personal computer sits on a
+21:41:18 <dmiles> desk against the western wall, in between two windows that look out into
+21:41:18 <dmiles> space. A neatly made bed has been placed against the northern wall.
+21:41:19 <dmiles> portal from to fn Geordi's Quarters East A Corridor
+21:41:40 <dmiles> the last line was cyc genrarted
+21:42:39 <dmiles> however the players are still comming out as  Thing 2075536398-0000
+21:43:46 <dmiles> i am going to detect keyword constants now from text to create objects
+21:44:12 <dmiles> so the computer and bed should reifiy
+21:45:18 <dmiles> need to make this work right:
+21:45:19 <dmiles> (implies 
+21:45:20 <dmiles>        (and 
+21:45:20 <dmiles>            (mudPossiblyAlreadyInRoom ?AREA ?TEXT ?DESC) 
+21:45:20 <dmiles>            (termOfUnit ?OBJ 
+21:45:20 <dmiles>                (SKF-5434719270 ?AREA ?DESC ?TEXT))) 
+21:45:21 <dmiles>        (mudDescription ?OBJ ?DESC))
+21:45:51 <dmiles> no deductions yet
+21:46:40 <yottzumm> does creating constants take a long time
+21:47:32 <dmiles> nope its a background job that should self propogate
+21:47:35 <yottzumm> blind could mean a window shade as well.  More correct might be "cannotSet"
+21:47:38 <yottzumm> blind could mean a window shade as well.  More correct might be "cannotSee"
+21:47:41 <dmiles> oh from text though..
+21:48:22 <dmiles> well the text will require #$Names in it
+21:48:49 <dmiles> that display the prettyName when viewed
+21:48:51 <yottzumm> make sure if someone says "drop myNewObject" that it won't be created
+21:49:03 <yottzumm> has to exist before you drop it
+21:49:23 <dmiles> yeah thats kinda an issue now.. part of seacvhing means i might have to cyclify someting
+21:49:57 <dmiles> when i cyclify from text it can mean i may need to create a new cyc constant
+21:50:09 <dmiles> it doenst become a fisrt class object though
+21:50:17 <dmiles> it is only a cyc constant
+21:50:33 <dmiles> but yes for each command there is going tyo have to check rules of legality
+21:50:57 <yottzumm> yes, but don't cyclify the error message
+21:51:14 <dmiles> so commandEnabled ?Cmd ?ArgsListSet
+21:51:32 <dmiles> err
+21:51:41 <dmiles> (commandEnabled ?Actor ?Cmd ?ArgsListSet)
+21:51:45 <yottzumm> "Can't drop myNewObject because it doesn't exist--not allowed' shouldn't reify myNewObject
+21:52:39 <dmiles> yeah thats the thing in order to constructy a command i have to construct a possiblity 
+21:53:03 <dmiles> when constructing a possiblity that might ential creatiing to object to drop :0
+21:53:28 <yottzumm> thank god for garbage collection
+21:54:00 <dmiles> well that helps.. the code i am ussing is call findCycFort()
+21:55:08 <yottzumm> what class?
+21:55:20 <dmiles> http://12.225.207.235/offt/sourceforge/logicmoo/src/logicmoo/CycMoo.java
+21:55:34 <dmiles> my java docs may be old.. so if my Cvs
+21:55:38 <dmiles> err so is
+21:55:50 <dmiles> i probly should be commiting more..
+21:56:51 <dmiles> err locateCycFort(..,..)
+21:56:57 <dmiles> is what i use
+21:57:54 <dmiles> the howmuch =  matchable(name,p); 
+21:57:55 <yottzumm> cool
+21:58:17 <dmiles> scores the possiblity
+21:58:29 <dmiles> from the arraylist of candiates
+22:13:31 --- join: rom (~roman@adsl-63-197-150-112.dsl.snfc21.pacbell.net) joined #opencyc
+22:14:25 --- part: rom left #opencyc
+22:15:32 <dmiles> i am working on a predicate mudObjectVisable to ...
+22:15:36 <dmiles> http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&8521
+22:16:09 <dmiles> as i move around that link updates
+22:17:42 <yottzumm> so they can see something from a portal?
+22:18:16 <dmiles> one can look at a portal
+22:18:31 <yottzumm> ah
+22:18:37 <dmiles> if a portal is a Doorway or a HOC it can be stood in
+22:19:14 <dmiles> for exmaple: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-content-frame&-541
+22:20:49 <dmiles> i am not sure though if the look descitpon should be any more then it already has
+22:21:06 <dmiles> but i can do this...
+22:21:07 <yottzumm> looks good to me
+22:21:26 <dmiles> if you are in a dooprway of a building... 
+22:21:49 <dmiles> you see the doorway dewsc ..a nd the name of the building and the name of the outside as being things
+22:22:19 <dmiles> so that gives the impression of look front yard
+22:22:25 <dmiles> or look livingroom
+22:22:42 <dmiles> to get full descriptions of areas it would connect
+22:23:16 <dmiles> this is a neat place: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-cf&8456
+22:30:11 <yottzumm> My computer just got transported :)
+22:30:51 <dmiles> :)
+22:33:38 <yottzumm> hurrah, I created a draw pile all by myself
+22:37:21 <yottzumm> are collections ordered, or is there an ordered collection?
+22:37:44 <dmiles> usually not .. they are a set
+22:38:11 <yottzumm> maybe I should just keep track of the top card on the discard stack...
+22:39:29 <dmiles> thats a good method
+22:39:53 <dmiles> oh you can create an odered list of things
+22:39:59 <dmiles> err ordered
+22:40:08 <dmiles> one sec
+22:41:02 <yottzumm> I guess I should say instances of collection
+22:41:13 <yottzumm> ordered instances
+22:42:20 <dmiles> TotallyOrderedCollectionType
+22:42:57 --- join: mea_culpa (mea_culpa@12-225-207-235.client.attbi.com) joined #opencyc
+22:43:19 <dmiles> so you have TotallyOrderedCollection
+22:44:18 <dmiles> that would be a list of links so A B C would be (l A B) (l B C)
+22:45:03 <dmiles> you could use something like assertions of above
+22:45:22 <dmiles> and get the uppermost item
+22:46:03 <dmiles> generally that is how you create an order
+22:48:20 <yottzumm> is there a standard "I"?
+22:49:13 <dmiles> "I" ?
+22:49:20 <yottzumm> as in (I A B)
+22:49:30 <dmiles> oh that was a L ;) .. 
+22:50:11 <dmiles> SuccessorFn
+22:50:18 <dmiles> oh wait
+22:50:19 <yottzumm> thanks
+22:50:54 <yottzumm> that looks like it's for integers
+22:51:23 <dmiles> oh yeah.. i was hopping to follow its super
+22:51:30 <dmiles> i guess its not right there
+22:51:33 <dmiles> TransitiveBinaryPredicate IrreflexiveBinaryPredicate AsymmetricBinaryPredicate 
+22:52:20 <dmiles> hrrm looking for predicates thaty are all those things
+22:54:43 <dmiles> #$above-Touching looks good
+22:54:53 * mea_culpa pokes dmiles
+22:55:36 <dmiles> "(above-Touching ABOVE BELOW) means that ABOVE is located over BELOW and they are touching. More precisely, it implies both (above-Directly ABOVE BELOW) and that ABOVE touches BELOW. Examples: a person sitting on a chair; coffee in a cup; a boat on water; a hat on a head. (Note that not every point of ABOVE must be higher than every point of BELOW.)" 
+22:56:55 <yottzumm> cool
+22:57:01 <dmiles> but oh it has another specialization
+22:57:14 <dmiles> i am following wohat is genlPreded to it
+22:57:16 <dmiles> on-Physical
+22:57:24 <dmiles> is even more specific
+22:57:38 <dmiles> (genlPreds on-Physical above-Touching)
+22:57:57 <dmiles> so  on-Physical is even tighter
+22:58:25 <yottzumm> does the bottom card have to sit on anything?
+22:58:43 <yottzumm> I'll have to construct a whole house to play a card game
+22:58:48 <dmiles> you should have a nonHadnTable
+22:59:07 <dmiles> err Collection of things that holds cards
+22:59:20 <dmiles> hands, discards, deck, playpile 1
+22:59:41 <yottzumm> so I can get all the hands etc.  a root to get at the instances
+23:00:01 <dmiles> yeah.. 
+23:00:09 <dmiles> like a CardHolderCollection
+23:05:58 <dmiles> mea_culpa: http://12.225.207.235:8036/cgi-bin/cyccgi/cg?cb-af&102736 
+23:08:08 <mea_culpa> :)
+23:12:28 <dmiles> i guess yottzumm that you could place cards on-Physical the hand
+23:12:35 <dmiles> and make a rule.. 
+23:12:58 <yottzumm> can't pull a card from someone else's hand?
+23:13:43 <dmiles> (implies (above ?Card ?Hand) (availbeforPlay ?Hand ?Card))))
+23:14:36 <dmiles> then (availbeforPlay Hand1 ?Cards) will query out cards
+23:23:16 <yottzumm> I'll send you the code for your perusal.  It seems to work, and I'm going to bed
+23:23:56 <dmiles> cool
+23:24:19 --- quit: yottzumm ("Client Exiting")
+23:39:13 --- join: bruce (~bruce@dnvrdslgw17poola1.dnvr.uswest.net) joined #opencyc
+23:42:48 <dmiles> hello bruce
+23:44:47 <dmiles> bruce getting closer to release of primary moo
+23:45:22 <bruce> hey
+23:45:23 <bruce> cool
+23:45:26 <bruce> i'm so tired
+23:45:35 <bruce> i lost a raid controller last night i think.
+23:45:40 <dmiles> i am taking the advice you semi-gave about not creating any reklations not already in cyc
+23:46:25 <dmiles> i have a few that are macro-based in a way
+23:46:52 <dmiles> just holders that implie relations normal to cyc
+23:47:09 <bruce> cool ... some of the stuff that johnd and others are talking about seems like a good synergy with virt.world efforts if custom relations are avoided
+23:47:43 <dmiles> virt.world ?
+23:47:57 <bruce> virtual world
+23:48:07 <dmiles> where?
+23:48:18 <bruce> your and my interests are virtual world stuff.
+23:48:31 <dmiles> ah :) was hoping there were others
+23:48:44 <bruce> our interests with Cyc have good synergy with the stuff that the sanddune/others are talking about.
+23:48:46 <dmiles> but dont mind us pioneering
+23:48:55 <bruce> i want to sleep for a week
+23:49:11 <dmiles> :) .. well cool.. i wont keep you up
+23:49:23 <bruce> nah, going to find something interesting to do and stay up for a while.
+23:49:35 <bruce> last night, power failure + surge in this part of the city.
+23:49:57 <dmiles> killed a raid controller or dicks?
+23:50:01 <bruce> so, i got to go back to the office @ 12:30am until 3am to attempt to resurrect a server.
+23:50:02 <dmiles> oops
+23:50:05 <dmiles> man.. sorry
+23:50:11 <dmiles> disks
+23:50:20 <bruce> i think it is the raid controller.
+23:50:31 <bruce> but not like i have spares :)
+23:50:45 <dmiles> yeah the most expensive part
+23:51:02 <bruce> mm, the drives were more.
+23:51:07 <bruce> but i have spare drives.
+23:51:26 <bruce> and that server rsync's to another box every 4 hours, so i don't care about the data.
+23:51:37 <dmiles> do raid controllers ussially have a big ram cache as well?
+23:52:04 <bruce> i think ours only has 32M
+23:53:00 <dmiles> ah .. i have an ide drive onmy one of my linux machines thats hardly ever in use.. it is ussually using a 700meg ram cache
+23:53:23 <dmiles> since the machine uses gig ram
+23:53:42 <dmiles> but i am wondering if that machine would get any benifits from a raid
+23:54:22 <dmiles> since it hardly ever touches the drive anyways
+23:55:19 <bruce> ahh, i have a lot of stuff that is entirely disk bound
+23:55:31 <bruce> well, not a lot .. just a couple of Very Important things
+23:56:22 <bruce> but ultra160 scsi + 15k RPM drives makes for nice throughput
+23:56:56 <dmiles> i guess the things you dio are entirely based on getting things to disks (server rsync's to another box)
+23:58:21 <bruce> well, i had 3 disk failures in 7 days earlier this year
+23:58:42 <bruce> that's why i rsync my server to another every 4 hours.
+23:59:03 <dmiles> no fun to lose everything
+23:59:05 <bruce> the reason that i need a lot of drive i/o is when dealing with our game's DB ... 2.5G of data.
+23:59:24 <bruce> nah, i had backups, just formed an utter lack of trust of my hardware in me.
+23:59:37 <dmiles> yeah 2.5 gig cant all be cached in ram ;)
+23:59:59 --- log: ended opencyc/02.05.24
+23:59:59 --- log: ended opencyc/02.05.25

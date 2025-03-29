@@ -1,0 +1,133 @@
+00:00:00 --- log: started opencyc/02.04.12
+00:28:31 --- quit: dmiles (Read error: 110 (Connection timed out))
+00:34:46 --- quit: Seth ()
+00:36:24 --- join: deltab (deltab@mewtwo.espnow.com) joined #opencyc
+02:10:36 * theos_wrk is back (gone 02:22:56)
+03:54:01 --- join: dmiles (ZQWER@dialup-65.58.156.34.Dial1.Portland1.Level3.net) joined #opencyc
+04:27:37 * theos_wrk is away: again feeding :)
+05:36:56 * theos_wrk is back (gone 01:09:19)
+06:14:35 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+07:13:16 --- join: grove (~grove@193.69.113.28) joined #opencyc
+07:39:11 <dmiles> i need to make a cyclist containing an integer .. do i make a new CycSymbol("1")?
+07:39:18 <dmiles> err CycList ;P
+07:39:55 <dmiles> or should i amke a new Integer() ?
+07:56:09 * stevereed is back
+07:56:23 <stevereed> CycList myCycList = new CycList();
+07:56:39 <stevereed> myCycList.add(new Integer(1024));
+07:57:01 <stevereed> done
+07:57:28 <stevereed> SubL like Java has integer types
+07:58:06 <stevereed> so (eq 1 :1) --> NIL
+07:58:18 <stevereed> where :1 is a symbol
+07:59:01 <stevereed> Regarding last night's grid issue...
+07:59:13 <stevereed> OpenCyc java source code includes,
+07:59:35 <stevereed> agent adapters for both the CoABS and FIPA-OS agent communities
+08:00:12 <stevereed> CoABS is still proprietary (Global InfoTek from the Darpa CoABS project) but FIPA-OS is open source
+08:00:26 <stevereed> and is one of a number of FIPA compliant agent systems.
+08:01:01 <stevereed> So the message for CoABS and FIPA-OS is similar, and OpenCyc uses the FIPA ACL (Agent Communication Language)
+08:01:24 <stevereed> form -- serialized into XML (actually CycML) between agents.
+08:01:53 <stevereed> But I am looking at peer to peer as the infrastructure for distributed cyc, in that the agent
+08:02:22 <stevereed> communities have centralized directory services, and peer to peer builds these on the fly.
+08:02:59 <stevereed> If the message content and performatives can be made identical between agent community and p2p frameworks,
+08:03:10 <stevereed> then OpenCyc can bridge them when appropriate.
+08:03:30 <stevereed> I think of the grid as any of the networking implementations.
+08:03:58 <stevereed> The Knowledge Grid in particular is the fact that when you launch cyc or talk to a cyc server, you will
+08:04:21 <stevereed> be talking to all connected cycs.... the semantic web.
+08:22:44 --- join: DouglasMiles (ZQWER@dialup-65.58.7.36.Dial1.Portland1.Level3.net) joined #opencyc
+08:23:03 <DouglasMiles> good morning.. thank you for the answer
+08:31:37 <DouglasMiles> http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/logicmoo/logicmoo/src/logicmoo/  <- added some source talked about yesterday...
+08:34:55 * theos_wrk is away: Humans distracting me!
+08:35:03 * theos_wrk is back (gone 00:00:02)
+08:39:38 --- quit: dmiles (Connection timed out)
+10:03:13 --- quit: johnd ("Client Exiting")
+10:03:55 --- part: theos_wrk left #opencyc
+10:13:38 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+10:18:44 --- join: ray__ (~ray@folsom.officedepot.com) joined #opencyc
+10:20:30 <johnd> hey ray
+10:48:37 --- join: Hedgehog (Filimon@213.233.92.81) joined #opencyc
+11:01:51 --- quit: DouglasMiles (No route to host)
+12:31:20 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+12:31:21 --- quit: Hedgehog (Read error: 104 (Connection reset by peer))
+12:44:36 <dmiles> http://12.225.207.235/logicmoo/index.jsp
+12:47:15 <dmiles> i sense a browse
+12:47:48 <dmiles> still working on it
+12:47:58 <dmiles> had some other things that tied up time..
+12:48:10 <dmiles> but fixed the add new predicate/function
+12:48:18 <dmiles> err fixing
+12:48:34 <dmiles> create collection works
+12:48:56 <dmiles> as in the top menu
+12:49:25 <Graham> I'd suggest adding a explict link for login
+12:49:45 <Graham> as anything someone chooses other than in the first menu will give a login error
+12:49:50 <Graham> just a suggestion
+12:49:58 <dmiles> maybe the page should start there anfd then contine from the session login
+12:50:34 <dmiles> as in i can track a user.. and know if they at least viisted the opencyc login
+12:50:53 <dmiles> but will add to opencyc menu.. very good idea
+12:51:17 <Graham> yeah it's not a bad idea making that the first page they visit
+12:52:19 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+12:57:41 <dmiles> fixed
+14:44:35 --- quit: Seth ()
+15:02:11 --- quit: Graham ("xchat exiting..")
+15:02:46 --- quit: Don (Read error: 110 (Connection timed out))
+15:08:37 <dmiles> create prtedficate is not done..
+15:08:43 <dmiles> create.. Collection ity
+15:08:45 <dmiles> err is
+15:08:59 <dmiles> its just a start right now ;P
+15:09:17 <dmiles> i change the class layourt so so  thibngs noty working
+15:09:26 <dmiles> 2002-04-12 07:44:59 StandardWrapperValve[jsp]: Servlet.service() for servlet jsp threw exception
+15:09:26 <dmiles> java.lang.ArrayIndexOutOfBoundsException
+15:09:43 <dmiles> 207.207.8.65 - - [12/Apr/2002:07:44:59 -0800] "POST /logicmoo/createpredicate.jsp HTTP/1.1" 200 166327
+15:11:55 <johnd> douglas, I got XSL working, at least on the old xml format (which is all I have to work with right now)
+15:13:14 <johnd> see http://www.cyc.com/xslt/cycml-view1.html and click the various links at the top
+15:13:42 <johnd> you can click terms within the assertions to jump to the comment for the term
+15:15:05 <johnd> also, solution to needing an xsl for every CycML file: sym links
+15:15:46 <johnd> that's the solution once all xsl views are brought together into one xsl file
+15:16:25 <dmiles> oh man that looks nice
+15:16:37 <dmiles> the constants vs variables
+15:16:40 <johnd> good
+15:16:55 <dmiles> i like vadanda arial the best ass well ;P
+15:17:11 <dmiles> err verdanda.
+15:17:20 <johnd> of course, the various uses of CycML will dictate how we want to show the contents
+15:17:41 <johnd> if CycML becomes like a transcript, with the performatives, how might we want to show that
+15:18:00 <johnd> we want to take maximum advantage of the fact that we can control the look
+15:18:07 <johnd> and have multiple looks
+15:18:42 <dmiles> well it should end up looking like at some point cycL (perfomatives) maybe they ccan even still have a argFormat
+15:19:02 <dmiles> (me grammer is horid right now)
+15:19:22 <johnd> I was going for the CycL looks with the parens in the detail view
+15:20:10 <johnd> but we should be able to do things like collapse to summary info, have stats, filter certain MTs, etc.
+15:20:11 <dmiles> yes performatives could always haver a CycL look and may even be itialzized or turned green for a comment
+15:20:28 <dmiles> (as in appears as comment)
+15:20:46 <johnd> CycL isn't necessarily the prettiest thing to look at. not necessarily
+15:20:50 <dmiles> or not even having to be rendered more then a plus sign that couild expand out
+15:21:16 <johnd> right, like the default XML view in MSIE
+15:21:58 <dmiles> yes .. so if the perfomratives are intersting to the view they can still see them
+15:22:28 <johnd> yes
+15:22:58 <johnd> if you're planning to load the file, click to see prerequisites, other things that will auto-load
+15:23:00 --- join: DouglasMiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+15:23:14 <DouglasMiles> johnd> right, like the default XML view in MSIE
+15:23:29 <DouglasMiles>  yes .. so if the perfomratives are intersting to the view.. they can be viewed optionally
+15:23:50 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+15:24:57 <DouglasMiles> the egnlish is generated how currently?
+15:25:38 <DouglasMiles> oh i see, argFormat pterry ness with some upper helpers
+15:25:55 <DouglasMiles> has better grammer then me sometimes
+15:27:37 <DouglasMiles> be back in a few.. have to run to pick up kid
+15:27:45 <johnd> later
+15:27:48 * johnd is away: I'm busy
+15:27:50 <DouglasMiles> (an hour or so if your on)
+15:28:41 <DouglasMiles> btw: i really like the combo of XSLT and CycML
+15:29:07 <DouglasMiles> and the fact that CycML saves everyting... (not a simplification)
+15:29:33 <DouglasMiles> and the XSLT language parser is only something that gets better with time
+15:29:54 * catskul is away: hooters
+15:30:01 * DouglasMiles is away: back in a hour
+16:03:54 --- quit: DouglasMiles (Read error: 104 (Connection reset by peer))
+17:05:25 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+17:41:23 --- quit: ray__ ("Client Exiting")
+17:52:10 --- part: Don left #opencyc
+19:30:25 --- quit: bruce (Read error: 104 (Connection reset by peer))
+20:03:57 --- join: bruce (~bruce@dnvrdslgw17poold45.dnvr.uswest.net) joined #opencyc
+20:04:04 --- join: kirk (~kirk@CPE014320108614.cpe.net.cable.rogers.com) joined #opencyc
+20:46:49 --- join: Hedgehog (Filimon@213.233.99.56) joined #opencyc
+21:30:54 --- join: mspring (~mspring@dsl027-176-216.sfo1.dsl.speakeasy.net) joined #opencyc
+22:20:05 --- join: mark (~mark@APX1-03-108.PDX.DU.TELEPORT.COM) joined #opencyc
+22:20:05 --- quit: Hedgehog (Read error: 104 (Connection reset by peer))
+22:33:26 --- quit: mark ("Client Exiting")
+23:37:10 --- part: mspring left #opencyc
+23:59:59 --- log: ended opencyc/02.04.12

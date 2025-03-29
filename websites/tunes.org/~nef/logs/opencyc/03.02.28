@@ -1,0 +1,74 @@
+00:00:00 --- log: started opencyc/03.02.28
+00:57:31 <fleeky> how do you explain free will?
+01:22:59 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+01:23:09 <yepster> morning
+07:48:40 <dmiles> morning
+07:49:08 <yepster> I back to symbolic btw
+07:49:27 <yepster> (for scripts)
+07:49:39 <dmiles> explain
+07:50:32 <yepster> well, problems you described with clipping
+07:50:47 <yepster> and me thinking things like 'scripts' are personal
+07:51:05 <yepster> to the person that gets the stories feeded
+07:51:19 <yepster> (and therefore might not even have a 'name')
+07:51:29 <dmiles> oh hah, yeah there is SHOP vs Partial Order planners
+07:51:51 <dmiles> if you personify SHOP you can emulate POP
+07:52:41 <dmiles> so one agent (say planner cursor) can wait use another
+07:53:51 <dmiles> currently today i am taking a SHOP system and POPing it
+07:54:03 <dmiles> is this simular to what your doing?
+07:54:19 <yepster> back
+07:54:30 <yepster> (suddenly there were 5 people behind my desk!)
+07:54:36 <dmiles> good
+07:54:39 <yepster> and they started talking to me etc
+07:55:07 <yepster> about shop to pop -> dunno
+07:55:19 <yepster> I need to represent a set of things that ARE scripts
+07:55:24 <yepster> but the problem is how
+07:55:44 <yepster> question: even when interpretation of script from a set of stories is personal
+07:55:50 <yepster> and not formal nor strict etc
+07:56:03 <yepster> does that mean it's no use to represent it in FOL
+07:56:05 <yepster> ?
+07:56:28 <yepster> i think it would be no problem if
+07:56:28 <dmiles> oh "I back to symbolic btw" means not alway cyc constants?
+07:56:41 <yepster> in the representation i include things like:
+07:56:48 <yepster> event might cause etc
+07:56:57 <yepster> and script (in head of) yeb
+07:57:02 <yepster> or actually opencyc
+07:57:10 <yepster> hmm this sounds weird
+07:57:27 <yepster> i few days ago i though about hooking discern into opencyc
+07:57:42 <dmiles> not overly weird
+07:57:51 <yepster> problem though is that a set of action sentences is needed to learn the lexicon
+07:57:59 <yepster> and i don't have time to prepare that
+07:59:00 * yepster getting a link to example set
+07:59:02 <dmiles> well when represting a script.. you mean its like the 3rd arguent of genlPhrase?
+07:59:13 <yepster> dunno genlPhrase
+07:59:22 <dmiles> err genPhrase
+07:59:38 <dmiles> can be (NIL) (2 . 1)
+07:59:53 <dmiles> its more structural to be used by code then logic
+08:00:28 * yepster hmm do not have that on a public server
+08:00:51 <yepster> that sounds interesting
+08:01:12 <dmiles> well actually genPhrase works but there is anohter example thats better
+08:01:22 <dmiles> i'll find real quick
+08:01:26 <yepster> what i want is being able to express that e.g. some subevents might not occur
+08:01:53 <yepster> without it being exceptional
+08:02:16 <yepster> will be difficult though
+08:03:08 <dmiles> (genTemplate likesAsFriend (ConcatenatePhrasesFn (TermParaphraseFn-NP :ARG1) (BestHeadVerbForInitialSubjectFn Like-TheWord) (TermParaphraseFn-NP :ARG2) (BestNLPhraseOfStringFn "as a friend"))) in EnglishParaphraseMt
+08:03:18 <dmiles> ok genTemplate works
+08:03:33 <dmiles> so you could use ConcatenateScriptFn
+08:03:57 <yepster> i have to attend some social stuff
+08:04:04 <yepster> ttyl8r?
+08:04:15 <dmiles> yes.. will be here all day
+13:07:37 --- join: yepster__ (yepster_@vetteaap.xs4all.nl) joined #opencyc
+13:08:27 <yepster__> #$DefaultDisjointScriptType should have been called #$DefaultDisjointEventType
+15:47:43 --- join: garlicg (~pk@dialup-209.244.180.228.Dial1.NewYork2.Level3.net) joined #opencyc
+15:48:16 <garlicg> what is the name of that word dictionary (the one freely downloadable)?
+15:48:57 <yepster__> wordnet
+15:49:19 <garlicg> ah.
+15:49:21 <garlicg> thanks.
+15:55:07 <garlicg> bye
+15:55:12 --- part: garlicg left #opencyc
+16:28:11 --- join: lazycode (~lzcd@ip68-2-43-43.ph.ph.cox.net) joined #opencyc
+16:28:50 <lazycode> Anyone know if there has been any attempts to use OpenCyc to solve SAT I Verbal section Analogy questions?
+18:09:54 <dmiles> http://opencyc250.homelinux.org:3603/cg?cb-start is not responding
+19:22:54 --- quit: deltab (Read error: 60 (Operation timed out))
+19:36:08 --- quit: lazycode ("leaving")
+21:14:20 --- join: deltab (~deltab@espians.com) joined #opencyc
+23:59:59 --- log: ended opencyc/03.02.28

@@ -1,0 +1,88 @@
+00:00:00 --- log: started opencyc/02.09.30
+00:46:03 --- join: notme (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+00:46:43 --- quit: mea_culpa_sleep (Read error: 104 (Connection reset by peer))
+01:10:44 --- quit: notme (Read error: 104 (Connection reset by peer))
+05:11:17 --- join: notme (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+05:13:39 <ZivZ> Thanks for the response, dmiles, I can appreciate the fact that they are busy and have to limit the resources devoted to OpenCyc.  I seriously doubt that there is such a limited number of users interested though, just a limit to the number taking the time to discuss it.
+05:15:08 <ZivZ> I know of at least half a dozen people in my circle of friends, who are quite excited about this, and we aren't even AI experts.
+05:16:38 --- nick: notme -> mea_culpa
+05:17:27 <ZivZ> The fact is that OpenCyc could add a measure of intelligence to programs that otherwise would require lots of tedium from workers, makes this a very exciting work.
+05:21:41 --- nick: mea_culpa -> mea_culpa_work
+06:52:51 --- join: CycLBot (~CycLBot@12-225-240-66.client.attbi.com) joined #opencyc
+08:08:35 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+08:09:24 --- join: CycLBot (~CycLBot@12-225-240-66.client.attbi.com) joined #opencyc
+09:58:32 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+09:58:39 <yepster> hello
+10:09:48 <yepster> subl: (+ 1 1)
+10:10:06 <yepster> hello CycLBot
+10:10:26 <yepster> (mapcar #'min-genls (all-genls #$Organization))
+10:10:55 <yepster> does anybody know how I can supply the optional Mt argument to min-genls in this construct?
+10:11:52 <yepster> (I am trying to automate showing genls trees with graphviz)
+10:48:09 --- quit: devEiant (Remote closed the connection)
+10:48:48 --- join: devEiant (~deveiant@eternal.esniff.com) joined #opencyc
+11:13:28 <stevereed> yepster, you probably do not require the optional mt argument because we are
+11:13:56 <stevereed> migrating all the isa, genls definitional assertions to the #$UniversalVocabularyMt.
+11:14:16 <stevereed> But I tried the following and see that mapcar is not working right in the Cyc api:
+11:14:47 <stevereed> (define my-fn (cols) (ret (min-genls cols #$UniversalVocabularyMt)))
+11:15:08 <stevereed> (mapcar 'my-fn (all-genls #$Organization))
+11:15:12 <stevereed> should give:
+11:15:26 <stevereed> (NIL (#$Thing) (#$Individual))
+11:15:34 <stevereed> but gives this error instead:
+11:15:51 <stevereed> MY-FN does not have a function value.
+11:16:22 <stevereed> I will not get a chance to fix this error by release 0.7 which should be out in a day or two.
+11:33:53 <yepster> ah too bad..
+11:34:20 <yepster> I tried it another way but am stuck a bit there too:
+11:34:22 <yepster> (define showgenls (col &optional (mt nil))
+11:34:22 <yepster>   (clet (x)
+11:34:22 <yepster>     (csetq x (min-genls col mt))
+11:34:22 <yepster>     (pif (eq x nil)
+11:34:22 <yepster>       nil
+11:34:22 <yepster>       (cons (cons (first x) col) (showgenls (first x)))
+11:34:24 <yepster>       )))
+11:35:25 <yepster> this works but isn't correct if min-genls returns a collection with >1 individual (because of the use of first)
+11:35:46 <yepster> using mapcar with showgenls doesn't work, apparantly because it's no standard function.
+11:39:55 <yepster> same mapcar error I guess
+11:40:24 <yepster> thanks anyway for the answer!
+12:24:24 --- quit: yepster ()
+12:24:48 --- join: deltab (~deltab@espians.com) joined #opencyc
+12:27:52 <deltab> I just saw this: "I think there is an enormous project whose name I don't recall right now going on in Texas, perhaps Austin, which is spiritually derived from Eliza and focused on sending whole, previous composed sentences back conversational style." - sound anything like Cyc to you?
+12:29:01 <deltab> (it was in the context of coded messages with slots to be filled in)
+15:28:18 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:48:29 --- nick: mea_culpa_work -> mea_culpa
+16:49:42 --- quit: Cobwa (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: stevereed (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: devEiant (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: CycLBot (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: Cobra (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: Kinoc (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: dmiles (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: deltab (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: siege (card.freenode.net irc.freenode.net)
+16:49:42 --- quit: ZivZ (card.freenode.net irc.freenode.net)
+16:49:43 --- quit: ChanServ (card.freenode.net irc.freenode.net)
+16:55:41 --- quit: mea_culpa ("Oh shit not again!")
+16:58:06 --- join: notme (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+16:58:06 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:58:06 --- join: stevereed (~reed@207.207.8.185) joined #opencyc
+16:58:35 --- nick: notme -> mea_culpa
+16:58:39 --- join: ChanServ (ChanServ@services.) joined #opencyc
+16:58:39 --- join: deltab (~deltab@espians.com) joined #opencyc
+16:58:39 --- join: devEiant (~deveiant@eternal.esniff.com) joined #opencyc
+16:58:39 --- join: CycLBot (~CycLBot@12-225-240-66.client.attbi.com) joined #opencyc
+16:58:39 --- join: Cobra (cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+16:58:39 --- join: dmiles (logicmoo@12-225-195-245.client.attbi.com) joined #opencyc
+16:58:39 --- join: siege (~siege@dsl093-240-123.ral1.dsl.speakeasy.net) joined #opencyc
+16:58:39 --- join: Kinoc (~kinoc@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:58:39 --- mode: card.freenode.net set +o ChanServ
+17:01:22 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+17:36:11 --- quit: Cobwa (Read error: 113 (No route to host))
+18:41:09 --- quit: devEiant ("Client Exiting")
+19:00:06 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+19:20:54 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+19:27:34 --- quit: graylensman ("Client Exiting")
+20:25:40 --- quit: mea_culpa (Read error: 104 (Connection reset by peer))
+20:26:12 --- join: mea_culpa (~mea_culpa@12-229-4-229.client.attbi.com) joined #opencyc
+20:31:16 --- nick: mea_culpa -> mea_culpa_sleep
+21:12:31 --- join: water (water@c66-235-5-90.sea2.cablespeed.com) joined #opencyc
+22:43:25 --- part: water left #opencyc
+23:59:59 --- log: ended opencyc/02.09.30

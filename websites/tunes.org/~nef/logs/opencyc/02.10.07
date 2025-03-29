@@ -1,0 +1,150 @@
+00:00:00 --- log: started opencyc/02.10.07
+02:07:21 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+05:42:04 <dmiles> prolog: english2Kif("i know")
+05:42:06 <CycLBot> assert(known_phrase(and_iv(isa('?Thing134', '#$CycFormula'), '#$knows'('?Speaker', '?Thing134'))))
+05:42:18 <dmiles> prolog: english2Kif("i see")
+05:42:19 <CycLBot> assert(known_phrase(and_iv('#$bodilyDoer'('?Speaker', '?Intrans79'), event_isa('?Intrans79', '#$VisualPerception'))))
+05:42:39 <dmiles> prolog: english2Kif("i see your car")
+05:42:42 <CycLBot> assert(known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION9', '#$VisualPerception'), '#$performedBy'('?ACTION9', '?Speaker'), '#$perceivedThings'('?ACTION9', '#$Automobile')), pos_and(ownedBy('#$Automobile', '#$Your-TheWord'), true))))
+05:43:25 <dmiles> prolog: english2Kif("i know about your car")
+05:43:28 <CycLBot> assert(known_phrase(verbSemTrans('#$knowsAbout'('?Speaker', '#$Automobile'), pos_and(ownedBy('#$Automobile', '#$Your-TheWord'), true))))
+05:49:47 <dmiles> prolog: english2Kif("i know about your car")
+05:49:51 <CycLBot> assert(known_phrase(verbSemTrans('#$knowsAbout'('?Speaker', '?Thing169'), pos_and(ownedBy('?Thing169', '#$Your-TheWord'), isa('?Thing169', '#$Automobile'), true))))
+05:54:14 <dmiles> prolog: english2Kif("i see the boat")
+05:54:17 <CycLBot> assert(known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION18', '#$VisualPerception'), '#$performedBy'('?ACTION18', '?Speaker'), '#$perceivedThings'('?ACTION18', '?Thing192')), referant('?Thing192', isa('?Thing192', '#$Watercraft'), true))))
+05:55:22 <dmiles> i have about 67% of CYC NL implimented
+05:55:40 <dmiles> based on the NL predicates that exist in opencyc
+05:56:03 <dmiles> in a few days should have all of it
+05:57:02 <dmiles> varaois internal forms like known_phrase,pos_and are spesical heuristics that can be used in infernce
+05:57:52 <dmiles> afterwards will convert these huristic into optimally formed queries/assertions
+05:58:52 <dmiles> for assertions a tough thing is that sessions each need their own microtheories (like when it reads webpages)
+05:59:16 <dmiles> and skolemizations have to be made in a global context
+05:59:34 <dmiles> so i am gathering one page is going to need to be a single asserion
+06:01:33 * dmiles naps now
+06:04:25 --- quit: CycLBot (Excess Flood)
+06:04:26 --- join: CycLBot (~CycLBot@12-225-240-66.client.attbi.com) joined #opencyc
+06:42:23 <yepster> if an agents says it knows -> assert (beliefs agents (knows agent something)) ?
+06:43:54 <yepster> prolog: english2Kif("i believe you")
+06:43:56 <CycLBot> assert(trans_and(isa_v('?believe1', '#$beliefs'), '#$doneBy'('?believe1', '?Speaker'), '#$constituentInSituation'('?believe1', '?TargetAgent'), true))
+06:45:57 <yepster> prolog: english2Kif("every car has 4 doors")
+06:46:39 <yepster> prolog: english2Kif("a car")
+06:46:41 <CycLBot> command(trans_and(isa_v('?a7', '#$Verb'('#$A_Change-ThePrefix')), '#$doneBy'('?a7', '?TargetAgent5'), '#$constituentInSituation'('?a7', '#$Automobile'), true))
+06:47:15 <yepster> prolog: english2Kif("I have a green car")
+06:47:19 <CycLBot> assert(trans_and(isa_v('?have2', '#$possesses'), '#$doneBy'('?have2', '?Speaker'), '#$constituentInSituation'('?have2', thingFor([green, car])), true))
+06:48:00 <yepster> prolog: english2Kif("Fred is a turkey")
+06:48:05 <CycLBot> assert(trans_and(isa_v('?is3', '#$Verb'('#$Be-TheWord')), '#$doneBy'('?is3', thingFor('Fred')), '#$constituentInSituation'('?is3', thingFor([turkey])), true))
+07:08:14 <dmiles> hrrm vvery odd it was doing much better a while ago
+07:08:24 <dmiles> prolog: english2Kif("i know about the green car")
+07:08:32 <CycLBot> assert(known_phrase(verbSemTrans('#$knowsAbout'('?Speaker', thingFor([green, car])), true)))
+07:08:40 <dmiles> prolog: english2Kif("Fred is a turkey")
+07:08:44 <CycLBot> words(['Fred', is, a, turkey])
+07:08:57 <dmiles> hrrm backing out some changes
+07:10:24 <dmiles> prolog: english2Kif("I have a green car and boat")
+07:10:28 <CycLBot> words(['I', have, a, green, car, and, boat])
+07:10:38 <dmiles> prolog: english2Kif("I have a green car and boat")
+07:10:45 <CycLBot> assert(trans_and(isa_v('?have5', '#$possesses'), '#$doneBy'('?have5', '?Speaker'), '#$constituentInSituation'('?have5', thingFor([green, car, and, boat])), true))
+07:14:03 <dmiles> prolog: english2Kif("I have a green car")
+07:14:07 <CycLBot> assert(trans_and(isa_v('?have9', _G663), '#$doneBy'('?have9', '?Speaker'), '#$constituentInSituation'('?have9', _G669), '#$possesses'('?Speaker', thingFor([green, car]))))
+07:22:28 --- join: devEiant (deveiant@dsl081-108-067.den1.dsl.speakeasy.net) joined #opencyc
+07:36:09 <dmiles> prolog: english2Kif("I own a green car")
+07:36:12 <CycLBot> assert(known_phrase(verbSemTrans('#$owns'('?Speaker', '?car4'), '#$thereExists'('?car4', and(and(true, isa_in('?car4', '#$Automobile')), hasTrait('?car4', '#$Adjective'('A01431944')))))))
+07:36:23 <dmiles> prolog: english2Kif("I have a green car")
+07:36:26 <CycLBot> assert(known_phrase('lightVerb-TransitiveSemTrans'('#$thereExists'('?car5', and(and('#$anatomicalParts'('?Speaker', '?car5'), isa_in('?car5', '#$Automobile')), hasTrait('?car5', '#$Adjective'('A01431944')))))))
+07:37:09 <dmiles> it actually comes up with 10 differnt parses there
+07:37:19 <dmiles> it is just returning the fastest
+07:37:49 <dmiles> all 10 well need deoptimized and WFF checked
+07:42:44 <dmiles> prolog: english2Kif("take the blue car")
+07:42:46 <CycLBot> command(known_phrase('lightVerb-TransitiveSemTrans'(referant('?Thing159', isa('?Thing159', '?car8'), and(and('#$and'('#$isa'('?ACTION10', '#$Ingesting'), '#$performedBy'('?ACTION10', '?SUBJECT1'), '#$primaryObjectMoving'('?ACTION10', '?Thing159')), isa_in('?car8', '#$Automobile')), hasTrait('?car8', '#$Adjective'('#$Blue-TheWord')))))))
+07:43:44 <dmiles> prolog: english2Kif("grab the blue car")
+07:47:32 <dmiles>  prolog: english2Kif("she stole the blue car").
+07:47:37 <CycLBot> assert(known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION13', '#$Stealing-Generic'), '#$objectOfPossessionTransfer'('?ACTION13', '?Thing175'), '#$perpetrator'('?ACTION13', '?She')), referant('?Thing175', isa('?Thing175', '?car12'), and(and(true, isa_in('?car12', '#$Automobile')), hasTrait('?car12', '#$Adjective'('#$Blue-TheWord')))))))
+07:47:39 <yepster> prolog: english2Kif("beer")
+07:47:41 <CycLBot> assert(and(exists('?beer1'), isa_in('?beer1', '#$Noun'('N05913023'))))
+07:47:58 <dmiles> thats a wordnet that need lexified
+07:48:27 <dmiles> i am cosidering walking up WN to the nearest Cyc collection vei synonmous external concept
+07:48:52 <dmiles> but it may be more fun to start a session with user that will get these lexified more explicitly
+07:49:42 <dmiles> rolog: english2Kif("a beer")
+07:49:45 <dmiles> prolog: english2Kif("a beer")
+07:49:47 <CycLBot> command(trans_and(isa_v('?a8', '#$Verb'('#$A_Change-ThePrefix')), '#$doneBy'('?a8', '?TargetAgent35'), '#$constituentInSituation'('?a8', '?beer2'), and(true, isa_in('?beer2', '#$Noun'('N05913023')))))
+07:49:58 <dmiles> oops
+07:52:14 <dmiles> fixed
+07:52:15 <dmiles> prolog: english2Kif("a beer")
+07:52:17 <CycLBot> assert('#$thereExists'('?beer4', and(exists('?beer4'), isa_in('?beer4', '#$Noun'('N05913023')))))
+07:52:32 <dmiles> prolog: english2Kif("all beers")
+07:52:33 <CycLBot> words([all, beers])
+07:52:38 <dmiles> prolog: english2Kif("all beer")
+07:52:39 <CycLBot> words([all, beer])
+08:06:09 <yepster> Do you believe in automatic text translation to cycl?
+08:06:16 <yepster> let me rephrase
+08:06:36 <yepster> do you think that it will ever produce 'good quality' assertions?
+08:07:30 <dmiles> yes but only if their can be contextual guidposts
+08:07:45 <dmiles> cyc need to know exacly what it can expect to hear
+08:08:18 <dmiles> then the utterence is  viewed as the best choise in multiple chioce.. where the is possible 100s of choices at a time
+08:08:49 <yepster> mapping of parsed tree against likelyhood of the meaning in cycl?
+08:09:42 <dmiles> yes.. so not just WFF is checked but consistancy with active topics (chioces) so basiclyl a priortized order would be nice as well
+08:11:06 <dmiles> i think it will still be important to define dialog.. as of yet there is nothing in cyc to help that
+08:11:58 <yepster> I would just put a dialog between people in 'as is', maybe do some stuff on it to
+08:11:59 <dmiles> that dialog has to be able to define parsing contexts
+08:12:29 <yepster> pull info out like 'a greets b', 'b asks a something'.
+08:12:37 <yepster> and that should be cycl
+08:12:43 <dmiles> yeah i am hoping maybe i can just try to populate a bunch of first order entities with relations betweeen them
+08:13:06 <dmiles> yes.. exactly.. thats the type of dialog
+08:13:31 <yepster> but the actual spoken or written nl text itself... too much noise, and not complete by itself
+08:14:02 <yepster> e.g. a asks b if b has opinion that it is warm in the room they are in
+08:14:15 <yepster> means:
+08:14:15 <dmiles> well there has to be the concept of side tracking
+08:14:23 <yepster> a wants b to open window
+08:14:44 <yepster> (=explanation pattern :)
+08:14:52 <dmiles> yes.. about to get there ;P
+08:14:59 <dmiles> we need Schankisms 
+08:15:14 <yepster> it's 2 chapters away
+08:15:55 <yepster> (in the doc of my thesis, currently working on straightforward translation of a formal legislation text)
+08:26:53 --- quit: yepster ()
+11:15:13 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+11:15:20 <fleeky> hello gentlemen
+11:15:27 <fleeky> all your base..
+11:18:04 <fleeky> could a non programmer use opencyc at this point?
+11:18:39 <fleeky> what are some good uses of opencyc?
+11:18:57 <fleeky> can it be used in video game engines?
+11:19:15 <fleeky> i remember talking to you guys and you were talking about making more intelligent levels.. 
+11:19:47 <fleeky> could you say for instance use open cyc with the torque engine (tribes2 now open source engine) to make the levels highly more interactive?
+14:08:27 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+15:50:01 <ZivZ> prolog: english2Kif("I see a tree")
+15:50:06 <CycLBot> assert(known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION1', '#$VisualPerception'), '#$performedBy'('?ACTION1', '?Speaker'), '#$perceivedThings'('?ACTION1', '?tree1')), '#$thereExists'('?tree1', and(true, isa_in('?tree1', '#$Tree-ThePlant'))))))
+15:51:16 <ZivZ> prolog: english2Kif("the tree does not see me")
+15:51:33 <CycLBot> assert(and(and_adverbal('?ACTION2', '#$not', known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION2', '#$VisualPerception'), '#$performedBy'('?ACTION2', '?tree2'), '#$perceivedThings'('?ACTION2', '?Speaker')), true))), isa_in('?tree2', '#$Tree-ThePlant')))
+15:52:30 <ZivZ> prolog: english2Kif("to see a tree be in sight of it")
+15:52:53 <CycLBot> words([to, see, a, tree, be, in, sight, of, it])
+15:53:16 <ZivZ> prolog: english2Kif("to see a tree, be in sight of it")
+15:53:42 <CycLBot> words([to, see, a, tree, (','), be, in, sight, of, it])
+15:54:06 <ZivZ> prolog: english2Kif("the tree is in sight")
+15:54:08 <CycLBot> assert(and(gen_phrase2('#$cityInState'('?tree3', '?sight1'), do_and(and(nil_true, isa_in('?sight1', '#$VisualPerception')))), isa_in('?tree3', '#$Tree-ThePlant')))
+15:54:59 <ZivZ> cool stuff.
+15:55:15 <deltab> cityInState?
+15:59:18 <deltab> prolog: english2Kif("the cat ran up the tree")
+15:59:28 <CycLBot> assert(and(trans_and(isa_v('?ran1', '#$DeviceRunning'), '#$doneBy'('?ran1', '?cat1'), '#$constituentInSituation'('?ran1', '?tree4'), and(true, isa_in('?tree4', '#$Tree-ThePlant'))), isa_in('?cat1', '#$Noun'('N01630731'))))
+16:11:41 <ZivZ> it has been a about a week since we were told it would probably be a couple of days until 0.7 came out.  Has there been any word?
+16:16:20 <ZivZ> prolog: english2Kif("I see")
+16:16:22 <CycLBot> assert(known_phrase(and_iv('#$bodilyDoer'('?Speaker', '?Intrans7'), event_isa('?Intrans7', '#$VisualPerception'))))
+16:16:43 <ZivZ> prolog: english2Kif("I understand")
+16:16:44 <CycLBot> assert(known_phrase(and_iv('#$bodilyDoer'('?Speaker', '?Intrans8'), event_isa('?Intrans8', '#$Verb'('V00397666')))))
+16:19:07 <deltab> prolog: english2Kif("the cat lkjlkj")
+16:20:16 <CycLBot> words([the, cat, lkjlkj])
+16:20:35 <deltab> prolog: english2Kif("I saw the tree")
+16:20:38 <CycLBot> assert(known_phrase(verbSemTrans('#$and'('#$isa'('?ACTION3', '#$VisualPerception'), '#$performedBy'('?ACTION3', '?Speaker'), '#$perceivedThings'('?ACTION3', '?tree5')), and(true, isa_in('?tree5', '#$Tree-ThePlant')))))
+16:21:37 <Cobwa> Is that new?  Who added phrase knowledge?
+16:24:28 --- quit: Cobwa ("[x]chat")
+16:31:22 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+18:40:47 --- quit: Cobwa ("[x]chat")
+19:16:11 --- join: MrShaker (~n@cs78161118.pp.htv.fi) joined #opencyc
+19:39:13 --- quit: MrShaker ()
+20:39:44 --- join: graylensman (~ray@fl-wbu2c6-669.pbc.adelphia.net) joined #opencyc
+21:02:30 --- quit: graylensman ("Client Exiting")
+21:09:54 <Kinoc> prolog: english2Kif("Where is dmiles?")
+21:09:59 <CycLBot> query(true(trans_and(isa_v('?is2', '#$Verb'('#$Be-TheWord')), '#$doneBy'('?is2', named('Where')), '#$constituentInSituation'('?is2', thingFor([dmiles])), true)))
+21:12:41 <deltab> prolog: english2Kif("is Where dmiles?")
+21:12:52 <CycLBot> query(can(trans_and(isa_v('?is5', '#$Verb'('#$Be-TheWord')), '#$doneBy'('?is5', '?TargetAgent9'), '#$constituentInSituation'('?is5', named('Where')), const_and(true, '?is5', '#$eventOccursAt'('?is5', thingFor([dmiles]))))))
+21:23:06 --- join: yottzumm ([yENJgV9C8@12-240-146-224.client.attbi.com) joined #opencyc
+21:23:42 --- quit: yottzumm (Client Quit)
+23:40:38 <fleeky>        ehllo?
+23:59:59 --- log: ended opencyc/02.10.07

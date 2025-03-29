@@ -1,0 +1,78 @@
+00:00:00 --- log: started opencyc/03.01.07
+00:00:28 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+00:03:44 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+02:53:19 <yepster> from doc:
+02:53:20 <yepster> Moreover, a reified NAT can be explicitly identified with an existing constant using the predicate #$termOfUnit: 
+02:53:20 <yepster>    (#$termOfUnit #$TheYear1996 (#$YearFn 1996))
+02:53:20 <yepster>    (#$termOfUnit #$Apple (#$FruitFn #$AppleTree))
+02:54:17 <yepster> however when I assert
+02:54:18 <yepster> (#$termOfUnit #$PersonMetIndicatie-G (#$PersonTypeOpIndicatieFn #$Indicatie-G))
+02:54:26 <yepster> the response is
+02:54:33 <yepster> HTML Transfer halted due to script error:A CONSTANT at 0x469f53cc is not a f_6453.
+03:01:50 --- quit: bediako_ (Read error: 60 (Operation timed out))
+03:10:31 --- quit: Graham (calvino.freenode.net irc.freenode.net)
+03:11:05 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+03:18:09 --- quit: Graham (calvino.freenode.net irc.freenode.net)
+03:18:21 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+03:38:46 <yepster> This works though
+03:38:47 <yepster> (termOfUnit (PersonTypeOpIndicatieFn Indicatie-C) (PersonTypeOpIndicatieFn Indicatie-C))
+03:40:54 <yepster> And I have an implication
+03:40:55 <yepster> (#$implies 
+03:40:56 <yepster>   (#$indicatieStelling ?PERSON ?INDICATIE) 
+03:40:56 <yepster>   (#$isa ?PERSON 
+03:40:56 <yepster>     (#$PersonTypeOpIndicatieFn ?INDICATIE)))
+03:41:15 <yepster> How can I get as consequent
+03:41:57 <yepster> (isa Person PersonMetIndicatie-C) instead of (isa Person (PersonTypeOpIndicatieFn Indicatie-C)) ?
+03:46:07 <yepster> I've searched the irc logs and common forum but could not find an answer
+03:47:20 --- quit: yepster ()
+03:48:19 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+03:55:55 <yepster> :( the 'more on functions' tutorial also doesn't give any clue
+03:56:12 <yepster> it's a collection denoting function
+07:20:16 <yepster> hmm
+07:20:48 <yepster> this is monotonic true:
+07:20:49 <yepster> (or 
+07:20:49 <yepster>        (isa HYP-Verzekerde-9040 PersonMetIndicatie-E) 
+07:20:49 <yepster>        (isa HYP-Verzekerde-9040 PersonMetIndicatie-F) 
+07:20:49 <yepster>        (isa HYP-Verzekerde-9040 PersoonMetIndicatie-DenC))
+07:21:05 <yepster> but these are also monotonic true:
+07:21:06 <yepster> (not (isa HYP-Verzekerde-9040 PersonMetIndicatie-E))
+07:21:06 <yepster> (not (isa HYP-Verzekerde-9040 PersonMetIndicatie-F))
+07:21:06 <yepster> (not (isa HYP-Verzekerde-9040 PersoonMetIndicatie-DenC))
+07:21:10 <yepster> in the same Mt
+07:21:23 <yepster> %-?
+08:31:02 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+09:14:45 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+09:23:16 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+09:51:27 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+09:56:42 --- quit: kinoc (Read error: 60 (Operation timed out))
+10:56:32 --- quit: Graham (calvino.freenode.net irc.freenode.net)
+10:59:36 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+11:04:59 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+11:30:22 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+12:17:31 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+13:46:01 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+14:45:09 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+14:53:37 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+14:57:39 --- join: mdupont (mdupont@p5080E6C9.dip0.t-ipconnect.de) joined #opencyc
+15:04:57 --- nick: mdupont -> mdupont-busy
+15:38:56 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:17:12 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+16:25:43 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+16:55:46 --- quit: Cobwa ("[x]chat")
+17:04:17 --- quit: kinoc (Read error: 60 (Operation timed out))
+17:15:12 --- join: bediako (~bediako@pool-141-156-17-54.res.east.verizon.net) joined #opencyc
+17:15:34 --- quit: bediako (Client Quit)
+18:41:19 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+18:58:51 <ZivZ> Hey Kinoc.
+19:07:23 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+19:33:37 --- quit: mdupont-busy (Read error: 60 (Operation timed out))
+19:42:18 --- join: mdupont-busy (mdupont@p5080E5AE.dip0.t-ipconnect.de) joined #opencyc
+20:07:16 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:54:18 --- nick: mdupont-busy -> mdupont
+21:02:46 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+21:03:13 --- join: kinoc2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+21:51:38 --- join: kinoc (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+22:00:10 --- quit: kinoc2 (Read error: 60 (Operation timed out))
+23:15:20 --- quit: mdupont ("Client Exiting")
+23:23:54 --- quit: kinoc (Read error: 60 (Operation timed out))
+23:59:59 --- log: ended opencyc/03.01.07

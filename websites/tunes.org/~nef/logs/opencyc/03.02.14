@@ -1,0 +1,116 @@
+00:00:00 --- log: started opencyc/03.02.14
+02:59:37 <dmiles> good
+02:59:40 <dmiles> hi there
+02:59:53 <dmiles> looking into story generation right now
+03:00:13 <dmiles> i am going to come up with a compforable fiction
+03:00:47 <dmiles> then allow certain unkey descission points to be based off user insteread
+03:01:00 <dmiles> should be interesting
+03:01:15 <dmiles> the more the system breaks down.. the more control i remove from user ;P
+03:06:02 <dmiles> but it sone by assering story rules
+03:06:06 <dmiles> err done by
+03:06:21 <dmiles> then querying for the middle state
+03:06:37 <dmiles> the resulting "proof" is the sequance of actions that would unfold
+03:06:58 <dmiles> so then it moves forward by making the event true
+03:07:25 <dmiles> a character's descision is part of the proof
+03:08:10 <dmiles> it would be possible if the character was suppposed to be the user.. the system my do a set of choices.. or perhaps delaying until the player asserts their own action
+03:08:16 <dmiles> the process is then started over
+03:08:55 <dmiles> the implimentation of the system is not totally in opencyc yet.. becasue the desired heuristics are backchain heavy
+03:09:24 <dmiles> if i can resrict the width of search maybe it would work
+03:09:51 <dmiles> pressently i am going for 100% predictable results
+03:10:00 <dmiles> (this is the get a baseline)
+03:10:31 <dmiles> but hoping the infernce harness will allow wiser breath
+03:11:09 <dmiles> we'll see, this is very much like the program TALESPIN
+03:11:48 <dmiles> even if the geenric infernceis not optimised for this practice.. a SBHL module is not out of line
+03:12:16 <dmiles> there is always some way the current infenrce harnesses will still help
+03:14:23 <dmiles> a good expository on what i am doing is at http://www.cs.utexas.edu/users/pclark/working_notes/014.pdf
+03:14:55 <dmiles> this also fits into explaination patterns discussed by yepster
+03:15:19 <dmiles> these XP's are the rules of steps.. some temporal transitions others not
+03:15:51 <dmiles> one thing is marking the differnce between a stat to state transitianal consequence vs a action->state rule
+03:23:32 <yepster> xp = possible explanation of an observed action; the possible goal the performer of the action could have
+03:23:49 <yepster> linked to each xp is a possible action
+03:24:35 <yepster> so an activated xp could be used to decide what to do next
+03:24:43 <dmiles> *nod*
+03:25:30 <yepster> to make it 'active' a programming language is used besided the knowledge representation language
+03:25:50 <yepster> i'm very tempted to use oracle/plsql since it has very strong 'active' support (called transactions)
+03:26:26 <dmiles> PClark's site has a lisp and prolog implimentation, (not that the code is complex) its just nice have something that is suppsoed to run at start
+03:26:55 <yepster> well i have steeles lisp manual on my desc but it's so big...
+03:28:10 <dmiles> yeah lisp/subl is not difficult.. there are so many ways to program the same things
+03:28:17 <yepster> example of synchronization of data in a workflow engine with opencyc:
+03:28:18 <yepster> http://217.117.225.187/~yeb/plflow_sync_opencyc_triggers.sql
+03:28:22 * dmiles looks
+03:28:30 <yepster> (opencyc is used to delegate authorization to)
+03:28:43 <dmiles> excelent!
+03:28:53 <dmiles> glad you've had time to start implementing
+03:29:21 <dmiles> was there any resuable data formats that you found that you can use this on (initial data) ?
+03:29:51 <dmiles> you program there looks like it intializes Cyc with the things it needs
+03:29:53 <yepster> it's part of a workflow engine
+03:30:02 <dmiles> *nod*
+03:30:04 <yepster> http://plflow.sourceforge.net/
+03:30:13 <yepster> not yet released, I have to make docs + examples
+03:30:30 <dmiles> makes sense
+03:30:44 <yepster> but it's actually used in two real life systems currentl
+03:31:02 <dmiles> that ERD tool... is that something that was written before .. or something you had to make specific for this?
+03:31:14 --- quit: ChanServ (Shutting Down)
+03:31:17 <yepster> it's oracle designer
+03:31:28 <dmiles> heh i just saw that ;P
+03:31:43 <yepster> makes very good table definitions; you don't need to make indices, foreign key definitions etc
+03:31:51 <yepster> all done automatically
+03:31:54 --- join: ChanServ (ChanServ@services.) joined #opencyc
+03:31:54 --- mode: leguin.freenode.net set +o ChanServ
+03:31:56 <dmiles> *nod*
+03:32:46 <yepster> but from the examply you can see that oracle's transaction mechanism can be used without problems with opencyc
+03:33:03 <yepster> just check things before an action, and perform things after an action
+03:33:19 <dmiles> exactly
+03:33:33 <dmiles> it generally looks ahead how many steps?
+03:33:48 <yepster> looks ahead?
+03:34:26 <dmiles> like if needed a preformed by action.. would it be one transition at a time?
+03:34:55 <dmiles> or is it the entire start to end?
+03:35:10 <yepster> alternative would be concurrent transitions?
+03:35:23 <dmiles> yeah that to
+03:35:47 <dmiles> as in some preformatives take place at the same time
+03:35:50 <yepster> well, in oracle terms:
+03:36:17 <yepster> triggers can be specified to run after a commit for the whole transaction (for each table), or for each row
+03:37:20 <dmiles> ah, i think i was randomly switching between three topics ;)
+03:37:38 <yepster> besides that there can be multiple sessions, but only one session can lock a single record for update
+03:38:27 <yepster> but when programming updates 'good', somebody doesn't need to think about concurrency and locks
+03:38:54 <dmiles> *nod*
+13:24:33 --- quit: ChanServ (leguin.freenode.net irc.freenode.net)
+13:24:33 --- quit: Cobra (leguin.freenode.net irc.freenode.net)
+13:24:33 --- quit: dmiles (leguin.freenode.net irc.freenode.net)
+13:24:35 --- quit: fleeky (leguin.freenode.net irc.freenode.net)
+13:24:35 --- quit: Graham (leguin.freenode.net irc.freenode.net)
+13:24:35 --- quit: reed__ (leguin.freenode.net irc.freenode.net)
+13:24:36 --- quit: yepster (leguin.freenode.net irc.freenode.net)
+13:24:36 --- quit: ZivZ (leguin.freenode.net irc.freenode.net)
+13:24:37 --- quit: deltab (leguin.freenode.net irc.freenode.net)
+13:26:04 --- join: ChanServ (ChanServ@services.) joined #opencyc
+13:26:04 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+13:26:04 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+13:26:04 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+13:26:04 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+13:26:04 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+13:26:04 --- mode: leguin.freenode.net set +oo ChanServ Graham
+13:26:26 --- quit: ChanServ (leguin.freenode.net irc.freenode.net)
+13:26:27 --- quit: dmiles (leguin.freenode.net irc.freenode.net)
+13:26:27 --- quit: Cobra (leguin.freenode.net irc.freenode.net)
+13:26:27 --- quit: Graham (leguin.freenode.net irc.freenode.net)
+13:26:27 --- quit: reed__ (leguin.freenode.net irc.freenode.net)
+13:26:27 --- quit: fleeky (leguin.freenode.net irc.freenode.net)
+13:26:38 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+13:26:38 --- join: ZivZ (ZivZ@6532210hfc103.tampabay.rr.com) joined #opencyc
+13:26:38 --- join: deltab (~deltab@espians.com) joined #opencyc
+13:27:04 --- join: ChanServ (ChanServ@services.) joined #opencyc
+13:27:04 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+13:27:04 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+13:27:04 --- join: fleeky (fleeky@dsl081-050-082.sfo1.dsl.speakeasy.net) joined #opencyc
+13:27:04 --- join: reed__ (~reed@207.207.8.185) joined #opencyc
+13:27:04 --- join: Graham (~Demi@207.207.8.145) joined #opencyc
+13:27:04 --- mode: leguin.freenode.net set +oo ChanServ Graham
+13:38:07 --- quit: Cobra (Read error: 110 (Connection timed out))
+14:49:13 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+15:55:08 --- quit: Cobra (Read error: 60 (Operation timed out))
+18:06:51 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+21:13:42 --- quit: ChanServ (Shutting Down)
+21:14:38 --- join: ChanServ (ChanServ@services.) joined #opencyc
+21:14:38 --- mode: leguin.freenode.net set +o ChanServ
+23:59:59 --- log: ended opencyc/03.02.14

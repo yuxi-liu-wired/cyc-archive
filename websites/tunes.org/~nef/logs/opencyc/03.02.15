@@ -1,0 +1,113 @@
+00:00:00 --- log: started opencyc/03.02.15
+00:28:16 --- quit: ChanServ (leguin.freenode.net irc.freenode.net)
+00:28:17 --- quit: dmiles (leguin.freenode.net irc.freenode.net)
+00:28:31 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+01:35:33 <dmiles> hrrm 123521 in 0.7 ?
+01:35:41 <dmiles> erm 123521 assertions?
+03:07:28 --- quit: dmiles ()
+03:07:40 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+07:10:58 --- quit: Cobra ("[x]chat")
+07:13:41 --- join: Cobra (~cobra@kevb.net) joined #opencyc
+07:25:00 <yepster> http://www.cs.indiana.edu/~leake/cbr/code/icbe.lsp/microSWALE/README
+07:25:27 <yepster> swale-mem.lisp contains the knowledge
+07:25:59 <yepster> i'm starting on making a ke text for this knowledge
+07:36:11 <dmiles> excellent
+07:36:49 <dmiles> !!:)
+07:37:28 <yepster> hehe
+07:38:28 <yepster> it's actually nice to have a ke example like the planner patch
+07:42:44 <dmiles> *nod*
+07:58:36 <yepster> btw do you know the difference between faceted specs and unfaceted specs?
+08:02:30 <dmiles> hrrm if i had one tiny example i could explain it ;P
+08:03:18 <yepster> healthy vs unhealty animals
+08:03:19 <yepster> ?
+08:05:59 <dmiles> oh faceted specs meaning that there is some precondition to the spec?
+08:07:11 <yepster> ?
+08:07:44 <yepster> doesn't really matter
+08:09:43 <dmiles> i just dont know off the top :)
+08:10:47 <yepster> hmm should all genls definitions be made in universalvocmt?
+08:11:00 <yepster> because i defined healthyanimal genls animal in swalevocmt
+08:11:10 <yepster> but it isn't shown in the cb-facets screen
+08:11:48 <dmiles> swalevocmt might need hooked up differntly
+08:12:27 <dmiles> as in cb-facets is looking for certain vocab mts
+08:12:38 <dmiles> (but maybe not new ones? :()
+08:13:26 <dmiles> it would be interesting to see the CycL query that qualifies the cb-facets results
+08:13:38 <dmiles> (and confirming we have one)
+08:14:56 <yepster> pff i cannot find the difference between biologyvocabmt and swalevocab,t
+08:15:38 <dmiles> you pretty much tried to make them close enough?
+08:15:49 <dmiles> (so you have a baseline)
+08:15:57 <yepster> yeah, the genlMt- stuff
+08:16:56 <dmiles> did you make them the same before asserting into it?
+08:17:19 <dmiles> (that can make a differnce to propogation for specs)
+08:17:27 <dmiles> (for everything)
+08:17:55 <yepster> yes
+08:18:04 <dmiles> it shouldnt make a differnce ;P but assuming it would
+08:19:27 <dmiles> there are times when data inside vocab mts.. is the sma ein anohter Mt 
+08:19:43 <dmiles> (like repeated)
+08:20:13 <dmiles> but i am pretty sure you been precisely confirming that you have unhealthy animal just right
+08:20:16 <yepster> hmm i cannot assert genlmt swalemt basekb in basekb, no errors, but it doesn't appear too.
+08:20:19 <yepster> agenda is running
+08:20:28 <yepster> maybe it has something to do with it
+08:20:45 <dmiles> thats supposed to be a forward deduction (at least in 0.6)
+08:21:09 <dmiles> so it should appear as a greenball assertion by now
+08:21:50 <yepster> 1
+08:21:50 <dmiles> but i think what gets linked to BaseKb proballity is changed
+08:22:06 <dmiles> err possibly
+08:22:33 <yepster> hmm my cyc prompt shows
+08:22:34 <yepster> Warning: Semantically invalid mt relevance test: S#8525
+08:22:34 <yepster> Warning: Semantically invalid mt relevance test: S#8525
+08:23:14 <dmiles> is the debug that cb-facets inspired?
+08:23:29 <yepster> ?
+08:23:40 <dmiles> when did that get printed?
+08:24:18 <yepster> don't know
+08:24:22 <yepster> I'm going to restart it
+08:24:26 <dmiles> (question was if you refresh the cb-facets page does it print thjat a 3rd time?)
+08:24:31 <dmiles> ok
+08:25:05 * dmiles is outside smoking
+08:25:08 <dmiles> back in 5
+08:28:41 <yepster> hmm it doesn't really change anything; but just checked some other stuff
+08:29:15 <yepster> stuff that 'works' but is added in 'own' mt which is a 'facets-Partition' -> also doesn't
+08:29:39 <yepster> get shown completely in cb-facets, and also those mt's all have gemlt mt basekb only in universalvocmt
+08:29:51 <yepster> so maybe cb-facets shows only things in public mts?
+08:29:54 <dmiles> so it worked when you did in a pre-known vocabmt ?
+08:30:07 <yepster> pre-known?
+08:30:17 <dmiles> like biologyvocabmt
+08:30:27 <yepster> didn't try that.
+08:31:07 <dmiles> its also possible durring the removal of certain constants from full cyc it leaves code hanging on missing refernces
+08:53:09 <yepster> hmm i have to represent something like state of an animal or bodypart type: healty vs sick or not working prperly
+08:54:12 <yepster> ah: PhysiologicalCondition
+09:57:41 --- quit: Cobra ("[x]chat")
+09:58:06 --- quit: dmiles (Read error: 113 (No route to host))
+10:01:29 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+10:47:01 <yepster> http://217.117.225.187/~yeb/swale-mem.ketext
+10:47:27 <yepster> i think about 30% finished
+10:48:05 <dmiles> :) good work
+10:48:43 <dmiles> ;  :events ((:enter m-enter-race-event)
+10:48:44 <dmiles> ;           (:mount m-mount-event)
+10:48:44 <dmiles> ;           (:run m-run-event))
+10:48:52 <yepster> yeah, a script
+10:49:16 <dmiles> on things like events.. how are you going to oderdinal them?
+10:49:40 <dmiles> (like from the context the planner uses?)
+10:49:42 <yepster> with static situations and events with preSit / postSit (?)
+10:49:55 <dmiles> *nod*
+10:50:20 <yepster> i thought the planner was a different representation
+10:50:27 <yepster> didn't look into it though
+10:51:06 <yepster> comment: "#$SituationPredicate is a collection of predicates that are used to make assertions about situations (dynamic or static occurrences, e.g. \"walking\", or \"containing something\") without reifying the situation.
+10:51:09 <dmiles> i havent looked deeply into it but yeah
+10:51:25 <yepster> The representation of situations in terms of #$SituationPredicates is an alternative to the Davidsonian-style representation of situations in which the \"participants\" in a situation are related to the reified individual situation (an instance of #$Situation) in which they participate (for representational approach, see #$Role).
+10:51:50 <yepster> I noticed the term DefaultDisjointScriptType a while ago.
+10:51:58 <yepster> -> 8-)
+10:52:29 <dmiles>  DefaultDisjointScriptType looked to be defined for this 
+11:03:37 <fleeky> hello glad to hear your still working on interesting things dmiles
+11:04:12 <dmiles> trying to.. just been busy moving and birthing new baby
+11:05:12 <fleeky> how many you hav ? 
+11:06:05 <dmiles> 3
+11:06:22 <dmiles> (one at a time)
+11:07:19 * dmiles is looking at the SCheme version of swale
+13:23:47 --- join: Cobwa (~cobra@kevb.net) joined #opencyc
+14:00:02 --- join: Yepster_home (yepster@vetteaap.xs4all.nl) joined #opencyc
+14:00:36 <Yepster_home> hmm goofed up arguments of systemConditionAffects, but now its good
+14:01:49 <Yepster_home> from (isa ?X BadHeartAnimal) to infer (not (systemConditionAffects HealthyCondition ?X)) because it has a part that is bad
+14:30:52 --- quit: Yepster_home ()
+15:33:07 --- quit: dmiles (Read error: 60 (Operation timed out))
+18:30:03 --- join: dmiles (alife@12-228-240-4.client.attbi.com) joined #opencyc
+23:59:59 --- log: ended opencyc/03.02.15

@@ -1,0 +1,522 @@
+00:00:00 --- log: started opencyc/02.04.19
+00:00:07 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+00:10:07 --- join: theos (~torsten@port-213-20-227-97.reverse.qdsl-home.de) joined #opencyc
+00:36:03 --- quit: grove (Remote closed the connection)
+00:39:51 --- join: grove (~grove@193.69.113.28) joined #opencyc
+01:45:37 <theos> mornin all
+01:49:29 <dmiles> good morning
+01:50:01 <dmiles> workinghard at making jamud load into Cyc
+01:56:55 <theos> sounds not to easy
+01:57:15 <theos> mud is a "mud" as I know them, eg. tinymud and julia?
+01:57:34 <dmiles> well i been on it for about 4 days now.. have some of it working.. but now i am making it more high level.. less Java langauge feel
+01:57:49 <dmiles> right Mud as in game RPG
+01:58:35 <dmiles> high level as when you br4owse the KB.. you are getting information that is game based not java program based
+02:31:55 <theos> ha
+02:32:09 <theos> sounds very interesting, remember once I told you we are voiceenabling frotz
+02:32:25 <theos> well, it can talk now, and soon it will listen and understand also
+02:32:36 <theos> maybe feeding the KB stuff into such a game can be nice too
+02:41:33 <dmiles> yes.. i want to put KB data back into game at a certain point
+02:47:36 <theos> hmm, I keep you updated if frotz is ready
+02:48:06 <theos> other thing is, what about putting the data back into a navigation thingie, eg. gpsdrive
+02:48:24 <theos> can be of interest too
+03:35:31 * theos is away: fresh air
+05:26:54 * theos is back (gone 01:51:22)
+05:29:23 * theos is away: pickup friend from airport
+08:11:15 --- quit: Seth ()
+08:12:15 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+09:22:31 --- join: BobArctor (~bob@pb194.luban.sdi.tpnet.pl) joined #opencyc
+09:45:44 --- quit: theos ("Client Exiting")
+11:42:10 --- quit: Seth ()
+11:46:49 --- join: theos (~torsten@port-212-202-181-50.reverse.qdsl-home.de) joined #opencyc
+12:22:51 --- quit: theos (Read error: 113 (No route to host))
+13:18:15 --- quit: dmiles (Read error: 110 (Connection timed out))
+13:21:59 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+13:22:48 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+14:03:56 <dmiles> good afternoon all
+14:04:07 <stevereed> you sleep?
+14:04:41 <dmiles> heheh about 5am to noon ;P
+14:04:58 <stevereed> ok..
+14:04:59 <dmiles> i really try to sleep arround 1 am
+14:05:17 <dmiles> but i set one small goal before then
+14:05:24 <stevereed> ?
+14:05:34 <stevereed> programming goal?
+14:05:43 <dmiles> then get excited when its acomplished.. will i cant sleep if i cant do an ant build
+14:05:55 <stevereed> *nod*
+14:06:35 <dmiles> yes last night i have to get new objects to be dsicovered durring jamud sync
+14:06:46 <dmiles> err had to to sleep
+14:10:22 <dmiles> oh and i couldnt figure out how to check a primtivee array class.. but it was (myarrry.getClass == int[].class)
+14:11:05 <dmiles> or (myarrry.getClass == boolean[].class)
+14:11:33 <dmiles> things you can know java for a year and not know how to do ;P
+14:13:58 <dmiles> but you dont sleep much eighter, ussualy it seems you are doing a nightly sweep of email at 1 am
+14:17:13 <dmiles>  i have been finding Jamud objects arnt ready to get synced until after a user logs in once, trying to get arround that
+14:17:40 <dmiles> well the Jamud world save state is XML
+14:17:54 <stevereed> makes sense
+14:18:15 <dmiles> yeah the load happens the first time
+14:18:29 <stevereed> what xml parser do you use?
+14:18:36 <dmiles> nanoxml
+14:18:42 <stevereed> ??
+14:19:03 <dmiles> its http://nanoxml.sourceforge.net
+14:19:11 <stevereed> i'll look at it,
+14:19:12 <dmiles> it non validating
+14:19:23 <stevereed> ok, i've used jdom and xerces
+14:19:45 <dmiles> so i like that.. mainly though it can be switched out
+14:20:41 <stevereed> I looked at the nanoxml site,
+14:20:49 <stevereed> can you generate with it?
+14:20:55 <stevereed> I guess you must.
+14:20:58 <dmiles> yes.. its very quick as well
+14:21:12 <dmiles> so i huge kb/world is nice 
+14:21:24 <stevereed> how big?
+14:21:44 <dmiles> 6k
+14:22:07 <dmiles> but its a desision.. since most peopekl will already have xerces 
+14:22:39 <dmiles> so you eigther add yet another dependancy .. or hope they already have something
+14:23:04 <dmiles> in which case you have to give them xerces
+14:23:28 <dmiles> i just was getting unhappy when the xerces of other prioject dependacies was mismatching
+14:23:48 <dmiles> like RDFQuery uses a differnt version then an app i was working with
+14:24:17 <dmiles> and Jakarta tomcat needed to have its own version (i think)
+14:24:49 <stevereed> FIPA-OS has it too
+14:25:15 <stevereed> I used XML parsers in cyc's agent adapters
+14:25:38 <stevereed> the cyc content is serialized when xmitted between agents
+14:25:56 <dmiles> ah yes, you really are ending up wanting to use the same accroosed all sub packages
+14:26:07 <stevereed> yeh
+14:26:28 <stevereed> agent code is slow, so any speedup is great
+14:26:42 <dmiles> thats why i was wondering if CycML was going to be used in Java and not HL
+14:27:14 <stevereed> yes, CycML encodes CycL at the EL (human readable) layer,
+14:27:29 <dmiles> err SubL
+14:27:33 <stevereed> the HL (machine optimized internal form) is Cyc server specific
+14:27:37 <stevereed> ok
+14:27:53 <stevereed> CycML is for java and subl both
+14:28:04 <stevereed> my recent code will be subl
+14:28:15 <dmiles> good it will be nice to be able to use an API from both places
+14:28:21 <stevereed> rigth
+14:28:23 <stevereed> right
+14:28:29 <stevereed> sorry,m
+14:28:35 <stevereed> sorry, got to go,
+14:28:40 <dmiles> and nice to have a java load methjod that will take an XMLElement
+14:28:42 <stevereed> work on crunch deadline
+14:28:57 <stevereed> leave questions for this weekend,,
+14:29:03 <stevereed> when I get loose again
+14:29:17 * stevereed is away: I'm busy
+14:29:23 <dmiles> sure will.. i am finally getting good at finding things incyc-apiu docs
+14:29:30 --- join: Don (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+14:30:55 <dmiles> i have been adding lots of CycMooAccess (extends CycAccess) routines that use it.. 
+14:32:49 --- nick: dmiles -> dmiles-wc
+15:23:27 <dmiles-wc> oh i was crazy, i somehow accessed CycList 1 based and not zero twice in my code
+15:24:05 <dmiles-wc> the first() second() third() stuff distracted me :P 
+15:28:43 <dmiles-wc> oh i have a big question.. you probly already looking into it
+15:29:12 <dmiles-wc> is it planned that one cyc server will complete a query with the help of another cyc server?
+15:29:31 <dmiles-wc> 1) is that api there yet?
+15:29:56 <dmiles-wc> 2) if i wanted to start a fasl service from another programming language
+15:30:53 <dmiles-wc> will a doc exists that shows my how to spoof as a peer cyc server?
+15:41:23 --- nick: dmiles-wc -> dmiles
+16:53:40 --- quit: Seth (Read error: 104 (Connection reset by peer))
+17:00:39 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+17:02:30 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+18:48:01 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+18:52:59 --- join: dmiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:21:39 --- part: Don left #opencyc
+19:26:11 --- join: DouglasMiles (mea_culpa@dialup-65.58.156.58.Dial1.Portland1.Level3.net) joined #opencyc
+19:27:00 --- join: DougMiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+19:27:13 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+19:27:42 --- nick: DougMiles -> dmiles
+19:44:59 --- quit: DouglasMiles (Read error: 110 (Connection timed out))
+21:02:26 --- join: DougMiles (~alife@12-225-207-235.client.attbi.com) joined #opencyc
+21:02:26 --- quit: stevereed_home (Read error: 104 (Connection reset by peer))
+21:02:43 --- join: stevereed_home (~reed@adsl-66-141-46-249.dsl.austtx.swbell.net) joined #opencyc
+21:03:07 --- quit: dmiles (Read error: 104 (Connection reset by peer))
+21:03:20 <DougMiles> about to bring the a CycIRCBot online
+21:03:34 <DougMiles> would it be ok if he idled in this channel?
+21:04:20 <DougMiles> he works off commands prefixed subl: <subL command>
+21:04:44 <DougMiles> going to add   assert:
+21:04:48 <DougMiles> query: 
+21:04:49 <DougMiles> etc
+21:05:55 <DougMiles> about 20 minutes max he'll be in here if i get no resistence 
+21:06:11 <DougMiles> it will make it easier to demonstrate API calls and such
+21:06:59 <DougMiles> and test queries/TMS
+21:07:20 <DougMiles> ok.. bbiaf w/ a new bot ;P
+21:18:24 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+21:18:35 <DougMiles> oh root huh
+21:18:39 <DougMiles> time
+21:18:48 <DougMiles> hello
+21:19:03 <DougMiles> subl: (+ 2 2)
+21:19:22 <DougMiles> quit
+21:20:53 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+21:21:30 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+21:21:37 <DougMiles> test
+21:23:00 --- quit: CycLBot (Read error: 104 (Connection reset by peer))
+21:23:44 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+21:24:00 <DougMiles> time
+21:40:29 --- quit: CycLBot (Remote closed the connection)
+21:42:40 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+21:42:45 <DougMiles> time
+21:42:47 <CycLBot> the time is Fri Apr 19 14:19:43 PDT 2002
+21:42:57 <DougMiles> subl: (+ 1 1)
+21:42:58 <CycLBot> eval "(+ 1 1)" from "DougMiles" return path "#opencyc"
+21:57:10 --- quit: CycLBot (Remote closed the connection)
+22:00:51 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:01:01 <DougMiles> subl: (+ 2 2)
+22:01:01 <CycLBot> error "java.lang.RuntimeException: Expected String but received (class java.lang.Integer) 4
+22:01:01 <CycLBot> in response to command (+ 2 2)" trying to eval "(+ 2 2)" from "DougMiles" with returnpath "#opencyc"
+22:06:34 --- quit: CycLBot (Remote closed the connection)
+22:15:14 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:16:22 --- quit: CycLBot (Remote closed the connection)
+22:16:59 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:17:03 <DougMiles> subl: (+ 2 2)
+22:17:05 <CycLBot> 4
+22:17:15 <DougMiles> subl: (NIL)
+22:17:15 <CycLBot> error "org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator NIL is not defined in the API")" trying to eval "(NIL)" from "DougMiles" with returnpath "#opencyc"
+22:17:31 <DougMiles> subl: (eval '(NIL))
+22:17:32 <CycLBot> error "org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator NIL is not defined in the API")" trying to eval "(eval '(NIL))" from "DougMiles" with returnpath "#opencyc"
+22:17:40 <DougMiles> subl: (eval (NIL))
+22:17:41 <CycLBot> error "org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator NIL is not defined in the API")" trying to eval "(eval (NIL))" from "DougMiles" with returnpath "#opencyc"
+22:17:57 <DougMiles> yay! it works
+22:19:26 <DougMiles> hello
+22:19:26 <CycLBot> hello DougMiles
+22:20:36 <DougMiles> query: (#$isa ?what #$Dog) 
+22:31:57 --- quit: CycLBot (Remote closed the connection)
+22:34:03 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:34:07 <DougMiles> query: (#$isa ?what #$Dog) 
+22:34:26 <DougMiles> query: (#$isa ?what #$Dog) 
+22:34:39 <DougMiles> subl: (+ 2 2)
+22:35:26 <DougMiles> time
+22:35:26 <CycLBot> the time is Fri Apr 19 15:12:23 PDT 2002
+22:36:25 <DougMiles> subl::: (+ 2 2)
+22:36:52 --- quit: CycLBot (Remote closed the connection)
+22:37:30 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:37:38 <DougMiles> subl (+ 2 2)
+22:37:46 <DougMiles> subl: (+ 2 2)
+22:37:57 <DougMiles> query: (#$isa ?what #$Dog) 
+22:39:31 --- quit: CycLBot (Remote closed the connection)
+22:40:28 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:40:37 <DougMiles> subl: (+ 2 2)
+22:40:55 <DougMiles> subl (+ 2 2)
+22:41:57 --- quit: CycLBot (Remote closed the connection)
+22:41:58 --- join: johnd (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+22:42:34 --- join: CycLBot (root@12-225-207-235.client.attbi.com) joined #opencyc
+22:42:38 <DougMiles> subl: (+ 2 2)
+22:42:41 <CycLBot> 4
+22:42:53 <johnd> Did you code that?
+22:42:58 <DougMiles> yes
+22:43:13 <johnd> Should it be called SubLBot?
+22:43:18 <DougMiles> query: (#$isa ?what #$Dog) 
+22:43:19 <CycLBot> your Mt is not set
+22:43:30 <johnd> ok ok 
+22:43:45 <johnd> Has Steve see this yet?
+22:43:55 <DougMiles> nope i just built it in the last 2 hours
+22:44:14 <johnd> When's the last time you slept?
+22:44:27 <DougMiles> it probly usefull for testing a cyc server ;P
+22:44:41 <DougMiles> hehe i sleep for 5 am to noon each day
+22:44:53 <johnd> how do you set the MT?
+22:45:04 <DougMiles> still working on per irc user prioperty lists
+22:45:12 <DougMiles> err property lists
+22:45:33 <DougMiles> subl (make an execption)
+22:45:37 <DougMiles> subl: (make an execption)
+22:45:37 <CycLBot> error "org.opencyc.api.CycApiException: (S#21632 :MESSAGE "Operator MAKE is not defined in the API")" trying to eval "(make an execption)" from "DougMiles" with returnpath "#opencyc"
+22:45:57 <DougMiles> handles errors and things
+22:46:05 <DougMiles> the Mt not set is me returning the error
+22:46:16 <johnd> subl: (cyc-query '(#$isa #$Dog ?WHAT) #$InferencePSC)
+22:46:16 <CycLBot> (((?WHAT . BiologicalTaxon)) ((?WHAT . BiologicalSpecies)) ((?WHAT . ObjectType)) ((?WHAT . FixedOrderCollection)) ((?WHAT . FirstOrderCollection)) ((?WHAT . StuffType)) ((?WHAT . TemporalStuffType)) ((?WHAT . ExistingObjectType)) ((?WHAT . PartiallyIntangible)) ((?WHAT . Intangible)) ((?WHAT . MathematicalOrComputationalThing)) ((?WHAT . MathematicalThing)) ((?WHAT . SetOrCollection)) ((?WHAT . Collection)) ((?WHAT . ConventionalClassificati
+22:46:33 <DougMiles> ahah cool
+22:46:45 <DougMiles> i will fix its line trucation
+22:47:08 <DougMiles> max it at 50 wide.. then it would all make it
+22:47:14 <johnd> Steve wanted to do something like this.
+22:47:15 <DougMiles> Irc server trims it
+22:47:29 <DougMiles> it was alot easier then it sounds
+22:47:38 <DougMiles> i found an example irc bot
+22:47:44 <DougMiles> it was only about 50 lines
+22:47:47 <johnd> He did start on it, but you need to tell him how you did it.
+22:47:53 <johnd> Cool
+22:48:16 <johnd> He wants it to respond to certain simple English patterns
+22:48:26 <johnd> what do you know about ?X
+22:48:29 <DougMiles> i wrote an irc bot in prolog to do that ;P
+22:48:39 <johnd> great
+22:48:42 <DougMiles> oh definately.. if that was subl based it would be easy
+22:48:57 <johnd> once we have a bunch of Cycs hooked up to each other...
+22:48:57 <DougMiles> english:  what do you know about ?X
+22:49:19 <johnd> yeah, leave off the "english"
+22:49:38 <johnd> it should appear like the bot is just butting in without being directly asked
+22:49:45 <johnd> so maybe I gave a bad example
+22:49:45 <DougMiles> well ussually it can fall back first looks for S-Expression.. if bnot well formed it can assume english
+22:49:58 <johnd> right
+22:50:29 --- join: bruce (~bruce@dnvrdslgw17poola13.dnvr.uswest.net) joined #opencyc
+22:50:46 <DougMiles> a few years ago i saw a demo at MS of a NL parser
+22:50:53 <johnd> with a bunch of Cycs hooked up with different knowledge, they could ask each other for help in providing an answer
+22:51:12 <DougMiles> yes i actually like the irc cerver conbtext and conversational system
+22:51:56 <DougMiles> they can message
+22:52:01 <DougMiles> (each other)]
+22:52:03 <johnd> opencyc.org appears to be down
+22:52:18 <DougMiles> or in a public #cycdebug channel
+22:52:32 <johnd> but cyc.com is up, and they're on the same server
+22:52:48 <johnd> which makes me think it's the Zope server
+22:53:01 <DougMiles> not ussing source forge redirector? 
+22:53:11 <johnd> because opencyc.org uses zope and cyc.com doesn't yet
+22:53:36 <DougMiles> oh yeah i see. the sf page redirects to the downed server
+22:53:49 <johnd> right
+22:54:21 <DougMiles> well heck opencyc.org probly gets tons more traffic nowadays .. its harsh when on weekend
+22:54:42 <johnd> i don't think it got knocked down
+22:54:59 <johnd> i think someone who reset the server for some maint reason forgot to restart zope
+22:55:22 <DougMiles> ah.. i hadent used zope before.. yeah .. that happens with me tomcat webserver
+22:55:34 <DougMiles> i keep putting off making it a service
+22:55:46 <johnd> what does tomcat do? something xml related?
+22:56:10 <DougMiles> it wrapps your java programs into a webcontext so all your applications can pass objects arround inside it
+22:56:33 <DougMiles> it can do xml things though
+22:56:37 <johnd> u huh
+22:56:47 <DougMiles> but you cant set a fileexetsnion to do something that i know of
+22:56:52 <DougMiles> like you can with zope
+22:57:18 <DougMiles> i am guessing zope can combine xslt and xml to make an html
+22:57:35 <johnd> Maybe
+22:57:50 <johnd> Zope is just coming up to speed on integrating XML
+22:57:59 <DougMiles> tomcat allows you to run JSP pages in the same context as a tread like the JavaAPI
+22:58:00 <johnd> I mean, it's there in Python
+22:58:28 <DougMiles> rr so for example the java api of cyc stays in memory between page transitions
+22:58:31 <johnd> ... but not as much directly in Zope
+22:59:04 <johnd> They're working on stuff like parsing apart an XML into a million little objects stored directly in Zope
+22:59:31 <johnd> so TomCat is pooling resources?
+22:59:43 <DougMiles> that would be nice .. i really wished there was a mbetter way to waljk an object model from a web scripting languasge
+22:59:51 <johnd> or staying alive like an Apache mod?
+23:00:13 <DougMiles> yes it can be an appache mod.. and it pool;s your objects
+23:00:20 <DougMiles> yes to both
+23:00:42 <DougMiles> each webservice has a Application/Session/Page level memory pool
+23:00:42 <johnd> so...
+23:01:01 <johnd> remember that xsl stuff i was working on for CycML
+23:01:05 <DougMiles> so for example i keep the java CycAccess object in the Application pool
+23:01:18 <johnd> right, that speeds things up
+23:01:18 <DougMiles> but user settings in the Session Pool
+23:01:31 <johnd> ... without messing things up
+23:01:45 <DougMiles> yes.. i can just leave it to tomcat to figure it out
+23:01:59 <johnd> XSL was a headache this week
+23:02:04 <johnd> all i wanted to do...
+23:02:10 <DougMiles> the java objects sometimes need to be set with internal mutexs call 'synchronize'
+23:02:21 <johnd> was filter an xml with an xsl server-side
+23:02:48 <DougMiles> yeah it seemed like it was working
+23:02:59 <johnd> found what I thought were all kinds of things I would need to install
+23:03:00 <DougMiles> from what you showed me
+23:03:10 <johnd> yeah, it was working with 2 major limitations
+23:03:29 <johnd> you had to have an xsl with the same name as each xml
+23:03:33 <johnd> and...
+23:03:57 <johnd> you couldn't pass in parameters, so you were stuck with one view per xml
+23:04:16 <DougMiles> limitations like that are just too wierd....  oh and it couldnt do http POST or GET?
+23:04:29 <johnd> what I wanted was N xmls usable with any of M views (xsls)
+23:04:31 <DougMiles> er GET with params
+23:04:54 <johnd> supposedly it could do GET, but I couldn't see how
+23:05:09 <johnd> anyway, the answer jumped out at me on day 4
+23:05:22 <DougMiles> you cant 'source' in one of the four choisces?
+23:05:34 <johnd> we somehow had 4xslt installed with our Python
+23:05:40 <johnd> what do you mean?
+23:06:04 <DougMiles> well i think it was something you suggested.. that each page would include the appropiate xsl
+23:06:40 <DougMiles> like some kind of dirrective in the xsl source of the manuy pages
+23:06:49 <johnd> didn't have a way to tell it which part to use
+23:07:16 <DougMiles> and that is becasue the way to parse the GET request was not avaible
+23:07:38 <DougMiles> (as in get varaibles) ?
+23:07:41 <johnd> one piece of documentation said ApacheModXSLT could read a DOCTYPE directive in the XML to determine the XSL to use
+23:08:12 <johnd> don't know, didn't figure it out, but all moot now
+23:08:15 <johnd> moot
+23:08:16 <DougMiles> thats rought when thats your only point of varaibnce 
+23:08:22 <johnd> 4xslt (part of 4Suite) has a command line version
+23:08:38 <johnd> one command at the Linux prompt solved the problem
+23:09:11 <johnd> 4xslt -i (xmlfilename) (xslfilename)
+23:09:22 <DougMiles> cool.. ah.. so you made a cgi wrapper!
+23:09:30 <johnd> -i means ignore style instructions in the xml
+23:09:43 <johnd> not yet, but that's what I need to do
+23:09:50 <johnd> should be the easy part
+23:09:59 <johnd> ...for someone who knows how
+23:10:04 <DougMiles> i wonder if there is a pool me and reuse cgiwrap
+23:10:10 <johnd> I could (and might) figure it out
+23:10:22 <johnd> but I'm the marketing guy!!
+23:10:46 <DougMiles> heh :P
+23:11:21 <DougMiles> that means your incharge of visual production
+23:11:31 <DougMiles> and web things ;P
+23:11:34 <johnd> interesting you mention it
+23:11:49 <johnd> I'm working with a programmer on a visual issue in the KB Browser
+23:12:19 <johnd> we're going to somehow color code all instances of #$ImplementationConstant
+23:12:40 <johnd> #$ImplementationConstant just got added today
+23:12:45 <johnd> to the full KB
+23:12:51 <DougMiles> oh .. you coulkd systly sheet it
+23:13:00 <DougMiles> err style sheet 
+23:13:02 <johnd> Right
+23:13:11 <johnd> The question is what to make it look like
+23:13:31 <johnd> We could style sheet several things in the term content page, for example
+23:13:37 <DougMiles> yeah.. implimetation constants are like HL based predicates rigth?
+23:14:41 <johnd> ImplementationConstants are any constants that are not used to represent either common sense or other shared knowledge
+23:15:06 <johnd> other shared knowledge would be like knowledge of some expert domain, like Nuclear Physics
+23:15:26 <johnd> so, ImplementationConstants are there to implement some application or capability
+23:15:36 <johnd> One spec is NLImplementationConstant
+23:15:53 <johnd> We wan't to make it obvious to people...
+23:16:09 <DougMiles> italics?
+23:16:19 <johnd> ..."hey, this is probably not something you should mess with or worry about"
+23:16:27 <johnd> hmmm
+23:16:31 <DougMiles> since it is something they may not need to read perfectly but nknow its something important
+23:16:59 <johnd> I think I'm going to mock up some pages that try a couple of things
+23:17:00 <DougMiles> i had an inference engine i wrote once for the web...
+23:17:07 <DougMiles> i used title tags
+23:17:22 <johnd> so I'll copy the html from a generated frame, then mess with it
+23:17:25 <DougMiles> so only when the mouse hvered over it.. otherwsie hidden
+23:17:31 <johnd> italics will be one version
+23:18:01 <johnd> what was hidden during mouseout
+23:18:39 <DougMiles> just no more yellow in cyc ;P (kidding)
+23:19:17 <DougMiles> yeah i dont know if you get to hide enough.. in my case it was..
+23:19:23 <johnd> we were thinking of changing the color of the whole background when viewing ImpConstants
+23:19:33 <DougMiles> (NameOFn Constant)
+23:19:50 <DougMiles> i hide the (NameOFn <showed> )
+23:19:59 <DougMiles> just deplay the showed
+23:20:03 <johnd> oh
+23:20:13 <DougMiles> and then the mosue over showed the dereificvation
+23:20:30 <johnd> I was thinking of using different colored text for ImpConsts
+23:20:33 <DougMiles> er un refified 
+23:20:54 <johnd> kind of like you'd have in a code editor window
+23:21:02 <johnd> or emacs
+23:21:12 <johnd> i mean, e.g. emacs
+23:21:30 <DougMiles> that seems to work.. ruight now there dosnt seem to be any taking advantage of color for constants
+23:21:40 <johnd> problem is, almost everything is a link
+23:21:50 <johnd> some believe links should be blue and underlined
+23:21:54 <johnd> i don't believe it
+23:21:56 <DougMiles> links can be collored just as easy
+23:22:11 <DougMiles> the fint color is inside the a ref tag
+23:22:26 <DougMiles> err inside the <a> tag
+23:22:27 <johnd> I'm just talking about what some believe is the right way to show it to users
+23:22:29 <deltab> it depends
+23:22:57 <johnd> yes?
+23:23:07 <deltab> if you're making a Web site which people will visit, look at a few pages, then leave, it needs to match the rest of the Web
+23:23:17 <johnd> EXACTLY
+23:23:22 <johnd> that was my point
+23:23:38 <deltab> because people aren't going to take the time to find out and learn the special colour codes
+23:23:43 <deltab> but
+23:23:55 <deltab> with something like cyc, they will
+23:24:01 <johnd> people who spend even 5 or 10 mins learning the KB Browser, and who will then use it repeatedly, they can deal with a different look
+23:24:17 <johnd> they'll get that almost everything is a link
+23:24:31 <johnd> i think the underlines we have everywhere are overkill
+23:25:03 <johnd> maybe we could use some plain thin font for unlinked text
+23:25:12 <DougMiles> yes.. mainly becasue you never know as a user whether you will really get what you expect when you click it
+23:25:40 <johnd> then everything else could be a little thicker and color-coded
+23:26:35 <DougMiles> well if your into working with that portion of things... you may as well not even use links
+23:26:43 <johnd> and they don't have to know the color-codes to use it
+23:26:50 <johnd> what do you mean, dmiles?
+23:27:02 <DougMiles> you can make them look how yiou want and have the entire docuyment plan recive it all for one event handler
+23:27:08 <johnd> deltab, are you British?
+23:27:16 <DougMiles> err document plane
+23:27:44 <johnd> huh?
+23:27:47 <DougMiles> for example.. in IE you can say event.srcElement.innerText() and get the name of the constant they clicked
+23:28:14 <DougMiles> if you onClick the entuire body element
+23:28:39 <DougMiles> then depending on the tag they arte in decuide if you are showing them a constant...
+23:29:42 <DougMiles> and so you dont have a bunch of links
+23:29:54 <DougMiles> they are HTML formated like you want
+23:30:03 <johnd> what's the advantage, from the user's point of view?
+23:30:12 <DougMiles> then on the <BODY onClick="myClickHander"
+23:30:33 <DougMiles> well documetns about 10 times smaller
+23:30:49 <DougMiles> and not forcing you into working with tags..
+23:30:49 <johnd> i'm going the other direction
+23:31:04 <johnd> I'm thinking about making the page bigger
+23:31:11 <deltab> johnd: yes, so I am presently at the mercy of C&W's network :-)
+23:31:53 <johnd> oh, sorry to hear. I noticed you said, "colour".
+23:32:15 <johnd> bigger page because I've got XML on the brain
+23:32:22 <DougMiles> OH = window.event.srcElement.outerHTML                          
+23:32:22 <DougMiles> if left(OH,3)="<U>" then 
+23:32:22 <DougMiles>    OH = mid(OH,4,len(OH)-7) 
+23:32:22 <DougMiles>    theForm.word.value=replace(replace(OH,"&lt;","<"),"&gt;",">") 
+23:32:22 <DougMiles>    if err then exit sub
+23:32:23 <DougMiles>    theForm.show.click
+23:32:25 <DougMiles>    navigateShowConstant(OH.innerText())
+23:32:42 <johnd> although i suppose it could be compressed/expanded
+23:33:01 <DougMiles> ah thats right you are looking at the rendering of CycML especially
+23:33:23 <johnd> I'm thinking a Cyc server could serve up chunks of XML that fill a particular template-based query
+23:33:28 <deltab> ah, XML, there's an idea
+23:33:31 <johnd> more than CycML
+23:33:48 <deltab> use XSLT or the like to transform to HTML locally
+23:33:52 <johnd> CycML as a component of something like cfaslML (?)
+23:34:04 <johnd> yes, XSLT for local transforms
+23:34:06 <johnd> and...
+23:34:27 <johnd> send chunks of surrounding data
+23:34:39 <johnd> background stuff that might be called on
+23:35:01 <johnd> comments for all terms that come down, whether or not they display immediately
+23:35:03 <DougMiles> your goal is to make the transition from the native socket to XML to HTML as small as possible 
+23:35:07 <DougMiles> (?)
+23:35:15 <johnd> data that can fill pop-up lists, etc.
+23:36:00 <DougMiles> ah
+23:36:07 <DougMiles> you saw http://12.225.207.235/logicmoo/createpredicate.jsp
+23:36:14 <johnd> yes
+23:36:19 <johnd> that's a good example
+23:36:22 <DougMiles> just complete abuse ;P
+23:36:29 <johnd> hm?
+23:36:39 <DougMiles> the ammount it sends.. 
+23:36:59 <johnd> yes, I see the page takes a while to load
+23:37:07 <johnd> things can be done about that
+23:37:13 <DougMiles> when the argGenls and argISa selections come for a arity 5 predicate
+23:37:31 <DougMiles> thats not on that form anymore but i was expermenting
+23:38:02 <DougMiles> so i only give out sublcasses of the genlPreds and in the Mt.. etc
+23:38:16 <johnd> i wonder whether cacheing client-side might be a worthwhile thing
+23:38:25 <DougMiles> but still you want to send the data over once and reuse it in xslt
+23:38:45 <johnd> oh yeah, i forgot, that's one of the major advantages
+23:39:04 <johnd> well, right now, xslt processing is server side
+23:39:15 <DougMiles> yeah.. filling a combo or listbox programmicly is just as slow as seneding the html over sometimes
+23:39:19 <johnd> ... because you can't trust everyone to have an xslt processor locally
+23:39:34 <DougMiles> programmicaly on client side i mean
+23:39:45 <johnd> but even if it's server-side
+23:39:58 <johnd> it's quicker to grab it from the XML than to re-query
+23:40:07 <DougMiles> true
+23:40:48 <johnd> we have a grapher tool that will probably get into OpenCyc
+23:40:58 <DougMiles> then there is the one world sullotion to give them a java applet that they run locally
+23:41:14 <johnd> I'd like to see it work with XML as it's source, as well as with the KB (the current way)
+23:41:16 <DougMiles> that connects to a fasl pport ;P
+23:41:56 <johnd> i think XML/XSL will also be a one-world solution -- soon
+23:42:00 <DougMiles> right you would like to remove the differnce between a KB and the XML 
+23:42:09 <johnd> right
+23:42:40 <johnd> then, some want the CycML viewer to become the CycML editor
+23:42:58 <DougMiles> definaTELY.. THEN WHEN THE USER IS DONE.. SENT IT BACK TO SERVER
+23:43:01 <DougMiles> oops
+23:43:04 <DougMiles> (my caps)
+23:43:11 <deltab> heh
+23:43:18 <johnd> you could browse, the XML (via multiple XSL views), make changes, and send them back to the KB
+23:43:33 <johnd> sounds ambitious to me
+23:43:39 <johnd> but maybe doable
+23:43:46 <DougMiles> yeah definately getting very intimate with xslt
+23:43:57 <johnd> i'm concerned about keeping changes in sync
+23:44:24 <johnd> like everything else, XSLT is very easy once you already know it
+23:44:29 <DougMiles> well yes.. which its dead old info
+23:44:46 <DougMiles> which is new is not a problem.. but which is missing is
+23:45:24 <johnd> we have to think about what a change means in this use case
+23:45:48 <johnd> think of it as a new CycML arriving from a different KB
+23:46:11 <johnd> now it's the same problem of synching up knowledge
+23:46:17 <DougMiles> yes.. line by line.. send it the manifiest of what they just did to their own docuiment
+23:46:19 <johnd> which is a complicated problem
+23:46:40 <johnd> oh wait, what are you saying
+23:46:42 <DougMiles> so instead of their state.. you get their transformation
+23:46:58 <johnd> can you resolve your anaphora
+23:47:00 <DougMiles> then try to repliocate it on the server
+23:47:13 <DougMiles> and then tell them where it broke
+23:47:35 <johnd> say it all again without any 'them's or 'their's
+23:47:53 <DougMiles> oh.. thats a problem
+23:48:30 <johnd> no 'it's either ;)
+23:48:39 <DougMiles> you have to only give out spindle Mts
+23:49:02 <DougMiles> no its?!
+23:49:17 <johnd> send 'it' the manifest
+23:49:25 <johnd> 'their' state
+23:49:31 <johnd> 'their' transformation
+23:50:17 <DougMiles> send the cyc server a tranformation manifiest .. incremental edits of something that happened on the client end
+23:50:45 <DougMiles> so server can do things one at a time
+23:50:57 <DougMiles> delete these 10 assertions.. add these 2
+23:51:07 <johnd> yes, I figured changes would go back with small, frequent messages
+23:52:07 <johnd> but what about a screen that's been sitting there overnight
+23:52:25 <johnd> cookies? or some other user context info?
+23:52:33 <DougMiles> i think its alot to ask from a web context
+23:52:57 <DougMiles> it may be doable.. but 
+23:53:09 <johnd> just to tell the time that the page being responded from was sent?
+23:53:32 <johnd> server rejects things that come from pages older than x minutes
+23:53:50 <DougMiles> well no they let it sit overnight they need to deal with the fact that it may be too later
+23:54:13 <DougMiles> and now they need to start over
+23:54:32 <johnd> oh, if they made changes and then left it?
+23:54:48 <johnd> yeah, in that case, sorry user
+23:55:09 <DougMiles> but what if 5 mites was a very long time on that particualar cyc server
+23:55:14 <DougMiles> err 5 minutes
+23:55:46 <DougMiles> you almost need to make sure what they are looking at is fresh
+23:55:59 <johnd> if 5 mins would be too long, things should probably be architected differently
+23:56:11 <johnd> they should have their own sandbox MT
+23:56:29 <DougMiles> i think they would use something called a spindle Mt
+23:56:38 <johnd> above it should be fairly static knowledge, not stuff that changes rapidly based on others' work
+23:56:39 <DougMiles> thaT THERE mT IS LIFTED FROM IN THE NORMAL ONES
+23:56:41 <DougMiles> oops
+23:57:11 <DougMiles> so for example in my ambitous logicmoo..
+23:57:23 <DougMiles> i know that if java is updating the Kb..
+23:57:46 <DougMiles> then rules about it should live separtely
+23:58:00 <johnd> somewhere things have to merge, and we're just putting off that problem
+23:58:52 <DougMiles> yes i see.. no mater where you put their information eventually its supposed to be used by more then just them
+23:59:38 <johnd> if Bob and Fred suggest conflicting changes to the meaning of #$Game, and each thinks his should make it into the official EntertainmentMt...
+23:59:59 --- log: ended opencyc/02.04.19

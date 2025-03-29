@@ -1,0 +1,995 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>OE Handbook: Chapter 13. Writing CycL Queries</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/handbook/images/opencyc-logo.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>Ontological Engineer's Handbook</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <b><a href='http://www.cyc.com/doc/handbook/oe/oe-handbook-toc-opencyc.html'>OE Handbook Table of Contents</a></b>
+    <h2>Chapter 13. Writing CycL Queries</h2>
+    <p></p>
+    <b>13.1.  <a HREF='#137143560'>
+Conditional Queries
+</a></b>
+    <br>
+    <font size='-1'>13.1.1.  <a HREF='#137163488'>
+General-purpose queries (ASK)
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.2.  <a HREF='#137187216'>
+ASKing disjunctive queries
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.3.  <a HREF='#137214200'>
+Conditional Queries (PROVE)</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.4.  <a HREF='#137252408'>
+The Cyc Browser's QUERY tool</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.5.  <a HREF='#137262192'>
+Tautologies and Contradictions in ASK
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.6.  <a HREF='#137280392'>
+Tautologies and Contradictions in PROVE
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.7.  <a HREF='#137161744'>
+Detailed Example
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.8.  <a HREF='#137335600'>
+Caching of hypothesis microtheories
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.9.  <a HREF='#137364056'>
+Ephemerality of possible worlds and hypothesized terms
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.10.  <a HREF='#137377488'>
+More on type constraints 
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.1.11.  <a HREF='#137387920'>
+Antecedent syntactic restrictions in PROVE
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>13.2.  <a HREF='#137402568'>
+Using thereExists To Eliminate Unwanted Variables</a></b>
+    <br>
+    <p></p>
+    <b>13.3.  <a HREF='#137423216'>
+Using assertedSentence etc. To Block Unwanted Inheritance</a></b>
+    <br>
+    <font size='-1'>13.3.1.  <a HREF='#137452400'>
+#$assertedSentence
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.3.2.  <a HREF='#137498480'>
+#$assertedPredicateArg
+</a>
+      <br>
+    </font>
+    <font size='-1'>13.3.3.  <a HREF='#137525664'>
+#$ist-Asserted
+</a>
+      <br>
+    </font>
+    <hr>
+    <h1>
+    Chapter 13. 
+    Writing CycL Queries</h1>
+    <h2>13.1.  <a NAME='137143560'>
+Conditional Queries
+</a>
+    </h2>
+    <p>
+The terminology used in this document to refer to different types of
+queries is:</p>
+    <blockquote>
+      <ol>
+        <li>
+"ASK"   -> General-purpose query</li>
+        <li>
+"PROVE" -> Conditional query</li>
+        <li>
+"QUERY" -> Could be either of the above</li>
+      </ol>
+    </blockquote>
+    <p>
+They will be used in all capitals to distingish them from the common
+usage of these words.</p>
+    <p>
+Before explaining conditional queries, some explanation of Cyc's
+general-purpose inference mechanism is required.</p>
+    <h3>13.1.1.  <a NAME='137163488'>
+General-purpose queries (ASK)
+</a>
+    </h3>
+    <p>
+The functionality of Cyc's general-purpose inference mechanism is
+focused on generating unique proofs that sets of closed terms unify
+with the free variables of a query.  This is an ASK.</p>
+    <p>
+For example, ASKing the query</p>
+    <font color='#339900'>
+      <tt><pre>
+  (geopoliticalSubdivision Canada ?WHAT)
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+is a request to generate sets of bindings for the free variables such
+as the following</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((?WHAT . Manitoba-CanadianProvince))</pre></tt>
+    </font>
+
+<p>
+along with a complete deductive justification for each one.  In the
+Cyc Browser, the binding sets are presented as a table, with the
+columns being the free variables.</p>
+    <p>
+ASKing</p>
+    <font color='#339900'>
+      <tt><pre>
+  (thereExists ?WHAT
+    (geopoliticalSubdivision Canada ?WHAT))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+results in an identical proof being performed except that, by
+convention, the bindings for a successful proof are given as</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((T . T))</pre></tt>
+    </font>
+
+<p>
+since there are no free variables.  Each potential binding for ?WHAT
+is part of an independent justification for the fact that there exist
+any at all.  ((T . T)) is displayed in the Cyc Browser as "Query was
+proven True".</p>
+    <p>
+In short, all free variables in an ASK have an implicit existential
+quantification wrapped around them for purposes of resolving the
+ambiguity.  Those variables that are free in the original query are
+interpreted as being those for which bindings are requested that
+indeed prove the existence of such terms satisfying the query.</p>
+    <h3>13.1.2.  <a NAME='137187216'>
+ASKing disjunctive queries
+</a>
+    </h3>
+    <p>
+ASKing disjunctive queries like
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (or
+    (isa ?WHAT CanadianProvince)
+    (geopoliticalSubdivision Canada ?WHAT))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+
+<p>
+is a request to generate bindings that either satisfy
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa ?WHAT CanadianProvince)
+</pre></tt>
+    </font>
+<p>
+or</p>
+    <font color='#339900'>
+      <tt><pre>
+  (geopoliticalSubdivision Canada ?WHAT)
+</pre></tt>
+    </font>
+<p>
+Now consider a slightly different disjunctive query :
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (or
+    (not (isa ?WHAT CanadianProvince))
+    (geopoliticalSubdivision Canada ?WHAT))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+This is logically equivalent to the query
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (isa ?WHAT CanadianProvince)
+    (geopoliticalSubdivision Canada ?WHAT))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+ASKing either of these forms of the query is a request to
+return bindings for ?WHAT that satisfy this disjunction.  Note that</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((?WHAT . EiffelTower))
+</pre></tt>
+    </font>
+<p>
+satisfies this disjunction since it is not a Canadian province.
+</p>
+    <h3>13.1.3.  <a NAME='137214200'>
+Conditional Queries (PROVE)</a>
+    </h3>
+    <p>
+It would be more interesting to be able to ask a conditional query in
+which ?WHAT is universally quantified, rather than existentially
+quantified, as in :</p>
+    <font color='#339900'>
+      <tt><pre>
+  ;; Is every Canadian province a political subdivision of Canada?
+  (forAll ?WHAT
+    (implies
+      (isa ?WHAT CanadianProvince)
+      (geopoliticalSubdivision Canada ?WHAT)))
+ in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+PROVE is a mechanism designed to provide support for this kind of
+conditional query.  It accepts formulas of the exact syntactic form</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies &lt;ANTECEDENT> &lt;CONSEQUENT>)
+  in &lt;MT></pre></tt>
+    </font>
+
+<p>
+Any &lt;SENTENCE> not of this exact syntactic form is treated as if
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies True &lt;SENTENCE>)
+</pre></tt>
+    </font>
+<p>
+were provided.
+</p>
+    <p>
+Unlike ASK, the free variables of the antecedent (if any) are
+assumed <em>universally</em> quantified for the entire query.  The remaining
+free variables of the consequent (if any) are then assumed
+<em>existentially</em> quantified around that.</p>
+    <p>
+In order to prove the universal quantifications, PROVE creates a
+hypothetical microtheory (the "hypothesis mt") and hypothetical terms
+for each of the free variables of the antecedent, and assumes the
+antecedent is true of the hypothetical terms in the hypothesis mt.
+The hypothesis mt has the query &lt;MT> of the PROVE as its sole
+genlMt.  The hypothesis microtheory therefore represents a possible world in
+which the antecedent condition is assumed true of generic terms.</p>
+    <p>
+We then create another hypothetical microtheory (the "proof mt") for
+the further type constraints on the generic terms which are imposed by
+the consequent within the possible world of the antecedent being true.
+The proof microtheory therefore represents a possible world in which the
+antecedent and the type constraints from the consequent are assumed
+true of generic terms.</p>
+    <p>
+Within the possible world of the proof microtheory, we then perform an ASK
+of the consequent with the generic terms substituted for the free
+variables appearing in the antecedent.  If any proof can then be
+found, by the rule of universal generalization, it is a proof of the
+universals since they were arbitrarily chosen.</p>
+    <p>
+In short, PROVE creates </p>
+    <blockquote>
+      <ul>
+        <li>
+two nested possible worlds, one that assumes the antecedent and
+
+one that assumes the antecedent plus additional type constraints from
+the consequent</li>
+        <li>
+generic terms for free variables in the antecedent which satisfy
+the antecedent in these possible worlds</li>
+      </ul>
+    </blockquote>
+    <p>
+It then does a normal ASK in these possible worlds, where an answer
+would prove a logically equivalent universal result in the query
+context.</p>
+    <h3>13.1.4.  <a NAME='137252408'>
+The Cyc Browser's QUERY tool</a>
+    </h3>
+    <p>
+The Cyc Browser's QUERY tool (labeled "Ask" or "Ask A Query") is a
+wrapper around both ASK and PROVE.  Any query of the syntactic form</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies &lt;antecedent> &lt;consequent>)</pre></tt>
+    </font>
+
+<p>
+is passed off to PROVE, since that is usually what is intended.
+All other queries are passed to ASK.</p>
+    <h3>13.1.5.  <a NAME='137262192'>
+Tautologies and Contradictions in ASK
+</a>
+    </h3>
+    <p>
+In ASK, certain logical tautologies like</p>
+    <font color='#339900'>
+      <tt><pre>
+  (or 
+    (geopoliticalSubdivision Canada ?WHAT)
+    (not (geopoliticalSubdivision Canada ?WHAT)))</pre></tt>
+    </font>
+
+<p>
+can be detected automatically by the canonicalizer, which reduces them
+to #$True.  In this case, no inference is performed and</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((T . T)) 
+  :TAUTOLOGY</pre></tt>
+    </font>
+
+<p>
+is returned by ASK, indicating that the query was logically a
+tautology.  In the Cyc Browser, this displays as "Query reduced to
+True (a tautology)."  Similarly, a logical contradiction like</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and
+    (geopoliticalSubdivision #$Canada ?WHAT)
+    (not (geopoliticalSubdivision Canada ?WHAT)))</pre></tt>
+    </font>
+ 
+<p>
+can be detected and reduced to #$False by the canonicalizer.  In this
+case, no inference is performed and </p>
+    <font color='#339900'>
+      <tt><pre>
+  NIL
+  :CONTRADICTION</pre></tt>
+    </font>
+
+<p>
+is returned.  This displays as "Query reduced to False (a
+contradiction).".</p>
+    <h3>13.1.6.  <a NAME='137280392'>
+Tautologies and Contradictions in PROVE
+</a>
+    </h3>
+    <p>
+Since PROVE accepts formulas of the form
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies &lt;ANTECEDENT> &lt;CONSEQUENT>)
+</pre></tt>
+    </font>
+<p>
+if the &lt;ANTECEDENT> ever reduced to #$False, the entire proof would
+reduce to #$True.  Therefore, if the antecedent is unsatisfiable in
+the possible world of the hypothesis mt, PROVE returns</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((T . T))
+  :TAUTOLOGY</pre></tt>
+    </font>
+
+<p>
+If the additional constraints of the consequent are unsatisfiable in
+the possible world of the proof mt, PROVE likewise returns</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((T . T))
+  :TAUTOLOGY</pre></tt>
+    </font>
+
+<p>
+Finally, since the consequent formula is passed to ASK in the proof
+mt, if it reduces to #$True or #$False there, PROVE returns either</p>
+    <blockquote>
+      <ul>
+        <li>
+          <font color='#339900'>
+            <tt><pre>
+   ((T . T))
+  :TAUTOLOGY</pre></tt>
+          </font>
+        </li>
+
+<li>
+          <font color='#339900'>
+            <tt><pre>
+   NIL
+   :CONTRADICTION</pre></tt>
+          </font>
+        </li>
+      </ul>
+    </blockquote>
+ 
+
+
+<h3>13.1.7.  <a NAME='137161744'>
+Detailed Example
+</a>
+    </h3>
+    <p>
+Assume we want to ask the following query :
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  ;; Is every Canadian province a political subdivision of Canada?
+  (forAll ?WHAT
+    (implies
+      (isa ?WHAT CanadianProvince)
+      (geopoliticalSubdivision Canada ?WHAT)))
+ in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+We call PROVE with
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (implies
+    (isa ?WHAT CanadianProvince)
+    (geopoliticalSubdivision Canada ?WHAT)))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+This causes an instance of #$HypotheticalContext to be created
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa #$HYP-Context-001 HypotheticalContext)
+  (genlMt HYP-Context-001 WorldGeographyMt)</pre></tt>
+    </font>
+
+<p>
+It then creates a hypothetical Canadian province in that world :
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  In Mt : HYP-Context-001
+  (isa HYP-Province-001 CanadianProvince)</pre></tt>
+    </font>
+
+<p>
+We create a proof microtheory:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (isa HYP-Context-002 HypotheticalContext)
+  (genlMt HYP-Context-002 HYP-Context-001)</pre></tt>
+    </font>
+
+<p>
+Here we additionally assume
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  In Mt : #$HYP-Context-002
+  (isa #$HYP-Province-001 GeopoliticalEntity)</pre></tt>
+    </font>
+
+<p>
+We then do an ASK of
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (geopoliticalSubdivision Canada HYP-Province-001)
+  in #$HYP-Context-002</pre></tt>
+    </font>
+
+<p>
+If this can be proven of our generic province in this possible world,
+it can be proven of every province in WorldGeographyMt.</p>
+    <h3>13.1.8.  <a NAME='137335600'>
+Caching of hypothesis microtheories
+</a>
+    </h3>
+    <p>
+The advantage of separating the hypothesis mt from the query mt is
+clear; it allows us to reason about a possible world without modifying
+the context on which that world is based.</p>
+    <p>
+The advantage of separating the hypothesis mt from the proof mt is
+that several different proofs that assume the same possible world can
+reuse that world for different proofs.</p>
+    <p>
+For example, using PROVE on</p>
+    <font color='#339900'>
+      <tt><pre>
+  ;; Every Canadian province is a political subdivision of what country?
+  (implies
+    (isa ?WHAT CanadianProvince)
+    (and
+      (isa ?COUNTRY Country)
+      (geopoliticalSubdivision ?COUNTRY ?WHAT)))
+  in #$WorldGeographyMt</pre></tt>
+    </font>
+
+<p>
+assuming we already did the earlier proof, we can reuse the possible world
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  #$HYP-Context-001
+</pre></tt>
+    </font>
+<p>
+since this query uses the same assumed antecedent.  We then only have
+to create a different proof mt, in which we ASK</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and
+    (isa ?COUNTRY Country)
+    (geopoliticalSubdivision ?COUNTRY HYP-Province-001))</pre></tt>
+    </font>
+
+<p>
+  in <em><tt>
+#$HYP-Context-003</tt></em>
+    </p>
+    <p>
+in which we should be able to return</p>
+    <font color='#339900'>
+      <tt><pre>
+  ((?COUNTRY . Canada))</pre></tt>
+    </font>
+
+<p>
+as a binding.</p>
+    <p>
+Currently, we do not reuse proof mts, although this extension would be
+a natural one to make.</p>
+    <h3>13.1.9.  <a NAME='137364056'>
+Ephemerality of possible worlds and hypothesized terms
+</a>
+    </h3>
+    <p>
+All the terms hypothesised by PROVE, including
+</p>
+    <blockquote>
+      <ul>
+        <li>
+  hypothesis mts</li>
+        <li>
+  proof mts</li>
+        <li>
+  generic terms</li>
+      </ul>
+    </blockquote>
+    <p>
+are all marked as #$ephemeralTerm, indicating that they are internal
+to this particular Cyc image.  Furthermore we use #$termDependsOn and
+#$definingMt to indicate the mutual dependence of these terms on the
+hypothesis mt and the original query mt.  Therefore, if the original
+query mt were killed, all these hypothesized terms would automatically
+be killed as well.</p>
+    <h3>13.1.10.  <a NAME='137377488'>
+More on type constraints 
+</a>
+    </h3>
+    <p>
+The assumption in the proof mt of the additional constraints from the
+consequent makes PROVE's interpretation of type-constraints
+identical to that of the inference engine's in regard to the
+application of rules.</p>
+    <p>
+Thus, if the assert</p>
+    <font color='#339900'>
+      <tt><pre>
+  ASSERT (implies P(x) Q(x)) 
+  in MT</pre></tt>
+    </font>
+
+<p>
+is accepted by the system, asking afterward</p>
+    <font color='#339900'>
+      <tt><pre>
+  PROVE  (implies P(x) Q(x))
+  in MT, backchain = 1</pre></tt>
+    </font>
+
+<p>
+should now always succeed, even if the type constraints on x due to Q(x)
+are stronger than those due to P(x).</p>
+    <h3>13.1.11.  <a NAME='137387920'>
+Antecedent syntactic restrictions in PROVE
+</a>
+    </h3>
+    <p>
+The antecedent of an PROVE has additional syntactic restrictions.
+Since it specifies a formula which is intended to be made true in a
+possible world, the creation of generic terms for the free variables
+is much like the creation of new concepts followed by the asserting
+sentences about those concepts.</p>
+    <p>
+Because we want to reject possible worlds in which the antecedent is
+unsatisfiable, or leads to contradictions, we want to use something
+like WFF constraints to reject as unsatisfiable an antecedent like</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and
+    (isa ?CAR Automobile)
+    (feelsEmotion ?CAR Happiness Positive))</pre></tt>
+    </font>
+
+<p>
+since it is nonsensical for a car to be the arg1 of a feelsEmotion
+assertion.  However, just using the same WFF constraints that we use
+during an assert could lead to problems in this case:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and
+    (isa ?MOM AdultPerson)
+    (mother Napoleon ?MOM))</pre></tt>
+    </font>
+
+<p>
+In this case, the mother literal imposes a #$FemalePerson constraint
+which is orthogonal to the #$AdultPerson constraint on ?MOM.  So, we
+can't simply create an adult person and assert the #$mother literal
+because the ?MOM would not yet be known to be a #$FemalePerson.</p>
+    <p>
+Instead, we analyze the entire antecedent to gather all the type
+constraints, both #$isa and #$genls, on the free variables and first
+assert all of these.  If this succeeds, we then try asserting all the
+remaining assumptions, in order listed in the antecedent.</p>
+    <h2>13.2.  <a NAME='137402568'>
+Using thereExists To Eliminate Unwanted Variables</a>
+    </h2>
+    <p>
+If you are asking a query in Cyc, it will give you bindings for every
+free variable in the query. If you don't care about bindings for a
+particular variable, you can existentially quantify that variable so
+the system won't return bindings for it.</p>
+    <p>
+Example: Say that we wanted to ask Cyc for all the redheaded men
+with children. If we ask</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$and 
+   (#$isa ?MAN #$AdultMalePerson) 
+   (#$hairColor ?MAN #$Scalp #$RedColor) 
+   (#$children ?MAN ?KID))</pre></tt>
+    </font>
+
+
+<p>
+Then we will get back bindings for both variables, ?MAN and ?KID.
+But if we really only want to know about the redheaded men with children,
+and don't care about their children, then we could ask this instead:</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$thereExists ??KID 
+  (#$and 
+   (#$isa ?MAN #$AdultMalePerson) 
+   (#$hairColor ?MAN #$Scalp #$RedColor) 
+   (#$children ?MAN ??KID)))</pre></tt>
+    </font>
+
+
+<p>
+By wrapping a #$thereExists ?KID around the query, Cyc will now know that
+you only care about the existence of bindings for that variable and that
+you don't care about the bindings themselves. Note the ?? prefix on ??KID.
+This is a convention that indicates the variable is a "don't care" variable.
+It is not currently (August 2001) used by Cyc except for certain diagnostic
+utilities.</p>
+    <h2>13.3.  <a NAME='137423216'>
+Using assertedSentence etc. To Block Unwanted Inheritance</a>
+    </h2>
+    <p>
+The transitivity support in the inference engine is very powerful,
+but sometimes you are looking only for things that have been explicitly
+asserted, not those which can be inferred.  There are some HL-supported
+predicates you can use to specify this.  They are:</p>
+    <blockquote>
+      <ul>
+        <li>
+#$assertedSentence</li>
+        <li>
+#$ist-Asserted</li>
+        <li>
+#$assertedPredicateArg</li>
+      </ul>
+    </blockquote>
+    <h3>13.3.1.  <a NAME='137452400'>
+#$assertedSentence
+</a>
+    </h3>
+    <p>
+Here is an example of a case where #$assertedSentence comes in handy.
+</p>
+    <p>
+Imagine that you wanted to find all of the binary relations in the KB that
+could take an instance of #$Missile in one or more argument positions.
+You might try the query</p>
+    <font color='#339900'>
+      <tt><pre>
+  (thereExists ??N
+    (thereExists ?WHAT
+      (and
+        (isa ?RELN BinaryPredicate)
+        (argIsa ?RELN ??N ?WHAT)
+        (genls Missile ?WHAT))))</pre></tt>
+    </font>
+
+<em><p>
+[also see the section "Using thereExists To Eliminate Unwanted Variables" in this chapter]</p></em>
+    <p>
+You might be surprised to see that many of the predicates returned
+from this query would be such that neither of the argIsas was a
+generalization of #$Missile, e.g. #$lockState, which relates an instance
+of #$Lock to an instance of #$LockStateAttribute.</p>
+    <p>
+This is because Cyc believes
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (transitiveViaArg argIsa genls 3)
+</pre></tt>
+    </font>
+<p>
+Hence, since Cyc knows
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (argIsa lockState 1 Lock)
+</pre></tt>
+    </font>
+<p>
+it can conclude from the above two assertions:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (argIsa lockState 1 PartiallyTangible)
+</pre></tt>
+    </font>
+<p>
+and since #$PartiallyTangible is a genls of #$Missile, back comes
+#$lockState in the binding list for ?RELN.</p>
+    <p>
+This is a case in which you would want to use #$assertedSentence to
+block unwanted inheritance.  Instead of the initial query</p>
+    <font color='#339900'>
+      <tt><pre>
+  (thereExists ??N
+    (thereExists ?WHAT
+      (and
+        (isa ?RELN BinaryPredicate)
+        (argIsa ?RELN ??N ?WHAT)
+        (genls Missile ?WHAT))))</pre></tt>
+    </font>
+
+<p>
+the following query will get you the answers you seek:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (thereExists ??N 
+    (thereExists ?WHAT 
+      (and 
+        (isa ?RELN BinaryPredicate) 
+        (assertedSentence 
+          (argIsa ?RELN ??N ?WHAT)) 
+        (genls Missile ?WHAT))))</pre></tt>
+    </font>
+
+<p>
+The only obscure case that the above query would not cover is if there
+were a predicate which had disjoint arg constraints, one of which was
+a spec of #$Missile.  There are diagnostics which should catch this OE
+error, but if you wanted to eliminate such relations from coming back
+as bindings for ?RELN, you could modify the query thusly:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (thereExists ?N
+    (thereExists ?WHAT
+      (and
+        (isa ?RELN BinaryPredicate)
+        (assertedSentence (argIsa ?RELN ?N ?WHAT))
+        (unknownSentence
+          (thereExists ?OTRWHAT
+            (and
+              (argIsa ?RELN ?N ?OTRWHAT)
+              (disjointWith ?OTRWHAT Missile))))
+        (genls Missile ?WHAT))))</pre></tt>
+    </font>
+
+<p>
+Another predicate related to #$assertedSentence is #$assertionSentence.  It is 
+related in the following way:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$assertedSentence :SENTENCE)</pre></tt>
+    </font>
+
+<p>
+is equivalent to
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$thereExists ?ASSERTION
+    (#$assertionSentence ?ASSERTION :SENTENCE))</pre></tt>
+    </font>
+
+
+<h3>13.3.2.  <a NAME='137498480'>
+#$assertedPredicateArg
+</a>
+    </h3>
+    <p>
+Say that you wanted to see whether there was a #$capitalCity assertion
+for the United States.  You don't want to know whether Cyc can infer
+the United States' capital city, and you don't care what it is; you
+just want to know whether there is currently an actual assertion of
+the form (#$capitalCity #$UnitedStatesOfAmerica &lt;whatever>).  To ask
+this query you can use #$assertedPredicateArg as follows:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$assertedPredicateArg #$UnitedStatesOfAmerica 1 #$capitalCity)
+</pre></tt>
+    </font>
+<p>
+We could have also asked
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$thereExists ?CITY
+    (#$assertedSentence
+      (#$capitalCity #$UnitedStatesOfAmerica ?CITY)))</pre></tt>
+    </font>
+
+<p>
+to get the same result.
+</p>
+    <p>
+Hence, #$assertedPredicateArg is just shorthand for a common case of
+#$assertedSentence; wrapping a bunch of existentials around the
+arguments you don't care about, and saving you from worrying about the
+arity of the predicate.  It's most useful when you don't know the
+predicate or the argument number at query construction time, because
+it would be nigh impossible to write a terse query to achieve the
+effect of #$assertedPredicateArg.</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$assertedPredicateArg :TERM 1 :PRED)
+</pre></tt>
+    </font>
+<p>
+is equivalent to
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$thereExists ?REST-ARGS
+    (#$assertedSentence
+      (:PRED :TERM . ?REST-ARGS)))</pre></tt>
+    </font>
+
+<p>
+and similarly,</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$assertedPredicateArg :TERM 2 :PRED)
+</pre></tt>
+    </font>
+<p>
+is equivalent to
+</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$thereExists ?ARG-1
+    (#$thereExists ?REST-ARGS
+      (#$assertedSentence
+        (:PRED ?ARG-1 :TERM . ?REST-ARGS))))</pre></tt>
+    </font>
+
+<p>
+etc.</p>
+    <h3>13.3.3.  <a NAME='137525664'>
+#$ist-Asserted
+</a>
+    </h3>
+    <p>
+#$ist-Asserted is like a version of #$assertedSentence which gives you
+control over the microtheory assumptions.
+</p>
+    <p>
+This is most useful when you don't know the microtheory at query
+construction time.  It's good for reasoning in one context about
+whether something's asserted in another context.</p>
+    <p>
+Say you want to find all the specs of #$Fruit in the #$BiologyMt
+which do not have a #$denotation assertion in the #$EnglishMt.
+Then you could ask a query in the #$BiologyMt like so:</p>
+    <font color='#339900'>
+      <tt><pre>
+  (and
+    (knownSentence
+      (genls ?FRUIT Fruit))
+    (ist-Asserted GeneralEnglishMt
+      (denotation ??WORD ??POS ??SENSE ?FRUIT)))
+
+  (#$ist-Asserted :MT :SENTENCE)</pre></tt>
+    </font>
+
+<p>
+is equivalent to</p>
+    <font color='#339900'>
+      <tt><pre>
+  (#$thereExists ?ASSERTION
+    (#$thereExists ?GENL-MT
+      (#$and
+        (#$genlMt :MT ?GENL-MT)
+        (#$assertionMt ?ASSERTION ?GENL-MT)
+        (#$assertionSentence ?ASSERTION :SENTENCE)))</pre></tt>
+    </font>
+
+<p>
+See the constants
+</p>
+    <blockquote>
+      <ul>
+        <li>
+  #$assertedSentence
+</li>
+        <li>
+#$ist-Asserted</li>
+        <li>
+  #$assertedPredicateArg</li>
+        <li>
+  #$assertionSentence</li>
+      </ul>
+    </blockquote>
+    <p>
+in the KB for more details.</p>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/05/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

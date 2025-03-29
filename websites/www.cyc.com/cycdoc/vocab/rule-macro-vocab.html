@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/WD-html-in-xml/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Rule Macro Predicates</title></head>
+    <body>
+        <h2>
+            <a href="http://www.opencyc.org"><img alt="OpenCyc Homepage"
+                    border="0"
+            src="/cycdoc/img/opencyc-logo.gif" /></a>Rule Macro
+        Predicates</h2>E-Mail Comments to: <a
+        href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a><br />Last
+        Update: 12/13/02<br />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a><br />
+        <hr />
+        <a href="/cycdoc/toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/toc.html">Return to Documentation Contents</a>
+        <br />
+        <a href="/cycdoc/vocab/vocab-toc.html"><img border="0" src="/cycdoc/img/cyc-ball-sm.gif" /></a>
+        <a href="/cycdoc/vocab/vocab-toc.html">Return to Vocabulary Contents</a>
+        <br />
+        <hr />
+        <br />
+        <font size="+1">
+            <a
+                    name="RuleMacroPredicate">#$RuleMacroPredicate<i>&nbsp;&nbsp;&nbsp;rule
+                    macro predicates</i></a></font>
+        <blockquote> A specialization of <a
+            href="./fundamental-vocab.html#Predicate">#$Predicate.</a>
+            Each instance of <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            is a predicate that has, implicit in its definition, a
+            schema for a class of quantified formulas (an instance of <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            is related to its schema via the predicate #$expansion). A
+            ground assertion using one of these predicates is in fact
+            shorthand for a rule fitting this schema. For example, <a
+            href="./fundamental-vocab.html#genls">#$genls</a> is a <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            and its implicit schema is <a
+            href="./fundamental-vocab.html#implies">(#$implies</a> <a
+            href="./fundamental-vocab.html#isa">(#$isa</a> ?X ARG1) <a
+            href="./fundamental-vocab.html#isa">(#$isa</a> ?X ARG2)).
+            Therefore, <a
+            href="./fundamental-vocab.html#genls">(#$genls</a> #$Poodle
+                <a href="./biology-vocab.html#Dog">#$Dog)</a> is
+            shorthand for the rule <a
+            href="./fundamental-vocab.html#implies">(#$implies</a> <a
+            href="./fundamental-vocab.html#isa">(#$isa</a> ?X #$Poodle)
+                <a href="./fundamental-vocab.html#isa">(#$isa</a> ?X <a
+            href="./biology-vocab.html#Dog">#$Dog).</a> <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicates</a>
+            may be supported by system code, as is <a
+            href="./fundamental-vocab.html#genls">#$genls,</a> or they
+            may be defined with an #$expansion. In general, one should
+            only introduce a new <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            if 1) there is a plan to eventually provide code support for
+            efficient reasoning with its uses, and/or 2) using it
+            enables useful type-level reasoning.<br />
+            <b>guid: </b>bd8efae4-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$PredicateCategory
+            #$AtemporalNecessarilyEssentialCollectionType  <br />
+            <b>direct specialization of:
+                </b>#$MacroRelation&nbsp;&nbsp;<a href="./fundamental-vocab.html#Predicate">#$Predicate</a>&nbsp;&nbsp;<br />
+            <b>direct generalization of:
+            </b>#$GeneralizedQuantifierRelation
+            #$TypeTypeTernaryRuleMacroPredicate
+            #$TypeInstanceTernaryRuleMacroPredicate
+            #$InstanceTypeTernaryRuleMacroPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="expansionAxiom">#$expansionAxiom<i>&nbsp;&nbsp;&nbsp;expansion axiom</i></a></font>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#comments">**COMMENT NOT REVIEWED**</a></i>&nbsp;&nbsp;&nbsp;<i>
+            <a href="./kb-review-desc.html#GAFs">**GAFs NOT REVIEWED**</a></i>
+        <blockquote> <a
+            href="./rule-macro-vocab.html#expansionAxiom">(#$expansionAxiom</a>
+            PRED ASSERT) means that the assertion ASSERT is part of the
+            expansion of PRED.<br />
+            <b>guid: </b>bdfabffc-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of:
+            </b>#$DistributingMetaKnowledgePredicate  #$BinaryPredicate  <br />
+            <b>direct specialization of: </b>
+            <a
+            href="./doc-vocab.html#salientAssertions">#$salientAssertions</a>  </blockquote>
+        <font size="+1">
+            <a
+                    name="relationAllExists">#$relationAllExists<i>&nbsp;&nbsp;&nbsp;relation
+                    all exists</i></a></font>
+        <blockquote> <a
+            href="./rule-macro-vocab.html#relationAllExists">(#$relationAllExists</a>
+            PRED COL1 COL2) means that for any instance INST1 of COL1,
+            there exists some instance INST2 of COL2 such that (PRED
+            INST1 INST2) holds. <a
+            href="./rule-macro-vocab.html#relationAllExists">(#$relationAllExists</a>
+            PRED COL1 COL2) is thus redundant with a
+            commonly-encountered form of rule. So <a
+            href="./rule-macro-vocab.html#relationAllExists">#$relationAllExists</a>
+            (and its defining axiom; see #$expansion) enables this
+            common type of rule to be stated more tersely. Moreover,
+            (forthcoming) code support will enable type-level
+            inferencing with <a href="./rule-macro-vocab.html#relationAllExists">#$relationAllExists.</a><br />
+            <b>guid: </b>bf3429c5-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of:
+            </b>#$TypeTypeTernaryRuleMacroPredicate  <br />
+            <b>direct specialization of: </b>#$most-GenQuantRelnToType  </blockquote>
+        <font size="+1">
+            <a
+                    name="relationExistsAll">#$relationExistsAll<i>&nbsp;&nbsp;&nbsp;relation
+                    exists all</i></a></font>
+        <blockquote> <a
+            href="./rule-macro-vocab.html#relationExistsAll">(#$relationExistsAll</a>
+            PRED COL1 COL2) means that for every instance INS2 of COL2,
+            there is some instance INS1 of COL1, such that (PRED INS1
+            INS2) holds. Thus it is equivalent to the more complex form
+                <a
+            href="./fundamental-vocab.html#implies">(#$implies</a> (isa
+            ?INS2 COL2) <a
+            href="./fundamental-vocab.html#thereExists">(#$thereExists</a>
+            ?INS1 <a href="./fundamental-vocab.html#and">(#$and</a> <a
+            href="./fundamental-vocab.html#isa">(#$isa</a> ?INS1 COL1)
+            (PRED ?INS1 ?INS2)))). <a
+            href="./rule-macro-vocab.html#relationExistsAll">#$relationExistsAll</a>
+            is thus redundant with a very large set of
+            commonly-occurring axioms. So a ground atomic formula (or
+            GAF ) built upon relationInstanceExists is in effect
+            shorthand (i.e. a macro ) for an equivalent rule with the
+            more complex form. For example, <a
+            href="./rule-macro-vocab.html#relationExistsAll">(#$relationExistsAll</a>
+                <a
+            href="./spatial-vocab.html#adjacentTo">#$adjacentTo</a> <a
+            href="./transportation-vocab.html#Harbor">#$Harbor</a>
+            #$PortCity) means that for every port city there exists a
+            harbor to which the city is adjacent. See the shared #$NoteAboutUseOfRuleMacroPredicates.<br />
+            <b>guid: </b>c0bb3413-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of:
+            </b>#$TypeTypeTernaryRuleMacroPredicate  <br />
+            <b>direct specialization of: </b>#$most-GenQuantRelnFromType  </blockquote>
+        <font size="+1">
+            <a
+                    name="requiredArg1Pred">#$requiredArg1Pred<i>&nbsp;&nbsp;&nbsp;required
+                    arg 1 pred</i></a></font>
+        <blockquote> A #$MetaPredicate for stating that every instance
+            of a given collection is related to some thing or things by
+            a given predicate. <a
+            href="./rule-macro-vocab.html#requiredArg1Pred">(#$requiredArg1Pred</a>
+            COL PRED) means that for every instance INST of COL, there
+            exists some sequence <X2, ..., Xn> such that (PRED INST X2
+            ... Xn) holds. For example, <a
+            href="./rule-macro-vocab.html#requiredArg1Pred">(#$requiredArg1Pred</a>
+                <a
+            href="./organization-vocab.html#Organization">#$Organization</a>
+                <a
+            href="./organization-vocab.html#hasMembers">#$hasMembers)</a>
+            means that every organization has at least one member. See
+            also <a href="./rule-macro-vocab.html#requiredArg2Pred">#$requiredArg2Pred.</a><br />
+            <b>guid: </b>bdd50606-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$OpenCycDefinitionalPredicate
+            #$MetaPredicate  <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            #$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="requiredArg2Pred">#$requiredArg2Pred<i>&nbsp;&nbsp;&nbsp;required
+                    arg 2 pred</i></a></font>
+        <blockquote> A #$MetaPredicate for stating that every instance
+            of a given collection is related (as the arg2 ) to some
+            thing or things by a given predicate. <a
+            href="./rule-macro-vocab.html#requiredArg2Pred">(#$requiredArg2Pred</a>
+            COL PRED) means that for every instance INST of COL, there
+            exists some sequence <X1, X3, ..., Xn> of such that (PRED X1
+            INST X3 ... Xn) holds. For example, <a
+            href="./rule-macro-vocab.html#requiredArg2Pred">(#$requiredArg2Pred</a>
+                <a href="./spatial-vocab.html#Side">#$Side</a>
+            #$objectSides) means that every side is the side of at least
+            one object. See also <a href="./rule-macro-vocab.html#requiredArg1Pred">#$requiredArg1Pred.</a><br />
+            <b>guid: </b>bef7ed88-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$OpenCycDefinitionalPredicate
+            #$MetaPredicate  <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            #$BinaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="interArgIsa1-2">#$interArgIsa1-2<i>&nbsp;&nbsp;&nbsp;inter
+                    arg isa 1 - 2</i></a></font>
+        <blockquote> A ternary instance of #$InterArgIsaPredicate
+            (q.v.). <a
+            href="./rule-macro-vocab.html#interArgIsa1-2">(#$interArgIsa1-2</a>
+            RELN INDEPENDENT-ARG-COL DEPENDENT-ARG-COL) means that, when
+            an instance of INDEPENDENT-ARG-COL appears as the first
+            argument to RELN, a necessary condition for semantic
+            well-formedness is that the second argument must be an
+            instance of DEPENDENT-ARG-COL. That is, if INST is an
+            instance of INDEPENDENT-ARG-COL, then (RELN INST ARG2 ...
+            ARGN) is semantically well-formed only if ARG2 is an
+            instance of DEPENDENT-ARG-COL. For example, <a
+            href="./rule-macro-vocab.html#interArgIsa1-2">(#$interArgIsa1-2</a>
+                <a
+            href="./actor-vocab.html#performedBy">#$performedBy</a> <a
+            href="./doing-vocab.html#PurposefulAction">#$PurposefulAction</a>
+                <a
+            href="./agent-vocab.html#IntelligentAgent">#$IntelligentAgent)</a>
+            means that, if ACT is a purposeful action, then <a
+            href="./actor-vocab.html#performedBy">(#$performedBy</a> ACT
+            AGENT) is semantically well-formed only if AGENT is an
+            intelligent agent. For an explanation of semantic
+            well-formedness, see #$CycLExpression-Assertible and its
+            direct specializations. See #$interArgIsa for a similar but
+            more general predicate that is quintary, allowing the user
+            to specify the positions of the independent and dependent
+            arguments. Use #$interArgCondIsa1-2 to conclude that arg2 is
+            an instance of DEPENDENT-ARG-COL instead of having that as a constraint.<br />
+            <b>guid: </b>bd5c548a-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$OpenCycDefinitionalPredicate
+            #$IntangibleObjectRelatingPredicate  #$InterArgIsaPredicate
+                <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            #$TernaryPredicate  </blockquote>
+        <font size="+1">
+            <a
+                    name="interArgIsa2-1">#$interArgIsa2-1<i>&nbsp;&nbsp;&nbsp;inter
+                    arg isa 2 - 1</i></a></font>
+        <blockquote> A ternary instance of #$InterArgIsaPredicate
+            (q.v.). <a
+            href="./rule-macro-vocab.html#interArgIsa2-1">(#$interArgIsa2-1</a>
+            RELN INDEPENDENT-ARG-COL DEPENDENT-ARG-COL) means that, when
+            an instance of INDEPENDENT-ARG-COL appears as the second
+            argument to RELN, a necessary condition for semantic
+            well-formedness is that the first argument must be an
+            instance of DEPENDENT-ARG-COL. That is, if INST is an
+            instance of INDEPENDENT-ARG-COL, then (RELN ARG1 INST ...
+            ARGN) is semantically well-formed only if ARG1 is an
+            instance of DEPENDENT-ARG-COL. For an explanation of
+            semantic well-formedness, see #$CycLExpression-Assertible
+            and its direct specializations.<br />
+            <b>guid: </b>bd682bdd-9c29-11b1-9dad-c379636f7270<br />
+            <b>direct instance of: </b>#$OpenCycDefinitionalPredicate
+            #$IntangibleObjectRelatingPredicate  #$InterArgIsaPredicate
+                <a
+            href="./rule-macro-vocab.html#RuleMacroPredicate">#$RuleMacroPredicate</a>
+            #$TernaryPredicate  </blockquote>
+        <p />
+        <hr />
+        <i>Copyright&copy; 1996-2002.  All rights reserved.</i>  See <a
+            href="/cycdoc/legal-terms.html">Terms of Usage.</a></body></html>

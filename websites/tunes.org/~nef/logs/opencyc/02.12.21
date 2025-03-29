@@ -1,0 +1,281 @@
+00:00:00 --- log: started opencyc/02.12.21
+02:44:28 <dmiles> neat! DO-DICTIONARY ... and other dictionary stuff can be used as hashtable
+02:44:38 <dmiles> seems to be working
+02:48:13 <dmiles> hrrm must find the name of the function/varible that holds the global wordnet DICTIONARY
+03:02:52 --- quit: KinoC (Read error: 110 (Connection timed out))
+04:20:24 --- nick: mdupont -> mdupont-shopping
+05:57:58 --- quit: Cobwa ("[x]chat")
+08:47:05 --- join: Olmy (~colmk@159.134.207.186) joined #opencyc
+08:47:06 --- quit: ZivZ (Read error: 54 (Connection reset by peer))
+08:58:53 --- part: Olmy left #opencyc
+09:55:29 --- join: mdupont_ (mdupont@p5080E773.dip0.t-ipconnect.de) joined #opencyc
+09:56:12 --- quit: mdupont-shopping (Read error: 110 (Connection timed out))
+10:25:33 --- join: fleeky (~email@209.246.42.100) joined #opencyc
+10:37:14 <fleeky> ping
+11:00:31 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+11:00:57 <yepster> Anybody any good idea how to translate 0.6 mt's to 0.7?
+11:01:16 <yepster> or copy
+11:01:47 <yepster> (#$myCreator ?X #$CycAdministrator)
+11:02:00 <yepster> I could use the oracle interface perhaps:
+11:02:36 <yepster> select createconstant( name ) from (select (myCreator ?X CycAdministrator) from dual)
+11:02:59 <yepster> if only I knew lisp..
+11:06:37 --- quit: yepster ()
+11:11:06 --- join: yepster (~yepster@217.117.225.12) joined #opencyc
+11:12:32 <fleeky> cant you just get cyc 0.6 to transfer itself to 0.7 :) 
+11:12:45 * fleeky talks out of ass
+11:14:07 <yepster> tell me how
+11:14:58 <yepster> Maybe 0.7 can get something from 0.6
+11:17:40 <yepster> or a java program that connects to two servers
+11:18:15 <fleeky>  sorry i really dont know i still need to read through the opencyc tutorials .. 
+11:18:27 <yepster> hehehe
+11:19:07 <fleeky> http://sourceforge.net/projects/ebla
+11:19:17 <fleeky> this is pretty state of the art
+11:19:29 <fleeky> experience based language acquisition
+11:20:25 <yepster> language acquisition = understanding language?
+11:20:44 <yepster> as in: interpreting sentences in natural language?
+11:21:09 <fleeky> through visual perception
+11:21:21 <fleeky> eg : watching a video
+11:21:33 <yepster> lipreading!
+11:21:57 <yepster> cool
+11:22:41 <yepster> cmon that was funny
+11:23:14 <fleeky> budum bum
+11:23:23 <fleeky> hehe
+11:23:39 --- join: johndcyc (~johnd@cs2417522-192.austin.rr.com) joined #opencyc
+11:25:03 <yepster> hello john
+11:25:09 <johndcyc> hi
+11:25:13 <yepster> question:
+11:25:32 <yepster> what was the workaround you mentioned in the announcment mail of 0.7?
+11:26:04 <yepster> I need to copy about 300 assertions in 5 mt's
+11:26:55 <johndcyc> Steve hasn't gotten one working, but we were talking about a few options.
+11:27:10 <johndcyc> You need to move them from 0.6 to 0.7?
+11:27:19 <yepster> well..
+11:27:48 <yepster> I'd like to
+11:28:00 <yepster> 0.7 has a nice grapher
+11:28:06 <johndcyc> He was planning to create a file of all the terms in vanilla 0.6.
+11:28:26 <johndcyc> Then he would use a program to find everything that didn't match that list.
+11:28:53 <johndcyc> He would create a file of those and do the necessary creates followed by the asserts.
+11:29:19 <johndcyc> He would create a file of terms that got thrown off for whatever reason.
+11:29:37 <johndcyc> Pretty vague, huh? That's what I meant by it isn't done.
+11:30:09 <yepster> I haven't seen any missing term that I used to specialate from yet
+11:30:22 <yepster> (specialate?? is that a word)
+11:30:39 <johndcyc> Oh, there was the part about doing the same sort of thing with assertions, too.
+11:30:43 <johndcyc> Except...
+11:31:32 <johndcyc> Assertions have that internal ID number (unique to the KB). He was going to note that max assertion ID and pick up those that have numbers higher than that.
+11:32:01 <yepster> ah! and those have to be copied
+11:32:15 <johndcyc> yes
+11:32:49 <johndcyc> As for the assertions, why not format them as F: (my CycL Formula)
+11:32:59 <johndcyc> i.e. use KE Text
+11:33:42 <johndcyc> You'll have to paste it into the Compose window in 0.7, but that shouldn't be too tedious.
+11:34:06 <yepster> hmm i suddenly realize: it's pre 0.7 i want to copy from
+11:34:32 <yepster> and i am not sure, but i think it has no view as ke text for transcripts
+11:34:50 <yepster> but I could do something with subl: gather-mt-index i guess
+11:35:19 <johndcyc> Yes, I knew you meant copy FROM pre-0.7, which doesn't have Compose.
+11:35:45 <yepster> yes it does
+11:35:59 <johndcyc> I meant use SubL or Java to write out a text file.
+11:36:16 <johndcyc> Pre-0.7 doesn't, 0.7 does.
+11:36:41 <yepster> the pre-0.7 I used did
+11:36:45 <yepster> ;-)
+11:36:59 <yepster> the version from august or september
+11:37:12 <yepster> I actually used it for a while
+11:37:29 <johndcyc> Oh, okay! I know what you mean.
+11:37:40 <yepster> but I could figure out how to enter a constant correct; I kept on starting a halted agenda
+11:37:58 <johndcyc> Anyway, I don't know what it does for you to have KE-Text input in the FROM kb.
+11:38:20 <yepster> not much
+11:38:28 <johndcyc> Yes, the halting agendas can be a pain until you figure out how to do it.
+11:39:20 <johndcyc> Usually its because stuff you're entering is non-WFF, because there's something that needed to be in the KB first, or because your doing it from an Mt that can't see everything it needs to see.
+11:40:11 <yepster> hmm what was very strange that starting, and executing it again would give no problems
+11:40:24 <yepster> but maybe I got the default mt or sth wrong
+11:40:26 <johndcyc> Anyway, I don't know how, but my guess is that you could locate the max assertion ID from the vanilla version of your FROM kb.
+11:41:10 <johndcyc> I forget if it picks up from AFTER the one it halts on.
+11:41:23 <johndcyc> If so, then that could have been the only bad assertion.
+11:41:31 <johndcyc> But I think it retries that assertion.
+11:41:41 <yepster> Are they numbered er.. consequdkfj
+11:41:46 <yepster> what's the word
+11:41:56 <johndcyc> The reason I don't know is I always just clear the local queue.
+11:42:06 <johndcyc> CONSECUTIVELY
+11:42:10 <johndcyc> YES
+11:42:17 <johndcyc> That's the beauty of it.
+11:42:37 <yepster> that's the word i sought
+11:42:46 <yepster> but the dictionary said: successive.
+11:43:11 <yepster> well I think then it will be easy then
+11:43:31 <yepster> thany you!
+11:44:31 <yepster> ah: and use aseertion-mt, direction and strength
+11:45:11 <johndcyc> By default, GAFs go in forward and rules go in backward.
+11:45:43 <johndcyc> You shouldn't need to use direction unless you need to override that (e.g. forward rules).
+11:46:23 <yepster> yeah, but the strength is more important i think
+11:46:49 <yepster> actually, my mentor said that a 'rule' is not a right word for a formula that contains #$implies
+11:46:55 <johndcyc> That defaults to "default true".
+11:47:01 <yepster> but that is something completely different
+11:47:24 <johndcyc> You should probably leave that alone as well until you're sure the import works otherwise.
+11:47:26 <yepster> he said rule should be reserved for thinks like 'modus ponens', and elimination and so
+11:47:36 <johndcyc> Default is more forgiving.
+11:48:03 <johndcyc> My rule is: first get it working simply.
+11:48:05 <yepster> it's a translation of text containing legislation 
+11:48:21 <yepster> so a lot of things are monotonic
+11:48:49 <johndcyc> Give me an example.
+11:49:05 <johndcyc> A lot of things are default that people think are monotonic.
+11:49:12 <yepster> like the kinds of 'care' that a budget is meant for
+11:49:36 <yepster> or the amount of money people with a certain indication get
+11:49:57 <yepster> or antecedents for getting a budget
+11:50:08 <johndcyc> I would say those are all default.
+11:50:20 <johndcyc> There will be exceptions, qualifications, contexts.
+11:50:46 <yepster> hmm now you really have me puzzled..
+11:51:11 <yepster> because I think they really should be monotonic
+11:51:48 <yepster> i have a formal text, that says: these are the constraints, and there are not other constraints, under which certain actions are to be performed
+11:52:37 <fleeky> ack what is monotonic? 
+11:52:49 <yepster> cannot be denied by another fact
+11:52:59 <yepster> it's the strength of an assertion
+11:53:32 <yepster> monotonic theories are 'smaller' than default ones
+11:53:52 <johndcyc> That's what they said. I could be wrong, I'm not the expert. But my impression is that the context affects things. Maybe I'm wrong to think of that as something which affects the monotonicity, but I don't think so.
+11:53:59 <johndcyc> What if they change a law.
+11:54:05 <yepster> ah yes ;-)
+11:54:14 <yepster> then it's no more 'RegelingPGB2002Mt'
+11:54:16 <fleeky> there smaller?
+11:54:39 <fleeky> so what is non monotonic?
+11:54:46 <johndcyc> So, can it be monotonic within an Mt? Probably so, in which case I'm wrong.
+11:54:55 <fleeky> the weakness of an assertion?
+11:55:01 <johndcyc> At least that particular reason would not be the right one.
+11:55:22 <yepster> non-monotonic is default
+11:55:31 <johndcyc> non-monotonic means its possible for contradictions to exist, right?
+11:55:42 <yepster> if a law is changed inside 2002
+11:55:53 <fleeky> ok so monotonic assertions are assertions that cant have contradictions?
+11:56:00 <yepster> I could edit the assertion(s) that reflect the changed thing
+11:56:14 <yepster> but then it remains monotonic
+11:56:15 <fleeky> have an example ? 
+11:56:22 <johndcyc> What if there's an exception, a case of "splitting hairs", that the courts are dealing with
+11:56:49 <yepster> well it's not legal law stuff, it's 'administration of money'
+11:56:57 <johndcyc> courts interpret laws, therefore human laws (as opposed to natural laws) cannot be monotonic, IMHO
+11:57:14 <johndcyc> That's still human codes of conduct
+11:57:19 <yepster> interpretation is done outside the rules, e.g.:
+11:57:23 <johndcyc> Gotta go for a minute
+11:57:24 <fleeky> so 1 + 1 = 2 is monotonic?
+11:57:40 <yepster> an organization called 'RIO' decide in what category someoen is
+11:57:50 <johndcyc> right, 1+1=2 is monotonic
+11:57:54 <fleeky> ok 
+11:58:09 <yepster> that decision is called 'indication'
+11:58:09 <fleeky> an assertion that cant be interpreted 
+11:58:29 <fleeky> 2 is the indication of it being monotonic because there is only one indication?
+11:58:31 <yepster> and the making of that decision can never be done by formal reasoning
+11:58:50 <fleeky>  thats confusing :) 
+11:58:58 <yepster> but the result of the decision is a starting point for applying (monotonic true) rules
+11:59:17 <yepster> and those rules are descibed by the text i put in the kb
+11:59:52 <fleeky> ive been staring at this for too long the back of my head hurts
+11:59:52 <yepster> http://pgb.evsh.nl/cgi-bin/cyccgi/cg?cb-cf&8663
+11:59:55 * fleeky is away
+12:02:32 <yepster> or better
+12:02:35 <yepster> http://pgb.evsh.nl/cgi-bin/cyccgi/cg?cb-c-all-asserted-knowledge&8717
+12:06:21 <johndcyc> Is that Finnish?
+12:07:00 <yepster> dutch
+12:07:05 <johndcyc> Sorry
+12:07:13 <yepster> hehe
+12:07:17 <johndcyc> Shows you how much Dutch I know.
+12:07:34 <yepster> and finnish ;-)
+12:07:44 <johndcyc> Right.
+12:08:37 <yepster> well it's way beyond finished, but this 'rules' mt doesn't contain a single default assertion, if i rmember correct (it's been a month or so since i last did anything on it)
+12:08:55 <johndcyc> So, my point was, usually when you're talking about rules created by humans, they can think they're being completely precise, but they're really not.
+12:09:37 <yepster> well maybe this text is an exception. It's a pretty good 'specification'
+12:09:52 <johndcyc> Okay.
+12:10:56 <johndcyc> I think the difference in practice is that your KB will reject new knowledge that doesn't agree with your monotonic assertions, and that may be the behavior you want.
+12:11:14 <yepster> yes
+12:14:54 <johndcyc> I just looked for an example.
+12:15:32 <johndcyc> In OpenCyc, (genls Person Animal) is a default assertion.
+12:17:06 <yepster> strange
+12:17:11 <johndcyc> Maybe
+12:17:19 <johndcyc> Maybe just playing it safe
+12:18:32 <johndcyc> Maybe they were lazy about going through the effort of ensuring that it was monotonic.
+12:19:21 <yepster> the only reason i can think of if there were monotonic asserions on animal that contain errors, or should be able to get altered on a person
+12:19:41 <johndcyc> Maybe after the holidays, I should get better answers about this from some people who know better.
+12:19:52 <yepster> but things that must be altered for person maybe should be asserted on animal then?
+12:20:27 <yepster> err shoudn't
+12:20:51 <yepster> like animal: a hair beast with long teeth
+12:20:53 <johndcyc> Maybe they want to leave open the options for counterfactual contexts.
+12:21:04 <yepster> person: less haire beast with smaller theeh
+12:21:11 <johndcyc> No, that's handled by NonPersonAnimal
+12:21:46 <johndcyc> A Person is an Animal, the rest are NonPersonAnimals, which is a spec of Animal.
+12:22:38 <yepster> (partitionedInto Animal 
+12:22:38 <yepster>        (ThePartition Person NonPersonAnimal))
+12:22:49 <yepster> default, which is antecedent for the genls
+12:23:32 <johndcyc> what antecedent?
+12:24:05 <yepster> http://pgb.evsh.nl/cgi-bin/cyccgi/cg?cb-deduction&38365
+12:25:02 <yepster> I think that partitioning a set into kind-A and not-kind-A this could be done monotonic
+12:25:21 <yepster> since there can never be a third kind that is not in kind-A and also not in not-kind-A
+12:25:39 <johndcyc> That is the question. Could there?
+12:25:58 <johndcyc> Certainly it is stated like those are the only kinds.
+12:26:33 <johndcyc> What if some genetic experimentation goes horribly wrong.
+12:26:50 <yepster> Well, if it isn't a Person, is is a nonpersonanimal
+12:26:52 <johndcyc> You might have a creature where you debate whether or not it is human.
+12:27:24 <yepster> but not if it is an animal
+12:27:29 <yepster> ?
+12:27:36 <johndcyc> Not according to our rule.
+12:27:49 <johndcyc> But our rule is not the dictator of reality
+12:28:01 <johndcyc> It attempts to reflect reality
+12:28:24 <yepster> yes
+12:28:34 <yepster> and the partition rule is very strict i think
+12:28:38 <johndcyc> Since we are not omniscient, our reflecting of reality into another form lacks precision.
+12:29:04 <johndcyc> Yes, it is strict. There are harsh penalties for violating it. ;)
+12:29:57 <yepster> i think it's just the way you look at things
+12:30:06 <johndcyc> Exactly.
+12:30:30 <yepster> if you look from the opencyc viewpoint, the world that can be modeled is a bit strange, because it only contains stuff that can be modeled
+12:30:44 <johndcyc> And we'll have millions of people looking at these things. We want lots of Mts (or contexts) to be able to cooperate.
+12:30:48 <yepster> (I have no problems with that since I am a 'practical' guy
+12:31:16 <yepster> if you look at the world and think: how to put it into a computer without errors
+12:31:34 <yepster> well.. impossible?
+12:31:51 <johndcyc> I think a loosely applied monotonic rule is like a line in the sand that we dare [our interpretation of] reality to cross.
+12:31:51 <yepster> universal vocabulary
+12:32:15 <johndcyc> Yes, universal vocabulary is a goal,
+12:32:49 <johndcyc> and when we find out things we didn't know or rethink our interpretations to account for other ways of thinking about things,
+12:33:04 <johndcyc> then we find ourselves crossing the line in the sand.
+12:33:23 <yepster> hmm
+12:33:33 <johndcyc> After a while, we ask: "Should we bother drawing another line of monotonicity there."
+12:33:42 <johndcyc> I have to go.
+12:33:46 <johndcyc> It's been fun.
+12:33:52 <yepster> nice talking to you!
+12:34:02 <johndcyc> I hope I can get some better answers for you in the new year.
+12:34:20 <johndcyc> If you get ambitious, check out my new Python API (in CVS).
+12:34:24 <johndcyc> Bye!
+12:34:27 <yepster> bye
+12:34:33 --- quit: johndcyc ()
+12:40:18 <yepster> hmm just rereading.. " the world that can be modeled is a bit strange, because it only contains stuff that can be modeled"
+12:41:35 <yepster> a bit obvious
+13:18:39 --- quit: yepster ()
+13:33:47 --- quit: fleeky ()
+13:37:53 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+13:42:04 <KinoC> ping
+13:56:25 <mea_culpa> dmiles!
+13:58:50 --- join: Cobwa (~cobra@dsl-64-129-232-145.telocity.com) joined #opencyc
+14:15:19 --- quit: KinoC (Read error: 110 (Connection timed out))
+14:50:57 --- quit: Cobwa ("[x]chat")
+15:47:03 --- nick: mdupont_ -> mdupont
+15:47:06 <mdupont> hi
+16:35:31 <mea_culpa> hey mdupont
+16:35:47 <mdupont> hey mea_culpa
+16:47:35 <mdupont> lord of the rings II was good
+17:22:21 --- nick: mdupont -> mdupont-sleep
+19:10:09 --- join: Mark (~msbaltz@AC9EE5E8.ipt.aol.com) joined #opencyc
+19:10:34 <Mark> anyone here?
+20:00:19 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+20:00:20 --- quit: Mark (Read error: 104 (Connection reset by peer))
+20:00:29 <yottzumm> what are the new features available in 0.7?
+20:02:34 --- join: msbaltz (~msbaltz@AC83095C.ipt.aol.com) joined #opencyc
+20:11:38 <yottzumm> does opencyc 0.7 run on windows me?
+20:14:34 --- quit: yottzumm ("Client Exiting")
+20:53:43 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+20:55:17 <msbaltz> Welcome Kino, Have you used the grapher on Win XP?
+21:04:34 <KinoC> yea
+21:05:03 <KinoC> interesting
+22:03:25 --- part: msbaltz left #opencyc
+22:09:37 --- join: KinoC2 (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+22:11:02 --- join: yottzumm (~whoknows@12-232-71-205.client.attbi.com) joined #opencyc
+22:11:07 <yottzumm> http://home.attbi.com/~carlsonj/crazy8s.html
+22:11:28 <yottzumm> that's my start on a rule based crazy 8's game
+22:11:44 <yottzumm> and a card rule graphical user interface
+22:12:33 <yottzumm> I'm not sure if I'll do it in opencyc or not.  I imagine I will try to do it in java alone first
+22:12:54 <yottzumm> just because of the complexity of trying to keep opencyc and java in sync with each other
+22:14:56 <yottzumm> I would also be concerned with people cheating by putting assertions into opencyc manually while playing the game
+22:15:33 <yottzumm> If you have any comments, mail them to carlsonj@attbi.com
+22:17:40 --- quit: yottzumm (Remote closed the connection)
+22:22:34 --- quit: KinoC (Read error: 110 (Connection timed out))
+22:56:38 --- join: KinoC (~kino@crtntx1-ar2-094-170.crtntx1.dsl-verizon.net) joined #opencyc
+23:15:01 --- quit: KinoC2 (Read error: 110 (Connection timed out))
+23:23:32 --- quit: KinoC (Read error: 60 (Operation timed out))
+23:59:59 --- log: ended opencyc/02.12.21

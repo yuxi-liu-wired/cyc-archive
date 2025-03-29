@@ -1,0 +1,470 @@
+00:00:00 --- log: started opencyc/02.04.11
+00:04:01 --- quit: Nolan (Read error: 110 (Connection timed out))
+01:04:29 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+01:13:10 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+01:19:40 * theos_wrk is away: Discussing concepts until noon
+03:11:49 --- quit: Nolan (Read error: 110 (Connection timed out))
+03:13:42 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+03:46:24 --- quit: Nolan (Read error: 110 (Connection timed out))
+05:14:31 --- join: Nolan (~nolan@cs6668170-58.austin.rr.com) joined #opencyc
+05:33:57 * theos_wrk is back (gone 04:14:17)
+05:49:52 --- quit: Nolan (Read error: 110 (Connection timed out))
+06:35:25 --- quit: dmiles (Read error: 110 (Connection timed out))
+07:19:41 * Graham is back
+09:16:46 * theos_wrk is away: Humans distracting me!
+09:53:39 --- quit: Seth ()
+10:58:35 * theos_wrk is back (gone 01:41:49)
+12:51:43 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+12:57:10 --- quit: Seth ()
+13:14:42 --- join: Seth (~seth@12-230-243-179.client.attbi.com) joined #opencyc
+14:21:11 --- join: dash (washort@d115.narrowgate.net) joined #opencyc
+14:22:05 --- quit: theos_wrk (carter.openprojects.net irc.openprojects.net)
+14:22:05 --- quit: deltab (carter.openprojects.net irc.openprojects.net)
+14:22:06 --- quit: johnd (carter.openprojects.net irc.openprojects.net)
+14:22:06 --- quit: Graham (carter.openprojects.net irc.openprojects.net)
+14:22:20 --- quit: dash ("changing servers")
+14:22:27 --- join: dash (washort@d115.narrowgate.net) joined #opencyc
+14:23:23 --- join: Graham (ggelling@207.207.8.197) joined #opencyc
+14:23:23 --- join: theos_wrk (~torsten@kbs59.informatik.uni-bremen.de) joined #opencyc
+14:23:23 --- join: deltab (deltab@mewtwo.espnow.com) joined #opencyc
+14:23:23 --- join: johnd (johnd@207.207.8.65) joined #opencyc
+14:23:23 --- mode: carter.openprojects.net set +o Graham
+14:32:05 --- join: Jazer (Don@ip-216-23-48-150.adsl.one.net) joined #opencyc
+14:38:37 <johnd> dmiles, are you on?
+14:39:07 * johnd is back (gone 27:40:51)
+14:39:36 <johnd> anyway, if anyone hears from dmiles ...
+14:39:52 <johnd> he was asking if subl api docs are available
+14:40:22 <johnd> answer: the Cyc API docs at www.opencyc.org/doc ARE the SubL api docs
+14:59:15 * johnd is away: I'm busy
+15:17:58 --- quit: dash (Read error: 113 (No route to host))
+15:21:56 <theos_wrk> johnd: hi
+15:22:33 <theos_wrk> in which timezone are ya in?
+15:23:07 * theos_wrk is away: Humans distracting me!
+16:25:09 * stevereed is away: I'm busy
+16:41:01 --- join: dmiles (ZQWER@dialup-64.158.121.73.Dial1.Portland1.Level3.net) joined #opencyc
+16:41:52 <dmiles> alot of my questions are subL based, is the an web doc with the "SubL" API?
+16:43:41 <dmiles> 14:39:36 <johnd> anyway, if anyone hears from dmiles ...
+16:43:41 <dmiles> 14:39:52 <johnd> he was asking if subl api docs are available
+16:43:41 <dmiles> 14:40:22 <johnd> answer: the Cyc API docs at www.opencyc.org/doc ARE the SubL api docs
+16:43:41 <dmiles> 14:59:15 * johnd is away: I'm busy
+16:43:46 <dmiles> ah thank you 
+16:43:59 <dmiles> ok i should have read more carefull
+16:46:23 <dmiles> hrrm i am not finding documentation for things like ke-assert-now
+16:47:40 --- part: Jazer left #opencyc
+16:50:56 <dmiles> http://www.opencyc.org/doc/tut/doc/cycapi
+16:50:59 <dmiles> yay!
+16:52:46 <dmiles> hrrm 404 on a very imnportant Doc http://www.opencyc.org/doc/tut/doc/ref/subl-reference.html
+17:09:05 --- join: DouglasMiles (ZQWER@dialup-65.58.6.94.Dial1.Portland1.Level3.net) joined #opencyc
+17:10:03 <DouglasMiles> the cycapi doc is aewsome tho
+17:21:31 --- quit: dmiles (Read error: 110 (Connection timed out))
+18:41:05 <stevereed_home> This link works:
+18:41:14 <stevereed_home> http://www.cyc.com/cycdoc/ref/subl-reference.html
+18:42:20 <stevereed_home> You get to it via the documentation link off the www.opencyc.org home page
+18:42:55 <stevereed_home> Look up the Common Lisp hyperspec, whose URL is:
+18:43:32 <stevereed_home> http://www.xanalys.com/software_tools/reference/HyperSpec/Front/index.htm
+18:44:02 <stevereed_home> It gives the Common Lisp functions from which SubL is derived.  If a function is not defined 
+18:44:23 <stevereed_home> in the SubL programming doc, then very likely it has the signature given by common lisp
+18:44:57 <stevereed_home> When we release source code for the Cyc Server, it will likely be SubL that you either
+18:45:09 <stevereed_home> load into the command line or api,
+18:45:36 <stevereed_home> or compile into C using a translator built into Cyc itself... then compiling the 
+18:46:11 <stevereed_home> translated C code with the gcc toolchain and static linking to a Cyc object library that 
+18:46:47 <stevereed_home> we will provide.  The accompanying C header file will cover the Cyc API (as translated into C).
+18:47:15 <stevereed_home> Anyway hope the SubL doc is helpful.  We sure would like to see the KIF content
+18:47:40 <stevereed_home> mapped into Cyc's reference ontology.
+18:48:11 * stevereed_home is back (gone 42:51:12)
+18:48:13 * stevereed_home is away: I'm busy
+19:05:01 <DouglasMiles> steve: perfect thank yiou
+19:05:26 <DouglasMiles> yeah.. there is two mapping objects i am ussing for KIF
+19:05:43 <DouglasMiles> first if before import.. changes.. that are text basded
+19:06:27 <DouglasMiles> then afterwards it runs what are like reader macros.. well structurteal replecamnts
+19:07:16 <DouglasMiles> i have a moide for the KIF loader that loads CycL (uncyclified) into a Mt
+19:07:36 <DouglasMiles> it has a boolean that says to clear Mt first or incrementally add
+19:07:57 <DouglasMiles> andother bit to say user ordered file or try to reoroder
+19:08:31 <DouglasMiles> one more that says attempt to deduce isa  based on argIsa
+19:09:11 <DouglasMiles> if that is done it adds to the top of the preassert cache the (isa userCollection1 Collection)
+19:09:25 <DouglasMiles> and (isa argvalue userCollection1)
+19:09:50 <DouglasMiles> so i was able to get the IEEE stuff loaded at least
+19:10:43 <DouglasMiles> ok.. so then I'll post the classes i did into my CVS.. and tommorow i finally get off diapup and have perminat IPs for my linux machines
+19:11:06 <DouglasMiles> so i will put up a site running opencyc that usees the classes and extra jsp pages that interface to it
+19:12:20 <DouglasMiles> currently if a CycApiException happens durring loading of the KIF file it generates an htyml page that lets you add or edit the uploaded KIF file
+19:12:48 <DouglasMiles> and inserts into the File a comment above the assertion that coaused tyhe APi excveption
+19:13:17 <DouglasMiles> this seems to work.. tjhen a cyclist resumeits the page
+19:14:10 <DouglasMiles> its a pain with my modem having to make my win2k machine my internet gateway...
+19:14:32 <DouglasMiles> otherwise you could see it in actuino roght now.. but the cable guy should be here before noon
+19:14:52 <DouglasMiles> and if thats the case my linux machine will be interfacable from Wam
+19:14:59 <DouglasMiles> eee wan
+19:15:01 <DouglasMiles> err
+19:32:23 --- join: Hedgehog (Filimon@213.233.73.161) joined #opencyc
+19:37:44 <stevereed_home> very cool and good luck with your public server,  in subsequent releases we
+19:38:04 <stevereed_home> will address the security issue and have sandbox permissions like the java VM
+19:39:12 <stevereed_home> that, together with easy cyc to cyc communication, should let everyone make p2p and whatever
+19:39:19 <stevereed_home> else creative minds think up.
+19:40:40 <stevereed_home> Maybe next year we get 30,000 64-bit cyc users to colloborate on some worthwhile thinking task?
+19:41:35 <stevereed_home> Like how to make cyc better,.. then repeat the loop..
+19:43:00 <stevereed_home> I'm saving now for my first AMD-64, when the gcc toolchain is done for it, then I'll get
+19:43:44 <stevereed_home> the 1.6 million line (computer generated from SubL) C source compiled on it.
+19:44:16 <stevereed_home> 64-bits blows away the addressing limitation that holds cyc below 1.7 million assertions now
+19:44:44 <stevereed_home> Anyway, by then we should have released code to make assertions in a database appear the same
+19:45:18 <stevereed_home> as assertions in memory.  And have some kind of p2p worked out to put KB content worldwide
+19:45:27 <stevereed_home> as though in the same KB.
+19:46:13 <stevereed_home> got to go.
+19:46:16 * stevereed_home is back (gone 00:58:03)
+19:46:18 * stevereed_home is away: I'm busy
+19:51:27 --- join: johndcyc (~johnd@cs666852-42.austin.rr.com) joined #opencyc
+19:51:38 <DouglasMiles> cool.. it seems like its the fasl server that keeps things localhost
+19:52:35 <DouglasMiles> i am running it on a 1.4ghz + 1GB mem
+19:53:54 <DouglasMiles> localhost is just fine for now
+19:55:18 <johndcyc> Douglas, who are you talking with?
+19:56:42 <DouglasMiles> the channel log to steve ;P
+19:57:05 <johndcyc> Sort of like talking to yourself, only better.
+19:57:22 <stevereed_home> hey Im still lurking
+19:57:26 <DouglasMiles> hehe
+19:57:41 <DouglasMiles> http://tunes.org/~nef/logs/opencyc/02.04.11 <- somewhat connected conversations
+19:57:59 <stevereed_home> john, did we post that link yet?
+19:58:09 <johndcyc> to what?
+19:58:14 <stevereed_home> our home page
+19:58:22 <johndcyc> duh, to the log, right?
+19:58:31 <johndcyc> no, I can do it now
+19:58:33 <stevereed_home> yeh
+19:59:00 <stevereed_home> So I was asking Douglas about his plans for a public server
+19:59:06 <stevereed_home> for this KIF import
+19:59:12 <johndcyc> howsabout in the miscellaneous section of the doc page
+19:59:17 <stevereed_home> ok
+19:59:23 <johndcyc> you mean the SUMO import?
+19:59:24 <DouglasMiles> yewah it runs a consistancy check first.. by..
+19:59:32 <DouglasMiles> yes it loads the SUMO
+19:59:38 <johndcyc> or the kif import capability?
+19:59:53 <DouglasMiles> a person selects a kif file and a Mt name
+20:00:03 <DouglasMiles> and 4 options..
+20:00:19 <DouglasMiles> (kif file on their loacl machine)
+20:00:33 <DouglasMiles> then http multipart post the file via Jsp (tomcatr)
+20:00:40 <DouglasMiles> err tomcat
+20:00:56 <DouglasMiles> then it loads the file into an assertions collection object.. 
+20:01:02 <DouglasMiles> creates two Mts
+20:01:21 <stevereed_home> way cool
+20:01:30 <DouglasMiles> genls them .. the target Mt and then a KifLoadMt
+20:01:45 <DouglasMiles> genlMts them..
+20:01:49 <stevereed_home> right
+20:02:01 <DouglasMiles> then trys to assert everything into the KifLoadMt
+20:02:32 <DouglasMiles> if there are an problems it kills the  KifLoadMt and lets the user fix the problems in there webbrowser
+20:02:46 <DouglasMiles> er thier 
+20:02:53 <stevereed_home> good
+20:03:04 <stevereed_home> have you done asks?
+20:03:17 <DouglasMiles> then they can repost the new form.. if all goes goot it kills the KifLoadMt and asserts them into their Mt
+20:03:37 <stevereed_home> ok a temp mt
+20:03:55 <DouglasMiles> yes.. cause i didnt want to kill an incrementally load Mt
+20:04:23 <stevereed_home> when I get CycML released,
+20:04:31 <stevereed_home> you can export the mt to CycML and
+20:04:38 <stevereed_home> preserve the constant guids
+20:04:40 <DouglasMiles> that would be very good
+20:05:21 <DouglasMiles> CycML then sounds like a format that is targeted to needs of specific cyc
+20:05:36 <stevereed_home> all cycs
+20:05:45 <stevereed_home> but cyc-specific yes
+20:05:47 <DouglasMiles> what a meant ;P
+20:06:17 <DouglasMiles> i am about to make a query to KIF file..
+20:06:17 <stevereed_home> It looks like what KIF would look like if XML
+20:06:24 <stevereed_home> cool
+20:06:32 <DouglasMiles> like (#$ist ?Mt ?Fomula)
+20:06:58 <stevereed_home> ok really got to go, 
+20:07:02 * stevereed_home is back (gone 00:20:43)
+20:07:03 * stevereed_home is away: I'm busy
+20:07:05 <DouglasMiles> yeah there is interst in RDF logic for a KIF to XML
+20:07:21 <stevereed_home> XML is the way to go
+20:07:21 <DouglasMiles> i see CycML fullfilling that area
+20:07:46 <stevereed_home> well we have rules, high arity predicates, functions and contexts
+20:07:54 <stevereed_home> otherwise we like RDF
+20:08:01 <stevereed_home> easy to go from RDF to Cyc
+20:08:18 <stevereed_home> same for RDF to KIF
+20:08:20 <DouglasMiles> but hard from Cyc to RDF unless you are targeting vapourware ;P
+20:08:37 <stevereed_home> well you keep the binary predicates,
+20:08:43 <stevereed_home> the collection hierarchy
+20:08:52 <stevereed_home> and thats it
+20:09:10 <johndcyc> ok, look at http://www.opencyc.org/doc under 
+20:09:18 <johndcyc> ...miscellaneous
+20:09:21 <stevereed_home> but if you look at www.daml.org you will see lots of tools for DAML/RDF
+20:09:26 <stevereed_home> ok john
+20:09:56 <DouglasMiles> one quick question 
+20:10:13 <DouglasMiles> about loading kif.. there are many ways to alin it
+20:10:20 <stevereed_home> like looking in a mirror ...way cool john
+20:10:20 <DouglasMiles> err alaing a Kif theory
+20:10:50 <DouglasMiles> one could have a SuoKifCycLMappingMt
+20:11:10 <DouglasMiles> like (genls instance isa)
+20:11:20 <DouglasMiles> but when nams collide...
+20:11:23 <DouglasMiles> err names
+20:11:40 <DouglasMiles> well i am wondering if there is a way to ke-assert w/o tms temporarily
+20:12:06 <DouglasMiles> then afterwards run tms
+20:12:08 <stevereed_home> doug, i believe you mean wff checking off
+20:12:17 <DouglasMiles> yes.. just wff off
+20:12:40 <DouglasMiles> give me a subL example.. and i could go from there
+20:12:44 <stevereed_home> look at the java api code 
+20:12:54 <stevereed_home> in CycAccess
+20:13:04 <stevereed_home> in a moment i'll tell you....
+20:13:11 <DouglasMiles> 	String command =
+20:13:11 <DouglasMiles>             "(clet ((*the-cyclist* " + cyclist.cyclify() + "))\n" +
+20:13:11 <DouglasMiles>             "  (ke-assert-now\n" +
+20:13:11 <DouglasMiles>             "    '" + sentence.cyclify() + "\n" +
+20:13:11 <DouglasMiles>             "    " + mt.cyclify() + "))";
+20:13:50 <DouglasMiles> ok
+20:14:37 <DouglasMiles> FYI: my old null pointer was "cyclist.cyclify()" ;P
+20:19:59 <johndcyc> why a public server for the kif import utility? why not post the utility on sourceforge?
+20:20:01 <DouglasMiles> maybe ther is a let*  value
+20:20:07 <stevereed_home> Try wrapping (ke-assert-now with
+20:20:18 <DouglasMiles> i could.. its just it depends on tomcat.. so i was doin both
+20:20:26 <stevereed_home> (without-wff-semantics
+20:20:29 <stevereed_home> as in
+20:20:40 <stevereed_home> (without-wff-semantics (ke-assert-now ... ))
+20:20:47 <DouglasMiles> ah cool and easy
+20:21:01 <stevereed_home> No wff checking
+20:21:19 <stevereed_home> but in order to later check for wff-ness you have to
+20:21:20 <DouglasMiles> thank you
+20:21:29 <DouglasMiles> yes.. that was my next question
+20:21:32 <stevereed_home> iterate over them and use
+20:21:46 <stevereed_home> a wff function whose name I do not have
+20:21:57 <stevereed_home> maybe el-wff?, see the api
+20:22:05 <johndcyc> steve, where did you get without-wff-semantics. I don't see it in the Cyc API doc.
+20:22:24 <stevereed_home> its a macro wrapper that I added to the api myself
+20:22:39 <johndcyc> should it be in the docs?
+20:22:46 <stevereed_home> a cleanup task for me is to properly mark those as defmacro-api
+20:22:46 <johndcyc> is there much else missing from the docs?
+20:23:13 <stevereed_home> probably 40 fun and macro calls that I use in CycAccess
+20:23:13 <johndcyc> also, I heard there were some calls in the docs that aren't really available
+20:23:27 <stevereed_home> that would be a bug
+20:23:41 <johndcyc> does you API testing check all calls
+20:23:42 <DouglasMiles> yes these macros were formed very specific to java
+20:24:03 <stevereed_home> not all in the api
+20:24:10 <johndcyc> Mightn't one want to turn off wff checking in SubL too?
+20:24:17 <stevereed_home> only the ones I needed or others have asked for
+20:24:52 <stevereed_home> the macro wrapper without-wff-semantics does that in the wff module
+20:25:01 <johndcyc> Would these be added to both Java and Cyc (SubL) docs?
+20:25:14 <stevereed_home> just subL
+20:25:23 <johndcyc> oh
+20:25:26 <stevereed_home> because
+20:25:37 <stevereed_home> the macro changes the
+20:25:43 <stevereed_home> behavior of a method
+20:25:52 <stevereed_home> not introduces a new fun
+20:26:17 <stevereed_home> I use it in CycAccess for asks
+20:26:29 <stevereed_home> in those cases where i know the formula
+20:26:33 <DouglasMiles> yeah the java docs are specific to the expected java behavour and expempt to how it actually does it in subL
+20:27:00 <stevereed_home> right
+20:27:07 <stevereed_home> really, really go to go
+20:27:14 <johndcyc> bye steve
+20:27:15 <DouglasMiles> ok .. take care ;P
+20:27:25 <johndcyc> Douglas, what is tomcat?
+20:27:40 <DouglasMiles> its a JSP servlet application envirnment
+20:27:50 <johndcyc> what's its license
+20:28:20 <DouglasMiles> it is jakarta tomcat .. that are some classes that are ran by the licienced JVM
+20:28:45 <johndcyc> that's open source, right?
+20:28:54 <DouglasMiles> entirely
+20:29:17 <DouglasMiles> so it depends on JVM -> TomcatWebServer -> JspPages <-> OpenCyc
+20:29:39 <johndcyc> so, you think its better to do what steve is suggesting?
+20:29:39 <DouglasMiles> OpenCyc and Tomcat run side by side in the same JVM
+20:29:58 <johndcyc> set up a public server?
+20:30:03 <DouglasMiles> well there are times that WFF checking may be too soon
+20:30:23 <DouglasMiles> oh .. i think there needs ot be a doc on how to install the same configuration
+20:30:34 <DouglasMiles> Tomcat + JDK 
+20:30:51 <DouglasMiles> and the webapp that imports the KIF untilities and uses opencyc
+20:31:03 <johndcyc> so the KIF importer would be a tool that people could download
+20:31:17 <johndcyc> why do you say webapp
+20:31:20 <DouglasMiles> in a CVS.. but setting up a demo server helps people see what they are spending a hour installing
+20:31:29 <johndcyc> right, got it
+20:31:56 <DouglasMiles> webapp as in its a .war file (zipped up jars and JSP pages)
+20:32:05 <johndcyc> ok
+20:32:17 <DouglasMiles> a person puts the .war file into a tomcat/webapps dirrectory..
+20:32:30 <DouglasMiles> when tomcat starts it unzips the .war file into an application 
+20:33:00 <DouglasMiles> that webappication uses the opencyc.jar file
+20:33:19 <DouglasMiles> to communicate to the opencyc server they have installed on localhost..
+20:33:29 <DouglasMiles> it gives them a series of extra webpages
+20:33:42 <johndcyc> very cool
+20:34:21 <DouglasMiles> i have it embeedding the normal cyc server into a main center frame (resulting in 4)
+20:35:18 <DouglasMiles> in the very top frame (the added)_ it lets you use opencyc norm,all.. or uses the extra webpages that intoface to the opencyc api
+20:36:04 <DouglasMiles> it would be nice.. if the normal opencyc server eventually became a series of JSP pages
+20:36:12 <johndcyc> that framework might be imitated by lots of utility programs
+20:36:13 <DouglasMiles> err the webserver
+20:36:56 <DouglasMiles> yes.. it was the only way i could get opencyc already built framework into an expansion
+20:37:18 <johndcyc> once we open source the interface code, you can port to JSP pages ;)
+20:37:20 <DouglasMiles> of tools.. it works .. but not exaclty the coorect way
+20:37:38 <DouglasMiles> well basicly thats what is happening here ;P
+20:37:53 <DouglasMiles> i am aready making an ask/tell wrapped into one JSP page ;P
+20:38:06 <johndcyc> cool
+20:38:13 <johndcyc> new topic
+20:38:19 <johndcyc> let me tell you more about CycML
+20:38:23 <johndcyc> to get ready for CycML, we've set up ApacheModuleXSLT on the cyc server
+20:38:51 <DouglasMiles> very nice
+20:39:01 <johndcyc> you drop XSL and XML files into the same directory
+20:39:24 <johndcyc> when you ask for foo.html, it gets created out of foo.xsl and foo.xml
+20:39:34 <DouglasMiles> the XMl file (generated by Cyc) ?
+20:39:50 <johndcyc> right
+20:40:02 <johndcyc> I really mean that literally about foo
+20:40:06 <johndcyc> check out http://www.cyc.com/xslt/foo.html
+20:40:43 <DouglasMiles> am.. and the .xml and the .xsl
+20:40:53 <johndcyc> something's broken with some of the CycML viewer pages i had made a while ago
+20:41:02 <DouglasMiles>   <?xml version="1.0" ?> 
+20:41:03 <DouglasMiles> - <s1 title="s1 foo">
+20:41:03 <DouglasMiles> - <s2 title="Foo">
+20:41:03 <DouglasMiles>   <p>Hello</p> 
+20:41:03 <DouglasMiles>   </s2>
+20:41:03 <DouglasMiles>   </s1>
+20:41:04 <johndcyc> but you can check out http://www.cyc.com/xslt/cycml-view2.html
+20:41:17 <johndcyc> right, you found the xml
+20:41:40 <johndcyc> view1 is another xsl with the same xml
+20:41:46 <johndcyc> not working right now
+20:41:54 <johndcyc> was working, will work again
+20:42:07 <DouglasMiles> hrrm it may be the #
+20:42:08 <johndcyc> view1 turns the xml into a CycL view
+20:42:19 <johndcyc> yeah, I've tried that
+20:42:59 <johndcyc> that's really just part of an in-page link <a href=#BotanyMt>
+20:43:05 <johndcyc> ...for example
+20:43:17 <johndcyc> when i first made the pages...
+20:43:44 <johndcyc> the xsl was made to work with the xml parser that you could download from Microsoft and use within your browser
+20:43:55 <johndcyc> it was almost a year ago.
+20:43:58 <DouglasMiles> i am ussing IE6 
+20:44:17 <johndcyc> so, does that mean you've got built in xsl support
+20:44:26 <DouglasMiles> supposed to mean ;P
+20:44:35 <DouglasMiles> but yes
+20:44:50 <johndcyc> i just started working on this again. i'll get it.
+20:45:13 <johndcyc> it will work server side, since i can't rely on most having xml parsing client side
+20:45:22 <DouglasMiles> not getting http://www.cyc.com/xslt/cycml-view1.html
+20:45:30 <johndcyc> right, doesn't work
+20:45:41 <johndcyc> but you can see it in the directory
+20:45:47 <johndcyc> look at the .xsl
+20:47:04 <DouglasMiles> hrrm have you pulled out the style tags and tried?
+20:47:12 <johndcyc> the xml you see is the old version of CycML
+20:47:21 <johndcyc> no, haven't pulled out style
+20:47:29 <johndcyc> I'm going to gut the thing tomorrow
+20:47:31 --- quit: Hedgehog (Read error: 104 (Connection reset by peer))
+20:47:39 <johndcyc> need to do it from the office
+20:47:45 <DouglasMiles> so the xml is different from 1 and 2 ?
+20:47:51 <johndcyc> no
+20:47:53 <johndcyc> same xml
+20:48:01 <johndcyc> that's another thing
+20:48:01 <DouglasMiles> yep.. it is.. 
+20:48:10 <johndcyc> i'm not going to really do it this way
+20:48:25 <johndcyc> the utility requires same name on xsl and xml files
+20:48:45 <johndcyc> i'm going to make one xsl with conditionals, i think
+20:48:55 <DouglasMiles> understandable.. you are going to have to make cyc server up some new id maybe
+20:49:20 <johndcyc> view one through four (or whatever) in one file
+20:49:24 <DouglasMiles> well overwrite the .xml files
+20:49:34 <johndcyc> i don't know yet
+20:49:46 <johndcyc> of course it would if that were the whole solution
+20:50:00 <johndcyc> the intended use...
+20:50:08 <DouglasMiles> yeah that should work you ccan even hide the 3 other views
+20:50:28 <DouglasMiles> as in .hidden=false the one at a time
+20:50:48 <johndcyc> i don't think i have to do that
+20:50:52 <johndcyc> that sounds like layers
+20:51:07 <johndcyc> not very compatible with old netscape, for example
+20:51:18 <DouglasMiles> well you can put 4 divs on there at least for testing purposes
+20:51:26 <johndcyc> i think i should be able to pass in a url parm
+20:51:34 <DouglasMiles> oh yeah i never figuraed out how to hide with netscape ;P
+20:51:42 <johndcyc> then i'll only walk over part of the xsl on each use
+20:51:57 <DouglasMiles> yep 
+20:51:59 <johndcyc> the intended usage...
+20:52:01 <johndcyc> is to have a sort of knowledge exchange server
+20:52:10 <johndcyc> people submit CycML files
+20:52:20 <johndcyc> everyone can view and download the files
+20:52:28 <johndcyc> the same files are great for viewing and loading
+20:52:37 <johndcyc> CycML with xsl for viewing
+20:52:38 <DouglasMiles> yes that would be good to have an exchange system based on those
+20:52:49 <johndcyc> CycML with OpenCyc load util for loading
+20:53:03 <johndcyc> you could even download packages...
+20:53:16 <johndcyc>  that include some CycML with SKSI assertions
+20:53:31 <johndcyc> and a database or hash file
+20:53:57 <johndcyc> and get them connected up just by loading the CycML and dropping the database/file in the right directory
+20:54:22 <johndcyc> we
+20:54:25 <johndcyc> sorry
+20:54:31 <johndcyc> we've got to figure out
+20:54:35 <DouglasMiles> yes .. seems like you could have one cyc server call upon another to make them a cycML file
+20:54:47 <johndcyc> oohhh
+20:55:23 <johndcyc> we've got to figure out things like how to know the CycML you're downloading will work with your current system
+20:55:45 <johndcyc> I'm thinking of RedHat Package Manager-type capabilities ... at least some of them
+20:55:54 <johndcyc> the file contains pre-requisite info
+20:55:59 <johndcyc> the CycML file
+20:56:00 <DouglasMiles> hrrm it seems like it would be nice to make a list of CycML URIs that you want your cyc to load
+20:56:12 <johndcyc> right
+20:56:28 <johndcyc> so the one file you download has enough info
+20:56:41 <johndcyc> for all other downloads to happen automatically
+20:56:41 <DouglasMiles> sound slike CycML could hold sbhl modules to?
+20:56:52 <johndcyc> point to them, maybe
+20:57:03 <johndcyc> there will be performatives
+20:57:19 <johndcyc> but we're thinking first of things like ASK, ASSERT
+20:57:37 <DouglasMiles> yes.. sounds like a batch/declaritive/everything 
+20:57:48 <DouglasMiles> i would even suspect you could make infernce tests 
+20:57:59 <DouglasMiles> ASSERT ASSERT ASSERT ASSERT ASK
+20:58:13 <johndcyc> is there a downside we should watch out for with being the kitchen sink?
+20:58:16 <DouglasMiles> i did that with my old system.. created .tq files
+20:59:06 <DouglasMiles> that was Batch but normally its in the ASSERT mode on a formula
+20:59:25 <johndcyc> ?
+20:59:51 <DouglasMiles> it was a file full of assertions.. that you could use performatives on
+21:00:06 <DouglasMiles> so i am seeing the CycML as a Mt content file 
+21:00:25 <johndcyc> the CycML you could look at here is like that
+21:00:51 <johndcyc> but we're talking about the performatives being part of the file in what Steve is now working on
+21:01:25 <DouglasMiles> yeah.. is there an example of CycML somewhere right now?
+21:01:37 <DouglasMiles> oh the .xml ;P
+21:01:41 <johndcyc> it's a content file, but can also be used for loosely coupled message passing
+21:02:02 <johndcyc> right, the xml is an example of the stuff before performatives have been added
+21:02:29 <johndcyc> you might wrap a cycml with something like SOAP, no?
+21:02:30 <DouglasMiles> will the xslt parser break if you namespace them ?
+21:02:47 <johndcyc> don't think so
+21:02:52 <DouglasMiles> <cyc:constant>
+21:03:14 <johndcyc> what are you thinking
+21:03:25 <DouglasMiles> the daml folks would probly like that (is all)
+21:03:48 <johndcyc> we have a daml format for the daml folks ;)
+21:04:11 <johndcyc> but it might make sense to do, anyway
+21:04:21 <DouglasMiles> true.. you can alwauys globally do so
+21:04:37 <DouglasMiles> with a tag.. i forgot it but used it in jamud xml files
+21:05:05 <johndcyc> can you comment on my SOAP comment
+21:05:17 <DouglasMiles> i like it.. soap could wrap it
+21:05:33 <johndcyc> then you hand around little chunks of knowledge
+21:05:37 <DouglasMiles> it could teransport it.. i'd use soap transport over comming up with my own
+21:06:11 <johndcyc> I'm not clear on how the set of performatives expands over time
+21:06:22 <johndcyc> does it support subl calls?
+21:06:34 <DouglasMiles> it could support the passing of a call
+21:06:40 <johndcyc> you have #$performSubL in Cyc
+21:07:05 <DouglasMiles> unless you did a soapd in opencyc server..
+21:07:31 <DouglasMiles> but you are talking about a request type situation
+21:07:49 <johndcyc> what's the conversation, in English, of how two cyc's would communicate with CycML
+21:07:50 <DouglasMiles> so what you have in cycML is something that you could pass arroubnd via soap..
+21:08:02 <DouglasMiles> i am not sure about reussing soap calls for performatives
+21:08:13 <johndcyc> A request might first require establishing a context
+21:08:32 <johndcyc> Let me tell you about the pizza I'd like to order
+21:09:05 <johndcyc> now that you have all this knowledge about it, can you tell me if you can handle my order?
+21:09:58 <DouglasMiles> i could see it starting in soap
+21:10:08 <johndcyc> a web services provider has MTs that are just waiting to take in assertions
+21:10:19 <johndcyc> soap for transport
+21:10:53 <DouglasMiles> yes "orderingcontext for me: i would like somne pizza.. "
+21:11:25 <DouglasMiles> replaies "give me the CycML that specifies your pizza"
+21:11:35 <DouglasMiles> err replies
+21:11:38 <johndcyc> well, for the real grid, the tightly connected one, there will be a different way to do it
+21:11:57 <johndcyc> but i think there will be need for loosely-coupled interaction
+21:12:47 <DouglasMiles> yes the grid project must already be adopting standards for a conversant model
+21:13:35 <johndcyc> which grid project
+21:13:54 <DouglasMiles> CoAbs
+21:13:59 <johndcyc> oh
+21:14:15 <johndcyc> We'll have a different grid for OpenCyc, I believe
+21:14:17 <DouglasMiles> but, you still are defining what will actually happen
+21:14:32 <johndcyc> It might borrow ideas from CoAbs
+21:14:42 <johndcyc> but will be different, as far as I know
+21:14:50 <johndcyc> don't know specifics at this point
+21:14:58 <DouglasMiles> yeah you need a working model now that can always relate to coabs later
+21:14:58 <johndcyc> Steve is the man in the know
+21:15:11 <johndcyc> Gotta go
+21:15:24 <johndcyc> would love to continue any part of this at another time
+21:15:27 <DouglasMiles> yeah very interesting topics
+21:15:37 <johndcyc> we'll throw design ideas past you as we go
+21:15:44 <DouglasMiles> i like that
+21:15:46 <johndcyc> miles to go before i sleep
+21:15:53 <DouglasMiles> oh my 
+21:15:55 <johndcyc> miles to go before i sleep
+21:16:01 <johndcyc> bye
+21:16:04 <DouglasMiles> you have a long comute from office?
+21:16:13 <johndcyc> already home
+21:16:23 <johndcyc> not literal miles :)
+21:16:39 <DouglasMiles> ah
+21:16:44 <johndcyc> but those figurative ones can be tiring
+21:16:51 <DouglasMiles> or longer
+21:17:14 --- quit: johndcyc ()
+22:37:24 --- quit: deltab (Read error: 110 (Connection timed out))
+22:48:06 --- quit: DouglasMiles (Read error: 104 (Connection reset by peer))
+23:05:57 --- join: dmiles (ZQWER@dialup-65.58.6.94.Dial1.Portland1.Level3.net) joined #opencyc
+23:34:42 * theos_wrk is back (gone 08:11:35)
+23:47:39 * theos_wrk is away: grabbing food
+23:59:59 --- log: ended opencyc/02.04.11
