@@ -27,7 +27,7 @@ Because the Internet Archive has been very fiddly, several other tools I tried h
 * `websites`: The scraped websites.
 * `other_files`:
   * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
-  * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from 
+  * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
 * `scraping_utils`: Scripts used for scraping, described above.
 
 ### Other files
@@ -39,6 +39,7 @@ Other than what's in the archive, there's also
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
 * [`www.saildart.org/DBL`](https://www.saildart.org/DBL): Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`.
+* The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. I haven't bothered to archive it since even my patience has limits. But I think running `.\wbm-dl.exe http://suo.ieee.org/ -t 2008 -X "^.*/email/.*$"` should do the trick.
 
 ### Lost files
 
