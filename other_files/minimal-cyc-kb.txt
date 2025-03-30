@@ -1,0 +1,1415 @@
+[NOTE: The information below has not been updated since the late 1990s. It is incomplete, but it should be sufficiently accurate to be incorporated into a starter document.]
+
+BNF Grammar for CycL
+=================
+
+This BNF can be used to check for syntactic well-formedness of a CycL formula, and -- coupled with the 650 formulas above in Appendix A, -- to check a CycL formula for semantic well-formedness as well.
+
+Assume the following Terminals (token-level non-terminals)
+<Character>
+<String>
+<Number>
+<Symbol>
+<Variable>
+
+Assume the following CycL data object:
+<Constant>
+
+The empty expansion is:
+<epsilon>
+
+For Syntactic and Semantic constraints, click here.
+
+Relation Arity Constraints:
+
+For <FunctionExp> :
+when <Function> is ground
+either 
+  (#$isa <Function> #$VariableArityRelation)
+or 
+  (#$arity <Function> <N>)
+  and
+  <N> is a non-negative integer
+  and
+  if <Argument-Seq> is terminated by . <Variable> 
+     the number of <2ndOrderTerm>s in <Argument-Seq>
+     must be less than or equal to <N>
+  else the number of <2ndOrderTerm>s in <Argument-Seq> 
+       must be equal to <N>
+
+For <AtomicFormula> :
+when <Predicate> is ground
+either
+  (#$isa <Predicate> #$VariableArityRelation)
+or 
+  (#$arity <Predicate> <N>)
+  and
+  <N> is a non-negative integer
+  and
+  if <Argument-Seq> is terminated by . <Variable> 
+     the number of <2ndOrderTerm>s in <Argument-Seq>
+     must be less than or equal to <N>
+  else the number of <2ndOrderTerm>s in <Argument-Seq> 
+     must be equal to <N>               
+
+Relation Argument Constraints:
+
+For <FunctionExp> :
+each term in <Argument-Seq> must satisfy all applicable arg constraints
+(e.g., #$arg1Isa, #$interArgIsa2-1, ...)
+
+or <AtomicFormula> :
+each term in <Argument-Seq> must satisfy all applicable arg constraints
+(e.g., #$arg1Isa, #$interArgIsa2-1, ...)
+
+========================================================
+
+Formulas true in every CycL KB
+=======================
+
+The syntactic component of CycL includes a large number of constant terms (you can think of these as "reserved words" in the CycL language), and the semantic component of CycL includes a large number of sentences involving and interrelating these terms. This set of sentences forms a coherent self-sufficient KB -- the CycL KERNEL KB -- which forms the upper (most general) part of every CycL KB, including, e.g., the Cyc KB, the OpenCyc KB, etc. Herewith is that list of approximately 650 sentences -- each is a closed, well-formed CycL formula. All of the CycL constants mentioned in these assertions should be thought of as CycL "reserved words." These terms, of which there are about 160, occur below on comment lines, just before the set of mandatory formulas involving them; each of those comment lines begins with three semicolons in a row; e.g., ;;; #$AntiSymmetricBinaryPredicate.
+
+The formulas, and terms, are not commented or explained, below. If one browses through the Cyc KB or the OpenCyc KB, one can read the documentation for each of these terms, etc. That is how you, a human reader, can most easily become familiar with the ontology and the semantics of CycL. Just as the in BNF above, the long list of formulas below is provided more to be machine- than human- readable.
+
+We've arranged these in such a fashion that (most) duplicates have been eliminated. Thus, in the case of one of the first few assertions, (#$genls #$AntiSymmetricBinaryPredicate #$BinaryPredicate), that assertion is listed once, under ;;; #$AntiSymmetricBinaryPredicate, not again under ;;; #$BinaryPredicate.
+
+We've prefixed each CycL term with the characters #$. This may facilitate reading mechanically; if you don't care or want this, just do a systematic replace of #$ by the empty string. It will be useful in distinguishing CycL constant names from the names of C (or Lisp) functions which are called to implement some of the low-level bookkeeping.
+
+Let us reiterate that CycL is a declarative language with no procedural information of any kind in any CycL formula, including these formulas.
+
+Finally, you may notice that about 10 of the 160 CycL constant terms below contain the word "Cyc"; this reflects the origins of those terms. We could just as well have called those ten . . .Cyc. . . terms . . .CycL. . . instead; the absolute names are not so important as agreeing on a fixed vocabulary of names for constants. This is the CycL semantic standard; please do not rename any of these 160 terms, or remove/violate any of these 650 formulas:
+
+ 
+
+;;; #$AntiSymmetricBinaryPredicate
+(#$isa #$AntiSymmetricBinaryPredicate #$Collection)
+(#$genls #$AntiSymmetricBinaryPredicate #$BinaryPredicate)
+
+(#$implies 
+  (#$and 
+    (#$isa ?SLOT #$AntiSymmetricBinaryPredicate) 
+    (#$isa ?SLOT #$IrreflexiveBinaryPredicate)) 
+  (#$isa ?SLOT #$AsymmetricBinaryPredicate))
+
+;;; #$Assertion
+(#$isa #$Assertion #$Collection)
+(#$genls #$Assertion #$CycIndexedTerm)
+(#$genls #$Assertion #$IndividualObject)
+
+;;; #$AsymmetricBinaryPredicate
+(#$isa #$AsymmetricBinaryPredicate #$Collection)
+(#$genls #$AsymmetricBinaryPredicate #$AntiSymmetricBinaryPredicate)
+(#$genls #$AsymmetricBinaryPredicate #$IrreflexiveBinaryPredicate)
+
+(#$not 
+  (#$and 
+    (#$isa ?PRED #$AsymmetricBinaryPredicate) 
+    (?PRED ?ARG1 ?ARG2) 
+    (?PRED ?ARG2 ?ARG1)))
+
+(#$implies 
+  (#$and 
+    (#$isa ?Q #$AsymmetricBinaryPredicate) 
+    (#$genlPreds ?P ?Q)) 
+  (#$isa ?P #$AsymmetricBinaryPredicate))
+
+(#$implies 
+  (#$isa ?PRED #$AsymmetricBinaryPredicate) 
+  (#$negationInverse ?PRED ?PRED))
+
+;;; #$AttributeValue
+(#$isa #$AttributeValue #$Collection)
+(#$genls #$AttributeValue #$IndividualObject)
+
+;;; #$BaseKB
+(#$isa #$BaseKB #$BroadMicrotheory)
+
+(#$implies 
+  (#$isa ?MIC #$Microtheory) 
+  (#$genlMt ?MIC #$BaseKB))
+
+;;; #$BinaryPredicate
+(#$isa #$BinaryPredicate #$Collection)
+(#$genls #$BinaryPredicate #$Predicate)
+
+(#$implies 
+  (#$isa ?P #$BinaryPredicate) 
+  (#$arity ?P 2))
+
+;;; #$BookkeepingMt
+(#$isa #$BookkeepingMt #$Microtheory)
+(#$genlMt #$BookkeepingMt #$CyclistsMt)
+(#$genlMt #$BookkeepingMt #$BaseKB)
+
+;;; #$BookkeepingPredicate
+(#$isa #$BookkeepingPredicate #$Collection)
+(#$genls #$BookkeepingPredicate #$Predicate)
+
+;;; #$BroadMicrotheory
+(#$isa #$BroadMicrotheory #$Collection)
+(#$genls #$BroadMicrotheory #$Microtheory)
+
+;;; #$Collection
+(#$isa #$Collection #$Collection)
+(#$genls #$Collection #$SetOrCollection)
+
+;;; #$CollectionDenotingFunction
+(#$isa #$CollectionDenotingFunction #$Collection)
+(#$genls #$CollectionDenotingFunction #$ReifiableFunction)
+
+;;; #$CommutativeRelation
+(#$isa #$CommutativeRelation #$Collection)
+(#$genls #$CommutativeRelation #$Relationship)
+
+;;; #$CycELVariable
+(#$isa #$CycELVariable #$Collection)
+(#$genls #$CycELVariable #$CycSystemSymbol)
+
+;;; #$CycExpression
+(#$isa #$CycExpression #$Collection)
+(#$genls #$CycExpression #$IndividualObject)
+
+;;; #$CycFormula
+(#$isa #$CycFormula #$Collection)
+(#$genls #$CycFormula #$CycExpression)
+
+;;; #$CycIndexedTerm
+(#$isa #$CycIndexedTerm #$Collection)
+(#$genls #$CycIndexedTerm #$Thing)
+
+;;; #$CycSystemList
+(#$isa #$CycSystemList #$Collection)
+(#$genls #$CycSystemList #$IndividualObject)
+
+;;; #$CycSystemString
+(#$isa #$CycSystemString #$Collection)
+(#$genls #$CycSystemString #$IndividualObject)
+
+;;; #$CycSystemSymbol
+(#$isa #$CycSystemSymbol #$Collection)
+(#$genls #$CycSystemSymbol #$IndividualObject)
+
+;;; #$Cyclist
+(#$isa #$Cyclist #$Collection)
+(#$genls #$Cyclist #$TemporalObject)
+
+;;; #$CyclistsMt
+(#$isa #$CyclistsMt #$Microtheory)
+(#$genlMt #$CyclistsMt #$BaseKB)
+
+;;; #$DefaultMonotonicPredicate
+(#$isa #$DefaultMonotonicPredicate #$Collection)
+(#$genls #$DefaultMonotonicPredicate #$Predicate)
+
+;;; #$EvaluatableFunction
+(#$isa #$EvaluatableFunction #$Collection)
+(#$genls #$EvaluatableFunction #$FunctionTheMathematicalType)
+
+;;; #$False
+(#$isa #$False #$IndividualObject)
+
+;;; #$Format
+(#$isa #$Format #$Collection)
+(#$genls #$Format #$IndividualObject)
+
+;;; #$ForwardInferencePSC
+(#$isa #$ForwardInferencePSC #$ProblemSolvingCntxt)
+(#$genlMt #$ForwardInferencePSC #$BaseKB)
+
+;;; #$FunctionTheMathematicalType
+(#$isa #$FunctionTheMathematicalType #$Collection)
+(#$genls #$FunctionTheMathematicalType #$Relationship)
+
+;;; #$Guest
+(#$isa #$Guest #$HumanCyclist)
+
+;;; #$HumanCyclist
+(#$isa #$HumanCyclist #$Collection)
+(#$genls #$HumanCyclist #$Cyclist)
+
+;;; #$IndividualObject
+(#$isa #$IndividualObject #$Collection)
+(#$genls #$IndividualObject #$Thing)
+
+;;; #$InferenceRelatedBookkeepingPredicate
+(#$isa #$InferenceRelatedBookkeepingPredicate #$Collection)
+(#$genls #$InferenceRelatedBookkeepingPredicate #$BookkeepingPredicate)
+
+;;; #$Integer
+(#$isa #$Integer #$Collection)
+(#$genls #$Integer #$RealNumber)
+
+;;; #$IntervalEntry
+(#$isa #$IntervalEntry #$Format)
+
+;;; #$IrreflexiveBinaryPredicate
+(#$isa #$IrreflexiveBinaryPredicate #$Collection)
+(#$genls #$IrreflexiveBinaryPredicate #$BinaryPredicate)
+
+(#$not 
+  (#$and 
+    (#$isa ?PRED #$IrreflexiveBinaryPredicate) 
+    (?PRED ?OBJ ?OBJ)))
+
+(#$implies 
+  (#$and 
+    (#$isa ?Q #$IrreflexiveBinaryPredicate) 
+    (#$different ?P ?Q) 
+    (#$genlPreds ?P ?Q)) 
+  (#$isa ?P #$IrreflexiveBinaryPredicate))
+
+;;; #$ListTheFormat
+(#$isa #$ListTheFormat #$Format)
+
+;;; #$Microtheory
+(#$isa #$Microtheory #$Collection)
+(#$genls #$Microtheory #$IndividualObject)
+
+;;; #$NonNegativeInteger
+(#$isa #$NonNegativeInteger #$Collection)
+(#$genls #$NonNegativeInteger #$Integer)
+
+;;; #$NonPredicateFunction
+(#$isa #$NonPredicateFunction #$Collection)
+(#$genls #$NonPredicateFunction #$FunctionTheMathematicalType)
+
+;;; #$PositiveInteger
+(#$isa #$PositiveInteger #$Collection)
+(#$genls #$PositiveInteger #$NonNegativeInteger)
+
+;;; #$Predicate
+(#$isa #$Predicate #$Collection)
+(#$genls #$Predicate #$FunctionTheMathematicalType)
+
+;;; #$ProblemSolvingCntxt
+(#$isa #$ProblemSolvingCntxt #$Collection)
+(#$genls #$ProblemSolvingCntxt #$Microtheory)
+
+;;; #$QuaternaryPredicate
+(#$isa #$QuaternaryPredicate #$Collection)
+(#$genls #$QuaternaryPredicate #$Predicate)
+
+(#$implies 
+  (#$isa ?P #$QuaternaryPredicate) 
+  (#$arity ?P 4))
+
+;;; #$QuintaryPredicate
+(#$isa #$QuintaryPredicate #$Collection)
+(#$genls #$QuintaryPredicate #$Predicate)
+
+(#$implies 
+  (#$isa ?P #$QuintaryPredicate) 
+  (#$arity ?P 5))
+
+;;; #$RealNumber
+(#$isa #$RealNumber #$Collection)
+(#$genls #$RealNumber #$AttributeValue)
+
+;;; #$ReflexiveBinaryPredicate
+(#$isa #$ReflexiveBinaryPredicate #$Collection)
+(#$genls #$ReflexiveBinaryPredicate #$BinaryPredicate)
+
+(#$implies 
+  (#$isa ?PRED #$ReflexiveBinaryPredicate) 
+  (?PRED ?OBJ ?OBJ))
+
+;;; #$ReifiableFunction
+(#$isa #$ReifiableFunction #$Collection)
+(#$genls #$ReifiableFunction #$NonPredicateFunction)
+
+;;; #$ReifiableTerm
+(#$isa #$ReifiableTerm #$ReifiableTerm)
+(#$isa #$ReifiableTerm #$Collection)
+(#$genls #$ReifiableTerm #$CycIndexedTerm)
+
+;;; #$Relationship
+(#$isa #$Relationship #$Collection)
+(#$genls #$Relationship #$IndividualObject)
+
+;;; #$Set-Mathematical
+(#$isa #$Set-Mathematical #$Collection)
+(#$genls #$Set-Mathematical #$SetOrCollection)
+
+;;; #$SetOrCollection
+(#$isa #$SetOrCollection #$Collection)
+(#$genls #$SetOrCollection #$Thing)
+
+;;; #$SetTheFormat
+(#$isa #$SetTheFormat #$Format)
+
+;;; #$SiblingDisjointAttributeType
+(#$isa #$SiblingDisjointAttributeType #$SiblingDisjointCollection)
+(#$genls #$SiblingDisjointAttributeType #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?C #$SiblingDisjointAttributeType) 
+    (#$isa ?A1 ?C) 
+    (#$isa ?A2 ?C) 
+    (#$different ?A1 ?A2) 
+    (#$hasAttributes ?G072 ?A1) 
+    (#$hasAttributes ?G072 ?A2)) 
+  (#$or 
+    (#$genlAttributes ?A1 ?A2) 
+    (#$genlAttributes ?A2 ?A1)))
+
+;;; #$SiblingDisjointCollection
+(#$isa #$SiblingDisjointCollection #$Collection)
+(#$genls #$SiblingDisjointCollection #$Collection)
+
+;;; #$SingleEntry
+(#$isa #$SingleEntry #$Format)
+
+;;; #$SkolemFuncN
+(#$isa #$SkolemFuncN #$ReifiableFunction)
+(#$arity #$SkolemFuncN 3)
+(#$arg1Isa #$SkolemFuncN #$CycSystemList)
+(#$arg2Isa #$SkolemFuncN #$CycSystemSymbol)
+(#$arg3Isa #$SkolemFuncN #$RealNumber)
+
+;;; #$SkolemFunction
+(#$isa #$SkolemFunction #$Collection)
+(#$genls #$SkolemFunction #$ReifiableFunction)
+(#$arity #$SkolemFunction 2)
+(#$arg2Isa #$SkolemFunction #$CycSystemSymbol)
+(#$arg1Isa #$SkolemFunction #$CycSystemList)
+
+;;; #$SubAbs
+(#$isa #$SubAbs #$Format)
+
+;;; #$SymmetricBinaryPredicate
+(#$isa #$SymmetricBinaryPredicate #$Collection)
+(#$genls #$SymmetricBinaryPredicate #$CommutativeRelation)
+(#$genls #$SymmetricBinaryPredicate #$BinaryPredicate)
+
+(#$implies 
+  (#$and 
+    (#$isa ?PRED #$SymmetricBinaryPredicate) 
+    (?PRED ?ARG1 ?ARG2)) 
+  (?PRED ?ARG2 ?ARG1))
+
+(#$implies 
+  (#$isa ?PRED #$SymmetricBinaryPredicate) 
+  (#$genlInverse ?PRED ?PRED))
+
+;;; #$TemporalObject
+(#$isa #$TemporalObject #$Collection)
+(#$genls #$TemporalObject #$IndividualObject)
+
+;;; #$TernaryPredicate
+(#$isa #$TernaryPredicate #$Collection)
+(#$genls #$TernaryPredicate #$Predicate)
+
+(#$not 
+  (#$and 
+    (#$isa ?X #$TernaryPredicate) 
+    (#$arg4Isa ?X ?Y)))
+
+(#$implies 
+  (#$isa ?P #$TernaryPredicate) 
+  (#$arity ?P 3))
+
+;;; #$TheSet
+(#$isa #$TheSet #$VariableArityRelation)
+(#$isa #$TheSet #$NonPredicateFunction)
+(#$resultIsa #$TheSet #$Set-Mathematical)
+(#$argsIsa #$TheSet #$Thing)
+
+;;; #$TheTerm
+(#$isa #$TheTerm #$Collection)
+(#$genls #$TheTerm #$Thing)
+
+;;; #$Thing
+(#$isa #$Thing #$Collection)
+
+(#$isa ?OBJ #$Thing)
+
+;;; #$TransitiveBinaryPredicate
+(#$isa #$TransitiveBinaryPredicate #$Collection)
+(#$genls #$TransitiveBinaryPredicate #$BinaryPredicate)
+
+(#$implies 
+  (#$and 
+    (#$isa ?U #$TransitiveBinaryPredicate) 
+    (?U ?X ?Z) 
+    (?U ?Z ?VAR3)) 
+  (?U ?X ?VAR3))
+
+;;; #$True
+(#$isa #$True #$IndividualObject)
+
+;;; #$UnaryPredicate
+(#$isa #$UnaryPredicate #$Collection)
+(#$genls #$UnaryPredicate #$Predicate)
+
+(#$implies 
+  (#$isa ?P #$UnaryPredicate) 
+  (#$arity ?P 1))
+
+;;; #$UnaryTypePredicate
+(#$isa #$UnaryTypePredicate #$Collection)
+(#$genls #$UnaryTypePredicate #$UnaryPredicate)
+(#$genls #$UnaryTypePredicate #$InferenceRelatedBookkeepingPredicate)
+
+;;; #$VariableArityRelation
+(#$isa #$VariableArityRelation #$Collection)
+(#$genls #$VariableArityRelation #$Relationship)
+
+;;; #$abnormal
+(#$isa #$abnormal #$DefaultMonotonicPredicate)
+(#$isa #$abnormal #$BinaryPredicate)
+(#$arity #$abnormal 2)
+(#$arg1Isa #$abnormal #$CycSystemList)
+(#$arg2Isa #$abnormal #$Assertion)
+
+;;; #$afterAdding
+(#$isa #$afterAdding #$InferenceRelatedBookkeepingPredicate)
+(#$isa #$afterAdding #$BinaryPredicate)
+(#$arity #$afterAdding 2)
+(#$arg1Isa #$afterAdding #$Predicate)
+(#$arg2Isa #$afterAdding #$CycSystemSymbol)
+
+;;; #$afterRemoving
+(#$isa #$afterRemoving #$InferenceRelatedBookkeepingPredicate)
+(#$isa #$afterRemoving #$BinaryPredicate)
+(#$arity #$afterRemoving 2)
+(#$arg1Isa #$afterRemoving #$Predicate)
+(#$arg2Isa #$afterRemoving #$CycSystemSymbol)
+
+;;; #$and
+(#$isa #$and #$CommutativeRelation)
+(#$isa #$and #$VariableArityRelation)
+(#$argsIsa #$and #$CycFormula)
+(#$resultIsa #$and #$CycExpression)
+
+;;; #$arg1Format
+(#$isa #$arg1Format #$BinaryPredicate)
+(#$arity #$arg1Format 2)
+(#$arg1Isa #$arg1Format #$Predicate)
+(#$arg2Isa #$arg1Format #$Format)
+
+;;; #$arg1Genl
+(#$isa #$arg1Genl #$BinaryPredicate)
+(#$arity #$arg1Genl 2)
+(#$arg1Isa #$arg1Genl #$Relationship)
+(#$arg2Isa #$arg1Genl #$Collection)
+
+;;; #$arg1Isa
+(#$isa #$arg1Isa #$DefaultMonotonicPredicate)
+(#$isa #$arg1Isa #$BinaryPredicate)
+(#$arity #$arg1Isa 2)
+(#$arg1Isa #$arg1Isa #$Relationship)
+(#$arg2Isa #$arg1Isa #$Collection)
+
+;;; #$arg2Format
+(#$isa #$arg2Format #$BinaryPredicate)
+(#$arity #$arg2Format 2)
+(#$arg1Isa #$arg2Format #$Predicate)
+(#$arg2Isa #$arg2Format #$Format)
+
+;;; #$arg2Genl
+(#$isa #$arg2Genl #$BinaryPredicate)
+(#$arity #$arg2Genl 2)
+(#$arg1Isa #$arg2Genl #$Relationship)
+(#$arg2Isa #$arg2Genl #$Collection)
+
+;;; #$arg2Isa
+(#$isa #$arg2Isa #$DefaultMonotonicPredicate)
+(#$isa #$arg2Isa #$BinaryPredicate)
+(#$arity #$arg2Isa 2)
+(#$arg1Isa #$arg2Isa #$Relationship)
+(#$arg2Isa #$arg2Isa #$Collection)
+
+;;; #$arg3Format
+(#$isa #$arg3Format #$BinaryPredicate)
+(#$arity #$arg3Format 2)
+(#$arg1Isa #$arg3Format #$Predicate)
+(#$arg2Isa #$arg3Format #$Format)
+
+;;; #$arg3Genl
+(#$isa #$arg3Genl #$BinaryPredicate)
+(#$arity #$arg3Genl 2)
+(#$arg1Isa #$arg3Genl #$Relationship)
+(#$arg2Isa #$arg3Genl #$Collection)
+
+;;; #$arg3Isa
+(#$isa #$arg3Isa #$DefaultMonotonicPredicate)
+(#$isa #$arg3Isa #$BinaryPredicate)
+(#$arity #$arg3Isa 2)
+(#$arg1Isa #$arg3Isa #$Relationship)
+(#$arg2Isa #$arg3Isa #$Collection)
+
+;;; #$arg4Format
+(#$isa #$arg4Format #$BinaryPredicate)
+(#$arity #$arg4Format 2)
+(#$arg1Isa #$arg4Format #$Predicate)
+(#$arg2Isa #$arg4Format #$Format)
+
+;;; #$arg4Genl
+(#$isa #$arg4Genl #$BinaryPredicate)
+(#$arity #$arg4Genl 2)
+(#$arg1Isa #$arg4Genl #$Relationship)
+(#$arg2Isa #$arg4Genl #$Collection)
+
+;;; #$arg4Isa
+(#$isa #$arg4Isa #$DefaultMonotonicPredicate)
+(#$isa #$arg4Isa #$BinaryPredicate)
+(#$arity #$arg4Isa 2)
+(#$arg1Isa #$arg4Isa #$Relationship)
+(#$arg2Isa #$arg4Isa #$Collection)
+
+;;; #$arg5Format
+(#$isa #$arg5Format #$BinaryPredicate)
+(#$arity #$arg5Format 2)
+(#$arg1Isa #$arg5Format #$Predicate)
+(#$arg2Isa #$arg5Format #$Format)
+
+;;; #$arg5Genl
+(#$isa #$arg5Genl #$BinaryPredicate)
+(#$arity #$arg5Genl 2)
+(#$arg1Isa #$arg5Genl #$Relationship)
+(#$arg2Isa #$arg5Genl #$Collection)
+
+;;; #$arg5Isa
+(#$isa #$arg5Isa #$DefaultMonotonicPredicate)
+(#$isa #$arg5Isa #$BinaryPredicate)
+(#$arity #$arg5Isa 2)
+(#$arg1Isa #$arg5Isa #$Relationship)
+(#$arg2Isa #$arg5Isa #$Collection)
+
+;;; #$argsGenl
+(#$isa #$argsGenl #$BinaryPredicate)
+(#$arity #$argsGenl 2)
+(#$arg1Isa #$argsGenl #$Relationship)
+(#$arg2Isa #$argsGenl #$Collection)
+
+;;; #$argsIsa
+(#$isa #$argsIsa #$BinaryPredicate)
+(#$arity #$argsIsa 2)
+(#$arg1Isa #$argsIsa #$Relationship)
+(#$arg2Isa #$argsIsa #$Collection)
+
+;;; #$arity
+(#$isa #$arity #$DefaultMonotonicPredicate)
+(#$isa #$arity #$BinaryPredicate)
+(#$arity #$arity 2)
+(#$arg1Isa #$arity #$Relationship)
+(#$arg2Isa #$arity #$Integer)
+
+;;; #$coExtensional
+(#$isa #$coExtensional #$SymmetricBinaryPredicate)
+(#$isa #$coExtensional #$ReflexiveBinaryPredicate)
+(#$isa #$coExtensional #$TransitiveBinaryPredicate)
+(#$genlInverse #$coExtensional #$coExtensional)
+(#$arity #$coExtensional 2)
+(#$arg1Isa #$coExtensional #$Collection)
+(#$arg2Isa #$coExtensional #$Collection)
+
+;;; #$comment
+(#$isa #$comment #$BinaryPredicate)
+(#$arity #$comment 2)
+(#$arg1Isa #$comment #$CycIndexedTerm)
+(#$arg2Isa #$comment #$CycSystemString)
+
+;;; #$cyclistNotes
+(#$isa #$cyclistNotes #$BinaryPredicate)
+(#$arity #$cyclistNotes 2)
+(#$arg1Isa #$cyclistNotes #$CycIndexedTerm)
+(#$arg2Isa #$cyclistNotes #$CycSystemString)
+
+;;; #$defnIff
+(#$isa #$defnIff #$InferenceRelatedBookkeepingPredicate)
+(#$isa #$defnIff #$BinaryPredicate)
+(#$arity #$defnIff 2)
+(#$arg1Isa #$defnIff #$Collection)
+(#$arg2Isa #$defnIff #$CycSystemSymbol)
+
+(#$implies 
+  (#$defnIff ?X ?Y) 
+  (#$defnSufficient ?X ?Y))
+
+;;; #$defnNecessary
+(#$isa #$defnNecessary #$BinaryPredicate)
+(#$arity #$defnNecessary 2)
+(#$arg1Isa #$defnNecessary #$Collection)
+(#$arg2Isa #$defnNecessary #$CycSystemSymbol)
+
+;;; #$defnSufficient
+(#$isa #$defnSufficient #$InferenceRelatedBookkeepingPredicate)
+(#$isa #$defnSufficient #$BinaryPredicate)
+(#$arity #$defnSufficient 2)
+(#$arg1Isa #$defnSufficient #$Collection)
+(#$arg2Isa #$defnSufficient #$CycSystemSymbol)
+
+;;; #$different
+(#$isa #$different #$VariableArityRelation)
+(#$isa #$different #$EvaluatableFunction)
+(#$isa #$different #$Predicate)
+(#$argsIsa #$different #$Thing)
+
+(#$not 
+  (#$different ?OBJ ?OBJ))
+
+;;; #$disjointWith
+(#$isa #$disjointWith #$DefaultMonotonicPredicate)
+(#$isa #$disjointWith #$SymmetricBinaryPredicate)
+(#$isa #$disjointWith #$IrreflexiveBinaryPredicate)
+(#$genlInverse #$disjointWith #$disjointWith)
+(#$arity #$disjointWith 2)
+(#$arg1Isa #$disjointWith #$SetOrCollection)
+(#$arg2Isa #$disjointWith #$SetOrCollection)
+
+(#$not 
+  (#$and 
+    (#$isa ?OBJ ?COL1) 
+    (#$isa ?OBJ ?COL2) 
+    (#$disjointWith ?COL1 ?COL2)))
+
+(#$implies 
+  (#$and 
+    (#$disjointWith ?COL ?SUPERSET) 
+    (#$genls ?SUBSET ?SUPERSET)) 
+  (#$disjointWith ?COL ?SUBSET))
+
+(#$not 
+  (#$and 
+    (#$disjointWith ?X ?Y) 
+    (#$genls ?X ?Y)))
+
+;;; #$elementOf
+(#$isa #$elementOf #$BinaryPredicate)
+(#$arity #$elementOf 2)
+(#$arg1Isa #$elementOf #$Thing)
+(#$arg2Isa #$elementOf #$SetOrCollection)
+
+;;; #$equals
+(#$isa #$equals #$DefaultMonotonicPredicate)
+(#$isa #$equals #$SymmetricBinaryPredicate)
+(#$isa #$equals #$ReflexiveBinaryPredicate)
+(#$isa #$equals #$TransitiveBinaryPredicate)
+(#$genlInverse #$equals #$equals)
+(#$arity #$equals 2)
+(#$arg1Isa #$equals #$Thing)
+(#$arg2Isa #$equals #$Thing)
+
+;;; #$exceptFor
+(#$isa #$exceptFor #$Relationship)
+(#$arity #$exceptFor 2)
+(#$arg2Isa #$exceptFor #$Assertion)
+(#$arg1Isa #$exceptFor #$ReifiableTerm)
+
+;;; #$exceptWhen
+(#$isa #$exceptWhen #$Relationship)
+(#$arity #$exceptWhen 2)
+(#$arg2Isa #$exceptWhen #$Assertion)
+(#$arg1Isa #$exceptWhen #$CycFormula)
+
+;;; #$forAll
+(#$isa #$forAll #$Relationship)
+(#$arity #$forAll 2)
+(#$arg2Isa #$forAll #$CycFormula)
+(#$arg1Isa #$forAll #$CycELVariable)
+
+;;; #$genlAttributes
+(#$isa #$genlAttributes #$ReflexiveBinaryPredicate)
+(#$isa #$genlAttributes #$TransitiveBinaryPredicate)
+(#$arity #$genlAttributes 2)
+(#$arg1Isa #$genlAttributes #$AttributeValue)
+(#$arg2Isa #$genlAttributes #$AttributeValue)
+
+;;; #$genlInverse
+(#$isa #$genlInverse #$BinaryPredicate)
+(#$arity #$genlInverse 2)
+(#$arg1Isa #$genlInverse #$BinaryPredicate)
+(#$arg2Isa #$genlInverse #$BinaryPredicate)
+
+(#$implies 
+  (#$and 
+    (#$genlInverse ?PRED ?GEN-PRED) 
+    (?PRED ?ARG1 ?ARG2)) 
+  (?GEN-PRED ?ARG2 ?ARG1))
+
+(#$implies 
+  (#$and 
+    (#$genlInverse ?SPEC-PRED ?PRED) 
+    (#$genlInverse ?PRED ?GENL-PRED)) 
+  (#$genlPreds ?SPEC-PRED ?GENL-PRED))
+
+(#$implies 
+  (#$and 
+    (#$genlInverse ?SPEC-PRED ?PRED) 
+    (#$genlPreds ?PRED ?GENL-PRED)) 
+  (#$genlInverse ?SPEC-PRED ?GENL-PRED))
+
+(#$implies 
+  (#$and 
+    (#$negationPreds ?GENL-PRED ?NEG-PRED) 
+    (#$genlInverse ?SPEC-PRED ?GENL-PRED)) 
+  (#$negationInverse ?NEG-PRED ?SPEC-PRED))
+
+(#$implies 
+  (#$and 
+    (#$negationInverse ?GENL-PRED ?NEG-PRED) 
+    (#$genlInverse ?SPEC-PRED ?GENL-PRED)) 
+  (#$negationPreds ?NEG-PRED ?SPEC-PRED))
+
+(#$implies 
+  (#$and 
+    (#$genlPreds ?SPEC-PRED ?PRED) 
+    (#$genlInverse ?PRED ?GENL-PRED)) 
+  (#$genlInverse ?SPEC-PRED ?GENL-PRED))
+
+;;; #$genlMt
+(#$isa #$genlMt #$DefaultMonotonicPredicate)
+(#$isa #$genlMt #$AntiSymmetricBinaryPredicate)
+(#$isa #$genlMt #$ReflexiveBinaryPredicate)
+(#$isa #$genlMt #$TransitiveBinaryPredicate)
+(#$arity #$genlMt 2)
+(#$arg1Isa #$genlMt #$Microtheory)
+(#$arg2Isa #$genlMt #$Microtheory)
+
+;;; #$genlPreds
+(#$isa #$genlPreds #$AntiSymmetricBinaryPredicate)
+(#$isa #$genlPreds #$ReflexiveBinaryPredicate)
+(#$isa #$genlPreds #$TransitiveBinaryPredicate)
+(#$arity #$genlPreds 2)
+(#$arg1Isa #$genlPreds #$Predicate)
+(#$arg2Isa #$genlPreds #$Predicate)
+
+(#$implies 
+  (#$and 
+    (?PRED ?ARG1) 
+    (#$genlPreds ?PRED ?GENL-PRED)) 
+  (?GENL-PRED ?ARG1))
+
+(#$implies 
+  (#$and 
+    (#$negationPreds ?GENL-PRED ?NEG-PRED) 
+    (#$genlPreds ?SPEC-PRED ?GENL-PRED)) 
+  (#$negationPreds ?NEG-PRED ?SPEC-PRED))
+
+(#$implies 
+  (#$and 
+    (#$negationInverse ?GENL-PRED ?NEG-PRED) 
+    (#$genlPreds ?SPEC-PRED ?GENL-PRED)) 
+  (#$negationInverse ?NEG-PRED ?SPEC-PRED))
+
+(#$implies 
+  (#$and 
+    (#$genlPreds ?PRED ?GENL-PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4 ?ARG5)) 
+  (?GENL-PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4 ?ARG5))
+
+(#$implies 
+  (#$and 
+    (#$genlPreds ?PRED ?GENL-PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4)) 
+  (?GENL-PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4))
+
+(#$implies 
+  (#$and 
+    (#$genlPreds ?PRED ?GENL-PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3)) 
+  (?GENL-PRED ?ARG1 ?ARG2 ?ARG3))
+
+(#$implies 
+  (#$and 
+    (#$genlPreds ?PRED ?GENL-PRED) 
+    (?PRED ?ARG1 ?ARG2)) 
+  (?GENL-PRED ?ARG1 ?ARG2))
+
+;;; #$genls
+(#$isa #$genls #$DefaultMonotonicPredicate)
+(#$isa #$genls #$ReflexiveBinaryPredicate)
+(#$isa #$genls #$TransitiveBinaryPredicate)
+(#$arity #$genls 2)
+(#$arg1Isa #$genls #$Collection)
+(#$arg2Isa #$genls #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?OBJ ?SUBSET) 
+    (#$genls ?SUBSET ?SUPERSET)) 
+  (#$isa ?OBJ ?SUPERSET))
+
+(#$implies 
+  (#$resultGenl ?FUNC ?COLL) 
+  (#$genls 
+    (?FUNC ?ARG1 ?ARG2 ?ARG3 ?ARG4 ?ARG5) ?COLL))
+
+(#$implies 
+  (#$resultGenl ?FUNC ?COLL) 
+  (#$genls 
+    (?FUNC ?ARG1 ?ARG2 ?ARG3 ?ARG4) ?COLL))
+
+(#$implies 
+  (#$resultGenl ?FUNC ?COLL) 
+  (#$genls 
+    (?FUNC ?ARG1 ?ARG2 ?ARG3) ?COLL))
+
+(#$implies 
+  (#$resultGenl ?FUNC ?COLL) 
+  (#$genls 
+    (?FUNC ?ARG1 ?ARG2) ?COLL))
+
+(#$implies 
+  (#$resultGenl ?FUNC ?COLL) 
+  (#$genls 
+    (?FUNC ?ARG1) ?COLL))
+
+;;; #$hasAttributes
+(#$isa #$hasAttributes #$BinaryPredicate)
+(#$arity #$hasAttributes 2)
+(#$arg1Isa #$hasAttributes #$TemporalObject)
+(#$arg2Isa #$hasAttributes #$AttributeValue)
+
+(#$not 
+  (#$and 
+    (#$hasAttributes ?Z ?X) 
+    (#$hasAttributes ?Z ?Y) 
+    (#$negationAttribute ?X ?Y)))
+
+;;; #$holdsIn
+(#$isa #$holdsIn #$BinaryPredicate)
+(#$arity #$holdsIn 2)
+(#$arg1Isa #$holdsIn #$TemporalObject)
+(#$arg2Isa #$holdsIn #$CycFormula)
+
+;;; #$implies
+(#$isa #$implies #$Relationship)
+(#$arity #$implies 2)
+(#$arg2Isa #$implies #$CycFormula)
+(#$arg1Isa #$implies #$CycFormula)
+
+;;; #$interArgIsa1-2
+(#$isa #$interArgIsa1-2 #$TernaryPredicate)
+(#$arity #$interArgIsa1-2 3)
+(#$arg1Isa #$interArgIsa1-2 #$Predicate)
+(#$arg2Isa #$interArgIsa1-2 #$Collection)
+(#$arg3Isa #$interArgIsa1-2 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$requiredArg1Pred ?COL-1 ?PRED) 
+    (#$interArgIsa1-2 ?PRED ?COL-1 ?COL-2)) 
+  (#$relationAllExists ?PRED ?COL-1 ?COL-2))
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (?PRED ?INDEP-INS ?DEP-INS) 
+    (#$interArgIsa1-2 ?PRED ?INDEP-COL ?DEP-COL)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa1-3
+(#$isa #$interArgIsa1-3 #$TernaryPredicate)
+(#$arity #$interArgIsa1-3 3)
+(#$arg1Isa #$interArgIsa1-3 #$Predicate)
+(#$arg2Isa #$interArgIsa1-3 #$Collection)
+(#$arg3Isa #$interArgIsa1-3 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa1-3 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?INDEP-INS ?ANY-ARG-2 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa1-4
+(#$isa #$interArgIsa1-4 #$TernaryPredicate)
+(#$arity #$interArgIsa1-4 3)
+(#$arg1Isa #$interArgIsa1-4 #$Predicate)
+(#$arg2Isa #$interArgIsa1-4 #$Collection)
+(#$arg3Isa #$interArgIsa1-4 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa1-4 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?INDEP-INS ?ANY-ARG-2 ?ANY-ARG-3 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa1-5
+(#$isa #$interArgIsa1-5 #$TernaryPredicate)
+(#$arity #$interArgIsa1-5 3)
+(#$arg1Isa #$interArgIsa1-5 #$Predicate)
+(#$arg2Isa #$interArgIsa1-5 #$Collection)
+(#$arg3Isa #$interArgIsa1-5 #$Collection)
+
+(#$implies 
+  (#$and 
+   (#$isa ?INDEP-INS ?INDEP-COL) 
+   (#$interArgIsa1-5 ?PRED ?INDEP-COL ?DEP-COL) 
+   (?PRED ?INDEP-INS ?ANY-ARG-2 ?ANY-ARG-3 ?ANY-ARG-4 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa2-1
+(#$isa #$interArgIsa2-1 #$TernaryPredicate)
+(#$arity #$interArgIsa2-1 3)
+(#$arg1Isa #$interArgIsa2-1 #$Predicate)
+(#$arg2Isa #$interArgIsa2-1 #$Collection)
+(#$arg3Isa #$interArgIsa2-1 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (?PRED ?DEP-INS ?INDEP-INS) 
+    (#$interArgIsa2-1 ?PRED ?INDEP-COL ?DEP-COL)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa2-3
+(#$isa #$interArgIsa2-3 #$TernaryPredicate)
+(#$arity #$interArgIsa2-3 3)
+(#$arg1Isa #$interArgIsa2-3 #$Predicate)
+(#$arg2Isa #$interArgIsa2-3 #$Collection)
+(#$arg3Isa #$interArgIsa2-3 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa2-3 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?INDEP-INS ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa2-4
+(#$isa #$interArgIsa2-4 #$TernaryPredicate)
+(#$arity #$interArgIsa2-4 3)
+(#$arg1Isa #$interArgIsa2-4 #$Predicate)
+(#$arg2Isa #$interArgIsa2-4 #$Collection)
+(#$arg3Isa #$interArgIsa2-4 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa2-4 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?INDEP-INS ?ANY-ARG-3 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa2-5
+(#$isa #$interArgIsa2-5 #$TernaryPredicate)
+(#$arity #$interArgIsa2-5 3)
+(#$arg1Isa #$interArgIsa2-5 #$Predicate)
+(#$arg2Isa #$interArgIsa2-5 #$Collection)
+(#$arg3Isa #$interArgIsa2-5 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa2-5 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?INDEP-INS ?ANY-ARG-3 ?ANY-ARG-4 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa3-1
+(#$isa #$interArgIsa3-1 #$TernaryPredicate)
+(#$arity #$interArgIsa3-1 3)
+(#$arg1Isa #$interArgIsa3-1 #$Predicate)
+(#$arg2Isa #$interArgIsa3-1 #$Collection)
+(#$arg3Isa #$interArgIsa3-1 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa3-1 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?DEP-INS ?ANY-ARG-2 ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa3-2
+(#$isa #$interArgIsa3-2 #$TernaryPredicate)
+(#$arity #$interArgIsa3-2 3)
+(#$arg1Isa #$interArgIsa3-2 #$Predicate)
+(#$arg2Isa #$interArgIsa3-2 #$Collection)
+(#$arg3Isa #$interArgIsa3-2 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa3-2 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?DEP-INS ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa3-4
+(#$isa #$interArgIsa3-4 #$TernaryPredicate)
+(#$arity #$interArgIsa3-4 3)
+(#$arg1Isa #$interArgIsa3-4 #$Predicate)
+(#$arg2Isa #$interArgIsa3-4 #$Collection)
+(#$arg3Isa #$interArgIsa3-4 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa3-4 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?INDEP-INS ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa3-5
+(#$isa #$interArgIsa3-5 #$TernaryPredicate)
+(#$arity #$interArgIsa3-5 3)
+(#$arg1Isa #$interArgIsa3-5 #$Predicate)
+(#$arg2Isa #$interArgIsa3-5 #$Collection)
+(#$arg3Isa #$interArgIsa3-5 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa3-5 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?INDEP-INS ?ANY-ARG-4 ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa4-1
+(#$isa #$interArgIsa4-1 #$TernaryPredicate)
+(#$arity #$interArgIsa4-1 3)
+(#$arg1Isa #$interArgIsa4-1 #$Predicate)
+(#$arg2Isa #$interArgIsa4-1 #$Collection)
+(#$arg3Isa #$interArgIsa4-1 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa4-1 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?DEP-INS ?ANY-ARG-2 ?ANY-ARG-3 ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa4-2
+(#$isa #$interArgIsa4-2 #$TernaryPredicate)
+(#$arity #$interArgIsa4-2 3)
+(#$arg1Isa #$interArgIsa4-2 #$Predicate)
+(#$arg2Isa #$interArgIsa4-2 #$Collection)
+(#$arg3Isa #$interArgIsa4-2 #$Collection)
+
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa4-2 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?DEP-INS ?ANY-ARG-3 ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa4-3
+(#$isa #$interArgIsa4-3 #$TernaryPredicate)
+(#$arity #$interArgIsa4-3 3)
+(#$arg1Isa #$interArgIsa4-3 #$Predicate)
+(#$arg2Isa #$interArgIsa4-3 #$Collection)
+(#$arg3Isa #$interArgIsa4-3 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa4-3 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?DEP-INS ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa4-5
+(#$isa #$interArgIsa4-5 #$TernaryPredicate)
+(#$arity #$interArgIsa4-5 3)
+(#$arg1Isa #$interArgIsa4-5 #$Predicate)
+(#$arg2Isa #$interArgIsa4-5 #$Collection)
+(#$arg3Isa #$interArgIsa4-5 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa4-5 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?ANY-ARG-3 ?INDEP-INS ?DEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa5-1
+(#$isa #$interArgIsa5-1 #$TernaryPredicate)
+(#$arity #$interArgIsa5-1 3)
+(#$arg1Isa #$interArgIsa5-1 #$QuintaryPredicate)
+(#$arg2Isa #$interArgIsa5-1 #$Collection)
+(#$arg3Isa #$interArgIsa5-1 #$Collection)
+
+(#$implies 
+  (#$and 
+    (#$isa ?INDEP-INS ?INDEP-COL) 
+    (#$interArgIsa5-1 ?PRED ?INDEP-COL ?DEP-COL) 
+    (?PRED ?DEP-INS ?ANY-ARG-2 ?ANY-ARG-3 ?ANY-ARG-4 ?INDEP-INS)) 
+  (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa5-2
+(#$isa #$interArgIsa5-2 #$TernaryPredicate)
+(#$arity #$interArgIsa5-2 3)
+(#$arg1Isa #$interArgIsa5-2 #$QuintaryPredicate)
+(#$arg2Isa #$interArgIsa5-2 #$Collection)
+(#$arg3Isa #$interArgIsa5-2 #$Collection)
+
+(#$implies 
+ (#$and 
+  (#$isa ?INDEP-INS ?INDEP-COL) 
+  (#$interArgIsa5-2 ?PRED ?INDEP-COL ?DEP-COL) 
+  (?PRED ?ANY-ARG-1 ?DEP-INS ?ANY-ARG-3 ?ANY-ARG-4 ?INDEP-INS))
+ (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa5-3
+(#$isa #$interArgIsa5-3 #$TernaryPredicate)
+(#$arity #$interArgIsa5-3 3)
+(#$arg1Isa #$interArgIsa5-3 #$QuintaryPredicate)
+(#$arg2Isa #$interArgIsa5-3 #$Collection)
+(#$arg3Isa #$interArgIsa5-3 #$Collection)
+
+(#$implies 
+ (#$and 
+  (#$isa ?INDEP-INS ?INDEP-COL) 
+  (#$interArgIsa5-3 ?PRED ?INDEP-COL ?DEP-COL) 
+  (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?DEP-INS ?ANY-ARG-4 ?INDEP-INS)) 
+ (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$interArgIsa5-4
+(#$isa #$interArgIsa5-4 #$TernaryPredicate)
+(#$arity #$interArgIsa5-4 3)
+(#$arg1Isa #$interArgIsa5-4 #$QuintaryPredicate)
+(#$arg2Isa #$interArgIsa5-4 #$Collection)
+(#$arg3Isa #$interArgIsa5-4 #$Collection)
+
+(#$implies 
+ (#$and 
+  (#$isa ?INDEP-INS ?INDEP-COL) 
+  (#$interArgIsa5-4 ?PRED ?INDEP-COL ?DEP-COL) 
+  (?PRED ?ANY-ARG-1 ?ANY-ARG-2 ?ANY-ARG-3 ?DEP-INS ?INDEP-INS)) 
+ (#$isa ?DEP-INS ?DEP-COL))
+
+;;; #$relationExistsAll
+(#$isa #$relationExistsAll #$TernaryPredicate)
+(#$arity #$relationExistsAll 3)
+(#$arg1Isa #$relationExistsAll #$BinaryPredicate)
+(#$arg2Isa #$relationExistsAll #$Collection)
+(#$arg3Isa #$relationExistsAll #$Collection)
+
+;;; #$relationExistsCountAll
+(#$isa #$relationExistsCountAll #$QuaternaryPredicate)
+(#$arity #$relationExistsCountAll 4)
+(#$arg1Isa #$relationExistsCountAll #$BinaryPredicate)
+(#$arg2Isa #$relationExistsCountAll #$Collection)
+(#$arg3Isa #$relationExistsCountAll #$Collection)
+(#$arg4Isa #$relationExistsCountAll #$NonNegativeInteger)
+
+;;; #$isa
+(#$isa #$isa #$DefaultMonotonicPredicate)
+(#$isa #$isa #$BinaryPredicate)
+(#$arity #$isa 2)
+(#$arg1Isa #$isa #$ReifiableTerm)
+(#$arg2Isa #$isa #$Collection)
+
+(#$implies 
+  (#$resultIsa ?F ?COL) 
+  (#$isa 
+    (?F ?ARG1 ?ARG2 ?ARG3) ?COL))
+
+(#$implies 
+  (#$resultIsa ?F ?COL) 
+  (#$isa 
+    (?F ?ARG1 ?ARG2) ?COL))
+
+(#$implies 
+  (#$resultIsa ?F ?COL) 
+  (#$isa 
+    (?F ?ARG1) ?COL))
+
+;;; #$ist
+(#$isa #$ist #$BinaryPredicate)
+(#$arity #$ist 2)
+(#$arg1Isa #$ist #$Microtheory)
+(#$arg2Isa #$ist #$CycFormula)
+
+;;; #$lispDefun
+(#$isa #$lispDefun #$BinaryPredicate)
+(#$arity #$lispDefun 2)
+(#$arg1Isa #$lispDefun #$EvaluatableFunction)
+(#$arg2Isa #$lispDefun #$CycSystemSymbol)
+
+;;; #$minimizeExtent
+(#$isa #$minimizeExtent #$UnaryPredicate)
+(#$arity #$minimizeExtent 1)
+(#$arg1Isa #$minimizeExtent #$Predicate)
+
+;;; #$mtInferenceFunction
+(#$isa #$mtInferenceFunction #$BinaryPredicate)
+(#$arity #$mtInferenceFunction 2)
+(#$arg1Isa #$mtInferenceFunction #$Microtheory)
+(#$arg2Isa #$mtInferenceFunction #$CycSystemSymbol)
+
+;;; #$myCreationTime
+(#$isa #$myCreationTime #$BinaryPredicate)
+(#$isa #$myCreationTime #$BookkeepingPredicate)
+(#$arity #$myCreationTime 2)
+(#$arg1Isa #$myCreationTime #$Thing)
+(#$arg2Isa #$myCreationTime #$PositiveInteger)
+
+;;; #$myCreator
+(#$isa #$myCreator #$BinaryPredicate)
+(#$isa #$myCreator #$BookkeepingPredicate)
+(#$arity #$myCreator 2)
+(#$arg1Isa #$myCreator #$Thing)
+(#$arg2Isa #$myCreator #$Cyclist)
+
+;;; #$negationAttribute
+(#$isa #$negationAttribute #$SymmetricBinaryPredicate)
+(#$isa #$negationAttribute #$IrreflexiveBinaryPredicate)
+(#$genlInverse #$negationAttribute #$negationAttribute)
+(#$arity #$negationAttribute 2)
+(#$arg1Isa #$negationAttribute #$AttributeValue)
+(#$arg2Isa #$negationAttribute #$AttributeValue)
+
+;;; #$negationInverse
+(#$isa #$negationInverse #$SymmetricBinaryPredicate)
+(#$isa #$negationInverse #$IrreflexiveBinaryPredicate)
+(#$genlInverse #$negationInverse #$negationInverse)
+(#$arity #$negationInverse 2)
+(#$arg1Isa #$negationInverse #$BinaryPredicate)
+(#$arg2Isa #$negationInverse #$BinaryPredicate)
+
+(#$not 
+  (#$and 
+    (#$negationInverse ?GEN-PRED ?PRED) 
+    (?PRED ?ARG1 ?ARG2) 
+    (?GEN-PRED ?ARG2 ?ARG1)))
+
+;;; #$negationPreds
+(#$isa #$negationPreds #$SymmetricBinaryPredicate)
+(#$genlInverse #$negationPreds #$negationPreds)
+(#$arity #$negationPreds 2)
+(#$arg1Isa #$negationPreds #$Predicate)
+(#$arg2Isa #$negationPreds #$Predicate)
+
+(#$not 
+  (#$and 
+    (?PRED ?ARG1) 
+    (?NEG-PRED ?ARG1) 
+    (#$negationPreds ?NEG-PRED ?PRED)))
+
+(#$not 
+  (#$and 
+    (#$negationPreds ?NEG-PRED ?PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4 ?ARG5) 
+    (?NEG-PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4 ?ARG5)))
+
+(#$not 
+  (#$and 
+    (#$negationPreds ?NEG-PRED ?PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4) 
+    (?NEG-PRED ?ARG1 ?ARG2 ?ARG3 ?ARG4)))
+
+(#$not 
+  (#$and 
+    (#$negationPreds ?NEG-PRED ?PRED) 
+    (?PRED ?ARG1 ?ARG2 ?ARG3) 
+    (?NEG-PRED ?ARG1 ?ARG2 ?ARG3)))
+
+(#$not 
+  (#$and 
+    (#$negationPreds ?NEG-PRED ?PRED) 
+    (?PRED ?ARG1 ?ARG2) 
+    (?NEG-PRED ?ARG1 ?ARG2)))
+
+;;; #$not
+(#$isa #$not #$Relationship)
+(#$arity #$not 1)
+(#$arg1Isa #$not #$CycFormula)
+
+;;; #$oldConstantName
+(#$isa #$oldConstantName #$BinaryPredicate)
+(#$arity #$oldConstantName 2)
+(#$arg1Isa #$oldConstantName #$Thing)
+(#$arg2Isa #$oldConstantName #$CycSystemString)
+
+;;; #$or
+(#$isa #$or #$CommutativeRelation)
+(#$isa #$or #$VariableArityRelation)
+(#$argsIsa #$or #$CycFormula)
+(#$resultIsa #$or #$CycExpression)
+
+;;; #$relationAllExists
+(#$isa #$relationAllExists #$TernaryPredicate)
+(#$arity #$relationAllExists 3)
+(#$arg1Isa #$relationAllExists #$BinaryPredicate)
+(#$arg2Isa #$relationAllExists #$Collection)
+(#$arg3Isa #$relationAllExists #$Collection)
+
+;;; #$relationAllExistsCount
+(#$isa #$relationAllExistsCount #$QuaternaryPredicate)
+(#$arity #$relationAllExistsCount 4)
+(#$arg1Isa #$relationAllExistsCount #$BinaryPredicate)
+(#$arg2Isa #$relationAllExistsCount #$Collection)
+(#$arg3Isa #$relationAllExistsCount #$Collection)
+(#$arg4Isa #$relationAllExistsCount #$NonNegativeInteger)
+
+;;; #$requiredArg1Pred
+(#$isa #$requiredArg1Pred #$BinaryPredicate)
+(#$arity #$requiredArg1Pred 2)
+(#$arg1Isa #$requiredArg1Pred #$Collection)
+(#$arg2Isa #$requiredArg1Pred #$Predicate)
+
+;;; #$requiredArg2Pred
+(#$isa #$requiredArg2Pred #$BinaryPredicate)
+(#$arity #$requiredArg2Pred 2)
+(#$arg1Isa #$requiredArg2Pred #$Collection)
+(#$arg2Isa #$requiredArg2Pred #$Predicate)
+
+;;; #$resultGenl
+(#$isa #$resultGenl #$BinaryPredicate)
+(#$arity #$resultGenl 2)
+(#$arg1Isa #$resultGenl #$CollectionDenotingFunction)
+(#$arg2Isa #$resultGenl #$Collection)
+
+;;; #$resultIsa
+(#$isa #$resultIsa #$BinaryPredicate)
+(#$arity #$resultIsa 2)
+(#$arg1Isa #$resultIsa #$Relationship)
+(#$arg2Isa #$resultIsa #$Collection)
+
+;;; #$satisfiesDescription
+(#$isa #$satisfiesDescription #$TernaryPredicate)
+(#$arity #$satisfiesDescription 3)
+(#$arg1Isa #$satisfiesDescription #$CycSystemList)
+(#$arg2Isa #$satisfiesDescription #$CycSystemList)
+(#$arg3Isa #$satisfiesDescription #$Microtheory)
+
+;;; #$siblingDisjointExceptions
+(#$isa #$siblingDisjointExceptions #$SymmetricBinaryPredicate)
+(#$isa #$siblingDisjointExceptions #$IrreflexiveBinaryPredicate)
+(#$genlInverse #$siblingDisjointExceptions #$siblingDisjointExceptions)
+(#$arity #$siblingDisjointExceptions 2)
+(#$arg1Isa #$siblingDisjointExceptions #$Collection)
+(#$arg2Isa #$siblingDisjointExceptions #$Collection)
+
+(#$implies 
+  (#$siblingDisjointExceptions ?C1 ?C2) 
+  (#$siblingDisjointExceptions ?C1 ?C2))
+
+;;; #$termOfUnit
+(#$isa #$termOfUnit #$DefaultMonotonicPredicate)
+(#$isa #$termOfUnit #$InferenceRelatedBookkeepingPredicate)
+(#$isa #$termOfUnit #$BinaryPredicate)
+(#$arity #$termOfUnit 2)
+(#$arg1Isa #$termOfUnit #$ReifiableTerm)
+(#$arg2Isa #$termOfUnit #$CycSystemList)
+
+;;; #$thereExistAtLeast
+(#$isa #$thereExistAtLeast #$Relationship)
+(#$arity #$thereExistAtLeast 3)
+(#$resultIsa #$thereExistAtLeast #$CycFormula)
+(#$arg3Isa #$thereExistAtLeast #$CycFormula)
+(#$arg2Isa #$thereExistAtLeast #$CycELVariable)
+(#$arg1Isa #$thereExistAtLeast #$PositiveInteger)
+
+;;; #$thereExistAtMost
+(#$isa #$thereExistAtMost #$Relationship)
+(#$arity #$thereExistAtMost 3)
+(#$resultIsa #$thereExistAtMost #$CycFormula)
+(#$arg3Isa #$thereExistAtMost #$CycFormula)
+(#$arg2Isa #$thereExistAtMost #$CycELVariable)
+(#$arg1Isa #$thereExistAtMost #$PositiveInteger)
+
+;;; #$thereExistExactly
+(#$isa #$thereExistExactly #$Relationship)
+(#$arity #$thereExistExactly 3)
+(#$resultIsa #$thereExistExactly #$CycFormula)
+(#$arg3Isa #$thereExistExactly #$CycFormula)
+(#$arg2Isa #$thereExistExactly #$CycELVariable)
+(#$arg1Isa #$thereExistExactly #$PositiveInteger)
+
+;;; #$thereExists
+(#$isa #$thereExists #$Relationship)
+(#$arity #$thereExists 2)
+(#$arg2Isa #$thereExists #$CycFormula)
+(#$arg1Isa #$thereExists #$CycELVariable)

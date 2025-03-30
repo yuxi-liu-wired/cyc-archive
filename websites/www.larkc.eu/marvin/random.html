@@ -1,0 +1,49 @@
+<html lang='en-US' xml:lang='en-US' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>MaRVIN: a distributed platform for massive RDF inference</title>
+    <link href="main.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="marvin.ico" type="image/x-icon" />
+  </head>
+
+<body>
+<div id='header'>
+<div id='mainHeader'>
+<h2 style="text-align:center">
+MaRVIN:a distributed platform for massive RDF inference
+</h2>
+</div>
+</div>
+<br clear='left' />
+
+<div id="poster" style="width:45%;margin-right:1em">
+  <img class="border" src="hitrate-random.gif" alt="hitrate random"/>
+</div>
+
+<div class='main' style="width:50%">
+  <h1>Random data exchanges</h1>
+  <dl class="faq">
+    <dt>What am I looking at?</dt>
+    <dd>On the right you see an animation of MaRVIN peers exchanging data (you 
+    may need to zoom in). The horizontal axis shows 100 different peers, the 
+    vertical axis shows 100 different keys. Each white dot at (x,y) means that 
+    peer X holds one piece of data with key Y. The brighter the dot, the more 
+    data this peer has.
+    </dd>
+    <dt>What is the data exchange strategy?</dt>
+    <dd>In this animation, peers exchange data <b>randomly</b>: they randomly 
+    pick some other peer, and give him some random part of their own data.
+    <dt>What are the advantages of this strategy?</dt>
+    <dd>Random exchanges maintain optimal load-balance: all peers have 
+    approximately the same amount of data. This means that no peer is overloaded 
+    and no peer is underutilised.</dd>
+    <dt>What are the disadvantages of this strategy?</dt>
+    <dd>Random exchanges are not very efficient for our task. We want to reason 
+    with triples, which means that triples with a shared key should meet at one 
+    peer to derive a consequence. With random exchanges, the chances of triples 
+    meeting is quite low.</dd>
+  </dl>
+
+</div>
+
+</body>
+</html>
