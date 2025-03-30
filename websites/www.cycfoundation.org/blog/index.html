@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>The Cyc Foundation  </title>
+<meta name="verify-v1" content="5GqWS0e+NkqAEf6F4cdIN2JX4wEjUiUXDIfKlujRcMw=" />
+<meta name="generator" content="WordPress 2.2.1" /> <!-- leave this for stats -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+		_uacct = "UA-616404-1";
+		urchinTracker();
+		</script>
+		<script src="_js/wikip.js" 	type="text/javascript"></script>
+<link rel="stylesheet" href="http://www.cycfoundation.org/blog/wordpress/wp-content/themes/simplicitybright/style.css" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.cycfoundation.org/blog/?feed=rss2" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.cycfoundation.org/blog/?feed=rss" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.cycfoundation.org/blog/?feed=atom" />
+<link rel="pingback" href="http://www.cycfoundation.org/blog/wordpress/xmlrpc.php" />
+	<link rel='archives' title='June 2011' href='http://www.cycfoundation.org/blog/?m=201106' />
+	<link rel='archives' title='February 2011' href='http://www.cycfoundation.org/blog/?m=201102' />
+	<link rel='archives' title='September 2008' href='http://www.cycfoundation.org/blog/?m=200809' />
+	<link rel='archives' title='May 2008' href='http://www.cycfoundation.org/blog/?m=200805' />
+	<link rel='archives' title='March 2008' href='http://www.cycfoundation.org/blog/?m=200803' />
+	<link rel='archives' title='January 2008' href='http://www.cycfoundation.org/blog/?m=200801' />
+	<link rel='archives' title='September 2007' href='http://www.cycfoundation.org/blog/?m=200709' />
+	<link rel='archives' title='August 2007' href='http://www.cycfoundation.org/blog/?m=200708' />
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.cycfoundation.org/blog/wordpress/xmlrpc.php?rsd" />
+</head>
+<body>
+<div id="top">
+<div id="topbar">
+<ul class="topmenu">
+<li><a href="http://www.cycfoundation.org/blog">Home</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=2" title="About">About</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=3" title="Team">Team</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=4" title="Initiatives">Initiatives</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=5" title="Videos">Videos</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=6" title="Suggested Reading">Suggested Reading</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=7" title="Join">Join</a></li>
+<li><a href="http://www.cycfoundation.org/blog/?feed=rss2"><img src="http://www.cycfoundation.org/blog/wordpress/wp-content/themes/simplicitybright/images/rss.gif" alt="rssfeed" /></a></li>
+</ul>
+</div>
+</div>
+
+<div id="page">
+<div id="header">
+
+<div id="blogname">
+<h2><a href="http://www.cycfoundation.org/blog/">The Cyc Foundation</a></h2>
+<p>&nbsp;&nbsp;Computable Common Sense</p>
+</div>
+
+</div>
+
+<div id="wrapper"><div id="content">
+
+<div class="post">
+
+<h1 id="post-45"><a href="http://www.cycfoundation.org/blog/?p=45" rel="bookmark" title="Permanent Link: Introducing Schema.org">Introducing Schema.org</a></h1>
+
+<div class="entry">
+
+<p>Google, Bing, and Yahoo! have announced the formation of <a href="http://www.schema.org" title="Schema.org" target="_blank">schema.org</a>. The current schema.org type hierarchy can be found on the organization&#8217;s website <a href="http://schema.org/docs/full.html" title="The Type Hierarchy" target="_blank">here</a>. OpenCyc concepts corresponding to this hierarchy may be explored at <a href="http://sw.opencyc.org/" title="OpenCyc for the Semantic Web" target="_blank">sw.opencyc.org</a>. See for example the entry for <a href="http://sw.opencyc.org/concept/Mx4rv973YpwpEbGdrcN5Y29ycA" title="Movie - Conceptual Work" target="_blank">movies</a>.
+<ul>
+<li><a href="http://googleblog.blogspot.com/2011/06/introducing-schemaorg-search-engines.html" title="Introducing schema.org: Search engines come together for a richer web" target="_blank">Google&#8217;s announcement </a></li>
+<li><a href="http://www.bing.com:80/community/site_blogs/b/search/archive/2011/06/02/bing-google-and-yahoo-unite-to-build-the-web-of-objects.aspx" title="Introducing Schema.org: Bing, Google and Yahoo Unite to Build the Web of Objects" target="_blank">Bing&#8217;s announcement</a></li>
+<li><a href="http://www.ysearchblog.com/2011/06/02/introducing-schema-org-a-collaboration-on-structured-data/" title="Introducing schema.org: A Collaboration on Structured Data">Yahoo!&#8217;s announcement</a></li>
+</ul>
+</div>
+
+<!--<p class="postmetadata">June 2nd, 2011 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=45#respond" title="Comment on Introducing Schema.org">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-44"><a href="http://www.cycfoundation.org/blog/?p=44" rel="bookmark" title="Permanent Link: <i>Smartest Machine on Earth</i>"><i>Smartest Machine on Earth</i></a></h1>
+
+<div class="entry">
+
+<p>Tune in Wednesday February 9, 2011 for the premier of <em>Smartest Machine on Earth.</em> The <em>NOVA</em> documentary explores IBM&#8217;s Watson, the computer that may do for <em>Jeopardy!</em> what Deep Blue did for the game of chess. The program airs 10pm EST on your local PBS station.</p>
+</div>
+
+<!--<p class="postmetadata">February 9th, 2011 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=44#respond" title="Comment on &lt;i&gt;Smartest Machine on Earth&lt;/i&gt;">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-42"><a href="http://www.cycfoundation.org/blog/?p=42" rel="bookmark" title="Permanent Link: A Progress Report">A Progress Report</a></h1>
+
+<div class="entry">
+
+<p>We&#8217;re pleased to bring you an update on several recent activities related to OpenCyc and the Semantic Web.<br/><br/><span style="font-weight: bold" class="Apple-style-span">UMBEL</span><br/>The lightweight <a href="http://www.umbel.org/" title="UMBEL lightweight ontology" target="_blank">UMBEL</a> ontology is finally live. Mike Bergman and Fred Giasson deserve a big round of applause for the tremendous effort they&#8217;ve put into this release. They&#8217;ve meticulously selected 20,000 of the most relevant concepts from the more than 300,000 in the Cyc KB. What&#8217;s more, relationships between these concepts have been simplified to facilitate discovery of related concepts and alignment with external ontologies.<br/><br/>One can use UMBEL to describe things, to help develop new ontologies and to put individuals in context. As an example of the first (from the UMBEL documentation), suppose you wanted to describe Muhammad Ali. Using the FOAF ontology, you could only say that he is a foaf:Person. We know he is, more specifically, a boxer, but we can&#8217;t find a boxer ontology. UMBEL has the subject concept sc:Boxer, which comes from the OpenCyc ontology. Using UMBEL, we can use both of these ontologies at once, thus employing the properties of foaf:Person (name, gender, birthday) as well as the class hierarchy above sc:Boxer (cyc:Person, cyc:SocialBeing, cyc:Athlete) to create a detailed representation of Muhammad Ali that relates to all other ontologies mapped into UMBEL.<br/><br/><span style="font-weight: bold" class="Apple-style-span">Wikipedia and OpenCyc Alignment</span><br/>We collaborated with <a href="http://www.cs.waikato.ac.nz/~olena/index.html" title="Olena Medelyan" target="_blank">Olena Medelyan</a> and <a href="http://www.waikato.ac.nz/wfass/staff/phils/clegg" title="Catherine Legg" target="_blank">Catherine Legg</a> of the University of Waikato, New Zealand in their effort to automatically identify ontologically equivalent concepts in Cyc and Wikipedia. The work was presented at this year&#8217;s AAAI and represents the highest quality mapping to date. It will prove useful for connecting with other open datasets like DBPedia and Freebase.<br/><br/>Details and downloadable versions of the mappings can be found at the project <a href="http://www.cs.waikato.ac.nz/~olena/cyc.html" title="INTEGRATING CYC AND WIKIPEDIA" target="_blank">website</a>.<br/><br/><span style="font-weight: bold" class="Apple-style-span">OpenCyc Update</span><br/>An updated OpenCyc ontology has been released featuring:
+<ul>
+<li>a new Creative Commons licensing</li>
+<li>new simplified relations between concepts in addition to the existing relationships</li>
+<li>new URI&#8217;s complying with the latest Linked Data principles</li>
+<li>a cleaner internal structure free of legacy concepts related to internal Cycorp projects that were of little use to the general community</li>
+</ul>
+<p>This OpenCyc update represents a significant usability improvement over the previous ontology and incorporates feedback from Cyc Foundation members, the UMBEL effort, and the community at large.<br/><br/>Thank you all for your continued interest and support.</p>
+</div>
+
+<!--<p class="postmetadata">September 11th, 2008 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=42#respond" title="Comment on A Progress Report">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-41"><a href="http://www.cycfoundation.org/blog/?p=41" rel="bookmark" title="Permanent Link: Games With a Purpose">Games With a Purpose</a></h1>
+
+<div class="entry">
+
+<p><a href="http://en.wikipedia.org/wiki/Luis_von_Ahn" target="_blank" title="Luis @ Wikipedia">Luis von Ahn</a> and <a href="http://www.gwap.com/gwap/news/" target="_blank" title="GWAP Team">his team</a> have launched <a href="http://www.gwap.com" target="_blank" title="Games With a Purpose">gwap.com</a>, a collection of fun games which also capture machine readable knowledge. </p>
+</div>
+
+<!--<p class="postmetadata">May 14th, 2008 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=41#respond" title="Comment on Games With a Purpose">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-40"><a href="http://www.cycfoundation.org/blog/?p=40" rel="bookmark" title="Permanent Link: UMBEL">UMBEL</a></h1>
+
+<div class="entry">
+
+<p><a href="http://www.mkbergman.com/?page_id=4" title="Mike Bergman" target="_blank">Mike Bergman</a> began an <a href="http://www.mkbergman.com/?p=430" title="A Re-Introduction to UMBEL" target="_blank">interesting series</a> about the history and motivations of the <a href="http://www.umbel.org/" title="UMBEL" target="_blank">UMBEL</a>  project over the weekend. Stay tuned.</p>
+</div>
+
+<!--<p class="postmetadata">March 31st, 2008 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=40#respond" title="Comment on UMBEL">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-39"><a href="http://www.cycfoundation.org/blog/?p=39" rel="bookmark" title="Permanent Link: New Cyc Foundation Facebook Group">New Cyc Foundation Facebook Group</a></h1>
+
+<div class="entry">
+
+<p>The Cyc Foundation has a new <a href="http://www.facebook.com/group.php?gid=10076841457" title="The Cyc Foundation Facebook Group" target="_blank">Facebook group</a>. If you are a member, please show your support and invite a friend!</p>
+</div>
+
+<!--<p class="postmetadata">January 30th, 2008 | <a href="http://www.cycfoundation.org/blog/?cat=4" title="View all posts in Facebook" rel="category">Facebook</a> | <a href="http://www.cycfoundation.org/blog/?p=39#respond" title="Comment on New Cyc Foundation Facebook Group">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-36"><a href="http://www.cycfoundation.org/blog/?p=36" rel="bookmark" title="Permanent Link: TreeJuxtaposer">TreeJuxtaposer</a></h1>
+
+<div class="entry">
+
+<p>Also on the topic of ontology alignment, <a href="http://www.cs.ubc.ca/~tmm/papers/tj/" title="TreeJuxtaposer" target="_blank">TreeJuxtaposer</a> is a wonderful comparison tool by Tamara Munzner.</p>
+</div>
+
+<!--<p class="postmetadata">September 7th, 2007 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=36#respond" title="Comment on TreeJuxtaposer">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-35"><a href="http://www.cycfoundation.org/blog/?p=35" rel="bookmark" title="Permanent Link: You Say - We Say">You Say - We Say</a></h1>
+
+<div class="entry">
+
+<p><a href="http://http://well-formed-data.net/archives/72/you-say-we-say" target="_blank" title="You Say We Say">You Say - We Say</a> is an interesting visualization of folksonomy/ontology alignment.</p>
+</div>
+
+<!--<p class="postmetadata">September 6th, 2007 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=35#respond" title="Comment on You Say - We Say">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-33"><a href="http://www.cycfoundation.org/blog/?p=33" rel="bookmark" title="Permanent Link: Batch importing into Cyc">Batch importing into Cyc</a></h1>
+
+<div class="entry">
+
+<p>How do you efficiently import a bunch of terms and assertions into an OpenCyc instance? Recently I looked at a few approaches. I found that Cyc&#8217;s &#8220;KEText&#8221; file format works well. Here are the docs on this format: <a href="http://65.99.218.242/ke-file.html" title="KEText">KEText</a>. The following SubL command then comes in handy, to load a file in KEText format:</p>
+<p>(load-ke-text-file #$CycAdministrator &#8220;C:/my.ketext.txt&#8221; :agenda t)</p>
+<p>To load very large amounts of data you&#8217;ll need to break your KEText files up into fairly small chunks, as there are limits to how much data the SubL command can process.</p>
+<p>You could alternatively use the OpenCyc Java API, which provides everything you need to make additions and changes to a Cyc image. In my case I had a bunch of information in XML already, so transforming the XML into KEText format was an easier way to go.</p>
+</div>
+
+<!--<p class="postmetadata">September 6th, 2007 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=33#respond" title="Comment on Batch importing into Cyc">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+<div class="post">
+
+<h1 id="post-31"><a href="http://www.cycfoundation.org/blog/?p=31" rel="bookmark" title="Permanent Link: A Bridge Between Rich Semantic Reasoning and Theorem Provers">A Bridge Between Rich Semantic Reasoning and Theorem Provers</a></h1>
+
+<div class="entry">
+
+<p>  In the history of the Cyc project, Cyc&#8217;s knowledge base and inference engine have evolved in a direction far different from most other automated theorem provers.  Cyc concentrated on solving problems in very large knowledge spaces (i.e., millions of facts), using higher-order logic, although the problem solutions were often not very deep.  The automated theorem proving community, on the other hand, looked at relatively small knowledge spaces (or theorems), but focused on becoming very fast at finding very deep solutions.</p>
+<p>To date, there has been fairly little cross-pollination between the two communities.  In part, this has been because there was no corpus of problems accessible by both Cyc and automated theorem provers.   Now, however, just such a problem corpus has been released and made available in the TPTP (Thousands of Problems for Theorem Provers) format that is the standard for automated theorem proving researchers.  More information about this problem suite can be found at<br />
+<a href="http://www.opencyc.org/doc/tptp_challenge_problem_set.html" title="The Cyc TPTP Challenge Problem Set" target="_blank">http://www.opencyc.org/doc/tptp_challenge_problem_set.html</a>.</p>
+</div>
+
+<!--<p class="postmetadata">September 6th, 2007 | <a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <a href="http://www.cycfoundation.org/blog/?p=31#respond" title="Comment on A Bridge Between Rich Semantic Reasoning and Theorem Provers">0 Comments</a></p>-->
+<p class="postmetadata"></p>
+</div>
+
+
+<div class="pagenavigation2">
+<div class="alignleft"><a href="http://www.cycfoundation.org/blog/wordpress/index.php?paged=2">&laquo; Previous Posts</a></div>
+<div class="alignright"><a href="http://www.cycfoundation.org/blog/wordpress/index.php?paged=2"></a></div>
+</div>
+
+
+</div>
+
+</div>
+<div id="sidebar">
+<div class="sidelist">
+<h2>Search</h2>
+<ul>
+<li>
+<form method="get" class="searchform" action="/blog/wordpress/index.php">
+<div>
+<input type="text" value="Search term..." name="s" class="s" onblur="if(this.value=='')this.value='Search term...';" onfocus="if(this.value=='Search term...')this.value='';" />
+</div>
+</form></li>
+</ul>
+</div>
+
+<div class="sidelist">
+<ul>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=2" title="About">About</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=3" title="Team">Team</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=4" title="Initiatives">Initiatives</a>
+	<ul>
+	<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=15" title="Cyclopedia">Cyclopedia</a></li>
+	<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=9" title="OpenCyc Concept Browser">OpenCyc Concept Browser</a></li>
+	<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=12" title="OpenCyc for the Semantic Web">OpenCyc for the Semantic Web</a></li>
+	<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=13" title="OpenCyc Web Services">OpenCyc Web Services</a></li>
+	</ul>
+</li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=5" title="Videos">Videos</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=6" title="Suggested Reading">Suggested Reading</a></li>
+<li class="page_item"><a href="http://www.cycfoundation.org/blog/?page_id=7" title="Join">Join</a></li>
+</ul>
+</div>
+
+
+<div class="sidelist">
+<!--
+<h2>Archive</h2>
+<ul>
+	<li><a href='http://www.cycfoundation.org/blog/?m=201106' title='June 2011'>June 2011</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=201102' title='February 2011'>February 2011</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200809' title='September 2008'>September 2008</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200805' title='May 2008'>May 2008</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200803' title='March 2008'>March 2008</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200801' title='January 2008'>January 2008</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200709' title='September 2007'>September 2007</a></li>
+	<li><a href='http://www.cycfoundation.org/blog/?m=200708' title='August 2007'>August 2007</a></li>
+</ul>
+-->
+</div>
+
+<div class="sidelist">
+<ul>
+<li class="categories"><h2>Categories</h2><ul>	<li><a href="http://www.cycfoundation.org/blog/?cat=4" title="View all posts filed under Facebook">Facebook</a>
+</li>
+	<li><a href="http://www.cycfoundation.org/blog/?cat=3" title="View all posts filed under Natural Language">Natural Language</a>
+</li>
+	<li><a href="http://www.cycfoundation.org/blog/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+</ul></li></ul>
+</div>
+
+<div class="sidelist">
+<ul>
+</ul>
+</div>
+
+</div><!--#### Ende Sidebar ###--><br class="clear" />
+
+<div id="bottom">
+<!--
+<div id="bottom-left">
+
+<h2>Initiatives</h2>
+<ul>
+<li><a href="#">OpenCyc Concept Browser</a></li>
+<li><a href="#">OpenCyc for the Semantic Web</a></li>
+<li><a href="#">OpenCyc Web Services</a></li>
+
+
+</ul>
+</div>
+
+<div id="bottom-mid">
+<h2>Menu middle</h2>
+<ul>
+<li><a href="#">Cyclify Community</a></li>
+<li><a href="#">Cyclopedia</a></li>
+<li><a href="#">Games that Matter</a></li>
+</ul>
+</div>
+
+<div id="bottom-right">
+<h2>Menu right</h2>
+<ul>
+<li><a href="#">Item 1</a></li>
+<li><a href="#">Item 2</a></li>
+<li><a href="#">Item 3</a></li>
+<li><a href="#">Item 4</a></li>
+<li><a href="#">Item 5</a></li>
+</ul>
+</div> 
+
+</div>
+-->
+<!-- end of bottom -->
+
+
+</div>
+<div id="footer">
+<div>&nbsp;</div>
+Copyright 2008. The Cyc Foundation. All rights reserved.
+<!--
+This Site runs with <a href="http://www.wordpress.de">WordPress 2.2.1</a> and the Theme <a href="http://www.koch-werkstatt.de/2007/03/24/wordpress-theme-simplicity/">Simplicity</a>
+-->
+<div>&nbsp;</div>
+</div>
+</body>
+</html>
+
