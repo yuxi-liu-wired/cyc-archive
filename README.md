@@ -9,16 +9,35 @@ The tools used:
 
 For some urls, a very specific version is needed. Those are in `exact.txt` and downloaded by `python exact.py`.
 
-There is a rather special case: some IRC records from 2002 and 2003. They are downloaded by the following command:
+For the rest, we need the latest version before a specific year (later years throw something like a 404 or other bad results). Those are placed into the `url_year.txt`, and to download them using `wbm-dl.exe`, run `python url_year.py`.
+
+Because the Internet Archive has been very fiddly, several other tools I tried have failed, and even this one doesn't work all the time. Sometimes the download would fail, so you should watch the terminal carefully for "Unable to connect to the remote server" error message. Interrupt if it starts throwing errors. Move the successful scraps from `url_year.txt` to `url_year_done.txt` so that you don't restart from the beginning.
+
+### Special cases
+
+Some IRC records from 2002 and 2003 are downloaded by the following command:
 
 ```sh
 .\wbm-dl.exe -e http://tunes.org/~nef/logs/opencyc/
 .\wbm-dl.exe http://tunes.org/~nef/logs/opencyc/ -O "^.*[0-9][0-9]\.[0-9][0-9]\.[0-9][0-9]$"
 ```
 
-For the rest, we need the latest version before a specific year (later years throw something like a 404 or other bad results). Those are placed into the `url_year.txt`, and to download them using `wbm-dl.exe`, run `python url_year.py`.
+Only some of the tweets of `cyc_ai` are available, and only through its frontpage, which updates over time, so they are scraped by this command:
 
-Because the Internet Archive has been very fiddly, several other tools I tried have failed, and even this one doesn't work all the time. Sometimes the download would fail, so you should watch the terminal carefully for "Unable to connect to the remote server" error message. Interrupt if it starts throwing errors. Move the successful scraps from `url_year.txt` to `url_year_done.txt` so that you don't restart from the beginning.
+```sh
+.\wbm-dl.exe -a -e http://twitter.com:80/cyc_ai
+```
+
+The SAILDART archive is still available, so it is scraped by 
+
+```sh
+wget -r -l 3 -c --no-parent --convert-links --adjust-extension --page-requisites \
+  -e robots=off \
+  --accept-regex ".*DBL.*" \
+  https://www.saildart.org/DBL
+```
+
+Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot be used on Windows, so I replaced it with `[_,DBL]`. This required changing exactly one `href`, in `DBL.html`, from `[*,DBL]` to `[_,DBL]`.
 
 ## Contents
 
@@ -35,13 +54,17 @@ Because the Internet Archive has been very fiddly, several other tools I tried h
   * `opencyc.org` and `www.opencyc.org`: From the `OpenCyc.org` website, which went offline around 2016. Particularly interesting is the tutorial at `www.opencyc.org\doc\doc`.
   * `www.larkc.eu` and `wiki.larkc.eu`: The "Large Knowledge Collider" website, last updated in 2011. It got converted to a [domain parking website](https://en.wikipedia.org/wiki/Domain_parking) in 2015.
   * `207.207.9.186` and `game.cyc.com`: Two websites for the game of "FACTory". It was first launched in 2005 and was hosted on `207.207.9.186` until 2007. It was then hosted on `game.cyc.com` until 2012.
-  * `blog.cyc.com`: 11 blogposts by the Cyc Foundation. It started in 2008, and ended in 2011.
+  * `twitter.com`: The tweets of `@cyc_ai`. It began in 2008 and ended in 2011 after 15764 tweets, mostly in the format of "I just leaned `<statement>`, true or false?". It shut down some time around 2017.
+  * `www.cycfoundation.org\blog`: Blog posts by the Cyc Foundation. It started in 2007 and ended in 2011.
+  * `cycfoundation.org\concepts`: Around 27000 concepts in the Semantic Web version of OpenCyc. They were originally hosted on `sw.opencyc.org`, but the archived version on the Internet Archive is completely broken. For some reason, the version hosted on `cycfoundation.org` had been correctly archived, which is why I downloaded these.
+  * `blog.cyc.com`: 11 more blog posts by the Cyc Foundation. It started in 2008, and ended in 2011.
   * `tunes.org`: Some IRC chat records about Cyc back in 2002--2003.
   * `suo.ieee.org`: The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it.
 * `other_files`:
   * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
   * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
   * `minimal-cyc-kb.txt` and `opencyc-ontology.txt`: Early snapshots of the Cyc ontology and knowledge base from before 2002. Downloaded from [1](https://web.archive.org/web/20070309111053/http://www.cyc.com:80/SUO/minimal-cyc-kb.txt) and [2](https://web.archive.org/web/20130115202515/http://www.cyc.com:80/SUO/opencyc-ontology.txt)
+  * `www.saildart.org.zip`: The complete archive of [`www.saildart.org/DBL`](https://www.saildart.org/DBL). It is Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * `scraping_utils`: Scripts used for scraping, described above.
 
 The general impression after reading through the entire system is that there was a single period of "massive extinction event" during 2013--2016, where Cycorp purged just about everything from the Internet. No more OpenCyc, tutorial, reference, Ontological Engineer's handbook... everything was purged, except marketing material. This closely corresponds to the commercialization wave in 2016 when Lenat declared Cyc "done" and started commercializing it.
@@ -53,7 +76,6 @@ Other than what's in the archive, there's also
 * [`asanchez75/opencyc`](https://github.com/asanchez75/opencyc): The published versions of OpenCyc and its knowledge graphs. The last update was in 2012.
 * [`white-flame/am`](https://github.com/white-flame/am): Automated Mathematician from SAIL archives circa 1977.
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
-* [`www.saildart.org/DBL`](https://www.saildart.org/DBL): Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`. I made a [mirror on GitHub](https://github.com/yuxi-liu-wired/Large-Knowledge-Collider-archive).
 
 ### Lost files
