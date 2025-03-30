@@ -56,7 +56,6 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
   * `207.207.9.186` and `game.cyc.com`: Two websites for the game of "FACTory". It was first launched in 2005 and was hosted on `207.207.9.186` until 2007. It was then hosted on `game.cyc.com` until 2012.
   * `twitter.com`: The tweets of `@cyc_ai`. It began in 2008 and ended in 2011 after 15764 tweets, mostly in the format of "I just leaned `<statement>`, true or false?". It shut down some time around 2017.
   * `www.cycfoundation.org\blog`: Blog posts by the Cyc Foundation. It started in 2007 and ended in 2011.
-  * `cycfoundation.org\concepts`: Around 27000 concepts in the Semantic Web version of OpenCyc. They were originally hosted on `sw.opencyc.org`, but the archived version on the Internet Archive is completely broken. For some reason, the version hosted on `cycfoundation.org` had been correctly archived, which is why I downloaded these.
   * `blog.cyc.com`: 11 more blog posts by the Cyc Foundation. It started in 2008, and ended in 2011.
   * `tunes.org`: Some IRC chat records about Cyc back in 2002--2003.
   * `suo.ieee.org`: The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it.
@@ -64,6 +63,7 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
   * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
   * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
   * `minimal-cyc-kb.txt` and `opencyc-ontology.txt`: Early snapshots of the Cyc ontology and knowledge base from before 2002. Downloaded from [1](https://web.archive.org/web/20070309111053/http://www.cyc.com:80/SUO/minimal-cyc-kb.txt) and [2](https://web.archive.org/web/20130115202515/http://www.cyc.com:80/SUO/opencyc-ontology.txt)
+  * `cycfoundation-concepts.zip`: 27609 concepts in the Semantic Web version of OpenCyc. They were originally hosted on `sw.opencyc.org`, but the archived version on the Internet Archive is completely broken. For some reason, the version hosted on `cycfoundation.org` had been correctly archived, which is where I scraped them from. The urls are of the form `http://www.cycfoundation.org:80/concepts/<name>` and scraped by `.\wbm-dl.exe http://cycfoundation.org:80/concepts/ -t 2011`.
   * `www.saildart.org.zip`: The complete archive of [`www.saildart.org/DBL`](https://www.saildart.org/DBL). It is Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * `scraping_utils`: Scripts used for scraping, described above.
 
