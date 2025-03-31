@@ -1,5 +1,9 @@
 # Cyc Archive
 
+This is an archive of most of the online material that the Cycorp has released over the years that has been deleted, but preserved within the Internet Archive. Due to the lack of long-term stability of IA, I have taken the liberty to scrape those from IA and kept them here for safe keeping.
+
+I built this archive while writing my essay on the history of Lenat and the Cyc project, which is available on [my website](https://yuxi-liu-wired.github.io/essays/posts/cyc/).
+
 ## How to scrape these
 
 The tools used:
@@ -44,12 +48,11 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
 ### Contents of the folder
 
 * `websites`: The scraped websites.
-  * Particularly interesting are:
-    * `www.cyc.com\doc\handbook\oe`: The Ontology Engineer's Handbook, version 0.7, last updated on `2002-06-05`.
-    * `\www.cyc.com\cycdoc`: Documentation.
-      * `walkthroughs\oeintro_cats_frames_long.html`: A long introduction tutorial.
-      * `vocab`: A list of vocabularies (that is, entities in the top-level and mid-level ontology and microtheories).
-      * `ref`: The reference documentation for the CycL language as it was in 2002.
+  * `www.cyc.com\doc\handbook\oe`: The Ontology Engineer's Handbook, version 0.7, last updated on `2002-06-05`.
+  * `www.cyc.com\cycdoc`: Documentation.
+    * `walkthroughs\oeintro_cats_frames_long.html`: A long introduction tutorial.
+    * `vocab`: A list of vocabularies (that is, entities in the top-level and mid-level ontology and microtheories).
+    * `ref`: The reference documentation for the CycL language as it was in 2002.
   * `cyc.com\cyc\applications\cycsecure`: The CycSecure application, which reasons about ways in which a computer system can be attacked and defended.
   * `opencyc.org` and `www.opencyc.org`: From the `OpenCyc.org` website, which went offline around 2016. Particularly interesting is the tutorial at `www.opencyc.org\doc\doc`.
   * `www.larkc.eu` and `wiki.larkc.eu`: The "Large Knowledge Collider" website, last updated in 2011. It got converted to a [domain parking website](https://en.wikipedia.org/wiki/Domain_parking) in 2015.
@@ -61,13 +64,14 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
   * `suo.ieee.org`: The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it.
 * `other_files`:
   * `Douglas Lenat.md`: Notes I've taken during the research of this essay.
-  * `Cyc101_tutorial_slides.zip`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
+  * `Cyc101_tutorial_slides.tar.xz`: Tutorial slides downloaded from [Cyc 101 Tutorial at OpenCyc.org](https://web.archive.org/web/20120409060356/http://opencyc.org/doc/tut/?expand_all=1)
   * `minimal-cyc-kb.txt` and `opencyc-ontology.txt`: Early snapshots of the Cyc ontology and knowledge base from before 2002. Downloaded from [1](https://web.archive.org/web/20070309111053/http://www.cyc.com:80/SUO/minimal-cyc-kb.txt) and [2](https://web.archive.org/web/20130115202515/http://www.cyc.com:80/SUO/opencyc-ontology.txt)
-  * `cycfoundation-concepts.zip`: 27609 concepts in the Semantic Web version of OpenCyc. They were originally hosted on `sw.opencyc.org`, but the archived version on the Internet Archive is completely broken. For some reason, the version hosted on `cycfoundation.org` had been correctly archived, which is where I scraped them from. The urls are of the form `http://www.cycfoundation.org:80/concepts/<name>` and scraped by `.\wbm-dl.exe http://cycfoundation.org:80/concepts/ -t 2011`.
-  * `www.saildart.org.zip`: The complete archive of [`www.saildart.org/DBL`](https://www.saildart.org/DBL). It is Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
+  * `cycfoundation-concepts.tar.xz`: 27580 concepts in the Semantic Web version of OpenCyc. They were originally hosted on `sw.opencyc.org`, but the archived version on the Internet Archive is completely broken. For some reason, the version hosted on `cycfoundation.org` had been correctly archived, which is where I scraped them from. The urls are of the form `http://www.cycfoundation.org:80/concepts/<name>` and scraped by `.\wbm-dl.exe http://cycfoundation.org:80/concepts/ -t 2011`. Note that 78 of the concepts, such as `BloodTypeByABOAndRhFactor` have had duplicate entries. This is probably because the Internet Archive archived two versions of some concepts. The later version would contain more information, such as "Examples of `<concept>` Include ...".
+  * `cycfoundation-concepts.jsonl.xz`: The concepts from `cycfoundation-concepts.tar.xz`, parsed into `jsonl` using `parse_cycfoundation_concepts.py`.
+  * `www.saildart.org.7z`: The complete archive of [`www.saildart.org/DBL`](https://www.saildart.org/DBL). It is Douglas Lenat's files at the SAILDART archive, an archive of the first [Stanford Artificial Intelligence Laboratory](https://en.wikipedia.org/wiki/Stanford_Artificial_Intelligence_Laboratory) derived from its final backup tapes.
 * `scraping_utils`: Scripts used for scraping, described above.
 
-The general impression after reading through the entire system is that there was a single period of "massive extinction event" during 2013--2016, where Cycorp purged just about everything from the Internet. No more OpenCyc, tutorial, reference, Ontological Engineer's handbook... everything was purged, except marketing material. This closely corresponds to the commercialization wave in 2016 when Lenat declared Cyc "done" and started commercializing it.
+The general impression after reading through the entire system is that there was a single period of "massive extinction event" during 2013--2016, during which Cycorp purged most of the open information about Cyc from the Internet. No more OpenCyc, tutorial, reference, Ontological Engineer's handbook... everything was purged, except marketing material. This closely corresponds to the commercialization wave in 2016, the year in which Lenat declared Cyc "done" and started commercializing it.
 
 ### Other files
 
