@@ -244,9 +244,8 @@
   collapsed:: true
 	- "we now agree that the details of such unstated heuristics should have been given in the thesis." But he discounts most of the criticism as "minor organizational matters or implementation details."
 - ✅Computer software for intelligent systems (1984) [@lenatComputerSoftwareIntelligent1984]
-  collapsed:: true
 	- Applying "coalesce" to Traveller, EURISKO developed a novel strategy: it directed a disabled ship to fire on and sink itself. Because the game's stylized rules defined overall fleet agility in terms of the slowest vessel, this was a reasonable method of in creasing the fleet's power.
-	- In working on the design of integrated circuits, for example, EURISKO stumbled on the fact that symmetry is a desirable property for such chips, although it did not understand why; when it was later in structed to design fleets for the Traveller game, EURISKO decided to make them symmetrical and justified its decision by referring to its earlier experience in de signing circuits.
+	- In working on the design of integrated circuits, for example, EURISKO stumbled on the fact that symmetry is a desirable property for such chips, although it did not understand why; when it was later instructed to design fleets for the Traveller game, EURISKO decided to make them symmetrical and justified its decision by referring to its earlier experience in designing circuits.
 - ✅CYC: Using common sense knowledge to overcome brittleness and knowledge acquisition bottlenecks (1985) [@lenatCycUsingCommon1985]
   collapsed:: true
 	- assumptions
@@ -266,7 +265,6 @@
 	- conservative estimate for the data enterers’ rate is one paragraph per day; this would make their total effort about 150 person-years.
 	-
 - ✅When will machines learn? (1989): 0.5M assertions, 50M by 1995. NLU and ML by 1995.
-  collapsed:: true
 	- We now have about half a million entries in it, and we expect it to increase by one order of magnitude by mid-1990 and one more by the end of 1994. We expect that at roughly that point, a kind of crossover will occur, and it will be cost-effective to enlarge the system from that point onward by having it learn mostly on its own and from online texts.
 	- my 1975-1984 work on AM and Eurisko helped to spark the rebirth of the machine learning field. I fully expect that CYC will spark a vasty greater renaissance in that field, and that I will be rehabilitated (considered a learning researcher again) during the latter half of the 1990s.
 	- since CYC started in September, 1984, and the crossover to automated KA was and still is scheduled to occur ten years later than that, a tongue-in-cheek answer to this editorial's apparently rhetorical title (When Will Machines Learn?) might be: "September 1, 1994."
@@ -355,7 +353,6 @@
 		- Marvin Minsky: 0.2M waking hours between birth and age 21. Assuming 4 new concepts per hour, then 0.8M concepts.
 		- There are about 1 trillion brain cells. Assuming each brain cell is responsible for a one-step inference between two concepts, then there are 1M concepts.
 - ✅Silicon babies (1991) [@wallichSiliconBabies1991]
-  collapsed:: true
 	- At that point, it will be able to pick up new knowledge more readily by read ing than by having knowledge engineers spoon-feed it. A wider information base may also save eyc from such gaffe s as concluding (from everybody it knew about) that all humans in the world are friends of Doug Lenat.
 	- Cyc is "kitchen-sink engineering".
 	- asserted in two different forms : first in clean and elegant " epistemological language" and again at the heuristic level in "a grab bag of different representations " that are designed to make inference faster for a particular class of facts.
@@ -368,12 +365,34 @@
 	- Why did it have to change so drastically? Cyc project began with RLL, the same language that EURISKO used. They thought it would all work out, because all the pieces "worked", or rather,
 	  collapsed:: true
 		- each of the documented features worked, at least once, in some demo, though few of them worked simultaneously, or repeatably, or on a wide range of problems. This "sort of" level of implementation was not limited to Stanford, or the 80's, of course; one could point one's finger at SHRDLU, HACKER,... well, you get the idea, and, as I've already remarked, I was as guilty as anyone of this sloppiness. Living in this never-never land of semi-implemented systems has certain advantages (it lets you expound, and cling to, elegant theories of knowledge and intelligent action.) This is what Aristotle did with physics; it's what we're still able to do with religion. Things get ever so much uglier if you let data intrude.
+- Guha, Ramanathan V. Contexts: a formalization and some applications. PhD thesis, Stanford University, 1992.
+	-
+- ✅Guha, Ramanathan V., and Douglas B. Lenat. "Re: CycLing paper reviews." *Artificial Intelligence* 61.1 (1993): 149-174. [@guhaReCycLingPaper1993]: >1M assertions, >30 inference engines. takes 180 hours to learn.
+  collapsed:: true
+	- McDermott says "the formalists are pushing through the same swamp ... a few meters ahead". But we have little confidence that the theoreticians know what's important, that they're pushing in the right direction, given that they only try to use their formalisms on toy problems. Ntis Nilsson recently [20] provided what is perhaps a more accurate metaphorical characterization of our effort, in which we are the "discoverers '~ and the formalists are the "colonists" following along behind, years later.
+	- Today, our methodology for ontological engineering starts with a global plan, scheduling dozens of micro-theories (e.g., daily human activities, the weather, human-occupied constructs) we will be entering over the coming year, and sketching their interdependencies. One or two very experienced individuals then produce an account, in English, of the scope of a theory to be worked on next. Other project members flesh out that account, still in English, and restate each sentence at the right level of generality. Half a dozen knowledge enterers then work to identify any concepts (collections, predicates, etc.) which are absent from Cyc but which are needed to express this knowledge. Finally, teams (usually of size 2) of knowledge enterers finish axiomatizing the knowledge, entering it into Cyc, and (often using a "tiger-team" approach) testing and reviewing it. This methodology continues to evolve, partly as a result of our learning more about the process, and partly as a result of Cyc learning more (and hence being increasingly able to actively help with the knowledge entering process.)
+	- more than half of the useful knowledge in Cyc was entered during the past 18 months.
+	- CycL
+		- Cyc's representation language, CycL, has significantly evolved in the years since the book was written.
+		- Reasoning by argumentation--a mechanism central to CycL's doing default reasoning--was barely hinted at in the book. The old scheme, involving numeric certainty factors, was found to be inadequate, and was scrapped when the book was almost finished, and several sections had to be hastily amended.
+		- The need for expressive power has mutated the representation so far from the vanilla frame-based language of its origins as to be almost unrecognizable. Those "needs" included disjunctions, negation, universal and existential quantification, etc., which led us (admittedly unwillingly) to something like first-order predicate calculus. Our unhappiness over this inexorable transformation was due to the fact that most systems which use first-order predicate calculus as a representation language also happen to use general theorem proving as their inference "engine"--and that leads to intolerably slow and combinatorially explosive behavior even with moderately small sets of axioms.
+	- there are currently well over a million such axioms in the Cyc knowledge base; by the time you read these words, there will probably be over two million
+	- The point is that we (people and programs) need only pursue heuristic completeness--i.e., the ability to (usually) efficiently draw those inferences that an application demands
+	- identified (and implemented) over 30 different inference schemas, that together cover almost all of the couple of million of assertions anyone's ever made to Cyc, and yet are specific enough that they admit significant optimizations for inference, for truth maintenance, etc. Some of these "inference engines" are familiar schemas (inheritance and automatic classification), some less so (e.g., determinations and transfersThrough, which is akin to). These are encapsulated as separate modules at the Heuristic Level; a translator recognizes when a module can be called upon, adjudicates which module to invoke in case of multiple ones being triggered, and then, after one or more modules return answers. lifts or transforms it back into normal CycL form. Of course this goes on recursively, so various different Heuristic Level modules might be called, many times, in the course of answering a single Epistemological Level query.
+	- project management
+		- Cyc has never received a penny of government funding, let alone a large share of it. Since its inception in 1984, the project has been supported entirely by a consortium of American companies.
+		- In 1991, we offered [to the SRKB group, on Internet] to make parts of the Cyc knowledge base available--in KIF interlingua format--to that community of "Shared Reusable Knowledge Base" researchers. We encouraged them to use it in conducting experiments on knowledge sharing, or to use it as a substrate for knowledge sharing (as Sowa suggests). Interestingly, we had only one public and one private reply, the latter being a cynical (but, in hindsight, accurate) prediction that no one in that group would take us up on our offer, because that community was interested foremost in dictating standards, only secondarily in representation, and only incidentally in knowledge (which is what we were offering.)
+	- application
+		- In June, 1992, we held a month-long 9-hour-a-day every-day immersion course in Cyc, primarily for the benefit of our new knowledge enterers and collaborators. That is the magnitude of the effort required at present, to come up to speed on Cyc. Within one month, every single one of our dozen new knowledge enterers was working productively, representing new knowledge in CycL.
+		- the most promising short-term uses of Cyc are not what are traditionally considered AI problems. Instead, they are in relatively "mundane" problems such as making spreadsheets smarter, providing better access to a heterogeneous set of databases, directed marketing of goods and services, etc.
+	- ontological change
+		- Over the years, there have been about five relatively major transitions, each of which has stopped the knowledge entry process for about a week--during which time we semi-automatically converted the old knowledge base to the new one. The last big change was the introduction of contexts; that occurred in the summer of 1990, when there were already over half a million assertions in the knowledge base.
+		- Consider the following, which is an actual example of a high-level change in the ontology we made in 1991. We radically changed the way we handle RepresentedThing v e r s u s InternalMachineThing. All it meant was one "operation" that we had to perform--one assertion told to Cyc--followed by allowing the system to run for about eight hours to "assimilate" that magnitude of change. Back in 1988, a similar thing happened when we realized that Processes and Events were coextensional (even though ProcessType and EventType are not), and asserted that to Cyc.
 - ✅[CYC Report -- V. Pratt](http://boole.stanford.edu/cyc.html) (1994-04-16): staff comprises 22 individuals at present (19 FTEs); we hope to staff up to over 30 soon, assuming that is we "stay in business" at MCC
   collapsed:: true
 	- the typical knowledge enterer will work on a topic for several days, then enter several hundred axioms in a burst, in a day.
 	- our staff size has gone up and down, but for the first 5 years in particular we had a much smaller staff.
 - ✅✅Enabling agents to work together (1994) [@guhaEnablingAgentsWork1994]
-  collapsed:: true
 	- The Syntax module can properly handle about 75% of the sentences found in the news stories of a typical issue of the newspaper USA Today. And in cases in which Cyc knows all the proper nouns in the sentence, the Semantics module can properly handle most of the sentences parsable by the syntax module... as good as what our knowledge enterers independently come up with, when asked to manually translate the material into CycL.
 	- ```
 	  1. The 30k constant terms
@@ -517,12 +536,10 @@
   collapsed:: true
 	- our hopes for NLU and ML in the next 10 years are very high
 - [DUELING BRAINSCAPES IN ARTIFICIAL INTELLIGENCE](https://web.archive.org/web/20031224235959/http://businessweek.com/1997/25/b353210.htm) (1997-06-23): 2M assertions. Already cost $40M. Autonomous research by 2020.
-  collapsed:: true
 	- The flip side of the AI coin can be found in Texas. Meet Cyc (from encyclopedia), the most ambitious version of the old-school, top-down system. Some $40 million has been spent on organizing Cyc's reasoning ''engines'' and stuffing its knowledge base with a half-million rules derived from 2 million common-sense facts.
 	- Cycorp has turned a modest profit each year on annual revenues and research contracts of about $3 million.
 	- By 2020, Lenat hopes Cyc will be ready to take charge of its own research lab. He expects Cyc to design unique experiments and uncover new knowledge.
 - ✅✅From 2001 to 2001: Common Sense and the Mind of HAL (1998)
-  collapsed:: true
 	- Often I'd find it in a mode best described as "dead." Sometime during the night, EURISKO would decide that the best thing to do was to commit suicide and shut itself off. More precisely, it modified its own judgmental rules in a way that valued "making no errors at all" as highly as "making productive new discoveries." As soon as EURISKO did this, it found it could successfully meet its new goal by doing nothing at all for the rest of the night... I eventually had to add a new heuristic to EURISKO-one it couldn't modify in any way-to explicitly forbid this sort of suicide.
 	  
 	  [@HALsLegacy2001s1998, page 194]
@@ -597,7 +614,6 @@
   collapsed:: true
 	- John McCarthy occasionally advised Lenat on the project. McCarthy is a professor of computer science at Stanford and a founding father of the field. He is famous for, among many accomplishments, coining the term artificial intelligence. He helped focus the group's efforts by formulating a pair of test sentences: "Napoleon died on St. Helena. Wellington was greatly saddened."
 - ✅✅[Cyc in use - Computerworld](https://web.archive.org/web/20021113022542/http://www.computerworld.com/industrytopics/defense/story/0,10801,69848,00.html) (2002-04-08): CycSecure
-  collapsed:: true
 	- CycSecure taps into a variety of sources, including the U.S. Department of Defense's Information Assurance Vulnerability Assessment notification program, to keep up to date on all known ways a system can be attacked. It also knows about the military command's computers and networks and combines that knowledge with the vulnerability information to simulate network attacks. When it spots a potential vulnerability in a computer, it can go out to that box to determine whether it is in fact vulnerable and then recommend the appropriate patch.
 - ✅[Computerizing Common Sense - Computerworld](https://web.archive.org/web/20021019152738/http://www.computerworld.com/news/2002/story/0,11280,69881,00.html) (2002-04-08): 600 person-years, 3M rules, 300K concepts. Planned to "migrate everything to the public mode. But OpenCyc will always lag by 24 to 30 months." Finally knew enough to be "tutored" in 2001. Expect 10M assertions/yr contributed by the public, and 100M assertions in total by 2007, reaching the level of a human. [@anthesComputerizingCommonSense2002]
   collapsed:: true
@@ -672,17 +688,14 @@
 	- The Ontoprise system proved to be the fastest and most reliable, taking approximately 2 hours to complete its batch run. The SRI system ran the challenge in approximately 5 hours, and the Cycorp system completed its processing in over 12 hours
 	- Cycorp’s OpenHalo knowledge base was two orders of magnitude larger than the other teams’. They were unable to demonstrate any measurable advantage in using this additional knowledge, even in example-based questions, where they exhibited meta-reasoning brittleness similar to that observed in the other systems. The size of their knowledge base does however explain some of the significant run-time differences. They have also yet to demonstrate successful, effective reintegration of Halo knowledge into the extended Cyc platform. Reuse and integration appear to remain open questions for all three Halo teams.
 	- Cycorp’s generative approach may eventually scale and generalize, but the current results were extremely verbose and often unintelligible to domain experts.
-- ✅✅[Cycorp: The Cost of Common Sense | MIT Technology Review](https://www.technologyreview.com/2005/03/01/274581/cycorp-the-cost-of-common-sense-2/) (2005-03-01)
-  collapsed:: true
+- ✅✅[Cycorp: The Cost of Common Sense | MIT Technology Review](https://www.technologyreview.com/2005/03/01/274581/cycorp-the-cost-of-common-sense-2/) (2005-03-01) [@woodCycorpCostCommon2005]
 	- In 1996, we got our first substantial government contract,” Lenat recalls. Since then, Cycorp has collected about half of its revenue from U.S. government agencies and the rest from companies, mostly for building “semantic maps” that help users pull information from various databases with a single query. By taking on paying projects, Cycorp has been able to stay profitable and debt-free. All of the firm’s stock is owned by its employees, making Cycorp answerable only to Cycorp. “But,” Lenat admits, “we have had to tack with the funding winds. Maybe 50 percent of the funding we get pushes us forward in the direction that we need to go.”
 	- Cycorp doesn’t even want to be distracted by the rigors of the retail software business; instead, it licenses Cyc for use in third-party software packages.
 	- The time may come, Lenat says, when a greatly expanded Cyc will underlie countless software applications. But reaching that goal could easily take another two decades.
-- ✅Mullins, Justin. "Whatever happened to machines that think?." *New Scientist* 186.2496 (2005): 32-37.: singularity by 2015.
-  collapsed:: true
+- ✅[Mullins, Justin. "Whatever happened to machines that think?."](https://web.archive.org/web/20050423210805/http://www.newscientist.com/channel/info-tech/mg18624961.700) *New Scientist* 186.2496 (2005): 32-37.: singularity by 2015.
 	- In the next few months \[Cyc\] will be put online for the world to interact with. And it’s only going to get cleverer. Opening Cyc up to the masses is expected to accelerate the rate at which it learns, giving it access to the combined knowledge of millions of people around the globe as it hoovers up new facts from web pages, webcams and data entered manually by anyone who wants to contribute.
 	- “I believe we are heading towards a singularity and we will see it in less than 10 years,” says Doug Lenat
 - ✅Applied ontology issues (2005): funny anecdote about "Ontological Engineer’s Handbook"
-  collapsed:: true
 	- DB Lenat - Applied Ontology, 2005
 	- I coined the phrase “ontological engineer” in the mid-1980’s, shortly after embarking on the construction of Cyc, because I didn’t like the pejorative tone of “knowledge enterer” or “knowledge worker”, and the term “knowledge engineer” had already been taken (to mean someone who builds expert systems). Based on that, when Addison-Wesley published our 1989 Cyc book (Building Large Knowledge-Based Systems), the editor playfully inserted a forward reference, at the front, under Other Publications, to the 1997 Ontological Engineer’s Handbook. Of course the joke was on us when, starting in 1997, we began to be deluged by requests for that nonexistent work.
 - ✅An introduction to the syntax and content of Cyc (2006): 2.2M assertions, 250K concepts, 15K predicates.
@@ -695,7 +708,6 @@
 	  
 	  An important specialization of `Situation`, and thus also of `IntangibleIndividual` and `TemporallyExistingThing`. Each instance of `Event` is a dynamic situation in which the state of the world changes; each instance is something one would say ‘happens’. `Event`s are intangible because they are changes *per se*, not tangible objects that effect and undergo changes. Notable specializations of `Event` include `Event-Localized`, `PhysicalEvent`, `Action`, and `GeneralizedTransfer`. `Event`s should not be confused with `TimeIntervals`.
 - ✅The Voice of the Turtle: Whatever Happened to AI? (2006 talk published in 2008): 900 person-year. ready to use Cyc as an inductive bias for learning
-  collapsed:: true
 	- so many hours, so many careers, of brilliant researchers like Allen Newell and Herb Simon have been sacrificed to the altar of such verisimilitude. Generations of Carnegie Mellon University graduate students built Pure Production Systems, with the goal of duplicating the timing delays, error rates, and so on, of humans (for example, see Laird and Rosenbloom [1994]). Today we look back with disdain at ancients who pursued similar sorts of sympathetic magic rituals, but are we really that much different? I fear that some of our practices in faithfully duplicating human cognitive architecture fall under what Richard Feynman dubbed cargo cult science, with the same faith—part reverence and part hope—as the deluded South Seas islanders circa 1946 with their bamboo headphones, meticulously duplicating the form but totally misunderstanding the functionality, and the salience.
 	- how much priming of the pump should go on, versus letting the computer learn everything on its own? My point here is that I fear that too many brilliant AI researchers have placed that bet too far toward the tabula rasa end of that spectrum, and as a result AI is not as far along as it could have been by now. I’ve been working at the opposite end—priming the pump in the form of building Cyc—for 24 plus years now, and after 900 person-years of such effort, we finally, in the last couple years, have been ready to use it as an inductive bias for learning. This has led to a dramatic shift in activity at Cycorp: most of our effort these days goes into utilizing Cyc for machine learning by discovery or by language understanding and clarification dialogue, not hand-coding assertions one by one.
 	- I’ll mention one more error of this analogy-to-humans sort that has slowed down progress in AI: an almost mystical worship of physical embodiment.
@@ -783,15 +795,14 @@
 	- As of 2006, they were "mostly" autoformalizing from online information.
 	- https://slideplayer.com/slide/6425196/
 	-
-- [Efficient Pathfinding in Very Large Data Spaces (2007)](https://apps.dtic.mil/sti/tr/pdf/ADA475387.pdf)
-	-
+- [Efficient Pathfinding in Very Large Data Spaces (2007-11)](https://apps.dtic.mil/sti/tr/pdf/ADA475387.pdf): 1 strategist, 4 tacticians, 1097 workers. The strategist and tacticians are parameterized.
+	- AFRL-RI-RS-TR-2007-244 Final Technical Report November 2007
 - [Case Study: A Semantic Web Content Repository for Clinical Research](https://www.w3.org/2001/sw/sweo/public/UseCases/ClevelandClinic/) (2007-10)
 - Autonomous Classification of Knowledge into an Ontology (2007): 4.6M assertions, 23,627 microtheories
   collapsed:: true
 	- Cyc currently contains about 4.6 million assertions in 23,627 microtheories, which have an average of approximately three microtheories directly below them in the hierarchy.
 	- Historically, all assertions have been added to Cyc by ontologists, human knowledge engineers who are familiar with the Mt structure and able to determine the appropriate Mt placement (domain and level of generality) of that an assertion. This is not ideal for several reasons. It is timeconsuming; choosing the right microtheory can easily take several minutes for a trained ontologist who is familiar with the Cyc ontology and experienced in how best to organize knowledge for maximum utility.
 - OpenCyc + [[Semantic Web]]
-  collapsed:: true
 	- OpenCyc was in the [Standard Upper Ontology Working Group](https://web.archive.org/web/20120609070903/http://suo.ieee.org/), which lived from 2001 to 2003.
 	  collapsed:: true
 		- This standard will specify an upper ontology that will enable computers to utilize it for applications such as data interoperability, information search and retrieval, automated inferencing, and natural language processing. An ontology is similar to a dictionary or glossary, but with greater detail and structure that enables computers to process its content. An ontology consists of a set of concepts, axioms, and relationships that describe a domain of interest. An upper ontology is limited to concepts that are meta, generic, abstract and philosophical, and therefore are general enough to address (at a high level) a broad range of domain areas. Concepts specific to given domains will not be included; however, this standard will provide a structure and a set of general concepts upon which domain ontologies (e.g. medical, financial, engineering, etc.) could be constructed.
@@ -832,10 +843,8 @@
 		- The [last post](https://web.archive.org/web/20110610022626/http://www.cycfoundation.org/blog/?p=45) was up in 2011-06, about the formation of schema.org, yet another organization for the Semantic Web.
 		- It closed down sometime between [2015-09-10](https://web.archive.org/web/20150910135245/http://cycfoundation.org/) and [2015-09-24](https://web.archive.org/web/20150924210404/http://cycfoundation.org/). The domain expired between [2016-03-06](https://web.archive.org/web/20160306034534/http://cycfoundation.org/) and [2016-04-04](https://web.archive.org/web/20160404222149/http://cycfoundation.org/)
 - Cyc + Internet
-  collapsed:: true
 	- Searching for Common Sense: Populating Cyc™ from the Web (2005)
 	- ✅FACTory (2005--2012)
-	  collapsed:: true
 		- https://web.archive.org/web/20061004063309/http://207.207.9.186/
 		- https://web.archive.org/web/20120902022607/http://game.cyc.com/
 		- Games with a purpose was all the rage circa 2005, with the breakout success of the [ESP game](https://en.wikipedia.org/wiki/ESP_game) (2003), so Cyc attempts to keep up with the times with its own FACTory (2005). It never got out of the `Beta version 1.0.1` and shut down sometime in 2012. According to the [tutorial](https://web.archive.org/web/20061205102605/http://207.207.9.186/helpfiles/HowToPlay.html), the game was literally just you telling Cyc whether an assertion it has parsed from the web is true or not.
@@ -949,7 +958,6 @@
 		- Usability of upper level ontologies: The case of ResearchCyc (2010)
 	- They further report a large collection of usability problems including problems in understandability, learnability, portability, reliability, compliance with standards, and interface to other systems. More broadly, CYC has had comparatively little impact on AI research—much less than less sophisticated online resources as Wikipedia or WordNet.
 - ✅[One genius' lonely crusade to teach a computer common sense](https://archive.is/pyPzn) (2016-03-24)
-  collapsed:: true
 	- But because they rely on what is essentially statistical analysis, neural nets get things wrong... But Cyc can help guide these neural networks, Lenat says. It can give them at least some of the common sense they need.
 	- You’re not going to see this approach scale up to levels one to sixty in World of Warcraft, or even to mediocre puzzles in The Secret World. Even in the gaming world—leaving aside real world tasks—there’s this long tail of more complicated games that are not going to be learned using the Google approach. In the same way, you can build taller and taller towers—and that may be impressive—but you’re never going to get to the moon by building a tall enough tower.
 - [OpenCyc 4.0](https://web.archive.org/web/20170227201513/http://www.opencyc.org/): just an ontology containing 239K concepts, 2M triples (like `(Napoleon Bonaparte, birthDate, 1769)`), and some links to DBpedia, WordNet, CIA World Factbook, etc. It is a glorified dictionary.
@@ -998,6 +1006,9 @@
 - ✅[Not Good As Gold: Today's AI's Are Dangerously Lacking In AU (Artificial Understanding)](https://www.forbes.com/sites/cognitiveworld/2019/02/18/not-good-as-gold-todays-ais-are-dangerously-lacking-in-au-artificial-understanding/#234b26be536d) (2019-02-18): 20 engines in 1989. >1100 in 2019.
   collapsed:: true
 	- By 1989, we had identified and implemented about 20 such special-case reasoners, each with its own data structures and algorithms.  Today there are over 1100 of these “heuristic level reasoning modules.
+- [Episode 89: A Conversation with Doug Lenat – Voices in AI](https://voicesinai.com/episode/episode-89-a-conversation-with-doug-lenat/) (2019-06)
+	- a great story that Marvin Minsky told me, my late friend and colleague, about when he was at Lincoln Labs about 50 years ago. And in those days computer time was so precious that you submitted a deck of computer cards and the very first card said ‘how many CPU seconds to allow the program to run?’ And so he built a program that essentially would beg for time. So it would say ‘give 30 seconds’ on the job control card, but then once it started, all it would do is sit there for 15 seconds doing nothing. Then it would ring a bell on the Teletype console in the machine room and call the operator’s attention and say ‘I need 20 more seconds please.’ Then it would just sit there for another 15 seconds and do that again and say ‘I need another minute please.’ And so at the end finally after like half an hour, the operator just killed that particular job. And Marvin would storm into the poor operator’s room and say “Hey I put 15 seconds on the job control card. You're charging me for half an hour of CPU time,” and the poor operator would say “well your program kept asking for it,” and Marvin would say, "it always does that."
+	-
 - ✅[Technology Overview (2021-04)](https://cyc.com/wp-content/uploads/2021/04/Cyc-Technology-Overview.pdf)
   collapsed:: true
 	- An ontology of about 1.5 million general concepts
@@ -1059,7 +1070,8 @@
 	- ✅[Replicating Douglas Lenat's Traveller TCS win with publicly-known techniques — LessWrong](https://www.lesswrong.com/posts/Myr7PLikhzYgPFhuy/replicating-douglas-lenat-s-traveller-tcs-win-with-publicly) (2013-10-26)
 	  collapsed:: true
 		- My suspicion is that Lenat's TCS win tells us more about TCS than about EURISKO, that TCS is likely a game that's inherently vulnerable to the "find winning strategies by simulating a lots of games on a computer" meta-strategy. I've heard, for example, that battles are often tactically trivial, with the outcome of battles effectively determined by the composition of the two fleets (and fleet composition is what Lenat used EURISKO for). If that hypothesis is correct, though, it suggests it shouldn't be necessary to reimplement EURISKO specifically to get a program that's good at designing TCS fleets. If that turns out not to be the case, it would be evidence that there really is something special about EURISKO after all.
-	- [Cyc | Hacker News](https://news.ycombinator.com/item?id=21781597) (2019-12-13)
+	- ✅[Cyc | Hacker News](https://news.ycombinator.com/item?id=21781597) (2019-12-13)
+	  collapsed:: true
 		- Pros
 			- Everyone there is very smart and depending on your tastes, it can be pretty fun to be in meetings where you try to explain Davidsonian ontology to perplexed business people. I suspect a decent fraction of the technical staff are reading this comment thread. There are also some genuine technical advances (which I wish were more publicly shared) in inference engine architecture or generally stemming from treating symbolic reasoning as a practical engineering project and giving up on things like completeness in favor of being able to get an answer most of the time.
 			- I was initially pretty skeptical of the continued feasibility of symbolic AI when I went in to interview, but Doug Lenat gave me a pitch that essentially assured me that the project had found a way around many of the concerns I had. In particular, they were doing deep reasoning from common sense principles using heuristics and not just doing the thing Prolog often devolved into where you end up basically writing a logical system to emulate a procedural algorithm to solve problems.
@@ -1154,7 +1166,7 @@
 		- Cyc was an interesting project - you might consider it as the ultimate scaling experiment in expert systems... The company is still around, but from what people who've worked there have said, it seems as if the original goal is all but abandoned (although Lenat might have disagreed, and seemed eternally optimistic, at least in public). It seems they survive on private contracts for custom systems premised on the power of Cyc being brought to bear, when in reality these projects could be accomplished in simpler ways.
 	- https://www.dwerden.com/forum/forum/euphonium-tuba-and-general-music/general-music-discussion/general-discussion-of-anything/13169-is-anyone-else-afraid-of-how-ai-might-be-used?p=114481#post114481 (2024-01-06)
 		- When I first started working for Glaxo Wellcome in 1997 as a "knowledge engineer" I was heavily involved in efforts to make use of the Cyc system (https://cyc.com/) for use in scientific information retrieval, and was working closely with the Cyc engineers, linguists, and scientists to develop prototype AI software for use in drug discovery and bioinformatics.
-	- [Gwern](https://www.reddit.com/r/MachineLearning/comments/1974yoo/comment/khz22y8/)
+	- [Gwern comments on "Getting from Generative AI to Trustworthy AI"](https://www.reddit.com/r/MachineLearning/comments/1974yoo/comment/khz22y8/) (2024-01-15)
 		- If you read that paper, Lenat explains how the original dream of Cyc failed and now it's just a big toolkit of highly-specialized hand-written experts tailored to each problem; they don't even use the original general theorem-proving stuff anymore. I was shocked to read it - I'd assume Cyc failed for obvious reasons but that it at least still did all the original general logic stuff and got some utility out of it. But no, they turned it off ages ago because it was useless even in Cyc.
 - ✅[ABBYY's Bitter Lesson: How Linguists Lost the Last Battle for NLP - System Block](https://sysblok.ru/blog/gorkij-urok-abbyy-kak-lingvisty-proigrali-poslednjuju-bitvu-za-nlp/) [@skorinkinABBYYsBitterLesson2024]: a parallel to Cyc?
   collapsed:: true
