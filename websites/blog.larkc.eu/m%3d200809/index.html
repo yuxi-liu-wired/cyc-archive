@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>LarKC weblog   &raquo; 2008&raquo; September</title>
+
+<meta name="generator" content="WordPress 2.3.3" /> <!-- leave this for stats -->
+
+<link rel="stylesheet" href="http://blog.larkc.eu/wp-content/themes/default/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="LarKC weblog RSS Feed" href="http://blog.larkc.eu/?feed=rss2" />
+<link rel="pingback" href="http://blog.larkc.eu/xmlrpc.php" />
+
+<style type="text/css" media="screen">
+
+	#page { background: url("http://blog.larkc.eu/wp-content/themes/default/images/kubrickbg-ltr.jpg") repeat-y top; border: none; }
+
+</style>
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.larkc.eu/xmlrpc.php?rsd" />
+ <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.larkc.eu/wp-includes/wlwmanifest.xml" /> </head>
+<body>
+<div id="page">
+
+
+<div id="header">
+	<div id="headerimg">
+  
+	</div>
+</div>
+<hr />
+<p>
+<h2 align="right"><img  src="http://wasp.cs.vu.nl/larkc/blog/rss.png" alt='RSS' />
+<font color="#FF8040">
+<a href="http://blog.larkc.eu/?feed=rss2"><font color="#FF8040">Entries (RSS)</font></a>
+		and <a href="http://blog.larkc.eu/?feed=comments-rss2"><font color="#FF8040">Comments (RSS)&nbsp;&nbsp;</font></a></font></h2>
+		
+</p>
+
+
+	<div id="content" class="narrowcolumn">
+		
+ 	   	  		<h2 class="pagetitle">Archive for September, 2008</h2>
+ 	  
+
+		<div class="navigation">
+			<div class="alignleft"></div>
+			<div class="alignright"></div>
+		</div>
+
+				<div class="post">
+				<h3 id="post-381"><a href="http://blog.larkc.eu/?p=381" rel="bookmark" title="Permanent Link to Racing RDF stores against databases">Racing RDF stores against databases</a></h3>
+				<small>Thursday, September 18th, 2008</small>
+
+				<div class="entry">
+					<p>Chris Bizer has developed a benchmark for RDF stores, and has run it to compare native RDF/SPARQL stores against SQL databases (wrapped as RDF stores). The results are rather interesting, see <a href="http://lists.w3.org/Archives/Public/semantic-web/2008Sep/0128.html">http://lists.w3.org/Archives/Public/semantic-web/2008Sep/0128.html</a>.</p>
+<p>All of this run on datasets ranging from 250k to 100M triples. </p>
+<p>The management summary of this seems to be that:</p>
+<ol>
+<li>that relational database to RDF wrappers generally outperform RDF stores for larger dataset sizes.</li>
+<li>that no store outperforms the others for all queries and dataset sizes.</li>
+<li>that the query throughput still varies widely within the multi-client scenario.</li>
+<li>that the fastest RDF store is still 7 times slower than a relational database.</li>
+</ol>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> |   <a href="http://blog.larkc.eu/?p=381#comments" title="Comment on Racing RDF stores against databases">1 Comment &#187;</a></p>
+
+			</div>
+
+				<div class="post">
+				<h3 id="post-371"><a href="http://blog.larkc.eu/?p=371" rel="bookmark" title="Permanent Link to The First LarKC API and Prototype">The First LarKC API and Prototype</a></h3>
+				<small>Tuesday, September 16th, 2008</small>
+
+				<div class="entry">
+					<p><em>by Barry Bishop, STI-Innsbruck<br />
+</em></p>
+<p>A first draft of the LarKC API for plug-ins has been created. This API is mostly the product of an intensive workshop kindly hosted for us by CyC Europe in Ljubljiana in August.</p>
+<p>Although at a very early stage, establishing this API forms a basis for moving forward in three key ways:</p>
+<ul>
+<li>It allows for experimentation with various engineering techniques and approaches</li>
+<li>It encourages a convergence of terminology usage within the consortium</li>
+<li>Since the structure of the API determines how different plug-ins interact with the LarKC platform, the API also provides a point of reference for researchers to explore the boundaries of their plug-in&#8217;s behaviour and align with other software components under development</li>
+</ul>
+<p>Shortly after the Ljubljiana workshop, STI Innsbruck created a simple prototype to verify the suitability of the API. Encouragingly, despite all of the many yet-to-be-addressed areas of functionality, an interesting and functional prototype was created with almost no modifications to the agreed API.</p>
+<p>This prototype will answer an arbitrary SPARQL query in the context of all RDF data found on the web that is indexed by sindice (or swoogle) and does so in alignment with the pipeline idea at the heart of the LarKC philosophy. To realise each pipeline stage the prototype uses:</p>
+<ul>
+<li>Retrieve: Swoogle or sindice (essentially WEB RDF indexers)</li>
+<li>Abstract: Components for transforming SPARQL queries in to a form suitable for &#8216;Retrieve&#8217;</li>
+<li>Select: Simple &#8217;select first&#8217; or &#8217;select all&#8217; plug-ins</li>
+<li>Reason: SPARQL query answering with Jena</li>
+<li>Decide: A single pass over all the stages</li>
+</ul>
+<p>For those interested in the prototype itself, it essentially attempts to answer any sparql query (<a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=select.png" target="_blank">select</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=describe.png" target="_blank">describe</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=construct.png" target="_blank">construct</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=ask.png" target="_blank">ask</a>) by searching the web for RDF documents containing likely triples, grabbing as much RDF data as it can, combining it and executing the query. The query results are output along with the URLs of RDF documents that were considered.</p>
+<p>For those readers with a flare for the dramatic, the exact details for the first test run of the &#8220;Large Knowledge Collider&#8221; were as follows:</p>
+<p><strong>The Query: Who knows Frank van Harmelen?</strong></p>
+<p>PREFIX rdf: <a class="moz-txt-link-rfc2396E" href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</a><br />
+PREFIX foaf: <a class="moz-txt-link-rfc2396E" href="http://xmlns.com/foaf/0.1/">&lt;http://xmlns.com/foaf/0.1/&gt;</a><br />
+SELECT DISTINCT ?name<br />
+WHERE {<br />
+?person1 rdf:type foaf:Person .<br />
+?person2 rdf:type foaf:Person .<br />
+?person1 foaf:knows ?person2 .<br />
+?person1 foaf:name ?name.<br />
+?person2 foaf:name &#8220;Frank van Harmelen&#8221; .<br />
+}<br />
+ORDER BY ?name</p>
+<p><strong>What were the relevant RDF resources found on the web?</strong></p>
+<p><a class="moz-txt-link-freetext" href="http://www.openrdf.org/people/foaf-jeen.rdf">http://www.openrdf.org/people/foaf-jeen.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.ivan-herman.net/foaf">http://www.ivan-herman.net/foaf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Epmika/foaf.rdf">http://www.cs.vu.nl/~pmika/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.ivan-herman.net/foaf.rdf">http://www.ivan-herman.net/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eheiner/foaf.rdf">http://www.cs.vu.nl/~heiner/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7efrankh/foaf.rdf">http://www.cs.vu.nl/%7efrankh/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Efrankh/foaf.rdf">http://www.cs.vu.nl/~frankh/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.few.vu.nl/%7Elaroyo/foaf.rdf">http://www.few.vu.nl/~laroyo/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cse.lehigh.edu/%7Eheflin/index.owl">http://www.cse.lehigh.edu/~heflin/index.owl</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eholger/Holger%20Wache.rdf">http://www.cs.vu.nl/~holger/Holger%20Wache.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.openrdf.org/people/foaf-arjohn.rdf">http://www.openrdf.org/people/foaf-arjohn.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eguus/foaf.rdf">http://www.cs.vu.nl/~guus/foaf.rdf</a></p>
+<p><strong>How many relevant triples does that make?</strong></p>
+<p>Answer: 1330</p>
+<p><strong>What were the results of the query?</strong></p>
+<p>?name<br />
+&#8212;&#8211;<br />
+Arjohn Kampman<br />
+Guus Schreiber<br />
+Herman Iván<br />
+Ivan Herman<br />
+Jeen Broekstra<br />
+Lora Aroyo<br />
+Peter Mika</p>
+<p><span style="#808080;"><span style="#999999;">LarKC links:</span></span></p>
+<ul>
+<li><span style="#808080;"><span style="#999999;">Documentation for API: <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus" target="_blank">http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;">Notes on the prototype: <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01" target="_blank">http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;">Prototype source code: <a href="https://svn.gforge.hlrs.de/svn/larkc/trunk/platform_v01" target="_blank">https://svn.gforge.hlrs.de/svn/larkc/trunk/platform_v01</a></span></span></li>
+</ul>
+<p><span style="#808080;"><span style="#999999;">Other links:</span></span></p>
+<ul>
+<li><span style="#808080;"><span style="#999999;"><a href="http://swoogle.umbc.edu/" target="_blank">http://swoogle.umbc.edu/</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;"><a href="http://sindice.com/" target="_blank">http://sindice.com/</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;"><a href="http://jena.sourceforge.net/" target="_blank">http://jena.sourceforge.net/</a></span></span></li>
+</ul>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> |   <a href="http://blog.larkc.eu/?p=371#comments" title="Comment on The First LarKC API and Prototype">2 Comments &#187;</a></p>
+
+			</div>
+
+				<div class="post">
+				<h3 id="post-361"><a href="http://blog.larkc.eu/?p=361" rel="bookmark" title="Permanent Link to Big Data">Big Data</a></h3>
+				<small>Friday, September 5th, 2008</small>
+
+				<div class="entry">
+					<p>Last edition of Nature has a Special on &#8220;Big Data&#8221;. An interesting reading for all of us.</p>
+<p><a href="http://www.nature.com/news/specials/bigdata/index.html">http://www.nature.com/news/specials/bigdata/index.html</a></p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> |   <a href="http://blog.larkc.eu/?p=361#respond" title="Comment on Big Data">No Comments &#187;</a></p>
+
+			</div>
+
+				<div class="post">
+				<h3 id="post-331"><a href="http://blog.larkc.eu/?p=331" rel="bookmark" title="Permanent Link to Technology Cooperation between Korea and EU">Technology Cooperation between Korea and EU</a></h3>
+				<small>Thursday, September 4th, 2008</small>
+
+				<div class="entry">
+					<p>Seminar 2008 on Technology Cooperation between Korea and EU has been held successfully with more than 200 people from government, industry and research area at 28th August 2008 in Seoul, Korea.  The invited speaker includes Mr. Ignacio Asenjo at European Commission and more.  Saltlux&#8217;s CEO, Tony Lee has presented the audience EU FP participation experience of LarKC. This event was organized by Korean government that is seeking for ways to participate EU FP from 2014.</p>
+<p> </p>
+<p><a href="http://blog.larkc.eu/wp-content/uploads/2008/09/eukorea.jpg"></a><a href="http://blog.larkc.eu/wp-content/uploads/2008/09/eukorea1.jpg"><img class="aligncenter size-full wp-image-351" src="http://blog.larkc.eu/wp-content/uploads/2008/09/eukorea1.jpg" alt="" width="500" height="1057" /></a></p>
+<p> </p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> |   <a href="http://blog.larkc.eu/?p=331#respond" title="Comment on Technology Cooperation between Korea and EU">No Comments &#187;</a></p>
+
+			</div>
+
+				<div class="post">
+				<h3 id="post-321"><a href="http://blog.larkc.eu/?p=321" rel="bookmark" title="Permanent Link to Best Practice Recipes for Publishing RDF Vocabularies">Best Practice Recipes for Publishing RDF Vocabularies</a></h3>
+				<small>Thursday, September 4th, 2008</small>
+
+				<div class="entry">
+					<p>Posted by Georgina Gallizo</p>
+<p>(<span style="small;"><span style="Consolas;">Diego Berrueta and Jon Phipps (eds), W3C Technical Report</span></span>)</p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><span style="small;"><span style="Consolas;">Members of W3C&#8217;s Semantic Web Deployment Working Group have published a Group Note for &#8220;Best Practice Recipes for Publishing RDF Vocabularies.&#8221;</span></span></p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><span style="small;"><span style="Consolas;">The document is intended for the creators and maintainers of vocabularies in RDFS and OWL (vocabulary and ontology are used interchangeably in the context of this specification). It provides step-by-step instructions for publishing vocabularies on the Web, giving example configurations designed to cover the most common cases. This &#8216;cookbook&#8217; provides recipes describing the steps needed to publish a vocabulary on a Web server, and to configure the Web server to support Semantic Web applications. The section &#8216;Choosing a recipe&#8217; provides guidance for choosing the most appropriate recipe depending on the situation and requirements. Once the recipe has been chosen, the reader can follow the steps, adapting the examples for a particular vocabulary.</span></span></p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><span style="small;"><span style="Consolas;">All of the recipes give example configurations for the Apache HTTP server. For those not already familiar with Apache configuration, the appendix on Apache configuration provides a short introduction to the Apache configuration mechanisms used in the examples and basic information on troubleshooting. While the provided configuration examples are specific to an Apache HTTP server, the general principles apply to non-Apache environments as well. The Working Group invites contributions of additional bindings for non-Apache servers. The W3C has provided a wiki page to collect these non-Apache bindings and recommendations. This document is primarily intended for creators and maintainers of existing vocabularies who are looking for guidance on how their vocabularies should best be published on the Web. It is not intended to provide detailed and exhaustive guidance on choosing an appropriate URI namespace for naming a new vocabulary and its constituent terms. However, some basic technical information about URI namespaces, including some considerations relevant to choosing a URI namespace for a vocabulary, is given in the section on URI namespaces&#8230;</span></span></p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><span style="small;"><span style="Consolas;"> </span></span></p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><a href="http://www.w3.org/TR/2008/NOTE-swbp-vocab-pub-20080828/"><span style="Consolas;">http://www.w3.org/TR/2008/NOTE-swbp-vocab-pub-20080828/</span></a></p>
+<p class="MsoPlainText" style="0in 0in 0pt;"><span style="Consolas;">See also the W3C Semantic Web Deployment Working Group (SWD): </span><a href="http://www.w3.org/2006/07/SWD/"><span style="Consolas;">http://www.w3.org/2006/07/SWD/</span></a></p>
+<p> </p>
+<p> </p>
+				</div>
+
+				<p class="postmetadata">Tags: <a href="http://blog.larkc.eu/?tag=owl" rel="tag">OWL</a>, <a href="http://blog.larkc.eu/?tag=rdf" rel="tag">RDF</a>, <a href="http://blog.larkc.eu/?tag=w3c" rel="tag">W3C</a><br /> Posted in <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> |   <a href="http://blog.larkc.eu/?p=321#respond" title="Comment on Best Practice Recipes for Publishing RDF Vocabularies">No Comments &#187;</a></p>
+
+			</div>
+
+		
+		<div class="navigation">
+			<div class="alignleft"></div>
+			<div class="alignright"></div>
+		</div>
+
+	
+	</div>
+
+	<div id="sidebar">
+		<ul>
+						<li>
+				<form method="get" id="searchform" action="http://blog.larkc.eu/">
+<div><input type="text" value="" name="s" id="s" />
+<input type="submit" id="searchsubmit" value="Search" />
+</div>
+</form>
+			</li>
+
+			<!-- Author information is disabled per default. Uncomment and fill in your details if you want to use it.
+			<li><h2>Author</h2>
+			<p>A little something about you, the author. Nothing lengthy, just an overview.</p>
+			</li>
+			-->
+
+			 <li>
+
+						<p>You are currently browsing the <a href="http://blog.larkc.eu/">LarKC weblog</a> blog archives
+			for September, 2008.</p>
+
+			
+			</li> 
+			<li class="pagenav"><h2>Pages</h2><ul><li class="page_item page-item-831"><a href="http://blog.larkc.eu/?page_id=831" title="LarKC WP9 Blog Pages">LarKC WP9 Blog Pages</a>
+	<ul>
+	<li class="page_item page-item-961"><a href="http://blog.larkc.eu/?page_id=961" title="Commodity Resources, HPC, Cloud Computing">Commodity Resources, HPC, Cloud Computing</a></li>
+	<li class="page_item page-item-861"><a href="http://blog.larkc.eu/?page_id=861" title="Information Sharing">Information Sharing</a></li>
+	<li class="page_item page-item-1041"><a href="http://blog.larkc.eu/?page_id=1041" title="Intelligent Systems, Agents, Robots">Intelligent Systems, Agents, Robots</a></li>
+	<li class="page_item page-item-941"><a href="http://blog.larkc.eu/?page_id=941" title="Reality Browsing &#038; Context Aware Games">Reality Browsing &#038; Context Aware Games</a></li>
+	<li class="page_item page-item-1031"><a href="http://blog.larkc.eu/?page_id=1031" title="Semantic Advertising">Semantic Advertising</a></li>
+	<li class="page_item page-item-851"><a href="http://blog.larkc.eu/?page_id=851" title="Semantic Bookmarks">Semantic Bookmarks</a></li>
+	<li class="page_item page-item-991"><a href="http://blog.larkc.eu/?page_id=991" title="Semantic Business Intelligence">Semantic Business Intelligence</a></li>
+	<li class="page_item page-item-901"><a href="http://blog.larkc.eu/?page_id=901" title="Semantic Collaboration">Semantic Collaboration</a></li>
+	<li class="page_item page-item-911"><a href="http://blog.larkc.eu/?page_id=911" title="Semantic Data Integration">Semantic Data Integration</a></li>
+	<li class="page_item page-item-891"><a href="http://blog.larkc.eu/?page_id=891" title="Semantic Desktop">Semantic Desktop</a></li>
+	<li class="page_item page-item-1001"><a href="http://blog.larkc.eu/?page_id=1001" title="Semantic ERP Applications">Semantic ERP Applications</a></li>
+	<li class="page_item page-item-1011"><a href="http://blog.larkc.eu/?page_id=1011" title="Semantic Governance Compliance &#038; Risk">Semantic Governance Compliance &#038; Risk</a></li>
+	<li class="page_item page-item-981"><a href="http://blog.larkc.eu/?page_id=981" title="Semantic Infrastructure">Semantic Infrastructure</a></li>
+	<li class="page_item page-item-971"><a href="http://blog.larkc.eu/?page_id=971" title="Semantic Mashups and Composite Applications">Semantic Mashups and Composite Applications</a></li>
+	<li class="page_item page-item-931"><a href="http://blog.larkc.eu/?page_id=931" title="Semantic Mobility">Semantic Mobility</a></li>
+	<li class="page_item page-item-881"><a href="http://blog.larkc.eu/?page_id=881" title="Semantic Search">Semantic Search</a></li>
+	<li class="page_item page-item-951"><a href="http://blog.larkc.eu/?page_id=951" title="Semantic Search, Discovery &#038; Navigation">Semantic Search, Discovery &#038; Navigation</a></li>
+	<li class="page_item page-item-841"><a href="http://blog.larkc.eu/?page_id=841" title="Semantic Social Networking">Semantic Social Networking</a></li>
+	<li class="page_item page-item-1021"><a href="http://blog.larkc.eu/?page_id=1021" title="Semantic Wiki">Semantic Wiki</a></li>
+	</ul>
+</li>
+<li class="page_item page-item-391"><a href="http://blog.larkc.eu/?page_id=391" title="Some comments on the Europan Semantic Technologies Conference">Some comments on the Europan Semantic Technologies Conference</a></li>
+</ul></li>
+			<li><h2>Archives</h2>
+				<ul>
+					<li><a href='http://blog.larkc.eu/?m=201110' title='October 2011'>October 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201109' title='September 2011'>September 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201107' title='July 2011'>July 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201106' title='June 2011'>June 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201105' title='May 2011'>May 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201103' title='March 2011'>March 2011</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201012' title='December 2010'>December 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201011' title='November 2010'>November 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201010' title='October 2010'>October 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201008' title='August 2010'>August 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201007' title='July 2010'>July 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201006' title='June 2010'>June 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201005' title='May 2010'>May 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201004' title='April 2010'>April 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201003' title='March 2010'>March 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201002' title='February 2010'>February 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=201001' title='January 2010'>January 2010</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200912' title='December 2009'>December 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200911' title='November 2009'>November 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200910' title='October 2009'>October 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200908' title='August 2009'>August 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200907' title='July 2009'>July 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200906' title='June 2009'>June 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200905' title='May 2009'>May 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200904' title='April 2009'>April 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200903' title='March 2009'>March 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200902' title='February 2009'>February 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200901' title='January 2009'>January 2009</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200812' title='December 2008'>December 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200811' title='November 2008'>November 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200810' title='October 2008'>October 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200809' title='September 2008'>September 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200808' title='August 2008'>August 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200807' title='July 2008'>July 2008</a></li>
+	<li><a href='http://blog.larkc.eu/?m=200806' title='June 2008'>June 2008</a></li>
+				</ul>
+			</li>
+
+			<li class="categories"><h2>Categories</h2><ul>	<li class="cat-item cat-item-771"><a href="http://blog.larkc.eu/?cat=771" title="View all posts filed under Commodity Resources, HPC, Cloud Computing">Commodity Resources, HPC, Cloud Computing</a> (6)
+</li>
+	<li class="cat-item cat-item-1391"><a href="http://blog.larkc.eu/?cat=1391" title="View all posts filed under Dissemination">Dissemination</a> (13)
+</li>
+	<li class="cat-item cat-item-781"><a href="http://blog.larkc.eu/?cat=781" title="View all posts filed under Information Sharing">Information Sharing</a> (9)
+</li>
+	<li class="cat-item cat-item-791"><a href="http://blog.larkc.eu/?cat=791" title="View all posts filed under Intelligent Systems, Agents, Robots">Intelligent Systems, Agents, Robots</a> (6)
+</li>
+	<li class="cat-item cat-item-741"><a href="http://blog.larkc.eu/?cat=741" title="View all posts filed under Reality Browsing &amp; Context Aware Games">Reality Browsing &amp; Context Aware Games</a> (2)
+</li>
+	<li class="cat-item cat-item-801"><a href="http://blog.larkc.eu/?cat=801" title="View all posts filed under Semantic Advertising">Semantic Advertising</a> (5)
+</li>
+	<li class="cat-item cat-item-821"><a href="http://blog.larkc.eu/?cat=821" title="View all posts filed under Semantic Bookmarks">Semantic Bookmarks</a> (1)
+</li>
+	<li class="cat-item cat-item-751"><a href="http://blog.larkc.eu/?cat=751" title="View all posts filed under Semantic Business Intelligence">Semantic Business Intelligence</a> (2)
+</li>
+	<li class="cat-item cat-item-811"><a href="http://blog.larkc.eu/?cat=811" title="View all posts filed under Semantic Collaboration">Semantic Collaboration</a> (3)
+</li>
+	<li class="cat-item cat-item-831"><a href="http://blog.larkc.eu/?cat=831" title="View all posts filed under Semantic Data Integration">Semantic Data Integration</a> (10)
+</li>
+	<li class="cat-item cat-item-851"><a href="http://blog.larkc.eu/?cat=851" title="View all posts filed under Semantic ERP Applications">Semantic ERP Applications</a> (2)
+</li>
+	<li class="cat-item cat-item-871"><a href="http://blog.larkc.eu/?cat=871" title="View all posts filed under Semantic Infrastructure">Semantic Infrastructure</a> (11)
+</li>
+	<li class="cat-item cat-item-881"><a href="http://blog.larkc.eu/?cat=881" title="View all posts filed under Semantic Mashups and Composite Applications">Semantic Mashups and Composite Applications</a> (7)
+</li>
+	<li class="cat-item cat-item-761"><a href="http://blog.larkc.eu/?cat=761" title="View all posts filed under Semantic Mobility">Semantic Mobility</a> (3)
+</li>
+	<li class="cat-item cat-item-891"><a href="http://blog.larkc.eu/?cat=891" title="View all posts filed under Semantic Search, Discovery &amp; Navigation">Semantic Search, Discovery &amp; Navigation</a> (9)
+</li>
+	<li class="cat-item cat-item-901"><a href="http://blog.larkc.eu/?cat=901" title="View all posts filed under Semantic Social Networking">Semantic Social Networking</a> (6)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://blog.larkc.eu/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a> (106)
+</li>
+</ul></li>
+			
+					</ul>
+	</div>
+
+
+
+<hr />
+<div id="footer">
+<!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way; it's our only promotion or advertising. -->
+	<p>
+		LarKC weblog is proudly powered by
+		<a href="http://wordpress.org/">WordPress</a>
+		<br /><a href="http://blog.larkc.eu/?feed=rss2">Entries (RSS)</a>
+		and <a href="http://blog.larkc.eu/?feed=comments-rss2">Comments (RSS)</a>.
+		<!-- 28 queries. 0.551 seconds. -->
+	</p>
+</div>
+</div>
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
+
+		</body>
+</html>

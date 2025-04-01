@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>LarKC weblog  &raquo; Blog Archive   &raquo; The First LarKC API and Prototype</title>
+
+<link rel="stylesheet" href="http://blog.larkc.eu/wp-content/themes/default/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="LarKC weblog RSS Feed" href="http://blog.larkc.eu/?feed=rss2" />
+<link rel="pingback" href="http://blog.larkc.eu/xmlrpc.php" />
+
+<style type="text/css" media="screen">
+
+	#page { background: url("http://blog.larkc.eu/wp-content/themes/default/images/kubrickbgwide.jpg") repeat-y top; border: none; }
+
+</style>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.larkc.eu/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.larkc.eu/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 2.5.1" />
+
+</head>
+<body>
+<div id="page">
+
+
+<div id="header">
+	<div id="headerimg">
+		<h1><a href="http://blog.larkc.eu/">LarKC weblog</a></h1>
+		<div class="description"></div>
+	</div>
+</div>
+<hr />
+<p>
+
+		<h3 align="right"><font color="#FF8040"><img src="/wp-includes/images/rss.png" alt='rss'><a href="http://blog.larkc.eu/?feed=rss2"><font color="#0000A0">Entries (RSS)</font></a>
+		and <a href="http://blog.larkc.eu/?feed=comments-rss2"><font color="#0000A0">Comments (RSS)</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></h3>
+		
+</p>
+	<div id="content" class="widecolumn">
+
+	
+		<div class="navigation">
+			<div class="alignleft">&laquo; <a href="http://blog.larkc.eu/?p=361">Big Data</a></div>
+			<div class="alignright"><a href="http://blog.larkc.eu/?p=381">Racing RDF stores against databases</a> &raquo;</div>
+		</div>
+
+		<div class="post" id="post-371">
+			<h2>The First LarKC API and Prototype</h2>
+
+			<div class="entry">
+				<p><em>by Barry Bishop, STI-Innsbruck<br />
+</em></p>
+<p>A first draft of the LarKC API for plug-ins has been created. This API is mostly the product of an intensive workshop kindly hosted for us by CyC Europe in Ljubljiana in August.</p>
+<p>Although at a very early stage, establishing this API forms a basis for moving forward in three key ways:</p>
+<ul>
+<li>It allows for experimentation with various engineering techniques and approaches</li>
+<li>It encourages a convergence of terminology usage within the consortium</li>
+<li>Since the structure of the API determines how different plug-ins interact with the LarKC platform, the API also provides a point of reference for researchers to explore the boundaries of their plug-in&#8217;s behaviour and align with other software components under development</li>
+</ul>
+<p>Shortly after the Ljubljiana workshop, STI Innsbruck created a simple prototype to verify the suitability of the API. Encouragingly, despite all of the many yet-to-be-addressed areas of functionality, an interesting and functional prototype was created with almost no modifications to the agreed API.</p>
+<p>This prototype will answer an arbitrary SPARQL query in the context of all RDF data found on the web that is indexed by sindice (or swoogle) and does so in alignment with the pipeline idea at the heart of the LarKC philosophy. To realise each pipeline stage the prototype uses:</p>
+<ul>
+<li>Retrieve: Swoogle or sindice (essentially WEB RDF indexers)</li>
+<li>Abstract: Components for transforming SPARQL queries in to a form suitable for &#8216;Retrieve&#8217;</li>
+<li>Select: Simple &#8217;select first&#8217; or &#8217;select all&#8217; plug-ins</li>
+<li>Reason: SPARQL query answering with Jena</li>
+<li>Decide: A single pass over all the stages</li>
+</ul>
+<p>For those interested in the prototype itself, it essentially attempts to answer any sparql query (<a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=select.png" target="_blank">select</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=describe.png" target="_blank">describe</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=construct.png" target="_blank">construct</a>, <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01?action=AttachFile&amp;do=get&amp;target=ask.png" target="_blank">ask</a>) by searching the web for RDF documents containing likely triples, grabbing as much RDF data as it can, combining it and executing the query. The query results are output along with the URLs of RDF documents that were considered.</p>
+<p>For those readers with a flare for the dramatic, the exact details for the first test run of the &#8220;Large Knowledge Collider&#8221; were as follows:</p>
+<p><strong>The Query: Who knows Frank van Harmelen?</strong></p>
+<p>PREFIX rdf: <a class="moz-txt-link-rfc2396E" href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</a><br />
+PREFIX foaf: <a class="moz-txt-link-rfc2396E" href="http://xmlns.com/foaf/0.1/">&lt;http://xmlns.com/foaf/0.1/&gt;</a><br />
+SELECT DISTINCT ?name<br />
+WHERE {<br />
+?person1 rdf:type foaf:Person .<br />
+?person2 rdf:type foaf:Person .<br />
+?person1 foaf:knows ?person2 .<br />
+?person1 foaf:name ?name.<br />
+?person2 foaf:name &#8220;Frank van Harmelen&#8221; .<br />
+}<br />
+ORDER BY ?name</p>
+<p><strong>What were the relevant RDF resources found on the web?</strong></p>
+<p><a class="moz-txt-link-freetext" href="http://www.openrdf.org/people/foaf-jeen.rdf">http://www.openrdf.org/people/foaf-jeen.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.ivan-herman.net/foaf">http://www.ivan-herman.net/foaf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Epmika/foaf.rdf">http://www.cs.vu.nl/~pmika/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.ivan-herman.net/foaf.rdf">http://www.ivan-herman.net/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eheiner/foaf.rdf">http://www.cs.vu.nl/~heiner/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7efrankh/foaf.rdf">http://www.cs.vu.nl/%7efrankh/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Efrankh/foaf.rdf">http://www.cs.vu.nl/~frankh/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.few.vu.nl/%7Elaroyo/foaf.rdf">http://www.few.vu.nl/~laroyo/foaf.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cse.lehigh.edu/%7Eheflin/index.owl">http://www.cse.lehigh.edu/~heflin/index.owl</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eholger/Holger%20Wache.rdf">http://www.cs.vu.nl/~holger/Holger%20Wache.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.openrdf.org/people/foaf-arjohn.rdf">http://www.openrdf.org/people/foaf-arjohn.rdf</a><br />
+<a class="moz-txt-link-freetext" href="http://www.cs.vu.nl/%7Eguus/foaf.rdf">http://www.cs.vu.nl/~guus/foaf.rdf</a></p>
+<p><strong>How many relevant triples does that make?</strong></p>
+<p>Answer: 1330</p>
+<p><strong>What were the results of the query?</strong></p>
+<p>?name<br />
+&#8212;&#8211;<br />
+Arjohn Kampman<br />
+Guus Schreiber<br />
+Herman Iván<br />
+Ivan Herman<br />
+Jeen Broekstra<br />
+Lora Aroyo<br />
+Peter Mika</p>
+<p><span style="#808080;"><span style="#999999;">LarKC links:</span></span></p>
+<ul>
+<li><span style="#808080;"><span style="#999999;">Documentation for API: <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus" target="_blank">http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;">Notes on the prototype: <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01" target="_blank">http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiTestPrototypeV01</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;">Prototype source code: <a href="https://svn.gforge.hlrs.de/svn/larkc/trunk/platform_v01" target="_blank">https://svn.gforge.hlrs.de/svn/larkc/trunk/platform_v01</a></span></span></li>
+</ul>
+<p><span style="#808080;"><span style="#999999;">Other links:</span></span></p>
+<ul>
+<li><span style="#808080;"><span style="#999999;"><a href="http://swoogle.umbc.edu/" target="_blank">http://swoogle.umbc.edu/</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;"><a href="http://sindice.com/" target="_blank">http://sindice.com/</a></span></span></li>
+<li><span style="#808080;"><span style="#999999;"><a href="http://jena.sourceforge.net/" target="_blank">http://jena.sourceforge.net/</a></span></span></li>
+</ul>
+
+								
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+												on Tuesday, September 16th, 2008 at 1:22 am						and is filed under <a href="http://blog.larkc.eu/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a>.
+						You can follow any responses to this entry through the <a href='http://blog.larkc.eu/?feed=rss2&amp;p=371'>RSS 2.0</a> feed.
+
+													You can <a href="#respond">leave a response</a>, or <a href="http://blog.larkc.eu/wp-trackback.php?p=371" rel="trackback">trackback</a> from your own site.
+
+						
+					</small>
+				</p>
+
+			</div>
+		</div>
+
+	
+<!-- You can start editing here. -->
+
+	<h3 id="comments">2 Responses to &#8220;The First LarKC API and Prototype&#8221;</h3>
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-811">
+			<img alt='' src='http://www.gravatar.com/avatar/afe9a51f1731ad2db90350fc4731f18a?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32' height='32' width='32' />			<cite>Karl Eggberg</cite> Says:
+						<br />
+
+			<small class="commentmetadata"><a href="#comment-811" title="">September 16th, 2008 at 1:13 pm</a> </small>
+
+			<p>Hi guys nice to see semantic web search engines in action, could you tell us what is the different results you get if you switch from sindice to swoogle? </p>
+<p>it also might be interesting to try this query on swse (www.swse.org) ? it seems it should be able to answer this query right away as it fetches and smushes information and provides a real sparql endpoint.</p>
+<p>there are a number of links that point to &#8220;not allowed&#8221;, e.g. <a href="http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus" rel="nofollow">http://wiki.larkc.eu/LarkcProject/WP5/docs/platform/ApiCurrentStatus</a></p>
+
+		</li>
+
+	
+	
+		<li id="comment-841">
+			<img alt='' src='http://www.gravatar.com/avatar/63a59c8a7c0467755f6f145ad89f5a5c?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32' height='32' width='32' />			<cite><a href='http://www.cs.vu.nl/~frankh' rel='external nofollow'>FrankVanHarmelen</a></cite> Says:
+						<br />
+
+			<small class="commentmetadata"><a href="#comment-841" title="">September 18th, 2008 at 4:10 pm</a> </small>
+
+			<p>Karl, thanks for your comments. Yes, we should indeed try out different variations like switching sindice for swoogle etc. The point of this demo was not so much that this query result was so great (it isn&#8217;t, and indeed other tools like SWSE could do this too and better). The point was rather to show that the nascent LarKC infrastructure can already do something simple (in fact, this was the very first thing it ever did). LarKC is aiming to be more scaleable and flexible then centralised approaches like SWSE. Check up on us in a year from now to see if we are living up to that goal!</p>
+<p>(and concerning the &#8220;not allowed&#8221; link: we&#8217;ll probably move to a more open developers site in the near future, yet another reason to come back again!)</p>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h3 id="respond">Leave a Reply</h3>
+
+
+<form action="http://blog.larkc.eu/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="371" />
+</p>
+
+</form>
+
+
+
+	
+	</div>
+
+
+<hr />
+<div id="footer">
+<!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way; it's our only promotion or advertising. -->
+	<p>
+		LarKC weblog is proudly powered by
+		<a href="http://wordpress.org/">WordPress</a>
+		<br /><a href="http://blog.larkc.eu/?feed=rss2">Entries (RSS)</a>
+		and <a href="http://blog.larkc.eu/?feed=comments-rss2">Comments (RSS)</a>.
+		<!-- 25 queries. 0.165 seconds. -->
+	</p>
+</div>
+</div>
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
+
+		</body>
+</html>
