@@ -1,0 +1,431 @@
+<html>
+  <head>
+    <META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+    <title>
+The OpenCyc Planner 
+</title>
+  </head>
+  <body bgcolor='white'>
+    <a name='top'></a>
+    <table width='100%'>
+      <tr>
+        <td width='100'>
+          <a href='http://www.opencyc.org'><img src='http://www.cyc.com/cycdoc/img/opencyc-logo-old.gif' border='0' alt='[OpenCyc.org Homepage]'></a>
+        </td>
+        <td align='center'>
+          <b><font size='+2'>
+The OpenCyc Planner 
+</font></b>
+          <br>
+          <font size='+1'>Version 0.7</font>
+        </td>
+        <td width='100'></td>
+      </tr>
+    </table>
+    <font size='-1'>E-Mail Comments to: <a href='mailto:opencyc-doc@cyc.com'>opencyc-doc@cyc.com</a>
+    </font>
+    <hr>
+    <h2>
+The OpenCyc Planner 
+</h2>
+    <p></p>
+    <b>1.  <a HREF='#137006096'>Actions</a></b>
+    <br>
+    <p></p>
+    <b>2.  <a HREF='#137041688'>Planner Rule Vocabulary</a></b>
+    <br>
+    <font size='-1'>.2.1.  <a HREF='#137043640'>
+
+#$PlanningDomainMicrotheory
+</a>
+      <br>
+    </font>
+    <font size='-1'>.2.2.  <a HREF='#137055552'>
+
+Preconditions</a>
+      <br>
+    </font>
+    <font size='-1'>.2.3.  <a HREF='#137071376'>
+Effects</a>
+      <br>
+    </font>
+    <font size='-1'>.2.4.  <a HREF='#137121672'>
+Complex Actions and Methods
+</a>
+      <br>
+    </font>
+    <p></p>
+    <b>3.  <a HREF='#137154848'>
+Running The Planner</a></b>
+    <br>
+    <p></p>
+    <b>4.  <a HREF='#137191304'>
+Further Reading on Planning
+</a></b>
+    <br>
+    <hr>
+    <h1>
+The OpenCyc Planner 
+</h1>
+    <p>The OpenCyc Planner is a reimplementation of the 
+<a HREF='http://www.cs.umd.edu/projects/shop/'>SHOP planner</a> designed to directly access the
+Cyc Inference Engine. A planner is an inference engine optimized for
+reasoning about actions, events, and other activities in a dynamic
+world.</p>
+    <h2>1.  <a NAME='#137006096'>Actions</a>
+    </h2>
+    <p>
+Actions are represented as formulas with instances of
+<tt><nobr>
+#$ActionPredicate</nobr></tt> as their operators. For example, if it is asserted
+that: </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$cleans #$Bob #$BobsRoomFloor) </pre></tt>
+    </font>
+<p>
+this represents the fact that Bob
+is cleaning the floor of his room in the current context.</p>
+    <p>
+One uses the planner by giving it a high-level, possibly abstract
+action sentence as a goal. For example, </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$transport #$Bob #$AustinBergstromAirport)</pre></tt>
+    </font> 
+<p>
+given to the planner as a goal means that it
+should find a sequence of simple actions for getting Bob to the Austin
+Bergstrom International Airport.</p>
+    <p>
+For any context we shall consider instances of
+<tt><nobr>
+#$SimpleActionPredicate</nobr></tt>, a subcollection of <tt><nobr>
+#$ActionPredicate</nobr></tt>, to
+define the extent of primitive actions in that context.  These are
+actions for which there are no decompositions. Every context should
+have a set of simple actions, since they give the vocabulary with
+which to express complete plans.  If the plans generated are meant to
+be executed, then it makes sense for the simple actions in the domain
+to correspond with the simplest actions of the effector.</p>
+    <p>
+A plan consists of a linear sequence of sentences, whose operators are
+instances of <tt><nobr>
+#$SimpleActionPredicate</nobr></tt>. It is important to stress that
+context should be important in determining whether or not an action
+should be represented with a simple action predicate.  Suppose we
+wanted to create a planning domain that could power a user
+application that would give driving directions between locations in
+Austin, TX. It would be inappropriate to have simple actions like 
+<tt><nobr>
+#$turnKeyInIgnition</nobr></tt>, <tt><nobr>
+#$shiftGears</nobr></tt>, and <tt><nobr>
+#$changeLanes</nobr></tt>, since we can
+assume that most users of the application already know how to drive.
+Probably a better vocabulary would have simple action sentences like:
+</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$turnLeftAtIntersection (#$RoadIntersectionFn #$SanJacinto #$SixthStreet))
+(#$followHighwayRouteUntilExit #$MopacExpressway #$MopacExit43)</pre></tt>
+    </font>
+
+
+<h2>2.  <a NAME='#137041688'>Planner Rule Vocabulary</a>
+    </h2>
+    <h3>2.1.  <a NAME='#137043640'>
+
+#$PlanningDomainMicrotheory
+</a>
+    </h3>
+    <p>
+The planner takes as one of its inputs a microtheory that sets the
+context for the search.  Planner rules using the vocabulary described
+above should be asserted in a microtheory that is an instance of
+<tt><nobr>
+#$PlanningDomainMicrotheory</nobr></tt>.  Every <tt><nobr>
+#$genlMt</nobr></tt> of the context mt that is
+also an instance of <tt><nobr>
+#$PlanningDomainMicrotheory</nobr></tt> is relevant when the
+planner looks for applicable rules.</p>
+    <h3>2.2.  <a NAME='#137055552'>
+
+Preconditions</a>
+    </h3>
+    <p>
+Simple actions can have preconditions. Preconditions are facts that
+must be true in the world in order for the particular action to be executable
+or applicable. In order to mop the floor of a room, you must be
+holding the mop, you must be in or standing next to the room, the
+floor can't be covered with carpeting, etc. These facts can all be
+represented with preconditions.</p>
+    <p>
+Usage: </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$preconditionFor-Props CONDITION ACTION)</pre></tt>
+    </font>
+
+<p>
+Comment for <tt><nobr>
+#$preconditionFor-Props</nobr></tt>:</p>
+    <p>
+"A binary predicate which relates instances of ELSentence-Assertible to instances of ELSentence-Assertible, and which is used to state that one formula expresses a necessary precondition for the truth of another. (preconditionFor-Props COND PROP) means that PROP isn't true unless COND is true. Preconditions of various types are distinguished by the more specialized predicates legalPreconditionFor and causalPreconditionFor. See also sufficientFor-Props." </p>
+    <p>
+Example: </p>
+    <font color='#339900'>
+      <tt><pre>
+       (#$preconditionFor-Props 
+             (#$and (#$isa ?CLEANSER #$CleaningSubstance)
+                    (#$possesses ?AGT ?CLEANSER)
+                    (#$possesses ?AGT ?OBJECT))
+             (#$cleans ?AGT ?OBJECT))</pre></tt>
+    </font>
+
+
+
+<h3>2.3.  <a NAME='#137071376'>
+Effects</a>
+    </h3>
+    <p>
+Simple actions are unique in a domain, since they are permitted to
+have effects.  Effects are facts that are true in the world after an
+action occurs. We use positive literals to represent facts that 
+are true in the world after the action is executed. We use negative
+literals to represent facts that are made untrue by the execution of
+the action.</p>
+    <p>
+We use the binary predicate <tt><nobr>
+#$effectOfAction-Props</nobr></tt> to represent 
+literals.</p>
+    <p>
+Usage:</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$effectOfAction-Props ACTION EFFECTS)</pre></tt>
+    </font>
+
+<p>
+Comment for <tt><nobr>
+#$effectOfAction-Props</nobr></tt>:</p>
+    <p>
+"A binary predicate which relates instances of ELSentence-Assertible to instances of ELSentence-Assertible. (effectOfAction-Props ACTION-PROP PROP) means that the effect of ACTION-PROP, where ACTION-PROP is a proposition of the form (PRED . ARGS) and PRED is an instance of ActionPredicate, is PROP, where PROP is any proposition that describes the effect(s) of ACTION-PROP. Thus, effectOfAction-Props should be used only when the first argument is a proposition in which an ActionPredicate is used in the arg0 place." 
+</p>
+    <p>
+Example: </p>
+    <font color='#339900'>
+      <tt><pre>
+(#$effectOfAction-Props (#$cleans ?AGT ?OBJ) (#$not (#$dirtinessOfObject ?OBJ #$ALittleDirty))</pre></tt>
+    </font>
+
+
+<p>
+Effects can also be conditional, meaning that the facts that are true
+after the action occurs may be dependent on what is already true. For
+rules like these, we use <tt><nobr>
+#$effectOfActionIf-Props</nobr></tt>.</p>
+    <p>
+Usage:</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$effectOfActionIf-Props ACTION CONDITION EFFECTS)</pre></tt>
+    </font>
+
+<p>
+Comment for <tt><nobr>
+#$effectOfActionIf-Props</nobr></tt>:
+</p>
+    <p>
+"A ternary predicate which relates three instances of ELSentence-Assertible. (effectOfActionIf-Props ACTION COND EFFECT) means that if COND is true in the context in which ACTION occurs, then ACTION makes EFFECT true. This predicate was designed to be used in the specification of planning domains (see PlanningDomainMicrotheory). ACTION should be an atomic sentence with an ActionPredicate as the formula operator (i.e. in the arg0 position). See also the binary predicate effectOfAction-Props." </p>
+    <p>
+Example: A more subtle notion of cleaning:</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$effectOfActionIf-Props (#$cleans ?AGT ?OBJ) 
+    (#$and (#$dirtinessOfObject ?OBJ ?OLD-DIRTINESS) 
+           (#$followingValue ?NEW-DIRTYNESS ?OLD-DIRTYNESS))
+    (#$and (#$not (#$dirtynessOfObject ?OBJ ?OLD-DIRTYNESS))
+                  (#$dirtynessOfObject ?OBJ ?NEW-DIRTYNESS)))</pre></tt>
+    </font>
+
+<p>
+In this example the dirtyness of an object is an instance of <tt><nobr>
+#$Dirtiness</nobr></tt>
+which can range from <tt><nobr>
+#$ReallyDirty</nobr></tt> to <tt><nobr>
+#$Sterile</nobr></tt>. Each execution of the 
+cleaning action on the same object will raise its cleaniness one step.</p>
+    <h3>2.4.  <a NAME='#137121672'>
+Complex Actions and Methods
+</a>
+    </h3>
+    <p>
+SHOP is an example of a Hierarchical Task Network planner. Most of the
+knowledge it uses is in the form of method decompositions. Methods
+encapsulate the approach of solving problems by breaking them down
+into smaller subproblems. For example, cleaning the floor can be
+achieved, if it is not carpeted, by mopping the floor . Mopping the
+floor can be achieved by acquiring a mop and a pail of soapy water,
+mopping each square meter of the floor separately, and then cleaning
+the mop and emptying the pail. Mopping each square meter involves
+wetting the mop, wringing out the mop, swabbing the square meter
+section, checking to see if it is still dirty, and repeating if
+necessary. Each of these can be represented as a single method rule in
+the Cyc KB.</p>
+    <p>
+      <tt><nobr>
+#$methodForAction</nobr></tt> rules associate a complex action with its
+decomposition.</p>
+    <font color='#339900'>
+      <tt><pre>
+      (#$implies FORMULA 
+         (#$methodForAction (COMPLEXACTIONPRED . ARGS)
+         (#$actionSequence 
+           (#$TheList 
+              (SUBACTION1 ) 
+              (SUBACTION2 ) 
+              (SUBACTION3 )))))</pre></tt>
+    </font>
+
+
+<p>
+      <tt><nobr>#$sufficientFor-Props</nobr></tt> rules specify the conditions under which a
+complex action has a trivial decomposition. Sometimes it is not
+necessary to add the decomposed primitive actions of a complex action
+to a plan, when the purpose of that complex action has already been
+achieved by steps taken earlier in the plan. These kinds of rules
+aid in representing a domain since we can then specify method
+decomposition rules in their most general form, without enumerating
+all the possible exceptions when part of the decomposition could be
+redundant.</p>
+    <p>
+Usage:</p>
+    <font color='#339900'>
+      <tt><pre>
+(#$sufficientFor-Props CONDITION-FORMULA ACTION-SENTENCE)</pre></tt>
+    </font>
+
+<p>
+Comment for <tt><nobr>
+#$sufficientFor-Props</nobr></tt>:</p>
+    <p>
+"A binary predicate which relates instances of ELSentence-Assertible to instances of <tt><nobr>
+ELSentence-Assertible</nobr></tt>, and which is used to state that one formula expresses a sufficient condition for the truth of another. <tt><nobr>
+(sufficientFor-Props PROP1 PROP2)</nobr></tt> means that PROP1's being satisfied is sufficient for PROP2's being satisfied. See also <tt><nobr>preconditionFor-Props</nobr></tt>."</p>
+    <p>
+Example:</p>
+    <font color='#339900'>
+      <tt><pre>
+         (#$sufficientFor-Props 
+              (#$dirtynessOfObject ?OBJECT #$Sterile)
+              (#$cleans ?AGT ?OBJECT)) 
+</pre></tt>
+    </font>
+
+
+<h2>3.  <a NAME='#137154848'>
+Running The Planner</a>
+    </h2>
+    <p>
+The OpenCyc Planner is easy to use, it can be accessed with 
+one function: SHOP-FIND-PLANS.</p>
+    <font color='#339900'>
+      <tt><pre>
+function SHOP-FIND-PLANS: (task mt &amp;optional (verbose 0) number time depth backchain) </pre></tt>
+    </font>
+
+<p>
+Returns a list of action sequences each of which are
+a plan for TASK in the context of MT. </p>
+    <blockquote>
+      <dl>
+        <dt>
+          <em>
+TASK</em>
+        </dt>
+        <dd>
+a formula with an
+instance of <tt><nobr>
+#$ActionSequence</nobr></tt> as its first argument.</dd>
+        <dt>
+          <em>
+MT </em>
+        </dt>
+        <dd>
+a microtheory that gives context to the planning problem.  </dd>
+        <dt>
+          <em>
+VERBOSE</em>
+        </dt>
+        <dd>
+an integer between 0 and 9, that controls how
+much logging information shop should send to standard output.</dd>
+        <dt>
+          <em>
+NUMBER</em>
+        </dt>
+        <dd>
+the maximum number of plans to return.  </dd>
+        <dt>
+          <em>
+TIME </em>
+        </dt>
+        <dd>
+the maximum amount of time allocated to the planner.</dd>
+        <dt>
+          <em>
+DEPTH</em>
+        </dt>
+        <dd>
+the maximum depth the planner can reach searching for plans.</dd>
+        <dt>
+          <em>
+BACKCHAIN</em>
+        </dt>
+        <dd>
+the maximum number of backchains allowed when querying the KB when matching rule
+conditions.</dd>
+      </dl>
+    </blockquote>
+    <h2>4.  <a NAME='#137191304'>
+Further Reading on Planning
+</a>
+    </h2>
+    <blockquote>
+      <ul>
+        <li>
+          <p>
+Here is pretty complete intro guide:  <a HREF=' http://www.research.salford.ac.uk/plansig/papers/crc-chapter.pdf'>http://www.research.salford.ac.uk/plansig/papers/crc-chapter.pdf</a>
+          </p>
+        </li>
+        <li>
+          <p>
+CycLish examples describing planning principles:</p>
+          <blockquote>
+            <ul>
+              <li>
+                <a HREF=' http://www.aiai.ed.ac.uk/~stuart/Papers/plan01-ws.pdf'>http://www.aiai.ed.ac.uk/~stuart/Papers/plan01-ws.pdf</a>
+              </li>
+              <li>
+                <a HREF=' http://www-formal.stanford.edu/jmc/mccarthy-buvac-98/context/node13.html'>http://www-formal.stanford.edu/jmc/mccarthy-buvac-98/context/node13.html</a>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <p>
+Nice PowerPoint presentation about SHOP Planner (the type OpenCyc uses): 
+<a HREF=' http://prometeo.ing.unibs.it/sschool/slides/nau/nau2.ppt'>http://prometeo.ing.unibs.it/sschool/slides/nau/nau2.ppt</a> (very pretty and understandable but its examples use the HICAP system)
+</p>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <div align='center'>
+      <font size='-1'>
+    Last update: 06/21/2002 &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <i>Copyright &copy; 2002 <a href='http://www.cyc.com'>Cycorp</a> All rights reserved.</i>
+      </font>
+    </div>
+  </body>
+</html>

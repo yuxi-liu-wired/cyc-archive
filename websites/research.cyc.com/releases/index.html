@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<base href="http://research.cyc.com/releases/" />
+
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="description" content="OpenCyc is the open source version of the Cyc technology, the worlds largest and most complete general knowledge base and commonsense reasonging engine.  Cycorp, the builders of Cyc, have set up an independent organization, OpenCyc.org, to disseminate and administer OpenCyc, and have committed to a pipeline through which all current and future Cyc technology will flow into ResearchCyc (available for R&D in academia and industry) and then OpenCyc.">
+<meta name="keywords" content="research, ResearchCyc, Cyc, opencyc,open source,free software,intelligent software,bots,Cycorp,
+cyc,artificial intelligence,expert system,ontology,ai,software,natural language,common sense,intelligent computing,knowledge management,semantic integration,knowledge,doug lenat,logic,symbolic,software tool,predicate calculus,enterprise computing,cio,decision support,data warehouse,hal 9000,knowledge base,knowledge server">
+<title>ResearchCyc</title>
+<style type="text/css">
+  A.none {text-decoration: none; color: #663399}
+  h2 {color: #663399}
+</style>
+</head>
+
+<body bgcolor="#FFFFFF">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="right" valign="center">
+        <a href="http://research.cyc.com/">
+        <img src="/images/Cycorp_logo_75.gif" border=0></a></td>
+        <td width="10">&nbsp;</td>
+<td align="left" valign="bottom"><font size="12"
+        face="Arial" color="#663399"><strong>ResearchCyc</strong></font></td>
+        <td align="right" valign="bottom" width="350"><p
+        align="right"><font color="#663399" size="3"
+        face="Arial"><strong>Formalized Common Knowledge</strong></font></p>
+        </td>
+    </tr>
+</table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"
+bordercolor="#FFFFFF" bordercolordark="#FFFFFF"
+bordercolorlight="#FFFFFF">
+    <tr>
+        <td width="75" height="10">&nbsp;</td>
+        <td height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#663399" bordercolor="#000080"
+        height="10"><img
+        src="/images/menubarpurple.gif"
+        width="354" height="13"></td>
+        <td valign="top" width="10" bgcolor="#663399" height="10">&nbsp;</td>
+        <td bgcolor="#663399" height="10">&nbsp;</td>
+        <td bgcolor="#663399" height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#663399" height="10">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="30">&nbsp;</td>
+
+    </tr>
+    <tr>
+        <td valign="top"><br>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/"><font
+        size="2">Home</font></a></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/projects/">
+        <font size="2">Projects</font></a></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/faq/">
+        <font size="2">FAQ</font></a></p>
+        <p><nobr><img src="images/lavender_ball.gif">
+        <a class="none" href="doc">
+        <font size="2">Documentation</font></a></nobr></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/releases/">
+        <font size="2">Releases</font></a></p>
+        
+        </td>
+        <td width="20"><!--webbot bot="HTMLMarkup" startspan -->&nbsp;<!--webbot
+        bot="HTMLMarkup" endspan --></td>
+<td valign="top">
+
+<p>
+<h1>Please see <a href="http://www.cyc.com/hwsw_req">Hardware and Software Requirements</a></h1>
+<p>
+<h2>Installation Instructions</h2>
+<b>NOTE: Starting with release 9b, it is necessary to run a setup routine as part of the 
+installation process that prompts for a license key. If you have not received a license key,
+ please send email to rcyc@cyc.com.</b></p>
+<p>
+<B>System Requirements:</B>
+<ul>
+<li>Java is required for creating the .redbin file</li>
+</ul>
+To access ResearchCyc (a.k.a. "RCyc") releases, download and extract the appropriate version for your platform.
+
+<h2>Linux</h2>
+
+<ul>
+
+<li>At a command line:<p>
+<pre>
+$ ftp ftp.cyc.com
+User: <USERNAME>
+Password: 
+ftp> bin
+ftp> cd ResearchCyc
+ftp> get researchcyc-1.0-linux.tgz 
+ftp> bye
+</li>
+
+
+<li>Copy the tar (.tgz) file to the directory in which you want to
+install RCyc, cd to that directory, then type:
+<pre>
+$ tar -xvzf researchcyc-1.0-linux.tgz
+</pre>
+</li>
+
+<p>A directory named 'researchcyc-1.0' will be created, which
+will contain 6 directories: api, client, server, documentation,
+licenses, and scripts.  It also contains a README.txt file that
+has instructions that may be more accurate than these.  You need
+to first run a setup script that prompts you for the license
+key. After that, you will be able to run cyc. First, type the
+following two commands:
+
+<li>$ cd scripts/license</li>
+
+<li>$ ./make-cyc-license-key.sh</li>
+
+<p><b>NOTE: Java is needed to run the setup script.</b>
+
+<p>You will be prompted to enter your license key, which is
+unique to your site. (The same license key may be used on
+multiple installations within your organization.)</p>
+
+<p>If this process completes successfully, a file named
+'cyc-license-key.redbin' will be created in the scripts/license
+directory as well as the server/cyc/run/repository directory. You
+will not need to do anything with this file.</p>
+
+<p><b>You only need to run setup once per
+installation. Subsequently, you can just run cyc as directed
+below.</b></p>
+
+<p>Now you can move to the 'scripts' directory to run RCyc.</p>
+
+<li>$ cd ..</li>
+<li>$ ./run-cyc.sh</li>
+</ul>
+
+<p>This script which runs the Cyc executable using the default
+settings.  The first invocation will build a 'world' file for
+your machine that will make subsequent invocations much faster.
+This process takes 15-45 minutes.
+
+<p> After cyc starts up, it will reach the CYC(1):
+prompt.  You can then use the following URL in a browser to
+access Cyc on the machine cyc is running:
+<p>
+<pre>  http://localhost:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+
+<p>or on a remote machine, with Cyc running on, e.g., myserver.mydomain.edu:<p>
+
+<pre>    http://myserver.mydomain.edu:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+<p>
+<ul>
+<li>Cyc assumes a trusted environment, so you're responsible for
+running it from a machine where only authorized users will be
+able to link to it.
+<p>
+</li>
+<li>Use the login name 'CycAdministrator' to login. Then you can create new user accounts by creating new instances of #$HumanCyclist.
+<p>
+</li>
+</ul>
+
+
+<h2>Windows</h2>
+
+
+<ul>
+<li>At a command line:<p>
+<pre>
+$ ftp ftp.cyc.com
+User: <USERNAME>
+Password: 
+ftp> bin
+ftp> cd ResearchCyc
+ftp> get researchcyc-1.0-windows.zip 
+ftp> bye
+</li>
+<li>Copy the zip file to the directory in which you want to install RCyc, cd to that directory,
+and run the zip file to extract the contents to that directory.
+</li>
+<p>
+<li>Follow the instructions in the README file to activiate your copy of Cyc using your license key and to create
+a Cyc world image file.
+</li>
+
+<li>
+<p> After cyc starts up, it will reach the CYC(1):
+prompt.  You can then use the following URL in a browser to
+access Cyc on the machine cyc is running:
+<p>
+<pre>  http://localhost:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+
+<p>or on a remote machine, with Cyc running on, e.g., myserver.mydomain.edu:<p>
+
+<pre>    http://myserver.mydomain.edu:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+<p>
+</li>
+
+<li>Cyc assumes a trusted environment, so you're responsible for
+running it from a machine where only authorized users will be
+able to link to it.
+<p>
+</li>
+<li>Use the login name 'CycAdministrator' to login. Then you can create new user accounts by creating new instances of #$HumanCyclist.
+<p>
+</li>
+</ul>
+
+<hr>
+<p>Click <a href="older_releases">here</a> for information about older releases.</p>
+<hr>
+If you have questions, send email to rcyc@cyc.com.
+
+<P>Last Update: May 3, 2006</P>
+<P><i></i></P></FONT>
+
+
+<p>
+<TABLE width=100% cellpadding=0 cellspacing=0 border=0>
+<TR>
+<TD bgcolor="#663399"><img src="images/spacer.gif" width="1" height="4"></TD>
+</TR>
+<TR>
+<TD bgcolor="#FFFFFF"><img src="images/spacer.gif" width="1" height="2"></TD>
+</TR>
+<TR>
+<TD bgcolor="#663399"><img src="images/spacer.gif" width="1" height="1"></TD>
+</TR>
+</TABLE>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center"><a href="http://www.cyc.com"><img src="images/cyc-logo-small.gif" align="middle" border=0></a></td>
+    </tr>
+</table>
+</td>
+</tr>
+</table>
+<p align="left">&nbsp;</p>
+
+<p align="left">&nbsp;</p>
+</body>
+</html>

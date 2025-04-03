@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="description" content="OpenCyc is the open source version of the Cyc technology, the worlds largest and most complete general knowledge base and commonsense reasonging engine.  Cycorp, the builders of Cyc, have set up an independent organization, OpenCyc.org, to disseminate and administer OpenCyc, and have committed to a pipeline through which all current and future Cyc technology will flow into ResearchCyc (available for R&D in academia and industry) and then OpenCyc.">
+<meta name="keywords" content="research, ResearchCyc, Cyc, opencyc,open source,free software,intelligent software,bots,Cycorp,
+cyc,artificial intelligence,expert system,ontology,ai,software,natural language,common sense,intelligent computing,knowledge management,semantic integration,knowledge,doug lenat,logic,symbolic,software tool,predicate calculus,enterprise computing,cio,decision support,data warehouse,hal 9000,knowledge base,knowledge server">
+<title>ResearchCyc</title>
+<style type="text/css">
+  A.none {text-decoration: none; color: #663399}
+  h2 {color: #663399}
+</style>
+</head>
+
+<body bgcolor="#FFFFFF">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="right" valign="center">
+        <a href="http://research.cyc.com/">
+        <img src="/images/Cycorp_logo_75.gif" border=0></a></td>
+        <td width="10">&nbsp;</td>
+<td align="left" valign="bottom"><font size="12"
+        face="Arial" color="#663399"><strong>ResearchCyc</strong></font></td>
+        <td align="right" valign="bottom" width="350"><p
+        align="right"><font color="#663399" size="3"
+        face="Arial"><strong>Formalized Common Knowledge</strong></font></p>
+        </td>
+    </tr>
+</table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"
+bordercolor="#FFFFFF" bordercolordark="#FFFFFF"
+bordercolorlight="#FFFFFF">
+    <tr>
+        <td width="75" height="10">&nbsp;</td>
+        <td height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#663399" bordercolor="#000080"
+        height="10"><img
+        src="/images/menubarpurple.gif"
+        width="354" height="13"></td>
+        <td valign="top" width="10" bgcolor="#663399" height="10">&nbsp;</td>
+        <td bgcolor="#663399" height="10">&nbsp;</td>
+        <td bgcolor="#663399" height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#663399" height="10">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="30">&nbsp;</td>
+
+    </tr>
+    <tr>
+        <td valign="top"><br>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/"><font
+        size="2">Home</font></a></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/projects/">
+        <font size="2">Projects</font></a></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/faq/">
+        <font size="2">FAQ</font></a></p>
+        <p><nobr><img src="images/lavender_ball.gif">
+        <a class="none" href="doc">
+        <font size="2">Documentation</font></a></nobr></p>
+        <p><img src="images/lavender_ball.gif">
+        <a class="none" href="http://researchcyc.cyc.com/releases/">
+        <font size="2">Releases</font></a></p>
+        
+        </td>
+        <td width="20"><!--webbot bot="HTMLMarkup" startspan -->&nbsp;<!--webbot
+        bot="HTMLMarkup" endspan --></td>
+<td valign="top">
+
+<p>
+<h2>Installation Instructions for r9b</h2>
+<b>NOTE: Starting with release 9b, it is necessary to run a setup routine as part of the installation process that prompts for a license key. If you have not received a license key, please send email to rcyc@cyc.com.</b></p>
+<p>
+<P>To access ResearchCyc (a.k.a. "RCyc") releases: </P>
+<ul>
+<li>At a command line:<p>
+<pre>
+$ ftp ftp.cyc.com
+User: <USERNAME>
+Password: 
+ftp> bin
+ftp> cd ResearchCyc
+ftp> get rcyc-r9b.tgz
+ftp> bye
+<pre>
+</li>
+<p>
+<li>copy the tar file to the directory in which you want to install RCyc, cd to that directory, then type:
+<pre>
+$ tar -xvzf rcyc-r9b.tgz
+</pre></li>
+<p>A directory named 'cyc' will be created, which will contain 2 directories, 'run' and 'api'. You need to first run a setup script that prompts you for the license key. After that, you will be able to run cyc. First, type the following two commands:
+<li>$ cd cyc/run/repositories</li>
+<li>$ ./setup.sh</li>
+<p>You will be prompted to enter your license key, which is unique to your site. (The same license key may be used on multiple installations within your organization.)</p>
+<p>If this process completes successfully, a file named 'default.redbin' will be created in the repositories directory. You will not need to do anything with this file.</p>
+<p><b>You only need to run setup once per installation. Subsequently, you can just run cyc as directed below.</b></p>
+
+<p>Now you can move to the 'run' directory to run RCyc.</p>
+<li>$ cd ..</li>
+<li>$ ./run-cyc.sh</li>
+</ul>
+<p>After cyc starts up, it will reach the CYC(1): prompt. You will see two warning messages on the way toward seeing the 'Cyc(1):' prompt. They will not cause a problem. You can then use the following URL in a browser to access Cyc
+ on the machine cyc is running:
+<p>
+<pre>    http://localhost:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+
+<p>or on a remote machine, with Cyc running on myserver.mydomain.edu:<p>
+
+<pre>    http://myserver.mydomain.edu:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+<p>
+<ul>
+<li>Cyc assumes a trusted environment, so you're responsible for running it from a machine where only authorized users will be able to link to it.
+<p>
+</li>
+
+<li>Use the login name 'CycAdministrator' to login. Then you can create new user accounts by creating new instances of #$HumanCyclist.
+<p>
+</li>
+</ul>
+<hr>
+<h2>Installation Instructions for r9b</h2>
+<P>To access ResearchCyc releases: </P>
+<ul>
+<li>At a command line:<p>
+<pre>
+$ ftp ftp.cyc.com
+User: <USERNAME>
+Password: 
+ftp> bin
+ftp> cd ResearchCyc
+ftp> get researchcyc-r8b.tgz
+ftp> bye
+<pre>
+</li>
+<p>
+<li>The file was tarballed using 'tar -cvzf'. Untar it in the directory in which you want to run it, then cd to the cyc/scripts/linux directory and:
+<pre>
+$ ./run-cyc.sh
+</pre></li>
+<li>After cyc starts up, it will reach the CYC(1): prompt. You can then use the following URL in a browser to access Cyc
+<p> on the machine cyc is running:
+<p>
+<pre>http://localhost:3602/cgi-bin/cyccgi/cg?cb-start</pre>
+
+<p>or on a remote machine, with Cyc running on myserver.mydomain.edu:<p>
+
+<pre>http://myserver.mydomain.edu:3602/cgi-bin/cyccgi/cg?cb-start</pre></li>
+
+<li>Cyc assumes a trusted environment, so you're responsible for running it from a machine where only authorized users will be able to link to it.
+<p>
+</li>
+
+<li>Use the login name 'CycAdministrator' to login. Then you can create new user accounts by creating new instances of #$HumanCyclist.
+<p>
+</li>
+</ul>
+<hr>
+<h2>Release r8b</h2>
+<table>
+<tr><td width=150>System Version</td><td>1.7327</td></tr>
+<tr><td>FORTs</td><td align=right>116,909</td></tr>
+<tr><td>&nbsp;&nbsp;Constants</td><td align=right>89,379</td></tr>
+<tr><td>&nbsp;&nbsp;NARTs</td><td align=right>27,530</td></tr>
+<tr><td>Assertions</td><td align=right>968,985</td></tr>
+<tr><td>Deductions</td><td align=right>361,185</td></tr>
+<tr><td><b>Sample Collection Extents</b></td></tr>
+<tr><td>EnglishWord</td><td align=right>18,007</td></tr>
+<tr><td>Event</td><td align=right>6,050</td></tr>
+<tr><td>PartiallyTangible</td><td align=right>24,387</td></tr>
+<tr><td>Microtheory</td><td align=right>1,688</td></tr>
+
+</table>
+<hr>
+<h2>Release r7b</h2>
+<table>
+<tr><td width=150>System Version</td><td>1.6895</td></tr>
+<tr><td>FORTs</td><td align=right>92,838</td></tr>
+<tr><td>&nbsp;&nbsp;Constants</td><td align=right>71,360</td></tr>
+<tr><td>&nbsp;&nbsp;NARTs</td><td align=right>21,478</td></tr>
+<tr><td>Assertions</td><td align=right>728,246</td></tr>
+<tr><td>Deductions</td><td align=right>247,211</td></tr>
+<tr><td><b>Sample Collection Extents</b></td></tr>
+<tr><td>EnglishWord</td><td align=right>10,433</td></tr>
+<tr><td>Event</td><td align=right>5,589</td></tr>
+<tr><td>PartiallyTangible</td><td align=right>17,239</td></tr>
+<tr><td>Microtheory</td><td align=right>1,667</td></tr>
+
+</table>
+<hr>
+If you have questions, send email to rcyc@cyc.com.
+
+<P>Last Update: April 12, 2005</P>
+<P><i></i></P></FONT>
+
+<p>
+<TABLE width=100% cellpadding=0 cellspacing=0 border=0>
+<TR>
+<TD bgcolor="#663399"><img src="images/spacer.gif" width="1" height="4"></TD>
+</TR>
+<TR>
+<TD bgcolor="#FFFFFF"><img src="images/spacer.gif" width="1" height="2"></TD>
+</TR>
+<TR>
+<TD bgcolor="#663399"><img src="images/spacer.gif" width="1" height="1"></TD>
+</TR>
+</TABLE>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center"><a href="http://www.cyc.com"><img src="images/cyc-logo-small.gif" align="middle" border=0></a></td>
+    </tr>
+</table>
+</td>
+</tr>
+</table>
+<p align="left">&nbsp;</p>
+
+<p align="left">&nbsp;</p>
+</body>
+</html>

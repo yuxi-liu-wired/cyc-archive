@@ -1,0 +1,296 @@
+<HTML>
+<HEAD>
+<TITLE>Exercise: CycL Translations</TITLE>
+</HEAD>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="description" content="OpenCyc is the open source version of the Cyc technology, the worlds largest and most complete general knowledge base and commonsense reasonging engine.  Cycorp, the builders of Cyc, have set up an independent organization, OpenCyc.org, to disseminate and administer OpenCyc, and have committed to a pipeline through which all current and future Cyc technology will flow into ResearchCyc (available for R&amp;D in academia and industry) and then OpenCyc.">
+<meta name="keywords" content="opencyc,open source,free software,intelligent software,bots,Cycorp,
+cyc,artificial intelligence,expert system,ontology,ai,software,natural language,common sense,intelligent computing,knowledge management,semantic integration,knowledge,doug lenat,logic,symbolic,software tool,predicate calculus,enterprise computing,cio,decision support,data warehouse,hal 9000,knowledge base,knowledge server">
+<title>OpenCyc</title>
+   <style type="text/css">
+  A {text-decoration: none; }
+a.title {font-weight:bold; color:#0000ff}
+a.simple {text-decoration: underline}
+
+ul.nomargin {margin-top: 0px}
+
+
+.bldoc { 
+  border-left: solid 1px #6699CC;
+ }
+
+.blldoc {
+  border-left: solid 1px #6699CC;
+}
+
+.blrdoc {
+  border-right: solid 1px #6699CC;
+  border-left: solid 1px #6699CC;
+}
+.doc table td { 
+  border-bottom: solid 1px #ccd9ff;
+}
+.blkl {
+  border-bottom: solid 1px #ccd9ff;
+}
+
+.bborder {
+  border:  solid #6699CC 1px;
+}
+
+.blth {
+    border-left: solid 1px #6699CC;
+  border-bottom:  solid 1px #6699CC;
+}
+
+.bllth {
+border-bottom:  solid 1px #6699CC;
+}
+
+.doctitle {
+font-weight: bold;
+line-height:100%;
+font-size: 90%;
+margin-bottom: 0;
+padding-bottom: 0;
+}
+
+.docstatus{
+font-size: 80%;
+}
+  </style>
+</head>
+
+<body bgcolor="#FFFFFF">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td><img
+        src="images/opencyc3-logo-1.gif"
+        width="268" height="70"></td>
+        <td width="50">&nbsp;</td>
+        <td align="right" valign="bottom" width="350"><p
+        align="right"><font color="#3399FF" size="3"
+        face="Arial"><strong>Formalized Common Knowledge</strong></font></p>
+        </td>
+    </tr>
+</table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"
+bordercolor="#FFFFFF" bordercolordark="#FFFFFF"
+bordercolorlight="#FFFFFF">
+    <tr>
+        <td width="75" height="10">&nbsp;</td>
+        <td height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#3399FF" bordercolor="#000080"
+        height="10"><img
+        src="images/menubar9.gif"
+        width="354" height="13"></td>
+        <td valign="top" width="10" bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td bgcolor="#3399FF" height="10">&nbsp;</td>
+        <td valign="top" bgcolor="#3399FF" height="10">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+        <td height="30">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"><br>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="http://www.opencyc.org/"><font
+        size="2">Home</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/projects/opencyc/"><font
+        size="2">Projects</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="/OpenCyc_org/faq/opencyc_faq"><font size="2">FAQ</font></a></p>
+        <p><nobr><img src="images/small_bullet.gif" width="17"
+        height="7"><a href="doc"><font
+        size="2">Documentation</font></a></nobr></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a class="none" 
+        href="http://www.opencyc.org/releases/"><font
+        size="2">Releases</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/project/showfiles.php?group_id=27274"><font
+        size="2">Downloads</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/forum/?group_id=27274"><font
+        size="2">Discussion</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://sourceforge.net/news/?group_id=27274"><font
+        size="2">News</font></a></p>
+        <p><img src="images/small_bullet.gif" width="17"
+        height="7"><a
+        href="http://www.opencyc.org/license"><font
+        size="2">License</font></a></p>
+        </td>
+        <td width="20"><!--webbot bot="HTMLMarkup" startspan -->&nbsp;<!--webbot
+        bot="HTMLMarkup" endspan --></td>
+<td valign="top">
+
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<B><I><FONT SIZE=5><P ALIGN="CENTER">Exercise: Representing Roles in Events</P>
+</B></I></FONT><FONT SIZE=3>
+
+<B><P>Because many of the terms used in this exercise are not included in OpenCyc, 
+we recommend that you print this exercise and try it on paper.  When you have finished the
+exercise, <a href="RolesAnswers">click here to see the answers</a>.</P></b>
+
+</FONT><P>This exercise acquaints users with the appropriate uses of role predicates within the 
+CYC&reg; system. Predicates that are instances of the collection #$Role express the relationship between instances of the collection #$Situation and the things involved in situations. </P>
+
+<P>Please pay particular attention to instances of #$ActorSlot, a special type of #$Role. (#$ActorSlot is a specialization of #$Role, i.e., (#$genls #$ActorSlot #$Role)). Instances of the collection #$ActorSlot are predicates that specify the relationships between instances of the collection #$Event and the instances of #$SomethingExisting that "act" in events. </P>
+
+<P>In order to acquaint yourself with current role predicate vocabulary, please consider the various 
+actor slots that might be used to represent the roles described in the following scenarios. 
+You will be asked to consider a list of role predicates and choose which role(s) most closely corresponds to the role(s) played by the participant(s) in that situation.</P>
+
+<P>For example:   What is the most specific role of a newborn baby in a #$BirthEvent?</P>
+
+
+<UL>
+<LI>  #$birthChild</LI>
+<LI>  #$outputsCreated</LI>
+<LI>  #$offspringActors</LI>
+<LI>  #$children</LI></UL>
+
+
+<B><P>#$birthChild: This is the best answer.</P>
+
+
+<UL>
+<LI>#$outputsCreated: Too general.</LI>
+<LI>#$offspringActors: This predicate takes a #$BiologicalReproductionEvent as its arg1, not a #$BirthEvent.</LI>
+<LI>#$children: This predicate takes a parent as its arg1.</LI></UL>
+
+</B>
+
+<P>Other questions will show a situation and a potential CycL representation of that situation. You are asked to determine if the CycL representation given is the most appropriate interpretation of that situation.</P>
+
+<P>You are encouraged to examine the suggested role predicates in the KB and to discuss the questions and answers with other cyclists. Choosing the best role predicate is more of an art than a science, and reasonable cyclists can disagree.</P>
+
+
+<P>For example:  What is the role of a kitchen in a #$CookingFood event which occurs in that kitchen?</P>
+
+
+<UL>
+<LI>#$fromLocation</LI>
+<LI>#$eventOccursAt</LI>
+<LI>#$objectFoundInLocation</LI>
+<LI>#$deviceUsed</LI></UL>
+
+
+<B><P>#$eventOccursAt: This is the best answer.</P>
+</B>
+
+<UL>
+<B><LI>#$fromLocation: This would be appropriate only for #$Translocations that start in the kitchen.</LI>
+<LI>#$objectFoundInLocation : This is not a role predicate. It could be used to describe things that are located in the kitchen, but not an event that occurs there.</LI>
+<LI>#$deviceUsed: This predicate would be more appropriate for mixing bowls, ovens, etc.</LI></UL>
+
+
+<P>&nbsp;</P>
+</B><P>1. What is the most specific role of a rock in a "rock-falling" event?</P>
+<UL>
+<LI>#$objectMoving</LI>
+<LI>#$primaryObjectMoving</LI></UL>
+
+
+<B><P> </P>
+</B><P>2.  What is the role of two objects touching each other in a #$Touching event?</P>
+<UL>
+<LI>#$objectsInContact</LI>
+<LI>#$actorPartsInvolved</LI></UL>
+
+
+<P>   3. What is the role that is shared between a foot and a ball in a "kicking-a-ball" event?</P>
+<UL>
+<LI>#$objectsInContact</LI>
+<LI>#$objectActedOn</LI>
+<LI>#$actorPartsInvolved</LI></UL>
+
+
+<P>4. What are the most specific roles of New York and Dallas in the #$Translation-RoundTrip event mentioned in "Joe took a round-trip to New York from Dallas"?</P>
+
+
+<UL>
+<LI>#$toLocation</LI>
+<LI>#$fromLocation</LI>
+<LI>#$origin-RoundTrip</LI>
+<LI>#$destination-RoundTrip</LI></UL>
+
+
+
+<P>5. Does this rule use appropriate roles, given the situation?</P>
+<pre>
+(#$implies
+   (#$and
+      (#$isa ?ACT #$PurposefulAction)
+      (#$doneBy ?ACT ?DOER))
+   (#$performedBy ?ACT ?DOER))
+</pre>
+
+<P>6. Which of the following best reflects the #$Role played by Joe, given the situation?</P>
+<pre>
+(and
+   (isa Sleeping01 #$Sleeping)
+   (________ Sleeping01 Joe))
+</pre>
+
+<UL>
+<LI>#$performedBy</LI>
+<LI>#$bodilyDoer</LI>
+<LI>#$doneBy</LI></UL>
+
+
+<P>7. Should either the arg1 (#$performedBy) or the arg2 (#$Breathing) in this assertion be generalized? If so, how and why?</P>
+
+(#$interArgFormat1-2 #$performedBy #$Breathing #$SingleEntry)<br>
+*This assertion can be paraphrased "For any #$Breathing event, there is at most one entity that 
+plays the #$performedBy role."
+
+
+<P>8. Someone is coerced into doing something (e.g. at gunpoint). Is this person a #$deliberateActors, a #$nonDeliberateActors or neither?</P>
+
+<P>&nbsp;</P>
+<P>9. What is the role of a violinist in a #$ClassicalMusicalPerformance?</P>
+
+
+<UL>
+<LI>#$performedBy</LI>
+<LI>#$bodilyDoer</LI>
+<LI>#$informationOrigin</LI>
+<LI>#$directingAgent</LI></UL>
+
+
+<P>10. What is the role of a conductor in a #$ClassicalMusicalPerformance?</P>
+
+
+<UL>
+<LI>#$performedBy</LI>
+<LI>#$bodilyDoer</LI>
+<LI>#$informationOrigin</LI>
+<LI>#$directingAgent</LI></UL>
+
+<a href="RolesAnswers">Click here to see the answers.</a>
+
+</BODY>
+</HTML>

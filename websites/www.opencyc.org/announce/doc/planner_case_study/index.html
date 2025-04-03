@@ -1,0 +1,662 @@
+<html>
+
+<head>
+  <style type="text/css">
+    p {font-family: Arial, sans-serif }
+    a {font-family: Arial, sans-serif }
+    li {font-family: Arial, sans-serif }
+    code {font-family: courier; color:green }
+    h1 {font-family: Arial, sans-serif }
+    h2 {font-family: Arial, sans-serif }
+    h3 {font-family: Arial, sans-serif }
+    h4 {font-family: Arial, sans-serif }
+     p {font-size: 100%}
+
+	a:link {color: blue; text-decoration: none}
+	a:visited {color: #6495ED; text-decoration: none}
+	a:hover {color: #CC3300; text-decoration: none}
+
+  </style>
+  <title>The OpenCyc Planner: A Case Study</title>
+  </head>
+
+
+<body bgcolor="white">
+  <a name="top"></a>  
+  <table width="100%">
+    <tr><td width="100">
+           <a href="http://www.opencyc.org"> <img src="http://www.cyc.com/cycdoc/img/opencyc-logo-old.gif" 
+           alt="[OpenCyc.org Homepage]" border="0" /></a></td>
+        <td align="center">
+           <b><font face="Arial" size="+2">Designing Planning Domains: A Case Study</font></b><br />
+           <font face="Arial" size="+1">Version 0.7b </font>
+        </td>
+        <td width="100">
+        </td>
+    </tr>
+  </table>
+  <font face="Arial" size="-2">E-Mail Comments to: <a href="mailto:opencyc-doc@cyc.com">opencyc-doc@cyc.com</a>
+            </font><hr />
+
+
+<a name="Introduction"><h2>Introduction</h2></a>
+
+<p>
+The purpose of this document is to describe the process by which a
+real planning domain can be represented in the Cyc KB. It is assumed
+that the reader already has some experience with knowledge entry
+and some knowledge of the issues involved in ontological design.
+</p>
+
+<p>
+The domain in question, computer programming, has been selected for
+several reasons. Firstly, it is relatively easy to implement this
+domain up to the execution level. The programs produced by the planner
+in this domain should be amenable to being compiled, interpreted, and
+run. Secondly, computers in general are already a fairly discrete
+world that lends itself well to near complete representation in
+predicate logic. Thirdly, this domain effectively demonstrates in
+action several key Cyc technologies for knowledge representation and
+reasoning.
+</p>
+
+<p>
+Our purpose here is to describe the process of creating the domain
+and exploring how that domain can interact with the rest of the KB and
+be used for interesting applications. In the process, we will show how
+to make best use the inference engine and the SHOP planner.
+</p>
+
+<p>
+This problem domain was an interesting exercise in ontological
+engineering, since much of the vocabulary we needed for preconditions
+did not exist. This allowed the KB representation of the program
+model to grow and be influenced by the parallel development of the
+planning domain. Since domain-specific knowledge is scarce in the KB,
+this will likely be the normal state of affairs.
+</p>
+
+<p> 
+Go to <a href="#Appendix A">Appendix A</a> for some example plan tasks
+to try, and for a discussion of the programming domain as it is 
+represented in the Cyc KB. 
+<a href="#Appendix B">Appendix B</a> is a list of some
+possible extensions to the domain that would make interesting projects
+for the interested ontological engineer.
+</p>
+
+<a name="ontology"><h2>Planning Domain Ontology</h2></a>
+
+<h3>General</h3>
+
+<p>
+A Planner is by its very nature a general purpose problem solver. As
+an extension to the Cyc inference engine, its power is harnessed via
+rules and assertions in the KB. Applications using the planner may
+have special code for processing, displaying, or even executing plans,
+but the heart of the application will be the planner rules themselves.
+</p>
+
+<p>
+Creating a planning domain is a very similar act to programming. Often
+rules when first conceived will not work as expected. This is because
+the rules are inherently linked together, and a failure anywhere might
+break the entire plan. Thus, it is normal to spend a period of debugging
+whenever a planning domain is extended with new rules, or when a new
+world model representation requires editing rule preconditions.
+</p>
+
+<p>
+A rough algorithm for designing a planning domain: 
+<ol>
+<li>
+Design the world representation
+</li>
+<li>
+Design the primitive action layer
+</li>
+<li>
+Design the hierarchy of complex actions
+</li>
+</ol>
+</p>
+
+<p>
+This algorithm is very rough. In fact, it may be true that no planning
+domain is ever designed this way. In reality, it seems more likely
+that design will become an iterative process, during which mistakes
+are made and lessons learned. But this algorithm is still valuable,
+since it also communicates the inherent dependencies of the various
+parts of the planning domain. It is guaranteed that a change in your
+world model representation will force changes to your planner rules.
+However, there may be many possible networks of complex actions that
+reasonably represent the abstract activities of the plan. Also, the
+steps are written in increasing order of the expected amount of
+revision each will likely require.
+</p>
+
+<a name="Microtheory Structure"><h3>Microtheory Structure</h3></a>
+
+<p>
+An important consideration early on is determining how all of the
+relevant information is going to be made available to the planner
+during its execution.  The SHOP planner is given one (1) microtheory
+as a parameter that defines the context in which the planning is
+done. However, for real (non-toy) domains it will make sense to
+fragment the domain into modular chunks. The reason is that typically
+there will actually be several interesting and well defined contexts
+that you will be interesting in planning in, and these contexts will
+share a lot of their knowledge.
+</p>
+
+<div class="sidebar">
+<h4>Case study: Programming in different languages</h4>
+<p>
+We were particularly interested early on in maximizing the reuse of
+planner rules, especially when the domain is extended to cover more
+programming languages. We use the microtheory structure of the Cyc KB
+to filter rules by programming language. For example, most plans for
+writing C programs should be generated either in
+#$CProgrammingDomainMt, or in one of its spec-Mts.
+</p>
+
+<p>
+Much of the organization of a program takes place at an abstract level
+in which the syntax of the language does not play a part.  Most of the
+planner rules used in defining the abstract structure of a program are
+asserted in #$ProgrammingDomainMt.
+</p>
+
+<p>
+Many programming languages share similar features and syntax. Java,
+for instance, borrows heavily from C and C++. We thus can also
+identify more specialized areas of abstraction, where rules pertaining
+to specific families of languages can be asserted.  Therefore, we have
+also created #$CSyntaxProgrammingDomainMt, that has both
+#$CProgrammingDomainMt and #$JavaProgrammingDomainMt as
+specializations. As an example of the kind of knowledge that would be
+asserted at this level, consider that in both languages, code blocks
+are bracketed with curly braces. It would be redundant to represent
+this fact separately in both specialized microtheories.
+</p>
+
+<p>
+However, it is not sufficient to define microtheories only for each
+programming language. The algorithms used should be kept separate and
+here we store them in #$ProgramModelMt. Additionally, during
+implementation certain assumptions are made about, for instance, how
+data types correspond to the information they represent. This kind of
+information is stored in microtheories like #$CProgrammingTestMt,
+which can see their respective language mts.
+</p>
+</div>
+
+<a name="effects"><h3>Effects</h3></a>
+
+<p>
+There are two types of simple action rules, preconditions and effects.
+Preconditions can be considered to be a specialization of method rules
+so we discuss them further in the section on complex action rules. Cyc
+current uses two different effect predicates: #$effectOfAction-Props,
+and #$effectOfActionIf-Props. 
+</p>
+
+<p>
+Good planner rules allow the right information to be available
+at each step of the planner's decision-making. There are two ways for
+this information to flow: Primarily, it can flow down the hierarchy,
+through the variable bindings of matching complex action
+preconditions, applied to the actions of their associated
+decompositions. Secondarily, it can flow through the preconditions of
+later actions matching the effects of previous actions.
+</p>
+
+<p>
+It turns out that in some domains that the effects of actions play a
+relatively small part in the planning process. The primary purpose of
+effect rules in a planning domain is that they allow the signalling of
+information to later steps in the planning process. The SHOP planner
+plans for tasks in the same order they are to be executed; this means
+that in some cases decisions made when expanding earlier complex tasks
+in the plan will constrain the planning for later tasks. For example,
+consider a domain for traveling to work. At the beginning of the journey,
+one may have the option of riding the bus or driving a car. But once
+the plan involves a phase of bus riding, the planner should prune away
+all successive actions that involve driving, since riding the bus means
+leaving the car behind.
+</p>
+
+<div class="sidebar">
+<h4>Case Study: Function definitions</h4>
+
+<p>
+Early on in the designing the programming domain, we decided that the
+program itself would be a sequence of program tokens. Since appending
+a token to the end of a text file is a fairly innocuous action, it did
+not have an effect that we needed the planner to reason with. However,
+if this domain was to be extended to the writing of entire programs
+rather than single functions, we would need a much richer effect
+ontology for communicating between plan states. Why? Well, say we are
+writing a program for statistical analysis of some set of data. Well,
+at some high level we would decide we needed a function for computing
+averages over a set of numbers. Well at the point that decision is
+made, the actual details of that function are not relevant. But at
+some point later in the program, when we actually want to call our
+function, those details of its signature and interface <em>are</em>
+important. It would make for an ugly hierarchy to have this function
+specific information to go through the hierarchy as variable bindings.
+So the correct solution would be to ensure some of the primitive
+actions include effects that add the functions details to world state
+as perceived by the later plan states where the function calls will
+possible be planned.
+</p>
+</div>
+
+<a name="complex action rules"><h3>Complex Action Rules</h3></a>
+
+<p>
+A planning domain is only as good as its rules. Unfortunately,
+planning domains are inherently interdependent structures. One bad
+rule can totally ruin the performance of the planner on many problems.
+Sometimes the preconditions of the rule can be incredible expensive.
+</p>
+
+<p>
+It is helpful when design method rules to consider the nature of the
+information flow during the planning process. Each method rule
+encapsulates a point of decision making for the planner. The decision
+is always whether the rule should fire; i.e. whether the search space
+should include a node with this rule's decomposition pushed onto its
+stack. It makes this decision based on information from two sources:
+variable bindings from the world state, and variable bindings for the
+action predicates arguments passed to the rule from successful method
+rules encounter previously during planning. 
+</p>
+
+<p>
+Since the information flow into the rule from these two sources can
+change as the design evolves, it should be expected that these rules
+will change as well, and even the argument constraints and arity of
+the action predicate itself may change.
+</p>
+
+<p>
+Some heuristics:
+<ol>
+<li>
+While there is no hard constraint limiting the size of method
+rules, historically our planner rules have usually around half a dozen
+preconditions and no more than half a dozen subtasks in their
+decomposition.
+</li>
+<li>
+We enforce modularity by being selective about the
+preconditions. At each stage we should include in the preconditions
+only that information necessary for ensuring the legality of its
+associated decomposition.
+</li>
+<li>
+While in an ideal world, the planner would be able to handle any
+representation, we find that sometimes we must tailor our
+representation to facilitate its querying by the planner.
+</li>
+<li>
+CycL has a sophisticated array of evaluatable functions available.
+Often will want to pass variables to the decomposition action formulas
+with that require something beyond the mere binding against GAFs in
+the KB. 
+</li>
+</ol>
+</p>
+
+<p>
+We now will consider some different problems that arose during the
+development of the programming domain, and their solutions.
+</p>
+
+
+<div class="sidebar">
+<h4>Case Study: Program Expressions</h4>
+
+<p>
+One of the major problems that needed addressing in this domain was
+that there needed to be some mechanism for translating nested program
+expressions into the appropriate programming language, such as:
+
+<pre><code>
+(#$SqrtFn 
+   (#$PlusFn
+      (#$TimesFn (#$ParameterValueFn XSide)
+		 (#$ParameterValueFn XSide))
+      (#$TimesFn (#$ParameterValueFn YSide)
+		 (#$ParameterValueFn YSide))))
+</code></pre>
+
+The solution was to use recursive planner rules to implement a
+"Visitor" pattern over CycL formulas representing the expressions. The
+planner would recursively try to expand each part of the formula and
+translate it appropriately. Here is an example of such a rule, in this
+case used for expanding binary functions in expressions when
+translating for Lisp:
+
+<pre><code>
+(#$implies 
+       (#$programFunctionOperator ?RELN ?OPERATOR) 
+       (#$methodForAction 
+           (#$doOutputProgramExpression ?HACKER ?FILE 
+               (?RELN ?ARG1 ?ARG2)) 
+           (#$actionSequence 
+               (#$TheList 
+                   (#$outputProgramToken ?HACKER ?FILE "(") 
+                   (#$doOutputProgramOperator ?HACKER ?FILE ?OPERATOR) 
+                   (#$doOutputProgramExpression ?HACKER ?FILE ?ARG1) 
+                   (#$doOutputProgramExpression ?HACKER ?FILE ?ARG2) 
+                   (#$outputProgramToken ?HACKER ?FILE ")"))))) 
+</code></pre>
+
+<p>
+Since the tokens used to represent the functions like #$TimesFn can be
+language dependent, we represented the mapping via the binary
+predicate #$programFunctionOperator.  whose GAFs are asserted in
+microtheories specific to each programming language,
+i.e. #$CProgrammingLanguageMt, #$CommonLispProgrammingLanguageMt, etc.
+</p>
+</div>
+
+<div class="sidebar">
+<h4>Case Study: Joining Sequence Variable Lists</h4>
+
+<p>
+Since CycL already includes an extensive vocabulary of evaluatable
+functions, including many mathematical and set theoretic functions,
+and list and string manipulation functions, we wanted to leverage that
+existing work as much as possible in this new domain.
+</p>
+
+<p>
+For instance, within a function definition, there is some structure
+that defines the local variables used in that function. In our program
+representation, we have two predicates, #$programAlgorithmOutputs and
+#$programAlgorithmInternals that relate an algorithm with the software
+parameters it needs to declare locally. While it would possible to
+have a third predicate, #$programAlgorithmLocals, store the
+concatenation of both list, it would not be ideal since the knowledge
+would be duplicated in the KB. 
+</p>
+
+<p>
+It would be better to be able to combine both lists on the fly.  The
+following method for action rule bind each list of parameters to
+?OUTVARS and ?INTERNALS. Note that ?INTERNALS is a sequence variable
+and ?OUTVARS is not, since ?ALGORITHM should only be bound to an
+instance of #$FunctionalAlgorithm. We then use a combination of
+#$TheList, #$JoinListsFn, and #$evaluate to compute the concatenation
+of the two lists, which is then passed as an argument to a
+#$doOpenLocalVariables Scope action.
+</p>
+
+<p align="center"><pre><code>
+(#$implies 
+   (#$and 
+    (#$programAlgorithmInternals ?ALGORITHM . ?INTERNALS) 
+    (#$algorithmStartStep ?ALGORITHM ?STEP) 
+    (#$programAlgorithmOutputs ?ALGORITHM ?OUTVARS) 
+    (#$programStrings ?ALGORITHM ?ALG-NAME) 
+    (#$equals ?JOINLISTSFN 
+    (#$TheList . ?LOCALS)) 
+    (#$evaluate ?JOINLISTSFN 
+    (#$JoinListsFn 
+      (#$TheList ?OUTVARS) 
+      (#$TheList . ?INTERNALS))) 
+    (#$termOfUnit ?PARAMETERVALUEFN 
+      (#$ParameterValueFn ?OUTVARS))) 
+   (#$methodForAction 
+    (#$doDefineProgramFunctionFromAlgorithm ?HACKER ?FILE ?ALGORITHM)
+      (#$actionSequence 
+       (#$TheList 
+        (#$doOutputProgramFunctionHeader ?HACKER ?FILE ?ALGORITHM) 
+        (#$doOpenLocalVariablesScope ?HACKER ?FILE . ?LOCALS) 
+        (#$doProgramStep ?HACKER ?FILE ?STEP) 
+        (#$doOutputFunctionReturn ?HACKER ?FILE ?ALGORITHM ?PARAMETERVALUEFN) 
+        (#$doCloseLocalVariablesScope ?HACKER ?FILE . ?LOCALS) 
+        (#$doCloseFunctionDefinition ?HACKER ?FILE 
+          (#$AlgorithmFunctionFn ?ALGORITHM ?ALG-NAME))))))
+</code></pre></p>
+</div>
+
+<h2>Debugging Tricks</h2>
+
+<p>
+Do not be surprised when you carefully designed planning domain fails
+to return plans right away. The rule interactions are complicated and
+it is very hard to assert the rules correctly the first time. Here are
+some pointers that might help the debugging process:
+<ol>
+<li>
+Use the verbose mode. Setting the verbosity of the planner, either
+throw the parameter of <code>shop-find-plans</code> or otherwise,
+will give you more information about where in the planning process
+the error occurred. A verbosity of 0 means no extra output, and a 
+value of 9 means the highest level of extra information.  
+</li>
+<li>
+It will sometimes be the case, especially when designing domains with
+recursive method rules, or when preconditions are extremely expensive
+to compute, that the planner will run of into the weeds trying its
+best to find a solution. Since we do not currently have a method for
+interrupting the planning process, it is usually a good idea to set
+the depth and time cutoffs to reasonable values. The time cutoff does
+the obvious thing. Every time a method rule is successfully applied to
+a node, the children of that node have their depth value incremented
+by one. Depth is therefore a rough guide of the progress of the
+planner on a particular task. If the planner tries to expand nodes of
+a depth greater than your predefined limit, it will halt immediately.
+</li>
+<li>
+Work backwards. It is much more efficient to make the complex rules
+that are closer to the primitive level work properly, and then more up
+to the more abstract actions. By working backwards you can build the
+domain one level at a time, with each level debugged against a
+known-to-be stable base of action rules.  The planner can be called on
+any action predicate formula, and will plan for even the smallest
+subactions in a larger conceived plan. There is nothing that forces
+plan tests to be executed at the highest possible level.
+</li>
+</ol>
+</p>
+
+<!-- 
+<h2>Conclusion</h2>
+-->
+<!-- something conclusive here -->
+
+<a name="Appendix A"><h2>Appendix A</h2></a>
+
+<h3>Example Plan Tasks</h3>
+
+<ol>
+<li>Try the plan:
+<code>(#$doDefineProgramFunctionFromAlgorithm #$Thing #$Thing #$AbsoluteValueComputation)</code><br> 
+in either <code>#$CProgrammingTestMt</code> or 
+<code>#$CommonLispProgrammingTestMt.</code>
+</li>
+
+<li>Try the plan:
+<code>(#$doDefineProgramFunctionFromAlgorithm #$Thing #$Thing #$MaxElementComputation)</code><br> 
+in either <code>#$CProgrammingTestMt</code> or 
+<code>#$CommonLispProgrammingTestMt.</code>
+</li></ol>
+
+<p>
+For example,
+<blockquote>
+<code>
+CYC(1): (csetq plans (shop-find-plans '(#$doDefineProgramFunctionFromAlgorithm #$Thing #$Thing #$MaxElementComputation) #$CProgrammingTestMt)<br>
+CYC(2): (punless (null plans)
+	  (csetq actions (shop-plan-simple-actions (first plans))))
+</code></blockquote>
+
+will bind <code>actions</code> to a list of simple action formulas that constitute a plan for writing code that computes the maximum element of 
+a list in the C programming language.</p>
+
+<h3>Algorithm Representation</h3>
+
+<p>
+While it is important that the programs produced by the planner be
+valid, we would like further to analyze the algorithms involved
+abstracted away as much as possible from their implementation in the
+syntax of the programming languages themselves.
+</p>
+
+<h4>Program Steps</h4>
+<p>
+We currently support the representation of functional algorithms,
+i.e. functions which compute only one data object. This collection is
+denoted by the term #$FunctionalAlgorithm.
+We represent an
+algorithm as a mapping between program steps. It is conceptually very
+similar to the old style logic flowcharts.
+</p>
+
+<p>
+Program steps are always instances of #$ProgramStep. We associate an
+algorithm with its first step with the predicate
+#$algorithmStartStep. Individual program steps of an algorithm can be
+denoted with the function #$AlgorithmStepFn. Other program steps can
+be denoted with special purpose functions like #$ProgramAssignmentFn
+and #$MakeFunctionCallInProgramFn.
+</p>
+
+<p>
+There are several predicates that can be used to define the
+relationships between the program steps: 
+<blockquote><code>
+#$programIfConditionThenElse<br>
+#$programWhileConditionDo<br>
+#$hasSequentialProgramSteps
+</code></blockquote>
+</p>
+
+<h4>Tokens</h4>
+<p>
+Most named entities in a program, such as parameters and functions,
+will have a #$programStrings assertion on them, that will indicate
+(within the current context) what the string should be used in the
+program for that entity.
+</p>
+
+<h4>Variables</h4>
+<p>
+Variables are crucial to algorithm representation. We use instances of
+#$SoftwareParameter as variables or, as we call them here, parameters.
+Initial values for parameters are represented with
+#$initialParameterValue GAFs. The value of a parameter can be denoted
+via the unary function #$ParameterValueFn. In practice, this is
+similar to the '$' prefix used in bash shell scripting when accessing
+the value of an environment variable.  This function maps a parameter
+to the information that its actual interal value is meant to
+represent. For example, in a C program where #$Counter is has type
+<code>int</code>, then (#$ParameterValueFn #$Counter) would denote an
+instance #$Integer, not some bitfield that is the actual
+representation of that integer in memory.
+</p>
+
+<h4>Expressions</h4>
+<p>
+The CycKB already has extensive knowledge about many of the
+mathematical functions we would be interested in using in program
+expressions. We use these functions as much as possible in the CycL
+representation of program steps, thereby establishing the semantic
+roots of the expression within pre-existing CycL. We use the binary
+predicate #$programFunctionOperator to represent the mapping between
+the CycL functions and their programming language counterparts.
+</p>
+
+<h4>Statement Parts</h4>
+<p>
+Many programming languages have very similar kinds of statements. For
+example, usually an <code>if/then/else</code> statement is almost
+standard, as is some kind looping construct. Since these forms are so
+common we can abstract them out to a language independent level, and
+have merely a mapping between <em>parts</em> of the statement and
+tokens in the language. This is the main reason for the action
+predicate #$doOutputStatementPart and the represented instances of
+#$ProgramSyntaxObject, such as #$IfStatement-StartIf and
+#$IfStatement-Then.
+</p>
+
+<h4>Domain Extent</h4>
+<p>
+At the current stage the domain represents only the programming of
+individual functions. To really useful, we need to extend the domain
+to include complete programs that meet specified requirements; 
+use more of the existing #$Algorithm ontology to represent how different
+algorithms are combined to form complex programs; and look for
+ways of automating a link between program specifications and programs
+themselves.
+</p>
+
+<a name="Appendix B"><h2>Appendix B: Extensions</h2></a>
+
+<p>
+The domain is currently only a small prototype. There are many ways it
+could be easily extended to cover more of the programming domain
+space. We now give some suggestions for projects that the interested
+student may wish to work on:
+</p>
+
+<p><ol>
+<li>
+Extend the representation to pointer referencing/dereferencing.
+Allow a capability for pointer arithmetic.
+</li>
+<li>
+Extend the representation to gracefully handle C-style bitwise
+operations.
+</li>
+<li>
+Create a framework for software modules/packages. Allow the
+automatic mapping of functions like #$TangentFn and #$SineFn to
+functions in a mathematics subroutine library only when that
+library is available.
+</li>  
+<li>
+Extend existing vocabulary to handle object oriented programming,
+specifically the manipulation of class definitions, method
+declarations, and method invocation.
+</li>
+<li>
+Namespaces and identifiers are currently given a very cursory
+treatment. Ideally we would like to automatically generate meaningful
+identifier strings for variables such that there are no collisions in
+the namespace. Presumably assertions in the KB (perhaps something
+involving #$programStrings, or perhaps some more complicated scheme)
+would be used to give "hints" to the planner.
+</li>
+<li>
+Develop a framework for doing software verification in CycL. Extend
+CycL to enable the application (or implementation) of software
+engineering tools upon the CycL representation.
+</li>
+<li>
+Extend existing functionality to include bash shell scripting.  With
+the representation of the typical tool set of the average Linux user,
+develop a methodology that allows the planner to usefully chain
+together commands like <code>grep</code> and <code>find</code>, using
+piping and i/o indirection, like <code>grep</code> and
+<code>find</code>, to extract information from both the user
+environment, and from text file based knowledge sources with known
+formats. Simple queries for information by the user could serve as the
+high level goals for plans to actively process those files and extract
+their information as an answer to the query.
+</li>
+</ol></p>
+
+
+    <hr /><div align="center">
+    <font face="Arial" size="-2">
+    Last update: 10/01/2002 &#160;&#160; | &#160;&#160; 
+    <i>Copyright &#169; 2002 <a href="http://www.cyc.com">Cycorp</a> All rights reserved.</i>
+    </font></div>
+</body>
+</html>

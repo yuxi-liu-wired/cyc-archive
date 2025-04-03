@@ -1,0 +1,2051 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xsd:schema xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+  <!-- CycML types -->
+
+  <xsd:complexType name = "CycLSentence-sequence">
+    <xsd:choice maxOccurs = "unbounded">
+      <xsd:element ref = "CycLSentence"/>
+      <xsd:element ref = "CycLVariable"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "CycLSentence">
+    <xsd:choice>
+      <xsd:element ref = "True"/>
+      <xsd:element ref = "False"/>
+      <xsd:element ref = "CycLVariable"/>
+      <xsd:element ref = "CycLAtomicSentence"/>
+      <xsd:element ref = "not"/>
+      <xsd:element ref = "and"/>
+      <xsd:element ref = "or"/>
+      <xsd:element ref = "xor"/>
+      <xsd:element ref = "implies"/>
+      <xsd:element ref = "equiv"/>
+      <xsd:element ref = "forAll"/>
+      <xsd:element ref = "thereExists"/>
+      <xsd:element ref = "thereExistExactly"/>
+      <xsd:element ref = "thereExistAtMost"/>
+      <xsd:element ref = "thereExistAtLeast"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "predicate">
+    <xsd:choice>
+      <xsd:element ref = "OpenCycDefinitionalPredicate"/>    
+      <xsd:element ref = "CycLRepresentedTerm"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "OpenCycDefinitionalPredicate">
+    <xsd:choice>
+      <xsd:element ref = "arg1Format"/>
+      <xsd:element ref = "arg1Genl"/> 
+      <xsd:element ref = "arg1Isa"/> 
+      <xsd:element ref = "arg2Format"/> 
+      <xsd:element ref = "arg2Genl"/> 
+      <xsd:element ref = "arg2Isa"/> 
+      <xsd:element ref = "arg3Format"/> 
+      <xsd:element ref = "arg3Genl"/> 
+      <xsd:element ref = "arg3Isa"/>
+      <xsd:element ref = "arg4Format"/> 
+      <xsd:element ref = "arg4Genl"/>
+      <xsd:element ref = "arg4Isa"/> 
+      <xsd:element ref = "arg5Format"/> 
+      <xsd:element ref = "arg5Genl"/> 
+      <xsd:element ref = "arg5Isa"/> 
+      <xsd:element ref = "arg6Format"/> 
+      <xsd:element ref = "arg6Genl"/> 
+      <xsd:element ref = "arg6Isa"/> 
+      <xsd:element ref = "argAndRestGenl"/> 
+      <xsd:element ref = "argAndRestIsa"/> 
+      <xsd:element ref = "argFormat"/> 
+      <xsd:element ref = "argGenl"/> 
+      <xsd:element ref = "argIsa"/> 
+      <xsd:element ref = "argsGenl"/> 
+      <xsd:element ref = "argsIsa"/> 
+      <xsd:element ref = "arity"/> 
+      <xsd:element ref = "arityMax"/> 
+      <xsd:element ref = "arityMin"/> 
+      <xsd:element ref = "collectionIntersection"/> 
+      <xsd:element ref = "collectionUnion"/> 
+      <xsd:element ref = "comment"/> 
+      <xsd:element ref = "completeExtentKnown"/> 
+      <xsd:element ref = "constrainsArg"/> 
+      <xsd:element ref = "covering"/> 
+      <xsd:element ref = "disjointWith"/> 
+      <xsd:element ref = "functionCorrespondingPredicate"/> 
+      <xsd:element ref = "functionCorrespondingPredicate-Canonical"/> 
+      <xsd:element ref = "functionCorrespondingPredicate-Generic"/> 
+      <xsd:element ref = "functionalInArgs"/> 
+      <xsd:element ref = "genlAttributes"/> 
+      <xsd:element ref = "genlFuncs"/> 
+      <xsd:element ref = "genlInverse"/> 
+      <xsd:element ref = "genlMt"/> 
+      <xsd:element ref = "genlPreds"/> 
+      <xsd:element ref = "genls"/> 
+      <xsd:element ref = "independentArg"/> 
+      <xsd:element ref = "interArg1ResultGenls"/> 
+      <xsd:element ref = "interArg1ResultIsa"/> 
+      <xsd:element ref = "interArg2ResultGenls"/> 
+      <xsd:element ref = "interArg2ResultIsa"/> 
+      <xsd:element ref = "interArg3ResultGenls"/> 
+      <xsd:element ref = "interArg3ResultIsa"/> 
+      <xsd:element ref = "interArg4ResultGenls"/> 
+      <xsd:element ref = "interArg4ResultIsa"/> 
+      <xsd:element ref = "interArg5ResultGenls"/> 
+      <xsd:element ref = "interArg5ResultIsa"/> 
+      <xsd:element ref = "interArgDifferent"/> 
+      <xsd:element ref = "interArgFormat1-1"/> 
+      <xsd:element ref = "interArgFormat1-2"/> 
+      <xsd:element ref = "interArgFormat1-3"/> 
+      <xsd:element ref = "interArgFormat1-4"/> 
+      <xsd:element ref = "interArgFormat1-5"/> 
+      <xsd:element ref = "interArgFormat2-1"/> 
+      <xsd:element ref = "interArgFormat2-2"/> 
+      <xsd:element ref = "interArgFormat2-3"/> 
+      <xsd:element ref = "interArgFormat2-4"/> 
+      <xsd:element ref = "interArgFormat2-5"/> 
+      <xsd:element ref = "interArgFormat3-1"/> 
+      <xsd:element ref = "interArgFormat3-2"/> 
+      <xsd:element ref = "interArgFormat3-3"/> 
+      <xsd:element ref = "interArgFormat3-4"/> 
+      <xsd:element ref = "interArgFormat3-5"/> 
+      <xsd:element ref = "interArgFormat4-1"/> 
+      <xsd:element ref = "interArgFormat4-2"/> 
+      <xsd:element ref = "interArgFormat4-3"/> 
+      <xsd:element ref = "interArgFormat4-4"/> 
+      <xsd:element ref = "interArgFormat4-5"/> 
+      <xsd:element ref = "interArgFormat5-1"/> 
+      <xsd:element ref = "interArgFormat5-2"/> 
+      <xsd:element ref = "interArgFormat5-3"/> 
+      <xsd:element ref = "interArgFormat5-4"/> 
+      <xsd:element ref = "interArgFormat5-5"/> 
+      <xsd:element ref = "interArgIsa"/> 
+      <xsd:element ref = "interArgIsa1-2"/> 
+      <xsd:element ref = "interArgIsa1-3"/> 
+      <xsd:element ref = "interArgIsa1-4"/> 
+      <xsd:element ref = "interArgIsa1-5"/> 
+      <xsd:element ref = "interArgIsa2-1"/> 
+      <xsd:element ref = "interArgIsa2-3"/> 
+      <xsd:element ref = "interArgIsa2-4"/> 
+      <xsd:element ref = "interArgIsa2-5"/> 
+      <xsd:element ref = "interArgIsa3-1"/> 
+      <xsd:element ref = "interArgIsa3-2"/> 
+      <xsd:element ref = "interArgIsa3-4"/> 
+      <xsd:element ref = "interArgIsa3-5"/> 
+      <xsd:element ref = "interArgIsa4-1"/> 
+      <xsd:element ref = "interArgIsa4-2"/> 
+      <xsd:element ref = "interArgIsa4-3"/> 
+      <xsd:element ref = "interArgIsa4-5"/> 
+      <xsd:element ref = "interArgIsa5-1"/> 
+      <xsd:element ref = "interArgIsa5-2"/> 
+      <xsd:element ref = "interArgIsa5-3"/> 
+      <xsd:element ref = "interArgIsa5-4"/> 
+      <xsd:element ref = "interArgReln"/> 
+      <xsd:element ref = "interArgReln1-2"/> 
+      <xsd:element ref = "interArgReln1-3"/> 
+      <xsd:element ref = "interArgReln1-4"/> 
+      <xsd:element ref = "interArgReln2-1"/> 
+      <xsd:element ref = "interArgReln2-3"/> 
+      <xsd:element ref = "interArgReln2-4"/> 
+      <xsd:element ref = "interArgReln3-1"/> 
+      <xsd:element ref = "interArgReln3-2"/> 
+      <xsd:element ref = "interArgReln3-4"/> 
+      <xsd:element ref = "interArgReln4-1"/> 
+      <xsd:element ref = "interArgReln4-2"/> 
+      <xsd:element ref = "interArgReln4-3"/> 
+      <xsd:element ref = "interArgResultGenl"/> 
+      <xsd:element ref = "interArgResultIsa"/> 
+      <xsd:element ref = "interArgResultReln"/> 
+      <xsd:element ref = "interResultArgReln"/> 
+      <xsd:element ref = "isa"/> 
+      <xsd:element ref = "minimizeExtent"/> 
+      <xsd:element ref = "negationAttribute"/> 
+      <xsd:element ref = "negationInverse"/> 
+      <xsd:element ref = "negationPreds"/> 
+      <xsd:element ref = "opaqueArgument"/> 
+      <xsd:element ref = "partitionedInto"/> 
+      <xsd:element ref = "quotedArgument"/> 
+      <xsd:element ref = "quotedCollection"/> 
+      <xsd:element ref = "requiredActorSlots "/>
+      <xsd:element ref = "requiredArg1Pred"/> 
+      <xsd:element ref = "requiredArg2Pred"/> 
+      <xsd:element ref = "resultGenl"/> 
+      <xsd:element ref = "resultGenlArg"/> 
+      <xsd:element ref = "resultIsa"/> 
+      <xsd:element ref = "resultIsaArg"/> 
+      <xsd:element ref = "rewriteOf"/> 
+      <xsd:element ref = "rolesForEventType"/> 
+      <xsd:element ref = "sharedNotes"/> 
+      <xsd:element ref = "siblingDisjointExceptions"/> 
+      <xsd:element ref = "superTaxons"/> 
+      <xsd:element ref = "transitiveViaArg"/> 
+      <xsd:element ref = "transitiveViaArgInverse"/> 
+      <xsd:element ref = "typeGenls"/> 
+      <xsd:element ref = "typedGenlInverse"/> 
+      <xsd:element ref = "typedGenlPreds"/> 
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "CycLReifiableDenotationalTerm">
+    <xsd:choice>
+      <xsd:element ref = "CycLConstant"/>
+      <xsd:element ref = "CycLReifiableNonAtomicTerm"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "CycLTerm">
+    <xsd:choice>
+      <xsd:element ref = "CycLDenotationalTerm"/>
+      <xsd:element ref = "CycLSentence"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "CycLDenotationalTerm">
+    <xsd:choice>
+      <xsd:element ref = "CycLRepresentedTerm"/>
+      <xsd:element ref = "SubLAtomicTerm"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "CycLRepresentedTerm">
+    <xsd:choice>
+      <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      <xsd:element ref = "CycLVariable"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "SubLAtomicTerm">
+    <xsd:choice>
+      <xsd:element ref = "SubLCharacter"/>
+      <xsd:element ref = "SubLString"/>
+      <xsd:element ref = "SubLRealNumber"/>
+      <xsd:element ref = "SubLNonVariableSymbol"/>
+      <xsd:element ref = "CycLVariable"/>
+      <xsd:element ref = "SubLList"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name = "operation">
+    <xsd:choice>
+      <xsd:element ref = "create"/>
+      <xsd:element ref = "find-or-create"/>
+      <xsd:element ref = "rename"/>
+      <xsd:element ref = "merge"/>
+      <xsd:element ref = "kill"/>
+      <xsd:element ref = "assert"/>
+      <xsd:element ref = "reassert"/>
+      <xsd:element ref = "unassert"/>
+      <xsd:element ref = "blast"/>
+      <xsd:element ref = "create-skolem"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+
+  <!-- CycML elements -->
+
+
+  <xsd:element name = "cycml">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "knowledge-package"/>
+        <xsd:element ref = "operations"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "operations">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "operation" minOccurs = "0" maxOccurs = "unbounded"/>        
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "knowledge-package">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "knowledge-package-id"/>
+        <xsd:element ref = "knowledge-package-dependencies"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "knowledge-package-dependencies">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "knowledge-package-id" maxOccurs = "unbounded"/>        
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- create constant operation -->
+  <xsd:element name = "create">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLConstant"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- find-or-create constant operation -->
+  <xsd:element name = "find-or-create">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLConstant"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- rename constant operation -->
+  <xsd:element name = "rename">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLConstant"/>
+        <xsd:element ref = "CycLConstant"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- merge fort operation -->
+  <xsd:element name = "merge">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- kill fort operation -->
+  <xsd:element name = "kill">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- assert operation -->
+  <xsd:element name = "assert">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLAssertion"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- resassert operation -->
+  <xsd:element name = "reassert">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLAssertion"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- unassert operation -->
+  <xsd:element name = "unassert">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLAssertion"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- blast assertion operation -->
+  <xsd:element name = "blast">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLAssertion"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- create-skolem operation -->
+  <xsd:element name = "create-skolem">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "guid"/>
+        <xsd:element ref = "skolem-unreified-term"/>
+        <xsd:element ref = "Microtheory"/>
+        <xsd:element ref = "skolem-conjunctive-normal-form"/>
+        <xsd:element ref = "skolem-arg-types" minOccurs = "0"/>
+        <xsd:element ref = "bookkeeping-info" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "skolem-unreified-term">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLList"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "skolem-conjunctive-normal-form">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLList"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "skolem-arg-types">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLList"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- bookkeeping info which accompanies each operation -->
+  <xsd:element name = "bookkeeping-info">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "Cyclist"/>
+        <xsd:element ref = "cyc-image-id"/>
+        <xsd:element ref = "date"/>
+        <xsd:element ref = "time" minOccurs = "0"/>
+        <xsd:element ref = "purpose" minOccurs = "0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "Cyclist">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "purpose">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name = "CycLAssertion">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref = "assertion-id"/>
+        <xsd:element ref = "paraphrase"/>
+        <xsd:element ref = "CycLSentence"/>
+        <xsd:element ref = "Microtheory"/>
+        <xsd:element ref = "strength"/>
+        <xsd:element ref = "direction"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "Microtheory">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "strength">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLNonVariableSymbol"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "direction">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLList"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "CycLAtomicSentence">
+    <xsd:complexType>
+      <xsd:sequence>
+        <!-- the predicate -->
+        <xsd:element ref = "predicate"/>
+        <!-- the arguments -->
+        <xsd:choice minOccurs = "0" maxOccurs = "unbounded">
+          <xsd:element ref = "CycLTerm"/>
+          <xsd:element ref = "CycLVariable"/>
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "CycLReifiableNonAtomicTerm">
+    <xsd:complexType>
+      <xsd:sequence>
+        <!-- function -->
+        <xsd:element ref = "CycLRepresentedTerm"/>
+        <!-- the arguments -->
+        <xsd:choice minOccurs = "0" maxOccurs = "unbounded">
+          <xsd:element ref = "CycLTerm"/>
+          <xsd:element ref = "CycLVariable"/>
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "CycLConstant">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref = "guid"/>
+        <xsd:element ref = "namespace"/>
+        <xsd:element ref = "name"/>
+        <xsd:element ref = "uri"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "SubLNonVariableSymbol">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "package"/>
+        <xsd:element ref = "name"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "SubLList">
+    <xsd:complexType>
+      <xsd:choice minOccurs = "0" maxOccurs = "unbounded">
+        <xsd:element ref = "SubLList"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLAssertion"/>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "SubLAtomicTerm"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+
+
+  <!-- logical operators used in building sentences -->
+
+  <xsd:element name = "not">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "and">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence-sequence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "or">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence-sequence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "xor">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "implies">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "equiv">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLSentence"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "forAll">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "thereExists">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "thereExistExactly">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLRealNumber"/>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "thereExistAtMost">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLRealNumber"/>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "thereExistAtLeast">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "SubLRealNumber"/>
+        <xsd:element ref = "CycLVariable"/>
+        <xsd:element ref = "CycLSentence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- definitional predicates -->
+
+  <xsd:element name = "arg1Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "arg1Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg1Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg2Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg2Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg2Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg3Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg3Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg3Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "arg4Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg4Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "arg4Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg5Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg5Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg5Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg6Format">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg6Genl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arg6Isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argAndRestGenl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argAndRestIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argFormat">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argGenl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argsGenl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "argsIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arity">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arityMax">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "arityMin">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "collectionIntersection">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "collectionUnion">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "comment">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "SublString"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "completeExtentKnown">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "constrainsArg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "covering">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "disjointWith">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "functionCorrespondingPredicate">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "functionCorrespondingPredicate-Canonical">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "functionCorrespondingPredicate-Generic">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "functionalInArgs">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genlAttributes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genlFuncs">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genlInverse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genlMt">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genlPreds">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "genls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "independentArg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "NonNegativeInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg1ResultGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg1ResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg2ResultGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg2ResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg3ResultGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg3ResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg4ResultGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg4ResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg5ResultGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArg5ResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgDifferent">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat1-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat1-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat1-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat1-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat1-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat2-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat2-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat2-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat2-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat2-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat3-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat3-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat3-3">
+    <xsd:complexType>
+      <xsd:sequence>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat3-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat3-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat4-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat4-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat4-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat4-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat4-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat5-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat5-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat5-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat5-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgFormat5-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa1-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa1-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa1-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa1-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa2-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa2-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa2-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa2-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa3-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa3-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa3-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa3-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa4-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa4-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa4-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa4-5">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa5-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa5-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa5-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgIsa5-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln1-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln1-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln1-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln2-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln2-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln2-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln3-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln3-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln3-4">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln4-1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln4-2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgReln4-3">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgResultGenl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgResultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interArgResultReln">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "interResultArgReln">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "isa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "minimizeExtent">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "negationAttribute">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "negationInverse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "negationPreds">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "opaqueArgument">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "partitionedInto">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "quotedArgument">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "quotedCollection">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "requiredActorSlots">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name = "requiredArg1Pred">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+     </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "requiredArg2Pred">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "resultGenl">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "resultGenlArg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "resultIsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "resultIsaArg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "rewriteOf">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "rolesForEventType">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "sharedNotes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "siblingDisjointExceptions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "superTaxons">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "transitiveViaArg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "transitiveViaArgInverse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "PositiveInteger"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "typeGenls">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "typedGenlInverse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+ 
+  <xsd:element name = "typedGenlPreds">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+        <xsd:element ref = "CycLReifiableDenotationalTerm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element> 
+
+  <!-- primitives -->
+
+  <xsd:element name = "True"/>
+  <xsd:element name = "False"/>
+
+  <xsd:element name = "guid" type = "xsd:string"/>
+  <xsd:element name = "uri" type = "xsd:anyUri"/>
+  <xsd:element name = "name" type = "xsd:string"/>
+  <xsd:element name = "CycLVariable" type = "xsd:string"/>
+  <xsd:element name = "SubLRealNumber" type = "xsd:decimal"/>
+  <xsd:element name = "SubLString" type = "xsd:string"/>
+  <xsd:element name = "SubLCharacter" type = "xsd:string"/>
+  <xsd:element name = "package" type = "xsd:string"/>
+  <xsd:element name = "knowledge-package-id" type = "xsd:string"/>
+  <xsd:element name = "assertion-id" type = "xsd:string"/>
+  <xsd:element name = "paraphrase" type = "xsd:string"/>
+  <xsd:element name = "cyc-image-id" type = "xsd:string"/>
+  <xsd:element name = "date" type = "xsd:date"/>
+  <xsd:element name = "PositiveInteger" type = "xsd:positiveInteger"/>
+  <xsd:element name = "NonNegativeInteger" type = "xsd:nonNegativeInteger"/>
+
+
+</xsd:schema>

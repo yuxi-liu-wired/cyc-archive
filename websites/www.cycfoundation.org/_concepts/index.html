@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>OpenCyc Concepts Browser</title>		
+		<base href="http://www.cycfoundation.org/_concepts/" />
+		<link rel="stylesheet" href="_css/index_styles.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="_css/index_styles.css" type="text/css" media="print" />
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+		_uacct = "UA-616404-1";
+		urchinTracker();
+		</script>
+		<script src="_js/scroll_list.js" 	type="text/javascript"></script>
+		<script src="_js/debug.js" 				type="text/javascript"></script>
+		<script src="_js/platform.js" 		type="text/javascript"></script>
+		<script src="_js/xmlhttp.js" 			type="text/javascript"></script>
+		<script language="Javascript" 		type="text/javascript">
+			<!--
+			//<![CDATA[
+				// ScrollModel
+				var sm = {
+						intervalID:null,
+						curIndex:0,
+						visibleFields:20,
+						constants:[],
+						spanPrefix:"A",
+						spanStart:1,
+						spanEnd:700
+				}
+				function updateList()
+				{
+						var el = document.getElementById("scroll_list");
+						var tmpStr 	= '<ul>';
+								for(var i=sm.curIndex; i<(sm.curIndex+sm.visibleFields); i++)
+								{
+									var tmp = sm.constants[i];
+									tmp = tmp == undefined ? "" : tmp; 
+									tmpStr += '<li><a href="http://www.cycfoundation.org/concepts/'+tmp+'">'+tmp+'</li>';
+								}
+								tmpStr += '</ul>';
+								el.innerHTML = tmpStr;
+				}
+				function changePrefix(_prefix)
+				{
+					sm.spanPrefix = _prefix;
+					sm.curIndex = 0;
+					spanStart = 1;
+					spanEnd = 50;
+					requestConstants();
+				}
+				function _scrollUp()
+				{
+					if(sm.curIndex-1 >= 0)
+					{
+						sm.curIndex--;
+						updateList();
+					}					
+				}
+				function _scrollDown()
+				{
+					if(sm.curIndex+1 <= sm.spanEnd)
+					{
+						sm.curIndex++;
+						updateList();				
+					}
+				}
+				function scrollUp()
+				{
+					_scrollUp();
+					sm.intervalID = setInterval("_scrollUp()", 30);
+				}
+				function scrollDown()
+				{
+					_scrollDown();
+					sm.intervalID = setInterval("_scrollDown()", 30);					
+				}
+				function clearScroll()
+				{
+					clearInterval(sm.intervalID);
+				}
+				function xmlCallback(_js, _url)
+				{
+					sm.constants = _js;
+					updateList();
+				}
+				function requestConstants()
+				{
+					ScrollList.loadJSON("http://www.cycfoundation.org/_concepts/alpha.php?prefix="+sm.spanPrefix+"&start="+sm.spanStart+"&end="+sm.spanEnd+"&random="+new Date().getTime(), xmlCallback);
+				}
+				var REQUEST_INTERVAL = 100;
+				var suggestID;
+				var field;
+				var original_text;
+				function suggestCallback(_js, _url)
+				{
+					//alert("callback");
+					sm.constants = _js;
+					sm.curIndex = 0;
+					updateList();
+				}
+				function suggestLoop()
+				{
+					if(field.value != original_text && field.value != "")
+					{
+						var tmp = field.value;
+						//alert(tmp);
+						tmp = tmp.split(" ");
+						tmp = tmp.join("");
+						ScrollList.loadJSON("http://www.cycfoundation.org/_concepts/alpha.php?prefix="+tmp+"&start=0&end=100&random="+new Date().getTime(), suggestCallback);
+						original_text = field.value;
+					}
+				}
+				function startSuggest(sender, ev)
+				{
+					field = document.getElementById('autoField');
+					suggestID = setInterval('suggestLoop();', REQUEST_INTERVAL);					
+				}
+				function stopSuggest(sender, ev)
+				{
+					clearInterval(suggestID);
+				}
+			//]]> -->
+		</script>
+	</head>
+	<body onload="requestConstants();">
+	  <div style="padding:40px">Cyc Foundation Concept Browser</div>
+<!--		<div style="width:300px;margin-top:40px;margin-bottom:26px;margin-left:auto;margin-right:auto;padding:10px;background-color:#FFEDBD;border:5px solid #FFE5A1;font-weight:bold;">Hard hat area... work in progress!</div> -->
+		<a href="http://www.cycfoundation.org/random"><b> --&nbsp; View a Random Concept &nbsp;-- </b></a><br/><br/>
+		<div class="scroll_list">
+			<div class="search_header" style="padding:8px;padding-left:12px;width:480px;margin-left:auto;text-align:center;margin-right:auto;background-color:#D7D7D7;border:1px solid #BBBBBB;border-bottom:none;height:25px;">
+				<div style="margin-left:auto;margin-right:auto;">
+					<div style="float:left;margin-top:4px;">Search by Term: &nbsp;</div><input type="text" id="autoField" name="autoField" onfocus="startSuggest();" onblur="stopSuggest();" style="width:360px;margin:0;padding:0;margin-top:4px;margin-bottom:16px;float:left;border:1px solid #BBBBBB" />
+					<div id="suggestions" style="margin-left:56px;text-align:left;"></div>
+				</div>
+			</div>
+			<div class="scroll_list_button_up" onmousedown="scrollUp();" onmouseup="clearScroll();">SCROLL UP</div>
+			<div id="scroll_list" class="concepts_list"></div>
+			<div class="scroll_list_button_down" onmousedown="scrollDown();" onmouseup="clearScroll();">SCROLL DOWN</div>
+		</div>
+	</body>
+</html>

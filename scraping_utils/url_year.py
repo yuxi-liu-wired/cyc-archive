@@ -17,15 +17,13 @@ def parse_and_run_commands(filename):
                 current_year = line.lstrip("#").strip()
                 continue
             
-            # If the line ends with '*', remove all trailing '*'
-            if line.endswith('*'):
-                url_no_stars = line.rstrip('*')
-                # Run command
-                os.system(f'.\\wbm-dl.exe {url_no_stars} -t {current_year}')
-            else:
-                # Run command with -e
-                os.system(f'.\\wbm-dl.exe -e {line} -t {current_year}')
-            # wait for 5 seconds
+            url = line
+            if url.endswith('*'):
+                url = url.rstrip('*')
+                os.system(f'.\\wbm-dl.exe {url} -t {current_year}')
+            os.system(f'.\\wbm-dl.exe -e {url} -t {current_year}')
+            
+            # wait for 5 seconds to be polite
             time.sleep(5)
             
 if __name__ == "__main__":
