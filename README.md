@@ -1,6 +1,6 @@
 # Cyc Archive
 
-This is an archive of most of the online material that the Cycorp has released over the years that has been deleted, but preserved within the Internet Archive. Due to the lack of long-term stability of IA, I have taken the liberty to scrape those from IA and kept them here for safe keeping.
+This is an archive of most of the online material that the Cycorp has released over the years that has been deleted, but preserved within the Internet Archive. Due to the lack of long-term stability of IA (some examples documented by [Gwern](https://gwern.net/archiving#why-not-internet-archive)), I have taken the liberty to scrape those from IA and kept them here for safe keeping.
 
 I built this archive while writing my essay on the history of Lenat and the Cyc project, which is available on [my website](https://yuxi-liu-wired.github.io/essays/posts/cyc/).
 
