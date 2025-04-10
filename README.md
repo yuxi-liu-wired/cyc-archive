@@ -47,7 +47,7 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
 
 ### Contents of the folder
 
-* `websites`: The scraped websites.
+* `websites`: The scraped websites. Some notable ones in the folder are as follows (I did not describe all of the contents in the folder):
   * `www.cyc.com\doc\handbook\oe`: The Ontology Engineer's Handbook, version 0.7, last updated on `2002-06-05`.
   * `www.cyc.com\cycdoc`: Documentation.
     * `walkthroughs\oeintro_cats_frames_long.html`: A long introduction tutorial.
