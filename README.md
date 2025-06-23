@@ -15,7 +15,7 @@ For some urls, a very specific version is needed. Those are in `exact.txt` and d
 
 For the rest, we need the latest version before a specific year (later years throw something like a 404 or other bad results). Those are placed into the `url_year.txt`, and to download them using `wbm-dl.exe`, run `python url_year.py`.
 
-Because the Internet Archive has been very fiddly, several other tools I tried have failed, and even this one doesn't work all the time. Sometimes the download would fail, so you should watch the terminal carefully for "Unable to connect to the remote server" error message. Interrupt if it starts throwing errors. Move the successful scraps from `url_year.txt` to `url_year_done.txt` so that you don't restart from the beginning.
+Because the Internet Archive has been very fiddly, several other tools I tried have failed, and even this one doesn't work all the time. Sometimes the download would fail, so you should watch the terminal carefully for "Unable to connect to the remote server" error message. Interrupt if it starts throwing errors. Move the successful scrapes from `url_year.txt` to `url_year_done.txt` so that you don't restart from the beginning.
 
 ### Special cases
 
