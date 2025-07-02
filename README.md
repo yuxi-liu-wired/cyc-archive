@@ -79,6 +79,8 @@ The general impression after reading through the entire system is that there was
 Other than what's in the archive, there's also
 
 * [`asanchez75/opencyc`](https://github.com/asanchez75/opencyc): The published versions of OpenCyc and its knowledge graphs. The last update was in 2012.
+* [`openmindproject/opencyc-backups`](https://github.com/yuxi-liu-wired/opencyc-backups): Another backup to OpenCyc. This one goes back to `0.2.0`.
+* [`therohk/opencyc-kb`](https://github.com/yuxi-liu-wired/opencyc-kb): More knowledge base files.
 * [`white-flame/am`](https://github.com/white-flame/am): Automated Mathematician from SAIL archives circa 1977.
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
 * [Large Knowledge Collider / Code / [r2063] /trunk](https://sourceforge.net/p/larkc/code/HEAD/tree/trunk/): Source code from the Large Knowledge Collider. It's stuck in Alpha, and last updated on `2012-06-16`. I made a [mirror on GitHub](https://github.com/yuxi-liu-wired/Large-Knowledge-Collider-archive).
