@@ -80,6 +80,7 @@ Other than what's in the archive, there's also
 
 * [`asanchez75/opencyc`](https://github.com/asanchez75/opencyc): The published versions of OpenCyc and its knowledge graphs. The last update was in 2012.
 * [`openmindproject/opencyc-backups`](https://github.com/yuxi-liu-wired/opencyc-backups): Another backup to OpenCyc. This one goes back to `0.2.0`.
+* [`mhewett/legacy-ai`](https://github.com/mhewett/legacy-ai): An archive of legacy AI papers. Contains Lenat's PhD thesis on AM, with extra pages, and emailed comments from various people (Allen Newell, Tom Dietterich, etc).
 * [`therohk/opencyc-kb`](https://github.com/yuxi-liu-wired/opencyc-kb): More knowledge base files.
 * [`white-flame/am`](https://github.com/white-flame/am): Automated Mathematician from SAIL archives circa 1977.
 * [`white-flame/eurisko`](https://github.com/white-flame/eurisko): Eurisko from SAIL archives circa 1981.
