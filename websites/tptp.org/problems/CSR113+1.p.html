@@ -1,0 +1,236 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR113+1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR113+1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR113+1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR113%2B1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR113+1 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Where can you find the Statue of Liberty?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_003_insicht_3_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.33 v9.0.0, 0.25 v8.2.0, 0.20 v8.1.0, 0.21 v7.5.0, 0.33 v7.4.0, 0.38 v7.3.0, 0.43 v7.2.0, 0.33 v7.1.0, 0.25 v7.0.0, 0.36 v6.4.0, 0.29 v6.3.0, 0.31 v6.2.0, 0.55 v6.1.0, 0.56 v6.0.0, 0.50 v5.4.0, 0.48 v5.3.0, 0.52 v5.2.0, 0.36 v5.0.0, 0.45 v4.1.0, 0.56 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10870 (   0 equ)
+%            Maximal formula atoms :  164 (   1 avg)
+%            Number of connectives :  681 (   0   ~;  18   |; 537   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  164 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   88 (  88 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16657 (16657 usr;16656 con; 0-2 aty)
+%            Number of variables   :  473 ( 405   !;  68   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_003_insicht_3"></A>fof(synth_qa07_003_insicht_3,conjecture,
+    ? [X0,X1,X2,X3,X4] :
+      ( flp(X0,X2)
+      & attr(X2,X1)
+      & loc(X3,X0)
+      & scar(X3,X4)
+      & sub(X1,name_1_1)
+      & sub(X4,freiheitsstatue_1_1)
+      & subs(X3,stehen_1_1)
+      & val(X1,new_york_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_003_insicht_3"></A>fof(ave07_era5_synth_qa07_003_insicht_3,hypothesis,
+    ( loc(c11,c59)
+    & scar(c11,c18)
+    & subs(c11,befinden_1_2)
+    & attr(c13,c14)
+    & sub(c13,stadt__1_1)
+    & sub(c14,name_1_1)
+    & val(c14,paris_0)
+    & pred(c18,freiheitsstatue_1_1)
+    & propr(c18,gleich_1_1)
+    & pred(c36,gr__366__337e_1_1)
+    & loc(c41,c57)
+    & sub(c41,freiheitsstatue_1_1)
+    & attr(c48,c49)
+    & sub(c48,stadt__1_1)
+    & sub(c49,name_1_1)
+    & val(c49,new_york_0)
+    & arg1(c54,c18)
+    & arg2(c54,gleich_1_1)
+    & assoc(c54,c36)
+    & instr(c54,c41)
+    & subr(c54,propr_0)
+    & in(c57,c48)
+    & in(c59,c13)
+    & assoc(freiheitsstatue_1_1,freiheit_1_1)
+    & sub(freiheitsstatue_1_1,statue_1_1)
+    & sort(c11,st)
+    & fact(c11,real)
+    & gener(c11,sp)
+    & sort(c59,l)
+    & card(c59,int1)
+    & etype(c59,int0)
+    & fact(c59,real)
+    & gener(c59,sp)
+    & quant(c59,one)
+    & refer(c59,det)
+    & varia(c59,con)
+    & sort(c18,d)
+    & card(c18,int4)
+    & etype(c18,int1)
+    & fact(c18,real)
+    & gener(c18,sp)
+    & quant(c18,nfquant)
+    & refer(c18,indet)
+    & varia(c18,varia_c)
+    & sort(befinden_1_2,st)
+    & fact(befinden_1_2,real)
+    & gener(befinden_1_2,ge)
+    & sort(c13,d)
+    & sort(c13,io)
+    & card(c13,int1)
+    & etype(c13,int0)
+    & fact(c13,real)
+    & gener(c13,sp)
+    & quant(c13,one)
+    & refer(c13,det)
+    & varia(c13,con)
+    & sort(c14,na)
+    & card(c14,int1)
+    & etype(c14,int0)
+    & fact(c14,real)
+    & gener(c14,sp)
+    & quant(c14,one)
+    & refer(c14,indet)
+    & varia(c14,varia_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(paris_0,fe)
+    & sort(freiheitsstatue_1_1,d)
+    & card(freiheitsstatue_1_1,int1)
+    & etype(freiheitsstatue_1_1,int0)
+    & fact(freiheitsstatue_1_1,real)
+    & gener(freiheitsstatue_1_1,ge)
+    & quant(freiheitsstatue_1_1,one)
+    & refer(freiheitsstatue_1_1,refer_c)
+    & varia(freiheitsstatue_1_1,varia_c)
+    & sort(gleich_1_1,rq)
+    & sort(c36,oa)
+    & card(c36,cons(x_constant,cons(int1,nil)))
+    & etype(c36,int1)
+    & fact(c36,real)
+    & gener(c36,sp)
+    & quant(c36,mult)
+    & refer(c36,det)
+    & varia(c36,con)
+    & sort(gr__366__337e_1_1,oa)
+    & card(gr__366__337e_1_1,int1)
+    & etype(gr__366__337e_1_1,int0)
+    & fact(gr__366__337e_1_1,real)
+    & gener(gr__366__337e_1_1,ge)
+    & quant(gr__366__337e_1_1,one)
+    & refer(gr__366__337e_1_1,refer_c)
+    & varia(gr__366__337e_1_1,varia_c)
+    & sort(c41,d)
+    & card(c41,int1)
+    & etype(c41,int0)
+    & fact(c41,real)
+    & gener(c41,sp)
+    & quant(c41,one)
+    & refer(c41,det)
+    & varia(c41,con)
+    & sort(c57,l)
+    & card(c57,int1)
+    & etype(c57,int0)
+    & fact(c57,real)
+    & gener(c57,sp)
+    & quant(c57,one)
+    & refer(c57,det)
+    & varia(c57,con)
+    & sort(c48,d)
+    & sort(c48,io)
+    & card(c48,int1)
+    & etype(c48,int0)
+    & fact(c48,real)
+    & gener(c48,sp)
+    & quant(c48,one)
+    & refer(c48,det)
+    & varia(c48,con)
+    & sort(c49,na)
+    & card(c49,int1)
+    & etype(c49,int0)
+    & fact(c49,real)
+    & gener(c49,sp)
+    & quant(c49,one)
+    & refer(c49,indet)
+    & varia(c49,varia_c)
+    & sort(new_york_0,fe)
+    & sort(c54,st)
+    & fact(c54,real)
+    & gener(c54,sp)
+    & sort(propr_0,st)
+    & fact(propr_0,real)
+    & gener(propr_0,gener_c)
+    & sort(freiheit_1_1,as)
+    & sort(freiheit_1_1,io)
+    & card(freiheit_1_1,int1)
+    & etype(freiheit_1_1,int0)
+    & fact(freiheit_1_1,real)
+    & gener(freiheit_1_1,ge)
+    & quant(freiheit_1_1,one)
+    & refer(freiheit_1_1,refer_c)
+    & varia(freiheit_1_1,varia_c)
+    & sort(statue_1_1,d)
+    & card(statue_1_1,int1)
+    & etype(statue_1_1,int0)
+    & fact(statue_1_1,real)
+    & gener(statue_1_1,ge)
+    & quant(statue_1_1,one)
+    & refer(statue_1_1,refer_c)
+    & varia(statue_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

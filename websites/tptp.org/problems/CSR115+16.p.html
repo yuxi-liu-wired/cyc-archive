@@ -1,0 +1,238 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+16.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+16.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+16 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B16" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+16 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1124_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.40 v9.0.0, 0.25 v8.2.0, 0.27 v8.1.0, 0.29 v7.5.0, 0.38 v7.4.0, 0.31 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.31 v6.2.0, 0.45 v6.1.0, 0.52 v6.0.0, 0.50 v5.4.0, 0.48 v5.3.0, 0.57 v5.2.0, 0.43 v5.0.0, 0.45 v4.1.0, 0.50 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10872 (   0 equ)
+%            Maximal formula atoms :  165 (   1 avg)
+%            Number of connectives :  683 (   0   ~;  18   |; 539   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  165 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-5 aty)
+%            Number of functors    : 16655 (16655 usr;16654 con; 0-2 aty)
+%            Number of variables   :  475 ( 405   !;  70   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1124"></A>fof(synth_qa07_007_mira_news_1124,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6] :
+      ( attr(X0,X1)
+      & attr(X3,X2)
+      & attr(X5,X6)
+      & obj(X4,X0)
+      & sub(X1,name_1_1)
+      & sub(X0,firma_1_1)
+      & sub(X2,name_1_1)
+      & val(X1,bmw_0)
+      & val(X2,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1124"></A>fof(ave07_era5_synth_qa07_007_mira_news_1124,hypothesis,
+    ( assoc(ansichtskarte_1_1,post_1_2)
+    & sub(ansichtskarte_1_1,karte_1_1)
+    & sub(c365,teilauflage_1_1)
+    & sub(c371,spiegel_1_1)
+    & subs(c376,ausgabe_1_1)
+    & sub(c385,ansichtskarte_1_1)
+    & attch(c407,c385)
+    & attr(c407,c408)
+    & attr(c407,c413)
+    & sub(c407,firma_1_1)
+    & sub(c408,name_1_1)
+    & val(c408,bmw_0)
+    & sub(c413,name_1_1)
+    & val(c413,m__374nchen_0)
+    & tupl_p5(c508,c365,c371,c376,c385)
+    & assoc(teilauflage_1_1,teil_2_1)
+    & sub(teilauflage_1_1,auflage_1_1)
+    & sort(ansichtskarte_1_1,d)
+    & card(ansichtskarte_1_1,int1)
+    & etype(ansichtskarte_1_1,int0)
+    & fact(ansichtskarte_1_1,real)
+    & gener(ansichtskarte_1_1,ge)
+    & quant(ansichtskarte_1_1,one)
+    & refer(ansichtskarte_1_1,refer_c)
+    & varia(ansichtskarte_1_1,varia_c)
+    & sort(post_1_2,d)
+    & card(post_1_2,card_c)
+    & etype(post_1_2,int1)
+    & fact(post_1_2,real)
+    & gener(post_1_2,ge)
+    & quant(post_1_2,quant_c)
+    & refer(post_1_2,refer_c)
+    & varia(post_1_2,varia_c)
+    & sort(karte_1_1,d)
+    & card(karte_1_1,int1)
+    & etype(karte_1_1,int0)
+    & fact(karte_1_1,real)
+    & gener(karte_1_1,ge)
+    & quant(karte_1_1,one)
+    & refer(karte_1_1,refer_c)
+    & varia(karte_1_1,varia_c)
+    & sort(c365,oa)
+    & card(c365,int1)
+    & etype(c365,int0)
+    & fact(c365,real)
+    & gener(c365,sp)
+    & quant(c365,one)
+    & refer(c365,indet)
+    & varia(c365,varia_c)
+    & sort(teilauflage_1_1,oa)
+    & card(teilauflage_1_1,int1)
+    & etype(teilauflage_1_1,int0)
+    & fact(teilauflage_1_1,real)
+    & gener(teilauflage_1_1,ge)
+    & quant(teilauflage_1_1,one)
+    & refer(teilauflage_1_1,refer_c)
+    & varia(teilauflage_1_1,varia_c)
+    & sort(c371,d)
+    & card(c371,int1)
+    & etype(c371,int0)
+    & fact(c371,real)
+    & gener(c371,sp)
+    & quant(c371,one)
+    & refer(c371,det)
+    & varia(c371,varia_c)
+    & sort(spiegel_1_1,d)
+    & card(spiegel_1_1,int1)
+    & etype(spiegel_1_1,int0)
+    & fact(spiegel_1_1,real)
+    & gener(spiegel_1_1,ge)
+    & quant(spiegel_1_1,one)
+    & refer(spiegel_1_1,refer_c)
+    & varia(spiegel_1_1,varia_c)
+    & sort(c376,ad)
+    & card(c376,int1)
+    & etype(c376,int0)
+    & fact(c376,real)
+    & gener(c376,gener_c)
+    & quant(c376,one)
+    & refer(c376,refer_c)
+    & varia(c376,varia_c)
+    & sort(ausgabe_1_1,ad)
+    & card(ausgabe_1_1,int1)
+    & etype(ausgabe_1_1,int0)
+    & fact(ausgabe_1_1,real)
+    & gener(ausgabe_1_1,ge)
+    & quant(ausgabe_1_1,one)
+    & refer(ausgabe_1_1,refer_c)
+    & varia(ausgabe_1_1,varia_c)
+    & sort(c385,d)
+    & card(c385,int1)
+    & etype(c385,int0)
+    & fact(c385,real)
+    & gener(c385,sp)
+    & quant(c385,one)
+    & refer(c385,indet)
+    & varia(c385,varia_c)
+    & sort(c407,d)
+    & sort(c407,io)
+    & card(c407,int1)
+    & etype(c407,int0)
+    & fact(c407,real)
+    & gener(c407,sp)
+    & quant(c407,one)
+    & refer(c407,det)
+    & varia(c407,con)
+    & sort(c408,na)
+    & card(c408,int1)
+    & etype(c408,int0)
+    & fact(c408,real)
+    & gener(c408,sp)
+    & quant(c408,one)
+    & refer(c408,indet)
+    & varia(c408,varia_c)
+    & sort(c413,na)
+    & card(c413,int1)
+    & etype(c413,int0)
+    & fact(c413,real)
+    & gener(c413,sp)
+    & quant(c413,one)
+    & refer(c413,indet)
+    & varia(c413,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(m__374nchen_0,fe)
+    & sort(c508,ent)
+    & card(c508,card_c)
+    & etype(c508,etype_c)
+    & fact(c508,real)
+    & gener(c508,gener_c)
+    & quant(c508,quant_c)
+    & refer(c508,refer_c)
+    & varia(c508,varia_c)
+    & sort(teil_2_1,d)
+    & card(teil_2_1,int1)
+    & etype(teil_2_1,int0)
+    & fact(teil_2_1,real)
+    & gener(teil_2_1,ge)
+    & quant(teil_2_1,one)
+    & refer(teil_2_1,refer_c)
+    & varia(teil_2_1,varia_c)
+    & sort(auflage_1_1,oa)
+    & card(auflage_1_1,int1)
+    & etype(auflage_1_1,int0)
+    & fact(auflage_1_1,real)
+    & gener(auflage_1_1,ge)
+    & quant(auflage_1_1,one)
+    & refer(auflage_1_1,refer_c)
+    & varia(auflage_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

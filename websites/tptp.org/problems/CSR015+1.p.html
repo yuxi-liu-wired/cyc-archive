@@ -1,0 +1,166 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR015+1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR015+1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR015+1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR015%2B1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%--------------------------------------------------------------------------
+% File     : CSR015+1 : TPTP v9.3.1. Bugfixed v3.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Not backwards at time 1
+% Version  : [Mue04] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=MS05>MS05</a>]  Mueller & Sutcliffe (2005), Reasoning in the Event Cal
+%          : [<a href=SeeTPTP?Category=BibTeX&File=Mue04>Mue04</a>] Mueller (2004), A Tool for Satisfiability-based Common
+%          : [<a href=SeeTPTP?Category=BibTeX&File=MS02>MS02</a>]  Miller & Shanahan (2002), Some Alternative Formulation
+% Source   : [MS05]
+% Names    :
+
+% Status   : Theorem
+% Rating   : 0.22 v9.3.0, 0.21 v9.1.0, 0.24 v9.0.0, 0.22 v8.1.0, 0.25 v7.5.0, 0.28 v7.4.0, 0.23 v7.3.0, 0.21 v7.2.0, 0.17 v7.1.0, 0.13 v6.4.0, 0.19 v6.3.0, 0.12 v6.2.0, 0.24 v6.1.0, 0.30 v6.0.0, 0.17 v5.5.0, 0.26 v5.4.0, 0.29 v5.3.0, 0.33 v5.2.0, 0.20 v5.1.0, 0.19 v5.0.0, 0.25 v4.1.0, 0.26 v4.0.1, 0.30 v4.0.0, 0.29 v3.7.0, 0.25 v3.5.0, 0.21 v3.4.0, 0.26 v3.3.0, 0.36 v3.1.0
+% Syntax   : Number of formulae    :   48 (  22 unt;   0 def)
+%            Number of atoms       :  138 (  43 equ)
+%            Maximal formula atoms :   19 (   2 avg)
+%            Number of connectives :  123 (  33   ~;  13   |;  51   &)
+%                                         (  16 &lt;=>;  10  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   13 (   4 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of predicates  :   13 (  12 usr;   0 prp; 2-4 aty)
+%            Number of functors    :   16 (  16 usr;  15 con; 0-2 aty)
+%            Number of variables   :   73 (  64   !;   9   ?)
+% SPC      : FOF_THM_RFO_SEQ
+
+% Comments :
+%--------------------------------------------------------------------------
+%----Include standard discrete event calculus axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001+0.ax>CSR001+0.ax</a>').
+%----Include supermarket trolley axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001+2.ax>CSR001+2.ax</a>').
+%--------------------------------------------------------------------------
+<A NAME="plus0_0"></A>fof(plus0_0,axiom,
+    plus(n0,n0) = n0 ).
+
+<A NAME="plus0_1"></A>fof(plus0_1,axiom,
+    plus(n0,n1) = n1 ).
+
+<A NAME="plus0_2"></A>fof(plus0_2,axiom,
+    plus(n0,n2) = n2 ).
+
+<A NAME="plus0_3"></A>fof(plus0_3,axiom,
+    plus(n0,n3) = n3 ).
+
+<A NAME="plus1_1"></A>fof(plus1_1,axiom,
+    plus(n1,n1) = n2 ).
+
+<A NAME="plus1_2"></A>fof(plus1_2,axiom,
+    plus(n1,n2) = n3 ).
+
+<A NAME="plus1_3"></A>fof(plus1_3,axiom,
+    plus(n1,n3) = n4 ).
+
+<A NAME="plus2_2"></A>fof(plus2_2,axiom,
+    plus(n2,n2) = n4 ).
+
+<A NAME="plus2_3"></A>fof(plus2_3,axiom,
+    plus(n2,n3) = n5 ).
+
+<A NAME="plus3_3"></A>fof(plus3_3,axiom,
+    plus(n3,n3) = n6 ).
+
+<A NAME="symmetry_of_plus"></A>fof(symmetry_of_plus,axiom,
+    ! [X,Y] : plus(X,Y) = plus(Y,X) ).
+
+<A NAME="less_or_equal"></A>fof(less_or_equal,axiom,
+    ! [X,Y] :
+      ( less_or_equal(X,Y)
+    &lt;=> ( less(X,Y)
+        | X = Y ) ) ).
+
+<A NAME="less0"></A>fof(less0,axiom,
+    ~ ? [X] : less(X,n0) ).
+
+<A NAME="less1"></A>fof(less1,axiom,
+    ! [X] :
+      ( less(X,n1)
+    &lt;=> less_or_equal(X,n0) ) ).
+
+<A NAME="less2"></A>fof(less2,axiom,
+    ! [X] :
+      ( less(X,n2)
+    &lt;=> less_or_equal(X,n1) ) ).
+
+<A NAME="less3"></A>fof(less3,axiom,
+    ! [X] :
+      ( less(X,n3)
+    &lt;=> less_or_equal(X,n2) ) ).
+
+<A NAME="less4"></A>fof(less4,axiom,
+    ! [X] :
+      ( less(X,n4)
+    &lt;=> less_or_equal(X,n3) ) ).
+
+<A NAME="less5"></A>fof(less5,axiom,
+    ! [X] :
+      ( less(X,n5)
+    &lt;=> less_or_equal(X,n4) ) ).
+
+<A NAME="less6"></A>fof(less6,axiom,
+    ! [X] :
+      ( less(X,n6)
+    &lt;=> less_or_equal(X,n5) ) ).
+
+<A NAME="less7"></A>fof(less7,axiom,
+    ! [X] :
+      ( less(X,n7)
+    &lt;=> less_or_equal(X,n6) ) ).
+
+<A NAME="less8"></A>fof(less8,axiom,
+    ! [X] :
+      ( less(X,n8)
+    &lt;=> less_or_equal(X,n7) ) ).
+
+<A NAME="less9"></A>fof(less9,axiom,
+    ! [X] :
+      ( less(X,n9)
+    &lt;=> less_or_equal(X,n8) ) ).
+
+<A NAME="less_property"></A>fof(less_property,axiom,
+    ! [X,Y] :
+      ( less(X,Y)
+    &lt;=> ( ~ less(Y,X)
+        & Y != X ) ) ).
+
+%----Initial conditions
+<A NAME="not_forwards_0"></A>fof(not_forwards_0,hypothesis,
+    ~ holdsAt(forwards,n0) ).
+
+<A NAME="not_backwards_0"></A>fof(not_backwards_0,hypothesis,
+    ~ holdsAt(backwards,n0) ).
+
+<A NAME="not_splinning_0"></A>fof(not_splinning_0,hypothesis,
+    ~ holdsAt(spinning,n0) ).
+
+<A NAME="not_releasedAt"></A>fof(not_releasedAt,hypothesis,
+    ! [Fluent,Time] : ~ releasedAt(Fluent,Time) ).
+
+<A NAME="not_backwards_1"></A>fof(not_backwards_1,conjecture,
+    ~ holdsAt(backwards,n1) ).
+
+%--------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

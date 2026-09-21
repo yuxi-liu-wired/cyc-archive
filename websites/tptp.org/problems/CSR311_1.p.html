@@ -1,0 +1,91 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR311_1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR311_1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR311_1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR311_1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR311_1 : TPTP v9.3.1. Released v9.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Water level is 3 at time 4
+% Version  : [Mue04] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=MS05>MS05</a>]  Mueller & Sutcliffe (2005), Reasoning in the Event Cal
+%          : [<a href=SeeTPTP?Category=BibTeX&File=Mue04>Mue04</a>] Mueller (2004), A Tool for Satisfiability-based Common
+%          : [<a href=SeeTPTP?Category=BibTeX&File=MS02>MS02</a>]  Miller & Shanahan (2002), Some Alternative Formulation
+% Source   : [MS05]
+% Names    :
+
+% Status   : Theorem
+% Rating   : 0.40 v9.3.0, 0.50 v9.1.0
+% Syntax   : Number of formulae    :   52 (  12 unt;  20 typ;   0 def)
+%            Number of atoms       :  101 (  27 equ)
+%            Maximal formula atoms :   11 (   3 avg)
+%            Number of connectives :   94 (  25   ~;   8   |;  42   &)
+%                                         (   7 &lt;=>;  12  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   6 avg)
+%            Maximal term depth    :    3 (   1 avg)
+%            Number arithmetic     :   81 (   6 atm;  15 fun;  23 num;  37 var)
+%            Number of types       :    5 (   3 usr;   1 ari;   0 dat;   0 cdt)
+%            Number of type conns  :   31 (  12   >;  19   *;   0   +;   0  &lt;&lt;)
+%            Number of predicates  :   12 (  10 usr;   0 prp; 2-4 aty)
+%            Number of functors    :   11 (   7 usr;   8 con; 0-2 aty)
+%            Number of variables   :   70 (  59   !;  11   ?;  70   :)
+% SPC      : TF0_THM_EQU_ARI_NDT
+
+% Comments :
+%------------------------------------------------------------------------------
+%----Include event calculus axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001_0.ax>CSR001_0.ax</a>').
+%----Include kitchen sink axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001_1.ax>CSR001_1.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="happens_all_defn"></A>tff(happens_all_defn,axiom,
+    ! [Event: event,Time: $int] :
+      ( happens(Event,at_time(Time))
+    &lt;=> ( ( ( Event = tapOn )
+          & ( Time = 0 ) )
+        | ( holdsAt(waterLevel(3),at_time(Time))
+          & holdsAt(filling,at_time(Time))
+          & ( Event = overflow ) ) ) ) ).
+
+<A NAME="waterLevel_0"></A>tff(waterLevel_0,axiom,
+    holdsAt(waterLevel(0),at_time(0)) ).
+
+<A NAME="not_filling_0"></A>tff(not_filling_0,axiom,
+    ~ holdsAt(filling,at_time(0)) ).
+
+<A NAME="not_spilling_0"></A>tff(not_spilling_0,axiom,
+    ~ holdsAt(spilling,at_time(0)) ).
+
+<A NAME="not_released_waterLevel_0"></A>tff(not_released_waterLevel_0,axiom,
+    ! [Height:$int] : ~ releasedAt(waterLevel(Height),at_time(0)) ).
+
+<A NAME="not_released_filling_0"></A>tff(not_released_filling_0,axiom,
+    ~ releasedAt(filling,at_time(0)) ).
+
+<A NAME="not_released_spilling_0"></A>tff(not_released_spilling_0,axiom,
+    ~ releasedAt(spilling,at_time(0)) ).
+
+<A NAME="filling_or_spilling"></A>tff(filling_or_spilling,conjecture,
+    ( holdsAt(filling,at_time(3))
+    | holdsAt(spilling,at_time(3)) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

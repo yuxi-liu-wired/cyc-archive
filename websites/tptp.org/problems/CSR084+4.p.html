@@ -1,0 +1,106 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR084+4.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR084+4.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR084+4 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR084%2B4" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR084+4 : TPTP v9.3.1. Bugfixed v7.3.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Case elimination with multiple rules
+% Version  : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=NP01>NP01</a>]  Niles & Pease (2001), Towards A Standard Upper Ontology
+%          : [Sie07] Siegel (2007), Email to G. Sutcliffe
+% Source   : [Sie07]
+% Names    : TQG10
+
+% Status   : ContradictoryAxioms
+% Rating   : 0.74 v9.3.0, 0.79 v9.0.0, 0.83 v8.1.0, 0.75 v7.5.0, 0.81 v7.4.0, 0.29 v7.3.0
+% Syntax   : Number of formulae    : 7225 (4494 unt;   0 def)
+%            Number of atoms       : 18044 (1090 equ)
+%            Maximal formula atoms :   22 (   2 avg)
+%            Number of connectives : 11379 ( 560   ~;  70   |;4887   &)
+%                                         ( 100 &lt;=>;5762  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   26 (   3 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :  290 ( 289 usr;   0 prp; 1-8 aty)
+%            Number of functors    : 3172 (3121 usr;3059 con; 0-8 aty)
+%            Number of variables   : 7508 (7011   !; 497   ?)
+% SPC      : FOF_CAX_RFO_SEQ
+
+% Comments : 
+% Bugfixes : v4.0.1 - Bugfixes in CSR003 axiom files.
+%          : v4.1.0 - Bugfixes in CSR003 axiom files.
+%          : v5.3.0 - Bugfixes in CSR003 axiom files.
+%          : v5.4.0 - Bugfixes in CSR003 axiom files.
+%          : v7.3.0 - Bugfixes in CSR003 axiom files.
+%------------------------------------------------------------------------------
+%----Include axioms from SUMO
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR003+0.ax>CSR003+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="local_1"></A>fof(local_1,axiom,
+    ! [V_A] :
+      ( s__instance(V_A,s__Object)
+     => ( ( s__instance(V_A,s__Animal)
+          & ~ ? [V_PART] :
+                ( s__instance(V_PART,s__Object)
+                & s__instance(V_PART,s__SpinalColumn)
+                & s__part(V_PART,V_A) ) )
+       => ~ s__instance(V_A,s__Vertebrate) ) ) ).
+
+<A NAME="local_2"></A>fof(local_2,axiom,
+    ~ ? [V_SPINE] :
+        ( s__instance(V_SPINE,s__Object)
+        & s__instance(V_SPINE,s__SpinalColumn)
+        & s__part(V_SPINE,s__BananaSlug10_1) ) ).
+
+<A NAME="local_3"></A>fof(local_3,axiom,
+    s__partition_3(s__Animal,s__Vertebrate,s__Invertebrate) ).
+
+<A NAME="local_4"></A>fof(local_4,axiom,
+    ! [V_SUPER,V_SUB1,V_SUB2] :
+      ( ( s__instance(V_SUPER,s__Class)
+        & s__instance(V_SUB1,s__Class)
+        & s__instance(V_SUB2,s__Class) )
+     => ( s__partition_3(V_SUPER,V_SUB1,V_SUB2)
+       => s__partition_3(V_SUPER,V_SUB2,V_SUB1) ) ) ).
+
+<A NAME="local_5"></A>fof(local_5,axiom,
+    ! [V_SUPER,V_SUB1,V_SUB2,V_INST] :
+      ( ( s__instance(V_SUPER,s__Class)
+        & s__instance(V_SUB1,s__Class)
+        & s__instance(V_SUB2,s__Class) )
+     => ( ( s__partition_3(V_SUPER,V_SUB1,V_SUB2)
+          & s__instance(V_INST,V_SUPER)
+          & ~ s__instance(V_INST,V_SUB1) )
+       => s__instance(V_INST,V_SUB2) ) ) ).
+
+<A NAME="local_6"></A>fof(local_6,axiom,
+    s__instance(s__BananaSlug10_1,s__Animal) ).
+
+<A NAME="local_7"></A>fof(local_7,axiom,
+    ( s__instance(s__BodyPart10_1,s__BodyPart)
+    & s__component(s__BodyPart10_1,s__BananaSlug10_1) ) ).
+
+<A NAME="prove_from_SUMO"></A>fof(prove_from_SUMO,conjecture,
+    s__instance(s__BananaSlug10_1,s__Invertebrate) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

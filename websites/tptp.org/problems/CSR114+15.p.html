@@ -1,0 +1,245 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR114+15.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR114+15.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR114+15 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR114%2B15" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR114+15 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : In which Italian city can you find the Colosseum?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_004_mira_wp_359_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.30 v9.1.0, 0.40 v9.0.0, 0.19 v8.2.0, 0.20 v8.1.0, 0.29 v7.5.0, 0.38 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.36 v6.4.0, 0.29 v6.3.0, 0.38 v6.2.0, 0.45 v6.1.0, 0.60 v6.0.0, 0.75 v5.5.0, 0.62 v5.4.0, 0.61 v5.3.0, 0.74 v5.2.0, 0.50 v5.0.0, 0.60 v4.1.0, 0.67 v4.0.1, 0.74 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10879 (   0 equ)
+%            Maximal formula atoms :  173 (   1 avg)
+%            Number of connectives :  690 (   0   ~;  18   |; 546   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  173 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16655 (16655 usr;16654 con; 0-2 aty)
+%            Number of variables   :  473 ( 405   !;  68   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_004_mira_wp_359"></A>fof(synth_qa07_004_mira_wp_359,conjecture,
+    ? [X0,X1,X2,X3,X4] :
+      ( attr(X0,X1)
+      & loc(X4,X2)
+      & prop(X0,italienisch__1_1)
+      & scar(X4,X3)
+      & sub(X1,name_1_1)
+      & sub(X0,stadt__1_1)
+      & subs(X4,stehen_1_1)
+      & val(X1,rom_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_004_mira_wp_359"></A>fof(ave07_era5_synth_qa07_004_mira_wp_359,hypothesis,
+    ( attr(c1132,c1133)
+    & sub(c1133,jahr__1_1)
+    & val(c1133,c4)
+    & sub(c1134,c1134)
+    & sub(c1134,fiumicino_1_1)
+    & sub(c1134,stadtteil_1_1)
+    & attch(c1281,c1134)
+    & attr(c1281,c1282)
+    & prop(c1281,italienisch__1_1)
+    & sub(c1281,hauptsstadt_1_1)
+    & sub(c1282,name_1_1)
+    & val(c1282,rom_0)
+    & arg1(c1285,c1134)
+    & arg2(c1285,c1351)
+    & semrel(c1285,c7)
+    & subs(c1285,sein_3_3)
+    & temp(c1285,seitdem_2_1)
+    & prop(c1351,eigenst__344ndig_1_1)
+    & sub(c1351,gemeinde_1_1)
+    & arg1(c7,c1134)
+    & arg2(c7,c1134)
+    & fin(c7,c1132)
+    & subr(c7,sub_0)
+    & sub(hauptsstadt_1_1,stadt__1_1)
+    & assoc(stadtteil_1_1,stadt__1_1)
+    & sub(stadtteil_1_1,teil_1_1)
+    & sort(c1132,t)
+    & card(c1132,int1)
+    & etype(c1132,int0)
+    & fact(c1132,real)
+    & gener(c1132,sp)
+    & quant(c1132,one)
+    & refer(c1132,det)
+    & varia(c1132,con)
+    & sort(c1133,me)
+    & sort(c1133,oa)
+    & sort(c1133,ta)
+    & card(c1133,card_c)
+    & etype(c1133,etype_c)
+    & fact(c1133,real)
+    & gener(c1133,sp)
+    & quant(c1133,quant_c)
+    & refer(c1133,refer_c)
+    & varia(c1133,varia_c)
+    & sort(jahr__1_1,me)
+    & sort(jahr__1_1,oa)
+    & sort(jahr__1_1,ta)
+    & card(jahr__1_1,card_c)
+    & etype(jahr__1_1,etype_c)
+    & fact(jahr__1_1,real)
+    & gener(jahr__1_1,ge)
+    & quant(jahr__1_1,quant_c)
+    & refer(jahr__1_1,refer_c)
+    & varia(jahr__1_1,varia_c)
+    & sort(c4,nu)
+    & card(c4,int1992)
+    & sort(c1134,o)
+    & card(c1134,int1)
+    & etype(c1134,int0)
+    & fact(c1134,real)
+    & gener(c1134,gener_c)
+    & quant(c1134,one)
+    & refer(c1134,refer_c)
+    & varia(c1134,varia_c)
+    & sort(fiumicino_1_1,o)
+    & card(fiumicino_1_1,int1)
+    & etype(fiumicino_1_1,int0)
+    & fact(fiumicino_1_1,real)
+    & gener(fiumicino_1_1,ge)
+    & quant(fiumicino_1_1,one)
+    & refer(fiumicino_1_1,refer_c)
+    & varia(fiumicino_1_1,varia_c)
+    & sort(stadtteil_1_1,d)
+    & sort(stadtteil_1_1,io)
+    & card(stadtteil_1_1,int1)
+    & etype(stadtteil_1_1,int0)
+    & fact(stadtteil_1_1,real)
+    & gener(stadtteil_1_1,ge)
+    & quant(stadtteil_1_1,one)
+    & refer(stadtteil_1_1,refer_c)
+    & varia(stadtteil_1_1,varia_c)
+    & sort(c1281,d)
+    & sort(c1281,io)
+    & card(c1281,int1)
+    & etype(c1281,int0)
+    & fact(c1281,real)
+    & gener(c1281,sp)
+    & quant(c1281,one)
+    & refer(c1281,det)
+    & varia(c1281,con)
+    & sort(c1282,na)
+    & card(c1282,int1)
+    & etype(c1282,int0)
+    & fact(c1282,real)
+    & gener(c1282,sp)
+    & quant(c1282,one)
+    & refer(c1282,indet)
+    & varia(c1282,varia_c)
+    & sort(italienisch__1_1,nq)
+    & sort(hauptsstadt_1_1,d)
+    & sort(hauptsstadt_1_1,io)
+    & card(hauptsstadt_1_1,int1)
+    & etype(hauptsstadt_1_1,int0)
+    & fact(hauptsstadt_1_1,real)
+    & gener(hauptsstadt_1_1,ge)
+    & quant(hauptsstadt_1_1,one)
+    & refer(hauptsstadt_1_1,refer_c)
+    & varia(hauptsstadt_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(rom_0,fe)
+    & sort(c1285,st)
+    & fact(c1285,real)
+    & gener(c1285,sp)
+    & sort(c1351,d)
+    & sort(c1351,io)
+    & card(c1351,int1)
+    & etype(c1351,int0)
+    & fact(c1351,real)
+    & gener(c1351,sp)
+    & quant(c1351,one)
+    & refer(c1351,indet)
+    & varia(c1351,varia_c)
+    & sort(c7,st)
+    & fact(c7,real)
+    & gener(c7,sp)
+    & sort(sein_3_3,st)
+    & fact(sein_3_3,real)
+    & gener(sein_3_3,ge)
+    & sort(seitdem_2_1,t)
+    & card(seitdem_2_1,int1)
+    & etype(seitdem_2_1,int0)
+    & fact(seitdem_2_1,real)
+    & gener(seitdem_2_1,sp)
+    & quant(seitdem_2_1,one)
+    & refer(seitdem_2_1,refer_c)
+    & varia(seitdem_2_1,varia_c)
+    & sort(eigenst__344ndig_1_1,nq)
+    & sort(gemeinde_1_1,d)
+    & sort(gemeinde_1_1,io)
+    & card(gemeinde_1_1,int1)
+    & etype(gemeinde_1_1,int0)
+    & fact(gemeinde_1_1,real)
+    & gener(gemeinde_1_1,ge)
+    & quant(gemeinde_1_1,one)
+    & refer(gemeinde_1_1,refer_c)
+    & varia(gemeinde_1_1,varia_c)
+    & sort(sub_0,st)
+    & fact(sub_0,real)
+    & gener(sub_0,gener_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(teil_1_1,co)
+    & card(teil_1_1,card_c)
+    & etype(teil_1_1,etype_c)
+    & fact(teil_1_1,real)
+    & gener(teil_1_1,ge)
+    & quant(teil_1_1,quant_c)
+    & refer(teil_1_1,refer_c)
+    & varia(teil_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

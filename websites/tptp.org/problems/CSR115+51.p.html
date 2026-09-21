@@ -1,0 +1,219 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+51.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+51.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+51 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B51" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+51 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1302_a19984_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.0.0, 0.19 v8.2.0, 0.13 v8.1.0, 0.14 v7.5.0, 0.19 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.14 v6.3.0, 0.23 v6.2.0, 0.27 v6.1.0, 0.40 v6.0.0, 0.50 v5.5.0, 0.46 v5.4.0, 0.43 v5.3.0, 0.52 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.44 v4.0.1, 0.47 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10853 (   0 equ)
+%            Maximal formula atoms :  147 (   1 avg)
+%            Number of connectives :  664 (   0   ~;  18   |; 520   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  147 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   86 (  86 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16652 (16652 usr;16651 con; 0-2 aty)
+%            Number of variables   :  474 ( 405   !;  69   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1302_a19984"></A>fof(synth_qa07_007_mira_news_1302_a19984,conjecture,
+    ? [X0,X1,X2,X3,X4,X5] :
+      ( agt(X3,X2)
+      & attr(X2,X1)
+      & attr(X4,X5)
+      & obj(X3,X0)
+      & prop(X0,britisch__1_1)
+      & sub(X1,name_1_1)
+      & subs(X3,n374bernehmen_1_1)
+      & val(X1,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1302_a19984"></A>fof(ave07_era5_synth_qa07_007_mira_news_1302_a19984,hypothesis,
+    ( assoc(autokonzern_1_1,auto__1_1)
+    & sub(autokonzern_1_1,firmengruppe_1_1)
+    & assoc(autounternehmen_1_1,auto__1_1)
+    & sub(autounternehmen_1_1,unternehmen_1_1)
+    & attr(c0,c1)
+    & sub(c0,stadt__1_1)
+    & sub(c1,name_1_1)
+    & val(c1,m__374nchen_0)
+    & agt(c163,c165)
+    & obj(c163,c218)
+    & subs(c163,n374bernehmen_1_1)
+    & attr(c165,c166)
+    & prop(c165,m__374nchner_1_1)
+    & sub(c165,autokonzern_1_1)
+    & sub(c166,name_1_1)
+    & val(c166,bmw_0)
+    & attr(c218,c219)
+    & prop(c218,altbew__344hrt_1_1)
+    & prop(c218,britisch__1_1)
+    & sub(c218,autounternehmen_1_1)
+    & sub(c219,name_1_1)
+    & val(c219,rover_0)
+    & assoc(m__374nchner_1_1,c0)
+    & sort(autokonzern_1_1,d)
+    & sort(autokonzern_1_1,io)
+    & card(autokonzern_1_1,int1)
+    & etype(autokonzern_1_1,int0)
+    & fact(autokonzern_1_1,real)
+    & gener(autokonzern_1_1,ge)
+    & quant(autokonzern_1_1,one)
+    & refer(autokonzern_1_1,refer_c)
+    & varia(autokonzern_1_1,varia_c)
+    & sort(auto__1_1,d)
+    & card(auto__1_1,int1)
+    & etype(auto__1_1,int0)
+    & fact(auto__1_1,real)
+    & gener(auto__1_1,ge)
+    & quant(auto__1_1,one)
+    & refer(auto__1_1,refer_c)
+    & varia(auto__1_1,varia_c)
+    & sort(firmengruppe_1_1,d)
+    & sort(firmengruppe_1_1,io)
+    & card(firmengruppe_1_1,int1)
+    & etype(firmengruppe_1_1,int0)
+    & fact(firmengruppe_1_1,real)
+    & gener(firmengruppe_1_1,ge)
+    & quant(firmengruppe_1_1,one)
+    & refer(firmengruppe_1_1,refer_c)
+    & varia(firmengruppe_1_1,varia_c)
+    & sort(autounternehmen_1_1,d)
+    & sort(autounternehmen_1_1,io)
+    & card(autounternehmen_1_1,int1)
+    & etype(autounternehmen_1_1,int0)
+    & fact(autounternehmen_1_1,real)
+    & gener(autounternehmen_1_1,ge)
+    & quant(autounternehmen_1_1,one)
+    & refer(autounternehmen_1_1,refer_c)
+    & varia(autounternehmen_1_1,varia_c)
+    & sort(unternehmen_1_1,d)
+    & sort(unternehmen_1_1,io)
+    & card(unternehmen_1_1,int1)
+    & etype(unternehmen_1_1,int0)
+    & fact(unternehmen_1_1,real)
+    & gener(unternehmen_1_1,ge)
+    & quant(unternehmen_1_1,one)
+    & refer(unternehmen_1_1,refer_c)
+    & varia(unternehmen_1_1,varia_c)
+    & sort(c0,d)
+    & sort(c0,io)
+    & card(c0,int1)
+    & etype(c0,int0)
+    & fact(c0,real)
+    & gener(c0,sp)
+    & quant(c0,one)
+    & refer(c0,det)
+    & varia(c0,varia_c)
+    & sort(c1,na)
+    & card(c1,int1)
+    & etype(c1,int0)
+    & fact(c1,real)
+    & gener(c1,sp)
+    & quant(c1,one)
+    & refer(c1,det)
+    & varia(c1,varia_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(m__374nchen_0,fe)
+    & sort(c163,da)
+    & fact(c163,real)
+    & gener(c163,sp)
+    & sort(c165,d)
+    & sort(c165,io)
+    & card(c165,int1)
+    & etype(c165,int0)
+    & fact(c165,real)
+    & gener(c165,sp)
+    & quant(c165,one)
+    & refer(c165,det)
+    & varia(c165,con)
+    & sort(c218,d)
+    & sort(c218,io)
+    & card(c218,int1)
+    & etype(c218,int0)
+    & fact(c218,real)
+    & gener(c218,sp)
+    & quant(c218,one)
+    & refer(c218,det)
+    & varia(c218,con)
+    & sort(n374bernehmen_1_1,da)
+    & fact(n374bernehmen_1_1,real)
+    & gener(n374bernehmen_1_1,ge)
+    & sort(c166,na)
+    & card(c166,int1)
+    & etype(c166,int0)
+    & fact(c166,real)
+    & gener(c166,sp)
+    & quant(c166,one)
+    & refer(c166,indet)
+    & varia(c166,varia_c)
+    & sort(m__374nchner_1_1,gq)
+    & sort(bmw_0,fe)
+    & sort(c219,na)
+    & card(c219,int1)
+    & etype(c219,int0)
+    & fact(c219,real)
+    & gener(c219,sp)
+    & quant(c219,one)
+    & refer(c219,indet)
+    & varia(c219,varia_c)
+    & sort(altbew__344hrt_1_1,ql)
+    & sort(britisch__1_1,nq)
+    & sort(rover_0,fe) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

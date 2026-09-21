@@ -1,0 +1,249 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+37.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+37.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+37 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B37" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+37 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1229_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.33 v9.0.0, 0.19 v8.2.0, 0.20 v8.1.0, 0.21 v7.5.0, 0.29 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.23 v6.2.0, 0.36 v6.1.0, 0.48 v6.0.0, 0.50 v5.4.0, 0.52 v5.3.0, 0.61 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.44 v4.0.1, 0.47 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10883 (   0 equ)
+%            Maximal formula atoms :  173 (   1 avg)
+%            Number of connectives :  694 (   0   ~;  18   |; 550   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  173 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16659 (16659 usr;16658 con; 0-2 aty)
+%            Number of variables   :  476 ( 405   !;  71   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1229"></A>fof(synth_qa07_007_mira_news_1229,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6,X7] :
+      ( attr(X0,X1)
+      & attr(X3,X2)
+      & attr(X5,X6)
+      & has_card_leq(X7,int1994)
+      & sub(X1,name_1_1)
+      & sub(X0,firma_1_1)
+      & sub(X2,name_1_1)
+      & sub(X6,jahr__1_1)
+      & temp(X4,X5)
+      & val(X1,bmw_0)
+      & val(X2,bmw_0)
+      & val(X6,X7) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1229"></A>fof(ave07_era5_synth_qa07_007_mira_news_1229,hypothesis,
+    ( sub(c100,c103)
+    & temp(c100,c106)
+    & pmod(c103,erst_1_1,halbjahr_1_1)
+    & attr(c106,c107)
+    & sub(c107,jahr__1_1)
+    & val(c107,c102)
+    & attch(c110,c100)
+    & prop(c110,r__374ckg__344ngig_1_1)
+    & sub(c110,markttrend_1_1)
+    & benf(c111,c93)
+    & modl(c111,k__366nnen_0)
+    & obj(c111,c95)
+    & subs(c111,abkoppeln_1_1)
+    & temp(c111,c100)
+    & attr(c93,c94)
+    & sub(c93,firma_1_1)
+    & sub(c94,name_1_1)
+    & val(c94,bmw_0)
+    & sub(c95,sich_1_1)
+    & assoc(halbjahr_1_1,halb__1_1)
+    & sub(halbjahr_1_1,jahr__1_1)
+    & assoc(markttrend_1_1,markt_1_1)
+    & sub(markttrend_1_1,entwicklungstendenz_1_1)
+    & sort(c100,ta)
+    & card(c100,int1)
+    & etype(c100,int0)
+    & fact(c100,real)
+    & gener(c100,sp)
+    & quant(c100,one)
+    & refer(c100,det)
+    & varia(c100,con)
+    & sort(c103,ta)
+    & card(c103,int1)
+    & etype(c103,int0)
+    & fact(c103,real)
+    & gener(c103,ge)
+    & quant(c103,one)
+    & refer(c103,refer_c)
+    & varia(c103,varia_c)
+    & sort(c106,t)
+    & card(c106,int1)
+    & etype(c106,int0)
+    & fact(c106,real)
+    & gener(c106,sp)
+    & quant(c106,one)
+    & refer(c106,det)
+    & varia(c106,con)
+    & sort(erst_1_1,oq)
+    & card(erst_1_1,int1)
+    & sort(halbjahr_1_1,ta)
+    & card(halbjahr_1_1,int1)
+    & etype(halbjahr_1_1,int0)
+    & fact(halbjahr_1_1,real)
+    & gener(halbjahr_1_1,ge)
+    & quant(halbjahr_1_1,one)
+    & refer(halbjahr_1_1,refer_c)
+    & varia(halbjahr_1_1,varia_c)
+    & sort(c107,me)
+    & sort(c107,oa)
+    & sort(c107,ta)
+    & card(c107,card_c)
+    & etype(c107,etype_c)
+    & fact(c107,real)
+    & gener(c107,sp)
+    & quant(c107,quant_c)
+    & refer(c107,refer_c)
+    & varia(c107,varia_c)
+    & sort(jahr__1_1,me)
+    & sort(jahr__1_1,oa)
+    & sort(jahr__1_1,ta)
+    & card(jahr__1_1,card_c)
+    & etype(jahr__1_1,etype_c)
+    & fact(jahr__1_1,real)
+    & gener(jahr__1_1,ge)
+    & quant(jahr__1_1,quant_c)
+    & refer(jahr__1_1,refer_c)
+    & varia(jahr__1_1,varia_c)
+    & sort(c102,nu)
+    & card(c102,int1994)
+    & sort(c110,io)
+    & card(c110,int1)
+    & etype(c110,int0)
+    & fact(c110,real)
+    & gener(c110,sp)
+    & quant(c110,one)
+    & refer(c110,det)
+    & varia(c110,con)
+    & sort(r__374ckg__344ngig_1_1,nq)
+    & sort(markttrend_1_1,io)
+    & card(markttrend_1_1,int1)
+    & etype(markttrend_1_1,int0)
+    & fact(markttrend_1_1,real)
+    & gener(markttrend_1_1,ge)
+    & quant(markttrend_1_1,one)
+    & refer(markttrend_1_1,refer_c)
+    & varia(markttrend_1_1,varia_c)
+    & sort(c111,da)
+    & fact(c111,real)
+    & gener(c111,sp)
+    & sort(c93,d)
+    & sort(c93,io)
+    & card(c93,int1)
+    & etype(c93,int0)
+    & fact(c93,real)
+    & gener(c93,sp)
+    & quant(c93,one)
+    & refer(c93,det)
+    & varia(c93,con)
+    & sort(k__366nnen_0,md)
+    & fact(k__366nnen_0,real)
+    & gener(k__366nnen_0,gener_c)
+    & sort(c95,co)
+    & card(c95,card_c)
+    & etype(c95,etype_c)
+    & fact(c95,real)
+    & gener(c95,sp)
+    & quant(c95,quant_c)
+    & refer(c95,refer_c)
+    & varia(c95,varia_c)
+    & sort(abkoppeln_1_1,da)
+    & fact(abkoppeln_1_1,real)
+    & gener(abkoppeln_1_1,ge)
+    & sort(c94,na)
+    & card(c94,int1)
+    & etype(c94,int0)
+    & fact(c94,real)
+    & gener(c94,sp)
+    & quant(c94,one)
+    & refer(c94,indet)
+    & varia(c94,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(sich_1_1,o)
+    & card(sich_1_1,int1)
+    & etype(sich_1_1,int0)
+    & fact(sich_1_1,real)
+    & gener(sich_1_1,gener_c)
+    & quant(sich_1_1,one)
+    & refer(sich_1_1,refer_c)
+    & varia(sich_1_1,varia_c)
+    & sort(halb__1_1,tq)
+    & sort(markt_1_1,d)
+    & card(markt_1_1,int1)
+    & etype(markt_1_1,int0)
+    & fact(markt_1_1,real)
+    & gener(markt_1_1,ge)
+    & quant(markt_1_1,one)
+    & refer(markt_1_1,refer_c)
+    & varia(markt_1_1,varia_c)
+    & sort(entwicklungstendenz_1_1,io)
+    & card(entwicklungstendenz_1_1,int1)
+    & etype(entwicklungstendenz_1_1,int0)
+    & fact(entwicklungstendenz_1_1,real)
+    & gener(entwicklungstendenz_1_1,ge)
+    & quant(entwicklungstendenz_1_1,one)
+    & refer(entwicklungstendenz_1_1,refer_c)
+    & varia(entwicklungstendenz_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

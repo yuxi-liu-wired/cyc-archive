@@ -61,6 +61,7 @@ Although be warned that the filename `[*,DBL]` contain an asterisk, which cannot
   * `www.cycfoundation.org\blog`: Blog posts by the Cyc Foundation. It started in 2007 and ended in 2011.
   * `blog.cyc.com`: 11 more blog posts by the Cyc Foundation. It started in 2008, and ended in 2011.
   * `tunes.org`: Some IRC chat records about Cyc back in 2002--2003.
+  * `tptp.org`: 1060 [TPTP problems in commonsense reasoning](websites/tptp.org/index.html). The problems `CSR025.p` to `CSR074.p` use axioms taken from Cyc. The files `axioms\CSR002+4.ax.html` and `axioms\CSR002+5.ax.html` are compressed with `xz`.
   * `suo.ieee.org`: The [IEEE 1600.1 Standard Upper Ontology Working Group](https://web.archive.org/web/20080523023923/http://suo.ieee.org/) website, which was last updated on `2003-12-28`. Cyc was a participant of it.
 * `other_files`:
   * `research_notes`: Notes I've taken during the research of this essay.

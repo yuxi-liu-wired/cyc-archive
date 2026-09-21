@@ -1,0 +1,967 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR117+1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR117+1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR117+1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR117%2B1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR117+1 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Flooding Copenhagen
+% Version  : Especial.
+% English  : Find an OECD country whose capital is at the same latitude as 
+%            Moscow, rounded to the nearest degree, and that can be flooded.
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=SS+10>SS+10</a>] Sutcliffe et al. (2010), Progress Towards Effective Au
+% Source   : [TPTP]
+% Names    :
+
+% Status   : Theorem
+% Rating   : 0.26 v9.3.0, 0.30 v9.0.0, 0.33 v8.2.0, 0.39 v7.5.0, 0.41 v7.4.0, 0.33 v7.3.0, 0.38 v7.1.0, 0.35 v7.0.0, 0.37 v6.4.0, 0.42 v6.3.0, 0.38 v6.2.0, 0.44 v6.1.0, 0.53 v6.0.0, 0.57 v5.5.0, 0.59 v5.4.0, 0.57 v5.3.0, 0.59 v5.2.0, 0.45 v5.1.0, 0.48 v5.0.0, 0.58 v4.1.0
+% Syntax   : Number of formulae    :  269 ( 226 unt;   0 def)
+%            Number of atoms       :  332 (  17 equ)
+%            Maximal formula atoms :   18 (   1 avg)
+%            Number of connectives :   93 (  30   ~;   0   |;  19   &)
+%                                         (   0 &lt;=>;  44  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   29 (   2 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of predicates  :   24 (  23 usr;   0 prp; 1-5 aty)
+%            Number of functors    :  122 ( 122 usr; 121 con; 0-1 aty)
+%            Number of variables   :   71 (  43   !;  28   ?)
+% SPC      : FOF_THM_RFO_SEQ
+
+% Comments : Created by TFF to FOF conversion of the TFF problem. Some axioms
+%            come from SUMO, some from XDB sources, and some are internal.
+%            Arithmetic has been converted to non-numeric terms.
+%------------------------------------------------------------------------------
+<A NAME="s__SetOrClass_type"></A>fof(s__SetOrClass_type,axiom,
+    ? [A] : s__SetOrClass(A) ).
+
+<A NAME="s__Entity_type"></A>fof(s__Entity_type,axiom,
+    ? [A] : s__Entity(A) ).
+
+<A NAME="s__Object_type"></A>fof(s__Object_type,axiom,
+    ? [A] : s__Object(A) ).
+
+<A NAME="s__Region_type"></A>fof(s__Region_type,axiom,
+    ? [A] : s__Region(A) ).
+
+<A NAME="s__GeographicArea_type"></A>fof(s__GeographicArea_type,axiom,
+    ? [A] : s__GeopoliticalArea(A) ).
+
+<A NAME="s__Nation_type"></A>fof(s__Nation_type,axiom,
+    ? [A] : s__Nation(A) ).
+
+<A NAME="s__City_type"></A>fof(s__City_type,axiom,
+    ? [A] : s__City(A) ).
+
+<A NAME="s__WaterArea_type"></A>fof(s__WaterArea_type,axiom,
+    ? [A] : s__WaterArea(A) ).
+
+<A NAME="s__BodyOfWater_type"></A>fof(s__BodyOfWater_type,axiom,
+    ? [A] : s__BodyOfWater(A) ).
+
+<A NAME="s__Sea_type"></A>fof(s__Sea_type,axiom,
+    ? [A] : s__Sea(A) ).
+
+<A NAME="s__PositionalAttribute_type"></A>fof(s__PositionalAttribute_type,axiom,
+    ? [A] : s__PositionalAttribute(A) ).
+
+<A NAME="s__SymmetricPositionalAttribute_type"></A>fof(s__SymmetricPositionalAttribute_type,axiom,
+    ? [A] : s__SymmetricPositionalAttribute(A) ).
+
+<A NAME="s__CaseRole_type"></A>fof(s__CaseRole_type,axiom,
+    ? [A] : s__CaseRole(A) ).
+
+<A NAME="s__SymbolicString_type"></A>fof(s__SymbolicString_type,axiom,
+    ? [A] : s__SymbolicString(A) ).
+
+<A NAME="kb_SUMO_MILO_701"></A>fof(kb_SUMO_MILO_701,axiom,
+    ! [A] :
+      ( s__Region(A)
+     => s__Object(A) ) ).
+
+<A NAME="kb_SUMO_MILO_6365"></A>fof(kb_SUMO_MILO_6365,axiom,
+    ! [A] :
+      ( s__GeographicArea(A)
+     => s__Region(A) ) ).
+
+<A NAME="kb_SUMO_MILO_6345"></A>fof(kb_SUMO_MILO_6345,axiom,
+    ! [A] :
+      ( s__GeopoliticalArea(A)
+     => s__GeographicArea(A) ) ).
+
+<A NAME="kb_SUMO_MILO_6428"></A>fof(kb_SUMO_MILO_6428,axiom,
+    ! [A] :
+      ( s__Nation(A)
+     => s__GeopoliticalArea(A) ) ).
+
+<A NAME="kb_SUMO_MILO_6437"></A>fof(kb_SUMO_MILO_6437,axiom,
+    ! [A] :
+      ( s__City(A)
+     => s__GeopoliticalArea(A) ) ).
+
+<A NAME="kb_SUMO_MILO_6391"></A>fof(kb_SUMO_MILO_6391,axiom,
+    ! [A] :
+      ( s__WaterArea(A)
+     => s__GeographicArea(A) ) ).
+
+<A NAME="kb_SUMO_MILO_Domains_9582"></A>fof(kb_SUMO_MILO_Domains_9582,axiom,
+    ! [A] :
+      ( s__BodyOfWater(A)
+     => s__WaterArea(A) ) ).
+
+<A NAME="kb_SUMO_MILO_Domains_9679"></A>fof(kb_SUMO_MILO_Domains_9679,axiom,
+    ! [A] :
+      ( s__Sea(A)
+     => s__BodyOfWater(A) ) ).
+
+<A NAME="kb_SUMO_MILO_7458"></A>fof(kb_SUMO_MILO_7458,axiom,
+    ! [A] :
+      ( s__SymmetricPositionalAttribute(A)
+     => s__PositionalAttribute(A) ) ).
+
+<A NAME="kb_SUMO_MILO_7487"></A>fof(kb_SUMO_MILO_7487,axiom,
+    s__SymmetricPositionalAttribute(s__Near) ).
+
+<A NAME="kb_SUMO_MILO_12059"></A>fof(kb_SUMO_MILO_12059,axiom,
+    s__SetOrClass(s__Flooding__t) ).
+
+<A NAME="s__located__m_type"></A>fof(s__located__m_type,axiom,
+    s__CaseRole(s__located__m) ).
+
+<A NAME="coastal_cities_near_water"></A>fof(coastal_cities_near_water,axiom,
+    ! [City] :
+      ( s__City(City)
+     => ( is_instance(City,s__CoastalCitiesClass)
+       => ? [Sea] :
+            ( s__Sea(Sea)
+            & s__orientation(City,Sea,s__Near) ) ) ) ).
+
+<A NAME="flood_near_water"></A>fof(flood_near_water,axiom,
+    ! [W,C] :
+      ( ( s__WaterArea(W)
+        & s__City(C) )
+     => ( s__orientation(C,W,s__Near)
+       => s__capability(s__Flooding__t,s__located__m,C) ) ) ).
+
+<A NAME="where"></A>fof(where,conjecture,
+    ? [City,Nation,CityLat,CityLong,CityName,CityNation,Latitude,MoscowLat,MoscowLong,MoscowName,MoscowNation] :
+      ( s__Object(City)
+      & s__Object(Nation)
+      & real(CityLat)
+      & real(CityLong)
+      & s__SymbolicString(CityName)
+      & s__SymbolicString(CityNation)
+      & int(Latitude)
+      & real(MoscowLat)
+      & real(MoscowLong)
+      & s__SymbolicString(MoscowName)
+      & s__SymbolicString(MoscowNation)
+      & is_instance(Nation,s__OECDMemberEconomiesClass)
+      & capital_city(City,Nation)
+      & look_different(City,s__Moscow)
+      & latlong(City,CityLat,CityLong,CityName,CityNation)
+      & latlong(s__Moscow,MoscowLat,MoscowLong,MoscowName,MoscowNation)
+      & to_int(CityLat) = to_int(MoscowLat)
+      & s__capability(s__Flooding__t,s__located__m,City) ) ).
+
+<A NAME="real_type"></A>fof(real_type,axiom,
+    ? [A] : real(A) ).
+
+<A NAME="int_type"></A>fof(int_type,axiom,
+    ? [A] : int(A) ).
+
+<A NAME="coastal_cities_type"></A>fof(coastal_cities_type,axiom,
+    s__Object(s__CoastalCitiesClass) ).
+
+<A NAME="s__Moscow_type"></A>fof(s__Moscow_type,axiom,
+    s__City(s__Moscow) ).
+
+<A NAME="copenhagen_coastal"></A>fof(copenhagen_coastal,axiom,
+    is_instance(s__Copenhagen,s__CoastalCitiesClass) ).
+
+<A NAME="to_int_type"></A>fof(to_int_type,axiom,
+    ! [A] :
+      ( real(A)
+     => int(to_int(A)) ) ).
+
+<A NAME="oecd_type"></A>fof(oecd_type,axiom,
+    s__Object(s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__CzechRepublic_type"></A>fof(s__CzechRepublic_type,axiom,
+    s__Nation(s__CzechRepublic) ).
+
+<A NAME="s__CzechRepublic_OECD"></A>fof(s__CzechRepublic_OECD,axiom,
+    is_instance(s__CzechRepublic,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Denmark_type"></A>fof(s__Denmark_type,axiom,
+    s__Nation(s__Denmark) ).
+
+<A NAME="s__Denmark_OECD"></A>fof(s__Denmark_OECD,axiom,
+    is_instance(s__Denmark,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Finland_type"></A>fof(s__Finland_type,axiom,
+    s__Nation(s__Finland) ).
+
+<A NAME="s__Finland_OECD"></A>fof(s__Finland_OECD,axiom,
+    is_instance(s__Finland,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Germany_type"></A>fof(s__Germany_type,axiom,
+    s__Nation(s__Germany) ).
+
+<A NAME="s__Germany_OECD"></A>fof(s__Germany_OECD,axiom,
+    is_instance(s__Germany,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Greece_type"></A>fof(s__Greece_type,axiom,
+    s__Nation(s__Greece) ).
+
+<A NAME="s__Greece_OECD"></A>fof(s__Greece_OECD,axiom,
+    is_instance(s__Greece,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Hungary_type"></A>fof(s__Hungary_type,axiom,
+    s__Nation(s__Hungary) ).
+
+<A NAME="s__Hungary_OECD"></A>fof(s__Hungary_OECD,axiom,
+    is_instance(s__Hungary,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Italy_type"></A>fof(s__Italy_type,axiom,
+    s__Nation(s__Italy) ).
+
+<A NAME="s__Italy_OECD"></A>fof(s__Italy_OECD,axiom,
+    is_instance(s__Italy,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Luxembourg_type"></A>fof(s__Luxembourg_type,axiom,
+    s__Nation(s__Luxembourg) ).
+
+<A NAME="s__Luxembourg_OECD"></A>fof(s__Luxembourg_OECD,axiom,
+    is_instance(s__Luxembourg,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Mexico_type"></A>fof(s__Mexico_type,axiom,
+    s__Nation(s__Mexico) ).
+
+<A NAME="s__Mexico_OECD"></A>fof(s__Mexico_OECD,axiom,
+    is_instance(s__Mexico,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__NewZealand_type"></A>fof(s__NewZealand_type,axiom,
+    s__Nation(s__NewZealand) ).
+
+<A NAME="s__NewZealand_OECD"></A>fof(s__NewZealand_OECD,axiom,
+    is_instance(s__NewZealand,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Poland_type"></A>fof(s__Poland_type,axiom,
+    s__Nation(s__Poland) ).
+
+<A NAME="s__Poland_OECD"></A>fof(s__Poland_OECD,axiom,
+    is_instance(s__Poland,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Sweden_type"></A>fof(s__Sweden_type,axiom,
+    s__Nation(s__Sweden) ).
+
+<A NAME="s__Sweden_OECD"></A>fof(s__Sweden_OECD,axiom,
+    is_instance(s__Sweden,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__SouthKorea_type"></A>fof(s__SouthKorea_type,axiom,
+    s__Nation(s__SouthKorea) ).
+
+<A NAME="s__SouthKorea_OECD"></A>fof(s__SouthKorea_OECD,axiom,
+    is_instance(s__SouthKorea,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Slovakia_type"></A>fof(s__Slovakia_type,axiom,
+    s__Nation(s__Slovakia) ).
+
+<A NAME="s__Slovakia_OECD"></A>fof(s__Slovakia_OECD,axiom,
+    is_instance(s__Slovakia,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Spain_type"></A>fof(s__Spain_type,axiom,
+    s__Nation(s__Spain) ).
+
+<A NAME="s__Spain_OECD"></A>fof(s__Spain_OECD,axiom,
+    is_instance(s__Spain,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Switzerland_type"></A>fof(s__Switzerland_type,axiom,
+    s__Nation(s__Switzerland) ).
+
+<A NAME="s__Switzerland_OECD"></A>fof(s__Switzerland_OECD,axiom,
+    is_instance(s__Switzerland,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__UnitedKingdom_type"></A>fof(s__UnitedKingdom_type,axiom,
+    s__Nation(s__UnitedKingdom) ).
+
+<A NAME="s__UnitedKingdom_OECD"></A>fof(s__UnitedKingdom_OECD,axiom,
+    is_instance(s__UnitedKingdom,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__UnitedStates_type"></A>fof(s__UnitedStates_type,axiom,
+    s__Nation(s__UnitedStates) ).
+
+<A NAME="s__UnitedStates_OECD"></A>fof(s__UnitedStates_OECD,axiom,
+    is_instance(s__UnitedStates,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Portugal_type"></A>fof(s__Portugal_type,axiom,
+    s__Nation(s__Portugal) ).
+
+<A NAME="s__Portugal_OECD"></A>fof(s__Portugal_OECD,axiom,
+    is_instance(s__Portugal,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Norway_type"></A>fof(s__Norway_type,axiom,
+    s__Nation(s__Norway) ).
+
+<A NAME="s__Norway_OECD"></A>fof(s__Norway_OECD,axiom,
+    is_instance(s__Norway,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Netherlands_type"></A>fof(s__Netherlands_type,axiom,
+    s__Nation(s__Netherlands) ).
+
+<A NAME="s__Netherlands_OECD"></A>fof(s__Netherlands_OECD,axiom,
+    is_instance(s__Netherlands,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Iceland_type"></A>fof(s__Iceland_type,axiom,
+    s__Nation(s__Iceland) ).
+
+<A NAME="s__Iceland_OECD"></A>fof(s__Iceland_OECD,axiom,
+    is_instance(s__Iceland,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Belgium_type"></A>fof(s__Belgium_type,axiom,
+    s__Nation(s__Belgium) ).
+
+<A NAME="s__Belgium_OECD"></A>fof(s__Belgium_OECD,axiom,
+    is_instance(s__Belgium,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__France_type"></A>fof(s__France_type,axiom,
+    s__Nation(s__France) ).
+
+<A NAME="s__France_OECD"></A>fof(s__France_OECD,axiom,
+    is_instance(s__France,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Australia_type"></A>fof(s__Australia_type,axiom,
+    s__Nation(s__Australia) ).
+
+<A NAME="s__Australia_OECD"></A>fof(s__Australia_OECD,axiom,
+    is_instance(s__Australia,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Austria_type"></A>fof(s__Austria_type,axiom,
+    s__Nation(s__Austria) ).
+
+<A NAME="s__Austria_OECD"></A>fof(s__Austria_OECD,axiom,
+    is_instance(s__Austria,s__OECDMemberEconomiesClass) ).
+
+<A NAME="s__Athens_type"></A>fof(s__Athens_type,axiom,
+    s__City(s__Athens) ).
+
+<A NAME="s__Athens_s__Greece"></A>fof(s__Athens_s__Greece,axiom,
+    capital_city(s__Athens,s__Greece) ).
+
+<A NAME="s__Berlin_type"></A>fof(s__Berlin_type,axiom,
+    s__City(s__Berlin) ).
+
+<A NAME="s__Berlin_s__Germany"></A>fof(s__Berlin_s__Germany,axiom,
+    capital_city(s__Berlin,s__Germany) ).
+
+<A NAME="s__Bratislava_type"></A>fof(s__Bratislava_type,axiom,
+    s__City(s__Bratislava) ).
+
+<A NAME="s__Bratislava_s__Slovakia"></A>fof(s__Bratislava_s__Slovakia,axiom,
+    capital_city(s__Bratislava,s__Slovakia) ).
+
+<A NAME="s__Brussels_type"></A>fof(s__Brussels_type,axiom,
+    s__City(s__Brussels) ).
+
+<A NAME="s__Brussels_s__Belgium"></A>fof(s__Brussels_s__Belgium,axiom,
+    capital_city(s__Brussels,s__Belgium) ).
+
+<A NAME="s__Budapest_type"></A>fof(s__Budapest_type,axiom,
+    s__City(s__Budapest) ).
+
+<A NAME="s__Budapest_s__Hungary"></A>fof(s__Budapest_s__Hungary,axiom,
+    capital_city(s__Budapest,s__Hungary) ).
+
+<A NAME="s__Canberra_type"></A>fof(s__Canberra_type,axiom,
+    s__City(s__Canberra) ).
+
+<A NAME="s__Canberra_s__Australia"></A>fof(s__Canberra_s__Australia,axiom,
+    capital_city(s__Canberra,s__Australia) ).
+
+<A NAME="s__Copenhagen_type"></A>fof(s__Copenhagen_type,axiom,
+    s__City(s__Copenhagen) ).
+
+<A NAME="s__Copenhagen_s__Denmark"></A>fof(s__Copenhagen_s__Denmark,axiom,
+    capital_city(s__Copenhagen,s__Denmark) ).
+
+<A NAME="s__Helsinki_type"></A>fof(s__Helsinki_type,axiom,
+    s__City(s__Helsinki) ).
+
+<A NAME="s__Helsinki_s__Finland"></A>fof(s__Helsinki_s__Finland,axiom,
+    capital_city(s__Helsinki,s__Finland) ).
+
+<A NAME="s__Lisbon_type"></A>fof(s__Lisbon_type,axiom,
+    s__City(s__Lisbon) ).
+
+<A NAME="s__Lisbon_s__Portugal"></A>fof(s__Lisbon_s__Portugal,axiom,
+    capital_city(s__Lisbon,s__Portugal) ).
+
+<A NAME="s__Luxembourg_City_type"></A>fof(s__Luxembourg_City_type,axiom,
+    s__City(s__Luxembourg_City) ).
+
+<A NAME="s__Luxembourg_City_s__Luxembourg"></A>fof(s__Luxembourg_City_s__Luxembourg,axiom,
+    capital_city(s__Luxembourg_City,s__Luxembourg) ).
+
+<A NAME="s__Paris_type"></A>fof(s__Paris_type,axiom,
+    s__City(s__Paris) ).
+
+<A NAME="s__Paris_s__France"></A>fof(s__Paris_s__France,axiom,
+    capital_city(s__Paris,s__France) ).
+
+<A NAME="s__Prague_type"></A>fof(s__Prague_type,axiom,
+    s__City(s__Prague) ).
+
+<A NAME="s__Prague_s__CzechRepublic"></A>fof(s__Prague_s__CzechRepublic,axiom,
+    capital_city(s__Prague,s__CzechRepublic) ).
+
+<A NAME="s__Seoul_type"></A>fof(s__Seoul_type,axiom,
+    s__City(s__Seoul) ).
+
+<A NAME="s__Seoul_s__SouthKorea"></A>fof(s__Seoul_s__SouthKorea,axiom,
+    capital_city(s__Seoul,s__SouthKorea) ).
+
+<A NAME="s__Vienna_type"></A>fof(s__Vienna_type,axiom,
+    s__City(s__Vienna) ).
+
+<A NAME="s__Vienna_s__Austria"></A>fof(s__Vienna_s__Austria,axiom,
+    capital_city(s__Vienna,s__Austria) ).
+
+<A NAME="s__Warsaw_type"></A>fof(s__Warsaw_type,axiom,
+    s__City(s__Warsaw) ).
+
+<A NAME="s__Warsaw_s__Poland"></A>fof(s__Warsaw_s__Poland,axiom,
+    capital_city(s__Warsaw,s__Poland) ).
+
+<A NAME="athens_lat_type"></A>fof(athens_lat_type,axiom,
+    real('37.97615') ).
+
+<A NAME="athens_long_type"></A>fof(athens_long_type,axiom,
+    real('23.736415') ).
+
+<A NAME="athens_type"></A>fof(athens_type,axiom,
+    s__SymbolicString(athens) ).
+
+<A NAME="gr_type"></A>fof(gr_type,axiom,
+    s__SymbolicString(gr) ).
+
+<A NAME="latlong_s__Athens"></A>fof(latlong_s__Athens,axiom,
+    latlong(s__Athens,'37.97615','23.736415',athens,gr) ).
+
+<A NAME="berlin_lat_type"></A>fof(berlin_lat_type,axiom,
+    real('52.516074') ).
+
+<A NAME="berlin_long_type"></A>fof(berlin_long_type,axiom,
+    real('13.376987') ).
+
+<A NAME="berlin_type"></A>fof(berlin_type,axiom,
+    s__SymbolicString(berlin) ).
+
+<A NAME="de_type"></A>fof(de_type,axiom,
+    s__SymbolicString(de) ).
+
+<A NAME="latlong_s__Berlin"></A>fof(latlong_s__Berlin,axiom,
+    latlong(s__Berlin,'52.516074','13.376987',berlin,de) ).
+
+<A NAME="bratislava_lat_type"></A>fof(bratislava_lat_type,axiom,
+    real('48.149245') ).
+
+<A NAME="bratislava_long_type"></A>fof(bratislava_long_type,axiom,
+    real('17.107005') ).
+
+<A NAME="bratislava_type"></A>fof(bratislava_type,axiom,
+    s__SymbolicString(bratislava) ).
+
+<A NAME="sk_type"></A>fof(sk_type,axiom,
+    s__SymbolicString(sk) ).
+
+<A NAME="latlong_s__Bratislava"></A>fof(latlong_s__Bratislava,axiom,
+    latlong(s__Bratislava,'48.149245','17.107005',bratislava,sk) ).
+
+<A NAME="brussels_lat_type"></A>fof(brussels_lat_type,axiom,
+    real('50.848385') ).
+
+<A NAME="brussels_long_type"></A>fof(brussels_long_type,axiom,
+    real('4.349685') ).
+
+<A NAME="brussels_type"></A>fof(brussels_type,axiom,
+    s__SymbolicString(brussels) ).
+
+<A NAME="be_type"></A>fof(be_type,axiom,
+    s__SymbolicString(be) ).
+
+<A NAME="latlong_s__Brussels"></A>fof(latlong_s__Brussels,axiom,
+    latlong(s__Brussels,'50.848385','4.349685',brussels,be) ).
+
+<A NAME="budapest_lat_type"></A>fof(budapest_lat_type,axiom,
+    real('47.506225') ).
+
+<A NAME="budapest_long_type"></A>fof(budapest_long_type,axiom,
+    real('19.06482') ).
+
+<A NAME="budapest_type"></A>fof(budapest_type,axiom,
+    s__SymbolicString(budapest) ).
+
+<A NAME="hu_type"></A>fof(hu_type,axiom,
+    s__SymbolicString(hu) ).
+
+<A NAME="latlong_s__Budapest"></A>fof(latlong_s__Budapest,axiom,
+    latlong(s__Budapest,'47.506225','19.06482',budapest,hu) ).
+
+<A NAME="canberra_lat_type"></A>fof(canberra_lat_type,axiom,
+    real('-35.306541') ).
+
+<A NAME="canberra_long_type"></A>fof(canberra_long_type,axiom,
+    real('149.126556') ).
+
+<A NAME="canberra_type"></A>fof(canberra_type,axiom,
+    s__SymbolicString(canberra) ).
+
+<A NAME="au_type"></A>fof(au_type,axiom,
+    s__SymbolicString(au) ).
+
+<A NAME="latlong_s__Canberra"></A>fof(latlong_s__Canberra,axiom,
+    latlong(s__Canberra,'-35.306541','149.126556',canberra,au) ).
+
+<A NAME="copenhagen_lat_type"></A>fof(copenhagen_lat_type,axiom,
+    real('55.67631') ).
+
+<A NAME="copenhagen_long_type"></A>fof(copenhagen_long_type,axiom,
+    real('12.569355') ).
+
+<A NAME="copenhagen_type"></A>fof(copenhagen_type,axiom,
+    s__SymbolicString(copenhagen) ).
+
+<A NAME="dk_type"></A>fof(dk_type,axiom,
+    s__SymbolicString(dk) ).
+
+<A NAME="latlong_s__Copenhagen"></A>fof(latlong_s__Copenhagen,axiom,
+    latlong(s__Copenhagen,'55.67631','12.569355',copenhagen,dk) ).
+
+<A NAME="helsinki_lat_type"></A>fof(helsinki_lat_type,axiom,
+    real('60.17116') ).
+
+<A NAME="helsinki_long_type"></A>fof(helsinki_long_type,axiom,
+    real('24.93258') ).
+
+<A NAME="helsinki_type"></A>fof(helsinki_type,axiom,
+    s__SymbolicString(helsinki) ).
+
+<A NAME="fi_type"></A>fof(fi_type,axiom,
+    s__SymbolicString(fi) ).
+
+<A NAME="latlong_s__Helsinki"></A>fof(latlong_s__Helsinki,axiom,
+    latlong(s__Helsinki,'60.17116','24.93258',helsinki,fi) ).
+
+<A NAME="lisbon_lat_type"></A>fof(lisbon_lat_type,axiom,
+    real('38.725679') ).
+
+<A NAME="lisbon_long_type"></A>fof(lisbon_long_type,axiom,
+    real('-9.150371') ).
+
+<A NAME="lisbon_type"></A>fof(lisbon_type,axiom,
+    s__SymbolicString(lisbon) ).
+
+<A NAME="pt_type"></A>fof(pt_type,axiom,
+    s__SymbolicString(pt) ).
+
+<A NAME="latlong_s__Lisbon"></A>fof(latlong_s__Lisbon,axiom,
+    latlong(s__Lisbon,'38.725679','-9.150371',lisbon,pt) ).
+
+<A NAME="luxembourg_city_lat_type"></A>fof(luxembourg_city_lat_type,axiom,
+    real('49.609531') ).
+
+<A NAME="luxembourg_city_long_type"></A>fof(luxembourg_city_long_type,axiom,
+    real('6.12997') ).
+
+<A NAME="luxembourg_city_type"></A>fof(luxembourg_city_type,axiom,
+    s__SymbolicString(luxembourg_city) ).
+
+<A NAME="lu_type"></A>fof(lu_type,axiom,
+    s__SymbolicString(lu) ).
+
+<A NAME="latlong_s__Luxembourg_City"></A>fof(latlong_s__Luxembourg_City,axiom,
+    latlong(s__Luxembourg_City,'49.609531','6.12997',luxembourg_city,lu) ).
+
+<A NAME="moscow_lat_type"></A>fof(moscow_lat_type,axiom,
+    real('55.75695') ).
+
+<A NAME="moscow_long_type"></A>fof(moscow_long_type,axiom,
+    real('37.614975') ).
+
+<A NAME="moscow_type"></A>fof(moscow_type,axiom,
+    s__SymbolicString(moscow) ).
+
+<A NAME="ru_type"></A>fof(ru_type,axiom,
+    s__SymbolicString(ru) ).
+
+<A NAME="latlong_s__Moscow"></A>fof(latlong_s__Moscow,axiom,
+    latlong(s__Moscow,'55.75695','37.614975',moscow,ru) ).
+
+<A NAME="paris_lat_type"></A>fof(paris_lat_type,axiom,
+    real('48.856925') ).
+
+<A NAME="paris_long_type"></A>fof(paris_long_type,axiom,
+    real('2.34121') ).
+
+<A NAME="paris_type"></A>fof(paris_type,axiom,
+    s__SymbolicString(paris) ).
+
+<A NAME="fr_type"></A>fof(fr_type,axiom,
+    s__SymbolicString(fr) ).
+
+<A NAME="latlong_s__Paris"></A>fof(latlong_s__Paris,axiom,
+    latlong(s__Paris,'48.856925','2.34121',paris,fr) ).
+
+<A NAME="prague_lat_type"></A>fof(prague_lat_type,axiom,
+    real('50.079083') ).
+
+<A NAME="prague_long_type"></A>fof(prague_long_type,axiom,
+    real('14.43323') ).
+
+<A NAME="prague_type"></A>fof(prague_type,axiom,
+    s__SymbolicString(prague) ).
+
+<A NAME="cz_type"></A>fof(cz_type,axiom,
+    s__SymbolicString(cz) ).
+
+<A NAME="latlong_s__Prague"></A>fof(latlong_s__Prague,axiom,
+    latlong(s__Prague,'50.079083','14.43323',prague,cz) ).
+
+<A NAME="seoul_lat_type"></A>fof(seoul_lat_type,axiom,
+    real('37.557121') ).
+
+<A NAME="seoul_long_type"></A>fof(seoul_long_type,axiom,
+    real('126.977379') ).
+
+<A NAME="seoul_type"></A>fof(seoul_type,axiom,
+    s__SymbolicString(seoul) ).
+
+<A NAME="kr_type"></A>fof(kr_type,axiom,
+    s__SymbolicString(kr) ).
+
+<A NAME="latlong_s__Seoul"></A>fof(latlong_s__Seoul,axiom,
+    latlong(s__Seoul,'37.557121','126.977379',seoul,kr) ).
+
+<A NAME="vienna_lat_type"></A>fof(vienna_lat_type,axiom,
+    real('48.202548') ).
+
+<A NAME="vienna_long_type"></A>fof(vienna_long_type,axiom,
+    real('16.368805') ).
+
+<A NAME="vienna_type"></A>fof(vienna_type,axiom,
+    s__SymbolicString(vienna) ).
+
+<A NAME="at_type"></A>fof(at_type,axiom,
+    s__SymbolicString(at) ).
+
+<A NAME="latlong_s__Vienna"></A>fof(latlong_s__Vienna,axiom,
+    latlong(s__Vienna,'48.202548','16.368805',vienna,at) ).
+
+<A NAME="warsaw_lat_type"></A>fof(warsaw_lat_type,axiom,
+    real('52.23537') ).
+
+<A NAME="warsaw_long_type"></A>fof(warsaw_long_type,axiom,
+    real('21.009485') ).
+
+<A NAME="warsaw_type"></A>fof(warsaw_type,axiom,
+    s__SymbolicString(warsaw) ).
+
+<A NAME="pl_type"></A>fof(pl_type,axiom,
+    s__SymbolicString(pl) ).
+
+<A NAME="latlong_s__Warsaw"></A>fof(latlong_s__Warsaw,axiom,
+    latlong(s__Warsaw,'52.23537','21.009485',warsaw,pl) ).
+
+<A NAME="s__Athens_not_s__Moscow"></A>fof(s__Athens_not_s__Moscow,axiom,
+    look_different(s__Athens,s__Moscow) ).
+
+<A NAME="s__Berlin_not_s__Moscow"></A>fof(s__Berlin_not_s__Moscow,axiom,
+    look_different(s__Berlin,s__Moscow) ).
+
+<A NAME="s__Bratislava_not_s__Moscow"></A>fof(s__Bratislava_not_s__Moscow,axiom,
+    look_different(s__Bratislava,s__Moscow) ).
+
+<A NAME="s__Brussels_not_s__Moscow"></A>fof(s__Brussels_not_s__Moscow,axiom,
+    look_different(s__Brussels,s__Moscow) ).
+
+<A NAME="s__Budapest_not_s__Moscow"></A>fof(s__Budapest_not_s__Moscow,axiom,
+    look_different(s__Budapest,s__Moscow) ).
+
+<A NAME="s__Canberra_not_s__Moscow"></A>fof(s__Canberra_not_s__Moscow,axiom,
+    look_different(s__Canberra,s__Moscow) ).
+
+<A NAME="s__Copenhagen_not_s__Moscow"></A>fof(s__Copenhagen_not_s__Moscow,axiom,
+    look_different(s__Copenhagen,s__Moscow) ).
+
+<A NAME="s__Helsinki_not_s__Moscow"></A>fof(s__Helsinki_not_s__Moscow,axiom,
+    look_different(s__Helsinki,s__Moscow) ).
+
+<A NAME="s__Lisbon_not_s__Moscow"></A>fof(s__Lisbon_not_s__Moscow,axiom,
+    look_different(s__Lisbon,s__Moscow) ).
+
+<A NAME="s__Luxembourg_City_not_s__Moscow"></A>fof(s__Luxembourg_City_not_s__Moscow,axiom,
+    look_different(s__Luxembourg_City,s__Moscow) ).
+
+<A NAME="s__Paris_not_s__Moscow"></A>fof(s__Paris_not_s__Moscow,axiom,
+    look_different(s__Paris,s__Moscow) ).
+
+<A NAME="s__Prague_not_s__Moscow"></A>fof(s__Prague_not_s__Moscow,axiom,
+    look_different(s__Prague,s__Moscow) ).
+
+<A NAME="s__Seoul_not_s__Moscow"></A>fof(s__Seoul_not_s__Moscow,axiom,
+    look_different(s__Seoul,s__Moscow) ).
+
+<A NAME="s__Vienna_not_s__Moscow"></A>fof(s__Vienna_not_s__Moscow,axiom,
+    look_different(s__Vienna,s__Moscow) ).
+
+<A NAME="s__Warsaw_not_s__Moscow"></A>fof(s__Warsaw_not_s__Moscow,axiom,
+    look_different(s__Warsaw,s__Moscow) ).
+
+<A NAME="'-35_type'"></A>fof('-35_type',axiom,
+    int('-35') ).
+
+<A NAME="'-35.306541_-35'"></A>fof('-35.306541_-35',axiom,
+    to_int('-35.306541') = '-35' ).
+
+<A NAME="'37_type'"></A>fof('37_type',axiom,
+    int('37') ).
+
+<A NAME="'37.557121_37'"></A>fof('37.557121_37',axiom,
+    to_int('37.557121') = '37' ).
+
+<A NAME="'37.97615_37'"></A>fof('37.97615_37',axiom,
+    to_int('37.97615') = '37' ).
+
+<A NAME="'38_type'"></A>fof('38_type',axiom,
+    int('38') ).
+
+<A NAME="'38.725679_38'"></A>fof('38.725679_38',axiom,
+    to_int('38.725679') = '38' ).
+
+<A NAME="'47_type'"></A>fof('47_type',axiom,
+    int('47') ).
+
+<A NAME="'47.506225_47'"></A>fof('47.506225_47',axiom,
+    to_int('47.506225') = '47' ).
+
+<A NAME="'48_type'"></A>fof('48_type',axiom,
+    int('48') ).
+
+<A NAME="'48.149245_48'"></A>fof('48.149245_48',axiom,
+    to_int('48.149245') = '48' ).
+
+<A NAME="'48.202548_48'"></A>fof('48.202548_48',axiom,
+    to_int('48.202548') = '48' ).
+
+<A NAME="'48.856925_48'"></A>fof('48.856925_48',axiom,
+    to_int('48.856925') = '48' ).
+
+<A NAME="'49_type'"></A>fof('49_type',axiom,
+    int('49') ).
+
+<A NAME="'49.609531_49'"></A>fof('49.609531_49',axiom,
+    to_int('49.609531') = '49' ).
+
+<A NAME="'50_type'"></A>fof('50_type',axiom,
+    int('50') ).
+
+<A NAME="'50.079083_50'"></A>fof('50.079083_50',axiom,
+    to_int('50.079083') = '50' ).
+
+<A NAME="'50.848385_50'"></A>fof('50.848385_50',axiom,
+    to_int('50.848385') = '50' ).
+
+<A NAME="'52_type'"></A>fof('52_type',axiom,
+    int('52') ).
+
+<A NAME="'52.23537_52'"></A>fof('52.23537_52',axiom,
+    to_int('52.23537') = '52' ).
+
+<A NAME="'52.516074_52'"></A>fof('52.516074_52',axiom,
+    to_int('52.516074') = '52' ).
+
+<A NAME="'55_type'"></A>fof('55_type',axiom,
+    int('55') ).
+
+<A NAME="'55.67631_55'"></A>fof('55.67631_55',axiom,
+    to_int('55.67631') = '55' ).
+
+<A NAME="'55.75695_55'"></A>fof('55.75695_55',axiom,
+    to_int('55.75695') = '55' ).
+
+<A NAME="'60_type'"></A>fof('60_type',axiom,
+    int('60') ).
+
+<A NAME="'60.17116_60'"></A>fof('60.17116_60',axiom,
+    to_int('60.17116') = '60' ).
+
+<A NAME="int_not_real"></A>fof(int_not_real,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ real(A) ) ).
+
+<A NAME="int_not_s__SymbolicString"></A>fof(int_not_s__SymbolicString,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__SymbolicString(A) ) ).
+
+<A NAME="int_not_s__CaseRole"></A>fof(int_not_s__CaseRole,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__CaseRole(A) ) ).
+
+<A NAME="int_not_s__PositionalAttribute"></A>fof(int_not_s__PositionalAttribute,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__PositionalAttribute(A) ) ).
+
+<A NAME="int_not_s__Object"></A>fof(int_not_s__Object,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__Object(A) ) ).
+
+<A NAME="int_not_s__Entity"></A>fof(int_not_s__Entity,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="int_not_s__SetOrClass"></A>fof(int_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( int(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="real_not_s__SymbolicString"></A>fof(real_not_s__SymbolicString,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__SymbolicString(A) ) ).
+
+<A NAME="real_not_s__CaseRole"></A>fof(real_not_s__CaseRole,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__CaseRole(A) ) ).
+
+<A NAME="real_not_s__PositionalAttribute"></A>fof(real_not_s__PositionalAttribute,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__PositionalAttribute(A) ) ).
+
+<A NAME="real_not_s__Object"></A>fof(real_not_s__Object,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__Object(A) ) ).
+
+<A NAME="real_not_s__Entity"></A>fof(real_not_s__Entity,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="real_not_s__SetOrClass"></A>fof(real_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( real(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__SymbolicString_not_s__CaseRole"></A>fof(s__SymbolicString_not_s__CaseRole,axiom,
+    ! [A] :
+      ( s__SymbolicString(A)
+     => ~ s__CaseRole(A) ) ).
+
+<A NAME="s__SymbolicString_not_s__PositionalAttribute"></A>fof(s__SymbolicString_not_s__PositionalAttribute,axiom,
+    ! [A] :
+      ( s__SymbolicString(A)
+     => ~ s__PositionalAttribute(A) ) ).
+
+<A NAME="s__SymbolicString_not_s__Object"></A>fof(s__SymbolicString_not_s__Object,axiom,
+    ! [A] :
+      ( s__SymbolicString(A)
+     => ~ s__Object(A) ) ).
+
+<A NAME="s__SymbolicString_not_s__Entity"></A>fof(s__SymbolicString_not_s__Entity,axiom,
+    ! [A] :
+      ( s__SymbolicString(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="s__SymbolicString_not_s__SetOrClass"></A>fof(s__SymbolicString_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( s__SymbolicString(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__CaseRole_not_s__PositionalAttribute"></A>fof(s__CaseRole_not_s__PositionalAttribute,axiom,
+    ! [A] :
+      ( s__CaseRole(A)
+     => ~ s__PositionalAttribute(A) ) ).
+
+<A NAME="s__CaseRole_not_s__Object"></A>fof(s__CaseRole_not_s__Object,axiom,
+    ! [A] :
+      ( s__CaseRole(A)
+     => ~ s__Object(A) ) ).
+
+<A NAME="s__CaseRole_not_s__Entity"></A>fof(s__CaseRole_not_s__Entity,axiom,
+    ! [A] :
+      ( s__CaseRole(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="s__CaseRole_not_s__SetOrClass"></A>fof(s__CaseRole_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( s__CaseRole(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__PositionalAttribute_not_s__Object"></A>fof(s__PositionalAttribute_not_s__Object,axiom,
+    ! [A] :
+      ( s__PositionalAttribute(A)
+     => ~ s__Object(A) ) ).
+
+<A NAME="s__PositionalAttribute_not_s__Entity"></A>fof(s__PositionalAttribute_not_s__Entity,axiom,
+    ! [A] :
+      ( s__PositionalAttribute(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="s__PositionalAttribute_not_s__SetOrClass"></A>fof(s__PositionalAttribute_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( s__PositionalAttribute(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__Object_not_s__Entity"></A>fof(s__Object_not_s__Entity,axiom,
+    ! [A] :
+      ( s__Object(A)
+     => ~ s__Entity(A) ) ).
+
+<A NAME="s__Object_not_s__SetOrClass"></A>fof(s__Object_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( s__Object(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__Entity_not_s__SetOrClass"></A>fof(s__Entity_not_s__SetOrClass,axiom,
+    ! [A] :
+      ( s__Entity(A)
+     => ~ s__SetOrClass(A) ) ).
+
+<A NAME="s__GeopoliticalArea_not_s__WaterArea"></A>fof(s__GeopoliticalArea_not_s__WaterArea,axiom,
+    ! [A] :
+      ( s__GeopoliticalArea(A)
+     => ~ s__WaterArea(A) ) ).
+
+<A NAME="s__Nation_not_s__City"></A>fof(s__Nation_not_s__City,axiom,
+    ! [A] :
+      ( s__Nation(A)
+     => ~ s__City(A) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Axioms File: CSR001+0.ax</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPWorld.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Axioms File: <TT>CSR001+0.ax</TT></H2></CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001+0 : TPTP v9.3.1. Bugfixed v3.1.0.
+% Domain   : Commonsense Reasoning
+% Axioms   : Standard discrete event calculus axioms
+% Version  : [Mue04] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Mue04>Mue04</a>] Mueller (2004), A Tool for Satisfiability-based Common
+%          : [<a href=SeeTPTP?Category=BibTeX&File=MS02>MS02</a>]  Miller & Shanahan (2002), Some Alternative Formulation
+% Source   : [Mue04]
+% Names    :
+
+% Status   : Satisfiable
+% Syntax   : Number of formulae    :   12 (   0 unt;   0 def)
+%            Number of atoms       :   54 (   0 equ)
+%            Maximal formula atoms :    6 (   4 avg)
+%            Number of connectives :   56 (  14   ~;   2   |;  28   &)
+%                                         (   2 &lt;=>;  10  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   9 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of predicates  :   11 (  11 usr;   0 prp; 2-4 aty)
+%            Number of functors    :    3 (   3 usr;   2 con; 0-2 aty)
+%            Number of variables   :   44 (  36   !;   8   ?)
+% SPC      : FOF_SAT_RFO_NEQ
+
+% Comments :
+%------------------------------------------------------------------------------
+%----DEC1
+<A NAME="stoppedin_defn"></A>fof(stoppedin_defn,axiom,
+    ! [Time1,Fluent,Time2] :
+      ( stoppedIn(Time1,Fluent,Time2)
+    &lt;=> ? [Event,Time] :
+          ( happens(Event,Time)
+          & less(Time1,Time)
+          & less(Time,Time2)
+          & terminates(Event,Fluent,Time) ) ) ).
+
+%----DEC2
+<A NAME="startedin_defn"></A>fof(startedin_defn,axiom,
+    ! [Time1,Time2,Fluent] :
+      ( startedIn(Time1,Fluent,Time2)
+    &lt;=> ? [Event,Time] :
+          ( happens(Event,Time)
+          & less(Time1,Time)
+          & less(Time,Time2)
+          & initiates(Event,Fluent,Time) ) ) ).
+
+%----DEC3
+<A NAME="change_holding"></A>fof(change_holding,axiom,
+    ! [Event,Time,Fluent,Fluent2,Offset] :
+      ( ( happens(Event,Time)
+        & initiates(Event,Fluent,Time)
+        & less(n0,Offset)
+        & trajectory(Fluent,Time,Fluent2,Offset)
+        & ~ stoppedIn(Time,Fluent,plus(Time,Offset)) )
+     => holdsAt(Fluent2,plus(Time,Offset)) ) ).
+
+%----DEC4
+<A NAME="antitrajectory"></A>fof(antitrajectory,axiom,
+    ! [Event,Time1,Fluent1,Time2,Fluent2] :
+      ( ( happens(Event,Time1)
+        & terminates(Event,Fluent1,Time1)
+        & less(n0,Time2)
+        & antitrajectory(Fluent1,Time1,Fluent2,Time2)
+        & ~ startedIn(Time1,Fluent1,plus(Time1,Time2)) )
+     => holdsAt(Fluent2,plus(Time1,Time2)) ) ).
+
+%----DEC5
+<A NAME="keep_holding"></A>fof(keep_holding,axiom,
+    ! [Fluent,Time] :
+      ( ( holdsAt(Fluent,Time)
+        & ~ releasedAt(Fluent,plus(Time,n1))
+        & ~ ? [Event] :
+              ( happens(Event,Time)
+              & terminates(Event,Fluent,Time) ) )
+     => holdsAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC6
+<A NAME="keep_not_holding"></A>fof(keep_not_holding,axiom,
+    ! [Fluent,Time] :
+      ( ( ~ holdsAt(Fluent,Time)
+        & ~ releasedAt(Fluent,plus(Time,n1))
+        & ~ ? [Event] :
+              ( happens(Event,Time)
+              & initiates(Event,Fluent,Time) ) )
+     => ~ holdsAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC7
+<A NAME="keep_released"></A>fof(keep_released,axiom,
+    ! [Fluent,Time] :
+      ( ( releasedAt(Fluent,Time)
+        & ~ ? [Event] :
+              ( happens(Event,Time)
+              & ( initiates(Event,Fluent,Time)
+                | terminates(Event,Fluent,Time) ) ) )
+     => releasedAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC8
+<A NAME="keep_not_released"></A>fof(keep_not_released,axiom,
+    ! [Fluent,Time] :
+      ( ( ~ releasedAt(Fluent,Time)
+        & ~ ? [Event] :
+              ( happens(Event,Time)
+              & releases(Event,Fluent,Time) ) )
+     => ~ releasedAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC9
+<A NAME="happens_holds"></A>fof(happens_holds,axiom,
+    ! [Event,Time,Fluent] :
+      ( ( happens(Event,Time)
+        & initiates(Event,Fluent,Time) )
+     => holdsAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC10
+<A NAME="happens_terminates_not_holds"></A>fof(happens_terminates_not_holds,axiom,
+    ! [Event,Time,Fluent] :
+      ( ( happens(Event,Time)
+        & terminates(Event,Fluent,Time) )
+     => ~ holdsAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC11
+<A NAME="happens_releases"></A>fof(happens_releases,axiom,
+    ! [Event,Time,Fluent] :
+      ( ( happens(Event,Time)
+        & releases(Event,Fluent,Time) )
+     => releasedAt(Fluent,plus(Time,n1)) ) ).
+
+%----DEC12
+<A NAME="happens_not_released"></A>fof(happens_not_released,axiom,
+    ! [Event,Time,Fluent] :
+      ( ( happens(Event,Time)
+        & ( initiates(Event,Fluent,Time)
+          | terminates(Event,Fluent,Time) ) )
+     => ~ releasedAt(Fluent,plus(Time,n1)) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

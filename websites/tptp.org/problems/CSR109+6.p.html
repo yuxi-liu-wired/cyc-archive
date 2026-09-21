@@ -1,0 +1,90 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR109+6.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR109+6.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR109+6 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR109%2B6" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR109+6 : TPTP v9.3.1. Bugfixed v7.3.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Skolemization of a deep class hierarchy, with subsumption
+% Version  : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=NP01>NP01</a>]  Niles & Pease (2001), Towards A Standard Upper Ontology
+%          : [Sie07] Siegel (2007), Email to G. Sutcliffe
+% Source   : [Sie07]
+% Names    : TQG50
+
+% Status   : ContradictoryAxioms
+% Rating   : 0.57 v9.3.0, 0.76 v9.0.0, 0.78 v8.1.0, 0.81 v7.4.0, 0.43 v7.3.0
+% Syntax   : Number of formulae    : 55589 (40662 unt;   0 def)
+%            Number of atoms       : 151001 (14168 equ)
+%            Maximal formula atoms :   29 (   2 avg)
+%            Number of connectives : 99418 (4006   ~; 275   |;60357   &)
+%                                         ( 249 &lt;=>;34531  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   33 (   3 avg)
+%            Maximal term depth    :    7 (   1 avg)
+%            Number of predicates  : 1201 (1200 usr;   0 prp; 1-8 aty)
+%            Number of functors    : 33067 (32450 usr;32839 con; 0-8 aty)
+%            Number of variables   : 56944 (49181   !;7763   ?)
+% SPC      : FOF_CAX_RFO_SEQ
+
+% Comments : Requires at least 53 steps. 
+% Bugfixes : v4.0.1 - Bugfixes in CSR003 axiom files.
+%          : v4.1.0 - Bugfixes in CSR003 axiom files.
+%          : v5.3.0 - Bugfixes in CSR003 axiom files.
+%          : v5.4.0 - Bugfixes in CSR003 axiom files.
+%          : v7.3.0 - Bugfixes in CSR003 axiom files.
+%------------------------------------------------------------------------------
+%----Include axioms from all Sigma constituents
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR003+2.ax>CSR003+2.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="local_1"></A>fof(local_1,axiom,
+    s__instance(s__Creature50_1,s__Animal) ).
+
+<A NAME="local_2"></A>fof(local_2,axiom,
+    ( s__subclass(s__Reptile,s__Animal)
+   => ? [V_C1,V_C2,V_C3,V_C4,V_C5,V_C6,V_C7,V_C8,V_C9,V_C10] :
+        ( s__instance(V_C1,s__SetOrClass)
+        & s__instance(V_C2,s__SetOrClass)
+        & s__instance(V_C3,s__SetOrClass)
+        & s__instance(V_C4,s__SetOrClass)
+        & s__instance(V_C5,s__SetOrClass)
+        & s__instance(V_C6,s__SetOrClass)
+        & s__instance(V_C7,s__SetOrClass)
+        & s__instance(V_C8,s__SetOrClass)
+        & s__instance(V_C9,s__SetOrClass)
+        & s__instance(V_C10,s__SetOrClass)
+        & s__subclass(V_C1,V_C2)
+        & s__subclass(V_C2,V_C3)
+        & s__subclass(V_C3,V_C4)
+        & s__subclass(V_C4,V_C5)
+        & s__subclass(V_C5,V_C6)
+        & s__subclass(V_C6,V_C7)
+        & s__subclass(V_C7,V_C8)
+        & s__subclass(V_C8,V_C9)
+        & s__subclass(V_C9,V_C10)
+        & s__subclass(V_C10,s__Reptile)
+        & s__instance(s__Creature50_1,V_C1) ) ) ).
+
+<A NAME="prove_from_SUMO_MILO"></A>fof(prove_from_SUMO_MILO,conjecture,
+    s__instance(s__Creature50_1,s__Reptile) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

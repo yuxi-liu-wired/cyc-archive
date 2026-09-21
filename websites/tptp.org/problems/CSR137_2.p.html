@@ -1,0 +1,334 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR137^2.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR137^2.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR137^2 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR137^2" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR137^2 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Feelings from people to Bill and Anna
+% Version  : Especial > Augmented > Especial.
+% English  : Do there exist relations ?R and ?Q so that ?R holds between a 
+%            person ?Y and Bill and ?Q between ?Y and Anna. 
+
+% Refs     : [Ben10] Benzmueller (2010), Email to Geoff Sutcliffe
+% Source   : [Ben10]
+% Names    : rv_3.tq_SUMO_sine [Ben10]
+
+% Status   : Theorem
+% Rating   : 0.25 v9.3.0, 0.33 v9.1.0, 0.25 v9.0.0, 0.10 v8.2.0, 0.23 v8.1.0, 0.18 v7.5.0, 0.14 v7.4.0, 0.11 v7.2.0, 0.00 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.33 v6.3.0, 0.40 v6.2.0, 0.43 v6.1.0, 0.71 v6.0.0, 0.29 v5.5.0, 0.50 v5.4.0, 0.60 v5.2.0, 0.40 v5.1.0, 0.60 v5.0.0, 0.40 v4.1.0
+% Syntax   : Number of formulae    :   71 (  17 unt;  26 typ;   0 def)
+%            Number of atoms       :   86 (   2 equ;  10 cnn)
+%            Maximal formula atoms :    4 (   1 avg)
+%            Number of connectives :  188 (  10   ~;   2   |;  11   &; 152   @)
+%                                         (   2 &lt;=>;  11  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   5 avg)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :   40 (  40   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of symbols     :   27 (  25 usr;  14 con; 0-3 aty)
+%            Number of variables   :   40 (   0   ^;  36   !;   4   ?;  40   :)
+% SPC      : TH0_THM_EQU_NAR_NDT
+
+% Comments : This is a simple test problem for reasoning in/about SUMO.
+%            Initally the problem has been hand generated in KIF syntax in
+%            SigmaKEE and then automatically translated by Benzmueller's
+%            KIF2TH0 translator into THF syntax.
+%          : The translation has been applied in two modes: local and SInE.
+%            The local mode only translates the local assumptions and the
+%            query. The SInE mode additionally translates the SInE-extract
+%            of the loaded knowledge base (usually SUMO).
+%          : The examples are selected to illustrate the benefits of
+%            higher-order reasoning in ontology reasoning.
+%          : Note that the universal predicates are excluded for ?R and Q? 
+%            with the second and third conjuncts in the query.
+%------------------------------------------------------------------------------
+%----The extracted signature
+<A NAME="numbers"></A>thf(numbers,type,
+    num: $tType ).
+
+<A NAME="attribute_THFTYPE_i"></A>thf(attribute_THFTYPE_i,type,
+    attribute_THFTYPE_i: $i ).
+
+<A NAME="domain_THFTYPE_IIiioIiioI"></A>thf(domain_THFTYPE_IIiioIiioI,type,
+    domain_THFTYPE_IIiioIiioI: ( $i > $i > $o ) > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IiiioI"></A>thf(domain_THFTYPE_IiiioI,type,
+    domain_THFTYPE_IiiioI: $i > $i > $i > $o ).
+
+<A NAME="equal_THFTYPE_i"></A>thf(equal_THFTYPE_i,type,
+    equal_THFTYPE_i: $i ).
+
+<A NAME="holdsDuring_THFTYPE_IiooI"></A>thf(holdsDuring_THFTYPE_IiooI,type,
+    holdsDuring_THFTYPE_IiooI: $i > $o > $o ).
+
+<A NAME="instance_THFTYPE_IIiioIioI"></A>thf(instance_THFTYPE_IIiioIioI,type,
+    instance_THFTYPE_IIiioIioI: ( $i > $i > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiooIioI"></A>thf(instance_THFTYPE_IIiooIioI,type,
+    instance_THFTYPE_IIiooIioI: ( $i > $o > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IiioI"></A>thf(instance_THFTYPE_IiioI,type,
+    instance_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="lAnna_THFTYPE_i"></A>thf(lAnna_THFTYPE_i,type,
+    lAnna_THFTYPE_i: $i ).
+
+<A NAME="lAsymmetricRelation_THFTYPE_i"></A>thf(lAsymmetricRelation_THFTYPE_i,type,
+    lAsymmetricRelation_THFTYPE_i: $i ).
+
+<A NAME="lBen_THFTYPE_i"></A>thf(lBen_THFTYPE_i,type,
+    lBen_THFTYPE_i: $i ).
+
+<A NAME="lBill_THFTYPE_i"></A>thf(lBill_THFTYPE_i,type,
+    lBill_THFTYPE_i: $i ).
+
+<A NAME="lBinaryPredicate_THFTYPE_i"></A>thf(lBinaryPredicate_THFTYPE_i,type,
+    lBinaryPredicate_THFTYPE_i: $i ).
+
+<A NAME="lBob_THFTYPE_i"></A>thf(lBob_THFTYPE_i,type,
+    lBob_THFTYPE_i: $i ).
+
+<A NAME="lMary_THFTYPE_i"></A>thf(lMary_THFTYPE_i,type,
+    lMary_THFTYPE_i: $i ).
+
+<A NAME="lOrganism_THFTYPE_i"></A>thf(lOrganism_THFTYPE_i,type,
+    lOrganism_THFTYPE_i: $i ).
+
+<A NAME="lSue_THFTYPE_i"></A>thf(lSue_THFTYPE_i,type,
+    lSue_THFTYPE_i: $i ).
+
+<A NAME="likes_THFTYPE_IiioI"></A>thf(likes_THFTYPE_IiioI,type,
+    likes_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="n1_THFTYPE_i"></A>thf(n1_THFTYPE_i,type,
+    n1_THFTYPE_i: $i ).
+
+<A NAME="n2_THFTYPE_i"></A>thf(n2_THFTYPE_i,type,
+    n2_THFTYPE_i: $i ).
+
+<A NAME="parent_THFTYPE_IiioI"></A>thf(parent_THFTYPE_IiioI,type,
+    parent_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="range_THFTYPE_IiioI"></A>thf(range_THFTYPE_IiioI,type,
+    range_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="subclass_THFTYPE_IiioI"></A>thf(subclass_THFTYPE_IiioI,type,
+    subclass_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="subrelation_THFTYPE_IIioIIioIoI"></A>thf(subrelation_THFTYPE_IIioIIioIoI,type,
+    subrelation_THFTYPE_IIioIIioIoI: ( $i > $o ) > ( $i > $o ) > $o ).
+
+<A NAME="subrelation_THFTYPE_IiioI"></A>thf(subrelation_THFTYPE_IiioI,type,
+    subrelation_THFTYPE_IiioI: $i > $i > $o ).
+
+%----The translated axioms
+<A NAME="ax"></A>thf(ax,axiom,
+    likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_001"></A>thf(ax_001,axiom,
+    likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_002"></A>thf(ax_002,axiom,
+    (~) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lMary_THFTYPE_i ) ).
+
+<A NAME="ax_003"></A>thf(ax_003,axiom,
+    (~) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lMary_THFTYPE_i ) ).
+
+%KIF documentation:(documentation instance EnglishLanguage "An object is an &%instance of a &%SetOrClass if it is included in that &%SetOrClass. An individual may be an instance of many classes, some of which may be subclasses of others. Thus, there is no assumption in the meaning of &%instance about specificity or uniqueness.")
+%KIF documentation:(documentation range EnglishLanguage "Gives the range of a function. In other words, (&%range ?FUNCTION ?CLASS) means that all of the values assigned by ?FUNCTION are &%instances of ?CLASS.")
+%KIF documentation:(documentation EnglishLanguage EnglishLanguage "A Germanic language that incorporates many roots from the Romance languages. It is the official language of the &%UnitedStates, the &%UnitedKingdom, and many other countries.")
+<A NAME="ax_004"></A>thf(ax_004,axiom,
+    parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lAnna_THFTYPE_i ).
+
+<A NAME="ax_005"></A>thf(ax_005,axiom,
+    parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lAnna_THFTYPE_i ).
+
+<A NAME="ax_006"></A>thf(ax_006,axiom,
+    ! [X: $i,Y: $i,Z: $i] :
+      ( ( ( subclass_THFTYPE_IiioI @ X @ Y )
+        & ( instance_THFTYPE_IiioI @ Z @ X ) )
+     => ( instance_THFTYPE_IiioI @ Z @ Y ) ) ).
+
+<A NAME="ax_007"></A>thf(ax_007,axiom,
+    parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBen_THFTYPE_i ).
+
+<A NAME="ax_008"></A>thf(ax_008,axiom,
+    parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBen_THFTYPE_i ).
+
+<A NAME="ax_009"></A>thf(ax_009,axiom,
+    ! [CLASS1: $i,CLASS2: $i] :
+      ( ( CLASS1 = CLASS2 )
+     => ! [THING: $i] :
+          ( ( instance_THFTYPE_IiioI @ THING @ CLASS1 )
+        &lt;=> ( instance_THFTYPE_IiioI @ THING @ CLASS2 ) ) ) ).
+
+%KIF documentation:(documentation equal EnglishLanguage "(equal ?ENTITY1 ?ENTITY2) is true just in case ?ENTITY1 is identical with ?ENTITY2.")
+%KIF documentation:(documentation AsymmetricRelation EnglishLanguage "A &%BinaryRelation is asymmetric if and only if it is both an &%AntisymmetricRelation and an &%IrreflexiveRelation.")
+<A NAME="ax_010"></A>thf(ax_010,axiom,
+    (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBen_THFTYPE_i ) ).
+
+<A NAME="ax_011"></A>thf(ax_011,axiom,
+    (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBen_THFTYPE_i ) ).
+
+<A NAME="ax_012"></A>thf(ax_012,axiom,
+    parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lAnna_THFTYPE_i ).
+
+<A NAME="ax_013"></A>thf(ax_013,axiom,
+    parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lAnna_THFTYPE_i ).
+
+<A NAME="ax_014"></A>thf(ax_014,axiom,
+    ! [REL2: $i > $o,ROW: $i,REL1: $i > $o] :
+      ( ( ( subrelation_THFTYPE_IIioIIioIoI @ REL1 @ REL2 )
+        & ( REL1 @ ROW ) )
+     => ( REL2 @ ROW ) ) ).
+
+%KIF documentation:(documentation subrelation EnglishLanguage "(&%subrelation ?REL1 ?REL2) means that every tuple of ?REL1 is also a tuple of ?REL2. In other words, if the &%Relation ?REL1 holds for some arguments arg_1, arg_2, ... arg_n, then the &%Relation ?REL2 holds for the same arguments. A consequence of this is that a &%Relation and its subrelations must have the same &%valence.")
+<A NAME="ax_015"></A>thf(ax_015,axiom,
+    ! [ORGANISM: $i] :
+      ( ( instance_THFTYPE_IiioI @ ORGANISM @ lOrganism_THFTYPE_i )
+     => ? [PARENT: $i] : ( parent_THFTYPE_IiioI @ ORGANISM @ PARENT ) ) ).
+
+<A NAME="ax_016"></A>thf(ax_016,axiom,
+    ! [TIME: $i,SITUATION: $o] :
+      ( ( holdsDuring_THFTYPE_IiooI @ TIME @ ( (~) @ SITUATION ) )
+     => ( (~) @ ( holdsDuring_THFTYPE_IiooI @ TIME @ SITUATION ) ) ) ).
+
+%KIF documentation:(documentation holdsDuring EnglishLanguage "(&%holdsDuring ?TIME ?FORMULA) means that the proposition denoted by ?FORMULA is true in the time frame ?TIME. Note that this implies that ?FORMULA is true at every &%TimePoint which is a &%temporalPart of ?TIME.")
+<A NAME="ax_017"></A>thf(ax_017,axiom,
+    likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_018"></A>thf(ax_018,axiom,
+    likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_019"></A>thf(ax_019,axiom,
+    ! [THING2: $i,THING1: $i] :
+      ( ( THING1 = THING2 )
+     => ! [CLASS: $i] :
+          ( ( instance_THFTYPE_IiioI @ THING1 @ CLASS )
+        &lt;=> ( instance_THFTYPE_IiioI @ THING2 @ CLASS ) ) ) ).
+
+<A NAME="ax_020"></A>thf(ax_020,axiom,
+    ! [CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( range_THFTYPE_IiioI @ REL @ CLASS1 )
+        & ( range_THFTYPE_IiioI @ REL @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+%KIF documentation:(documentation domain EnglishLanguage "Provides a computationally and heuristically convenient mechanism for declaring the argument types of a given relation. The formula (&%domain ?REL ?INT ?CLASS) means that the ?INT'th element of each tuple in the relation ?REL must be an instance of ?CLASS. Specifying argument types is very helpful in maintaining ontologies. Representation systems can use these specifications to classify terms and check integrity constraints. If the restriction on the argument type of a &%Relation is not captured by a &%SetOrClass already defined in the ontology, one can specify a &%SetOrClass compositionally with the functions &%UnionFn, &%IntersectionFn, etc.")
+<A NAME="ax_021"></A>thf(ax_021,axiom,
+    likes_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_022"></A>thf(ax_022,axiom,
+    likes_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBill_THFTYPE_i ).
+
+%KIF documentation:(documentation attribute EnglishLanguage "(&%attribute ?OBJECT ?PROPERTY) means that ?PROPERTY is a &%Attribute of ?OBJECT. For example, (&%attribute &%MyLittleRedWagon &%Red).")
+%KIF documentation:(documentation Organism EnglishLanguage "Generally, a living individual, including all &%Plants and &%Animals.")
+<A NAME="ax_023"></A>thf(ax_023,axiom,
+    ! [CLASS: $i,CHILD: $i,PARENT: $i] :
+      ( ( ( parent_THFTYPE_IiioI @ CHILD @ PARENT )
+        & ( subclass_THFTYPE_IiioI @ CLASS @ lOrganism_THFTYPE_i )
+        & ( instance_THFTYPE_IiioI @ PARENT @ CLASS ) )
+     => ( instance_THFTYPE_IiioI @ CHILD @ CLASS ) ) ).
+
+%KIF documentation:(documentation BinaryPredicate EnglishLanguage "A &%Predicate relating two items - its valence is two.")
+<A NAME="ax_024"></A>thf(ax_024,axiom,
+    ! [REL2: $i,CLASS1: $i,REL1: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ REL1 @ REL2 )
+        & ( range_THFTYPE_IiioI @ REL2 @ CLASS1 ) )
+     => ( range_THFTYPE_IiioI @ REL1 @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation subclass EnglishLanguage "(&%subclass ?CLASS1 ?CLASS2) means that ?CLASS1 is a subclass of ?CLASS2, i.e. every instance of ?CLASS1 is also an instance of ?CLASS2. A class may have multiple superclasses and subclasses.")
+<A NAME="ax_025"></A>thf(ax_025,axiom,
+    (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lAnna_THFTYPE_i ) ).
+
+<A NAME="ax_026"></A>thf(ax_026,axiom,
+    (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lAnna_THFTYPE_i ) ).
+
+%KIF documentation:(documentation documentation EnglishLanguage "A relation between objects in the domain of discourse and strings of natural language text stated in a particular &%HumanLanguage. The domain of &%documentation is not constants (names), but the objects themselves. This means that one does not quote the names when associating them with their documentation.")
+<A NAME="ax_027"></A>thf(ax_027,axiom,
+    parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBen_THFTYPE_i ).
+
+<A NAME="ax_028"></A>thf(ax_028,axiom,
+    ! [NUMBER: $i,CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( domain_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS1 )
+        & ( domain_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+<A NAME="ax_029"></A>thf(ax_029,axiom,
+    parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBen_THFTYPE_i ).
+
+<A NAME="ax_030"></A>thf(ax_030,axiom,
+    ! [NUMBER: $i,PRED1: $i,CLASS1: $i,PRED2: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ PRED1 @ PRED2 )
+        & ( domain_THFTYPE_IiiioI @ PRED2 @ NUMBER @ CLASS1 ) )
+     => ( domain_THFTYPE_IiiioI @ PRED1 @ NUMBER @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation parent EnglishLanguage "The general relationship of parenthood. (&%parent ?CHILD ?PARENT) means that ?PARENT is a biological parent of ?CHILD.")
+<A NAME="ax_031"></A>thf(ax_031,axiom,
+    instance_THFTYPE_IIiioIioI @ parent_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_032"></A>thf(ax_032,axiom,
+    instance_THFTYPE_IIiioIioI @ range_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_033"></A>thf(ax_033,axiom,
+    instance_THFTYPE_IIiioIioI @ range_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_034"></A>thf(ax_034,axiom,
+    instance_THFTYPE_IIiioIioI @ parent_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_035"></A>thf(ax_035,axiom,
+    domain_THFTYPE_IIiioIiioI @ parent_THFTYPE_IiioI @ n1_THFTYPE_i @ lOrganism_THFTYPE_i ).
+
+<A NAME="ax_036"></A>thf(ax_036,axiom,
+    instance_THFTYPE_IIiooIioI @ holdsDuring_THFTYPE_IiooI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_037"></A>thf(ax_037,axiom,
+    domain_THFTYPE_IIiioIiioI @ parent_THFTYPE_IiioI @ n2_THFTYPE_i @ lOrganism_THFTYPE_i ).
+
+<A NAME="ax_038"></A>thf(ax_038,axiom,
+    instance_THFTYPE_IIiioIioI @ subrelation_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_039"></A>thf(ax_039,axiom,
+    instance_THFTYPE_IiioI @ equal_THFTYPE_i @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_040"></A>thf(ax_040,axiom,
+    instance_THFTYPE_IIiioIioI @ subclass_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_041"></A>thf(ax_041,axiom,
+    instance_THFTYPE_IiioI @ attribute_THFTYPE_i @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_042"></A>thf(ax_042,axiom,
+    instance_THFTYPE_IIiioIioI @ instance_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_043"></A>thf(ax_043,axiom,
+    instance_THFTYPE_IIiooIioI @ holdsDuring_THFTYPE_IiooI @ lBinaryPredicate_THFTYPE_i ).
+
+%----The translated conjecture
+<A NAME="con"></A>thf(con,conjecture,
+    ? [Q: $i > $i > $o,R: $i > $i > $o,Y: $i] :
+      ( ( R @ Y @ lBill_THFTYPE_i )
+      & ( Q @ Y @ lAnna_THFTYPE_i )
+      & ( (~)
+        @ ! [A: $i,B: $i] : ( R @ A @ B ) )
+      & ( (~)
+        @ ! [A: $i,B: $i] : ( Q @ A @ B ) ) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

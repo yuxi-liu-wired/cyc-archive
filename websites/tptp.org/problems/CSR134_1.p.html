@@ -1,0 +1,136 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR134^1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR134^1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR134^1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR134^1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR134^1 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : In 2009, what are different feelings of people to Anna?
+% Version  : Especial.
+% English  : In the context of year 2009: Does there exists a relation ?R and 
+%            persons ?X and ?Y so that ?R holds between ?X and Anna but not 
+%            between ?Y and Anna.
+
+% Refs     : [Ben10] Benzmueller (2010), Email to Geoff Sutcliffe
+% Source   : [Ben10]
+% Names    : ef_rv_6.tq_SUMO_local [Ben10]
+
+% Status   : Theorem
+% Rating   : 0.22 v9.3.0, 0.17 v9.1.0, 0.25 v9.0.0, 0.17 v8.2.0, 0.18 v8.1.0, 0.33 v7.3.0, 0.30 v7.2.0, 0.38 v7.1.0, 0.43 v7.0.0, 0.38 v6.4.0, 0.43 v6.3.0, 0.50 v6.1.0, 0.67 v6.0.0, 0.33 v5.5.0, 0.40 v5.4.0, 0.50 v5.1.0, 0.75 v5.0.0, 0.50 v4.1.0
+% Syntax   : Number of formulae    :   23 (   0 unt;  12 typ;   0 def)
+%            Number of atoms       :   25 (   0 equ;   4 cnn)
+%            Maximal formula atoms :    3 (   2 avg)
+%            Number of connectives :   66 (   4   ~;   0   |;   1   &;  61   @)
+%                                         (   0 &lt;=>;   0  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :    9 (   5 avg)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :    9 (   9   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of symbols     :   12 (  11 usr;   8 con; 0-2 aty)
+%            Number of variables   :    3 (   0   ^;   0   !;   3   ?;   3   :)
+% SPC      : TH0_THM_NEQ_NAR_NDT
+
+% Comments : This is a simple test problem for reasoning in/about SUMO.
+%            Initally the problem has been hand generated in KIF syntax in
+%            SigmaKEE and then automatically translated by Benzmueller's
+%            KIF2TH0 translator into THF syntax.
+%          : The translation has been applied in two modes: local and SInE.
+%            The local mode only translates the local assumptions and the
+%            query. The SInE mode additionally translates the SInE-extract
+%            of the loaded knowledge base (usually SUMO).
+%          : The examples are selected to illustrate the benefits of
+%            higher-order reasoning in ontology reasoning.
+%------------------------------------------------------------------------------
+%----The extracted signature
+<A NAME="numbers"></A>thf(numbers,type,
+    num: $tType ).
+
+<A NAME="holdsDuring_THFTYPE_IiooI"></A>thf(holdsDuring_THFTYPE_IiooI,type,
+    holdsDuring_THFTYPE_IiooI: $i > $o > $o ).
+
+<A NAME="lAnna_THFTYPE_i"></A>thf(lAnna_THFTYPE_i,type,
+    lAnna_THFTYPE_i: $i ).
+
+<A NAME="lBen_THFTYPE_i"></A>thf(lBen_THFTYPE_i,type,
+    lBen_THFTYPE_i: $i ).
+
+<A NAME="lBill_THFTYPE_i"></A>thf(lBill_THFTYPE_i,type,
+    lBill_THFTYPE_i: $i ).
+
+<A NAME="lBob_THFTYPE_i"></A>thf(lBob_THFTYPE_i,type,
+    lBob_THFTYPE_i: $i ).
+
+<A NAME="lMary_THFTYPE_i"></A>thf(lMary_THFTYPE_i,type,
+    lMary_THFTYPE_i: $i ).
+
+<A NAME="lSue_THFTYPE_i"></A>thf(lSue_THFTYPE_i,type,
+    lSue_THFTYPE_i: $i ).
+
+<A NAME="lYearFn_THFTYPE_IiiI"></A>thf(lYearFn_THFTYPE_IiiI,type,
+    lYearFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="likes_THFTYPE_IiioI"></A>thf(likes_THFTYPE_IiioI,type,
+    likes_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="n2009_THFTYPE_i"></A>thf(n2009_THFTYPE_i,type,
+    n2009_THFTYPE_i: $i ).
+
+<A NAME="parent_THFTYPE_IiioI"></A>thf(parent_THFTYPE_IiioI,type,
+    parent_THFTYPE_IiioI: $i > $i > $o ).
+
+%----The translated axioms
+<A NAME="ax"></A>thf(ax,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lAnna_THFTYPE_i ) ).
+
+<A NAME="ax_001"></A>thf(ax_001,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBen_THFTYPE_i ) ).
+
+<A NAME="ax_002"></A>thf(ax_002,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lAnna_THFTYPE_i ) ) ).
+
+<A NAME="ax_003"></A>thf(ax_003,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lBill_THFTYPE_i ) ).
+
+<A NAME="ax_004"></A>thf(ax_004,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( likes_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBill_THFTYPE_i ) ).
+
+<A NAME="ax_005"></A>thf(ax_005,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( (~) @ ( parent_THFTYPE_IiioI @ lBob_THFTYPE_i @ lBen_THFTYPE_i ) ) ).
+
+<A NAME="ax_006"></A>thf(ax_006,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBill_THFTYPE_i ) ).
+
+<A NAME="ax_007"></A>thf(ax_007,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( parent_THFTYPE_IiioI @ lSue_THFTYPE_i @ lAnna_THFTYPE_i ) ).
+
+<A NAME="ax_008"></A>thf(ax_008,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( parent_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBen_THFTYPE_i ) ).
+
+<A NAME="ax_009"></A>thf(ax_009,axiom,
+    holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i ) @ ( (~) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ lMary_THFTYPE_i ) ) ).
+
+%----The translated conjecture
+<A NAME="con"></A>thf(con,conjecture,
+    ? [R: $i > $i > $o,X: $i,Y: $i] :
+      ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i )
+      @ ( ( R @ X @ lAnna_THFTYPE_i )
+        & ( (~) @ ( R @ Y @ lAnna_THFTYPE_i ) ) ) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

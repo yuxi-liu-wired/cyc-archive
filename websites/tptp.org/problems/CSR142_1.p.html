@@ -1,0 +1,98 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR142^1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR142^1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR142^1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR142^1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR142^1 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Who is the husband of Corina?
+% Version  : Especial.
+% English  : Corina is the wife of Chris. Who is the husband of Corina?
+
+% Refs     : [Ben10] Benzmueller (2010), Email to Geoff Sutcliffe
+% Source   : [Ben10]
+% Names    : ex_1.tq_SUMO_handselected [Ben10]
+
+% Status   : Theorem
+% Rating   : 0.00 v8.1.0, 0.08 v7.4.0, 0.00 v6.1.0, 0.50 v6.0.0, 0.00 v5.3.0, 0.25 v5.2.0, 0.00 v5.1.0, 0.25 v5.0.0, 0.00 v4.1.0
+% Syntax   : Number of formulae    :   10 (   3 unt;   6 typ;   0 def)
+%            Number of atoms       :    6 (   0 equ;   0 cnn)
+%            Maximal formula atoms :    3 (   1 avg)
+%            Number of connectives :   14 (   0   ~;   0   |;   0   &;  12   @)
+%                                         (   1 &lt;=>;   1  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :    9 (   5 avg)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :   14 (  14   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of symbols     :    5 (   5 usr;   2 con; 0-2 aty)
+%            Number of variables   :    5 (   0   ^;   4   !;   1   ?;   5   :)
+% SPC      : TH0_THM_NEQ_NAR_NDT
+
+% Comments : This is a simple test problem for reasoning in/about SUMO.
+%            Initally the problem has been hand generated in KIF syntax in
+%            SigmaKEE and then automatically translated by Benzmueller's
+%            KIF2TH0 translator into THF syntax.
+%          : The translation has been applied in three modes: handselected,
+%            SInE, and local. The local mode only translates the local
+%            assumptions and the query. The SInE mode additionally translates
+%            the SInE extract of the loaded knowledge base (usually SUMO). The
+%            handselected mode contains a hand-selected relevant axioms.
+%          : The examples are selected to illustrate the benefits of
+%            higher-order reasoning in ontology reasoning.
+%------------------------------------------------------------------------------
+%----The extracted signature
+<A NAME="numbers"></A>thf(numbers,type,
+    num: $tType ).
+
+<A NAME="husband_THFTYPE_IiioI"></A>thf(husband_THFTYPE_IiioI,type,
+    husband_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="lChris_THFTYPE_i"></A>thf(lChris_THFTYPE_i,type,
+    lChris_THFTYPE_i: $i ).
+
+<A NAME="lCorina_THFTYPE_i"></A>thf(lCorina_THFTYPE_i,type,
+    lCorina_THFTYPE_i: $i ).
+
+<A NAME="wife_THFTYPE_IiioI"></A>thf(wife_THFTYPE_IiioI,type,
+    wife_THFTYPE_IiioI: $i > $i > $o ).
+
+%----The handselected axioms from the knowledge base
+<A NAME="inverse_THFTYPE_IIiioIIiioIoI"></A>thf(inverse_THFTYPE_IIiioIIiioIoI,type,
+    inverse_THFTYPE_IIiioIIiioIoI: ( $i > $i > $o ) > ( $i > $i > $o ) > $o ).
+
+<A NAME="ax"></A>thf(ax,axiom,
+    inverse_THFTYPE_IIiioIIiioIoI @ husband_THFTYPE_IiioI @ wife_THFTYPE_IiioI ).
+
+<A NAME="ax_001"></A>thf(ax_001,axiom,
+    ! [REL2: $i > $i > $o,REL1: $i > $i > $o] :
+      ( ( inverse_THFTYPE_IIiioIIiioIoI @ REL1 @ REL2 )
+     => ! [INST1: $i,INST2: $i] :
+          ( ( REL1 @ INST1 @ INST2 )
+        &lt;=> ( REL2 @ INST2 @ INST1 ) ) ) ).
+
+%----The translated axioms
+<A NAME="ax_002"></A>thf(ax_002,axiom,
+    wife_THFTYPE_IiioI @ lCorina_THFTYPE_i @ lChris_THFTYPE_i ).
+
+%----The translated conjectures
+<A NAME="con"></A>thf(con,conjecture,
+    ? [X: $i] : ( husband_THFTYPE_IiioI @ X @ lCorina_THFTYPE_i ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

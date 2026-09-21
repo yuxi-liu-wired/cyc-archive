@@ -1,0 +1,110 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Axioms File: CSR001+2.ax</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPWorld.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Axioms File: <TT>CSR001+2.ax</TT></H2></CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001+2 : TPTP v9.3.1. Bugfixed v3.1.0.
+% Domain   : Commonsense Reasoning
+% Axioms   : Supermarket trolley scenario
+% Version  : [Sha97] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Sha97>Sha97</a>] Shanahan (1997), Solving the Frame Problem
+% Source   : [Sha97]
+% Names    :
+
+% Status   : Satisfiable
+% Syntax   : Number of formulae    :    8 (   5 unt;   0 def)
+%            Number of atoms       :   43 (  30 equ)
+%            Maximal formula atoms :   19 (   5 avg)
+%            Number of connectives :   46 (  11   ~;  10   |;  22   &)
+%                                         (   3 &lt;=>;   0  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   13 (   6 avg)
+%            Maximal term depth    :    1 (   1 avg)
+%            Number of predicates  :    5 (   4 usr;   0 prp; 2-3 aty)
+%            Number of functors    :    8 (   8 usr;   8 con; 0-0 aty)
+%            Number of variables   :   11 (  11   !;   0   ?)
+% SPC      : FOF_SAT_RFO_SEQ
+
+% Comments : Requires CSR001+0.ax
+%------------------------------------------------------------------------------
+<A NAME="initiates_all_defn"></A>fof(initiates_all_defn,axiom,
+    ! [Event,Fluent,Time] :
+      ( initiates(Event,Fluent,Time)
+    &lt;=> ( ( Event = push
+          & Fluent = forwards
+          & ~ happens(pull,Time) )
+        | ( Event = pull
+          & Fluent = backwards
+          & ~ happens(push,Time) )
+        | ( Event = pull
+          & Fluent = spinning
+          & happens(push,Time) ) ) ) ).
+
+<A NAME="terminates_all_defn"></A>fof(terminates_all_defn,axiom,
+    ! [Event,Fluent,Time] :
+      ( terminates(Event,Fluent,Time)
+    &lt;=> ( ( Event = push
+          & Fluent = backwards
+          & ~ happens(pull,Time) )
+        | ( Event = pull
+          & Fluent = forwards
+          & ~ happens(push,Time) )
+        | ( Event = pull
+          & Fluent = forwards
+          & happens(push,Time) )
+        | ( Event = pull
+          & Fluent = backwards
+          & happens(push,Time) )
+        | ( Event = push
+          & Fluent = spinning
+          & ~ happens(pull,Time) )
+        | ( Event = pull
+          & Fluent = spinning
+          & ~ happens(push,Time) ) ) ) ).
+
+<A NAME="releases_all_defn"></A>fof(releases_all_defn,axiom,
+    ! [Event,Fluent,Time] : ~ releases(Event,Fluent,Time) ).
+
+<A NAME="happens_all_defn"></A>fof(happens_all_defn,axiom,
+    ! [Event,Time] :
+      ( happens(Event,Time)
+    &lt;=> ( ( Event = push
+          & Time = n0 )
+        | ( Event = pull
+          & Time = n1 )
+        | ( Event = pull
+          & Time = n2 )
+        | ( Event = push
+          & Time = n2 ) ) ) ).
+
+%----Distinct events
+<A NAME="push_not_pull"></A>fof(push_not_pull,axiom,
+    push != pull ).
+
+%----Distinct fluents
+<A NAME="forwards_not_backwards"></A>fof(forwards_not_backwards,axiom,
+    forwards != backwards ).
+
+<A NAME="forwards_not_spinning"></A>fof(forwards_not_spinning,axiom,
+    forwards != spinning ).
+
+<A NAME="spinning_not_backwards"></A>fof(spinning_not_backwards,axiom,
+    spinning != backwards ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

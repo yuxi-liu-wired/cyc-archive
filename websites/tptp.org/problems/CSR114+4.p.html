@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR114+4.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR114+4.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR114+4 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR114%2B4" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR114+4 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : In which Italian city can you find the Colosseum?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_004_insicht_3_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.30 v9.1.0, 0.33 v9.0.0, 0.19 v8.2.0, 0.20 v8.1.0, 0.21 v7.5.0, 0.29 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.23 v6.2.0, 0.36 v6.1.0, 0.52 v6.0.0, 0.50 v5.4.0, 0.48 v5.3.0, 0.57 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.50 v4.0.1, 0.47 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10878 (   0 equ)
+%            Maximal formula atoms :  171 (   1 avg)
+%            Number of connectives :  689 (   0   ~;  18   |; 545   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  171 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   90 (  90 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16661 (16661 usr;16660 con; 0-2 aty)
+%            Number of variables   :  473 ( 405   !;  68   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_004_insicht_3"></A>fof(synth_qa07_004_insicht_3,conjecture,
+    ? [X0,X1,X2,X3,X4] :
+      ( in(X2,X0)
+      & attr(X0,X1)
+      & loc(X4,X2)
+      & scar(X4,X3)
+      & sub(X1,name_1_1)
+      & sub(X0,stadt__1_1)
+      & sub(X3,kolosseum_1_1)
+      & subs(X4,stehen_1_1)
+      & val(X1,rom_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_004_insicht_3"></A>fof(ave07_era5_synth_qa07_004_insicht_3,hypothesis,
+    ( chsp2(bekommen_1_1,c0)
+    & attch(c12058,c7)
+    & attr(c12058,c12059)
+    & sub(c12058,stadt__1_1)
+    & sub(c12059,name_1_1)
+    & val(c12059,verona_0)
+    & modp(c12087,zwei_1_1,c0)
+    & arg1(c12093,c7)
+    & arg2(c12093,c12602)
+    & assoc(c12093,c12583)
+    & semrel(c12093,c16)
+    & subr(c12093,equ_0)
+    & loc(c12583,c12608)
+    & sub(c12583,kolosseum_1_1)
+    & attr(c12594,c12595)
+    & sub(c12594,stadt__1_1)
+    & sub(c12595,name_1_1)
+    & val(c12595,rom_0)
+    & prop(c12602,c0)
+    & prop(c12602,c12605)
+    & sub(c12602,amphi_theater_1_1)
+    & supl(c12605,zweitgro__337_1_1,c12606)
+    & in(c12608,c12594)
+    & arg1(c16,c7)
+    & arg2(c16,c7)
+    & subr(c16,sub_0)
+    & equ(c7,c12602)
+    & prop(c7,c12087)
+    & prop(c7,r__366misch__1_1)
+    & sub(c7,amphi_theater_1_1)
+    & sub(c7,arena__1_1)
+    & sub(c7,c7)
+    & sort(bekommen_1_1,dn)
+    & fact(bekommen_1_1,real)
+    & gener(bekommen_1_1,ge)
+    & sort(c0,tq)
+    & sort(c12058,d)
+    & sort(c12058,io)
+    & card(c12058,int1)
+    & etype(c12058,int0)
+    & fact(c12058,real)
+    & gener(c12058,sp)
+    & quant(c12058,one)
+    & refer(c12058,det)
+    & varia(c12058,con)
+    & sort(c7,d)
+    & card(c7,int1)
+    & etype(c7,int0)
+    & fact(c7,real)
+    & gener(c7,sp)
+    & quant(c7,one)
+    & refer(c7,det)
+    & varia(c7,con)
+    & sort(c12059,na)
+    & card(c12059,int1)
+    & etype(c12059,int0)
+    & fact(c12059,real)
+    & gener(c12059,sp)
+    & quant(c12059,one)
+    & refer(c12059,indet)
+    & varia(c12059,varia_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(verona_0,fe)
+    & sort(c12087,tq)
+    & sort(zwei_1_1,nq)
+    & sort(c12093,st)
+    & fact(c12093,real)
+    & gener(c12093,sp)
+    & sort(c12602,co)
+    & card(c12602,card_c)
+    & etype(c12602,etype_c)
+    & fact(c12602,real)
+    & gener(c12602,sp)
+    & quant(c12602,quant_c)
+    & refer(c12602,det)
+    & varia(c12602,con)
+    & sort(c12583,d)
+    & card(c12583,int1)
+    & etype(c12583,int0)
+    & fact(c12583,real)
+    & gener(c12583,sp)
+    & quant(c12583,one)
+    & refer(c12583,det)
+    & varia(c12583,con)
+    & sort(c16,st)
+    & fact(c16,real)
+    & gener(c16,sp)
+    & sort(equ_0,st)
+    & fact(equ_0,real)
+    & gener(equ_0,gener_c)
+    & sort(c12608,l)
+    & card(c12608,int1)
+    & etype(c12608,int0)
+    & fact(c12608,real)
+    & gener(c12608,sp)
+    & quant(c12608,one)
+    & refer(c12608,det)
+    & varia(c12608,con)
+    & sort(kolosseum_1_1,d)
+    & card(kolosseum_1_1,int1)
+    & etype(kolosseum_1_1,int0)
+    & fact(kolosseum_1_1,real)
+    & gener(kolosseum_1_1,sp)
+    & quant(kolosseum_1_1,one)
+    & refer(kolosseum_1_1,det)
+    & varia(kolosseum_1_1,con)
+    & sort(c12594,d)
+    & sort(c12594,io)
+    & card(c12594,int1)
+    & etype(c12594,int0)
+    & fact(c12594,real)
+    & gener(c12594,sp)
+    & quant(c12594,one)
+    & refer(c12594,det)
+    & varia(c12594,con)
+    & sort(c12595,na)
+    & card(c12595,int1)
+    & etype(c12595,int0)
+    & fact(c12595,real)
+    & gener(c12595,sp)
+    & quant(c12595,one)
+    & refer(c12595,indet)
+    & varia(c12595,varia_c)
+    & sort(rom_0,fe)
+    & sort(c12605,tq)
+    & sort(amphi_theater_1_1,o)
+    & card(amphi_theater_1_1,int1)
+    & etype(amphi_theater_1_1,int0)
+    & fact(amphi_theater_1_1,real)
+    & gener(amphi_theater_1_1,ge)
+    & quant(amphi_theater_1_1,one)
+    & refer(amphi_theater_1_1,refer_c)
+    & varia(amphi_theater_1_1,varia_c)
+    & sort(zweitgro__337_1_1,mq)
+    & sort(c12606,o)
+    & card(c12606,card_c)
+    & etype(c12606,int1)
+    & etype(c12606,int2)
+    & fact(c12606,real)
+    & gener(c12606,gener_c)
+    & quant(c12606,quant_c)
+    & refer(c12606,refer_c)
+    & varia(c12606,varia_c)
+    & sort(sub_0,st)
+    & fact(sub_0,real)
+    & gener(sub_0,gener_c)
+    & sort(r__366misch__1_1,tq)
+    & sort(arena__1_1,d)
+    & card(arena__1_1,int1)
+    & etype(arena__1_1,int0)
+    & fact(arena__1_1,real)
+    & gener(arena__1_1,ge)
+    & quant(arena__1_1,one)
+    & refer(arena__1_1,refer_c)
+    & varia(arena__1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

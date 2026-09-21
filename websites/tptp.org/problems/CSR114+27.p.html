@@ -1,0 +1,178 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR114+27.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR114+27.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR114+27 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR114%2B27" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR114+27 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : In which Italian city can you find the Colosseum?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_004_qapw_90_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.25 v9.1.0, 0.33 v9.0.0, 0.19 v8.2.0, 0.20 v8.1.0, 0.21 v7.5.0, 0.29 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.23 v6.2.0, 0.36 v6.1.0, 0.48 v6.0.0, 0.50 v5.4.0, 0.48 v5.3.0, 0.57 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.50 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10812 (   0 equ)
+%            Maximal formula atoms :  105 (   1 avg)
+%            Number of connectives :  623 (   0   ~;  18   |; 479   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  105 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   86 (  86 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16648 (16648 usr;16647 con; 0-2 aty)
+%            Number of variables   :  473 ( 405   !;  68   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_004_qapw_90"></A>fof(synth_qa07_004_qapw_90,conjecture,
+    ? [X0,X1,X2,X3,X4] :
+      ( in(X2,X0)
+      & attr(X0,X1)
+      & loc(X4,X2)
+      & scar(X4,X3)
+      & sub(X1,name_1_1)
+      & sub(X0,stadt__1_1)
+      & sub(X3,kolosseum_1_1)
+      & subs(X4,stehen_1_1)
+      & val(X1,rom_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_004_qapw_90"></A>fof(ave07_era5_synth_qa07_004_qapw_90,hypothesis,
+    ( obj(c16,c21)
+    & subs(c16,aufnehmen_1_1)
+    & loc(c21,c35)
+    & sub(c21,konzert__1_1)
+    & loc(c25,c34)
+    & sub(c25,kolosseum_1_1)
+    & attr(c31,c32)
+    & sub(c31,stadt__1_1)
+    & sub(c32,name_1_1)
+    & val(c32,rom_0)
+    & in(c34,c31)
+    & in(c35,c25)
+    & sort(c16,dn)
+    & fact(c16,real)
+    & gener(c16,sp)
+    & sort(c21,ad)
+    & sort(c21,d)
+    & sort(c21,io)
+    & card(c21,int1)
+    & etype(c21,int0)
+    & fact(c21,real)
+    & gener(c21,sp)
+    & quant(c21,one)
+    & refer(c21,det)
+    & varia(c21,con)
+    & sort(aufnehmen_1_1,dn)
+    & fact(aufnehmen_1_1,real)
+    & gener(aufnehmen_1_1,ge)
+    & sort(c35,l)
+    & card(c35,int1)
+    & etype(c35,int0)
+    & fact(c35,real)
+    & gener(c35,sp)
+    & quant(c35,one)
+    & refer(c35,det)
+    & varia(c35,con)
+    & sort(konzert__1_1,ad)
+    & sort(konzert__1_1,d)
+    & sort(konzert__1_1,io)
+    & card(konzert__1_1,int1)
+    & etype(konzert__1_1,int0)
+    & fact(konzert__1_1,real)
+    & gener(konzert__1_1,ge)
+    & quant(konzert__1_1,one)
+    & refer(konzert__1_1,refer_c)
+    & varia(konzert__1_1,varia_c)
+    & sort(c25,d)
+    & card(c25,int1)
+    & etype(c25,int0)
+    & fact(c25,real)
+    & gener(c25,sp)
+    & quant(c25,one)
+    & refer(c25,det)
+    & varia(c25,con)
+    & sort(c34,l)
+    & card(c34,int1)
+    & etype(c34,int0)
+    & fact(c34,real)
+    & gener(c34,sp)
+    & quant(c34,one)
+    & refer(c34,det)
+    & varia(c34,con)
+    & sort(kolosseum_1_1,d)
+    & card(kolosseum_1_1,int1)
+    & etype(kolosseum_1_1,int0)
+    & fact(kolosseum_1_1,real)
+    & gener(kolosseum_1_1,sp)
+    & quant(kolosseum_1_1,one)
+    & refer(kolosseum_1_1,det)
+    & varia(kolosseum_1_1,con)
+    & sort(c31,d)
+    & sort(c31,io)
+    & card(c31,int1)
+    & etype(c31,int0)
+    & fact(c31,real)
+    & gener(c31,sp)
+    & quant(c31,one)
+    & refer(c31,det)
+    & varia(c31,con)
+    & sort(c32,na)
+    & card(c32,int1)
+    & etype(c32,int0)
+    & fact(c32,real)
+    & gener(c32,sp)
+    & quant(c32,one)
+    & refer(c32,indet)
+    & varia(c32,varia_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(rom_0,fe) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

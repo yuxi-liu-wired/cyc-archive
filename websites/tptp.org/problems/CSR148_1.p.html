@@ -1,0 +1,107 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR148^1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR148^1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR148^1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR148^1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR148^1 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Is there a year in which Sue liked somebody?
+% Version  : Especial > Reduced > Especial.
+% English  : What holds that holds at all times. Mary likes Bill. During 2009 
+%            Sue liked whoever Mary liked. Is there a year in which Sue liked 
+%            somebody?
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=PS07>PS07</a>]  Pease & Sutcliffe (2007), First Order Reasoning on a L
+%          : [<a href=SeeTPTP?Category=BibTeX&File=BP10>BP10</a>]  Benzmueller & Pease (2010), Progress in Automating Hig
+%          : [Ben10] Benzmueller (2010), Email to Geoff Sutcliffe
+% Source   : [Ben10]
+% Names    : paar_4.tq_SUMO_local [Ben10]
+
+% Status   : Theorem
+% Rating   : 0.11 v9.3.0, 0.08 v9.1.0, 0.12 v9.0.0, 0.08 v8.2.0, 0.09 v8.1.0, 0.08 v7.4.0, 0.11 v7.3.0, 0.10 v7.2.0, 0.12 v7.1.0, 0.14 v7.0.0, 0.12 v6.4.0, 0.14 v6.3.0, 0.17 v6.2.0, 0.00 v6.1.0, 0.50 v6.0.0, 0.00 v5.4.0, 0.25 v5.3.0, 0.50 v5.1.0, 0.75 v5.0.0, 0.50 v4.1.0
+% Syntax   : Number of formulae    :   12 (   2 unt;   8 typ;   0 def)
+%            Number of atoms       :    7 (   0 equ;   0 cnn)
+%            Maximal formula atoms :    3 (   1 avg)
+%            Number of connectives :   18 (   0   ~;   0   |;   0   &;  16   @)
+%                                         (   0 &lt;=>;   2  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :    6 (   5 avg)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :    5 (   5   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of symbols     :    7 (   7 usr;   4 con; 0-2 aty)
+%            Number of variables   :    5 (   0   ^;   3   !;   2   ?;   5   :)
+% SPC      : TH0_THM_NEQ_NAR_NDT
+
+% Comments : This is a simple test problem for reasoning in/about SUMO.
+%            Initally the problem has been hand generated in KIF syntax in
+%            SigmaKEE and then automatically translated by Benzmueller's
+%            KIF2TH0 translator into THF syntax.
+%          : The translation has been applied in two modes: local and SInE.
+%            The local mode only translates the local assumptions and the
+%            query. The SInE mode additionally translates the SInE-extract
+%            of the loaded knowledge base (usually SUMO).
+%          : The examples are selected to illustrate the benefits of
+%            higher-order reasoning in ontology reasoning.
+%------------------------------------------------------------------------------
+%----The extracted Signature
+<A NAME="numbers"></A>thf(numbers,type,
+    num: $tType ).
+
+<A NAME="holdsDuring_THFTYPE_IiooI"></A>thf(holdsDuring_THFTYPE_IiooI,type,
+    holdsDuring_THFTYPE_IiooI: $i > $o > $o ).
+
+<A NAME="lBill_THFTYPE_i"></A>thf(lBill_THFTYPE_i,type,
+    lBill_THFTYPE_i: $i ).
+
+<A NAME="lMary_THFTYPE_i"></A>thf(lMary_THFTYPE_i,type,
+    lMary_THFTYPE_i: $i ).
+
+<A NAME="lSue_THFTYPE_i"></A>thf(lSue_THFTYPE_i,type,
+    lSue_THFTYPE_i: $i ).
+
+<A NAME="lYearFn_THFTYPE_IiiI"></A>thf(lYearFn_THFTYPE_IiiI,type,
+    lYearFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="likes_THFTYPE_IiioI"></A>thf(likes_THFTYPE_IiioI,type,
+    likes_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="n2009_THFTYPE_i"></A>thf(n2009_THFTYPE_i,type,
+    n2009_THFTYPE_i: $i ).
+
+%----The translated axioms
+<A NAME="ax"></A>thf(ax,axiom,
+    likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBill_THFTYPE_i ).
+
+<A NAME="ax_001"></A>thf(ax_001,axiom,
+    ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i )
+    @ ! [X: $i] :
+        ( ( likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ X )
+       => ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ X ) ) ) ).
+
+<A NAME="ax_002"></A>thf(ax_002,axiom,
+    ! [P: $o,Y: $i] :
+      ( P
+     => ( holdsDuring_THFTYPE_IiooI @ Y @ P ) ) ).
+
+%----The translated conjectures
+<A NAME="con"></A>thf(con,conjecture,
+    ? [X: $i,Y: $i] : ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ Y ) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ X ) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

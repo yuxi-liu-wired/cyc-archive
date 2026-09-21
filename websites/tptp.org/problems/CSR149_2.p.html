@@ -1,0 +1,1095 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR149^2.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR149^2.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR149^2 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR149^2" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR149^2 : TPTP v9.3.1. Released v4.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Elegantly, is there a year in which Sue liked somebody?
+% Version  : Especial > Reduced > Especial.
+% English  : What holds that holds at all times (elegantly expressed). Mary 
+%            likes Bill. During 2009 Sue liked whoever Mary liked. Is there a 
+%            year in which Sue liked somebody?
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=PS07>PS07</a>]  Pease & Sutcliffe (2007), First Order Reasoning on a L
+%          : [<a href=SeeTPTP?Category=BibTeX&File=BP10>BP10</a>]  Benzmueller & Pease (2010), Progress in Automating Hig
+%          : [Ben10] Benzmueller (2010), Email to Geoff Sutcliffe
+% Source   : [Ben10]
+% Names    : paar_5.tq_SUMO_sine [Ben10]
+
+% Status   : Theorem
+% Rating   : 0.33 v9.3.0, 0.22 v9.1.0, 0.25 v9.0.0, 0.20 v8.2.0, 0.31 v8.1.0, 0.18 v7.5.0, 0.14 v7.4.0, 0.22 v7.2.0, 0.12 v7.1.0, 0.25 v7.0.0, 0.43 v6.4.0, 0.50 v6.3.0, 0.60 v6.2.0, 0.43 v6.1.0, 1.00 v6.0.0, 0.57 v5.5.0, 0.50 v5.4.0, 0.80 v5.1.0, 1.00 v4.1.0
+% Syntax   : Number of formulae    :  281 ( 106 unt;  89 typ;   0 def)
+%            Number of atoms       :  319 (   9 equ;   4 cnn)
+%            Maximal formula atoms :    4 (   1 avg)
+%            Number of connectives :  687 (   4   ~;   4   |;  28   &; 610   @)
+%                                         (   6 &lt;=>;  35  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   4 avg)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :  124 ( 124   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of symbols     :   91 (  88 usr;  50 con; 0-3 aty)
+%            Number of variables   :  105 (   0   ^; 102   !;   3   ?; 105   :)
+% SPC      : TH0_THM_EQU_NAR_NDT
+
+% Comments : This is a simple test problem for reasoning in/about SUMO.
+%            Initally the problem has been hand generated in KIF syntax in
+%            SigmaKEE and then automatically translated by Benzmueller's
+%            KIF2TH0 translator into THF syntax.
+%          : The translation has been applied in two modes: local and SInE.
+%            The local mode only translates the local assumptions and the
+%            query. The SInE mode additionally translates the SInE-extract
+%            of the loaded knowledge base (usually SUMO).
+%          : The examples are selected to illustrate the benefits of
+%            higher-order reasoning in ontology reasoning.
+%------------------------------------------------------------------------------
+%----The extracted Signature
+<A NAME="numbers"></A>thf(numbers,type,
+    num: $tType ).
+
+<A NAME="agent_THFTYPE_i"></A>thf(agent_THFTYPE_i,type,
+    agent_THFTYPE_i: $i ).
+
+<A NAME="attribute_THFTYPE_i"></A>thf(attribute_THFTYPE_i,type,
+    attribute_THFTYPE_i: $i ).
+
+<A NAME="disjointRelation_THFTYPE_IiioI"></A>thf(disjointRelation_THFTYPE_IiioI,type,
+    disjointRelation_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="disjoint_THFTYPE_IiioI"></A>thf(disjoint_THFTYPE_IiioI,type,
+    disjoint_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="documentation_THFTYPE_i"></A>thf(documentation_THFTYPE_i,type,
+    documentation_THFTYPE_i: $i ).
+
+<A NAME="domainSubclass_THFTYPE_IIiioIiioI"></A>thf(domainSubclass_THFTYPE_IIiioIiioI,type,
+    domainSubclass_THFTYPE_IIiioIiioI: ( $i > $i > $o ) > $i > $i > $o ).
+
+<A NAME="domainSubclass_THFTYPE_IiiioI"></A>thf(domainSubclass_THFTYPE_IiiioI,type,
+    domainSubclass_THFTYPE_IiiioI: $i > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IIIiioIIiioIoIiioI"></A>thf(domain_THFTYPE_IIIiioIIiioIoIiioI,type,
+    domain_THFTYPE_IIIiioIIiioIoIiioI: ( ( $i > $i > $o ) > ( $i > $i > $o ) > $o ) > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IIiiIiioI"></A>thf(domain_THFTYPE_IIiiIiioI,type,
+    domain_THFTYPE_IIiiIiioI: ( $i > $i ) > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IIiiioIiioI"></A>thf(domain_THFTYPE_IIiiioIiioI,type,
+    domain_THFTYPE_IIiiioIiioI: ( $i > $i > $i > $o ) > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IIiioIiioI"></A>thf(domain_THFTYPE_IIiioIiioI,type,
+    domain_THFTYPE_IIiioIiioI: ( $i > $i > $o ) > $i > $i > $o ).
+
+<A NAME="domain_THFTYPE_IiiioI"></A>thf(domain_THFTYPE_IiiioI,type,
+    domain_THFTYPE_IiiioI: $i > $i > $i > $o ).
+
+<A NAME="duration_THFTYPE_IiioI"></A>thf(duration_THFTYPE_IiioI,type,
+    duration_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="equal_THFTYPE_i"></A>thf(equal_THFTYPE_i,type,
+    equal_THFTYPE_i: $i ).
+
+<A NAME="greaterThan_THFTYPE_i"></A>thf(greaterThan_THFTYPE_i,type,
+    greaterThan_THFTYPE_i: $i ).
+
+<A NAME="holdsDuring_THFTYPE_IiooI"></A>thf(holdsDuring_THFTYPE_IiooI,type,
+    holdsDuring_THFTYPE_IiooI: $i > $o > $o ).
+
+<A NAME="instance_THFTYPE_IIIiioIiioIioI"></A>thf(instance_THFTYPE_IIIiioIiioIioI,type,
+    instance_THFTYPE_IIIiioIiioIioI: ( ( $i > $i > $o ) > $i > $i > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiiIioI"></A>thf(instance_THFTYPE_IIiiIioI,type,
+    instance_THFTYPE_IIiiIioI: ( $i > $i ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiiiIioI"></A>thf(instance_THFTYPE_IIiiiIioI,type,
+    instance_THFTYPE_IIiiiIioI: ( $i > $i > $i ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiiioIioI"></A>thf(instance_THFTYPE_IIiiioIioI,type,
+    instance_THFTYPE_IIiiioIioI: ( $i > $i > $i > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiioIioI"></A>thf(instance_THFTYPE_IIiioIioI,type,
+    instance_THFTYPE_IIiioIioI: ( $i > $i > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IIiooIioI"></A>thf(instance_THFTYPE_IIiooIioI,type,
+    instance_THFTYPE_IIiooIioI: ( $i > $o > $o ) > $i > $o ).
+
+<A NAME="instance_THFTYPE_IiioI"></A>thf(instance_THFTYPE_IiioI,type,
+    instance_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="instrument_THFTYPE_i"></A>thf(instrument_THFTYPE_i,type,
+    instrument_THFTYPE_i: $i ).
+
+<A NAME="lAdditionFn_THFTYPE_i"></A>thf(lAdditionFn_THFTYPE_i,type,
+    lAdditionFn_THFTYPE_i: $i ).
+
+<A NAME="lAsymmetricRelation_THFTYPE_i"></A>thf(lAsymmetricRelation_THFTYPE_i,type,
+    lAsymmetricRelation_THFTYPE_i: $i ).
+
+<A NAME="lBeginFn_THFTYPE_IiiI"></A>thf(lBeginFn_THFTYPE_IiiI,type,
+    lBeginFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="lBill_THFTYPE_i"></A>thf(lBill_THFTYPE_i,type,
+    lBill_THFTYPE_i: $i ).
+
+<A NAME="lBinaryFunction_THFTYPE_i"></A>thf(lBinaryFunction_THFTYPE_i,type,
+    lBinaryFunction_THFTYPE_i: $i ).
+
+<A NAME="lBinaryPredicate_THFTYPE_i"></A>thf(lBinaryPredicate_THFTYPE_i,type,
+    lBinaryPredicate_THFTYPE_i: $i ).
+
+<A NAME="lCardinalityFn_THFTYPE_IiiI"></A>thf(lCardinalityFn_THFTYPE_IiiI,type,
+    lCardinalityFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="lDayDuration_THFTYPE_i"></A>thf(lDayDuration_THFTYPE_i,type,
+    lDayDuration_THFTYPE_i: $i ).
+
+<A NAME="lDay_THFTYPE_i"></A>thf(lDay_THFTYPE_i,type,
+    lDay_THFTYPE_i: $i ).
+
+<A NAME="lEndFn_THFTYPE_IiiI"></A>thf(lEndFn_THFTYPE_IiiI,type,
+    lEndFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="lEntity_THFTYPE_i"></A>thf(lEntity_THFTYPE_i,type,
+    lEntity_THFTYPE_i: $i ).
+
+<A NAME="lInheritableRelation_THFTYPE_i"></A>thf(lInheritableRelation_THFTYPE_i,type,
+    lInheritableRelation_THFTYPE_i: $i ).
+
+<A NAME="lInteger_THFTYPE_i"></A>thf(lInteger_THFTYPE_i,type,
+    lInteger_THFTYPE_i: $i ).
+
+<A NAME="lIrreflexiveRelation_THFTYPE_i"></A>thf(lIrreflexiveRelation_THFTYPE_i,type,
+    lIrreflexiveRelation_THFTYPE_i: $i ).
+
+<A NAME="lMary_THFTYPE_i"></A>thf(lMary_THFTYPE_i,type,
+    lMary_THFTYPE_i: $i ).
+
+<A NAME="lMeasureFn_THFTYPE_IiiiI"></A>thf(lMeasureFn_THFTYPE_IiiiI,type,
+    lMeasureFn_THFTYPE_IiiiI: $i > $i > $i ).
+
+<A NAME="lMonthFn_THFTYPE_i"></A>thf(lMonthFn_THFTYPE_i,type,
+    lMonthFn_THFTYPE_i: $i ).
+
+<A NAME="lMonth_THFTYPE_i"></A>thf(lMonth_THFTYPE_i,type,
+    lMonth_THFTYPE_i: $i ).
+
+<A NAME="lMultiplicationFn_THFTYPE_i"></A>thf(lMultiplicationFn_THFTYPE_i,type,
+    lMultiplicationFn_THFTYPE_i: $i ).
+
+<A NAME="lObject_THFTYPE_i"></A>thf(lObject_THFTYPE_i,type,
+    lObject_THFTYPE_i: $i ).
+
+<A NAME="lProcess_THFTYPE_i"></A>thf(lProcess_THFTYPE_i,type,
+    lProcess_THFTYPE_i: $i ).
+
+<A NAME="lQuantity_THFTYPE_i"></A>thf(lQuantity_THFTYPE_i,type,
+    lQuantity_THFTYPE_i: $i ).
+
+<A NAME="lRelationExtendedToQuantities_THFTYPE_i"></A>thf(lRelationExtendedToQuantities_THFTYPE_i,type,
+    lRelationExtendedToQuantities_THFTYPE_i: $i ).
+
+<A NAME="lRelation_THFTYPE_i"></A>thf(lRelation_THFTYPE_i,type,
+    lRelation_THFTYPE_i: $i ).
+
+<A NAME="lSetOrClass_THFTYPE_i"></A>thf(lSetOrClass_THFTYPE_i,type,
+    lSetOrClass_THFTYPE_i: $i ).
+
+<A NAME="lSubtractionFn_THFTYPE_i"></A>thf(lSubtractionFn_THFTYPE_i,type,
+    lSubtractionFn_THFTYPE_i: $i ).
+
+<A NAME="lSue_THFTYPE_i"></A>thf(lSue_THFTYPE_i,type,
+    lSue_THFTYPE_i: $i ).
+
+<A NAME="lTemporalCompositionFn_THFTYPE_IiiiI"></A>thf(lTemporalCompositionFn_THFTYPE_IiiiI,type,
+    lTemporalCompositionFn_THFTYPE_IiiiI: $i > $i > $i ).
+
+<A NAME="lTemporalCompositionFn_THFTYPE_i"></A>thf(lTemporalCompositionFn_THFTYPE_i,type,
+    lTemporalCompositionFn_THFTYPE_i: $i ).
+
+<A NAME="lTemporalRelation_THFTYPE_i"></A>thf(lTemporalRelation_THFTYPE_i,type,
+    lTemporalRelation_THFTYPE_i: $i ).
+
+<A NAME="lTernaryPredicate_THFTYPE_i"></A>thf(lTernaryPredicate_THFTYPE_i,type,
+    lTernaryPredicate_THFTYPE_i: $i ).
+
+<A NAME="lTimeInterval_THFTYPE_i"></A>thf(lTimeInterval_THFTYPE_i,type,
+    lTimeInterval_THFTYPE_i: $i ).
+
+<A NAME="lTotalValuedRelation_THFTYPE_i"></A>thf(lTotalValuedRelation_THFTYPE_i,type,
+    lTotalValuedRelation_THFTYPE_i: $i ).
+
+<A NAME="lTransitiveRelation_THFTYPE_i"></A>thf(lTransitiveRelation_THFTYPE_i,type,
+    lTransitiveRelation_THFTYPE_i: $i ).
+
+<A NAME="lUnaryFunction_THFTYPE_i"></A>thf(lUnaryFunction_THFTYPE_i,type,
+    lUnaryFunction_THFTYPE_i: $i ).
+
+<A NAME="lWhenFn_THFTYPE_IiiI"></A>thf(lWhenFn_THFTYPE_IiiI,type,
+    lWhenFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="lWhenFn_THFTYPE_i"></A>thf(lWhenFn_THFTYPE_i,type,
+    lWhenFn_THFTYPE_i: $i ).
+
+<A NAME="lYearFn_THFTYPE_IiiI"></A>thf(lYearFn_THFTYPE_IiiI,type,
+    lYearFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="lYearFn_THFTYPE_i"></A>thf(lYearFn_THFTYPE_i,type,
+    lYearFn_THFTYPE_i: $i ).
+
+<A NAME="lYear_THFTYPE_i"></A>thf(lYear_THFTYPE_i,type,
+    lYear_THFTYPE_i: $i ).
+
+<A NAME="lessThan_THFTYPE_i"></A>thf(lessThan_THFTYPE_i,type,
+    lessThan_THFTYPE_i: $i ).
+
+<A NAME="likes_THFTYPE_IiioI"></A>thf(likes_THFTYPE_IiioI,type,
+    likes_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="located_THFTYPE_IiioI"></A>thf(located_THFTYPE_IiioI,type,
+    located_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="meetsTemporally_THFTYPE_IiioI"></A>thf(meetsTemporally_THFTYPE_IiioI,type,
+    meetsTemporally_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="minus_THFTYPE_IiiiI"></A>thf(minus_THFTYPE_IiiiI,type,
+    minus_THFTYPE_IiiiI: $i > $i > $i ).
+
+<A NAME="n12_THFTYPE_i"></A>thf(n12_THFTYPE_i,type,
+    n12_THFTYPE_i: $i ).
+
+<A NAME="n1_THFTYPE_i"></A>thf(n1_THFTYPE_i,type,
+    n1_THFTYPE_i: $i ).
+
+<A NAME="n2009_THFTYPE_i"></A>thf(n2009_THFTYPE_i,type,
+    n2009_THFTYPE_i: $i ).
+
+<A NAME="n2_THFTYPE_i"></A>thf(n2_THFTYPE_i,type,
+    n2_THFTYPE_i: $i ).
+
+<A NAME="n3_THFTYPE_i"></A>thf(n3_THFTYPE_i,type,
+    n3_THFTYPE_i: $i ).
+
+<A NAME="orientation_THFTYPE_i"></A>thf(orientation_THFTYPE_i,type,
+    orientation_THFTYPE_i: $i ).
+
+<A NAME="part_THFTYPE_IiioI"></A>thf(part_THFTYPE_IiioI,type,
+    part_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="patient_THFTYPE_i"></A>thf(patient_THFTYPE_i,type,
+    patient_THFTYPE_i: $i ).
+
+<A NAME="rangeSubclass_THFTYPE_IiioI"></A>thf(rangeSubclass_THFTYPE_IiioI,type,
+    rangeSubclass_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="range_THFTYPE_IiioI"></A>thf(range_THFTYPE_IiioI,type,
+    range_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="relatedInternalConcept_THFTYPE_IIiioIIiioIoI"></A>thf(relatedInternalConcept_THFTYPE_IIiioIIiioIoI,type,
+    relatedInternalConcept_THFTYPE_IIiioIIiioIoI: ( $i > $i > $o ) > ( $i > $i > $o ) > $o ).
+
+<A NAME="relatedInternalConcept_THFTYPE_IiIiiIoI"></A>thf(relatedInternalConcept_THFTYPE_IiIiiIoI,type,
+    relatedInternalConcept_THFTYPE_IiIiiIoI: $i > ( $i > $i ) > $o ).
+
+<A NAME="relatedInternalConcept_THFTYPE_IiioI"></A>thf(relatedInternalConcept_THFTYPE_IiioI,type,
+    relatedInternalConcept_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="result_THFTYPE_i"></A>thf(result_THFTYPE_i,type,
+    result_THFTYPE_i: $i ).
+
+<A NAME="subProcess_THFTYPE_IiioI"></A>thf(subProcess_THFTYPE_IiioI,type,
+    subProcess_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="subclass_THFTYPE_IiioI"></A>thf(subclass_THFTYPE_IiioI,type,
+    subclass_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="subrelation_THFTYPE_IIioIIioIoI"></A>thf(subrelation_THFTYPE_IIioIIioIoI,type,
+    subrelation_THFTYPE_IIioIIioIoI: ( $i > $o ) > ( $i > $o ) > $o ).
+
+<A NAME="subrelation_THFTYPE_IiioI"></A>thf(subrelation_THFTYPE_IiioI,type,
+    subrelation_THFTYPE_IiioI: $i > $i > $o ).
+
+<A NAME="temporalPart_THFTYPE_IiioI"></A>thf(temporalPart_THFTYPE_IiioI,type,
+    temporalPart_THFTYPE_IiioI: $i > $i > $o ).
+
+%----The translated axioms
+<A NAME="ax"></A>thf(ax,axiom,
+    ! [REL2: $i,CLASS1: $i,CLASS2: $i,REL1: $i] :
+      ( ( ( rangeSubclass_THFTYPE_IiioI @ REL1 @ CLASS1 )
+        & ( rangeSubclass_THFTYPE_IiioI @ REL2 @ CLASS2 )
+        & ( disjoint_THFTYPE_IiioI @ CLASS1 @ CLASS2 ) )
+     => ( disjointRelation_THFTYPE_IiioI @ REL1 @ REL2 ) ) ).
+
+<A NAME="ax_001"></A>thf(ax_001,axiom,
+    subclass_THFTYPE_IiioI @ lInheritableRelation_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+%KIF documentation:(documentation instance EnglishLanguage "An object is an &%instance of a &%SetOrClass if it is included in that &%SetOrClass. An individual may be an instance of many classes, some of which may be subclasses of others. Thus, there is no assumption in the meaning of &%instance about specificity or uniqueness.")
+%KIF documentation:(documentation range EnglishLanguage "Gives the range of a function. In other words, (&%range ?FUNCTION ?CLASS) means that all of the values assigned by ?FUNCTION are &%instances of ?CLASS.")
+%KIF documentation:(documentation Process EnglishLanguage "The class of things that happen and have temporal parts or stages. Examples include extended events like a football match or a race, actions like &%Pursuing and &%Reading, and biological processes. The formal definition is: anything that occurs in time but is not an &%Object. Note that a &%Process may have participants 'inside' it which are &%Objects, such as the players in a football match. In a 4D ontology, a &%Process is something whose spatiotemporal extent is thought of as dividing into temporal stages roughly perpendicular to the time-axis.")
+<A NAME="ax_002"></A>thf(ax_002,axiom,
+    ! [X: $i,Y: $i,Z: $i] :
+      ( ( ( subclass_THFTYPE_IiioI @ X @ Y )
+        & ( instance_THFTYPE_IiioI @ Z @ X ) )
+     => ( instance_THFTYPE_IiioI @ Z @ Y ) ) ).
+
+%KIF documentation:(documentation TemporalRelation EnglishLanguage "The &%Class of temporal &%Relations. This &%Class includes notions of (temporal) topology of intervals, (temporal) schemata, and (temporal) extension.")
+<A NAME="ax_003"></A>thf(ax_003,axiom,
+    ! [X: $i,Y: $i] :
+      ( ( subclass_THFTYPE_IiioI @ X @ Y )
+     => ( ( instance_THFTYPE_IiioI @ X @ lSetOrClass_THFTYPE_i )
+        & ( instance_THFTYPE_IiioI @ Y @ lSetOrClass_THFTYPE_i ) ) ) ).
+
+%KIF documentation:(documentation disjointRelation EnglishLanguage "This predicate relates two &%Relations. (&%disjointRelation ?REL1 ?REL2) means that the two relations have no tuples in common.")
+%KIF documentation:(documentation lessThan EnglishLanguage "(&%lessThan ?NUMBER1 ?NUMBER2) is true just in case the &%Quantity ?NUMBER1 is less than the &%Quantity ?NUMBER2.")
+%KIF documentation:(documentation AsymmetricRelation EnglishLanguage "A &%BinaryRelation is asymmetric if and only if it is both an &%AntisymmetricRelation and an &%IrreflexiveRelation.")
+%KIF documentation:(documentation MonthFn EnglishLanguage "A &%BinaryFunction that maps a subclass of &%Month and a subclass of &%Year to the class containing the &%Months corresponding to thos &%Years. For example (&%MonthFn &%January (&%YearFn 1912)) is the class containing the eighth &%Month, i.e. August, of the &%Year 1912. For another example, (&%MonthFn &%August &%Year) is equal to &%August, the class of all months of August. Note that this function returns a &%Class as a value. The reason for this is that the related functions, viz. DayFn, HourFn, MinuteFn, and SecondFn, are used to generate both specific &%TimeIntervals and recurrent intervals, and the only way to do this is to make the domains and ranges of these functions classes rather than individuals.")
+%KIF documentation:(documentation instrument EnglishLanguage "(instrument ?EVENT ?TOOL) means that ?TOOL is used by an agent in bringing about ?EVENT and that ?TOOL is not changed by ?EVENT. For example, the key is an &%instrument in the following proposition: The key opened the door. Note that &%instrument and &%resource cannot be satisfied by the same ordered pair.")
+<A NAME="ax_004"></A>thf(ax_004,axiom,
+    ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i )
+    @ ! [X: $i] :
+        ( ( likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ X )
+       => ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ X ) ) ) ).
+
+<A NAME="ax_005"></A>thf(ax_005,axiom,
+    ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ n2009_THFTYPE_i )
+    @ ! [X: $i] :
+        ( ( likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ X )
+       => ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ X ) ) ) ).
+
+<A NAME="ax_006"></A>thf(ax_006,axiom,
+    ! [THING: $i] : ( instance_THFTYPE_IiioI @ THING @ lEntity_THFTYPE_i ) ).
+
+<A NAME="ax_007"></A>thf(ax_007,axiom,
+    ! [NUMBER: $i,MONTH: $i] :
+      ( ( ( instance_THFTYPE_IiioI @ MONTH @ lMonth_THFTYPE_i )
+        & ( duration_THFTYPE_IiioI @ MONTH @ ( lMeasureFn_THFTYPE_IiiiI @ NUMBER @ lDayDuration_THFTYPE_i ) ) )
+     => ( ( lCardinalityFn_THFTYPE_IiiI @ ( lTemporalCompositionFn_THFTYPE_IiiiI @ MONTH @ lDay_THFTYPE_i ) )
+        = NUMBER ) ) ).
+
+<A NAME="ax_008"></A>thf(ax_008,axiom,
+    ! [OBJ1: $i,OBJ2: $i] :
+      ( ( located_THFTYPE_IiioI @ OBJ1 @ OBJ2 )
+     => ! [SUB: $i] :
+          ( ( part_THFTYPE_IiioI @ SUB @ OBJ1 )
+         => ( located_THFTYPE_IiioI @ SUB @ OBJ2 ) ) ) ).
+
+%KIF documentation:(documentation disjoint EnglishLanguage "&%Classes are &%disjoint only if they share no instances, i.e. just in case the result of applying &%IntersectionFn to them is empty.")
+%KIF documentation:(documentation MultiplicationFn EnglishLanguage "If ?NUMBER1 and ?NUMBER2 are &%Numbers, then (&%MultiplicationFn ?NUMBER1 ?NUMBER2) is the arithmetical product of these numbers.")
+%KIF documentation:(documentation domain EnglishLanguage "Provides a computationally and heuristically convenient mechanism for declaring the argument types of a given relation. The formula (&%domain ?REL ?INT ?CLASS) means that the ?INT'th element of each tuple in the relation ?REL must be an instance of ?CLASS. Specifying argument types is very helpful in maintaining ontologies. Representation systems can use these specifications to classify terms and check integrity constraints. If the restriction on the argument type of a &%Relation is not captured by a &%SetOrClass already defined in the ontology, one can specify a &%SetOrClass compositionally with the functions &%UnionFn, &%IntersectionFn, etc.")
+%KIF documentation:(documentation rangeSubclass EnglishLanguage "(&%rangeSubclass ?FUNCTION ?CLASS) means that all of the values assigned by ?FUNCTION are &%subclasses of ?CLASS.")
+%KIF documentation:(documentation TimeInterval EnglishLanguage "An interval of time. Note that a &%TimeInterval has both an extent and a location on the universal timeline. Note too that a &%TimeInterval has no gaps, i.e. this class contains only convex time intervals.")
+%KIF documentation:(documentation TernaryPredicate EnglishLanguage "The &%Class of &%Predicates that require exactly three arguments.")
+<A NAME="ax_009"></A>thf(ax_009,axiom,
+    subclass_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i @ lIrreflexiveRelation_THFTYPE_i ).
+
+<A NAME="ax_010"></A>thf(ax_010,axiom,
+    subclass_THFTYPE_IiioI @ lTotalValuedRelation_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+%KIF documentation:(documentation Relation EnglishLanguage "The &%Class of relations. There are three kinds of &%Relation: &%Predicate, &%Function, and &%List. &%Predicates and &%Functions both denote sets of ordered n-tuples. The difference between these two &%Classes is that &%Predicates cover formula-forming operators, while &%Functions cover term-forming operators. A &%List, on the other hand, is a particular ordered n-tuple.")
+<A NAME="ax_011"></A>thf(ax_011,axiom,
+    ! [NUMBER: $i,CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( domainSubclass_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS1 )
+        & ( domainSubclass_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+<A NAME="ax_012"></A>thf(ax_012,axiom,
+    ! [DAY: $i] :
+      ( ( instance_THFTYPE_IiioI @ DAY @ lDay_THFTYPE_i )
+     => ( duration_THFTYPE_IiioI @ DAY @ ( lMeasureFn_THFTYPE_IiiiI @ n1_THFTYPE_i @ lDayDuration_THFTYPE_i ) ) ) ).
+
+<A NAME="ax_013"></A>thf(ax_013,axiom,
+    ! [REL2: $i,NUMBER: $i,CLASS1: $i,CLASS2: $i,REL1: $i] :
+      ( ( ( domainSubclass_THFTYPE_IiiioI @ REL1 @ NUMBER @ CLASS1 )
+        & ( domainSubclass_THFTYPE_IiiioI @ REL2 @ NUMBER @ CLASS2 )
+        & ( disjoint_THFTYPE_IiioI @ CLASS1 @ CLASS2 ) )
+     => ( disjointRelation_THFTYPE_IiioI @ REL1 @ REL2 ) ) ).
+
+%KIF documentation:(documentation documentation EnglishLanguage "A relation between objects in the domain of discourse and strings of natural language text stated in a particular &%HumanLanguage. The domain of &%documentation is not constants (names), but the objects themselves. This means that one does not quote the names when associating them with their documentation.")
+<A NAME="ax_014"></A>thf(ax_014,axiom,
+    subclass_THFTYPE_IiioI @ lTemporalRelation_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_015"></A>thf(ax_015,axiom,
+    subclass_THFTYPE_IiioI @ lYear_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_016"></A>thf(ax_016,axiom,
+    ! [NUMBER: $i,CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( domain_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS1 )
+        & ( domain_THFTYPE_IiiioI @ REL @ NUMBER @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+<A NAME="ax_017"></A>thf(ax_017,axiom,
+    ! [REL: $i > $i > $o] :
+      ( ( instance_THFTYPE_IIiioIioI @ REL @ lTransitiveRelation_THFTYPE_i )
+    &lt;=> ! [INST1: $i,INST2: $i,INST3: $i] :
+          ( ( ( REL @ INST1 @ INST2 )
+            & ( REL @ INST2 @ INST3 ) )
+         => ( REL @ INST1 @ INST3 ) ) ) ).
+
+%KIF documentation:(documentation TemporalCompositionFn EnglishLanguage "The basic &%Function for expressing the composition of larger &%TimeIntervals out of smaller &%TimeIntervals. For example, if &%ThisSeptember is an &%instance of &%September, (&%TemporalCompositionFn &%ThisSeptember &%Day) denotes the &%Class of consecutive days that make up &%ThisSeptember. Note that one can obtain the number of instances of this &%Class by using the function &%CardinalityFn.")
+<A NAME="ax_018"></A>thf(ax_018,axiom,
+    rangeSubclass_THFTYPE_IiioI @ lTemporalCompositionFn_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+%KIF documentation:(documentation RelationExtendedToQuantities EnglishLanguage "A &%RelationExtendedToQuantities is a &%Relation that, when it is true on a sequence of arguments that are &%RealNumbers, it is also true on a sequence of instances of &%ConstantQuantity with those magnitudes in some unit of measure. For example, the &%lessThan relation is extended to quantities. This means that for all pairs of quantities ?QUANTITY1 and ?QUANTITY2, (&%lessThan ?QUANTITY1 ?QUANTITY2) if and only if, for some ?NUMBER1, ?NUMBER2, and ?UNIT, ?QUANTITY1 = (&%MeasureFn ?NUMBER1 ?UNIT), ?QUANTITY2 = (&%MeasureFn ?NUMBER2 ?UNIT), and (&%lessThan ?NUMBER1 ?NUMBER2), for all units ?UNIT on which ?QUANTITY1 and ?QUANTITY2 can be measured. Note that, when a &%RelationExtendedToQuantities is extended from &%RealNumbers to instances of &%ConstantQuantity, the &%ConstantQuantity must be measured along the same physical dimension.")
+%KIF documentation:(documentation equal EnglishLanguage "(equal ?ENTITY1 ?ENTITY2) is true just in case ?ENTITY1 is identical with ?ENTITY2.")
+%KIF documentation:(documentation CardinalityFn EnglishLanguage "(CardinalityFn ?CLASS) returns the number of instances in the &%SetOrClass ?CLASS or the number of members in the ?CLASS &%Collection.")
+<A NAME="ax_019"></A>thf(ax_019,axiom,
+    ! [REL2: $i,CLASS1: $i,CLASS2: $i,REL1: $i] :
+      ( ( ( range_THFTYPE_IiioI @ REL1 @ CLASS1 )
+        & ( range_THFTYPE_IiioI @ REL2 @ CLASS2 )
+        & ( disjoint_THFTYPE_IiioI @ CLASS1 @ CLASS2 ) )
+     => ( disjointRelation_THFTYPE_IiioI @ REL1 @ REL2 ) ) ).
+
+<A NAME="ax_020"></A>thf(ax_020,axiom,
+    subclass_THFTYPE_IiioI @ lRelationExtendedToQuantities_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_021"></A>thf(ax_021,axiom,
+    subclass_THFTYPE_IiioI @ lMonth_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_022"></A>thf(ax_022,axiom,
+    ! [TIME: $i,SITUATION: $o] :
+      ( ( holdsDuring_THFTYPE_IiooI @ TIME @ ( (~) @ SITUATION ) )
+     => ( (~) @ ( holdsDuring_THFTYPE_IiooI @ TIME @ SITUATION ) ) ) ).
+
+%KIF documentation:(documentation holdsDuring EnglishLanguage "(&%holdsDuring ?TIME ?FORMULA) means that the proposition denoted by ?FORMULA is true in the time frame ?TIME. Note that this implies that ?FORMULA is true at every &%TimePoint which is a &%temporalPart of ?TIME.")
+<A NAME="ax_023"></A>thf(ax_023,axiom,
+    likes_THFTYPE_IiioI @ lMary_THFTYPE_i @ lBill_THFTYPE_i ).
+
+%KIF documentation:(documentation Integer EnglishLanguage "A negative or nonnegative whole number.")
+%KIF documentation:(documentation attribute EnglishLanguage "(&%attribute ?OBJECT ?PROPERTY) means that ?PROPERTY is a &%Attribute of ?OBJECT. For example, (&%attribute &%MyLittleRedWagon &%Red).")
+<A NAME="ax_024"></A>thf(ax_024,axiom,
+    range_THFTYPE_IiioI @ lWhenFn_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+%KIF documentation:(documentation greaterThan EnglishLanguage "(&%greaterThan ?NUMBER1 ?NUMBER2) is true just in case the &%Quantity ?NUMBER1 is greater than the &%Quantity ?NUMBER2.")
+<A NAME="ax_025"></A>thf(ax_025,axiom,
+    ! [INTERVAL1: $i,INTERVAL2: $i] :
+      ( ( meetsTemporally_THFTYPE_IiioI @ INTERVAL1 @ INTERVAL2 )
+    &lt;=> ( ( lEndFn_THFTYPE_IiiI @ INTERVAL1 )
+        = ( lBeginFn_THFTYPE_IiiI @ INTERVAL2 ) ) ) ).
+
+<A NAME="ax_026"></A>thf(ax_026,axiom,
+    ! [SITUATION: $o,TIME2: $i,TIME1: $i] :
+      ( ( ( holdsDuring_THFTYPE_IiooI @ TIME1 @ SITUATION )
+        & ( temporalPart_THFTYPE_IiioI @ TIME2 @ TIME1 ) )
+     => ( holdsDuring_THFTYPE_IiooI @ TIME2 @ SITUATION ) ) ).
+
+<A NAME="ax_027"></A>thf(ax_027,axiom,
+    range_THFTYPE_IiioI @ lMultiplicationFn_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_028"></A>thf(ax_028,axiom,
+    ? [THING: $i] : ( instance_THFTYPE_IiioI @ THING @ lEntity_THFTYPE_i ) ).
+
+<A NAME="ax_029"></A>thf(ax_029,axiom,
+    ! [REL: $i > $i > $o] :
+      ( ( instance_THFTYPE_IIiioIioI @ REL @ lIrreflexiveRelation_THFTYPE_i )
+    &lt;=> ! [INST: $i] : ( (~) @ ( REL @ INST @ INST ) ) ) ).
+
+<A NAME="ax_030"></A>thf(ax_030,axiom,
+    subclass_THFTYPE_IiioI @ lBinaryFunction_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_031"></A>thf(ax_031,axiom,
+    ! [NUMBER: $i,PRED1: $i,CLASS1: $i,PRED2: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ PRED1 @ PRED2 )
+        & ( domain_THFTYPE_IiiioI @ PRED2 @ NUMBER @ CLASS1 ) )
+     => ( domain_THFTYPE_IiiioI @ PRED1 @ NUMBER @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation domainSubclass EnglishLanguage "&%Predicate used to specify argument type restrictions of &%Predicates. The formula (&%domainSubclass ?REL ?INT ?CLASS) means that the ?INT'th element of each tuple in the relation ?REL must be a subclass of ?CLASS.")
+<A NAME="ax_032"></A>thf(ax_032,axiom,
+    subclass_THFTYPE_IiioI @ lTotalValuedRelation_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+%KIF documentation:(documentation located EnglishLanguage "(&%located ?PHYS ?OBJ) means that ?PHYS is &%partlyLocated at ?OBJ, and there is no &%part or &%subProcess of ?PHYS that is not &%located at ?OBJ.")
+<A NAME="ax_033"></A>thf(ax_033,axiom,
+    subclass_THFTYPE_IiioI @ lTernaryPredicate_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_034"></A>thf(ax_034,axiom,
+    subclass_THFTYPE_IiioI @ lRelationExtendedToQuantities_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_035"></A>thf(ax_035,axiom,
+    ! [YEAR: $i] :
+      ( ( instance_THFTYPE_IiioI @ YEAR @ lYear_THFTYPE_i )
+     => ( ( lCardinalityFn_THFTYPE_IiiI @ ( lTemporalCompositionFn_THFTYPE_IiiiI @ YEAR @ lMonth_THFTYPE_i ) )
+        = n12_THFTYPE_i ) ) ).
+
+%KIF documentation:(documentation SubtractionFn EnglishLanguage "If ?NUMBER1 and ?NUMBER2 are &%Numbers, then (&%SubtractionFn ?NUMBER1 ?NUMBER2) is the arithmetical difference between ?NUMBER1 and ?NUMBER2, i.e. ?NUMBER1 minus ?NUMBER2. An exception occurs when ?NUMBER1 is equal to 0, in which case (&%SubtractionFn ?NUMBER1 ?NUMBER2) is the negation of ?NUMBER2.")
+%KIF documentation:(documentation IrreflexiveRelation EnglishLanguage "&%Relation ?REL is irreflexive iff (?REL ?INST ?INST) holds for no value of ?INST.")
+%KIF documentation:(documentation Day EnglishLanguage "The &%Class of all calendar &%Days.")
+<A NAME="ax_036"></A>thf(ax_036,axiom,
+    ! [CLASS1: $i,CLASS2: $i] :
+      ( ( CLASS1 = CLASS2 )
+     => ! [THING: $i] :
+          ( ( instance_THFTYPE_IiioI @ THING @ CLASS1 )
+        &lt;=> ( instance_THFTYPE_IiioI @ THING @ CLASS2 ) ) ) ).
+
+%KIF documentation:(documentation TotalValuedRelation EnglishLanguage "A &%Relation is a &%TotalValuedRelation just in case there exists an assignment for the last argument position of the &%Relation given any assignment of values to every argument position except the last one. Note that declaring a &%Relation to be both a &%TotalValuedRelation and a &%SingleValuedRelation means that it is a total function.")
+%KIF documentation:(documentation duration EnglishLanguage "(&%duration ?POS ?TIME) means that the duration of the &%TimePosition ?POS is ?TIME. Note that this &%Predicate can be used in conjunction with the &%Function &%WhenFn to specify the duration of any instance of &%Physical.")
+<A NAME="ax_037"></A>thf(ax_037,axiom,
+    ! [REL2: $i,CLASS1: $i,REL1: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ REL1 @ REL2 )
+        & ( rangeSubclass_THFTYPE_IiioI @ REL2 @ CLASS1 ) )
+     => ( rangeSubclass_THFTYPE_IiioI @ REL1 @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation Quantity EnglishLanguage "Any specification of how many or how much of something there is. Accordingly, there are two subclasses of &%Quantity: &%Number (how many) and &%PhysicalQuantity (how much).")
+<A NAME="ax_038"></A>thf(ax_038,axiom,
+    ! [YEAR2: $i,YEAR1: $i] :
+      ( ( ( instance_THFTYPE_IiioI @ YEAR1 @ lYear_THFTYPE_i )
+        & ( instance_THFTYPE_IiioI @ YEAR2 @ lYear_THFTYPE_i )
+        & ( ( minus_THFTYPE_IiiiI @ YEAR2 @ YEAR1 )
+          = n1_THFTYPE_i ) )
+     => ( meetsTemporally_THFTYPE_IiioI @ YEAR1 @ YEAR2 ) ) ).
+
+<A NAME="ax_039"></A>thf(ax_039,axiom,
+    ! [REL2: $i > $o,ROW: $i,REL1: $i > $o] :
+      ( ( ( subrelation_THFTYPE_IIioIIioIoI @ REL1 @ REL2 )
+        & ( REL1 @ ROW ) )
+     => ( REL2 @ ROW ) ) ).
+
+%KIF documentation:(documentation YearFn EnglishLanguage "A &%UnaryFunction that maps a number to the corresponding calendar &%Year. For example, (&%YearFn 1912) returns the &%Class containing just one instance, the year of 1912. As might be expected, positive integers return years in the Common Era, while negative integers return years in B.C.E. Note that this function returns a &%Class as a value. The reason for this is that the related functions, viz. &%MonthFn, &%DayFn, &%HourFn, &%MinuteFn, and &%SecondFn, are used to generate both specific &%TimeIntervals and recurrent intervals, and the only way to do this is to make the domains and ranges of these functions classes rather than individuals.")
+%KIF documentation:(documentation subProcess EnglishLanguage "(&%subProcess ?SUBPROC ?PROC) means that ?SUBPROC is a subprocess of ?PROC. A subprocess is here understood as a temporally distinguished part (proper or not) of a &%Process.")
+<A NAME="ax_040"></A>thf(ax_040,axiom,
+    ! [THING2: $i,THING1: $i] :
+      ( ( THING1 = THING2 )
+     => ! [CLASS: $i] :
+          ( ( instance_THFTYPE_IiioI @ THING1 @ CLASS )
+        &lt;=> ( instance_THFTYPE_IiioI @ THING2 @ CLASS ) ) ) ).
+
+<A NAME="ax_041"></A>thf(ax_041,axiom,
+    ! [CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( range_THFTYPE_IiioI @ REL @ CLASS1 )
+        & ( range_THFTYPE_IiioI @ REL @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+<A NAME="ax_042"></A>thf(ax_042,axiom,
+    ! [CLASS1: $i,CLASS2: $i] :
+      ( ( disjoint_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+    &lt;=> ! [INST: $i] :
+          ( (~)
+          @ ( ( instance_THFTYPE_IiioI @ INST @ CLASS1 )
+            & ( instance_THFTYPE_IiioI @ INST @ CLASS2 ) ) ) ) ).
+
+%KIF documentation:(documentation orientation EnglishLanguage "A general &%Predicate for indicating how two &%Objects are oriented with respect to one another. For example, (orientation ?OBJ1 ?OBJ2 North) means that ?OBJ1 is north of ?OBJ2, and (orientation ?OBJ1 ?OBJ2 Vertical) means that ?OBJ1 is positioned vertically with respect to ?OBJ2.")
+%KIF documentation:(documentation UnaryFunction EnglishLanguage "The &%Class of &%Functions that require a single argument.")
+<A NAME="ax_043"></A>thf(ax_043,axiom,
+    ! [SUBPROC: $i,PROC: $i] :
+      ( ( subProcess_THFTYPE_IiioI @ SUBPROC @ PROC )
+     => ( temporalPart_THFTYPE_IiioI @ ( lWhenFn_THFTYPE_IiiI @ SUBPROC ) @ ( lWhenFn_THFTYPE_IiiI @ PROC ) ) ) ).
+
+%KIF documentation:(documentation AdditionFn EnglishLanguage "If ?NUMBER1 and ?NUMBER2 are &%Numbers, then (&%AdditionFn ?NUMBER1 ?NUMBER2) is the arithmetical sum of these numbers.")
+%KIF documentation:(documentation relatedInternalConcept EnglishLanguage "Means that the two arguments are related concepts within the SUMO, i.e. there is a significant similarity of meaning between them. To indicate a meaning relation between a SUMO concept and a concept from another source, use the Predicate &%relatedExternalConcept.")
+<A NAME="ax_044"></A>thf(ax_044,axiom,
+    rangeSubclass_THFTYPE_IiioI @ lMonthFn_THFTYPE_i @ lMonth_THFTYPE_i ).
+
+<A NAME="ax_045"></A>thf(ax_045,axiom,
+    ! [INTERVAL1: $i,INTERVAL2: $i] :
+      ( ( ( ( lBeginFn_THFTYPE_IiiI @ INTERVAL1 )
+          = ( lBeginFn_THFTYPE_IiiI @ INTERVAL2 ) )
+        & ( ( lEndFn_THFTYPE_IiiI @ INTERVAL1 )
+          = ( lEndFn_THFTYPE_IiiI @ INTERVAL2 ) ) )
+     => ( INTERVAL1 = INTERVAL2 ) ) ).
+
+%KIF documentation:(documentation BinaryPredicate EnglishLanguage "A &%Predicate relating two items - its valence is two.")
+%KIF documentation:(documentation SetOrClass EnglishLanguage "The &%SetOrClass of &%Sets and &%Classes, i.e. any instance of &%Abstract that has &%elements or &%instances.")
+<A NAME="ax_046"></A>thf(ax_046,axiom,
+    ! [REL2: $i,CLASS1: $i,REL1: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ REL1 @ REL2 )
+        & ( range_THFTYPE_IiioI @ REL2 @ CLASS1 ) )
+     => ( range_THFTYPE_IiioI @ REL1 @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation MeasureFn EnglishLanguage "This &%BinaryFunction maps a &%RealNumber and a &%UnitOfMeasure to that &%Number of units. It is used to express `measured' instances of &%PhysicalQuantity. Example: the concept of three meters is represented as (&%MeasureFn 3 &%Meter).")
+%KIF documentation:(documentation subclass EnglishLanguage "(&%subclass ?CLASS1 ?CLASS2) means that ?CLASS1 is a subclass of ?CLASS2, i.e. every instance of ?CLASS1 is also an instance of ?CLASS2. A class may have multiple superclasses and subclasses.")
+%KIF documentation:(documentation part EnglishLanguage "The basic mereological relation. All other mereological relations are defined in terms of this one. (&%part ?PART ?WHOLE) simply means that the &%Object ?PART is part of the &%Object ?WHOLE. Note that, since &%part is a &%ReflexiveRelation, every &%Object is a part of itself.")
+%KIF documentation:(documentation BinaryFunction EnglishLanguage "The &%Class of &%Functions that require two arguments.")
+%KIF documentation:(documentation Entity EnglishLanguage "The universal class of individuals. This is the root node of the ontology.")
+%KIF documentation:(documentation WhenFn EnglishLanguage "A &%UnaryFunction that maps an &%Object or &%Process to the exact &%TimeInterval during which it exists. Note that, for every &%TimePoint ?TIME outside of the &%TimeInterval (WhenFn ?THING), (time ?THING ?TIME) does not hold.")
+<A NAME="ax_047"></A>thf(ax_047,axiom,
+    subclass_THFTYPE_IiioI @ lTemporalRelation_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_048"></A>thf(ax_048,axiom,
+    ! [REL2: $i,NUMBER: $i,CLASS1: $i,REL1: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ REL1 @ REL2 )
+        & ( domainSubclass_THFTYPE_IiiioI @ REL2 @ NUMBER @ CLASS1 ) )
+     => ( domainSubclass_THFTYPE_IiiioI @ REL1 @ NUMBER @ CLASS1 ) ) ).
+
+%KIF documentation:(documentation agent EnglishLanguage "(&%agent ?PROCESS ?AGENT) means that ?AGENT is an active determinant, either animate or inanimate, of the &%Process ?PROCESS, with or without voluntary intention. For example, Eve is an &%agent in the following proposition: Eve bit an apple.")
+<A NAME="ax_049"></A>thf(ax_049,axiom,
+    ! [SUBPROC: $i,PROC: $i] :
+      ( ( subProcess_THFTYPE_IiioI @ SUBPROC @ PROC )
+     => ! [REGION: $i] :
+          ( ( located_THFTYPE_IiioI @ PROC @ REGION )
+         => ( located_THFTYPE_IiioI @ SUBPROC @ REGION ) ) ) ).
+
+%KIF documentation:(documentation BeginFn EnglishLanguage "A &%UnaryFunction that maps a &%TimeInterval to the &%TimePoint at which the interval begins.")
+<A NAME="ax_050"></A>thf(ax_050,axiom,
+    range_THFTYPE_IiioI @ lSubtractionFn_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+%KIF documentation:(documentation Month EnglishLanguage "The &%Class of all calendar &%Months.")
+<A NAME="ax_051"></A>thf(ax_051,axiom,
+    ! [Y: $i] : ( holdsDuring_THFTYPE_IiooI @ Y @ $true ) ).
+
+%KIF documentation:(documentation EnglishLanguage EnglishLanguage "A Germanic language that incorporates many roots from the Romance languages. It is the official language of the &%UnitedStates, the &%UnitedKingdom, and many other countries.")
+%KIF documentation:(documentation TransitiveRelation EnglishLanguage "A &%BinaryRelation ?REL is transitive if (?REL ?INST1 ?INST2) and (?REL ?INST2 ?INST3) imply (?REL ?INST1 ?INST3), for all ?INST1, ?INST2, and ?INST3.")
+%KIF documentation:(documentation patient EnglishLanguage "(&%patient ?PROCESS ?ENTITY) means that ?ENTITY is a participant in ?PROCESS that may be moved, said, experienced, etc. For example, the direct objects in the sentences 'The cat swallowed the canary' and 'Billy likes the beer' would be examples of &%patients. Note that the &%patient of a &%Process may or may not undergo structural change as a result of the &%Process. The &%CaseRole of &%patient is used when one wants to specify as broadly as possible the object of a &%Process.")
+%KIF documentation:(documentation Year EnglishLanguage "The &%Class of all calendar &%Years.")
+%KIF documentation:(documentation result EnglishLanguage "(result ?ACTION ?OUTPUT) means that ?OUTPUT is a product of ?ACTION. For example, house is a &%result in the following proposition: Eric built a house.")
+<A NAME="ax_052"></A>thf(ax_052,axiom,
+    range_THFTYPE_IiioI @ lAdditionFn_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+%KIF documentation:(documentation temporalPart EnglishLanguage "The temporal analogue of the spatial &%part predicate. (&%temporalPart ?POS1 ?POS2) means that &%TimePosition ?POS1 is part of &%TimePosition ?POS2. Note that since &%temporalPart is a &%ReflexiveRelation every &%TimePostion is a &%temporalPart of itself.")
+%KIF documentation:(documentation subrelation EnglishLanguage "(&%subrelation ?REL1 ?REL2) means that every tuple of ?REL1 is also a tuple of ?REL2. In other words, if the &%Relation ?REL1 holds for some arguments arg_1, arg_2, ... arg_n, then the &%Relation ?REL2 holds for the same arguments. A consequence of this is that a &%Relation and its subrelations must have the same &%valence.")
+%KIF documentation:(documentation EndFn EnglishLanguage "A &%UnaryFunction that maps a &%TimeInterval to the &%TimePoint at which the interval ends.")
+%KIF documentation:(documentation meetsTemporally EnglishLanguage "(&%meetsTemporally ?INTERVAL1 ?INTERVAL2) means that the terminal point of the &%TimeInterval ?INTERVAL1 is the initial point of the &%TimeInterval ?INTERVAL2.")
+<A NAME="ax_053"></A>thf(ax_053,axiom,
+    ! [OBJ: $i,PROCESS: $i] :
+      ( ( located_THFTYPE_IiioI @ PROCESS @ OBJ )
+     => ! [SUB: $i] :
+          ( ( subProcess_THFTYPE_IiioI @ SUB @ PROCESS )
+         => ( located_THFTYPE_IiioI @ SUB @ OBJ ) ) ) ).
+
+<A NAME="ax_054"></A>thf(ax_054,axiom,
+    subclass_THFTYPE_IiioI @ lUnaryFunction_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_055"></A>thf(ax_055,axiom,
+    subclass_THFTYPE_IiioI @ lDay_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+%KIF documentation:(documentation DayDuration EnglishLanguage "Time unit. 1 day = 24 hours.")
+%KIF documentation:(documentation InheritableRelation EnglishLanguage "The class of &%Relations whose properties can be inherited downward in the class hierarchy via the &%subrelation &%Predicate.")
+<A NAME="ax_056"></A>thf(ax_056,axiom,
+    ! [REL2: $i,NUMBER: $i,CLASS1: $i,CLASS2: $i,REL1: $i] :
+      ( ( ( domain_THFTYPE_IiiioI @ REL1 @ NUMBER @ CLASS1 )
+        & ( domain_THFTYPE_IiiioI @ REL2 @ NUMBER @ CLASS2 )
+        & ( disjoint_THFTYPE_IiioI @ CLASS1 @ CLASS2 ) )
+     => ( disjointRelation_THFTYPE_IiioI @ REL1 @ REL2 ) ) ).
+
+<A NAME="ax_057"></A>thf(ax_057,axiom,
+    rangeSubclass_THFTYPE_IiioI @ lYearFn_THFTYPE_i @ lYear_THFTYPE_i ).
+
+<A NAME="ax_058"></A>thf(ax_058,axiom,
+    ! [CLASS: $i,PRED1: $i,PRED2: $i] :
+      ( ( ( subrelation_THFTYPE_IiioI @ PRED1 @ PRED2 )
+        & ( instance_THFTYPE_IiioI @ PRED2 @ CLASS )
+        & ( subclass_THFTYPE_IiioI @ CLASS @ lInheritableRelation_THFTYPE_i ) )
+     => ( instance_THFTYPE_IiioI @ PRED1 @ CLASS ) ) ).
+
+%KIF documentation:(documentation Object EnglishLanguage "Corresponds roughly to the class of ordinary objects. Examples include normal physical objects, geographical regions, and locations of &%Processes, the complement of &%Objects in the &%Physical class. In a 4D ontology, an &%Object is something whose spatiotemporal extent is thought of as dividing into spatial parts roughly parallel to the time-axis.")
+<A NAME="ax_059"></A>thf(ax_059,axiom,
+    ! [CLASS1: $i,REL: $i,CLASS2: $i] :
+      ( ( ( rangeSubclass_THFTYPE_IiioI @ REL @ CLASS1 )
+        & ( rangeSubclass_THFTYPE_IiioI @ REL @ CLASS2 ) )
+     => ( ( subclass_THFTYPE_IiioI @ CLASS1 @ CLASS2 )
+        | ( subclass_THFTYPE_IiioI @ CLASS2 @ CLASS1 ) ) ) ).
+
+<A NAME="ax_060"></A>thf(ax_060,axiom,
+    subclass_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i @ lInheritableRelation_THFTYPE_i ).
+
+<A NAME="ax_061"></A>thf(ax_061,axiom,
+    instance_THFTYPE_IIiioIioI @ meetsTemporally_THFTYPE_IiioI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_062"></A>thf(ax_062,axiom,
+    instance_THFTYPE_IIiioIioI @ duration_THFTYPE_IiioI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_063"></A>thf(ax_063,axiom,
+    instance_THFTYPE_IiioI @ lAdditionFn_THFTYPE_i @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_064"></A>thf(ax_064,axiom,
+    instance_THFTYPE_IIiioIioI @ range_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_065"></A>thf(ax_065,axiom,
+    instance_THFTYPE_IiioI @ lMonthFn_THFTYPE_i @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_066"></A>thf(ax_066,axiom,
+    domain_THFTYPE_IIiioIiioI @ disjointRelation_THFTYPE_IiioI @ n2_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_067"></A>thf(ax_067,axiom,
+    instance_THFTYPE_IIiioIioI @ meetsTemporally_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_068"></A>thf(ax_068,axiom,
+    domainSubclass_THFTYPE_IiiioI @ lMonthFn_THFTYPE_i @ n2_THFTYPE_i @ lYear_THFTYPE_i ).
+
+<A NAME="ax_069"></A>thf(ax_069,axiom,
+    domain_THFTYPE_IIiioIiioI @ subProcess_THFTYPE_IiioI @ n1_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_070"></A>thf(ax_070,axiom,
+    relatedInternalConcept_THFTYPE_IiioI @ lMonth_THFTYPE_i @ lMonthFn_THFTYPE_i ).
+
+<A NAME="ax_071"></A>thf(ax_071,axiom,
+    instance_THFTYPE_IiioI @ lessThan_THFTYPE_i @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_072"></A>thf(ax_072,axiom,
+    domain_THFTYPE_IIiioIiioI @ meetsTemporally_THFTYPE_IiioI @ n1_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_073"></A>thf(ax_073,axiom,
+    domain_THFTYPE_IiiioI @ equal_THFTYPE_i @ n2_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_074"></A>thf(ax_074,axiom,
+    domain_THFTYPE_IIiioIiioI @ disjoint_THFTYPE_IiioI @ n2_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_075"></A>thf(ax_075,axiom,
+    instance_THFTYPE_IiioI @ lSubtractionFn_THFTYPE_i @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_076"></A>thf(ax_076,axiom,
+    domain_THFTYPE_IIiioIiioI @ subProcess_THFTYPE_IiioI @ n2_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_077"></A>thf(ax_077,axiom,
+    domain_THFTYPE_IiiioI @ agent_THFTYPE_i @ n1_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_078"></A>thf(ax_078,axiom,
+    instance_THFTYPE_IIiioIioI @ relatedInternalConcept_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_079"></A>thf(ax_079,axiom,
+    instance_THFTYPE_IiioI @ equal_THFTYPE_i @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_080"></A>thf(ax_080,axiom,
+    instance_THFTYPE_IiioI @ lAdditionFn_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_081"></A>thf(ax_081,axiom,
+    instance_THFTYPE_IiioI @ lessThan_THFTYPE_i @ lIrreflexiveRelation_THFTYPE_i ).
+
+<A NAME="ax_082"></A>thf(ax_082,axiom,
+    domain_THFTYPE_IIiioIiioI @ disjointRelation_THFTYPE_IiioI @ n1_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_083"></A>thf(ax_083,axiom,
+    domain_THFTYPE_IiiioI @ greaterThan_THFTYPE_i @ n2_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_084"></A>thf(ax_084,axiom,
+    domain_THFTYPE_IIiioIiioI @ range_THFTYPE_IiioI @ n2_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_085"></A>thf(ax_085,axiom,
+    domain_THFTYPE_IIiioIiioI @ subrelation_THFTYPE_IiioI @ n2_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_086"></A>thf(ax_086,axiom,
+    instance_THFTYPE_IIiiIioI @ lYearFn_THFTYPE_IiiI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_087"></A>thf(ax_087,axiom,
+    instance_THFTYPE_IiioI @ attribute_THFTYPE_i @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_088"></A>thf(ax_088,axiom,
+    instance_THFTYPE_IIiiIioI @ lWhenFn_THFTYPE_IiiI @ lUnaryFunction_THFTYPE_i ).
+
+<A NAME="ax_089"></A>thf(ax_089,axiom,
+    subrelation_THFTYPE_IiioI @ result_THFTYPE_i @ patient_THFTYPE_i ).
+
+<A NAME="ax_090"></A>thf(ax_090,axiom,
+    domain_THFTYPE_IiiioI @ lMultiplicationFn_THFTYPE_i @ n1_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_091"></A>thf(ax_091,axiom,
+    domain_THFTYPE_IiiioI @ patient_THFTYPE_i @ n1_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_092"></A>thf(ax_092,axiom,
+    instance_THFTYPE_IIiiIioI @ lCardinalityFn_THFTYPE_IiiI @ lUnaryFunction_THFTYPE_i ).
+
+<A NAME="ax_093"></A>thf(ax_093,axiom,
+    instance_THFTYPE_IiioI @ greaterThan_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_094"></A>thf(ax_094,axiom,
+    instance_THFTYPE_IiioI @ lMultiplicationFn_THFTYPE_i @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_095"></A>thf(ax_095,axiom,
+    domain_THFTYPE_IiiioI @ patient_THFTYPE_i @ n2_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_096"></A>thf(ax_096,axiom,
+    instance_THFTYPE_IiioI @ documentation_THFTYPE_i @ lTernaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_097"></A>thf(ax_097,axiom,
+    instance_THFTYPE_IIiioIioI @ duration_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_098"></A>thf(ax_098,axiom,
+    instance_THFTYPE_IiioI @ orientation_THFTYPE_i @ lTernaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_099"></A>thf(ax_099,axiom,
+    domain_THFTYPE_IIiiioIiioI @ domain_THFTYPE_IiiioI @ n1_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_100"></A>thf(ax_100,axiom,
+    instance_THFTYPE_IiioI @ greaterThan_THFTYPE_i @ lIrreflexiveRelation_THFTYPE_i ).
+
+<A NAME="ax_101"></A>thf(ax_101,axiom,
+    domain_THFTYPE_IiiioI @ result_THFTYPE_i @ n2_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_102"></A>thf(ax_102,axiom,
+    instance_THFTYPE_IiioI @ lMultiplicationFn_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_103"></A>thf(ax_103,axiom,
+    instance_THFTYPE_IiioI @ lTemporalCompositionFn_THFTYPE_i @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_104"></A>thf(ax_104,axiom,
+    domain_THFTYPE_IIiioIiioI @ relatedInternalConcept_THFTYPE_IiioI @ n2_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_105"></A>thf(ax_105,axiom,
+    instance_THFTYPE_IIiioIioI @ subrelation_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_106"></A>thf(ax_106,axiom,
+    relatedInternalConcept_THFTYPE_IIiioIIiioIoI @ disjointRelation_THFTYPE_IiioI @ disjoint_THFTYPE_IiioI ).
+
+<A NAME="ax_107"></A>thf(ax_107,axiom,
+    domain_THFTYPE_IiiioI @ greaterThan_THFTYPE_i @ n1_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_108"></A>thf(ax_108,axiom,
+    domain_THFTYPE_IIiioIiioI @ part_THFTYPE_IiioI @ n1_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_109"></A>thf(ax_109,axiom,
+    instance_THFTYPE_IIiiIioI @ lBeginFn_THFTYPE_IiiI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_110"></A>thf(ax_110,axiom,
+    domain_THFTYPE_IIiiIiioI @ lBeginFn_THFTYPE_IiiI @ n1_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_111"></A>thf(ax_111,axiom,
+    instance_THFTYPE_IiioI @ lSubtractionFn_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_112"></A>thf(ax_112,axiom,
+    instance_THFTYPE_IIiioIioI @ instance_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_113"></A>thf(ax_113,axiom,
+    instance_THFTYPE_IiioI @ attribute_THFTYPE_i @ lIrreflexiveRelation_THFTYPE_i ).
+
+<A NAME="ax_114"></A>thf(ax_114,axiom,
+    domain_THFTYPE_IiiioI @ lessThan_THFTYPE_i @ n1_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_115"></A>thf(ax_115,axiom,
+    domain_THFTYPE_IIiioIiioI @ instance_THFTYPE_IiioI @ n1_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_116"></A>thf(ax_116,axiom,
+    instance_THFTYPE_IIiooIioI @ holdsDuring_THFTYPE_IiooI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_117"></A>thf(ax_117,axiom,
+    domain_THFTYPE_IIiioIiioI @ part_THFTYPE_IiioI @ n2_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_118"></A>thf(ax_118,axiom,
+    instance_THFTYPE_IIiioIioI @ temporalPart_THFTYPE_IiioI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_119"></A>thf(ax_119,axiom,
+    domain_THFTYPE_IiiioI @ instrument_THFTYPE_i @ n2_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_120"></A>thf(ax_120,axiom,
+    domain_THFTYPE_IiiioI @ lAdditionFn_THFTYPE_i @ n1_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_121"></A>thf(ax_121,axiom,
+    domain_THFTYPE_IIiiIiioI @ lYearFn_THFTYPE_IiiI @ n1_THFTYPE_i @ lInteger_THFTYPE_i ).
+
+<A NAME="ax_122"></A>thf(ax_122,axiom,
+    instance_THFTYPE_IIiioIioI @ range_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_123"></A>thf(ax_123,axiom,
+    instance_THFTYPE_IIIiioIiioIioI @ domain_THFTYPE_IIiioIiioI @ lTernaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_124"></A>thf(ax_124,axiom,
+    domain_THFTYPE_IIiiioIiioI @ domain_THFTYPE_IiiioI @ n3_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_125"></A>thf(ax_125,axiom,
+    instance_THFTYPE_IIiiIioI @ lCardinalityFn_THFTYPE_IiiI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_126"></A>thf(ax_126,axiom,
+    domain_THFTYPE_IiiioI @ documentation_THFTYPE_i @ n1_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_127"></A>thf(ax_127,axiom,
+    instance_THFTYPE_IIiioIioI @ rangeSubclass_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_128"></A>thf(ax_128,axiom,
+    relatedInternalConcept_THFTYPE_IiIiiIoI @ lYear_THFTYPE_i @ lYearFn_THFTYPE_IiiI ).
+
+<A NAME="ax_129"></A>thf(ax_129,axiom,
+    domain_THFTYPE_IiiioI @ equal_THFTYPE_i @ n1_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_130"></A>thf(ax_130,axiom,
+    instance_THFTYPE_IIiiIioI @ lCardinalityFn_THFTYPE_IiiI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_131"></A>thf(ax_131,axiom,
+    instance_THFTYPE_IIiioIioI @ disjoint_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_132"></A>thf(ax_132,axiom,
+    instance_THFTYPE_IIiioIioI @ temporalPart_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_133"></A>thf(ax_133,axiom,
+    instance_THFTYPE_IiioI @ lMultiplicationFn_THFTYPE_i @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_134"></A>thf(ax_134,axiom,
+    instance_THFTYPE_IIiioIioI @ subProcess_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_135"></A>thf(ax_135,axiom,
+    instance_THFTYPE_IiioI @ greaterThan_THFTYPE_i @ lTransitiveRelation_THFTYPE_i ).
+
+<A NAME="ax_136"></A>thf(ax_136,axiom,
+    instance_THFTYPE_IIiioIioI @ disjointRelation_THFTYPE_IiioI @ lIrreflexiveRelation_THFTYPE_i ).
+
+<A NAME="ax_137"></A>thf(ax_137,axiom,
+    instance_THFTYPE_IiioI @ lMonthFn_THFTYPE_i @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_138"></A>thf(ax_138,axiom,
+    instance_THFTYPE_IiioI @ greaterThan_THFTYPE_i @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_139"></A>thf(ax_139,axiom,
+    instance_THFTYPE_IIiiIioI @ lBeginFn_THFTYPE_IiiI @ lUnaryFunction_THFTYPE_i ).
+
+<A NAME="ax_140"></A>thf(ax_140,axiom,
+    instance_THFTYPE_IIiiiIioI @ lMeasureFn_THFTYPE_IiiiI @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_141"></A>thf(ax_141,axiom,
+    domain_THFTYPE_IiiioI @ lMultiplicationFn_THFTYPE_i @ n2_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_142"></A>thf(ax_142,axiom,
+    instance_THFTYPE_IIiiIioI @ lBeginFn_THFTYPE_IiiI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_143"></A>thf(ax_143,axiom,
+    instance_THFTYPE_IIiioIioI @ meetsTemporally_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_144"></A>thf(ax_144,axiom,
+    domainSubclass_THFTYPE_IiiioI @ lMonthFn_THFTYPE_i @ n1_THFTYPE_i @ lMonth_THFTYPE_i ).
+
+<A NAME="ax_145"></A>thf(ax_145,axiom,
+    instance_THFTYPE_IIiioIioI @ subclass_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_146"></A>thf(ax_146,axiom,
+    domain_THFTYPE_IiiioI @ result_THFTYPE_i @ n1_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_147"></A>thf(ax_147,axiom,
+    instance_THFTYPE_IIiiIioI @ lEndFn_THFTYPE_IiiI @ lUnaryFunction_THFTYPE_i ).
+
+<A NAME="ax_148"></A>thf(ax_148,axiom,
+    domain_THFTYPE_IIiioIiioI @ subclass_THFTYPE_IiioI @ n2_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_149"></A>thf(ax_149,axiom,
+    instance_THFTYPE_IIiiIioI @ lEndFn_THFTYPE_IiiI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_150"></A>thf(ax_150,axiom,
+    domain_THFTYPE_IiiioI @ lTemporalCompositionFn_THFTYPE_i @ n1_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_151"></A>thf(ax_151,axiom,
+    domain_THFTYPE_IIIiioIIiioIoIiioI @ relatedInternalConcept_THFTYPE_IIiioIIiioIoI @ n1_THFTYPE_i @ lEntity_THFTYPE_i ).
+
+<A NAME="ax_152"></A>thf(ax_152,axiom,
+    instance_THFTYPE_IiioI @ lTemporalCompositionFn_THFTYPE_i @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_153"></A>thf(ax_153,axiom,
+    domain_THFTYPE_IIiioIiioI @ subclass_THFTYPE_IiioI @ n1_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_154"></A>thf(ax_154,axiom,
+    domain_THFTYPE_IiiioI @ lSubtractionFn_THFTYPE_i @ n2_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_155"></A>thf(ax_155,axiom,
+    instance_THFTYPE_IiioI @ equal_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_156"></A>thf(ax_156,axiom,
+    domainSubclass_THFTYPE_IiiioI @ lTemporalCompositionFn_THFTYPE_i @ n2_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_157"></A>thf(ax_157,axiom,
+    instance_THFTYPE_IIiiIioI @ lYearFn_THFTYPE_IiiI @ lUnaryFunction_THFTYPE_i ).
+
+<A NAME="ax_158"></A>thf(ax_158,axiom,
+    domain_THFTYPE_IiiioI @ orientation_THFTYPE_i @ n2_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_159"></A>thf(ax_159,axiom,
+    domain_THFTYPE_IIiiioIiioI @ domainSubclass_THFTYPE_IiiioI @ n1_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_160"></A>thf(ax_160,axiom,
+    relatedInternalConcept_THFTYPE_IiioI @ lDay_THFTYPE_i @ lDayDuration_THFTYPE_i ).
+
+<A NAME="ax_161"></A>thf(ax_161,axiom,
+    disjointRelation_THFTYPE_IiioI @ result_THFTYPE_i @ instrument_THFTYPE_i ).
+
+<A NAME="ax_162"></A>thf(ax_162,axiom,
+    instance_THFTYPE_IIiiiIioI @ lMeasureFn_THFTYPE_IiiiI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_163"></A>thf(ax_163,axiom,
+    domain_THFTYPE_IiiioI @ instrument_THFTYPE_i @ n1_THFTYPE_i @ lProcess_THFTYPE_i ).
+
+<A NAME="ax_164"></A>thf(ax_164,axiom,
+    instance_THFTYPE_IIiioIioI @ duration_THFTYPE_IiioI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_165"></A>thf(ax_165,axiom,
+    instance_THFTYPE_IiioI @ lAdditionFn_THFTYPE_i @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_166"></A>thf(ax_166,axiom,
+    instance_THFTYPE_IiioI @ lSubtractionFn_THFTYPE_i @ lBinaryFunction_THFTYPE_i ).
+
+<A NAME="ax_167"></A>thf(ax_167,axiom,
+    domain_THFTYPE_IIiioIiioI @ instance_THFTYPE_IiioI @ n2_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_168"></A>thf(ax_168,axiom,
+    domain_THFTYPE_IiiioI @ lSubtractionFn_THFTYPE_i @ n1_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_169"></A>thf(ax_169,axiom,
+    domain_THFTYPE_IIiioIiioI @ duration_THFTYPE_IiioI @ n1_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_170"></A>thf(ax_170,axiom,
+    domain_THFTYPE_IIiioIiioI @ subrelation_THFTYPE_IiioI @ n1_THFTYPE_i @ lRelation_THFTYPE_i ).
+
+<A NAME="ax_171"></A>thf(ax_171,axiom,
+    instance_THFTYPE_IIiiIioI @ lEndFn_THFTYPE_IiiI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_172"></A>thf(ax_172,axiom,
+    instance_THFTYPE_IIiiioIioI @ domainSubclass_THFTYPE_IiiioI @ lTernaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_173"></A>thf(ax_173,axiom,
+    domain_THFTYPE_IIiioIiioI @ meetsTemporally_THFTYPE_IiioI @ n2_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_174"></A>thf(ax_174,axiom,
+    domain_THFTYPE_IiiioI @ lessThan_THFTYPE_i @ n2_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_175"></A>thf(ax_175,axiom,
+    instance_THFTYPE_IIiooIioI @ holdsDuring_THFTYPE_IiooI @ lAsymmetricRelation_THFTYPE_i ).
+
+<A NAME="ax_176"></A>thf(ax_176,axiom,
+    domainSubclass_THFTYPE_IIiioIiioI @ rangeSubclass_THFTYPE_IiioI @ n2_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_177"></A>thf(ax_177,axiom,
+    instance_THFTYPE_IiioI @ lessThan_THFTYPE_i @ lTransitiveRelation_THFTYPE_i ).
+
+<A NAME="ax_178"></A>thf(ax_178,axiom,
+    domain_THFTYPE_IIiioIiioI @ disjoint_THFTYPE_IiioI @ n1_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_179"></A>thf(ax_179,axiom,
+    subrelation_THFTYPE_IiioI @ instrument_THFTYPE_i @ patient_THFTYPE_i ).
+
+<A NAME="ax_180"></A>thf(ax_180,axiom,
+    domain_THFTYPE_IIiiIiioI @ lEndFn_THFTYPE_IiiI @ n1_THFTYPE_i @ lTimeInterval_THFTYPE_i ).
+
+<A NAME="ax_181"></A>thf(ax_181,axiom,
+    instance_THFTYPE_IIiioIioI @ disjointRelation_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+<A NAME="ax_182"></A>thf(ax_182,axiom,
+    domain_THFTYPE_IiiioI @ orientation_THFTYPE_i @ n1_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_183"></A>thf(ax_183,axiom,
+    instance_THFTYPE_IIiiIioI @ lWhenFn_THFTYPE_IiiI @ lTotalValuedRelation_THFTYPE_i ).
+
+<A NAME="ax_184"></A>thf(ax_184,axiom,
+    instance_THFTYPE_IiioI @ lessThan_THFTYPE_i @ lRelationExtendedToQuantities_THFTYPE_i ).
+
+<A NAME="ax_185"></A>thf(ax_185,axiom,
+    domain_THFTYPE_IiiioI @ attribute_THFTYPE_i @ n1_THFTYPE_i @ lObject_THFTYPE_i ).
+
+<A NAME="ax_186"></A>thf(ax_186,axiom,
+    domain_THFTYPE_IiiioI @ lAdditionFn_THFTYPE_i @ n2_THFTYPE_i @ lQuantity_THFTYPE_i ).
+
+<A NAME="ax_187"></A>thf(ax_187,axiom,
+    instance_THFTYPE_IIiioIioI @ located_THFTYPE_IiioI @ lTransitiveRelation_THFTYPE_i ).
+
+<A NAME="ax_188"></A>thf(ax_188,axiom,
+    domain_THFTYPE_IIiiioIiioI @ domainSubclass_THFTYPE_IiiioI @ n3_THFTYPE_i @ lSetOrClass_THFTYPE_i ).
+
+<A NAME="ax_189"></A>thf(ax_189,axiom,
+    instance_THFTYPE_IIiiIioI @ lWhenFn_THFTYPE_IiiI @ lTemporalRelation_THFTYPE_i ).
+
+<A NAME="ax_190"></A>thf(ax_190,axiom,
+    instance_THFTYPE_IIiioIioI @ rangeSubclass_THFTYPE_IiioI @ lBinaryPredicate_THFTYPE_i ).
+
+%----The translated conjectures
+<A NAME="con"></A>thf(con,conjecture,
+    ? [X: $i,Y: $i] : ( holdsDuring_THFTYPE_IiooI @ ( lYearFn_THFTYPE_IiiI @ Y ) @ ( likes_THFTYPE_IiioI @ lSue_THFTYPE_i @ X ) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

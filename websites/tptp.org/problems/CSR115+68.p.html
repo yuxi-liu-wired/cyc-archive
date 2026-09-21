@@ -1,0 +1,217 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+68.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+68.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+68 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B68" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+68 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_wp_478_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.40 v9.0.0, 0.25 v8.2.0, 0.27 v8.1.0, 0.29 v7.5.0, 0.38 v7.4.0, 0.31 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.31 v6.2.0, 0.45 v6.1.0, 0.52 v6.0.0, 0.50 v5.5.0, 0.54 v5.4.0, 0.52 v5.3.0, 0.57 v5.2.0, 0.43 v5.0.0, 0.45 v4.1.0, 0.50 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10851 (   0 equ)
+%            Maximal formula atoms :  144 (   1 avg)
+%            Number of connectives :  662 (   0   ~;  18   |; 518   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  144 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-5 aty)
+%            Number of functors    : 16657 (16657 usr;16656 con; 0-2 aty)
+%            Number of variables   :  475 ( 405   !;  70   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_wp_478"></A>fof(synth_qa07_007_mira_wp_478,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6] :
+      ( attr(X0,X1)
+      & attr(X3,X2)
+      & attr(X5,X6)
+      & obj(X4,X0)
+      & sub(X1,name_1_1)
+      & sub(X0,firma_1_1)
+      & sub(X2,name_1_1)
+      & val(X1,bmw_0)
+      & val(X2,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_wp_478"></A>fof(ave07_era5_synth_qa07_007_mira_wp_478,hypothesis,
+    ( pred(c123,motor__1_1)
+    & pred(c130,zw__366lfzylindermotor_1_1)
+    & prop(c130,leistungsgesteigerten_1_1)
+    & subs(c145,gehsport_1_1)
+    & attch(c147,c130)
+    & attr(c147,c148)
+    & sub(c147,firma_1_1)
+    & sub(c148,name_1_1)
+    & val(c148,bmw_0)
+    & sub(c149,gmbh__1_1)
+    & tupl_p5(c218,c123,c130,c145,c149)
+    & assoc(gehsport_1_1,motor__1_1)
+    & subs(gehsport_1_1,sport__1_1)
+    & assoc(zw__366lfzylindermotor_1_1,walze_1_1)
+    & assoc(zw__366lfzylindermotor_1_1,zw__366lf_1_1)
+    & sub(zw__366lfzylindermotor_1_1,motor__1_1)
+    & sort(c123,d)
+    & card(c123,cons(x_constant,cons(int1,nil)))
+    & etype(c123,int1)
+    & fact(c123,real)
+    & gener(c123,sp)
+    & quant(c123,mult)
+    & refer(c123,det)
+    & varia(c123,con)
+    & sort(motor__1_1,d)
+    & card(motor__1_1,int1)
+    & etype(motor__1_1,int0)
+    & fact(motor__1_1,real)
+    & gener(motor__1_1,ge)
+    & quant(motor__1_1,one)
+    & refer(motor__1_1,refer_c)
+    & varia(motor__1_1,varia_c)
+    & sort(c130,d)
+    & card(c130,cons(x_constant,cons(int1,nil)))
+    & etype(c130,int1)
+    & fact(c130,real)
+    & gener(c130,sp)
+    & quant(c130,mult)
+    & refer(c130,det)
+    & varia(c130,varia_c)
+    & sort(zw__366lfzylindermotor_1_1,d)
+    & card(zw__366lfzylindermotor_1_1,int1)
+    & etype(zw__366lfzylindermotor_1_1,int0)
+    & fact(zw__366lfzylindermotor_1_1,real)
+    & gener(zw__366lfzylindermotor_1_1,ge)
+    & quant(zw__366lfzylindermotor_1_1,one)
+    & refer(zw__366lfzylindermotor_1_1,refer_c)
+    & varia(zw__366lfzylindermotor_1_1,varia_c)
+    & sort(leistungsgesteigerten_1_1,gq)
+    & sort(c145,ad)
+    & card(c145,int1)
+    & etype(c145,int0)
+    & fact(c145,real)
+    & gener(c145,gener_c)
+    & quant(c145,one)
+    & refer(c145,refer_c)
+    & varia(c145,varia_c)
+    & sort(gehsport_1_1,ad)
+    & card(gehsport_1_1,int1)
+    & etype(gehsport_1_1,int0)
+    & fact(gehsport_1_1,real)
+    & gener(gehsport_1_1,ge)
+    & quant(gehsport_1_1,one)
+    & refer(gehsport_1_1,refer_c)
+    & varia(gehsport_1_1,varia_c)
+    & sort(c147,d)
+    & sort(c147,io)
+    & card(c147,int1)
+    & etype(c147,int0)
+    & fact(c147,real)
+    & gener(c147,sp)
+    & quant(c147,one)
+    & refer(c147,det)
+    & varia(c147,con)
+    & sort(c148,na)
+    & card(c148,int1)
+    & etype(c148,int0)
+    & fact(c148,real)
+    & gener(c148,sp)
+    & quant(c148,one)
+    & refer(c148,indet)
+    & varia(c148,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(c149,d)
+    & sort(c149,io)
+    & card(c149,int1)
+    & etype(c149,int1)
+    & fact(c149,real)
+    & gener(c149,gener_c)
+    & quant(c149,one)
+    & refer(c149,refer_c)
+    & varia(c149,varia_c)
+    & sort(gmbh__1_1,d)
+    & sort(gmbh__1_1,io)
+    & card(gmbh__1_1,card_c)
+    & etype(gmbh__1_1,int1)
+    & fact(gmbh__1_1,real)
+    & gener(gmbh__1_1,ge)
+    & quant(gmbh__1_1,quant_c)
+    & refer(gmbh__1_1,refer_c)
+    & varia(gmbh__1_1,varia_c)
+    & sort(c218,ent)
+    & card(c218,card_c)
+    & etype(c218,etype_c)
+    & fact(c218,real)
+    & gener(c218,gener_c)
+    & quant(c218,quant_c)
+    & refer(c218,refer_c)
+    & varia(c218,varia_c)
+    & sort(sport__1_1,ad)
+    & card(sport__1_1,int1)
+    & etype(sport__1_1,int0)
+    & fact(sport__1_1,real)
+    & gener(sport__1_1,ge)
+    & quant(sport__1_1,one)
+    & refer(sport__1_1,refer_c)
+    & varia(sport__1_1,varia_c)
+    & sort(walze_1_1,d)
+    & card(walze_1_1,int1)
+    & etype(walze_1_1,int0)
+    & fact(walze_1_1,real)
+    & gener(walze_1_1,ge)
+    & quant(walze_1_1,one)
+    & refer(walze_1_1,refer_c)
+    & varia(walze_1_1,varia_c)
+    & sort(zw__366lf_1_1,nu)
+    & card(zw__366lf_1_1,int12) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

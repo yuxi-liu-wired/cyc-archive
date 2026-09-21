@@ -1,0 +1,172 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR001+1.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR001+1.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR001+1 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR001%2B1" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001+1 : TPTP v9.3.1. Bugfixed v3.1.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Water level is 3 at time 4
+% Version  : [Mue04] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=MS05>MS05</a>]  Mueller & Sutcliffe (2005), Reasoning in the Event Cal
+%          : [<a href=SeeTPTP?Category=BibTeX&File=Mue04>Mue04</a>] Mueller (2004), A Tool for Satisfiability-based Common
+%          : [<a href=SeeTPTP?Category=BibTeX&File=MS02>MS02</a>]  Miller & Shanahan (2002), Some Alternative Formulation
+% Source   : [MS05]
+% Names    :
+
+% Status   : Theorem
+% Rating   : 0.61 v9.3.0, 0.67 v9.1.0, 0.70 v9.0.0, 0.72 v8.2.0, 0.69 v7.5.0, 0.78 v7.4.0, 0.63 v7.3.0, 0.66 v7.1.0, 0.70 v7.0.0, 0.80 v6.4.0, 0.77 v6.3.0, 0.79 v6.2.0, 0.80 v6.1.0, 0.97 v6.0.0, 0.91 v5.5.0, 0.89 v5.4.0, 0.86 v5.3.0, 0.96 v5.2.0, 0.85 v5.1.0, 0.86 v5.0.0, 0.88 v4.1.0, 0.91 v4.0.0, 0.96 v3.7.0, 0.90 v3.5.0, 0.89 v3.3.0, 0.79 v3.2.0, 0.82 v3.1.0
+% Syntax   : Number of formulae    :   55 (  25 unt;   0 def)
+%            Number of atoms       :  136 (  40 equ)
+%            Maximal formula atoms :   11 (   2 avg)
+%            Number of connectives :  109 (  28   ~;   8   |;  43   &)
+%                                         (  18 &lt;=>;  12  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   4 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of predicates  :   13 (  12 usr;   0 prp; 2-4 aty)
+%            Number of functors    :   17 (  17 usr;  15 con; 0-2 aty)
+%            Number of variables   :   86 (  74   !;  12   ?)
+% SPC      : FOF_THM_RFO_SEQ
+
+% Comments :
+%------------------------------------------------------------------------------
+%----Include standard discrete event calculus axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001+0.ax>CSR001+0.ax</a>').
+%----Include kitchen sink scenario axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR001+1.ax>CSR001+1.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="plus0_0"></A>fof(plus0_0,axiom,
+    plus(n0,n0) = n0 ).
+
+<A NAME="plus0_1"></A>fof(plus0_1,axiom,
+    plus(n0,n1) = n1 ).
+
+<A NAME="plus0_2"></A>fof(plus0_2,axiom,
+    plus(n0,n2) = n2 ).
+
+<A NAME="plus0_3"></A>fof(plus0_3,axiom,
+    plus(n0,n3) = n3 ).
+
+<A NAME="plus1_1"></A>fof(plus1_1,axiom,
+    plus(n1,n1) = n2 ).
+
+<A NAME="plus1_2"></A>fof(plus1_2,axiom,
+    plus(n1,n2) = n3 ).
+
+<A NAME="plus1_3"></A>fof(plus1_3,axiom,
+    plus(n1,n3) = n4 ).
+
+<A NAME="plus2_2"></A>fof(plus2_2,axiom,
+    plus(n2,n2) = n4 ).
+
+<A NAME="plus2_3"></A>fof(plus2_3,axiom,
+    plus(n2,n3) = n5 ).
+
+<A NAME="plus3_3"></A>fof(plus3_3,axiom,
+    plus(n3,n3) = n6 ).
+
+<A NAME="symmetry_of_plus"></A>fof(symmetry_of_plus,axiom,
+    ! [X,Y] : plus(X,Y) = plus(Y,X) ).
+
+<A NAME="less_or_equal"></A>fof(less_or_equal,axiom,
+    ! [X,Y] :
+      ( less_or_equal(X,Y)
+    &lt;=> ( less(X,Y)
+        | X = Y ) ) ).
+
+<A NAME="less0"></A>fof(less0,axiom,
+    ~ ? [X] : less(X,n0) ).
+
+<A NAME="less1"></A>fof(less1,axiom,
+    ! [X] :
+      ( less(X,n1)
+    &lt;=> less_or_equal(X,n0) ) ).
+
+<A NAME="less2"></A>fof(less2,axiom,
+    ! [X] :
+      ( less(X,n2)
+    &lt;=> less_or_equal(X,n1) ) ).
+
+<A NAME="less3"></A>fof(less3,axiom,
+    ! [X] :
+      ( less(X,n3)
+    &lt;=> less_or_equal(X,n2) ) ).
+
+<A NAME="less4"></A>fof(less4,axiom,
+    ! [X] :
+      ( less(X,n4)
+    &lt;=> less_or_equal(X,n3) ) ).
+
+<A NAME="less5"></A>fof(less5,axiom,
+    ! [X] :
+      ( less(X,n5)
+    &lt;=> less_or_equal(X,n4) ) ).
+
+<A NAME="less6"></A>fof(less6,axiom,
+    ! [X] :
+      ( less(X,n6)
+    &lt;=> less_or_equal(X,n5) ) ).
+
+<A NAME="less7"></A>fof(less7,axiom,
+    ! [X] :
+      ( less(X,n7)
+    &lt;=> less_or_equal(X,n6) ) ).
+
+<A NAME="less8"></A>fof(less8,axiom,
+    ! [X] :
+      ( less(X,n8)
+    &lt;=> less_or_equal(X,n7) ) ).
+
+<A NAME="less9"></A>fof(less9,axiom,
+    ! [X] :
+      ( less(X,n9)
+    &lt;=> less_or_equal(X,n8) ) ).
+
+<A NAME="less_property"></A>fof(less_property,axiom,
+    ! [X,Y] :
+      ( less(X,Y)
+    &lt;=> ( ~ less(Y,X)
+        & Y != X ) ) ).
+
+%----Initial conditions
+<A NAME="waterLevel_0"></A>fof(waterLevel_0,hypothesis,
+    holdsAt(waterLevel(n0),n0) ).
+
+<A NAME="not_filling_0"></A>fof(not_filling_0,hypothesis,
+    ~ holdsAt(filling,n0) ).
+
+<A NAME="not_spilling_0"></A>fof(not_spilling_0,hypothesis,
+    ~ holdsAt(spilling,n0) ).
+
+<A NAME="not_released_waterLevel_0"></A>fof(not_released_waterLevel_0,hypothesis,
+    ! [Height] : ~ releasedAt(waterLevel(Height),n0) ).
+
+<A NAME="not_released_filling_0"></A>fof(not_released_filling_0,hypothesis,
+    ~ releasedAt(filling,n0) ).
+
+<A NAME="not_released_spilling_0"></A>fof(not_released_spilling_0,hypothesis,
+    ~ releasedAt(spilling,n0) ).
+
+<A NAME="waterLevel_4"></A>fof(waterLevel_4,conjecture,
+    holdsAt(waterLevel(n3),n4) ).
+
+%--------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

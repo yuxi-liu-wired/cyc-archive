@@ -1,0 +1,268 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+57.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+57.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+57 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B57" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+57 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1315_a19984_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.47 v9.0.0, 0.25 v8.2.0, 0.27 v8.1.0, 0.36 v7.5.0, 0.43 v7.4.0, 0.31 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.36 v6.4.0, 0.21 v6.3.0, 0.31 v6.2.0, 0.45 v6.1.0, 0.64 v6.0.0, 0.50 v5.5.0, 0.62 v5.4.0, 0.61 v5.3.0, 0.70 v5.2.0, 0.43 v5.0.0, 0.55 v4.1.0, 0.67 v4.0.1, 0.63 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10902 (   0 equ)
+%            Maximal formula atoms :  198 (   1 avg)
+%            Number of connectives :  713 (   0   ~;  18   |; 569   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  198 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16657 (16657 usr;16656 con; 0-2 aty)
+%            Number of variables   :  474 ( 405   !;  69   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1315_a19984"></A>fof(synth_qa07_007_mira_news_1315_a19984,conjecture,
+    ? [X0,X1,X2,X3,X4,X5] :
+      ( attr(X2,X1)
+      & attr(X4,X5)
+      & obj(X3,X0)
+      & sub(X0,firma_1_1)
+      & sub(X1,name_1_1)
+      & val(X1,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1315_a19984"></A>fof(ave07_era5_synth_qa07_007_mira_news_1315_a19984,hypothesis,
+    ( assoc(autobauer_1_1,auto__1_1)
+    & sub(autobauer_1_1,fabrikant_1_1)
+    & attr(c1000,c1001)
+    & prop(c1000,britisch__1_1)
+    & sub(c1000,autobauer_1_1)
+    & sub(c1001,name_1_1)
+    & val(c1001,rover_0)
+    & attr(c1070,c1071)
+    & sub(c1070,firma_1_1)
+    & sub(c1071,name_1_1)
+    & val(c1071,bmw_0)
+    & attr(c1077,c1078)
+    & sub(c1077,land_1_1)
+    & sub(c1078,name_1_1)
+    & val(c1078,england_0)
+    & prop(c1082,politisch__1_1)
+    & prop(c1082,scharf_1_1)
+    & subs(c1082,kontroverse_1_1)
+    & cstr(c1088,c975)
+    & loc(c1088,c1092)
+    & rslt(c1088,c1082)
+    & subs(c1088,ausl__366sen_1_1)
+    & in(c1092,c1077)
+    & cstr(c975,c1082)
+    & obj(c975,c1000)
+    & ornt(c975,c1070)
+    & prop(c975,unerwartet_1_1)
+    & subs(c975,absatz_1_2)
+    & assoc(politisch__1_1,politik_1_1)
+    & chsp1(n374berraschen_1_1,unerwartet_1_1)
+    & sort(autobauer_1_1,d)
+    & sort(autobauer_1_1,io)
+    & card(autobauer_1_1,int1)
+    & etype(autobauer_1_1,int0)
+    & fact(autobauer_1_1,real)
+    & gener(autobauer_1_1,ge)
+    & quant(autobauer_1_1,one)
+    & refer(autobauer_1_1,refer_c)
+    & varia(autobauer_1_1,varia_c)
+    & sort(auto__1_1,d)
+    & card(auto__1_1,int1)
+    & etype(auto__1_1,int0)
+    & fact(auto__1_1,real)
+    & gener(auto__1_1,ge)
+    & quant(auto__1_1,one)
+    & refer(auto__1_1,refer_c)
+    & varia(auto__1_1,varia_c)
+    & sort(fabrikant_1_1,d)
+    & sort(fabrikant_1_1,io)
+    & card(fabrikant_1_1,int1)
+    & etype(fabrikant_1_1,int0)
+    & fact(fabrikant_1_1,real)
+    & gener(fabrikant_1_1,ge)
+    & quant(fabrikant_1_1,one)
+    & refer(fabrikant_1_1,refer_c)
+    & varia(fabrikant_1_1,varia_c)
+    & sort(c1000,d)
+    & sort(c1000,io)
+    & card(c1000,int1)
+    & etype(c1000,int0)
+    & fact(c1000,real)
+    & gener(c1000,sp)
+    & quant(c1000,one)
+    & refer(c1000,det)
+    & varia(c1000,con)
+    & sort(c1001,na)
+    & card(c1001,int1)
+    & etype(c1001,int0)
+    & fact(c1001,real)
+    & gener(c1001,sp)
+    & quant(c1001,one)
+    & refer(c1001,indet)
+    & varia(c1001,varia_c)
+    & sort(britisch__1_1,nq)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(rover_0,fe)
+    & sort(c1070,d)
+    & sort(c1070,io)
+    & card(c1070,int1)
+    & etype(c1070,int0)
+    & fact(c1070,real)
+    & gener(c1070,sp)
+    & quant(c1070,one)
+    & refer(c1070,det)
+    & varia(c1070,con)
+    & sort(c1071,na)
+    & card(c1071,int1)
+    & etype(c1071,int0)
+    & fact(c1071,real)
+    & gener(c1071,sp)
+    & quant(c1071,one)
+    & refer(c1071,indet)
+    & varia(c1071,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(c1077,d)
+    & sort(c1077,io)
+    & card(c1077,int1)
+    & etype(c1077,int0)
+    & fact(c1077,real)
+    & gener(c1077,sp)
+    & quant(c1077,one)
+    & refer(c1077,det)
+    & varia(c1077,con)
+    & sort(c1078,na)
+    & card(c1078,int1)
+    & etype(c1078,int0)
+    & fact(c1078,real)
+    & gener(c1078,sp)
+    & quant(c1078,one)
+    & refer(c1078,indet)
+    & varia(c1078,varia_c)
+    & sort(land_1_1,d)
+    & sort(land_1_1,io)
+    & card(land_1_1,int1)
+    & etype(land_1_1,int0)
+    & fact(land_1_1,real)
+    & gener(land_1_1,ge)
+    & quant(land_1_1,one)
+    & refer(land_1_1,refer_c)
+    & varia(land_1_1,varia_c)
+    & sort(england_0,fe)
+    & sort(c1082,ad)
+    & card(c1082,int1)
+    & etype(c1082,int0)
+    & fact(c1082,real)
+    & gener(c1082,sp)
+    & quant(c1082,one)
+    & refer(c1082,indet)
+    & varia(c1082,varia_c)
+    & sort(politisch__1_1,tq)
+    & sort(scharf_1_1,nq)
+    & sort(kontroverse_1_1,ad)
+    & card(kontroverse_1_1,int1)
+    & etype(kontroverse_1_1,int0)
+    & fact(kontroverse_1_1,real)
+    & gener(kontroverse_1_1,ge)
+    & quant(kontroverse_1_1,one)
+    & refer(kontroverse_1_1,refer_c)
+    & varia(kontroverse_1_1,varia_c)
+    & sort(c1088,dn)
+    & fact(c1088,real)
+    & gener(c1088,sp)
+    & sort(c975,ad)
+    & card(c975,int1)
+    & etype(c975,int0)
+    & fact(c975,real)
+    & gener(c975,sp)
+    & quant(c975,one)
+    & refer(c975,det)
+    & varia(c975,con)
+    & sort(c1092,l)
+    & card(c1092,int1)
+    & etype(c1092,int0)
+    & fact(c1092,real)
+    & gener(c1092,sp)
+    & quant(c1092,one)
+    & refer(c1092,det)
+    & varia(c1092,con)
+    & sort(ausl__366sen_1_1,dn)
+    & fact(ausl__366sen_1_1,real)
+    & gener(ausl__366sen_1_1,ge)
+    & sort(unerwartet_1_1,nq)
+    & sort(absatz_1_2,ad)
+    & card(absatz_1_2,int1)
+    & etype(absatz_1_2,int0)
+    & fact(absatz_1_2,real)
+    & gener(absatz_1_2,ge)
+    & quant(absatz_1_2,one)
+    & refer(absatz_1_2,refer_c)
+    & varia(absatz_1_2,varia_c)
+    & sort(politik_1_1,ad)
+    & sort(politik_1_1,io)
+    & card(politik_1_1,int1)
+    & etype(politik_1_1,int0)
+    & fact(politik_1_1,real)
+    & gener(politik_1_1,ge)
+    & quant(politik_1_1,one)
+    & refer(politik_1_1,refer_c)
+    & varia(politik_1_1,varia_c)
+    & sort(n374berraschen_1_1,dn)
+    & fact(n374berraschen_1_1,real)
+    & gener(n374berraschen_1_1,ge) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

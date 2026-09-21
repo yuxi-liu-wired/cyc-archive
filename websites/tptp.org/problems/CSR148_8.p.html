@@ -1,0 +1,99 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR148_8.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR148_8.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR148_8 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR148_8" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR148_8 : TPTP v9.3.1. Released v8.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Is there a year in which Sue liked somebody?
+% Version  : Especial * Reduced > Especial.
+% English  : What holds that holds at all times. Mary likes Bill. During 2009 
+%            Sue liked whoever Mary liked. Is there a year in which Sue liked 
+%            somebody?
+
+% Refs     : 
+% Source   : [TPTP]
+% Names    : 
+
+% Status   : Theorem
+% Rating   : 0.00 v8.1.0
+% Syntax   : Number of formulae    :   12 (   4 unt;   8 typ;   0 def)
+%            Number of atoms       :    7 (   0 equ)
+%            Maximal formula atoms :    1 (   1 avg)
+%            Number of connectives :    2 (   0   ~;   0   |;   0   &)
+%                                         (   0 &lt;=>;   2  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :    4 (   2 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of FOOLs       :    4 (   2 fml;   2 var)
+%            Number of types       :    3 (   1 usr)
+%            Number of type conns  :    5 (   3   >;   2   *;   0   +;   0  &lt;&lt;)
+%            Number of predicates  :    2 (   2 usr;   0 prp; 2-2 aty)
+%            Number of functors    :    5 (   5 usr;   4 con; 0-1 aty)
+%            Number of variables   :    5 (   3   !;   2   ?;   5   :)
+% SPC      : TX0_THM_NEQ_NAR_NDT
+
+% Comments : Translated to TXF from the THF version.
+%------------------------------------------------------------------------------
+%----The extracted Signature
+<A NAME="numbers"></A>tff(numbers,type,
+    num: $tType ).
+
+<A NAME="holdsDuring_THFTYPE_IiooI"></A>tff(holdsDuring_THFTYPE_IiooI,type,
+    holdsDuring_THFTYPE_IiooI: ( $i * $o ) > $o ).
+
+<A NAME="lBill_THFTYPE_i"></A>tff(lBill_THFTYPE_i,type,
+    lBill_THFTYPE_i: $i ).
+
+<A NAME="lMary_THFTYPE_i"></A>tff(lMary_THFTYPE_i,type,
+    lMary_THFTYPE_i: $i ).
+
+<A NAME="lSue_THFTYPE_i"></A>tff(lSue_THFTYPE_i,type,
+    lSue_THFTYPE_i: $i ).
+
+<A NAME="lYearFn_THFTYPE_IiiI"></A>tff(lYearFn_THFTYPE_IiiI,type,
+    lYearFn_THFTYPE_IiiI: $i > $i ).
+
+<A NAME="likes_THFTYPE_IiioI"></A>tff(likes_THFTYPE_IiioI,type,
+    likes_THFTYPE_IiioI: ( $i * $i ) > $o ).
+
+<A NAME="n2009_THFTYPE_i"></A>tff(n2009_THFTYPE_i,type,
+    n2009_THFTYPE_i: $i ).
+
+%----The translated axioms
+<A NAME="ax"></A>tff(ax,axiom,
+    likes_THFTYPE_IiioI(lMary_THFTYPE_i,lBill_THFTYPE_i) ).
+
+<A NAME="ax_001"></A>tff(ax_001,axiom,
+    holdsDuring_THFTYPE_IiooI(lYearFn_THFTYPE_IiiI(n2009_THFTYPE_i),
+      ! [X: $i] :
+        ( likes_THFTYPE_IiioI(lMary_THFTYPE_i,X)
+       => likes_THFTYPE_IiioI(lSue_THFTYPE_i,X) )) ).
+
+<A NAME="ax_002"></A>tff(ax_002,axiom,
+    ! [P: $o,Y: $i] :
+      ( (P)
+     => holdsDuring_THFTYPE_IiooI(Y,(P)) ) ).
+
+%----The translated conjectures
+<A NAME="con"></A>tff(con,conjecture,
+    ? [X: $i,Y: $i] : holdsDuring_THFTYPE_IiooI(lYearFn_THFTYPE_IiiI(Y),likes_THFTYPE_IiioI(lSue_THFTYPE_i,X)) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+46.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+46.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+46 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B46" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+46 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1258_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.35 v9.1.0, 0.40 v9.0.0, 0.25 v8.2.0, 0.27 v8.1.0, 0.29 v7.5.0, 0.38 v7.4.0, 0.31 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.36 v6.4.0, 0.21 v6.3.0, 0.31 v6.2.0, 0.45 v6.1.0, 0.60 v6.0.0, 0.50 v5.5.0, 0.54 v5.4.0, 0.52 v5.3.0, 0.61 v5.2.0, 0.43 v5.0.0, 0.45 v4.1.0, 0.56 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10878 (   0 equ)
+%            Maximal formula atoms :  171 (   1 avg)
+%            Number of connectives :  689 (   0   ~;  18   |; 545   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  171 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   86 (  86 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16657 (16657 usr;16656 con; 0-2 aty)
+%            Number of variables   :  475 ( 405   !;  70   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1258"></A>fof(synth_qa07_007_mira_news_1258,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6] :
+      ( attr(X0,X1)
+      & attr(X3,X2)
+      & attr(X5,X6)
+      & obj(X4,X0)
+      & sub(X1,name_1_1)
+      & sub(X0,firma_1_1)
+      & sub(X2,name_1_1)
+      & val(X1,bmw_0)
+      & val(X2,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1258"></A>fof(ave07_era5_synth_qa07_007_mira_news_1258,hypothesis,
+    ( assoc(autofirma_1_1,auto__1_1)
+    & sub(autofirma_1_1,firma_1_1)
+    & agt(c484,c893)
+    & benf(c484,c858)
+    & obj(c484,c902)
+    & subs(c484,nehmen_1_7)
+    & temp(c484,c865)
+    & attr(c858,c859)
+    & sub(c858,firma_1_1)
+    & sub(c859,name_1_1)
+    & val(c859,bmw_0)
+    & prop(c865,pass__351_1_1)
+    & sub(c865,sommer__1_1)
+    & attr(c893,c894)
+    & sub(c893,autofirma_1_1)
+    & sub(c894,name_1_1)
+    & val(c894,rover_0)
+    & prop(c902,britisch__1_1)
+    & prop(c902,unabh__344ngig_1_1)
+    & sub(c902,c904)
+    & pmod(c904,letzt_1_1,massenhersteller_1_1)
+    & agt(c907,c902)
+    & subs(c907,herstellen_1_1)
+    & assoc(massenhersteller_1_1,masse_1_1)
+    & sub(massenhersteller_1_1,fabrikant_1_1)
+    & sort(autofirma_1_1,d)
+    & sort(autofirma_1_1,io)
+    & card(autofirma_1_1,int1)
+    & etype(autofirma_1_1,int0)
+    & fact(autofirma_1_1,real)
+    & gener(autofirma_1_1,ge)
+    & quant(autofirma_1_1,one)
+    & refer(autofirma_1_1,refer_c)
+    & varia(autofirma_1_1,varia_c)
+    & sort(auto__1_1,d)
+    & card(auto__1_1,int1)
+    & etype(auto__1_1,int0)
+    & fact(auto__1_1,real)
+    & gener(auto__1_1,ge)
+    & quant(auto__1_1,one)
+    & refer(auto__1_1,refer_c)
+    & varia(auto__1_1,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(c484,da)
+    & fact(c484,real)
+    & gener(c484,sp)
+    & sort(c893,d)
+    & sort(c893,io)
+    & card(c893,int1)
+    & etype(c893,int0)
+    & fact(c893,real)
+    & gener(c893,sp)
+    & quant(c893,one)
+    & refer(c893,det)
+    & varia(c893,con)
+    & sort(c858,d)
+    & sort(c858,io)
+    & card(c858,int1)
+    & etype(c858,int0)
+    & fact(c858,real)
+    & gener(c858,sp)
+    & quant(c858,one)
+    & refer(c858,det)
+    & varia(c858,con)
+    & sort(c902,io)
+    & card(c902,int1)
+    & etype(c902,int0)
+    & fact(c902,real)
+    & gener(c902,sp)
+    & quant(c902,one)
+    & refer(c902,det)
+    & varia(c902,con)
+    & sort(nehmen_1_7,da)
+    & fact(nehmen_1_7,real)
+    & gener(nehmen_1_7,ge)
+    & sort(c865,ta)
+    & card(c865,int1)
+    & etype(c865,int0)
+    & fact(c865,real)
+    & gener(c865,sp)
+    & quant(c865,one)
+    & refer(c865,det)
+    & varia(c865,con)
+    & sort(c859,na)
+    & card(c859,int1)
+    & etype(c859,int0)
+    & fact(c859,real)
+    & gener(c859,sp)
+    & quant(c859,one)
+    & refer(c859,indet)
+    & varia(c859,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(pass__351_1_1,tq)
+    & sort(sommer__1_1,ta)
+    & card(sommer__1_1,int1)
+    & etype(sommer__1_1,int0)
+    & fact(sommer__1_1,real)
+    & gener(sommer__1_1,ge)
+    & quant(sommer__1_1,one)
+    & refer(sommer__1_1,refer_c)
+    & varia(sommer__1_1,varia_c)
+    & sort(c894,na)
+    & card(c894,int1)
+    & etype(c894,int0)
+    & fact(c894,real)
+    & gener(c894,sp)
+    & quant(c894,one)
+    & refer(c894,indet)
+    & varia(c894,varia_c)
+    & sort(rover_0,fe)
+    & sort(britisch__1_1,nq)
+    & sort(unabh__344ngig_1_1,nq)
+    & sort(c904,d)
+    & sort(c904,io)
+    & card(c904,int1)
+    & etype(c904,int0)
+    & fact(c904,real)
+    & gener(c904,ge)
+    & quant(c904,one)
+    & refer(c904,refer_c)
+    & varia(c904,varia_c)
+    & sort(letzt_1_1,oq)
+    & card(letzt_1_1,card_c)
+    & sort(massenhersteller_1_1,d)
+    & sort(massenhersteller_1_1,io)
+    & card(massenhersteller_1_1,int1)
+    & etype(massenhersteller_1_1,int0)
+    & fact(massenhersteller_1_1,real)
+    & gener(massenhersteller_1_1,ge)
+    & quant(massenhersteller_1_1,one)
+    & refer(massenhersteller_1_1,refer_c)
+    & varia(massenhersteller_1_1,varia_c)
+    & sort(c907,da)
+    & fact(c907,real)
+    & gener(c907,sp)
+    & sort(herstellen_1_1,da)
+    & fact(herstellen_1_1,real)
+    & gener(herstellen_1_1,ge)
+    & sort(masse_1_1,io)
+    & card(masse_1_1,card_c)
+    & etype(masse_1_1,int1)
+    & fact(masse_1_1,real)
+    & gener(masse_1_1,ge)
+    & quant(masse_1_1,quant_c)
+    & refer(masse_1_1,refer_c)
+    & varia(masse_1_1,varia_c)
+    & sort(fabrikant_1_1,d)
+    & sort(fabrikant_1_1,io)
+    & card(fabrikant_1_1,int1)
+    & etype(fabrikant_1_1,int0)
+    & fact(fabrikant_1_1,real)
+    & gener(fabrikant_1_1,ge)
+    & quant(fabrikant_1_1,one)
+    & refer(fabrikant_1_1,refer_c)
+    & varia(fabrikant_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR114+13.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR114+13.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR114+13 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR114%2B13" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR114+13 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : In which Italian city can you find the Colosseum?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_004_mira_wp_311_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.30 v9.1.0, 0.40 v9.0.0, 0.25 v8.2.0, 0.20 v8.1.0, 0.29 v7.5.0, 0.38 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.36 v6.4.0, 0.29 v6.3.0, 0.31 v6.2.0, 0.45 v6.1.0, 0.56 v6.0.0, 0.50 v5.5.0, 0.58 v5.4.0, 0.57 v5.3.0, 0.70 v5.2.0, 0.57 v5.0.0, 0.55 v4.1.0, 0.67 v4.0.1, 0.63 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10840 (   0 equ)
+%            Maximal formula atoms :  135 (   1 avg)
+%            Number of connectives :  651 (   0   ~;  18   |; 507   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  135 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   87 (  87 usr;   0 prp; 2-5 aty)
+%            Number of functors    : 16653 (16653 usr;16652 con; 0-2 aty)
+%            Number of variables   :  473 ( 405   !;  68   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_004_mira_wp_311"></A>fof(synth_qa07_004_mira_wp_311,conjecture,
+    ? [X0,X1,X2,X3,X4] :
+      ( attr(X0,X1)
+      & loc(X4,X2)
+      & scar(X4,X3)
+      & sub(X1,name_1_1)
+      & sub(X0,stadt__1_1)
+      & subs(X4,stehen_1_1)
+      & val(X1,rom_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_004_mira_wp_311"></A>fof(ave07_era5_synth_qa07_004_mira_wp_311,hypothesis,
+    ( attr(c112,c113)
+    & sub(c112,gebietsinstitution_1_1)
+    & sub(c113,name_1_1)
+    & val(c113,ponza_0)
+    & prop(c117,beliebt_1_1)
+    & sub(c117,ferienziel_1_1)
+    & pred(c123,tourist_1_1)
+    & prop(c123,italienisch__1_1)
+    & attr(c136,c137)
+    & sub(c136,stadt__1_1)
+    & sub(c137,name_1_1)
+    & val(c137,rom_0)
+    & tupl_p5(c694,c112,c117,c123,c136)
+    & assoc(ferienziel_1_1,ferien__1_1)
+    & sub(ferienziel_1_1,ziel_1_1)
+    & sort(c112,d)
+    & sort(c112,io)
+    & card(c112,int1)
+    & etype(c112,int0)
+    & fact(c112,real)
+    & gener(c112,sp)
+    & quant(c112,one)
+    & refer(c112,det)
+    & varia(c112,con)
+    & sort(c113,na)
+    & card(c113,int1)
+    & etype(c113,int0)
+    & fact(c113,real)
+    & gener(c113,sp)
+    & quant(c113,one)
+    & refer(c113,indet)
+    & varia(c113,varia_c)
+    & sort(gebietsinstitution_1_1,d)
+    & sort(gebietsinstitution_1_1,io)
+    & card(gebietsinstitution_1_1,int1)
+    & etype(gebietsinstitution_1_1,int0)
+    & fact(gebietsinstitution_1_1,real)
+    & gener(gebietsinstitution_1_1,ge)
+    & quant(gebietsinstitution_1_1,one)
+    & refer(gebietsinstitution_1_1,refer_c)
+    & varia(gebietsinstitution_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(ponza_0,fe)
+    & sort(c117,io)
+    & card(c117,int1)
+    & etype(c117,int0)
+    & fact(c117,real)
+    & gener(c117,sp)
+    & quant(c117,one)
+    & refer(c117,indet)
+    & varia(c117,varia_c)
+    & sort(beliebt_1_1,nq)
+    & sort(ferienziel_1_1,io)
+    & card(ferienziel_1_1,int1)
+    & etype(ferienziel_1_1,int0)
+    & fact(ferienziel_1_1,real)
+    & gener(ferienziel_1_1,ge)
+    & quant(ferienziel_1_1,one)
+    & refer(ferienziel_1_1,refer_c)
+    & varia(ferienziel_1_1,varia_c)
+    & sort(c123,d)
+    & card(c123,cons(x_constant,cons(int1,nil)))
+    & etype(c123,int1)
+    & fact(c123,real)
+    & gener(c123,gener_c)
+    & quant(c123,mult)
+    & refer(c123,refer_c)
+    & varia(c123,varia_c)
+    & sort(tourist_1_1,d)
+    & card(tourist_1_1,int1)
+    & etype(tourist_1_1,int0)
+    & fact(tourist_1_1,real)
+    & gener(tourist_1_1,ge)
+    & quant(tourist_1_1,one)
+    & refer(tourist_1_1,refer_c)
+    & varia(tourist_1_1,varia_c)
+    & sort(italienisch__1_1,nq)
+    & sort(c136,d)
+    & sort(c136,io)
+    & card(c136,int1)
+    & etype(c136,int0)
+    & fact(c136,real)
+    & gener(c136,sp)
+    & quant(c136,one)
+    & refer(c136,det)
+    & varia(c136,con)
+    & sort(c137,na)
+    & card(c137,int1)
+    & etype(c137,int0)
+    & fact(c137,real)
+    & gener(c137,sp)
+    & quant(c137,one)
+    & refer(c137,indet)
+    & varia(c137,varia_c)
+    & sort(stadt__1_1,d)
+    & sort(stadt__1_1,io)
+    & card(stadt__1_1,int1)
+    & etype(stadt__1_1,int0)
+    & fact(stadt__1_1,real)
+    & gener(stadt__1_1,ge)
+    & quant(stadt__1_1,one)
+    & refer(stadt__1_1,refer_c)
+    & varia(stadt__1_1,varia_c)
+    & sort(rom_0,fe)
+    & sort(c694,ent)
+    & card(c694,card_c)
+    & etype(c694,etype_c)
+    & fact(c694,real)
+    & gener(c694,gener_c)
+    & quant(c694,quant_c)
+    & refer(c694,refer_c)
+    & varia(c694,varia_c)
+    & sort(ferien__1_1,as)
+    & card(ferien__1_1,int1)
+    & etype(ferien__1_1,int0)
+    & fact(ferien__1_1,real)
+    & gener(ferien__1_1,ge)
+    & quant(ferien__1_1,one)
+    & refer(ferien__1_1,refer_c)
+    & varia(ferien__1_1,varia_c)
+    & sort(ziel_1_1,io)
+    & card(ziel_1_1,int1)
+    & etype(ziel_1_1,int0)
+    & fact(ziel_1_1,real)
+    & gener(ziel_1_1,ge)
+    & quant(ziel_1_1,one)
+    & refer(ziel_1_1,refer_c)
+    & varia(ziel_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

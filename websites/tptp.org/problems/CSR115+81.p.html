@@ -1,0 +1,240 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+81.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+81.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+81 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B81" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+81 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_wp_491_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.25 v9.1.0, 0.20 v9.0.0, 0.19 v8.2.0, 0.13 v8.1.0, 0.14 v7.5.0, 0.24 v7.4.0, 0.19 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.21 v6.4.0, 0.14 v6.3.0, 0.23 v6.2.0, 0.27 v6.1.0, 0.48 v6.0.0, 0.50 v5.4.0, 0.48 v5.3.0, 0.57 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.44 v4.0.1, 0.42 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10874 (   0 equ)
+%            Maximal formula atoms :  166 (   1 avg)
+%            Number of connectives :  685 (   0   ~;  18   |; 541   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  166 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   88 (  88 usr;   0 prp; 2-4 aty)
+%            Number of functors    : 16660 (16660 usr;16659 con; 0-2 aty)
+%            Number of variables   :  475 ( 405   !;  70   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_wp_491"></A>fof(synth_qa07_007_mira_wp_491,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6] :
+      ( agt(X4,X3)
+      & attr(X0,X1)
+      & attr(X3,X2)
+      & attr(X5,X6)
+      & sub(X1,name_1_1)
+      & sub(X0,firma_1_1)
+      & sub(X2,name_1_1)
+      & subs(X4,n374bernehmen_1_1)
+      & val(X1,bmw_0)
+      & val(X2,bmw_0) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_wp_491"></A>fof(ave07_era5_synth_qa07_007_mira_wp_491,hypothesis,
+    ( pred(c12,getriebe__1_1)
+    & pred(c16,rotornabe_1_1)
+    & sub(c4,konstruktion_1_1)
+    & agt(c45,c57)
+    & modl(c45,sollen_0)
+    & obj(c45,c62)
+    & subs(c45,n374bernehmen_1_1)
+    & attr(c57,c58)
+    & sub(c57,firma_1_1)
+    & sub(c58,name_1_1)
+    & val(c58,bmw_0)
+    & itms_p4(c62,c4,c12,c16)
+    & attch(c9,c4)
+    & subs(c9,motoranlage_1_1)
+    & assoc(motoranlage_1_1,motor__1_1)
+    & subs(motoranlage_1_1,anlage_1_1)
+    & assoc(rotornabe_1_1,rotor_1_1)
+    & sub(rotornabe_1_1,nabe_1_1)
+    & sort(c12,d)
+    & card(c12,cons(x_constant,cons(int1,nil)))
+    & etype(c12,int1)
+    & fact(c12,real)
+    & gener(c12,gener_c)
+    & quant(c12,mult)
+    & refer(c12,indet)
+    & varia(c12,varia_c)
+    & sort(getriebe__1_1,d)
+    & card(getriebe__1_1,int1)
+    & etype(getriebe__1_1,int0)
+    & fact(getriebe__1_1,real)
+    & gener(getriebe__1_1,ge)
+    & quant(getriebe__1_1,one)
+    & refer(getriebe__1_1,refer_c)
+    & varia(getriebe__1_1,varia_c)
+    & sort(c16,o)
+    & card(c16,cons(x_constant,cons(int1,nil)))
+    & etype(c16,int1)
+    & fact(c16,real)
+    & gener(c16,gener_c)
+    & quant(c16,mult)
+    & refer(c16,indet)
+    & varia(c16,varia_c)
+    & sort(rotornabe_1_1,o)
+    & card(rotornabe_1_1,int1)
+    & etype(rotornabe_1_1,int0)
+    & fact(rotornabe_1_1,real)
+    & gener(rotornabe_1_1,ge)
+    & quant(rotornabe_1_1,one)
+    & refer(rotornabe_1_1,refer_c)
+    & varia(rotornabe_1_1,varia_c)
+    & sort(c4,d)
+    & card(c4,int1)
+    & etype(c4,int0)
+    & fact(c4,real)
+    & gener(c4,sp)
+    & quant(c4,one)
+    & refer(c4,det)
+    & varia(c4,con)
+    & sort(konstruktion_1_1,d)
+    & card(konstruktion_1_1,int1)
+    & etype(konstruktion_1_1,int0)
+    & fact(konstruktion_1_1,real)
+    & gener(konstruktion_1_1,ge)
+    & quant(konstruktion_1_1,one)
+    & refer(konstruktion_1_1,refer_c)
+    & varia(konstruktion_1_1,varia_c)
+    & sort(c45,da)
+    & fact(c45,real)
+    & gener(c45,sp)
+    & sort(c57,d)
+    & sort(c57,io)
+    & card(c57,int1)
+    & etype(c57,int0)
+    & fact(c57,real)
+    & gener(c57,sp)
+    & quant(c57,one)
+    & refer(c57,det)
+    & varia(c57,con)
+    & sort(sollen_0,md)
+    & fact(sollen_0,real)
+    & gener(sollen_0,gener_c)
+    & sort(c62,o)
+    & card(c62,int3)
+    & etype(c62,int1)
+    & fact(c62,real)
+    & gener(c62,sp)
+    & quant(c62,nfquant)
+    & refer(c62,det)
+    & varia(c62,con)
+    & sort(n374bernehmen_1_1,da)
+    & fact(n374bernehmen_1_1,real)
+    & gener(n374bernehmen_1_1,ge)
+    & sort(c58,na)
+    & card(c58,int1)
+    & etype(c58,int0)
+    & fact(c58,real)
+    & gener(c58,sp)
+    & quant(c58,one)
+    & refer(c58,indet)
+    & varia(c58,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(c9,as)
+    & card(c9,int1)
+    & etype(c9,int0)
+    & fact(c9,real)
+    & gener(c9,gener_c)
+    & quant(c9,one)
+    & refer(c9,refer_c)
+    & varia(c9,varia_c)
+    & sort(motoranlage_1_1,as)
+    & card(motoranlage_1_1,int1)
+    & etype(motoranlage_1_1,int0)
+    & fact(motoranlage_1_1,real)
+    & gener(motoranlage_1_1,ge)
+    & quant(motoranlage_1_1,one)
+    & refer(motoranlage_1_1,refer_c)
+    & varia(motoranlage_1_1,varia_c)
+    & sort(motor__1_1,d)
+    & card(motor__1_1,int1)
+    & etype(motor__1_1,int0)
+    & fact(motor__1_1,real)
+    & gener(motor__1_1,ge)
+    & quant(motor__1_1,one)
+    & refer(motor__1_1,refer_c)
+    & varia(motor__1_1,varia_c)
+    & sort(anlage_1_1,as)
+    & card(anlage_1_1,int1)
+    & etype(anlage_1_1,int0)
+    & fact(anlage_1_1,real)
+    & gener(anlage_1_1,ge)
+    & quant(anlage_1_1,one)
+    & refer(anlage_1_1,refer_c)
+    & varia(anlage_1_1,varia_c)
+    & sort(rotor_1_1,o)
+    & card(rotor_1_1,int1)
+    & etype(rotor_1_1,int0)
+    & fact(rotor_1_1,real)
+    & gener(rotor_1_1,ge)
+    & quant(rotor_1_1,one)
+    & refer(rotor_1_1,refer_c)
+    & varia(rotor_1_1,varia_c)
+    & sort(nabe_1_1,o)
+    & card(nabe_1_1,int1)
+    & etype(nabe_1_1,int0)
+    & fact(nabe_1_1,real)
+    & gener(nabe_1_1,ge)
+    & quant(nabe_1_1,one)
+    & refer(nabe_1_1,refer_c)
+    & varia(nabe_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

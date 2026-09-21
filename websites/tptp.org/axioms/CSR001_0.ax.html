@@ -1,0 +1,193 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Axioms File: CSR001_0.ax</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPWorld.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Axioms File: <TT>CSR001_0.ax</TT></H2></CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001_0 : TPTP v9.3.1. Released v9.1.0.
+% Domain   : Commonsense Reasoning
+% Axioms   : Kitchen sink scenario
+% Version  : [Sha97] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Sha97>Sha97</a>] Shanahan (1997), Solving the Frame Problem
+% Source   : [Sha97]
+% Names    :
+
+% Status   : Satisfiable
+% Syntax   : Number of formulae    :   26 (   0 unt;  14 typ;   0 def)
+%            Number of atoms       :   54 (   0 equ)
+%            Maximal formula atoms :    6 (   4 avg)
+%            Number of connectives :   56 (  14   ~;   2   |;  28   &)
+%                                         (   2 &lt;=>;  10  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   12 (   9 avg)
+%            Maximal term depth    :    3 (   1 avg)
+%            Number arithmetic     :   50 (   6 atm;  14 fun;  12 num;  18 var)
+%            Number of types       :    5 (   3 usr;   1 ari;   0 dat;   0 cdt)
+%            Number of type conns  :   30 (  11   >;  19   *;   0   +;   0  &lt;&lt;)
+%            Number of predicates  :   11 (  10 usr;   0 prp; 2-4 aty)
+%            Number of functors    :    4 (   1 usr;   2 con; 0-2 aty)
+%            Number of variables   :   44 (  36   !;   8   ?;  44   :)
+% SPC      : TF0_SAT_NEQ_ARI_NDT
+
+% Comments : 
+%------------------------------------------------------------------------------
+<A NAME="time_type"></A>tff(time_type,type,
+    time: $tType ).
+
+<A NAME="fluent_type"></A>tff(fluent_type,type,
+    fluent: $tType ).
+
+<A NAME="event_type"></A>tff(event_type,type,
+    event: $tType ).
+
+<A NAME="startedIn_decl"></A>tff(startedIn_decl,type,
+    startedIn: ( time * fluent * time ) > $o ).
+
+<A NAME="stoppedIn_decl"></A>tff(stoppedIn_decl,type,
+    stoppedIn: ( time * fluent * time ) > $o ).
+
+<A NAME="happens_decl"></A>tff(happens_decl,type,
+    happens: ( event * time ) > $o ).
+
+<A NAME="initiates_decl"></A>tff(initiates_decl,type,
+    initiates: ( event * fluent * time ) > $o ).
+
+<A NAME="terminates_decl"></A>tff(terminates_decl,type,
+    terminates: ( event * fluent * time ) > $o ).
+
+<A NAME="releases_decl"></A>tff(releases_decl,type,
+    releases: ( event * fluent * time ) > $o ).
+
+<A NAME="trajectory_decl"></A>tff(trajectory_decl,type,
+    trajectory: ( fluent * time * fluent * $int ) > $o ).
+
+<A NAME="antitrajectory_decl"></A>tff(antitrajectory_decl,type,
+    antitrajectory: ( fluent * time * fluent * $int ) > $o ).
+
+<A NAME="holdsAt_decl"></A>tff(holdsAt_decl,type,
+    holdsAt: ( fluent * time ) > $o ).
+
+<A NAME="releasedAt_decl"></A>tff(releasedAt_decl,type,
+    releasedAt: ( fluent * time ) > $o ).
+
+<A NAME="at_time_decl"></A>tff(at_time_decl,type,
+    at_time: $int > time ).
+
+<A NAME="stoppedin_defn"></A>tff(stoppedin_defn,axiom,
+    ! [Time1: $int,Fluent: fluent,Time2: $int] :
+      ( stoppedIn(at_time(Time1),Fluent,at_time(Time2))
+    &lt;=> ? [Event: event,Time: $int] :
+          ( happens(Event,at_time(Time))
+          & $less(Time1,Time)
+          & $less(Time,Time2)
+          & terminates(Event,Fluent,at_time(Time)) ) ) ).
+
+<A NAME="startedin_defn"></A>tff(startedin_defn,axiom,
+    ! [Time1: $int,Fluent: fluent,Time2: $int] :
+      ( startedIn(at_time(Time1),Fluent,at_time(Time2))
+    &lt;=> ? [Event: event,Time: $int] :
+          ( happens(Event,at_time(Time))
+          & $less(Time1,Time)
+          & $less(Time,Time2)
+          & initiates(Event,Fluent,at_time(Time)) ) ) ).
+
+<A NAME="change_holding"></A>tff(change_holding,axiom,
+    ! [Event: event,Time: $int,Fluent: fluent,Fluent2: fluent,Offset: $int] :
+      ( ( happens(Event,at_time(Time))
+        & initiates(Event,Fluent,at_time(Time))
+        & $less(0,Offset)
+        & trajectory(Fluent,at_time(Time),Fluent2,Offset)
+        & ~ stoppedIn(at_time(Time),Fluent,at_time($sum(Time,Offset))) )
+     => holdsAt(Fluent2,at_time($sum(Time,Offset))) ) ).
+
+<A NAME="antitrajectory"></A>tff(antitrajectory,axiom,
+    ! [Event: event,Time1: $int,Fluent1: fluent,Time2: $int,Fluent2: fluent] :
+      ( ( happens(Event,at_time(Time1))
+        & terminates(Event,Fluent1,at_time(Time1))
+        & $less(0,Time2)
+        & antitrajectory(Fluent1,at_time(Time1),Fluent2,Time2)
+        & ~ startedIn(at_time(Time1),Fluent1,at_time($sum(Time1,Time2))) )
+     => holdsAt(Fluent2,at_time($sum(Time1,Time2))) ) ).
+
+<A NAME="keep_holding"></A>tff(keep_holding,axiom,
+    ! [Fluent: fluent,Time: $int] :
+      ( ( holdsAt(Fluent,at_time(Time))
+        & ~ releasedAt(Fluent,at_time($sum(Time,1)))
+        & ~ ? [Event: event] :
+              ( happens(Event,at_time(Time))
+              & terminates(Event,Fluent,at_time(Time)) ) )
+     => holdsAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="keep_not_holding"></A>tff(keep_not_holding,axiom,
+    ! [Fluent: fluent,Time: $int] :
+      ( ( ~ holdsAt(Fluent,at_time(Time))
+        & ~ releasedAt(Fluent,at_time($sum(Time,1)))
+        & ~ ? [Event: event] :
+              ( happens(Event,at_time(Time))
+              & initiates(Event,Fluent,at_time(Time)) ) )
+     => ~ holdsAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="keep_released"></A>tff(keep_released,axiom,
+    ! [Fluent: fluent,Time: $int] :
+      ( ( releasedAt(Fluent,at_time(Time))
+        & ~ ? [Event: event] :
+              ( happens(Event,at_time(Time))
+              & ( initiates(Event,Fluent,at_time(Time))
+                | terminates(Event,Fluent,at_time(Time)) ) ) )
+     => releasedAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="keep_not_released"></A>tff(keep_not_released,axiom,
+    ! [Fluent: fluent,Time: $int] :
+      ( ( ~ releasedAt(Fluent,at_time(Time))
+        & ~ ? [Event: event] :
+              ( happens(Event,at_time(Time))
+              & releases(Event,Fluent,at_time(Time)) ) )
+     => ~ releasedAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="happens_holds"></A>tff(happens_holds,axiom,
+    ! [Event: event,Time: $int,Fluent: fluent] :
+      ( ( happens(Event,at_time(Time))
+        & initiates(Event,Fluent,at_time(Time)) )
+     => holdsAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="happens_terminates_not_holds"></A>tff(happens_terminates_not_holds,axiom,
+    ! [Event: event,Time: $int,Fluent: fluent] :
+      ( ( happens(Event,at_time(Time))
+        & terminates(Event,Fluent,at_time(Time)) )
+     => ~ holdsAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="happens_releases"></A>tff(happens_releases,axiom,
+    ! [Event: event,Time: $int,Fluent: fluent] :
+      ( ( happens(Event,at_time(Time))
+        & releases(Event,Fluent,at_time(Time)) )
+     => releasedAt(Fluent,at_time($sum(Time,1))) ) ).
+
+<A NAME="happens_not_released"></A>tff(happens_not_released,axiom,
+    ! [Event: event,Time: $int,Fluent: fluent] :
+      ( ( happens(Event,at_time(Time))
+        & ( initiates(Event,Fluent,at_time(Time))
+          | terminates(Event,Fluent,at_time(Time)) ) )
+     => ~ releasedAt(Fluent,at_time($sum(Time,1))) ) ).
+
+%tff(before_time,axiom,
+%    ~ ? [X:$int] : 
+%      ? [T:time] :
+%        ( $less(X,0)
+%        & at_time(X) = T ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

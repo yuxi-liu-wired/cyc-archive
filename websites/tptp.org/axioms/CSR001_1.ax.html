@@ -1,0 +1,138 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Axioms File: CSR001_1.ax</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPWorld.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Axioms File: <TT>CSR001_1.ax</TT></H2></CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001_1 : TPTP v9.3.1. Released v9.1.0.
+% Domain   : Commonsense Reasoning
+% Axioms   : Kitchen sink scenario
+% Version  : [Sha97] axioms : Especial.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Sha97>Sha97</a>] Shanahan (1997), Solving the Frame Problem
+% Source   : [Sha97]
+% Names    :
+
+% Status   : Satisfiable
+% Syntax   : Number of formulae    :   18 (   6 unt;   6 typ;   0 def)
+%            Number of atoms       :   42 (  24 equ)
+%            Maximal formula atoms :   11 (   3 avg)
+%            Number of connectives :   27 (   6   ~;   4   |;  11   &)
+%                                         (   4 &lt;=>;   2  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   11 (   5 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of FOOLs       :    9 (   9 fml;   0 var)
+%            Number arithmetic     :   18 (   0 atm;   1 fun;   0 num;  17 var)
+%            Number of types       :    1 (   0 usr;   1 ari;   0 dat;   0 cdt)
+%            Number of type conns  :    1 (   1   >;   0   *;   0   +;   0  &lt;&lt;)
+%            Number of predicates  :    9 (   8 usr;   2 prp; 0-4 aty)
+%            Number of functors    :    7 (   6 usr;   5 con; 0-2 aty)
+%            Number of variables   :   23 (  20   !;   3   ?;  23   :)
+% SPC      : TX0_SAT_EQU_ARI_NDT
+
+% Comments : Requires CSR001_0.ax
+%------------------------------------------------------------------------------
+<A NAME="waterLevel_decl"></A>tff(waterLevel_decl,type,
+    waterLevel: $int > fluent ).
+
+<A NAME="tapOn_decl"></A>tff(tapOn_decl,type,
+    tapOn: event ).
+
+<A NAME="tapOff_decl"></A>tff(tapOff_decl,type,
+    tapOff: event ).
+
+<A NAME="overflow_decl"></A>tff(overflow_decl,type,
+    overflow: event ).
+
+<A NAME="spilling_decl"></A>tff(spilling_decl,type,
+    spilling: fluent ).
+
+<A NAME="filling_decl"></A>tff(filling_decl,type,
+    filling: fluent ).
+
+%tff(distinct_events,axiom,
+%    $distinct(tapOn,tapOff,overflow) ).
+
+<A NAME="tapOn_tapOff"></A>tff(tapOn_tapOff,axiom,
+    tapOn != tapOff ).
+
+<A NAME="tapOn_overflow"></A>tff(tapOn_overflow,axiom,
+    tapOn != overflow ).
+
+<A NAME="tapOff_overflow"></A>tff(tapOff_overflow,axiom,
+    tapOff != overflow ).
+
+<A NAME="filling_not_waterLevel"></A>tff(filling_not_waterLevel,axiom,
+    ! [X: $int] : ( filling != waterLevel(X) ) ).
+
+<A NAME="spilling_not_waterLevel"></A>tff(spilling_not_waterLevel,axiom,
+    ! [X: $int] : ( spilling != waterLevel(X) ) ).
+
+<A NAME="filling_not_spilling"></A>tff(filling_not_spilling,axiom,
+    filling != spilling ).
+
+<A NAME="distinct_waterLevels"></A>tff(distinct_waterLevels,axiom,
+    ! [X: $int,Y: $int] :
+      ( ( waterLevel(X) = waterLevel(Y) )
+    &lt;=> ( X = Y ) ) ).
+
+<A NAME="initiates_all_defn"></A>tff(initiates_all_defn,axiom,
+    ! [Event: event,Fluent: fluent,Time: $int] :
+      ( initiates(Event,Fluent,at_time(Time))
+    &lt;=> ( ( ( Event = tapOn )
+          & ( Fluent = filling ) )
+        | ( ( Event = overflow )
+          & ( Fluent = spilling ) )
+        | ? [Height: $int] :
+            ( holdsAt(waterLevel(Height),at_time(Time))
+            & ( Event = tapOff )
+            & ( Fluent = waterLevel(Height) ) )
+        | ? [Height: $int] :
+            ( holdsAt(waterLevel(Height),at_time(Time))
+            & ( Event = overflow )
+            & ( Fluent = waterLevel(Height) ) ) ) ) ).
+
+<A NAME="terminates_all_defn"></A>tff(terminates_all_defn,axiom,
+    ! [Event: event,Fluent: fluent,Time: $int] :
+      ( terminates(Event,Fluent,at_time(Time))
+    &lt;=> ( ( ( Event = tapOff )
+          & ( Fluent = filling ) )
+        | ( ( Event = overflow )
+          & ( Fluent = filling ) ) ) ) ).
+
+%----tapOn event releases all waterLevels at all times
+<A NAME="releases_all_defn"></A>tff(releases_all_defn,axiom,
+    ! [Event: event,Fluent: fluent,Time: $int] :
+      ( releases(Event,Fluent,at_time(Time))
+    &lt;=> ? [Height: $int] :
+          ( ( Event = tapOn )
+          & ( Fluent = waterLevel(Height) ) ) ) ).
+
+<A NAME="change_of_waterLevel"></A>tff(change_of_waterLevel,axiom,
+    ! [Height1: $int,Time: $int,Height2: $int,Offset: $int] :
+      ( ( holdsAt(waterLevel(Height1),at_time(Time))
+        & ( Height2 = $sum(Height1,Offset) ) )
+     => trajectory(filling,at_time(Time),waterLevel(Height2),Offset) ) ).
+
+<A NAME="same_waterLevel"></A>tff(same_waterLevel,axiom,
+    ! [Time: $int,Height1: $int,Height2: $int] :
+      ( ( holdsAt(waterLevel(Height1),at_time(Time))
+        & holdsAt(waterLevel(Height2),at_time(Time)) )
+     => ( Height1 = Height2 ) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

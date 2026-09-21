@@ -1,0 +1,112 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Axioms File: CSR001+3.ax</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPWorld.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Axioms File: <TT>CSR001+3.ax</TT></H2></CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR001+3 : TPTP v9.3.1. Bugfixed v3.1.0.
+% Domain   : Commonsense Reasoning
+% Axioms   : Supermarket trolley scenario for multiple trolleys
+% Version  : [Mue05] axioms : Especial.
+% English  :
+
+% Refs     : [Mue05] Mueller (2005), Email to Geoff Sutcliffe
+% Source   : [Mue05]
+% Names    :
+
+% Status   : Satisfiable
+% Syntax   : Number of formulae    :    9 (   5 unt;   0 def)
+%            Number of atoms       :   40 (  28 equ)
+%            Maximal formula atoms :   19 (   4 avg)
+%            Number of connectives :   48 (  17   ~;   7   |;  20   &)
+%                                         (   2 &lt;=>;   2  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :   15 (   7 avg)
+%            Maximal term depth    :    2 (   1 avg)
+%            Number of predicates  :    5 (   4 usr;   0 prp; 2-3 aty)
+%            Number of functors    :    5 (   5 usr;   0 con; 1-2 aty)
+%            Number of variables   :   26 (  22   !;   4   ?)
+% SPC      : FOF_SAT_RFO_SEQ
+
+% Comments : Requires CSR001+0.ax
+%------------------------------------------------------------------------------
+<A NAME="initiates_all_defn"></A>fof(initiates_all_defn,axiom,
+    ! [Event,Fluent,Time] :
+      ( initiates(Event,Fluent,Time)
+    &lt;=> ? [Agent,Trolley] :
+          ( ( Event = push(Agent,Trolley)
+            & Fluent = forwards(Trolley)
+            & ~ happens(pull(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = backwards(Trolley)
+            & ~ happens(push(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = spinning(Trolley)
+            & happens(push(Agent,Trolley),Time) ) ) ) ).
+
+<A NAME="terminates_all_defn"></A>fof(terminates_all_defn,axiom,
+    ! [Event,Fluent,Time] :
+      ( terminates(Event,Fluent,Time)
+    &lt;=> ? [Agent,Trolley] :
+          ( ( Event = push(Agent,Trolley)
+            & Fluent = backwards(Trolley)
+            & ~ happens(pull(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = forwards(Trolley)
+            & ~ happens(push(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = forwards(Trolley)
+            & happens(push(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = backwards(Trolley)
+            & happens(push(Agent,Trolley),Time) )
+          | ( Event = push(Agent,Trolley)
+            & Fluent = spinning(Trolley)
+            & ~ happens(pull(Agent,Trolley),Time) )
+          | ( Event = pull(Agent,Trolley)
+            & Fluent = spinning(Trolley)
+            & ~ happens(push(Agent,Trolley),Time) ) ) ) ).
+
+<A NAME="releases_all_defn"></A>fof(releases_all_defn,axiom,
+    ! [Event,Fluent,Time] : ~ releases(Event,Fluent,Time) ).
+
+%----Distinct events
+<A NAME="push_not_pull"></A>fof(push_not_pull,axiom,
+    ! [Agent,Trolley] : push(Agent,Trolley) != pull(Agent,Trolley) ).
+
+<A NAME="push_unique"></A>fof(push_unique,axiom,
+    ! [Agent1,Agent2,Trolley1,Trolley2] :
+      ( ( Agent1 != Agent2
+        & Trolley1 != Trolley2 )
+     => push(Agent1,Trolley1) != push(Agent2,Trolley2) ) ).
+
+<A NAME="pull_unique"></A>fof(pull_unique,axiom,
+    ! [Agent1,Agent2,Trolley1,Trolley2] :
+      ( ( Agent1 != Agent2
+        & Trolley1 != Trolley2 )
+     => pull(Agent1,Trolley1) != pull(Agent2,Trolley2) ) ).
+
+%----Distinct fluents
+<A NAME="forwards_not_backwards"></A>fof(forwards_not_backwards,axiom,
+    ! [Trolley] : forwards(Trolley) != backwards(Trolley) ).
+
+<A NAME="forwards_not_spinning"></A>fof(forwards_not_spinning,axiom,
+    ! [Trolley] : forwards(Trolley) != spinning(Trolley) ).
+
+<A NAME="spinning_not_backwards"></A>fof(spinning_not_backwards,axiom,
+    ! [Trolley] : spinning(Trolley) != backwards(Trolley) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>

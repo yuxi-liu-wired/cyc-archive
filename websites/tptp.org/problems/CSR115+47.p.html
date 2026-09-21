@@ -1,0 +1,197 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>TPTP Problem File: CSR115+47.p</title>
+<meta name="ROBOTS" content="NOINDEX,NOFOLLOW" />
+<link href="https://tptp.org/Logos/TPTPPL.png" rel="icon" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<HR><CENTER>
+<H2>TPTP Problem File: CSR115+47.p</H2><A HREF=SeeTPTP?Category=Solutions&Domain=CSR&File=CSR115+47 TARGET=_blank>
+View Solutions</A>
+- <A HREF="https://tptp.org/cgi-bin/SystemOnTPTP?TPTPProblem=CSR115%2B47" TARGET="_blank">Solve Problem</A>
+</CENTER><HR>
+<pre>
+%------------------------------------------------------------------------------
+% File     : CSR115+47 : TPTP v9.3.1. Released v4.0.0.
+% Domain   : Commonsense Reasoning
+% Problem  : Which British company was taken over by BMW in 1994?
+% Version  : [Pel09] axioms.
+% English  :
+
+% Refs     : [<a href=SeeTPTP?Category=BibTeX&File=Glo07>Glo07</a>] Gloeckner (2007), University of Hagen at CLEF 2007: An
+%          : [<a href=SeeTPTP?Category=BibTeX&File=PW07>PW07</a>]  Pelzer & Wernhard (2007), System Description: E-KRHype
+%          : [<a href=SeeTPTP?Category=BibTeX&File=FG+08>FG+08</a>] Furbach et al. (2008), LogAnswer - A Deduction-Based Q
+%          : [Pel09] Pelzer (2009), Email to Geoff Sutcliffe
+% Source   : [Pel09]
+% Names    : synth_qa07_007_mira_news_1287_a19984_tptp [Pel09]
+
+% Status   : Theorem
+% Rating   : 0.20 v9.3.0, 0.30 v9.1.0, 0.33 v9.0.0, 0.19 v8.2.0, 0.20 v8.1.0, 0.21 v7.5.0, 0.29 v7.4.0, 0.25 v7.3.0, 0.29 v7.2.0, 0.17 v7.1.0, 0.25 v7.0.0, 0.29 v6.4.0, 0.21 v6.3.0, 0.23 v6.2.0, 0.36 v6.1.0, 0.48 v6.0.0, 0.50 v5.5.0, 0.46 v5.4.0, 0.43 v5.3.0, 0.52 v5.2.0, 0.36 v5.0.0, 0.40 v4.1.0, 0.50 v4.0.1, 0.53 v4.0.0
+% Syntax   : Number of formulae    : 10189 (10061 unt;   0 def)
+%            Number of atoms       : 10831 (   0 equ)
+%            Maximal formula atoms :  122 (   1 avg)
+%            Number of connectives :  642 (   0   ~;  18   |; 498   &)
+%                                         (   0 &lt;=>; 126  =>;   0  &lt;=;   0 &lt;~>)
+%            Maximal formula depth :  122 (   1 avg)
+%            Maximal term depth    :    5 (   1 avg)
+%            Number of predicates  :   86 (  86 usr;   0 prp; 2-3 aty)
+%            Number of functors    : 16651 (16651 usr;16650 con; 0-2 aty)
+%            Number of variables   :  475 ( 405   !;  70   ?)
+% SPC      : FOF_THM_RFO_NEQ
+
+% Comments : The different versions of this problem stem from the use of
+%            different text snippet retrieval modules, and different snippets
+%            being found. The problem tries to prove the questions from the
+%            snippet and the background knowledge.
+%------------------------------------------------------------------------------
+%----Include LogAnswer axioms
+include('Axioms/<a href=SeeTPTP?Category=Axioms&File=CSR004+0.ax>CSR004+0.ax</a>').
+%------------------------------------------------------------------------------
+<A NAME="synth_qa07_007_mira_news_1287_a19984"></A>fof(synth_qa07_007_mira_news_1287_a19984,conjecture,
+    ? [X0,X1,X2,X3,X4,X5,X6] :
+      ( agt(X3,X2)
+      & attr(X2,X1)
+      & attr(X4,X5)
+      & has_card_leq(X6,int1994)
+      & obj(X3,X0)
+      & sub(X0,firma_1_1)
+      & sub(X1,name_1_1)
+      & sub(X5,jahr__1_1)
+      & temp(X3,X4)
+      & val(X1,bmw_0)
+      & val(X5,X6) ) ).
+
+<A NAME="ave07_era5_synth_qa07_007_mira_news_1287_a19984"></A>fof(ave07_era5_synth_qa07_007_mira_news_1287_a19984,hypothesis,
+    ( mcont(c417,c519)
+    & mexp(c417,c419)
+    & subs(c417,erw__344gen_1_1)
+    & attr(c419,c420)
+    & sub(c419,firma_1_1)
+    & sub(c420,name_1_1)
+    & val(c420,bmw_0)
+    & attr(c506,c507)
+    & sub(c506,firma_1_1)
+    & sub(c507,name_1_1)
+    & val(c507,rover_0)
+    & attr(c517,c518)
+    & sub(c518,jahr__1_1)
+    & val(c518,c508)
+    & agt(c519,c419)
+    & obj(c519,c506)
+    & subs(c519,festigen_1_1)
+    & temp(c519,c517)
+    & temp(c519,schon_1_1)
+    & sort(c417,da)
+    & fact(c417,real)
+    & gener(c417,sp)
+    & sort(c519,da)
+    & fact(c519,hypo)
+    & gener(c519,sp)
+    & sort(c419,d)
+    & sort(c419,io)
+    & card(c419,int1)
+    & etype(c419,int0)
+    & fact(c419,real)
+    & gener(c419,sp)
+    & quant(c419,one)
+    & refer(c419,det)
+    & varia(c419,con)
+    & sort(erw__344gen_1_1,da)
+    & fact(erw__344gen_1_1,real)
+    & gener(erw__344gen_1_1,ge)
+    & sort(c420,na)
+    & card(c420,int1)
+    & etype(c420,int0)
+    & fact(c420,real)
+    & gener(c420,sp)
+    & quant(c420,one)
+    & refer(c420,indet)
+    & varia(c420,varia_c)
+    & sort(firma_1_1,d)
+    & sort(firma_1_1,io)
+    & card(firma_1_1,int1)
+    & etype(firma_1_1,int0)
+    & fact(firma_1_1,real)
+    & gener(firma_1_1,ge)
+    & quant(firma_1_1,one)
+    & refer(firma_1_1,refer_c)
+    & varia(firma_1_1,varia_c)
+    & sort(name_1_1,na)
+    & card(name_1_1,int1)
+    & etype(name_1_1,int0)
+    & fact(name_1_1,real)
+    & gener(name_1_1,ge)
+    & quant(name_1_1,one)
+    & refer(name_1_1,refer_c)
+    & varia(name_1_1,varia_c)
+    & sort(bmw_0,fe)
+    & sort(c506,d)
+    & sort(c506,io)
+    & card(c506,int1)
+    & etype(c506,int0)
+    & fact(c506,real)
+    & gener(c506,sp)
+    & quant(c506,one)
+    & refer(c506,det)
+    & varia(c506,con)
+    & sort(c507,na)
+    & card(c507,int1)
+    & etype(c507,int0)
+    & fact(c507,real)
+    & gener(c507,sp)
+    & quant(c507,one)
+    & refer(c507,indet)
+    & varia(c507,varia_c)
+    & sort(rover_0,fe)
+    & sort(c517,t)
+    & card(c517,int1)
+    & etype(c517,int0)
+    & fact(c517,real)
+    & gener(c517,sp)
+    & quant(c517,one)
+    & refer(c517,det)
+    & varia(c517,con)
+    & sort(c518,me)
+    & sort(c518,oa)
+    & sort(c518,ta)
+    & card(c518,card_c)
+    & etype(c518,etype_c)
+    & fact(c518,real)
+    & gener(c518,sp)
+    & quant(c518,quant_c)
+    & refer(c518,refer_c)
+    & varia(c518,varia_c)
+    & sort(jahr__1_1,me)
+    & sort(jahr__1_1,oa)
+    & sort(jahr__1_1,ta)
+    & card(jahr__1_1,card_c)
+    & etype(jahr__1_1,etype_c)
+    & fact(jahr__1_1,real)
+    & gener(jahr__1_1,ge)
+    & quant(jahr__1_1,quant_c)
+    & refer(jahr__1_1,refer_c)
+    & varia(jahr__1_1,varia_c)
+    & sort(c508,nu)
+    & card(c508,int1994)
+    & sort(festigen_1_1,da)
+    & fact(festigen_1_1,real)
+    & gener(festigen_1_1,ge)
+    & sort(schon_1_1,t)
+    & card(schon_1_1,int1)
+    & etype(schon_1_1,int0)
+    & fact(schon_1_1,real)
+    & gener(schon_1_1,sp)
+    & quant(schon_1_1,one)
+    & refer(schon_1_1,refer_c)
+    & varia(schon_1_1,varia_c) ) ).
+
+%------------------------------------------------------------------------------
+</pre>
+<HR>
+
+</body>
+</html>
